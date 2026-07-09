@@ -114,7 +114,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
-columns = 2
+columns = 3
 
 [node name="AttackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
 layout_mode = 2
@@ -124,6 +124,10 @@ text = "Attack"
 layout_mode = 2
 text = "Skill"
 
+[node name="ItemBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Item"
+
 [node name="DefendBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
 layout_mode = 2
 text = "Defend"
@@ -131,6 +135,10 @@ text = "Defend"
 [node name="LimitBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
 layout_mode = 2
 text = "Limit"
+
+[node name="EscapeBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Escape"
 
 [node name="SkillPanel" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox"]
 visible = false
@@ -142,6 +150,19 @@ layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="SkillBackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/SkillPanel"]
+layout_mode = 2
+text = "Back"
+
+[node name="ItemPanel" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ItemList" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/ItemPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ItemBackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/ItemPanel"]
 layout_mode = 2
 text = "Back"
 
@@ -194,3 +215,38 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 28
 text = "Victory!"
 horizontal_alignment = 1
+
+[node name="TransitionOverlay" type="ColorRect" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.05, 0.08, 1)
+
+[node name="PhaseBanner" type="PanelContainer" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -36.0
+offset_right = 360.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="PhaseLabel" type="Label" parent="CombatRoot/PhaseBanner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.55, 1)
+theme_override_font_sizes/font_size = 24
+text = "Phase announcement"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -102,6 +102,18 @@ func apply_status(effect: Dictionary) -> void:
 	})
 
 
+func cure_status(status_type: String) -> void:
+	var remaining: Array[Dictionary] = []
+	for s in statuses:
+		if s.get("type", "") != status_type:
+			remaining.append(s)
+	statuses = remaining
+
+
+func has_status(status_type: String) -> bool:
+	return statuses.any(func(s): return s.get("type", "") == status_type)
+
+
 func tick_statuses() -> Array[String]:
 	var messages: Array[String] = []
 	var remaining: Array[Dictionary] = []

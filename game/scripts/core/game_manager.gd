@@ -92,3 +92,41 @@ func get_enemy_def(enemy_id: String) -> Dictionary:
 		if e.get("id") == enemy_id:
 			return e
 	return {}
+
+
+func get_item_def(item_id: String) -> Dictionary:
+	var item_data: Dictionary = _data_cache.get("items", {})
+	for item in item_data.get("items", []):
+		if item.get("id") == item_id:
+			return item
+	return {}
+
+
+func get_item_count(item_id: String) -> int:
+	return inventory.get(item_id, 0)
+
+
+func add_item(item_id: String, quantity: int = 1) -> void:
+	inventory[item_id] = get_item_count(item_id) + quantity
+
+
+func consume_item(item_id: String, quantity: int = 1) -> bool:
+	var current := get_item_count(item_id)
+	if current < quantity:
+		return false
+	var remaining := current - quantity
+	if remaining <= 0:
+		inventory.erase(item_id)
+	else:
+		inventory[item_id] = remaining
+	return true
+
+
+func get_battle_item_ids() -> Array[String]:
+	var result: Array[String] = []
+	for item_id in inventory.keys():
+		var def := get_item_def(item_id)
+		if def.get("battle_use", false) and get_item_count(item_id) > 0:
+			result.append(item_id)
+	result.sort()
+	return result

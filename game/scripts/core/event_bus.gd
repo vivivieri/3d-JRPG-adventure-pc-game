@@ -9,11 +9,13 @@ signal dialogue_line(line: Dictionary)
 signal dialogue_finished(scene_id: String)
 signal combat_started
 signal combat_ended(victory: bool)
+signal combat_escaped
 signal combat_log_appended(message: String)
 signal combat_stats_changed
 signal turn_started(actor_data: Dictionary)
 signal turn_ended(actor_data: Dictionary)
 signal enemy_intent_shown(enemy_id: String, skill_id: String, intent_key: String)
+signal boss_phase_announced(enemy_id: String, message: String)
 signal damage_dealt(target_id: String, amount: int, element: String)
 signal actor_defeated(actor_id: String)
 signal quest_updated(quest_id: String)

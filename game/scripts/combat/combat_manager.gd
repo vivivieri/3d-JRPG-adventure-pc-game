@@ -3,6 +3,9 @@ extends Node
 
 enum Phase { INTRO, PLAYER_TURN, ENEMY_TURN, RESOLVE, VICTORY, DEFEAT }
 
+const ACTION_BEAT := 0.42
+const ENEMY_INTENT_BEAT := 1.1
+
 var phase: Phase = Phase.INTRO
 var turn_order: Array[Combatant] = []
 var current_turn_index := 0
@@ -12,6 +15,8 @@ var battle_log: Array[String] = []
 var current_actor: Combatant = null
 
 var _pending_enemy: Dictionary = {}
+var _advance_pending := false
+var _triggered_phases: Dictionary = {}
 
 
 func start_battle(enemy_ids: Array) -> void:
@@ -40,11 +45,19 @@ func resolve_pending_enemy_turn() -> void:
 	var skill_id: String = _pending_enemy.get("skill_id", "")
 	_pending_enemy = {}
 	if actor == null or not actor.is_alive():
-		_advance_turn()
+		_schedule_advance(0.1)
 		return
 	var skill := GameManager.get_skill_def(skill_id)
 	var target_idx := _pick_target_index(skill)
 	_execute_skill(actor, skill, target_idx, false)
+
+
+func is_boss_battle() -> bool:
+	return enemies.any(func(e): return e.tier == "boss")
+
+
+func can_escape() -> bool:
+	return not is_boss_battle()
 
 
 func _reset() -> void:
@@ -55,6 +68,8 @@ func _reset() -> void:
 	current_actor = null
 	battle_log.clear()
 	_pending_enemy = {}
+	_advance_pending = false
+	_triggered_phases = {}
 	phase = Phase.INTRO
 
 
@@ -89,7 +104,7 @@ func _start_current_turn() -> void:
 		_log(msg)
 	_emit_stats()
 	if not actor.is_alive():
-		_advance_turn()
+		_schedule_advance(0.1)
 		return
 	EventBus.turn_started.emit(_actor_payload(actor))
 	if actor.is_player:
@@ -113,6 +128,18 @@ func _end_round() -> void:
 	_start_current_turn()
 
 
+func _schedule_advance(delay: float = ACTION_BEAT) -> void:
+	if _advance_pending or phase in [Phase.VICTORY, Phase.DEFEAT]:
+		return
+	_advance_pending = true
+	get_tree().create_timer(delay).timeout.connect(func() -> void:
+		_advance_pending = false
+		if phase in [Phase.VICTORY, Phase.DEFEAT]:
+			return
+		_advance_turn()
+	, CONNECT_ONE_SHOT)
+
+
 func _advance_turn() -> void:
 	if current_actor:
 		EventBus.turn_ended.emit(_actor_payload(current_actor))
@@ -123,6 +150,8 @@ func _advance_turn() -> void:
 func player_action(action: String, skill_id: String = "", target_index: int = 0) -> void:
 	if phase != Phase.PLAYER_TURN or current_actor == null or not current_actor.is_player:
 		return
+	if _advance_pending:
+		return
 	var actor := current_actor
 	match action:
 		"attack":
@@ -132,10 +161,11 @@ func player_action(action: String, skill_id: String = "", target_index: int = 0)
 		"defend":
 			actor.is_defending = true
 			_log(LocalizationManager.tr_key("combat.defend", { "actor": actor.display_name }))
-			_advance_turn()
+			_schedule_advance()
 		"item":
-			_log(LocalizationManager.tr_key("UI_COMBAT_ITEM_NA"))
-			_advance_turn()
+			player_use_item(skill_id, target_index)
+		"escape":
+			try_escape()
 		"limit":
 			var limit_skill := _get_limit_skill(actor)
 			if limit_skill.is_empty():
@@ -143,6 +173,81 @@ func player_action(action: String, skill_id: String = "", target_index: int = 0)
 			_execute_skill(actor, limit_skill, target_index, true)
 	if _check_battle_end():
 		return
+
+
+func player_use_item(item_id: String, target_index: int) -> void:
+	if phase != Phase.PLAYER_TURN or current_actor == null:
+		return
+	if GameManager.get_item_count(item_id) <= 0:
+		return
+	var item_def := GameManager.get_item_def(item_id)
+	if item_def.is_empty() or not item_def.get("battle_use", false):
+		return
+	if target_index < 0 or target_index >= allies.size():
+		return
+	var target := allies[target_index]
+	if not target.is_alive():
+		return
+	var effect: Dictionary = item_def.get("effect", {})
+	var item_name := LocalizationManager.item_name(item_id)
+	match effect.get("type", ""):
+		"heal_hp":
+			var healed := target.heal(effect.get("value", 0))
+			_log(LocalizationManager.tr_key("combat.item_heal_hp", {
+				"user": current_actor.display_name,
+				"item": item_name,
+				"target": target.display_name,
+				"amount": healed,
+			}))
+		"heal_mp":
+			var before := target.mp
+			target.restore_mp(effect.get("value", 0))
+			var restored := target.mp - before
+			_log(LocalizationManager.tr_key("combat.item_heal_mp", {
+				"user": current_actor.display_name,
+				"item": item_name,
+				"target": target.display_name,
+				"amount": restored,
+			}))
+		"cure_status":
+			var status_type: String = effect.get("status", "poison")
+			if target.has_status(status_type):
+				target.cure_status(status_type)
+				_log(LocalizationManager.tr_key("combat.item_cure", {
+					"user": current_actor.display_name,
+					"item": item_name,
+					"target": target.display_name,
+					"status": LocalizationManager.tr_key("status.%s" % status_type),
+				}))
+			else:
+				_log(LocalizationManager.tr_key("combat.item_no_effect", {
+					"user": current_actor.display_name,
+					"item": item_name,
+					"target": target.display_name,
+				}))
+				_schedule_advance()
+				return
+		_:
+			_schedule_advance()
+			return
+	GameManager.consume_item(item_id)
+	_emit_stats()
+	_schedule_advance()
+
+
+func try_escape() -> void:
+	if not can_escape():
+		_log(LocalizationManager.tr_key("combat.escape_blocked"))
+		_schedule_advance()
+		return
+	if randf() > 0.8:
+		_log(LocalizationManager.tr_key("combat.escape_fail"))
+		_schedule_advance()
+		return
+	_log(LocalizationManager.tr_key("combat.escape_success"))
+	phase = Phase.RESOLVE
+	GameManager.change_state(GameManager.GameState.EXPLORATION)
+	EventBus.combat_escaped.emit()
 
 
 func _get_limit_skill(actor: Combatant) -> Dictionary:
@@ -167,12 +272,12 @@ func _pick_target_index(skill: Dictionary) -> int:
 
 func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_limit: bool) -> void:
 	if skill.is_empty():
-		_advance_turn()
+		_schedule_advance(0.1)
 		return
 	var mp_cost: int = skill.get("mp_cost", 0)
 	if mp_cost > 0 and not actor.spend_mp(mp_cost):
 		_log(LocalizationManager.tr_key("combat.no_mp", { "actor": actor.display_name }))
-		_advance_turn()
+		_schedule_advance()
 		return
 	var targets := _resolve_targets(actor, skill, target_index)
 	if skill.get("power", 0.0) > 0.0:
@@ -189,6 +294,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 				"target": t.display_name,
 				"amount": dealt
 			}))
+			_check_boss_phases(t)
 			if not t.is_alive():
 				EventBus.actor_defeated.emit(t.id)
 				_log(LocalizationManager.tr_key("combat.defeated", { "target": t.display_name }))
@@ -196,10 +302,36 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 			actor.add_limit(8)
 	for msg in SkillResolver.apply_skill_effects(actor, targets, skill):
 		_log(msg)
+		for t in targets:
+			if t is Combatant:
+				_check_boss_phases(t)
 	if is_limit:
 		actor.limit_gauge = 0
 	_emit_stats()
-	_advance_turn()
+	if _check_battle_end():
+		return
+	_schedule_advance()
+
+
+func _check_boss_phases(target: Combatant) -> void:
+	var enemy_index := enemies.find(target)
+	if enemy_index < 0:
+		return
+	var enemy_def := GameManager.get_enemy_def(target.id)
+	for phase_data in enemy_def.get("phases", []):
+		var threshold: float = phase_data.get("hp_threshold", 1.0)
+		var phase_key := "%s:%s" % [target.id, threshold]
+		if _triggered_phases.has(phase_key):
+			continue
+		var hp_ratio := float(target.hp) / float(maxi(target.max_hp, 1))
+		if hp_ratio > threshold:
+			continue
+		_triggered_phases[phase_key] = true
+		var percent := int(threshold * 100.0)
+		var message := LocalizationManager.tr_key("boss.%s.%d" % [target.id, percent])
+		if message == "boss.%s.%d" % [target.id, percent]:
+			message = phase_data.get("announcement", "")
+		EventBus.boss_phase_announced.emit(target.id, message)
 
 
 func _resolve_targets(actor: Combatant, skill: Dictionary, target_index: int) -> Array:

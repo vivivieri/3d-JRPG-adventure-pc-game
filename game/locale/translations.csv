@@ -24,7 +24,21 @@ UI_COMBAT_ENEMY_TURN,Enemy turn,敵のターン,敌方回合
 UI_COMBAT_BACK,Back,戻る,返回
 UI_COMBAT_CANCEL,Cancel,キャンセル,取消
 UI_COMBAT_SELECT_TARGET,Select a target,ターゲットを選択,选择目标
+UI_COMBAT_NO_ITEMS,No usable items.,使えるアイテムがない。,没有可用道具。
 UI_COMBAT_ITEM_NA,Items not available yet.,アイテムは未実装です。,道具尚未开放。
+# Combat messages
+combat.escape_success,Escaped from battle!,戦闘から逃げた！,成功逃离战斗！
+combat.escape_fail,Couldn't escape!,逃げられなかった！,逃跑失败！
+combat.escape_blocked,Can't flee from this foe!,この敵からは逃げられない！,无法从此敌人处逃离！
+combat.item_heal_hp,{user} uses {item} on {target} — +{amount} HP.,{user}は{target}に{item}、HP+{amount}。,{user}对{target}使用{item}，生命+{amount}。
+combat.item_heal_mp,{user} uses {item} on {target} — +{amount} MP.,{user}は{target}に{item}、MP+{amount}。,{user}对{target}使用{item}，法力+{amount}。
+combat.item_cure,{user} uses {item} on {target} — cured {status}.,{user}は{target}の{status}を{item}で治した。,{user}用{item}治愈{target}的{status}。
+combat.item_no_effect,It had no effect on {target}.,{target}には効かなかった。,对{target}没有效果。
+# Boss phase announcements
+boss.shore_wraith.50,The wraith swells with drowned voices...,亡霊が溺れた声で膨れ上がる……,亡魂因溺亡之声而膨胀……
+boss.tide_keeper.66,The tide rises...,潮が満ちてくる……,潮水上涨……
+boss.tide_keeper.33,Time fractures.,時間が砕ける。,时间破碎。
+boss.tide_keeper.10,Choose.,選べ。,做出选择。
 # Enemy intent
 intent.attack,Attack,攻撃,攻击
 intent.defend,Defend,防御,防御
@@ -151,8 +165,3 @@ status.def_down,Defense Down,防御低下,防御降低
 status.taunt,Taunt,挑発,挑衅
 status.heal,Heal,回復,治疗
 status.cleanse,Cleanse,浄化,净化
-# Boss announcements
-boss.shore_wraith.phase,The wraith swells with drowned voices...,亡霊が溺れた声で膨れ上がる……,亡魂因溺亡之声而膨胀……
-boss.tide_keeper.phase1,The tide rises...,潮が満ちてくる……,潮水上涨……
-boss.tide_keeper.phase2,Time fractures.,時間が砕ける。,时间破碎。
-boss.tide_keeper.phase3,Choose.,選べ。,做出选择。

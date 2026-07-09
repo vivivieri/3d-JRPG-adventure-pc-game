@@ -14,6 +14,7 @@ signal slot_pressed(index: int)
 
 var slot_index := 0
 var is_enemy_slot := false
+var _turn_active := false
 
 
 func _ready() -> void:
@@ -66,8 +67,38 @@ func set_targetable(active: bool) -> void:
 	_select_btn.visible = active and modulate.a > 0.5
 	if active:
 		add_theme_stylebox_override(&"panel", _highlight_style())
-	else:
+	elif not _turn_active:
 		remove_theme_stylebox_override(&"panel")
+
+
+func set_turn_active(active: bool) -> void:
+	_turn_active = active
+	if active:
+		add_theme_stylebox_override(&"panel", _turn_active_style())
+	elif not _select_btn.visible:
+		remove_theme_stylebox_override(&"panel")
+
+
+func play_damage_flash() -> void:
+	var tween := create_tween()
+	tween.tween_property(self, "modulate", Color(1.0, 0.35, 0.35, 1.0), 0.08)
+	tween.tween_property(self, "modulate", Color.WHITE if modulate.a > 0.9 else Color(0.45, 0.45, 0.45, 0.75), 0.22)
+
+
+func play_heal_flash() -> void:
+	var tween := create_tween()
+	tween.tween_property(self, "modulate", Color(0.55, 1.0, 0.65, 1.0), 0.08)
+	tween.tween_property(self, "modulate", Color.WHITE if modulate.a > 0.9 else Color(0.45, 0.45, 0.45, 0.75), 0.22)
+
+
+
+func _turn_active_style() -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = Color(0.16, 0.24, 0.3, 0.95)
+	box.border_color = Color(0.52, 0.82, 0.92, 0.95)
+	box.set_border_width_all(2)
+	box.set_corner_radius_all(4)
+	return box
 
 
 func _highlight_style() -> StyleBoxFlat:

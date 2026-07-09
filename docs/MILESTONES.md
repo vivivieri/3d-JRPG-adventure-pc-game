@@ -22,6 +22,7 @@ Track implementation progress against the GDD milestones.
 
 ## M2 — Combat vertical slice
 - [x] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
+- [x] Combat polish (transitions, damage flash, items, escape, boss banners)
 
 ## M3 — Chapter 1
 - [ ] Tidal Caves greybox map

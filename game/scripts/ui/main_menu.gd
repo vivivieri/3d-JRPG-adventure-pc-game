@@ -57,6 +57,7 @@ func _on_new_game_pressed() -> void:
 	GameManager.inventory.clear()
 	GameManager.gold = 0
 	GameManager.current_area = "ruined_village"
+	GameManager.inventory = { "sea_salve": 2, "spirit_tonic": 1 }
 	get_tree().change_scene_to_file("res://scenes/world/ruined_village.tscn")
 
 
