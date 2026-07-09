@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://village001"]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="2_interact"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+size = Vector3(40, 0.5, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(40, 0.5, 40)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.6
+
+[node name="RuinedVillage" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 12, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_ground")
+
+[node name="Collision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+script = ExtResource("1_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
+current = true
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="ToriiShrine" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -5)
+script = ExtResource("2_interact")
+dialogue_scene_id = "SC-03"
+interaction_prompt = "Examine Torii"
+
+[node name="Collision" type="CollisionShape3D" parent="ToriiShrine"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="RokuShack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -3)
+script = ExtResource("2_interact")
+dialogue_scene_id = "SC-04"
+interaction_prompt = "Talk"
+
+[node name="Collision" type="CollisionShape3D" parent="RokuShack"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="TutorialEncounter" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+script = ExtResource("2_interact")
+interaction_prompt = "Fight"
+combat_encounter_ids = PackedStringArray("salt_crab")
+
+[node name="Collision" type="CollisionShape3D" parent="TutorialEncounter"]
+shape = SubResource("CapsuleShape3D_player")
