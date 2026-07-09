@@ -9,6 +9,34 @@ var _can_move := true
 
 func _ready() -> void:
 	add_to_group("player")
+	_add_visual()
+
+
+func _add_visual() -> void:
+	if get_node_or_null("Visual"):
+		return
+	var body := MeshInstance3D.new()
+	body.name = "Visual"
+	var cap := CapsuleMesh.new()
+	cap.radius = 0.38
+	cap.height = 1.5
+	body.mesh = cap
+	body.position = Vector3(0, 0.95, 0)
+	var coat := StandardMaterial3D.new()
+	coat.albedo_color = Color("#4A5A68")
+	coat.roughness = 0.75
+	body.material_override = coat
+	add_child(body)
+	var head := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.28
+	sphere.height = 0.56
+	head.mesh = sphere
+	head.position = Vector3(0, 1.75, 0)
+	var skin := StandardMaterial3D.new()
+	skin.albedo_color = Color("#D4B896")
+	head.material_override = skin
+	body.add_child(head)
 
 
 func _physics_process(delta: float) -> void:

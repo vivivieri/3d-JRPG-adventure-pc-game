@@ -1,5 +1,5 @@
 extends Node
-## Loads each world scene, waits for render, saves viewport PNG.
+## Loads each world scene, frames the camera, and saves viewport PNG.
 
 
 const SCENES := [
@@ -9,12 +9,19 @@ const SCENES := [
 	{"file": "palace", "path": "res://scenes/world/dragon_palace_gate.tscn"},
 ]
 
+const CAMERA_VIEWS := {
+	"village": {"cam": Vector3(7, 5.5, 10), "focus": Vector3(-4, 2.5, -4)},
+	"caves": {"cam": Vector3(9, 5, 11), "focus": Vector3(0, 2, -4)},
+	"palace": {"cam": Vector3(0, 7, 26), "focus": Vector3(0, 5, 10)},
+}
+
 const DEFAULT_OUT := "/opt/cursor/artifacts/screenshots"
 
 
 func _ready() -> void:
 	var out_dir: String = OS.get_environment("SCREENSHOT_DIR") if OS.has_environment("SCREENSHOT_DIR") else DEFAULT_OUT
 	DirAccess.make_dir_recursive_absolute(out_dir)
+	_preload_story_flags()
 	await get_tree().process_frame
 	for entry in SCENES:
 		await _capture_scene(entry, out_dir)
@@ -22,10 +29,20 @@ func _ready() -> void:
 	get_tree().quit()
 
 
+func _preload_story_flags() -> void:
+	# Prevent auto-dialogue from covering palace / cave shots.
+	GameManager.set_flag("gate_arrival_dialogue")
+	GameManager.set_flag("palace_vision_seen")
+	GameManager.set_flag("caves_entrance_dialogue")
+
+
 func _capture_scene(entry: Dictionary, out_dir: String) -> void:
 	get_tree().change_scene_to_file(entry.path)
-	# Allow zone visuals, materials, and lighting to settle.
 	await get_tree().create_timer(2.0).timeout
+	_hide_dialogue_ui()
+	if CAMERA_VIEWS.has(entry.file):
+		_frame_camera(CAMERA_VIEWS[entry.file])
+	await get_tree().create_timer(0.5).timeout
 	await get_tree().process_frame
 	await get_tree().process_frame
 	var img: Image = get_viewport().get_texture().get_image()
@@ -35,3 +52,19 @@ func _capture_scene(entry: Dictionary, out_dir: String) -> void:
 		push_error("Failed to save %s (err %s)" % [path, err])
 	else:
 		print("[Screenshot] Saved ", path)
+
+
+func _frame_camera(view: Dictionary) -> void:
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		return
+	if cam is Camera3D and cam.get("orbit_enabled") != null:
+		cam.set("orbit_enabled", false)
+	cam.global_position = view.cam
+	cam.look_at(view.focus, Vector3.UP)
+
+
+func _hide_dialogue_ui() -> void:
+	var panel := get_tree().root.find_child("DialoguePanel", true, false)
+	if panel:
+		panel.visible = false
