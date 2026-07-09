@@ -178,13 +178,13 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
 			_add_village_planting_groups(cover)
-			_scatter_village_flora(cover, Vector3(0, 0, 1), 14.0, 16.0, 5 if _screenshot_mode() else 10)
-			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 3 if _screenshot_mode() else 6, false)
+			_scatter_village_flora(cover, Vector3(0, 0, 1), 11.0, 13.0, 2 if _screenshot_mode() else 5)
+			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 2 if _screenshot_mode() else 4, false)
 			_add_ground_edge_breakup(cover, Vector2(21, 21), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
-			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.5, 21.0, 8 if _screenshot_mode() else 16)
-			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.5, 24.0, 5 if _screenshot_mode() else 9)
+			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.0, 21.0, 4 if _screenshot_mode() else 9)
+			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.0, 24.0, 2 if _screenshot_mode() else 5)
 			_add_cave_wet_patches(cover, palette, zone_id)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
@@ -334,9 +334,9 @@ static func _add_village_mud_patches(parent: Node3D, palette: Dictionary) -> voi
 
 
 static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	for spot in [Vector3(-3.5, 0.03, -12), Vector3(3.0, 0.03, -20)]:
+	for spot in [Vector3(-4.6, 0.03, -18)]:
 		var puddle := MeshInstance3D.new()
-		puddle.mesh = _make_water_plane(Vector2(1.8, 1.4))
+		puddle.mesh = TerrainShapes.flood_pool_mesh(0.9, 0.65, 12)
 		puddle.position = spot
 		WaterMaterial.apply_to_mesh(puddle, palette, zone_id, true)
 		parent.add_child(puddle)
@@ -439,7 +439,6 @@ static func _add_palisade_enclosure(parent: Node3D, center: Vector3, half_x: flo
 
 static func _add_village_pets(parent: Node3D) -> void:
 	_spawn_village_pet(parent, Vector3(7.2, 0, -1.2), "cat")
-	_spawn_village_pet(parent, Vector3(9.8, 0, 0.8), "chicken")
 	_spawn_village_pet(parent, Vector3(-4.8, 0, 8.5), "dog")
 
 
@@ -450,17 +449,17 @@ static func _spawn_village_pet(parent: Node3D, pos: Vector3, kind: String) -> vo
 	parent.add_child(pet)
 	match kind:
 		"cat":
-			_add_pet_part(pet, "body", Vector3(0, 0.12, 0), 0.14, Color("#E8E0D0"))
-			_add_pet_part(pet, "head", Vector3(0.12, 0.2, 0), 0.09, Color("#F0EAE0"))
-			_add_pet_part(pet, "tail", Vector3(-0.16, 0.16, 0), 0.05, Color("#D8C8B0"))
+			_add_pet_part(pet, "body", Vector3(0, 0.09, 0), 0.1, Color("#A88A68"))
+			_add_pet_part(pet, "head", Vector3(0.1, 0.15, 0), 0.065, Color("#B89470"))
+			_add_pet_part(pet, "tail", Vector3(-0.12, 0.12, 0), 0.035, Color("#8A6A4A"))
 		"chicken":
 			_add_pet_part(pet, "body", Vector3(0, 0.1, 0), 0.1, Color("#E8D8B8"))
 			_add_pet_part(pet, "head", Vector3(0.08, 0.16, 0), 0.06, Color("#F0E0C0"))
 			_add_pet_part(pet, "comb", Vector3(0.08, 0.22, 0), 0.03, Color("#C04030"))
 		"dog":
-			_add_pet_part(pet, "body", Vector3(0, 0.14, 0), 0.16, Color("#A08060"))
-			_add_pet_part(pet, "head", Vector3(0.14, 0.2, 0), 0.1, Color("#B09070"))
-			_add_pet_part(pet, "ear", Vector3(0.12, 0.26, 0.05), 0.04, Color("#8A6848"))
+			_add_pet_part(pet, "body", Vector3(0, 0.11, 0), 0.12, Color("#7A5A3A"))
+			_add_pet_part(pet, "head", Vector3(0.12, 0.17, 0), 0.075, Color("#8A6848"))
+			_add_pet_part(pet, "ear", Vector3(0.1, 0.21, 0.04), 0.03, Color("#5C422C"))
 
 
 static func _add_pet_part(parent: Node3D, part_name: String, pos: Vector3, radius: float, color: Color) -> void:
@@ -793,12 +792,12 @@ static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
 
 
 static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
-	for z in range(-40, 16, 12):
+	for z in range(-40, 12, 18):
 		PropLibrary.spawn("rock_large_b", parent, Vector3(-15, 0, z), 20.0, 1.0, true)
 		PropLibrary.spawn("rock_large_a", parent, Vector3(15, 0, z), -20.0, 1.05, true)
-	for x in [-16, -10, 10, 16]:
-		for z in [-36, -18, 2]:
-			PropLibrary.spawn("rock_small_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.8, 1.0), true)
+	for x in [-16, 16]:
+		for z in [-34, -10]:
+			PropLibrary.spawn("rock_small_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.75, 0.9), true)
 	_add_horizon_plane(parent, Vector3(0, -0.5, -44), Vector2(80, 20), palette.get("sky", Color("#0E1A22")), 0.9)
 
 
@@ -938,9 +937,8 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_palisade_enclosure(parent, Vector3(5, 0, 2), 1.6, 1.4)
 	_add_pier(parent, Vector3(-8, 0, 6), palette, zone_id)
 	_add_coastline(parent, palette, zone_id)
-	_add_rock_cluster(parent, Vector3(3, 0, -8), palette, zone_id)
-	_add_rock_cluster(parent, Vector3(-10, 0, -2), palette, zone_id)
-	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
+	_add_rock_cluster(parent, Vector3(-12, 0, -3), palette, zone_id)
+	_add_rock_cluster(parent, Vector3(-6, 0, 11), palette, zone_id)
 	_add_broken_fence(parent, Vector3(12, 0, 8), palette, zone_id)
 	_add_festival_banner_prop(parent, Vector3(-2, 0, 6), palette, zone_id)
 	_add_sandal_puddle(parent, Vector3(1.5, 0, 3.5), palette, zone_id)
@@ -968,27 +966,26 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	_add_cave_tunnel_walls(parent, palette, zone_id)
 	_add_cave_wall_flora(parent)
 	_add_cave_big_leaf_clusters(parent)
-	for i in 3:
+	for i in 2:
 		_add_algae_strip(parent, Vector3(-5.0 + i * 5.0, 0.45, -1.5 - i * 4.0), palette, zone_id)
 	_add_flood_pool_frame(parent, Vector3(4.0, 0, -7.5), palette, zone_id)
 	_add_flood_chamber_wetness(parent, Vector3(4.0, 0, -7.5), palette, zone_id)
-	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
 	_add_deep_pool_faces(parent, Vector3(0, 0, -16), palette)
 	_add_shrine_alcove(parent, Vector3(0, 0, -28), palette, zone_id)
-	for z in range(-24, 10, 12):
+	for z in range(-24, 10, 16):
 		PropLibrary.spawn("rock_tall_a", parent, Vector3(-6.5, 0, z), 20.0, 1.0, false)
 		PropLibrary.spawn("rock_tall_b", parent, Vector3(6.5, 0, z - 1), -20.0, 1.05, false)
 		PropLibrary.spawn("mushroom_tan", parent, Vector3(-4.8, 0, z + 0.5), 0.0, 0.75, false)
 
 
 static func _add_cave_wall_flora(parent: Node3D) -> void:
-	for z in range(-26, 12, 8):
+	for z in range(-24, 10, 12):
 		PropLibrary.spawn("grass", parent, Vector3(-5.9, 0, z), 25.0, 0.95, false)
 		PropLibrary.spawn("grass_leafs", parent, Vector3(5.8, 0, z + 1.0), -20.0, 0.9, false)
 
 
 static func _add_cave_big_leaf_clusters(parent: Node3D) -> void:
-	for spot in [Vector3(-5.0, 0, -13), Vector3(5.0, 0, -20), Vector3(5.4, 0, -4)]:
+	for spot in [Vector3(-5.0, 0, -13), Vector3(5.0, 0, -20)]:
 		PropLibrary.spawn("grass", parent, spot, randf_range(0, 360), 1.15, false)
 		PropLibrary.spawn("grass_leafs", parent, spot + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, false)
 
@@ -1096,9 +1093,10 @@ static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id
 
 
 static func _add_coastline(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	for x in range(-6, 7):
-		PropLibrary.spawn("rock_small_a", parent, Vector3(x * 2.0, 0, -9.5), float(x * 17), 0.9, true)
-		PropLibrary.spawn("grass_leafs", parent, Vector3(x * 1.8, 0, -8.2), float(x * 23), 1.0, true)
+	for x in range(-5, 6, 2):
+		PropLibrary.spawn("rock_small_a", parent, Vector3(x * 2.2, 0, -11.5), float(x * 17), 0.75, true)
+		if x % 4 == 0:
+			PropLibrary.spawn("grass_small", parent, Vector3(x * 2.0, 0, -10.2), float(x * 23), 0.75, false)
 
 
 static func _add_rock_cluster(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
