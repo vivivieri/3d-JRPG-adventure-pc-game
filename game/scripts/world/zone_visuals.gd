@@ -177,13 +177,14 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
-			_scatter_village_flora(cover, Vector3(0, 0, 0), 18.0, 22.0, 14 if _screenshot_mode() else 32)
-			_scatter_rocks(cover, Vector3(0, 0, 0), 16.0, 20.0, 6 if _screenshot_mode() else 12, false)
-			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
+			_add_village_planting_groups(cover)
+			_scatter_village_flora(cover, Vector3(0, 0, 1), 14.0, 16.0, 5 if _screenshot_mode() else 10)
+			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 3 if _screenshot_mode() else 6, false)
+			_add_ground_edge_breakup(cover, Vector2(21, 21), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
-			_scatter_cave_flora(cover, Vector3(0, 0, -8), 7.0, 22.0, 18 if _screenshot_mode() else 36)
-			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 7.0, 24.0, 8 if _screenshot_mode() else 14)
+			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.5, 21.0, 8 if _screenshot_mode() else 16)
+			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.5, 24.0, 5 if _screenshot_mode() else 9)
 			_add_cave_wet_patches(cover, palette, zone_id)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
@@ -339,6 +340,28 @@ static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: 
 		puddle.position = spot
 		WaterMaterial.apply_to_mesh(puddle, palette, zone_id, true)
 		parent.add_child(puddle)
+
+
+static func _add_village_planting_groups(parent: Node3D) -> void:
+	var groups := [
+		{
+			"center": Vector3(-6.0, 0, 6.5),
+			"spots": [Vector3(-0.8, 0, -0.6), Vector3(0.2, 0, -0.9), Vector3(0.9, 0, -0.2), Vector3(-0.2, 0, 0.6)],
+		},
+		{
+			"center": Vector3(8.8, 0, -5.6),
+			"spots": [Vector3(-0.9, 0, 0.2), Vector3(0.1, 0, -0.5), Vector3(1.0, 0, 0.4)],
+		},
+		{
+			"center": Vector3(4.4, 0, 3.7),
+			"spots": [Vector3(-0.7, 0, 0.4), Vector3(0.4, 0, 0.7), Vector3(0.8, 0, -0.4)],
+		},
+	]
+	for group in groups:
+		var center: Vector3 = group["center"]
+		for spot in group["spots"]:
+			PropLibrary.spawn("grass_small", parent, center + spot, randf_range(-18, 18), randf_range(0.7, 0.95), false)
+		PropLibrary.spawn("grass_leafs", parent, center + Vector3(0.15, 0, 0.15), randf_range(0, 360), 0.75, false)
 
 
 static func _add_ground_edge_breakup(
@@ -651,7 +674,7 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 		"tidal_caves":
 			env.fog_density = 0.028
 			env.fog_aerial_perspective = 0.48
-			env.ambient_light_color = palette.get("light", Color.WHITE) * 0.18
+			env.ambient_light_color = palette.get("light", Color.WHITE) * 0.22
 		"dragon_palace_gate":
 			env.fog_density = 0.012
 			env.fog_aerial_perspective = 0.68
@@ -697,6 +720,8 @@ static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
 		"tidal_caves":
 			mat.sun_angle_max = 0.0
 			mat.sky_curve = 0.08
+			mat.ground_horizon_color = Color("#111C24")
+			mat.ground_bottom_color = Color("#071017")
 		"dragon_palace_gate":
 			mat.sun_angle_max = 8.0
 			mat.sun_curve = 0.25
@@ -943,33 +968,29 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	_add_cave_tunnel_walls(parent, palette, zone_id)
 	_add_cave_wall_flora(parent)
 	_add_cave_big_leaf_clusters(parent)
-	for i in 5:
-		_add_algae_strip(parent, Vector3(-4.5 + i * 2.0, 0.6, 1 - i * 0.4), palette, zone_id)
+	for i in 3:
+		_add_algae_strip(parent, Vector3(-5.0 + i * 5.0, 0.45, -1.5 - i * 4.0), palette, zone_id)
 	_add_flood_pool_frame(parent, Vector3(4.0, 0, -7.5), palette, zone_id)
 	_add_flood_chamber_wetness(parent, Vector3(4.0, 0, -7.5), palette, zone_id)
 	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
 	_add_deep_pool_faces(parent, Vector3(0, 0, -16), palette)
 	_add_shrine_alcove(parent, Vector3(0, 0, -28), palette, zone_id)
-	for z in range(-24, 10, 8):
+	for z in range(-24, 10, 12):
 		PropLibrary.spawn("rock_tall_a", parent, Vector3(-6.5, 0, z), 20.0, 1.0, false)
 		PropLibrary.spawn("rock_tall_b", parent, Vector3(6.5, 0, z - 1), -20.0, 1.05, false)
-		PropLibrary.spawn("mushroom_tan", parent, Vector3(-2.6, 0, z + 0.5), 0.0, 0.85, false)
+		PropLibrary.spawn("mushroom_tan", parent, Vector3(-4.8, 0, z + 0.5), 0.0, 0.75, false)
 
 
 static func _add_cave_wall_flora(parent: Node3D) -> void:
-	for z in range(-26, 12, 3):
-		PropLibrary.spawn("grass", parent, Vector3(-4.0, 0, z), 25.0, 1.2, false)
-		PropLibrary.spawn("grass_leafs", parent, Vector3(4.0, 0, z + 1.0), -20.0, 1.15, false)
-		if z % 6 == 0:
-			PropLibrary.spawn("grass", parent, Vector3(-3.4, 0, z + 1.5), 40.0, 1.35, false)
-			PropLibrary.spawn("grass_leafs", parent, Vector3(3.4, 0, z - 0.5), -35.0, 1.3, false)
+	for z in range(-26, 12, 8):
+		PropLibrary.spawn("grass", parent, Vector3(-5.9, 0, z), 25.0, 0.95, false)
+		PropLibrary.spawn("grass_leafs", parent, Vector3(5.8, 0, z + 1.0), -20.0, 0.9, false)
 
 
 static func _add_cave_big_leaf_clusters(parent: Node3D) -> void:
-	for spot in [Vector3(-3.2, 0, -12), Vector3(3.0, 0, -20), Vector3(-2.5, 0, -4), Vector3(2.8, 0, -16)]:
-		PropLibrary.spawn("grass", parent, spot, randf_range(0, 360), 1.4, false)
-		PropLibrary.spawn("grass_leafs", parent, spot + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.25, false)
-		PropLibrary.spawn("grass", parent, spot + Vector3(-0.5, 0, -0.6), randf_range(0, 360), 1.2, false)
+	for spot in [Vector3(-5.0, 0, -13), Vector3(5.0, 0, -20), Vector3(5.4, 0, -4)]:
+		PropLibrary.spawn("grass", parent, spot, randf_range(0, 360), 1.15, false)
+		PropLibrary.spawn("grass_leafs", parent, spot + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, false)
 
 
 static func _add_flood_chamber_wetness(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -1122,7 +1143,7 @@ static func _add_cave_pool_glow(parent: Node3D, pos: Vector3, palette: Dictionar
 	parent.add_child(pool)
 	var water := MeshInstance3D.new()
 	water.name = "PoolWater"
-	water.mesh = _make_water_plane(Vector2(7.5, 5.5))
+	water.mesh = TerrainShapes.flood_pool_mesh(3.6, 2.4, 20)
 	water.position = Vector3(0, -0.04, -2)
 	WaterMaterial.apply_to_mesh(water, palette, zone_id)
 	pool.add_child(water)
