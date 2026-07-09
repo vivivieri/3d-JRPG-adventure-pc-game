@@ -63,6 +63,50 @@ static func _cave_half_width(z: float) -> float:
 	return 4.0
 
 
+static func hub_ground_mesh(half_width: float, half_depth: float) -> ArrayMesh:
+	var nx := 18
+	var nz := 18
+	var verts: PackedVector3Array = []
+	verts.resize((nx + 1) * (nz + 1))
+	for iz in nz + 1:
+		for ix in nx + 1:
+			var tx := float(ix) / float(nx)
+			var tz := float(iz) / float(nz)
+			var x := lerpf(-half_width, half_width, tx)
+			var z := lerpf(-half_depth, half_depth, tz)
+			var nxn := x / half_width
+			var nzn := z / half_depth
+			var radial: float = sqrt(nxn * nxn + nzn * nzn)
+			if radial > 0.78:
+				var edge_t: float = clampf((radial - 0.78) / 0.22, 0.0, 1.0)
+				x -= sign(x) * edge_t * 1.6
+				z -= sign(z) * edge_t * 1.4
+				x += sin(z * 0.35 + ix) * 0.45 * edge_t
+				z += cos(x * 0.28 + iz) * 0.4 * edge_t
+			verts[iz * (nx + 1) + ix] = Vector3(x, sin(x * 0.2 + z * 0.15) * 0.05, z)
+	return _grid_to_mesh(verts, nx, nz)
+
+
+static func palace_court_mesh(half_width: float, half_depth: float) -> ArrayMesh:
+	var nx := 16
+	var nz := 26
+	var verts: PackedVector3Array = []
+	verts.resize((nx + 1) * (nz + 1))
+	for iz in nz + 1:
+		for ix in nx + 1:
+			var tx := float(ix) / float(nx)
+			var tz := float(iz) / float(nz)
+			var x := lerpf(-half_width, half_width, tx)
+			var z := lerpf(-half_depth, half_depth, tz)
+			var taper: float = 1.0 - pow(abs(z) / half_depth, 3.0) * 0.12
+			x *= taper
+			if abs(x) > half_width * 0.82:
+				var edge_t: float = (abs(x) - half_width * 0.82) / (half_width * 0.18)
+				x = sign(x) * (half_width * 0.82 + sin(z * 0.22 + ix) * 0.5 * edge_t)
+			verts[iz * (nx + 1) + ix] = Vector3(x, 0.0, z)
+	return _grid_to_mesh(verts, nx, nz)
+
+
 static func _grid_to_mesh(verts: PackedVector3Array, nx: int, nz: int) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)

@@ -69,6 +69,20 @@ const KENNEY := {
 	"castle_stairs": "res://assets/models/castle/stairsStone.obj",
 }
 
+# Props with obvious box/cube silhouettes — remapped at spawn time.
+const BOXY_PROP_REMAP := {
+	"path_stone": "rock_small_a",
+	"path_corner": "rock_small_b",
+	"fence_simple": "log",
+	"fence_planks": "log",
+	"plant_flat": "fern",
+	"cliff_block": "rock_large_b",
+	"cliff_slope": "rock_large_a",
+	"cliff_corner": "rock_large_a",
+	"cliff_cave": "rock_large_b",
+	"castle_banner": "branches",
+}
+
 # Prefer Poly Haven for detail props; trees/cliffs stay Kenney unless spawned by HD id directly.
 const PROP_CHAIN := {
 	"rock_large_a": ["boulder_a", "rock_large_a"],
@@ -149,6 +163,7 @@ static func spawn_many(
 
 
 static func _resolve_prop_id(prop_id: String, prefer_hd: bool = true) -> String:
+	prop_id = BOXY_PROP_REMAP.get(prop_id, prop_id)
 	if not prefer_hd:
 		return prop_id if _resolve_path(prop_id, false) != "" else ""
 	var chain: Array = PROP_CHAIN.get(prop_id, [prop_id])

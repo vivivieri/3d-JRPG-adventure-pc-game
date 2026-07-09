@@ -87,6 +87,7 @@ static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	_hide_greybox_meshes(root)
 	_refine_water_meshes(root)
 	_upgrade_water_boxes(root)
+	_hide_all_box_meshes(root)
 	_tint_meshes(root, palette, zone_id)
 	_add_zone_props(root, zone_id, palette)
 	_add_ground_cover(root, zone_id, palette)
@@ -142,6 +143,16 @@ static func _upgrade_water_boxes(node: Node) -> void:
 		_upgrade_water_boxes(child)
 
 
+static func _hide_all_box_meshes(node: Node) -> void:
+	if node is MeshInstance3D:
+		var inst := node as MeshInstance3D
+		if inst.mesh is BoxMesh:
+			inst.visible = false
+			inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	for child in node.get_children():
+		_hide_all_box_meshes(child)
+
+
 static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary) -> void:
 	if root.get_node_or_null("GroundCover"):
 		return
@@ -155,7 +166,7 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_rocks(cover, Vector3(0, 0, 2), 9.0, 8.0, 10 if _screenshot_mode() else 14, false)
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
-			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
+			_add_organic_ground(cover, palette, zone_id, "hub")
 			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 12 if _screenshot_mode() else 28, false)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 8 if _screenshot_mode() else 16, false)
 			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
@@ -164,7 +175,7 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 8 if _screenshot_mode() else 10, false)
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 12 if _screenshot_mode() else 18, false)
 		"dragon_palace_gate":
-			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
+			_add_organic_ground(cover, palette, zone_id, "palace")
 
 
 static func _scatter_path_strip(
@@ -174,17 +185,17 @@ static func _scatter_path_strip(
 	spacing: float,
 	rot_y: float = 0.0,
 ) -> void:
-	if not PropLibrary.has_prop("path_stone"):
-		return
 	var tangent := Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(rot_y))
 	for i in count:
 		var jitter := Vector3(randf_range(-0.25, 0.25), 0, randf_range(-0.25, 0.25))
+		var kind := "rock_small_a" if i % 2 == 0 else "log"
 		PropLibrary.spawn(
-			"path_stone",
+			kind,
 			parent,
 			origin + tangent * (i - count * 0.5) * spacing + jitter,
 			rot_y + randf_range(-8, 8),
-			randf_range(1.0, 1.2),
+			randf_range(0.75, 1.0),
+			true,
 		)
 
 
@@ -215,9 +226,15 @@ static func _add_organic_ground(
 		"beach":
 			mesh_inst.mesh = TerrainShapes.beach_sand_mesh(11.0, 12.0, -4.5)
 			mesh_inst.position = Vector3(0, -0.22, 0)
+		"hub":
+			mesh_inst.mesh = TerrainShapes.hub_ground_mesh(20.0, 20.0)
+			mesh_inst.position = Vector3(0, -0.22, 0)
 		"cave":
 			mesh_inst.mesh = TerrainShapes.cave_path_mesh(-30.0, 15.0)
 			mesh_inst.position = Vector3(0, -0.2, -7.5)
+		"palace":
+			mesh_inst.mesh = TerrainShapes.palace_court_mesh(7.5, 24.0)
+			mesh_inst.position = Vector3(0, -0.22, -6)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = palette.get("ground", Color.GRAY)
 	mat.roughness = 0.88
@@ -260,24 +277,22 @@ static func _add_beach_shoreline_dressing(parent: Node3D, palette: Dictionary) -
 			PropLibrary.spawn("grass_leafs", parent, Vector3(sx + 0.4, 0, wave_z + 0.5), float(x * 7), 0.9, true)
 	for offset in [Vector3(-5, 0, -0.5), Vector3(4, 0, -1.2), Vector3(0, 0, -2.0)]:
 		PropLibrary.spawn("log", parent, offset, randf_range(-20, 20), randf_range(0.75, 0.95), true)
-	_add_wet_sand_ribbon(parent, palette, zone_id)
+	_add_wet_sand_ribbon(parent)
 
 
-static func _add_wet_sand_ribbon(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	var wet := MeshInstance3D.new()
-	wet.name = "WetSandRibbon"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(24, 3.5)
-	wet.mesh = plane
-	wet.rotation_degrees.x = -90.0
-	wet.position = Vector3(0, -0.16, -2.8)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("ground", Color.SANDY_BROWN).lerp(palette.get("water", Color.TEAL), 0.45)
-	mat.roughness = 0.12
-	mat.metallic = 0.05
-	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
-	wet.material_override = mat
-	parent.add_child(wet)
+static func _spawn_vertical_log(parent: Node3D, pos: Vector3, scale_factor: float) -> void:
+	var log_node := PropLibrary.spawn("log", parent, pos, 0.0, scale_factor, true)
+	if log_node:
+		log_node.rotation_degrees.x = 90.0
+
+
+static func _add_wet_sand_ribbon(parent: Node3D) -> void:
+	for x in range(-10, 11):
+		var sx := float(x) * 1.05
+		var wave_z := -2.5 + sin(sx * 0.5) * 1.0
+		if x % 2 == 0:
+			PropLibrary.spawn("grass_leafs", parent, Vector3(sx, 0, wave_z + 0.4), float(x * 9), 0.85, true)
+		PropLibrary.spawn("rock_small_b", parent, Vector3(sx * 0.95, 0, wave_z), float(x * 11), 0.7, true)
 
 
 static func _scatter_grass_field(
@@ -628,8 +643,8 @@ static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 	torii.name = "ToriiProp"
 	torii.position = pos
 	parent.add_child(torii)
-	PropLibrary.spawn("fence_planks", torii, Vector3(-1.4, 0, 0), 0.0, 1.15)
-	PropLibrary.spawn("fence_planks", torii, Vector3(1.4, 0, 0), 0.0, 1.15)
+	_spawn_vertical_log(torii, Vector3(-1.4, 0.9, 0), 0.42)
+	_spawn_vertical_log(torii, Vector3(1.4, 0.9, 0), 0.42)
 	PropLibrary.spawn("log", torii, Vector3(0, 2.6, 0), 90.0, 1.05, true)
 	PropLibrary.spawn("log", torii, Vector3(0, 2.1, 0), 90.0, 0.95, true)
 	PropLibrary.spawn("bush", torii, Vector3(0, 0, 0.8), 0.0, 0.9, true)
@@ -694,9 +709,10 @@ static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary,
 	var fence := Node3D.new()
 	fence.position = pos
 	parent.add_child(fence)
-	PropLibrary.spawn("fence_planks", fence, Vector3(0, 0, 0), 0.0, 1.0)
+	_spawn_vertical_log(fence, Vector3(0, 0.45, 0), 0.38)
 	PropLibrary.spawn("log", fence, Vector3(2.5, 0.05, 0.2), 15.0, 0.85, true)
 	PropLibrary.spawn("log", fence, Vector3(4.0, 0, -0.3), 80.0, 0.9, true)
+	PropLibrary.spawn("rock_small_b", fence, Vector3(1.2, 0, 0.5), 20.0, 0.85, true)
 
 
 static func _add_cave_tunnel_walls(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -732,8 +748,10 @@ static func _add_palace_banners(parent: Node3D, pos: Vector3, palette: Dictionar
 	var banners := Node3D.new()
 	banners.position = pos
 	parent.add_child(banners)
-	PropLibrary.spawn("castle_banner", banners, Vector3(-5.5, 0, 0.6), 0.0, 1.2)
-	PropLibrary.spawn("castle_banner", banners, Vector3(5.5, 0, 0.6), 180.0, 1.2)
+	for side in [-5.5, 5.5]:
+		_spawn_vertical_log(banners, Vector3(side, 1.2, 0.6), 0.35)
+		PropLibrary.spawn("branches", banners, Vector3(side + 0.15, 2.0, 0.7), 0.0 if side < 0 else 180.0, 1.05, true)
+		PropLibrary.spawn("bush", banners, Vector3(side, 0.2, 0.8), 0.0, 0.75, true)
 
 
 static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -741,19 +759,13 @@ static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) 
 	sea.name = "VoidSea"
 	parent.add_child(sea)
 	var water := MeshInstance3D.new()
+	water.name = "VoidSeaWater"
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(30, 58)
 	water.mesh = plane
 	water.rotation_degrees.x = -90.0
 	water.position = Vector3(0, -2.6, -8)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("water", Color("#1A2858"))
-	mat.metallic = 0.2
-	mat.roughness = 0.06
-	mat.emission_enabled = true
-	mat.emission = palette.get("accent", Color.CYAN) * 0.22
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	water.material_override = mat
+	WaterMaterial.apply_to_mesh(water, palette, zone_id)
 	sea.add_child(water)
 	for z in [12, 2, -8, -18, -30]:
 		var light := OmniLight3D.new()
@@ -774,10 +786,12 @@ static func _add_mirror_chamber(parent: Node3D, pos: Vector3, palette: Dictionar
 	PropLibrary.spawn("castle_arch", chamber, Vector3(0, 0, -1.0), 0.0, 1.05)
 	var mirror := MeshInstance3D.new()
 	mirror.name = "Mirror"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(2.6, 3.4)
-	mirror.mesh = plane
+	var sphere := SphereMesh.new()
+	sphere.radius = 1.35
+	sphere.height = 2.7
+	mirror.mesh = sphere
 	mirror.position = Vector3(0, 1.9, 0.5)
+	mirror.scale = Vector3(1.0, 1.25, 0.12)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color("#A8D0E8")
 	mat.metallic = 0.95
@@ -853,32 +867,6 @@ static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary,
 	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.0), 0.0, 1.1)
 
 
-static func _add_box(
-	parent: Node3D,
-	pos: Vector3,
-	size: Vector3,
-	color: Color,
-	emissive: bool = false,
-	zone_id: String = "",
-	tex_key: String = "structure",
-) -> void:
-	var mesh_inst := MeshInstance3D.new()
-	var box := BoxMesh.new()
-	box.size = size
-	mesh_inst.mesh = box
-	mesh_inst.position = pos
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.roughness = 0.65
-	if emissive:
-		mat.emission_enabled = true
-		mat.emission = color * 0.25
-	if not zone_id.is_empty():
-		_apply_zone_texture(mat, zone_id, tex_key, tex_key, tex_key)
-	mesh_inst.material_override = mat
-	parent.add_child(mesh_inst)
-
-
 static func _add_cylinder(
 	parent: Node3D,
 	pos: Vector3,
@@ -947,8 +935,9 @@ static func _add_festival_banner_prop(parent: Node3D, pos: Vector3, palette: Dic
 	banner.name = "FestivalBannerProp"
 	banner.position = pos
 	parent.add_child(banner)
-	PropLibrary.spawn("log", banner, Vector3(0, 0.85, 0), 0.0, 0.38, true)
-	PropLibrary.spawn("castle_banner", banner, Vector3(0.12, 1.55, 0), 12.0, 0.92)
+	_spawn_vertical_log(banner, Vector3(0, 0.85, 0), 0.38)
+	PropLibrary.spawn("branches", banner, Vector3(0.15, 1.65, 0.05), 12.0, 1.0, true)
+	PropLibrary.spawn("bush", banner, Vector3(-0.1, 1.35, 0.1), 35.0, 0.8, true)
 	PropLibrary.spawn("rock_small_b", banner, Vector3(0.5, 0, 0.4), 30.0, 0.8, true)
 	PropLibrary.spawn("rock_small_a", banner, Vector3(-0.4, 0, -0.3), -15.0, 0.75, true)
 
@@ -1002,8 +991,8 @@ static func _add_shrine_alcove(parent: Node3D, pos: Vector3, palette: Dictionary
 	PropLibrary.spawn("rock_large_b", alcove, Vector3(-2.8, 0, 0.2), 88.0, 1.05, true)
 	PropLibrary.spawn("rock_large_a", alcove, Vector3(2.8, 0, 0.2), -88.0, 1.05, true)
 	PropLibrary.spawn("rock_large_b", alcove, Vector3(0, 1.6, -1.8), 0.0, 0.95, true)
-	PropLibrary.spawn("fence_planks", alcove, Vector3(-0.9, 0, 0.8), 0.0, 0.9)
-	PropLibrary.spawn("fence_planks", alcove, Vector3(0.9, 0, 0.8), 0.0, 0.9)
+	_spawn_vertical_log(alcove, Vector3(-0.9, 0.9, 0.8), 0.38)
+	_spawn_vertical_log(alcove, Vector3(0.9, 0.9, 0.8), 0.38)
 	PropLibrary.spawn("log", alcove, Vector3(0, 1.7, 0.8), 90.0, 0.8, true)
 	PropLibrary.spawn("log", alcove, Vector3(0, 1.35, 0.8), 90.0, 0.72, true)
 	PropLibrary.spawn("bush", alcove, Vector3(0, 0, 1.5), 0.0, 0.85, true)

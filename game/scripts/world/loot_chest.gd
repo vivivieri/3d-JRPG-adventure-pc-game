@@ -12,6 +12,8 @@ extends StaticBody3D
 func _ready() -> void:
 	if not opened_flag.is_empty() and GameManager.has_flag(opened_flag):
 		_hide_chest()
+		return
+	_spawn_visual()
 
 
 func interact() -> void:
@@ -30,6 +32,18 @@ func get_prompt() -> String:
 	if not opened_flag.is_empty() and GameManager.has_flag(opened_flag):
 		return ""
 	return LocalizationManager.tr_key(interaction_prompt_key)
+
+
+func _spawn_visual() -> void:
+	if get_node_or_null("ChestVisual"):
+		return
+	var visual := Node3D.new()
+	visual.name = "ChestVisual"
+	add_child(visual)
+	PropLibrary.spawn("log_stack", visual, Vector3(0, 0, 0), 0.0, 0.9, true)
+	PropLibrary.spawn("mushroom_tan", visual, Vector3(0.15, 0.55, 0.1), 20.0, 0.95, true)
+	PropLibrary.spawn("rock_small_b", visual, Vector3(-0.35, 0, -0.25), -15.0, 0.8, true)
+	PropLibrary.spawn("fern", visual, Vector3(0.3, 0, 0.3), 35.0, 0.85, true)
 
 
 func _hide_chest() -> void:
