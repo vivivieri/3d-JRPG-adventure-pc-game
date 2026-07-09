@@ -1,10 +1,26 @@
 class_name PropLibrary
 extends RefCounted
-## Spawns curated CC0 Kenney models (GLB/OBJ) with caching.
+## Spawns CC0 props — prefers high-poly Poly Haven, falls back to Kenney.
 
 
-const PROPS := {
-	# Nature kit
+const POLYHAVEN := {
+	"tree_coastal_a": "res://assets/models/polyhaven/tree_coastal_a/tree_coastal_a_1k.gltf",
+	"tree_coastal_b": "res://assets/models/polyhaven/tree_coastal_b/tree_coastal_b_1k.gltf",
+	"pine_hd": "res://assets/models/polyhaven/pine_hd/pine_hd_1k.gltf",
+	"fir_hd": "res://assets/models/polyhaven/fir_hd/fir_hd_1k.gltf",
+	"cliff_coastal": "res://assets/models/polyhaven/cliff_coastal/cliff_coastal_1k.gltf",
+	"boulder_a": "res://assets/models/polyhaven/boulder_a/boulder_a_1k.gltf",
+	"rocks_moss_a": "res://assets/models/polyhaven/rocks_moss_a/rocks_moss_a_1k.gltf",
+	"rocks_moss_b": "res://assets/models/polyhaven/rocks_moss_b/rocks_moss_b_1k.gltf",
+	"dead_trunk": "res://assets/models/polyhaven/dead_trunk/dead_trunk_1k.gltf",
+	"grass_hd": "res://assets/models/polyhaven/grass_hd/grass_hd_1k.gltf",
+	"grass_clump": "res://assets/models/polyhaven/grass_clump/grass_clump_1k.gltf",
+	"fern": "res://assets/models/polyhaven/fern/fern_1k.gltf",
+	"shrub_hd": "res://assets/models/polyhaven/shrub_hd/shrub_hd_1k.gltf",
+	"branches": "res://assets/models/polyhaven/branches/branches_1k.gltf",
+}
+
+const KENNEY := {
 	"canoe": "res://assets/models/nature/canoe.glb",
 	"canoe_paddle": "res://assets/models/nature/canoe_paddle.glb",
 	"bridge_wood": "res://assets/models/nature/bridge_wood.glb",
@@ -38,7 +54,6 @@ const PROPS := {
 	"tree_detailed": "res://assets/models/nature/tree_detailed.glb",
 	"tree_fat": "res://assets/models/nature/tree_fat.glb",
 	"mushroom_tan": "res://assets/models/nature/mushroom_tan.glb",
-	# Castle kit
 	"castle_gate": "res://assets/models/castle/gate.obj",
 	"castle_metal_gate": "res://assets/models/castle/metalGate.obj",
 	"castle_tower_top": "res://assets/models/castle/towerSquareTop.obj",
@@ -54,12 +69,47 @@ const PROPS := {
 	"castle_stairs": "res://assets/models/castle/stairsStone.obj",
 }
 
+# Prefer Poly Haven for detail props; trees/cliffs stay Kenney unless spawned by HD id directly.
+const PROP_CHAIN := {
+	"rock_large_a": ["boulder_a", "rock_large_a"],
+	"rock_large_b": ["rocks_moss_b", "rock_large_b"],
+	"rock_small_a": ["rocks_moss_a", "rock_small_a"],
+	"rock_small_b": ["rocks_moss_b", "rock_small_b"],
+	"bush": ["shrub_hd", "bush"],
+	"grass_small": ["grass_hd", "grass_small"],
+	"grass": ["grass_clump", "grass"],
+	"grass_leafs": ["fern", "grass_leafs"],
+	"log": ["dead_trunk", "log"],
+	"stump": ["dead_trunk", "stump"],
+	"log_stack": ["branches", "log_stack"],
+	"plant_flat": ["fern", "plant_flat"],
+	"mushroom": ["shrub_hd", "mushroom"],
+	"mushroom_tan": ["shrub_hd", "mushroom_tan"],
+}
+
+# Real-world Poly Haven assets need per-asset scale correction vs Kenney props.
+const HD_SCALE := {
+	"tree_coastal_a": 1.0,
+	"tree_coastal_b": 1.0,
+	"pine_hd": 1.0,
+	"fir_hd": 1.0,
+	"cliff_coastal": 0.07,
+	"boulder_a": 1.0,
+	"rocks_moss_a": 0.45,
+	"rocks_moss_b": 0.5,
+	"dead_trunk": 0.4,
+	"grass_hd": 14.0,
+	"grass_clump": 4.0,
+	"fern": 3.5,
+	"shrub_hd": 18.0,
+	"branches": 0.55,
+}
+
 static var _cache: Dictionary = {}
 
 
 static func has_prop(prop_id: String) -> bool:
-	var path: String = PROPS.get(prop_id, "")
-	return not path.is_empty() and ResourceLoader.exists(path)
+	return not _resolve_path(prop_id, true).is_empty()
 
 
 static func spawn(
@@ -68,15 +118,21 @@ static func spawn(
 	pos: Vector3 = Vector3.ZERO,
 	rot_y_deg: float = 0.0,
 	scale_factor: float = 1.0,
+	prefer_hd: bool = true,
 ) -> Node3D:
-	var node := _instantiate(prop_id)
+	var resolved := _resolve_prop_id(prop_id, prefer_hd)
+	if resolved.is_empty():
+		return null
+	var node := _instantiate(resolved)
 	if node == null:
 		return null
 	parent.add_child(node)
 	node.position = pos
 	node.rotation_degrees.y = rot_y_deg
-	if scale_factor != 1.0:
-		node.scale = Vector3.ONE * scale_factor
+	var hd_mul: float = HD_SCALE.get(resolved, 1.0)
+	var final_scale := scale_factor * hd_mul
+	if final_scale != 1.0:
+		node.scale = Vector3.ONE * final_scale
 	return node
 
 
@@ -92,6 +148,27 @@ static func spawn_many(
 		spawn(prop_id, parent, pos, rot_y, scale_factor)
 
 
+static func _resolve_prop_id(prop_id: String, prefer_hd: bool = true) -> String:
+	if not prefer_hd:
+		return prop_id if _resolve_path(prop_id, false) != "" else ""
+	var chain: Array = PROP_CHAIN.get(prop_id, [prop_id])
+	for candidate in chain:
+		if _resolve_path(str(candidate), true) != "":
+			return str(candidate)
+	return ""
+
+
+static func _resolve_path(prop_id: String, allow_polyhaven: bool = true) -> String:
+	var path: String = ""
+	if allow_polyhaven:
+		path = POLYHAVEN.get(prop_id, "")
+	if path.is_empty():
+		path = KENNEY.get(prop_id, "")
+	if path.is_empty() or not ResourceLoader.exists(path):
+		return ""
+	return path
+
+
 static func _instantiate(prop_id: String) -> Node3D:
 	if _cache.has(prop_id):
 		var cached: Resource = _cache[prop_id]
@@ -99,9 +176,9 @@ static func _instantiate(prop_id: String) -> Node3D:
 			return (cached as PackedScene).instantiate() as Node3D
 		if cached is Mesh:
 			return _mesh_node(cached as Mesh)
-	var path: String = PROPS.get(prop_id, "")
-	if path.is_empty() or not ResourceLoader.exists(path):
-		push_warning("PropLibrary: missing prop '%s' at %s" % [prop_id, path])
+	var path := _resolve_path(prop_id, true)
+	if path.is_empty():
+		push_warning("PropLibrary: missing prop '%s'" % prop_id)
 		return null
 	var res: Resource = load(path)
 	_cache[prop_id] = res

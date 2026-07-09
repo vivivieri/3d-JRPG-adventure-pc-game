@@ -84,18 +84,29 @@ ALLOWED = {
     "game/assets/fonts/NotoSansSC-Bold.otf": "OFL 1.1",
 }
 
-SKIP_NAMES = {"README.md", "ASSET_LICENSE.md", "OFL.txt", ".gitkeep", "LICENSE_KENNEY.txt", "asset_manifest.json"}
+SKIP_NAMES = {
+    "README.md",
+    "ASSET_LICENSE.md",
+    "OFL.txt",
+    ".gitkeep",
+    "LICENSE_KENNEY.txt",
+    "LICENSE_POLYHAVEN.txt",
+    "asset_manifest.json",
+    "polyhaven_manifest.json",
+    "model.path",
+}
 
 
 def load_model_manifest() -> set[str]:
-    manifest_path = os.path.join(ROOT, "game", "assets", "models", "asset_manifest.json")
-    if not os.path.isfile(manifest_path):
-        return set()
-    with open(manifest_path, encoding="utf-8") as f:
-        data = json.load(f)
     allowed: set[str] = set()
-    for rel in data.get("files", []):
-        allowed.add(f"game/assets/models/{rel}".replace("\\", "/"))
+    for name in ("asset_manifest.json", "polyhaven_manifest.json"):
+        manifest_path = os.path.join(ROOT, "game", "assets", "models", name)
+        if not os.path.isfile(manifest_path):
+            continue
+        with open(manifest_path, encoding="utf-8") as f:
+            data = json.load(f)
+        for rel in data.get("files", []):
+            allowed.add(f"game/assets/models/{rel}".replace("\\", "/"))
     return allowed
 
 
@@ -125,7 +136,7 @@ def main() -> int:
 
     for rel in models:
         if rel not in model_allowed:
-            errors.append(f"Unlisted 3D model (re-run tools/install_cc0_assets.sh): {rel}")
+            errors.append(f"Unlisted 3D model (re-run install scripts): {rel}")
 
     for rel in STEAM_MEDIA:
         path = os.path.join(ROOT, rel)

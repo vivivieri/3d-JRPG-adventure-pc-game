@@ -38,7 +38,7 @@ func _preload_story_flags() -> void:
 
 func _capture_scene(entry: Dictionary, out_dir: String) -> void:
 	get_tree().change_scene_to_file(entry.path)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(5.0).timeout
 	_hide_dialogue_ui()
 	if CAMERA_VIEWS.has(entry.file):
 		_frame_camera(CAMERA_VIEWS[entry.file])

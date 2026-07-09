@@ -22,6 +22,7 @@ dist/
 *.zip
 .godot-sdk/
 .asset-dl/
+game/assets/models/polyhaven/
 steam/screenshots/concat.txt
 steam/screenshots/trailer_slideshow.mp4
 

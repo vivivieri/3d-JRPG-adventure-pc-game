@@ -115,12 +115,12 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	match zone_id:
 		"ruined_village":
 			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
-			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 90)
-			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 28)
+			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 28, false)
+			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 16, false)
 		"tidal_caves":
 			_add_playable_ground(cover, palette, zone_id, Vector2(14, 52))
-			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 24)
-			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 36)
+			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 10, false)
+			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 18, false)
 		"dragon_palace_gate":
 			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
 			for z in range(8, -26, -8):
@@ -170,6 +170,7 @@ static func _scatter_grass_field(
 	radius_x: float,
 	radius_z: float,
 	count: int,
+	prefer_hd: bool = true,
 ) -> void:
 	if not PropLibrary.has_prop("grass_small"):
 		return
@@ -180,10 +181,17 @@ static func _scatter_grass_field(
 			kind = "grass"
 		var x := center.x + randf_range(-radius_x, radius_x)
 		var z := center.z + randf_range(-radius_z, radius_z)
-		PropLibrary.spawn(kind, parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.9, 1.35))
+		PropLibrary.spawn(kind, parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.9, 1.35), prefer_hd)
 
 
-static func _scatter_rocks(parent: Node3D, center: Vector3, radius_x: float, radius_z: float, count: int) -> void:
+static func _scatter_rocks(
+	parent: Node3D,
+	center: Vector3,
+	radius_x: float,
+	radius_z: float,
+	count: int,
+	prefer_hd: bool = true,
+) -> void:
 	var kinds := ["rock_small_a", "rock_small_b", "rock_large_a", "stump"]
 	for i in count:
 		var kind: String = kinds[i % kinds.size()]
@@ -191,7 +199,7 @@ static func _scatter_rocks(parent: Node3D, center: Vector3, radius_x: float, rad
 			continue
 		var x := center.x + randf_range(-radius_x, radius_x)
 		var z := center.z + randf_range(-radius_z, radius_z)
-		PropLibrary.spawn(kind, parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.75, 1.2))
+		PropLibrary.spawn(kind, parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.75, 1.2), prefer_hd)
 
 
 static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -290,20 +298,20 @@ static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
 		var x := cos(angle) * radius
 		var z := sin(angle) * radius - 8.0
 		var tree_id := "tree_pine" if i % 2 == 0 else "tree_oak"
-		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.4, 2.0))
+		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.2, 1.6), false)
 	for i in 8:
 		var x := -56.0 + i * 16.0
-		PropLibrary.spawn("cliff_block", parent, Vector3(x, 0, -48), 0.0, randf_range(1.2, 1.8))
+		PropLibrary.spawn("cliff_block", parent, Vector3(x, 0, -48), 0.0, randf_range(1.0, 1.4), false)
 
 
 static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	for z in range(-42, 18, 8):
-		PropLibrary.spawn("cliff_cave", parent, Vector3(-16, 0, z), 90.0, 2.2)
-		PropLibrary.spawn("cliff_cave", parent, Vector3(16, 0, z), -90.0, 2.2)
-		PropLibrary.spawn("cliff_slope", parent, Vector3(0, 9, z), 180.0, 2.0)
+		PropLibrary.spawn("cliff_cave", parent, Vector3(-16, 0, z), 90.0, 1.4, false)
+		PropLibrary.spawn("cliff_cave", parent, Vector3(16, 0, z), -90.0, 1.4, false)
+		PropLibrary.spawn("cliff_slope", parent, Vector3(0, 9, z), 180.0, 1.2, false)
 	for x in [-18, -10, 10, 18]:
 		for z in [-38, -20, 0, 16]:
-			PropLibrary.spawn("rock_large_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(1.0, 1.5))
+			PropLibrary.spawn("rock_large_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(1.0, 1.5), false)
 	_add_horizon_plane(parent, Vector3(0, -0.5, -44), Vector2(80, 20), palette.get("sky", Color("#0E1A22")), 0.9)
 
 
@@ -435,21 +443,25 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
 	_add_distant_hills(parent, palette)
 	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
+	# Hero high-poly trees (Poly Haven — kept sparse for performance).
+	if PropLibrary.has_prop("tree_coastal_a"):
+		PropLibrary.spawn("tree_coastal_a", parent, Vector3(-16, 0, 2), 30.0, 1.35)
+		PropLibrary.spawn("fir_hd", parent, Vector3(14, 0, -4), -35.0, 1.3)
 	var tree_spots := [
-		["tree_oak", -16, 2, 30.0, 1.8],
-		["tree_pine", 16, -8, -50.0, 1.9],
-		["tree_detailed", -12, 12, 15.0, 1.7],
-		["tree_fat", 12, 6, -20.0, 1.6],
-		["tree_default", -8, 10, 10.0, 1.5],
-		["tree_pine", 6, -12, 70.0, 1.7],
-		["tree_oak", -14, -10, 5.0, 1.6],
-		["tree_detailed", 14, -4, -35.0, 1.8],
+		["tree_oak", -16, 2, 30.0, 1.4],
+		["tree_pine", 16, -8, -50.0, 1.5],
+		["tree_detailed", -12, 12, 15.0, 1.3],
+		["tree_fat", 12, 6, -20.0, 1.2],
+		["tree_default", -8, 10, 10.0, 1.2],
+		["tree_pine", 6, -12, 70.0, 1.3],
+		["tree_oak", -14, -10, 5.0, 1.2],
+		["tree_detailed", 14, -4, -35.0, 1.4],
 	]
 	for spot in tree_spots:
-		PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4])
+		PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4], false)
 	for offset in [Vector3(1, 0, 4), Vector3(-2, 0, 7), Vector3(10, 0, 0), Vector3(-5, 0, -6)]:
-		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.1)
-		PropLibrary.spawn("log_stack", parent, offset + Vector3(0.8, 0, 0.5), 70.0, 1.0)
+		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.1, true)
+		PropLibrary.spawn("log_stack", parent, offset + Vector3(0.8, 0, 0.5), 70.0, 1.0, true)
 
 static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	_add_cave_tunnel(parent, palette, zone_id)
@@ -458,11 +470,13 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	_add_stalactites(parent, Vector3(-4, 5.5, -6), palette, zone_id)
 	_add_stalactites(parent, Vector3(4.5, 5.5, -14), palette, zone_id)
 	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
+	if PropLibrary.has_prop("cliff_coastal"):
+		PropLibrary.spawn("cliff_coastal", parent, Vector3(-22, 0, -14), 25.0, 1.0)
 	for z in range(-24, 10, 10):
-		PropLibrary.spawn("cliff_block", parent, Vector3(-7.0, 0, z), 90.0, 1.3)
-		PropLibrary.spawn("cliff_block", parent, Vector3(7.0, 0, z), -90.0, 1.3)
-		PropLibrary.spawn("rock_large_b", parent, Vector3(-4.0, 0, z + 2), 30.0, 0.85)
-		PropLibrary.spawn("rock_large_a", parent, Vector3(4.0, 0, z - 1), -25.0, 0.9)
+		PropLibrary.spawn("cliff_block", parent, Vector3(-7.0, 0, z), 90.0, 1.0, false)
+		PropLibrary.spawn("cliff_block", parent, Vector3(7.0, 0, z), -90.0, 1.0, false)
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-4.0, 0, z + 2), 30.0, 0.85, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(4.0, 0, z - 1), -25.0, 0.9, true)
 		PropLibrary.spawn("mushroom_tan", parent, Vector3(1.5, 0, z + 1), 0.0, 1.1)
 		PropLibrary.spawn("mushroom", parent, Vector3(-1.5, 0, z - 2), 35.0, 1.0)
 
@@ -484,11 +498,11 @@ static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 	torii.name = "ToriiProp"
 	torii.position = pos
 	parent.add_child(torii)
-	if PropLibrary.spawn("bush", torii, Vector3(-1.2, 0, 0), 0.0, 1.2):
-		PropLibrary.spawn("bush", torii, Vector3(1.2, 0, 0), 0.0, 1.2)
-		PropLibrary.spawn("stump", torii, Vector3(-1.5, 0, -0.4), 0.0, 0.85)
-		PropLibrary.spawn("stump", torii, Vector3(1.5, 0, -0.4), 0.0, 0.85)
-		PropLibrary.spawn("log", torii, Vector3(0, 1.2, -0.4), 90.0, 0.85)
+	if PropLibrary.spawn("bush", torii, Vector3(-1.2, 0, 0), 0.0, 1.2, true):
+		PropLibrary.spawn("bush", torii, Vector3(1.2, 0, 0), 0.0, 1.2, true)
+		PropLibrary.spawn("stump", torii, Vector3(-1.5, 0, -0.4), 0.0, 0.85, true)
+		PropLibrary.spawn("stump", torii, Vector3(1.5, 0, -0.4), 0.0, 0.85, true)
+		PropLibrary.spawn("log", torii, Vector3(0, 1.2, -0.4), 90.0, 0.85, true)
 		return
 	_add_box(torii, Vector3(-2.2, 0.25, 0), Vector3(0.7, 0.5, 0.7), palette.get("structure", Color.GRAY), false, zone_id, "structure")
 	_add_box(torii, Vector3(2.2, 0.25, 0), Vector3(0.7, 0.5, 0.7), palette.get("structure", Color.GRAY), false, zone_id, "structure")
@@ -574,8 +588,8 @@ static func _add_distant_hills(parent: Node3D, palette: Dictionary) -> void:
 	hills.name = "DistantHills"
 	parent.add_child(hills)
 	for spot in [[-20, -28, 1.6], [-10, -32, 1.4], [8, -30, 1.5], [18, -27, 1.3]]:
-		PropLibrary.spawn("tree_pine", hills, Vector3(spot[0], 0, spot[1]), float(spot[0]), spot[2])
-		PropLibrary.spawn("tree_oak", hills, Vector3(spot[0] + 3, 0, spot[1] - 2), float(spot[0] * 2), spot[2] * 0.9)
+		PropLibrary.spawn("tree_pine", hills, Vector3(spot[0], 0, spot[1]), float(spot[0]), spot[2], false)
+		PropLibrary.spawn("tree_oak", hills, Vector3(spot[0] + 3, 0, spot[1] - 2), float(spot[0] * 2), spot[2] * 0.9, false)
 
 
 static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:

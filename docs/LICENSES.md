@@ -55,6 +55,20 @@ Install curated subset: `bash tools/install_cc0_assets.sh` (requires `.asset-dl/
 
 Attribution appreciated but not required: [Kenney](https://www.kenney.nl)
 
+---
+
+## 3D models (CC0 — Poly Haven, high-poly)
+
+| Item | Source | License | Used for |
+|------|--------|---------|----------|
+| Nature glTF (`models/polyhaven/*/`) | [Poly Haven](https://polyhaven.com) | CC0 1.0 | HD trees, cliffs, rocks, grass, shrubs |
+
+Install curated subset: `python3 tools/install_polyhaven_assets.py` (~1.6 GB at 1k resolution).
+
+`PropLibrary` prefers Poly Haven models when installed, falling back to Kenney low-poly.
+
+Attribution appreciated but not required: [Poly Haven](https://polyhaven.com)
+
 Greybox floor/wall primitives remain procedural Godot meshes.
 
 ---
@@ -80,6 +94,7 @@ Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG onl
 | Status | Notes |
 |--------|-------|
 | **Kenney CC0 kits** | Curated Nature + Castle models in `game/assets/models/`. See `asset_manifest.json`. |
+| **Poly Haven CC0** | High-poly nature glTF in `game/assets/models/polyhaven/`. See `polyhaven_manifest.json`. Not committed — run installer. |
 
 ---
 
