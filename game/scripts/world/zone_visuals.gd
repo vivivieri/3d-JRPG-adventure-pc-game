@@ -988,12 +988,6 @@ static func _add_beach_set(parent: Node3D, palette: Dictionary, zone_id: String)
 		PropLibrary.spawn("rock_small_a", parent, offset + Vector3(0.8, 0, 0.5), randf_range(0, 360), 0.9, true)
 	_add_rock_cluster(parent, Vector3(-6, 0, 2), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(7, 0, 5), palette, zone_id)
-	var surf := MeshInstance3D.new()
-	surf.name = "SurfWater"
-	surf.mesh = _make_water_plane(Vector2(28, 14))
-	surf.position = Vector3(0, -0.22, -6.5)
-	WaterMaterial.apply_to_mesh(surf, palette, zone_id)
-	parent.add_child(surf)
 	for x in range(-12, 13):
 		var sx := float(x) * 1.1
 		var wave_z := -2.8 + sin(sx * 0.45) * 0.9
