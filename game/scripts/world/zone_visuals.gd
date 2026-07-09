@@ -127,9 +127,6 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 18, false)
 		"dragon_palace_gate":
 			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
-			for z in [12, 4, -4]:
-				PropLibrary.spawn("castle_pillar", cover, Vector3(-5.5, 0, z), 0.0, 1.2)
-				PropLibrary.spawn("castle_pillar", cover, Vector3(5.5, 0, z), 0.0, 1.2)
 
 
 static func _scatter_path_strip(
@@ -286,26 +283,17 @@ static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionar
 
 
 static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
-	_add_horizon_plane(parent, Vector3(0, -0.42, -24), Vector2(140, 10), palette.get("ground", Color("#C9B89A")), 0.95)
-	_add_horizon_plane(
-		parent,
-		Vector3(0, -0.55, -38),
-		Vector2(160, 50),
-		palette.get("water", Color("#1A4A5A")),
-		0.2,
-		true,
-		palette.get("accent", Color.CYAN) * 0.1,
-	)
-	for i in 14:
-		var angle := float(i) / 14.0 * TAU
-		var radius := 42.0
+	_add_horizon_plane(parent, Vector3(0, -0.72, -62), Vector2(220, 6), palette.get("water", Color("#142E38")), 0.5)
+	var hd_trees := ["tree_coastal_a", "tree_coastal_b"]
+	for i in 2:
+		var tree_id: String = hd_trees[i % hd_trees.size()]
+		if not PropLibrary.has_prop(tree_id):
+			continue
+		var angle := float(i) / 2.0 * TAU + 0.6
+		var radius := 46.0
 		var x := cos(angle) * radius
-		var z := sin(angle) * radius - 8.0
-		var tree_id := "tree_pine" if i % 2 == 0 else "tree_oak"
-		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.2, 1.6), false)
-	for i in 8:
-		var x := -56.0 + i * 16.0
-		PropLibrary.spawn("cliff_block", parent, Vector3(x, 0, -48), 0.0, randf_range(1.0, 1.4), false)
+		var z := sin(angle) * radius - 10.0
+		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.1, 1.35))
 
 
 static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
@@ -330,10 +318,10 @@ static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	)
 	for i in 10:
 		var angle := float(i) / 10.0 * TAU
-		var x := cos(angle) * 38.0
-		var z := sin(angle) * 38.0 + 4.0
-		if i % 3 == 0:
-			PropLibrary.spawn("castle_tower_base", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.3)
+		var x := cos(angle) * 48.0
+		var z := sin(angle) * 48.0 + 4.0
+		if i % 5 == 0:
+			PropLibrary.spawn("castle_tower_base", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.0)
 	for i in 6:
 		_add_star_glow(parent, Vector3(randf_range(-30, 30), randf_range(18, 28), randf_range(-20, 30)))
 
@@ -444,12 +432,11 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_torii(parent, Vector3(-6, 0, -5), palette, zone_id)
 	_add_shack(parent, Vector3(8, 0, -3), palette, zone_id)
 	_add_well(parent, Vector3(5, 0, 2), palette, zone_id)
-	_add_pier(parent, Vector3(-12, 0, 8), palette, zone_id)
+	_add_pier(parent, Vector3(-8, 0, 6), palette, zone_id)
 	_add_coastline(parent, palette, zone_id)
 	_add_rock_cluster(parent, Vector3(3, 0, -8), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-10, 0, -2), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
-	_add_distant_hills(parent, palette)
 	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
 	var hero_trees := [
 		["tree_coastal_a", -14, 4, 25.0, 1.3],
@@ -459,13 +446,6 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	for spot in hero_trees:
 		if PropLibrary.has_prop(spot[0]):
 			PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4])
-	var tree_spots := [
-		["tree_detailed", -18, 8, 15.0, 1.3],
-		["tree_fat", 16, 4, -25.0, 1.2],
-		["tree_oak", -10, 12, 5.0, 1.25],
-	]
-	for spot in tree_spots:
-		PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4], false)
 	for offset in [Vector3(1, 0, 4), Vector3(-2, 0, 7), Vector3(10, 0, 0), Vector3(-5, 0, -6)]:
 		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.0, true)
 		PropLibrary.spawn("grass_leafs", parent, offset + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, true)
@@ -486,12 +466,10 @@ static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String
 	_add_gate_pillars(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_banners(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_void_sea(parent, palette, zone_id)
-	_add_palace_columns(parent, Vector3(0, 0, 2), palette, zone_id)
 	_add_palace_lanterns(parent, Vector3(0, 0, 8), palette, zone_id)
-	PropLibrary.spawn("castle_arch", parent, Vector3(0, 0, 14), 0.0, 1.6)
-	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.4, 6), 0.0, 1.2)
-	PropLibrary.spawn("castle_stairs", parent, Vector3(-5.5, 0, 0), 90.0, 1.15)
-	PropLibrary.spawn("castle_stairs", parent, Vector3(5.5, 0, 0), -90.0, 1.15)
+	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.4, 6), 0.0, 1.0)
+	PropLibrary.spawn("knight_red", parent, Vector3(-2.0, 0, 4), 35.0, 1.1)
+	PropLibrary.spawn("knight_red", parent, Vector3(2.0, 0, 4), -35.0, 1.1)
 
 
 static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -517,7 +495,6 @@ static func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 	PropLibrary.spawn("log", shack, Vector3(1.0, 0.6, 0.6), -25.0, 0.95, true)
 	PropLibrary.spawn("log", shack, Vector3(0, 1.1, 0.2), 0.0, 1.0, true)
 	PropLibrary.spawn("bush", shack, Vector3(0, 0, 1.0), 0.0, 0.95, true)
-	PropLibrary.spawn("castle_door", shack, Vector3(0, 0, 1.4), 0.0, 0.9)
 
 
 static func _add_well(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -534,16 +511,15 @@ static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id
 	var pier := Node3D.new()
 	pier.position = pos
 	parent.add_child(pier)
-	for i in 5:
-		PropLibrary.spawn("log", pier, Vector3(i * 1.1, 0.08, 0), 90.0, 0.95, true)
-	PropLibrary.spawn("canoe", pier, Vector3(4.5, 0.12, 0.8), -25.0, 1.0)
-	PropLibrary.spawn("canoe_paddle", pier, Vector3(4.8, 0.2, 1.0), 40.0, 1.0)
+	for i in 3:
+		PropLibrary.spawn("log", pier, Vector3(i * 1.0, 0.06, 0), 90.0, 0.9, true)
+	PropLibrary.spawn("bush", pier, Vector3(4.2, 0, 0.6), 0.0, 0.85, true)
 
 
 static func _add_coastline(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	for x in range(-8, 9):
-		PropLibrary.spawn("rock_small_a", parent, Vector3(x * 2.0, 0, -9.5), float(x * 17), 1.0)
-		PropLibrary.spawn("grass_leafs", parent, Vector3(x * 1.8, 0, -8.2), float(x * 23), 1.0)
+	for x in range(-6, 7):
+		PropLibrary.spawn("rock_small_a", parent, Vector3(x * 2.0, 0, -9.5), float(x * 17), 0.9, true)
+		PropLibrary.spawn("grass_leafs", parent, Vector3(x * 1.8, 0, -8.2), float(x * 23), 1.0, true)
 
 
 static func _add_rock_cluster(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -655,9 +631,8 @@ static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary,
 	gate.name = "PalaceGate"
 	gate.position = pos
 	parent.add_child(gate)
-	PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.5)
-	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.2), 0.0, 1.3)
-	PropLibrary.spawn("castle_arch", gate, Vector3(0, 0, -1.5), 0.0, 1.4)
+	PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.25)
+	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.0), 0.0, 1.1)
 
 
 static func _add_box(
