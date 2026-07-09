@@ -309,21 +309,27 @@ static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
 static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	_add_horizon_plane(
 		parent,
-		Vector3(0, -3.8, 10),
-		Vector2(120, 70),
+		Vector3(0, -4.2, -6),
+		Vector2(100, 80),
 		palette.get("ground_horizon", Color("#1A2858")),
-		0.15,
+		0.2,
 		true,
-		palette.get("accent", Color.CYAN) * 0.15,
+		palette.get("accent", Color.CYAN) * 0.12,
 	)
-	for i in 10:
-		var angle := float(i) / 10.0 * TAU
-		var x := cos(angle) * 48.0
-		var z := sin(angle) * 48.0 + 4.0
-		if i % 5 == 0:
-			PropLibrary.spawn("castle_tower_base", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.0)
-	for i in 6:
-		_add_star_glow(parent, Vector3(randf_range(-30, 30), randf_range(18, 28), randf_range(-20, 30)))
+	for side in [-1, 1]:
+		for z in [-28, -8, 12]:
+			PropLibrary.spawn(
+				"castle_tower_base",
+				parent,
+				Vector3(side * 22.0, 0, z),
+				90.0 if side > 0 else -90.0,
+				1.15,
+			)
+	for i in 8:
+		_add_star_glow(
+			parent,
+			Vector3(randf_range(-35, 35), randf_range(20, 32), randf_range(-35, 20)),
+		)
 
 
 static func _add_horizon_plane(
@@ -463,13 +469,21 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 
 
 static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	_add_void_sea(parent, palette, zone_id)
 	_add_gate_pillars(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_banners(parent, Vector3(0, 0, 12), palette, zone_id)
-	_add_void_sea(parent, palette, zone_id)
-	_add_palace_lanterns(parent, Vector3(0, 0, 8), palette, zone_id)
-	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.4, 6), 0.0, 1.0)
-	PropLibrary.spawn("knight_red", parent, Vector3(-2.0, 0, 4), 35.0, 1.1)
-	PropLibrary.spawn("knight_red", parent, Vector3(2.0, 0, 4), -35.0, 1.1)
+	_add_palace_lanterns(parent, Vector3(0, 0, 10), palette, zone_id)
+	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.35, 7), 0.0, 1.05)
+	PropLibrary.spawn("castle_stairs", parent, Vector3(-4.5, 0, 9), 90.0, 1.05)
+	PropLibrary.spawn("castle_stairs", parent, Vector3(4.5, 0, 9), -90.0, 1.05)
+	PropLibrary.spawn("knight_red", parent, Vector3(-2.2, 0, 4), 35.0, 1.1)
+	PropLibrary.spawn("knight_red", parent, Vector3(2.2, 0, 4), -35.0, 1.1)
+	_add_palace_columns(parent, Vector3(0, 0, 2), palette, zone_id)
+	_add_palace_banners(parent, Vector3(0, 0, 2), palette, zone_id)
+	_add_palace_lanterns(parent, Vector3(0, 0, 2), palette, zone_id)
+	_add_mirror_chamber(parent, Vector3(-4, 0, -8), palette, zone_id)
+	_add_palace_section(parent, Vector3(0, 0, -18), palette, zone_id, true)
+	_add_palace_section(parent, Vector3(0, 0, -30), palette, zone_id, false)
 
 
 static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -590,7 +604,78 @@ static func _add_palace_banners(parent: Node3D, pos: Vector3, palette: Dictionar
 
 
 static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	pass
+	var sea := Node3D.new()
+	sea.name = "VoidSea"
+	parent.add_child(sea)
+	var water := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(30, 58)
+	water.mesh = plane
+	water.rotation_degrees.x = -90.0
+	water.position = Vector3(0, -2.6, -8)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("water", Color("#1A2858"))
+	mat.metallic = 0.2
+	mat.roughness = 0.06
+	mat.emission_enabled = true
+	mat.emission = palette.get("accent", Color.CYAN) * 0.22
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	water.material_override = mat
+	sea.add_child(water)
+	for z in [12, 2, -8, -18, -30]:
+		var light := OmniLight3D.new()
+		light.light_color = palette.get("accent", Color.CYAN)
+		light.light_energy = 0.55
+		light.omni_range = 12.0
+		light.position = Vector3(0, -1.0, z)
+		sea.add_child(light)
+
+
+static func _add_mirror_chamber(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
+	var chamber := Node3D.new()
+	chamber.name = "MirrorChamberProp"
+	chamber.position = pos
+	parent.add_child(chamber)
+	PropLibrary.spawn("castle_pillar", chamber, Vector3(-2.0, 0, 0), 0.0, 1.1)
+	PropLibrary.spawn("castle_pillar", chamber, Vector3(2.0, 0, 0), 0.0, 1.1)
+	PropLibrary.spawn("castle_arch", chamber, Vector3(0, 0, -1.0), 0.0, 1.05)
+	var mirror := MeshInstance3D.new()
+	mirror.name = "Mirror"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(2.6, 3.4)
+	mirror.mesh = plane
+	mirror.position = Vector3(0, 1.9, 0.5)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color("#A8D0E8")
+	mat.metallic = 0.95
+	mat.roughness = 0.04
+	mat.emission_enabled = true
+	mat.emission = palette.get("glow", Color.WHITE) * 0.15
+	mirror.material_override = mat
+	chamber.add_child(mirror)
+	_add_palace_lanterns(chamber, Vector3(0, 0, 0.8), palette, zone_id)
+
+
+static func _add_palace_section(
+	parent: Node3D,
+	pos: Vector3,
+	palette: Dictionary,
+	zone_id: String,
+	with_knights: bool,
+) -> void:
+	var section := Node3D.new()
+	section.position = pos
+	parent.add_child(section)
+	_add_palace_banners(section, Vector3(0, 0, 0), palette, zone_id)
+	_add_palace_lanterns(section, Vector3(0, 0, 0), palette, zone_id)
+	PropLibrary.spawn("castle_pillar", section, Vector3(-4.0, 0, 0), 0.0, 1.15)
+	PropLibrary.spawn("castle_pillar", section, Vector3(4.0, 0, 0), 0.0, 1.15)
+	if with_knights:
+		PropLibrary.spawn("knight_red", section, Vector3(-1.5, 0, 1.5), 20.0, 1.05)
+		PropLibrary.spawn("knight_red", section, Vector3(1.5, 0, 1.5), -20.0, 1.05)
+	else:
+		PropLibrary.spawn("castle_arch", section, Vector3(0, 0, 1.5), 0.0, 1.25)
+		PropLibrary.spawn("castle_tower_top", section, Vector3(0, 0, -1.5), 0.0, 1.1)
 
 
 static func _add_palace_columns(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:

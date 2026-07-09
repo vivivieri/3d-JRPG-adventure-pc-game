@@ -12,7 +12,7 @@ const SCENES := [
 const CAMERA_VIEWS := {
 	"village": {"cam": Vector3(12, 8, 14), "focus": Vector3(0, 1.5, 0), "fov": 68.0},
 	"caves": {"cam": Vector3(5, 4.5, 10), "focus": Vector3(0, 1.5, -8), "fov": 65.0},
-	"palace": {"cam": Vector3(8, 24, 50), "focus": Vector3(0, 2, 0), "fov": 80.0},
+	"palace": {"cam": Vector3(5, 18, 36), "focus": Vector3(0, 4, 8), "fov": 74.0},
 }
 
 const DEFAULT_OUT := "/opt/cursor/artifacts/screenshots"
