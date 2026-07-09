@@ -91,7 +91,12 @@ Japanese and Chinese use bundled **Noto Sans** fonts (OFL 1.1):
 | `ja` | `NotoSansJP-Regular.otf`, `NotoSansJP-Bold.otf` |
 | `zh` | `NotoSansSC-Regular.otf`, `NotoSansSC-Bold.otf` |
 
-`FontThemeManager` autoload applies the correct font when the locale changes. See `game/assets/fonts/README.md`.
+When dialogue is active, `DialogueBox` (CanvasLayer) shows speaker + typewriter text. Advance with **Space / Enter / E**.
+
+- Scene: `game/scenes/ui/dialogue_box.tscn`
+- Autoload: `DialogueUiManager` attaches overlay to root viewport
+- Signals: `dialogue_started`, `dialogue_line`, `dialogue_finished`
+- Fonts: `FontThemeManager.apply_dialogue_*` on locale change
 
 ---
 

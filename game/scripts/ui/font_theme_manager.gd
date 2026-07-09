@@ -53,6 +53,24 @@ func apply_subtitle(label: Label) -> void:
 	label.add_theme_font_size_override("font_size", SUBTITLE_FONT_SIZE)
 
 
+func apply_dialogue_speaker(label: Label) -> void:
+	if _bold:
+		label.add_theme_font_override(&"font", _bold)
+	label.add_theme_font_size_override(&"font_size", 22)
+
+
+func apply_dialogue_body(label: Label) -> void:
+	if _regular:
+		label.add_theme_font_override(&"font", _regular)
+	label.add_theme_font_size_override(&"font_size", 20)
+
+
+func apply_dialogue_hint(label: Label) -> void:
+	if _regular:
+		label.add_theme_font_override(&"font", _regular)
+	label.add_theme_font_size_override(&"font_size", 14)
+
+
 func apply_to_control(root: Control) -> void:
 	if _regular == null:
 		return

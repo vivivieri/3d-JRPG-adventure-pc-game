@@ -6,6 +6,7 @@ UI_NEW_GAME,New Game,はじめから,新游戏
 UI_CONTINUE,Continue,つづきから,继续游戏
 UI_QUIT,Quit,終了,退出
 UI_LANGUAGE,Language,言語,语言
+UI_DIALOGUE_ADVANCE,Press Space or Enter to continue,スペースまたはEnterで続ける,按空格或回车继续
 # UI — Interaction
 UI_INTERACT_EXAMINE,Examine,調べる,调查
 UI_INTERACT_TALK,Talk,話す,交谈

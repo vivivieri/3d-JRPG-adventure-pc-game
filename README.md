@@ -86,7 +86,7 @@ Example — start tutorial combat from code:
 GameManager.start_combat(["salt_crab"])
 ```
 
-Example — play a dialogue scene:
+Example — play a dialogue scene (UI appears automatically):
 
 ```gdscript
 DialogueRunner.play_scene("SC-03")
