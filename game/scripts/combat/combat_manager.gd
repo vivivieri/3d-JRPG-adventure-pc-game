@@ -22,7 +22,7 @@ var _triggered_phases: Dictionary = {}
 func start_battle(enemy_ids: Array) -> void:
 	_reset()
 	for char_id in GameManager.party_ids:
-		var def := GameManager.get_character_def(char_id)
+		var def := GameManager.build_combat_definition(char_id)
 		if not def.is_empty():
 			allies.append(Combatant.new(def, true))
 	for enemy_id in enemy_ids:
@@ -404,12 +404,14 @@ func _on_victory() -> void:
 		total_gold += rewards.get("gold", 0)
 	GameManager.gold += total_gold
 	_log(LocalizationManager.tr_key("combat.victory", { "xp": total_xp, "gold": total_gold }))
+	GameManager.sync_field_stats_from_combat(allies)
 	GameManager.change_state(GameManager.GameState.EXPLORATION)
 	EventBus.combat_ended.emit(true)
 
 
 func _on_defeat() -> void:
 	_log(LocalizationManager.tr_key("combat.defeat"))
+	GameManager.sync_field_stats_from_combat(allies)
 	GameManager.change_state(GameManager.GameState.EXPLORATION)
 	EventBus.combat_ended.emit(false)
 

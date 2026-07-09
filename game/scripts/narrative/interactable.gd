@@ -12,6 +12,7 @@ extends StaticBody3D
 func interact() -> void:
 	if not once_flag.is_empty() and GameManager.has_flag(once_flag):
 		return
+	AudioManager.play_sfx("interact")
 	if not dialogue_scene_id.is_empty():
 		DialogueRunner.play_scene(dialogue_scene_id)
 	elif combat_encounter_ids.size() > 0:

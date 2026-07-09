@@ -17,6 +17,23 @@ UI_INTERACT_USE,Use,使う,使用
 UI_INTERACT_OPEN,Open,開ける,打开
 UI_INTERACT_LOCKED,Locked,鍵がかかっている,已锁定
 UI_INTERACT_KEY,E,E,E
+# UI — Field menu
+UI_MENU_TITLE,Menu,メニュー,菜单
+UI_MENU_ITEMS,Items,アイテム,道具
+UI_MENU_EQUIPMENT,Equipment,装備,装备
+UI_FIELD_NO_ITEMS,No usable items.,使えるアイテムがない。,没有可用道具。
+UI_FIELD_USE_ON,Use on,使う対象,使用对象
+UI_EQUIP_UNEQUIP,Unequip,外す,卸下
+UI_EQUIP_NONE,No equipment available.,装備できるものがない。,没有可装备物品。
+equip.slot.weapon,Weapon,武器,武器
+equip.slot.armor,Armor,防具,防具
+equip.slot.charm,Charm,お守り,护符
+field.item_heal_hp,Used {item} on {target} — +{amount} HP.,{target}に{item}、HP+{amount}。,对{target}使用{item}，生命+{amount}。
+field.item_heal_mp,Used {item} on {target} — +{amount} MP.,{target}に{item}、MP+{amount}。,对{target}使用{item}，法力+{amount}。
+field.item_cure,Used {item} on {target} — cured {status}.,{target}の{status}を{item}で治した。,用{item}治愈{target}的{status}。
+field.item_no_effect,It had no effect on {target}.,{target}には効かなかった。,对{target}没有效果。
+field.equipped,Equipped {item} on {target}.,{target}に{item}を装備した。,为{target}装备了{item}。
+field.unequipped,Unequipped {slot} from {target}.,{target}の{slot}を外した。,卸下了{target}的{slot}。
 # UI — Combat actions
 UI_ACTION_ATTACK,Attack,攻撃,攻击
 UI_ACTION_SKILL,Skill,スキル,技能

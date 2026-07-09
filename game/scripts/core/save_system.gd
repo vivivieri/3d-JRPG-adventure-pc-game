@@ -11,8 +11,11 @@ func save_game() -> bool:
 		"party_ids": GameManager.party_ids,
 		"party_levels": GameManager.party_levels,
 		"inventory": GameManager.inventory,
+		"equipped": GameManager.equipped,
+		"party_field_stats": GameManager.party_field_stats,
 		"gold": GameManager.gold,
 		"current_area": GameManager.current_area,
+		"chosen_ending": GameManager.chosen_ending,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -37,8 +40,13 @@ func load_game() -> bool:
 	GameManager.party_ids.assign(parsed.get("party_ids", ["urashima"]))
 	GameManager.party_levels = parsed.get("party_levels", { "urashima": 1 })
 	GameManager.inventory = parsed.get("inventory", {})
+	GameManager.equipped = parsed.get("equipped", {})
+	GameManager.party_field_stats = parsed.get("party_field_stats", {})
 	GameManager.gold = parsed.get("gold", 0)
 	GameManager.current_area = parsed.get("current_area", "ruined_village")
+	GameManager.chosen_ending = parsed.get("chosen_ending", "")
+	if GameManager.party_field_stats.is_empty():
+		GameManager.reset_party_field_stats()
 	return true
 
 

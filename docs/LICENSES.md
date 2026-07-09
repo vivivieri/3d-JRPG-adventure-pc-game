@@ -43,12 +43,13 @@ Track every third-party asset, story source, and engine dependency.
 
 ---
 
-## Audio (planned)
+## Audio
 
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
-| _TBD_ | Freesound.org (CC0 filter) | CC0 | — | Ambient waves, combat SFX |
-| _TBD_ | OpenGameArt.org | Per entry | — | Background music |
+| Placeholder BGM/SFX | Procedural (tools/generate_placeholder_audio.py) | MIT (repo) | 2026-07 | All zones + UI/combat SFX until final assets |
+| _TBD_ | Freesound.org (CC0 filter) | CC0 | — | Replace placeholder SFX |
+| _TBD_ | OpenGameArt.org | Per entry | — | Replace placeholder BGM |
 
 ---
 

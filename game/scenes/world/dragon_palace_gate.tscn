@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://palacegate001"]
 
-[ext_resource type="Script" path="res://scripts/world/world_spawn.gd" id="1_spawn"]
+[ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="1_spawn"]
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/world/auto_dialogue_zone.gd" id="3_dialogue"]
 [ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="4_interact"]
@@ -25,6 +25,7 @@ size = Vector3(2, 2.5, 2)
 
 [node name="DragonPalaceGate" type="Node3D"]
 script = ExtResource("1_spawn")
+zone_id = "dragon_palace_gate"
 default_spawn = "from_caves"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

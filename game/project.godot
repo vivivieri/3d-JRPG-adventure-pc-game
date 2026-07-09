@@ -23,6 +23,12 @@ EventBus="*res://scripts/core/event_bus.gd"
 SaveSystem="*res://scripts/core/save_system.gd"
 DialogueRunner="*res://scripts/narrative/dialogue_runner.gd"
 CombatManager="*res://scripts/combat/combat_manager.gd"
+AudioManager="*res://scripts/core/audio_manager.gd"
+FieldMenuManager="*res://scripts/ui/field_menu_manager.gd"
+
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
 
 [internationalization]
 

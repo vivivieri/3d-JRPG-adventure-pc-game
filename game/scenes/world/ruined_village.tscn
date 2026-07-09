@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://village001"]
 
-[ext_resource type="Script" path="res://scripts/world/world_spawn.gd" id="1_spawn"]
+[ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="1_spawn"]
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="3_interact"]
 [ext_resource type="Script" path="res://scripts/world/scene_transition.gd" id="4_transition"]
@@ -17,6 +17,7 @@ height = 1.6
 
 [node name="RuinedVillage" type="Node3D"]
 script = ExtResource("1_spawn")
+zone_id = "ruined_village"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 12, 0)

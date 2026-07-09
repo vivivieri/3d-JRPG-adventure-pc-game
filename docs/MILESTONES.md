@@ -37,8 +37,12 @@ Track implementation progress against the GDD milestones.
 - [ ] Credits sequence
 
 ## M5 — Steam
+- [x] Placeholder BGM/SFX + AudioManager
+- [x] Zone art pass (materials, fog, props)
+- [x] Field item use + equipment UI (Tab menu)
+- [x] Steam store page copy + capsule placeholders
+- [x] Windows export preset (`game/export_presets.cfg`)
 - [ ] GodotSteam integration
-- [ ] Windows export build
-- [ ] Store page assets (capsule, trailer, screenshots)
+- [ ] Windows export build (run in Godot)
+- [ ] Trailer + in-game screenshots
 - [ ] Playtest + balance pass
-- [ ] LICENSES.md fully populated

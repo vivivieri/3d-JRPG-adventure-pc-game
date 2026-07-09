@@ -25,6 +25,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.z = move_toward(velocity.z, 0, move_speed)
 	move_and_slide()
+	if direction and GameManager.state == GameManager.GameState.EXPLORATION:
+		AudioManager.play_footstep()
 
 
 func _unhandled_input(event: InputEvent) -> void:

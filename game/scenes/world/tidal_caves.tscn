@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://tidalcaves001"]
 
-[ext_resource type="Script" path="res://scripts/world/world_spawn.gd" id="1_spawn"]
+[ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="1_spawn"]
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/world/auto_dialogue_zone.gd" id="3_dialogue"]
 [ext_resource type="Script" path="res://scripts/world/water_controller.gd" id="4_water"]
@@ -36,6 +36,7 @@ size = Vector3(1.6, 2, 1.6)
 
 [node name="TidalCaves" type="Node3D"]
 script = ExtResource("1_spawn")
+zone_id = "tidal_caves"
 default_spawn = "from_village"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

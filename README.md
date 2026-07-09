@@ -15,11 +15,11 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 |-----------|--------|
 | M0 — GDD, storyboard, repo scaffold | Done |
 | M0b — Multi-language (en / ja / zh) | Done |
-| M1 — Greybox movement + dialogue | In progress |
-| M2 — Combat vertical slice | Scaffolded |
-| M3 — Chapter 1 playable | Planned |
-| M4 — Full story + endings | Planned |
-| M5 — Steam release | Planned |
+| M1 — Greybox movement + dialogue | Done |
+| M2 — Combat vertical slice | Done |
+| M3 — Chapter 1 playable | Done |
+| M4 — Full story + endings | Done |
+| M5 — Polish + Steam page | In progress |
 
 ---
 
@@ -32,12 +32,17 @@ docs/
   ART_DIRECTION.md    # Visual style bible
   LICENSES.md         # Asset attribution log
 
+steam/
+  STORE_PAGE.md       # Steam store listing copy + asset checklist
+  capsule_*.png       # Store capsule placeholders
+
 game/
   project.godot       # Open in Godot 4.3+
+  export_presets.cfg  # Windows Desktop export preset
   data/               # JSON — skills, enemies, dialogue, quests
   scripts/            # GDScript systems
   scenes/             # Godot scenes
-  assets/             # Models, textures, audio (import here)
+  assets/             # Models, textures, audio
 ```
 
 ---
@@ -105,10 +110,12 @@ DialogueRunner.play_scene("SC-03")
 
 ---
 
-## Steam (future)
+## Steam
 
-- Steam Direct fee: $100 (recoupable at $1,000 revenue)
-- Godot + GodotSteam plugin for achievements, cloud saves
+Store page copy and capsule placeholders are in [`steam/STORE_PAGE.md`](steam/STORE_PAGE.md).
+
+- Export preset: `game/export_presets.cfg` (Windows Desktop)
+- GodotSteam integration: planned (see `docs/MILESTONES.md`)
 - Target price: $4.99–$9.99
 
 ---

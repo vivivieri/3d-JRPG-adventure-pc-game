@@ -38,9 +38,9 @@ func _init(definition: Dictionary, player: bool) -> void:
 	tier = definition.get("tier", "normal")
 	var stats: Dictionary = definition.get("stats", definition.get("base_stats", {}))
 	max_hp = stats.get("max_hp", 50)
-	hp = max_hp
+	hp = stats.get("hp", max_hp)
 	max_mp = stats.get("max_mp", 10)
-	mp = max_mp
+	mp = stats.get("mp", max_mp)
 	atk = stats.get("atk", 5)
 	def = stats.get("def", 5)
 	mag = stats.get("mag", 5)
