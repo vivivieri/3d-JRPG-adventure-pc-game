@@ -178,7 +178,6 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
 			_add_village_planting_groups(cover)
-			_scatter_village_flora(cover, Vector3(0, 0, 1), 11.0, 13.0, 2 if _screenshot_mode() else 5)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 2 if _screenshot_mode() else 4, false)
 			_add_ground_edge_breakup(cover, Vector2(21, 21), palette, zone_id)
 		"tidal_caves":
@@ -258,9 +257,9 @@ static func _add_organic_ground(
 		mat.albedo_color = palette.get("ground", Color.GRAY).lerp(Color("#6A5A42"), 0.25)
 		mat.roughness = 0.92
 	elif shape == "cave":
-		mat.albedo_color = palette.get("ground", Color.GRAY)
-		mat.roughness = 0.25
-		mat.metallic = 0.05
+		mat.albedo_color = Color("#3A4448")
+		mat.roughness = 0.62
+		mat.metallic = 0.02
 	elif shape == "palace":
 		mat.albedo_color = Color("#F2EDE4")
 		mat.roughness = 0.4
@@ -361,7 +360,6 @@ static func _add_village_planting_groups(parent: Node3D) -> void:
 		var center: Vector3 = group["center"]
 		for spot in group["spots"]:
 			PropLibrary.spawn("grass_small", parent, center + spot, randf_range(-18, 18), randf_range(0.7, 0.95), false)
-		PropLibrary.spawn("grass_leafs", parent, center + Vector3(0.15, 0, 0.15), randf_range(0, 360), 0.75, false)
 
 
 static func _add_ground_edge_breakup(
@@ -934,7 +932,6 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_shack(parent, Vector3(8, 0, -3), palette, zone_id)
 	_add_palisade_enclosure(parent, Vector3(8, 0, -3), 2.8, 2.2)
 	_add_well(parent, Vector3(5, 0, 2), palette, zone_id)
-	_add_palisade_enclosure(parent, Vector3(5, 0, 2), 1.6, 1.4)
 	_add_pier(parent, Vector3(-8, 0, 6), palette, zone_id)
 	_add_coastline(parent, palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-12, 0, -3), palette, zone_id)
@@ -1350,7 +1347,7 @@ static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary
 		PropLibrary.spawn("log", puddle, Vector3(0.05, 0.04, 0), 25.0, 0.28, true)
 	PropLibrary.spawn("rock_small_a", puddle, Vector3(-0.55, 0, 0.35), -20.0, 0.45, true)
 	PropLibrary.spawn("rock_small_a", puddle, Vector3(0.45, 0, -0.25), 15.0, 0.4, true)
-	PropLibrary.spawn("grass_leafs", puddle, Vector3(-0.7, 0, -0.35), 40.0, 0.7, true)
+	PropLibrary.spawn("grass_small", puddle, Vector3(-0.7, 0, -0.35), 40.0, 0.65, false)
 
 
 static func _add_deep_pool_faces(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:

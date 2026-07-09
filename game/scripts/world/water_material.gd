@@ -55,6 +55,7 @@ static func _attach_animator(mesh: MeshInstance3D) -> void:
 
 static func _apply_zone_accent(mat: StandardMaterial3D, zone_id: String) -> void:
 	if zone_id == "tidal_caves":
+		mat.albedo_color = Color(0.42, 0.82, 0.78)
 		mat.emission = Color(0.25, 0.85, 0.78) * 0.18
 	elif zone_id == "beach_shore":
 		mat.emission = Color(0.18, 0.72, 0.62) * 0.14
