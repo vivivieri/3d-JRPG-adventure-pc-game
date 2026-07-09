@@ -7,8 +7,8 @@ const CAPTURES := [
 	{
 		"file": "beach",
 		"path": "res://scenes/world/beach_shore.tscn",
-		"cam": Vector3(10, 6, 16),
-		"focus": Vector3(0, 1.2, 7),
+		"cam": Vector3(5, 4.2, 12),
+		"focus": Vector3(0, 0.6, 6),
 		"fov": 70.0,
 		"wait": 8.0,
 	},
@@ -49,8 +49,8 @@ const CAPTURES := [
 	{
 		"file": "caves_water",
 		"path": "res://scenes/world/tidal_caves.tscn",
-		"cam": Vector3(6, 3.5, -2),
-		"focus": Vector3(0, 0.2, -6),
+		"cam": Vector3(2.5, 3.2, -1),
+		"focus": Vector3(4.0, 0.1, -7.5),
 		"fov": 60.0,
 		"wait": 0.6,
 		"reuse_scene": true,
@@ -68,8 +68,8 @@ const CAPTURES := [
 	{
 		"file": "palace",
 		"path": "res://scenes/world/dragon_palace_gate.tscn",
-		"cam": Vector3(5, 18, 36),
-		"focus": Vector3(0, 4, 8),
+		"cam": Vector3(0, 14, 28),
+		"focus": Vector3(0, 2.5, 6),
 		"fov": 74.0,
 		"wait": 5.0,
 	},

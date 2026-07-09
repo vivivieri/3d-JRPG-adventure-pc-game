@@ -142,7 +142,11 @@ static func _upgrade_water_boxes(node: Node) -> void:
 	if node is MeshInstance3D and node.name == "Water":
 		var box := node.mesh as BoxMesh
 		if box:
-			node.mesh = _make_water_plane(Vector2(box.size.x, box.size.z))
+			var puzzle_parent := node.get_parent()
+			if puzzle_parent and puzzle_parent.name == "WaterPuzzle":
+				node.mesh = TerrainShapes.flood_pool_mesh(box.size.x * 0.46, box.size.z * 0.46)
+			else:
+				node.mesh = _make_water_plane(Vector2(box.size.x, box.size.z))
 			node.rotation_degrees = Vector3.ZERO
 	for child in node.get_children():
 		_upgrade_water_boxes(child)
@@ -167,8 +171,9 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	match zone_id:
 		"beach_shore":
 			_add_organic_ground(cover, palette, zone_id, "beach")
-			_scatter_beach_flora(cover, Vector3(0, 0, 5), 8.0, 7.0, 8 if _screenshot_mode() else 12)
-			_scatter_rocks(cover, Vector3(0, 0, 2), 9.0, 8.0, 10 if _screenshot_mode() else 14, false)
+			_add_dry_sand_field(cover, palette)
+			_scatter_beach_flora(cover, Vector3(0, 0, 6), 9.0, 6.0, 8 if _screenshot_mode() else 12)
+			_scatter_rocks(cover, Vector3(0, 0, 4), 7.0, 5.0, 8 if _screenshot_mode() else 12, false)
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
@@ -177,10 +182,11 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
-			_scatter_cave_flora(cover, Vector3(0, 0, -6), 4.5, 20.0, 8 if _screenshot_mode() else 14)
+			_scatter_cave_flora(cover, Vector3(0, 0, -8), 5.0, 22.0, 16 if _screenshot_mode() else 32)
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 12 if _screenshot_mode() else 18, false)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
+			_add_palace_court_plaza(cover, palette)
 
 
 static func _scatter_path_strip(
@@ -229,8 +235,8 @@ static func _add_organic_ground(
 	mesh_inst.name = "PlayableGround"
 	match shape:
 		"beach":
-			mesh_inst.mesh = TerrainShapes.beach_sand_mesh(11.0, 12.0, -4.5)
-			mesh_inst.position = Vector3(0, -0.22, 0)
+			mesh_inst.mesh = TerrainShapes.beach_sand_mesh(13.0, 14.0, -5.0)
+			mesh_inst.position = Vector3(0, 0.02, 0)
 		"hub":
 			mesh_inst.mesh = TerrainShapes.hub_ground_mesh(20.0, 20.0)
 			mesh_inst.position = Vector3(0, -0.22, 0)
@@ -238,14 +244,54 @@ static func _add_organic_ground(
 			mesh_inst.mesh = TerrainShapes.cave_path_mesh(-30.0, 15.0)
 			mesh_inst.position = Vector3(0, -0.2, -7.5)
 		"palace":
-			mesh_inst.mesh = TerrainShapes.palace_court_mesh(7.5, 24.0)
-			mesh_inst.position = Vector3(0, -0.22, -6)
+			mesh_inst.mesh = TerrainShapes.palace_court_mesh(10.0, 28.0)
+			mesh_inst.position = Vector3(0, 0.02, -6)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = palette.get("ground", Color.GRAY)
 	mat.roughness = 0.88
+	if shape == "beach":
+		mat.albedo_color = palette.get("ground", Color.GRAY).lerp(Color("#E8D8B0"), 0.35)
+		mat.roughness = 0.82
+	elif shape == "palace":
+		mat.albedo_color = Color("#F2EDE4")
+		mat.roughness = 0.4
+		mat.metallic = 0.06
 	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
 	mesh_inst.material_override = mat
 	parent.add_child(mesh_inst)
+
+
+static func _add_dry_sand_field(parent: Node3D, palette: Dictionary) -> void:
+	var sand := MeshInstance3D.new()
+	sand.name = "DrySandField"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(20, 14)
+	plane.orientation = PlaneMesh.FACE_Y
+	sand.mesh = plane
+	sand.position = Vector3(0, 0.04, 6.5)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color("#E2D2A8")
+	mat.roughness = 0.9
+	_apply_zone_texture(mat, "beach_shore", "ground", "ground", "ground")
+	sand.material_override = mat
+	parent.add_child(sand)
+
+
+static func _add_palace_court_plaza(parent: Node3D, palette: Dictionary) -> void:
+	var plaza := MeshInstance3D.new()
+	plaza.name = "PalaceCourtPlaza"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(22, 34)
+	plane.orientation = PlaneMesh.FACE_Y
+	plaza.mesh = plane
+	plaza.position = Vector3(0, 0.06, 2)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color("#F0EBE0")
+	mat.roughness = 0.35
+	mat.metallic = 0.08
+	_apply_zone_texture(mat, "dragon_palace_gate", "ground", "ground", "ground")
+	plaza.material_override = mat
+	parent.add_child(plaza)
 
 
 static func _add_ground_edge_breakup(
@@ -307,9 +353,9 @@ static func _is_beach_inland(pos: Vector3) -> bool:
 
 
 static func _is_cave_dry_ground(pos: Vector3) -> bool:
-	if pos.z > -3.5 and absf(pos.x) < 4.2:
+	if pos.z > -2.0 and absf(pos.x) < 2.8:
 		return false
-	if pos.z > -11.0 and absf(pos.x) < 3.6:
+	if pos.z > -12.5 and pos.x > 1.8 and pos.x < 6.8 and pos.z > -11.5 and pos.z < -4.5:
 		return false
 	return true
 
@@ -359,10 +405,10 @@ static func _scatter_cave_flora(
 		radius_x,
 		radius_z,
 		count,
-		["mushroom_tan", "mushroom", "bush", "grass_small"],
+		["mushroom_tan", "mushroom", "mushroom_tan", "mushroom"],
 		false,
-		0.85,
-		1.15,
+		0.8,
+		1.2,
 		Callable(ZoneVisuals, "_is_cave_dry_ground"),
 	)
 
@@ -559,12 +605,11 @@ static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
 static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	_add_horizon_plane(
 		parent,
-		Vector3(0, -4.2, -6),
-		Vector2(100, 80),
+		Vector3(0, -10.0, -42),
+		Vector2(140, 90),
 		palette.get("ground_horizon", Color("#1A2858")),
-		0.2,
-		true,
-		palette.get("accent", Color.CYAN) * 0.12,
+		0.35,
+		false,
 	)
 	for side in [-1, 1]:
 		for z in [-28, -8, 12]:
@@ -718,16 +763,43 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 
 static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	_add_cave_tunnel_walls(parent, palette, zone_id)
+	_add_cave_wall_flora(parent)
 	for i in 5:
 		_add_algae_strip(parent, Vector3(-4.5 + i * 2.0, 0.6, 1 - i * 0.4), palette, zone_id)
+	_add_flood_pool_frame(parent, Vector3(4.0, 0, -7.5), palette, zone_id)
 	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
 	_add_deep_pool_faces(parent, Vector3(0, 0, -16), palette)
 	_add_shrine_alcove(parent, Vector3(0, 0, -28), palette, zone_id)
-	for z in range(-24, 10, 12):
+	for z in range(-24, 10, 10):
 		PropLibrary.spawn("rock_large_b", parent, Vector3(-3.5, 0, z + 1), 30.0, 0.8, false)
 		PropLibrary.spawn("rock_large_a", parent, Vector3(3.5, 0, z - 1), -25.0, 0.85, false)
-		PropLibrary.spawn("mushroom_tan", parent, Vector3(1.2, 0, z + 1), 0.0, 1.0, false)
-		PropLibrary.spawn("bush", parent, Vector3(-1.2, 0, z - 1), 35.0, 0.9, false)
+		PropLibrary.spawn("mushroom_tan", parent, Vector3(-2.8, 0, z + 0.5), 0.0, 1.05, false)
+		PropLibrary.spawn("mushroom", parent, Vector3(2.6, 0, z - 0.5), 35.0, 1.0, false)
+		PropLibrary.spawn("mushroom_tan", parent, Vector3(-1.0, 0, z - 1.2), 20.0, 0.9, false)
+		PropLibrary.spawn("mushroom", parent, Vector3(1.2, 0, z + 1.0), -15.0, 0.95, false)
+
+
+static func _add_cave_wall_flora(parent: Node3D) -> void:
+	for z in range(-26, 12, 4):
+		PropLibrary.spawn("mushroom_tan", parent, Vector3(-4.2, 0, z), 25.0, 0.95, false)
+		PropLibrary.spawn("mushroom", parent, Vector3(4.2, 0, z + 1.5), -20.0, 0.9, false)
+		if z % 8 == 0:
+			PropLibrary.spawn("mushroom", parent, Vector3(-3.6, 0, z + 2.0), 40.0, 1.1, false)
+			PropLibrary.spawn("mushroom_tan", parent, Vector3(3.6, 0, z - 1.0), -35.0, 1.05, false)
+
+
+static func _add_flood_pool_frame(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
+	var frame := Node3D.new()
+	frame.name = "FloodPoolFrame"
+	frame.position = pos
+	parent.add_child(frame)
+	for angle_deg in [35.0, 145.0, 215.0]:
+		var angle := deg_to_rad(angle_deg)
+		PropLibrary.spawn("rock_large_b", frame, Vector3(cos(angle) * 2.4, 0, sin(angle) * 1.8), angle_deg, 0.85, false)
+		PropLibrary.spawn("rock_small_a", frame, Vector3(cos(angle) * 1.5, 0, sin(angle) * 1.1), angle_deg + 20.0, 0.8, false)
+	PropLibrary.spawn("rock_large_a", frame, Vector3(-1.8, 0, 1.6), 60.0, 0.75, false)
+	PropLibrary.spawn("mushroom_tan", frame, Vector3(2.0, 0, 1.4), -10.0, 0.9, false)
+	PropLibrary.spawn("mushroom", frame, Vector3(-1.2, 0, -1.5), 30.0, 0.85, false)
 
 
 static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -866,19 +938,12 @@ static func _add_palace_banners(parent: Node3D, pos: Vector3, palette: Dictionar
 	for side in [-5.5, 5.5]:
 		_spawn_vertical_log(banners, Vector3(side, 1.2, 0.6), 0.35)
 		PropLibrary.spawn("branches", banners, Vector3(side + 0.15, 2.0, 0.7), 0.0 if side < 0 else 180.0, 1.05, true)
-		PropLibrary.spawn("bush", banners, Vector3(side, 0.2, 0.8), 0.0, 0.75, true)
 
 
 static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	var sea := Node3D.new()
 	sea.name = "VoidSea"
 	parent.add_child(sea)
-	var water := MeshInstance3D.new()
-	water.name = "VoidSeaWater"
-	water.mesh = _make_water_plane(Vector2(30, 58))
-	water.position = Vector3(0, -2.6, -8)
-	WaterMaterial.apply_to_mesh(water, palette, zone_id)
-	sea.add_child(water)
 	for z in [12, 2, -8, -18, -30]:
 		var light := OmniLight3D.new()
 		light.light_color = palette.get("accent", Color.CYAN)
@@ -967,7 +1032,7 @@ static func _add_palace_lanterns(parent: Node3D, pos: Vector3, palette: Dictiona
 
 static func _add_algae_strip(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	PropLibrary.spawn("mushroom_tan", parent, pos, randf_range(0, 360), 0.95, false)
-	PropLibrary.spawn("bush", parent, pos + Vector3(0.35, 0, 0.25), randf_range(0, 360), 0.8, false)
+	PropLibrary.spawn("mushroom", parent, pos + Vector3(0.35, 0, 0.25), randf_range(0, 360), 0.85, false)
 
 
 static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -1090,8 +1155,8 @@ static func _add_shrine_alcove(parent: Node3D, pos: Vector3, palette: Dictionary
 	PropLibrary.spawn("log", alcove, Vector3(0, 1.7, 0.8), 90.0, 0.8, true)
 	PropLibrary.spawn("log", alcove, Vector3(0, 1.35, 0.8), 90.0, 0.72, true)
 	PropLibrary.spawn("bush", alcove, Vector3(0, 0, 1.5), 0.0, 0.85, true)
-	PropLibrary.spawn("fern", alcove, Vector3(-1.2, 0, 1.0), 25.0, 1.0, false)
-	PropLibrary.spawn("bush", alcove, Vector3(1.2, 0, 1.0), -25.0, 0.9, false)
+	PropLibrary.spawn("mushroom_tan", alcove, Vector3(-1.2, 0, 1.0), 25.0, 1.0, false)
+	PropLibrary.spawn("mushroom", alcove, Vector3(1.2, 0, 1.0), -25.0, 0.95, false)
 	var light := OmniLight3D.new()
 	light.name = "ShrineGlow"
 	light.light_color = palette.get("accent", Color.CYAN)
@@ -1115,7 +1180,7 @@ static func _apply_zone_texture(mat: StandardMaterial3D, zone_id: String, name_l
 			key = "ground"
 		elif zone_id == "dragon_palace_gate":
 			key = "structure"
-		elif zone_id == "tidal_caves" and ("algae" in name_lower or randf() > 0.7):
+		elif zone_id == "tidal_caves" and "algae" in name_lower:
 			key = "accent"
 	var path: String = zone_tex.get(key, "")
 	if path.is_empty() or not ResourceLoader.exists(path):

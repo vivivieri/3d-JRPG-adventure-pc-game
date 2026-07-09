@@ -27,7 +27,7 @@ static func beach_sand_mesh(half_width: float, z_inland: float, z_sea: float) ->
 				var dune_t: float = 1.0 - tz / 0.35
 				z += sin(x * 0.3) * 0.25 * dune_t
 			verts[iz * (nx + 1) + ix] = Vector3(x, 0.0, z)
-	return _grid_to_mesh(verts, nx, nz)
+	return _grid_to_mesh(verts, nx, nz, 0.22)
 
 
 static func beach_shore_pos(x: float) -> Vector2:
@@ -57,10 +57,10 @@ static func beach_surf_water_mesh(half_width: float, sea_reach: float, x_segment
 		var x1 := lerpf(-half_width, half_width, t1)
 		var p0 := beach_shore_pos(x0)
 		var p1 := beach_shore_pos(x1)
-		var near0 := Vector3(p0.x, -0.2, p0.y + 0.15)
-		var near1 := Vector3(p1.x, -0.2, p1.y + 0.15)
-		var far0 := Vector3(p0.x, -0.24, p0.y - sea_reach)
-		var far1 := Vector3(p1.x, -0.24, p1.y - sea_reach)
+		var near0 := Vector3(p0.x, -0.3, p0.y - 0.12)
+		var near1 := Vector3(p1.x, -0.3, p1.y - 0.12)
+		var far0 := Vector3(p0.x, -0.34, p0.y - sea_reach)
+		var far1 := Vector3(p1.x, -0.34, p1.y - sea_reach)
 		var n := Vector3.UP
 		st.set_normal(n)
 		st.add_vertex(near0)
@@ -98,7 +98,7 @@ static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 			# Slight floor undulation.
 			var y := sin(x * 0.7 + z * 0.18) * 0.04
 			verts[iz * (nx + 1) + ix] = Vector3(x, y, z)
-	return _grid_to_mesh(verts, nx, nz)
+	return _grid_to_mesh(verts, nx, nz, 0.3)
 
 
 static func _cave_half_width(z: float) -> float:
@@ -132,7 +132,7 @@ static func hub_ground_mesh(half_width: float, half_depth: float) -> ArrayMesh:
 				x += sin(z * 0.35 + ix) * 0.45 * edge_t
 				z += cos(x * 0.28 + iz) * 0.4 * edge_t
 			verts[iz * (nx + 1) + ix] = Vector3(x, sin(x * 0.2 + z * 0.15) * 0.05, z)
-	return _grid_to_mesh(verts, nx, nz)
+	return _grid_to_mesh(verts, nx, nz, 0.25)
 
 
 static func palace_court_mesh(half_width: float, half_depth: float) -> ArrayMesh:
@@ -152,10 +152,33 @@ static func palace_court_mesh(half_width: float, half_depth: float) -> ArrayMesh
 				var edge_t: float = (abs(x) - half_width * 0.82) / (half_width * 0.18)
 				x = sign(x) * (half_width * 0.82 + sin(z * 0.22 + ix) * 0.5 * edge_t)
 			verts[iz * (nx + 1) + ix] = Vector3(x, 0.0, z)
-	return _grid_to_mesh(verts, nx, nz)
+	return _grid_to_mesh(verts, nx, nz, 0.28)
 
 
-static func _grid_to_mesh(verts: PackedVector3Array, nx: int, nz: int) -> ArrayMesh:
+static func flood_pool_mesh(half_width: float, half_depth: float, segments: int = 14) -> ArrayMesh:
+	## Rounded flood-pool basin — not a sharp rectangle on the cave path.
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var center := Vector3.ZERO
+	for i in segments:
+		var t0 := float(i) / float(segments) * TAU
+		var t1 := float(i + 1) / float(segments) * TAU
+		var p0 := Vector3(cos(t0) * half_width, 0.0, sin(t0) * half_depth)
+		var p1 := Vector3(cos(t1) * half_width, 0.0, sin(t1) * half_depth)
+		st.set_normal(Vector3.UP)
+		st.set_uv(Vector2(p0.x, p0.z) * 0.22 + Vector2(0.5, 0.5))
+		st.add_vertex(center)
+		st.set_normal(Vector3.UP)
+		st.set_uv(Vector2(p0.x, p0.z) * 0.22 + Vector2(0.5, 0.5))
+		st.add_vertex(p0)
+		st.set_normal(Vector3.UP)
+		st.set_uv(Vector2(p1.x, p1.z) * 0.22 + Vector2(0.5, 0.5))
+		st.add_vertex(p1)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _grid_to_mesh(verts: PackedVector3Array, nx: int, nz: int, uv_scale: float = 0.35) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for iz in nz:
@@ -168,17 +191,15 @@ static func _grid_to_mesh(verts: PackedVector3Array, nx: int, nz: int) -> ArrayM
 			var v10 := verts[i10]
 			var v01 := verts[i01]
 			var v11 := verts[i11]
-			st.set_normal((v01 - v00).cross(v10 - v00).normalized())
-			st.add_vertex(v00)
-			st.set_normal((v11 - v10).cross(v01 - v10).normalized())
-			st.add_vertex(v10)
-			st.set_normal((v11 - v01).cross(v10 - v01).normalized())
-			st.add_vertex(v11)
-			st.set_normal((v01 - v00).cross(v11 - v00).normalized())
-			st.add_vertex(v00)
-			st.set_normal((v11 - v01).cross(v10 - v01).normalized())
-			st.add_vertex(v11)
-			st.set_normal((v01 - v00).cross(v01 - v11).normalized())
-			st.add_vertex(v01)
+			var tri := [
+				[v00, v10, v11],
+				[v00, v11, v01],
+			]
+			for face in tri:
+				var n := (face[1] - face[0]).cross(face[2] - face[0]).normalized()
+				for v in face:
+					st.set_normal(n)
+					st.set_uv(Vector2(v.x, v.z) * uv_scale)
+					st.add_vertex(v)
 	st.generate_normals()
 	return st.commit()

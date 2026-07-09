@@ -24,7 +24,7 @@ height = 1.6
 size = Vector3(10, 3, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_water"]
-size = Vector3(8, 0.3, 6)
+size = Vector3(4.5, 0.2, 3.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape_barrier"]
 size = Vector3(8, 2.5, 0.6)
@@ -124,7 +124,7 @@ once_flag = "caves_entrance_dialogue"
 shape = SubResource("BoxShape_zone")
 
 [node name="WaterPuzzle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7.5)
 
 [node name="WaterController" type="Node3D" parent="WaterPuzzle"]
 script = ExtResource("4_water")
@@ -134,11 +134,11 @@ lowered_y = -1.6
 raised_y = 0.35
 
 [node name="Water" type="MeshInstance3D" parent="WaterPuzzle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.5)
 mesh = SubResource("BoxMesh_water")
 
 [node name="FloodBarrier" type="StaticBody3D" parent="WaterPuzzle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -4.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -2.4)
 
 [node name="Mesh" type="MeshInstance3D" parent="WaterPuzzle/FloodBarrier"]
 mesh = SubResource("BoxMesh_barrier")
@@ -147,7 +147,7 @@ mesh = SubResource("BoxMesh_barrier")
 shape = SubResource("BoxShape_barrier")
 
 [node name="TideSwitch" type="StaticBody3D" parent="WaterPuzzle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1, 1.4)
 script = ExtResource("5_switch")
 water_controller_path = NodePath("../WaterController")
 
@@ -155,7 +155,7 @@ water_controller_path = NodePath("../WaterController")
 shape = SubResource("BoxShape_interact")
 
 [node name="AntidoteChest" type="StaticBody3D" parent="WaterPuzzle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.2)
 script = ExtResource("6_chest")
 item_id = "coral_antidote"
 quantity = 1
