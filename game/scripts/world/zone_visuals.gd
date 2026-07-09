@@ -353,6 +353,7 @@ static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone
 	var wet_mat := StandardMaterial3D.new()
 	wet_mat.albedo_color = Color("#8A7656")
 	wet_mat.roughness = 0.94
+	wet_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	wet.material_override = wet_mat
 	parent.add_child(wet)
 
@@ -364,6 +365,7 @@ static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone
 	sea_mat.albedo_color = Color("#276E78")
 	sea_mat.roughness = 0.18
 	sea_mat.metallic = 0.05
+	sea_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	sea_mat.emission_enabled = true
 	sea_mat.emission = Color("#0F3F48") * 0.12
 	sea.material_override = sea_mat
