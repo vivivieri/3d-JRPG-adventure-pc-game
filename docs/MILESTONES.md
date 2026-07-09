@@ -16,6 +16,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Player movement polish (camera orbit option)
 - [ ] Interaction prompt UI
 - [ ] Dialogue box UI scene
+- [x] CJK font bundle + locale-aware `FontThemeManager`
 - [ ] Quest tracker UI
 - [ ] Save point at village well
 

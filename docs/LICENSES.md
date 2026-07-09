@@ -27,9 +27,9 @@ Track every third-party asset, story source, and engine dependency.
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Noto Sans | Google Fonts | OFL 1.1 | UI body text |
-| Noto Sans JP | Google Fonts | OFL 1.1 | Japanese UI + dialogue |
-| Noto Sans SC | Google Fonts | OFL 1.1 | Chinese UI + dialogue |
+| Noto Sans | notofonts/noto-fonts | OFL 1.1 | English UI (`NotoSans-*.ttf`) |
+| Noto Sans JP | notofonts/noto-cjk Sans2.004 | OFL 1.1 | Japanese UI (`NotoSansJP-*.otf`) |
+| Noto Sans SC | notofonts/noto-cjk Sans2.004 | OFL 1.1 | Chinese UI (`NotoSansSC-*.otf`) |
 
 ---
 

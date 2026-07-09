@@ -7,6 +7,13 @@ func _ready() -> void:
 	$VBox/Continue.disabled = not SaveSystem.has_save()
 	_setup_language_selector()
 	_refresh_labels()
+	_apply_fonts()
+
+
+func _apply_fonts() -> void:
+	FontThemeManager.apply_title($VBox/Title)
+	FontThemeManager.apply_subtitle($VBox/Subtitle)
+	FontThemeManager.apply_to_control($VBox)
 
 
 func _setup_language_selector() -> void:
@@ -35,6 +42,7 @@ func _refresh_labels() -> void:
 
 func _on_locale_changed(_locale_code: String) -> void:
 	_refresh_labels()
+	_apply_fonts()
 
 
 func _on_language_selected(index: int) -> void:

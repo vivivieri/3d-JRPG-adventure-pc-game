@@ -83,13 +83,15 @@ Use per-locale objects on the `text` field:
 
 ## Fonts (CJK)
 
-Japanese and Chinese require a font with CJK glyphs. Before ship:
+Japanese and Chinese use bundled **Noto Sans** fonts (OFL 1.1):
 
-1. Download **Noto Sans JP** and **Noto Sans SC** (OFL license) from Google Fonts
-2. Place in `game/assets/fonts/`
-3. Create a `Theme` resource with locale-aware font swapping (M1 polish task)
+| Locale | Font files |
+|--------|------------|
+| `en` | `NotoSans-Regular.ttf`, `NotoSans-Bold.ttf` |
+| `ja` | `NotoSansJP-Regular.otf`, `NotoSansJP-Bold.otf` |
+| `zh` | `NotoSansSC-Regular.otf`, `NotoSansSC-Bold.otf` |
 
-Until then, Godot falls back to system fonts on most platforms.
+`FontThemeManager` autoload applies the correct font when the locale changes. See `game/assets/fonts/README.md`.
 
 ---
 

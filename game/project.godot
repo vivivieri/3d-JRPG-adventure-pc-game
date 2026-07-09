@@ -14,6 +14,7 @@ config/icon="res://assets/ui/icon.svg"
 [autoload]
 
 LocalizationManager="*res://scripts/core/localization_manager.gd"
+FontThemeManager="*res://scripts/ui/font_theme_manager.gd"
 GameManager="*res://scripts/core/game_manager.gd"
 EventBus="*res://scripts/core/event_bus.gd"
 SaveSystem="*res://scripts/core/save_system.gd"
