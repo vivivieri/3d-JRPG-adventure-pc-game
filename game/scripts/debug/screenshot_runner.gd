@@ -10,8 +10,8 @@ const SCENES := [
 ]
 
 const CAMERA_VIEWS := {
-	"village": {"cam": Vector3(7, 5.5, 10), "focus": Vector3(-4, 2.5, -4)},
-	"caves": {"cam": Vector3(9, 5, 11), "focus": Vector3(0, 2, -4)},
+	"village": {"cam": Vector3(10, 6, 12), "focus": Vector3(0, 1.5, 2)},
+	"caves": {"cam": Vector3(5, 4.5, 10), "focus": Vector3(0, 1.5, -8)},
 	"palace": {"cam": Vector3(0, 7, 26), "focus": Vector3(0, 5, 10)},
 }
 

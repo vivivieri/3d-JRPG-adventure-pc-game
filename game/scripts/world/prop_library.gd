@@ -6,6 +6,7 @@ extends RefCounted
 const PROPS := {
 	# Nature kit
 	"canoe": "res://assets/models/nature/canoe.glb",
+	"canoe_paddle": "res://assets/models/nature/canoe_paddle.glb",
 	"bridge_wood": "res://assets/models/nature/bridge_wood.glb",
 	"tree_pine": "res://assets/models/nature/tree_pineDefaultA.glb",
 	"tree_oak": "res://assets/models/nature/tree_oak.glb",
@@ -25,6 +26,18 @@ const PROPS := {
 	"bush": "res://assets/models/nature/plant_bush.glb",
 	"mushroom": "res://assets/models/nature/mushroom_red.glb",
 	"grass": "res://assets/models/nature/grass_large.glb",
+	"grass_small": "res://assets/models/nature/grass.glb",
+	"grass_leafs": "res://assets/models/nature/grass_leafs.glb",
+	"path_stone": "res://assets/models/nature/path_stone.glb",
+	"path_corner": "res://assets/models/nature/path_stoneCorner.glb",
+	"fence_gate": "res://assets/models/nature/fence_gate.glb",
+	"cliff_slope": "res://assets/models/nature/cliff_blockSlope_stone.glb",
+	"rock_tall_a": "res://assets/models/nature/rock_tallA.glb",
+	"rock_tall_b": "res://assets/models/nature/rock_tallB.glb",
+	"plant_flat": "res://assets/models/nature/plant_flatShort.glb",
+	"tree_detailed": "res://assets/models/nature/tree_detailed.glb",
+	"tree_fat": "res://assets/models/nature/tree_fat.glb",
+	"mushroom_tan": "res://assets/models/nature/mushroom_tan.glb",
 	# Castle kit
 	"castle_gate": "res://assets/models/castle/gate.obj",
 	"castle_metal_gate": "res://assets/models/castle/metalGate.obj",
@@ -36,6 +49,9 @@ const PROPS := {
 	"castle_door": "res://assets/models/castle/door.obj",
 	"castle_pillar": "res://assets/models/castle/wallPillar.obj",
 	"castle_arch": "res://assets/models/castle/towerSquareArch.obj",
+	"castle_tower_base": "res://assets/models/castle/towerSquareBase.obj",
+	"castle_wall": "res://assets/models/castle/wall.obj",
+	"castle_stairs": "res://assets/models/castle/stairsStone.obj",
 }
 
 static var _cache: Dictionary = {}

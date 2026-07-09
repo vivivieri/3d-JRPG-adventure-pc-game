@@ -21,6 +21,7 @@ mkdir -p "${OUT}/nature" "${OUT}/castle"
 
 NATURE_MODELS=(
   canoe.glb
+  canoe_paddle.glb
   bridge_wood.glb
   tree_pineDefaultA.glb
   tree_oak.glb
@@ -40,6 +41,18 @@ NATURE_MODELS=(
   plant_bush.glb
   mushroom_red.glb
   grass_large.glb
+  grass.glb
+  grass_leafs.glb
+  path_stone.glb
+  path_stoneCorner.glb
+  fence_gate.glb
+  cliff_blockSlope_stone.glb
+  rock_tallA.glb
+  rock_tallB.glb
+  plant_flatShort.glb
+  tree_detailed.glb
+  tree_fat.glb
+  mushroom_tan.glb
 )
 
 CASTLE_MODELS=(
@@ -53,6 +66,9 @@ CASTLE_MODELS=(
   door
   wallPillar
   towerSquareArch
+  towerSquareBase
+  wall
+  stairsStone
 )
 
 for f in "${NATURE_MODELS[@]}"; do
