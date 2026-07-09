@@ -71,6 +71,18 @@ func apply_dialogue_hint(label: Label) -> void:
 	label.add_theme_font_size_override(&"font_size", 14)
 
 
+func apply_interaction_key(label: Label) -> void:
+	if _bold:
+		label.add_theme_font_override(&"font", _bold)
+	label.add_theme_font_size_override(&"font_size", 18)
+
+
+func apply_interaction_action(label: Label) -> void:
+	if _regular:
+		label.add_theme_font_override(&"font", _regular)
+	label.add_theme_font_size_override(&"font_size", 18)
+
+
 func apply_to_control(root: Control) -> void:
 	if _regular == null:
 		return

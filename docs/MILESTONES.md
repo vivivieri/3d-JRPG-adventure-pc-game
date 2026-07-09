@@ -14,7 +14,7 @@ Track implementation progress against the GDD milestones.
 
 ## M1 — Greybox exploration
 - [ ] Player movement polish (camera orbit option)
-- [ ] Interaction prompt UI
+- [x] Interaction prompt HUD (Press E — action, localized)
 - [x] Dialogue box UI scene (typewriter, speaker, locale fonts)
 - [x] CJK font bundle + locale-aware `FontThemeManager`
 - [ ] Quest tracker UI
