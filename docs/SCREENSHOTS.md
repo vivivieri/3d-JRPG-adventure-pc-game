@@ -1,26 +1,28 @@
 # In-game screenshots
 
-If images do not show in the Cursor chat, open these links in your browser:
+**Note:** This repository is **private**. `raw.githubusercontent.com` links will **404** unless the repo is public. Use the GitHub file browser links below while logged into GitHub.
 
-## GitHub (committed files)
+## Latest screenshots (PR #5 branch — CC0 3D models)
+
+| Scene | View on GitHub (log in required) |
+|-------|----------------------------------|
+| Main menu | [main_menu.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/cc0-3d-assets-dc91/steam/screenshots-capture/main_menu.png) |
+| Ruined Village | [village.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/cc0-3d-assets-dc91/steam/screenshots-capture/village.png) |
+| Tidal Caves | [caves.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/cc0-3d-assets-dc91/steam/screenshots-capture/caves.png) |
+| Dragon Palace Gate | [palace.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/cc0-3d-assets-dc91/steam/screenshots-capture/palace.png) |
+
+**Folder:** https://github.com/vivivieri/3d-JRPG-adventure-pc-game/tree/cursor/cc0-3d-assets-dc91/steam/screenshots-capture
+
+**PR gallery:** https://github.com/vivivieri/3d-JRPG-adventure-pc-game/pull/5
+
+## Previous screenshots (PR #4 branch)
 
 | Scene | View on GitHub |
 |-------|----------------|
 | Main menu | [main_menu.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/game-audio-art-dc91/steam/screenshots-capture/main_menu.png) |
 | Ruined Village | [village.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/game-audio-art-dc91/steam/screenshots-capture/village.png) |
 | Tidal Caves | [caves.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/game-audio-art-dc91/steam/screenshots-capture/caves.png) |
-| Dragon Palace Gate | [palace.png](https://github.com/vivivieri/3d-JRPG-adventure-pc91/steam/screenshots-capture/palace.png) |
-
-## Raw image URLs (paste in browser)
-
-- https://raw.githubusercontent.com/vivivieri/3d-JRPG-adventure-pc-game/cursor/game-audio-art-dc91/steam/screenshots-capture/main_menu.png
-- https://raw.githubusercontent.com/vivivieri/3d-JRPG-adventure-pc-game/cursor/game-audio-art-dc91/steam/screenshots-capture/village.png
-- https://raw.githubusercontent.com/vivivieri/3d-JRPG-adventure-pc-game/cursor/game-audio-art-dc91/steam/screenshots-capture/caves.png
-- https://raw.githubusercontent.com/vivivieri/3d-JRPG-adventure-pc-game/cursor/game-audio-art-dc91/steam/screenshots-capture/palace.png
-
-## PR gallery
-
-Screenshots are also embedded in [PR #4](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/pull/4).
+| Dragon Palace Gate | [palace.png](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/cursor/game-audio-art-dc91/steam/screenshots-capture/palace.png) |
 
 ## Regenerate locally
 
