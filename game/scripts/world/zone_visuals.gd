@@ -74,23 +74,27 @@ static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 
 
 static func _hide_greybox_meshes(node: Node) -> void:
-	var parent_name := node.get_parent().name.to_lower() if node.get_parent() else ""
-	var self_name := node.name.to_lower()
 	if node is MeshInstance3D:
-		var hide := false
-		if self_name == "mesh" and (
-			"floor" in parent_name
-			or parent_name == "ground"
-			or "tunnel" in parent_name
-			or parent_name == "floodbarrier"
-		):
-			hide = true
-		if "barrier" in self_name and "flood" in parent_name:
-			hide = true
-		if hide:
-			(node as MeshInstance3D).visible = false
+		var mesh := node as MeshInstance3D
+		if _is_greybox_mesh(mesh):
+			mesh.visible = false
+			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for child in node.get_children():
 		_hide_greybox_meshes(child)
+
+
+static func _is_greybox_mesh(mesh: MeshInstance3D) -> bool:
+	var self_name := mesh.name.to_lower()
+	var parent_name := mesh.get_parent().name.to_lower() if mesh.get_parent() else ""
+	if self_name != "mesh" and self_name != "water":
+		return false
+	if parent_name == "ground" or "floor" in parent_name or "tunnel" in parent_name:
+		return true
+	if "flood" in parent_name or "barrier" in parent_name:
+		return true
+	if parent_name == "waterpuzzle" and self_name == "water":
+		return false
+	return false
 
 
 static func _refine_water_meshes(node: Node) -> void:
@@ -123,9 +127,9 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 18, false)
 		"dragon_palace_gate":
 			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
-			for z in range(8, -26, -8):
-				PropLibrary.spawn("castle_wall", cover, Vector3(-7.0, 0, z), 90.0, 1.4)
-				PropLibrary.spawn("castle_wall", cover, Vector3(7.0, 0, z), -90.0, 1.4)
+			for z in [12, 4, -4]:
+				PropLibrary.spawn("castle_pillar", cover, Vector3(-5.5, 0, z), 0.0, 1.2)
+				PropLibrary.spawn("castle_pillar", cover, Vector3(5.5, 0, z), 0.0, 1.2)
 
 
 static func _scatter_path_strip(
@@ -305,13 +309,12 @@ static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
 
 
 static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
-	for z in range(-42, 18, 8):
-		PropLibrary.spawn("cliff_cave", parent, Vector3(-16, 0, z), 90.0, 1.4, false)
-		PropLibrary.spawn("cliff_cave", parent, Vector3(16, 0, z), -90.0, 1.4, false)
-		PropLibrary.spawn("cliff_slope", parent, Vector3(0, 9, z), 180.0, 1.2, false)
-	for x in [-18, -10, 10, 18]:
-		for z in [-38, -20, 0, 16]:
-			PropLibrary.spawn("rock_large_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(1.0, 1.5), false)
+	for z in range(-40, 16, 12):
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-12, 0, z), 20.0, 1.0, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(12, 0, z), -20.0, 1.05, true)
+	for x in [-14, -8, 8, 14]:
+		for z in [-36, -18, 2]:
+			PropLibrary.spawn("rock_small_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.8, 1.0), true)
 	_add_horizon_plane(parent, Vector3(0, -0.5, -44), Vector2(80, 20), palette.get("sky", Color("#0E1A22")), 0.9)
 
 
@@ -329,7 +332,8 @@ static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
 		var angle := float(i) / 10.0 * TAU
 		var x := cos(angle) * 38.0
 		var z := sin(angle) * 38.0 + 4.0
-		PropLibrary.spawn("castle_wall", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.6)
+		if i % 3 == 0:
+			PropLibrary.spawn("castle_tower_base", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.3)
 	for i in 6:
 		_add_star_glow(parent, Vector3(randf_range(-30, 30), randf_range(18, 28), randf_range(-20, 30)))
 
@@ -378,6 +382,10 @@ static func _add_star_glow(parent: Node3D, pos: Vector3) -> void:
 static func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> void:
 	if node is MeshInstance3D:
 		var mesh := node as MeshInstance3D
+		if not mesh.visible:
+			for child in node.get_children():
+				_tint_meshes(child, palette, zone_id)
+			return
 		var mat := StandardMaterial3D.new()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 		var name_lower := node.name.to_lower()
@@ -443,42 +451,35 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
 	_add_distant_hills(parent, palette)
 	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
-	# Hero high-poly trees (Poly Haven — kept sparse for performance).
-	if PropLibrary.has_prop("tree_coastal_a"):
-		PropLibrary.spawn("tree_coastal_a", parent, Vector3(-16, 0, 2), 30.0, 1.35)
-		PropLibrary.spawn("fir_hd", parent, Vector3(14, 0, -4), -35.0, 1.3)
+	var hero_trees := [
+		["tree_coastal_a", -14, 4, 25.0, 1.3],
+		["tree_coastal_b", 12, -6, -40.0, 1.2],
+		["fir_hd", -6, -10, 10.0, 1.15],
+	]
+	for spot in hero_trees:
+		if PropLibrary.has_prop(spot[0]):
+			PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4])
 	var tree_spots := [
-		["tree_oak", -16, 2, 30.0, 1.4],
-		["tree_pine", 16, -8, -50.0, 1.5],
-		["tree_detailed", -12, 12, 15.0, 1.3],
-		["tree_fat", 12, 6, -20.0, 1.2],
-		["tree_default", -8, 10, 10.0, 1.2],
-		["tree_pine", 6, -12, 70.0, 1.3],
-		["tree_oak", -14, -10, 5.0, 1.2],
-		["tree_detailed", 14, -4, -35.0, 1.4],
+		["tree_detailed", -18, 8, 15.0, 1.3],
+		["tree_fat", 16, 4, -25.0, 1.2],
+		["tree_oak", -10, 12, 5.0, 1.25],
 	]
 	for spot in tree_spots:
 		PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4], false)
 	for offset in [Vector3(1, 0, 4), Vector3(-2, 0, 7), Vector3(10, 0, 0), Vector3(-5, 0, -6)]:
-		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.1, true)
-		PropLibrary.spawn("log_stack", parent, offset + Vector3(0.8, 0, 0.5), 70.0, 1.0, true)
+		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.0, true)
+		PropLibrary.spawn("grass_leafs", parent, offset + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, true)
 
 static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	_add_cave_tunnel(parent, palette, zone_id)
-	for i in 6:
-		_add_algae_strip(parent, Vector3(-5.5 + i * 2.2, 1.0, 2 - i * 0.3), palette, zone_id)
-	_add_stalactites(parent, Vector3(-4, 5.5, -6), palette, zone_id)
-	_add_stalactites(parent, Vector3(4.5, 5.5, -14), palette, zone_id)
+	_add_cave_tunnel_walls(parent, palette, zone_id)
+	for i in 5:
+		_add_algae_strip(parent, Vector3(-4.5 + i * 2.0, 0.6, 1 - i * 0.4), palette, zone_id)
 	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
-	if PropLibrary.has_prop("cliff_coastal"):
-		PropLibrary.spawn("cliff_coastal", parent, Vector3(-22, 0, -14), 25.0, 1.0)
-	for z in range(-24, 10, 10):
-		PropLibrary.spawn("cliff_block", parent, Vector3(-7.0, 0, z), 90.0, 1.0, false)
-		PropLibrary.spawn("cliff_block", parent, Vector3(7.0, 0, z), -90.0, 1.0, false)
-		PropLibrary.spawn("rock_large_b", parent, Vector3(-4.0, 0, z + 2), 30.0, 0.85, true)
-		PropLibrary.spawn("rock_large_a", parent, Vector3(4.0, 0, z - 1), -25.0, 0.9, true)
-		PropLibrary.spawn("mushroom_tan", parent, Vector3(1.5, 0, z + 1), 0.0, 1.1)
-		PropLibrary.spawn("mushroom", parent, Vector3(-1.5, 0, z - 2), 35.0, 1.0)
+	for z in range(-24, 10, 12):
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-3.5, 0, z + 1), 30.0, 0.8, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(3.5, 0, z - 1), -25.0, 0.85, true)
+		PropLibrary.spawn("mushroom_tan", parent, Vector3(1.2, 0, z + 1), 0.0, 1.0, true)
+		PropLibrary.spawn("fern", parent, Vector3(-1.2, 0, z - 1), 35.0, 1.0, true)
 
 
 static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -488,9 +489,9 @@ static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String
 	_add_palace_columns(parent, Vector3(0, 0, 2), palette, zone_id)
 	_add_palace_lanterns(parent, Vector3(0, 0, 8), palette, zone_id)
 	PropLibrary.spawn("castle_arch", parent, Vector3(0, 0, 14), 0.0, 1.6)
-	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -1.2, 6), 0.0, 1.35)
-	PropLibrary.spawn("castle_stairs", parent, Vector3(-6, 0, 0), 90.0, 1.3)
-	PropLibrary.spawn("castle_stairs", parent, Vector3(6, 0, 0), -90.0, 1.3)
+	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.4, 6), 0.0, 1.2)
+	PropLibrary.spawn("castle_stairs", parent, Vector3(-5.5, 0, 0), 90.0, 1.15)
+	PropLibrary.spawn("castle_stairs", parent, Vector3(5.5, 0, 0), -90.0, 1.15)
 
 
 static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -498,19 +499,11 @@ static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 	torii.name = "ToriiProp"
 	torii.position = pos
 	parent.add_child(torii)
-	if PropLibrary.spawn("bush", torii, Vector3(-1.2, 0, 0), 0.0, 1.2, true):
-		PropLibrary.spawn("bush", torii, Vector3(1.2, 0, 0), 0.0, 1.2, true)
-		PropLibrary.spawn("stump", torii, Vector3(-1.5, 0, -0.4), 0.0, 0.85, true)
-		PropLibrary.spawn("stump", torii, Vector3(1.5, 0, -0.4), 0.0, 0.85, true)
-		PropLibrary.spawn("log", torii, Vector3(0, 1.2, -0.4), 90.0, 0.85, true)
-		return
-	_add_box(torii, Vector3(-2.2, 0.25, 0), Vector3(0.7, 0.5, 0.7), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_box(torii, Vector3(2.2, 0.25, 0), Vector3(0.7, 0.5, 0.7), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_box(torii, Vector3(-2.2, 2.8, 0), Vector3(0.38, 5.6, 0.38), palette.get("accent", Color.RED), false, zone_id, "structure")
-	_add_box(torii, Vector3(2.2, 2.8, 0), Vector3(0.38, 5.6, 0.38), palette.get("accent", Color.RED), false, zone_id, "structure")
-	_add_box(torii, Vector3(0, 5.4, 0), Vector3(5.6, 0.32, 0.42), palette.get("accent", Color.RED), false, zone_id, "structure")
-	_add_box(torii, Vector3(0, 4.35, 0), Vector3(4.6, 0.2, 0.32), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_box(torii, Vector3(0, 3.6, 0), Vector3(0.9, 0.12, 0.9), palette.get("moss", Color.GREEN), false, zone_id, "ground")
+	PropLibrary.spawn("fence_planks", torii, Vector3(-1.4, 0, 0), 0.0, 1.15)
+	PropLibrary.spawn("fence_planks", torii, Vector3(1.4, 0, 0), 0.0, 1.15)
+	PropLibrary.spawn("log", torii, Vector3(0, 2.6, 0), 90.0, 1.05, true)
+	PropLibrary.spawn("log", torii, Vector3(0, 2.1, 0), 90.0, 0.95, true)
+	PropLibrary.spawn("bush", torii, Vector3(0, 0, 0.8), 0.0, 0.9, true)
 
 
 static func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -518,50 +511,33 @@ static func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 	shack.name = "ShackProp"
 	shack.position = pos
 	parent.add_child(shack)
-	if PropLibrary.has_prop("log_stack"):
-		PropLibrary.spawn("log_stack", shack, Vector3(-1.0, 0, -0.8), 0.0, 0.9)
-		PropLibrary.spawn("log_stack", shack, Vector3(1.0, 0, -0.8), 180.0, 0.9)
-		PropLibrary.spawn("log", shack, Vector3(0, 0.5, 1.0), 0.0, 1.0)
-		PropLibrary.spawn("bush", shack, Vector3(0, 0, 0.5), 0.0, 1.1)
-		return
-	_add_box(shack, Vector3(0, 1.15, 0), Vector3(3.6, 2.3, 3.2), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_box(shack, Vector3(0, 2.55, 0), Vector3(4.2, 0.18, 3.6), palette.get("accent", Color.GRAY), false, zone_id, "structure")
-	_add_box(shack, Vector3(-1.8, 3.1, 0), Vector3(2.2, 0.12, 3.4), palette.get("accent", Color.GRAY), false, zone_id, "structure")
-	_add_box(shack, Vector3(1.8, 3.1, 0), Vector3(2.2, 0.12, 3.4), palette.get("accent", Color.GRAY), false, zone_id, "structure")
-	if not PropLibrary.spawn("castle_door", shack, Vector3(1.9, 0.0, 1.5), 0.0, 1.1):
-		_add_box(shack, Vector3(1.9, 0.9, 1.5), Vector3(0.08, 1.8, 0.9), Color("#1A1410"), false, zone_id, "structure")
+	PropLibrary.spawn("log_stack", shack, Vector3(-1.0, 0, -0.8), 0.0, 0.85, true)
+	PropLibrary.spawn("log_stack", shack, Vector3(1.0, 0, -0.8), 180.0, 0.85, true)
+	PropLibrary.spawn("log", shack, Vector3(-1.0, 0.6, 0.6), 25.0, 0.95, true)
+	PropLibrary.spawn("log", shack, Vector3(1.0, 0.6, 0.6), -25.0, 0.95, true)
+	PropLibrary.spawn("log", shack, Vector3(0, 1.1, 0.2), 0.0, 1.0, true)
+	PropLibrary.spawn("bush", shack, Vector3(0, 0, 1.0), 0.0, 0.95, true)
+	PropLibrary.spawn("castle_door", shack, Vector3(0, 0, 1.4), 0.0, 0.9)
 
 
 static func _add_well(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var well := Node3D.new()
 	well.position = pos
 	parent.add_child(well)
-	if PropLibrary.has_prop("rock_large_a"):
-		for i in 6:
-			var angle := float(i) / 6.0 * TAU
-			PropLibrary.spawn("rock_small_a", well, Vector3(cos(angle) * 0.9, 0, sin(angle) * 0.9), rad_to_deg(angle), 1.0)
-		PropLibrary.spawn("rock_large_b", well, Vector3(0, 0, 0), 0.0, 0.55)
-		return
-	_add_cylinder(well, Vector3(0, 0.55, 0), 0.85, 1.1, palette.get("structure", Color.GRAY), zone_id, "structure")
-	_add_box(well, Vector3(0, 1.15, 0), Vector3(2.0, 0.15, 2.0), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_cylinder(well, Vector3(0, 0.15, 0), 0.55, 0.35, Color("#1A3040"), zone_id, "ground")
+	for i in 6:
+		var angle := float(i) / 6.0 * TAU
+		PropLibrary.spawn("rock_small_a", well, Vector3(cos(angle) * 0.85, 0, sin(angle) * 0.85), rad_to_deg(angle), 0.9, true)
+	PropLibrary.spawn("rock_large_b", well, Vector3(0, 0, 0), 0.0, 0.5, true)
 
 
 static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var pier := Node3D.new()
 	pier.position = pos
 	parent.add_child(pier)
-	if PropLibrary.has_prop("log"):
-		for i in 5:
-			PropLibrary.spawn("log", pier, Vector3(i * 1.1, 0.08, 0), 90.0, 0.95)
-		PropLibrary.spawn("canoe", pier, Vector3(4.5, 0.12, 0.8), -25.0, 1.0)
-		if PropLibrary.has_prop("canoe_paddle"):
-			PropLibrary.spawn("canoe_paddle", pier, Vector3(4.8, 0.2, 1.0), 40.0, 1.0)
-	else:
-		for i in 5:
-			_add_box(pier, Vector3(i * 1.1, 0.15, 0), Vector3(0.9, 0.3, 3.5), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-			_add_box(pier, Vector3(i * 1.1, -0.6, 1.2), Vector3(0.25, 1.2, 0.25), palette.get("structure", Color.GRAY).darkened(0.15), false, zone_id, "structure")
-			_add_box(pier, Vector3(i * 1.1, -0.6, -1.2), Vector3(0.25, 1.2, 0.25), palette.get("structure", Color.GRAY).darkened(0.15), false, zone_id, "structure")
+	for i in 5:
+		PropLibrary.spawn("log", pier, Vector3(i * 1.1, 0.08, 0), 90.0, 0.95, true)
+	PropLibrary.spawn("canoe", pier, Vector3(4.5, 0.12, 0.8), -25.0, 1.0)
+	PropLibrary.spawn("canoe_paddle", pier, Vector3(4.8, 0.2, 1.0), 40.0, 1.0)
 
 
 static func _add_coastline(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -574,66 +550,53 @@ static func _add_rock_cluster(parent: Node3D, pos: Vector3, palette: Dictionary,
 	var rocks := Node3D.new()
 	rocks.position = pos
 	parent.add_child(rocks)
-	if PropLibrary.spawn("rock_large_a", rocks, Vector3(0, 0, 0), 20.0, 1.0):
-		PropLibrary.spawn("rock_small_a", rocks, Vector3(1.2, 0, 0.8), -15.0, 0.9)
-		PropLibrary.spawn("rock_small_b", rocks, Vector3(-0.8, 0, -0.5), 35.0, 0.85)
-	else:
-		_add_box(rocks, Vector3(0, 0.35, 0), Vector3(1.4, 0.7, 1.0), palette.get("moss", Color.GREEN), false, zone_id, "ground")
-		_add_box(rocks, Vector3(0.8, 0.25, 0.6), Vector3(0.9, 0.5, 0.8), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-		_add_box(rocks, Vector3(-0.6, 0.2, -0.4), Vector3(0.7, 0.4, 0.7), palette.get("ground", Color.GRAY), false, zone_id, "ground")
+	PropLibrary.spawn("rock_large_a", rocks, Vector3(0, 0, 0), 20.0, 0.95, true)
+	PropLibrary.spawn("rock_small_a", rocks, Vector3(1.2, 0, 0.8), -15.0, 0.85, true)
+	PropLibrary.spawn("rock_small_b", rocks, Vector3(-0.8, 0, -0.5), 35.0, 0.8, true)
 
 
 static func _add_distant_hills(parent: Node3D, palette: Dictionary) -> void:
 	var hills := Node3D.new()
 	hills.name = "DistantHills"
 	parent.add_child(hills)
-	for spot in [[-20, -28, 1.6], [-10, -32, 1.4], [8, -30, 1.5], [18, -27, 1.3]]:
-		PropLibrary.spawn("tree_pine", hills, Vector3(spot[0], 0, spot[1]), float(spot[0]), spot[2], false)
-		PropLibrary.spawn("tree_oak", hills, Vector3(spot[0] + 3, 0, spot[1] - 2), float(spot[0] * 2), spot[2] * 0.9, false)
+	for spot in [[-20, -28, 1.4], [18, -27, 1.3]]:
+		PropLibrary.spawn("tree_coastal_b", hills, Vector3(spot[0], 0, spot[1]), float(spot[0]), spot[2]) if PropLibrary.has_prop("tree_coastal_b") else PropLibrary.spawn("tree_pine", hills, Vector3(spot[0], 0, spot[1]), float(spot[0]), spot[2], false)
 
 
 static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var fence := Node3D.new()
 	fence.position = pos
 	parent.add_child(fence)
-	if PropLibrary.spawn("fence_planks", fence, Vector3(0, 0, 0), 0.0, 1.0):
-		PropLibrary.spawn("fence_simple", fence, Vector3(2.5, 0, 0.2), 15.0, 0.9)
-		PropLibrary.spawn("log", fence, Vector3(4.0, 0, -0.3), 80.0, 1.0)
-		return
-	for i in 4:
-		var h := 1.2 if i % 2 == 0 else 0.7
-		_add_box(fence, Vector3(i * 1.3, h * 0.5, 0), Vector3(0.12, h, 0.12), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-	_add_box(fence, Vector3(1.95, 0.9, 0), Vector3(2.8, 0.08, 0.08), palette.get("structure", Color.GRAY), false, zone_id, "structure")
+	PropLibrary.spawn("fence_planks", fence, Vector3(0, 0, 0), 0.0, 1.0)
+	PropLibrary.spawn("fence_simple", fence, Vector3(2.5, 0, 0.2), 15.0, 0.9)
+	PropLibrary.spawn("log", fence, Vector3(4.0, 0, -0.3), 80.0, 0.9, true)
 
 
-static func _add_cave_tunnel(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	if PropLibrary.has_prop("cliff_cave"):
-		return
-	for z in range(-28, 14, 3):
-		_add_box(parent, Vector3(-6.2, 3.0, z), Vector3(1.4, 6.0, 2.8), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-		_add_box(parent, Vector3(6.2, 3.0, z), Vector3(1.4, 6.0, 2.8), palette.get("structure", Color.GRAY), false, zone_id, "structure")
-		_add_box(parent, Vector3(0, 6.4, z), Vector3(12.0, 1.0, 2.8), palette.get("structure", Color.GRAY).darkened(0.1), false, zone_id, "structure")
-
-
-static func _add_stalactites(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
-	var group := Node3D.new()
-	group.position = pos
-	parent.add_child(group)
-	if PropLibrary.has_prop("rock_tall_a"):
-		for i in 3:
-			var stal := PropLibrary.spawn("rock_tall_a", group, Vector3(i * 1.4 - 1.4, 2.0, 0), 0.0, 0.7 + i * 0.08)
-			if stal:
-				stal.rotation_degrees.x = 180.0
-		return
-	for i in 3:
-		_add_cylinder(group, Vector3(i * 1.4 - 1.4, -0.8, 0), 0.18 + i * 0.04, 1.6 + i * 0.3, palette.get("ground", Color.GRAY), zone_id, "structure")
+static func _add_cave_tunnel_walls(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	for z in range(-28, 14, 5):
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-5.5, 0, z), 90.0, 0.75, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(5.5, 0, z), -90.0, 0.8, true)
+		PropLibrary.spawn("rock_small_a", parent, Vector3(-4.5, 0, z + 1.5), 30.0, 0.9, true)
+		PropLibrary.spawn("rock_small_b", parent, Vector3(4.5, 0, z - 1.5), -30.0, 0.85, true)
 
 
 static func _add_cave_pool_glow(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var pool := Node3D.new()
 	pool.position = pos
 	parent.add_child(pool)
-	_add_box(pool, Vector3(0, 0, -2), Vector3(7, 0.05, 5), palette.get("water", Color("#1A4A5A")), true, zone_id, "accent")
+	var water := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(7, 5)
+	water.mesh = plane
+	water.rotation_degrees.x = -90.0
+	water.position = Vector3(0, 0, -2)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("water", Color("#1A4A5A"))
+	mat.emission_enabled = true
+	mat.emission = palette.get("accent", Color.CYAN) * 0.2
+	mat.roughness = 0.1
+	water.material_override = mat
+	pool.add_child(water)
 	var light := OmniLight3D.new()
 	light.light_color = palette.get("accent", Color.CYAN)
 	light.light_energy = 0.9
@@ -646,12 +609,8 @@ static func _add_palace_banners(parent: Node3D, pos: Vector3, palette: Dictionar
 	var banners := Node3D.new()
 	banners.position = pos
 	parent.add_child(banners)
-	if PropLibrary.spawn("castle_banner", banners, Vector3(-5.5, 0, 0.6), 0.0, 1.2):
-		PropLibrary.spawn("castle_banner", banners, Vector3(5.5, 0, 0.6), 180.0, 1.2)
-		return
-	for x in [-5.5, 5.5]:
-		_add_box(banners, Vector3(x, 4.5, 0.6), Vector3(0.08, 5.5, 0.08), palette.get("structure", Color.GOLD), true, zone_id, "structure")
-		_add_box(banners, Vector3(x, 4.0, 0.9), Vector3(0.04, 3.5, 1.2), palette.get("accent", Color.RED), true, zone_id, "structure")
+	PropLibrary.spawn("castle_banner", banners, Vector3(-5.5, 0, 0.6), 0.0, 1.2)
+	PropLibrary.spawn("castle_banner", banners, Vector3(5.5, 0, 0.6), 180.0, 1.2)
 
 
 static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -662,14 +621,9 @@ static func _add_palace_columns(parent: Node3D, pos: Vector3, palette: Dictionar
 	var hall := Node3D.new()
 	hall.position = pos
 	parent.add_child(hall)
-	if PropLibrary.has_prop("castle_pillar"):
-		for x in [-5.0, -2.5, 2.5, 5.0]:
-			PropLibrary.spawn("castle_pillar", hall, Vector3(x, 0, 0), 0.0, 1.3)
-		PropLibrary.spawn("castle_tower_top", hall, Vector3(0, 0, -2), 0.0, 1.1)
-		return
 	for x in [-5.0, -2.5, 2.5, 5.0]:
-		_add_cylinder(hall, Vector3(x, 2.5, 0), 0.45, 5.0, palette.get("glow", Color.WHITE), zone_id, "structure", true)
-	_add_box(hall, Vector3(0, 5.2, 0), Vector3(12, 0.5, 1.2), palette.get("structure", Color.GOLD), true, zone_id, "structure")
+		PropLibrary.spawn("castle_pillar", hall, Vector3(x, 0, 0), 0.0, 1.3)
+	PropLibrary.spawn("castle_tower_top", hall, Vector3(0, 0, -2), 0.0, 1.1)
 
 
 static func _add_palace_lanterns(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -692,9 +646,8 @@ static func _add_palace_lanterns(parent: Node3D, pos: Vector3, palette: Dictiona
 
 
 static func _add_algae_strip(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
-	if PropLibrary.spawn("plant_flat", parent, pos + Vector3(0, -0.5, 0), randf_range(0, 360), 1.2):
-		return
-	_add_box(parent, pos, Vector3(0.18, 2.8, 1.4), palette.get("accent", Color.CYAN), true, zone_id, "accent")
+	PropLibrary.spawn("fern", parent, pos, randf_range(0, 360), 1.1, true)
+	PropLibrary.spawn("grass_leafs", parent, pos + Vector3(0.3, 0, 0.2), randf_range(0, 360), 0.9, true)
 
 
 static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -702,15 +655,9 @@ static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary,
 	gate.name = "PalaceGate"
 	gate.position = pos
 	parent.add_child(gate)
-	if PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.5):
-		PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.2), 0.0, 1.3)
-		return
-	for x in [-4.2, 4.2]:
-		_add_cylinder(gate, Vector3(x, 4.2, 0), 0.75, 8.4, palette.get("structure", Color.GOLD), zone_id, "structure", true)
-		_add_box(gate, Vector3(x, 8.6, 0), Vector3(1.6, 0.5, 1.6), palette.get("glow", Color.WHITE), true, zone_id, "glow")
-	_add_box(gate, Vector3(0, 8.2, 0), Vector3(10.5, 0.9, 1.2), palette.get("glow", Color.WHITE), true, zone_id, "glow")
-	_add_box(gate, Vector3(0, 7.2, 0), Vector3(8.5, 0.5, 0.9), palette.get("structure", Color.GOLD), true, zone_id, "structure")
-	_add_box(gate, Vector3(0, 5.5, 0.8), Vector3(6, 4, 0.35), Color("#1A1A3A"), true, zone_id, "ground")
+	PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.5)
+	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.2), 0.0, 1.3)
+	PropLibrary.spawn("castle_arch", gate, Vector3(0, 0, -1.5), 0.0, 1.4)
 
 
 static func _add_box(

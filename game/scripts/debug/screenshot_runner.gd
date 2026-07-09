@@ -40,6 +40,7 @@ func _capture_scene(entry: Dictionary, out_dir: String) -> void:
 	get_tree().change_scene_to_file(entry.path)
 	await get_tree().create_timer(5.0).timeout
 	_hide_dialogue_ui()
+	_hide_player_visual()
 	if CAMERA_VIEWS.has(entry.file):
 		_frame_camera(CAMERA_VIEWS[entry.file])
 	await get_tree().create_timer(0.5).timeout
@@ -62,6 +63,14 @@ func _frame_camera(view: Dictionary) -> void:
 		cam.set("orbit_enabled", false)
 	cam.global_position = view.cam
 	cam.look_at(view.focus, Vector3.UP)
+
+
+func _hide_player_visual() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if player:
+		var visual := player.get_node_or_null("Visual")
+		if visual:
+			visual.visible = false
 
 
 func _hide_dialogue_ui() -> void:
