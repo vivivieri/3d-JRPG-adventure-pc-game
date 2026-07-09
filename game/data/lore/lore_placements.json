@@ -1,0 +1,12 @@
+{
+  "placements": [
+    { "id": "fishing_ledger", "zone": "ruined_village", "position": [4.5, 0.0, 1.5] },
+    { "id": "festival_banner", "zone": "ruined_village", "position": [-2.0, 0.0, 6.0] },
+    { "id": "yuzu_prayer", "zone": "ruined_village", "position": [-5.5, 0.0, -4.0] },
+    { "id": "roku_dive_log", "zone": "ruined_village", "position": [9.0, 0.0, -2.0] },
+    { "id": "cave_inscription", "zone": "tidal_caves", "position": [-4.0, 1.0, 8.0] },
+    { "id": "sailor_charm", "zone": "tidal_caves", "position": [3.5, 0.0, -14.0] },
+    { "id": "palace_seal", "zone": "dragon_palace_gate", "position": [-5.0, 0.0, 10.0] },
+    { "id": "otohime_letter", "zone": "dragon_palace_gate", "position": [2.0, 0.0, -6.0] }
+  ]
+}

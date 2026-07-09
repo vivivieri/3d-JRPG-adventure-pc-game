@@ -44,6 +44,21 @@ Synthesized in code (numpy). No Freesound, stock loops, or licensed recordings.
 
 ---
 
+## 3D models (CC0 — Kenney)
+
+| Item | Source | License | Used for |
+|------|--------|---------|----------|
+| Nature Kit GLBs (`models/nature/*.glb`) | Kenney Nature Kit | CC0 1.0 | Trees, rocks, pier, cliffs, fences |
+| Castle Kit OBJs (`models/castle/*.obj`) | Kenney Castle Kit | CC0 1.0 | Palace gate, pillars, banners, player knight |
+
+Install curated subset: `bash tools/install_cc0_assets.sh` (requires `.asset-dl/` source packs).
+
+Attribution appreciated but not required: [Kenney](https://www.kenney.nl)
+
+Greybox floor/wall primitives remain procedural Godot meshes.
+
+---
+
 ## Art (original — no third-party images)
 
 | Item | Source | License | Date | Used for |
@@ -64,7 +79,7 @@ Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG onl
 
 | Status | Notes |
 |--------|-------|
-| **None imported** | Greybox primitives only. Planned CC0 kits (Kenney/Quaternius) are **not** in the repository. |
+| **Kenney CC0 kits** | Curated Nature + Castle models in `game/assets/models/`. See `asset_manifest.json`. |
 
 ---
 

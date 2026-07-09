@@ -2,10 +2,11 @@
 """Verify shipped art/audio assets match the documented license manifest.
 
 Fails if unknown media files appear under game/assets/ or steam/ without a license entry.
-All game art and audio must be original procedural (MIT) or listed third-party (OFL/MIT/PD).
+All game art and audio must be original procedural (MIT), documented OFL fonts, or CC0 models.
 """
 from __future__ import annotations
 
+import json
 import os
 import sys
 
@@ -13,6 +14,7 @@ ROOT = os.path.join(os.path.dirname(__file__), "..")
 
 # Extensions treated as licensable media.
 MEDIA_EXT = {".png", ".ogg", ".wav", ".mp3", ".mp4", ".svg", ".ttf", ".otf", ".webp"}
+MODEL_EXT = {".glb", ".obj", ".mtl", ".png"}
 
 # Files allowed outside game/assets but in repo marketing folder.
 STEAM_MEDIA = {
@@ -25,6 +27,10 @@ STEAM_MEDIA = {
     "steam/screenshots/03_combat.png",
     "steam/screenshots/04_palace.png",
     "steam/screenshots/05_endings.png",
+    "steam/screenshots-capture/caves.png",
+    "steam/screenshots-capture/main_menu.png",
+    "steam/screenshots-capture/palace.png",
+    "steam/screenshots-capture/village.png",
 }
 
 # Basename allowlist under game/assets (procedural MIT or documented third-party).
@@ -78,17 +84,29 @@ ALLOWED = {
     "game/assets/fonts/NotoSansSC-Bold.otf": "OFL 1.1",
 }
 
-SKIP_NAMES = {"README.md", "ASSET_LICENSE.md", "OFL.txt", ".gitkeep"}
+SKIP_NAMES = {"README.md", "ASSET_LICENSE.md", "OFL.txt", ".gitkeep", "LICENSE_KENNEY.txt", "asset_manifest.json"}
 
 
-def iter_media(base: str) -> list[str]:
+def load_model_manifest() -> set[str]:
+    manifest_path = os.path.join(ROOT, "game", "assets", "models", "asset_manifest.json")
+    if not os.path.isfile(manifest_path):
+        return set()
+    with open(manifest_path, encoding="utf-8") as f:
+        data = json.load(f)
+    allowed: set[str] = set()
+    for rel in data.get("files", []):
+        allowed.add(f"game/assets/models/{rel}".replace("\\", "/"))
+    return allowed
+
+
+def iter_media(base: str, extensions: set[str]) -> list[str]:
     found: list[str] = []
     for dirpath, _, filenames in os.walk(base):
         for name in filenames:
             if name.endswith(".import") or name in SKIP_NAMES:
                 continue
             ext = os.path.splitext(name)[1].lower()
-            if ext in MEDIA_EXT:
+            if ext in extensions:
                 rel = os.path.relpath(os.path.join(dirpath, name), ROOT).replace("\\", "/")
                 found.append(rel)
     return sorted(found)
@@ -96,10 +114,18 @@ def iter_media(base: str) -> list[str]:
 
 def main() -> int:
     errors: list[str] = []
-    checked = iter_media(os.path.join(ROOT, "game", "assets"))
+    model_allowed = load_model_manifest()
+    checked = iter_media(os.path.join(ROOT, "game", "assets"), MEDIA_EXT)
+    checked = [r for r in checked if not r.startswith("game/assets/models/")]
+    models = iter_media(os.path.join(ROOT, "game", "assets", "models"), MODEL_EXT)
+
     for rel in checked:
         if rel not in ALLOWED:
             errors.append(f"Unlisted asset (add to docs/LICENSES.md or remove): {rel}")
+
+    for rel in models:
+        if rel not in model_allowed:
+            errors.append(f"Unlisted 3D model (re-run tools/install_cc0_assets.sh): {rel}")
 
     for rel in STEAM_MEDIA:
         path = os.path.join(ROOT, rel)
@@ -108,7 +134,7 @@ def main() -> int:
 
     extra_steam = [
         r
-        for r in iter_media(os.path.join(ROOT, "steam"))
+        for r in iter_media(os.path.join(ROOT, "steam"), MEDIA_EXT)
         if r not in STEAM_MEDIA and not r.endswith(".md") and not r.endswith(".txt")
     ]
     for rel in extra_steam:
@@ -120,8 +146,8 @@ def main() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"OK — {len(checked)} game assets + {len(STEAM_MEDIA)} Steam files match manifest.")
-    print("All art/audio are original procedural (MIT) or documented OFL fonts.")
+    total = len(checked) + len(models)
+    print(f"OK — {total} game assets ({len(models)} CC0 models) + {len(STEAM_MEDIA)} Steam files match manifest.")
     return 0
 
 

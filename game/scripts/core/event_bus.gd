@@ -26,3 +26,4 @@ signal equipment_changed(character_id: String)
 signal quest_tracker_changed
 signal save_message(message: String)
 signal locale_changed(locale_code: String)
+signal lore_collected(lore_id: String)

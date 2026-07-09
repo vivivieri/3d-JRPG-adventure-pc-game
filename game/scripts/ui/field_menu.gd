@@ -2,7 +2,7 @@ extends CanvasLayer
 ## Field menu — Items and Equipment tabs (Tab to toggle).
 
 
-enum Tab { ITEMS, EQUIPMENT }
+enum Tab { ITEMS, EQUIPMENT, LORE }
 
 @onready var _root: Control = $MenuRoot
 @onready var _items_panel: VBoxContainer = $MenuRoot/Panel/Margin/MainVBox/ItemsPanel
@@ -15,6 +15,11 @@ enum Tab { ITEMS, EQUIPMENT }
 @onready var _message_label: Label = $MenuRoot/Panel/Margin/MainVBox/MessageLabel
 @onready var _items_tab: Button = $MenuRoot/Panel/Margin/MainVBox/TabRow/ItemsTab
 @onready var _equip_tab: Button = $MenuRoot/Panel/Margin/MainVBox/TabRow/EquipTab
+@onready var _lore_tab: Button = $MenuRoot/Panel/Margin/MainVBox/TabRow/LoreTab
+@onready var _lore_panel: VBoxContainer = $MenuRoot/Panel/Margin/MainVBox/LorePanel
+@onready var _lore_list: VBoxContainer = $MenuRoot/Panel/Margin/MainVBox/LorePanel/LoreScroll/LoreList
+@onready var _lore_detail: Label = $MenuRoot/Panel/Margin/MainVBox/LorePanel/LoreDetail
+@onready var _lore_progress: Label = $MenuRoot/Panel/Margin/MainVBox/LorePanel/LoreProgress
 @onready var _close_btn: Button = $MenuRoot/Panel/Margin/MainVBox/CloseBtn
 
 var _open := false
@@ -28,11 +33,13 @@ func _ready() -> void:
 	UiStyleManager.apply_to_panel($MenuRoot/Panel, UiStyleManager.menu_panel())
 	_items_tab.pressed.connect(func(): _show_tab(Tab.ITEMS))
 	_equip_tab.pressed.connect(func(): _show_tab(Tab.EQUIPMENT))
+	_lore_tab.pressed.connect(func(): _show_tab(Tab.LORE))
 	_close_btn.pressed.connect(close_menu)
 	_char_option.item_selected.connect(_on_char_selected)
 	EventBus.locale_changed.connect(_on_locale_changed)
 	EventBus.party_changed.connect(_refresh)
 	EventBus.equipment_changed.connect(func(_id): _refresh())
+	EventBus.lore_collected.connect(func(_id): _refresh())
 	_apply_fonts()
 
 
@@ -68,11 +75,14 @@ func _show_tab(tab: Tab) -> void:
 	_tab = tab
 	_items_panel.visible = tab == Tab.ITEMS
 	_equip_panel.visible = tab == Tab.EQUIPMENT
+	_lore_panel.visible = tab == Tab.LORE
 	_refresh_tab_labels()
 	if tab == Tab.ITEMS:
 		_populate_items()
-	else:
+	elif tab == Tab.EQUIPMENT:
 		_populate_equipment()
+	else:
+		_populate_lore()
 
 
 func _refresh() -> void:
@@ -114,6 +124,40 @@ func _use_item(item_id: String, character_id: String) -> void:
 	var result := GameManager.use_field_item(item_id, character_id)
 	_message_label.text = result.get("message", "")
 	_populate_items()
+
+
+func _populate_lore() -> void:
+	for child in _lore_list.get_children():
+		child.queue_free()
+	_lore_progress.text = LocalizationManager.tr_key("UI_LORE_PROGRESS", {
+		"found": LoreJournal.collected_count(),
+		"total": LoreJournal.total_count(),
+	})
+	_lore_detail.text = LocalizationManager.tr_key("UI_LORE_HINT")
+	var first_collected := ""
+	for entry in LoreJournal.get_all_entries():
+		var lore_id: String = entry.get("id", "")
+		var btn := Button.new()
+		if LoreJournal.is_collected(lore_id):
+			btn.text = LoreJournal.title_for(lore_id)
+			if first_collected.is_empty():
+				first_collected = lore_id
+		else:
+			btn.text = LoreJournal.locked_label()
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		btn.pressed.connect(func() -> void:
+			if LoreJournal.is_collected(lore_id):
+				_lore_detail.text = "%s\n\n%s" % [
+					LoreJournal.title_for(lore_id),
+					LoreJournal.body_for(lore_id),
+				]
+		)
+		_lore_list.add_child(btn)
+	if not first_collected.is_empty():
+		_lore_detail.text = "%s\n\n%s" % [
+			LoreJournal.title_for(first_collected),
+			LoreJournal.body_for(first_collected),
+		]
 
 
 func _populate_equipment() -> void:
@@ -203,6 +247,7 @@ func _refresh_tab_labels() -> void:
 	$MenuRoot/Panel/Margin/MainVBox/Title.text = LocalizationManager.tr_key("UI_MENU_TITLE")
 	_items_tab.text = LocalizationManager.tr_key("UI_MENU_ITEMS")
 	_equip_tab.text = LocalizationManager.tr_key("UI_MENU_EQUIPMENT")
+	_lore_tab.text = LocalizationManager.tr_key("UI_MENU_LORE")
 	_close_btn.text = LocalizationManager.tr_key("UI_COMBAT_BACK")
 
 

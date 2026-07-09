@@ -16,4 +16,5 @@ func _ready() -> void:
 			player.global_rotation = marker.global_rotation
 	GameManager.current_area = zone_id
 	ZoneVisuals.apply_to_scene(self, zone_id)
+	LoreSpawner.spawn_for_zone(self, zone_id)
 	AudioManager.play_bgm(zone_id if zone_id != "main_menu" else "main_menu")

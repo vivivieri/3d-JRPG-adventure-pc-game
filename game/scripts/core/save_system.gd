@@ -17,6 +17,7 @@ func save_game() -> bool:
 		"gold": GameManager.gold,
 		"current_area": GameManager.current_area,
 		"chosen_ending": GameManager.chosen_ending,
+		"lore_collected": LoreJournal.collected_count(),
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:

@@ -15,6 +15,11 @@ func _ready() -> void:
 func _add_visual() -> void:
 	if get_node_or_null("Visual"):
 		return
+	if PropLibrary.has_prop("knight_red"):
+		var knight := PropLibrary.spawn("knight_red", self, Vector3(0, 0, 0), 180.0, 1.35)
+		if knight:
+			knight.name = "Visual"
+			return
 	var body := MeshInstance3D.new()
 	body.name = "Visual"
 	var cap := CapsuleMesh.new()

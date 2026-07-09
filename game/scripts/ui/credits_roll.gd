@@ -46,6 +46,7 @@ func _build_lines() -> void:
 		"credits.programming",
 		"credits.audio",
 		"credits.art",
+		"credits.models3d",
 		"credits.localization",
 		"credits.fonts",
 		"credits.engine",

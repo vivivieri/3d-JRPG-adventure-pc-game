@@ -6,6 +6,19 @@ var _current_scene: Dictionary = {}
 var _line_index := 0
 
 
+func show_lore_popup(lore_id: String) -> void:
+	var entry: Dictionary = LoreJournal.get_entry(lore_id)
+	if entry.is_empty():
+		return
+	_start_scene({
+		"scene_id": "LORE_%s" % lore_id,
+		"lines": [
+			{ "speaker": "narrator", "text": entry.get("title", {}) },
+			{ "speaker": "narrator", "text": entry.get("body", {}) },
+		],
+	})
+
+
 func play_scene(scene_id: String) -> void:
 	var dialogue_data: Dictionary = GameManager.get_data("dialogue")
 	if dialogue_data == null:

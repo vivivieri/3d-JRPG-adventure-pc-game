@@ -12,21 +12,22 @@
 
 These files are **synthesized in code** (numpy/Pillow). No samples, stock photos, or downloaded loops are used.
 
-## Third-party (permissive licenses — attribution required)
+## Third-party (permissive licenses)
 
 | Asset | License | Attribution |
 |-------|---------|-------------|
+| Kenney Nature Kit (GLB subset) | CC0 1.0 | Kenney / www.kenney.nl (optional) |
+| Kenney Castle Kit (OBJ subset) | CC0 1.0 | Kenney / www.kenney.nl (optional) |
 | Noto Sans / JP / SC fonts | SIL Open Font License 1.1 | See `fonts/OFL.txt` + credits screen |
 | Godot Engine | MIT | Credits screen |
 | GodotSteam plugin | MIT | Credits screen (when shipped) |
 
-## Not included
-
-No Kenney, Quaternius, Freesound, OpenGameArt, Mixamo, or other external art/audio packs are imported into this project.
+3D models are installed via `tools/install_cc0_assets.sh` from source packs in `.asset-dl/`.
 
 ## Verify before ship
 
 ```bash
+bash tools/install_cc0_assets.sh   # if models not yet copied
 python3 tools/verify_asset_licenses.py
 ```
 
