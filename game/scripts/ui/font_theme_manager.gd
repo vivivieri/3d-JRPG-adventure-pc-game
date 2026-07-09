@@ -83,6 +83,36 @@ func apply_interaction_action(label: Label) -> void:
 	label.add_theme_font_size_override(&"font_size", 18)
 
 
+func apply_combat_title(label: Label) -> void:
+	if _bold:
+		label.add_theme_font_override(&"font", _bold)
+	label.add_theme_font_size_override(&"font_size", 20)
+
+
+func apply_combat_name(label: Label) -> void:
+	if _bold:
+		label.add_theme_font_override(&"font", _bold)
+	label.add_theme_font_size_override(&"font_size", 16)
+
+
+func apply_combat_action(control: Control) -> void:
+	if _regular:
+		control.add_theme_font_override(&"font", _regular)
+	control.add_theme_font_size_override(&"font_size", 16)
+
+
+func apply_combat_hint(label: Label) -> void:
+	if _regular:
+		label.add_theme_font_override(&"font", _regular)
+	label.add_theme_font_size_override(&"font_size", 13)
+
+
+func apply_combat_log(label: RichTextLabel) -> void:
+	if _regular:
+		label.add_theme_font_override(&"normal_font", _regular)
+	label.add_theme_font_size_override(&"normal_font_size", 14)
+
+
 func apply_to_control(root: Control) -> void:
 	if _regular == null:
 		return

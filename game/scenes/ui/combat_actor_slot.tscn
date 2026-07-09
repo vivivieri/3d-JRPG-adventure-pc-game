@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=3 uid="uid://combatslot001"]
+
+[ext_resource type="Script" path="res://scripts/ui/combat_actor_slot.gd" id="1_slot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+bg_color = Color(0.12, 0.14, 0.18, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.322, 0.647, 0.847, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp"]
+bg_color = Color(0.2, 0.08, 0.08, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.75, 0.18, 0.2, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="CombatActorSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 108)
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+script = ExtResource("1_slot")
+
+[node name="SelectButton" type="Button" parent="."]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.94, 0.96, 1)
+theme_override_font_sizes/font_size = 16
+text = "Name"
+
+[node name="HpBar" type="ProgressBar" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+max_value = 100.0
+value = 75.0
+show_percentage = false
+theme_override_styles/background = SubResource("StyleBoxFlat_hp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+
+[node name="MpRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="MpBar" type="ProgressBar" parent="Margin/VBox/MpRow"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 30.0
+value = 20.0
+show_percentage = false
+
+[node name="LimitBar" type="ProgressBar" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+max_value = 100.0
+show_percentage = false
+
+[node name="IntentLabel" type="Label" parent="Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Attack"

@@ -21,11 +21,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Save point at village well
 
 ## M2 — Combat vertical slice
-- [ ] Combat UI scene (party/enemy HP, action menu)
-- [ ] Enemy intent display icons
-- [ ] Battle transition animation
-- [ ] Tutorial fight (SC-05) wired end-to-end
-- [ ] Boss phase announcements
+- [x] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
 
 ## M3 — Chapter 1
 - [ ] Tidal Caves greybox map

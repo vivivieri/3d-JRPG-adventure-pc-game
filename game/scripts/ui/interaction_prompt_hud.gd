@@ -34,11 +34,11 @@ func is_showing() -> bool:
 
 func _on_locale_changed(_locale_code: String) -> void:
 	_apply_fonts()
-	if _panel.visible and not _current_action.is_empty():
+	if _panel.visible:
 		_key_label.text = LocalizationManager.tr_key("UI_INTERACT_KEY")
-		# Action text may need refresh from interactable — manager handles on next frame.
 
 
 func _apply_fonts() -> void:
 	FontThemeManager.apply_interaction_key(_key_label)
+	FontThemeManager.apply_interaction_action(_separator_label)
 	FontThemeManager.apply_interaction_action(_action_label)

@@ -18,6 +18,18 @@ UI_ACTION_SKILL,Skill,スキル,技能
 UI_ACTION_ITEM,Item,アイテム,道具
 UI_ACTION_DEFEND,Defend,防御,防御
 UI_ACTION_ESCAPE,Escape,逃げる,逃跑
+UI_ACTION_LIMIT,Limit,必殺,极限
+UI_COMBAT_YOUR_TURN,{name}'s turn,{name}のターン,{name}的回合
+UI_COMBAT_ENEMY_TURN,Enemy turn,敵のターン,敌方回合
+UI_COMBAT_BACK,Back,戻る,返回
+UI_COMBAT_CANCEL,Cancel,キャンセル,取消
+UI_COMBAT_SELECT_TARGET,Select a target,ターゲットを選択,选择目标
+UI_COMBAT_ITEM_NA,Items not available yet.,アイテムは未実装です。,道具尚未开放。
+# Enemy intent
+intent.attack,Attack,攻撃,攻击
+intent.defend,Defend,防御,防御
+intent.charge,Charging,溜め,蓄力
+intent.debuff,Debuff,弱体化,减益
 # UI — Endings
 UI_ENDING_REWIND,Rewind,巻き戻し,倒流
 UI_ENDING_ANCHOR,Anchor,留まる,锚定

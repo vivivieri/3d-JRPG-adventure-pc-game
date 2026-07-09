@@ -9,6 +9,9 @@ var current_turn_index := 0
 var allies: Array[Combatant] = []
 var enemies: Array[Combatant] = []
 var battle_log: Array[String] = []
+var current_actor: Combatant = null
+
+var _pending_enemy: Dictionary = {}
 
 
 func start_battle(enemy_ids: Array) -> void:
@@ -23,9 +26,25 @@ func start_battle(enemy_ids: Array) -> void:
 			enemies.append(Combatant.new(def, false))
 	_build_turn_order()
 	phase = Phase.PLAYER_TURN
+	GameManager.change_state(GameManager.GameState.COMBAT)
 	EventBus.combat_started.emit()
 	_log(LocalizationManager.tr_key("combat.battle_start"))
+	_emit_stats()
 	_start_current_turn()
+
+
+func resolve_pending_enemy_turn() -> void:
+	if _pending_enemy.is_empty():
+		return
+	var actor: Combatant = _pending_enemy.get("actor")
+	var skill_id: String = _pending_enemy.get("skill_id", "")
+	_pending_enemy = {}
+	if actor == null or not actor.is_alive():
+		_advance_turn()
+		return
+	var skill := GameManager.get_skill_def(skill_id)
+	var target_idx := _pick_target_index(skill)
+	_execute_skill(actor, skill, target_idx, false)
 
 
 func _reset() -> void:
@@ -33,7 +52,9 @@ func _reset() -> void:
 	enemies.clear()
 	turn_order.clear()
 	current_turn_index = 0
+	current_actor = null
 	battle_log.clear()
+	_pending_enemy = {}
 	phase = Phase.INTRO
 
 
@@ -62,18 +83,28 @@ func _start_current_turn() -> void:
 		_end_round()
 		return
 	var actor: Combatant = turn_order[current_turn_index]
+	current_actor = actor
 	actor.reset_defend()
 	for msg in actor.tick_statuses():
 		_log(msg)
+	_emit_stats()
 	if not actor.is_alive():
 		_advance_turn()
 		return
-	EventBus.turn_started.emit(null)
+	EventBus.turn_started.emit(_actor_payload(actor))
 	if actor.is_player:
 		phase = Phase.PLAYER_TURN
 	else:
 		phase = Phase.ENEMY_TURN
-		_execute_enemy_turn(actor)
+		_queue_enemy_turn(actor)
+
+
+func _queue_enemy_turn(actor: Combatant) -> void:
+	var skill_id := SkillResolver.pick_enemy_skill(actor)
+	var enemy_def := GameManager.get_enemy_def(actor.id)
+	var intent_key: String = enemy_def.get("intent_display", "attack")
+	_pending_enemy = { "actor": actor, "skill_id": skill_id }
+	EventBus.enemy_intent_shown.emit(actor.id, skill_id, intent_key)
 
 
 func _end_round() -> void:
@@ -83,16 +114,16 @@ func _end_round() -> void:
 
 
 func _advance_turn() -> void:
+	if current_actor:
+		EventBus.turn_ended.emit(_actor_payload(current_actor))
 	current_turn_index += 1
 	_start_current_turn()
 
 
-func player_action(action: String, actor_index: int, skill_id: String, target_index: int) -> void:
-	if phase != Phase.PLAYER_TURN:
+func player_action(action: String, skill_id: String = "", target_index: int = 0) -> void:
+	if phase != Phase.PLAYER_TURN or current_actor == null or not current_actor.is_player:
 		return
-	var actor := _get_current_player(actor_index)
-	if actor == null:
-		return
+	var actor := current_actor
 	match action:
 		"attack":
 			_execute_skill(actor, GameManager.get_skill_def("strike"), target_index, false)
@@ -103,7 +134,7 @@ func player_action(action: String, actor_index: int, skill_id: String, target_in
 			_log(LocalizationManager.tr_key("combat.defend", { "actor": actor.display_name }))
 			_advance_turn()
 		"item":
-			_log("Item use not yet implemented.")
+			_log(LocalizationManager.tr_key("UI_COMBAT_ITEM_NA"))
 			_advance_turn()
 		"limit":
 			var limit_skill := _get_limit_skill(actor)
@@ -114,24 +145,11 @@ func player_action(action: String, actor_index: int, skill_id: String, target_in
 		return
 
 
-func _get_current_player(index: int) -> Combatant:
-	if index < 0 or index >= allies.size():
-		return null
-	return allies[index]
-
-
 func _get_limit_skill(actor: Combatant) -> Dictionary:
 	if not actor.can_use_limit():
 		return {}
 	var char_def := GameManager.get_character_def(actor.id)
 	return GameManager.get_skill_def(char_def.get("limit_skill", ""))
-
-
-func _execute_enemy_turn(actor: Combatant) -> void:
-	var skill_id := SkillResolver.pick_enemy_skill(actor)
-	var skill := GameManager.get_skill_def(skill_id)
-	var target_idx := _pick_target_index(skill)
-	_execute_skill(actor, skill, target_idx, false)
 
 
 func _pick_target_index(skill: Dictionary) -> int:
@@ -161,7 +179,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 		for t in targets:
 			var dmg := SkillResolver.resolve_damage(actor, t, skill)
 			var dealt := t.take_damage(dmg)
-			EventBus.damage_dealt.emit(null, dealt, skill.get("element", ""))
+			EventBus.damage_dealt.emit(t.id, dealt, skill.get("element", ""))
 			var skill_name := LocalizationManager.skill_name(skill.get("id", ""))
 			if skill_name == skill.get("id", ""):
 				skill_name = skill.get("display_name", "?")
@@ -172,7 +190,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 				"amount": dealt
 			}))
 			if not t.is_alive():
-				EventBus.actor_defeated.emit(null)
+				EventBus.actor_defeated.emit(t.id)
 				_log(LocalizationManager.tr_key("combat.defeated", { "target": t.display_name }))
 		if actor.is_player:
 			actor.add_limit(8)
@@ -180,6 +198,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 		_log(msg)
 	if is_limit:
 		actor.limit_gauge = 0
+	_emit_stats()
 	_advance_turn()
 
 
@@ -240,6 +259,20 @@ func _on_defeat() -> void:
 	EventBus.combat_ended.emit(false)
 
 
+func _actor_payload(actor: Combatant) -> Dictionary:
+	return {
+		"id": actor.id,
+		"name": actor.display_name,
+		"is_player": actor.is_player,
+		"party_index": allies.find(actor),
+	}
+
+
+func _emit_stats() -> void:
+	EventBus.combat_stats_changed.emit()
+
+
 func _log(message: String) -> void:
 	battle_log.append(message)
+	EventBus.combat_log_appended.emit(message)
 	print("[Combat] %s" % message)
