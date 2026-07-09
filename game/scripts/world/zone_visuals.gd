@@ -12,6 +12,9 @@ const PALETTES := {
 		"water": Color("#1A4A5A"),
 		"fog": Color("#8B9DAF"),
 		"sky": Color("#8B9DAF"),
+		"sky_top": Color("#4A7A9A"),
+		"sky_horizon": Color("#B8D0E0"),
+		"ground_horizon": Color("#6A8A9A"),
 		"light": Color("#D4C4A8"),
 	},
 	"tidal_caves": {
@@ -21,6 +24,9 @@ const PALETTES := {
 		"water": Color("#1A4A5A"),
 		"fog": Color("#1A3040"),
 		"sky": Color("#0E1A22"),
+		"sky_top": Color("#060C14"),
+		"sky_horizon": Color("#1A3048"),
+		"ground_horizon": Color("#142838"),
 		"light": Color("#6EC8C0"),
 	},
 	"dragon_palace_gate": {
@@ -30,6 +36,9 @@ const PALETTES := {
 		"glow": Color("#F0E8D0"),
 		"fog": Color("#1A1A3A"),
 		"sky": Color("#1A1A3A"),
+		"sky_top": Color("#080818"),
+		"sky_horizon": Color("#3A2868"),
+		"ground_horizon": Color("#1A2858"),
 		"light": Color("#FFD890"),
 	},
 }
@@ -61,6 +70,7 @@ static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	_tint_meshes(root, palette, zone_id)
 	_add_zone_props(root, zone_id, palette)
 	_add_ground_cover(root, zone_id, palette)
+	_add_zone_backdrop(root, zone_id, palette)
 
 
 static func _hide_greybox_meshes(node: Node) -> void:
@@ -104,12 +114,15 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	root.add_child(cover)
 	match zone_id:
 		"ruined_village":
+			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
 			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 90)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 28)
 		"tidal_caves":
+			_add_playable_ground(cover, palette, zone_id, Vector2(14, 52))
 			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 24)
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 36)
 		"dragon_palace_gate":
+			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
 			for z in range(8, -26, -8):
 				PropLibrary.spawn("castle_wall", cover, Vector3(-7.0, 0, z), 90.0, 1.4)
 				PropLibrary.spawn("castle_wall", cover, Vector3(7.0, 0, z), -90.0, 1.4)
@@ -134,6 +147,21 @@ static func _scatter_path_strip(
 			rot_y + randf_range(-8, 8),
 			randf_range(1.0, 1.2),
 		)
+
+
+static func _add_playable_ground(parent: Node3D, palette: Dictionary, zone_id: String, size: Vector2) -> void:
+	var mesh_inst := MeshInstance3D.new()
+	mesh_inst.name = "PlayableGround"
+	var plane := PlaneMesh.new()
+	plane.size = size
+	mesh_inst.mesh = plane
+	mesh_inst.position = Vector3(0, -0.22, -6 if zone_id == "tidal_caves" else 0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("ground", Color.GRAY)
+	mat.roughness = 0.88
+	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
+	mesh_inst.material_override = mat
+	parent.add_child(mesh_inst)
 
 
 static func _scatter_grass_field(
@@ -173,20 +201,170 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 		env_node.name = "WorldEnvironment"
 		root.add_child(env_node)
 	var env := Environment.new()
-	env.background_mode = Environment.BG_COLOR
-	env.background_color = palette.get("sky", Color("#888888"))
+	env.background_mode = Environment.BG_SKY
+	env.sky = _make_zone_sky(palette, zone_id)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = palette.get("light", Color.WHITE) * 0.35
+	env.ambient_light_color = palette.get("light", Color.WHITE) * 0.4
 	env.fog_enabled = true
 	env.fog_light_color = palette.get("fog", Color.GRAY)
-	env.fog_density = 0.018
-	env.fog_aerial_perspective = 0.4
+	env.fog_sky_affect = 0.85
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	match zone_id:
+		"ruined_village":
+			env.fog_density = 0.008
+			env.fog_aerial_perspective = 0.72
+		"tidal_caves":
+			env.fog_density = 0.022
+			env.fog_aerial_perspective = 0.55
+			env.ambient_light_color = palette.get("light", Color.WHITE) * 0.25
+		"dragon_palace_gate":
+			env.fog_density = 0.012
+			env.fog_aerial_perspective = 0.68
+			env.glow_enabled = true
+			env.glow_intensity = 0.35
+			env.glow_bloom = 0.18
+		_:
+			env.fog_density = 0.012
+			env.fog_aerial_perspective = 0.5
 	env_node.environment = env
 	for child in root.get_children():
 		if child is DirectionalLight3D:
 			child.light_color = palette.get("light", Color.WHITE)
-			child.light_energy = 1.0 if zone_id == "dragon_palace_gate" else 0.85
+			child.light_energy = 1.05 if zone_id == "dragon_palace_gate" else 0.9
+			if zone_id == "ruined_village":
+				child.rotation_degrees = Vector3(-48, -35, 0)
+
+
+static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
+	var sky := Sky.new()
+	var mat := ProceduralSkyMaterial.new()
+	mat.sky_top_color = palette.get("sky_top", palette.get("sky", Color("#4A7A9A")))
+	mat.sky_horizon_color = palette.get("sky_horizon", palette.get("sky", Color("#A8C4D4")))
+	mat.ground_horizon_color = palette.get("ground_horizon", palette.get("water", Color("#1A4A5A")))
+	mat.ground_bottom_color = palette.get("water", Color("#0E2838"))
+	mat.sky_curve = 0.18
+	mat.ground_curve = 0.04
+	match zone_id:
+		"ruined_village":
+			mat.sun_angle_max = 28.0
+			mat.sun_curve = 0.12
+		"tidal_caves":
+			mat.sun_angle_max = 0.0
+			mat.sky_curve = 0.08
+		"dragon_palace_gate":
+			mat.sun_angle_max = 8.0
+			mat.sun_curve = 0.25
+	sky.sky_material = mat
+	return sky
+
+
+static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionary) -> void:
+	if root.get_node_or_null("ZoneBackdrop"):
+		return
+	var backdrop := Node3D.new()
+	backdrop.name = "ZoneBackdrop"
+	root.add_child(backdrop)
+	match zone_id:
+		"ruined_village":
+			_add_coastal_backdrop(backdrop, palette)
+		"tidal_caves":
+			_add_cave_backdrop(backdrop, palette)
+		"dragon_palace_gate":
+			_add_palace_backdrop(backdrop, palette)
+
+
+static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
+	_add_horizon_plane(parent, Vector3(0, -0.42, -24), Vector2(140, 10), palette.get("ground", Color("#C9B89A")), 0.95)
+	_add_horizon_plane(
+		parent,
+		Vector3(0, -0.55, -38),
+		Vector2(160, 50),
+		palette.get("water", Color("#1A4A5A")),
+		0.2,
+		true,
+		palette.get("accent", Color.CYAN) * 0.1,
+	)
+	for i in 14:
+		var angle := float(i) / 14.0 * TAU
+		var radius := 42.0
+		var x := cos(angle) * radius
+		var z := sin(angle) * radius - 8.0
+		var tree_id := "tree_pine" if i % 2 == 0 else "tree_oak"
+		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.4, 2.0))
+	for i in 8:
+		var x := -56.0 + i * 16.0
+		PropLibrary.spawn("cliff_block", parent, Vector3(x, 0, -48), 0.0, randf_range(1.2, 1.8))
+
+
+static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
+	for z in range(-42, 18, 8):
+		PropLibrary.spawn("cliff_cave", parent, Vector3(-16, 0, z), 90.0, 2.2)
+		PropLibrary.spawn("cliff_cave", parent, Vector3(16, 0, z), -90.0, 2.2)
+		PropLibrary.spawn("cliff_slope", parent, Vector3(0, 9, z), 180.0, 2.0)
+	for x in [-18, -10, 10, 18]:
+		for z in [-38, -20, 0, 16]:
+			PropLibrary.spawn("rock_large_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(1.0, 1.5))
+	_add_horizon_plane(parent, Vector3(0, -0.5, -44), Vector2(80, 20), palette.get("sky", Color("#0E1A22")), 0.9)
+
+
+static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
+	_add_horizon_plane(
+		parent,
+		Vector3(0, -3.8, 10),
+		Vector2(120, 70),
+		palette.get("ground_horizon", Color("#1A2858")),
+		0.15,
+		true,
+		palette.get("accent", Color.CYAN) * 0.15,
+	)
+	for i in 10:
+		var angle := float(i) / 10.0 * TAU
+		var x := cos(angle) * 38.0
+		var z := sin(angle) * 38.0 + 4.0
+		PropLibrary.spawn("castle_wall", parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, 1.6)
+	for i in 6:
+		_add_star_glow(parent, Vector3(randf_range(-30, 30), randf_range(18, 28), randf_range(-20, 30)))
+
+
+static func _add_horizon_plane(
+	parent: Node3D,
+	pos: Vector3,
+	size: Vector2,
+	color: Color,
+	roughness: float,
+	emissive: bool = false,
+	emission: Color = Color.BLACK,
+) -> void:
+	var mesh_inst := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = size
+	mesh_inst.mesh = plane
+	mesh_inst.position = pos
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.roughness = roughness
+	mat.metallic = 0.05
+	if emissive:
+		mat.emission_enabled = true
+		mat.emission = emission
+	mesh_inst.material_override = mat
+	parent.add_child(mesh_inst)
+
+
+static func _add_star_glow(parent: Node3D, pos: Vector3) -> void:
+	var orb := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.12
+	sphere.height = 0.24
+	orb.mesh = sphere
+	orb.position = pos
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color("#FFF8E8")
+	mat.emission_enabled = true
+	mat.emission = Color("#FFD890") * 0.8
+	orb.material_override = mat
+	parent.add_child(orb)
 
 
 static func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> void:
@@ -373,7 +551,6 @@ static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id
 
 
 static func _add_coastline(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	_add_box(parent, Vector3(0, -0.45, -16), Vector3(42, 0.15, 14), palette.get("water", Color("#1A4A5A")), true, zone_id, "ground")
 	for x in range(-8, 9):
 		PropLibrary.spawn("rock_small_a", parent, Vector3(x * 2.0, 0, -9.5), float(x * 17), 1.0)
 		PropLibrary.spawn("grass_leafs", parent, Vector3(x * 1.8, 0, -8.2), float(x * 23), 1.0)
@@ -464,7 +641,7 @@ static func _add_palace_banners(parent: Node3D, pos: Vector3, palette: Dictionar
 
 
 static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	_add_box(parent, Vector3(0, -4.2, 8), Vector3(30, 0.08, 40), palette.get("sky", Color.NAVY_BLUE), true, zone_id, "ground")
+	pass
 
 
 static func _add_palace_columns(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
