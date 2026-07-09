@@ -30,15 +30,20 @@ static func beach_sand_mesh(half_width: float, z_inland: float, z_sea: float) ->
 	return _grid_to_mesh(verts, nx, nz, 0.22)
 
 
-static func beach_shore_pos(x: float) -> Vector2:
+static func beach_shore_pos(
+	x: float,
+	half_width: float = 13.0,
+	z_inland: float = 14.0,
+	z_sea: float = -5.0,
+) -> Vector2:
 	## Returns (x, z) on the sand–surf boundary — same curve as beach_sand_mesh sea edge.
-	var half_width := 11.0
-	var z_sea := -4.5
-	var cove: float = 1.0 - pow(abs(x) / half_width, 2.2) * 0.28
+	var tz_shore := 0.79
+	var cove: float = 1.0 - pow(abs(x) / half_width, 2.2) * 0.28 * tz_shore
 	var cx := x * cove
-	var shore_wave := sin(cx * 0.55 + 0.4) * 1.5 + cos(cx * 0.21) * 0.9
-	var z := z_sea + shore_wave
-	cx += sin(z * 0.8) * 0.35
+	var shore_t: float = (tz_shore - 0.58) / 0.42
+	var z := lerpf(z_inland, z_sea, tz_shore)
+	z += (sin(cx * 0.55 + 0.4) * 1.5 + cos(cx * 0.21) * 0.9) * shore_t
+	cx += sin(z * 0.8) * 0.35 * shore_t
 	return Vector2(cx, z)
 
 
@@ -127,12 +132,12 @@ static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 
 static func _cave_half_width(z: float) -> float:
 	if z < -24.0:
-		return 4.2
+		return 7.5
 	if z < -12.0:
-		return 3.4 + sin(z * 0.12) * 0.35
+		return 6.8 + sin(z * 0.12) * 0.45
 	if z < 4.0:
-		return 3.8 + cos(z * 0.08) * 0.25
-	return 4.0
+		return 7.2 + cos(z * 0.08) * 0.35
+	return 7.5
 
 
 static func hub_ground_mesh(half_width: float, half_depth: float) -> ArrayMesh:
@@ -216,11 +221,14 @@ static func _grid_to_mesh(verts: PackedVector3Array, nx: int, nz: int, uv_scale:
 			var v01 := verts[i01]
 			var v11 := verts[i11]
 			var tri := [
-				[v00, v10, v11],
-				[v00, v11, v01],
+				[v00, v11, v10],
+				[v00, v01, v11],
 			]
 			for face in tri:
-				var n := (face[1] - face[0]).cross(face[2] - face[0]).normalized()
+				var a: Vector3 = face[0]
+				var b: Vector3 = face[1]
+				var c: Vector3 = face[2]
+				var n: Vector3 = (b - a).cross(c - a).normalized()
 				for v in face:
 					st.set_normal(n)
 					st.set_uv(Vector2(v.x, v.z) * uv_scale)

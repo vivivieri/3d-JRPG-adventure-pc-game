@@ -171,21 +171,19 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	match zone_id:
 		"beach_shore":
 			_add_organic_ground(cover, palette, zone_id, "beach")
-			_add_dry_sand_field(cover, palette)
 			_add_wet_sand_band(cover, palette)
 			_scatter_beach_flora(cover, Vector3(0, 0, 6), 9.0, 6.0, 6 if _screenshot_mode() else 10)
 			_scatter_rocks(cover, Vector3(0, 0, 3), 8.0, 5.5, 10 if _screenshot_mode() else 16, false)
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
-			_add_village_mud_patches(cover, palette)
 			_scatter_village_flora(cover, Vector3(0, 0, 0), 18.0, 22.0, 14 if _screenshot_mode() else 32)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 16.0, 20.0, 6 if _screenshot_mode() else 12, false)
 			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
-			_scatter_cave_flora(cover, Vector3(0, 0, -8), 5.0, 22.0, 18 if _screenshot_mode() else 36)
-			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 5.0, 24.0, 10 if _screenshot_mode() else 16)
+			_scatter_cave_flora(cover, Vector3(0, 0, -8), 7.0, 22.0, 18 if _screenshot_mode() else 36)
+			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 7.0, 24.0, 8 if _screenshot_mode() else 14)
 			_add_cave_wet_patches(cover, palette, zone_id)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
@@ -241,8 +239,8 @@ static func _add_organic_ground(
 			mesh_inst.mesh = TerrainShapes.beach_sand_mesh(13.0, 14.0, -5.0)
 			mesh_inst.position = Vector3(0, 0.02, 0)
 		"hub":
-			mesh_inst.mesh = TerrainShapes.hub_ground_mesh(20.0, 20.0)
-			mesh_inst.position = Vector3(0, 0.01, 0)
+			mesh_inst.mesh = TerrainShapes.hub_ground_mesh(22.0, 22.0)
+			mesh_inst.position = Vector3(0, 0.03, 0)
 		"cave":
 			mesh_inst.mesh = TerrainShapes.cave_path_mesh(-30.0, 15.0)
 			mesh_inst.position = Vector3(0, -0.2, -7.5)
@@ -307,7 +305,7 @@ static func _add_palace_court_plaza(parent: Node3D, palette: Dictionary) -> void
 static func _add_wet_sand_band(parent: Node3D, palette: Dictionary) -> void:
 	var wet := MeshInstance3D.new()
 	wet.name = "WetSandBand"
-	wet.mesh = TerrainShapes.wet_sand_band_mesh(12.5, 0.85, 28)
+	wet.mesh = TerrainShapes.wet_sand_band_mesh(13.0, 0.85, 32)
 	wet.position = Vector3(0, 0.035, 0)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color("#B8A880")
@@ -335,9 +333,9 @@ static func _add_village_mud_patches(parent: Node3D, palette: Dictionary) -> voi
 
 
 static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	for spot in [Vector3(-2.5, 0.03, -4), Vector3(2.0, 0.03, -10), Vector3(-1.0, 0.03, -18), Vector3(3.5, 0.03, -8)]:
+	for spot in [Vector3(-3.5, 0.03, -12), Vector3(3.0, 0.03, -20)]:
 		var puddle := MeshInstance3D.new()
-		puddle.mesh = _make_water_plane(Vector2(2.2, 1.6))
+		puddle.mesh = _make_water_plane(Vector2(1.8, 1.4))
 		puddle.position = spot
 		WaterMaterial.apply_to_mesh(puddle, palette, zone_id, true)
 		parent.add_child(puddle)
@@ -605,8 +603,8 @@ static func _scatter_cave_boulders(
 		var x := center.x + randf_range(-radius_x, radius_x)
 		var z := center.z + randf_range(-radius_z, radius_z)
 		var pos := Vector3(x, 0, z)
-		if absf(pos.x) < 2.5:
-			pos.x = signf(randf_range(-1.0, 1.0)) * randf_range(2.6, 4.5)
+		if absf(pos.x) < 4.0:
+			pos.x = signf(randf_range(-1.0, 1.0)) * randf_range(4.2, 6.5)
 		PropLibrary.spawn(kind, parent, pos, randf_range(0, 360), randf_range(0.9, 1.25), false)
 
 
@@ -688,6 +686,14 @@ static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
 		"ruined_village":
 			mat.sun_angle_max = 28.0
 			mat.sun_curve = 0.12
+			mat.ground_horizon_color = palette.get("ground", Color("#7A6A52")).lerp(
+				palette.get("sky_horizon", Color("#B8D0E0")),
+				0.35,
+			)
+			mat.ground_bottom_color = palette.get("ground", Color("#6A5A42")).lerp(
+				palette.get("moss", Color("#4A6A48")),
+				0.2,
+			)
 		"tidal_caves":
 			mat.sun_angle_max = 0.0
 			mat.sky_curve = 0.08
@@ -708,11 +714,41 @@ static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionar
 		"beach_shore":
 			_add_beach_backdrop(backdrop, palette)
 		"ruined_village":
-			_add_coastal_backdrop(backdrop, palette)
+			_add_village_backdrop(backdrop, palette)
 		"tidal_caves":
 			_add_cave_backdrop(backdrop, palette)
 		"dragon_palace_gate":
 			_add_palace_backdrop(backdrop, palette)
+
+
+static func _add_village_backdrop(parent: Node3D, palette: Dictionary) -> void:
+	_add_horizon_plane(
+		parent,
+		Vector3(0, -1.2, -72),
+		Vector2(240, 8),
+		palette.get("ground", Color("#6A5A42")).lerp(palette.get("moss", Color("#4A6A48")), 0.25),
+		0.92,
+	)
+	_add_horizon_plane(
+		parent,
+		Vector3(0, -1.35, -78),
+		Vector2(260, 14),
+		palette.get("water", Color("#1A4A5A")),
+		0.45,
+	)
+	_add_distant_hills(parent, palette)
+	if _screenshot_mode():
+		return
+	var hd_trees := ["tree_coastal_a", "tree_coastal_b"]
+	for i in 2:
+		var tree_id: String = hd_trees[i % hd_trees.size()]
+		if not PropLibrary.has_prop(tree_id):
+			continue
+		var angle := float(i) / 2.0 * TAU + 0.6
+		var radius := 46.0
+		var x := cos(angle) * radius
+		var z := sin(angle) * radius - 10.0
+		PropLibrary.spawn(tree_id, parent, Vector3(x, 0, z), rad_to_deg(angle) + 90.0, randf_range(1.1, 1.35))
 
 
 static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
@@ -733,9 +769,9 @@ static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
 
 static func _add_cave_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	for z in range(-40, 16, 12):
-		PropLibrary.spawn("rock_large_b", parent, Vector3(-12, 0, z), 20.0, 1.0, true)
-		PropLibrary.spawn("rock_large_a", parent, Vector3(12, 0, z), -20.0, 1.05, true)
-	for x in [-14, -8, 8, 14]:
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-15, 0, z), 20.0, 1.0, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(15, 0, z), -20.0, 1.05, true)
+	for x in [-16, -10, 10, 16]:
 		for z in [-36, -18, 2]:
 			PropLibrary.spawn("rock_small_b", parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.8, 1.0), true)
 	_add_horizon_plane(parent, Vector3(0, -0.5, -44), Vector2(80, 20), palette.get("sky", Color("#0E1A22")), 0.9)
@@ -915,8 +951,8 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	_add_deep_pool_faces(parent, Vector3(0, 0, -16), palette)
 	_add_shrine_alcove(parent, Vector3(0, 0, -28), palette, zone_id)
 	for z in range(-24, 10, 8):
-		PropLibrary.spawn("rock_tall_a", parent, Vector3(-3.8, 0, z), 20.0, 1.0, false)
-		PropLibrary.spawn("rock_tall_b", parent, Vector3(3.8, 0, z - 1), -20.0, 1.05, false)
+		PropLibrary.spawn("rock_tall_a", parent, Vector3(-6.5, 0, z), 20.0, 1.0, false)
+		PropLibrary.spawn("rock_tall_b", parent, Vector3(6.5, 0, z - 1), -20.0, 1.05, false)
 		PropLibrary.spawn("mushroom_tan", parent, Vector3(-2.6, 0, z + 0.5), 0.0, 0.85, false)
 
 
@@ -1074,10 +1110,10 @@ static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary,
 
 static func _add_cave_tunnel_walls(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	for z in range(-28, 14, 5):
-		PropLibrary.spawn("rock_large_b", parent, Vector3(-5.5, 0, z), 90.0, 0.75, true)
-		PropLibrary.spawn("rock_large_a", parent, Vector3(5.5, 0, z), -90.0, 0.8, true)
-		PropLibrary.spawn("rock_small_a", parent, Vector3(-4.5, 0, z + 1.5), 30.0, 0.9, true)
-		PropLibrary.spawn("rock_small_b", parent, Vector3(4.5, 0, z - 1.5), -30.0, 0.85, true)
+		PropLibrary.spawn("rock_large_b", parent, Vector3(-9.0, 0, z), 90.0, 0.75, true)
+		PropLibrary.spawn("rock_large_a", parent, Vector3(9.0, 0, z), -90.0, 0.8, true)
+		PropLibrary.spawn("rock_small_a", parent, Vector3(-7.5, 0, z + 1.5), 30.0, 0.9, true)
+		PropLibrary.spawn("rock_small_b", parent, Vector3(7.5, 0, z - 1.5), -30.0, 0.85, true)
 
 
 static func _add_cave_pool_glow(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -1254,7 +1290,7 @@ static func _add_beach_set(parent: Node3D, palette: Dictionary, zone_id: String)
 static func _add_beach_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	var surf := MeshInstance3D.new()
 	surf.name = "SurfWater"
-	surf.mesh = TerrainShapes.beach_surf_water_mesh(12.5, 11.0, 28)
+	surf.mesh = TerrainShapes.beach_surf_water_mesh(13.0, 11.0, 32)
 	WaterMaterial.apply_to_mesh(surf, palette, "beach_shore")
 	parent.add_child(surf)
 	for x in range(-11, 12):
