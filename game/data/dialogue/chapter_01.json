@@ -135,6 +135,101 @@
       "on_complete": {
         "set_flags": ["knows_box_truth"]
       }
+    },
+    {
+      "scene_id": "SC-06",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Bioluminescent algae paints the cave walls. Somewhere deep inside, a bell tolls — the palace, calling across years.",
+            "ja": "生物発光の藻が洞窟の壁を染める。奥深くで鐘が鳴る——宮殿が、歳を越えて呼んでいる。",
+            "zh": "生物发光的藻类染亮了洞壁。深处传来钟声——宫殿在跨越岁月呼唤。"
+          },
+          "emotion": "wonder"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "The tide carved this place. Every echo sounds like an accusation.",
+            "ja": "潮がここを穿った。どの反響も非難のように聞こえる。",
+            "zh": "潮水凿出了这个地方。每一声回响都像指责。"
+          },
+          "emotion": "uneasy"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["caves_entered"]
+      }
+    },
+    {
+      "scene_id": "SC-08",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Faces ripple beneath the black water. Dozens of voices overlap: \"Why didn't you come back?\"",
+            "ja": "黒い水面の下で顔が揺れる。無数の声が重なる——「なぜ戻らなかった？」",
+            "zh": "黑水之下面孔荡漾。无数声音重叠：「你为什么没有回来？」"
+          },
+          "emotion": "horror"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_guilty",
+          "text": {
+            "en": "I know you. I left you all behind.",
+            "ja": "わかっている。俺は皆を置いていった。",
+            "zh": "我认识你们。我把你们都抛下了。"
+          },
+          "emotion": "guilt"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["deep_pool_dialogue_done"]
+      }
+    },
+    {
+      "scene_id": "SC-10",
+      "lines": [
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "text": {
+            "en": "The wraith was our sorrow given shape. It cannot rest — and neither can I.",
+            "ja": "あの霊は私たちの悲しみの形だった。それは休めない——私もまた。",
+            "zh": "那亡魂是我们悲伤的化身。它无法安息——我也一样。"
+          },
+          "emotion": "melancholy"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "text": {
+            "en": "I can't rest until the tide is answered. Let me walk with you, Urashima.",
+            "ja": "潮に答えが出るまで休めない。一緒に歩かせて、浦島。",
+            "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。"
+          },
+          "emotion": "resolve"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "text": {
+            "en": "Then we face what I owe — together.",
+            "ja": "なら、俺の借りを——一緒に向き合おう。",
+            "zh": "那我们一起面对我欠下的债。"
+          },
+          "emotion": "resolved"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["yuzu_joined"],
+        "add_party": ["yuzu"]
+      }
     }
   ]
 }

@@ -66,6 +66,8 @@ func _finish_scene() -> void:
 		var item_id: String = item_entry.get("item_id", "")
 		var qty: int = item_entry.get("quantity", 1)
 		GameManager.inventory[item_id] = GameManager.inventory.get(item_id, 0) + qty
+	for member_id in on_complete.get("add_party", []):
+		GameManager.add_party_member(member_id)
 	_active = false
 	_current_scene = {}
 	_line_index = 0

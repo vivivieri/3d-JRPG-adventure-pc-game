@@ -10,6 +10,7 @@ var party_levels: Dictionary = { "urashima": 1 }
 var inventory: Dictionary = {}
 var gold: int = 0
 var current_area: String = "ruined_village"
+var entry_spawn: String = ""
 
 var _data_cache: Dictionary = {}
 
