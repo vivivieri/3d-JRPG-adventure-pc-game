@@ -7,4 +7,4 @@ const COMBAT_UI_SCENE := preload("res://scenes/ui/combat_ui.tscn")
 
 func _ready() -> void:
 	var ui := COMBAT_UI_SCENE.instantiate()
-	get_tree().root.add_child(ui)
+	get_tree().root.call_deferred("add_child", ui)

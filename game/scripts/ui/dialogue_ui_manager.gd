@@ -9,4 +9,4 @@ var _dialogue_box: CanvasLayer
 
 func _ready() -> void:
 	_dialogue_box = DIALOGUE_BOX_SCENE.instantiate()
-	get_tree().root.add_child(_dialogue_box)
+	get_tree().root.call_deferred("add_child", _dialogue_box)

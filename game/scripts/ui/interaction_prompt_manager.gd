@@ -11,7 +11,7 @@ var _focused: Node
 
 func _ready() -> void:
 	_hud = PROMPT_SCENE.instantiate()
-	get_tree().root.add_child(_hud)
+	get_tree().root.call_deferred("add_child", _hud)
 	EventBus.locale_changed.connect(_on_locale_changed)
 
 
