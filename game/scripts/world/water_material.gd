@@ -57,4 +57,4 @@ static func _apply_zone_accent(mat: StandardMaterial3D, zone_id: String) -> void
 	if zone_id == "tidal_caves":
 		mat.emission = Color(0.25, 0.85, 0.78) * 0.18
 	elif zone_id == "beach_shore":
-		mat.emission = Color(0.2, 0.55, 0.65) * 0.12
+		mat.emission = Color(0.18, 0.72, 0.62) * 0.14

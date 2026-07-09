@@ -78,6 +78,30 @@ static func beach_surf_water_mesh(half_width: float, sea_reach: float, x_segment
 	return st.commit()
 
 
+static func wet_sand_band_mesh(half_width: float, inland_reach: float, x_segments: int) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in x_segments:
+		var t0 := float(i) / float(x_segments)
+		var t1 := float(i + 1) / float(x_segments)
+		var x0 := lerpf(-half_width, half_width, t0)
+		var x1 := lerpf(-half_width, half_width, t1)
+		var p0 := beach_shore_pos(x0)
+		var p1 := beach_shore_pos(x1)
+		var sea0 := Vector3(p0.x, 0.0, p0.y - 0.08)
+		var sea1 := Vector3(p1.x, 0.0, p1.y - 0.08)
+		var land0 := Vector3(p0.x, 0.0, p0.y + inland_reach)
+		var land1 := Vector3(p1.x, 0.0, p1.y + inland_reach)
+		var n := Vector3.UP
+		for tri in [[sea0, sea1, land1], [sea0, land1, land0]]:
+			for v in tri:
+				st.set_normal(n)
+				st.set_uv(Vector2(v.x, v.z) * 0.2)
+				st.add_vertex(v)
+	st.generate_normals()
+	return st.commit()
+
+
 static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 	var nx := 12
 	var nz := 28

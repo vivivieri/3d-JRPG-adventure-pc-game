@@ -435,13 +435,15 @@ def make_trailer() -> None:
 
 def main() -> None:
     make_tile_texture("village_ground", PALETTE["sand"], PALETTE["moss"])
+    make_tile_texture("village_mud", "#7A6A52", "#5A4A38", grain=0.42)
+    make_tile_texture("cave_wet_floor", "#2A3238", "#1A2830", grain=0.38)
     make_tile_texture("village_wood", PALETTE["wood"], PALETTE["rust"], grain=0.35)
     make_tile_texture("cave_stone", PALETTE["stone"], PALETTE["teal"])
     make_glow_texture("cave_algae", PALETTE["stone"], PALETTE["biolume"])
     make_tile_texture("palace_marble", PALETTE["ethereal"], PALETTE["coral"], grain=0.25)
     make_glow_texture("palace_gold", PALETTE["coral"], PALETTE["ethereal"])
 
-    make_tile_texture("beach_sand", "#C4B48E", "#A89870", grain=0.28)
+    make_tile_texture("beach_sand", "#E8DCC0", "#C8B898", grain=0.22)
     make_water_ripple_texture()
     make_face_glow_texture()
     make_ui_assets()
