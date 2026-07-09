@@ -171,6 +171,7 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	match zone_id:
 		"beach_shore":
 			_add_organic_ground(cover, palette, zone_id, "beach")
+			_add_beach_sand_texture_detail(cover)
 			_add_wet_sand_band(cover, palette)
 			_scatter_beach_flora(cover, Vector3(0, 0, 6), 9.0, 6.0, 6 if _screenshot_mode() else 10)
 			_scatter_rocks(cover, Vector3(0, 0, 3), 8.0, 5.5, 10 if _screenshot_mode() else 16, false)
@@ -318,6 +319,29 @@ static func _add_wet_sand_band(parent: Node3D, palette: Dictionary) -> void:
 	_apply_zone_texture(mat, "beach_shore", "ground", "ground", "ground")
 	wet.material_override = mat
 	parent.add_child(wet)
+
+
+static func _add_beach_sand_texture_detail(parent: Node3D) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.62, 0.50, 0.32, 0.34)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	for i in 30:
+		var x := lerpf(-10.5, 10.5, float(i % 10) / 9.0) + sin(i * 1.7) * 0.45
+		var z := lerpf(0.0, 11.5, float(i / 10) / 2.0) + cos(i * 0.9) * 0.55
+		if not _is_beach_inland(Vector3(x, 0, z)):
+			continue
+		var ripple := MeshInstance3D.new()
+		ripple.name = "SandRipple"
+		var plane := PlaneMesh.new()
+		plane.orientation = PlaneMesh.FACE_Y
+		plane.size = Vector2(randf_range(0.8, 1.8), 0.035)
+		ripple.mesh = plane
+		ripple.position = Vector3(x, 0.085, z)
+		ripple.rotation_degrees.y = -12.0 + sin(i * 0.8) * 18.0
+		ripple.material_override = mat
+		parent.add_child(ripple)
 
 
 static func _add_village_mud_patches(parent: Node3D, palette: Dictionary) -> void:

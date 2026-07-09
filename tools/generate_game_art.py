@@ -111,6 +111,33 @@ def make_tile_texture(name: str, base: str, accent: str, size: int = 256, grain:
     img.save(path)
 
 
+def make_beach_sand_texture(size: int = 256) -> None:
+    """Higher-contrast sand grain with wind-ripple bands that read in gameplay screenshots."""
+    base = hex_rgb("#E9D7AD")
+    warm = hex_rgb("#C9A96F")
+    dark = hex_rgb("#9E8352")
+    light = hex_rgb("#F8EBC6")
+    rng = random.Random(70709)
+    img = Image.new("RGB", (size, size))
+    px = img.load()
+    for y in range(size):
+        for x in range(size):
+            grain = rng.random() * 0.28
+            ripple = (math.sin((x * 0.16) + (y * 0.055)) + 1.0) * 0.5
+            cross = (math.sin((x * -0.055) + (y * 0.12)) + 1.0) * 0.5
+            t = grain * 0.45 + ripple * 0.32 + cross * 0.12
+            col = lerp_color(base, warm, t)
+            if ripple > 0.82:
+                col = lerp_color(col, dark, (ripple - 0.82) / 0.18 * 0.35)
+            if cross < 0.16:
+                col = lerp_color(col, light, (0.16 - cross) / 0.16 * 0.2)
+            px[x, y] = col
+    img = img.filter(ImageFilter.GaussianBlur(radius=0.35))
+    path = os.path.join(ASSETS, "textures", "zones", "beach_sand.png")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    img.save(path)
+
+
 def make_glow_texture(name: str, base: str, glow: str, size: int = 256) -> None:
     c0 = hex_rgb(base)
     g = hex_rgb(glow)
@@ -443,7 +470,7 @@ def main() -> None:
     make_tile_texture("palace_marble", PALETTE["ethereal"], PALETTE["coral"], grain=0.25)
     make_glow_texture("palace_gold", PALETTE["coral"], PALETTE["ethereal"])
 
-    make_tile_texture("beach_sand", "#E8DCC0", "#C8B898", grain=0.22)
+    make_beach_sand_texture()
     make_water_ripple_texture()
     make_face_glow_texture()
     make_ui_assets()
