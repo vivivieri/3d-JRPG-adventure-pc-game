@@ -8,6 +8,7 @@ extends StaticBody3D
 @export var once_flag: String = ""
 @export var victory_flag: String = ""
 @export var post_victory_dialogue: String = ""
+@export var load_ending_on_victory: bool = false
 @export var interaction_prompt_key: String = "UI_INTERACT_FIGHT"
 
 var _defeated := false
@@ -68,6 +69,10 @@ func _on_combat_ended(victory: bool) -> void:
 	if not once_flag.is_empty():
 		GameManager.set_flag(once_flag)
 	_hide_trigger()
+	if load_ending_on_victory and not GameManager.chosen_ending.is_empty():
+		await get_tree().create_timer(1.6).timeout
+		GameManager.play_ending(GameManager.chosen_ending)
+		return
 	if not post_victory_dialogue.is_empty():
 		await get_tree().process_frame
 		DialogueRunner.play_scene(post_victory_dialogue)

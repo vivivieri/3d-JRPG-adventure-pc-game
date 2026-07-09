@@ -33,6 +33,11 @@ const PHASE_BANNER_TIME := 2.2
 @onready var _transition: ColorRect = $CombatRoot/TransitionOverlay
 @onready var _phase_banner: PanelContainer = $CombatRoot/PhaseBanner
 @onready var _phase_label: Label = $CombatRoot/PhaseBanner/PhaseLabel
+@onready var _choice_panel: PanelContainer = $CombatRoot/ChoicePanel
+@onready var _choice_prompt: Label = $CombatRoot/ChoicePanel/Margin/ChoiceVBox/PromptLabel
+@onready var _rewind_btn: Button = $CombatRoot/ChoicePanel/Margin/ChoiceVBox/RewindBtn
+@onready var _anchor_btn: Button = $CombatRoot/ChoicePanel/Margin/ChoiceVBox/AnchorBtn
+@onready var _drift_btn: Button = $CombatRoot/ChoicePanel/Margin/ChoiceVBox/DriftBtn
 @onready var _result_overlay: ColorRect = $CombatRoot/ResultOverlay
 @onready var _result_label: Label = $CombatRoot/ResultOverlay/ResultLabel
 
@@ -56,6 +61,7 @@ func _ready() -> void:
 	EventBus.turn_started.connect(_on_turn_started)
 	EventBus.enemy_intent_shown.connect(_on_enemy_intent_shown)
 	EventBus.boss_phase_announced.connect(_on_boss_phase_announced)
+	EventBus.boss_choice_required.connect(_on_boss_choice_required)
 	EventBus.combat_log_appended.connect(_on_combat_log_appended)
 	EventBus.combat_stats_changed.connect(_on_combat_stats_changed)
 	EventBus.damage_dealt.connect(_on_damage_dealt)
@@ -73,12 +79,16 @@ func _connect_buttons() -> void:
 	_skill_back_btn.pressed.connect(_show_main_menu)
 	_item_back_btn.pressed.connect(_show_main_menu)
 	_target_cancel_btn.pressed.connect(_show_main_menu)
+	_rewind_btn.pressed.connect(func(): _choose_ending("rewind"))
+	_anchor_btn.pressed.connect(func(): _choose_ending("anchor"))
+	_drift_btn.pressed.connect(func(): _choose_ending("drift"))
 
 
 func _on_combat_started() -> void:
 	_root.visible = true
 	_result_overlay.visible = false
 	_phase_banner.visible = false
+	_choice_panel.visible = false
 	_clear_log()
 	_build_slots()
 	_refresh_all_stats()
@@ -137,6 +147,34 @@ func _on_boss_phase_announced(_enemy_id: String, message: String) -> void:
 		fade.tween_property(_phase_banner, "modulate:a", 0.0, 0.35)
 		await fade.finished
 		_phase_banner.visible = false
+
+
+func _on_boss_choice_required(_enemy_id: String) -> void:
+	_set_action_panel_enabled(false)
+	_target_panel.visible = false
+	_clear_turn_highlights()
+	_refresh_choice_labels()
+	_choice_panel.visible = true
+	_choice_panel.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(_choice_panel, "modulate:a", 1.0, 0.35)
+
+
+func _choose_ending(ending_id: String) -> void:
+	if CombatManager.phase != CombatManager.Phase.CHOICE:
+		return
+	_choice_panel.visible = false
+	CombatManager.resolve_ending_choice(ending_id)
+
+
+func _refresh_choice_labels() -> void:
+	_choice_prompt.text = LocalizationManager.tr_key("UI_ENDING_CHOICE_PROMPT")
+	_rewind_btn.text = LocalizationManager.tr_key("UI_ENDING_REWIND")
+	_rewind_btn.tooltip_text = LocalizationManager.tr_key("UI_ENDING_REWIND_DESC")
+	_anchor_btn.text = LocalizationManager.tr_key("UI_ENDING_ANCHOR")
+	_anchor_btn.tooltip_text = LocalizationManager.tr_key("UI_ENDING_ANCHOR_DESC")
+	_drift_btn.text = LocalizationManager.tr_key("UI_ENDING_DRIFT")
+	_drift_btn.tooltip_text = LocalizationManager.tr_key("UI_ENDING_DRIFT_DESC")
 
 
 func _on_damage_dealt(target_id: String, _amount: int, _element: String) -> void:
@@ -233,6 +271,7 @@ func _on_combat_stats_changed() -> void:
 func _on_locale_changed(_locale_code: String) -> void:
 	_apply_fonts()
 	_refresh_action_labels()
+	_refresh_choice_labels()
 	_refresh_all_stats()
 
 

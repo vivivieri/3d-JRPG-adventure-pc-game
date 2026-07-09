@@ -53,12 +53,25 @@ intent.debuff,Debuff,弱体化,减益
 UI_ENDING_REWIND,Rewind,巻き戻し,倒流
 UI_ENDING_ANCHOR,Anchor,留まる,锚定
 UI_ENDING_DRIFT,Drift,漂う,漂泊
+UI_ENDING_CHOICE_PROMPT,The lacquer box hums. What will you do with stolen time?,漆箱が振動する。奪われた時間をどうする？,漆盒低鸣。你将如何处置被偷走的时间？
+UI_ENDING_REWIND_DESC,Open the box — restore the village. Your story ends.,箱を開けよ——村を取り戻す。お前の物語は終わる。,打开盒子——复原村庄。你的故事就此落幕。
+UI_ENDING_ANCHOR_DESC,Break the box — bind the spirits to the land. Stay and rebuild.,箱を壊せ——霊を大地に留め、残って再建する。,打碎盒子——将灵魂缚于大地。留下重建。
+UI_ENDING_DRIFT_DESC,Keep the box closed — row into the endless tide.,箱を閉じたまま——果てなき潮へ漕ぎ出す。,合上盒子——驶入无尽的潮水。
+UI_THE_END,The End,終,剧终
+UI_RETURN_MENU,Return to Title,タイトルへ戻る,返回标题
+ending.rewind.title,Rewind,巻き戻し,倒流
+ending.rewind.body,Village lanterns bloom again. At the festival edge, Urashima's figure thins to a breath of salt air.,村に灯籠がまた灯る。祭りの縁で、浦島の姿は潮風に薄れていく。,村庄的灯笼再度亮起。在庙会边缘，浦岛的身影化作一缕咸风。
+ending.anchor.title,Anchor,留まる,锚定
+ending.anchor.body,Dawn paints the shore gold. Roku plants a sapling. Spirits sink into the soil — and stay.,夜明けが岸を黄金に染める。六が若木を植える。霊は土に沈み——留まる。,晨曦将海岸染成金色。六栽下一棵新苗。灵魂沉入泥土——并留下来。
+ending.drift.title,Drift,漂う,漂泊
+ending.drift.body,The boat rocks on an endless sea. Beneath the waves, a palace glimmers — waiting.,小舟は果てなき海を揺らす。波の下で宮殿が瞬く——待っている。,小舟在无尽海上摇晃。波浪之下，宫殿闪烁——仍在等待。
 # Speakers
 speaker.narrator,Narrator,ナレーター,旁白
 speaker.urashima,Urashima,浦島,浦岛
 speaker.yuzu,Yuzu,ゆず,柚子
 speaker.roku,Roku,六,六
 speaker.otohime,Otohime,乙姫,乙姬
+speaker.tide_keeper,Tide Keeper,潮王,潮王
 # Characters
 character.urashima.name,Urashima,浦島,浦岛
 character.urashima.title,The Returned Fisherman,帰還した漁師,归来的渔夫

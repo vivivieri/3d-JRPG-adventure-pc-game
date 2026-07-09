@@ -49,6 +49,9 @@ shadow_enabled = true
 [node name="from_village" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
 
+[node name="from_gate" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -32)
+
 [node name="default" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
 
@@ -192,4 +195,16 @@ target_spawn = "from_caves"
 interaction_prompt_key = "UI_INTERACT_EXIT"
 
 [node name="Collision" type="CollisionShape3D" parent="ExitToVillage"]
+shape = SubResource("BoxShape_interact")
+
+[node name="PalaceGatePortal" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -32)
+script = ExtResource("8_transition")
+target_scene = "res://scenes/world/dragon_palace_gate.tscn"
+target_area = "dragon_palace_gate"
+target_spawn = "from_caves"
+required_flag = "shore_wraith_defeated"
+interaction_prompt_key = "UI_INTERACT_ENTER"
+
+[node name="Collision" type="CollisionShape3D" parent="PalaceGatePortal"]
 shape = SubResource("BoxShape_interact")

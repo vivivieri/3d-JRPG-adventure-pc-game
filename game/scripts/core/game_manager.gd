@@ -11,6 +11,13 @@ var inventory: Dictionary = {}
 var gold: int = 0
 var current_area: String = "ruined_village"
 var entry_spawn: String = ""
+var chosen_ending: String = ""
+
+const ENDING_SCENES := {
+	"rewind": "res://scenes/world/ending_rewind.tscn",
+	"anchor": "res://scenes/world/ending_anchor.tscn",
+	"drift": "res://scenes/world/ending_drift.tscn",
+}
 
 var _data_cache: Dictionary = {}
 
@@ -121,6 +128,16 @@ func consume_item(item_id: String, quantity: int = 1) -> bool:
 	else:
 		inventory[item_id] = remaining
 	return true
+
+
+func play_ending(ending_id: String) -> void:
+	var scene_path: String = ENDING_SCENES.get(ending_id, "")
+	if scene_path.is_empty():
+		push_error("Unknown ending: %s" % ending_id)
+		return
+	chosen_ending = ending_id
+	set_flag("ending_%s" % ending_id)
+	get_tree().change_scene_to_file(scene_path)
 
 
 func get_battle_item_ids() -> Array[String]:

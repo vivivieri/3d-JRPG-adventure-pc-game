@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=3 uid="uid://palacegate001"]
+
+[ext_resource type="Script" path="res://scripts/world/world_spawn.gd" id="1_spawn"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/world/auto_dialogue_zone.gd" id="3_dialogue"]
+[ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="4_interact"]
+[ext_resource type="Script" path="res://scripts/world/combat_trigger.gd" id="5_combat"]
+[ext_resource type="Script" path="res://scripts/world/scene_transition.gd" id="6_transition"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(14, 0.4, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape_floor"]
+size = Vector3(14, 0.4, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="BoxShape3D" id="BoxShape_zone"]
+size = Vector3(12, 4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape_interact"]
+size = Vector3(2, 2.5, 2)
+
+[node name="DragonPalaceGate" type="Node3D"]
+script = ExtResource("1_spawn")
+default_spawn = "from_caves"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 14, 0)
+light_color = Color(0.95, 0.82, 0.55, 1)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="from_caves" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16)
+
+[node name="default" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16)
+
+[node name="GateFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 12)
+
+[node name="Mesh" type="MeshInstance3D" parent="GateFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="GateFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="VisionFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 2)
+
+[node name="Mesh" type="MeshInstance3D" parent="VisionFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="VisionFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="MirrorFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -8)
+
+[node name="Mesh" type="MeshInstance3D" parent="MirrorFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="MirrorFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="SentinelFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -18)
+
+[node name="Mesh" type="MeshInstance3D" parent="SentinelFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="SentinelFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="ThroneFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -30)
+
+[node name="Mesh" type="MeshInstance3D" parent="ThroneFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="ThroneFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16)
+script = ExtResource("2_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
+current = true
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape_player")
+
+[node name="GateArrival" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13)
+script = ExtResource("3_dialogue")
+dialogue_scene_id = "SC-12"
+once_flag = "gate_arrival_dialogue"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GateArrival"]
+shape = SubResource("BoxShape_zone")
+
+[node name="PalaceVision" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+script = ExtResource("3_dialogue")
+dialogue_scene_id = "SC-11"
+once_flag = "palace_vision_seen"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PalaceVision"]
+shape = SubResource("BoxShape_zone")
+
+[node name="MirrorChamber" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -8)
+script = ExtResource("4_interact")
+dialogue_scene_id = "SC-13"
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
+once_flag = "knows_box_truth"
+
+[node name="Collision" type="CollisionShape3D" parent="MirrorChamber"]
+shape = SubResource("BoxShape_interact")
+
+[node name="PalaceSentinel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -18)
+script = ExtResource("5_combat")
+pre_dialogue_id = "SC-14"
+pre_dialogue_flag = "sentinel_dialogue_done"
+combat_encounter_ids = PackedStringArray("palace_sentinel")
+victory_flag = "sentinel_defeated"
+once_flag = "sentinel_fought"
+interaction_prompt_key = "UI_INTERACT_FIGHT"
+
+[node name="Collision" type="CollisionShape3D" parent="PalaceSentinel"]
+shape = SubResource("BoxShape_interact")
+
+[node name="TideKeeperBoss" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30)
+script = ExtResource("5_combat")
+pre_dialogue_id = "SC-15"
+pre_dialogue_flag = "keeper_dialogue_done"
+combat_encounter_ids = PackedStringArray("tide_keeper")
+once_flag = "keeper_fought"
+load_ending_on_victory = true
+interaction_prompt_key = "UI_INTERACT_FIGHT"
+
+[node name="Collision" type="CollisionShape3D" parent="TideKeeperBoss"]
+shape = SubResource("BoxShape_interact")
+
+[node name="ExitToCaves" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 18)
+script = ExtResource("6_transition")
+target_scene = "res://scenes/world/tidal_caves.tscn"
+target_area = "tidal_caves"
+target_spawn = "from_gate"
+interaction_prompt_key = "UI_INTERACT_EXIT"
+
+[node name="Collision" type="CollisionShape3D" parent="ExitToCaves"]
+shape = SubResource("BoxShape_interact")

@@ -1,7 +1,7 @@
 extends Node
 ## Turn-based combat orchestrator.
 
-enum Phase { INTRO, PLAYER_TURN, ENEMY_TURN, RESOLVE, VICTORY, DEFEAT }
+enum Phase { INTRO, PLAYER_TURN, ENEMY_TURN, RESOLVE, CHOICE, VICTORY, DEFEAT }
 
 const ACTION_BEAT := 0.42
 const ENEMY_INTENT_BEAT := 1.1
@@ -86,6 +86,8 @@ func _build_turn_order() -> void:
 
 
 func _start_current_turn() -> void:
+	if phase == Phase.CHOICE:
+		return
 	if _check_battle_end():
 		return
 	if turn_order.is_empty():
@@ -129,7 +131,7 @@ func _end_round() -> void:
 
 
 func _schedule_advance(delay: float = ACTION_BEAT) -> void:
-	if _advance_pending or phase in [Phase.VICTORY, Phase.DEFEAT]:
+	if _advance_pending or phase in [Phase.VICTORY, Phase.DEFEAT, Phase.CHOICE]:
 		return
 	_advance_pending = true
 	get_tree().create_timer(delay).timeout.connect(func() -> void:
@@ -147,7 +149,19 @@ func _advance_turn() -> void:
 	_start_current_turn()
 
 
+func resolve_ending_choice(ending_id: String) -> void:
+	if phase != Phase.CHOICE:
+		return
+	GameManager.chosen_ending = ending_id
+	GameManager.set_flag("tide_keeper_defeated")
+	EventBus.ending_chosen.emit(ending_id)
+	phase = Phase.VICTORY
+	_on_victory()
+
+
 func player_action(action: String, skill_id: String = "", target_index: int = 0) -> void:
+	if phase == Phase.CHOICE:
+		return
 	if phase != Phase.PLAYER_TURN or current_actor == null or not current_actor.is_player:
 		return
 	if _advance_pending:
@@ -295,6 +309,9 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 				"amount": dealt
 			}))
 			_check_boss_phases(t)
+			if phase == Phase.CHOICE:
+				_emit_stats()
+				return
 			if not t.is_alive():
 				EventBus.actor_defeated.emit(t.id)
 				_log(LocalizationManager.tr_key("combat.defeated", { "target": t.display_name }))
@@ -305,6 +322,9 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 		for t in targets:
 			if t is Combatant:
 				_check_boss_phases(t)
+			if phase == Phase.CHOICE:
+				_emit_stats()
+				return
 	if is_limit:
 		actor.limit_gauge = 0
 	_emit_stats()
@@ -332,6 +352,9 @@ func _check_boss_phases(target: Combatant) -> void:
 		if message == "boss.%s.%d" % [target.id, percent]:
 			message = phase_data.get("announcement", "")
 		EventBus.boss_phase_announced.emit(target.id, message)
+		if phase_data.get("triggers_choice", false):
+			phase = Phase.CHOICE
+			EventBus.boss_choice_required.emit(target.id)
 
 
 func _resolve_targets(actor: Combatant, skill: Dictionary, target_index: int) -> Array:

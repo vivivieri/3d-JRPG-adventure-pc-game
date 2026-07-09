@@ -230,6 +230,130 @@
         "set_flags": ["yuzu_joined"],
         "add_party": ["yuzu"]
       }
+    },
+    {
+      "scene_id": "SC-11",
+      "lines": [
+        {
+          "speaker": "otohime",
+          "portrait": "otohime_ethereal",
+          "text": {
+            "en": "Stay, Urashima. In the palace, the world will not touch you.",
+            "ja": "留まりなさい、浦島。宮にいれば、世の苦しみは届きません。",
+            "zh": "留下吧，浦岛。在宫殿里，尘世伤不到你。"
+          },
+          "emotion": "seductive"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_young",
+          "text": {
+            "en": "It was so quiet. I almost believed forever was real.",
+            "ja": "あまりにも静かだった。永遠が本物だと、ほとんど信じた。",
+            "zh": "那里太安静了。我几乎相信永恒是真的。"
+          },
+          "emotion": "dreamlike"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["saw_palace_vision"]
+      }
+    },
+    {
+      "scene_id": "SC-12",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The gate floats above black water — architecture that should not stand.",
+            "ja": "門は黒い水面の上に浮かぶ——立つはずのない造形。",
+            "zh": "门扉浮于黑水之上——本不该存在的建筑。"
+          },
+          "emotion": "awe"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_serious",
+          "text": {
+            "en": "This is where time was stolen. I dive one last time with you.",
+            "ja": "ここが時間を奪った場所だ。最後の潜りに付き合う。",
+            "zh": "时间就是在彼处被偷走的。我陪你下最后一次水。"
+          },
+          "emotion": "grim"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "text": {
+            "en": "Then let's answer the tide — all of us.",
+            "ja": "なら、潮に答えよう——俺たち全員で。",
+            "zh": "那我们就一起回应潮水吧。"
+          },
+          "emotion": "resolved"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["gate_reached"],
+        "add_party": ["roku"],
+        "start_quest": "palace_gate"
+      }
+    },
+    {
+      "scene_id": "SC-14",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Armored coral rises from the hall floor. The sentinel's visor burns with borrowed years.",
+            "ja": "武装した珊瑚が床から立ち上がる。衛兵の面は借りた歳で燃えている。",
+            "zh": "披甲珊瑚从大厅地面升起。卫士的面甲燃烧着借来的岁月。"
+          },
+          "emotion": "epic"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "\"No mortal leaves with stolen time.\"",
+            "ja": "「盗んだ時間を持って去る者はいない。」",
+            "zh": "「凡人无权带着被偷走的时间离开。」"
+          },
+          "emotion": "threatening"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["sentinel_dialogue_done"]
+      }
+    },
+    {
+      "scene_id": "SC-15",
+      "lines": [
+        {
+          "speaker": "tide_keeper",
+          "portrait": "tide_keeper",
+          "text": {
+            "en": "Paradise is mercy. You fled pain — I offered peace.",
+            "ja": "楽園は慈悲だ。お前は苦しみから逃げた——私は安らぎを与えた。",
+            "zh": "乐园即是慈悲。你逃离了痛苦——我赐予了安宁。"
+          },
+          "emotion": "cosmic"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "text": {
+            "en": "Mercy that drowns the world isn't mercy.",
+            "ja": "世界を溺らす慈悲は、慈悲じゃない。",
+            "zh": "溺毙世界的慈悲，不是慈悲。"
+          },
+          "emotion": "defiant"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["keeper_dialogue_done"]
+      }
     }
   ]
 }
