@@ -23,8 +23,8 @@ const CAPTURES := [
 	{
 		"file": "village_inspects",
 		"path": "res://scenes/world/ruined_village.tscn",
-		"cam": Vector3(-5, 4.5, 9),
-		"focus": Vector3(-0.5, 1.2, 4.5),
+		"cam": Vector3(-4, 3.8, 8),
+		"focus": Vector3(1.0, 0.6, 4.8),
 		"fov": 58.0,
 		"wait": 0.6,
 		"reuse_scene": true,

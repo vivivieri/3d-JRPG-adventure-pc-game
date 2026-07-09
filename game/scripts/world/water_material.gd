@@ -18,7 +18,7 @@ static func make_surface(
 	mat.albedo_color = base
 	mat.roughness = 0.04
 	mat.metallic = 0.18
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED if shallow else BaseMaterial3D.CULL_BACK
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if shallow else BaseMaterial3D.TRANSPARENCY_DISABLED
 	if shallow:
 		mat.albedo_color.a = 0.82

@@ -131,14 +131,19 @@ static func _refine_water_meshes(node: Node) -> void:
 		_refine_water_meshes(child)
 
 
+static func _make_water_plane(size: Vector2) -> PlaneMesh:
+	var plane := PlaneMesh.new()
+	plane.size = size
+	plane.orientation = PlaneMesh.FACE_Y
+	return plane
+
+
 static func _upgrade_water_boxes(node: Node) -> void:
 	if node is MeshInstance3D and node.name == "Water":
 		var box := node.mesh as BoxMesh
 		if box:
-			var plane := PlaneMesh.new()
-			plane.size = Vector2(box.size.x, box.size.z)
-			node.mesh = plane
-			node.rotation_degrees.x = -90.0
+			node.mesh = _make_water_plane(Vector2(box.size.x, box.size.z))
+			node.rotation_degrees = Vector3.ZERO
 	for child in node.get_children():
 		_upgrade_water_boxes(child)
 
@@ -162,17 +167,17 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	match zone_id:
 		"beach_shore":
 			_add_organic_ground(cover, palette, zone_id, "beach")
-			_scatter_grass_field(cover, Vector3(0, 0, 5), 8.0, 7.0, 8 if _screenshot_mode() else 12, false)
+			_scatter_beach_flora(cover, Vector3(0, 0, 5), 8.0, 7.0, 8 if _screenshot_mode() else 12)
 			_scatter_rocks(cover, Vector3(0, 0, 2), 9.0, 8.0, 10 if _screenshot_mode() else 14, false)
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
-			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 12 if _screenshot_mode() else 28, false)
+			_scatter_village_flora(cover, Vector3(0, 0, 0), 18.0, 22.0, 12 if _screenshot_mode() else 28)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 8 if _screenshot_mode() else 16, false)
 			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
-			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 8 if _screenshot_mode() else 10, false)
+			_scatter_cave_flora(cover, Vector3(0, 0, -6), 4.5, 20.0, 8 if _screenshot_mode() else 14)
 			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 12 if _screenshot_mode() else 18, false)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
@@ -303,16 +308,96 @@ static func _scatter_grass_field(
 	count: int,
 	prefer_hd: bool = true,
 ) -> void:
-	if not PropLibrary.has_prop("grass_small"):
+	_scatter_flora_kinds(parent, center, radius_x, radius_z, count, ["grass_small", "grass", "grass_leafs"], prefer_hd)
+
+
+static func _scatter_beach_flora(
+	parent: Node3D,
+	center: Vector3,
+	radius_x: float,
+	radius_z: float,
+	count: int,
+) -> void:
+	_scatter_flora_kinds(
+		parent,
+		center,
+		radius_x,
+		radius_z,
+		count,
+		["grass_leafs", "bush", "grass_small"],
+		true,
+		0.75,
+		1.05,
+	)
+
+
+static func _scatter_cave_flora(
+	parent: Node3D,
+	center: Vector3,
+	radius_x: float,
+	radius_z: float,
+	count: int,
+) -> void:
+	_scatter_flora_kinds(
+		parent,
+		center,
+		radius_x,
+		radius_z,
+		count,
+		["fern", "mushroom_tan", "mushroom"],
+		true,
+		0.85,
+		1.15,
+	)
+
+
+static func _scatter_village_flora(
+	parent: Node3D,
+	center: Vector3,
+	radius_x: float,
+	radius_z: float,
+	count: int,
+) -> void:
+	_scatter_flora_kinds(
+		parent,
+		center,
+		radius_x,
+		radius_z,
+		count,
+		["grass", "grass_leafs", "bush", "fern"],
+		not _screenshot_mode(),
+		0.9,
+		1.25,
+	)
+
+
+static func _scatter_flora_kinds(
+	parent: Node3D,
+	center: Vector3,
+	radius_x: float,
+	radius_z: float,
+	count: int,
+	kinds: Array,
+	prefer_hd: bool = true,
+	scale_min: float = 0.9,
+	scale_max: float = 1.35,
+) -> void:
+	if kinds.is_empty():
 		return
-	var kinds := ["grass_small", "grass", "grass_leafs"]
 	for i in count:
 		var kind: String = kinds[i % kinds.size()]
 		if not PropLibrary.has_prop(kind):
-			kind = "grass"
+			continue
 		var x := center.x + randf_range(-radius_x, radius_x)
 		var z := center.z + randf_range(-radius_z, radius_z)
-		PropLibrary.spawn(kind, parent, Vector3(x, 0, z), randf_range(0, 360), randf_range(0.9, 1.35), prefer_hd)
+		PropLibrary.spawn(
+			kind,
+			parent,
+			Vector3(x, 0, z),
+			randf_range(0, 360),
+			randf_range(scale_min, scale_max),
+			prefer_hd,
+		)
 
 
 static func _scatter_rocks(
@@ -584,7 +669,7 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_rock_cluster(parent, Vector3(3, 0, -8), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-10, 0, -2), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
-	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
+	_add_broken_fence(parent, Vector3(12, 0, 8), palette, zone_id)
 	_add_festival_banner_prop(parent, Vector3(-2, 0, 6), palette, zone_id)
 	_add_sandal_puddle(parent, Vector3(1.5, 0, 3.5), palette, zone_id)
 	var hero_trees: Array = []
@@ -665,12 +750,19 @@ static func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary, zone_i
 
 static func _add_well(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var well := Node3D.new()
+	well.name = "VillageWellProp"
 	well.position = pos
 	parent.add_child(well)
 	for i in 6:
 		var angle := float(i) / 6.0 * TAU
 		PropLibrary.spawn("rock_small_a", well, Vector3(cos(angle) * 0.85, 0, sin(angle) * 0.85), rad_to_deg(angle), 0.9, true)
-	PropLibrary.spawn("rock_large_b", well, Vector3(0, 0, 0), 0.0, 0.5, true)
+	var water := MeshInstance3D.new()
+	water.name = "WellWater"
+	water.mesh = _make_water_plane(Vector2(1.0, 1.0))
+	water.position = Vector3(0, 0.04, 0)
+	WaterMaterial.apply_to_mesh(water, palette, zone_id, true)
+	well.add_child(water)
+	PropLibrary.spawn("rock_large_b", well, Vector3(0.55, 0, 0.35), 20.0, 0.45, true)
 
 
 static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -707,9 +799,10 @@ static func _add_distant_hills(parent: Node3D, palette: Dictionary) -> void:
 
 static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	var fence := Node3D.new()
+	fence.name = "BrokenFenceProp"
 	fence.position = pos
 	parent.add_child(fence)
-	_spawn_vertical_log(fence, Vector3(0, 0.45, 0), 0.38)
+	PropLibrary.spawn("stump", fence, Vector3(0, 0, 0), 15.0, 0.75, true)
 	PropLibrary.spawn("log", fence, Vector3(2.5, 0.05, 0.2), 15.0, 0.85, true)
 	PropLibrary.spawn("log", fence, Vector3(4.0, 0, -0.3), 80.0, 0.9, true)
 	PropLibrary.spawn("rock_small_b", fence, Vector3(1.2, 0, 0.5), 20.0, 0.85, true)
@@ -729,10 +822,7 @@ static func _add_cave_pool_glow(parent: Node3D, pos: Vector3, palette: Dictionar
 	parent.add_child(pool)
 	var water := MeshInstance3D.new()
 	water.name = "PoolWater"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(7.5, 5.5)
-	water.mesh = plane
-	water.rotation_degrees.x = -90.0
+	water.mesh = _make_water_plane(Vector2(7.5, 5.5))
 	water.position = Vector3(0, -0.04, -2)
 	WaterMaterial.apply_to_mesh(water, palette, zone_id)
 	pool.add_child(water)
@@ -760,10 +850,7 @@ static func _add_void_sea(parent: Node3D, palette: Dictionary, zone_id: String) 
 	parent.add_child(sea)
 	var water := MeshInstance3D.new()
 	water.name = "VoidSeaWater"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(30, 58)
-	water.mesh = plane
-	water.rotation_degrees.x = -90.0
+	water.mesh = _make_water_plane(Vector2(30, 58))
 	water.position = Vector3(0, -2.6, -8)
 	WaterMaterial.apply_to_mesh(water, palette, zone_id)
 	sea.add_child(water)
@@ -855,7 +942,7 @@ static func _add_palace_lanterns(parent: Node3D, pos: Vector3, palette: Dictiona
 
 static func _add_algae_strip(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
 	PropLibrary.spawn("fern", parent, pos, randf_range(0, 360), 1.1, true)
-	PropLibrary.spawn("grass_leafs", parent, pos + Vector3(0.3, 0, 0.2), randf_range(0, 360), 0.9, true)
+	PropLibrary.spawn("mushroom_tan", parent, pos + Vector3(0.35, 0, 0.25), randf_range(0, 360), 0.85, true)
 
 
 static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -903,23 +990,21 @@ static func _add_beach_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	_add_rock_cluster(parent, Vector3(7, 0, 5), palette, zone_id)
 	var surf := MeshInstance3D.new()
 	surf.name = "SurfWater"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(48, 36)
-	surf.mesh = plane
-	surf.rotation_degrees.x = -90.0
-	surf.position = Vector3(0, -0.18, -8)
+	surf.mesh = _make_water_plane(Vector2(28, 14))
+	surf.position = Vector3(0, -0.22, -6.5)
 	WaterMaterial.apply_to_mesh(surf, palette, zone_id)
 	parent.add_child(surf)
+	for x in range(-12, 13):
+		var sx := float(x) * 1.1
+		var wave_z := -2.8 + sin(sx * 0.45) * 0.9
+		PropLibrary.spawn("rock_small_b", parent, Vector3(sx, 0, wave_z), float(x * 9), randf_range(0.7, 0.95), true)
 
 
 static func _add_beach_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	var sea := MeshInstance3D.new()
 	sea.name = "OpenSea"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(120, 80)
-	sea.mesh = plane
-	sea.rotation_degrees.x = -90.0
-	sea.position = Vector3(0, -0.42, -42)
+	sea.mesh = _make_water_plane(Vector2(72, 48))
+	sea.position = Vector3(0, -0.38, -28)
 	WaterMaterial.apply_to_mesh(sea, palette, "beach_shore")
 	parent.add_child(sea)
 	for x in range(-7, 8):
@@ -935,11 +1020,11 @@ static func _add_festival_banner_prop(parent: Node3D, pos: Vector3, palette: Dic
 	banner.name = "FestivalBannerProp"
 	banner.position = pos
 	parent.add_child(banner)
-	_spawn_vertical_log(banner, Vector3(0, 0.85, 0), 0.38)
-	PropLibrary.spawn("branches", banner, Vector3(0.15, 1.65, 0.05), 12.0, 1.0, true)
-	PropLibrary.spawn("bush", banner, Vector3(-0.1, 1.35, 0.1), 35.0, 0.8, true)
-	PropLibrary.spawn("rock_small_b", banner, Vector3(0.5, 0, 0.4), 30.0, 0.8, true)
-	PropLibrary.spawn("rock_small_a", banner, Vector3(-0.4, 0, -0.3), -15.0, 0.75, true)
+	PropLibrary.spawn("stump", banner, Vector3(0, 0, 0), 12.0, 0.7, true)
+	PropLibrary.spawn("log", banner, Vector3(0.35, 0.06, 0.15), 72.0, 0.55, true)
+	PropLibrary.spawn("branches", banner, Vector3(0.2, 0.55, 0.05), 18.0, 1.05, true)
+	PropLibrary.spawn("bush", banner, Vector3(-0.35, 0, 0.35), 35.0, 0.75, true)
+	PropLibrary.spawn("rock_small_b", banner, Vector3(0.55, 0, 0.45), 30.0, 0.8, true)
 
 
 static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -949,27 +1034,17 @@ static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary
 	parent.add_child(puddle)
 	var water := MeshInstance3D.new()
 	water.name = "PuddleWater"
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(1.4, 1.2)
-	water.mesh = plane
-	water.rotation_degrees.x = -90.0
+	water.mesh = _make_water_plane(Vector2(2.0, 1.6))
 	water.position = Vector3(0, 0.02, 0)
 	WaterMaterial.apply_to_mesh(water, palette, zone_id, true)
 	puddle.add_child(water)
 	if PropLibrary.has_prop("canoe_paddle"):
-		PropLibrary.spawn("canoe_paddle", puddle, Vector3(0.05, 0.04, 0.02), 28.0, 0.32, true)
+		PropLibrary.spawn("canoe_paddle", puddle, Vector3(0.15, 0.05, 0.05), 32.0, 0.38, true)
 	else:
 		PropLibrary.spawn("log", puddle, Vector3(0.05, 0.04, 0), 25.0, 0.28, true)
-	for i in 4:
-		var angle := float(i) / 4.0 * TAU
-		PropLibrary.spawn(
-			"rock_small_a",
-			puddle,
-			Vector3(cos(angle) * 0.75, 0, sin(angle) * 0.65),
-			rad_to_deg(angle),
-			0.55,
-			true,
-		)
+	PropLibrary.spawn("rock_small_a", puddle, Vector3(-0.55, 0, 0.35), -20.0, 0.45, true)
+	PropLibrary.spawn("rock_small_a", puddle, Vector3(0.45, 0, -0.25), 15.0, 0.4, true)
+	PropLibrary.spawn("grass_leafs", puddle, Vector3(-0.7, 0, -0.35), 40.0, 0.7, true)
 
 
 static func _add_deep_pool_faces(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
