@@ -70,8 +70,8 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 | Main capsule | 616 × 353 | `steam/capsule_main.png` |
 | Small capsule | 231 × 87 | `steam/capsule_small.png` |
 | Library hero | 3840 × 1240 | _TODO — wide key art_ |
-| Screenshots | 1920 × 1080 min | `steam/screenshots/` (_capture from build_) |
-| Trailer | 1920 × 1080 MP4 | _TODO_ |
+| Screenshots | 1920 × 1080 min | `steam/screenshots/` (5 placeholders generated) |
+| Trailer | 1920 × 1080 MP4 | `steam/trailer.mp4` (15s slideshow + BGM) |
 
 ---
 
@@ -94,10 +94,13 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 
 ## Build & upload
 
-1. Open `game/project.godot` in Godot 4.3+
-2. **Project → Export** → preset `Windows Desktop` (`game/export_presets.cfg`)
-3. Export to `build/TidesOfUrashima.exe`
-4. Upload depot via Steamworks SDK / GodotSteam (integration planned — see `docs/MILESTONES.md`)
+```bash
+./tools/export_windows.sh   # produces build/TidesOfUrashima.exe (~109 MB)
+```
+
+1. Open `game/project.godot` in Godot 4.3+ (or use script above)
+2. **Project → Export** → preset `Windows Desktop`
+3. See `steam/GODOTSTEAM_SETUP.md` for depot layout + achievements
 
 ---
 

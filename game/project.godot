@@ -24,7 +24,10 @@ SaveSystem="*res://scripts/core/save_system.gd"
 DialogueRunner="*res://scripts/narrative/dialogue_runner.gd"
 CombatManager="*res://scripts/combat/combat_manager.gd"
 AudioManager="*res://scripts/core/audio_manager.gd"
-FieldMenuManager="*res://scripts/ui/field_menu_manager.gd"
+QuestTracker="*res://scripts/narrative/quest_tracker.gd"
+QuestTrackerManager="*res://scripts/ui/quest_tracker_manager.gd"
+SteamManager="*res://scripts/steam/steam_manager.gd"
+SaveToastManager="*res://scripts/ui/save_toast_manager.gd"
 
 [audio]
 

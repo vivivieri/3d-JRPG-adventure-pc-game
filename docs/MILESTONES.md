@@ -13,36 +13,39 @@ Track implementation progress against the GDD milestones.
 - [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
 
 ## M1 — Greybox exploration
-- [ ] Player movement polish (camera orbit option)
+- [x] Player movement polish (camera orbit — right-mouse + scroll)
 - [x] Interaction prompt HUD (Press E — action, localized)
 - [x] Dialogue box UI scene (typewriter, speaker, locale fonts)
 - [x] CJK font bundle + locale-aware `FontThemeManager`
-- [ ] Quest tracker UI
-- [ ] Save point at village well
+- [x] Quest tracker UI
+- [x] Save point at village well
 
 ## M2 — Combat vertical slice
 - [x] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
 - [x] Combat polish (transitions, damage flash, items, escape, boss banners)
 
 ## M3 — Chapter 1
-- [ ] Tidal Caves greybox map
-- [ ] Water level puzzle
-- [ ] Shore Wraith boss
-- [ ] Yuzu joins party
+- [x] Tidal Caves greybox map
+- [x] Water level puzzle
+- [x] Shore Wraith boss
+- [x] Yuzu joins party
 
 ## M4 — Full game
-- [ ] Dragon Palace Gate dungeon
-- [ ] Palace Sentinel + Tide Keeper bosses
-- [ ] Three endings
-- [ ] Credits sequence
+- [x] Dragon Palace Gate dungeon
+- [x] Palace Sentinel + Tide Keeper bosses
+- [x] Three endings
+- [x] Credits sequence
 
 ## M5 — Steam
 - [x] Placeholder BGM/SFX + AudioManager
 - [x] Zone art pass (materials, fog, props)
 - [x] Field item use + equipment UI (Tab menu)
 - [x] Steam store page copy + capsule placeholders
-- [x] Windows export preset (`game/export_presets.cfg`)
-- [ ] GodotSteam integration
-- [ ] Windows export build (run in Godot)
-- [ ] Trailer + in-game screenshots
-- [ ] Playtest + balance pass
+- [x] Windows export preset + `tools/export_windows.sh`
+- [x] Steam screenshots + trailer placeholder (`steam/screenshots/`, `steam/trailer.mp4`)
+- [x] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
+- [x] Combat drop rolls + balance pass
+- [ ] Install GodotSteam GDExtension binaries (manual — see addon README)
+- [ ] Steamworks app ID + depot upload
+- [ ] Final CC0 audio/art replacement
+- [ ] Playtest on Windows hardware

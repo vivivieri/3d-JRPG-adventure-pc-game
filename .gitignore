@@ -20,6 +20,7 @@ dist/
 *.exe
 *.pck
 *.zip
+.godot-sdk/
 
 # Logs
 *.log

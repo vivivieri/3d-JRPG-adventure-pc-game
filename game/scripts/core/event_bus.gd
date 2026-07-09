@@ -23,4 +23,6 @@ signal quest_updated(quest_id: String)
 signal ending_chosen(ending_id: String)
 signal field_item_used(character_id: String, item_id: String)
 signal equipment_changed(character_id: String)
+signal quest_tracker_changed
+signal save_message(message: String)
 signal locale_changed(locale_code: String)

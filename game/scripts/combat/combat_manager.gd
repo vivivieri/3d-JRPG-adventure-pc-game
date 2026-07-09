@@ -297,7 +297,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 	if skill.get("power", 0.0) > 0.0:
 		for t in targets:
 			var dmg := SkillResolver.resolve_damage(actor, t, skill)
-			var dealt := t.take_damage(dmg)
+			var dealt: int = t.take_damage(dmg)
 			EventBus.damage_dealt.emit(t.id, dealt, skill.get("element", ""))
 			var skill_name := LocalizationManager.skill_name(skill.get("id", ""))
 			if skill_name == skill.get("id", ""):
@@ -402,6 +402,13 @@ func _on_victory() -> void:
 		var rewards: Dictionary = def.get("rewards", {})
 		total_xp += rewards.get("xp", 0)
 		total_gold += rewards.get("gold", 0)
+		for drop in rewards.get("drops", []):
+			var item_id: String = drop.get("item_id", "")
+			var chance: float = drop.get("chance", 0.0)
+			if not item_id.is_empty() and randf() <= chance:
+				GameManager.add_item(item_id)
+				var item_name := LocalizationManager.item_name(item_id)
+				_log(LocalizationManager.tr_key("combat.item_drop", { "item": item_name }))
 	GameManager.gold += total_gold
 	_log(LocalizationManager.tr_key("combat.victory", { "xp": total_xp, "gold": total_gold }))
 	GameManager.sync_field_stats_from_combat(allies)

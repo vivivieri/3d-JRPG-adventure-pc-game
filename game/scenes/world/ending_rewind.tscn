@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://endingrewind"]
+[gd_scene load_steps=4 format=3 uid="uid://endingrewind"]
 
 [ext_resource type="Script" path="res://scripts/ui/ending_screen.gd" id="1_ending"]
+[ext_resource type="PackedScene" uid="uid://creditsroll001" path="res://scenes/ui/credits_roll.tscn" id="2_credits"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.04, 0.08, 0.12, 1)
@@ -69,3 +70,18 @@ custom_minimum_size = Vector2(280, 52)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Return to Title"
+
+[node name="CreditsBtn" type="Button" parent="Margin/VBox"]
+custom_minimum_size = Vector2(280, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "View Credits"
+
+[node name="CreditsRoll" parent="." instance=ExtResource("2_credits")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

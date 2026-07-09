@@ -30,6 +30,7 @@ static func apply_to_stats(stats: Dictionary, item_def: Dictionary) -> Dictionar
 			result.message_key = "field.item_heal_mp"
 		"cure_status":
 			var status_type: String = effect.get("status", "poison")
+			var statuses: Array = stats.get("statuses", [])
 			if status_type in statuses:
 				statuses.erase(status_type)
 				stats["statuses"] = statuses

@@ -13,6 +13,7 @@ func save_game() -> bool:
 		"inventory": GameManager.inventory,
 		"equipped": GameManager.equipped,
 		"party_field_stats": GameManager.party_field_stats,
+		"quest_tracker": QuestTracker.get_snapshot(),
 		"gold": GameManager.gold,
 		"current_area": GameManager.current_area,
 		"chosen_ending": GameManager.chosen_ending,
@@ -42,6 +43,8 @@ func load_game() -> bool:
 	GameManager.inventory = parsed.get("inventory", {})
 	GameManager.equipped = parsed.get("equipped", {})
 	GameManager.party_field_stats = parsed.get("party_field_stats", {})
+	var tracker: Dictionary = parsed.get("quest_tracker", {})
+	QuestTracker.restore(tracker.get("active_quests", []), tracker.get("completed_quests", []))
 	GameManager.gold = parsed.get("gold", 0)
 	GameManager.current_area = parsed.get("current_area", "ruined_village")
 	GameManager.chosen_ending = parsed.get("chosen_ending", "")

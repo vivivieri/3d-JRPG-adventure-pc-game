@@ -34,14 +34,14 @@ const PALETTES := {
 }
 
 
-func apply_to_scene(root: Node3D, zone_id: String) -> void:
+static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	var palette: Dictionary = PALETTES.get(zone_id, PALETTES.ruined_village)
 	_apply_environment(root, palette, zone_id)
 	_tint_meshes(root, palette, zone_id)
 	_add_zone_props(root, zone_id, palette)
 
 
-func _apply_environment(root: Node3D, palette: Dictionary, zone_id: String) -> void:
+static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: String) -> void:
 	var env_node := root.get_node_or_null("WorldEnvironment") as WorldEnvironment
 	if env_node == null:
 		env_node = WorldEnvironment.new()
@@ -64,7 +64,7 @@ func _apply_environment(root: Node3D, palette: Dictionary, zone_id: String) -> v
 			child.light_energy = 1.0 if zone_id == "dragon_palace_gate" else 0.85
 
 
-func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> void:
+static func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> void:
 	if node is MeshInstance3D:
 		var mesh := node as MeshInstance3D
 		var mat := StandardMaterial3D.new()
@@ -105,7 +105,7 @@ func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> void:
 		_tint_meshes(child, palette, zone_id)
 
 
-func _add_zone_props(root: Node3D, zone_id: String, palette: Dictionary) -> void:
+static func _add_zone_props(root: Node3D, zone_id: String, palette: Dictionary) -> void:
 	if root.get_node_or_null("ZoneProps"):
 		return
 	var props := Node3D.new()
@@ -122,7 +122,7 @@ func _add_zone_props(root: Node3D, zone_id: String, palette: Dictionary) -> void
 			_add_gate_pillars(props, Vector3(0, 0, 12), palette)
 
 
-func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
+static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	var torii := Node3D.new()
 	torii.position = pos
 	parent.add_child(torii)
@@ -132,7 +132,7 @@ func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	_add_box(torii, Vector3(0, 3.8, 0), Vector3(4.4, 0.22, 0.28), palette.get("structure", Color.GRAY))
 
 
-func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
+static func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	var shack := Node3D.new()
 	shack.position = pos
 	parent.add_child(shack)
@@ -140,11 +140,11 @@ func _add_shack(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	_add_box(shack, Vector3(0, 2.6, 0), Vector3(4, 0.2, 3.4), palette.get("accent", Color.GRAY))
 
 
-func _add_algae_strip(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
+static func _add_algae_strip(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	_add_box(parent, pos, Vector3(0.15, 2.5, 1.2), palette.get("accent", Color.CYAN), true)
 
 
-func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
+static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
 	var gate := Node3D.new()
 	gate.position = pos
 	parent.add_child(gate)
@@ -153,7 +153,7 @@ func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary) -> voi
 	_add_box(gate, Vector3(0, 7.5, 0), Vector3(10, 0.8, 1), palette.get("glow", Color.WHITE), true)
 
 
-func _add_box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, emissive: bool = false) -> void:
+static func _add_box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, emissive: bool = false) -> void:
 	var mesh_inst := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size

@@ -62,6 +62,8 @@ func _on_new_game_pressed() -> void:
 	GameManager.current_area = "ruined_village"
 	GameManager.inventory = { "sea_salve": 2, "spirit_tonic": 1 }
 	GameManager.reset_party_field_stats()
+	QuestTracker.active_quests.clear()
+	QuestTracker.completed_quests.clear()
 	get_tree().change_scene_to_file("res://scenes/world/ruined_village.tscn")
 
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="1_spawn"]
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/player/orbit_camera.gd" id="2b_camera"]
 [ext_resource type="Script" path="res://scripts/world/auto_dialogue_zone.gd" id="3_dialogue"]
 [ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="4_interact"]
 [ext_resource type="Script" path="res://scripts/world/combat_trigger.gd" id="5_combat"]
@@ -94,6 +95,7 @@ script = ExtResource("2_player")
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
 current = true
+script = ExtResource("2b_camera")
 
 [node name="Collision" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape_player")
