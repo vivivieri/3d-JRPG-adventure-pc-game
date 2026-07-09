@@ -47,17 +47,24 @@ static func apply_skill_effects(
 			for t in targets:
 				if t is Combatant:
 					var healed: int = t.heal(effect.get("potency", 0))
-					messages.append("%s heals %d HP." % [t.display_name, healed])
+					messages.append(LocalizationManager.tr_key("combat.heal", {
+						"target": t.display_name, "amount": healed
+					}))
 		elif type == "cleanse":
 			for t in targets:
 				if t is Combatant:
 					t.statuses.clear()
-					messages.append("%s is cleansed." % t.display_name)
+					messages.append(LocalizationManager.tr_key("combat.cleanse", {
+						"target": t.display_name
+					}))
 		else:
 			for t in targets:
 				if t is Combatant and randf() <= effect.get("chance", 1.0):
 					t.apply_status(effect)
-					messages.append("%s is affected by %s." % [t.display_name, type])
+					messages.append(LocalizationManager.tr_key("combat.status", {
+						"target": t.display_name,
+						"status": LocalizationManager.tr_key("status.%s" % type)
+					}))
 	return messages
 
 

@@ -24,7 +24,7 @@ func start_battle(enemy_ids: Array) -> void:
 	_build_turn_order()
 	phase = Phase.PLAYER_TURN
 	EventBus.combat_started.emit()
-	_log("Battle start!")
+	_log(LocalizationManager.tr_key("combat.battle_start"))
 	_start_current_turn()
 
 
@@ -100,7 +100,7 @@ func player_action(action: String, actor_index: int, skill_id: String, target_in
 			_execute_skill(actor, GameManager.get_skill_def(skill_id), target_index, false)
 		"defend":
 			actor.is_defending = true
-			_log("%s defends." % actor.display_name)
+			_log(LocalizationManager.tr_key("combat.defend", { "actor": actor.display_name }))
 			_advance_turn()
 		"item":
 			_log("Item use not yet implemented.")
@@ -153,7 +153,7 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 		return
 	var mp_cost: int = skill.get("mp_cost", 0)
 	if mp_cost > 0 and not actor.spend_mp(mp_cost):
-		_log("%s lacks MP." % actor.display_name)
+		_log(LocalizationManager.tr_key("combat.no_mp", { "actor": actor.display_name }))
 		_advance_turn()
 		return
 	var targets := _resolve_targets(actor, skill, target_index)
@@ -162,12 +162,18 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 			var dmg := SkillResolver.resolve_damage(actor, t, skill)
 			var dealt := t.take_damage(dmg)
 			EventBus.damage_dealt.emit(null, dealt, skill.get("element", ""))
-			_log("%s uses %s on %s for %d damage." % [
-				actor.display_name, skill.get("display_name", "?"), t.display_name, dealt
-			])
+			var skill_name := LocalizationManager.skill_name(skill.get("id", ""))
+			if skill_name == skill.get("id", ""):
+				skill_name = skill.get("display_name", "?")
+			_log(LocalizationManager.tr_key("combat.damage", {
+				"actor": actor.display_name,
+				"skill": skill_name,
+				"target": t.display_name,
+				"amount": dealt
+			}))
 			if not t.is_alive():
 				EventBus.actor_defeated.emit(null)
-				_log("%s is defeated." % t.display_name)
+				_log(LocalizationManager.tr_key("combat.defeated", { "target": t.display_name }))
 		if actor.is_player:
 			actor.add_limit(8)
 	for msg in SkillResolver.apply_skill_effects(actor, targets, skill):
@@ -223,13 +229,13 @@ func _on_victory() -> void:
 		total_xp += rewards.get("xp", 0)
 		total_gold += rewards.get("gold", 0)
 	GameManager.gold += total_gold
-	_log("Victory! +%d XP, +%d gold." % [total_xp, total_gold])
+	_log(LocalizationManager.tr_key("combat.victory", { "xp": total_xp, "gold": total_gold }))
 	GameManager.change_state(GameManager.GameState.EXPLORATION)
 	EventBus.combat_ended.emit(true)
 
 
 func _on_defeat() -> void:
-	_log("Defeat...")
+	_log(LocalizationManager.tr_key("combat.defeat"))
 	GameManager.change_state(GameManager.GameState.EXPLORATION)
 	EventBus.combat_ended.emit(false)
 

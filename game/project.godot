@@ -13,11 +13,18 @@ config/icon="res://assets/ui/icon.svg"
 
 [autoload]
 
+LocalizationManager="*res://scripts/core/localization_manager.gd"
 GameManager="*res://scripts/core/game_manager.gd"
 EventBus="*res://scripts/core/event_bus.gd"
 SaveSystem="*res://scripts/core/save_system.gd"
 DialogueRunner="*res://scripts/narrative/dialogue_runner.gd"
 CombatManager="*res://scripts/combat/combat_manager.gd"
+
+[internationalization]
+
+locale/translation_parsers=PackedStringArray()
+locale/fallback="en"
+locale/include_text_server_data=true
 
 [display]
 

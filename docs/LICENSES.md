@@ -28,7 +28,8 @@ Track every third-party asset, story source, and engine dependency.
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
 | Noto Sans | Google Fonts | OFL 1.1 | UI body text |
-| Noto Serif JP | Google Fonts | OFL 1.1 | Headings, dialogue emphasis |
+| Noto Sans JP | Google Fonts | OFL 1.1 | Japanese UI + dialogue |
+| Noto Sans SC | Google Fonts | OFL 1.1 | Chinese UI + dialogue |
 
 ---
 

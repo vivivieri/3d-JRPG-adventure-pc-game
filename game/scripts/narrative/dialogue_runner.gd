@@ -32,7 +32,9 @@ func _emit_current_line() -> void:
 	if _line_index >= lines.size():
 		_finish_scene()
 		return
-	var line: Dictionary = lines[_line_index]
+	var line: Dictionary = lines[_line_index].duplicate(true)
+	line["text_resolved"] = LocalizationManager.resolve_text(line.get("text", ""))
+	line["speaker_name"] = LocalizationManager.speaker_name(line.get("speaker", ""))
 	EventBus.dialogue_line.emit(line)
 	_line_index += 1
 

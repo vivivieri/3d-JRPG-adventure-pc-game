@@ -172,27 +172,20 @@ Equipment adds `slot`: `weapon`, `armor`, `charm` and `stat_bonus` object.
 
 ```json
 {
-  "scene_id": "SC-03",
-  "lines": [
-    {
-      "speaker": "yuzu",
-      "portrait": "yuzu_sad",
-      "text": "You left. We waited.",
-      "emotion": "accusatory"
-    },
-    {
-      "speaker": "urashima",
-      "portrait": "urashima_shocked",
-      "text": "That voice... the shrine?",
-      "emotion": "confused"
-    }
-  ],
-  "on_complete": {
-    "set_flags": ["met_yuzu_spirit"],
-    "start_quest": "echoes_at_torii"
+  "speaker": "yuzu",
+  "text": {
+    "en": "You left. We waited.",
+    "ja": "あなたは去った。私たちは待っていた。",
+    "zh": "你离开了。我们一直等着。"
   }
 }
 ```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `text` | object | **Required** — `en`, `ja`, `zh` strings (see `docs/LOCALIZATION.md`) |
+| `speaker` | string | Speaker id → localized via `speaker.{id}` CSV key |
+| `on_complete` | object | Flags, quests, item rewards |
 
 ---
 

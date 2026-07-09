@@ -1,0 +1,144 @@
+keys,en,ja,zh
+# UI — Main menu
+UI_GAME_TITLE,Tides of Urashima,浦島の潮,Tides of Urashima
+UI_GAME_SUBTITLE,A short JRPG adventure,短編JRPGアドベンチャー,短篇JRPG冒险
+UI_NEW_GAME,New Game,はじめから,新游戏
+UI_CONTINUE,Continue,つづきから,继续游戏
+UI_QUIT,Quit,終了,退出
+UI_LANGUAGE,Language,言語,语言
+# UI — Interaction
+UI_INTERACT_EXAMINE,Examine,調べる,调查
+UI_INTERACT_TALK,Talk,話す,交谈
+UI_INTERACT_FIGHT,Fight,戦う,战斗
+# UI — Combat actions
+UI_ACTION_ATTACK,Attack,攻撃,攻击
+UI_ACTION_SKILL,Skill,スキル,技能
+UI_ACTION_ITEM,Item,アイテム,道具
+UI_ACTION_DEFEND,Defend,防御,防御
+UI_ACTION_ESCAPE,Escape,逃げる,逃跑
+# UI — Endings
+UI_ENDING_REWIND,Rewind,巻き戻し,倒流
+UI_ENDING_ANCHOR,Anchor,留まる,锚定
+UI_ENDING_DRIFT,Drift,漂う,漂泊
+# Speakers
+speaker.narrator,Narrator,ナレーター,旁白
+speaker.urashima,Urashima,浦島,浦岛
+speaker.yuzu,Yuzu,ゆず,柚子
+speaker.roku,Roku,六,六
+speaker.otohime,Otohime,乙姫,乙姬
+# Characters
+character.urashima.name,Urashima,浦島,浦岛
+character.urashima.title,The Returned Fisherman,帰還した漁師,归来的渔夫
+character.yuzu.name,Yuzu,ゆず,柚子
+character.yuzu.title,Shrine Maiden Spirit,巫女の霊,巫女之灵
+character.roku.name,Roku,六,六
+character.roku.title,Veteran Diver,老潜水夫,老潜水员
+# Skills
+skill.strike.name,Strike,打撃,打击
+skill.strike.desc,A basic physical attack.,基本的な物理攻撃。,基础物理攻击。
+skill.tidal_slash.name,Tidal Slash,潮斬り,潮汐斩击
+skill.tidal_slash.desc,A swift strike infused with sea current.,海流を纏った素早い一撃。,蕴含海流的迅捷斩击。
+skill.ocean_veil.name,Ocean Veil,海の帳,海之帷幕
+skill.ocean_veil.desc,Shroud an ally in protective currents.,味方を守る海流の帳。,以护流笼罩盟友。
+skill.returning_wave.name,Returning Wave,帰潮,归潮
+skill.returning_wave.desc,Damage all enemies with a crushing tide.,押し寄せる潮で敵全体にダメージ。,以汹涌潮水伤害所有敌人。
+skill.box_unbound.name,Box Unbound,匣解放,匣中解放
+skill.box_unbound.desc,Release stolen years in a devastating surge.,奪われた年月を解き放つ。,释放被偷走的岁月。
+skill.purify.name,Purify,浄化,净化
+skill.purify.desc,Holy light damages a single foe.,聖なる光で単体にダメージ。,以圣光伤害单个敌人。
+skill.spirit_light.name,Spirit Light,霊光,灵光
+skill.spirit_light.desc,Heal an ally for a moderate amount.,味方単体を回復する。,中等量治疗单个盟友。
+skill.sacred_mend.name,Sacred Mend,聖癒,圣愈
+skill.sacred_mend.desc,Heal all allies.,味方全体を回復する。,治疗所有盟友。
+skill.torii_ward.name,Torii Ward,鳥居の加護,鸟居庇护
+skill.torii_ward.desc,Grant regen and spirit resistance to the party.,味方全体に再生と加護。,为队伍赋予再生与抗性。
+skill.last_prayer.name,Last Prayer,最後の祈り,最后的祈祷
+skill.last_prayer.desc,Fully heal all allies and cleanse status.,味方全体を全回復し状態異常を解除。,完全治愈并净化所有盟友。
+skill.shell_guard.name,Shell Guard,甲殻防御,甲壳防御
+skill.shell_guard.desc,Brace and reduce damage taken.,身を固めダメージを軽減。,固守并减少所受伤害。
+skill.harpoon_drive.name,Harpoon Drive,銛突き,鱼叉突刺
+skill.harpoon_drive.desc,A piercing strike that ignores some defense.,防御を一部無視する突き。,无视部分防御的穿刺攻击。
+skill.tide_taunt.name,Tide Taunt,潮誘い,潮涌挑衅
+skill.tide_taunt.desc,Draw enemy attention and harden.,敵の注意を引き身を固める。,吸引敌人注意并强化自身。
+skill.depth_charge.name,Depth Charge,深淵爆,深渊爆
+skill.depth_charge.desc,Massive physical blast to all enemies.,敵全体に巨大な物理爆発。,对所有敌人造成巨大物理伤害。
+skill.claw_snap.name,Claw Snap,爪撃,爪击
+skill.claw_snap.desc,Pinching attack.,はさみ攻撃。,钳击攻击。
+skill.shell_harden.name,Shell Harden,甲殻硬化,甲壳硬化
+skill.shell_harden.desc,Raise defense.,防御力を上げる。,提升防御力。
+skill.drown_touch.name,Drown Touch,溺れの手,溺亡之触
+skill.drown_touch.desc,Chilling wraith attack.,冷たい亡霊の攻撃。,冰冷的亡魂攻击。
+skill.regret_surge.name,Regret Surge,悔恨の波,悔恨之潮
+skill.regret_surge.desc,AoE wave of sorrow.,悲しみの波動。,悲伤的群体波动。
+skill.sentinel_cleave.name,Sentinel Cleave,衛兵斬,卫兵斩
+skill.sentinel_cleave.desc,Heavy single-target slash.,強力な単体斬撃。,强力单体斩击。
+skill.tide_lament.name,Tide Lament,潮の嘆き,潮之哀歌
+skill.tide_lament.desc,Cosmic tide attack.,宇宙の潮による攻撃。,宇宙潮汐攻击。
+# Enemies
+enemy.salt_crab.name,Salt Crab,塩蟹,盐蟹
+enemy.tide_wraith.name,Tide Wraith,潮霊,潮灵
+enemy.shore_wraith.name,Shore Wraith,岸霊,岸灵
+enemy.palace_sentinel.name,Palace Sentinel,宮門衛,宫门卫士
+enemy.tide_keeper.name,Tide Keeper,潮王,潮王
+# Items
+item.sea_salve.name,Sea Salve,海の膏,海之膏
+item.sea_salve.desc,Restores 80 HP.,HPを80回復。,恢复80点生命值。
+item.spirit_tonic.name,Spirit Tonic,霊気薬,灵气药
+item.spirit_tonic.desc,Restores 25 MP.,MPを25回復。,恢复25点法力值。
+item.coral_antidote.name,Coral Antidote,珊瑚解毒,珊瑚解毒
+item.coral_antidote.desc,Cures poison.,毒を治す。,治愈中毒。
+item.shell_coin.name,Shell Coin,環貝,环贝
+item.shell_coin.desc,Currency of the ruined coast.,壊れた海岸の通貨。,废墟海岸的货币。
+item.fisher_katana.name,Fisher's Katana,漁師の刀,渔夫之刀
+item.fisher_katana.desc,Urashima's trusted blade.,浦島の愛刀。,浦岛信赖的刀。
+item.shrine_charm.name,Shrine Charm,神社の護符,神社护符
+item.shrine_charm.desc,Increases spirit power.,霊力を高める。,提升灵力。
+item.diver_mail.name,Diver's Mail,潜水服,潜水服
+item.diver_mail.desc,Heavy coat from the old diving days.,昔の潜水用の重衣。,昔日潜水用的重衣。
+item.wraith_pearl.name,Wraith Pearl,霊珠,灵珠
+item.wraith_pearl.desc,Opens the palace gate.,宮門を開く鍵。,开启宫门之钥。
+item.spirit_shard.name,Spirit Shard,霊片,灵片
+item.spirit_shard.desc,A fragment of bound spirit energy.,縛られた霊気の欠片。,束缚灵气的碎片。
+item.palace_fragment.name,Palace Fragment,宮の欠片,宫之碎片
+item.palace_fragment.desc,Crystallized time from the Dragon Palace.,竜宮城の結晶化した時間。,龙宫城结晶化的时间。
+# Quests
+quest.the_return.title,The Return,帰還,归来
+quest.the_return.desc,Explore the ruined village and learn what became of home.,壊れた村を調べ、故郷の行方を知る。,探索废墟村庄，查明故乡的遭遇。
+quest.the_return.stage.explore_village,Investigate the ruined fishing village.,壊れた漁村を調べる。,调查废弃渔村。
+quest.echoes_at_torii.title,Echoes at the Torii,鳥居の残響,鸟居回响
+quest.echoes_at_torii.desc,Follow the spirit's voice to the Tidal Caves.,霊の声を辿り潮穴へ向かう。,追随灵声前往潮穴。
+quest.echoes_at_torii.stage.investigate_shrine,Investigate the cracked torii gate.,ひび割れた鳥居を調べる。,调查破裂的鸟居。
+quest.echoes_at_torii.stage.enter_caves,Enter the Tidal Caves beneath the cliffs.,崖下の潮穴に入る。,进入崖下潮穴。
+quest.echoes_at_torii.stage.defeat_shore_wraith,Confront the Shore Wraith.,岸霊と対峙する。,与岸灵对峙。
+quest.palace_gate.title,The Palace Gate,宮門,宫门
+quest.palace_gate.desc,Reach the Dragon Palace Gate and face the Tide Keeper.,竜宮の門に辿り着き潮王に挑む。,抵达龙宫之门，挑战潮王。
+quest.palace_gate.stage.reach_gate,Travel to the floating gate.,浮かぶ門へ向かう。,前往浮空之门。
+quest.palace_gate.stage.defeat_sentinel,Defeat the Palace Sentinel.,宮門衛を倒す。,击败宫门卫士。
+quest.palace_gate.stage.face_keeper,Confront the Tide Keeper.,潮王と対峙する。,与潮王对峙。
+# Combat log
+combat.battle_start,Battle start!,戦闘開始！,战斗开始！
+combat.victory,Victory! +{xp} XP +{gold} gold.,勝利！ 経験値+{xp} 金貨+{gold},胜利！ 经验+{xp} 金币+{gold}
+combat.defeat,Defeat...,敗北……,战败……
+combat.defend,{actor} defends.,{actor}は防御した。,{actor}进行防御。
+combat.no_mp,{actor} lacks MP.,{actor}のMPが足りない。,{actor}法力不足。
+combat.damage,{actor} uses {skill} on {target} for {amount} damage.,{actor}の{skill}！ {target}に{amount}ダメージ。,{actor}使用{skill}！对{target}造成{amount}伤害。
+combat.defeated,{target} is defeated.,{target}は倒れた。,{target}被击败。
+combat.poison,{target} takes {amount} poison damage.,{target}は毒で{amount}ダメージ。,{target}受到{amount}点毒伤。
+combat.regen,{target} regenerates {amount} HP.,{target}は{amount}回復した。,{target}恢复{amount}点生命。
+combat.status,{target} is affected by {status}.,{target}は{status}状態になった。,{target}陷入{status}状态。
+combat.heal,{target} heals {amount} HP.,{target}は{amount}回復した。,{target}恢复{amount}点生命。
+combat.cleanse,{target} is cleansed.,{target}の状態異常が解除された。,{target}被净化。
+# Status names
+status.poison,Poison,毒,中毒
+status.regen,Regen,再生,再生
+status.stun,Stun,気絶,眩晕
+status.def_up,Defense Up,防御上昇,防御提升
+status.def_down,Defense Down,防御低下,防御降低
+status.taunt,Taunt,挑発,挑衅
+status.heal,Heal,回復,治疗
+status.cleanse,Cleanse,浄化,净化
+# Boss announcements
+boss.shore_wraith.phase,The wraith swells with drowned voices...,亡霊が溺れた声で膨れ上がる……,亡魂因溺亡之声而膨胀……
+boss.tide_keeper.phase1,The tide rises...,潮が満ちてくる……,潮水上涨……
+boss.tide_keeper.phase2,Time fractures.,時間が砕ける。,时间破碎。
+boss.tide_keeper.phase3,Choose.,選べ。,做出选择。

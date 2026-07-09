@@ -3,7 +3,7 @@ extends StaticBody3D
 
 
 @export var dialogue_scene_id: String = ""
-@export var interaction_prompt: String = "Examine"
+@export var interaction_prompt_key: String = "UI_INTERACT_EXAMINE"
 @export var sets_flag_on_interact: String = ""
 @export var combat_encounter_ids: PackedStringArray = []
 
@@ -18,3 +18,7 @@ func interact() -> void:
 		GameManager.start_combat(ids)
 	if not sets_flag_on_interact.is_empty():
 		GameManager.set_flag(sets_flag_on_interact)
+
+
+func get_prompt() -> String:
+	return LocalizationManager.tr_key(interaction_prompt_key)

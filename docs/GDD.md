@@ -206,6 +206,7 @@ game/
 | ID | Deliverable | Done when |
 |----|-------------|-----------|
 | M0 | GDD + storyboard + repo | ✓ This doc |
+| M0b | i18n (en / ja / zh) | ✓ LocalizationManager + CSV |
 | M1 | Greybox movement + dialogue | Walk village, talk to NPC |
 | M2 | Combat vertical slice | 1 fight feels good |
 | M3 | Chapter 1 playable | Tidal Caves complete |
@@ -222,7 +223,18 @@ game/
 
 ---
 
-## 15. Risk register
+## 15. Localization
+
+Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**.
+
+- UI and game data: `game/locale/translations.csv`
+- Story dialogue: inline `{ en, ja, zh }` per line
+- Language selector on main menu; preference saved to `user://settings.json`
+- See `docs/LOCALIZATION.md` for translator workflow
+
+---
+
+## 16. Risk register
 
 | Risk | Mitigation |
 |------|------------|

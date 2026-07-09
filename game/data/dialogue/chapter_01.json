@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "scenes": [
     {
       "scene_id": "SC-01",
@@ -7,13 +7,21 @@
         {
           "speaker": "narrator",
           "portrait": "",
-          "text": "The sea returns what it claims. Urashima washes ashore, the lacquer box cold against his chest.",
+          "text": {
+            "en": "The sea returns what it claims. Urashima washes ashore, the lacquer box cold against his chest.",
+            "ja": "海は奪ったものを返す。浦島は打ち上げられ、胸に漆箱の冷たさを感じていた。",
+            "zh": "大海归还它索取的一切。浦岛被冲上岸边，胸口的漆盒冰冷刺骨。"
+          },
           "emotion": "neutral"
         },
         {
           "speaker": "urashima",
           "portrait": "urashima_weary",
-          "text": "Three days... it was only three days...",
+          "text": {
+            "en": "Three days... it was only three days...",
+            "ja": "三日……たったの三日だったはずなのに……",
+            "zh": "三天……明明只有三天……"
+          },
           "emotion": "confused"
         }
       ],
@@ -28,19 +36,31 @@
         {
           "speaker": "yuzu",
           "portrait": "yuzu_sad",
-          "text": "You left. We waited.",
+          "text": {
+            "en": "You left. We waited.",
+            "ja": "あなたは去った。私たちは待っていた。",
+            "zh": "你离开了。我们一直等着。"
+          },
           "emotion": "accusatory"
         },
         {
           "speaker": "urashima",
           "portrait": "urashima_shocked",
-          "text": "That voice... the shrine?",
+          "text": {
+            "en": "That voice... the shrine?",
+            "ja": "この声……神社か？",
+            "zh": "这声音……是神社？"
+          },
           "emotion": "confused"
         },
         {
           "speaker": "yuzu",
           "portrait": "yuzu_sad",
-          "text": "The tide took our years. You took our tomorrow.",
+          "text": {
+            "en": "The tide took our years. You took our tomorrow.",
+            "ja": "潮が歳を奪った。あなたは明日を奪った。",
+            "zh": "潮水夺走了我们的岁月。你夺走了我们的明天。"
+          },
           "emotion": "sorrow"
         }
       ],
@@ -55,19 +75,31 @@
         {
           "speaker": "roku",
           "portrait": "roku_grim",
-          "text": "Boy. You're back. That's worse than never returning.",
+          "text": {
+            "en": "Boy. You're back. That's worse than never returning.",
+            "ja": "小僧。戻ったか。帰らぬより厄介だ。",
+            "zh": "小子。你回来了。这比不回来更糟。"
+          },
           "emotion": "grim"
         },
         {
           "speaker": "urashima",
           "portrait": "urashima_weary",
-          "text": "Roku? What happened here?",
+          "text": {
+            "en": "Roku? What happened here?",
+            "ja": "六さん？ここで何があった？",
+            "zh": "六叔？这里发生了什么？"
+          },
           "emotion": "desperate"
         },
         {
           "speaker": "roku",
           "portrait": "roku_grim",
-          "text": "That box isn't a gift. Don't open it. The caves below — start there.",
+          "text": {
+            "en": "That box isn't a gift. Don't open it. The caves below — start there.",
+            "ja": "あの箱は贈り物じゃない。開くな。下の潮穴からだ。",
+            "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。"
+          },
           "emotion": "urgent"
         }
       ],
@@ -82,13 +114,21 @@
         {
           "speaker": "roku",
           "portrait": "roku_serious",
-          "text": "The box holds their years. Open it, they live — you won't.",
+          "text": {
+            "en": "The box holds their years. Open it, they live — you won't.",
+            "ja": "箱には彼らの歳がある。開けば彼らは生き、お前は消える。",
+            "zh": "盒子里装着他们的岁月。打开它，他们能活——你不能。"
+          },
           "emotion": "heavy"
         },
         {
           "speaker": "urashima",
           "portrait": "urashima_resolved",
-          "text": "Then I finally face what I owe.",
+          "text": {
+            "en": "Then I finally face what I owe.",
+            "ja": "なら、ようやく償いと向き合おう。",
+            "zh": "那么，我终于要直面所欠的债。"
+          },
           "emotion": "resolved"
         }
       ],

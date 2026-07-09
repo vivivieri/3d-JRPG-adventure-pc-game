@@ -3,6 +3,7 @@
 A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Japanese folktale *Urashima Tarō*.
 
 **Engine:** Godot 4 (MIT, no royalties)  
+**Languages:** English, 日本語, 简体中文  
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
@@ -13,6 +14,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Milestone | Status |
 |-----------|--------|
 | M0 — GDD, storyboard, repo scaffold | Done |
+| M0b — Multi-language (en / ja / zh) | Done |
 | M1 — Greybox movement + dialogue | In progress |
 | M2 — Combat vertical slice | Scaffolded |
 | M3 — Chapter 1 playable | Planned |
@@ -97,6 +99,7 @@ DialogueRunner.play_scene("SC-03")
 - [Game Design Document](docs/GDD.md)
 - [Storyboard](docs/STORYBOARD.md)
 - [Art Direction](docs/ART_DIRECTION.md)
+- [Localization guide](docs/LOCALIZATION.md)
 - [License log](docs/LICENSES.md)
 - [Combat data schema](game/data/README.md)
 

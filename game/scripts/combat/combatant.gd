@@ -27,8 +27,13 @@ const LIMIT_MAX := 100
 
 func _init(definition: Dictionary, player: bool) -> void:
 	id = definition.get("id", "")
-	display_name = definition.get("display_name", id)
 	is_player = player
+	if player:
+		display_name = LocalizationManager.character_name(id)
+	else:
+		display_name = LocalizationManager.enemy_name(id)
+	if display_name.is_empty():
+		display_name = definition.get("display_name", id)
 	element = definition.get("element", "physical")
 	tier = definition.get("tier", "normal")
 	var stats: Dictionary = definition.get("stats", definition.get("base_stats", {}))
@@ -106,10 +111,14 @@ func tick_statuses() -> Array[String]:
 		match type:
 			"poison":
 				var dmg := take_damage(potency)
-				messages.append("%s takes %d poison damage." % [display_name, dmg])
+				messages.append(LocalizationManager.tr_key("combat.poison", {
+					"target": display_name, "amount": dmg
+				}))
 			"regen":
 				var healed := heal(potency)
-				messages.append("%s regenerates %d HP." % [display_name, healed])
+				messages.append(LocalizationManager.tr_key("combat.regen", {
+					"target": display_name, "amount": healed
+				}))
 		s["duration"] = s.get("duration", 1) - 1
 		if s.get("duration", 0) > 0:
 			remaining.append(s)

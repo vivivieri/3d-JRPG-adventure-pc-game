@@ -10,6 +10,7 @@ Track implementation progress against the GDD milestones.
 - [x] Godot 4 project scaffold
 - [x] Combat JSON schema + sample data
 - [x] Core scripts (GameManager, Combat, Dialogue, Save)
+- [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
 
 ## M1 — Greybox exploration
 - [ ] Player movement polish (camera orbit option)
