@@ -30,6 +30,54 @@ static func beach_sand_mesh(half_width: float, z_inland: float, z_sea: float) ->
 	return _grid_to_mesh(verts, nx, nz)
 
 
+static func beach_shore_pos(x: float) -> Vector2:
+	## Returns (x, z) on the sand–surf boundary — same curve as beach_sand_mesh sea edge.
+	var half_width := 11.0
+	var z_sea := -4.5
+	var cove: float = 1.0 - pow(abs(x) / half_width, 2.2) * 0.28
+	var cx := x * cove
+	var shore_wave := sin(cx * 0.55 + 0.4) * 1.5 + cos(cx * 0.21) * 0.9
+	var z := z_sea + shore_wave
+	cx += sin(z * 0.8) * 0.35
+	return Vector2(cx, z)
+
+
+static func beach_shoreline_z(x: float) -> float:
+	return beach_shore_pos(x).y
+
+
+static func beach_surf_water_mesh(half_width: float, sea_reach: float, x_segments: int) -> ArrayMesh:
+	## Curved surf band that hugs the sand shoreline instead of a flat rectangle.
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in x_segments:
+		var t0 := float(i) / float(x_segments)
+		var t1 := float(i + 1) / float(x_segments)
+		var x0 := lerpf(-half_width, half_width, t0)
+		var x1 := lerpf(-half_width, half_width, t1)
+		var p0 := beach_shore_pos(x0)
+		var p1 := beach_shore_pos(x1)
+		var near0 := Vector3(p0.x, -0.2, p0.y + 0.15)
+		var near1 := Vector3(p1.x, -0.2, p1.y + 0.15)
+		var far0 := Vector3(p0.x, -0.24, p0.y - sea_reach)
+		var far1 := Vector3(p1.x, -0.24, p1.y - sea_reach)
+		var n := Vector3.UP
+		st.set_normal(n)
+		st.add_vertex(near0)
+		st.set_normal(n)
+		st.add_vertex(near1)
+		st.set_normal(n)
+		st.add_vertex(far1)
+		st.set_normal(n)
+		st.add_vertex(near0)
+		st.set_normal(n)
+		st.add_vertex(far1)
+		st.set_normal(n)
+		st.add_vertex(far0)
+	st.generate_normals()
+	return st.commit()
+
+
 static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 	var nx := 12
 	var nz := 28

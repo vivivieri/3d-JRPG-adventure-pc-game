@@ -97,8 +97,8 @@ const PROP_CHAIN := {
 	"stump": ["dead_trunk", "stump"],
 	"log_stack": ["branches", "log_stack"],
 	"plant_flat": ["fern", "plant_flat"],
-	"mushroom": ["shrub_hd", "mushroom"],
-	"mushroom_tan": ["shrub_hd", "mushroom_tan"],
+	"mushroom": ["mushroom"],
+	"mushroom_tan": ["mushroom_tan"],
 }
 
 # Real-world Poly Haven assets need per-asset scale correction vs Kenney props.
