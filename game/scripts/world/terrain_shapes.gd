@@ -132,12 +132,12 @@ static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 
 static func _cave_half_width(z: float) -> float:
 	if z < -24.0:
-		return 7.5
+		return 9.5
 	if z < -12.0:
-		return 6.8 + sin(z * 0.12) * 0.45
+		return 9.0 + sin(z * 0.12) * 0.55
 	if z < 4.0:
-		return 7.2 + cos(z * 0.08) * 0.35
-	return 7.5
+		return 10.5 + cos(z * 0.08) * 0.45
+	return 9.5
 
 
 static func hub_ground_mesh(half_width: float, half_depth: float) -> ArrayMesh:

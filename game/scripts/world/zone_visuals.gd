@@ -177,11 +177,13 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
+			_add_village_visible_coast(cover, palette, zone_id)
 			_add_village_planting_groups(cover)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 2 if _screenshot_mode() else 4, false)
 			_add_ground_edge_breakup(cover, Vector2(21, 21), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
+			_add_cave_chamber_floor(cover, palette, zone_id)
 			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.0, 21.0, 4 if _screenshot_mode() else 9)
 			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.0, 24.0, 2 if _screenshot_mode() else 5)
 			_add_cave_wet_patches(cover, palette, zone_id)
@@ -339,6 +341,105 @@ static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: 
 		puddle.position = spot
 		WaterMaterial.apply_to_mesh(puddle, palette, zone_id, true)
 		parent.add_child(puddle)
+
+
+static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var wet := MeshInstance3D.new()
+	wet.name = "VillageWetShore"
+	wet.mesh = _make_village_coast_band_mesh(23.0, -10.0, 2.0, 28)
+	wet.position = Vector3(0, 0.075, 0)
+	var wet_mat := StandardMaterial3D.new()
+	wet_mat.albedo_color = Color("#6E6048")
+	wet_mat.roughness = 0.94
+	wet.material_override = wet_mat
+	parent.add_child(wet)
+
+	var sea := MeshInstance3D.new()
+	sea.name = "VillageNearSea"
+	sea.mesh = _make_village_sea_mesh(24.0, -11.0, -24.0, 30)
+	sea.position = Vector3(0, 0.085, 0)
+	WaterMaterial.apply_to_mesh(sea, palette, zone_id)
+	parent.add_child(sea)
+
+
+static func _make_village_sea_mesh(
+	half_width: float,
+	z_shore: float,
+	z_far: float,
+	x_segments: int,
+) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in x_segments:
+		var t0 := float(i) / float(x_segments)
+		var t1 := float(i + 1) / float(x_segments)
+		var x0 := lerpf(-half_width, half_width, t0)
+		var x1 := lerpf(-half_width, half_width, t1)
+		var shore0 := z_shore + sin(x0 * 0.24) * 0.85 + cos(x0 * 0.11) * 0.45
+		var shore1 := z_shore + sin(x1 * 0.24) * 0.85 + cos(x1 * 0.11) * 0.45
+		var near0 := Vector3(x0, 0, shore0)
+		var near1 := Vector3(x1, 0, shore1)
+		var far0 := Vector3(x0, 0, z_far)
+		var far1 := Vector3(x1, 0, z_far)
+		var n := Vector3.UP
+		for tri in [[near0, near1, far1], [near0, far1, far0]]:
+			for v in tri:
+				st.set_normal(n)
+				st.set_uv(Vector2(v.x, v.z) * 0.12)
+				st.add_vertex(v)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _make_village_coast_band_mesh(
+	half_width: float,
+	z_shore: float,
+	inland_reach: float,
+	x_segments: int,
+) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in x_segments:
+		var t0 := float(i) / float(x_segments)
+		var t1 := float(i + 1) / float(x_segments)
+		var x0 := lerpf(-half_width, half_width, t0)
+		var x1 := lerpf(-half_width, half_width, t1)
+		var shore0 := z_shore + sin(x0 * 0.24) * 0.85 + cos(x0 * 0.11) * 0.45
+		var shore1 := z_shore + sin(x1 * 0.24) * 0.85 + cos(x1 * 0.11) * 0.45
+		var sea0 := Vector3(x0, 0, shore0 - 0.15)
+		var sea1 := Vector3(x1, 0, shore1 - 0.15)
+		var land0 := Vector3(x0, 0, shore0 + inland_reach)
+		var land1 := Vector3(x1, 0, shore1 + inland_reach)
+		var n := Vector3.UP
+		for tri in [[sea0, sea1, land1], [sea0, land1, land0]]:
+			for v in tri:
+				st.set_normal(n)
+				st.set_uv(Vector2(v.x, v.z) * 0.14)
+				st.add_vertex(v)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _add_cave_chamber_floor(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var chamber := MeshInstance3D.new()
+	chamber.name = "CaveStoneChamber"
+	chamber.mesh = TerrainShapes.flood_pool_mesh(12.5, 10.5, 36)
+	chamber.position = Vector3(2.0, -0.155, -8.0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color("#4E5B5E")
+	mat.roughness = 0.82
+	mat.metallic = 0.0
+	chamber.material_override = mat
+	parent.add_child(chamber)
+	for spot in [
+		Vector3(-9.5, 0, -2.0),
+		Vector3(11.0, 0, -3.5),
+		Vector3(-8.0, 0, -13.5),
+		Vector3(10.5, 0, -14.0),
+		Vector3(2.0, 0, -18.0),
+	]:
+		PropLibrary.spawn("rock_tall_a", parent, spot, randf_range(-20, 20), 1.15, false)
+		PropLibrary.spawn("rock_large_b", parent, spot + Vector3(0.9, 0, 0.6), randf_range(0, 360), 0.9, false)
 
 
 static func _add_village_planting_groups(parent: Node3D) -> void:
