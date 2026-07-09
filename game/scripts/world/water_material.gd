@@ -1,0 +1,57 @@
+class_name WaterMaterial
+extends RefCounted
+## Shared stylized water surface material with optional UV animation.
+
+
+const RIPPLE_TEX := "res://assets/textures/zones/water_ripple.png"
+
+
+static func make_surface(
+	palette: Dictionary,
+	zone_id: String,
+	shallow: bool = false,
+) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	var base: Color = palette.get("water", Color("#1A4A5A"))
+	if shallow:
+		base = base.lerp(Color.WHITE, 0.12)
+	mat.albedo_color = base
+	mat.roughness = 0.04
+	mat.metallic = 0.18
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if shallow else BaseMaterial3D.TRANSPARENCY_DISABLED
+	if shallow:
+		mat.albedo_color.a = 0.82
+	if ResourceLoader.exists(RIPPLE_TEX):
+		mat.albedo_texture = load(RIPPLE_TEX)
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		mat.uv1_scale = Vector3(4.0, 4.0, 1.0)
+		mat.roughness = 0.03
+	mat.emission_enabled = true
+	var accent: Color = palette.get("accent", Color.CYAN)
+	mat.emission = accent * (0.14 if shallow else 0.2)
+	_apply_zone_accent(mat, zone_id)
+	return mat
+
+
+static func apply_to_mesh(mesh: MeshInstance3D, palette: Dictionary, zone_id: String, shallow: bool = false) -> void:
+	if mesh == null:
+		return
+	mesh.material_override = make_surface(palette, zone_id, shallow)
+	_attach_animator(mesh)
+
+
+static func _attach_animator(mesh: MeshInstance3D) -> void:
+	if mesh.get_node_or_null("WaterAnimator"):
+		return
+	var anim := Node.new()
+	anim.name = "WaterAnimator"
+	anim.set_script(load("res://scripts/world/water_surface_animator.gd"))
+	mesh.add_child(anim)
+
+
+static func _apply_zone_accent(mat: StandardMaterial3D, zone_id: String) -> void:
+	if zone_id == "tidal_caves":
+		mat.emission = Color(0.25, 0.85, 0.78) * 0.22
+	elif zone_id == "beach_shore":
+		mat.emission = Color(0.2, 0.55, 0.65) * 0.16

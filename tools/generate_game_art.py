@@ -129,6 +129,50 @@ def make_glow_texture(name: str, base: str, glow: str, size: int = 256) -> None:
     img.save(path)
 
 
+def make_water_ripple_texture(size: int = 256) -> None:
+    """Tileable water surface ripples."""
+    c_deep = hex_rgb(PALETTE["teal"])
+    c_shallow = hex_rgb("#3A8A9A")
+    c_foam = hex_rgb("#6AB8C8")
+    field = noise_field(size, size, scale=size / 10)
+    field2 = noise_field(size, size, scale=size / 22)
+    img = Image.new("RGBA", (size, size))
+    px = img.load()
+    for y in range(size):
+        for x in range(size):
+            n = field[y][x]
+            n2 = field2[y][x]
+            wave = math.sin((x + y) * 0.14) * 0.12 + math.sin(x * 0.09 - y * 0.11) * 0.1
+            t = n * 0.55 + n2 * 0.35 + wave + 0.1
+            t = max(0.0, min(1.0, t))
+            col = lerp_color(c_deep, c_shallow, t)
+            if t > 0.72:
+                col = lerp_color(col, c_foam, (t - 0.72) / 0.28)
+            alpha = int(180 + n2 * 60)
+            px[x, y] = (*col, alpha)
+    out = os.path.join(ASSETS, "textures", "zones", "water_ripple.png")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    img.save(out)
+    print("  wrote", out)
+
+
+def make_face_glow_texture(size: int = 128) -> None:
+    """Soft spirit silhouette for underwater face VFX."""
+    os.makedirs(os.path.join(ASSETS, "textures", "vfx"), exist_ok=True)
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    cx, cy = size // 2, size // 2
+    for r in range(size // 2, 0, -1):
+        t = r / (size * 0.5)
+        alpha = int(220 * (1.0 - t) ** 1.8)
+        col = lerp_color(hex_rgb("#1A4A5A"), hex_rgb(PALETTE["biolume"]), 1.0 - t)
+        draw.ellipse((cx - r, cy - r * 1.15, cx + r, cy + r * 1.15), fill=(*col, alpha))
+    img = img.filter(ImageFilter.GaussianBlur(radius=2))
+    out = os.path.join(ASSETS, "textures", "vfx", "face_glow.png")
+    img.save(out)
+    print("  wrote", out)
+
+
 def ink_panel(size: Tuple[int, int], border_color: str, fill: Tuple[int, int, int, int]) -> Image.Image:
     w, h = size
     img = Image.new("RGBA", size, (0, 0, 0, 0))
@@ -397,6 +441,9 @@ def main() -> None:
     make_tile_texture("palace_marble", PALETTE["ethereal"], PALETTE["coral"], grain=0.25)
     make_glow_texture("palace_gold", PALETTE["coral"], PALETTE["ethereal"])
 
+    make_tile_texture("beach_sand", "#C4B48E", "#A89870", grain=0.28)
+    make_water_ripple_texture()
+    make_face_glow_texture()
     make_ui_assets()
     make_main_menu_bg()
     make_icon()

@@ -59,6 +59,9 @@ ALLOWED = {
     "game/assets/audio/sfx/equip.ogg": "MIT (repo, procedural)",
     # Art — procedural MIT (tools/generate_game_art.py)
     "game/assets/textures/zones/village_ground.png": "MIT (repo, procedural)",
+    "game/assets/textures/zones/beach_sand.png": "MIT (repo, procedural)",
+    "game/assets/textures/zones/water_ripple.png": "MIT (repo, procedural)",
+    "game/assets/textures/vfx/face_glow.png": "MIT (repo, procedural)",
     "game/assets/textures/zones/village_wood.png": "MIT (repo, procedural)",
     "game/assets/textures/zones/cave_stone.png": "MIT (repo, procedural)",
     "game/assets/textures/zones/cave_algae.png": "MIT (repo, procedural)",

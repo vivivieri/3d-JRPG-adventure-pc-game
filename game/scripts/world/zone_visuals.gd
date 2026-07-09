@@ -57,6 +57,9 @@ const PALETTES := {
 
 
 const ZONE_TEXTURES := {
+	"beach_shore": {
+		"ground": "res://assets/textures/zones/beach_sand.png",
+	},
 	"ruined_village": {
 		"ground": "res://assets/textures/zones/village_ground.png",
 		"structure": "res://assets/textures/zones/village_wood.png",
@@ -83,6 +86,7 @@ static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	_apply_environment(root, palette, zone_id)
 	_hide_greybox_meshes(root)
 	_refine_water_meshes(root)
+	_upgrade_water_boxes(root)
 	_tint_meshes(root, palette, zone_id)
 	_add_zone_props(root, zone_id, palette)
 	_add_ground_cover(root, zone_id, palette)
@@ -126,6 +130,18 @@ static func _refine_water_meshes(node: Node) -> void:
 		_refine_water_meshes(child)
 
 
+static func _upgrade_water_boxes(node: Node) -> void:
+	if node is MeshInstance3D and node.name == "Water":
+		var box := node.mesh as BoxMesh
+		if box:
+			var plane := PlaneMesh.new()
+			plane.size = Vector2(box.size.x, box.size.z)
+			node.mesh = plane
+			node.rotation_degrees.x = -90.0
+	for child in node.get_children():
+		_upgrade_water_boxes(child)
+
+
 static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary) -> void:
 	if root.get_node_or_null("GroundCover"):
 		return
@@ -134,17 +150,19 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	root.add_child(cover)
 	match zone_id:
 		"beach_shore":
-			_add_playable_ground(cover, palette, zone_id, Vector2(26, 22))
-			_scatter_grass_field(cover, Vector3(0, 0, 4), 9.0, 8.0, 10, false)
-			_scatter_rocks(cover, Vector3(0, 0, 2), 10.0, 9.0, 8, false)
+			_add_organic_ground(cover, palette, zone_id, "beach")
+			_scatter_grass_field(cover, Vector3(0, 0, 5), 8.0, 7.0, 8 if _screenshot_mode() else 12, false)
+			_scatter_rocks(cover, Vector3(0, 0, 2), 9.0, 8.0, 10 if _screenshot_mode() else 14, false)
+			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
 			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 12 if _screenshot_mode() else 28, false)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 8 if _screenshot_mode() else 16, false)
+			_add_ground_edge_breakup(cover, Vector2(20, 20), palette, zone_id)
 		"tidal_caves":
-			_add_playable_ground(cover, palette, zone_id, Vector2(14, 52))
-			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 10, false)
-			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 18, false)
+			_add_organic_ground(cover, palette, zone_id, "cave")
+			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 8 if _screenshot_mode() else 10, false)
+			_scatter_rocks(cover, Vector3(0, 0, -8), 5.5, 26.0, 12 if _screenshot_mode() else 18, false)
 		"dragon_palace_gate":
 			_add_playable_ground(cover, palette, zone_id, Vector2(16, 52))
 
@@ -183,6 +201,83 @@ static func _add_playable_ground(parent: Node3D, palette: Dictionary, zone_id: S
 	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
 	mesh_inst.material_override = mat
 	parent.add_child(mesh_inst)
+
+
+static func _add_organic_ground(
+	parent: Node3D,
+	palette: Dictionary,
+	zone_id: String,
+	shape: String,
+) -> void:
+	var mesh_inst := MeshInstance3D.new()
+	mesh_inst.name = "PlayableGround"
+	match shape:
+		"beach":
+			mesh_inst.mesh = TerrainShapes.beach_sand_mesh(11.0, 12.0, -4.5)
+			mesh_inst.position = Vector3(0, -0.22, 0)
+		"cave":
+			mesh_inst.mesh = TerrainShapes.cave_path_mesh(-30.0, 15.0)
+			mesh_inst.position = Vector3(0, -0.2, -7.5)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("ground", Color.GRAY)
+	mat.roughness = 0.88
+	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
+	mesh_inst.material_override = mat
+	parent.add_child(mesh_inst)
+
+
+static func _add_ground_edge_breakup(
+	parent: Node3D,
+	half_size: Vector2,
+	palette: Dictionary,
+	zone_id: String,
+) -> void:
+	for i in 24:
+		var edge := i % 4
+		var t := randf()
+		var pos := Vector3.ZERO
+		match edge:
+			0:
+				pos = Vector3(lerpf(-half_size.x, half_size.x, t), 0, -half_size.y)
+			1:
+				pos = Vector3(lerpf(-half_size.x, half_size.x, t), 0, half_size.y)
+			2:
+				pos = Vector3(-half_size.x, 0, lerpf(-half_size.y, half_size.y, t))
+			3:
+				pos = Vector3(half_size.x, 0, lerpf(-half_size.y, half_size.y, t))
+		pos += Vector3(randf_range(-0.6, 0.6), 0, randf_range(-0.6, 0.6))
+		var kind := "rock_small_b" if i % 2 == 0 else "rock_small_a"
+		if PropLibrary.has_prop(kind):
+			PropLibrary.spawn(kind, parent, pos, randf_range(0, 360), randf_range(0.8, 1.05), not _screenshot_mode())
+
+
+static func _add_beach_shoreline_dressing(parent: Node3D, palette: Dictionary) -> void:
+	for x in range(-8, 9):
+		var sx := float(x) * 1.15
+		var wave_z := -1.2 + sin(sx * 0.55) * 1.1 + cos(sx * 0.23) * 0.6
+		PropLibrary.spawn("rock_small_a", parent, Vector3(sx, 0, wave_z), float(x * 13), randf_range(0.85, 1.0), true)
+		if x % 2 == 0:
+			PropLibrary.spawn("grass_leafs", parent, Vector3(sx + 0.4, 0, wave_z + 0.5), float(x * 7), 0.9, true)
+	for offset in [Vector3(-5, 0, -0.5), Vector3(4, 0, -1.2), Vector3(0, 0, -2.0)]:
+		PropLibrary.spawn("log", parent, offset, randf_range(-20, 20), randf_range(0.75, 0.95), true)
+	_add_wet_sand_ribbon(parent, palette, zone_id)
+
+
+static func _add_wet_sand_ribbon(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var wet := MeshInstance3D.new()
+	wet.name = "WetSandRibbon"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(24, 3.5)
+	wet.mesh = plane
+	wet.rotation_degrees.x = -90.0
+	wet.position = Vector3(0, -0.16, -2.8)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("ground", Color.SANDY_BROWN).lerp(palette.get("water", Color.TEAL), 0.45)
+	mat.roughness = 0.12
+	mat.metallic = 0.05
+	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
+	wet.material_override = mat
+	parent.add_child(wet)
 
 
 static func _scatter_grass_field(
@@ -415,11 +510,10 @@ static func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> vo
 		var name_lower := node.name.to_lower()
 		var parent_name := node.get_parent().name.to_lower() if node.get_parent() else ""
 		if "water" in name_lower or "water" in parent_name:
-			mat.albedo_color = palette.get("water", Color("#1A4A5A"))
-			mat.emission_enabled = true
-			mat.emission = palette.get("accent", Color.CYAN) * 0.25
-			mat.roughness = 0.15
-			mat.metallic = 0.1
+			WaterMaterial.apply_to_mesh(mesh, palette, zone_id, "puddle" in parent_name)
+			for child in node.get_children():
+				_tint_meshes(child, palette, zone_id)
+			return
 		elif "barrier" in name_lower or "flood" in parent_name:
 			mat.albedo_color = palette.get("structure", Color.GRAY)
 			mat.roughness = 0.9
@@ -601,7 +695,7 @@ static func _add_broken_fence(parent: Node3D, pos: Vector3, palette: Dictionary,
 	fence.position = pos
 	parent.add_child(fence)
 	PropLibrary.spawn("fence_planks", fence, Vector3(0, 0, 0), 0.0, 1.0)
-	PropLibrary.spawn("fence_simple", fence, Vector3(2.5, 0, 0.2), 15.0, 0.9)
+	PropLibrary.spawn("log", fence, Vector3(2.5, 0.05, 0.2), 15.0, 0.85, true)
 	PropLibrary.spawn("log", fence, Vector3(4.0, 0, -0.3), 80.0, 0.9, true)
 
 
@@ -618,17 +712,13 @@ static func _add_cave_pool_glow(parent: Node3D, pos: Vector3, palette: Dictionar
 	pool.position = pos
 	parent.add_child(pool)
 	var water := MeshInstance3D.new()
+	water.name = "PoolWater"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(7, 5)
+	plane.size = Vector2(7.5, 5.5)
 	water.mesh = plane
 	water.rotation_degrees.x = -90.0
-	water.position = Vector3(0, 0, -2)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("water", Color("#1A4A5A"))
-	mat.emission_enabled = true
-	mat.emission = palette.get("accent", Color.CYAN) * 0.2
-	mat.roughness = 0.1
-	water.material_override = mat
+	water.position = Vector3(0, -0.04, -2)
+	WaterMaterial.apply_to_mesh(water, palette, zone_id)
 	pool.add_child(water)
 	var light := OmniLight3D.new()
 	light.light_color = palette.get("accent", Color.CYAN)
@@ -823,28 +913,33 @@ static func _add_beach_set(parent: Node3D, palette: Dictionary, zone_id: String)
 		PropLibrary.spawn("rock_small_a", parent, offset + Vector3(0.8, 0, 0.5), randf_range(0, 360), 0.9, true)
 	_add_rock_cluster(parent, Vector3(-6, 0, 2), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(7, 0, 5), palette, zone_id)
-	_scatter_path_strip(parent, Vector3(0, 0, 10), 5, 1.4, 0.0)
 	var surf := MeshInstance3D.new()
-	surf.name = "SurfLine"
+	surf.name = "SurfWater"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(22, 5)
+	plane.size = Vector2(48, 36)
 	surf.mesh = plane
 	surf.rotation_degrees.x = -90.0
-	surf.position = Vector3(0, -0.08, -2)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("water", Color("#1A5A6A"))
-	mat.roughness = 0.08
-	mat.metallic = 0.05
-	mat.emission_enabled = true
-	mat.emission = palette.get("accent", Color.CYAN) * 0.12
-	surf.material_override = mat
+	surf.position = Vector3(0, -0.18, -8)
+	WaterMaterial.apply_to_mesh(surf, palette, zone_id)
 	parent.add_child(surf)
 
 
 static func _add_beach_backdrop(parent: Node3D, palette: Dictionary) -> void:
-	_add_horizon_plane(parent, Vector3(0, -0.65, -48), Vector2(180, 8), palette.get("water", Color("#1A4A5A")), 0.45)
-	for x in range(-5, 6):
-		PropLibrary.spawn("rock_small_b", parent, Vector3(x * 3.2, 0, -10), float(x * 11), 0.95, true)
+	var sea := MeshInstance3D.new()
+	sea.name = "OpenSea"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(120, 80)
+	sea.mesh = plane
+	sea.rotation_degrees.x = -90.0
+	sea.position = Vector3(0, -0.42, -42)
+	WaterMaterial.apply_to_mesh(sea, palette, "beach_shore")
+	parent.add_child(sea)
+	for x in range(-7, 8):
+		var sx := float(x) * 2.8
+		var wave_z := -11.0 + sin(sx * 0.4) * 1.8
+		PropLibrary.spawn("rock_small_b", parent, Vector3(sx, 0, wave_z), float(x * 11), randf_range(0.85, 1.1), true)
+		if x % 3 == 0:
+			PropLibrary.spawn("rock_large_a", parent, Vector3(sx * 0.9, 0, wave_z - 1.5), float(x * 7), 0.75, true)
 
 
 static func _add_festival_banner_prop(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -852,8 +947,10 @@ static func _add_festival_banner_prop(parent: Node3D, pos: Vector3, palette: Dic
 	banner.name = "FestivalBannerProp"
 	banner.position = pos
 	parent.add_child(banner)
-	PropLibrary.spawn("castle_banner", banner, Vector3(0, 0.2, 0), 12.0, 1.05)
-	PropLibrary.spawn("fence_simple", banner, Vector3(0, 0, -0.4), 0.0, 0.75)
+	PropLibrary.spawn("log", banner, Vector3(0, 0.85, 0), 0.0, 0.38, true)
+	PropLibrary.spawn("castle_banner", banner, Vector3(0.12, 1.55, 0), 12.0, 0.92)
+	PropLibrary.spawn("rock_small_b", banner, Vector3(0.5, 0, 0.4), 30.0, 0.8, true)
+	PropLibrary.spawn("rock_small_a", banner, Vector3(-0.4, 0, -0.3), -15.0, 0.75, true)
 
 
 static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -862,18 +959,28 @@ static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary
 	puddle.position = pos
 	parent.add_child(puddle)
 	var water := MeshInstance3D.new()
+	water.name = "PuddleWater"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(1.6, 1.4)
+	plane.size = Vector2(1.4, 1.2)
 	water.mesh = plane
 	water.rotation_degrees.x = -90.0
 	water.position = Vector3(0, 0.02, 0)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("water", Color("#1A4A5A")).lerp(Color.WHITE, 0.15)
-	mat.roughness = 0.05
-	mat.metallic = 0.1
-	water.material_override = mat
+	WaterMaterial.apply_to_mesh(water, palette, zone_id, true)
 	puddle.add_child(water)
-	PropLibrary.spawn("plant_flat", puddle, Vector3(0.1, 0.04, 0.05), 35.0, 0.55, true)
+	if PropLibrary.has_prop("canoe_paddle"):
+		PropLibrary.spawn("canoe_paddle", puddle, Vector3(0.05, 0.04, 0.02), 28.0, 0.32, true)
+	else:
+		PropLibrary.spawn("log", puddle, Vector3(0.05, 0.04, 0), 25.0, 0.28, true)
+	for i in 4:
+		var angle := float(i) / 4.0 * TAU
+		PropLibrary.spawn(
+			"rock_small_a",
+			puddle,
+			Vector3(cos(angle) * 0.75, 0, sin(angle) * 0.65),
+			rad_to_deg(angle),
+			0.55,
+			true,
+		)
 
 
 static func _add_deep_pool_faces(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
