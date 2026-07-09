@@ -11,6 +11,7 @@ WORKSPACE_OUT="$ROOT/steam/screenshots-capture"
 mkdir -p "$OUT" "$WORKSPACE_OUT"
 export DISPLAY="${DISPLAY:-:1}"
 export SCREENSHOT_DIR="$OUT"
+export SCREENSHOT_MODE="1"
 
 if [[ ! -x "$GODOT" ]]; then
   echo "Godot not found at $GODOT"

@@ -14,6 +14,7 @@ var _bob_time := 0.0
 
 
 func _ready() -> void:
+	add_to_group("water_controller")
 	_lowered = GameManager.has_flag("water_lowered")
 	_apply_level(true)
 	set_process(true)
@@ -39,6 +40,11 @@ func toggle() -> void:
 
 func is_lowered() -> bool:
 	return _lowered
+
+
+func sync_from_flags() -> void:
+	_lowered = GameManager.has_flag("water_lowered")
+	_apply_level(true)
 
 
 func _apply_level(instant: bool = false) -> void:

@@ -74,6 +74,10 @@ const ZONE_TEXTURES := {
 }
 
 
+static func _screenshot_mode() -> bool:
+	return OS.has_environment("SCREENSHOT_MODE")
+
+
 static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	var palette: Dictionary = PALETTES.get(zone_id, PALETTES.ruined_village)
 	_apply_environment(root, palette, zone_id)
@@ -134,8 +138,9 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_grass_field(cover, Vector3(0, 0, 4), 9.0, 8.0, 10, false)
 			_scatter_rocks(cover, Vector3(0, 0, 2), 10.0, 9.0, 8, false)
 		"ruined_village":
-			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 28, false)
-			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 16, false)
+			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
+			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 12 if _screenshot_mode() else 28, false)
+			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 8 if _screenshot_mode() else 16, false)
 		"tidal_caves":
 			_add_playable_ground(cover, palette, zone_id, Vector2(14, 52))
 			_scatter_grass_field(cover, Vector3(0, 0, -6), 4.5, 20.0, 10, false)
@@ -276,6 +281,7 @@ static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
 			mat.sun_angle_max = 32.0
 			mat.sun_curve = 0.1
 		"ruined_village":
+			mat.sun_angle_max = 28.0
 			mat.sun_curve = 0.12
 		"tidal_caves":
 			mat.sun_angle_max = 0.0
@@ -297,6 +303,7 @@ static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionar
 		"beach_shore":
 			_add_beach_backdrop(backdrop, palette)
 		"ruined_village":
+			_add_coastal_backdrop(backdrop, palette)
 		"tidal_caves":
 			_add_cave_backdrop(backdrop, palette)
 		"dragon_palace_gate":
@@ -305,6 +312,8 @@ static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionar
 
 static func _add_coastal_backdrop(parent: Node3D, palette: Dictionary) -> void:
 	_add_horizon_plane(parent, Vector3(0, -0.72, -62), Vector2(220, 6), palette.get("water", Color("#142E38")), 0.5)
+	if _screenshot_mode():
+		return
 	var hd_trees := ["tree_coastal_a", "tree_coastal_b"]
 	for i in 2:
 		var tree_id: String = hd_trees[i % hd_trees.size()]
@@ -469,14 +478,21 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
 	_add_festival_banner_prop(parent, Vector3(-2, 0, 6), palette, zone_id)
 	_add_sandal_puddle(parent, Vector3(1.5, 0, 3.5), palette, zone_id)
-	var hero_trees := [
-		["tree_coastal_a", -14, 4, 25.0, 1.3],
-		["tree_coastal_b", 12, -6, -40.0, 1.2],
-		["fir_hd", -6, -10, 10.0, 1.15],
-	]
+	var hero_trees: Array = []
+	if _screenshot_mode():
+		hero_trees = [
+			["tree_pine", -14, 4, 25.0, 1.2],
+			["tree_pine", 12, -6, -40.0, 1.1],
+		]
+	else:
+		hero_trees = [
+			["tree_coastal_a", -14, 4, 25.0, 1.3],
+			["tree_coastal_b", 12, -6, -40.0, 1.2],
+			["fir_hd", -6, -10, 10.0, 1.15],
+		]
 	for spot in hero_trees:
 		if PropLibrary.has_prop(spot[0]):
-			PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4])
+			PropLibrary.spawn(spot[0], parent, Vector3(spot[1], 0, spot[2]), spot[3], spot[4], not _screenshot_mode())
 	for offset in [Vector3(1, 0, 4), Vector3(-2, 0, 7), Vector3(10, 0, 0), Vector3(-5, 0, -6)]:
 		PropLibrary.spawn("bush", parent, offset, randf_range(0, 360), 1.0, true)
 		PropLibrary.spawn("grass_leafs", parent, offset + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, true)
@@ -852,7 +868,7 @@ static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary
 	water.rotation_degrees.x = -90.0
 	water.position = Vector3(0, 0.02, 0)
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("water", Color("#1A4A5A")).lightened(0.15)
+	mat.albedo_color = palette.get("water", Color("#1A4A5A")).lerp(Color.WHITE, 0.15)
 	mat.roughness = 0.05
 	mat.metallic = 0.1
 	water.material_override = mat

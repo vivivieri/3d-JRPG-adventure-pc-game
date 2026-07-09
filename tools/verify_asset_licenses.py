@@ -28,9 +28,14 @@ STEAM_MEDIA = {
     "steam/screenshots/04_palace.png",
     "steam/screenshots/05_endings.png",
     "steam/screenshots-capture/caves.png",
+    "steam/screenshots-capture/caves_pool.png",
+    "steam/screenshots-capture/caves_shrine.png",
+    "steam/screenshots-capture/caves_water.png",
+    "steam/screenshots-capture/beach.png",
     "steam/screenshots-capture/main_menu.png",
     "steam/screenshots-capture/palace.png",
     "steam/screenshots-capture/village.png",
+    "steam/screenshots-capture/village_inspects.png",
 }
 
 # Basename allowlist under game/assets (procedural MIT or documented third-party).

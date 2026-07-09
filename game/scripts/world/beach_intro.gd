@@ -20,6 +20,8 @@ func _ready() -> void:
 	GameManager.current_area = zone_id
 	ZoneVisuals.apply_to_scene(self, zone_id)
 	AudioManager.play_bgm("ruined_village")
+	if OS.has_environment("SCREENSHOT_MODE"):
+		return
 	await get_tree().process_frame
 	if not GameManager.has_flag("game_started"):
 		EventBus.dialogue_finished.connect(_on_intro_finished, CONNECT_ONE_SHOT)
