@@ -259,9 +259,11 @@ static func _add_organic_ground(
 		mat.albedo_color = palette.get("ground", Color.GRAY).lerp(Color("#6A5A42"), 0.25)
 		mat.roughness = 0.92
 	elif shape == "cave":
-		mat.albedo_color = Color("#3A4448")
+		mat.albedo_color = Color("#5E5A50")
 		mat.roughness = 0.62
 		mat.metallic = 0.02
+		mat.emission_enabled = true
+		mat.emission = Color("#332F28") * 0.18
 	elif shape == "palace":
 		mat.albedo_color = Color("#F2EDE4")
 		mat.roughness = 0.4
@@ -346,19 +348,25 @@ static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: 
 static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	var wet := MeshInstance3D.new()
 	wet.name = "VillageWetShore"
-	wet.mesh = _make_village_coast_band_mesh(23.0, -10.0, 2.0, 28)
+	wet.mesh = _make_village_coast_band_mesh(23.0, -7.8, 1.6, 28)
 	wet.position = Vector3(0, 0.075, 0)
 	var wet_mat := StandardMaterial3D.new()
-	wet_mat.albedo_color = Color("#6E6048")
+	wet_mat.albedo_color = Color("#8A7656")
 	wet_mat.roughness = 0.94
 	wet.material_override = wet_mat
 	parent.add_child(wet)
 
 	var sea := MeshInstance3D.new()
 	sea.name = "VillageNearSea"
-	sea.mesh = _make_village_sea_mesh(24.0, -11.0, -24.0, 30)
-	sea.position = Vector3(0, 0.085, 0)
-	WaterMaterial.apply_to_mesh(sea, palette, zone_id)
+	sea.mesh = _make_village_sea_mesh(24.0, -8.25, -28.0, 30)
+	sea.position = Vector3(0, 0.095, 0)
+	var sea_mat := StandardMaterial3D.new()
+	sea_mat.albedo_color = Color("#276E78")
+	sea_mat.roughness = 0.18
+	sea_mat.metallic = 0.05
+	sea_mat.emission_enabled = true
+	sea_mat.emission = Color("#0F3F48") * 0.12
+	sea.material_override = sea_mat
 	parent.add_child(sea)
 
 
@@ -426,9 +434,11 @@ static func _add_cave_chamber_floor(parent: Node3D, palette: Dictionary, zone_id
 	chamber.mesh = TerrainShapes.flood_pool_mesh(12.5, 10.5, 36)
 	chamber.position = Vector3(2.0, -0.155, -8.0)
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color("#4E5B5E")
+	mat.albedo_color = Color("#665F54")
 	mat.roughness = 0.82
 	mat.metallic = 0.0
+	mat.emission_enabled = true
+	mat.emission = Color("#3A352D") * 0.16
 	chamber.material_override = mat
 	parent.add_child(chamber)
 	for spot in [
