@@ -21,6 +21,8 @@ dist/
 *.pck
 *.zip
 .godot-sdk/
+steam/screenshots/concat.txt
+steam/screenshots/trailer_slideshow.mp4
 
 # Logs
 *.log
