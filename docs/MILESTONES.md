@@ -37,8 +37,8 @@ Track implementation progress against the GDD milestones.
 - [x] Credits sequence
 
 ## M5 — Steam
-- [x] Placeholder BGM/SFX + AudioManager
-- [x] Zone art pass (materials, fog, props)
+- [x] Placeholder BGM/SFX + AudioManager → **procedural coastal JRPG audio** (`tools/generate_game_audio.py`)
+- [x] Zone art pass (materials, fog, props) → **tileable zone textures + portraits**
 - [x] Field item use + equipment UI (Tab menu)
 - [x] Steam store page copy + capsule placeholders
 - [x] Windows export preset + `tools/export_windows.sh`
@@ -47,5 +47,5 @@ Track implementation progress against the GDD milestones.
 - [x] Combat drop rolls + balance pass
 - [x] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
 - [ ] Steamworks app ID + depot upload
-- [ ] Final CC0 audio/art replacement
+- [ ] Final CC0 audio/art replacement (optional — current assets are original procedural)
 - [ ] Playtest on Windows hardware

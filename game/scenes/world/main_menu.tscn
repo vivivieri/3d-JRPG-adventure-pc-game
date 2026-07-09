@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://mainmenu001"]
+[gd_scene load_steps=3 format=3 uid="uid://mainmenu001"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/ui/main_menu_bg.png" id="2_bg"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,12 +12,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.102, 0.29, 0.353, 1)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Tint" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.12, 0.16, 0.35)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1

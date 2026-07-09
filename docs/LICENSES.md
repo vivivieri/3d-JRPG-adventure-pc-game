@@ -47,9 +47,17 @@ Track every third-party asset, story source, and engine dependency.
 
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
-| Placeholder BGM/SFX | Procedural (tools/generate_placeholder_audio.py) | MIT (repo) | 2026-07 | All zones + UI/combat SFX until final assets |
-| _TBD_ | Freesound.org (CC0 filter) | CC0 | — | Replace placeholder SFX |
-| _TBD_ | OpenGameArt.org | Per entry | — | Replace placeholder BGM |
+| BGM + SFX | Procedural (`tools/generate_game_audio.py`) | MIT (repo) | 2026-07 | All zones, combat, UI SFX — pentatonic coastal mood |
+
+## Art (2D textures & UI)
+
+| Item | Source | License | Date | Used for |
+|------|--------|---------|------|----------|
+| Zone textures | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Village/cave/palace albedo maps |
+| UI panels & bars | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Dialogue, menu, HP/MP bars |
+| Character portraits | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Dialogue portrait silhouettes |
+| Main menu & Steam art | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Menu BG, capsules, screenshots |
+| Game icon | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | App / export icon |
 
 ---
 

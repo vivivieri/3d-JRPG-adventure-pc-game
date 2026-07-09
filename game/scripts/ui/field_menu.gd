@@ -25,6 +25,7 @@ var _selected_char := ""
 func _ready() -> void:
 	layer = 6
 	_root.visible = false
+	UiStyleManager.apply_to_panel($MenuRoot/Panel, UiStyleManager.menu_panel())
 	_items_tab.pressed.connect(func(): _show_tab(Tab.ITEMS))
 	_equip_tab.pressed.connect(func(): _show_tab(Tab.EQUIPMENT))
 	_close_btn.pressed.connect(close_menu)

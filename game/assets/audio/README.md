@@ -1,25 +1,25 @@
 # Audio assets
 
-Placeholder BGM and SFX are generated procedurally by `tools/generate_placeholder_audio.py` (MIT, this repo).
+Original procedural BGM and SFX for Tides of Urashima — Japanese coastal JRPG mood (pentatonic melodies, ocean ambience, taiko combat, temple bells). MIT license (this repo).
 
-Regenerate:
+Regenerate all audio:
 
 ```bash
-python3 tools/generate_placeholder_audio.py
+./tools/generate_assets.sh
+# or
+python3 tools/generate_game_audio.py
 ```
-
-Replace with final CC0 assets from Freesound / OpenGameArt before ship. Log sources in `docs/LICENSES.md`.
 
 ## Tracks
 
-| File | Usage |
-|------|-------|
-| `bgm/menu.ogg` | Main menu |
-| `bgm/village.ogg` | Ruined village |
-| `bgm/caves.ogg` | Tidal caves |
-| `bgm/palace.ogg` | Dragon Palace Gate |
-| `bgm/combat.ogg` | Normal combat |
-| `bgm/boss.ogg` | Boss fights |
+| File | Mood |
+|------|------|
+| `bgm/menu.ogg` | Foggy coast, shakuhachi-like lead |
+| `bgm/village.ogg` | Ruined village, waves + koto phrases |
+| `bgm/caves.ogg` | Deep teal caves, biolume tension |
+| `bgm/palace.ogg` | Ethereal palace bells |
+| `bgm/combat.ogg` | Taiko rhythm + tension pads |
+| `bgm/boss.ogg` | Heavier drums, darker scale |
 
 ## SFX
 

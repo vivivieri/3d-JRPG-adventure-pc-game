@@ -8,7 +8,7 @@ const CHARS_PER_SECOND := 38.0
 @onready var _body_label: Label = $DialoguePanel/Margin/HBox/VBox/BodyLabel
 @onready var _hint_label: Label = $DialoguePanel/Margin/HBox/VBox/HintLabel
 @onready var _portrait_frame: PanelContainer = $DialoguePanel/Margin/HBox/PortraitFrame
-@onready var _portrait_placeholder: ColorRect = $DialoguePanel/Margin/HBox/PortraitFrame/PortraitPlaceholder
+@onready var _portrait_placeholder: TextureRect = $DialoguePanel/Margin/HBox/PortraitFrame/PortraitPlaceholder
 
 var _full_text := ""
 var _visible_chars := 0
@@ -20,6 +20,7 @@ var _current_line: Dictionary = {}
 func _ready() -> void:
 	layer = 10
 	_panel.visible = false
+	UiStyleManager.apply_to_panel(_panel, UiStyleManager.dialogue_panel())
 	EventBus.dialogue_started.connect(_on_dialogue_started)
 	EventBus.dialogue_line.connect(_on_dialogue_line)
 	EventBus.dialogue_finished.connect(_on_dialogue_finished)
@@ -90,6 +91,10 @@ func _show_line(line: Dictionary) -> void:
 		_speaker_label.text = speaker_display if not speaker_display.is_empty() else speaker
 	var portrait: String = line.get("portrait", "")
 	_portrait_frame.visible = not portrait.is_empty()
+	if not portrait.is_empty():
+		var tex := UiStyleManager.portrait_texture(portrait)
+		_portrait_placeholder.texture = tex
+		_portrait_placeholder.visible = tex != null
 	_full_text = line.get("text_resolved", LocalizationManager.resolve_text(line.get("text", "")))
 	_visible_chars = 0
 	_type_timer = 0.0

@@ -34,6 +34,24 @@ const PALETTES := {
 }
 
 
+const ZONE_TEXTURES := {
+	"ruined_village": {
+		"ground": "res://assets/textures/zones/village_ground.png",
+		"structure": "res://assets/textures/zones/village_wood.png",
+	},
+	"tidal_caves": {
+		"ground": "res://assets/textures/zones/cave_stone.png",
+		"structure": "res://assets/textures/zones/cave_stone.png",
+		"accent": "res://assets/textures/zones/cave_algae.png",
+	},
+	"dragon_palace_gate": {
+		"ground": "res://assets/textures/zones/palace_marble.png",
+		"structure": "res://assets/textures/zones/palace_gold.png",
+		"glow": "res://assets/textures/zones/palace_gold.png",
+	},
+}
+
+
 static func apply_to_scene(root: Node3D, zone_id: String) -> void:
 	var palette: Dictionary = PALETTES.get(zone_id, PALETTES.ruined_village)
 	_apply_environment(root, palette, zone_id)
@@ -100,6 +118,7 @@ static func _tint_meshes(node: Node, palette: Dictionary, zone_id: String) -> vo
 		else:
 			mat.albedo_color = palette.get("ground", Color.GRAY).lerp(palette.get("structure", Color.GRAY), 0.35)
 			mat.roughness = 0.8
+		_apply_zone_texture(mat, zone_id, name_lower, parent_name)
 		mesh.material_override = mat
 	for child in node.get_children():
 		_tint_meshes(child, palette, zone_id)
@@ -167,3 +186,26 @@ static func _add_box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, 
 		mat.emission = color * 0.2
 	mesh_inst.material_override = mat
 	parent.add_child(mesh_inst)
+
+
+static func _apply_zone_texture(mat: StandardMaterial3D, zone_id: String, name_lower: String, parent_name: String) -> void:
+	var zone_tex: Dictionary = ZONE_TEXTURES.get(zone_id, {})
+	if zone_tex.is_empty():
+		return
+	var key := "ground"
+	if "water" in name_lower or "water" in parent_name:
+		key = "accent" if zone_tex.has("accent") else "ground"
+	elif "torii" in parent_name or "shack" in parent_name or "gate" in parent_name or "pillar" in name_lower:
+		key = "structure"
+	elif "ground" in parent_name or "floor" in parent_name or "tunnel" in parent_name:
+		key = "ground"
+	elif zone_id == "dragon_palace_gate":
+		key = "structure"
+	elif zone_id == "tidal_caves" and ("algae" in name_lower or randf() > 0.7):
+		key = "accent"
+	var path: String = zone_tex.get(key, "")
+	if path.is_empty() or not ResourceLoader.exists(path):
+		return
+	mat.albedo_texture = load(path)
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	mat.uv1_scale = Vector3(2, 2, 2)

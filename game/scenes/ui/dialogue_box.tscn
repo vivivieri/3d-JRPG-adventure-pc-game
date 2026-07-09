@@ -63,9 +63,10 @@ custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
 
-[node name="PortraitPlaceholder" type="ColorRect" parent="DialoguePanel/Margin/HBox/PortraitFrame"]
+[node name="PortraitPlaceholder" type="TextureRect" parent="DialoguePanel/Margin/HBox/PortraitFrame"]
 layout_mode = 2
-color = Color(0.24, 0.35, 0.42, 1)
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBox" type="VBoxContainer" parent="DialoguePanel/Margin/HBox"]
 layout_mode = 2

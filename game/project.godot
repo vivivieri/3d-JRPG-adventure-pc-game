@@ -9,12 +9,13 @@ config/name="Tides of Urashima"
 config/description="A short 3D JRPG adventure adapted from Japanese folklore."
 run/main_scene="res://scenes/world/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://assets/ui/icon.svg"
+config/icon="res://assets/ui/icon.png"
 
 [autoload]
 
 LocalizationManager="*res://scripts/core/localization_manager.gd"
 FontThemeManager="*res://scripts/ui/font_theme_manager.gd"
+UiStyleManager="*res://scripts/ui/ui_style_manager.gd"
 DialogueUiManager="*res://scripts/ui/dialogue_ui_manager.gd"
 InteractionPromptManager="*res://scripts/ui/interaction_prompt_manager.gd"
 CombatUiManager="*res://scripts/ui/combat_ui_manager.gd"

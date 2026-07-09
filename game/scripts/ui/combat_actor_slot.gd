@@ -20,6 +20,14 @@ var _turn_active := false
 func _ready() -> void:
 	_select_btn.pressed.connect(func(): slot_pressed.emit(slot_index))
 	_apply_fonts()
+	_apply_bar_styles()
+
+
+func _apply_bar_styles() -> void:
+	_hp_bar.add_theme_stylebox_override(&"background", UiStyleManager.bar_background())
+	_hp_bar.add_theme_stylebox_override(&"fill", UiStyleManager.bar_fill("hp"))
+	_mp_bar.add_theme_stylebox_override(&"background", UiStyleManager.bar_background())
+	_mp_bar.add_theme_stylebox_override(&"fill", UiStyleManager.bar_fill("mp"))
 
 
 func configure(index: int, is_enemy: bool) -> void:
