@@ -45,7 +45,7 @@ Track implementation progress against the GDD milestones.
 - [x] Steam screenshots + trailer placeholder (`steam/screenshots/`, `steam/trailer.mp4`)
 - [x] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
 - [x] Combat drop rolls + balance pass
-- [ ] Install GodotSteam GDExtension binaries (manual — see addon README)
+- [x] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
 - [ ] Steamworks app ID + depot upload
 - [ ] Final CC0 audio/art replacement
 - [ ] Playtest on Windows hardware

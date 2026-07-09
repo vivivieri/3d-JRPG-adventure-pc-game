@@ -2,15 +2,18 @@
 
 Tides of Urashima ships with a `SteamManager` autoload that activates when the [GodotSteam](https://godotsteam.com/) GDExtension is present.
 
-## Setup (one-time)
+## Setup
 
-1. Download **GodotSteam 4.3** GDExtension for your editor OS from [GitHub releases](https://github.com/GodotSteam/GodotSteam/releases)
-2. Extract into `game/addons/godotsteam/` so these exist:
-   - `addons/godotsteam/godotsteam.gdextension`
-   - platform libs under `addons/godotsteam/linux64/` (or win64 for Windows editor)
-3. Enable the plugin: **Project → Project Settings → Plugins → GodotSteam**
-4. Replace `game/steam_appid.txt` with your Steam App ID (use `480` for Spacewar testing)
-5. Define matching achievement API names in Steamworks partner site (see `SteamManager.ACHIEVEMENTS`)
+Binaries are installed in this repo. To reinstall from scratch:
+
+```bash
+./tools/install_godotsteam.sh
+```
+
+1. `godotsteam.gdextension` + platform libs live under `addons/godotsteam/`
+2. No plugin toggle required — restart the Godot editor after install
+3. Replace `game/steam_appid.txt` with your Steam App ID (default `480` = Spacewar test app)
+4. Define matching achievement API names in Steamworks partner site (see `SteamManager.ACHIEVEMENTS`)
 
 ## Runtime behavior
 

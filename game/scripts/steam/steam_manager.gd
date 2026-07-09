@@ -36,12 +36,21 @@ func _init_steam() -> void:
 	elif steam.has_method("steamInit"):
 		is_available = steam.steamInit()
 	if restart and steam.has_method("restartAppIfNecessary"):
-		steam.restartAppIfNecessary(480)
+		steam.restartAppIfNecessary(_get_app_id())
 		get_tree().quit()
 	if is_available and steam.has_method("getSteamID"):
 		steam_id = steam.getSteamID()
 		steam_ready.emit()
 		print("[Steam] Initialized. SteamID=%s" % steam_id)
+
+
+func _get_app_id() -> int:
+	var path := "res://steam_appid.txt"
+	if FileAccess.file_exists(path):
+		var text := FileAccess.get_file_as_string(path).strip_edges()
+		if text.is_valid_int():
+			return int(text)
+	return 480
 
 
 func unlock_achievement(achievement_api_name: String) -> void:

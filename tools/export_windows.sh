@@ -55,8 +55,17 @@ application/file_description="A short 3D JRPG adventure adapted from Japanese fo
 EOF
 fi
 
+STEAM_WIN64="$ROOT/game/addons/godotsteam/win64"
+
 echo "Exporting Windows build..."
 cd "$ROOT/game"
 "$GODOT_BIN" --headless --path . --export-release "Windows Desktop" "$BUILD_DIR/TidesOfUrashima.exe"
+
+if [[ -d "$STEAM_WIN64" ]]; then
+  echo "Copying GodotSteam Windows redistributables..."
+  cp -f "$STEAM_WIN64/libgodotsteam.windows.template_release.x86_64.dll" "$BUILD_DIR/"
+  cp -f "$STEAM_WIN64/steam_api64.dll" "$BUILD_DIR/"
+fi
+
 echo "Done: $BUILD_DIR/TidesOfUrashima.exe"
 ls -lh "$BUILD_DIR/TidesOfUrashima.exe"
