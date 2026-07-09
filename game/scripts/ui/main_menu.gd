@@ -64,7 +64,7 @@ func _on_new_game_pressed() -> void:
 	GameManager.reset_party_field_stats()
 	QuestTracker.active_quests.clear()
 	QuestTracker.completed_quests.clear()
-	get_tree().change_scene_to_file("res://scenes/world/ruined_village.tscn")
+	get_tree().change_scene_to_file("res://scenes/world/beach_shore.tscn")
 
 
 func _on_continue_pressed() -> void:

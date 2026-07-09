@@ -4,6 +4,18 @@ extends RefCounted
 
 
 const PALETTES := {
+	"beach_shore": {
+		"ground": Color("#C4B48E"),
+		"structure": Color("#6A5A48"),
+		"accent": Color("#2A6A7A"),
+		"water": Color("#1A5A6A"),
+		"fog": Color("#9AB0C0"),
+		"sky": Color("#8BA8BC"),
+		"sky_top": Color("#5A88A8"),
+		"sky_horizon": Color("#C8DCE8"),
+		"ground_horizon": Color("#4A7888"),
+		"light": Color("#E0D4B8"),
+	},
 	"ruined_village": {
 		"ground": Color("#C9B89A"),
 		"structure": Color("#5C4A3A"),
@@ -117,8 +129,11 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 	cover.name = "GroundCover"
 	root.add_child(cover)
 	match zone_id:
+		"beach_shore":
+			_add_playable_ground(cover, palette, zone_id, Vector2(26, 22))
+			_scatter_grass_field(cover, Vector3(0, 0, 4), 9.0, 8.0, 10, false)
+			_scatter_rocks(cover, Vector3(0, 0, 2), 10.0, 9.0, 8, false)
 		"ruined_village":
-			_add_playable_ground(cover, palette, zone_id, Vector2(44, 44))
 			_scatter_grass_field(cover, Vector3(0, 0, 0), 18.0, 22.0, 28, false)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 18.0, 22.0, 16, false)
 		"tidal_caves":
@@ -219,6 +234,9 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 	env.fog_sky_affect = 0.85
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	match zone_id:
+		"beach_shore":
+			env.fog_density = 0.01
+			env.fog_aerial_perspective = 0.78
 		"ruined_village":
 			env.fog_density = 0.008
 			env.fog_aerial_perspective = 0.72
@@ -240,7 +258,7 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 		if child is DirectionalLight3D:
 			child.light_color = palette.get("light", Color.WHITE)
 			child.light_energy = 1.05 if zone_id == "dragon_palace_gate" else 0.9
-			if zone_id == "ruined_village":
+			if zone_id == "ruined_village" or zone_id == "beach_shore":
 				child.rotation_degrees = Vector3(-48, -35, 0)
 
 
@@ -254,8 +272,10 @@ static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
 	mat.sky_curve = 0.18
 	mat.ground_curve = 0.04
 	match zone_id:
+		"beach_shore":
+			mat.sun_angle_max = 32.0
+			mat.sun_curve = 0.1
 		"ruined_village":
-			mat.sun_angle_max = 28.0
 			mat.sun_curve = 0.12
 		"tidal_caves":
 			mat.sun_angle_max = 0.0
@@ -274,8 +294,9 @@ static func _add_zone_backdrop(root: Node3D, zone_id: String, palette: Dictionar
 	backdrop.name = "ZoneBackdrop"
 	root.add_child(backdrop)
 	match zone_id:
+		"beach_shore":
+			_add_beach_backdrop(backdrop, palette)
 		"ruined_village":
-			_add_coastal_backdrop(backdrop, palette)
 		"tidal_caves":
 			_add_cave_backdrop(backdrop, palette)
 		"dragon_palace_gate":
@@ -426,6 +447,8 @@ static func _add_zone_props(root: Node3D, zone_id: String, palette: Dictionary) 
 	props.name = "ZoneProps"
 	root.add_child(props)
 	match zone_id:
+		"beach_shore":
+			_add_beach_set(props, palette, zone_id)
 		"ruined_village":
 			_add_village_set(props, palette, zone_id)
 		"tidal_caves":
@@ -444,6 +467,8 @@ static func _add_village_set(parent: Node3D, palette: Dictionary, zone_id: Strin
 	_add_rock_cluster(parent, Vector3(-10, 0, -2), palette, zone_id)
 	_add_rock_cluster(parent, Vector3(-4, 0, 10), palette, zone_id)
 	_add_broken_fence(parent, Vector3(2, 0, 6), palette, zone_id)
+	_add_festival_banner_prop(parent, Vector3(-2, 0, 6), palette, zone_id)
+	_add_sandal_puddle(parent, Vector3(1.5, 0, 3.5), palette, zone_id)
 	var hero_trees := [
 		["tree_coastal_a", -14, 4, 25.0, 1.3],
 		["tree_coastal_b", 12, -6, -40.0, 1.2],
@@ -461,6 +486,8 @@ static func _add_caves_set(parent: Node3D, palette: Dictionary, zone_id: String)
 	for i in 5:
 		_add_algae_strip(parent, Vector3(-4.5 + i * 2.0, 0.6, 1 - i * 0.4), palette, zone_id)
 	_add_cave_pool_glow(parent, Vector3(0, 0.2, -6), palette, zone_id)
+	_add_deep_pool_faces(parent, Vector3(0, 0, -16), palette)
+	_add_shrine_alcove(parent, Vector3(0, 0, -28), palette, zone_id)
 	for z in range(-24, 10, 12):
 		PropLibrary.spawn("rock_large_b", parent, Vector3(-3.5, 0, z + 1), 30.0, 0.8, true)
 		PropLibrary.spawn("rock_large_a", parent, Vector3(3.5, 0, z - 1), -25.0, 0.85, true)
@@ -772,6 +799,100 @@ static func _add_cylinder(
 	_apply_zone_texture(mat, zone_id, tex_key, tex_key, tex_key)
 	mesh_inst.material_override = mat
 	parent.add_child(mesh_inst)
+
+
+static func _add_beach_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	for offset in [Vector3(-4, 0, 6), Vector3(3, 0, 4), Vector3(-2, 0, 9), Vector3(5, 0, 7)]:
+		PropLibrary.spawn("log", parent, offset, randf_range(-25, 25), randf_range(0.85, 1.1), true)
+		PropLibrary.spawn("rock_small_a", parent, offset + Vector3(0.8, 0, 0.5), randf_range(0, 360), 0.9, true)
+	_add_rock_cluster(parent, Vector3(-6, 0, 2), palette, zone_id)
+	_add_rock_cluster(parent, Vector3(7, 0, 5), palette, zone_id)
+	_scatter_path_strip(parent, Vector3(0, 0, 10), 5, 1.4, 0.0)
+	var surf := MeshInstance3D.new()
+	surf.name = "SurfLine"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(22, 5)
+	surf.mesh = plane
+	surf.rotation_degrees.x = -90.0
+	surf.position = Vector3(0, -0.08, -2)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("water", Color("#1A5A6A"))
+	mat.roughness = 0.08
+	mat.metallic = 0.05
+	mat.emission_enabled = true
+	mat.emission = palette.get("accent", Color.CYAN) * 0.12
+	surf.material_override = mat
+	parent.add_child(surf)
+
+
+static func _add_beach_backdrop(parent: Node3D, palette: Dictionary) -> void:
+	_add_horizon_plane(parent, Vector3(0, -0.65, -48), Vector2(180, 8), palette.get("water", Color("#1A4A5A")), 0.45)
+	for x in range(-5, 6):
+		PropLibrary.spawn("rock_small_b", parent, Vector3(x * 3.2, 0, -10), float(x * 11), 0.95, true)
+
+
+static func _add_festival_banner_prop(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
+	var banner := Node3D.new()
+	banner.name = "FestivalBannerProp"
+	banner.position = pos
+	parent.add_child(banner)
+	PropLibrary.spawn("castle_banner", banner, Vector3(0, 0.2, 0), 12.0, 1.05)
+	PropLibrary.spawn("fence_simple", banner, Vector3(0, 0, -0.4), 0.0, 0.75)
+
+
+static func _add_sandal_puddle(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
+	var puddle := Node3D.new()
+	puddle.name = "SandalPuddle"
+	puddle.position = pos
+	parent.add_child(puddle)
+	var water := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(1.6, 1.4)
+	water.mesh = plane
+	water.rotation_degrees.x = -90.0
+	water.position = Vector3(0, 0.02, 0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("water", Color("#1A4A5A")).lightened(0.15)
+	mat.roughness = 0.05
+	mat.metallic = 0.1
+	water.material_override = mat
+	puddle.add_child(water)
+	PropLibrary.spawn("plant_flat", puddle, Vector3(0.1, 0.04, 0.05), 35.0, 0.55, true)
+
+
+static func _add_deep_pool_faces(parent: Node3D, pos: Vector3, palette: Dictionary) -> void:
+	var vfx_script := load("res://scripts/world/pool_face_vfx.gd") as Script
+	if vfx_script == null:
+		return
+	var faces := Node3D.new()
+	faces.name = "DeepPoolFaces"
+	faces.position = pos
+	faces.set_script(vfx_script)
+	parent.add_child(faces)
+
+
+static func _add_shrine_alcove(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
+	var alcove := Node3D.new()
+	alcove.name = "YuzuShrineAlcove"
+	alcove.position = pos
+	parent.add_child(alcove)
+	PropLibrary.spawn("rock_large_b", alcove, Vector3(-2.8, 0, 0.2), 88.0, 1.05, true)
+	PropLibrary.spawn("rock_large_a", alcove, Vector3(2.8, 0, 0.2), -88.0, 1.05, true)
+	PropLibrary.spawn("rock_large_b", alcove, Vector3(0, 1.6, -1.8), 0.0, 0.95, true)
+	PropLibrary.spawn("fence_planks", alcove, Vector3(-0.9, 0, 0.8), 0.0, 0.9)
+	PropLibrary.spawn("fence_planks", alcove, Vector3(0.9, 0, 0.8), 0.0, 0.9)
+	PropLibrary.spawn("log", alcove, Vector3(0, 1.7, 0.8), 90.0, 0.8, true)
+	PropLibrary.spawn("log", alcove, Vector3(0, 1.35, 0.8), 90.0, 0.72, true)
+	PropLibrary.spawn("bush", alcove, Vector3(0, 0, 1.5), 0.0, 0.85, true)
+	PropLibrary.spawn("fern", alcove, Vector3(-1.2, 0, 1.0), 25.0, 1.0, true)
+	PropLibrary.spawn("fern", alcove, Vector3(1.2, 0, 1.0), -25.0, 1.0, true)
+	var light := OmniLight3D.new()
+	light.name = "ShrineGlow"
+	light.light_color = palette.get("accent", Color.CYAN)
+	light.light_energy = 1.15
+	light.omni_range = 9.0
+	light.position = Vector3(0, 2.0, 0.8)
+	alcove.add_child(light)
 
 
 static func _apply_zone_texture(mat: StandardMaterial3D, zone_id: String, name_lower: String, parent_name: String, tex_override: String = "") -> void:

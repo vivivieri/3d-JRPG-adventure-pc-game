@@ -8,6 +8,12 @@ extends Area3D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	call_deferred("_check_overlapping_player")
+
+
+func _check_overlapping_player() -> void:
+	for body in get_overlapping_bodies():
+		_on_body_entered(body)
 
 
 func _on_body_entered(body: Node3D) -> void:

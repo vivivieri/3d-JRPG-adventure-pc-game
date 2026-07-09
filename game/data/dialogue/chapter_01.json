@@ -31,6 +31,118 @@
       }
     },
     {
+      "scene_id": "SC-02",
+      "lines": [
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "Anyone...? The festival grounds are empty.",
+            "ja": "誰か……？祭りの場は、誰もいない。",
+            "zh": "有人吗……？节庆的空地上空无一人。"
+          },
+          "emotion": "uneasy"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Rotting banners flap in the wind. The village holds its breath.",
+            "ja": "朽ちた幟が風に揺れる。村は息を止めている。",
+            "zh": "腐烂的旗帜在风中拍打。村庄屏住了呼吸。"
+          },
+          "emotion": "dread"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["village_arrival_seen"]
+      }
+    },
+    {
+      "scene_id": "SC-02-BANNER",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The festival banner hangs in tatters. Salt has bleached the kanji to ghosts.",
+            "ja": "祭りの幟はぼろぼろに垂れている。塩気が文字を幽霊のように褪せさせた。",
+            "zh": "节庆旗帜残破下垂。盐气把字迹漂白成了幽灵。"
+          },
+          "emotion": "melancholy"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "They raised this for the tide-god. Who took them?",
+            "ja": "潮の神のために掲げたはずだ。誰が連れ去った？",
+            "zh": "他们是为潮神挂起这面旗的。谁把他们带走了？"
+          },
+          "emotion": "confused"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["inspected_banner"]
+      }
+    },
+    {
+      "scene_id": "SC-02-SANDAL",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "A child's sandal floats in a rain puddle, turning in slow circles.",
+            "ja": "子供の草履が雨溜まりに浮かび、ゆっくりと回っている。",
+            "zh": "一只孩子的草鞋漂在雨洼里，缓缓打转。"
+          },
+          "emotion": "dread"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_guilty",
+          "text": {
+            "en": "...I know that pattern. The Tanaka family's.",
+            "ja": "……この柄、知っている。田中家の。",
+            "zh": "……这花纹我认识。是田中家的。"
+          },
+          "emotion": "guilt"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["inspected_sandal"]
+      }
+    },
+    {
+      "scene_id": "SC-02-WELL",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The well is choked with seaweed. Something glints far below — not coin, not stone.",
+            "ja": "井戸は海藻で詰まっている。底の奥で何かが光る——貨幣でも石でもない。",
+            "zh": "井口被海藻堵住了。深处有什么在闪光——不是铜钱，也不是石头。"
+          },
+          "emotion": "uneasy"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "The water tastes of the open sea. As if the tide rose through the earth itself.",
+            "ja": "水は外海の味がする。まるで潮が地中から溢れ出したかのように。",
+            "zh": "这水有外海的味道。仿佛潮水从地底涌了上来。"
+          },
+          "emotion": "confused"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["inspected_well"]
+      }
+    },
+    {
       "scene_id": "SC-03",
       "lines": [
         {
