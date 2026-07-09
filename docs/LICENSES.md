@@ -2,7 +2,7 @@
 
 Track every third-party asset, story source, and engine dependency.
 
-**Policy:** Public domain or CC0 preferred. Mixamo allowed per Adobe terms. No "free download" sites without clear license.
+**Policy:** All shipped art and audio must be original procedural (MIT) or documented permissive licenses (OFL/MIT/PD). Run `python3 tools/verify_asset_licenses.py` before release.
 
 ---
 
@@ -10,54 +10,61 @@ Track every third-party asset, story source, and engine dependency.
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Urashima Tarō (folktale) | Japanese folklore, public domain | Public domain | Adapted — dark retelling in `docs/GDD.md` |
+| Urashima Tarō (folktale) | Japanese folklore | Public domain | Adapted — dark retelling in `docs/GDD.md` |
 
 ---
 
-## Engine
+## Engine & plugins
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Godot Engine 4 | https://godotengine.org | MIT | Include license in game credits |
-| Godot Engine contributors | See godotengine.org/license | MIT | Credit screen required |
+| Godot Engine 4.3 | https://godotengine.org | MIT | Credits screen required |
+| GodotSteam 4.15 | https://codeberg.org/godotsteam/godotsteam | MIT | `game/addons/godotsteam/` — credits screen |
 
 ---
 
-## Fonts (planned)
+## Fonts (bundled)
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Noto Sans | notofonts/noto-fonts | OFL 1.1 | English UI (`NotoSans-*.ttf`) |
-| Noto Sans JP | notofonts/noto-cjk Sans2.004 | OFL 1.1 | Japanese UI (`NotoSansJP-*.otf`) |
-| Noto Sans SC | notofonts/noto-cjk Sans2.004 | OFL 1.1 | Chinese UI (`NotoSansSC-*.otf`) |
+| Noto Sans (Latin) | https://github.com/notofonts/noto-fonts | OFL 1.1 | `NotoSans-*.ttf` — see `game/assets/fonts/OFL.txt` |
+| Noto Sans JP | https://github.com/notofonts/noto-cjk Sans2.004 | OFL 1.1 | `NotoSansJP-*.otf` |
+| Noto Sans SC | https://github.com/notofonts/noto-cjk Sans2.004 | OFL 1.1 | `NotoSansSC-*.otf` |
 
 ---
 
-## 3D assets (planned — not yet imported)
+## Audio (original — no third-party samples)
 
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
-| _TBD_ | Kenney Building Kit | CC0 | — | Village ruins |
-| _TBD_ | Quaternius Universal Base | CC0 | — | Character base mesh |
-| _TBD_ | Quaternius Nature Pack | CC0 | — | Rocks, trees |
+| All BGM (`bgm/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | Menu, zones, combat, boss |
+| All SFX (`sfx/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | UI, combat, field |
+
+Synthesized in code (numpy). No Freesound, stock loops, or licensed recordings.
 
 ---
 
-## Audio
+## Art (original — no third-party images)
 
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
-| BGM + SFX | Procedural (`tools/generate_game_audio.py`) | MIT (repo) | 2026-07 | All zones, combat, UI SFX — pentatonic coastal mood |
+| Zone textures (`textures/zones/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | World material albedo |
+| UI panels & bars (`ui/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Dialogue, menu, HP/MP |
+| Portraits (`ui/portraits/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Dialogue silhouettes |
+| Icons (`ui/icons/*.png`, `ui/icon.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | App icon, combat intents |
+| Main menu background | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Title screen |
+| Steam capsules & screenshots | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Store page marketing |
+| Steam trailer (`steam/trailer.mp4`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Slideshow + procedural BGM |
 
-## Art (2D textures & UI)
+Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG only.
 
-| Item | Source | License | Date | Used for |
-|------|--------|---------|------|----------|
-| Zone textures | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Village/cave/palace albedo maps |
-| UI panels & bars | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Dialogue, menu, HP/MP bars |
-| Character portraits | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Dialogue portrait silhouettes |
-| Main menu & Steam art | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | Menu BG, capsules, screenshots |
-| Game icon | Procedural (`tools/generate_game_art.py`) | MIT (repo) | 2026-07 | App / export icon |
+---
+
+## 3D models
+
+| Status | Notes |
+|--------|-------|
+| **None imported** | Greybox primitives only. Planned CC0 kits (Kenney/Quaternius) are **not** in the repository. |
 
 ---
 
@@ -65,15 +72,13 @@ Track every third-party asset, story source, and engine dependency.
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Game scripts | Original (this repo) | MIT | See repository LICENSE |
-| GodotSteam (future) | Community plugin | MIT | When Steam integration added |
+| Game scripts | Original (this repo) | MIT | See repository `LICENSE` |
 
 ---
 
 ## Checklist before Steam ship
 
-- [ ] Every asset row filled (no `_TBD_`)
-- [ ] Credits screen lists Godot MIT + all CC-BY/CC0 attributions
-- [ ] No scraped or "royalty-free" without license URL saved
-- [ ] Mixamo animations documented with export date
-- [ ] Music licenses allow commercial distribution
+- [x] All art/audio procedural or documented (`verify_asset_licenses.py` passes)
+- [x] No Kenney / Quaternius / Freesound / OGA files in repo
+- [ ] Credits screen lists Godot MIT + Noto OFL + GodotSteam MIT
+- [ ] Playtest on Windows hardware

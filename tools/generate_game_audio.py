@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate original procedural audio for Tides of Urashima.
 
-Japanese coastal JRPG mood: pentatonic melodies, ocean ambience, taiko combat,
-shakuhachi-like leads, temple bells, and cave drips. All MIT (repo) — no samples.
+Copyright: Original procedural synthesis — MIT License (see repository LICENSE).
+No samples, loops, or recordings from third-party libraries are used.
 """
 from __future__ import annotations
 

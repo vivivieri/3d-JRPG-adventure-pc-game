@@ -45,8 +45,11 @@ func _build_lines() -> void:
 		"credits.game_design",
 		"credits.programming",
 		"credits.audio",
+		"credits.art",
 		"credits.localization",
+		"credits.fonts",
 		"credits.engine",
+		"credits.godotsteam",
 	]:
 		_add_line(LocalizationManager.tr_key(key), 20, Color(0.88, 0.9, 0.96))
 	_add_spacer(32)

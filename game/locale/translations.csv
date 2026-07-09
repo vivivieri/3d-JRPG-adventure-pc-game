@@ -45,7 +45,10 @@ credits.title,Tides of Urashima,浦島の潮,浦岛潮汐
 credits.story,Story adapted from Urashima Tarō (public domain),浦島太郎（公有域）を題材に改編,改编自浦岛太郎（公有领域）
 credits.game_design,Game Design & Writing,ゲームデザイン・シナリオ,游戏设计与剧本
 credits.programming,Programming,プログラミング,程序开发
-credits.audio,Audio (placeholder procedural),音響（仮プロシージャル）,音频（占位程序化生成）
+credits.audio,Audio — original procedural (MIT),オリジナル音響（MIT・プロシージャル生成）,原创音频（MIT · 程序化生成）
+credits.art,Art & UI — original procedural (MIT),アート・UI（MIT・プロシージャル生成）,美术与界面（MIT · 程序化生成）
+credits.fonts,Noto fonts (SIL Open Font License 1.1),Noto フォント（SIL Open Font License 1.1）,Noto 字体（SIL Open Font License 1.1）
+credits.godotsteam,GodotSteam plugin (MIT),GodotSteam プラグイン（MIT）,GodotSteam 插件（MIT）
 credits.localization,Localization — EN / JA / ZH,ローカライズ（英・日・中）,本地化——英/日/中
 credits.engine,Godot Engine (MIT),Godot Engine（MIT）,Godot Engine（MIT）
 credits.thanks,Thank you for playing.,遊んでくれてありがとう。,感谢游玩。

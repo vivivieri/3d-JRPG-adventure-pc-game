@@ -1,0 +1,11 @@
+file '01_village.png'
+duration 3
+file '02_caves.png'
+duration 3
+file '03_combat.png'
+duration 3
+file '04_palace.png'
+duration 3
+file '05_endings.png'
+duration 3
+file '05_endings.png'

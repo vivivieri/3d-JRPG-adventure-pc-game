@@ -2,13 +2,17 @@
 """Generate original stylized art assets for Tides of Urashima.
 
 Low-poly coastal JRPG palette: muted fog, seaweed decay, biolume caves, coral palace.
-All procedural — MIT (repo).
+
+Copyright: Original procedural output — MIT License (see repository LICENSE).
+No third-party images, textures, or fonts are embedded except bundled Noto (OFL)
+used only as a render tool for title text baked into PNG exports.
 """
 from __future__ import annotations
 
 import math
 import os
 import random
+import subprocess
 from typing import Tuple
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -35,6 +39,15 @@ PALETTE = {
     "hp": "#BF2E34",
     "mp": "#3A6EA8",
 }
+
+
+def noto_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    """Use bundled Noto (OFL) — never system fonts with unclear license."""
+    fname = "NotoSans-Bold.ttf" if bold else "NotoSans-Regular.ttf"
+    path = os.path.join(ASSETS, "fonts", fname)
+    if os.path.isfile(path):
+        return ImageFont.truetype(path, size)
+    return ImageFont.load_default()
 
 
 def hex_rgb(h: str) -> Tuple[int, int, int]:
@@ -280,12 +293,8 @@ def make_icon() -> None:
 
 def draw_title_card(img: Image.Image, title: str = "Tides of Urashima") -> Image.Image:
     draw = ImageDraw.Draw(img)
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 72)
-        sub = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
-    except OSError:
-        font = ImageFont.load_default()
-        sub = font
+    font = noto_font(72, bold=True)
+    sub = noto_font(28)
     w, h = img.size
     draw.text((w // 2, h - 120), title, fill=hex_rgb(PALETTE["ethereal"]), anchor="mm", font=font)
     draw.text((w // 2, h - 60), "A coastal JRPG folktale", fill=hex_rgb(PALETTE["fog"]), anchor="mm", font=sub)
@@ -335,8 +344,49 @@ def make_screenshots() -> None:
                 n = field[y][x]
                 px[x, y] = tuple(max(0, min(255, int(c + (n - 0.5) * 40))) for c in base)
         d = ImageDraw.Draw(img)
-        d.text((w // 2, h // 2), label, fill=hex_rgb(PALETTE["ethereal"]), anchor="mm")
+        label_font = noto_font(36, bold=True)
+        d.text((w // 2, h // 2), label, fill=hex_rgb(PALETTE["ethereal"]), anchor="mm", font=label_font)
         img.save(os.path.join(out, fname))
+
+
+def make_trailer() -> None:
+    """Slideshow of procedural screenshots + procedural village BGM (MIT)."""
+    shots_dir = os.path.join(STEAM, "screenshots")
+    audio = os.path.join(ASSETS, "audio", "bgm", "village.ogg")
+    trailer = os.path.join(STEAM, "trailer.mp4")
+    concat = os.path.join(shots_dir, "concat.txt")
+    names = ["01_village.png", "02_caves.png", "03_combat.png", "04_palace.png", "05_endings.png"]
+    with open(concat, "w") as f:
+        for name in names:
+            f.write(f"file '{name}'\n")
+            f.write("duration 3\n")
+        f.write(f"file '{names[-1]}'\n")
+    slideshow = os.path.join(shots_dir, "trailer_slideshow.mp4")
+    subprocess.run(
+        [
+            "ffmpeg", "-y", "-loglevel", "error",
+            "-f", "concat", "-safe", "0", "-i", concat,
+            "-vf", "scale=1920:1080",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p",
+            "-t", "15",
+            slideshow,
+        ],
+        check=True,
+        cwd=shots_dir,
+    )
+    if os.path.isfile(audio):
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-loglevel", "error",
+                "-i", slideshow, "-i", audio,
+                "-c:v", "copy", "-c:a", "aac", "-shortest",
+                trailer,
+            ],
+            check=True,
+        )
+        os.remove(slideshow)
+    else:
+        os.replace(slideshow, trailer)
 
 
 def main() -> None:
@@ -363,6 +413,7 @@ def main() -> None:
 
     make_steam_capsules()
     make_screenshots()
+    make_trailer()
     print("Generated game art in", ASSETS)
 
 
