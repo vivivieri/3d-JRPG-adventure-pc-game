@@ -30,3 +30,22 @@
 ./tools/capture_screenshots.sh
 # Output: /opt/cursor/artifacts/screenshots/ and steam/screenshots-capture/
 ```
+
+## Latest screenshots (`cursor/godotprompt-complete-c4bf`)
+
+| Scenario | File |
+|----------|------|
+| Main menu | `steam/screenshots-capture/main_menu.png` |
+| Beach shore (SC-01) | `steam/screenshots-capture/beach.png` |
+| Ruined village | `steam/screenshots-capture/village.png` |
+| Torii close-up | `steam/screenshots-capture/village_torii.png` |
+| Dialogue (SC-03 Yuzu) | `steam/screenshots-capture/dialogue_torii.png` |
+| Combat tutorial | `steam/screenshots-capture/combat_tutorial.png` |
+| Field menu (Tab) | `steam/screenshots-capture/field_menu.png` |
+| Tidal caves | `steam/screenshots-capture/caves.png` |
+| Cave deep pool | `steam/screenshots-capture/caves_pool.png` |
+| Shore Wraith arena | `steam/screenshots-capture/caves_boss.png` |
+| Dragon Palace | `steam/screenshots-capture/palace.png` |
+| Palace gate | `steam/screenshots-capture/palace_gate.png` |
+| Boss combat | `steam/screenshots-capture/combat_boss.png` |
+| Endings (rewind / anchor / drift) | `steam/screenshots-capture/ending_*.png` |
