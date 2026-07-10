@@ -43,13 +43,22 @@ Work top-to-bottom. After each phase, run the project (F5) and fix errors via GD
 - [x] Verify autoloads load (`GameManager`, `EventBus`, `SaveSystem`, `DialogueRunner`, `CombatManager`)
 - [x] Dialogue + interaction prompt UI autoloads
 - [x] New Game → `beach_shore.tscn` (SC-01 arrival)
+- [ ] Polish `main_menu.tscn` — title art direction per `docs/ART_DIRECTION.md`
 
 ### Phase 2 — Beach shore (SC-01)
+**Scene:** `scenes/world/beach_shore.tscn`  
+**Storyboard:** Wide shore, driftwood, lacquer box, path to village.
+
+Done:
 - [x] Sky/fog/water per art bible (scene-authored materials)
 - [x] Driftwood, rocks, lacquer box props
 - [x] `SceneTransition` to ruined village
 
 ### Phase 3 — Ruined village hub (SC-02–05)
+**Scene:** `scenes/world/ruined_village.tscn`  
+**Markers (do not move):** `ToriiShrine`, `RokuShack`, `TutorialEncounter`, `VillageWell`, `InspectBanner`, `InspectSandal`, `CaveEntrance`
+
+Done:
 - [x] Torii, shack, well, banner inspect meshes (scene-authored)
 - [x] Visible sea plane toward -Z
 - [x] Dialogue hooks SC-03 / SC-04 on torii + Roku

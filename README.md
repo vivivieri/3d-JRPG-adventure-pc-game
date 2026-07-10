@@ -50,7 +50,7 @@ steam/
   GODOTSTEAM_SETUP.md    # Steamworks / export checklist
 ```
 
-Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out a branch such as `cursor/gdai-regen-dc91` (GDAI MCP experiment) or `cursor/urashima-jrpg-scaffold-dc91` to run or build the game.
+Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out `cursor/gdai-regen-dc91` (GDAI MCP experiment) or `cursor/urashima-jrpg-scaffold-dc91` to run the game.
 
 ---
 
@@ -62,8 +62,6 @@ Design docs on `main` are the source of truth. To run the game, check out an imp
 git fetch origin
 git checkout cursor/urashima-jrpg-scaffold-dc91   # or another feature branch
 ```
-
-Then open `game/project.godot` in Godot 4.3+ and press **F5**.
 
 For a GDAI MCP regeneration experiment (GDAI only — **not** GodotPrompter):
 
