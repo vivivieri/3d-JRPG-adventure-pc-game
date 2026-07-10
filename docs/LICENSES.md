@@ -2,7 +2,11 @@
 
 Track every third-party asset, story source, and engine dependency.
 
-**Policy:** All shipped art and audio must be original procedural (MIT) or documented permissive licenses (OFL/MIT/PD). Run `python3 tools/verify_asset_licenses.py` before release.
+**Policy:** All shipped art and audio must be **copyright-safe for commercial release** — no unlicensed or all-rights-reserved material. See **`docs/ASSET_COMPLIANCE.md`** for the full allow/deny list.
+
+**Machine manifest:** `docs/asset_manifest.license.json`  
+**Verify before ship:** `bash tools/check_asset_compliance.sh`  
+**Register new assets:** `python3 tools/register_asset.py add --help`
 
 ---
 
@@ -108,7 +112,8 @@ Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG onl
 
 ## Checklist before Steam ship
 
-- [x] All art/audio procedural or documented (`verify_asset_licenses.py` passes)
-- [x] No Kenney / Quaternius / Freesound / OGA files in repo
-- [ ] Credits screen lists Godot MIT + Noto OFL + GodotSteam MIT
+- [ ] `bash tools/check_asset_compliance.sh` passes (proof in `docs/compliance/COMPLIANCE_REPORT.md`)
+- [ ] Every new asset registered in `docs/asset_manifest.license.json` + this file
+- [ ] No banned licenses (NC, SA, ARR, unknown) — see `docs/ASSET_COMPLIANCE.md` §3
+- [ ] Credits screen lists Godot MIT + Noto OFL + GodotSteam MIT + any CC-BY attributions
 - [ ] Playtest on Windows hardware

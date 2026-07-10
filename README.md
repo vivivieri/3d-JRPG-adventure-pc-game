@@ -38,7 +38,21 @@ Before the art rebuild, these specs are the source of truth:
 | [Encounter Table](docs/ENCOUNTER_TABLE.md) | Pacing, XP, shop, equipment |
 | [Cinematics](docs/CINEMATICS.md) | Camera, boss intros, endings |
 | [Audio Direction](docs/AUDIO_DIRECTION.md) | Music map, SFX, scene cues |
+| [Asset Compliance](docs/ASSET_COMPLIANCE.md) | Copyright-safe policy + verification tools |
 | [Art Direction](docs/ART_DIRECTION.md) | Visual pivot + poly budgets |
+
+### Asset compliance (required before ship)
+
+```bash
+# Register a new external asset
+python3 tools/register_asset.py add \
+  --path game/assets/models/characters/urashima/urashima.glb \
+  --license ORIGINAL --source "Custom Blender" --author "Project" \
+  --used-for "Protagonist model"
+
+# Verify all media + generate audit proof
+bash tools/check_asset_compliance.sh
+```
 
 ---
 
@@ -58,6 +72,14 @@ docs/
   MILESTONES.md          # Implementation checklist
   LOCALIZATION.md        # en / ja / zh notes
   LICENSES.md            # Asset attribution log
+  ASSET_COMPLIANCE.md    # Copyright-safe asset policy (no ARR / NC / SA)
+  asset_manifest.license.json  # Machine-readable license manifest
+
+tools/
+  check_asset_compliance.sh      # Verify + generate audit proof
+  verify_asset_licenses.py       # Scan media vs manifest
+  register_asset.py              # Add assets to manifest
+  generate_compliance_report.py  # Write COMPLIANCE_REPORT.md
   SCREENSHOTS.md         # Screenshot capture notes
   GDAI_CLOUD_SETUP.md    # Dev-only GDAI MCP setup (for code branches)
 
@@ -95,7 +117,7 @@ Then open `game/project.godot` in Godot 4.3+ and follow [`docs/GDAI_REGEN_PLAN.m
 - **Story:** Dark retelling — Urashima returns to a ruined village; the lacquer box holds stolen years
 - **Combat:** Turn-based, speed-initiative, data-driven JSON skills/enemies/AI
 - **Endings:** Rewind / Anchor / Drift (player choice at final boss)
-- **Assets:** Custom high-detail Japanese stylized (CC0 / commissioned); see `docs/ART_DIRECTION.md`
+- **Assets:** Custom high-detail Japanese stylized — **copyright-safe only** (CC0, MIT, OFL, commissioned). See `docs/ASSET_COMPLIANCE.md`
 
 ---
 
@@ -130,6 +152,7 @@ DialogueRunner.play_scene("SC-03")
 - [Audio Direction](docs/AUDIO_DIRECTION.md)
 - [Localization guide](docs/LOCALIZATION.md)
 - [License log](docs/LICENSES.md)
+- [Asset compliance policy](docs/ASSET_COMPLIANCE.md)
 - [Combat data schema](game/data/README.md)
 
 ---

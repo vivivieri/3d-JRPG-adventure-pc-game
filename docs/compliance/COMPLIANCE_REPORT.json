@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-07-10 07:00:49 UTC",
+  "policy": "docs/ASSET_COMPLIANCE.md",
+  "manifest": "docs/asset_manifest.license.json",
+  "verify_exit_code": 0,
+  "verify_passed": true,
+  "verify_output": "ASSET LICENSE CHECK PASSED\n  Policy: docs/ASSET_COMPLIANCE.md\n  Manifest: docs/asset_manifest.license.json\n  Media files scanned: 0\n  Covered by manifest: 0\n  Allowed license types: 12\n  Warnings: 7 (paths not present on this branch)\n    - Scan path not present (no media to check): game/assets\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Regular.ttf\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Bold.ttf\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSansJP-Regular.otf\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSansJP-Bold.otf\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSansSC-Regular.otf\n    - Manifest entry file not on disk yet: game/assets/fonts/NotoSansSC-Bold.otf",
+  "statistics": {
+    "total_media_files": 0,
+    "by_license": {},
+    "unlisted": 0,
+    "allowed_license_types": [
+      "APACHE-2.0",
+      "BSD-2-CLAUSE",
+      "BSD-3-CLAUSE",
+      "CC-BY-3.0",
+      "CC-BY-4.0",
+      "CC0-1.0",
+      "COMMISSIONED",
+      "MIT",
+      "MIXAMO-TOS",
+      "OFL-1.1",
+      "ORIGINAL",
+      "PUBLIC-DOMAIN"
+    ],
+    "banned_license_types": [
+      "ALL-RIGHTS-RESERVED",
+      "ASSET-STORE-DEFAULT",
+      "CC-BY-NC",
+      "CC-BY-NC-ND",
+      "CC-BY-NC-SA",
+      "CC-BY-SA",
+      "EDITORIAL-ONLY",
+      "UNKNOWN"
+    ]
+  },
+  "manifest_entry_count": 13
+}

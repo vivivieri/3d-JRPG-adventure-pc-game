@@ -336,3 +336,4 @@ Map for environment artists — 8 entries (`game/data/lore/lore_entries.json`).
 - [ ] Fog + water + lighting match mood table
 - [ ] Japanese motif read clear at 15m camera distance
 - [ ] All props logged in `LICENSES.md` if sourced externally
+- [ ] Asset registered in `docs/asset_manifest.license.json` and compliance check passes

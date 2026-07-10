@@ -7,6 +7,7 @@ Track implementation progress against the GDD milestones.
 - [x] Storyboard — 18 scenes (`docs/STORYBOARD.md`)
 - [x] Art direction bible (`docs/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/LICENSES.md`)
+- [x] Asset compliance policy + verification tools (`docs/ASSET_COMPLIANCE.md`, `tools/`)
 - [x] Godot 4 project scaffold
 - [x] Combat JSON schema + sample data
 - [x] Core scripts (GameManager, Combat, Dialogue, Save)
@@ -57,6 +58,7 @@ Track implementation progress against the GDD milestones.
 - [x] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
 - [ ] Steamworks app ID + depot upload
 - [ ] Final CC0 audio/art replacement (optional — current assets are original procedural)
+- [ ] `bash tools/check_asset_compliance.sh` passes
 - [ ] Playtest on Windows hardware
 
 ## M6 — Art rebuild (high-detail Japanese)
@@ -67,3 +69,4 @@ Track implementation progress against the GDD milestones.
 - [ ] Painted portraits (replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
 - [ ] Curated BGM per act (replace procedural audio)
+- [ ] `bash tools/check_asset_compliance.sh` passes on release branch

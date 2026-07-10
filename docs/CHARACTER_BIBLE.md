@@ -302,7 +302,8 @@ game/assets/ui/portraits/urashima.png
 
 - Export GLB with embedded textures
 - Scale: 1 Godot unit = 1 meter; Urashima height ≈ **1.7m**
-- Log every external source in `docs/LICENSES.md`
+- Register in manifest: `python3 tools/register_asset.py add --help`
+- Log every external source in `docs/LICENSES.md` + `docs/ASSET_COMPLIANCE.md`
 
 ---
 

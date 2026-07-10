@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "policy": "docs/ASSET_COMPLIANCE.md",
+  "updated": "2026-07-10",
+  "allowed_licenses": [
+    "PUBLIC-DOMAIN",
+    "CC0-1.0",
+    "MIT",
+    "APACHE-2.0",
+    "BSD-2-CLAUSE",
+    "BSD-3-CLAUSE",
+    "OFL-1.1",
+    "CC-BY-4.0",
+    "CC-BY-3.0",
+    "ORIGINAL",
+    "COMMISSIONED",
+    "MIXAMO-TOS"
+  ],
+  "banned_licenses": [
+    "ALL-RIGHTS-RESERVED",
+    "CC-BY-NC",
+    "CC-BY-NC-SA",
+    "CC-BY-SA",
+    "CC-BY-NC-ND",
+    "EDITORIAL-ONLY",
+    "ASSET-STORE-DEFAULT",
+    "UNKNOWN"
+  ],
+  "scan_paths": [
+    "game/assets",
+    "steam"
+  ],
+  "media_extensions": [
+    ".png", ".jpg", ".jpeg", ".webp", ".svg",
+    ".ogg", ".wav", ".mp3", ".flac",
+    ".mp4", ".webm",
+    ".ttf", ".otf", ".woff", ".woff2",
+    ".glb", ".gltf", ".obj", ".fbx", ".blend", ".mtl"
+  ],
+  "skip_filenames": [
+    "README.md",
+    "ASSET_LICENSE.md",
+    "OFL.txt",
+    ".gitkeep",
+    "LICENSE_KENNEY.txt",
+    "LICENSE_POLYHAVEN.txt",
+    "asset_manifest.json",
+    "polyhaven_manifest.json",
+    "model.path"
+  ],
+  "assets": [
+    {
+      "path": "docs/GDD.md",
+      "license": "PUBLIC-DOMAIN",
+      "source": "Japanese folklore — Urashima Tarō",
+      "source_url": "https://en.wikipedia.org/wiki/Urashima_Tar%C5%8D",
+      "author": "Public domain",
+      "date_added": "2026-07-10",
+      "used_for": "Story adaptation basis",
+      "attribution": null
+    },
+    {
+      "path": "game/assets/fonts/NotoSans-Regular.ttf",
+      "license": "OFL-1.1",
+      "source": "Noto Fonts",
+      "source_url": "https://github.com/notofonts/noto-fonts",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "UI Latin text",
+      "attribution": "Noto Sans — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/fonts/NotoSans-Bold.ttf",
+      "license": "OFL-1.1",
+      "source": "Noto Fonts",
+      "source_url": "https://github.com/notofonts/noto-fonts",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "UI Latin headings",
+      "attribution": "Noto Sans — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/fonts/NotoSansJP-Regular.otf",
+      "license": "OFL-1.1",
+      "source": "Noto CJK",
+      "source_url": "https://github.com/notofonts/noto-cjk",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "Japanese UI text",
+      "attribution": "Noto Sans JP — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/fonts/NotoSansJP-Bold.otf",
+      "license": "OFL-1.1",
+      "source": "Noto CJK",
+      "source_url": "https://github.com/notofonts/noto-cjk",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "Japanese UI headings",
+      "attribution": "Noto Sans JP — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/fonts/NotoSansSC-Regular.otf",
+      "license": "OFL-1.1",
+      "source": "Noto CJK",
+      "source_url": "https://github.com/notofonts/noto-cjk",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "Simplified Chinese UI text",
+      "attribution": "Noto Sans SC — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/fonts/NotoSansSC-Bold.otf",
+      "license": "OFL-1.1",
+      "source": "Noto CJK",
+      "source_url": "https://github.com/notofonts/noto-cjk",
+      "author": "Google / Noto project",
+      "date_added": "2026-07-10",
+      "used_for": "Simplified Chinese UI headings",
+      "attribution": "Noto Sans SC — SIL Open Font License 1.1"
+    },
+    {
+      "path": "game/assets/models/",
+      "license": "CC0-1.0",
+      "source": "Kenney Nature Kit + Castle Kit (prototype only — replace in M6)",
+      "source_url": "https://www.kenney.nl/assets",
+      "author": "Kenney",
+      "date_added": "2026-07-10",
+      "used_for": "Prototype 3D props — see game/assets/models/asset_manifest.json on code branches",
+      "attribution": "Kenney (CC0) — appreciated",
+      "glob": "game/assets/models/**/*"
+    },
+    {
+      "path": "game/assets/models/polyhaven/",
+      "license": "CC0-1.0",
+      "source": "Poly Haven",
+      "source_url": "https://polyhaven.com",
+      "author": "Poly Haven contributors",
+      "date_added": "2026-07-10",
+      "used_for": "Optional HD nature models",
+      "attribution": "Poly Haven (CC0) — appreciated",
+      "glob": "game/assets/models/polyhaven/**/*"
+    },
+    {
+      "path": "game/assets/audio/",
+      "license": "MIT",
+      "source": "tools/generate_game_audio.py (this repo)",
+      "source_url": null,
+      "author": "Tides of Urashima project",
+      "date_added": "2026-07-10",
+      "used_for": "Procedural BGM and SFX",
+      "attribution": null,
+      "glob": "game/assets/audio/**/*.ogg"
+    },
+    {
+      "path": "game/assets/textures/",
+      "license": "MIT",
+      "source": "tools/generate_game_art.py (this repo)",
+      "source_url": null,
+      "author": "Tides of Urashima project",
+      "date_added": "2026-07-10",
+      "used_for": "Procedural zone textures",
+      "attribution": null,
+      "glob": "game/assets/textures/**/*.png"
+    },
+    {
+      "path": "game/assets/ui/",
+      "license": "MIT",
+      "source": "tools/generate_game_art.py (this repo)",
+      "source_url": null,
+      "author": "Tides of Urashima project",
+      "date_added": "2026-07-10",
+      "used_for": "Procedural UI, portraits, icons",
+      "attribution": null,
+      "glob": "game/assets/ui/**/*.png"
+    },
+    {
+      "path": "steam/",
+      "license": "MIT",
+      "source": "tools/generate_game_art.py / capture scripts (this repo)",
+      "source_url": null,
+      "author": "Tides of Urashima project",
+      "date_added": "2026-07-10",
+      "used_for": "Steam capsules, screenshots, trailer",
+      "attribution": null,
+      "glob": "steam/**/*.{png,mp4,jpg,webp}"
+    }
+  ]
+}

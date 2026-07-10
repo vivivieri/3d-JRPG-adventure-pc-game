@@ -122,7 +122,9 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 
 **Deprecated for ship builds:** Kenney Castle kit (European read), Quaternius as final character base, procedural primitive placeholders.
 
-**Rule:** Log every download in `docs/LICENSES.md` before import.
+**Rule:** Log every download in `docs/LICENSES.md` before import. **Run `bash tools/check_asset_compliance.sh` before commit.**
+
+**Copyright policy:** Only ship-safe licenses (CC0, MIT, OFL, public domain, commissioned with rights). **Banned:** all-rights-reserved, CC-BY-NC, CC-BY-SA, unknown sources. Full list: `docs/ASSET_COMPLIANCE.md`.
 
 ---
 

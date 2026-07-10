@@ -245,5 +245,5 @@ Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**
 |------|------------|
 | Scope creep | Lock 3 locations until post-launch |
 | Asset inconsistency | Single style bible + vertical slice gate (`docs/ART_DIRECTION.md` §10) |
-| License violations | LICENSES.md audit before ship |
+| License violations | `docs/ASSET_COMPLIANCE.md` + `tools/check_asset_compliance.sh` before ship |
 | Combat feel | Vertical slice before content production |
