@@ -25,7 +25,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | M0c — Art rebuild specs | Done |
 | M0d — Gameplay systems specs | Done |
 | M0e — Story data on main | Done |
-| M6 — Art rebuild (high-detail Japanese) | Not started |
+| M6 — Art rebuild (high-detail Japanese) | Not started — see `docs/IMPLEMENTATION_PLAN.md` |
 
 ---
 
@@ -153,34 +153,23 @@ tools/
   register_asset.py              # Add assets to manifest
   generate_compliance_report.py  # Write COMPLIANCE_REPORT.md
   SCREENSHOTS.md         # Screenshot capture notes
-  GDAI_CLOUD_SETUP.md    # Dev-only GDAI MCP setup (for code branches)
+  IMPLEMENTATION_PLAN.md # Fresh Godot rebuild phases (game-implementation branch)
+  GDAI_CLOUD_SETUP.md    # Dev-only GDAI MCP setup
 
 steam/
   STORE_PAGE.md          # Steam store listing copy + asset checklist
   GODOTSTEAM_SETUP.md    # Steamworks / export checklist
 ```
 
-Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out `cursor/gdai-regen-dc91` (GDAI MCP experiment) or `cursor/urashima-jrpg-scaffold-dc91` to run the game.
-
----
-
-## Getting started (code branches)
-
-Design docs on `main` are the source of truth. To run the game, check out an implementation branch and follow its README:
+Godot project code lives on **`cursor/game-implementation-01be`** (fresh rebuild from main docs).
 
 ```bash
 git fetch origin
-git checkout cursor/urashima-jrpg-scaffold-dc91   # or another feature branch
+git checkout cursor/game-implementation-01be
+bash tools/setup_dev_environment.sh
 ```
 
-For a GDAI MCP regeneration experiment (GDAI only — **not** GodotPrompter):
-
-```bash
-git fetch origin
-git checkout cursor/gdai-regen-dc91
-```
-
-Then open `game/project.godot` in Godot 4.3+ and follow [`docs/GDAI_REGEN_PLAN.md`](docs/GDAI_REGEN_PLAN.md) + [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
+Then open `game/project.godot` in Godot 4.3+ and follow [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) + [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
 
 ---
 

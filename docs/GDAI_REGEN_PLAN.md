@@ -1,5 +1,12 @@
 # GDAI MCP regeneration plan
 
+> **DEPRECATED** — Old `cursor/gdai-regen-dc91` branch deleted.  
+> **Use instead:** `docs/IMPLEMENTATION_PLAN.md` on branch `cursor/game-implementation-01be`.
+
+---
+
+# GDAI MCP regeneration plan (archived)
+
 **Branch:** `cursor/gdai-regen-dc91`  
 **Design source:** `main` — `docs/GDD.md`, `docs/STORYBOARD.md`, `docs/ART_DIRECTION.md`  
 **Tooling:** **GDAI MCP only** — do **not** use GodotPrompter, prompt-skills, or copy `zone_visuals.gd` from other branches unless you explicitly choose to compare.

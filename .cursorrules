@@ -67,9 +67,6 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 
 **Startup order:** Open Godot → start GDAI MCP → then Cursor (GodotPrompter runs inside Cursor at any time).
 
-### Branch exception (narrow)
-Only on `cursor/gdai-regen-dc91`: **GDAI MCP only** — that branch is a controlled experiment (`docs/GDAI_REGEN_PLAN.md`). Do not use GodotPrompter there. On **all other branches**, always use both tools together per R&R above.
-
 ---
 
 ## 2. Stylized rendering rules (project-specific)
