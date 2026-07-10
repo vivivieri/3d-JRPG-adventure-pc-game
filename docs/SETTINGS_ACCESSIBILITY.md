@@ -24,6 +24,9 @@ Accessible from: Main menu, Pause menu (field + combat)
 | **Hard mode** | Off / On | Off | `hard_mode` |
 | **Hints** | On / Off | On | `hints_enabled` |
 | **Intent icon style** | Standard / High contrast | Standard | `intent_contrast` |
+| **Graphics quality** | Low / Medium / High | Medium | `graphics_quality` |
+
+See `docs/RENDERING_GUIDE.md` §10 for preset details (shadows, MSAA, glow, fog).
 
 ---
 

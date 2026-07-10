@@ -5,7 +5,7 @@
 
 **Audience note (men 20–30):** Muted palette, emotional weight, no chibi comedy. Beauty with decay.
 
-**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/RENDERING_GUIDE.md`
 
 ### Ship rule (v1)
 

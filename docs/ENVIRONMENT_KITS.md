@@ -2,7 +2,7 @@
 
 **Version:** 1.0 (Pre-build)  
 **Visual target:** High-detail stylized Japanese coastal environments — authored modular kits, no greybox boxes in ship builds.  
-**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/STORYBOARD.md`, `docs/CHARACTER_BIBLE.md`
+**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/STORYBOARD.md`, `docs/CHARACTER_BIBLE.md`, `docs/RENDERING_GUIDE.md`
 
 ---
 

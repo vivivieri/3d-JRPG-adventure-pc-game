@@ -102,6 +102,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Playtest on Windows hardware
 
 ## M6 — Art rebuild (high-detail Japanese)
+- [ ] Rendering guide applied per zone (`docs/RENDERING_GUIDE.md`)
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
 - [ ] Replace all primitive / Kenney placeholder art
 - [ ] Japanese palace gate hero set-piece (no European castle kit)
