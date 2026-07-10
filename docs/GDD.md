@@ -7,7 +7,7 @@
 **Playtime target:** 2–3 hours (main story)  
 **Genre:** 3D adventure JRPG, turn-based combat  
 
-**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/BOSS_DESIGNS.md`, `docs/ENCOUNTER_TABLE.md`, `docs/CINEMATICS.md`, `docs/QUEST_AND_FLAGS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/ITEMS_AND_ECONOMY.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/COMBAT_SYSTEMS.md`, `docs/SKILLS_BIBLE.md`, `docs/UI_UX_FLOW.md`, `docs/SAVE_AND_FAIL_STATES.md`  
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/BOSS_DESIGNS.md`, `docs/ENCOUNTER_TABLE.md`, `docs/CINEMATICS.md`, `docs/AUDIO_DIRECTION.md`, `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/NARRATIVE_WRITING_GUIDE.md`, `docs/PROGRESSION_TUNING.md`, `docs/GAME_FEEL.md`, `docs/LORE_AND_ENVIRONMENTAL_STORY.md`, `docs/WORLD_MAP_AND_FLOW.md`, `docs/REPLAY_DESIGN.md`, `docs/QUEST_AND_FLAGS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/ITEMS_AND_ECONOMY.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/COMBAT_SYSTEMS.md`, `docs/SKILLS_BIBLE.md`, `docs/UI_UX_FLOW.md`, `docs/SAVE_AND_FAIL_STATES.md`
 
 ---
 

@@ -1,8 +1,9 @@
 # Tides of Urashima — Playtest Script
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.1 (Pre-build)  
 **Target duration:** 2–3 hours  
-**Build:** Implementation branch with full story
+**Build:** Implementation branch with full story  
+**Cross-refs:** `docs/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
 
 ---
 
@@ -98,7 +99,11 @@
 
 ---
 
-## 8. Bug severity template
+## 8. Bug reporting
+
+Use the full template and severity definitions in **`docs/QA_AND_BUG_PROCESS.md`** §2–§3.
+
+Quick reference:
 
 | Severity | Example |
 |----------|---------|

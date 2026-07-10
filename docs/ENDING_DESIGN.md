@@ -1,7 +1,7 @@
 # Tides of Urashima — Ending Design
 
 **Version:** 1.0 (Pre-build)  
-**Cross-refs:** `docs/GDD.md` §10, `docs/STORYBOARD.md` SC-16–17, `docs/CINEMATICS.md`
+**Cross-refs:** `docs/GDD.md` §10, `docs/STORYBOARD.md` SC-16–17, `docs/CINEMATICS.md`, `docs/REPLAY_DESIGN.md`
 
 ---
 
@@ -118,6 +118,8 @@ After choice confirmed:
 ---
 
 ## 7. Replay & meta
+
+See **`docs/REPLAY_DESIGN.md`** for full replay, gallery, and Hard mode guidance.
 
 | Feature | Design |
 |---------|--------|

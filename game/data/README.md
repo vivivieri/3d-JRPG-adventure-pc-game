@@ -71,3 +71,5 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 - `docs/ITEMS_AND_ECONOMY.md` — item catalog
 - `docs/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
 - `docs/ENCOUNTER_TABLE.md` — pacing
+- `docs/REPLAY_DESIGN.md` — replay & gallery
+- `docs/NARRATIVE_WRITING_GUIDE.md` — writing & no-VO policy

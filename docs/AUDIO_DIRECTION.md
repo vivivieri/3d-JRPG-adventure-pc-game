@@ -1,7 +1,9 @@
 # Tides of Urashima — Audio Direction
 
 **Version:** 1.0 (Pre-build)  
-**Cross-refs:** `docs/STORYBOARD.md`, `docs/BOSS_DESIGNS.md`, `game/assets/audio/`
+**Cross-refs:** `docs/STORYBOARD.md`, `docs/BOSS_DESIGNS.md`, `docs/AUDIO_PRODUCTION_GUIDE.md` (production specs), `game/assets/audio/`
+
+**Creative direction** is in this doc. **Per-track BPM, loops, SFX file list, scene map** → `docs/AUDIO_PRODUCTION_GUIDE.md`.
 
 ---
 
@@ -13,6 +15,7 @@
 | Reference | *NieR* restraint, *Ghost of Tsushima* wind/shore, traditional koto/shamisen accents |
 | Replace | Procedural placeholder audio (`tools/generate_game_audio.py`) before ship |
 | Languages | Music is non-vocal or JP lyrics buried in mix; SFX universal |
+| Voice acting | **None** — story is text dialogue only (`NARRATIVE_WRITING_GUIDE.md` §1) |
 
 ---
 
@@ -73,7 +76,7 @@
 |-----|----------|
 | Music | -12 dBFS peak |
 | SFX | -6 dBFS peak |
-| Voice / dialogue | -9 dBFS (always readable) |
+| Voice / dialogue | N/A — text only; optional UI open SFX |
 | Ambient | -18 dBFS under music |
 
 ---

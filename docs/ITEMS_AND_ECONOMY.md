@@ -150,11 +150,9 @@ No crafting v1. Sell at shop interface (future) or auto — **v1: no sell UI; ma
 
 ---
 
-## 10. items.json alignment TODO (code branch)
+## 10. items.json alignment
 
-Add missing equipment IDs to `game/data/items/items.json`:
-- `tide_cut_saber`, `palace_edge`, `worn_haori`, `cave_wet_coat`, `spirit_bell`, `shell_charm`, `spirit_knife`, `harpoon_rod`
-- Key items: `lacquer_box`, `cave_map`
+All equipment and key item IDs listed in §3–4 are present in `game/data/items/items.json` (schema v2). Update this doc if new items are added.
 
 ---
 

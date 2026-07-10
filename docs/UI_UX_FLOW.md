@@ -162,6 +162,8 @@ No retry-in-place v1.
 
 ## 11. Controller (Xbox layout)
 
+**Ship target:** Full main-path playable on gamepad (M5 polish). No remapping v1.
+
 | Action | Button |
 |--------|--------|
 | Move | Left stick |
@@ -173,6 +175,19 @@ No retry-in-place v1.
 | Camera | Right stick |
 
 **Combat:** D-pad menu navigate; A confirm; B back
+
+### SC-16 choice (gamepad)
+
+| Rule | Detail |
+|------|--------|
+| Default focus | **No** option pre-selected |
+| Navigate | D-pad up/down between 3 cards |
+| Select | A on card → confirm modal |
+| Confirm ending | A on "Are you certain?" |
+| Back | B returns to card selection |
+| Blocked | Attack/combat inputs disabled |
+
+See `ENDING_DESIGN.md` §2 and `GAME_FEEL.md` §6.
 
 ---
 
