@@ -36,6 +36,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Document | Purpose |
 |----------|---------|
 | [Character Bible](docs/CHARACTER_BIBLE.md) | Models, colors, animations, portraits |
+| [Items 3D Model Guide](docs/ITEMS_3D_MODEL_GUIDE.md) | Weapons, props, pickups, attachment rig |
 | [Environment Kits](docs/ENVIRONMENT_KITS.md) | Modular assets per zone + lore placements |
 | [Boss Designs](docs/BOSS_DESIGNS.md) | Phases, patterns, hard mode |
 | [Encounter Table](docs/ENCOUNTER_TABLE.md) | Pacing, XP, shop, equipment |
@@ -101,6 +102,7 @@ docs/
   STORYBOARD.md          # 19 scene beats (SC-00 prologue + 18 main)
   ART_DIRECTION.md       # Visual style bible (v1.1 — high-detail Japanese)
   CHARACTER_BIBLE.md     # Character models, anims, portraits
+  ITEMS_3D_MODEL_GUIDE.md # Item/prop 3D specs, rig attachments
   ENVIRONMENT_KITS.md    # Modular environment specs per zone
   BOSS_DESIGNS.md        # Boss phases and patterns
   ENCOUNTER_TABLE.md     # Combat pacing, shop, economy
@@ -195,6 +197,7 @@ DialogueRunner.play_scene("SC-03")
 - [Storyboard](docs/STORYBOARD.md)
 - [Art Direction](docs/ART_DIRECTION.md)
 - [Character Bible](docs/CHARACTER_BIBLE.md)
+- [Items 3D Model Guide](docs/ITEMS_3D_MODEL_GUIDE.md)
 - [Environment Kits](docs/ENVIRONMENT_KITS.md)
 - [Boss Designs](docs/BOSS_DESIGNS.md)
 - [Encounter Table](docs/ENCOUNTER_TABLE.md)

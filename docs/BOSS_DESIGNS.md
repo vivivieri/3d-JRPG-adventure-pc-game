@@ -2,7 +2,7 @@
 
 **Version:** 1.0 (Pre-build)  
 **Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
-**Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`
+**Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/CHARACTER_BIBLE.md` §6 (3D specs)
 
 ---
 
@@ -44,6 +44,8 @@
 - Colossal draped form (~4m tall); cloth simulated as static sculpt + particle drips
 - Multiple villager faces visible under folds
 - Emerges from pool (intro cinematic 5s)
+
+**3D production:** Full mesh breakdown, poly budgets, GLB paths — `docs/CHARACTER_BIBLE.md` §6 (`shore_wraith`).
 
 ### Stats (Normal)
 
@@ -170,6 +172,8 @@
 - Humanoid figure of flowing water; stolen **clock motifs** embedded in cloak (Roman numerals blurred — not literal clocks)
 - Phase 2: cloak becomes tidal wave silhouette
 - Phase 3: shrinks to human scale; calmer, more tragic
+
+**3D production:** Phase mesh swaps, materials, animations — `docs/CHARACTER_BIBLE.md` §6 (`tide_keeper`).
 
 ### Stats (Normal)
 

@@ -1,8 +1,8 @@
 # Tides of Urashima — Character Bible
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.1 (Pre-build)  
 **Visual target:** High-detail stylized Japanese — hand-painted albedo, readable silhouettes, no primitive placeholders in ship builds.  
-**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/STORYBOARD.md`, `docs/BOSS_DESIGNS.md`
+**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/STORYBOARD.md`, `docs/BOSS_DESIGNS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`
 
 ---
 
@@ -19,6 +19,36 @@
 | Naming | File prefix = character id (`urashima`, `yuzu`, `roku`, etc.) |
 
 **Ship rule:** No `CapsuleMesh`, `BoxMesh`, or Kenney knight placeholders in player-facing builds.
+
+### Model sheet template
+
+Every character and boss requires an orthographic model sheet before modeling. Full template and required fields: `docs/ITEMS_3D_MODEL_GUIDE.md` §2. Store sheets in `docs/model_sheets/<character_id>.png` (design-time only).
+
+### Rig attachment points
+
+| Empty name | Parent bone | Used by |
+|------------|-------------|---------|
+| `attach_weapon_r` | `RightHand` | Urashima weapons; Yuzu spirit knife |
+| `attach_back_prop` | `Spine2` | Roku harpoon (stowed) |
+| `attach_box_hip_l` | `Hips` | Urashima lacquer box |
+| `attach_charm_head` | `Head` | Yuzu fox bell (part of hair mesh v1) |
+
+Weapon parenting, combat offsets, and per-item mesh paths: `docs/ITEMS_3D_MODEL_GUIDE.md` §3–4.
+
+### Character LOD (field only)
+
+Combat uses full-detail mesh. Field exploration may swap LODs for performance.
+
+| LOD | Tris (hero) | Tris (party) | Tris (enemy) | When |
+|-----|-------------|--------------|--------------|------|
+| LOD0 | 12k–18k | 10k–15k | 5k–10k | Player within 15 m |
+| LOD1 | 6k–9k | 5k–8k | 3k–5k | 15–30 m |
+| LOD2 | 2k–4k | 2k–3k | 1k–2k | 30 m+ or off-screen |
+
+- **Bosses:** LOD0 only in boss arenas (no swap during fight).
+- **Followers:** Yuzu/Roku use LOD1 beyond 10 m from camera.
+- **Blend:** 0.2 s cross-fade; no pop on swap.
+- **Portraits / combat:** Always LOD0 source mesh.
 
 ---
 
@@ -209,7 +239,21 @@ Taunt = harpoon planted, roar anim; Shell Guard = crouch behind folded arms
 
 ### Shore Wraith (`shore_wraith`) — BOSS
 
-See `docs/BOSS_DESIGNS.md`. Colossal draped form; faces visible under cloth folds.
+**Combat design:** `docs/BOSS_DESIGNS.md` §2.
+
+| Spec | Detail |
+|------|--------|
+| **Height** | ~4.0 m (colossal; camera looks up in arena) |
+| **Silhouette** | Draped monolith; no legs; cloth pools at base |
+| **Tris** | ~32k (LOD0); LOD1 ~15k for intro cinematic wide shot |
+| **Mesh breakdown** | (1) Outer drape 18k — sculpted folds, no cloth sim; (2) Inner face cluster 6k — 5–7 embedded villager faces; (3) Arm tendrils 4k; (4) Base mist cards 4k |
+| **Palette** | Drape `#2A3A4A`; wet highlights `#4AE8D8`; faces `#C8A888` desaturated |
+| **Materials** | Matte cloth toon; faces slightly glossy (unsettling); additive drip particles |
+| **VFX** | Water drip particles from hem; phase 2 whisper overlay on faces |
+| **Animations** | `idle_float`, `drowned_grasp`, `regret_aura`, `heavy_slam`, `phase_transition`, `summon_wraith`, `death_collapse` |
+| **Intro** | Emerges from pool — 5s; mesh rises from water plane with alpha fade on lower drape |
+| **GLB** | `game/assets/models/enemies/shore_wraith/shore_wraith.glb` |
+| **Portrait** | 512×512 — draped form + single visible face |
 
 ---
 
@@ -228,7 +272,21 @@ See `docs/BOSS_DESIGNS.md`. Colossal draped form; faces visible under cloth fold
 
 ### Tide Keeper (`tide_keeper`) — FINAL BOSS
 
-See `docs/BOSS_DESIGNS.md`. Humanoid tide; clock motifs in water cloak.
+**Combat design:** `docs/BOSS_DESIGNS.md` §4.
+
+| Spec | Detail |
+|------|--------|
+| **Height** | Phase 1–2: ~3.2 m; Phase 3: ~1.8 m (shrinks to human scale) |
+| **Silhouette** | Humanoid water form; blurred clock numerals in cloak volume |
+| **Tris** | ~38k LOD0 (phase 1 body); phase 2 cloak swap +8k; phase 3 mesh swap 18k |
+| **Mesh breakdown** | (1) Core body 12k — translucent water shell; (2) Cloak volume 20k — sculpted wave + embedded numeral cards (blurred, not readable); (3) Crown/head 6k |
+| **Palette** | Body `#1A4A5A` → `#4AE8D8` edge; cloak `#1A1A3A`; numerals `#D4A55A` at 30% opacity |
+| **Phase materials** | P1: calm ripple scroll; P2: faster flow + higher emissive; P3: muted, more opaque, tragic stillness |
+| **VFX** | Flowing UV scroll on body; Maelstrom phase = cloak mesh scale pulse |
+| **Animations** | `idle_drift`, `tidal_fingers`, `borrowed_moment`, `gentle_pull`, `maelstrom`, `ebb_remembrance`, `phase_transition` ×2, `last_mercy`, `death_dissolve` |
+| **Choice gate** | At 10% HP combat pauses; mesh holds idle_drift; UI overlay only |
+| **GLB** | `game/assets/models/enemies/tide_keeper/tide_keeper_p1.glb`, `tide_keeper_p2.glb`, `tide_keeper_p3.glb` |
+| **Portrait** | 768×768 — phase 1 hero; UI may swap to p3 for choice moment |
 
 ---
 
@@ -310,9 +368,11 @@ game/assets/ui/portraits/urashima.png
 ## 11. Production order
 
 1. Urashima model + walk + idle (vertical slice gate)
-2. Torii + shack set dressing with Urashima in SC-02
-3. Salt Crab + combat portraits
-4. Yuzu + Shore Wraith (Act II gate)
-5. Roku + remaining enemies
-6. Palace Sentinel + Tide Keeper + Otohime bust
-7. Ending variants (crowd silhouettes, boat)
+2. Lacquer box + `fisher_katana` (`docs/ITEMS_3D_MODEL_GUIDE.md` §4, §8)
+3. Torii + shack set dressing with Urashima in SC-02
+4. Salt Crab + combat portraits
+5. Yuzu + Shore Wraith (Act II gate)
+6. Roku + remaining enemies
+7. Palace Sentinel + Tide Keeper + Otohime bust
+8. Ending variants (crowd silhouettes, boat)
+9. Remaining item pickups and weapon tiers

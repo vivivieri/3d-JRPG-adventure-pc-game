@@ -5,7 +5,7 @@
 
 **Audience note (men 20–30):** Muted palette, emotional weight, no chibi comedy. Beauty with decay.
 
-**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`
 
 ### Ship rule (v1)
 
@@ -101,6 +101,9 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 | Standard enemy | 5k–10k |
 | Boss | 25k–40k |
 | Environment module | 500–3k |
+| Handheld item / pickup | 200–1.2k |
+| Equipped weapon | 800–2.5k |
+| Key story prop (lacquer box) | 1k–3k |
 | Hero set-piece (torii, gate) | 8k–20k |
 
 ---
@@ -131,11 +134,12 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 ## 7. Blender → Godot pipeline
 
 1. Model in Blender per `docs/CHARACTER_BIBLE.md` poly budgets
-2. UV unwrap → hand-paint albedo (4K heroes, 2K modules)
-3. Export as `.glb` (embedded textures)
-4. Import to `game/assets/models/characters/` or `environment/`
-5. Rig humanoids via Mixamo if needed
-6. Materials: Godot toon shader family; spirits use alpha on lower body
+2. Items & props per `docs/ITEMS_3D_MODEL_GUIDE.md`
+3. UV unwrap → hand-paint albedo (4K heroes, 2K modules, 1K weapons)
+4. Export as `.glb` (embedded textures)
+5. Import to `game/assets/models/characters/`, `environment/`, or `items/`
+6. Rig humanoids via Mixamo if needed
+7. Materials: Godot toon shader family; spirits use alpha on lower body
 
 ---
 

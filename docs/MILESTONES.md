@@ -14,7 +14,8 @@ Track implementation progress against the GDD milestones.
 - [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
 
 ## M0c — Pre-build design (art rebuild specs)
-- [x] Character bible (`docs/CHARACTER_BIBLE.md`)
+- [x] Character bible (`docs/CHARACTER_BIBLE.md`) — v1.1: LOD, boss 3D, attachment rig
+- [x] Items 3D model guide (`docs/ITEMS_3D_MODEL_GUIDE.md`)
 - [x] Environment kits (`docs/ENVIRONMENT_KITS.md`)
 - [x] Boss design sheets (`docs/BOSS_DESIGNS.md`)
 - [x] Encounter & pacing table (`docs/ENCOUNTER_TABLE.md`)

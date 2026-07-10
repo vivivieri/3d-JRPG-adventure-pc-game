@@ -69,4 +69,5 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 - `docs/DATA_ARCHITECTURE.md` — full architecture
 - `docs/QUEST_AND_FLAGS.md` — quest & flag detail
 - `docs/ITEMS_AND_ECONOMY.md` — item catalog
+- `docs/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
 - `docs/ENCOUNTER_TABLE.md` — pacing

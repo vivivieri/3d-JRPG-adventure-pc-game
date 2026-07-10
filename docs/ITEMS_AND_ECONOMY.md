@@ -1,9 +1,9 @@
 # Tides of Urashima — Items & Economy
 
 **Version:** 1.0 (Pre-build)  
-**Cross-refs:** `docs/ENCOUNTER_TABLE.md`, `game/data/items/items.json`, `docs/QUEST_AND_FLAGS.md`
+**Cross-refs:** `docs/ENCOUNTER_TABLE.md`, `game/data/items/items.json`, `docs/QUEST_AND_FLAGS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`
 
-**Canonical rule:** Item IDs in this doc match `items.json`. Display names shown for UI.
+**Canonical rule:** Item IDs in this doc match `items.json`. Display names shown for UI. **3D mesh specs:** `docs/ITEMS_3D_MODEL_GUIDE.md`.
 
 ---
 
