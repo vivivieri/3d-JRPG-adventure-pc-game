@@ -2,13 +2,24 @@
 
 **Format per scene:** ID, location, camera, dialogue summary, gameplay type, mood, assets needed.
 
-**Total scenes:** 18 (main path)
+**Total scenes:** 19 (SC-00 prologue + 18 main path)
 
-**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`
+**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`
 
 ---
 
 ## Act I — The Return
+
+### SC-00 — Prologue: The Rescue (new)
+| Field | Detail |
+|-------|--------|
+| **Location** | Black / montage — sea, palace silhouette |
+| **Camera** | Slow fades; letterbox optional |
+| **Summary** | Urashima saves wounded kappa-turtle spirit. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
+| **Gameplay** | Non-interactive; skippable after 3s (hold Confirm after first play) |
+| **Mood** | Mythic, fateful |
+| **Assets** | Kappa-turtle spirit silhouette, box, palace gold flash |
+| **Flag** | `prologue_seen` |
 
 ### SC-01 — Arrival at the Shore
 | Field | Detail |
@@ -228,6 +239,7 @@
 
 ```mermaid
 flowchart LR
+    SC00[SC-00 Prologue] --> SC01
     SC01 --> SC02 --> SC03 --> SC04 --> SC05
     SC05 --> SC06 --> SC07 --> SC08 --> SC09
     SC09 --> SC10 --> SC11 --> SC12 --> SC13
@@ -244,6 +256,7 @@ flowchart LR
 ### Phase 0 — Design lock (complete)
 - [x] GDD, storyboard, art bible
 - [x] Character bible, environment kits, boss designs, encounter table, cinematics
+- [x] Quest/flags, tutorial, ending, economy, combat, skills, UI, save, puzzle, achievements, playtest
 
 ### Phase 1 — Vertical art slice
 1. SC-02 Ruined Village hub (`village_torii_damaged`, shack, well, Urashima model)

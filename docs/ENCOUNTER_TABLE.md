@@ -106,18 +106,17 @@
 
 ### Roku's shop (`roku_shack`)
 
-Available after SC-04; restocks after SC-09.
+Available after SC-04; restocks after SC-09. **Full catalog:** `docs/ITEMS_AND_ECONOMY.md` §7.
 
-| Item | Price | Stock | Notes |
-|------|-------|-------|-------|
-| Potion | 30 | ∞ | Heal 40% HP |
-| Antidote | 50 | ∞ | Cure poison |
-| Ether | 45 | ∞ | Restore 30% MP |
-| Shell Charm | 120 | 1 | +2 DEF accessory |
-| Skill scroll: `tidal_slash` | 200 | 1 | Urashima only |
-| Skill scroll: `purify` | 200 | 1 | Yuzu only |
+| Item ID | Price | Stock | Notes |
+|---------|-------|-------|-------|
+| `sea_salve` | 40 | ∞ | Heal 80 HP |
+| `coral_antidote` | 30 | ∞ | Cure poison |
+| `spirit_tonic` | 50 | ∞ | Restore 25 MP |
+| `shell_charm` | 80 | 1 | +2 DEF charm |
+| Skill scrolls | 200 | 1 each | `tidal_slash`, `purify` |
 
-**Design intent:** Player can afford 6–8 potions + one scroll on main path without grind.
+**Design intent:** Player can afford 6–8 salves + one scroll on main path without grind.
 
 ---
 
@@ -125,11 +124,11 @@ Available after SC-04; restocks after SC-09.
 
 | Slot | Act I | Act II | Act III |
 |------|-------|--------|---------|
-| Weapon | Rusted Blade (start) | Tide-Cut Saber (chest SC-07) | Palace Edge (Sentinel drop) |
-| Armor | Worn Haori | Cave-Wet Coat (shop) | — |
-| Charm | — | Shell Charm (shop) | Spirit Bell (lore_06) |
+| Weapon | `fisher_katana` (start) | `tide_cut_saber` (chest SC-07) | `palace_edge` (Sentinel drop) |
+| Armor | `worn_haori` | `cave_wet_coat` (shop) | — |
+| Charm | — | `shell_charm` (shop) | `spirit_bell` (lore_06) |
 
-Stats defined in `game/data/items/items.json` — tune ATK +2 per act tier.
+Canonical IDs: `docs/ITEMS_AND_ECONOMY.md` §3.
 
 ---
 

@@ -22,13 +22,15 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | M3 — Chapter 1 playable | Done |
 | M4 — Full story + endings | Done |
 | M5 — Polish + Steam page | In progress |
+| M0c — Art rebuild specs | Done |
+| M0d — Gameplay systems specs | Done |
 | M6 — Art rebuild (high-detail Japanese) | Not started |
 
 ---
 
-## Pre-build design package (M0c)
+## Pre-build design package
 
-Before the art rebuild, these specs are the source of truth:
+### Art & compliance (M0c)
 
 | Document | Purpose |
 |----------|---------|
@@ -40,6 +42,24 @@ Before the art rebuild, these specs are the source of truth:
 | [Audio Direction](docs/AUDIO_DIRECTION.md) | Music map, SFX, scene cues |
 | [Asset Compliance](docs/ASSET_COMPLIANCE.md) | Copyright-safe policy + verification tools |
 | [Art Direction](docs/ART_DIRECTION.md) | Visual pivot + poly budgets |
+
+### Gameplay systems (M0d)
+
+| Document | Purpose |
+|----------|---------|
+| [Quest & Flags](docs/QUEST_AND_FLAGS.md) | 5 quests, story flags, zone blockers |
+| [Tutorial Design](docs/TUTORIAL_DESIGN.md) | Onboarding matrix + SC-00 prologue |
+| [Ending Design](docs/ENDING_DESIGN.md) | Choice UI, 3 endings, replay |
+| [Items & Economy](docs/ITEMS_AND_ECONOMY.md) | Canonical items, shop, drops |
+| [Combat Systems](docs/COMBAT_SYSTEMS.md) | Elements, status, limits |
+| [Skills Bible](docs/SKILLS_BIBLE.md) | 15 player skills |
+| [UI / UX Flow](docs/UI_UX_FLOW.md) | Menus, HUD, controller |
+| [Save & Fail States](docs/SAVE_AND_FAIL_STATES.md) | Autosave, game over |
+| [Settings & Accessibility](docs/SETTINGS_ACCESSIBILITY.md) | Options, hard mode, a11y |
+| [Puzzle Design](docs/PUZZLE_DESIGN.md) | SC-07 water puzzle |
+| [Achievements](docs/ACHIEVEMENTS.md) | 12 Steam achievements |
+| [Playtest Script](docs/PLAYTEST_SCRIPT.md) | 2–3h QA path |
+| [Pacing Chart](docs/PACING_CHART.md) | Emotional beat timeline |
 
 ### Asset compliance (required before ship)
 
@@ -61,7 +81,7 @@ bash tools/check_asset_compliance.sh
 ```
 docs/
   GDD.md                 # Game design document
-  STORYBOARD.md          # 18 scene beats
+  STORYBOARD.md          # 19 scene beats (SC-00 prologue + 18 main)
   ART_DIRECTION.md       # Visual style bible (v1.1 — high-detail Japanese)
   CHARACTER_BIBLE.md     # Character models, anims, portraits
   ENVIRONMENT_KITS.md    # Modular environment specs per zone
@@ -69,6 +89,19 @@ docs/
   ENCOUNTER_TABLE.md     # Combat pacing, shop, economy
   CINEMATICS.md          # Camera and cinematic beats
   AUDIO_DIRECTION.md     # Music and SFX spec
+  PACING_CHART.md        # Emotional beat timeline
+  QUEST_AND_FLAGS.md     # 5 quests + story flags
+  TUTORIAL_DESIGN.md     # Onboarding spec
+  ENDING_DESIGN.md       # Three endings + choice UI
+  ITEMS_AND_ECONOMY.md   # Items, shop, drops
+  COMBAT_SYSTEMS.md      # Elements, status, limits
+  SKILLS_BIBLE.md        # Player skills
+  UI_UX_FLOW.md          # Menus and HUD
+  SAVE_AND_FAIL_STATES.md
+  SETTINGS_ACCESSIBILITY.md
+  PUZZLE_DESIGN.md
+  ACHIEVEMENTS.md
+  PLAYTEST_SCRIPT.md
   MILESTONES.md          # Implementation checklist
   LOCALIZATION.md        # en / ja / zh notes
   LICENSES.md            # Asset attribution log
@@ -150,6 +183,19 @@ DialogueRunner.play_scene("SC-03")
 - [Encounter Table](docs/ENCOUNTER_TABLE.md)
 - [Cinematics](docs/CINEMATICS.md)
 - [Audio Direction](docs/AUDIO_DIRECTION.md)
+- [Pacing Chart](docs/PACING_CHART.md)
+- [Quest & Flags](docs/QUEST_AND_FLAGS.md)
+- [Tutorial Design](docs/TUTORIAL_DESIGN.md)
+- [Ending Design](docs/ENDING_DESIGN.md)
+- [Items & Economy](docs/ITEMS_AND_ECONOMY.md)
+- [Combat Systems](docs/COMBAT_SYSTEMS.md)
+- [Skills Bible](docs/SKILLS_BIBLE.md)
+- [UI / UX Flow](docs/UI_UX_FLOW.md)
+- [Save & Fail States](docs/SAVE_AND_FAIL_STATES.md)
+- [Settings & Accessibility](docs/SETTINGS_ACCESSIBILITY.md)
+- [Puzzle Design](docs/PUZZLE_DESIGN.md)
+- [Achievements](docs/ACHIEVEMENTS.md)
+- [Playtest Script](docs/PLAYTEST_SCRIPT.md)
 - [Localization guide](docs/LOCALIZATION.md)
 - [License log](docs/LICENSES.md)
 - [Asset compliance policy](docs/ASSET_COMPLIANCE.md)

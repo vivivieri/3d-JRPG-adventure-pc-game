@@ -131,6 +131,17 @@
 
 ## 7. Storyboard scene specs
 
+### SC-00 — Prologue
+
+| Time | Shot |
+|------|------|
+| 0–2s | Black + surf |
+| 2–20s | Kappa-turtle rescue montage |
+| 20–40s | Palace silhouette; Otohime; box |
+| 40–45s | Fade to SC-01 shore |
+
+See `docs/TUTORIAL_DESIGN.md` §2.
+
 ### SC-01 — Arrival
 
 | Beat | Camera |

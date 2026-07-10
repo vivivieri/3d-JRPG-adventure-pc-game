@@ -4,7 +4,7 @@ Track implementation progress against the GDD milestones.
 
 ## M0 — Pre-production
 - [x] Game Design Document (`docs/GDD.md`)
-- [x] Storyboard — 18 scenes (`docs/STORYBOARD.md`)
+- [x] Storyboard — 19 scenes (`docs/STORYBOARD.md` — SC-00 + 18 main)
 - [x] Art direction bible (`docs/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/LICENSES.md`)
 - [x] Asset compliance policy + verification tools (`docs/ASSET_COMPLIANCE.md`, `tools/`)
@@ -21,6 +21,21 @@ Track implementation progress against the GDD milestones.
 - [x] Cinematics & camera spec (`docs/CINEMATICS.md`)
 - [x] Audio direction (`docs/AUDIO_DIRECTION.md`)
 - [x] Art direction pivot — high-detail Japanese stylized (`docs/ART_DIRECTION.md` v1.1)
+
+## M0d — Pre-build game design (gameplay systems)
+- [x] Quest & story flag map (`docs/QUEST_AND_FLAGS.md`) — 5 main quests
+- [x] Tutorial & onboarding (`docs/TUTORIAL_DESIGN.md`) + SC-00 prologue
+- [x] Ending design (`docs/ENDING_DESIGN.md`)
+- [x] Items & economy (`docs/ITEMS_AND_ECONOMY.md`)
+- [x] Combat systems (`docs/COMBAT_SYSTEMS.md`)
+- [x] Skills bible (`docs/SKILLS_BIBLE.md`) — 15 player skills
+- [x] UI / UX flow (`docs/UI_UX_FLOW.md`)
+- [x] Save & fail states (`docs/SAVE_AND_FAIL_STATES.md`)
+- [x] Settings & accessibility (`docs/SETTINGS_ACCESSIBILITY.md`)
+- [x] Puzzle design SC-07 (`docs/PUZZLE_DESIGN.md`)
+- [x] Steam achievements (`docs/ACHIEVEMENTS.md`)
+- [x] Playtest script (`docs/PLAYTEST_SCRIPT.md`)
+- [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
 ## M1 — Greybox exploration
 - [x] Player movement polish (camera orbit — right-mouse + scroll)

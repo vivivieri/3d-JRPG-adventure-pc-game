@@ -7,7 +7,7 @@
 **Playtime target:** 2–3 hours (main story)  
 **Genre:** 3D adventure JRPG, turn-based combat  
 
-**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/BOSS_DESIGNS.md`, `docs/ENCOUNTER_TABLE.md`, `docs/CINEMATICS.md`  
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/BOSS_DESIGNS.md`, `docs/ENCOUNTER_TABLE.md`, `docs/CINEMATICS.md`, `docs/QUEST_AND_FLAGS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/ITEMS_AND_ECONOMY.md`, `docs/COMBAT_SYSTEMS.md`, `docs/SKILLS_BIBLE.md`, `docs/UI_UX_FLOW.md`, `docs/SAVE_AND_FAIL_STATES.md`  
 
 ---
 
@@ -61,9 +61,9 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 | Dungeons | 2 (Tidal Caves, Dragon Palace Gate) |
 | Bosses | 3 (Shore Wraith, Palace Sentinel, Tide Keeper) |
 | Party members | 3 (Urashima, Yuzu the shrine maiden spirit, Roku the diver) |
-| Main quests | 5 |
+| Main quests | 5 — see `docs/QUEST_AND_FLAGS.md` |
 | Side lore collectibles | 8 |
-| Skills (total) | ~18 |
+| Skills (total) | 15 player + 6 enemy — see `docs/SKILLS_BIBLE.md` |
 | Playtime | 2–3 hours |
 
 ---
@@ -211,6 +211,7 @@ game/
 | M0 | GDD + storyboard + repo | ✓ This doc |
 | M0b | i18n (en / ja / zh) | ✓ LocalizationManager + CSV |
 | M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
+| M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, ITEMS, COMBAT, SKILLS, UI, SAVE, etc. |
 | M1 | Greybox movement + dialogue | Walk village, talk to NPC |
 | M2 | Combat vertical slice | 1 fight feels good |
 | M3 | Chapter 1 playable | Tidal Caves complete |
