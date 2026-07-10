@@ -60,6 +60,8 @@ game/
 2. Open `game/project.godot` in Godot
 3. Press **F5** to run (starts at Main Menu)
 
+Optional **dev-only** Godot Editor automation via GDAI MCP (not shipped in Steam builds): [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
+
 ### Controls
 
 | Action | Key |

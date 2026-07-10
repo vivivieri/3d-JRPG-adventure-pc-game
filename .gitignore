@@ -22,6 +22,9 @@ dist/
 *.zip
 .godot-sdk/
 .asset-dl/
+
+# Dev-only — GDAI MCP plugin (commercial; do not ship in Steam builds)
+game/addons/gdai-mcp-plugin-godot/
 game/assets/models/polyhaven/
 steam/screenshots/concat.txt
 steam/screenshots/trailer_slideshow.mp4
