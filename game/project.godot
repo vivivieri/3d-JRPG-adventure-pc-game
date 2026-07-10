@@ -25,6 +25,8 @@ SaveSystem="*res://scripts/core/save_system.gd"
 LocalizationManager="*res://scripts/core/localization_manager.gd"
 DialogueRunner="*res://scripts/narrative/dialogue_runner.gd"
 CombatManager="*res://scripts/combat/combat_manager.gd"
+SettingsManager="*res://scripts/core/settings_manager.gd"
+SteamManager="*res://scripts/core/steam_manager.gd"
 GDAIMCPRuntime="*res://addons/gdai-mcp-plugin-godot/gdai_mcp_runtime.gd"
 
 [input]

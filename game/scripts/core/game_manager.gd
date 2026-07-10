@@ -182,6 +182,7 @@ func set_flag(flag_id: String, value: Variant = true) -> void:
 	flags[resolved] = value
 	EventBus.flag_changed.emit(resolved, value)
 	_check_quest_progress()
+	SteamManager.on_flag_set(resolved, value)
 
 
 func get_flag(flag_id: String, default: Variant = false) -> Variant:

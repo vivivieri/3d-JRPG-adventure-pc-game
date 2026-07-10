@@ -28,9 +28,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -220.0
-offset_top = -200.0
+offset_top = -220.0
 offset_right = 220.0
-offset_bottom = 200.0
+offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
@@ -59,6 +59,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Continue"
 
+[node name="SettingsButton" type="Button" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Settings"
+
 [node name="DevHubButton" type="Button" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -69,7 +74,60 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Quit"
 
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="GraphicsRow" type="HBoxContainer" parent="SettingsPanel/VBox"]
+layout_mode = 2
+
+[node name="GraphicsLabel" type="Label" parent="SettingsPanel/VBox/GraphicsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Graphics quality"
+
+[node name="GraphicsOption" type="OptionButton" parent="SettingsPanel/VBox/GraphicsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+selected = 1
+popup/item_0/text = "Low"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+
+[node name="CloseSettingsButton" type="Button" parent="SettingsPanel/VBox"]
+layout_mode = 2
+text = "Close"
+
 [connection signal="pressed" from="VBox/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="VBox/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="VBox/SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBox/DevHubButton" to="." method="_on_dev_hub_pressed"]
 [connection signal="pressed" from="VBox/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="item_selected" from="SettingsPanel/VBox/GraphicsRow/GraphicsOption" to="." method="_on_graphics_changed"]
+[connection signal="pressed" from="SettingsPanel/VBox/CloseSettingsButton" to="." method="_on_settings_close_pressed"]

@@ -15,3 +15,4 @@ signal scene_blocked_changed(blocked: bool)
 signal lore_collected(lore_id: String)
 signal game_saved
 signal game_loaded
+signal graphics_settings_changed(preset: String)

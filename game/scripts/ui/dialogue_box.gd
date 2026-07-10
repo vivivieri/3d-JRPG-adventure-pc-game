@@ -22,6 +22,8 @@ func _ready() -> void:
 
 
 func start(scene_data: Dictionary, done_callback: Callable) -> void:
+	if SettingsManager:
+		_cps = SettingsManager.text_speed_cps
 	_scene_data = scene_data
 	_done_callback = done_callback
 	_lines = scene_data.get("lines", [])

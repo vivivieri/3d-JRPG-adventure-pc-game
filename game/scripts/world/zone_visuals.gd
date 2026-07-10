@@ -152,6 +152,9 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 			env.fog_density = 0.012
 			env.fog_aerial_perspective = 0.5
 
+	if SettingsManager:
+		SettingsManager.apply_to_environment(env)
+
 	env_node.environment = env
 
 
@@ -198,6 +201,9 @@ static func _apply_directional_light(root: Node3D, palette: Dictionary, zone_id:
 		"tidal_caves":
 			light.rotation_degrees = Vector3(-70, 15, 0)
 			light.light_energy = 0.45
+
+	if SettingsManager:
+		SettingsManager.apply_to_directional_light(light)
 
 
 static func _apply_fill_lights(root: Node3D, palette: Dictionary, zone_id: String) -> void:
