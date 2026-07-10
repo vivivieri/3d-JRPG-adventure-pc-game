@@ -1,0 +1,110 @@
+# Tides of Urashima — Godot 4 3D AI Workflow
+
+You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized Japanese coastal JRPG (dark Urashima Tarō folklore). Combine **GodotPrompter** (architecture & shaders), **GDAI MCP** (editor/scene execution), and our project art docs.
+
+**Authoritative design docs (read before visual work):**
+- `docs/ART_DIRECTION.md` — palette, silhouettes, what to avoid
+- `docs/RENDERING_GUIDE.md` — tonemap, fog, glow, shadows, zone presets
+- `docs/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
+- `docs/CHARACTER_BIBLE.md` — models, box glow states, spirit materials
+- `docs/ASSET_COMPLIANCE.md` — license-safe assets only
+
+**Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
+
+---
+
+## 1. Roles & responsibilities
+
+### Tool A: GodotPrompter (architecture, math & stylized shaders)
+- **Role:** Code generator, custom spatial shader architect.
+- **Responsibility:** Godot 4 syntax; NPR/toon pipelines; stepped diffuse ramps; vertex shaders (water, wind sway).
+- **When to use:** Before writing new shader code or designing lighting math.
+- **Branch note:** On `cursor/gdai-regen-dc91`, GodotPrompter is **forbidden** — GDAI MCP only (`docs/GDAI_REGEN_PLAN.md`).
+
+### Tool B: GDAI MCP (scene & environment mutator)
+- **Role:** Editor integration — create/configure nodes, scenes, materials, lights, WorldEnvironment.
+- **Responsibility:** Apply zone palettes, audit script errors, playtest in editor. Requires Godot open with GDAI plugin started (`docs/GDAI_CLOUD_SETUP.md`).
+- **When to use:** After planning; for scene graph changes and in-editor verification.
+- **Startup order:** Open Godot → start GDAI MCP → then use Cursor.
+
+---
+
+## 2. Stylized rendering rules (project-specific)
+
+When configuring nodes, environments, or materials, enforce **Tides of Urashima** standards — not generic bright anime defaults.
+
+### A. Lighting & shadows
+- **Shadows ON:** Use `DirectionalLight3D` with `shadow_enabled = true` and soft shadow filter. Tune max distance per zone.
+- **Colored lights — never pure white:** One dominant directional + one colored fill per zone (`docs/RENDERING_GUIDE.md` §5).
+  - Village: cool overcast `#B8C8D8` + warm lantern `#D4A880`
+  - Caves: cyan emissive `#4AE8D8` fill; no sky
+  - Palace: gold `#FFD890` from above; void sky `#1A1A3A`
+- **Muted, not pastel-bright:** Fog grey `#8B9DAF`, weathered wood `#5C4A3A`, biolume `#4AE8D8`. Avoid candy colors and sunny anime gold skies in the hub.
+- **No heavy SSIL/SSAO:** Disable in v1 — muddies toon ramps (`docs/RENDERING_GUIDE.md` §3.2).
+
+### B. WorldEnvironment & post-processing
+- **Tonemap:** `TONE_MAPPER_FILMIC` or `TONE_MAPPER_ACES` — **not** Linear (washed out). Tune exposure so fog and emissives do not clip to white.
+- **Fog:** Distance fog **always on** in ruined village hub. Zone-specific density; fog color matches sky palette.
+- **Volumetric fog:** Subtle in village only — not caves or palace void.
+- **Glow (bloom):** Enable on emissive content — lacquer box, cave algae, palace gold trim, spirit VFX. Mode `Softlight`; intensity restrained (~0.3–0.4). **Not** blanket dreamy bloom on every scene.
+- **Skip:** SDFGI, VoxelGI (v1), HDR reflections, lens flare.
+
+### C. Sky
+- Use **ProceduralSkyMaterial** per zone — grey overcast coast, dark caves, void palace. **No** sunny PhysicalSky HDRI or photographic skies.
+
+### D. NPR materials & textures
+- **Toon ramp shader family** across the scene — single cohesive look (`ART_DIRECTION.md` §7).
+- **Hand-painted albedo** on all hero assets; light normal maps OK for wood/stone detail.
+- **No full PBR workflow:** Avoid metallic/glossy skin, ORM packs, StandardMaterial3D realism in player-facing scenes.
+- **Emission:** Lacquer box (3 glow states), algae, palace trim, spirit lower body (alpha/additive).
+- **Outlines:** **Optional / subtle only** — not required. Prefer readable silhouettes and value contrast over heavy inverted-hull outlines unless art review approves.
+- **Water:** Stylized planes + foam decals + custom shader — not fluid simulation.
+
+### E. Environment & foliage
+- Wind-sway vertex shaders OK for coastal grass/reeds.
+- Japanese coastal / ryūgū motifs only — **no** European castle kits, medieval props, or Kenney placeholders in ship builds.
+- **No primitive placeholders** (`BoxMesh`, `CapsuleMesh`) in player-facing scenes.
+
+---
+
+## 3. Performance & ship rules
+- **60 FPS @ 1080p** on GTX 1060 — test SC-02 Ruined Village vertical slice first.
+- **≤ 8 materials** visible per zone at gameplay camera.
+- Log third-party assets in `docs/LICENSES.md`; run `bash tools/check_asset_compliance.sh` before commit.
+- Godot scenes/scripts live on feature branches; `main` holds design docs + `game/data/`.
+
+---
+
+## 4. Custom toon shader reference (Godot 4)
+```gdshader
+shader_type spatial;
+render_mode diffuse_toon, specular_toon;
+
+uniform vec4 base_color : source_color;
+uniform sampler2D albedo_texture : source_color, filter_linear_mipmap;
+
+void fragment() {
+    vec4 tex = texture(albedo_texture, UV);
+    ALBEDO = tex.rgb * base_color.rgb;
+    ROUGHNESS = 1.0;
+    METALLIC = 0.0;
+}
+```
+Extend with emission for interactables; keep one ramp family project-wide.
+
+---
+
+## 5. Strict Godot 4 syntax
+- **Signals:** `signal_name.connect(_on_callback)` — no string-based connections.
+- **Coroutines:** `await object.signal` — never `yield()`.
+- **3D:** Access `velocity`, `transform`, `global_position` on `Node3D` / `CharacterBody3D` directly.
+- **Typed GDScript** where the surrounding file already uses types.
+
+---
+
+## 6. Workflow checklist (M6 art rebuild)
+1. Read zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
+2. Plan with GodotPrompter (shaders/math) unless on `gdai-regen-dc91`.
+3. Implement scene via GDAI MCP or hand-edited `.tscn` / `.gd`.
+4. Apply `ZoneVisuals.apply_to_scene(root, zone_id)` or matching `.tres` preset.
+5. Verify palette hex values, shadows, fog, glow targets, and FPS at gameplay camera.
