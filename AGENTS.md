@@ -52,6 +52,25 @@ python3 tools/validate_story_data.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
 
+### Running the game window (GUI) in cloud
+
+A display is available at `DISPLAY=:1` (llvmpipe software OpenGL). Run the actual game (not just the editor) with the OpenGL driver:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+export DISPLAY=:1
+export XDG_DATA_HOME="/workspace/.cache/godot-data"
+export XDG_CONFIG_HOME="/workspace/.cache/godot-config"
+export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
+godot4 --rendering-driver opengl3 --path game
+```
+
+The boot scene (`res://scenes/boot.tscn`) renders the "Tides of Urashima" title plus the dev build version/paths.
+
+**Expected non-fatal noise (safe to ignore):**
+- `Failed to instantiate an autoload ... gdai_mcp_runtime.gd` — the GDAI MCP autoload/plugin is commercial and gitignored; the project still loads and the main scene runs without it.
+- `All audio drivers failed, falling back to the dummy driver` — no sound card in the VM; harmless.
+
 ### Rendering & environment (Phase 1)
 
 Before building zones, read:
