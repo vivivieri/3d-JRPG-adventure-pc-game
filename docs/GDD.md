@@ -1,11 +1,13 @@
 # Tides of Urashima — Game Design Document
 
-**Version:** 0.1 (Vertical Slice)  
+**Version:** 0.2 (Pre-build)  
 **Engine:** Godot 4  
 **Platform:** PC (Steam)  
 **Target audience:** Men 20–30  
 **Playtime target:** 2–3 hours (main story)  
 **Genre:** 3D adventure JRPG, turn-based combat  
+
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/BOSS_DESIGNS.md`, `docs/ENCOUNTER_TABLE.md`, `docs/CINEMATICS.md`  
 
 ---
 
@@ -107,9 +109,10 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 - Boss: **Shore Wraith** (manifestation of drowned villagers)
 
 ### 6.3 Dragon Palace Gate (Dungeon 2)
-- Ethereal architecture, reverse gravity rooms
+- Ethereal **ryūgū-jō** architecture (lacquer pillars, curved eaves) — floating walkways over void sea
 - Palace Sentinel miniboss → Tide Keeper final boss
 - Visual contrast: gold/coral vs. grey ruin hub
+- **Scope note:** Reverse-gravity rooms cut from v1; see `docs/ENVIRONMENT_KITS.md`
 
 ---
 
@@ -129,8 +132,8 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 
 **Design goals:**
 - First battle teaches mechanics in &lt; 3 minutes
-- Bosses require reading patterns (telegraphed "intent" UI)
-- No grinding required for story completion on Normal
+- Bosses require reading patterns (telegraphed "intent" UI) — see `docs/BOSS_DESIGNS.md`
+- No grinding required for story completion on Normal — see `docs/ENCOUNTER_TABLE.md`
 
 See `game/data/README.md` for full JSON schema.
 
@@ -144,7 +147,7 @@ See `game/data/README.md` for full JSON schema.
 | XP curve | Linear-ish; tuned for ~2 fights per area before boss |
 | Equipment | Weapon + armor + charm (3 slots) |
 | Currency | Shell coins (環貝) |
-| Shops | Roku's cache — potions, antidote, skill scroll (one-time) |
+| Shops | Roku's cache — potions, antidote, skill scroll (one-time); see `docs/ENCOUNTER_TABLE.md` §7 |
 
 ---
 
@@ -207,11 +210,13 @@ game/
 |----|-------------|-----------|
 | M0 | GDD + storyboard + repo | ✓ This doc |
 | M0b | i18n (en / ja / zh) | ✓ LocalizationManager + CSV |
+| M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
 | M1 | Greybox movement + dialogue | Walk village, talk to NPC |
 | M2 | Combat vertical slice | 1 fight feels good |
 | M3 | Chapter 1 playable | Tidal Caves complete |
 | M4 | Full story | All 3 endings |
 | M5 | Polish + Steam page | Trailer, store live |
+| M6 | Art rebuild (high-detail Japanese) | Vertical slice SC-02 → full production per ART_DIRECTION v1.1 |
 
 ---
 
@@ -239,6 +244,6 @@ Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**
 | Risk | Mitigation |
 |------|------------|
 | Scope creep | Lock 3 locations until post-launch |
-| Asset inconsistency | Single low-poly style bible (see ART_DIRECTION.md) |
+| Asset inconsistency | Single style bible + vertical slice gate (`docs/ART_DIRECTION.md` §10) |
 | License violations | LICENSES.md audit before ship |
 | Combat feel | Vertical slice before content production |

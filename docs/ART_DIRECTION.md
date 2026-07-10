@@ -1,8 +1,15 @@
 # Tides of Urashima — Art Direction Bible
 
-**Visual target:** Stylized low-poly 3D with painted-texture accents. Not anime-realistic — closer to *Rime*, *Sable*, or *Eastward* mood with Japanese coastal motifs.
+**Version:** 1.1 (Pre-build pivot)  
+**Visual target:** **High-detail stylized Japanese 3D** — hand-painted albedo, readable silhouettes, authored environments. Not anime-realistic or photoreal PBR — closer to *Ni no Kuni* environmental richness and *Eastward* clarity with Japanese coastal motifs.
 
 **Audience note (men 20–30):** Muted palette, emotional weight, no chibi comedy. Beauty with decay.
+
+**Related docs:** `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`
+
+### Ship rule (v1)
+
+**No primitive placeholders** (`BoxMesh`, `CapsuleMesh`, Kenney knight, procedural spheres) in player-facing builds. Greybox may exist in editor-only layers during development.
 
 ---
 
@@ -36,7 +43,7 @@
 
 ## 2. Character silhouettes
 
-Readable at low-poly distance. Exaggerate head-to-body ratio slightly (1:5, not chibi 1:3).
+Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:5, not chibi 1:3). Full model sheets: `docs/CHARACTER_BIBLE.md`.
 
 ### Urashima
 - Long coat over traditional fisherman's tunic
@@ -64,12 +71,14 @@ Readable at low-poly distance. Exaggerate head-to-body ratio slightly (1:5, not 
 
 ## 3. Environment style rules
 
-1. **Modular kits first** — 80% reused pieces (walls, floors, rocks, props)
-2. **Vertex color** for variation before unique textures
-3. **No PBR realism** — flat or hand-painted albedo, minimal roughness variation
-4. **Fog always on** in hub (draw distance mask)
-5. **Water** is stylized (flat color + foam line, not simulation)
-6. **Lighting:** One dominant directional + colored fill per zone
+1. **Modular kits first** — 80% reused pieces (walls, floors, rocks, props); see `docs/ENVIRONMENT_KITS.md`
+2. **Poly budget** — Modules 500–3k tris; hero set-pieces (torii, palace gate) 8k–20k
+3. **Hand-painted albedo** + light normal maps OK; single toon ramp across scene
+4. **No PBR realism** — avoid glossy skin, HDR reflections
+5. **Fog always on** in hub (draw distance mask)
+6. **Water** is stylized (sculpted basins + foam decals, not simulation)
+7. **Lighting:** One dominant directional + colored fill per zone
+8. **Japanese coastal / ryūgū motifs only** — no European castle or medieval fantasy props
 
 ---
 
@@ -83,35 +92,52 @@ Readable at low-poly distance. Exaggerate head-to-body ratio slightly (1:5, not 
 
 ---
 
-## 5. Free asset sourcing plan
+## 5. Poly budgets
 
-| Need | Source | License |
-|------|--------|---------|
-| Modular ruins | Kenney.nl Nature / Building kits | CC0 |
-| Low-poly characters base | Quaternius Universal Base | CC0 |
-| Rocks, caves | Quaternius Nature Pack | CC0 |
-| Textures | ambientCG, Poly Haven | CC0 |
-| Animations | Mixamo (humanoid rig) | Mixamo ToS (free commercial) |
-| UI icons | Kenney Game Icons | CC0 |
+| Asset | Tris (target) |
+|-------|---------------|
+| Urashima (hero) | 12k–18k |
+| Party members | 10k–15k each |
+| Standard enemy | 5k–10k |
+| Boss | 25k–40k |
+| Environment module | 500–3k |
+| Hero set-piece (torii, gate) | 8k–20k |
+
+---
+
+## 6. Asset sourcing plan (revised)
+
+**Priority:** Custom or commissioned for heroes + set-pieces; curated Japanese-environment packs for modular fill.
+
+| Need | Approach | License |
+|------|----------|---------|
+| Characters (Urashima, Yuzu, Roku, bosses) | **Custom Blender** or commission | Own / contract |
+| Japanese ruins / coastal kits | Curated packs (itch.io, Sketchfab CC0) + custom trim | CC0 / own |
+| Rocks, cliffs (shared) | Custom + Poly Haven / ambientCG | CC0 |
+| Textures | Hand-painted tileables; ambientCG base | CC0 |
+| Animations | Mixamo (humanoid rig) | Mixamo ToS |
+| UI icons | Kenney Game Icons or custom ink-wash | CC0 / own |
 | SFX | Freesound (filter CC0) | CC0 |
-| Music | OpenGameArt (curated) | Per-track license |
+| Music | OpenGameArt or commissioned short score | Per-track |
+
+**Deprecated for ship builds:** Kenney Castle kit (European read), Quaternius as final character base, procedural primitive placeholders.
 
 **Rule:** Log every download in `docs/LICENSES.md` before import.
 
 ---
 
-## 6. Blender → Godot pipeline
+## 7. Blender → Godot pipeline
 
-1. Model in Blender (low poly, &lt; 5k tris per character)
-2. UV unwrap → paint or flat color
+1. Model in Blender per `docs/CHARACTER_BIBLE.md` poly budgets
+2. UV unwrap → hand-paint albedo (4K heroes, 2K modules)
 3. Export as `.glb` (embedded textures)
-4. Import to `game/assets/models/`
+4. Import to `game/assets/models/characters/` or `environment/`
 5. Rig humanoids via Mixamo if needed
-6. Materials: Godot StandardMaterial3D, unshaded or toon for spirits
+6. Materials: Godot toon shader family; spirits use alpha on lower body
 
 ---
 
-## 7. Reference mood board (keywords)
+## 8. Reference mood board (keywords)
 
 - Grey overcast Japanese fishing coast
 - Submerged torii gates (real-world photography)
@@ -121,10 +147,23 @@ Readable at low-poly distance. Exaggerate head-to-body ratio slightly (1:5, not 
 
 ---
 
-## 8. What to avoid
+## 9. What to avoid
 
 - Bright candy colors in hub
 - Overly sexualized character designs
 - Generic fantasy medieval props (stay Japanese coastal)
 - Mixing realistic and toon shaders in same scene
 - Asset Store "office worker" models retextured as fishermen
+- **BoxMesh / primitive placeholders in shipped scenes**
+- Low-poly CC0 kitbash as final art (prototype only)
+
+---
+
+## 10. Vertical slice gate
+
+Before full production, **SC-02 Ruined Village** must pass:
+
+- [ ] Urashima authored model + walk/idle
+- [ ] Hero torii + shack + well (no primitives)
+- [ ] Palette matches §1 hex values at gameplay camera distance
+- [ ] 60 FPS @ 1080p on target hardware

@@ -4,6 +4,8 @@
 
 **Total scenes:** 18 (main path)
 
+**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`
+
 ---
 
 ## Act I — The Return
@@ -17,6 +19,7 @@
 | **Gameplay** | Tutorial movement (WASD), approach village gate |
 | **Mood** | Lonely, grey sky, distant thunder |
 | **Assets** | Beach terrain, driftwood, box prop, ruined gate silhouette |
+| **Camera** | See `CINEMATICS.md` SC-01 — wide establishing → follow |
 
 ### SC-02 — Empty Village
 | Field | Detail |
@@ -26,7 +29,8 @@
 | **Summary** | No people. Banners rotting. A child's sandal floats in a puddle. Urashima: "Anyone...?" |
 | **Gameplay** | Free exploration; interact with 3 inspect points (banner, sandal, well) |
 | **Mood** | Dread, silence broken by wind |
-| **Assets** | Modular ruin kit, water puddles, interactable highlights |
+| **Assets** | Modular ruin kit (`village_*`), water puddles, interactable highlights |
+| **Camera** | 4s hub pan on first enter (`CINEMATICS.md` SC-02) |
 
 ### SC-03 — The Cracked Torii
 | Field | Detail |
@@ -36,7 +40,8 @@
 | **Summary** | Spirit voice (Yuzu, unseen): "You left. We waited." Urashima recognizes the shrine. |
 | **Gameplay** | Dialogue sequence; quest flag `met_yuzu_spirit` |
 | **Mood** | Accusatory, spiritual |
-| **Assets** | Torii model (damaged), spirit particle VFX |
+| **Assets** | `village_torii_damaged` (hero prop), spirit particle VFX |
+| **Camera** | Low angle up torii (`CINEMATICS.md`) |
 
 ### SC-04 — Roku's Warning
 | Field | Detail |
@@ -46,7 +51,7 @@
 | **Summary** | Old man Roku emerges. "That box isn't a gift. Don't open it." Hints at Tidal Caves path. |
 | **Gameplay** | Dialogue + receive map item; unlock cave entrance |
 | **Mood** | Urgent, gravelly wisdom |
-| **Assets** | Shack interior, Roku character model, map UI icon |
+| **Assets** | `village_shack_roku` interior, Roku model, map UI icon |
 
 ### SC-05 — First Blood (Combat Tutorial)
 | Field | Detail |
@@ -56,7 +61,8 @@
 | **Summary** | A **Salt Crab** blocks the path — "even the sea forgets you." |
 | **Gameplay** | Tutorial combat: Attack, Skill, Defend; guaranteed win |
 | **Mood** | Tense → empowering |
-| **Assets** | Salt Crab enemy, combat UI, tutorial prompts |
+| **Assets** | Salt Crab model + portrait, combat UI, tutorial prompts |
+| **Gameplay note** | Limit gauge visible; tutorial optional |
 
 ---
 
@@ -100,7 +106,9 @@
 | **Summary** | Colossal wraith forms from pooled regret. "You chose her over us." |
 | **Gameplay** | Boss fight; teaches intent UI and phase change at 50% HP |
 | **Mood** | Confrontational, tragic |
-| **Assets** | Shore Wraith boss model, arena, boss HP bar |
+| **Assets** | Shore Wraith boss model, arena (`cave_boss_arena_ring`), boss HP bar |
+| **Gameplay note** | Urashima **solo** fight; Yuzu joins after (SC-10) |
+| **Camera** | 5s boss intro (`CINEMATICS.md`) |
 
 ### SC-10 — Yuzu Joins
 | Field | Detail |
@@ -111,6 +119,7 @@
 | **Gameplay** | Party member unlock; skill tutorial (Heal) |
 | **Mood** | Melancholy resolve |
 | **Assets** | Yuzu model, join fanfare SFX, party UI update |
+| **VFX** | Materialize from torii shards (2s) |
 
 ### SC-11 — Palace Vision (Flashback)
 | Field | Detail |
@@ -120,7 +129,8 @@
 | **Summary** | Otohime: "Stay, and the world will not touch you." Urashima almost agrees. |
 | **Gameplay** | Non-interactive cutscene (skippable) |
 | **Mood** | Seductive, too perfect |
-| **Assets** | Palace gold materials, Otohime silhouette, harp audio |
+| **Assets** | Palace gold materials, Otohime silhouette/bust, harp audio |
+| **Camera** | Letterbox 2.39:1; skippable after 3s |
 
 ### SC-12 — Dragon Palace Gate
 | Field | Detail |
@@ -130,7 +140,9 @@
 | **Summary** | Gate floats above water. Roku arrives (if not in party, joins here). "This is where time was stolen." |
 | **Gameplay** | Party complete; save point; enter dungeon |
 | **Mood** | Awe, scale |
-| **Assets** | Palace gate kit, skybox shift, Roku join if needed |
+| **Assets** | `palace_gate_main` (hero), skybox shift, Roku join if needed |
+| **Camera** | Vertigo tilt up gate (`CINEMATICS.md` SC-12) |
+| **Scope** | No reverse-gravity rooms in v1 — floating walkways only |
 
 ---
 
@@ -144,7 +156,8 @@
 | **Summary** | Roku: "The box holds their years. Open it, they live — you won't." |
 | **Gameplay** | Dialogue choice (recorded, not branching yet); quest `knows_box_truth` |
 | **Mood** | Heavy revelation |
-| **Assets** | Mirror shader, dual character lighting |
+| **Assets** | `palace_mirror_chamber`, mirror shader, dual character lighting |
+| **Camera** | Young + old Urashima in reflection (`CINEMATICS.md` SC-13) |
 
 ### SC-14 — Palace Sentinel
 | Field | Detail |
@@ -154,7 +167,8 @@
 | **Summary** | Armored guardian: "No mortal leaves with stolen time." |
 | **Gameplay** | Miniboss; weak to Spirit element (Yuzu) |
 | **Mood** | Epic, disciplined |
-| **Assets** | Sentinel armor model, hall pillars |
+| **Assets** | Palace Sentinel model (ryūgū armor), sentinel hall |
+| **Gameplay note** | Spirit weakness tutorial for Yuzu |
 
 ### SC-15 — Tide Keeper Confrontation
 | Field | Detail |
@@ -165,6 +179,7 @@
 | **Gameplay** | Final boss (3 phases); at 10% HP, combat pauses for choice prompt |
 | **Mood** | Cathartic, cosmic |
 | **Assets** | Tide Keeper boss, tide VFX, phase transition audio |
+| **Camera** | 6s intro; slow orbit phase 2 (`CINEMATICS.md`) |
 
 ### SC-16 — The Choice
 | Field | Detail |
@@ -175,36 +190,37 @@
 | **Gameplay** | Branching ending selection |
 | **Mood** | Stillness |
 | **Assets** | Choice UI, box glow intensify |
+| **Camera** | Close on Urashima; combat frozen (`CINEMATICS.md` SC-16) |
 
 ### SC-17a — Ending: Rewind
 | Field | Detail |
 |-------|--------|
-| **Location** | Village — restored |
-| **Camera** | Crane up from festival |
+| **Location** | Village — restored variant |
+| **Camera** | Crane up from festival (`CINEMATICS.md` — 15s total) |
 | **Summary** | Village lives again. Urashima's figure dissolves at the edge of the crowd. Yuzu feels a breeze. |
 | **Gameplay** | Credits roll |
 | **Mood** | Bittersweet |
-| **Assets** | Restored village variant, festival lanterns, credits |
+| **Assets** | `village_restored_kit`, `village_festival_lantern_row`, `village_crowd_silhouettes` (8–12), credits |
 
 ### SC-17b — Ending: Anchor
 | Field | Detail |
 |-------|--------|
 | **Location** | Village shore — dawn |
-| **Camera** | Wide; small figures rebuilding |
+| **Camera** | Wide rebuild shot → sapling close (`CINEMATICS.md`) |
 | **Summary** | Spirits fade into the land. Roku plants a new sapling. Urashima stays, older but present. |
 | **Gameplay** | Credits roll |
 | **Mood** | Hopeful |
-| **Assets** | Dawn lighting, sapling prop, rebuilding NPCs (silhouettes) |
+| **Assets** | `shore_dawn_skybox`, `prop_sapling_new`, `rebuilder_figures` (×3), spirit dissolve VFX |
 
 ### SC-17c — Ending: Drift
 | Field | Detail |
 |-------|--------|
 | **Location** | Open sea |
-| **Camera** | Pull back from lone boat |
+| **Camera** | Pull back from lone boat; underwater palace glimpse (`CINEMATICS.md`) |
 | **Summary** | Urashima rows toward horizon. Otohime's palace glimmers beneath the waves. Cycle continues. |
 | **Gameplay** | Credits roll |
 | **Mood** | Tragic, open |
-| **Assets** | Boat model, endless sea, palace underwater glimpse |
+| **Assets** | `boat_urashima`, endless sea plane, `palace_underwater_glimpse` |
 
 ---
 
@@ -223,8 +239,25 @@ flowchart LR
 
 ---
 
-## Production priority (for greybox)
+## Production priority (pre-build → art rebuild)
 
+### Phase 0 — Design lock (complete)
+- [x] GDD, storyboard, art bible
+- [x] Character bible, environment kits, boss designs, encounter table, cinematics
+
+### Phase 1 — Vertical art slice
+1. SC-02 Ruined Village hub (`village_torii_damaged`, shack, well, Urashima model)
+2. SC-05 tutorial combat (Salt Crab model + portraits)
+
+### Phase 2 — Act II art
+3. SC-06–09 Tidal Caves + Shore Wraith boss
+4. SC-10 Yuzu model + join VFX
+
+### Phase 3 — Act III art
+5. SC-12–16 Palace gate, mirror, Sentinel, Tide Keeper, choice UI
+6. SC-17a/b/c ending environments
+
+### Legacy greybox order (prototype branches only)
 1. SC-01, SC-02, SC-05 (movement + first fight)
 2. SC-06, SC-09 (dungeon + boss template)
 3. SC-15, SC-16 (final boss + choice UI)

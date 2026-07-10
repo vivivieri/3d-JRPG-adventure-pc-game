@@ -12,6 +12,15 @@ Track implementation progress against the GDD milestones.
 - [x] Core scripts (GameManager, Combat, Dialogue, Save)
 - [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
 
+## M0c — Pre-build design (art rebuild specs)
+- [x] Character bible (`docs/CHARACTER_BIBLE.md`)
+- [x] Environment kits (`docs/ENVIRONMENT_KITS.md`)
+- [x] Boss design sheets (`docs/BOSS_DESIGNS.md`)
+- [x] Encounter & pacing table (`docs/ENCOUNTER_TABLE.md`)
+- [x] Cinematics & camera spec (`docs/CINEMATICS.md`)
+- [x] Audio direction (`docs/AUDIO_DIRECTION.md`)
+- [x] Art direction pivot — high-detail Japanese stylized (`docs/ART_DIRECTION.md` v1.1)
+
 ## M1 — Greybox exploration
 - [x] Player movement polish (camera orbit — right-mouse + scroll)
 - [x] Interaction prompt HUD (Press E — action, localized)
@@ -49,3 +58,12 @@ Track implementation progress against the GDD milestones.
 - [ ] Steamworks app ID + depot upload
 - [ ] Final CC0 audio/art replacement (optional — current assets are original procedural)
 - [ ] Playtest on Windows hardware
+
+## M6 — Art rebuild (high-detail Japanese)
+- [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
+- [ ] Replace all primitive / Kenney placeholder art
+- [ ] Japanese palace gate hero set-piece (no European castle kit)
+- [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
+- [ ] Painted portraits (replace procedural silhouettes)
+- [ ] Ending environment variants (Rewind / Anchor / Drift)
+- [ ] Curated BGM per act (replace procedural audio)
