@@ -29,6 +29,11 @@ check "implementation plan doc" test -f docs/IMPLEMENTATION_PLAN.md
 check "rendering guide" test -f docs/RENDERING_GUIDE.md
 check "MCP example config" test -f .cursor/mcp.json.example
 
+export PATH="${HOME}/.local/bin:${PATH}"
+export XDG_DATA_HOME="${ROOT}/.cache/godot-data"
+export XDG_CONFIG_HOME="${ROOT}/.cache/godot-config"
+export XDG_CACHE_HOME="${ROOT}/.cache/godot-cache"
+
 if command -v uv >/dev/null 2>&1; then
   echo "[OK]   uv installed"
   OK=$((OK + 1))
@@ -36,9 +41,16 @@ else
   echo "[WARN] uv not installed (needed for GDAI MCP)"
 fi
 
-if command -v godot4 >/dev/null 2>&1 || command -v godot >/dev/null 2>&1; then
+if command -v godot4 >/dev/null 2>&1; then
   echo "[OK]   Godot in PATH"
   OK=$((OK + 1))
+  if godot4 --headless --path game --quit-after 1 >/dev/null 2>&1; then
+    echo "[OK]   Godot smoke test"
+    OK=$((OK + 1))
+  else
+    echo "[FAIL] Godot smoke test"
+    ERR=$((ERR + 1))
+  fi
 else
   echo "[WARN] Godot not in PATH"
 fi

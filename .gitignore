@@ -27,3 +27,6 @@ Thumbs.db
 
 # Local MCP paths (copy from .cursor/mcp.json.example)
 .cursor/mcp.json
+
+# Godot runtime cache (cloud)
+.cache/

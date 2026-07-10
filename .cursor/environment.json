@@ -1,0 +1,4 @@
+{
+  "install": "bash tools/install_cloud_dev.sh",
+  "start": "bash tools/start_godot_editor.sh"
+}

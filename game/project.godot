@@ -1,6 +1,10 @@
 ; Engine configuration file.
-; Tides of Urashima — fresh implementation (docs on main are source of truth)
-; Godot 4.3+ Forward+
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 

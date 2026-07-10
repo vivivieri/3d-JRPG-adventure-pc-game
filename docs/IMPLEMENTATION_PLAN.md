@@ -19,6 +19,7 @@ Previous Godot implementation branches (`*-dc91`) were **removed**. This plan re
 | `.cursor/mcp.json.example` (GDAI MCP) | Done |
 | `game/addons/README.md` | Done |
 | Boot scene validates `game/data/` paths | Done |
+| Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
 | Story data validator (`tools/validate_story_data.py`) | On main |
 
 **Verify:**

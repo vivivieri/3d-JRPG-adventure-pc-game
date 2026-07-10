@@ -100,53 +100,50 @@ You can copy `.cursor/mcp.json.example` to `~/.cursor/mcp.json` and fill in your
 
 ---
 
-## 4. Cloud Agent setup (experimental)
+## 4. Cloud Agent setup
 
-Cloud agents on this repo today use **code-driven** environments (`zone_visuals.gd`, `terrain_shapes.gd`) and **headless** Godot for screenshots. GDAI is **optional** and harder in cloud because the **Editor must stay open** for the whole agent run.
+Cloud agents use `.cursor/environment.json` to install dependencies automatically:
 
-### What works well in cloud
+```bash
+bash tools/install_cloud_dev.sh   # Godot 4.3, uv, export templates, numpy
+bash tools/check_dev_environment.sh
+```
 
-- Procedural environment edits in GDScript
-- `./tools/capture_screenshots.sh`
-- PR screenshot updates under `steam/screenshots-capture/`
+See **`AGENTS.md`** for full cloud workflow (GodotPrompter + GDAI MCP, headless validation).
 
-### What GDAI adds (usually local)
+### Installed by `install_cloud_dev.sh`
 
-- In-editor scene/node placement and polish
-- Live script error / output log inspection from the editor
+| Component | Location |
+|-----------|----------|
+| Godot 4.3 editor | `godot4` → `~/.local/bin` |
+| Export templates | `.cache/godot-data/godot/export_templates/` |
+| uv | `~/.local/bin/uv` |
+| numpy | Python (trailer tool) |
 
-### If you want to try GDAI in a Cursor Cloud environment
+Godot editor auto-starts via `tools/start_godot_editor.sh` (uses `--rendering-driver opengl3` in cloud VMs).
 
-1. **Install in the environment image**
-   - `uv`
-   - Full **Godot 4.3 editor** (not only the headless binary in `.godot-sdk/`)
-   - Manually copy `gdai-mcp-plugin-godot` into `game/addons/` on the VM (same as local; not in git)
+### GDAI in cloud (manual step)
 
-2. **Register MCP for Cloud Agents**
-   - Open https://cursor.com/agents → **MCP** dropdown → add a **stdio** server
-   - Use the same `uv run .../gdai_mcp_server.py` command
-   - Team plans: **Dashboard → Integrations & MCP**
+GDAI MCP is **commercial** and not in git. To use in cloud:
 
-3. **Start Godot Editor before / during the agent run**
+1. Copy plugin to `game/addons/gdai-mcp-plugin-godot/` (upload or environment secret)
+2. Re-run `bash tools/install_cloud_dev.sh` — auto-writes `.cursor/mcp.json`
+3. In Godot editor: enable plugin → **Start** MCP server
+4. Register MCP in Cursor dashboard if not using project `.cursor/mcp.json`
 
-   ```bash
-   export DISPLAY="${DISPLAY:-:1}"
-   /path/to/Godot --path game/project.godot --editor &
-   ```
+Without GDAI, cloud agents can still edit `.gd` / `.tscn` / shaders and validate with:
 
-   Enable the plugin once per environment (or bake it into a saved environment snapshot with the plugin already enabled in `project.godot` user settings — dev VMs only).
+```bash
+godot4 --headless --path game --quit-after 2
+```
 
-4. **Expect fragility**
-   - Editor must remain running with MCP **Started**
-   - Plugin license is per-seat/commercial — confirm terms for CI/cloud use
-   - Stdio MCP runs inside the agent VM; HTTP MCP is preferred for secrets when possible (GDAI uses stdio)
-
-### Hybrid workflow (recommended for *Tides of Urashima*)
+### Hybrid workflow (recommended)
 
 | Work | Where |
 |------|--------|
-| Zone rewrites, terrain, screenshots | **Cloud Agent** |
-| Palace prop nudging, scene polish, material tweaks | **Local Godot + GDAI** |
+| Godot code, shaders, environment zones | **Cloud Agent** (`godot4` + headless validation) |
+| GDAI in-editor polish | **Cloud or local** — after plugin installed |
+| Scene nudging, material tweaks in viewport | **GDAI MCP** when editor + plugin running |
 | Steam build | **No GDAI** in `game/addons/` |
 
 ---

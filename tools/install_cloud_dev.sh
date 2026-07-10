@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+# Idempotent cloud dev environment installer for Tides of Urashima.
+# Used by .cursor/environment.json and manual setup.
+#
+# Installs: uv, Godot 4.3 editor + export templates, Python deps, project dirs.
+# Does NOT install GDAI MCP (commercial — user must add game/addons/gdai-mcp-plugin-godot/).
+#
+# Usage: bash tools/install_cloud_dev.sh
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+GODOT_VERSION="${GODOT_VERSION:-4.3-stable}"
+GODOT_INSTALL_DIR="${GODOT_INSTALL_DIR:-/opt/godot}"
+GODOT_BIN_NAME="Godot_v${GODOT_VERSION}_linux.x86_64"
+GODOT_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/${GODOT_BIN_NAME}.zip"
+TEMPLATES_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz"
+
+export PATH="${HOME}/.local/bin:${PATH}"
+
+echo "==> Tides of Urashima — cloud dev install"
+echo "    Root: $ROOT"
+echo "    Godot: $GODOT_VERSION"
+echo
+
+# --- System packages (idempotent) ---
+if command -v apt-get >/dev/null 2>&1; then
+  sudo apt-get update -qq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+    curl wget unzip ca-certificates \
+    libgl1-mesa-dri libglx-mesa0 libvulkan1 xvfb \
+    >/dev/null 2>&1 || true
+fi
+
+# --- uv (GDAI MCP bridge) ---
+if ! command -v uv >/dev/null 2>&1; then
+  echo "==> Installing uv..."
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  export PATH="${HOME}/.local/bin:${PATH}"
+fi
+echo "==> uv: $(uv --version)"
+
+# --- Godot 4.3 editor ---
+sudo mkdir -p "$GODOT_INSTALL_DIR"
+if [[ ! -x "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" ]]; then
+  echo "==> Downloading Godot ${GODOT_VERSION}..."
+  TMPZIP="$(mktemp /tmp/godot.XXXXXX.zip)"
+  wget -q -O "$TMPZIP" "$GODOT_URL"
+  sudo unzip -o -q "$TMPZIP" -d "$GODOT_INSTALL_DIR"
+  sudo chmod +x "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}"
+  rm -f "$TMPZIP"
+fi
+
+# Symlink godot4 + godot into user local bin
+mkdir -p "${HOME}/.local/bin"
+ln -sf "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" "${HOME}/.local/bin/godot4"
+ln -sf "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" "${HOME}/.local/bin/godot"
+echo "==> Godot: $(${HOME}/.local/bin/godot4 --version 2>&1 | head -1)"
+
+# --- Export templates (headless export / validation) ---
+TEMPLATE_VER="${GODOT_VERSION#4.3-stable}"
+TEMPLATE_VER="4.3.stable"
+export XDG_DATA_HOME="${ROOT}/.cache/godot-data"
+export XDG_CONFIG_HOME="${ROOT}/.cache/godot-config"
+export XDG_CACHE_HOME="${ROOT}/.cache/godot-cache"
+mkdir -p "${XDG_DATA_HOME}/godot/export_templates/${TEMPLATE_VER}"
+
+if [[ ! -f "${XDG_DATA_HOME}/godot/export_templates/${TEMPLATE_VER}/version" ]]; then
+  echo "==> Installing Godot export templates..."
+  TMPTPZ="$(mktemp /tmp/godot-templates.XXXXXX.tpz)"
+  wget -q -O "$TMPTPZ" "$TEMPLATES_URL"
+  TMPDIR_TPL="$(mktemp -d /tmp/godot-tpl.XXXXXX)"
+  unzip -o -q "$TMPTPZ" -d "$TMPDIR_TPL"
+  cp -a "$TMPDIR_TPL"/templates/* "${XDG_DATA_HOME}/godot/export_templates/${TEMPLATE_VER}/"
+  rm -rf "$TMPDIR_TPL" "$TMPTPZ"
+fi
+
+# --- Python tooling (validators + trailer generator) ---
+echo "==> Python dependencies..."
+if command -v uv >/dev/null 2>&1; then
+  uv pip install --system numpy 2>/dev/null || pip3 install --user numpy 2>/dev/null || true
+else
+  pip3 install --user numpy 2>/dev/null || true
+fi
+
+# --- Project structure ---
+bash "$ROOT/tools/setup_dev_environment.sh"
+
+# --- Persist Godot XDG paths for agent shells ---
+PROFILE_SNIPPET="# Tides of Urashima — Godot cloud paths
+export PATH=\"\${HOME}/.local/bin:\${PATH}\"
+export XDG_DATA_HOME=\"${ROOT}/.cache/godot-data\"
+export XDG_CONFIG_HOME=\"${ROOT}/.cache/godot-config\"
+export XDG_CACHE_HOME=\"${ROOT}/.cache/godot-cache\"
+"
+for f in "${HOME}/.bashrc" "${HOME}/.profile"; do
+  if [[ -f "$f" ]] && ! grep -q "Tides of Urashima — Godot cloud paths" "$f" 2>/dev/null; then
+    echo "$PROFILE_SNIPPET" >> "$f"
+  fi
+done
+
+# --- Headless project smoke test ---
+echo "==> Godot headless smoke test..."
+export PATH="${HOME}/.local/bin:${PATH}"
+if godot4 --headless --path "$ROOT/game" --quit-after 2 2>&1 | tail -5; then
+  echo "==> Godot project loads OK"
+else
+  echo "!! Godot smoke test had warnings (check output above)"
+fi
+
+# --- GDAI MCP (manual) ---
+if [[ -d "$ROOT/game/addons/gdai-mcp-plugin-godot" ]]; then
+  echo "==> GDAI MCP plugin found"
+  if [[ ! -f "$ROOT/.cursor/mcp.json" ]] && [[ -f "$ROOT/.cursor/mcp.json.example" ]]; then
+    SERVER="$ROOT/game/addons/gdai-mcp-plugin-godot/gdai_mcp_server.py"
+    if [[ -f "$SERVER" ]]; then
+      cat > "$ROOT/.cursor/mcp.json" <<EOF
+{
+  "mcpServers": {
+    "godot-mcp": {
+      "command": "uv",
+      "args": ["run", "$SERVER"]
+    }
+  }
+}
+EOF
+      echo "==> Wrote .cursor/mcp.json (gitignored)"
+    fi
+  fi
+else
+  echo "!! GDAI MCP plugin not installed (commercial — https://gdaimcp.com/)"
+  echo "   Copy to: game/addons/gdai-mcp-plugin-godot/"
+  echo "   Then re-run this script or configure Cursor MCP manually."
+fi
+
+echo
+echo "==> Cloud dev install complete."
+bash "$ROOT/tools/check_dev_environment.sh" || true

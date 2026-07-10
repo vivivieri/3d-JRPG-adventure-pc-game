@@ -171,6 +171,8 @@ bash tools/setup_dev_environment.sh
 
 Then open `game/project.godot` in Godot 4.3+ and follow [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) + [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
 
+**Cloud agents:** dependencies install via `.cursor/environment.json` → `bash tools/install_cloud_dev.sh`. See [`AGENTS.md`](AGENTS.md).
+
 ---
 
 ## Design highlights
