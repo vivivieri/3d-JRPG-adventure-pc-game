@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "achievements": [
+    { "id": "ACH_FIRST_STEP", "steam_api": "FIRST_STEP", "trigger": { "flag": "game_started" }, "hidden": false },
+    { "id": "ACH_EMPTY_HOME", "steam_api": "EMPTY_HOME", "trigger": { "all_flags": ["inspected_banner", "inspected_sandal", "inspected_well"] }, "hidden": false },
+    { "id": "ACH_FIRST_BLOOD", "steam_api": "FIRST_BLOOD", "trigger": { "flag": "tutorial_combat_done" }, "hidden": false },
+    { "id": "ACH_WRAITH_FALLEN", "steam_api": "WRAITH_FALLEN", "trigger": { "flag": "shore_wraith_defeated" }, "hidden": false },
+    { "id": "ACH_SENTINEL_FALLEN", "steam_api": "SENTINEL_FALLEN", "trigger": { "flag": "sentinel_defeated" }, "hidden": false },
+    { "id": "ACH_KEEPER_FALLEN", "steam_api": "KEEPER_FALLEN", "trigger": { "flag": "tide_keeper_defeated" }, "hidden": false },
+    { "id": "ACH_ENDING_REWIND", "steam_api": "ENDING_REWIND", "trigger": { "flag_equals": { "ending_chosen": "rewind" } }, "hidden": false },
+    { "id": "ACH_ENDING_ANCHOR", "steam_api": "ENDING_ANCHOR", "trigger": { "flag_equals": { "ending_chosen": "anchor" } }, "hidden": false },
+    { "id": "ACH_ENDING_DRIFT", "steam_api": "ENDING_DRIFT", "trigger": { "flag_equals": { "ending_chosen": "drift" } }, "hidden": false },
+    { "id": "ACH_ALL_ENDINGS", "steam_api": "ALL_ENDINGS", "trigger": { "meta_endings_count": 3 }, "hidden": false },
+    { "id": "ACH_LORE_COMPLETE", "steam_api": "LORE_COMPLETE", "trigger": { "lore_count": 8 }, "hidden": false },
+    { "id": "ACH_BOX_TRUTH", "steam_api": "BOX_TRUTH", "trigger": { "flag": "knows_box_truth" }, "hidden": false },
+    { "id": "ACH_HARD_TIDE", "steam_api": "HARD_TIDE", "trigger": { "flag": "tide_keeper_defeated", "setting": "hard_mode" }, "hidden": true }
+  ]
+}

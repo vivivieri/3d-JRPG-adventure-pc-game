@@ -1,0 +1,202 @@
+{
+  "schema_version": 2,
+  "items": [
+    {
+      "id": "sea_salve",
+      "display_name": { "en": "Sea Salve", "ja": "海の膏", "zh": "海之膏" },
+      "type": "consumable",
+      "description": { "en": "Restores 80 HP.", "ja": "HPを80回復。", "zh": "恢复80点生命值。" },
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "heal_hp", "value": 80 },
+      "buy_price": 40,
+      "sell_price": 20
+    },
+    {
+      "id": "spirit_tonic",
+      "display_name": { "en": "Spirit Tonic", "ja": "霊の薬", "zh": "灵之药" },
+      "type": "consumable",
+      "description": { "en": "Restores 25 MP.", "ja": "MPを25回復。", "zh": "恢复25点法力。" },
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "heal_mp", "value": 25 },
+      "buy_price": 50,
+      "sell_price": 25
+    },
+    {
+      "id": "coral_antidote",
+      "display_name": { "en": "Coral Antidote", "ja": "珊瑚の解毒", "zh": "珊瑚解毒剂" },
+      "type": "consumable",
+      "description": { "en": "Cures poison.", "ja": "毒を治す。", "zh": "解除中毒。" },
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "cure_status", "status": "poison" },
+      "buy_price": 30,
+      "sell_price": 15
+    },
+    {
+      "id": "shell_coin",
+      "display_name": { "en": "Shell Coin", "ja": "環貝", "zh": "环贝" },
+      "type": "currency",
+      "description": { "en": "Currency of the ruined coast.", "ja": "廃れた海岸の通貨。", "zh": "废墟海岸的货币。" },
+      "battle_use": false,
+      "field_use": false,
+      "sell_price": 1
+    },
+    {
+      "id": "fisher_katana",
+      "display_name": { "en": "Fisher's Katana", "ja": "漁師の刀", "zh": "渔人之刀" },
+      "type": "equipment",
+      "slot": "weapon",
+      "description": { "en": "Urashima's trusted blade, salt-worn but sharp.", "ja": "浦島の愛刀。塩に朽ちてもなお鋭い。", "zh": "浦岛信赖的刀，盐蚀犹利。" },
+      "stat_bonus": { "atk": 4 },
+      "element": "water",
+      "equip_by": ["urashima"],
+      "sell_price": 50,
+      "story_grant": "new_game"
+    },
+    {
+      "id": "worn_haori",
+      "display_name": { "en": "Worn Haori", "ja": "古い羽織", "zh": "破旧羽织" },
+      "type": "equipment",
+      "slot": "armor",
+      "description": { "en": "A faded coat from before the palace.", "ja": "宮殿行き以前の色褪せた上着。", "zh": "前往龙宫前褪色的外衣。" },
+      "stat_bonus": { "def": 2 },
+      "equip_by": ["urashima"],
+      "sell_price": 30,
+      "story_grant": "new_game"
+    },
+    {
+      "id": "tide_cut_saber",
+      "display_name": { "en": "Tide-Cut Saber", "ja": "潮切りの刃", "zh": "斩潮之刃" },
+      "type": "equipment",
+      "slot": "weapon",
+      "description": { "en": "Blade from a flooded chest. Cuts like the undertow.", "ja": "水没した箱からの刀。底流のように切る。", "zh": "来自淹没之箱的刀，如暗流切裂。" },
+      "stat_bonus": { "atk": 7 },
+      "element": "water",
+      "equip_by": ["urashima"],
+      "sell_price": 80,
+      "story_grant": "SC-07"
+    },
+    {
+      "id": "palace_edge",
+      "display_name": { "en": "Palace Edge", "ja": "宮殿の刃", "zh": "宫殿之刃" },
+      "type": "equipment",
+      "slot": "weapon",
+      "description": { "en": "Lacquer-slick steel from the Sentinel's hall.", "ja": "近衛の間から得た漆のような鋼。", "zh": "自近卫厅取得的漆光之钢。" },
+      "stat_bonus": { "atk": 10 },
+      "element": "water",
+      "equip_by": ["urashima"],
+      "sell_price": 120,
+      "story_grant": "SC-14"
+    },
+    {
+      "id": "cave_wet_coat",
+      "display_name": { "en": "Cave-Wet Coat", "ja": "洞の湿衣", "zh": "洞湿外衣" },
+      "type": "equipment",
+      "slot": "armor",
+      "description": { "en": "Resists damp and spray.", "ja": "湿気と飛沫に強い。", "zh": "抵御潮湿与水花。" },
+      "stat_bonus": { "def": 4, "res": 2 },
+      "equip_by": ["urashima", "yuzu", "roku"],
+      "buy_price": 120,
+      "sell_price": 60
+    },
+    {
+      "id": "diver_mail",
+      "display_name": { "en": "Diver's Mail", "ja": "潜水士の鎧", "zh": "潜水士之铠" },
+      "type": "equipment",
+      "slot": "armor",
+      "description": { "en": "Heavy coat from the old diving days.", "ja": "昔の潜水の日々の重衣。", "zh": "昔日潜水时的厚重外衣。" },
+      "stat_bonus": { "def": 5, "max_hp": 20 },
+      "equip_by": ["roku"],
+      "buy_price": 150,
+      "sell_price": 75
+    },
+    {
+      "id": "shrine_charm",
+      "display_name": { "en": "Shrine Charm", "ja": "神社の護符", "zh": "神社护符" },
+      "type": "equipment",
+      "slot": "charm",
+      "description": { "en": "Increases spirit power.", "ja": "霊力を高める。", "zh": "提升灵力。" },
+      "stat_bonus": { "mag": 3, "res": 2 },
+      "buy_price": 120,
+      "sell_price": 60
+    },
+    {
+      "id": "shell_charm",
+      "display_name": { "en": "Shell Charm", "ja": "貝の護符", "zh": "贝壳护符" },
+      "type": "equipment",
+      "slot": "charm",
+      "description": { "en": "A villager's ward against the tide.", "ja": "潮に備えた村人の護り。", "zh": "村民抵御潮汐的护符。" },
+      "stat_bonus": { "def": 2 },
+      "buy_price": 80,
+      "sell_price": 40
+    },
+    {
+      "id": "spirit_bell",
+      "display_name": { "en": "Spirit Bell", "ja": "霊鈴", "zh": "灵铃" },
+      "type": "equipment",
+      "slot": "charm",
+      "description": { "en": "Bell from the post-boss shrine. Hums when spirits near.", "ja": "社の鈴。霊が近づくと振動する。", "zh": "神社之铃，灵近则鸣。" },
+      "stat_bonus": { "mag": 4, "spd": 1 },
+      "story_grant": "lore_sailor_charm"
+    },
+    {
+      "id": "spirit_knife",
+      "display_name": { "en": "Spirit Knife", "ja": "霊刀", "zh": "灵刀" },
+      "type": "equipment",
+      "slot": "weapon",
+      "description": { "en": "Ritual blade for shrine rites.", "ja": "祭事用の短刀。", "zh": "祭祀用短刀。" },
+      "stat_bonus": { "mag": 5 },
+      "equip_by": ["yuzu"],
+      "buy_price": 180,
+      "sell_price": 90
+    },
+    {
+      "id": "harpoon_rod",
+      "display_name": { "en": "Harpoon Rod", "ja": "銛竿", "zh": "鱼叉杆" },
+      "type": "equipment",
+      "slot": "weapon",
+      "description": { "en": "Roku's harpoon — more tool than weapon.", "ja": "六の銛——武器というより道具。", "zh": "六的鱼叉——与其说是武器不如说是工具。" },
+      "stat_bonus": { "atk": 6 },
+      "equip_by": ["roku"],
+      "buy_price": 150,
+      "sell_price": 75
+    },
+    {
+      "id": "lacquer_box",
+      "display_name": { "en": "Lacquer Box", "ja": "漆箱", "zh": "漆盒" },
+      "type": "key_item",
+      "description": { "en": "Forbidden gift from the Dragon Palace. Holds stolen years.", "ja": "龍宮からの禁断の贈り物。奪われた年月を秘める。", "zh": "龙宫禁赠之物，藏着被偷走的岁月。" },
+      "story_grant": "SC-00"
+    },
+    {
+      "id": "cave_map",
+      "display_name": { "en": "Tidal Cave Map", "ja": "潮穴の地図", "zh": "潮汐洞穴地图" },
+      "type": "key_item",
+      "description": { "en": "Roku's sketch of the caves below the cliffs.", "ja": "六が描いた崖下の洞窟図。", "zh": "六绘制的崖下洞穴图。" },
+      "story_grant": "SC-04"
+    },
+    {
+      "id": "wraith_pearl",
+      "display_name": { "en": "Wraith Pearl", "ja": "亡霊の珠", "zh": "亡灵之珠" },
+      "type": "key_item",
+      "description": { "en": "Condensed sorrow. Opens the palace gate.", "ja": "凝縮された悲しみ。宮殿の門を開く。", "zh": "凝结的悲哀，可启宫殿之门。" },
+      "story_grant": "SC-09"
+    },
+    {
+      "id": "spirit_shard",
+      "display_name": { "en": "Spirit Shard", "ja": "霊の欠片", "zh": "灵魂碎片" },
+      "type": "material",
+      "description": { "en": "A fragment of bound spirit energy.", "ja": "縛られた霊気の欠片。", "zh": "束缚灵能的碎片。" },
+      "sell_price": 8
+    },
+    {
+      "id": "palace_fragment",
+      "display_name": { "en": "Palace Fragment", "ja": "宮殿の欠片", "zh": "宫殿碎片" },
+      "type": "material",
+      "description": { "en": "Crystallized time from the Dragon Palace.", "ja": "龍宮から结晶化した時間。", "zh": "自龙宫结晶化的时间。" },
+      "sell_price": 25
+    }
+  ]
+}

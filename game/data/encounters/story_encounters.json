@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "encounters": [
+    {
+      "id": "enc_sc05_tutorial_crab",
+      "scene_id": "SC-05",
+      "zone": "ruined_village",
+      "trigger": "TutorialEncounter",
+      "enemies": ["salt_crab"],
+      "party": ["urashima"],
+      "tutorial": true,
+      "escape_allowed": false,
+      "on_win": { "set_flags": ["tutorial_combat_done"] }
+    },
+    {
+      "id": "enc_sc06_cave_crab",
+      "scene_id": "SC-06",
+      "zone": "tidal_caves",
+      "trigger": "CaveEntranceCrab",
+      "enemies": ["salt_crab"],
+      "party": ["urashima"],
+      "on_win": { "set_flags": [] }
+    },
+    {
+      "id": "enc_sc07_optional_crabs",
+      "scene_id": "SC-07",
+      "zone": "tidal_caves",
+      "trigger": "FloodedChamberCrabs",
+      "enemies": ["salt_crab", "salt_crab"],
+      "party": ["urashima"],
+      "optional": true,
+      "on_win": { "set_flags": [] }
+    },
+    {
+      "id": "enc_sc08_deep_pool",
+      "scene_id": "SC-08",
+      "zone": "tidal_caves",
+      "trigger": "DeepPoolEncounter",
+      "enemies": ["tide_wraith", "tide_wraith"],
+      "party": ["urashima"],
+      "on_win": { "set_flags": ["deep_pool_seen"] }
+    },
+    {
+      "id": "enc_sc09_shore_wraith",
+      "scene_id": "SC-09",
+      "zone": "tidal_caves",
+      "trigger": "ShoreWraithBoss",
+      "enemies": ["shore_wraith"],
+      "party": ["urashima"],
+      "boss": true,
+      "on_win": { "set_flags": ["shore_wraith_defeated"], "grant_items": ["wraith_pearl"] }
+    },
+    {
+      "id": "enc_sc12_palace_wraiths",
+      "scene_id": "SC-12",
+      "zone": "dragon_palace_gate",
+      "trigger": "GateApproachWraiths",
+      "enemies": ["tide_wraith", "tide_wraith"],
+      "party": ["urashima", "yuzu", "roku"],
+      "requires_flags": ["roku_combat_active", "yuzu_joined"],
+      "on_win": { "set_flags": [] }
+    },
+    {
+      "id": "enc_sc14_sentinel",
+      "scene_id": "SC-14",
+      "zone": "dragon_palace_gate",
+      "trigger": "PalaceSentinelBoss",
+      "enemies": ["palace_sentinel"],
+      "party": ["urashima", "yuzu", "roku"],
+      "boss": true,
+      "on_win": { "set_flags": ["sentinel_defeated"], "grant_items": ["palace_edge"] }
+    },
+    {
+      "id": "enc_sc15_tide_keeper",
+      "scene_id": "SC-15",
+      "zone": "dragon_palace_gate",
+      "trigger": "TideKeeperBoss",
+      "enemies": ["tide_keeper"],
+      "party": ["urashima", "yuzu", "roku"],
+      "boss": true,
+      "on_win": { "set_flags": ["tide_keeper_defeated", "tide_keeper_phase3"] }
+    }
+  ]
+}

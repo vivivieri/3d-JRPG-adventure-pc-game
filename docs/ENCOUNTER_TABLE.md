@@ -126,7 +126,7 @@ Available after SC-04; restocks after SC-09. **Full catalog:** `docs/ITEMS_AND_E
 |------|-------|--------|---------|
 | Weapon | `fisher_katana` (start) | `tide_cut_saber` (chest SC-07) | `palace_edge` (Sentinel drop) |
 | Armor | `worn_haori` | `cave_wet_coat` (shop) | — |
-| Charm | — | `shell_charm` (shop) | `spirit_bell` (lore_06) |
+| Charm | — | `shell_charm` (shop) | `spirit_bell` (lore `sailor_charm`) |
 
 Canonical IDs: `docs/ITEMS_AND_ECONOMY.md` §3.
 

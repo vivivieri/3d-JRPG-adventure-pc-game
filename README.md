@@ -7,7 +7,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
-> **This branch (`main`)** holds game design documents and release plans only. Godot implementation lives on feature branches (e.g. `cursor/urashima-jrpg-scaffold-dc91`, `cursor/japanese-environment-dc91`). Use `docs/GDAI_CLOUD_SETUP.md` when experimenting with GDAI MCP / GodotPrompter on a code branch.
+> **This branch (`main`)** holds game design documents, **story-driven JSON data** (`game/data/`), and release plans. Godot scenes/scripts live on feature branches.
 
 ---
 
@@ -24,6 +24,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | M5 — Polish + Steam page | In progress |
 | M0c — Art rebuild specs | Done |
 | M0d — Gameplay systems specs | Done |
+| M0e — Story data on main | Done |
 | M6 — Art rebuild (high-detail Japanese) | Not started |
 
 ---
@@ -61,7 +62,23 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | [Playtest Script](docs/PLAYTEST_SCRIPT.md) | 2–3h QA path |
 | [Pacing Chart](docs/PACING_CHART.md) | Emotional beat timeline |
 
-### Asset compliance (required before ship)
+### Story data (M0e)
+
+| Document / path | Purpose |
+|-----------------|---------|
+| [Data Architecture](docs/DATA_ARCHITECTURE.md) | Story-first DB design |
+| `game/data/story/scenes.json` | Scene spine SC-00…SC-17c |
+| `game/data/story/flags.json` | Flag registry |
+| `game/data/quests/main_quests.json` | 5 main quests |
+| `game/data/encounters/story_encounters.json` | Scripted fights |
+| `game/data/dialogue/chapter_01.json` | All dialogue |
+| `game/data/items/items.json` | Full item catalog |
+| `game/data/shop/roku_shop.json` | Roku shop |
+| `game/data/starting/new_game.json` | New game defaults |
+
+```bash
+python3 tools/validate_story_data.py
+```
 
 ```bash
 # Register a new external asset

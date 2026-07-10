@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "vendor_id": "roku_shack",
+  "display_name": { "en": "Roku's Cache", "ja": "六の蔵", "zh": "六的储藏" },
+  "requires_flag": "met_roku",
+  "restock_on_flag": "shore_wraith_defeated",
+  "inventory": [
+    { "item_id": "sea_salve", "price": 40, "stock": -1 },
+    { "item_id": "coral_antidote", "price": 30, "stock": -1 },
+    { "item_id": "spirit_tonic", "price": 50, "stock": -1 },
+    { "item_id": "shell_charm", "price": 80, "stock": 1 },
+    { "item_id": "cave_wet_coat", "price": 120, "stock": 1 },
+    { "item_id": "shrine_charm", "price": 120, "stock": 1 },
+    { "item_id": "diver_mail", "price": 150, "stock": 1, "equip_by": ["roku"] },
+    { "item_id": "harpoon_rod", "price": 150, "stock": 1, "equip_by": ["roku"] },
+    { "item_id": "spirit_knife", "price": 180, "stock": 1, "equip_by": ["yuzu"] }
+  ],
+  "scrolls": [
+    { "skill_id": "tidal_slash", "price": 200, "stock": 1, "character_id": "urashima", "restock": true },
+    { "skill_id": "purify", "price": 200, "stock": 1, "character_id": "yuzu", "restock": true }
+  ]
+}

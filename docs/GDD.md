@@ -211,7 +211,8 @@ game/
 | M0 | GDD + storyboard + repo | ✓ This doc |
 | M0b | i18n (en / ja / zh) | ✓ LocalizationManager + CSV |
 | M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
-| M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, ITEMS, COMBAT, SKILLS, UI, SAVE, etc. |
+| M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, COMBAT, UI, etc. |
+| M0e | Story data layer (`game/data/`) | ✓ DATA_ARCHITECTURE, validate_story_data.py |
 | M1 | Greybox movement + dialogue | Walk village, talk to NPC |
 | M2 | Combat vertical slice | 1 fight feels good |
 | M3 | Chapter 1 playable | Tidal Caves complete |

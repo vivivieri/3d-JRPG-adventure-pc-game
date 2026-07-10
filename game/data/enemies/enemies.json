@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "enemies": [
+    {
+      "id": "salt_crab",
+      "display_name": "Salt Crab",
+      "tier": "normal",
+      "element": "physical",
+      "stats": { "max_hp": 40, "atk": 7, "def": 5, "mag": 4, "res": 4, "spd": 6 },
+      "skills": ["claw_snap", "shell_harden"],
+      "ai": {
+        "type": "weighted",
+        "weights": [
+          { "skill_id": "claw_snap", "weight": 80 },
+          { "skill_id": "shell_harden", "weight": 20, "hp_below": 0.5 }
+        ]
+      },
+      "rewards": { "xp": 30, "gold": 10, "drops": [] },
+      "intent_display": "attack"
+    },
+    {
+      "id": "tide_wraith",
+      "display_name": "Tide Wraith",
+      "tier": "normal",
+      "element": "water",
+      "stats": { "max_hp": 50, "atk": 6, "def": 4, "mag": 10, "res": 6, "spd": 9 },
+      "skills": ["drown_touch"],
+      "ai": { "type": "weighted", "weights": [{ "skill_id": "drown_touch", "weight": 100 }] },
+      "rewards": { "xp": 35, "gold": 12, "drops": [{ "item_id": "spirit_shard", "chance": 0.3 }] },
+      "intent_display": "debuff"
+    },
+    {
+      "id": "shore_wraith",
+      "display_name": "Shore Wraith",
+      "tier": "boss",
+      "element": "spirit",
+      "stats": { "max_hp": 320, "atk": 13, "def": 10, "mag": 16, "res": 12, "spd": 10 },
+      "skills": ["drown_touch", "regret_surge"],
+      "ai": {
+        "type": "phase",
+        "phases": [
+          { "hp_above": 0.5, "weights": [{ "skill_id": "drown_touch", "weight": 70 }, { "skill_id": "regret_surge", "weight": 30 }] },
+          { "hp_above": 0.0, "weights": [{ "skill_id": "regret_surge", "weight": 60 }, { "skill_id": "drown_touch", "weight": 40 }] }
+        ]
+      },
+      "rewards": { "xp": 120, "gold": 45, "drops": [{ "item_id": "wraith_pearl", "chance": 1.0 }] },
+      "intent_display": "charge",
+      "phases": [{ "hp_threshold": 0.5, "announcement": "The drowned rise with me!" }]
+    },
+    {
+      "id": "palace_sentinel",
+      "display_name": "Palace Sentinel",
+      "tier": "elite",
+      "element": "physical",
+      "stats": { "max_hp": 250, "atk": 16, "def": 14, "mag": 6, "res": 10, "spd": 8 },
+      "skills": ["sentinel_cleave", "shell_harden"],
+      "ai": {
+        "type": "weighted",
+        "weights": [
+          { "skill_id": "sentinel_cleave", "weight": 75 },
+          { "skill_id": "shell_harden", "weight": 25, "hp_below": 0.4 }
+        ]
+      },
+      "rewards": {
+        "xp": 100,
+        "gold": 60,
+        "drops": [
+          { "item_id": "palace_edge", "chance": 1.0 },
+          { "item_id": "palace_fragment", "chance": 0.5 }
+        ]
+      },
+      "intent_display": "attack",
+      "spirit_weakness": 1.5
+    },
+    {
+      "id": "tide_keeper",
+      "display_name": "Tide Keeper",
+      "tier": "boss",
+      "element": "water",
+      "stats": { "max_hp": 580, "atk": 15, "def": 12, "mag": 20, "res": 14, "spd": 11 },
+      "skills": ["tide_lament", "regret_surge", "drown_touch"],
+      "ai": {
+        "type": "phase",
+        "phases": [
+          { "hp_above": 0.66, "weights": [{ "skill_id": "drown_touch", "weight": 50 }, { "skill_id": "tide_lament", "weight": 50 }] },
+          { "hp_above": 0.33, "weights": [{ "skill_id": "regret_surge", "weight": 40 }, { "skill_id": "tide_lament", "weight": 60 }] },
+          { "hp_above": 0.0, "weights": [{ "skill_id": "tide_lament", "weight": 100 }] }
+        ]
+      },
+      "rewards": { "xp": 250, "gold": 100, "drops": [{ "item_id": "palace_fragment", "chance": 1.0 }] },
+      "intent_display": "charge",
+      "phases": [
+        { "hp_threshold": 0.66, "announcement": "The tide rises..." },
+        { "hp_threshold": 0.33, "announcement": "Time fractures." },
+        { "hp_threshold": 0.1, "announcement": "Choose.", "triggers_choice": true }
+      ]
+    }
+  ]
+}

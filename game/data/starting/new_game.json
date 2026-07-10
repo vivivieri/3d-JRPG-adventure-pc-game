@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "start_scene": "beach_shore",
+  "spawn_marker": "PlayerSpawn",
+  "party_field": ["urashima"],
+  "party_combat": ["urashima"],
+  "level": 1,
+  "inventory": {
+    "sea_salve": 2
+  },
+  "key_items": ["lacquer_box"],
+  "equipment": {
+    "urashima": {
+      "weapon": "fisher_katana",
+      "armor": "worn_haori",
+      "charm": null
+    }
+  },
+  "gold": 0,
+  "flags": {},
+  "quests_active": ["the_return"],
+  "play_prologue": true
+}

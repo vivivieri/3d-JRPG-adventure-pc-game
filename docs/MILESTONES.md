@@ -37,6 +37,13 @@ Track implementation progress against the GDD milestones.
 - [x] Playtest script (`docs/PLAYTEST_SCRIPT.md`)
 - [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
+## M0e — Story data layer (main branch)
+- [x] Data architecture (`docs/DATA_ARCHITECTURE.md`)
+- [x] Story spine + flags (`game/data/story/`)
+- [x] 5 quests, 8 encounters, 20 items, 22 dialogue scenes
+- [x] Shop, achievements, new game defaults
+- [x] `tools/validate_story_data.py`
+
 ## M1 — Greybox exploration
 - [x] Player movement polish (camera orbit — right-mouse + scroll)
 - [x] Interaction prompt HUD (Press E — action, localized)

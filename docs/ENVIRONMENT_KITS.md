@@ -294,14 +294,14 @@ Map for environment artists — 8 entries (`game/data/lore/lore_entries.json`).
 
 | ID | Zone | Placement | Asset hook |
 |----|------|-----------|------------|
-| `lore_01` | ruined_village | On `InspectBanner` | Banner inspectable |
-| `lore_02` | ruined_village | Near well | Stone marker |
-| `lore_03` | ruined_village | Shack interior shelf | Scroll prop |
-| `lore_04` | tidal_caves | Puzzle room wall | Carved kanji |
-| `lore_05` | tidal_caves | Deep pool edge | Wet tablet |
-| `lore_06` | tidal_caves | Post-boss alcove | Shrine offering |
-| `lore_07` | dragon_palace_gate | Sentinel hall statue base | Plaque |
-| `lore_08` | dragon_palace_gate | Mirror chamber | Reflection trigger |
+| `fishing_ledger` | ruined_village | Near shack | Lore pickup |
+| `festival_banner` | ruined_village | On `InspectBanner` | Banner inspectable |
+| `yuzu_prayer` | ruined_village | Torii area | Shrine prop |
+| `roku_dive_log` | ruined_village | Shack interior | Scroll prop |
+| `cave_inscription` | tidal_caves | Puzzle room wall | Carved kanji |
+| `sailor_charm` | tidal_caves | Post-boss alcove | Grants `spirit_bell` on read |
+| `palace_seal` | dragon_palace_gate | Sentinel hall | Plaque |
+| `otohime_letter` | dragon_palace_gate | Mirror chamber | Reflection trigger |
 
 ---
 
