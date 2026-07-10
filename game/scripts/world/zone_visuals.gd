@@ -192,10 +192,10 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.0, 24.0, 1 if _screenshot_mode() else 5)
 			_add_cave_wet_patches(cover, palette, zone_id)
 		"dragon_palace_gate":
-			_add_organic_ground(cover, palette, zone_id, "palace")
 			_add_palace_court_plaza(cover, palette)
 			_add_palace_marble_bands(cover, palette)
 			_add_palace_court_aisle(cover, palette)
+			_add_palace_terrace_steps(cover, palette)
 			_add_palace_void_sea_surface(cover, palette, zone_id)
 
 
@@ -300,10 +300,10 @@ static func _add_palace_court_plaza(parent: Node3D, palette: Dictionary) -> void
 	var plaza := MeshInstance3D.new()
 	plaza.name = "PalaceCourtPlaza"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(22, 34)
+	plane.size = Vector2(24, 40)
 	plane.orientation = PlaneMesh.FACE_Y
 	plaza.mesh = plane
-	plaza.position = Vector3(0, 0.06, 2)
+	plaza.position = Vector3(0, 0.04, -4)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color("#F0EBE0")
 	mat.roughness = 0.35
@@ -313,13 +313,31 @@ static func _add_palace_court_plaza(parent: Node3D, palette: Dictionary) -> void
 	parent.add_child(plaza)
 
 
+static func _add_palace_terrace_steps(parent: Node3D, palette: Dictionary) -> void:
+	var riser_mat := StandardMaterial3D.new()
+	riser_mat.albedo_color = Color("#D8CDB8")
+	riser_mat.roughness = 0.48
+	riser_mat.metallic = 0.1
+	_apply_zone_texture(riser_mat, "dragon_palace_gate", "structure", "structure", "structure")
+	for z in [12.0, 2.0, -8.0, -18.0, -28.0]:
+		var riser := MeshInstance3D.new()
+		riser.name = "PalaceTerraceRiser"
+		var plane := PlaneMesh.new()
+		plane.size = Vector2(20.5, 0.85)
+		plane.orientation = PlaneMesh.FACE_Y
+		riser.mesh = plane
+		riser.position = Vector3(0, 0.055, z)
+		riser.material_override = riser_mat
+		parent.add_child(riser)
+
+
 static func _add_palace_marble_bands(parent: Node3D, palette: Dictionary) -> void:
 	var band_mat := StandardMaterial3D.new()
 	band_mat.albedo_color = Color("#E8DCC8")
 	band_mat.roughness = 0.28
 	band_mat.metallic = 0.12
 	_apply_zone_texture(band_mat, "dragon_palace_gate", "ground", "ground", "ground")
-	for z in [-24.0, -12.0, 0.0, 12.0]:
+	for z in [-26.0, -14.0, -2.0, 10.0]:
 		var band := MeshInstance3D.new()
 		band.name = "PalaceMarbleBand"
 		var plane := PlaneMesh.new()
@@ -335,28 +353,42 @@ static func _add_palace_court_aisle(parent: Node3D, palette: Dictionary) -> void
 	var aisle := MeshInstance3D.new()
 	aisle.name = "PalaceCourtAisle"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(3.2, 30.0)
+	plane.size = Vector2(4.5, 36.0)
 	plane.orientation = PlaneMesh.FACE_Y
 	aisle.mesh = plane
-	aisle.position = Vector3(0, 0.09, -2)
+	aisle.position = Vector3(0, 0.075, -4)
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = palette.get("accent", Color("#8B2A3A")).lerp(Color("#D4A55A"), 0.35)
-	mat.roughness = 0.42
-	mat.metallic = 0.18
+	mat.albedo_color = palette.get("accent", Color("#8B2A3A")).lerp(Color("#D4A55A"), 0.28)
+	mat.roughness = 0.38
+	mat.metallic = 0.22
 	mat.emission_enabled = true
-	mat.emission = palette.get("glow", Color.WHITE) * 0.08
+	mat.emission = palette.get("accent", Color("#8B2A3A")) * 0.12
 	aisle.material_override = mat
 	parent.add_child(aisle)
+	for z in [10.0, 0.0, -10.0, -20.0]:
+		var inset := MeshInstance3D.new()
+		inset.name = "PalaceAisleInset"
+		var tile := PlaneMesh.new()
+		tile.size = Vector2(1.2, 1.2)
+		tile.orientation = PlaneMesh.FACE_Y
+		inset.mesh = tile
+		inset.position = Vector3(0, 0.082, z)
+		var inset_mat := StandardMaterial3D.new()
+		inset_mat.albedo_color = Color("#F8F0D8")
+		inset_mat.roughness = 0.3
+		inset_mat.metallic = 0.15
+		inset.material_override = inset_mat
+		parent.add_child(inset)
 
 
 static func _add_palace_void_sea_surface(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	var sea := MeshInstance3D.new()
 	sea.name = "PalaceVoidSea"
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(90, 90)
+	plane.size = Vector2(110, 110)
 	plane.orientation = PlaneMesh.FACE_Y
 	sea.mesh = plane
-	sea.position = Vector3(0, -1.35, -6)
+	sea.position = Vector3(0, -1.45, -6)
 	WaterMaterial.apply_to_mesh(sea, palette, zone_id)
 	parent.add_child(sea)
 
@@ -925,8 +957,9 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 			if zone_id == "ruined_village" or zone_id == "beach_shore":
 				child.rotation_degrees = Vector3(-48, -35, 0)
 			elif zone_id == "dragon_palace_gate":
-				child.rotation_degrees = Vector3(-58, 18, 0)
-				child.shadow_opacity = 0.55
+				child.rotation_degrees = Vector3(-62, 22, 0)
+				child.shadow_opacity = 0.42
+				child.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
 
 
 static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
@@ -1052,14 +1085,24 @@ static func _add_palace_backdrop(parent: Node3D, palette: Dictionary) -> void:
 			PropLibrary.spawn(
 				"castle_tower_base",
 				parent,
-				Vector3(side * 22.0, 0, z),
+				Vector3(side * 30.0, -0.35, z),
 				90.0 if side > 0 else -90.0,
-				1.15,
+				1.05,
 			)
-	for i in 8:
+			PropLibrary.spawn(
+				"castle_tower_top",
+				parent,
+				Vector3(side * 30.0, 0, z - 0.5),
+				90.0 if side > 0 else -90.0,
+				1.0,
+			)
+	for z in [-30, -10, 10]:
+		PropLibrary.spawn("castle_wall", parent, Vector3(-30.0, 0, z), 90.0, 1.1)
+		PropLibrary.spawn("castle_wall", parent, Vector3(30.0, 0, z), -90.0, 1.1)
+	for i in 12:
 		_add_star_glow(
 			parent,
-			Vector3(randf_range(-35, 35), randf_range(20, 32), randf_range(-35, 20)),
+			Vector3(randf_range(-40, 40), randf_range(18, 34), randf_range(-40, 16)),
 		)
 
 
@@ -1263,10 +1306,13 @@ static func _add_flood_pool_frame(parent: Node3D, pos: Vector3, palette: Diction
 
 static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	_add_void_sea(parent, palette, zone_id)
+	_add_palace_court_walls(parent, palette, zone_id)
 	_add_palace_colonnade_rows(parent, palette, zone_id)
+	_add_palace_gate_approach(parent, palette, zone_id)
 	_add_gate_pillars(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_banners(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_lanterns(parent, Vector3(0, 0, 10), palette, zone_id)
+	_add_palace_court_lights(parent, palette)
 	PropLibrary.spawn("castle_bridge", parent, Vector3(0, -0.35, 7), 0.0, 1.05)
 	PropLibrary.spawn("castle_stairs", parent, Vector3(-4.5, 0, 9), 90.0, 1.05)
 	PropLibrary.spawn("castle_stairs", parent, Vector3(4.5, 0, 9), -90.0, 1.05)
@@ -1277,18 +1323,53 @@ static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String
 	_add_palace_lanterns(parent, Vector3(0, 0, 2), palette, zone_id)
 	_add_mirror_chamber(parent, Vector3(-4, 0, -8), palette, zone_id)
 	_add_palace_section(parent, Vector3(0, 0, -18), palette, zone_id, true)
+	_add_palace_throne_backdrop(parent, palette, zone_id)
 	_add_palace_section(parent, Vector3(0, 0, -30), palette, zone_id, false)
+
+
+static func _add_palace_court_walls(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	for z in range(-32, 16, 4):
+		PropLibrary.spawn("castle_wall", parent, Vector3(-10.0, 0, z), 90.0, 1.05)
+		PropLibrary.spawn("castle_wall", parent, Vector3(10.0, 0, z), -90.0, 1.05)
+
+
+static func _add_palace_gate_approach(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	_add_torii(parent, Vector3(0, 0, 14.5), palette, zone_id)
+	for side in [-6.5, 6.5]:
+		PropLibrary.spawn("castle_tower_top", parent, Vector3(side, 0, 13.5), 0.0, 1.15)
+		PropLibrary.spawn("castle_pillar", parent, Vector3(side, 0, 11.5), 0.0, 1.25)
+	PropLibrary.spawn("castle_arch", parent, Vector3(0, 0, 11.0), 0.0, 1.2)
+
+
+static func _add_palace_court_lights(parent: Node3D, palette: Dictionary) -> void:
+	for z in [12.0, 2.0, -8.0, -18.0, -28.0]:
+		var light := OmniLight3D.new()
+		light.light_color = palette.get("glow", Color("#FFD890"))
+		light.light_energy = 0.42
+		light.omni_range = 9.0
+		light.position = Vector3(0, 2.8, z)
+		parent.add_child(light)
+
+
+static func _add_palace_throne_backdrop(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var throne := Node3D.new()
+	throne.name = "PalaceThroneBackdrop"
+	throne.position = Vector3(0, 0, -32)
+	parent.add_child(throne)
+	PropLibrary.spawn("castle_arch", throne, Vector3(0, 0, 0), 0.0, 1.35)
+	PropLibrary.spawn("castle_tower_top", throne, Vector3(-5.0, 0, 0.5), 0.0, 1.2)
+	PropLibrary.spawn("castle_tower_top", throne, Vector3(5.0, 0, 0.5), 0.0, 1.2)
+	PropLibrary.spawn("castle_pillar", throne, Vector3(-3.5, 0, 1.5), 0.0, 1.3)
+	PropLibrary.spawn("castle_pillar", throne, Vector3(3.5, 0, 1.5), 0.0, 1.3)
+	_add_palace_banners(throne, Vector3(0, 0, 1.0), palette, zone_id)
 
 
 static func _add_palace_colonnade_rows(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	for z in [10.0, 0.0, -10.0, -20.0]:
 		for x in [-7.5, 7.5]:
 			PropLibrary.spawn("castle_pillar", parent, Vector3(x, 0, z), 0.0, 1.2)
-		var rail := Node3D.new()
-		rail.position = Vector3(0, 0, z)
-		parent.add_child(rail)
-		PropLibrary.spawn("log", rail, Vector3(-7.5, 0.55, 0), 90.0, 0.85, true)
-		PropLibrary.spawn("log", rail, Vector3(7.5, 0.55, 0), 90.0, 0.85, true)
+		for x in [-8.8, 8.8]:
+			PropLibrary.spawn("castle_wall", parent, Vector3(x, 0, z), 90.0 if x < 0 else -90.0, 0.95)
 
 
 static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -1513,8 +1594,10 @@ static func _add_gate_pillars(parent: Node3D, pos: Vector3, palette: Dictionary,
 	gate.name = "PalaceGate"
 	gate.position = pos
 	parent.add_child(gate)
-	PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.25)
-	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.0), 0.0, 1.1)
+	PropLibrary.spawn("castle_gate", gate, Vector3(0, 0, 0), 0.0, 1.4)
+	PropLibrary.spawn("castle_metal_gate", gate, Vector3(0, 0, 1.0), 0.0, 1.2)
+	PropLibrary.spawn("castle_pillar", gate, Vector3(-3.2, 0, 0.5), 0.0, 1.35)
+	PropLibrary.spawn("castle_pillar", gate, Vector3(3.2, 0, 0.5), 0.0, 1.35)
 
 
 static func _add_cylinder(
