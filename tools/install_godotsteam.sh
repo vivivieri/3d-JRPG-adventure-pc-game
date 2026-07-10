@@ -19,6 +19,24 @@ fi
 
 mkdir -p "$DEST"
 
+ZIP_URL="https://codeberg.org/godotsteam/godotsteam/releases/download/v4.15-gde/godotsteam-4.15-gdextension-plugin-4.1-4.3.zip"
+TMP_ZIP="$(mktemp /tmp/godotsteam-XXXXXX.zip)"
+
+echo "==> Downloading GodotSteam $VERSION for Godot 4.1–4.3..."
+if curl -fsSL -o "$TMP_ZIP" "$ZIP_URL"; then
+  unzip -qo "$TMP_ZIP" -d "$DEST"
+  if [[ -d "$DEST/addons/godotsteam" ]]; then
+    mv "$DEST/addons/godotsteam/"* "$DEST/"
+    rm -rf "$DEST/addons"
+  fi
+  rm -f "$TMP_ZIP"
+  echo "[OK] GodotSteam installed to $DEST"
+  ls "$DEST/godotsteam.gdextension"
+  exit 0
+fi
+
+rm -f "$TMP_ZIP"
+
 cat > "$DEST/README.md" <<'EOF'
 # GodotSteam (manual install required)
 
