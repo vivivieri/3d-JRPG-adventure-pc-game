@@ -1,0 +1,5 @@
+{
+  "install": "export PATH=\"$HOME/.local/bin:$PATH\" && GDAI_PLUGIN_REQUIRED=0 bash tools/install_gdai_mcp.sh",
+  "start": "export PATH=\"$HOME/.local/bin:$PATH\" DISPLAY=\"${DISPLAY:-:1}\" bash tools/start_godot_editor.sh",
+  "terminals": []
+}

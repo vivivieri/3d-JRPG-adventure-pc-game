@@ -7,6 +7,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PLUGIN_DIR="$ROOT/game/addons/gdai-mcp-plugin-godot"
 GODOT_SDK="${GODOT_SDK:-$ROOT/.godot-sdk}"
 GODOT_BIN="${GODOT_BIN:-$GODOT_SDK/Godot_v4.3-stable_linux.x86_64}"
+PLUGIN_REQUIRED="${GDAI_PLUGIN_REQUIRED:-1}"
 
 echo "==> Installing uv (GDAI MCP dependency)"
 if ! command -v uv >/dev/null 2>&1; then
@@ -34,10 +35,11 @@ else
     echo "Extracting $ZIP ..."
     tmp="$(mktemp -d)"
     unzip -q "$ZIP" -d "$tmp"
-  if [[ -d "$tmp/addons/gdai-mcp-plugin-godot" ]]; then
+    if [[ -d "$tmp/addons/gdai-mcp-plugin-godot" ]]; then
       mkdir -p "$ROOT/game/addons"
       cp -a "$tmp/addons/gdai-mcp-plugin-godot" "$PLUGIN_DIR"
     elif [[ -d "$tmp/gdai-mcp-plugin-godot" ]]; then
+      mkdir -p "$ROOT/game/addons"
       cp -a "$tmp/gdai-mcp-plugin-godot" "$PLUGIN_DIR"
     else
       echo "Could not find gdai-mcp-plugin-godot/ inside zip" >&2
@@ -54,14 +56,18 @@ It cannot be downloaded automatically in cloud CI.
 
 Options:
   1. Purchase/download the plugin zip locally
-  2. Upload to cloud: set GDAI_PLUGIN_ZIP=/path/to/plugin.zip and re-run
+  2. Set secret GDAI_PLUGIN_ZIP=/path/to/plugin.zip and re-run install
   3. Or manually copy to: game/addons/gdai-mcp-plugin-godot/
 
 Then in Godot: Project -> Plugins -> enable GDAI MCP -> Start server
-Configure Cursor MCP with uv run .../gdai_mcp_server.py (see .cursor/mcp.json.example)
+Register Cursor Cloud MCP (stdio): bash tools/print_gdai_mcp_config.sh
 
 EOF
-    exit 1
+    if [[ "$PLUGIN_REQUIRED" == "1" ]]; then
+      exit 1
+    fi
+    echo "Continuing without plugin (GDAI_PLUGIN_REQUIRED=0)."
+    exit 0
   fi
 fi
 
