@@ -33,7 +33,19 @@
 
 ## Latest screenshots (`cursor/godotprompt-complete-c4bf`)
 
+### In-game gameplay (third-person camera + player visible)
+
 | Scenario | File |
+|----------|------|
+| Exploring beach | `steam/screenshots-capture/gameplay_beach.png` |
+| Exploring village | `steam/screenshots-capture/gameplay_village.png` |
+| Interact prompt (Press E) | `steam/screenshots-capture/gameplay_interact.png` |
+| Dialogue in world | `steam/screenshots-capture/gameplay_dialogue.png` |
+| Combat in world | `steam/screenshots-capture/gameplay_combat.png` |
+| Exploring caves | `steam/screenshots-capture/gameplay_caves.png` |
+| Exploring palace | `steam/screenshots-capture/gameplay_palace.png` |
+
+### Cinematic / UI captures
 |----------|------|
 | Main menu | `steam/screenshots-capture/main_menu.png` |
 | Beach shore (SC-01) | `steam/screenshots-capture/beach.png` |

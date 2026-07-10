@@ -9,6 +9,14 @@ var _can_move := true
 
 func _ready() -> void:
 	add_to_group("player")
+	_add_visual()
+
+
+func _add_visual() -> void:
+	if get_node_or_null("Visual"):
+		return
+	var fisherman := JapaneseNatureMeshes.build_urashima_fisherman()
+	add_child(fisherman)
 
 
 func _physics_process(delta: float) -> void:

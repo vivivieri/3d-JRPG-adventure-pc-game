@@ -140,6 +140,36 @@ static func build_driftwood_log(length: float, wood: Color) -> Node3D:
 	return root
 
 
+static func build_urashima_fisherman(coat: Color = Color("#4A5A68"), skin: Color = Color("#D4B896")) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Visual"
+	var body := _build_tapered_pillar(0.32, 0.38, 1.1, 16, coat)
+	body.position = Vector3(0, 0.55, 0)
+	root.add_child(body)
+	var coat_tail := _build_box_mesh(Vector3(0.5, 0.7, 0.35), coat.darkened(0.08), 0.0, 0.0)
+	coat_tail.position = Vector3(0, 0.45, -0.12)
+	root.add_child(coat_tail)
+	var head := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.26
+	sphere.height = 0.52
+	sphere.radial_segments = 20
+	sphere.rings = 12
+	head.mesh = sphere
+	head.position = Vector3(0, 1.35, 0)
+	_apply_mat(head, skin, 0.82)
+	root.add_child(head)
+	var hair := _build_box_mesh(Vector3(0.34, 0.12, 0.32), Color("#1A1410"), 0.0, 0.0)
+	hair.position = Vector3(0, 1.52, -0.02)
+	root.add_child(hair)
+	var box := build_lacquer_box(Color("#6B1818"), Color("#C9A030"))
+	box.scale = Vector3(0.55, 0.55, 0.55)
+	box.position = Vector3(0.28, 0.75, 0.18)
+	box.rotation_degrees.y = 25
+	root.add_child(box)
+	return root
+
+
 static func build_seaweed_cluster(teal: Color) -> Node3D:
 	var root := Node3D.new()
 	root.name = "SeaweedHD"

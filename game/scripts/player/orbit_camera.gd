@@ -4,14 +4,14 @@ extends Camera3D
 
 @export var orbit_enabled := true
 @export var mouse_sensitivity := 0.004
-@export var min_pitch := -1.1
-@export var max_pitch := 0.15
+@export var min_pitch := -0.15
+@export var max_pitch := 0.75
 @export var default_distance := 7.0
 @export var min_distance := 4.0
 @export var max_distance := 12.0
 
 var _yaw := 0.0
-var _pitch := -0.45
+var _pitch := 0.38
 var _distance := 7.0
 
 
