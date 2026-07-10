@@ -235,6 +235,12 @@ Each design doc has a checklist — use during focused passes:
 | `ACHIEVEMENTS.md` | §5 |
 | `ENCOUNTER_TABLE.md` | §12 |
 | `AUDIO_PRODUCTION_GUIDE.md` | §11 |
+| `REPLAY_DESIGN.md` | §11 |
+| `NARRATIVE_WRITING_GUIDE.md` | §9 |
+| `PROGRESSION_TUNING.md` | §10 |
+| `GAME_FEEL.md` | §9 |
+| `LORE_AND_ENVIRONMENTAL_STORY.md` | §10 |
+| `WORLD_MAP_AND_FLOW.md` | §10 |
 | `CHARACTER_BIBLE.md` | Production order + global rules |
 
 ---

@@ -39,6 +39,14 @@ Track implementation progress against the GDD milestones.
 - [x] QA & bug process (`docs/QA_AND_BUG_PROCESS.md`)
 - [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
+## M0f — Pre-build design (narrative & polish)
+- [x] Narrative writing guide (`docs/NARRATIVE_WRITING_GUIDE.md`) — no VO; SC-07 silence
+- [x] Progression tuning (`docs/PROGRESSION_TUNING.md`)
+- [x] Game feel (`docs/GAME_FEEL.md`)
+- [x] Lore & environmental story (`docs/LORE_AND_ENVIRONMENTAL_STORY.md`)
+- [x] World map & zone flow (`docs/WORLD_MAP_AND_FLOW.md`)
+- [x] Replay design (`docs/REPLAY_DESIGN.md`)
+
 ## M0e — Story data layer (main branch)
 - [x] Data architecture (`docs/DATA_ARCHITECTURE.md`)
 - [x] Story spine + flags (`game/data/story/`)

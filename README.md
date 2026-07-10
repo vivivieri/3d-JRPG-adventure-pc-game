@@ -62,6 +62,12 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | [Achievements](docs/ACHIEVEMENTS.md) | 12 Steam achievements |
 | [Playtest Script](docs/PLAYTEST_SCRIPT.md) | 2–3h QA path |
 | [QA & Bug Process](docs/QA_AND_BUG_PROCESS.md) | Severity, triage, regression |
+| [Narrative Writing Guide](docs/NARRATIVE_WRITING_GUIDE.md) | Voice, silence, no VO, i18n prose |
+| [Progression Tuning](docs/PROGRESSION_TUNING.md) | XP, stats, economy, difficulty |
+| [Game Feel](docs/GAME_FEEL.md) | Combat juice, feedback, rewards |
+| [Lore & Environmental Story](docs/LORE_AND_ENVIRONMENTAL_STORY.md) | 8 lore entries, hub emptiness |
+| [World Map & Flow](docs/WORLD_MAP_AND_FLOW.md) | Zones, connections, save points |
+| [Replay Design](docs/REPLAY_DESIGN.md) | Endings gallery, second run |
 | [Pacing Chart](docs/PACING_CHART.md) | Emotional beat timeline |
 
 ### Story data (M0e)
@@ -123,6 +129,12 @@ docs/
   ACHIEVEMENTS.md
   PLAYTEST_SCRIPT.md
   QA_AND_BUG_PROCESS.md  # Bug severity, triage, regression
+  NARRATIVE_WRITING_GUIDE.md # Voice, no VO, SC-07 silence
+  PROGRESSION_TUNING.md  # XP, stats, economy, difficulty
+  GAME_FEEL.md           # Feedback, juice, rewards
+  LORE_AND_ENVIRONMENTAL_STORY.md
+  WORLD_MAP_AND_FLOW.md
+  REPLAY_DESIGN.md
   MILESTONES.md          # Implementation checklist
   LOCALIZATION.md        # en / ja / zh notes
   LICENSES.md            # Asset attribution log
@@ -219,6 +231,12 @@ DialogueRunner.play_scene("SC-03")
 - [Achievements](docs/ACHIEVEMENTS.md)
 - [Playtest Script](docs/PLAYTEST_SCRIPT.md)
 - [QA & Bug Process](docs/QA_AND_BUG_PROCESS.md)
+- [Narrative Writing Guide](docs/NARRATIVE_WRITING_GUIDE.md)
+- [Progression Tuning](docs/PROGRESSION_TUNING.md)
+- [Game Feel](docs/GAME_FEEL.md)
+- [Lore & Environmental Story](docs/LORE_AND_ENVIRONMENTAL_STORY.md)
+- [World Map & Flow](docs/WORLD_MAP_AND_FLOW.md)
+- [Replay Design](docs/REPLAY_DESIGN.md)
 - [Localization guide](docs/LOCALIZATION.md)
 - [License log](docs/LICENSES.md)
 - [Asset compliance policy](docs/ASSET_COMPLIANCE.md)

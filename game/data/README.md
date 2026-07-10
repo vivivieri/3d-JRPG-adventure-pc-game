@@ -69,4 +69,5 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 - `docs/DATA_ARCHITECTURE.md` — full architecture
 - `docs/QUEST_AND_FLAGS.md` — quest & flag detail
 - `docs/ITEMS_AND_ECONOMY.md` — item catalog
-- `docs/ENCOUNTER_TABLE.md` — pacing
+- `docs/REPLAY_DESIGN.md` — replay & gallery
+- `docs/NARRATIVE_WRITING_GUIDE.md` — writing & no-VO policy

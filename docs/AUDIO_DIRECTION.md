@@ -15,6 +15,7 @@
 | Reference | *NieR* restraint, *Ghost of Tsushima* wind/shore, traditional koto/shamisen accents |
 | Replace | Procedural placeholder audio (`tools/generate_game_audio.py`) before ship |
 | Languages | Music is non-vocal or JP lyrics buried in mix; SFX universal |
+| Voice acting | **None** — story is text dialogue only (`NARRATIVE_WRITING_GUIDE.md` §1) |
 
 ---
 
@@ -75,7 +76,7 @@
 |-----|----------|
 | Music | -12 dBFS peak |
 | SFX | -6 dBFS peak |
-| Voice / dialogue | -9 dBFS (always readable) |
+| Voice / dialogue | N/A — text only; optional UI open SFX |
 | Ambient | -18 dBFS under music |
 
 ---

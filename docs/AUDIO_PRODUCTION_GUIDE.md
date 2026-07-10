@@ -29,7 +29,7 @@
 | `Master` | All output | `master_volume` |
 | `Music` | BGM, stings on music bus | `music_volume` |
 | `SFX` | UI, combat, footsteps, one-shots | `sfx_volume` |
-| `Voice` | Dialogue VO lines (if recorded) | follows `master_volume` |
+| `Voice` | **Unused v1** — no recorded dialogue | — |
 | `Ambient` | Zone loops, surf, drips | duck under Music (-3 dB) |
 
 **Crossfade:** `AudioManager` — **1.5 s** linear crossfade between zone BGM tracks.
@@ -161,7 +161,7 @@ docs/audio_sheets/          # Design-time loop sheets (not shipped)
 | **Loop point** | Bar 29 |
 | **Layer with** | `amb_palace_hum` |
 | **Zones** | `dragon_palace_gate` (SC-12–16 field) |
-| **SC-11 flashback** | Duck to 40% under Otohime VO |
+| **SC-11 flashback** | Duck to 40% during Otohime dialogue (text on screen) |
 
 #### `bgm_combat`
 
@@ -228,12 +228,12 @@ See `AUDIO_DIRECTION.md` §2 for instrument notes. Each ending track **must not*
 | SC-00 | — | `bgm_prologue` | — | Box gift bell |
 | SC-01 | `beach_shore` | `bgm_village` | `amb_beach_surf` | Distant thunder at spawn |
 | SC-02 | `ruined_village` | `bgm_village` | `amb_village_wind` | Hub pan wind swell |
-| SC-03 | `ruined_village` | duck 50% | `amb_village_wind` | Fox bell distant; spirit reverb VO |
+| SC-03 | `ruined_village` | duck 50% | `amb_village_wind` | Fox bell distant; spirit reverb SFX under text |
 | SC-04 | `ruined_village` | `bgm_village` | shack interior dampened | Map handoff paper rustle |
 | SC-05 | combat | `bgm_combat` | — | `sting_combat_start`; tutorial confirm |
 | SC-06 | `tidal_caves` | `bgm_caves` | `amb_cave_drip` | Zone enter low pass 1 s |
 | SC-07 | `tidal_caves` | `bgm_caves` | drip | Switch `sfx_story_puzzle_switch`; chest open |
-| SC-08 | `tidal_caves` | duck 40% | drip + whisper bed | Overlapping whisper VO |
+| SC-08 | `tidal_caves` | duck 40% | drip + whisper bed | Overlapping whisper SFX bed (no VO) |
 | SC-09 | boss | `bgm_boss` | water surge | `sting_boss_intro`; phase 2 whispers |
 | SC-10 | `tidal_caves` | `bgm_caves` | — | `sting_yuzu_join` (short, not triumphant) |
 | SC-11 | cinematic | duck `bgm_caves` 30% | — | Palace harp overlay `sfx_story_palace_harp` |
@@ -399,12 +399,12 @@ Store per-track loop documentation in `docs/audio_sheets/<track_id>.md`:
 |-----|-----------------|-----------|
 | Music (each BGM) | -16 LUFS | -1.0 dBTP |
 | SFX (category peak) | — | -6.0 dBFS |
-| Voice / dialogue | -18 LUFS | -3.0 dBTP |
+| Voice / dialogue | N/A v1 | — |
 | Ambient beds | -22 LUFS | -6.0 dBTP |
 
 **Relative balance** (from `AUDIO_DIRECTION.md` §5): dialogue always readable over Music; Ambient always under Music.
 
-**Ducking:** Story dialogue ducks Music -6 dB; SC-16 choice ducks to -24 dBFS effective.
+**Ducking:** Long dialogue scenes may duck Music -6 dB for readability; SC-16 choice ducks to -24 dBFS effective. No voice bus in v1.
 
 ---
 

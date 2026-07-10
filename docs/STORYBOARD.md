@@ -4,7 +4,7 @@
 
 **Total scenes:** 19 (SC-00 prologue + 18 main path)
 
-**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`
+**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`, `docs/NARRATIVE_WRITING_GUIDE.md`
 
 ---
 
@@ -26,7 +26,7 @@
 |-------|--------|
 | **Location** | Beach outside ruined village |
 | **Camera** | Wide establishing shot → over-shoulder follow |
-| **Summary** | Urashima washes ashore, clutching the lacquer box. Voice-over: "I thought it was three days." |
+| **Summary** | Urashima washes ashore, clutching the lacquer box. Narrator line: "I thought it was three days." (text only — no VO) |
 | **Gameplay** | Tutorial movement (WASD), approach village gate |
 | **Mood** | Lonely, grey sky, distant thunder |
 | **Assets** | Beach terrain, driftwood, box prop, ruined gate silhouette |
@@ -94,7 +94,7 @@
 |-------|--------|
 | **Location** | Tidal Caves — flooded chamber |
 | **Camera** | Top-down wide for puzzle readability |
-| **Summary** | Urashima must raise/lower water to reach an ancient latch. |
+| **Summary** | Urashima must raise/lower water to reach an ancient latch. **No dialogue — quiet puzzle by design** (`NARRATIVE_WRITING_GUIDE.md` §4). |
 | **Gameplay** | Switch puzzle (2 states); optional chest with antidote |
 | **Mood** | Quiet problem-solving |
 | **Assets** | Water plane animation, switch props, chest |

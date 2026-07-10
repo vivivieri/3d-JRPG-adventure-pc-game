@@ -2,7 +2,7 @@
 
 **Version:** 1.0 (Pre-build)  
 **Scene:** SC-07 — Water Level Puzzle  
-**Cross-refs:** `docs/STORYBOARD.md`, `docs/QUEST_AND_FLAGS.md`
+**Cross-refs:** `docs/STORYBOARD.md`, `docs/QUEST_AND_FLAGS.md`, `docs/NARRATIVE_WRITING_GUIDE.md` §4
 
 ---
 
@@ -15,6 +15,7 @@
 | **Duration target** | 2–5 minutes |
 | **Fail state** | None — cannot die |
 | **Blocks** | Deep pool (SC-08) until solved |
+| **Dialogue** | **None** — intentional quiet beat (`NARRATIVE_WRITING_GUIDE.md` §4) |
 
 ---
 
