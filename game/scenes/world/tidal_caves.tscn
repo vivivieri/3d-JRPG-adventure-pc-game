@@ -1,0 +1,213 @@
+[gd_scene load_steps=12 format=3 uid="uid://tidalcaves001"]
+
+[ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="1_spawn"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/player/orbit_camera.gd" id="2b_camera"]
+[ext_resource type="Script" path="res://scripts/world/auto_dialogue_zone.gd" id="3_dialogue"]
+[ext_resource type="Script" path="res://scripts/world/water_controller.gd" id="4_water"]
+[ext_resource type="Script" path="res://scripts/world/water_switch.gd" id="5_switch"]
+[ext_resource type="Script" path="res://scripts/world/loot_chest.gd" id="6_chest"]
+[ext_resource type="Script" path="res://scripts/world/combat_trigger.gd" id="7_combat"]
+[ext_resource type="Script" path="res://scripts/world/scene_transition.gd" id="8_transition"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(12, 0.4, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape_floor"]
+size = Vector3(12, 0.4, 8)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="BoxShape3D" id="BoxShape_zone"]
+size = Vector3(10, 3, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_water"]
+size = Vector3(8, 0.3, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape_barrier"]
+size = Vector3(8, 2.5, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_barrier"]
+size = Vector3(8, 2.5, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape_interact"]
+size = Vector3(1.6, 2, 1.6)
+
+[node name="TidalCaves" type="Node3D"]
+script = ExtResource("1_spawn")
+zone_id = "tidal_caves"
+default_spawn = "from_village"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 10, 0)
+light_color = Color(0.55, 0.7, 0.9, 1)
+light_energy = 0.65
+shadow_enabled = true
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="from_village" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
+
+[node name="from_gate" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -32)
+
+[node name="default" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
+
+[node name="EntranceFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 10)
+
+[node name="Mesh" type="MeshInstance3D" parent="EntranceFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="EntranceFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="MainTunnel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 2)
+
+[node name="Mesh" type="MeshInstance3D" parent="MainTunnel"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="MainTunnel"]
+shape = SubResource("BoxShape_floor")
+
+[node name="PuzzleFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -6)
+
+[node name="Mesh" type="MeshInstance3D" parent="PuzzleFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="PuzzleFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="DeepPoolFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -16)
+
+[node name="Mesh" type="MeshInstance3D" parent="DeepPoolFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="DeepPoolFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="BossFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -28)
+
+[node name="Mesh" type="MeshInstance3D" parent="BossFloor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Collision" type="CollisionShape3D" parent="BossFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
+script = ExtResource("2_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
+current = true
+script = ExtResource("2b_camera")
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape_player")
+
+[node name="EntranceDialogue" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 11)
+script = ExtResource("3_dialogue")
+dialogue_scene_id = "SC-06"
+once_flag = "caves_entrance_dialogue"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceDialogue"]
+shape = SubResource("BoxShape_zone")
+
+[node name="WaterPuzzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="WaterController" type="Node3D" parent="WaterPuzzle"]
+script = ExtResource("4_water")
+water_mesh_path = NodePath("../Water")
+barrier_path = NodePath("../FloodBarrier")
+lowered_y = -1.6
+raised_y = 0.35
+
+[node name="Water" type="MeshInstance3D" parent="WaterPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -2)
+mesh = SubResource("BoxMesh_water")
+
+[node name="FloodBarrier" type="StaticBody3D" parent="WaterPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -4.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="WaterPuzzle/FloodBarrier"]
+mesh = SubResource("BoxMesh_barrier")
+
+[node name="Collision" type="CollisionShape3D" parent="WaterPuzzle/FloodBarrier"]
+shape = SubResource("BoxShape_barrier")
+
+[node name="TideSwitch" type="StaticBody3D" parent="WaterPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+script = ExtResource("5_switch")
+water_controller_path = NodePath("../WaterController")
+
+[node name="Collision" type="CollisionShape3D" parent="WaterPuzzle/TideSwitch"]
+shape = SubResource("BoxShape_interact")
+
+[node name="AntidoteChest" type="StaticBody3D" parent="WaterPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7.5)
+script = ExtResource("6_chest")
+item_id = "coral_antidote"
+quantity = 1
+opened_flag = "caves_antidote_chest"
+requires_water_lowered = true
+
+[node name="Collision" type="CollisionShape3D" parent="WaterPuzzle/AntidoteChest"]
+shape = SubResource("BoxShape_interact")
+
+[node name="DeepPoolEncounter" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -16)
+script = ExtResource("7_combat")
+pre_dialogue_id = "SC-08"
+pre_dialogue_flag = "deep_pool_dialogue_done"
+combat_encounter_ids = PackedStringArray("tide_wraith", "tide_wraith")
+once_flag = "deep_pool_cleared"
+interaction_prompt_key = "UI_INTERACT_FIGHT"
+
+[node name="Collision" type="CollisionShape3D" parent="DeepPoolEncounter"]
+shape = SubResource("BoxShape_interact")
+
+[node name="ShoreWraithBoss" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -28)
+script = ExtResource("7_combat")
+combat_encounter_ids = PackedStringArray("shore_wraith")
+victory_flag = "shore_wraith_defeated"
+post_victory_dialogue = "SC-10"
+once_flag = "shore_wraith_fought"
+interaction_prompt_key = "UI_INTERACT_FIGHT"
+
+[node name="Collision" type="CollisionShape3D" parent="ShoreWraithBoss"]
+shape = SubResource("BoxShape_interact")
+
+[node name="ExitToVillage" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16)
+script = ExtResource("8_transition")
+target_scene = "res://scenes/world/ruined_village.tscn"
+target_area = "ruined_village"
+target_spawn = "from_caves"
+interaction_prompt_key = "UI_INTERACT_EXIT"
+
+[node name="Collision" type="CollisionShape3D" parent="ExitToVillage"]
+shape = SubResource("BoxShape_interact")
+
+[node name="PalaceGatePortal" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -32)
+script = ExtResource("8_transition")
+target_scene = "res://scenes/world/dragon_palace_gate.tscn"
+target_area = "dragon_palace_gate"
+target_spawn = "from_caves"
+required_flag = "shore_wraith_defeated"
+interaction_prompt_key = "UI_INTERACT_ENTER"
+
+[node name="Collision" type="CollisionShape3D" parent="PalaceGatePortal"]
+shape = SubResource("BoxShape_interact")

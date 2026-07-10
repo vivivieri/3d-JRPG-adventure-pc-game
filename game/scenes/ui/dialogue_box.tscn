@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://dialoguebox001"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_dialogue"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.102, 0.102, 0.18, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.322, 0.647, 0.847, 0.55)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 20.0
+content_margin_top = 16.0
+content_margin_right = 20.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_portrait"]
+bg_color = Color(0.16, 0.2, 0.24, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.322, 0.647, 0.847, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="DialogueBox" type="CanvasLayer"]
+script = ExtResource("1_dialogue")
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -260.0
+offset_right = -80.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="DialoguePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PortraitFrame" type="PanelContainer" parent="DialoguePanel/Margin/HBox"]
+visible = false
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
+
+[node name="PortraitPlaceholder" type="ColorRect" parent="DialoguePanel/Margin/HBox/PortraitFrame"]
+layout_mode = 2
+color = Color(0.24, 0.35, 0.42, 1)
+
+[node name="VBox" type="VBoxContainer" parent="DialoguePanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="DialoguePanel/Margin/HBox/VBox"]
+layout_mode = 2
+
+[node name="SpeakerLabel" type="Label" parent="DialoguePanel/Margin/HBox/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.353, 1)
+theme_override_font_sizes/font_size = 22
+text = "Speaker"
+
+[node name="BodyLabel" type="Label" parent="DialoguePanel/Margin/HBox/VBox"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.94, 0.94, 0.96, 1)
+theme_override_font_sizes/font_size = 20
+text = "Dialogue text appears here."
+autowrap_mode = 3
+
+[node name="HintLabel" type="Label" parent="DialoguePanel/Margin/HBox/VBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.65, 0.7, 0.75, 0.85)
+theme_override_font_sizes/font_size = 14
+text = "Press Space or Enter"
+horizontal_alignment = 2

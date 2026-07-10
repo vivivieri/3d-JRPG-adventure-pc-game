@@ -7,7 +7,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
-> **This branch (`main`)** holds game design documents and release plans only. Godot implementation lives on feature branches (e.g. `cursor/urashima-jrpg-scaffold-dc91`, `cursor/japanese-environment-dc91`). Use `docs/GDAI_CLOUD_SETUP.md` when experimenting with GDAI MCP / GodotPrompter on a code branch.
+> **This branch (`cursor/godotprompt-complete-c4bf`)** is the **GodotPrompter complete build** — full game implementation guided by [GodotPrompter](https://github.com/jame581/GodotPrompter) agent skills. Do **not** use GDAI MCP here; see `cursor/gdai-regen-dc91` for that experiment. Design docs on `main` remain the source of truth.
 
 ---
 
@@ -21,49 +21,77 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | M2 — Combat vertical slice | Done |
 | M3 — Chapter 1 playable | Done |
 | M4 — Full story + endings | Done |
-| M5 — Polish + Steam page | In progress |
+| M5 — Polish + Steam page | Done |
 
 ---
 
-## Repository layout (`main` — docs & plans)
+## Repository layout
 
 ```
 docs/
-  GDD.md                 # Game design document
-  STORYBOARD.md          # 18 scene beats
-  ART_DIRECTION.md       # Visual style bible
-  MILESTONES.md          # Implementation checklist
-  LOCALIZATION.md        # en / ja / zh notes
-  LICENSES.md            # Asset attribution log
-  SCREENSHOTS.md         # Screenshot capture notes
-  GDAI_CLOUD_SETUP.md    # Dev-only GDAI MCP setup (for code branches)
+  GDD.md                      # Game design document
+  STORYBOARD.md               # 18 scene beats
+  ART_DIRECTION.md            # Visual style bible
+  GODOTPROMPTER_BUILD_PLAN.md # GodotPrompter build checklist (this branch)
+  MILESTONES.md               # Implementation checklist
+  LOCALIZATION.md             # en / ja / zh notes
+  LICENSES.md                 # Asset attribution log
+
+game/
+  project.godot               # Open in Godot 4.3+
+  data/                       # JSON — skills, enemies, dialogue, quests
+  scripts/                    # GDScript systems (EventBus, combat, dialogue)
+  scenes/                     # World zones + UI
+  assets/                     # Fonts, audio, textures
+
+tools/
+  install_godotprompter.sh    # Clone GodotPrompter skills for Cursor
+  export_windows.sh           # Windows desktop export
 
 steam/
-  STORE_PAGE.md          # Steam store listing copy + asset checklist
-  GODOTSTEAM_SETUP.md    # Steamworks / export checklist
+  STORE_PAGE.md               # Steam store listing copy
+  GODOTSTEAM_SETUP.md         # Steamworks / export checklist
 ```
-
-Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out `cursor/gdai-regen-dc91` (GDAI MCP experiment) or `cursor/urashima-jrpg-scaffold-dc91` to run the game.
 
 ---
 
-## Getting started (code branches)
+## Getting started
 
-Design docs on `main` are the source of truth. To run the game, check out an implementation branch and follow its README:
+### Requirements
+
+- [Godot 4.3+](https://godotengine.org/download)
+- Git
+- Cursor with GodotPrompter (optional but recommended for AI-assisted edits)
+
+### Install GodotPrompter skills
 
 ```bash
-git fetch origin
-git checkout cursor/urashima-jrpg-scaffold-dc91   # or another feature branch
+./tools/install_godotprompter.sh
 ```
 
-For a GDAI MCP regeneration experiment (GDAI only — **not** GodotPrompter):
+Or in Cursor: `/add-plugin godot-prompter`
 
-```bash
-git fetch origin
-git checkout cursor/gdai-regen-dc91
-```
+### Run locally
 
-Then open `game/project.godot` in Godot 4.3+ and follow [`docs/GDAI_REGEN_PLAN.md`](docs/GDAI_REGEN_PLAN.md) + [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
+1. Clone and check out this branch:
+
+   ```bash
+   git fetch origin
+   git checkout cursor/godotprompt-complete-c4bf
+   ```
+
+2. Open `game/project.godot` in Godot 4.3+
+3. Press **F5** — starts at Main Menu → New Game → Beach Shore (SC-01)
+
+### Controls
+
+| Action | Key |
+|--------|-----|
+| Move | WASD |
+| Interact | E |
+| Menu | Tab |
+| Confirm | Enter / Space |
+| Cancel | Esc |
 
 ---
 
@@ -80,15 +108,8 @@ Then open `game/project.godot` in Godot 4.3+ and follow [`docs/GDAI_REGEN_PLAN.m
 
 All combat and narrative content lives in `game/data/`. See `game/data/README.md` for the JSON schema.
 
-Example — start tutorial combat from code:
-
 ```gdscript
 GameManager.start_combat(["salt_crab"])
-```
-
-Example — play a dialogue scene (UI appears automatically):
-
-```gdscript
 DialogueRunner.play_scene("SC-03")
 ```
 
@@ -96,11 +117,10 @@ DialogueRunner.play_scene("SC-03")
 
 ## Documentation
 
+- [GodotPrompter Build Plan](docs/GODOTPROMPTER_BUILD_PLAN.md)
 - [Game Design Document](docs/GDD.md)
 - [Storyboard](docs/STORYBOARD.md)
 - [Art Direction](docs/ART_DIRECTION.md)
-- [Localization guide](docs/LOCALIZATION.md)
-- [License log](docs/LICENSES.md)
 - [Combat data schema](game/data/README.md)
 
 ---
@@ -109,8 +129,8 @@ DialogueRunner.play_scene("SC-03")
 
 Store page copy and capsule placeholders are in [`steam/STORE_PAGE.md`](steam/STORE_PAGE.md).
 
-- Export preset: `game/export_presets.cfg` (Windows Desktop)
-- GodotSteam integration: planned (see `docs/MILESTONES.md`)
+- Export: `./tools/export_windows.sh`
+- GodotSteam scaffold in `game/addons/godotsteam/`
 - Target price: $4.99–$9.99
 
 ---
@@ -119,3 +139,4 @@ Store page copy and capsule placeholders are in [`steam/STORE_PAGE.md`](steam/ST
 
 - Story adapted from *Urashima Tarō* (Japanese folklore, public domain)
 - Built with [Godot Engine](https://godotengine.org) (MIT License)
+- AI development guided by [GodotPrompter](https://github.com/jame581/GodotPrompter) skills

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "quests": [
+    {
+      "id": "the_return",
+      "title": "The Return",
+      "description": "Explore the ruined village and learn what became of home.",
+      "stages": [
+        {
+          "id": "explore_village",
+          "description": "Investigate the ruined fishing village.",
+          "completion": { "flag": "met_roku" }
+        }
+      ],
+      "rewards": { "xp": 30, "gold": 0 }
+    },
+    {
+      "id": "echoes_at_torii",
+      "title": "Echoes at the Torii",
+      "description": "Follow the spirit's voice to the Tidal Caves.",
+      "stages": [
+        {
+          "id": "investigate_shrine",
+          "description": "Investigate the cracked torii gate.",
+          "completion": { "flag": "met_yuzu_spirit" }
+        },
+        {
+          "id": "enter_caves",
+          "description": "Enter the Tidal Caves beneath the cliffs.",
+          "completion": { "flag": "caves_entered" }
+        },
+        {
+          "id": "defeat_shore_wraith",
+          "description": "Confront the Shore Wraith.",
+          "completion": { "flag": "shore_wraith_defeated" }
+        }
+      ],
+      "rewards": { "xp": 100, "gold": 50 }
+    },
+    {
+      "id": "palace_gate",
+      "title": "The Palace Gate",
+      "description": "Reach the Dragon Palace Gate and face the Tide Keeper.",
+      "stages": [
+        {
+          "id": "reach_gate",
+          "description": "Travel to the floating gate.",
+          "completion": { "flag": "gate_reached" }
+        },
+        {
+          "id": "defeat_sentinel",
+          "description": "Defeat the Palace Sentinel.",
+          "completion": { "flag": "sentinel_defeated" }
+        },
+        {
+          "id": "face_keeper",
+          "description": "Confront the Tide Keeper.",
+          "completion": { "flag": "tide_keeper_defeated" }
+        }
+      ],
+      "rewards": { "xp": 200, "gold": 0 }
+    }
+  ]
+}

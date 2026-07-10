@@ -1,0 +1,298 @@
+[gd_scene load_steps=3 format=3 uid="uid://combatui001"]
+
+[ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="1_combat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.1, 0.14, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.322, 0.647, 0.847, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_log"]
+bg_color = Color(0.06, 0.08, 0.1, 0.85)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[node name="CombatUi" type="CanvasLayer"]
+script = ExtResource("1_combat")
+
+[node name="CombatRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="VBoxContainer" parent="CombatRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="TopRow" type="HBoxContainer" parent="CombatRoot/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TurnLabel" type="Label" parent="CombatRoot/Layout/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.831, 0.647, 0.353, 1)
+theme_override_font_sizes/font_size = 20
+text = "Your turn"
+
+[node name="EnemyRow" type="HBoxContainer" parent="CombatRoot/Layout/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="LogPanel" type="PanelContainer" parent="CombatRoot/Layout"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_log")
+
+[node name="LogLabel" type="RichTextLabel" parent="CombatRoot/Layout/LogPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+theme_override_colors/default_color = Color(0.82, 0.85, 0.88, 1)
+theme_override_font_sizes/normal_font_size = 14
+text = " "
+
+[node name="Spacer" type="Control" parent="CombatRoot/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PartyRow" type="HBoxContainer" parent="CombatRoot/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BottomRow" type="HBoxContainer" parent="CombatRoot/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ActionPanel" type="PanelContainer" parent="CombatRoot/Layout/BottomRow"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel"]
+layout_mode = 2
+
+[node name="ActionVBox" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MainActions" type="GridContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="AttackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Attack"
+
+[node name="SkillBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Skill"
+
+[node name="ItemBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Item"
+
+[node name="DefendBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Defend"
+
+[node name="LimitBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Limit"
+
+[node name="EscapeBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/MainActions"]
+layout_mode = 2
+text = "Escape"
+
+[node name="SkillPanel" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SkillList" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/SkillPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SkillBackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/SkillPanel"]
+layout_mode = 2
+text = "Back"
+
+[node name="ItemPanel" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ItemList" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/ItemPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ItemBackBtn" type="Button" parent="CombatRoot/Layout/BottomRow/ActionPanel/Margin/ActionVBox/ItemPanel"]
+layout_mode = 2
+text = "Back"
+
+[node name="TargetPanel" type="PanelContainer" parent="CombatRoot/Layout/BottomRow"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot/Layout/BottomRow/TargetPanel"]
+layout_mode = 2
+
+[node name="TargetVBox" type="VBoxContainer" parent="CombatRoot/Layout/BottomRow/TargetPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TargetList" type="HBoxContainer" parent="CombatRoot/Layout/BottomRow/TargetPanel/Margin/TargetVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TargetCancelBtn" type="Button" parent="CombatRoot/Layout/BottomRow/TargetPanel/Margin/TargetVBox"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="ResultOverlay" type="ColorRect" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="ResultLabel" type="Label" parent="CombatRoot/ResultOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -24.0
+offset_right = 300.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="TransitionOverlay" type="ColorRect" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.05, 0.08, 1)
+
+[node name="PhaseBanner" type="PanelContainer" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -36.0
+offset_right = 360.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="PhaseLabel" type="Label" parent="CombatRoot/PhaseBanner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.55, 1)
+theme_override_font_sizes/font_size = 24
+text = "Phase announcement"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChoicePanel" type="PanelContainer" parent="CombatRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -160.0
+offset_right = 420.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot/ChoicePanel"]
+layout_mode = 2
+
+[node name="ChoiceVBox" type="VBoxContainer" parent="CombatRoot/ChoicePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="PromptLabel" type="Label" parent="CombatRoot/ChoicePanel/Margin/ChoiceVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.92, 0.96, 1)
+theme_override_font_sizes/font_size = 22
+text = "Choose."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="RewindBtn" type="Button" parent="CombatRoot/ChoicePanel/Margin/ChoiceVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Rewind"
+
+[node name="AnchorBtn" type="Button" parent="CombatRoot/ChoicePanel/Margin/ChoiceVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Anchor"
+
+[node name="DriftBtn" type="Button" parent="CombatRoot/ChoicePanel/Margin/ChoiceVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Drift"

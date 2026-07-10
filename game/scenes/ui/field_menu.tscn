@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3 uid="uid://fieldmenu001"]
+
+[ext_resource type="Script" path="res://scripts/ui/field_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.1, 0.14, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.322, 0.647, 0.847, 0.45)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 20.0
+content_margin_top = 16.0
+content_margin_right = 20.0
+content_margin_bottom = 16.0
+
+[node name="FieldMenu" type="CanvasLayer"]
+script = ExtResource("1_menu")
+
+[node name="MenuRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="MenuRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Panel" type="PanelContainer" parent="MenuRoot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -280.0
+offset_right = 360.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="MenuRoot/Panel"]
+layout_mode = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="MenuRoot/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="MenuRoot/Panel/Margin/MainVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.353, 1)
+theme_override_font_sizes/font_size = 26
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="TabRow" type="HBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ItemsTab" type="Button" parent="MenuRoot/Panel/Margin/MainVBox/TabRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Items"
+
+[node name="EquipTab" type="Button" parent="MenuRoot/Panel/Margin/MainVBox/TabRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Equipment"
+
+[node name="MessageLabel" type="Label" parent="MenuRoot/Panel/Margin/MainVBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ItemsPanel" type="VBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="ItemCharRow" type="HBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox/ItemsPanel"]
+layout_mode = 2
+
+[node name="ItemCharLabel" type="Label" parent="MenuRoot/Panel/Margin/MainVBox/ItemsPanel/ItemCharRow"]
+layout_mode = 2
+text = "Use on"
+
+[node name="ItemCharOption" type="OptionButton" parent="MenuRoot/Panel/Margin/MainVBox/ItemsPanel/ItemCharRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemScroll" type="ScrollContainer" parent="MenuRoot/Panel/Margin/MainVBox/ItemsPanel"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemList" type="VBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox/ItemsPanel/ItemScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EquipPanel" type="VBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CharRow" type="HBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel"]
+layout_mode = 2
+
+[node name="CharLabel" type="Label" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel/CharRow"]
+layout_mode = 2
+text = "Character"
+
+[node name="CharOption" type="OptionButton" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel/CharRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotList" type="VBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="EquipScroll" type="ScrollContainer" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EquipItemList" type="VBoxContainer" parent="MenuRoot/Panel/Margin/MainVBox/EquipPanel/EquipScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CloseBtn" type="Button" parent="MenuRoot/Panel/Margin/MainVBox"]
+layout_mode = 2
+text = "Back"

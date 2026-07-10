@@ -1,0 +1,21 @@
+{
+  "name": "godot-prompter",
+  "displayName": "GodotPrompter",
+  "description": "Agentic skills framework for Godot 4.x — domain-specific skills for GDScript and C# (Tides of Urashima build branch)",
+  "version": "1.11.0",
+  "author": {
+    "name": "Jan Mesarc"
+  },
+  "homepage": "https://github.com/jame581/GodotPrompter",
+  "repository": "https://github.com/jame581/GodotPrompter",
+  "license": "MIT",
+  "keywords": [
+    "godot",
+    "godot-4",
+    "gdscript",
+    "gamedev",
+    "skills"
+  ],
+  "skills": "../.godot-prompter/skills/",
+  "agents": "../.godot-prompter/agents/"
+}

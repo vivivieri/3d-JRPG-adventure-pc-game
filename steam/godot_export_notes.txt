@@ -1,0 +1,15 @@
+# Windows Desktop export preset for Godot 4.3+
+# Import via Project → Export → Import preset, or copy sections into export_presets.cfg
+
+name = "Windows Desktop"
+platform = "Windows Desktop"
+export_path = "../build/TidesOfUrashima.exe"
+binary_format/embed_pck = true
+binary_format/architecture = "x86_64"
+texture_format/s3tc_bptc = true
+application/icon = "res://assets/ui/icon.svg"
+application/file_version = "0.1.0.0"
+application/product_version = "0.1.0.0"
+application/company_name = "Tides of Urashima"
+application/product_name = "Tides of Urashima"
+application/file_description = "A short 3D JRPG adventure adapted from Japanese folklore."
