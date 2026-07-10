@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "description": "Localized on-screen text for marketing trailer segments. Images/zoom from generate_marketing_trailer.py SEGMENT_META.",
+  "locales": ["en", "ja", "zh"],
+  "segments": [
+    {
+      "image": null,
+      "duration": 2.5,
+      "zoom": "title",
+      "text": {
+        "en": ["TIDES OF URASHIMA", "A dark Urashima Taro JRPG"],
+        "ja": ["浦島の潮", "浦島太郎のダークJRPG"],
+        "zh": ["浦岛潮汐", "黑暗浦岛太郎 JRPG"]
+      }
+    },
+    {
+      "image": "characters/party_lineup.png",
+      "duration": 4.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["He left for three days.", "Centuries had passed."],
+        "ja": ["三日で戻るつもりだった。", "百年が過ぎていた。"],
+        "zh": ["他本以为只离开三天。", "百年早已流逝。"]
+      }
+    },
+    {
+      "image": "scenes/SC-00_prologue.png",
+      "duration": 3.5,
+      "zoom": "pan_right",
+      "text": {
+        "en": ["He saved a wounded spirit.", "Paradise gave him a lacquer box."],
+        "ja": ["傷ついた霊を救った。", "龍宮は漆箱を授けた。"],
+        "zh": ["他救起受伤的灵龟。", "龙宫赠予漆盒。"]
+      }
+    },
+    {
+      "image": "scenes/SC-01_shore_arrival.png",
+      "duration": 3.5,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["The sea spat him ashore.", "Alone."],
+        "ja": ["海が彼を打ち上げた。", "ただ一人。"],
+        "zh": ["大海将他冲上岸。", "孤身一人。"]
+      }
+    },
+    {
+      "image": "scenes/SC-02_ruined_village.png",
+      "duration": 3.0,
+      "zoom": "pan_left",
+      "text": {
+        "en": ["His village was gone.", ""],
+        "ja": ["村は消えていた。", ""],
+        "zh": ["村庄已不复存在。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-03_cracked_torii.png",
+      "duration": 3.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["You left. We waited.", ""],
+        "ja": ["あなたは去った。私たちは待っていた。", ""],
+        "zh": ["你离开了。我们一直等着。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-04_roku_shack.png",
+      "duration": 3.0,
+      "zoom": "pan_right",
+      "text": {
+        "en": ["That box is not a gift.", "Do not open it."],
+        "ja": ["あの箱は贈り物じゃない。", "開くな。"],
+        "zh": ["那盒子不是礼物。", "不要打开。"]
+      }
+    },
+    {
+      "image": "scenes/SC-05_salt_crab.png",
+      "duration": 2.5,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["Turn-based combat", "Speed - Skills - Strategy"],
+        "ja": ["ターン制バトル", "スピード・スキル・戦略"],
+        "zh": ["回合制战斗", "速度·技能·策略"]
+      }
+    },
+    {
+      "image": "scenes/SC-06_cave_entrance.png",
+      "duration": 2.5,
+      "zoom": "pan_left",
+      "text": {
+        "en": ["Descend the Tidal Caves.", ""],
+        "ja": ["潮穴へ降りる。", ""],
+        "zh": ["深入潮汐洞穴。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-07_water_puzzle.png",
+      "duration": 2.0,
+      "zoom": "zoom_out",
+      "text": {
+        "en": ["", ""],
+        "ja": ["", ""],
+        "zh": ["", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-08_deep_pool.png",
+      "duration": 3.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["The drowned remember.", ""],
+        "ja": ["溺れた者たちは覚えている。", ""],
+        "zh": ["溺水之人仍在记得。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-09_shore_wraith.png",
+      "duration": 3.5,
+      "zoom": "pan_right",
+      "text": {
+        "en": ["Confront the Shore Wraith.", "Boss phases - Intent UI"],
+        "ja": ["岸の亡霊と対峙する。", "ボス戦・意図UI"],
+        "zh": ["直面岸之亡灵。", "Boss阶段·意图UI"]
+      }
+    },
+    {
+      "image": "scenes/SC-10_yuzu_join.png",
+      "duration": 2.5,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["Spirits join the fight.", ""],
+        "ja": ["霊が共に戦う。", ""],
+        "zh": ["灵伴加入战斗。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-11_otohime_flashback.png",
+      "duration": 3.0,
+      "zoom": "pan_left",
+      "text": {
+        "en": ["Paradise was too perfect.", ""],
+        "ja": ["楽園は完璧すぎた。", ""],
+        "zh": ["乐园太过完美。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-12_palace_gate.png",
+      "duration": 3.5,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["The Dragon Palace Gate.", ""],
+        "ja": ["龍宮の門。", ""],
+        "zh": ["龙宫之门。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-13_mirror.png",
+      "duration": 3.0,
+      "zoom": "pan_right",
+      "text": {
+        "en": ["The box holds stolen years.", ""],
+        "ja": ["箱には奪われた年月が秘められている。", ""],
+        "zh": ["盒中藏着被偷走的岁月。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-14_sentinel.png",
+      "duration": 2.5,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["", ""],
+        "ja": ["", ""],
+        "zh": ["", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-15_tide_keeper.png",
+      "duration": 3.0,
+      "zoom": "pan_left",
+      "text": {
+        "en": ["The Tide Keeper waits.", ""],
+        "ja": ["潮の番人が待つ。", ""],
+        "zh": ["潮汐守护者等候于此。", ""]
+      }
+    },
+    {
+      "image": "scenes/SC-16_choice.png",
+      "duration": 4.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["Three endings. One choice.", "Who pays for stolen time?"],
+        "ja": ["三つの結末。一つの選択。", "奪われた時間の代償は誰が払う？"],
+        "zh": ["三种结局。一个选择。", "谁为被偷走的时间付出代价？"]
+      }
+    },
+    {
+      "image": "scenes/SC-17a_rewind.png",
+      "duration": 2.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["REWIND", "Restore the village"],
+        "ja": ["巻き戻し", "村を取り戻す"],
+        "zh": ["倒流", "归还村庄"]
+      }
+    },
+    {
+      "image": "scenes/SC-17b_anchor.png",
+      "duration": 2.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["ANCHOR", "Bind the spirits"],
+        "ja": ["留まる", "霊を大地に縛る"],
+        "zh": ["锚定", "缚灵于大地"]
+      }
+    },
+    {
+      "image": "scenes/SC-17c_drift.png",
+      "duration": 2.0,
+      "zoom": "zoom_in",
+      "text": {
+        "en": ["DRIFT", "Refuse the bargain"],
+        "ja": ["漂う", "契約を拒む"],
+        "zh": ["漂泊", "拒绝交易"]
+      }
+    },
+    {
+      "image": "characters/party_lineup.png",
+      "duration": 4.5,
+      "zoom": "zoom_out",
+      "text": {
+        "en": ["2-3 hours - 3 endings", "EN / JA / ZH  |  Walk the shore. Answer the tide."],
+        "ja": ["約2〜3時間・三つの結末", "日本語・英語・中国語対応  |  岸を歩め。潮に答えよ。"],
+        "zh": ["2-3小时·三种结局", "英/日/中文支持  |  踏浪而行，回应潮汐。"]
+      }
+    }
+  ]
+}
