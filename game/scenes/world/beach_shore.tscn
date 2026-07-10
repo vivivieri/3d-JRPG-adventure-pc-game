@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://beach_shore_zone"]
+
+[ext_resource type="Script" path="res://scripts/world/zone_scene.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_greybox.gd" id="2_greybox"]
+[ext_resource type="Script" path="res://scripts/world/dev_camera.gd" id="3_camera"]
+
+[node name="BeachShore" type="Node3D"]
+script = ExtResource("1_zone")
+zone_id = "beach_shore"
+
+[node name="Greybox" type="Node3D" parent="."]
+script = ExtResource("2_greybox")
+zone_id = "beach_shore"
+
+[node name="DevCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 5, 18)
+current = true
+script = ExtResource("3_camera")
