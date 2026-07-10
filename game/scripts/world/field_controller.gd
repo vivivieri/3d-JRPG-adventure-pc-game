@@ -77,7 +77,22 @@ func _on_zone_enter() -> void:
 	GameManager.current_zone = zone_id
 	EventBus.zone_changed.emit(zone_id)
 	_ensure_hud()
-	_try_auto_events()
+	_set_field_blocked(DialogueRunner.is_active())
+	if GameManager.pending_dialogue != "":
+		var scene := GameManager.pending_dialogue
+		GameManager.pending_dialogue = ""
+		DialogueRunner.play(scene)
+		return
+	call_deferred("_try_auto_events")
+
+
+func _set_field_blocked(on: bool) -> void:
+	_blocked = on
+	if _player and _player.has_method("set_enabled"):
+		_player.set_enabled(not on)
+	if not on and _player:
+		get_viewport().gui_release_focus()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _ensure_hud() -> void:
@@ -171,12 +186,10 @@ func _trigger_interact(marker_name: String, data: Dictionary) -> void:
 		return
 	match data.get("type", ""):
 		"dialogue", "auto_dialogue":
-			_blocked = true
 			DialogueRunner.play(str(data.scene))
 		"encounter":
 			_start_encounter(str(data.encounter))
 		"dialogue_then_encounter":
-			_blocked = true
 			DialogueRunner.play(str(data.scene))
 			_pending_encounter = str(data.encounter)
 		"zone":
@@ -238,13 +251,16 @@ func _start_encounter(encounter_id: String) -> void:
 
 
 func _on_blocked(on: bool) -> void:
-	_blocked = on
-	if _player and _player.has_method("set_enabled"):
-		_player.set_enabled(not on)
+	_set_field_blocked(on)
 
 
 func _on_dialogue_finished(_scene_id: String) -> void:
-	_blocked = false
+	_set_field_blocked(false)
+	if GameManager.pending_dialogue != "":
+		var scene := GameManager.pending_dialogue
+		GameManager.pending_dialogue = ""
+		DialogueRunner.play(scene)
+		return
 	if GameManager.has_flag("game_completed"):
 		get_tree().change_scene_to_file("res://scenes/ui/credits.tscn")
 		return
@@ -252,9 +268,9 @@ func _on_dialogue_finished(_scene_id: String) -> void:
 		var enc := _pending_encounter
 		_pending_encounter = ""
 		_start_encounter(enc)
+		return
+	call_deferred("_try_auto_events")
 
 
 func _on_battle_ended(_victory: bool) -> void:
-	_blocked = false
-	if _player and _player.has_method("set_enabled"):
-		_player.set_enabled(true)
+	_set_field_blocked(false)

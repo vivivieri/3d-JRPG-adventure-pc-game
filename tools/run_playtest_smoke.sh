@@ -37,6 +37,7 @@ check "Village zone loads" godot4 --headless --rendering-driver opengl3 --path g
 check "Palace zone loads" godot4 --headless --rendering-driver opengl3 --path game res://scenes/world/dragon_palace_gate.tscn --quit-after 2
 check "Windows exe exists" test -f build/TidesOfUrashima.exe
 check "GodotSteam gdextension present" test -f game/addons/godotsteam/godotsteam.gdextension
+check "Player movement works" godot4 --headless --rendering-driver opengl3 --path game res://tests/movement_smoke_test.tscn
 
 echo ""
 echo "Passed: $PASS | Failed: $FAIL"

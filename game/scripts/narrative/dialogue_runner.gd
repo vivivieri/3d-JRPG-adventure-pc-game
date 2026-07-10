@@ -27,10 +27,12 @@ func is_active() -> bool:
 
 func play(scene_id: String) -> void:
 	if _active:
+		push_warning("Dialogue already active; ignoring %s" % scene_id)
 		return
 	var data: Dictionary = GameManager.dialogue_scenes.get(scene_id, {})
 	if data.is_empty():
 		push_warning("Missing dialogue scene: %s" % scene_id)
+		EventBus.scene_blocked_changed.emit(false)
 		finished.emit(scene_id)
 		return
 	_scene_id = scene_id

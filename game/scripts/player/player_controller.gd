@@ -21,12 +21,21 @@ func set_enabled(on: bool) -> void:
 	velocity = Vector3.ZERO
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y -= 20.0 * delta
+	else:
+		velocity.y = 0.0
 	if not _enabled:
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	if input_dir.length_squared() < 0.01:
+		input_dir = Vector2(
+			float(Input.is_key_pressed(KEY_D)) - float(Input.is_key_pressed(KEY_A)),
+			float(Input.is_key_pressed(KEY_S)) - float(Input.is_key_pressed(KEY_W))
+		)
 	var speed := sprint_speed if Input.is_action_pressed("sprint") else move_speed
 	var direction := Vector3.ZERO
 	if _camera:

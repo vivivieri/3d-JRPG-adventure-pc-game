@@ -27,6 +27,7 @@ var completed_scenes: Array[String] = []
 var lore_collected: Array[String] = []
 var current_zone: String = ""
 var pending_spawn: String = "WorldSpawn"
+var pending_dialogue: String = ""
 var playtime_sec: float = 0.0
 
 var characters: Dictionary = {}

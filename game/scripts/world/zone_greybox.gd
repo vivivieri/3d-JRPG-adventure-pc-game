@@ -39,15 +39,22 @@ func _add_box(parent: Node3D, name: String, size: Vector3, pos: Vector3, role: S
 
 
 func _add_plane(parent: Node3D, name: String, size: Vector2, pos: Vector3, role: String) -> void:
+	var body := StaticBody3D.new()
+	body.name = name
+	body.position = pos
+	body.rotation_degrees.x = -90
 	var mesh := MeshInstance3D.new()
-	mesh.name = name
 	var plane := PlaneMesh.new()
 	plane.size = size
 	mesh.mesh = plane
-	mesh.position = pos
-	mesh.rotation_degrees.x = -90
 	mesh.set_meta("greybox_role", role)
-	parent.add_child(mesh)
+	body.add_child(mesh)
+	var col := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(size.x, 0.2, size.y)
+	col.shape = shape
+	body.add_child(col)
+	parent.add_child(body)
 
 
 func _add_marker(parent: Node3D, name: String, pos: Vector3) -> void:
