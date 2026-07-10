@@ -1,6 +1,10 @@
-# Tides of Urashima — Godot 4 3D AI Workflow
+# Tides of Urashima — Godot 4 3D AI Workflow Engine
 
-You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized Japanese coastal JRPG (dark Urashima Tarō folklore). Combine **GodotPrompter** (architecture & shaders), **GDAI MCP** (editor/scene execution), and our project art docs.
+You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized Japanese coastal JRPG (dark Urashima Tarō folklore).
+
+**Default toolchain (always work together):**
+- **GodotPrompter** — plan, architect, generate GDScript & shaders
+- **GDAI MCP** — execute in the live Godot Editor, configure scenes, verify & iterate
 
 **Authoritative design docs (read before visual work):**
 - `docs/ART_DIRECTION.md` — palette, silhouettes, what to avoid
@@ -13,19 +17,58 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 
 ---
 
-## 1. Roles & responsibilities
+## 1. Roles & responsibilities (R&R) — GodotPrompter + GDAI MCP
 
-### Tool A: GodotPrompter (architecture, math & stylized shaders)
-- **Role:** Code generator, custom spatial shader architect.
-- **Responsibility:** Godot 4 syntax; NPR/toon pipelines; stepped diffuse ramps; vertex shaders (water, wind sway).
-- **When to use:** Before writing new shader code or designing lighting math.
-- **Branch note:** On `cursor/gdai-regen-dc91`, GodotPrompter is **forbidden** — GDAI MCP only (`docs/GDAI_REGEN_PLAN.md`).
+These tools are **complementary, not alternatives**. Use both in every normal task unless a branch doc explicitly says otherwise.
 
-### Tool B: GDAI MCP (scene & environment mutator)
-- **Role:** Editor integration — create/configure nodes, scenes, materials, lights, WorldEnvironment.
-- **Responsibility:** Apply zone palettes, audit script errors, playtest in editor. Requires Godot open with GDAI plugin started (`docs/GDAI_CLOUD_SETUP.md`).
-- **When to use:** After planning; for scene graph changes and in-editor verification.
-- **Startup order:** Open Godot → start GDAI MCP → then use Cursor.
+### Tool A: GodotPrompter — *Architect & code generator*
+| | |
+|---|---|
+| **Role** | Structural planner, GDScript author, custom spatial shader architect |
+| **Owns** | Shader code (`.gdshader`), GDScript logic (`.gd`), math, class design, signal wiring patterns, refactor plans |
+| **Responsibility** | Godot 4 syntax; NPR/toon pipelines; stepped diffuse ramps; vertex shaders (water, wind sway); typed GDScript |
+| **When to use** | **First** — before editing scenes: plan approach, draft shaders/scripts, define node structure |
+| **Does NOT** | Replace the editor for placing meshes, tuning light angles, or reading live editor errors |
+
+### Tool B: GDAI MCP — *Scene mutator & runtime verifier*
+| | |
+|---|---|
+| **Role** | Editor integration layer — creates/configures nodes, scenes, materials, lights, `WorldEnvironment` |
+| **Owns** | `.tscn` graph changes, inspector properties, in-editor playtest, output-panel error inspection |
+| **Responsibility** | Apply zone palettes from art docs; parent nodes; assign materials; audit FPS in editor |
+| **When to use** | **After** GodotPrompter planning — implement the plan in the open Godot Editor |
+| **Prerequisite** | Godot 4.3+ open at `game/project.godot` → GDAI plugin enabled → MCP server **Started** (`docs/GDAI_CLOUD_SETUP.md`) |
+
+### Combined workflow (default — use every session)
+
+```
+1. READ     → docs/RENDERING_GUIDE.md + zone row in ENVIRONMENT_KITS.md
+2. PLAN     → GodotPrompter: shader design, script structure, node tree, property values
+3. EXECUTE  → GDAI MCP: create/edit scenes, apply materials, configure lights & WorldEnvironment
+4. VERIFY   → GDAI MCP: run scene (F5), read editor errors/output, check visuals in viewport
+5. REFINE   → GodotPrompter: fix script/shader bugs GDAI surfaced → GDAI MCP applies fixes in editor
+6. SHIP     → commit; run bash tools/check_asset_compliance.sh
+```
+
+**Handoff rules:**
+- GodotPrompter **writes** code; GDAI MCP **applies** it to the project and **confirms** it runs.
+- Never stop after GodotPrompter output alone — always hand off to GDAI MCP for editor integration.
+- Never configure complex shaders purely by hand in the inspector without GodotPrompter drafting the `.gdshader` first.
+- If GDAI reports script errors → loop back to GodotPrompter for the fix, then GDAI MCP to re-test.
+
+**Example task split:**
+
+| Task | GodotPrompter | GDAI MCP |
+|------|---------------|----------|
+| Zone lighting pass | Draft `zone_visuals.gd` fog/sky values; toon shader | Add `WorldEnvironment`, `DirectionalLight3D`, assign palette in `ruined_village.tscn` |
+| Water stylization | Write `water_material.gdshader` with foam + displacement | Create water mesh, assign shader, tune uniform in editor |
+| Combat UI hookup | Plan `combat_ui.gd` signal connections | Create `combat_ui.tscn` nodes, wire to `CombatUiManager` autoload |
+| Lacquer box glow | Shader with 3 emission states by uniform | Place box mesh on Urashima, swap material states via story flags |
+
+**Startup order:** Open Godot → start GDAI MCP → then Cursor (GodotPrompter runs inside Cursor at any time).
+
+### Branch exception (narrow)
+Only on `cursor/gdai-regen-dc91`: **GDAI MCP only** — that branch is a controlled experiment (`docs/GDAI_REGEN_PLAN.md`). Do not use GodotPrompter there. On **all other branches**, always use both tools together per R&R above.
 
 ---
 
@@ -103,8 +146,9 @@ Extend with emission for interactables; keep one ramp family project-wide.
 ---
 
 ## 6. Workflow checklist (M6 art rebuild)
-1. Read zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
-2. Plan with GodotPrompter (shaders/math) unless on `gdai-regen-dc91`.
-3. Implement scene via GDAI MCP or hand-edited `.tscn` / `.gd`.
-4. Apply `ZoneVisuals.apply_to_scene(root, zone_id)` or matching `.tres` preset.
-5. Verify palette hex values, shadows, fog, glow targets, and FPS at gameplay camera.
+1. **Read** zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
+2. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.
+3. **Execute** with GDAI MCP — apply plan in editor (scenes, materials, lights).
+4. **Verify** with GDAI MCP — F5 playtest, fix errors (loop GodotPrompter ↔ GDAI until clean).
+5. Apply `ZoneVisuals.apply_to_scene(root, zone_id)` or matching `.tres` preset if on a code-driven branch.
+6. **Ship check** — palette hex, shadows, fog, glow targets, 60 FPS @ 1080p on gameplay camera.
