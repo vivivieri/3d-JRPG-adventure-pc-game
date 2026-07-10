@@ -4,7 +4,7 @@
 
 **Total scenes:** 19 (SC-00 prologue + 18 main path)
 
-**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`, `docs/NARRATIVE_WRITING_GUIDE.md`
+**Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`, `docs/NARRATIVE_WRITING_GUIDE.md`, `docs/STORYBOARD_ILLUSTRATIONS.md`, `docs/pitch/illustrations/`
 
 ---
 

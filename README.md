@@ -45,6 +45,8 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | [Audio Production Guide](docs/AUDIO_PRODUCTION_GUIDE.md) | BGM specs, SFX manifest, scene map |
 | [Asset Compliance](docs/ASSET_COMPLIANCE.md) | Copyright-safe policy + verification tools |
 | [Art Direction](docs/ART_DIRECTION.md) | Visual pivot + poly budgets |
+| [Storyboard Illustrations](docs/STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec + scene briefs |
+| [Pitch images](docs/pitch/illustrations/) | P0 concept art (5 images) for presentations |
 
 ### Gameplay systems (M0d)
 

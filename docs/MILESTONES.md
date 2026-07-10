@@ -48,6 +48,12 @@ Track implementation progress against the GDD milestones.
 - [x] World map & zone flow (`docs/WORLD_MAP_AND_FLOW.md`)
 - [x] Replay design (`docs/REPLAY_DESIGN.md`)
 
+## M0g — Pitch illustrations
+- [x] Storyboard illustration spec (`docs/STORYBOARD_ILLUSTRATIONS.md`)
+- [x] P0 pitch images (`docs/pitch/illustrations/`) — party + 4 key scenes
+- [ ] P1 full storyboard pass (14 scenes) — optional
+- [ ] Character portraits P2 — optional
+
 ## M0e — Story data layer (main branch)
 - [x] Data architecture (`docs/DATA_ARCHITECTURE.md`)
 - [x] Story spine + flags (`game/data/story/`)
