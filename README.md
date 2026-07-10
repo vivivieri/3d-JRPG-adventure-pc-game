@@ -7,7 +7,13 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
-> **This branch (`main`)** holds game design documents and release plans only. Godot implementation lives on feature branches (e.g. `cursor/urashima-jrpg-scaffold-dc91`, `cursor/japanese-environment-dc91`). Use `docs/GDAI_CLOUD_SETUP.md` when experimenting with GDAI MCP / GodotPrompter on a code branch.
+> **This branch (`main`)** holds game design documents and release plans only. Godot implementation lives on feature branches.
+>
+> | Branch | Purpose |
+> |--------|---------|
+> | `cursor/gdai-regen-dc91` | **GDAI MCP-only** regeneration scaffold (no GodotPrompter) |
+> | `cursor/urashima-jrpg-scaffold-dc91` | Original code-driven scaffold |
+> | `cursor/japanese-environment-dc91` | Procedural environment polish |
 
 ---
 
@@ -37,13 +43,14 @@ docs/
   LICENSES.md            # Asset attribution log
   SCREENSHOTS.md         # Screenshot capture notes
   GDAI_CLOUD_SETUP.md    # Dev-only GDAI MCP setup (for code branches)
+  GDAI_REGEN_PLAN.md     # GDAI-only build phases (cursor/gdai-regen-dc91)
 
 steam/
   STORE_PAGE.md          # Steam store listing copy + asset checklist
   GODOTSTEAM_SETUP.md    # Steamworks / export checklist
 ```
 
-Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out a branch such as `cursor/urashima-jrpg-scaffold-dc91` to run or build the game.
+Godot project code (`game/`, `tools/`, etc.) is on feature branches — check out a branch such as `cursor/gdai-regen-dc91` (GDAI MCP experiment) or `cursor/urashima-jrpg-scaffold-dc91` to run or build the game.
 
 ---
 
@@ -58,7 +65,14 @@ git checkout cursor/urashima-jrpg-scaffold-dc91   # or another feature branch
 
 Then open `game/project.godot` in Godot 4.3+ and press **F5**.
 
-For a GDAI MCP / GodotPrompter regeneration experiment, branch from `main` and see [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
+For a GDAI MCP regeneration experiment (GDAI only — **not** GodotPrompter):
+
+```bash
+git fetch origin
+git checkout cursor/gdai-regen-dc91
+```
+
+Then open `game/project.godot` in Godot 4.3+ and follow [`docs/GDAI_REGEN_PLAN.md`](docs/GDAI_REGEN_PLAN.md) + [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md).
 
 ---
 

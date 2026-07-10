@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "scenes": [
+    {
+      "scene_id": "SC-01",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": "The sea returns what it claims. Urashima washes ashore, the lacquer box cold against his chest.",
+          "emotion": "neutral"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": "Three days... it was only three days...",
+          "emotion": "confused"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["game_started"],
+        "start_quest": "the_return"
+      }
+    },
+    {
+      "scene_id": "SC-03",
+      "lines": [
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_sad",
+          "text": "You left. We waited.",
+          "emotion": "accusatory"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_shocked",
+          "text": "That voice... the shrine?",
+          "emotion": "confused"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_sad",
+          "text": "The tide took our years. You took our tomorrow.",
+          "emotion": "sorrow"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["met_yuzu_spirit"],
+        "start_quest": "echoes_at_torii"
+      }
+    },
+    {
+      "scene_id": "SC-04",
+      "lines": [
+        {
+          "speaker": "roku",
+          "portrait": "roku_grim",
+          "text": "Boy. You're back. That's worse than never returning.",
+          "emotion": "grim"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": "Roku? What happened here?",
+          "emotion": "desperate"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_grim",
+          "text": "That box isn't a gift. Don't open it. The caves below — start there.",
+          "emotion": "urgent"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["met_roku", "caves_unlocked"],
+        "give_items": [{ "item_id": "fisher_katana", "quantity": 1 }]
+      }
+    },
+    {
+      "scene_id": "SC-13",
+      "lines": [
+        {
+          "speaker": "roku",
+          "portrait": "roku_serious",
+          "text": "The box holds their years. Open it, they live — you won't.",
+          "emotion": "heavy"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "text": "Then I finally face what I owe.",
+          "emotion": "resolved"
+        }
+      ],
+      "on_complete": {
+        "set_flags": ["knows_box_truth"]
+      }
+    }
+  ]
+}

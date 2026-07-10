@@ -1,0 +1,30 @@
+# Godot 4
+.godot/
+*.translation
+export_presets.cfg
+
+# Imported assets
+*.import
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Builds
+build/
+dist/
+*.exe
+*.pck
+*.zip
+.godot-sdk/
+.asset-dl/
+
+# Dev-only — GDAI MCP (commercial; do not ship in Steam builds)
+game/addons/gdai-mcp-plugin-godot/
+
+# Logs
+*.log

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "characters": [
+    {
+      "id": "urashima",
+      "display_name": "Urashima",
+      "title": "The Returned Fisherman",
+      "element": "water",
+      "base_stats": {
+        "max_hp": 120,
+        "max_mp": 30,
+        "atk": 14,
+        "def": 10,
+        "mag": 8,
+        "res": 9,
+        "spd": 11
+      },
+      "growth_per_level": {
+        "max_hp": 12,
+        "max_mp": 3,
+        "atk": 2,
+        "def": 1,
+        "mag": 1,
+        "res": 1,
+        "spd": 1
+      },
+      "starting_skills": ["strike", "tidal_slash"],
+      "skill_unlocks": [
+        { "level": 5, "skill_id": "ocean_veil" },
+        { "level": 10, "skill_id": "returning_wave" }
+      ],
+      "limit_skill": "box_unbound"
+    },
+    {
+      "id": "yuzu",
+      "display_name": "Yuzu",
+      "title": "Shrine Maiden Spirit",
+      "element": "spirit",
+      "base_stats": {
+        "max_hp": 85,
+        "max_mp": 45,
+        "atk": 7,
+        "def": 7,
+        "mag": 14,
+        "res": 12,
+        "spd": 10
+      },
+      "growth_per_level": {
+        "max_hp": 8,
+        "max_mp": 5,
+        "atk": 1,
+        "def": 1,
+        "mag": 2,
+        "res": 2,
+        "spd": 1
+      },
+      "starting_skills": ["purify", "spirit_light"],
+      "skill_unlocks": [
+        { "level": 4, "skill_id": "sacred_mend" },
+        { "level": 8, "skill_id": "torii_ward" }
+      ],
+      "limit_skill": "last_prayer"
+    },
+    {
+      "id": "roku",
+      "display_name": "Roku",
+      "title": "Veteran Diver",
+      "element": "physical",
+      "base_stats": {
+        "max_hp": 150,
+        "max_mp": 15,
+        "atk": 12,
+        "def": 14,
+        "mag": 4,
+        "res": 8,
+        "spd": 7
+      },
+      "growth_per_level": {
+        "max_hp": 15,
+        "max_mp": 2,
+        "atk": 2,
+        "def": 2,
+        "mag": 0,
+        "res": 1,
+        "spd": 0
+      },
+      "starting_skills": ["strike", "shell_guard"],
+      "skill_unlocks": [
+        { "level": 3, "skill_id": "harpoon_drive" },
+        { "level": 7, "skill_id": "tide_taunt" }
+      ],
+      "limit_skill": "depth_charge"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://palacegate001"]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/world/scene_transition.gd" id="2_transition"]
+[ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="3_interact"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_court"]
+size = Vector3(20, 0.5, 44)
+
+[sub_resource type="BoxShape3D" id="BoxShape_court"]
+size = Vector3(20, 0.5, 44)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
+radius = 0.4
+height = 1.6
+
+[node name="DragonPalaceGate" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 14, 0)
+shadow_enabled = true
+
+[node name="CourtFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -4)
+
+[node name="Mesh" type="MeshInstance3D" parent="CourtFloor"]
+mesh = SubResource("BoxMesh_court")
+
+[node name="Collision" type="CollisionShape3D" parent="CourtFloor"]
+shape = SubResource("BoxShape_court")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16)
+script = ExtResource("1_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
+current = true
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape_player")
+
+[node name="GateArrival" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13)
+
+[node name="PalaceVision" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+
+[node name="MirrorChamber" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -8)
+script = ExtResource("3_interact")
+dialogue_scene_id = "SC-13"
+interaction_prompt = "Examine mirror"
+
+[node name="PalaceSentinel" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -18)
+script = ExtResource("3_interact")
+interaction_prompt = "Fight"
+combat_encounter_ids = PackedStringArray("palace_sentinel")
+
+[node name="TideKeeperBoss" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30)
+script = ExtResource("3_interact")
+interaction_prompt = "Final battle"
+combat_encounter_ids = PackedStringArray("tide_keeper")
+
+[node name="ExitToCaves" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 18)
+script = ExtResource("2_transition")
+target_scene = "res://scenes/world/tidal_caves.tscn"
+target_area = "tidal_caves"
+interaction_prompt = "Return to caves"

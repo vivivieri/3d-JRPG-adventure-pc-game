@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "sea_salve",
+      "display_name": "Sea Salve",
+      "type": "consumable",
+      "description": "Restores 80 HP.",
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "heal_hp", "value": 80 },
+      "buy_price": 40,
+      "sell_price": 20
+    },
+    {
+      "id": "spirit_tonic",
+      "display_name": "Spirit Tonic",
+      "type": "consumable",
+      "description": "Restores 25 MP.",
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "heal_mp", "value": 25 },
+      "buy_price": 50,
+      "sell_price": 25
+    },
+    {
+      "id": "coral_antidote",
+      "display_name": "Coral Antidote",
+      "type": "consumable",
+      "description": "Cures poison.",
+      "battle_use": true,
+      "field_use": true,
+      "effect": { "type": "cure_status", "status": "poison" },
+      "buy_price": 30,
+      "sell_price": 15
+    },
+    {
+      "id": "shell_coin",
+      "display_name": "Shell Coin",
+      "type": "currency",
+      "description": "Currency of the ruined coast.",
+      "battle_use": false,
+      "field_use": false,
+      "buy_price": 0,
+      "sell_price": 1
+    },
+    {
+      "id": "fisher_katana",
+      "display_name": "Fisher's Katana",
+      "type": "equipment",
+      "slot": "weapon",
+      "description": "Urashima's trusted blade, salt-worn but sharp.",
+      "stat_bonus": { "atk": 4 },
+      "element": "water",
+      "buy_price": 0,
+      "sell_price": 50,
+      "equip_by": ["urashima"]
+    },
+    {
+      "id": "shrine_charm",
+      "display_name": "Shrine Charm",
+      "type": "equipment",
+      "slot": "charm",
+      "description": "Increases spirit power.",
+      "stat_bonus": { "mag": 3, "res": 2 },
+      "buy_price": 120,
+      "sell_price": 60
+    },
+    {
+      "id": "diver_mail",
+      "display_name": "Diver's Mail",
+      "type": "equipment",
+      "slot": "armor",
+      "description": "Heavy coat from the old diving days.",
+      "stat_bonus": { "def": 5, "max_hp": 20 },
+      "buy_price": 150,
+      "sell_price": 75,
+      "equip_by": ["roku"]
+    },
+    {
+      "id": "wraith_pearl",
+      "display_name": "Wraith Pearl",
+      "type": "key_item",
+      "description": "Condensed sorrow from the Shore Wraith. Opens the palace gate.",
+      "battle_use": false,
+      "field_use": false
+    },
+    {
+      "id": "spirit_shard",
+      "display_name": "Spirit Shard",
+      "type": "material",
+      "description": "A fragment of bound spirit energy.",
+      "sell_price": 8
+    },
+    {
+      "id": "palace_fragment",
+      "display_name": "Palace Fragment",
+      "type": "material",
+      "description": "Crystallized time from the Dragon Palace.",
+      "sell_price": 25
+    }
+  ]
+}
