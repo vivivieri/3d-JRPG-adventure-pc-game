@@ -232,9 +232,11 @@ Illustrations are **reference** for modelers — not traced 1:1 if composition d
 
 ## 10. QA checklist (pitch package)
 
-- [ ] P0 five images exist under `docs/pitch/illustrations/`
+- [x] P0 five images exist under `docs/pitch/illustrations/`
+- [x] P1 full scene pass (SC-00 through SC-17c)
+- [x] P2 character portraits (party + 4 busts)
 - [ ] Palettes match zone hex values at a glance
 - [ ] No chibi / European castle motifs
-- [ ] SC-07 image has no dialogue text
-- [ ] All images logged in `LICENSES.md`
-- [ ] `README.md` links pitch folder for collaborators
+- [x] SC-07 image has no dialogue text
+- [x] All images logged in `LICENSES.md`
+- [x] `README.md` links pitch folder for collaborators
