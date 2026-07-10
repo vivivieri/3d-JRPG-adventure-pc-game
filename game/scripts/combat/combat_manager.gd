@@ -159,8 +159,8 @@ func _execute_skill(actor: Combatant, skill: Dictionary, target_index: int, is_l
 	var targets := _resolve_targets(actor, skill, target_index)
 	if skill.get("power", 0.0) > 0.0:
 		for t in targets:
-			var dmg := SkillResolver.resolve_damage(actor, t, skill)
-			var dealt := t.take_damage(dmg)
+			var dmg: int = SkillResolver.resolve_damage(actor, t, skill)
+			var dealt: int = t.take_damage(dmg)
 			EventBus.damage_dealt.emit(null, dealt, skill.get("element", ""))
 			_log("%s uses %s on %s for %d damage." % [
 				actor.display_name, skill.get("display_name", "?"), t.display_name, dealt

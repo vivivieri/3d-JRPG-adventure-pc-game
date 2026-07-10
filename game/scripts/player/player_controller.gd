@@ -1,10 +1,15 @@
 extends CharacterBody3D
 ## Third-person exploration controller (greybox).
 
+
 @export var move_speed := 5.0
-@export var interact_range := 2.5
+@export var interact_range := 3.0
 
 var _can_move := true
+
+
+func _ready() -> void:
+	add_to_group("player")
 
 
 func _physics_process(delta: float) -> void:
@@ -28,18 +33,39 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_interact()
 
 
+func get_focused_interactable() -> Node:
+	var camera := get_node_or_null("Camera3D") as Camera3D
+	var origin := global_position + Vector3.UP
+	var direction := -global_transform.basis.z
+	if camera:
+		origin = camera.global_position
+		direction = -camera.global_transform.basis.z
+	return _raycast_interactable(origin, direction)
+
+
 func _try_interact() -> void:
+	var target := get_focused_interactable()
+	if target:
+		target.interact()
+
+
+func _raycast_interactable(origin: Vector3, direction: Vector3) -> Node:
 	var space := get_world_3d().direct_space_state
+	if space == null:
+		return null
 	var query := PhysicsRayQueryParameters3D.create(
-		global_position + Vector3.UP,
-		global_position + Vector3.UP + -global_transform.basis.z * interact_range
+		origin,
+		origin + direction.normalized() * interact_range
 	)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
 	var result := space.intersect_ray(query)
 	if result.is_empty():
-		return
+		return null
 	var collider: Object = result.get("collider")
-	if collider and collider.has_method("interact"):
-		collider.interact()
+	if collider is Node and collider.has_method("interact") and collider.has_method("get_prompt"):
+		return collider as Node
+	return null
 
 
 func set_movement_enabled(enabled: bool) -> void:

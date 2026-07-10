@@ -4,7 +4,7 @@ extends StaticBody3D
 @export_file("*.tscn") var target_scene: String = ""
 @export var target_area: String = ""
 @export var target_spawn: String = "default"
-@export var interaction_prompt: String = "Enter"
+@export var interaction_prompt_key: String = "UI_INTERACT_ENTER"
 
 
 func interact() -> void:
@@ -14,3 +14,7 @@ func interact() -> void:
 	if not target_area.is_empty():
 		GameManager.current_area = target_area
 	get_tree().change_scene_to_file(target_scene)
+
+
+func get_prompt() -> String:
+	return LocalizationManager.tr_key(interaction_prompt_key)

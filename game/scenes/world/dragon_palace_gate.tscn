@@ -50,18 +50,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -8)
 script = ExtResource("3_interact")
 dialogue_scene_id = "SC-13"
-interaction_prompt = "Examine mirror"
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
 
 [node name="PalaceSentinel" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -18)
 script = ExtResource("3_interact")
-interaction_prompt = "Fight"
+interaction_prompt_key = "UI_INTERACT_FIGHT"
 combat_encounter_ids = PackedStringArray("palace_sentinel")
 
 [node name="TideKeeperBoss" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30)
 script = ExtResource("3_interact")
-interaction_prompt = "Final battle"
+interaction_prompt_key = "UI_INTERACT_FIGHT"
 combat_encounter_ids = PackedStringArray("tide_keeper")
 
 [node name="ExitToCaves" type="StaticBody3D" parent="."]
@@ -69,4 +69,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 18)
 script = ExtResource("2_transition")
 target_scene = "res://scenes/world/tidal_caves.tscn"
 target_area = "tidal_caves"
-interaction_prompt = "Return to caves"
+interaction_prompt_key = "UI_INTERACT_ENTER"

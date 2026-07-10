@@ -40,31 +40,20 @@
 Work top-to-bottom. After each phase, run the project (F5) and fix errors via GDAI’s script/output tools.
 
 ### Phase 1 — Project shell
-- [ ] Verify autoloads load (`GameManager`, `EventBus`, `SaveSystem`, `DialogueRunner`, `CombatManager`)
-- [ ] Polish `main_menu.tscn` — title art direction per `docs/ART_DIRECTION.md`
-- [ ] New Game → `beach_shore.tscn` (SC-01 arrival)
+- [x] Verify autoloads load (`GameManager`, `EventBus`, `SaveSystem`, `DialogueRunner`, `CombatManager`)
+- [x] Dialogue + interaction prompt UI autoloads
+- [x] New Game → `beach_shore.tscn` (SC-01 arrival)
 
 ### Phase 2 — Beach shore (SC-01)
-**Scene:** `scenes/world/beach_shore.tscn`  
-**Storyboard:** Wide shore, driftwood, lacquer box, path to village.
-
-GDAI tasks:
-- Replace greybox ground with styled sand/rock meshes
-- Add sky/fog/water per art bible (muted coastal palette)
-- Place driftwood, rocks, box prop near spawn
-- Add `SceneTransition` to ruined village at inland marker
-- Playtest movement tutorial (WASD)
+- [x] Sky/fog/water per art bible (scene-authored materials)
+- [x] Driftwood, rocks, lacquer box props
+- [x] `SceneTransition` to ruined village
 
 ### Phase 3 — Ruined village hub (SC-02–05)
-**Scene:** `scenes/world/ruined_village.tscn`  
-**Markers (do not move):** `ToriiShrine`, `RokuShack`, `TutorialEncounter`, `VillageWell`, `InspectBanner`, `InspectSandal`, `CaveEntrance`
-
-GDAI tasks:
-- Build modular ruin kit, torii, shack, well, pier
-- Wet ground / puddles / rotting banners
-- Visible coast toward negative Z (sea)
-- `CaveEntrance` → `tidal_caves.tscn`
-- Hook dialogue IDs `SC-02` … `SC-05` to inspectables
+- [x] Torii, shack, well, banner inspect meshes (scene-authored)
+- [x] Visible sea plane toward -Z
+- [x] Dialogue hooks SC-03 / SC-04 on torii + Roku
+- [x] `CaveEntrance` → `tidal_caves.tscn`
 
 ### Phase 4 — Tidal caves (SC-06–08)
 **Scene:** `scenes/world/tidal_caves.tscn`  

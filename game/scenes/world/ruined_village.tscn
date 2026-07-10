@@ -1,20 +1,63 @@
-[gd_scene load_steps=6 format=3 uid="uid://village001"]
+[gd_scene load_steps=18 format=3 uid="uid://village001"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/narrative/interactable.gd" id="2_interact"]
 [ext_resource type="Script" path="res://scripts/world/scene_transition.gd" id="3_transition"]
+[ext_resource type="Script" path="res://scripts/world/world_scene.gd" id="4_world"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.35, 0.48, 0.62, 1)
+sky_horizon_color = Color(0.72, 0.82, 0.88, 1)
+ground_horizon_color = Color(0.42, 0.48, 0.42, 1)
+
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_hub"]
+background_mode = 2
+sky = SubResource("Sky_env")
+ambient_light_source = 2
+ambient_light_color = Color(0.78, 0.74, 0.66, 1)
+fog_enabled = true
+fog_light_color = Color(0.545, 0.616, 0.686, 1)
+fog_density = 0.009
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.48, 0.42, 0.33, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.36, 0.29, 0.23, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rust"]
+albedo_color = Color(0.545, 0.23, 0.16, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sea"]
+albedo_color = Color(0.102, 0.29, 0.353, 1)
+roughness = 0.1
+metallic = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_ground"]
 size = Vector3(40, 0.5, 40)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
 size = Vector3(40, 0.5, 40)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
 radius = 0.4
 height = 1.6
 
+[sub_resource type="BoxShape3D" id="BoxShape_interact"]
+size = Vector3(2, 2.5, 2)
+
 [node name="RuinedVillage" type="Node3D"]
+script = ExtResource("4_world")
+zone_id = "ruined_village"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hub")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 12, 0)
@@ -25,9 +68,116 @@ shadow_enabled = true
 [node name="Mesh" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
 
 [node name="Collision" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_floor")
+shape = SubResource("BoxShape_ground")
+
+[node name="Sea" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -18)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(1.1, 0.04, 0.45)
+surface_material_override/0 = SubResource("StandardMaterial3D_sea")
+
+[node name="ToriiShrine" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -5)
+script = ExtResource("2_interact")
+dialogue_scene_id = "SC-03"
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
+
+[node name="ToriiVisual" type="Node3D" parent="ToriiShrine"]
+
+[node name="PostL" type="MeshInstance3D" parent="ToriiShrine/ToriiVisual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 1.2, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(0.12, 1.2, 0.12)
+surface_material_override/0 = SubResource("StandardMaterial3D_wood")
+
+[node name="PostR" type="MeshInstance3D" parent="ToriiShrine/ToriiVisual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.2, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(0.12, 1.2, 0.12)
+surface_material_override/0 = SubResource("StandardMaterial3D_wood")
+
+[node name="LinteL" type="MeshInstance3D" parent="ToriiShrine/ToriiVisual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(1.5, 0.1, 0.14)
+surface_material_override/0 = SubResource("StandardMaterial3D_rust")
+
+[node name="Collision" type="CollisionShape3D" parent="ToriiShrine"]
+shape = SubResource("BoxShape_interact")
+
+[node name="RokuShack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -3)
+script = ExtResource("2_interact")
+dialogue_scene_id = "SC-04"
+interaction_prompt_key = "UI_INTERACT_TALK"
+
+[node name="ShackMesh" type="MeshInstance3D" parent="RokuShack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(0.55, 0.8, 0.45)
+surface_material_override/0 = SubResource("StandardMaterial3D_wood")
+
+[node name="Collision" type="CollisionShape3D" parent="RokuShack"]
+shape = SubResource("BoxShape_interact")
+
+[node name="VillageWell" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 2)
+script = ExtResource("2_interact")
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
+sets_flag_on_interact = "found_well"
+
+[node name="WellMesh" type="MeshInstance3D" parent="VillageWell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(0.45, 0.35, 0.45)
+surface_material_override/0 = SubResource("StandardMaterial3D_wood")
+
+[node name="Collision" type="CollisionShape3D" parent="VillageWell"]
+shape = SubResource("BoxShape_interact")
+
+[node name="InspectBanner" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 6)
+script = ExtResource("2_interact")
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
+
+[node name="BannerMesh" type="MeshInstance3D" parent="InspectBanner"]
+transform = Transform3D(0.9, 0, 0.44, 0, 1, 0, -0.44, 0, 0.9, 0, 1.1, 0)
+mesh = SubResource("BoxMesh_ground")
+scale = Vector3(0.08, 0.9, 0.5)
+surface_material_override/0 = SubResource("StandardMaterial3D_rust")
+
+[node name="Collision" type="CollisionShape3D" parent="InspectBanner"]
+shape = SubResource("BoxShape_interact")
+
+[node name="InspectSandal" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 3.5)
+script = ExtResource("2_interact")
+interaction_prompt_key = "UI_INTERACT_EXAMINE"
+
+[node name="Collision" type="CollisionShape3D" parent="InspectSandal"]
+shape = SubResource("BoxShape_interact")
+
+[node name="TutorialEncounter" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+script = ExtResource("2_interact")
+interaction_prompt_key = "UI_INTERACT_FIGHT"
+combat_encounter_ids = PackedStringArray("salt_crab")
+
+[node name="Collision" type="CollisionShape3D" parent="TutorialEncounter"]
+shape = SubResource("BoxShape_interact")
+
+[node name="CaveEntrance" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 14)
+script = ExtResource("3_transition")
+target_scene = "res://scenes/world/tidal_caves.tscn"
+target_area = "tidal_caves"
+interaction_prompt_key = "UI_INTERACT_ENTER"
+
+[node name="Collision" type="CollisionShape3D" parent="CaveEntrance"]
+shape = SubResource("BoxShape_interact")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
@@ -38,41 +188,4 @@ transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 4, 6)
 current = true
 
 [node name="Collision" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_player")
-
-[node name="ToriiShrine" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -5)
-script = ExtResource("2_interact")
-dialogue_scene_id = "SC-03"
-interaction_prompt = "Examine Torii"
-
-[node name="Collision" type="CollisionShape3D" parent="ToriiShrine"]
-shape = SubResource("CapsuleShape3D_player")
-
-[node name="RokuShack" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -3)
-script = ExtResource("2_interact")
-dialogue_scene_id = "SC-04"
-interaction_prompt = "Talk"
-
-[node name="Collision" type="CollisionShape3D" parent="RokuShack"]
-shape = SubResource("CapsuleShape3D_player")
-
-[node name="TutorialEncounter" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
-script = ExtResource("2_interact")
-interaction_prompt = "Fight"
-combat_encounter_ids = PackedStringArray("salt_crab")
-
-[node name="Collision" type="CollisionShape3D" parent="TutorialEncounter"]
-shape = SubResource("CapsuleShape3D_player")
-
-[node name="CaveEntrance" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 14)
-script = ExtResource("3_transition")
-target_scene = "res://scenes/world/tidal_caves.tscn"
-target_area = "tidal_caves"
-interaction_prompt = "Enter caves"
-
-[node name="Collision" type="CollisionShape3D" parent="CaveEntrance"]
-shape = SubResource("CapsuleShape3D_player")
+shape = SubResource("CapsuleShape_player")
