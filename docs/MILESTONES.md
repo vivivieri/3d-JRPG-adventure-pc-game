@@ -20,6 +20,7 @@ Track implementation progress against the GDD milestones.
 - [x] Encounter & pacing table (`docs/ENCOUNTER_TABLE.md`)
 - [x] Cinematics & camera spec (`docs/CINEMATICS.md`)
 - [x] Audio direction (`docs/AUDIO_DIRECTION.md`)
+- [x] Audio production guide (`docs/AUDIO_PRODUCTION_GUIDE.md`) — BGM/SFX specs, scene map
 - [x] Art direction pivot — high-detail Japanese stylized (`docs/ART_DIRECTION.md` v1.1)
 
 ## M0d — Pre-build game design (gameplay systems)
@@ -35,6 +36,7 @@ Track implementation progress against the GDD milestones.
 - [x] Puzzle design SC-07 (`docs/PUZZLE_DESIGN.md`)
 - [x] Steam achievements (`docs/ACHIEVEMENTS.md`)
 - [x] Playtest script (`docs/PLAYTEST_SCRIPT.md`)
+- [x] QA & bug process (`docs/QA_AND_BUG_PROCESS.md`)
 - [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
 ## M0e — Story data layer (main branch)
