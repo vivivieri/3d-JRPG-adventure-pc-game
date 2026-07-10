@@ -99,10 +99,16 @@ if [[ ! -d game/addons/gdai-mcp-plugin-godot ]]; then
   echo "   See: game/addons/README.md + docs/GDAI_CLOUD_SETUP.md"
 fi
 
+# --- Export preset (gitignored locally; copy from example) ---
+if [[ ! -f game/export_presets.cfg ]] && [[ -f game/export_presets.cfg.example ]]; then
+  cp game/export_presets.cfg.example game/export_presets.cfg
+  echo "==> Created game/export_presets.cfg from example"
+fi
+
 echo
 echo "==> Setup complete."
 echo "    1. Install Godot 4.3+ and open game/project.godot"
 echo "    2. Install GDAI MCP plugin → game/addons/gdai-mcp-plugin-godot/"
 echo "    3. Configure .cursor/mcp.json from .cursor/mcp.json.example"
-echo "    4. Read docs/IMPLEMENTATION_PLAN.md — Phase 1: environment"
+echo "    4. Ship build: bash tools/export_windows.sh"
 echo "    5. Workflow: GodotPrompter (plan) → GDAI MCP (editor) per .cursorrules"

@@ -6,4 +6,4 @@ extends Control
 
 
 func _ready() -> void:
-	_status.text = "Dev build %s\nData: game/data/ | Docs: docs/\nNext: Phase 1 environment zones" % ProjectSettings.get_setting("application/config/version", "0.1.0")
+	_status.text = "Dev build %s\nData: game/data/ | Docs: docs/\nPhase 1 zones: res://scenes/world/zone_hub.tscn" % ProjectSettings.get_setting("application/config/version", "0.1.0")

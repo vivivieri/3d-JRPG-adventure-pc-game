@@ -23,6 +23,7 @@ echo "Dev environment check — $ROOT"
 echo
 
 check "game/project.godot exists" test -f game/project.godot
+check "export preset configured" test -f game/export_presets.cfg -o -f game/export_presets.cfg.example
 check "story data valid" python3 tools/validate_story_data.py
 check "setup script executable" test -x tools/setup_dev_environment.sh
 check "implementation plan doc" test -f docs/IMPLEMENTATION_PLAN.md

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ending_rewind_zone"]
+
+[ext_resource type="Script" path="res://scripts/world/zone_scene.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_greybox.gd" id="2_greybox"]
+[ext_resource type="Script" path="res://scripts/world/field_controller.gd" id="3_field"]
+
+[node name="EndingRewind" type="Node3D"]
+script = ExtResource("1_zone")
+zone_id = "ending_rewind"
+
+[node name="Greybox" type="Node3D" parent="."]
+script = ExtResource("2_greybox")
+zone_id = "ending_rewind"
+
+[node name="Field" type="Node3D" parent="."]
+script = ExtResource("3_field")
+zone_id = "ending_rewind"
