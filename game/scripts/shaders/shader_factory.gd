@@ -1,8 +1,7 @@
-class_name ShaderFactory
 extends RefCounted
 
-const TOON_SHADER := preload("res://assets/shaders/toon_base.gdshader")
-const WATER_SHADER := preload("res://assets/shaders/water_stylized.gdshader")
+const TOON_SHADER = preload("res://assets/shaders/toon_base.gdshader")
+const WATER_SHADER = preload("res://assets/shaders/water_stylized.gdshader")
 
 
 static func make_toon(color: Color, emission: Color = Color.BLACK, emission_strength: float = 0.0) -> ShaderMaterial:

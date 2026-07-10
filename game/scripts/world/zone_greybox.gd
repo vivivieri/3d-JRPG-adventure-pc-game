@@ -21,6 +21,8 @@ func _build() -> void:
 			_build_caves()
 		"dragon_palace_gate":
 			_build_palace()
+		"ending_rewind", "ending_anchor", "ending_drift":
+			_build_ending()
 		_:
 			_build_village()
 
@@ -62,6 +64,7 @@ func _build_beach() -> void:
 	_add_box(self, "DriftwoodB", Vector3(2, 0.5, 0.8), Vector3(-3, 0.25, 8), "structure")
 	_add_box(self, "GateSilhouette", Vector3(4, 5, 0.6), Vector3(0, 2.5, 18), "torii")
 	_add_marker(self, "WorldSpawn", Vector3(0, 1, -8))
+	_add_marker(self, "PlayerSpawn", Vector3(0, 1, -8))
 	_add_marker(self, "ToVillage", Vector3(0, 1, 22))
 
 
@@ -85,6 +88,8 @@ func _build_village() -> void:
 	_add_marker(self, "TutorialEncounter", Vector3(2, 0, -8))
 	_add_marker(self, "CaveEntrance", Vector3(18, 0, 12))
 	_add_marker(self, "WorldSpawn", Vector3(0, 1, 10))
+	_add_marker(self, "PlayerSpawn", Vector3(0, 1, 10))
+	_add_marker(self, "VillageWellSave", Vector3(-4, 0, -4))
 
 
 func _build_caves() -> void:
@@ -100,6 +105,13 @@ func _build_caves() -> void:
 	_add_marker(self, "DeepPoolEncounter", Vector3(0, 0, -28))
 	_add_marker(self, "ShoreWraithBoss", Vector3(0, 0, -28))
 	_add_marker(self, "WorldSpawn", Vector3(0, 1, 20))
+	_add_marker(self, "PlayerSpawn", Vector3(0, 1, 20))
+	_add_marker(self, "CaveEntranceCrab", Vector3(0, 0, 15))
+	_add_marker(self, "FloodedChamberCrabs", Vector3(-4, 0, -5))
+	_add_marker(self, "ShrineAlcove", Vector3(0, 0, -20))
+	_add_marker(self, "PalaceVision", Vector3(0, 0, -24))
+	_add_marker(self, "ToPalace", Vector3(0, 0, -35))
+	_add_marker(self, "ToVillage", Vector3(0, 0, 22))
 
 
 func _build_palace() -> void:
@@ -115,4 +127,14 @@ func _build_palace() -> void:
 	_add_marker(self, "MirrorChamber", Vector3(0, 0, -15))
 	_add_marker(self, "PalaceSentinel", Vector3(-8, 0, -22))
 	_add_marker(self, "TideKeeperBoss", Vector3(0, 0, -30))
+	_add_marker(self, "EndingChoice", Vector3(0, 0, -30))
+	_add_marker(self, "GateApproachWraiths", Vector3(0, 0, 4))
 	_add_marker(self, "WorldSpawn", Vector3(0, 1, 12))
+	_add_marker(self, "PlayerSpawn", Vector3(0, 1, 12))
+
+
+func _build_ending() -> void:
+	_add_plane(self, "Ground", Vector2(40, 40), Vector3.ZERO, "ground")
+	_add_plane(self, "Water", Vector2(50, 20), Vector3(0, -0.1, -18), "water")
+	_add_marker(self, "WorldSpawn", Vector3(0, 1, 0))
+	_add_marker(self, "PlayerSpawn", Vector3(0, 1, 0))

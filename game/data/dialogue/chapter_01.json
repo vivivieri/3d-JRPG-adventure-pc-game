@@ -272,11 +272,8 @@
           "met_roku",
           "caves_unlocked"
         ],
-        "give_items": [
-          {
-            "item_id": "fisher_katana",
-            "quantity": 1
-          }
+        "grant_key_items": [
+          "cave_map"
         ]
       }
     },
@@ -505,7 +502,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "gate_reached"
+          "gate_reached",
+          "roku_combat_active"
         ],
         "add_party": [
           "roku"

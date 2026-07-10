@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world/zone_scene.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_greybox.gd" id="2_greybox"]
-[ext_resource type="Script" path="res://scripts/world/dev_camera.gd" id="3_camera"]
+[ext_resource type="Script" path="res://scripts/world/field_controller.gd" id="3_field"]
 
 [node name="RuinedVillage" type="Node3D"]
 script = ExtResource("1_zone")
@@ -12,7 +12,6 @@ zone_id = "ruined_village"
 script = ExtResource("2_greybox")
 zone_id = "ruined_village"
 
-[node name="DevCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 7, 22)
-current = true
-script = ExtResource("3_camera")
+[node name="Field" type="Node3D" parent="."]
+script = ExtResource("3_field")
+zone_id = "ruined_village"

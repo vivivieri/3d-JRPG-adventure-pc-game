@@ -1,6 +1,7 @@
-class_name ZoneVisuals
 extends RefCounted
 ## Applies zone palette, sky, fog, lights, and toon materials per docs/RENDERING_GUIDE.md.
+
+const ShaderFactoryLib = preload("res://scripts/shaders/shader_factory.gd")
 
 
 const PALETTES: Dictionary = {
@@ -57,6 +58,45 @@ const PALETTES: Dictionary = {
 		"ground_horizon": Color("#1A2858"),
 		"light": Color("#FFD890"),
 		"fill": Color("#D4A55A"),
+	},
+	"ending_rewind": {
+		"ground": Color("#C9B89A"),
+		"structure": Color("#6A5A48"),
+		"accent": Color("#8B3A2A"),
+		"water_shallow": Color(0.1, 0.42, 0.38, 0.7),
+		"water_deep": Color(0.04, 0.18, 0.22, 0.85),
+		"fog": Color("#B8D8E8"),
+		"sky_top": Color("#7AB0C8"),
+		"sky_horizon": Color("#E8F4FA"),
+		"ground_horizon": Color("#5A98B0"),
+		"light": Color("#FFF8E8"),
+		"fill": Color("#D4C4A8"),
+	},
+	"ending_anchor": {
+		"ground": Color("#7A6A52"),
+		"structure": Color("#5C4A3A"),
+		"accent": Color("#3D5C4A"),
+		"water_shallow": Color(0.08, 0.28, 0.32, 0.65),
+		"water_deep": Color(0.04, 0.15, 0.2, 0.8),
+		"fog": Color("#9AA8A0"),
+		"sky_top": Color("#5A7A6A"),
+		"sky_horizon": Color("#C8D8C8"),
+		"ground_horizon": Color("#6A8A7A"),
+		"light": Color("#D8E8D0"),
+		"fill": Color("#A8B898"),
+	},
+	"ending_drift": {
+		"ground": Color("#2A3848"),
+		"structure": Color("#1A2838"),
+		"accent": Color("#4A6888"),
+		"water_shallow": Color(0.05, 0.2, 0.35, 0.75),
+		"water_deep": Color(0.02, 0.08, 0.18, 0.9),
+		"fog": Color("#1A3048"),
+		"sky_top": Color("#0A1420"),
+		"sky_horizon": Color("#2A4868"),
+		"ground_horizon": Color("#142838"),
+		"light": Color("#88B8D8"),
+		"fill": Color("#4A6888"),
 	},
 }
 
@@ -189,7 +229,7 @@ static func _apply_mesh_material(mesh: MeshInstance3D, palette: Dictionary) -> v
 	var emission_strength := 0.0
 
 	if role.contains("water") or mesh.name.to_lower().contains("water"):
-		mesh.material_override = ShaderFactory.make_water(palette.water_shallow, palette.water_deep)
+		mesh.material_override = ShaderFactoryLib.make_water(palette.water_shallow, palette.water_deep)
 		return
 	if role.contains("structure") or role.contains("torii") or role.contains("shack") or role.contains("pier") or role.contains("pillar") or role.contains("gate"):
 		color = palette.structure
@@ -204,5 +244,5 @@ static func _apply_mesh_material(mesh: MeshInstance3D, palette: Dictionary) -> v
 		emission = palette.get("glow", palette.structure)
 		emission_strength = 0.25
 
-	mesh.material_override = ShaderFactory.make_toon(color, emission, emission_strength)
+	mesh.material_override = ShaderFactoryLib.make_toon(color, emission, emission_strength)
 	mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
