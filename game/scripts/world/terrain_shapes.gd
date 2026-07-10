@@ -130,6 +130,22 @@ static func cave_path_mesh(z_min: float, z_max: float) -> ArrayMesh:
 	return _grid_to_mesh(verts, nx, nz, 0.3)
 
 
+static func cave_path_lane_mesh(z_min: float, z_max: float, half_width: float) -> ArrayMesh:
+	var nx := 6
+	var nz := 28
+	var verts: PackedVector3Array = []
+	verts.resize((nx + 1) * (nz + 1))
+	for iz in nz + 1:
+		var tz := float(iz) / float(nz)
+		var z := lerpf(z_min, z_max, tz)
+		for ix in nx + 1:
+			var tx := float(ix) / float(nx)
+			var x := lerpf(-half_width, half_width, tx)
+			var y := sin(x * 0.5 + z * 0.15) * 0.02
+			verts[iz * (nx + 1) + ix] = Vector3(x, y, z)
+	return _grid_to_mesh(verts, nx, nz, 0.24)
+
+
 static func _cave_half_width(z: float) -> float:
 	if z < -24.0:
 		return 9.5

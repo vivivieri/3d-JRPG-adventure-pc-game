@@ -178,19 +178,25 @@ static func _add_ground_cover(root: Node3D, zone_id: String, palette: Dictionary
 			_add_beach_shoreline_dressing(cover, palette)
 		"ruined_village":
 			_add_organic_ground(cover, palette, zone_id, "hub")
+			_add_village_mud_patches(cover, palette)
+			_add_village_worn_paths(cover, palette)
 			_add_village_visible_coast(cover, palette, zone_id)
 			_add_village_planting_groups(cover)
 			_scatter_rocks(cover, Vector3(0, 0, 0), 15.0, 18.0, 2 if _screenshot_mode() else 4, false)
 			_add_ground_edge_breakup(cover, Vector2(21, 21), palette, zone_id)
 		"tidal_caves":
 			_add_organic_ground(cover, palette, zone_id, "cave")
+			_add_cave_path_lane(cover, palette, zone_id)
 			_add_cave_chamber_floor(cover, palette, zone_id)
-			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.0, 21.0, 4 if _screenshot_mode() else 9)
-			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.0, 24.0, 2 if _screenshot_mode() else 5)
+			_scatter_cave_flora(cover, Vector3(0, 0, -8), 6.0, 21.0, 3 if _screenshot_mode() else 9)
+			_scatter_cave_boulders(cover, Vector3(0, 0, -10), 6.0, 24.0, 1 if _screenshot_mode() else 5)
 			_add_cave_wet_patches(cover, palette, zone_id)
 		"dragon_palace_gate":
 			_add_organic_ground(cover, palette, zone_id, "palace")
 			_add_palace_court_plaza(cover, palette)
+			_add_palace_marble_bands(cover, palette)
+			_add_palace_court_aisle(cover, palette)
+			_add_palace_void_sea_surface(cover, palette, zone_id)
 
 
 static func _scatter_path_strip(
@@ -307,6 +313,54 @@ static func _add_palace_court_plaza(parent: Node3D, palette: Dictionary) -> void
 	parent.add_child(plaza)
 
 
+static func _add_palace_marble_bands(parent: Node3D, palette: Dictionary) -> void:
+	var band_mat := StandardMaterial3D.new()
+	band_mat.albedo_color = Color("#E8DCC8")
+	band_mat.roughness = 0.28
+	band_mat.metallic = 0.12
+	_apply_zone_texture(band_mat, "dragon_palace_gate", "ground", "ground", "ground")
+	for z in [-24.0, -12.0, 0.0, 12.0]:
+		var band := MeshInstance3D.new()
+		band.name = "PalaceMarbleBand"
+		var plane := PlaneMesh.new()
+		plane.size = Vector2(20.0, 1.35)
+		plane.orientation = PlaneMesh.FACE_Y
+		band.mesh = plane
+		band.position = Vector3(0, 0.08, z)
+		band.material_override = band_mat
+		parent.add_child(band)
+
+
+static func _add_palace_court_aisle(parent: Node3D, palette: Dictionary) -> void:
+	var aisle := MeshInstance3D.new()
+	aisle.name = "PalaceCourtAisle"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(3.2, 30.0)
+	plane.orientation = PlaneMesh.FACE_Y
+	aisle.mesh = plane
+	aisle.position = Vector3(0, 0.09, -2)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = palette.get("accent", Color("#8B2A3A")).lerp(Color("#D4A55A"), 0.35)
+	mat.roughness = 0.42
+	mat.metallic = 0.18
+	mat.emission_enabled = true
+	mat.emission = palette.get("glow", Color.WHITE) * 0.08
+	aisle.material_override = mat
+	parent.add_child(aisle)
+
+
+static func _add_palace_void_sea_surface(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var sea := MeshInstance3D.new()
+	sea.name = "PalaceVoidSea"
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(90, 90)
+	plane.orientation = PlaneMesh.FACE_Y
+	sea.mesh = plane
+	sea.position = Vector3(0, -1.35, -6)
+	WaterMaterial.apply_to_mesh(sea, palette, zone_id)
+	parent.add_child(sea)
+
+
 static func _add_wet_sand_band(parent: Node3D, palette: Dictionary) -> void:
 	var wet := MeshInstance3D.new()
 	wet.name = "WetSandBand"
@@ -345,7 +399,7 @@ static func _add_beach_sand_texture_detail(parent: Node3D) -> void:
 
 
 static func _add_village_mud_patches(parent: Node3D, palette: Dictionary) -> void:
-	for patch in [Vector3(-3, 0.02, 5), Vector3(6, 0.02, -4), Vector3(-8, 0.02, -2)]:
+	for patch in [Vector3(-3, 0.02, 5), Vector3(6, 0.02, -4), Vector3(-8, 0.02, -2), Vector3(2, 0.02, -8)]:
 		var mud := MeshInstance3D.new()
 		var plane := PlaneMesh.new()
 		plane.size = Vector2(5.5, 4.5)
@@ -360,13 +414,51 @@ static func _add_village_mud_patches(parent: Node3D, palette: Dictionary) -> voi
 		parent.add_child(mud)
 
 
+static func _add_village_worn_paths(parent: Node3D, palette: Dictionary) -> void:
+	var path_mat := StandardMaterial3D.new()
+	path_mat.albedo_color = Color("#8A7A62")
+	path_mat.roughness = 0.96
+	_apply_zone_texture(path_mat, "ruined_village", "ground", "ground", "ground")
+	for segment in [
+		{"center": Vector3(-0.5, 0.04, 4.5), "size": Vector2(2.2, 12.0), "rot": -18.0},
+		{"center": Vector3(1.5, 0.04, -1.0), "size": Vector2(1.8, 10.0), "rot": 8.0},
+		{"center": Vector3(-5.0, 0.04, 4.0), "size": Vector2(1.6, 7.5), "rot": 72.0},
+		{"center": Vector3(6.5, 0.04, 0.5), "size": Vector2(1.5, 6.0), "rot": -12.0},
+	]:
+		var strip := MeshInstance3D.new()
+		strip.name = "VillagePath"
+		var plane := PlaneMesh.new()
+		plane.size = segment["size"]
+		plane.orientation = PlaneMesh.FACE_Y
+		strip.mesh = plane
+		strip.position = segment["center"]
+		strip.rotation_degrees.y = segment["rot"]
+		strip.material_override = path_mat
+		parent.add_child(strip)
+
+
 static func _add_cave_wet_patches(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
-	for spot in [Vector3(-4.6, 0.03, -18)]:
+	for spot in [Vector3(-4.6, 0.03, -18), Vector3(3.2, 0.03, -9.5), Vector3(-2.0, 0.03, -4.0)]:
 		var puddle := MeshInstance3D.new()
-		puddle.mesh = TerrainShapes.flood_pool_mesh(0.9, 0.65, 12)
+		puddle.mesh = TerrainShapes.flood_pool_mesh(0.9 if spot.z < -10 else 0.65, 0.55 if spot.z < -10 else 0.45, 12)
 		puddle.position = spot
 		WaterMaterial.apply_to_mesh(puddle, palette, zone_id, true)
 		parent.add_child(puddle)
+
+
+static func _add_cave_path_lane(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	var lane := MeshInstance3D.new()
+	lane.name = "CavePathLane"
+	lane.mesh = TerrainShapes.cave_path_lane_mesh(-30.0, 14.0, 2.8)
+	lane.position = Vector3(0, -0.17, -7.5)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color("#6E6860")
+	mat.roughness = 0.78
+	mat.emission_enabled = true
+	mat.emission = Color("#4A4540") * 0.12
+	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
+	lane.material_override = mat
+	parent.add_child(lane)
 
 
 static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
@@ -385,14 +477,7 @@ static func _add_village_visible_coast(parent: Node3D, palette: Dictionary, zone
 	sea.name = "VillageNearSea"
 	sea.mesh = _make_village_sea_mesh(24.0, -8.25, -28.0, 30)
 	sea.position = Vector3(0, 0.095, 0)
-	var sea_mat := StandardMaterial3D.new()
-	sea_mat.albedo_color = Color("#276E78")
-	sea_mat.roughness = 0.18
-	sea_mat.metallic = 0.05
-	sea_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	sea_mat.emission_enabled = true
-	sea_mat.emission = Color("#0F3F48") * 0.12
-	sea.material_override = sea_mat
+	WaterMaterial.apply_to_mesh(sea, palette, zone_id)
 	parent.add_child(sea)
 
 
@@ -465,15 +550,26 @@ static func _add_cave_chamber_floor(parent: Node3D, palette: Dictionary, zone_id
 	mat.metallic = 0.0
 	mat.emission_enabled = true
 	mat.emission = Color("#3A352D") * 0.16
+	_apply_zone_texture(mat, zone_id, "ground", "ground", "ground")
 	chamber.material_override = mat
 	parent.add_child(chamber)
-	for spot in [
+	var chamber_light := OmniLight3D.new()
+	chamber_light.name = "ChamberFill"
+	chamber_light.light_color = palette.get("accent", Color.CYAN)
+	chamber_light.light_energy = 0.35
+	chamber_light.omni_range = 14.0
+	chamber_light.position = Vector3(2.0, 2.4, -8.0)
+	parent.add_child(chamber_light)
+	var rim_spots: Array = [
 		Vector3(-9.5, 0, -2.0),
 		Vector3(11.0, 0, -3.5),
 		Vector3(-8.0, 0, -13.5),
 		Vector3(10.5, 0, -14.0),
 		Vector3(2.0, 0, -18.0),
-	]:
+	]
+	if _screenshot_mode():
+		rim_spots = [Vector3(-9.5, 0, -2.0), Vector3(11.0, 0, -3.5), Vector3(2.0, 0, -18.0)]
+	for spot in rim_spots:
 		PropLibrary.spawn("rock_tall_a", parent, spot, randf_range(-20, 20), 1.15, false)
 		PropLibrary.spawn("rock_large_b", parent, spot + Vector3(0.9, 0, 0.6), randf_range(0, 360), 0.9, false)
 
@@ -673,6 +769,8 @@ static func _scatter_cave_flora(
 	radius_z: float,
 	count: int,
 ) -> void:
+	var scale_min := 0.75 if _screenshot_mode() else 1.05
+	var scale_max := 0.95 if _screenshot_mode() else 1.45
 	_scatter_flora_kinds(
 		parent,
 		center,
@@ -681,8 +779,8 @@ static func _scatter_cave_flora(
 		count,
 		["grass", "grass_leafs", "grass"],
 		false,
-		1.05,
-		1.45,
+		scale_min,
+		scale_max,
 		Callable(ZoneVisuals, "_is_cave_dry_ground"),
 	)
 
@@ -815,6 +913,7 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 			env.glow_enabled = true
 			env.glow_intensity = 0.35
 			env.glow_bloom = 0.18
+			env.ambient_light_color = palette.get("light", Color.WHITE) * 0.55
 		_:
 			env.fog_density = 0.012
 			env.fog_aerial_perspective = 0.5
@@ -825,6 +924,9 @@ static func _apply_environment(root: Node3D, palette: Dictionary, zone_id: Strin
 			child.light_energy = 1.05 if zone_id == "dragon_palace_gate" else 0.9
 			if zone_id == "ruined_village" or zone_id == "beach_shore":
 				child.rotation_degrees = Vector3(-48, -35, 0)
+			elif zone_id == "dragon_palace_gate":
+				child.rotation_degrees = Vector3(-58, 18, 0)
+				child.shadow_opacity = 0.55
 
 
 static func _make_zone_sky(palette: Dictionary, zone_id: String) -> Sky:
@@ -1119,6 +1221,8 @@ static func _add_cave_wall_flora(parent: Node3D) -> void:
 
 
 static func _add_cave_big_leaf_clusters(parent: Node3D) -> void:
+	if _screenshot_mode():
+		return
 	for spot in [Vector3(-5.0, 0, -13), Vector3(5.0, 0, -20)]:
 		PropLibrary.spawn("grass", parent, spot, randf_range(0, 360), 1.15, false)
 		PropLibrary.spawn("grass_leafs", parent, spot + Vector3(0.6, 0, 0.4), randf_range(0, 360), 1.0, false)
@@ -1131,7 +1235,7 @@ static func _add_flood_chamber_wetness(parent: Node3D, pos: Vector3, palette: Di
 	parent.add_child(chamber)
 	for offset in [Vector3(-1.2, 0.02, 0.8), Vector3(0.8, 0.02, -0.6), Vector3(0, 0.02, 1.2)]:
 		var drip := MeshInstance3D.new()
-		drip.mesh = _make_water_plane(Vector2(0.9, 0.7))
+		drip.mesh = TerrainShapes.flood_pool_mesh(0.55, 0.42, 10)
 		drip.position = offset
 		WaterMaterial.apply_to_mesh(drip, palette, zone_id, true)
 		chamber.add_child(drip)
@@ -1159,6 +1263,7 @@ static func _add_flood_pool_frame(parent: Node3D, pos: Vector3, palette: Diction
 
 static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
 	_add_void_sea(parent, palette, zone_id)
+	_add_palace_colonnade_rows(parent, palette, zone_id)
 	_add_gate_pillars(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_banners(parent, Vector3(0, 0, 12), palette, zone_id)
 	_add_palace_lanterns(parent, Vector3(0, 0, 10), palette, zone_id)
@@ -1173,6 +1278,17 @@ static func _add_palace_set(parent: Node3D, palette: Dictionary, zone_id: String
 	_add_mirror_chamber(parent, Vector3(-4, 0, -8), palette, zone_id)
 	_add_palace_section(parent, Vector3(0, 0, -18), palette, zone_id, true)
 	_add_palace_section(parent, Vector3(0, 0, -30), palette, zone_id, false)
+
+
+static func _add_palace_colonnade_rows(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
+	for z in [10.0, 0.0, -10.0, -20.0]:
+		for x in [-7.5, 7.5]:
+			PropLibrary.spawn("castle_pillar", parent, Vector3(x, 0, z), 0.0, 1.2)
+		var rail := Node3D.new()
+		rail.position = Vector3(0, 0, z)
+		parent.add_child(rail)
+		PropLibrary.spawn("log", rail, Vector3(-7.5, 0.55, 0), 90.0, 0.85, true)
+		PropLibrary.spawn("log", rail, Vector3(7.5, 0.55, 0), 90.0, 0.85, true)
 
 
 static func _add_torii(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id: String) -> void:
@@ -1221,9 +1337,10 @@ static func _add_pier(parent: Node3D, pos: Vector3, palette: Dictionary, zone_id
 	var pier := Node3D.new()
 	pier.position = pos
 	parent.add_child(pier)
-	for i in 3:
+	for i in 5:
 		PropLibrary.spawn("log", pier, Vector3(i * 1.0, 0.06, 0), 90.0, 0.9, true)
-	PropLibrary.spawn("bush", pier, Vector3(4.2, 0, 0.6), 0.0, 0.85, true)
+	PropLibrary.spawn("bush", pier, Vector3(5.2, 0, 0.6), 0.0, 0.85, true)
+	PropLibrary.spawn("rock_small_a", pier, Vector3(4.8, 0, -0.4), 15.0, 0.75, true)
 
 
 static func _add_coastline(parent: Node3D, palette: Dictionary, zone_id: String) -> void:
