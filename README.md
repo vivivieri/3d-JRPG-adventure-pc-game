@@ -47,7 +47,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | [Art Direction](docs/ART_DIRECTION.md) | Visual pivot + poly budgets |
 | [Storyboard Illustrations](docs/STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec + scene briefs |
 | [Pitch images](docs/pitch/illustrations/) | P0 concept art (5 images) for presentations |
-| [Marketing trailer](steam/trailer.mp4) | ~68s pitch video — regenerate with `tools/generate_marketing_trailer.py` |
+| [Marketing trailer](steam/trailer.mp4) | ~68s pitch video (EN / JA / ZH) — `python3 tools/generate_marketing_trailer.py --all-locales` |
 
 ### Gameplay systems (M0d)
 

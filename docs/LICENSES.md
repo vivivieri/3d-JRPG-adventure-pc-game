@@ -89,7 +89,7 @@ Greybox floor/wall primitives remain procedural Godot meshes.
 | Steam capsules & screenshots | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Store page marketing |
 | Steam trailer (`steam/trailer.mp4`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Slideshow + procedural BGM |
 | Pitch illustrations (`docs/pitch/illustrations/**/*.png`) | Cursor AI image generation | Pitch/marketing use | 2026-07 | Storyboard set — replace with 3D for ship |
-| Marketing trailer (`steam/trailer.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~68s; ambient bed generated in-tool |
+| Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~68s; procedural pentatonic BGM (`steam/trailer_bgm.ogg`) |
 
 Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG only.
 

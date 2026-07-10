@@ -53,7 +53,7 @@ Track implementation progress against the GDD milestones.
 - [x] P0 pitch images (`docs/pitch/illustrations/`) — party + 4 key scenes
 - [x] P1 full storyboard pass (20 scene images)
 - [x] P2 character portraits (4 + party lineup)
-- [x] Marketing trailer (`steam/trailer.mp4`) — `tools/generate_marketing_trailer.py`
+- [x] Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) — multilingual + procedural BGM
 
 ## M0e — Story data layer (main branch)
 - [x] Data architecture (`docs/DATA_ARCHITECTURE.md`)

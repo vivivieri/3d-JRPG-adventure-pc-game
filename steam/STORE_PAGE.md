@@ -71,7 +71,10 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 | Small capsule | 231 × 87 | `steam/capsule_small.png` |
 | Library hero | 3840 × 1240 | _TODO — wide key art_ |
 | Screenshots | 1920 × 1080 min | `steam/screenshots/` (5 placeholders generated) |
-| Trailer | 1920 × 1080 MP4 | `steam/trailer.mp4` (~68s marketing trailer — all pitch illustrations + story text) |
+| Trailer (EN) | 1920 × 1080 MP4 | `steam/trailer.mp4` (~68s — English on-screen text) |
+| Trailer (JA) | 1920 × 1080 MP4 | `steam/trailer_ja.mp4` (~68s — Japanese on-screen text) |
+| Trailer (ZH) | 1920 × 1080 MP4 | `steam/trailer_zh.mp4` (~68s — Chinese on-screen text) |
+| Trailer BGM | OGG | `steam/trailer_bgm.ogg` (shared procedural score) |
 
 ---
 
