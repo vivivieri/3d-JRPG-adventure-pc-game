@@ -88,6 +88,18 @@ fi
 # --- Project structure ---
 bash "$ROOT/tools/setup_dev_environment.sh"
 
+# --- GDAI MCP plugin (commercial zip — not in git) ---
+if [[ -d "$ROOT/game/addons/gdai-mcp-plugin-godot" ]]; then
+  echo "==> GDAI MCP plugin already installed"
+elif ls "$ROOT/game/addons"/gdai-mcp-plugin-godot*.zip >/dev/null 2>&1 || [[ -n "${GDAI_PLUGIN_ZIP:-}" ]]; then
+  echo "==> Installing GDAI MCP from zip..."
+  bash "$ROOT/tools/install_gdai_plugin.sh"
+else
+  echo "!! GDAI MCP plugin not installed (commercial — https://gdaimcp.com/)"
+  echo "   For cloud: upload zip to game/addons/ during Setup Agent, then rebuild snapshot"
+  echo "   Or: cp plugin zip → game/addons/gdai-mcp-plugin-godot-*.zip and re-run install"
+fi
+
 # --- Persist Godot XDG paths for agent shells ---
 PROFILE_SNIPPET="# Tides of Urashima — Godot cloud paths
 export PATH=\"\${HOME}/.local/bin:\${PATH}\"
