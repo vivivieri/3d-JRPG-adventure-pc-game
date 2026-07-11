@@ -63,6 +63,21 @@ else
   echo "[WARN] GDAI MCP plugin not installed (dev-only)"
 fi
 
+if curl -sf "http://127.0.0.1:${GDAI_MCP_SERVER_PORT:-3571}/tools" >/dev/null 2>&1; then
+  echo "[OK]   GDAI HTTP bridge (:${GDAI_MCP_SERVER_PORT:-3571})"
+  OK=$((OK + 1))
+else
+  echo "[FAIL] GDAI HTTP bridge not running — run: bash tools/ensure_gdai_mcp.sh"
+  ERR=$((ERR + 1))
+fi
+
+if [[ -f .cursor/mcp.json ]]; then
+  echo "[OK]   .cursor/mcp.json present"
+  OK=$((OK + 1))
+else
+  echo "[WARN] .cursor/mcp.json missing — run: bash tools/ensure_gdai_mcp.sh"
+fi
+
 echo
 echo "Passed: $OK | Failed: $ERR"
 exit "$ERR"

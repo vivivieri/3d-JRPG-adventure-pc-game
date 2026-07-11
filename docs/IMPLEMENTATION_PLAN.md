@@ -3,7 +3,7 @@
 **Version:** 1.0 (Fresh start)  
 **Branch:** `cursor/game-implementation-01be`  
 **Source of truth:** `main` design docs + `game/data/` JSON  
-**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) — see `.cursorrules`
+**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
 
 Previous Godot implementation branches (`*-dc91`) were **removed**. This plan rebuilds from documentation only.
 

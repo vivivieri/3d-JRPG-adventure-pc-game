@@ -2,6 +2,57 @@
 
 You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized Japanese coastal JRPG (dark Urashima Tarō folklore).
 
+---
+
+## 0. HARD RULES — GodotPrompter + GDAI MCP only
+
+**The AI agent implements this project using ONLY these two tools:**
+
+| Tool | Role |
+|------|------|
+| **GodotPrompter** | Plan, architect, write GDScript (`.gd`), shaders (`.gdshader`), data hooks, procedural asset *generators* |
+| **GDAI MCP** | All editor work: scenes (`.tscn`), nodes, materials, lights, inspector properties, F5 playtest, debugger/output |
+
+### Forbidden without explicit user override
+
+- Hand-editing `.tscn` scene trees, node placement, or inspector values in Cursor (GDAI MCP must do this)
+- Implementing gameplay/visual features when GDAI MCP is not connected
+- Importing copyrighted or unknown-license art, audio, fonts, or models from the web
+- Using Kenney packs, random Google images, CC-BY-NC, or franchise IP traces
+
+### Session startup (every agent run)
+
+```bash
+bash tools/ensure_gdai_mcp.sh
+```
+
+1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
+2. If **Cursor MCP** does not list `godot-mcp` as a connected server → **STOP and notify the user** to register `.cursor/mcp.json` in Cursor Settings → MCP, then restart the agent. Do not substitute hand-editing.
+3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
+
+### Notify the user when unavailable
+
+Always report clearly if any of these are missing:
+
+- `godot-mcp` not in Cursor MCP server list
+- GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
+- Godot Editor not running
+- GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
+
+**Do not silently fall back to manual file edits.**
+
+### Copyright-safe procedural assets (allowed)
+
+Generate ship-safe placeholders with project tools — register in manifest:
+
+| Asset type | Tool | License |
+|------------|------|---------|
+| BGM / SFX | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
+| Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
+| 3D meshes / zone art | GodotPrompter shaders + **GDAI MCP** scene build | ORIGINAL |
+
+After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_compliance.sh`
+
 **Default toolchain (always work together):**
 - **GodotPrompter** — plan, architect, generate GDScript & shaders
 - **GDAI MCP** — execute in the live Godot Editor, configure scenes, verify & iterate
@@ -12,6 +63,7 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 - `docs/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
 - `docs/CHARACTER_BIBLE.md` — models, box glow states, spirit materials
 - `docs/ASSET_COMPLIANCE.md` — license-safe assets only
+- `docs/AUDIO_PRODUCTION_GUIDE.md` — audio layout; use `tools/generate_game_audio.py` for placeholders
 
 **Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
 
@@ -25,9 +77,9 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 | | |
 |---|---|
 | **Role** | Structural planner, GDScript author, custom spatial shader architect |
-| **Owns** | Shader code (`.gdshader`), GDScript logic (`.gd`), math, class design, signal wiring patterns, refactor plans |
+| **Owns** | Shader code (`.gdshader`), GDScript logic (`.gd`), math, class design, signal wiring patterns, refactor plans, procedural generator scripts |
 | **Responsibility** | Godot 4 syntax; NPR/toon pipelines; stepped diffuse ramps; vertex shaders (water, wind sway); typed GDScript |
-| **When to use** | **First** — before editing scenes: plan approach, draft shaders/scripts, define node structure |
+| **When to use** | **First** — before GDAI touches scenes: plan approach, draft shaders/scripts, define node structure |
 | **Does NOT** | Replace the editor for placing meshes, tuning light angles, or reading live editor errors |
 
 ### Tool B: GDAI MCP — *Scene mutator & runtime verifier*
@@ -37,22 +89,25 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 | **Owns** | `.tscn` graph changes, inspector properties, in-editor playtest, output-panel error inspection |
 | **Responsibility** | Apply zone palettes from art docs; parent nodes; assign materials; audit FPS in editor |
 | **When to use** | **After** GodotPrompter planning — implement the plan in the open Godot Editor |
-| **Prerequisite** | Godot 4.3+ open at `game/project.godot` → GDAI plugin enabled → MCP server **Started** (`docs/GDAI_CLOUD_SETUP.md`) |
+| **Prerequisite** | `bash tools/ensure_gdai_mcp.sh` passes; `godot-mcp` connected in Cursor MCP |
 
 ### Combined workflow (default — use every session)
 
 ```
+0. BOOT     → bash tools/ensure_gdai_mcp.sh (block if GDAI MCP unavailable — notify user)
 1. READ     → docs/RENDERING_GUIDE.md + zone row in ENVIRONMENT_KITS.md
 2. PLAN     → GodotPrompter: shader design, script structure, node tree, property values
 3. EXECUTE  → GDAI MCP: create/edit scenes, apply materials, configure lights & WorldEnvironment
 4. VERIFY   → GDAI MCP: run scene (F5), read editor errors/output, check visuals in viewport
 5. REFINE   → GodotPrompter: fix script/shader bugs GDAI surfaced → GDAI MCP applies fixes in editor
-6. SHIP     → commit; run bash tools/check_asset_compliance.sh
+6. ASSETS   → Procedural audio/art via project tools; GDAI MCP assigns in editor
+7. SHIP     → commit; run bash tools/check_asset_compliance.sh
 ```
 
 **Handoff rules:**
 - GodotPrompter **writes** code; GDAI MCP **applies** it to the project and **confirms** it runs.
-- Never stop after GodotPrompter output alone — always hand off to GDAI MCP for editor integration.
+- **Never** stop after GodotPrompter output alone — always hand off to GDAI MCP for editor integration.
+- **Never** hand-edit `.tscn` or inspector values in Cursor when GDAI MCP is available.
 - Never configure complex shaders purely by hand in the inspector without GodotPrompter drafting the `.gdshader` first.
 - If GDAI reports script errors → loop back to GodotPrompter for the fix, then GDAI MCP to re-test.
 
@@ -62,10 +117,12 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 |------|---------------|----------|
 | Zone lighting pass | Draft `zone_visuals.gd` fog/sky values; toon shader | Add `WorldEnvironment`, `DirectionalLight3D`, assign palette in `ruined_village.tscn` |
 | Water stylization | Write `water_material.gdshader` with foam + displacement | Create water mesh, assign shader, tune uniform in editor |
-| Combat UI hookup | Plan `combat_ui.gd` signal connections | Create `combat_ui.tscn` nodes, wire to `CombatUiManager` autoload |
+| Combat UI hookup | Plan `combat_ui.gd` signal connections | Create `combat_ui.tscn` nodes, wire signals in editor |
+| Tab menu / shop UI | Plan `tab_menu.gd` logic | Build `tab_menu.tscn` node tree, connect signals, verify in viewport |
 | Lacquer box glow | Shader with 3 emission states by uniform | Place box mesh on Urashima, swap material states via story flags |
+| BGM / SFX | Run `generate_game_audio.py`; wire `audio_manager.gd` | Assign streams in editor, test F5 with audio bus |
 
-**Startup order:** Open Godot → start GDAI MCP → then Cursor (GodotPrompter runs inside Cursor at any time).
+**Startup order:** `ensure_gdai_mcp.sh` → Godot Editor + GDAI HTTP → Cursor `godot-mcp` connected → then plan in GodotPrompter.
 
 ---
 
@@ -103,7 +160,12 @@ When configuring nodes, environments, or materials, enforce **Tides of Urashima*
 ### E. Environment & foliage
 - Wind-sway vertex shaders OK for coastal grass/reeds.
 - Japanese coastal / ryūgū motifs only — **no** European castle kits, medieval props, or Kenney placeholders in ship builds.
-- **No primitive placeholders** (`BoxMesh`, `CapsuleMesh`) in player-facing scenes.
+- **No primitive placeholders** (`BoxMesh`, `CapsuleMesh`) in player-facing scenes — build via GDAI MCP + NPR meshes/shaders or licensed art.
+
+### F. Audio
+- **Procedural placeholders:** `python3 tools/generate_game_audio.py --all` (ORIGINAL, copyright-safe).
+- **Ship target:** Curated authored tracks per `docs/AUDIO_PRODUCTION_GUIDE.md` — all registered in manifest.
+- **Never** import random web SFX/BGM without documented license.
 
 ---
 
@@ -143,9 +205,10 @@ Extend with emission for interactables; keep one ramp family project-wide.
 ---
 
 ## 6. Workflow checklist (M6 art rebuild)
-1. **Read** zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
-2. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.
-3. **Execute** with GDAI MCP — apply plan in editor (scenes, materials, lights).
-4. **Verify** with GDAI MCP — F5 playtest, fix errors (loop GodotPrompter ↔ GDAI until clean).
-5. Apply `ZoneVisuals.apply_to_scene(root, zone_id)` or matching `.tres` preset if on a code-driven branch.
-6. **Ship check** — palette hex, shadows, fog, glow targets, 60 FPS @ 1080p on gameplay camera.
+1. **Boot** — `bash tools/ensure_gdai_mcp.sh`; notify user if GDAI MCP unavailable.
+2. **Read** zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
+3. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.
+4. **Execute** with GDAI MCP — apply plan in editor (scenes, materials, lights).
+5. **Verify** with GDAI MCP — F5 playtest, fix errors (loop GodotPrompter ↔ GDAI until clean).
+6. **Assets** — procedural audio/portraits; GDAI assigns in editor.
+7. **Ship check** — palette hex, shadows, fog, glow targets, 60 FPS @ 1080p, asset compliance.

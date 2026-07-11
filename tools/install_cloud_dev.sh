@@ -138,3 +138,7 @@ fi
 echo
 echo "==> Cloud dev install complete."
 bash "$ROOT/tools/check_dev_environment.sh" || true
+
+echo
+echo "==> Bootstrapping GDAI MCP bridge..."
+bash "$ROOT/tools/ensure_gdai_mcp.sh" || echo "!! ensure_gdai_mcp.sh failed — register godot-mcp in Cursor MCP and restart agent"
