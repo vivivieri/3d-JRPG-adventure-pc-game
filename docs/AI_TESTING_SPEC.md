@@ -1,6 +1,6 @@
 # AI Testing Specification
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Applies to:** All implementation on `main` (Phases 1–8)  
 **Parent doc:** `docs/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
 **Cross-refs:** `AGENTS.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`
@@ -141,12 +141,14 @@ bash tools/ensure_gdai_mcp.sh
 | Step | GDAI MCP action | Pass criterion |
 |------|-----------------|----------------|
 | 1 | Open target `.tscn` or run main scene | Scene opens without load errors |
-| 2 | Read Godot **Output** panel | Zero errors; warnings documented if unavoidable |
-| 3 | **F5** play scene (or main flow to scene) | No crash; reaches expected state |
-| 4 | Read **Debugger** if scripts changed | No unhandled exceptions |
-| 5 | Capture viewport screenshot | Save to `artifacts/screenshots/<phase>_<scene>_<date>.png` |
-| 6 | For zones: verify WorldEnvironment | Filmic tonemap, fog per `RENDERING_GUIDE.md` |
-| 7 | Stop scene | Clean exit |
+| 2 | **UI discovery** (menus/HUD) — scan live scene tree for `Control` nodes | Every interactive label found with text + visible state (see §11) |
+| 3 | Read Godot **Output** panel | Zero errors; warnings documented if unavoidable |
+| 4 | **F5** play scene (or main flow to scene) | No crash; reaches expected state |
+| 5 | Read **Debugger** if scripts changed | No unhandled exceptions |
+| 6 | **Runtime action sequence** if UI/combat (keypress batch + waits) | Menu opens, selection succeeds (see §11.2) |
+| 7 | Capture viewport **screenshot** | Save to `artifacts/screenshots/<phase>_<scene>_<date>.png`; check overlap/clipping |
+| 8 | For zones: verify WorldEnvironment | Filmic tonemap, fog per `RENDERING_GUIDE.md` |
+| 9 | Stop scene | Clean exit |
 
 ### 5.3 Checklists by task type
 
@@ -167,8 +169,11 @@ bash tools/ensure_gdai_mcp.sh
 #### Combat scene (Phase 4)
 
 - [ ] Combat UI visible; HP/MP bars update on damage  
+- [ ] **GDAI UI discovery** finds BattleMenu / action list nodes  
+- [ ] **Action sequence:** `ui_down` × N → `ui_accept` opens Skills; screenshot shows no text overlap  
 - [ ] Action menu opens; skill selection does not soft-lock  
 - [ ] Battle log shows last action  
+- [ ] **Edge case (runtime inject):** set player HP to 1 mid-fight → game over screen triggers on death (§11.3)  
 
 #### Boss / ending (Phase 5–6)
 
@@ -244,7 +249,9 @@ bash tools/ensure_gdai_mcp.sh
 
 ### 6.3 Implementation notes
 
-- Headless Godot with scripted `Input` simulation or dedicated test autoload  
+- **Hybrid model:** L4 uses **headless GDScript** for deterministic flag/math checks **plus** **GDAI MCP** for UI menus the headless runner cannot see (inventory, combat menus, dialogue).  
+- Headless Godot with scripted `Input` simulation **or** GDAI batched keypresses + timed waits  
+- JRPG sub-menus (Equipment, Skills, Items, Save): always **discover UI tree first**, then simulate navigation (§11)  
 - Each scenario returns pass/fail; runner exits non-zero on any fail  
 - Wire new scenarios in `tools/run_integration_tests.sh` as they land  
 
@@ -270,6 +277,7 @@ Full story automation per `game/data/story/scenes.json`:
 - Acts I–III playable without soft-lock  
 - All three endings: **Rewind**, **Anchor**, **Drift**  
 - Credits after each ending  
+- **GDAI MCP** drives field movement, dialogue advance, combat menus, and shop where headless scripts are brittle  
 - Optional: record video to `artifacts/videos/e2e_<ending>_<date>.mp4`
 
 ### 7.2 E2E matrix (implement in `game/tests/e2e/`)
@@ -404,7 +412,123 @@ Human QA: NOT STARTED (L5 prerequisite) / READY FOR HUMAN / N/A
 
 ---
 
-## 11. Related files
+## 11. GDAI MCP playtesting toolkit (adopted)
+
+These techniques come from live-runtime MCP testing (recommended for JRPG UI-heavy flows). They extend L3–L5; they **do not** replace L0–L2 headless tests.
+
+### 11.1 Adoption matrix (external advice → this project)
+
+| Technique | Adopt? | Layer | Notes |
+|-----------|--------|-------|-------|
+| **UI tree discovery** (live `Control` scan) | ✅ Yes | L3, L4 | Required for Equipment / Skills / Items / Save menus |
+| **Runtime action sequences** (keypress + wait batches) | ✅ Yes | L3, L4, L5 | `ui_down`, `ui_accept`, `interact`, movement keys |
+| **Viewport screenshots + visual review** | ✅ Yes | L3, L4 | Agent analyzes overlap, clipping, missing fonts |
+| **Runtime GDScript injection** | ✅ Yes | L4, L5 | Edge cases: HP=1, boss phase, grant item, set flag |
+| **GodotPrompter for test code** | ✅ Yes | L1, L4 | Already policy — Godot 4 APIs only, no Unity-style tests |
+| **GUT (Godot Unit Test)** | ⚠️ Optional | L1 | Keep lightweight `game/tests/unit/` now; consider GUT Phase 4+ for combat math |
+| **Godot MCP Pro / Godotiq** | ❌ No | — | **GDAI MCP only** per `.cursorrules` §0 |
+| **LimboAI / Beehave** | ❌ No (v1) | — | Turn-based enemy AI is **data-driven** (`enemies.json`); revisit if real-time AI added |
+
+### 11.2 UI discovery + action sequences
+
+**When:** Any JRPG menu, combat action select, shop, tab inventory, ending choice UI.
+
+**Procedure:**
+
+1. GDAI MCP: run game to target state (F5 or run scene).  
+2. **Discover UI elements** — walk live scene tree; collect `Control` text, name, position, `visible`, focus.  
+3. Plan key sequence from discovered nodes (do not hard-code stale node paths from `.tscn` files).  
+4. Execute batched input, e.g.:
+
+```
+Open inventory → wait 0.5s → ui_down × 3 → ui_accept → verify Equipment label updated
+```
+
+5. Screenshot immediately after; agent checks layout + Output panel.
+
+**JRPG menus to cover (Phase 2–4):**
+
+| Menu | Min action sequence |
+|------|---------------------|
+| Main menu | New Game → zone load |
+| Field HUD | Open quest tracker; close |
+| Dialogue | Advance to end; no soft-lock |
+| Combat | Attack → Skill → Item → Defend paths |
+| Shop (Roku) | Buy + sell one item |
+| Save / load | Well save → menu continue |
+
+### 11.3 Runtime GDScript injection (edge cases)
+
+Use GDAI MCP to execute **short** runtime scripts for states hard to reach organically.
+
+| Test ID | Inject example | Assert |
+|---------|----------------|--------|
+| `INJ-GAMEOVER-01` | Set party leader HP to 0 | Game over UI; reload works |
+| `INJ-BOSS-01` | Set boss to phase 2 HP threshold | Phase banner + intent change |
+| `INJ-FLAG-01` | `GameManager.set_flag("water_puzzle_solved")` | Gate opens without replaying puzzle |
+| `INJ-ENDING-01` | Jump to SC-16 with Tide Keeper at low HP | Choice UI blocks attack input |
+
+**Rules:**
+
+- GodotPrompter writes inject snippets; GDAI MCP runs them in live session.  
+- Log inject script in test report.  
+- Prefer **unit tests** for pure math; use inject only for **UI / state integration**.
+
+### 11.4 Example agent prompts (copy-paste)
+
+**Combat UI smoke (Phase 4):**
+
+```
+Using GDAI MCP only: run the project, enter SC-05 tutorial combat.
+Discover UI elements for the battle action menu.
+Simulate ui_down twice and ui_accept to open Skills.
+Capture a viewport screenshot and read the Output panel.
+Report any overlapping UI text, errors, or soft-lock.
+```
+
+**Inventory equip (Phase 2+):**
+
+```
+Using GDAI MCP: from field, open the tab menu inventory.
+Discover Equipment list Controls.
+Navigate down 3 times, press ui_accept to equip the training sword.
+Screenshot the stats panel and confirm ATK changed per items.json.
+```
+
+**Boss game-over edge case:**
+
+```
+Using GDAI MCP: start Shore Wraith encounter (SC-09).
+Inject runtime GDScript to set Urashima HP to 1.
+Take one enemy action that deals damage.
+Verify game over screen appears and Continue returns to last save.
+```
+
+### 11.5 Division of labor (GDAI vs headless)
+
+| Concern | Tool |
+|---------|------|
+| Fire spell deals 25–30 vs fire-weak enemy | **L1 unit test** (`test_damage_calculator.gd`) |
+| Skills menu opens and lists 15 skills | **GDAI** UI discovery + action sequence |
+| Full story three endings | **L5** headless E2E **+** GDAI for brittle UI steps |
+| Zone fog / materials | **GDAI** F5 + screenshot |
+| JSON flag after quest stage | **L1 unit test** or headless integration |
+
+---
+
+## 12. Optional: GUT unit tests (Phase 4+)
+
+If `game/tests/unit/` becomes crowded, adopt **[GUT](https://github.com/bitwes/Gut)** (Godot Unit Test):
+
+- GodotPrompter writes GUT test scripts per `COMBAT_SYSTEMS.md` worked examples.  
+- Run headless: `godot4 --headless -s addons/gut/gut_cmdln.gd` (after plugin install).  
+- Wire into `tools/run_unit_tests.sh`.  
+
+**Until then:** keep the lightweight `test_runner.gd` scaffold on `main`.
+
+---
+
+## 13. Related files
 
 | Path | Role |
 |------|------|

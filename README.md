@@ -176,7 +176,7 @@ var scenes = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/s
 ## Documentation
 
 - [AI Dev Workflow](docs/AI_DEV_WORKFLOW.md) — AI build, unit tests, acceptance criteria
-- [AI Testing Spec](docs/AI_TESTING_SPEC.md) — L0–L6 procedures; human QA after AI E2E
+- [AI Testing Spec](docs/AI_TESTING_SPEC.md) — L0–L6 procedures; GDAI UI discovery & playtesting (§11)
 - [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) — rebuild phases
 - [GDAI Cloud Setup](docs/GDAI_CLOUD_SETUP.md) — MCP + editor bridge
 - [Game Design Document](docs/GDD.md)

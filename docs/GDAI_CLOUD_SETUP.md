@@ -248,6 +248,7 @@ See `.cursorrules` §0 and **`AGENTS.md`**.
 | Procedural BGM/SFX (copyright-safe) | `python3 tools/generate_game_audio.py` |
 | Procedural portrait placeholders | `python3 tools/generate_procedural_portraits.py` |
 | Logic/data smoke (after GDAI verify) | `bash tools/run_playtest_smoke.sh` |
+| JRPG UI/combat playtest via live editor | GDAI MCP — see `docs/AI_TESTING_SPEC.md` §11 |
 | Steam build | **No GDAI** in `game/addons/` |
 
 ---
