@@ -271,3 +271,32 @@ Checks:
 5. `dialogue/chapter_01.json` — fill missing scenes
 6. `shop/roku_shop.json` + `achievements/achievements.json`
 7. `tools/validate_story_data.py`
+
+---
+
+## 16. Scene index vs storyboard count
+
+| Source | Count | Notes |
+|--------|-------|-------|
+| `docs/STORYBOARD.md` | **19** narrative beats | SC-00 + 18 main-path scenes |
+| `story/scenes.json` | **23** rows | Adds SC-02 inspectable sub-scenes + SC-17a/b/c ending variants |
+| `dialogue/chapter_01.json` | **22** scene keys | SC-07 silent puzzle — no dialogue block by design |
+
+All `scene_id` values in dialogue, encounters, and flags must exist in `scenes.json`.
+
+---
+
+## 17. JSON schema versions
+
+Files use `schema_version` (integer) or `version` (string) to track format evolution. The validator checks content, not version numbers.
+
+| File | Key | Current | Notes |
+|------|-----|---------|-------|
+| `dialogue/chapter_01.json` | `schema_version` | **4** | Adds `voice_id` on selective VO lines |
+| `quests/main_quests.json`, `items/items.json` | `schema_version` | **2** | — |
+| Most other `game/data/**/*.json` | `schema_version` | **1** | — |
+| `audio/vo_prompts.json`, `ace_step_prompts.json` | `version` | **"1.0"** | Audio catalog metadata (not gameplay schema) |
+
+Bump `schema_version` when breaking field renames; run `python3 tools/validate_story_data.py` after edits.
+
+**Dialogue layout:** `chapter_01.json` holds all scenes including SC-00. Optional `dialogue/prologue.json` split is documented but **not used** in this repo.

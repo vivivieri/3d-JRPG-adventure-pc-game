@@ -18,7 +18,7 @@ fi
 
 if [[ ! -f "$STEAM_ADDON/steam_api64.dll" ]]; then
   echo "[FAIL] GodotSteam win64 not installed. Run: bash tools/install_godotsteam.sh"
-  echo "       Then download/extract GodotSteam 4.15 for Godot 4.3."
+  echo "       Then install GodotSteam 4.20+ for Godot 4.7: GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh"
   exit 1
 fi
 

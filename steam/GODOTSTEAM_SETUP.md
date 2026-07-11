@@ -1,5 +1,13 @@
 # GodotSteam + Steamworks deployment
 
+**Engine:** Godot **4.7** stable · **GodotSteam 4.20+** required (see `docs/PLUGIN_COMPATIBILITY.md`)
+
+## Install GodotSteam
+
+```bash
+GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh
+```
+
 ## Achievements (map in Steamworks → `SteamManager.gd`)
 
 | API name | Trigger flag |
@@ -15,8 +23,9 @@
 ## Build pipeline
 
 ```bash
-# From repo root — installs Godot 4.3 + templates if missing, exports Windows build
+# From repo root — installs Godot 4.7 + templates if missing, exports Windows build
 ./tools/export_windows.sh
+bash tools/prepare_steam_depot.sh   # bundle win64 DLLs for depot test
 ```
 
 Output: `build/TidesOfUrashima.exe` (embedded PCK)

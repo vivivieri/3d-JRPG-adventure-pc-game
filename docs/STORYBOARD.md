@@ -26,7 +26,7 @@
 |-------|--------|
 | **Location** | Beach outside ruined village |
 | **Camera** | Wide establishing shot → over-shoulder follow |
-| **Summary** | Urashima washes ashore, clutching the lacquer box. Narrator line: "I thought it was three days." (text only — no VO) |
+| **Summary** | Urashima washes ashore, clutching the lacquer box. Narrator line: "I thought it was only three days." **Default: text only.** Optional selective VO: `sc01_urashima_01` (P1 — `docs/VO_HIT_LIST.md`) |
 | **Gameplay** | Tutorial movement (WASD), approach village gate |
 | **Mood** | Lonely, grey sky, distant thunder |
 | **Assets** | Beach terrain, driftwood, box prop, ruined gate silhouette |

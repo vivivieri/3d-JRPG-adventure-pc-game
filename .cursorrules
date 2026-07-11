@@ -250,7 +250,8 @@ When configuring nodes, environments, or materials, enforce **Tides of Urashima*
 - **60 FPS @ 1080p** on GTX 1060 — test SC-02 Ruined Village vertical slice first.
 - **≤ 8 materials** visible per zone at gameplay camera.
 - Log third-party assets in `docs/LICENSES.md`; run `bash tools/check_asset_compliance.sh` before commit.
-- Godot scenes/scripts live on feature branches; `main` holds design docs + `game/data/`.
+- Godot scenes/scripts for **Phases 1–6 gameplay** may land on `main` per `docs/IMPLEMENTATION_PLAN.md` or on feature branches — either is OK if PR-reviewed
+- `main` always holds: design docs, `game/data/` JSON, boot shell, validators, and story stubs (`CinematicDirector`, `VoiceLinePlayer`)
 
 ---
 

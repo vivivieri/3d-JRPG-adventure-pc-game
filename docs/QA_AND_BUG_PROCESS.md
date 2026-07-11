@@ -211,7 +211,7 @@ bash tools/check_asset_compliance.sh
 
 ### Full regression
 
-Follow `PLAYTEST_SCRIPT.md` Acts I–III once per milestone (M4 combat, M5 story complete, M6 polish).
+Follow `PLAYTEST_SCRIPT.md` Acts I–III once per milestone (**M2** combat slice, **M4** full story, **M5** art pass, **M6** ship gate).
 
 ### Post-fix regression
 
@@ -284,12 +284,13 @@ Next playtest on newer build
 
 | Milestone | Bug bar |
 |-----------|---------|
-| **M4** — Combat vertical slice | Zero S0; S1 only with documented workaround |
-| **M5** — Full story | Zero S0–S1 on main path |
-| **M6** — Polish / ship | Zero S0–S1; S2 triaged; S3 timeboxed |
-| **Ship** | Compliance script pass; full playtest once per ending |
+| **M2** — Combat vertical slice | Zero S0; S1 only with documented workaround |
+| **M4** — Full story | Zero S0–S1 on main path |
+| **M5** — Art rebuild | Zero S0–S1 on main path; no Kenney/primitive placeholders visible in player builds |
+| **M6** — Steam & ship | Zero S0–S1; S2 triaged; S3 timeboxed; compliance script pass |
+| **Ship** | Full playtest once per ending; GodotSteam 4.20+ on Godot 4.7 |
 
-See `docs/MILESTONES.md` for feature checklist.
+See `docs/MILESTONES.md` for feature checklist. Build order: `docs/IMPLEMENTATION_PLAN.md`.
 
 ---
 

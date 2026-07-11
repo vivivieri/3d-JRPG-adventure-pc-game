@@ -4,6 +4,7 @@
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
+**Build order:** `docs/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/MILESTONES.md`  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
 **Workflow:** **GodotPrompter + full MCP toolchain** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
 

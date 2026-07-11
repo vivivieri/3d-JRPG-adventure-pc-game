@@ -66,6 +66,17 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 | Flags | snake_case; defined only in `story/flags.json` |
 | Item IDs | snake_case; all drops must exist in `items.json` |
 | i18n inline | `{ "en": "...", "ja": "...", "zh": "..." }` |
+| Selective VO | `voice_id` on line → `game/assets/audio/voice/{locale}/{voice_id}.ogg` |
+
+## Schema versions
+
+See `docs/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_version: 4`; audio catalogs use `"version": "1.0"`.
+
+## Scene count
+
+- **23** rows in `story/scenes.json` (includes SC-02 inspectables + SC-17a/b/c)
+- **22** dialogue scene keys in `chapter_01.json` (SC-07 silent — no block)
+- **19** storyboard beats in `docs/STORYBOARD.md`
 
 ## Related docs
 

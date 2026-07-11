@@ -206,19 +206,21 @@ game/
 
 ## 13. Milestones
 
+**Build order:** `docs/IMPLEMENTATION_PLAN.md` Phases 0–8 are authoritative. **M5 = art rebuild** (Phase 7) before **M6 = Steam ship** (Phase 8).
+
 | ID | Deliverable | Done when |
 |----|-------------|-----------|
 | M0 | GDD + storyboard + repo | ✓ This doc |
-| M0b | i18n (en / ja / zh) | ✓ LocalizationManager + CSV |
+| M0b | i18n (en / ja / zh) | ✓ Spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+ |
 | M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
 | M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, COMBAT, UI, etc. |
 | M0e | Story data layer (`game/data/`) | ✓ DATA_ARCHITECTURE, validate_story_data.py |
-| M1 | Greybox movement + dialogue | Walk village, talk to NPC |
-| M2 | Combat vertical slice | 1 fight feels good |
-| M3 | Chapter 1 playable | Tidal Caves complete |
-| M4 | Full story | All 3 endings |
-| M5 | Polish + Steam page | Trailer, store live |
-| M6 | Art rebuild (high-detail Japanese) | Vertical slice SC-02 → full production per ART_DIRECTION v1.1 |
+| M1 | Greybox movement + dialogue | Walk village, talk to NPC (Phases 2–3) |
+| M2 | Combat vertical slice | 1 fight feels good (Phase 4) |
+| M3 | Chapter 1 playable | Tidal Caves complete (Phase 5) |
+| M4 | Full story | All 3 endings (Phase 6) |
+| M5 | Art rebuild (high-detail Japanese) | Vertical slice SC-02 → full NPR production per ART_DIRECTION v1.1 (Phase 7) |
+| M6 | Steam & ship prep | Export, store page, compliance, Windows playtest (Phase 8) |
 
 ---
 

@@ -3,9 +3,23 @@
 **Version:** 1.1 (Fresh rebuild)  
 **Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
-**Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.
+**Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.  
+**Milestone checklist:** `docs/MILESTONES.md` (M5 art → M6 Steam).
 
 Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
+
+### Phase ↔ milestone map
+
+| Phase | Milestone | Focus |
+|-------|-----------|-------|
+| 0 | M0, M0c–M0h | Dev environment + design/data baseline ✅ |
+| 1 | — | Environment foundation + SC-02 vertical slice gate |
+| 2–3 | M1 | Core systems + narrative exploration |
+| 4 | M2 | Combat vertical slice |
+| 5 | M3 | Chapter 1 dungeons |
+| 6 | M4 | Full story + three endings |
+| 7 | **M5** | Art rebuild (NPR zones, hero meshes, curated audio) |
+| 8 | **M6** | Steam export, compliance, playtest |
 
 ---
 
@@ -118,7 +132,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 
 ---
 
-## Phase 7 — M6 art rebuild
+## Phase 7 — M5 art rebuild
 
 Replace greybox with authored assets per `docs/ART_DIRECTION.md`:
 
@@ -130,7 +144,7 @@ Replace greybox with authored assets per `docs/ART_DIRECTION.md`:
 
 ---
 
-## Phase 8 — Ship prep
+## Phase 8 — M6 Steam & ship prep
 
 | # | Task |
 |---|------|

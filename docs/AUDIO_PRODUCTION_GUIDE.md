@@ -19,7 +19,7 @@
 | **Loop** | Seamless loop on all field BGM and ambient beds |
 | **Loudness** | BGM integrated **-16 LUFS**; SFX peak **-6 dBFS** (see §8) |
 | **Naming** | `snake_case`; prefix `bgm_` or `sfx_` or `amb_` or `sting_` |
-| **Placeholder** | Replace procedural output from `tools/generate_game_audio.py` before ship |
+| **Placeholder** | Dev: `tools/generate_game_audio.py` or ACE-Step `--fallback`. **Ship:** curated BGM/SFX per act — no raw procedural placeholders in release build (M5) |
 | **Compliance** | Register every external file: `python3 tools/register_asset.py add`; run `bash tools/check_asset_compliance.sh` |
 
 ### Bus routing (Godot)
@@ -29,7 +29,7 @@
 | `Master` | All output | `master_volume` |
 | `Music` | BGM, stings on music bus | `music_volume` |
 | `SFX` | UI, combat, footsteps, one-shots | `sfx_volume` |
-| `Voice` | **Unused v1** — no recorded dialogue | — |
+| `Voice` | **Selective VO** — 12 `voice_id` clips only (`docs/VO_HIT_LIST.md`) | `voice_volume` (Phase 2+) |
 | `Ambient` | Zone loops, surf, drips | duck under Music (-3 dB) |
 
 **Crossfade:** `AudioManager` — **1.5 s** linear crossfade between zone BGM tracks.
@@ -406,7 +406,7 @@ Store per-track loop documentation in `docs/audio_sheets/<track_id>.md`:
 |-----|-----------------|-----------|
 | Music (each BGM) | -16 LUFS | -1.0 dBTP |
 | SFX (category peak) | — | -6.0 dBFS |
-| Voice / dialogue | N/A v1 | — |
+| Voice / selective VO | −18 LUFS (short clips) | −3.0 dBTP |
 | Ambient beds | -22 LUFS | -6.0 dBTP |
 
 **Relative balance** (from `AUDIO_DIRECTION.md` §5): dialogue always readable over Music; Ambient always under Music.

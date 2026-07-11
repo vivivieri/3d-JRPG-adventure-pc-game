@@ -23,7 +23,7 @@ Track every third-party asset, story source, and engine dependency.
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
 | Godot Engine 4.7 | https://godotengine.org | MIT | Credits screen required |
-| GodotSteam 4.15 | https://codeberg.org/godotsteam/godotsteam | MIT | `game/addons/godotsteam/` — credits screen |
+| GodotSteam **4.20+** | https://codeberg.org/godotsteam/godotsteam | MIT | `game/addons/godotsteam/` — **required for Godot 4.7 ship**; install via `bash tools/install_godotsteam.sh` |
 
 ---
 
@@ -37,25 +37,29 @@ Track every third-party asset, story source, and engine dependency.
 
 ---
 
-## Audio (original — no third-party samples)
+## Audio
 
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
-| All BGM (`bgm/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | Menu, zones, combat, boss |
-| All SFX (`sfx/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | UI, combat, field |
+| Procedural BGM/SFX (`bgm/*.ogg`, `sfx/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | **Dev placeholder** — replace before M5 ship |
+| ACE-Step prototype tracks | ACE-Step 1.5 via `tools/generate_ai_bgm.py` | MIT (ACE-Step) | 2026-07 | Zone + cinematic hero BGM — human mix pass before ship |
+| Selective VO (12 clips) | ElevenLabs via `tools/generate_ai_vo.py` | Commercial AI — verify ToS | 2026-07 | `game/assets/audio/voice/{locale}/*.ogg` — log each clip |
+| Marketing trailer BGM | `tools/generate_marketing_trailer.py` or ACE-Step stitch | MIT / ACE-Step | 2026-07 | `steam/trailer_bgm.ogg` — marketing only |
 
-Synthesized in code (numpy). No Freesound, stock loops, or licensed recordings.
+**Third-party audio samples:** Do not import random web loops. Filtered CC0 from documented sources (e.g. Freesound CC0-only) is allowed **only** when registered here and in `asset_manifest.license.json` per `docs/ASSET_COMPLIANCE.md`. Default pipeline: procedural + ACE-Step + ElevenLabs.
 
 ---
 
-## 3D models (CC0 — Kenney)
+## 3D models (CC0 — Kenney) — **dev greybox only**
 
 | Item | Source | License | Used for |
 |------|--------|---------|----------|
-| Nature Kit GLBs (`models/nature/*.glb`) | Kenney Nature Kit | CC0 1.0 | Trees, rocks, pier, cliffs, fences |
-| Castle Kit OBJs (`models/castle/*.obj`) | Kenney Castle Kit | CC0 1.0 | Palace gate, pillars, banners, player knight |
+| Nature Kit GLBs (`models/nature/*.glb`) | Kenney Nature Kit | CC0 1.0 | **Phase 1–6 greybox** — trees, rocks, pier |
+| Castle Kit OBJs (`models/castle/*.obj`) | Kenney Castle Kit | CC0 1.0 | **Phase 1–6 greybox** — blockout only |
 
 Install curated subset: `bash tools/install_cc0_assets.sh` (requires `.asset-dl/` source packs).
+
+**Ship rule (M5):** Replace Kenney Castle/European kit pieces in **player-facing builds** per `docs/ART_DIRECTION.md`. Nature kit pieces may remain only if art-reviewed and logged. Kenney Castle kit is **deprecated for ship** — do not ship palace gate from Castle kit.
 
 Attribution appreciated but not required: [Kenney](https://www.kenney.nl)
 
@@ -69,11 +73,11 @@ Attribution appreciated but not required: [Kenney](https://www.kenney.nl)
 
 Install curated subset: `python3 tools/install_polyhaven_assets.py` (~1.6 GB at 1k resolution).
 
-`PropLibrary` prefers Poly Haven models when installed, falling back to Kenney low-poly.
+`PropLibrary` prefers Poly Haven models when installed, falling back to Kenney low-poly during greybox.
 
 Attribution appreciated but not required: [Poly Haven](https://polyhaven.com)
 
-Greybox floor/wall primitives remain procedural Godot meshes.
+Greybox floor/wall primitives remain procedural Godot meshes — replace before M5 ship.
 
 ---
 
@@ -87,20 +91,21 @@ Greybox floor/wall primitives remain procedural Godot meshes.
 | Icons (`ui/icons/*.png`, `ui/icon.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | App icon, combat intents |
 | Main menu background | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Title screen |
 | Steam capsules & screenshots | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Store page marketing |
-| Steam trailer (`steam/trailer.mp4`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Slideshow + procedural BGM |
 | Pitch illustrations (`docs/pitch/illustrations/**/*.png`) | Cursor AI image generation | Pitch/marketing use | 2026-07 | Storyboard set — replace with 3D for ship |
-| Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~68s; procedural pentatonic BGM (`steam/trailer_bgm.ogg`) |
+| Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~75s; procedural or ACE-Step BGM (`steam/trailer_bgm.ogg`) |
+| AI video b-roll (optional) | Runway / Kling / similar | Per vendor ToS | — | **Marketing trailer only** — log in manifest; never in-game |
 
 Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG only.
 
 ---
 
-## 3D models
+## 3D models — ship status
 
 | Status | Notes |
 |--------|-------|
-| **Kenney CC0 kits** | Curated Nature + Castle models in `game/assets/models/`. See `asset_manifest.json`. |
-| **Poly Haven CC0** | High-poly nature glTF in `game/assets/models/polyhaven/`. See `polyhaven_manifest.json`. Not committed — run installer. |
+| **Kenney CC0 kits** | Dev greybox in `game/assets/models/` — **replace before M5 ship** for palace/hero props |
+| **Poly Haven CC0** | High-poly nature glTF in `game/assets/models/polyhaven/`. Not committed — run installer |
+| **Hero meshes** | Blender + NPR albedo per `docs/CHARACTER_BIBLE.md` — M5 deliverable |
 
 ---
 
@@ -112,10 +117,13 @@ Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG onl
 
 ---
 
-## Checklist before Steam ship
+## Checklist before Steam ship (M6)
 
 - [ ] `bash tools/check_asset_compliance.sh` passes (proof in `docs/compliance/COMPLIANCE_REPORT.md`)
 - [ ] Every new asset registered in `docs/asset_manifest.license.json` + this file
 - [ ] No banned licenses (NC, SA, ARR, unknown) — see `docs/ASSET_COMPLIANCE.md` §3
-- [ ] Credits screen lists Godot MIT + Noto OFL + GodotSteam MIT + any CC-BY attributions
+- [ ] No Kenney Castle kit or primitive placeholders in player-facing scenes (M5 art pass)
+- [ ] Curated BGM/VO — no dev-only procedural audio in ship build
+- [ ] GodotSteam **4.20+** installed for Godot 4.7 export
+- [ ] Credits screen lists Godot MIT + Noto OFL + GodotSteam MIT + ACE-Step/ElevenLabs if used + any CC-BY attributions
 - [ ] Playtest on Windows hardware

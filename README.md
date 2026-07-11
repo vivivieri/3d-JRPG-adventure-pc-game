@@ -16,14 +16,14 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Milestone | Status |
 |-----------|--------|
 | M0 — GDD, storyboard, repo scaffold | Done |
-| M0b — Multi-language (en / ja / zh) | Done |
+| M0b — Multi-language (en / ja / zh) | Spec done — runtime Phase 2+ |
 | M0c — Art rebuild specs | Done |
 | M0d — Gameplay systems specs | Done |
 | M0e — Story data on main | Done |
 | **Phase 0 — Dev environment + boot shell** | **Done** |
 | **Phase 1–6 — Godot implementation** | **Not started** — rebuild on `main` via GDAI MCP |
-| M6 — Art rebuild (high-detail Japanese) | Not started |
-| M5 — Polish + Steam page | Not started |
+| M5 — Art rebuild (high-detail Japanese) | Not started (Phase 7) |
+| M6 — Steam & ship prep | Not started (Phase 8) |
 
 ---
 

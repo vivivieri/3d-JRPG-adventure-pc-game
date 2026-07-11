@@ -123,7 +123,7 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 | SFX | Freesound (filter CC0) | CC0 |
 | Music | OpenGameArt or commissioned short score | Per-track |
 
-**Deprecated for ship builds:** Kenney Castle kit (European read), Quaternius as final character base, procedural primitive placeholders.
+**Deprecated for ship builds (M5):** Kenney Castle kit (European read), Quaternius as final character base, procedural primitive placeholders. Kenney Nature may remain only if art-reviewed — see `docs/LICENSES.md` §Kenney (dev greybox only).
 
 **Rule:** Log every download in `docs/LICENSES.md` before import. **Run `bash tools/check_asset_compliance.sh` before commit.**
 

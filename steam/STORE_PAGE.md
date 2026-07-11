@@ -101,7 +101,7 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 ./tools/export_windows.sh   # produces build/TidesOfUrashima.exe (~109 MB)
 ```
 
-1. Open `game/project.godot` in Godot 4.3+ (or use script above)
+1. Open `game/project.godot` in Godot **4.7** stable (or use script above)
 2. **Project → Export** → preset `Windows Desktop`
 3. See `steam/GODOTSTEAM_SETUP.md` for depot layout + achievements
 

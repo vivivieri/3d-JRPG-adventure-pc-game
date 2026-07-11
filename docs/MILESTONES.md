@@ -2,6 +2,26 @@
 
 Track implementation progress against the GDD milestones.
 
+**Planning authority:** Build order and phase gates live in **`docs/IMPLEMENTATION_PLAN.md`** (Phases 0–8). This file is the **deliverable checklist**. When labels conflict, prefer the implementation plan.
+
+**M5 / M6 order (canonical):** **M5 = art rebuild** (Phase 7) → **M6 = Steam & ship** (Phase 8). Art before store/export.
+
+### Phase ↔ milestone map
+
+| Implementation phase | Milestone focus | Primary doc |
+|---------------------|-----------------|-------------|
+| Phase 0 | M0, M0c–M0h pre-production | This file §M0* |
+| Phase 1 | Environment + SC-02 vertical slice gate | `IMPLEMENTATION_PLAN` §Phase 1 |
+| Phase 2 | M1 greybox systems shell | `IMPLEMENTATION_PLAN` §Phase 2 |
+| Phase 3 | M1 narrative + exploration | `IMPLEMENTATION_PLAN` §Phase 3 |
+| Phase 4 | M2 combat vertical slice | `IMPLEMENTATION_PLAN` §Phase 4 |
+| Phase 5 | M3 Chapter 1 | `IMPLEMENTATION_PLAN` §Phase 5 |
+| Phase 6 | M4 full story + endings | `IMPLEMENTATION_PLAN` §Phase 6 |
+| Phase 7 | **M5 art rebuild** | `ART_DIRECTION.md`, `RENDERING_GUIDE.md` |
+| Phase 8 | **M6 Steam & ship** | `steam/`, `PLUGIN_COMPATIBILITY.md` |
+
+---
+
 ## M0 — Pre-production
 - [x] Game Design Document (`docs/GDD.md`)
 - [x] Storyboard — 19 scenes (`docs/STORYBOARD.md` — SC-00 + 18 main)
@@ -11,7 +31,7 @@ Track implementation progress against the GDD milestones.
 - [x] Godot 4 project scaffold (boot shell on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
-- [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
+- [x] **Multi-language support (en / ja / zh)** — spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+
 
 ## M0c — Pre-build design (art rebuild specs)
 - [x] Character bible (`docs/CHARACTER_BIBLE.md`) — v1.1: LOD, boss 3D, attachment rig
@@ -95,34 +115,19 @@ Track implementation progress against the GDD milestones.
 - [ ] Three endings
 - [ ] Credits sequence
 
-## M5 — Steam
-- [ ] Placeholder BGM/SFX + AudioManager
-- [ ] Zone art pass (materials, fog, props)
-- [ ] Field item use + equipment UI (Tab menu)
-- [ ] Steam store page copy + capsule placeholders
-- [ ] Windows export preset + `tools/export_windows.sh`
-- [ ] Steam screenshots + trailer placeholder (`steam/screenshots/`, `steam/trailer.mp4`)
-- [ ] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
-- [ ] Combat drop rolls + balance pass
-- [ ] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
-- [ ] Steamworks app ID + depot upload
-- [ ] Final CC0 audio/art replacement (optional — current assets are original procedural)
-- [ ] `bash tools/check_asset_compliance.sh` passes
-- [ ] Playtest on Windows hardware
-
-## M6 — Art rebuild (high-detail Japanese)
+## M5 — Art rebuild (high-detail Japanese)
 - [ ] Rendering guide applied per zone (`docs/RENDERING_GUIDE.md`)
 - [ ] Fresh implementation on `main` per `docs/IMPLEMENTATION_PLAN.md` + `docs/AI_DEV_WORKFLOW.md`
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
-- [ ] Replace all primitive / Kenney placeholder art
+- [ ] Replace all primitive / Kenney greybox art in player-facing builds
 - [ ] Japanese palace gate hero set-piece (`palace_gate_main` — SC-12)
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
 - [ ] Painted portraits (replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
-- [ ] Curated BGM per act (replace procedural audio)
+- [ ] Curated BGM per act (ACE-Step or commissioned — replace dev procedural placeholders)
 - [ ] `bash tools/check_asset_compliance.sh` passes on release branch
 
-### M6 cinematic budget (`docs/CINEMATICS.md` §12)
+### M5 cinematic budget (`docs/CINEMATICS.md` §12)
 
 | Priority | Deliverable | Assets / hooks | Notes |
 |----------|-------------|----------------|-------|
@@ -135,3 +140,17 @@ Track implementation progress against the GDD milestones.
 | **P2** | SC-11 flashback | Otohime silhouette, letterbox | Skippable after 3s |
 
 **Marginal cost rule:** SC-12 cinematic is cheap once `palace_gate_main` exists — fund the gate mesh first, camera path second.
+
+## M6 — Steam & ship prep
+- [ ] `AudioManager` + procedural BGM/SFX placeholders during Phases 1–6 (replace with curated tracks in M5)
+- [ ] Field item use + equipment UI (Tab menu) — if not done in Phase 3–6
+- [ ] Steam store page copy + capsule art from final M5 assets
+- [ ] Windows export preset + `tools/export_windows.sh`
+- [ ] Steam screenshots from 3D builds (`steam/screenshots/`)
+- [ ] Marketing trailer upload (`steam/trailer.mp4` — regenerate after M5 art if needed)
+- [ ] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
+- [ ] Install GodotSteam **4.20+** GDExtension (`bash tools/install_godotsteam.sh`) — required for Godot 4.7
+- [ ] Steamworks app ID + depot upload
+- [ ] `bash tools/check_asset_compliance.sh` passes
+- [ ] Playtest on Windows hardware (`docs/PLAYTEST_SCRIPT.md`)
+- [ ] Disable/remove GDAI MCP before export (`docs/IMPLEMENTATION_PLAN.md` Phase 8)
