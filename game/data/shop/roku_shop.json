@@ -16,7 +16,7 @@
     { "item_id": "spirit_knife", "price": 180, "stock": 1, "equip_by": ["yuzu"] }
   ],
   "scrolls": [
-    { "skill_id": "tidal_slash", "price": 200, "stock": 1, "character_id": "urashima", "restock": true },
-    { "skill_id": "purify", "price": 200, "stock": 1, "character_id": "yuzu", "restock": true }
+    { "skill_id": "returning_wave", "price": 200, "stock": 1, "character_id": "urashima", "restock": true },
+    { "skill_id": "torii_ward", "price": 200, "stock": 1, "character_id": "yuzu", "restock": true }
   ]
 }

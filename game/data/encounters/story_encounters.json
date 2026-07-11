@@ -53,6 +53,17 @@
       "on_win": { "set_flags": ["shore_wraith_defeated"], "grant_items": ["wraith_pearl"] }
     },
     {
+      "id": "enc_sc10_optional_wraith",
+      "scene_id": "SC-10",
+      "zone": "tidal_caves",
+      "trigger": "CaveExitWraith",
+      "enemies": ["tide_wraith"],
+      "party": ["urashima", "yuzu"],
+      "optional": true,
+      "requires_flags": ["yuzu_joined"],
+      "on_win": { "set_flags": [] }
+    },
+    {
       "id": "enc_sc12_palace_wraiths",
       "scene_id": "SC-12",
       "zone": "dragon_palace_gate",
@@ -81,7 +92,8 @@
       "enemies": ["tide_keeper"],
       "party": ["urashima", "yuzu", "roku"],
       "boss": true,
-      "on_win": { "set_flags": ["tide_keeper_defeated", "tide_keeper_phase3"] }
+      "on_phase_trigger": { "set_flags": ["tide_keeper_phase3"] },
+      "on_win": { "set_flags": ["tide_keeper_defeated"] }
     }
   ]
 }

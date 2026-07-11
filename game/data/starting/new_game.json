@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "start_scene": "beach_shore",
-  "spawn_marker": "PlayerSpawn",
+  "spawn_marker": "SpawnMarker_default",
   "party_field": ["urashima"],
   "party_combat": ["urashima"],
   "level": 1,

@@ -139,7 +139,7 @@
       "slot": "charm",
       "description": { "en": "Bell from the post-boss shrine. Hums when spirits near.", "ja": "社の鈴。霊が近づくと振動する。", "zh": "神社之铃，灵近则鸣。" },
       "stat_bonus": { "mag": 4, "spd": 1 },
-      "story_grant": "lore_sailor_charm"
+      "story_grant": "lore:sailor_charm"
     },
     {
       "id": "spirit_knife",

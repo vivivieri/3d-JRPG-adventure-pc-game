@@ -564,6 +564,51 @@
             "zh": "那么，我终于要直面所欠的债。"
           },
           "emotion": "resolved"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_serious",
+          "text": {
+            "en": "So — knowing that. Would you open it?",
+            "ja": "それを知って——お前は開けるのか？",
+            "zh": "知道了这些——你还会打开它吗？"
+          },
+          "emotion": "searching"
+        }
+      ],
+      "choices": [
+        {
+          "id": "open",
+          "text": {
+            "en": "I would open it.",
+            "ja": "俺は開ける。",
+            "zh": "我会打开它。"
+          },
+          "set_flags": {
+            "mirror_choice": "open"
+          }
+        },
+        {
+          "id": "break",
+          "text": {
+            "en": "I would break it.",
+            "ja": "俺は壊す。",
+            "zh": "我会打碎它。"
+          },
+          "set_flags": {
+            "mirror_choice": "break"
+          }
+        },
+        {
+          "id": "unknown",
+          "text": {
+            "en": "I don't know yet.",
+            "ja": "まだ分からない。",
+            "zh": "我还不知道。"
+          },
+          "set_flags": {
+            "mirror_choice": "unknown"
+          }
         }
       ],
       "on_complete": {
