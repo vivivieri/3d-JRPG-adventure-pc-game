@@ -12,7 +12,10 @@
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
 | 3 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | How runtime code fits together |
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
-| 5 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
+| 5 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA pass/fail — overrides any doc/data claim about "done" |
+| 6 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
+
+Matches the root [`README.md`](../README.md) authority line: `IMPLEMENTATION_PLAN → MILESTONES → TECHNICAL_DESIGN → DATA_ARCHITECTURE → ACCEPTANCE_CRITERIA → MCP_STACK / .cursorrules`.
 
 ---
 
@@ -41,7 +44,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [GDD.md](GDD.md) | Master game design — scope, pillars, audience |
-| [STORYBOARD.md](STORYBOARD.md) | 19-scene narrative bible (SC-00 + 18 main) |
+| [STORYBOARD.md](STORYBOARD.md) | Narrative bible — 20 scene headings (SC-00 + SC-01–16 + 3 ending variants); 18 experienced per playthrough. See `game/data/README.md` §Scene count for the full 20/23/22 breakdown |
 | [NARRATIVE_WRITING_GUIDE.md](NARRATIVE_WRITING_GUIDE.md) | Voice, silence, selective VO, i18n prose |
 | [VO_HIT_LIST.md](VO_HIT_LIST.md) | 12 ElevenLabs clips — not full dialogue |
 | [ENDING_DESIGN.md](ENDING_DESIGN.md) | Three endings, choice UI, replay |
@@ -68,14 +71,14 @@
 | Doc | Purpose |
 |-----|---------|
 | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) | Turn order, elements, status, intent UI |
-| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 15 player + 6 enemy skills |
+| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 15 player loadout slots (14 unique IDs) + 6 enemy skills |
 | [BOSS_DESIGNS.md](BOSS_DESIGNS.md) | Shore Wraith, Sentinel, Tide Keeper |
 | [ENCOUNTER_TABLE.md](ENCOUNTER_TABLE.md) | Pacing, XP, drops, shop timing |
 | [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) | XP curve, stats at milestones, difficulty |
 | [ITEMS_AND_ECONOMY.md](ITEMS_AND_ECONOMY.md) | 20 items, shop, drops, inflation guards |
 | [TUTORIAL_DESIGN.md](TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
 | [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards |
-| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 12 Steam achievements |
+| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 13 Steam achievements |
 
 ---
 
@@ -107,6 +110,7 @@
 
 | Doc | Purpose |
 |-----|---------|
+| [ART_DIRECTION.md](ART_DIRECTION.md) | **Palette, silhouettes, zone hex codes, what to avoid** — read before any visual work (Phase 1 dependency) |
 | [MODEL_QA.md](MODEL_QA.md) | **3D GLB lint + turntable vision jury** |
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
@@ -116,6 +120,7 @@
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
 | [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
 | [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
+| [audio_sheets/](audio_sheets/README.md) | Per-track BGM/cinematic/sting generation sheets (ACE-Step prompts) |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |
 | [LICENSES.md](LICENSES.md) | Attribution log |
@@ -175,6 +180,7 @@ python3 tools/validate_story_data.py
 | Doc | Replacement |
 |-----|-------------|
 | [GDAI_REGEN_PLAN.md](GDAI_REGEN_PLAN.md) | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) |
+| [SCREENSHOTS.md](SCREENSHOTS.md) | [VISUAL_QA.md](VISUAL_QA.md) — references deleted `*-dc91` branches and a nonexistent capture script |
 
 ---
 
