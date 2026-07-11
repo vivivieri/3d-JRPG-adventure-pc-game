@@ -1,7 +1,7 @@
 {
   "version": 1,
   "policy": "docs/ASSET_COMPLIANCE.md",
-  "updated": "2026-07-10",
+  "updated": "2026-07-11",
   "allowed_licenses": [
     "PUBLIC-DOMAIN",
     "CC0-1.0",
@@ -31,11 +31,27 @@
     "steam"
   ],
   "media_extensions": [
-    ".png", ".jpg", ".jpeg", ".webp", ".svg",
-    ".ogg", ".wav", ".mp3", ".flac",
-    ".mp4", ".webm",
-    ".ttf", ".otf", ".woff", ".woff2",
-    ".glb", ".gltf", ".obj", ".fbx", ".blend", ".mtl"
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    ".svg",
+    ".ogg",
+    ".wav",
+    ".mp3",
+    ".flac",
+    ".mp4",
+    ".webm",
+    ".ttf",
+    ".otf",
+    ".woff",
+    ".woff2",
+    ".glb",
+    ".gltf",
+    ".obj",
+    ".fbx",
+    ".blend",
+    ".mtl"
   ],
   "skip_filenames": [
     "README.md",
@@ -184,6 +200,110 @@
       "used_for": "Steam capsules, screenshots, trailer",
       "attribution": null,
       "glob": "steam/**/*.{png,mp4,jpg,webp}"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_menu.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_menu",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_field.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_field",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_village.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_village",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_caves.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_caves",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_combat.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_combat",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_palace.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_palace",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_ending_rewind.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_ending_rewind",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_ending_anchor.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_ending_anchor",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_ending_drift.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_ending_drift",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/sfx/sfx_ui.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sfx_ui",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/sfx/sfx_ui_confirm.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sfx_ui_confirm",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/sfx/sfx_hit.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sfx_hit",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/sfx/sfx_victory.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sfx_victory",
+      "notes": "Copyright-safe; replace before final ship if desired"
     }
   ]
 }

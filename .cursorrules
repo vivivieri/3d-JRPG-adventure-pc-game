@@ -61,7 +61,7 @@ Generate ship-safe placeholders with project tools — register in manifest:
 | Asset type | Tool | License |
 |------------|------|---------|
 | BGM / SFX placeholder | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
-| BGM zone prototype | Suno / Udio export → register in manifest | Per service ToS |
+| BGM zone prototype | **ACE-Step 1.5** (`bash tools/generate_ai_bgm.sh`) | MIT (ACE-Step) |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
 | Zone textures / UI | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
 | Hero 3D meshes | **Blender + AI Render** → GLB import | ORIGINAL / documented |
@@ -147,12 +147,14 @@ Core tools are **complementary, not alternatives**. Use the **full** toolchain i
 | **When to use** | Hero set-pieces (torii, lacquer box, palace trim) per `CHARACTER_BIBLE.md` |
 | **Handoff** | Export GLB → Godot import → GodotPrompter shader → GDAI MCP placement |
 
-### Tool H: Suno / Udio — *Audio prototype*
+### Tool H: ACE-Step 1.5 — *Audio prototype*
 | | |
 |---|---|
-| **Role** | Zone BGM loops during gameplay iteration (until authored tracks) |
-| **When to use** | Every zone pass; pair with `generate_game_audio.py` for SFX placeholders |
-| **Ship rule** | Replace before release — `docs/AUDIO_PRODUCTION_GUIDE.md` |
+| **Role** | Zone BGM, opening movie, boss loops, boss intro cinematics, ending hero scores |
+| **When to use** | Every audio pass; pair with `generate_game_audio.py` for instant fallback |
+| **Install** | `bash tools/install_ace_step.sh` → Gradio or REST API |
+| **Generate** | `bash tools/generate_ai_bgm.sh --category opening\|boss_cinematic\|ending\|zone` |
+| **Ship rule** | Human mix or commission before release — `docs/AUDIO_PRODUCTION_GUIDE.md` |
 
 ### Rejected for v1 (do not adopt)
 - **Summer Engine** — replaces Godot editor; breaks GDAI stack

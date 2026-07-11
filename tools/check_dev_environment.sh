@@ -104,7 +104,7 @@ fi
 
 echo
 echo "Note: notion MCP must be registered in Cursor Integrations (not in mcp.json)."
-echo "      Blender + Suno/Udio are required offline tools — verify manually."
+echo "      ACE-Step 1.5 — bash tools/install_ace_step.sh (audio prototypes)"
 
 echo
 echo "Passed: $OK | Failed: $ERR"

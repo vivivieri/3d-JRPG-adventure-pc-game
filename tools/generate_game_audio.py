@@ -72,10 +72,14 @@ def synth_sfx(name: str, duration: float, freq: float) -> list[float]:
 
 TRACKS: dict[str, dict] = {
     "bgm_menu": {"kind": "bgm", "dur": 12.0, "freqs": [196, 294, 392]},
+    "bgm_prologue": {"kind": "bgm", "dur": 14.0, "freqs": [110, 165, 220]},
     "bgm_field": {"kind": "bgm", "dur": 16.0, "freqs": [174, 261, 349]},
     "bgm_village": {"kind": "bgm", "dur": 16.0, "freqs": [155, 233, 311]},
     "bgm_caves": {"kind": "bgm", "dur": 14.0, "freqs": [220, 330, 440]},
     "bgm_combat": {"kind": "bgm", "dur": 10.0, "freqs": [146, 220, 293]},
+    "bgm_boss": {"kind": "bgm", "dur": 11.0, "freqs": [98, 147, 196]},
+    "bgm_boss_tide_keeper_p2": {"kind": "bgm", "dur": 10.0, "freqs": [110, 165, 220]},
+    "bgm_boss_tide_keeper_p3": {"kind": "bgm", "dur": 9.0, "freqs": [123, 185, 247]},
     "bgm_palace": {"kind": "bgm", "dur": 14.0, "freqs": [130, 196, 261]},
     "bgm_ending_rewind": {"kind": "bgm", "dur": 12.0, "freqs": [165, 247, 330]},
     "bgm_ending_anchor": {"kind": "bgm", "dur": 12.0, "freqs": [175, 262, 349]},
@@ -130,7 +134,7 @@ def register_asset(rel_path: str, used_for: str) -> None:
 def generate_one(track_id: str) -> Path:
     spec = TRACKS[track_id]
     kind = spec["kind"]
-    sub = "bgm" if kind == "bgm" else "sfx"
+    sub = "bgm" if kind == "bgm" else ("stings" if track_id.startswith(("sting_", "cine_")) else "sfx")
     out = AUDIO_ROOT / sub / f"{track_id}.ogg"
     wav_tmp = AUDIO_ROOT / sub / f".{track_id}.wav"
     if kind == "bgm":
