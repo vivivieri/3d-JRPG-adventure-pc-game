@@ -107,6 +107,7 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 7. Import → game/assets/models/characters/ or environment/
 8. GodotPrompter — toon shader + emission states (lacquer box)
 9. GDAI MCP — place in scene, F5 verify
+10. `docs/MODEL_QA.md` — GLB lint + turntable jury before import; `docs/VISUAL_QA.md` after in-scene
 ```
 
 **No commission path.** Rights = service ToS + `register_asset.py` + `LICENSES.md`.

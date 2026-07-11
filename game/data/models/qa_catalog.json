@@ -1,0 +1,122 @@
+{
+  "version": "1.0",
+  "phase_required": {
+    "1": ["urashima", "village_torii_damaged", "village_well_stone", "village_shack_roku"],
+    "m5": [
+      "urashima", "yuzu", "roku",
+      "salt_crab", "tide_wraith", "shore_wraith", "palace_sentinel", "tide_keeper_p1",
+      "village_torii_damaged", "palace_gate_main", "lacquer_box"
+    ]
+  },
+  "hero_jury": [
+    "urashima", "yuzu", "roku",
+    "village_torii_damaged", "palace_gate_main", "lacquer_box",
+    "shore_wraith", "tide_keeper_p1"
+  ],
+  "models": {
+    "urashima": {
+      "path": "game/assets/models/characters/urashima/urashima.glb",
+      "category": "hero",
+      "tris_min": 8000,
+      "tris_max": 22000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md §2 Urashima"
+    },
+    "yuzu": {
+      "path": "game/assets/models/characters/yuzu/yuzu.glb",
+      "category": "party",
+      "tris_min": 6000,
+      "tris_max": 18000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md §3 Yuzu"
+    },
+    "roku": {
+      "path": "game/assets/models/characters/roku/roku.glb",
+      "category": "party",
+      "tris_min": 6000,
+      "tris_max": 18000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md §4 Roku"
+    },
+    "salt_crab": {
+      "path": "game/assets/models/enemies/salt_crab/salt_crab.glb",
+      "category": "enemy",
+      "tris_min": 3000,
+      "tris_max": 12000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md enemies"
+    },
+    "tide_wraith": {
+      "path": "game/assets/models/enemies/tide_wraith/tide_wraith.glb",
+      "category": "enemy",
+      "tris_min": 4000,
+      "tris_max": 14000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md enemies"
+    },
+    "shore_wraith": {
+      "path": "game/assets/models/enemies/shore_wraith/shore_wraith.glb",
+      "category": "boss",
+      "tris_min": 20000,
+      "tris_max": 50000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md § Shore Wraith"
+    },
+    "palace_sentinel": {
+      "path": "game/assets/models/enemies/palace_sentinel/palace_sentinel.glb",
+      "category": "boss",
+      "tris_min": 15000,
+      "tris_max": 45000,
+      "texture_min": 1,
+      "bible": "BOSS_DESIGNS.md Sentinel"
+    },
+    "tide_keeper_p1": {
+      "path": "game/assets/models/enemies/tide_keeper/tide_keeper_p1.glb",
+      "category": "boss",
+      "tris_min": 20000,
+      "tris_max": 50000,
+      "texture_min": 1,
+      "bible": "CHARACTER_BIBLE.md Tide Keeper"
+    },
+    "village_torii_damaged": {
+      "path": "game/assets/models/environment/ruined_village/village_torii_damaged.glb",
+      "category": "set_piece",
+      "tris_min": 4000,
+      "tris_max": 25000,
+      "texture_min": 1,
+      "bible": "ENVIRONMENT_KITS.md ruined_village"
+    },
+    "village_well_stone": {
+      "path": "game/assets/models/environment/ruined_village/village_well_stone.glb",
+      "category": "prop",
+      "tris_min": 500,
+      "tris_max": 5000,
+      "texture_min": 1,
+      "bible": "ENVIRONMENT_KITS.md ruined_village"
+    },
+    "village_shack_roku": {
+      "path": "game/assets/models/environment/ruined_village/village_shack_roku.glb",
+      "category": "set_piece",
+      "tris_min": 3000,
+      "tris_max": 15000,
+      "texture_min": 1,
+      "bible": "ENVIRONMENT_KITS.md ruined_village"
+    },
+    "palace_gate_main": {
+      "path": "game/assets/models/environment/dragon_palace_gate/palace_gate_main.glb",
+      "category": "set_piece",
+      "tris_min": 8000,
+      "tris_max": 30000,
+      "texture_min": 1,
+      "bible": "ENVIRONMENT_KITS.md palace gate"
+    },
+    "lacquer_box": {
+      "path": "game/assets/models/items/lacquer_box/lacquer_box.glb",
+      "category": "hero_prop",
+      "tris_min": 800,
+      "tris_max": 4000,
+      "texture_min": 1,
+      "bible": "ITEMS_3D_MODEL_GUIDE.md lacquer_box"
+    }
+  }
+}

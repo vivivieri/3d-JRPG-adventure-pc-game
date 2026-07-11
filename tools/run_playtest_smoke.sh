@@ -75,6 +75,30 @@ check_audio_smoke() {
   rm -f "$log"
 }
 
+check_model_smoke() {
+  local label="Model smoke (GLB lint + turntable jury when urashima exists)"
+  local log
+  log="$(mktemp)"
+  set +e
+  bash tools/run_model_smoke_checks.sh >"$log" 2>&1
+  local rc=$?
+  set -e
+  cat "$log"
+  if [[ "$rc" -eq 0 ]]; then
+    if grep -q '^\[WARN\]' "$log"; then
+      echo "[WARN] $label (see above)"
+      WARN=$((WARN + 1))
+    else
+      echo "[PASS] $label"
+      PASS=$((PASS + 1))
+    fi
+  else
+    echo "[FAIL] $label"
+    FAIL=$((FAIL + 1))
+  fi
+  rm -f "$log"
+}
+
 echo "==> Fresh-rebuild smoke checks"
 echo ""
 
@@ -85,6 +109,9 @@ check "Dev environment healthy" bash tools/check_dev_environment.sh
 check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
 check_visual_smoke
 check_audio_smoke
+check_model_smoke
+
+echo ""
 echo "Passed: $PASS | Failed: $FAIL | Warnings: $WARN"
 echo ""
 echo "Rebuild phases: docs/IMPLEMENTATION_PLAN.md"

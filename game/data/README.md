@@ -14,6 +14,8 @@ game/data/
     chapter_01.json          # Dialogue by scene_id; optional voice_id per line
   audio/
     vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
+  models/
+    qa_catalog.json          # 3D model paths, tri budgets, hero_jury list (docs/MODEL_QA.md)
   quests/
     main_quests.json         # 5 main quests
   encounters/

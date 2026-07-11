@@ -5,7 +5,7 @@
 
 **Rule:** AI does **not** pass visual work on log output or node counts alone. It must pass **automated visual gates** + **screenshot review** against `docs/ART_DIRECTION.md`.
 
-**Cross-refs:** `docs/AI_TESTING_SPEC.md` (L3–L6), `docs/ART_DIRECTION.md` §10, `docs/RENDERING_GUIDE.md`, `tools/check_scene_visuals.sh`, `tools/check_screenshot_palette.py`
+**Cross-refs:** `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/MODEL_QA.md` (asset QA before in-scene)
 
 ---
 

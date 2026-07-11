@@ -105,7 +105,8 @@
 
 | Doc | Purpose |
 |-----|---------|
-| [VISUAL_QA.md](VISUAL_QA.md) | **Screenshot + vision gates** — prevent primitive/placeholder spread |
+| [MODEL_QA.md](MODEL_QA.md) | **3D GLB lint + turntable vision jury** |
+| [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |

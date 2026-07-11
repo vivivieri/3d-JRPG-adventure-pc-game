@@ -40,3 +40,5 @@ artifacts/visual_reviews/*
 !artifacts/visual_reviews/.gitkeep
 artifacts/audio_reviews/*
 !artifacts/audio_reviews/.gitkeep
+artifacts/model_reviews/*
+!artifacts/model_reviews/.gitkeep
