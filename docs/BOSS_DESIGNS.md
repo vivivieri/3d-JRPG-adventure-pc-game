@@ -4,6 +4,8 @@
 **Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
 **Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/CHARACTER_BIBLE.md` §6 (3D specs)
 
+> **Data reconciliation note (pre-Phase 4):** Stat tables below have been synced to `game/data/enemies/enemies.json` (the runtime source of truth — combat math reads that file, not this doc). The **named per-boss action kits** below (e.g. *Drowned Grasp*, *Maelstrom*, *Palace Reprisal*) are the **target design** and are **not yet implemented**: `game/data/skills/skills.json` currently only has 6 generic enemy skills (`claw_snap`, `shell_harden`, `drown_touch`, `regret_surge`, `sentinel_cleave`, `tide_lament`), and `enemies.json` assigns bosses only from that set. Before Phase 4 (combat vertical slice) either (a) add the named boss skills to `skills.json` with concrete `power`/`effects` and wire them into each boss's `ai.phases`, or (b) rewrite this doc's action tables to the 6 real skills. Do not implement a boss from this doc's move list alone without first extending the data.
+
 ---
 
 ## 1. Global boss rules
@@ -49,13 +51,18 @@
 
 ### Stats (Normal)
 
+Synced to `game/data/enemies/enemies.json` (`shore_wraith`):
+
 | Stat | Value |
 |------|-------|
-| HP | 420 |
-| ATK | 14 |
-| DEF | 8 |
-| SPD | 6 |
-| MP | 0 |
+| HP | 320 |
+| ATK | 13 |
+| DEF | 10 |
+| MAG | 16 |
+| RES | 12 |
+| SPD | 10 |
+
+*(Enemy schema has no `MP` field. The doc's earlier "tune HP to ~320 for solo" note is now the table value — 320 is confirmed as the shipped solo-tuned HP, not 420.)*
 
 ### Phase 1 — Accusation (100% → 50% HP)
 
@@ -70,7 +77,7 @@
 
 **Player teach moment:** Use Defend on Slam turn; Yuzu heal on Grasp turn if available (joined after fight — solo Urashima for this fight in v1 data; if Yuzu pre-join, adjust HP up 15%).
 
-**Note:** Current story order has Yuzu join **after** SC-09. Boss is **Urashima solo** — tune HP to ~320 for solo.
+**Note:** Current story order has Yuzu join **after** SC-09. Boss is **Urashima solo**; the 320 HP above already reflects the solo tuning.
 
 ### Phase 2 — Collective (50% → 0% HP)
 
@@ -82,7 +89,7 @@
 | New skill | Summon Tide Wraith (once, at 40% HP) |
 | Pattern | Grasp → Aura → Slam → Grasp (faster) |
 
-**Add — Tide Wraith:** 80 HP, ATK 8; dies in 2–3 hits; no intent on add (standard enemy rules).
+**Add — Tide Wraith:** 80 HP, ATK 8; dies in 2–3 hits; no intent on add (standard enemy rules). *(Not yet in `enemies.json` — `shore_wraith.ai.phases` has no summon/add behavior. Target design; add before Phase 4 combat or cut for v1.)*
 
 ### Hard mode deltas
 
@@ -92,11 +99,15 @@
 
 ### Rewards
 
+Synced to `game/data/enemies/enemies.json` (`shore_wraith.rewards`):
+
 | Drop | Rate |
 |------|------|
-| XP | 120 (solo) / 150 (if party) |
+| XP | 120 |
 | Shell coins | 45 |
-| Item | Antidote ×1 (100% first kill) |
+| Item | `wraith_pearl` ×1 (100%) |
+
+*(No Antidote drop in data. `wraith_pearl` is granted from **three** places that all fire on this fight: `enemies.json` drop (100%), `enc_sc09_shore_wraith.on_win.grant_items`, and the `echoes_at_torii` quest reward. Implementer must pick a single grant path (recommend: encounter `on_win` only) or make the grant idempotent so triple-granting is harmless.)*
 
 ### Audio / VFX
 
@@ -122,13 +133,18 @@
 
 ### Stats (Normal)
 
+Synced to `game/data/enemies/enemies.json` (`palace_sentinel`):
+
 | Stat | Value |
 |------|-------|
-| HP | 380 |
+| HP | 250 |
 | ATK | 16 |
 | DEF | 14 |
+| MAG | 6 |
+| RES | 10 |
 | SPD | 8 |
-| MP | 20 |
+
+*(Enemy schema has no `MP` field; JSON `tier` is `"elite"`, not `"boss"` — both terms are used interchangeably across docs for this fight, which is fine, but code that branches on `tier` must check for `"elite"`.)*
 
 ### Phase 1 — Guardian (100% → 0% HP, single phase)
 
@@ -141,7 +157,7 @@
 | Cycle B | Palace Reprisal | Skull | Single 160% ATK if target healed last turn |
 | Every 3rd | Barrier Pulse | Shield | Self Regen 5% HP |
 
-**Spirit weakness:** Yuzu Purify / Holy Light deals **150%** damage. UI hint after first Barrier Pulse: *"Spirit arts pierce the lacquer."*
+**Spirit weakness:** Yuzu's `purify` skill deals **150%** damage (matches `enemies.json` `palace_sentinel.spirit_weakness: 1.5`). UI hint after first Barrier Pulse: *"Spirit arts pierce the lacquer."*
 
 ### Hard mode deltas
 
@@ -151,11 +167,16 @@
 
 ### Rewards
 
+Synced to `game/data/enemies/enemies.json` (`palace_sentinel.rewards`):
+
 | Drop | Rate |
 |------|------|
 | XP | 100 |
 | Shell coins | 60 |
-| Item | Skill scroll `spirit_veil` (one-time 100%) |
+| Item | `palace_edge` (100%) |
+| Item | `palace_fragment` (50%) |
+
+*(No `spirit_veil` skill scroll in data — `spirit_veil` is not defined in `skills.json` or `items.json`. Cut this reward or design + add it before Phase 4.)*
 
 ---
 
@@ -177,13 +198,18 @@
 
 ### Stats (Normal)
 
+Synced to `game/data/enemies/enemies.json` (`tide_keeper`):
+
 | Stat | Value |
 |------|-------|
-| HP | 900 |
-| ATK | 18 |
-| DEF | 10 |
-| SPD | 9 |
-| MP | 50 |
+| HP | 580 |
+| ATK | 15 |
+| DEF | 12 |
+| MAG | 20 |
+| RES | 14 |
+| SPD | 11 |
+
+*(Enemy schema has no `MP` field. `docs/PROGRESSION_TUNING.md`'s attempt-count/fight-length targets for this boss were derived from the old 900 HP figure — re-verify those targets against 580 HP once combat is implemented.)*
 
 ### Phase 1 — Calm (100% → 66% HP)
 
@@ -229,7 +255,9 @@
 
 **After choice:** Boss uses final skill `Last Mercy` (cosmetic 1 turn) → scripted defeat → ending scene.
 
-**Technical:** Set flag `final_choice_made`; do not allow attack input during prompt.
+**Technical:** The choice sets the enum flag `ending_chosen` (`rewind` | `anchor` | `drift` — registered in `game/data/story/flags.json`, consumed by `ACH_ENDING_*` and the SC-17 branch). Do not allow attack input during the choice prompt.
+
+> **Open implementation question (Phase 6):** `game/data/enemies/enemies.json` (`tide_keeper.phases`) already flags `triggers_choice: true` at the 10% HP threshold, matching the gate above — that part is data-driven. However `game/data/encounters/story_encounters.json` (`enc_sc15_tide_keeper.on_win`) only sets `tide_keeper_defeated` and `tide_keeper_phase3` *after* the boss is fully defeated, and nothing in `game/data/story/` currently sets `ending_chosen` from the mid-combat choice UI. Phase 6 combat-UI work must wire: (1) pause on `triggers_choice`, (2) player picks an ending → set `ending_chosen`, (3) resume for the cosmetic `Last Mercy` turn, (4) `on_win` fires as today. `ending_chosen` must be set **before** the ending/credits flow reads it.
 
 ### Hard mode deltas
 
@@ -240,11 +268,13 @@
 
 ### Rewards
 
+Synced to `game/data/enemies/enemies.json` (`tide_keeper.rewards`):
+
 | Drop | Rate |
 |------|------|
 | XP | 250 |
 | Shell coins | 100 |
-| Item | None (story reward = ending) |
+| Item | `palace_fragment` (100%) — the story reward is the ending, but data also grants a material drop |
 
 ---
 
@@ -253,10 +283,12 @@
 **Storyboard:** SC-05  
 **Not a boss** but combat template.
 
-| Stat | HP 40 | ATK 6 | DEF 4 | SPD 4 |
-|------|-------|-------|-------|-------|
-| Skills | Pinch (100% ATK) only |
-| AI | Attack lowest HP |
+Synced to `game/data/enemies/enemies.json` (`salt_crab`) — skill IDs are `claw_snap` (attack) and `shell_harden` (defense buff below 50% HP), not "Pinch":
+
+| Stat | HP 40 | ATK 7 | DEF 5 | MAG 4 | RES 4 | SPD 6 |
+|------|-------|-------|-------|-------|-------|-------|
+| Skills | `claw_snap` (80% weight) / `shell_harden` (20% weight, HP < 50%) |
+| AI | Weighted skill pick (see above); no explicit "lowest HP" targeting field in data |
 | Tutorial | Force Attack → Skill → Defend prompts |
 
 Guaranteed win; no escape needed.
@@ -267,10 +299,13 @@ Guaranteed win; no escape needed.
 
 ### Tide Wraith (`tide_wraith`)
 
-| HP 70 | ATK 10 | DEF 3 | SPD 9 |
-|-------|--------|-------|-------|
-| Skill | Drown Touch — 90% ATK + Poison 2 turns |
-| AI | Target lowest HP; 30% double attack if alone |
+Synced to `game/data/enemies/enemies.json` (`tide_wraith`):
+
+| HP 50 | ATK 6 | DEF 4 | MAG 10 | RES 6 | SPD 9 |
+|-------|-------|-------|--------|-------|-------|
+| Skill | `drown_touch` only (100% weight) |
+| Drop | `spirit_shard` (30%) |
+| AI | Weighted skill pick; "target lowest HP / 30% double attack" is target design, not present in `ai` data — implement or cut |
 
 ### Salt Crab (`salt_crab`) — field
 
