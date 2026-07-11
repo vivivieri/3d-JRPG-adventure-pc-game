@@ -45,9 +45,11 @@ Use **both** tools together. **Do not** hand-edit `.tscn` or implement editor wo
 
 **If `godot-mcp` is not in the agent's MCP server list:**
 
-1. Confirm `.cursor/mcp.json` exists (written by `ensure_gdai_mcp.sh`)
-2. User: Cursor **Settings → MCP** → add/register `godot-mcp` server
-3. User: restart cloud agent
+1. Run `bash tools/ensure_gdai_mcp.sh` (VM bootstrap)
+2. Register MCP:
+   - **Desktop:** Cursor **Settings → Tools & MCP** → add `godot-mcp`
+   - **Cloud:** [cursor.com/agents](https://cursor.com/agents) dashboard → add custom MCP server (see `docs/GDAI_CLOUD_SETUP.md` §4.3)
+3. Restart cloud agent
 4. Agent: **stop implementation** until `godot-mcp` tools appear
 
 **Never substitute** manual `.tscn` editing or headless-only work for GDAI MCP editor integration.
