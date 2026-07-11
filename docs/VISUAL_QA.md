@@ -30,6 +30,7 @@ L1  check_scene_visuals.sh     → block BoxMesh/primitives in ship .tscn
 L3  GDAI screenshot            → artifacts/screenshots/<zone>_<camera>.png
 L3b Vision checklist           → agent reads image vs ART_DIRECTION §10
 L3c check_screenshot_palette   → muted palette / no candy-bright failure
+L3d Multi-LLM vision jury      → 2+ models must PASS (review_screenshot_vision.py)
 L4  compare_screenshots (MCP Pro) → diff vs golden master when present
 L6  Human playtest             → feel, pacing, fun (after L0–L5)
 ```
@@ -100,6 +101,52 @@ Godot MCP Pro `compare_screenshots` (or perceptual diff) fails CI if drift excee
 
 Subjective feel, pacing, audio, localization — `docs/PLAYTEST_SCRIPT.md`. Runs **after** L0–L5 on release candidate only.
 
+### Layer G — Multi-LLM vision jury (recommended)
+
+**Why:** A single model (especially the same one that placed the `BoxMesh`) can rationalize bad output. **Independent models reduce blind spots.**
+
+**Rule:** Configure **≥2** vision APIs. **Pass only if ≥2 return `overall_pass: true`** on the same screenshot + prompt.
+
+```bash
+python3 tools/review_screenshot_vision.py \
+  --zone ruined_village \
+  --scene ruined_village.tscn \
+  --view gameplay \
+  --screenshot artifacts/screenshots/phase1_ruined_village_gameplay.png \
+  --min-pass 2
+```
+
+**API keys (Cursor Secrets — optional but recommended for M5):**
+
+| Secret | Model used |
+|--------|------------|
+| `OPENAI_API_KEY` | GPT-4o vision |
+| `ANTHROPIC_API_KEY` | Claude Sonnet vision |
+| `GEMINI_API_KEY` | Gemini Flash vision |
+
+Output: `artifacts/visual_reviews/<screenshot>.jury.json` with per-model JSON votes.
+
+**No API keys:** script writes `*.manual.json` — paste the embedded prompt into **2+ different** Cursor models manually; same 2-of-N pass rule.
+
+**Do not** use the same model/session that built the scene as the only judge.
+
+---
+
+## 2H. Tools that can judge visuals today (2026)
+
+| Tool | What it judges | Good for | Not good for |
+|------|----------------|----------|--------------|
+| **Multi-LLM vision jury** (`review_screenshot_vision.py`) | Primitives, palette mood, style rules, UI glitches | Semantic “is this a grey box?” | Fun, pacing, controller feel |
+| **Cursor agent (multimodal)** | Same as above when screenshot attached | Interactive iteration | Unbiased if same agent built scene |
+| **Godot MCP Pro `compare_screenshots`** | Pixel diff vs golden PNG | Regression “did art change?” | New scenes, style compliance |
+| **`check_screenshot_palette.py`** | Average color vs zone hex | Muted palette drift | Composition, silhouettes |
+| **`check_scene_visuals.sh`** | BoxMesh in `.tscn` | Block placeholders before render | Materials, lighting |
+| **LAION Aesthetic / ImageReward** | Generic “pretty” score | Ranking variants | JRPG-specific style rules |
+| **Dedicated “game art QA” SaaS** | — | **None mature for stylized JRPG** | — |
+| **Human L6 playtest** | Feel, emotion, fun | Ship gate | Slow, subjective |
+
+**Recommendation:** Use **L1 + L3c + L3d (2-of-3 LLM jury) + L4 golden diff** together. No single tool replaces human playtest.
+
 ---
 
 ## 3. The black-box scenario (explicit anti-pattern)
@@ -119,9 +166,10 @@ Agent: copies same BoxMesh pattern to pier, well, palace
 2. GDAI places mesh + toon material
 3. bash tools/check_scene_visuals.sh  → must PASS
 4. GDAI F5 + screenshot gameplay view
-5. Agent vision review V1–V6
+5. Agent vision review V1–V6 (or multi-LLM jury L3d)
 6. python3 tools/check_screenshot_palette.py --zone ...
-7. Only then: mark task done / commit
+7. python3 tools/review_screenshot_vision.py --min-pass 2 ...
+8. Only then: mark task done / commit
 ```
 
 ---
@@ -135,6 +183,7 @@ Agent: copies same BoxMesh pattern to pier, well, palace
     - artifacts/screenshots/phase1_ruined_village_establishing.png
     - artifacts/screenshots/phase1_ruined_village_gameplay.png
   palette_check: PASS (avg distance 0.12)
+  vision_jury: PASS (2/3 models — see artifacts/visual_reviews/phase1_ruined_village_gameplay.jury.json)
   vision V1 primitives visible: NO
   vision V2 muted palette: YES
   vision V3 NPR not PBR: YES
@@ -164,6 +213,7 @@ Agent: copies same BoxMesh pattern to pier, well, palace
 | `tools/check_scene_visuals.sh` | Static primitive / banned asset scan |
 | `tools/check_screenshot_palette.py` | Post-screenshot palette distance |
 | `tools/palette_remap.py` | Pre-import texture palette |
+| `tools/review_screenshot_vision.py` | Multi-LLM vision jury (2-of-N consensus) |
 | `tools/check_asset_compliance.sh` | **License** only — not visual QA |
 
 **Do not confuse** license compliance with look-and-feel approval.
