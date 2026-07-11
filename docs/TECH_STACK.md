@@ -22,7 +22,8 @@ See `docs/MCP_STACK.md`.
 
 ## MCP plugin compatibility (Godot 4.7)
 
-**Full audit:** `docs/PLUGIN_COMPATIBILITY.md` — run `bash tools/check_plugin_compatibility.sh` before Phase 1.
+**Full audit:** `docs/PLUGIN_COMPATIBILITY.md` — run `bash tools/check_plugin_compatibility.sh` before Phase 1.  
+**Install steps:** `docs/PLUGIN_INSTALL_GUIDE.md`
 
 | Plugin | Min Godot | 4.7 status | Action |
 |--------|-----------|--------------|--------|

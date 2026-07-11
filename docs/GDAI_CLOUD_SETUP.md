@@ -2,7 +2,8 @@
 
 **GDAI MCP** is a **dev-only** Godot 4 plugin that lets Cursor (and other MCP clients) control the **Godot Editor** — create scenes, move nodes, read script errors, etc.
 
-> **Full MCP stack:** This project also supports **Godotiq** (analyze/debug) and **Godot MCP Pro** (automated testing). See **`docs/MCP_STACK.md`** for roles, install, and conflict rules.
+> **Full MCP stack:** This project also supports **Godotiq** (analyze/debug) and **Godot MCP Pro** (automated testing). See **`docs/MCP_STACK.md`** for roles, install, and conflict rules.  
+> **Plugin install steps:** `docs/PLUGIN_INSTALL_GUIDE.md`
 
 Official docs: https://gdaimcp.com/docs/installation  
 Cursor MCP docs: https://cursor.com/help/customization/mcp

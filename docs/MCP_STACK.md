@@ -54,6 +54,8 @@ GodotPrompter (plan/code)
 
 ## Install
 
+**Step-by-step:** `docs/PLUGIN_INSTALL_GUIDE.md` (Godotiq + Godot MCP Pro + full stack)
+
 ### 1. GDAI MCP (required for build)
 
 ```bash
