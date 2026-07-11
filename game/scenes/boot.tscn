@@ -53,6 +53,6 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.545098, 0.615686, 0.686275, 1)
 theme_override_font_sizes/font_size = 14
-text = "Run: bash tools/setup_dev_environment.sh"
+text = "Run: bash tools/ensure_gdai_mcp.sh  |  See docs/IMPLEMENTATION_PLAN.md"
 horizontal_alignment = 1
 autowrap_mode = 3

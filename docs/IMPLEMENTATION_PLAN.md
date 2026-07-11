@@ -1,11 +1,11 @@
 # Tides of Urashima — Implementation Plan
 
-**Version:** 1.0 (Fresh start)  
-**Branch:** `cursor/game-implementation-01be`  
+**Version:** 1.1 (Fresh rebuild)  
+**Branch:** `cursor/gdai-fresh-rebuild-01be`  
 **Source of truth:** `main` design docs + `game/data/` JSON  
 **Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
 
-Previous Godot implementation branches (`*-dc91`) were **removed**. This plan rebuilds from documentation only.
+Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
 
 ---
 
@@ -20,13 +20,17 @@ Previous Godot implementation branches (`*-dc91`) were **removed**. This plan re
 | `game/addons/README.md` | Done |
 | Boot scene validates `game/data/` paths | Done |
 | Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
-| Story data validator (`tools/validate_story_data.py`) | On main |
+| Story data validator (`tools/validate_story_data.py`) | Done |
+| GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |
+| Fresh-rebuild smoke (`tools/run_playtest_smoke.sh`) | Done |
 
 **Verify:**
 
 ```bash
 bash tools/setup_dev_environment.sh
+bash tools/ensure_gdai_mcp.sh
 bash tools/check_dev_environment.sh
+bash tools/run_playtest_smoke.sh
 # Open game/project.godot in Godot 4.3+ → F5
 ```
 
@@ -148,7 +152,9 @@ Replace greybox with authored assets per `docs/ART_DIRECTION.md`:
 
 ```bash
 python3 tools/validate_story_data.py
+bash tools/ensure_gdai_mcp.sh
 bash tools/check_dev_environment.sh
+bash tools/run_playtest_smoke.sh
 bash tools/check_asset_compliance.sh    # when assets exist
 ```
 
