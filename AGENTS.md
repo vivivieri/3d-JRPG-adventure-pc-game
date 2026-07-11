@@ -37,6 +37,14 @@ Use **both** tools together (see `.cursorrules`):
 4. In Godot: enable **GDAI MCP** plugin → **Start** server
 5. Restart Cursor MCP if tools do not appear
 
+Verified in cloud (plugin v0.3.2): once the addon is present, launching the editor with
+`DISPLAY=:1 bash tools/start_godot_editor.sh` auto-starts the GDAI runtime HTTP server on
+`127.0.0.1:3571` — no manual "Start" click is needed. The `godot-mcp` server in
+`.cursor/mcp.json` (`uv run .../gdai_mcp_server.py`) proxies to that port, so the editor
+must be running for the MCP tools to work. The `GDAIMCPRuntime` autoload error disappears
+once the addon is placed. The addon is gitignored, so a fresh VM without it will show that
+autoload error again until the addon is re-added and `install_cloud_dev.sh` is re-run.
+
 Without GDAI: edit `.gd` / `.tscn` / `.gdshader` files directly and validate with headless Godot.
 
 ### Headless validation
