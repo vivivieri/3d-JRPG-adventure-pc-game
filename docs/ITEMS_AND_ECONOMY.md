@@ -11,7 +11,7 @@
 
 | ID | Display name | Symbol | Notes |
 |----|--------------|--------|-------|
-| `shell_coin` | Shell Coin | 環貝 | Only currency; integer, no decimals |
+| `shell_coin` | Shell Coin | 環貝 | Only currency; integer, no decimals. **Runtime field name is `gold`** — `game/data/enemies/enemies.json` (`rewards.gold`), `game/data/quests/main_quests.json` (`rewards.gold`), and `game/data/starting/new_game.json` (`gold`) all use the key `gold` to store the shell-coin count. Treat `gold` as the internal field name for the in-fiction "shell coin" currency; do not introduce a second currency. |
 
 **Sources:** Combat drops, quest rewards, lore (5 coins ×8 optional), sell materials  
 **Sinks:** Roku's shop, no other vendors v1
@@ -59,7 +59,7 @@
 | ID | Display | Slot | Stats | Obtain | Equip |
 |----|---------|------|-------|--------|-------|
 | `shrine_charm` | Shrine Charm | charm | MAG +3, RES +2 | Shop 120 | all |
-| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `lore_06` | all |
+| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `sailor_charm` (tidal_caves) | all |
 | `shell_charm` | Shell Charm | charm | DEF +2 | Shop 80 | all |
 
 **Slots:** weapon + armor + charm (3 per character)  
