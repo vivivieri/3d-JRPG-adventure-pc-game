@@ -45,6 +45,8 @@ Fails if player-facing `.tscn` files contain banned primitive mesh types (`BoxMe
 
 **Run in:** `run_playtest_smoke.sh`, Phase 1+ PRs, M5 gate.
 
+`bash tools/run_visual_smoke_checks.sh` runs palette + multi-LLM jury when `artifacts/screenshots/phase1_<zone>_gameplay.png` exists; **WARNs and skips** until Phase 1 captures screenshots.
+
 ### Layer B — Mandatory screenshot (every zone/UI task)
 
 Per `docs/AI_TESTING_SPEC.md` §5.2 step 7:
@@ -213,6 +215,7 @@ Agent: copies same BoxMesh pattern to pier, well, palace
 | `tools/check_scene_visuals.sh` | Static primitive / banned asset scan |
 | `tools/check_screenshot_palette.py` | Post-screenshot palette distance |
 | `tools/palette_remap.py` | Pre-import texture palette |
+| `tools/run_visual_smoke_checks.sh` | L2 smoke: palette + jury (WARN until screenshots) |
 | `tools/review_screenshot_vision.py` | Multi-LLM vision jury (2-of-N consensus) |
 | `tools/check_asset_compliance.sh` | **License** only — not visual QA |
 

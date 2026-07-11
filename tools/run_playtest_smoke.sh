@@ -13,6 +13,7 @@ export XDG_CACHE_HOME="${ROOT}/.cache/godot-cache"
 
 PASS=0
 FAIL=0
+WARN=0
 
 check() {
   local label="$1"
@@ -26,6 +27,30 @@ check() {
   fi
 }
 
+check_visual_smoke() {
+  local label="Visual smoke (palette + LLM jury when screenshot exists)"
+  local log
+  log="$(mktemp)"
+  set +e
+  bash tools/run_visual_smoke_checks.sh >"$log" 2>&1
+  local rc=$?
+  set -e
+  cat "$log"
+  if [[ "$rc" -eq 0 ]]; then
+    if grep -q '^\[WARN\]' "$log"; then
+      echo "[WARN] $label (see above)"
+      WARN=$((WARN + 1))
+    else
+      echo "[PASS] $label"
+      PASS=$((PASS + 1))
+    fi
+  else
+    echo "[FAIL] $label"
+    FAIL=$((FAIL + 1))
+  fi
+  rm -f "$log"
+}
+
 echo "==> Fresh-rebuild smoke checks"
 echo ""
 
@@ -34,9 +59,10 @@ check "Scene visual lint (no primitives)" bash tools/check_scene_visuals.sh
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh
 check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
+check_visual_smoke
 
 echo ""
-echo "Passed: $PASS | Failed: $FAIL"
+echo "Passed: $PASS | Failed: $FAIL | Warnings: $WARN"
 echo ""
 echo "Rebuild phases: docs/IMPLEMENTATION_PLAN.md"
 echo "  Phase 1: ruined_village environment vertical slice via GDAI MCP"
