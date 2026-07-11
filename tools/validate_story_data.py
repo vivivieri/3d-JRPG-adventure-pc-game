@@ -64,11 +64,24 @@ def main() -> int:
                 if fk not in flags:
                     errors.append(f"scenes.json requires unknown flag: {fk} ({s['scene_id']})")
 
+    # Flag enum values (for choice validation)
+    flag_defs = {f["id"]: f for f in load("story/flags.json")["flags"]}
+
     # Dialogue on_complete flags + optional line requires_flags
     for block in dialogue["scenes"]:
         for fl in block.get("on_complete", {}).get("set_flags", []) or []:
             if fl not in flags:
                 errors.append(f"dialogue sets unknown flag: {fl} ({block['scene_id']})")
+        for choice in block.get("choices", []) or []:
+            sf = choice.get("set_flags") or {}
+            if isinstance(sf, dict):
+                for fk, fv in sf.items():
+                    if fk not in flags:
+                        errors.append(f"dialogue choice sets unknown flag: {fk} ({block['scene_id']})")
+                    else:
+                        allowed = flag_defs[fk].get("values")
+                        if allowed and fv not in allowed:
+                            errors.append(f"dialogue choice sets invalid enum value: {fk}={fv} ({block['scene_id']})")
         for line in block.get("lines", []) or []:
             req = line.get("requires_flags") or {}
             if isinstance(req, dict):
@@ -113,7 +126,8 @@ def main() -> int:
                 errors.append(f"cinematic_hooks then encounter missing: {step.get('id')} ({hid})")
 
     # Encounters reference valid scenes and enemies
-    enemy_ids = {e["id"] for e in load("enemies/enemies.json")["enemies"]}
+    enemies_data = load("enemies/enemies.json")["enemies"]
+    enemy_ids = {e["id"] for e in enemies_data}
     for enc in encounters:
         if enc["scene_id"] not in scene_ids:
             errors.append(f"Encounter {enc['id']} unknown scene: {enc['scene_id']}")
@@ -123,6 +137,12 @@ def main() -> int:
         for item in enc.get("on_win", {}).get("grant_items", []) or []:
             if item not in items:
                 errors.append(f"Encounter {enc['id']} grants unknown item: {item}")
+        for fl in enc.get("on_win", {}).get("set_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"Encounter {enc['id']} on_win sets unknown flag: {fl}")
+        for fl in enc.get("on_phase_trigger", {}).get("set_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"Encounter {enc['id']} on_phase_trigger sets unknown flag: {fl}")
         hook = enc.get("cinematic_hook")
         if hook and hook not in hook_ids:
             errors.append(f"Encounter {enc['id']} unknown cinematic_hook: {hook}")
@@ -130,15 +150,89 @@ def main() -> int:
             if fl not in flags:
                 errors.append(f"Encounter {enc['id']} requires unknown flag: {fl}")
 
-    # Quest count
+    # Skills: enemy kits, AI weights, drops; party skills/unlocks/limits
+    skill_ids = {s["id"] for s in load("skills/skills.json")["skills"]}
+    for en in enemies_data:
+        for sk in en.get("skills", []) or []:
+            if sk not in skill_ids:
+                errors.append(f"Enemy {en['id']} unknown skill: {sk}")
+        ai = en.get("ai") or {}
+        weight_lists = [ai.get("weights") or []] + [p.get("weights") or [] for p in ai.get("phases", []) or []]
+        for weights in weight_lists:
+            for w in weights:
+                if w.get("skill_id") not in skill_ids:
+                    errors.append(f"Enemy {en['id']} AI references unknown skill: {w.get('skill_id')}")
+        for drop in en.get("rewards", {}).get("drops", []) or []:
+            if drop.get("item_id") not in items:
+                errors.append(f"Enemy {en['id']} drops unknown item: {drop.get('item_id')}")
+
+    party = load("characters/party.json")["characters"]
+    char_ids = {c["id"] for c in party}
+    for ch in party:
+        for sk in ch.get("starting_skills", []) or []:
+            if sk not in skill_ids:
+                errors.append(f"Character {ch['id']} unknown starting skill: {sk}")
+        for unlock in ch.get("skill_unlocks", []) or []:
+            if unlock.get("skill_id") not in skill_ids:
+                errors.append(f"Character {ch['id']} unknown skill unlock: {unlock.get('skill_id')}")
+        limit = ch.get("limit_skill")
+        if limit and limit not in skill_ids:
+            errors.append(f"Character {ch['id']} unknown limit skill: {limit}")
+
+    # Quest count + stage completion flags
     if len(quests) != 5:
         errors.append(f"Expected 5 quests, found {len(quests)}")
+    for q in quests:
+        for stage in q.get("stages", []) or []:
+            comp = stage.get("completion") or {}
+            for fl in [comp.get("flag")] if comp.get("flag") else []:
+                if fl not in flags:
+                    errors.append(f"Quest {q['id']} stage {stage.get('id')} unknown flag: {fl}")
+            for fl in comp.get("all_flags", []) or []:
+                if fl not in flags:
+                    errors.append(f"Quest {q['id']} stage {stage.get('id')} unknown flag: {fl}")
+        for item in q.get("rewards", {}).get("items", []) or []:
+            if item not in items:
+                errors.append(f"Quest {q['id']} rewards unknown item: {item}")
 
-    # Shop items exist
+    # Shop items + scroll skills exist
     shop = load("shop/roku_shop.json")
     for entry in shop.get("inventory", []):
         if entry["item_id"] not in items:
             errors.append(f"Shop unknown item: {entry['item_id']}")
+    for scroll in shop.get("scrolls", []) or []:
+        if scroll.get("skill_id") not in skill_ids:
+            errors.append(f"Shop scroll unknown skill: {scroll.get('skill_id')}")
+        if scroll.get("character_id") not in char_ids:
+            errors.append(f"Shop scroll unknown character: {scroll.get('character_id')}")
+
+    # Achievements: trigger flags exist
+    achievements = load("achievements/achievements.json")["achievements"]
+    for ach in achievements:
+        trig = ach.get("trigger") or {}
+        for fl in [trig.get("flag")] if trig.get("flag") else []:
+            if fl not in flags:
+                errors.append(f"Achievement {ach['id']} unknown flag: {fl}")
+        for fl in trig.get("all_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"Achievement {ach['id']} unknown flag: {fl}")
+        for fk, fv in (trig.get("flag_equals") or {}).items():
+            if fk not in flags:
+                errors.append(f"Achievement {ach['id']} unknown flag: {fk}")
+            else:
+                allowed = flag_defs[fk].get("values")
+                if allowed and fv not in allowed:
+                    errors.append(f"Achievement {ach['id']} invalid enum value: {fk}={fv}")
+
+    # Every enum flag must be written somewhere (dialogue choice or scene)
+    enum_flags = {f["id"] for f in flag_defs.values() if f.get("type") == "enum"}
+    written_enums: set[str] = set()
+    for block in dialogue["scenes"]:
+        for choice in block.get("choices", []) or []:
+            for fk in (choice.get("set_flags") or {}).keys():
+                written_enums.add(fk)
+    for missing in sorted(enum_flags - written_enums):
+        errors.append(f"Enum flag never set by any dialogue choice: {missing}")
 
     if errors:
         print("STORY DATA VALIDATION FAILED", file=sys.stderr)
