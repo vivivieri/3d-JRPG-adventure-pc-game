@@ -3,7 +3,7 @@
 A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Japanese folktale *Urashima Tarō*.
 
 **Engine:** Godot 4.7 stable (MIT, no royalties)  
-**Languages:** English, 日本語, 简体中文 (Noto Sans — bundled at ship)  
+**Languages:** English, 日本語, 简体中文, 繁體中文 (Noto Sans — bundled at ship; written zh-Hant text + `cant`/`cmn` dialect VO per `docs/LOCALIZATION.md`)  
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
