@@ -5,13 +5,15 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
-**Workflow:** **GodotPrompter + MCP stack** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
+**Workflow:** **GodotPrompter + MCP stack** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/MCP_EXTENDED_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
 
 | MCP server | Role |
 |------------|------|
 | `godot-mcp` (GDAI) | **Build** scenes — required |
 | `godotiq` | **Analyze** signals/debug — recommended |
 | `godot-mcp-pro` | **Test** scenarios/asserts — recommended for L4/L5 |
+
+**Optional extended tools** (art/design — not required for boot): GameLab MCP (`gamelab-mcp`), Notion MCP, Blender offline pipeline. See `docs/MCP_EXTENDED_STACK.md`.
 
 ### Environment bootstrap
 

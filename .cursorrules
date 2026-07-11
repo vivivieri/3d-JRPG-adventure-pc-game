@@ -14,8 +14,10 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 | **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
 | **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
 | **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
+| **GameLab Studio MCP** | `gamelab-mcp` | **Art generate** (optional) — tileable textures, UI sheets, spritesheets |
+| **Notion MCP** | `notion` | **Design context** (optional) — formulas, lore index, balancing tables |
 
-Full stack guide: `docs/MCP_STACK.md`
+Core stack: `docs/MCP_STACK.md` — extended art/design roles: `docs/MCP_EXTENDED_STACK.md`
 
 ### Role rules (avoid MCP conflicts)
 
@@ -80,9 +82,9 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 
 ---
 
-## 1. Roles & responsibilities (R&R) — GodotPrompter + GDAI MCP
+## 1. Roles & responsibilities (R&R) — GodotPrompter + MCP stack
 
-These tools are **complementary, not alternatives**. Use both in every normal task unless a branch doc explicitly says otherwise.
+Core tools are **complementary, not alternatives**. Use the full core stack in every normal task unless a branch doc explicitly says otherwise. Optional extended tools (GameLab, Notion, Blender offline) supplement art and design context — see `docs/MCP_EXTENDED_STACK.md`.
 
 ### Tool A: GodotPrompter — *Architect & code generator*
 | | |
@@ -101,6 +103,52 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 | **Responsibility** | Apply zone palettes from art docs; parent nodes; assign materials; audit FPS in editor |
 | **When to use** | **After** GodotPrompter planning — implement the plan in the open Godot Editor |
 | **Prerequisite** | `bash tools/ensure_gdai_mcp.sh` passes; `godot-mcp` connected in Cursor MCP |
+
+### Tool C: Godotiq — *Analyze & debug*
+| | |
+|---|---|
+| **Role** | Signal tracing, dependency graphs, debug console, `ui_map`, `verify_project_runs` |
+| **Owns** | Read-only diagnosis — why combat hung, orphan signals, runtime errors |
+| **When to use** | After a failure or before refactoring systems with many signals |
+| **Does NOT** | Edit `.tscn` or mutate scenes |
+
+### Tool D: Godot MCP Pro — *Automated testing*
+| | |
+|---|---|
+| **Role** | L4/L5 scenarios — `run_test_scenario`, `assert_screen_text`, input replay, screenshot compare |
+| **Owns** | Test assertions and scripted playthroughs (`--minimal` mode — no scene editing) |
+| **When to use** | Phase gates, combat/menu E2E, regression after narrative changes |
+| **Does NOT** | Build or edit scenes (GDAI only) |
+
+### Tool E: GameLab Studio MCP — *Art generate* (optional)
+| | |
+|---|---|
+| **Role** | Tileable textures, UI frames, sprite/VFX sheets via MCP generation |
+| **Owns** | Exported PNG/WebP assets saved under `game/assets/` |
+| **When to use** | Phase 1+ zone albedos, ink-wash UI borders, placeholder VFX sheets |
+| **Does NOT** | Place nodes, assign materials, or edit `.tscn` — hand off to GDAI MCP |
+| **Prerequisite** | `gamelab-mcp` registered in Cursor; palette from `docs/ART_DIRECTION.md` |
+
+### Tool F: Notion MCP — *Design context* (optional)
+| | |
+|---|---|
+| **Role** | Agent-readable index for stat formulas, skill curves, flag glossary, tone guides |
+| **Owns** | Design intent lookup — not runtime data |
+| **When to use** | Phase 2–3 before editing `game/data/*.json` or combat GDScript |
+| **Does NOT** | Replace `game/data/` or `docs/` as source of truth |
+
+### Offline: Blender + AI Render — *3D hero pipeline* (optional, not MCP)
+| | |
+|---|---|
+| **Role** | Hand-painted albedo on low-poly Japanese coastal meshes before Godot import |
+| **When to use** | Hero set-pieces (torii, lacquer box, palace trim) per `CHARACTER_BIBLE.md` |
+| **Handoff** | Export GLB → Godot import → GodotPrompter shader → GDAI MCP placement |
+
+### Rejected for v1 (do not adopt)
+- **Summer Engine** — replaces Godot editor; breaks GDAI stack
+- **Fennara** — fourth scene editor; overlaps GDAI/Godotiq/MCP Pro
+- **Ink narrative rewrite** — JSON spine already defined
+- **Kenney town kits** — wrong visual read for Japanese coastal JRPG
 
 ### Combined workflow (default — use every session)
 
@@ -132,8 +180,13 @@ These tools are **complementary, not alternatives**. Use both in every normal ta
 | Tab menu / shop UI | Plan `tab_menu.gd` logic | Build `tab_menu.tscn` node tree, connect signals, verify in viewport |
 | Lacquer box glow | Shader with 3 emission states by uniform | Place box mesh on Urashima, swap material states via story flags |
 | BGM / SFX | Run `generate_game_audio.py`; wire `audio_manager.gd` | Assign streams in editor, test F5 with audio bus |
+| Zone wood/stone albedo | GameLab MCP: muted palette texture per `ART_DIRECTION.md` | Assign `toon_base` material on meshes in zone `.tscn` |
+| Combat balance pass | Query Notion for formulas; update `skills.json` + GDScript | F5 combat scene via GDAI after data change |
+| Hero prop (torii, box) | Blender offline → GLB import | Place mesh, assign NPR material, tune emission |
 
-**Startup order:** `ensure_gdai_mcp.sh` → Godot Editor + GDAI HTTP → Cursor `godot-mcp` connected → then plan in GodotPrompter.
+**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + GDAI HTTP → Cursor MCP connected (`godot-mcp` minimum) → then plan in GodotPrompter.
+
+**Extended stack:** `docs/MCP_EXTENDED_STACK.md`
 
 ---
 

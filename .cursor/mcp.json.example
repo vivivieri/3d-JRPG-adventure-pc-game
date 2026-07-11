@@ -23,5 +23,15 @@
         "GODOT_MCP_PORT": "6505"
       }
     }
+  },
+  "_optional_extended_stack": {
+    "_comment": "See docs/MCP_EXTENDED_STACK.md — merge gamelab-mcp into mcpServers when API key is set",
+    "gamelab-mcp": {
+      "type": "sse",
+      "url": "http://api.gamelabstudio.co:8765/sse",
+      "headers": {
+        "X-API-Key": "YOUR_GAMELAB_API_KEY"
+      }
+    }
   }
 }

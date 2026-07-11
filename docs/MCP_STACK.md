@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
-**Cross-refs:** `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/PLUGIN_COMPATIBILITY.md`
+**Cross-refs:** `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/PLUGIN_COMPATIBILITY.md`, `docs/MCP_EXTENDED_STACK.md` (optional art/design tools)
 
 Three MCP servers work **together**. Each has a distinct role — agents must not use all three for the same task blindly.
 
@@ -218,6 +218,7 @@ Using godot-mcp only: fix dialogue_box.tscn layout per UI_UX_FLOW.md.
 
 ## Related
 
+- `docs/MCP_EXTENDED_STACK.md` — optional GameLab, Notion, Blender pipelines (art & design context)
 - `game/.godotiq.json` — project conventions for Godotiq linter  
 - `game/addons/README.md` — addon policy  
 - `.cursor/mcp.json.example` — template  
