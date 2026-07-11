@@ -3,7 +3,7 @@
 **Version:** 1.1 (Fresh rebuild)  
 **Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
-**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
+**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0 and `docs/AI_DEV_WORKFLOW.md`. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
 
 Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
 
@@ -23,6 +23,8 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | Story data validator (`tools/validate_story_data.py`) | Done |
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |
 | Fresh-rebuild smoke (`tools/run_playtest_smoke.sh`) | Done |
+| AI dev workflow doc (`docs/AI_DEV_WORKFLOW.md`) | Done |
+| Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | Done |
 
 **Verify:**
 
@@ -30,6 +32,7 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 bash tools/setup_dev_environment.sh
 bash tools/ensure_gdai_mcp.sh
 bash tools/check_dev_environment.sh
+bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh
 # Open game/project.godot in Godot 4.3+ → F5
 ```
@@ -51,7 +54,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 1.7 | ProceduralSky per zone (no HDRI) | RENDERING_GUIDE §4 |
 | 1.8 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist | ART_DIRECTION §10 |
 
-**GDAI workflow:** GodotPrompter drafts shaders/`zone_visuals.gd` → GDAI MCP places nodes in `.tscn` → F5 verify.
+**GDAI workflow:** GodotPrompter drafts shaders/`zone_visuals.gd` → GDAI MCP places nodes in `.tscn` → F5 verify. **Acceptance criteria:** `docs/AI_DEV_WORKFLOW.md` §4 Phase 1.
 
 ---
 
@@ -153,9 +156,12 @@ Replace greybox with authored assets per `docs/ART_DIRECTION.md`:
 ```bash
 python3 tools/validate_story_data.py
 bash tools/ensure_gdai_mcp.sh
+bash tools/run_unit_tests.sh
 bash tools/check_dev_environment.sh
 bash tools/run_playtest_smoke.sh
-bash tools/check_asset_compliance.sh    # when assets exist
+bash tools/run_integration_tests.sh   # Phase 2+ gates
+bash tools/run_e2e_playthrough.sh     # Phase 6 gate
+bash tools/check_asset_compliance.sh  # when assets exist
 ```
 
 ---

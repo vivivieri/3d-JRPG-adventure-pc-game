@@ -8,9 +8,9 @@ Track implementation progress against the GDD milestones.
 - [x] Art direction bible (`docs/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/LICENSES.md`)
 - [x] Asset compliance policy + verification tools (`docs/ASSET_COMPLIANCE.md`, `tools/`)
-- [x] Godot 4 project scaffold
-- [x] Combat JSON schema + sample data
-- [x] Core scripts (GameManager, Combat, Dialogue, Save)
+- [x] Godot 4 project scaffold (boot shell on `main`)
+- [x] Combat JSON schema + sample data (`game/data/`)
+- [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
 - [x] **Multi-language support (en / ja / zh)** — `docs/LOCALIZATION.md`
 
 ## M0c — Pre-build design (art rebuild specs)
@@ -62,40 +62,48 @@ Track implementation progress against the GDD milestones.
 - [x] Shop, achievements, new game defaults
 - [x] `tools/validate_story_data.py`
 
+## M0h — AI dev workflow & testing (main baseline)
+- [x] AI build policy — GodotPrompter + GDAI MCP only (`.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`)
+- [x] Unit test scaffold (`game/tests/unit/`, `tools/run_unit_tests.sh`)
+- [x] Smoke tests (`tools/run_playtest_smoke.sh`)
+- [x] Phase acceptance criteria documented (`docs/AI_DEV_WORKFLOW.md` §4)
+- [ ] Integration tests (`tools/run_integration_tests.sh`) — expand Phase 2+
+- [ ] E2E three endings (`tools/run_e2e_playthrough.sh`) — Phase 6
+
 ## M1 — Greybox exploration
-- [x] Player movement polish (camera orbit — right-mouse + scroll)
-- [x] Interaction prompt HUD (Press E — action, localized)
-- [x] Dialogue box UI scene (typewriter, speaker, locale fonts)
-- [x] CJK font bundle + locale-aware `FontThemeManager`
-- [x] Quest tracker UI
-- [x] Save point at village well
+- [ ] Player movement polish (camera orbit — right-mouse + scroll)
+- [ ] Interaction prompt HUD (Press E — action, localized)
+- [ ] Dialogue box UI scene (typewriter, speaker, locale fonts)
+- [ ] CJK font bundle + locale-aware `FontThemeManager`
+- [ ] Quest tracker UI
+- [ ] Save point at village well
 
 ## M2 — Combat vertical slice
-- [x] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
-- [x] Combat polish (transitions, damage flash, items, escape, boss banners)
+- [ ] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
+- [ ] Combat polish (transitions, damage flash, items, escape, boss banners)
 
 ## M3 — Chapter 1
-- [x] Tidal Caves greybox map
-- [x] Water level puzzle
-- [x] Shore Wraith boss
-- [x] Yuzu joins party
+- [ ] Tidal Caves greybox map
+- [ ] Water level puzzle
+- [ ] Shore Wraith boss
+- [ ] Yuzu joins party
 
 ## M4 — Full game
-- [x] Dragon Palace Gate dungeon
-- [x] Palace Sentinel + Tide Keeper bosses
-- [x] Three endings
-- [x] Credits sequence
+- [ ] Dragon Palace Gate dungeon
+- [ ] Palace Sentinel + Tide Keeper bosses
+- [ ] Three endings
+- [ ] Credits sequence
 
 ## M5 — Steam
-- [x] Placeholder BGM/SFX + AudioManager → **procedural coastal JRPG audio** (`tools/generate_game_audio.py`)
-- [x] Zone art pass (materials, fog, props) → **tileable zone textures + portraits**
-- [x] Field item use + equipment UI (Tab menu)
-- [x] Steam store page copy + capsule placeholders
-- [x] Windows export preset + `tools/export_windows.sh`
-- [x] Steam screenshots + trailer placeholder (`steam/screenshots/`, `steam/trailer.mp4`)
-- [x] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
-- [x] Combat drop rolls + balance pass
-- [x] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
+- [ ] Placeholder BGM/SFX + AudioManager
+- [ ] Zone art pass (materials, fog, props)
+- [ ] Field item use + equipment UI (Tab menu)
+- [ ] Steam store page copy + capsule placeholders
+- [ ] Windows export preset + `tools/export_windows.sh`
+- [ ] Steam screenshots + trailer placeholder (`steam/screenshots/`, `steam/trailer.mp4`)
+- [ ] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
+- [ ] Combat drop rolls + balance pass
+- [ ] Install GodotSteam GDExtension binaries (`tools/install_godotsteam.sh`)
 - [ ] Steamworks app ID + depot upload
 - [ ] Final CC0 audio/art replacement (optional — current assets are original procedural)
 - [ ] `bash tools/check_asset_compliance.sh` passes
@@ -103,7 +111,7 @@ Track implementation progress against the GDD milestones.
 
 ## M6 — Art rebuild (high-detail Japanese)
 - [ ] Rendering guide applied per zone (`docs/RENDERING_GUIDE.md`)
-- [ ] Fresh implementation (`docs/IMPLEMENTATION_PLAN.md` on `cursor/game-implementation-01be`)
+- [ ] Fresh implementation on `main` per `docs/IMPLEMENTATION_PLAN.md` + `docs/AI_DEV_WORKFLOW.md`
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
 - [ ] Replace all primitive / Kenney placeholder art
 - [ ] Japanese palace gate hero set-piece (no European castle kit)

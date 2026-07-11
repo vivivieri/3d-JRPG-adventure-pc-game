@@ -1,7 +1,7 @@
 # Tides of Urashima — QA & Bug Process
 
-**Version:** 1.0 (Pre-build)  
-**Cross-refs:** `docs/PLAYTEST_SCRIPT.md`, `docs/MILESTONES.md`, `tools/validate_story_data.py`, `tools/check_asset_compliance.sh`
+**Version:** 1.1 (Pre-build)  
+**Cross-refs:** `docs/PLAYTEST_SCRIPT.md`, `docs/MILESTONES.md`, `docs/AI_DEV_WORKFLOW.md`, `tools/validate_story_data.py`, `tools/check_asset_compliance.sh`
 
 This doc defines **how to find, report, triage, and verify bugs** for *Tides of Urashima*. Playtest scripts live in `PLAYTEST_SCRIPT.md`; this doc is the **process and templates**.
 
@@ -11,11 +11,16 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 
 | Layer | What to verify | Primary doc / tool |
 |-------|----------------|-------------------|
+| **AI build & test policy** | GDAI-only build; layered automated tests | `docs/AI_DEV_WORKFLOW.md` |
 | **Story data** | Scene IDs, flags, items, encounters align | `python3 tools/validate_story_data.py` |
+| **Unit tests (L1)** | Logic, parsers, calculators, flags | `bash tools/run_unit_tests.sh` |
+| **Smoke (L2)** | Boot load, dev environment | `bash tools/run_playtest_smoke.sh` |
+| **Integration (L4)** | Multi-scene flows, combat, save | `bash tools/run_integration_tests.sh` |
+| **E2E (L5)** | Full story + 3 endings | `bash tools/run_e2e_playthrough.sh` (Phase 6+) |
 | **Asset compliance** | Copyright-safe shipped assets | `bash tools/check_asset_compliance.sh` |
-| **Gameplay systems** | Combat, save, quests, endings | Per-doc QA checklists (see §7) |
-| **Playthrough** | Full 2–3 h path, soft-locks | `PLAYTEST_SCRIPT.md` |
-| **Localization** | en / ja / zh keys present | `game/locale/translations.csv` (impl branch) |
+| **Gameplay systems** | Combat, save, quests, endings | Per-doc QA checklists (see §7) + phase acceptance criteria |
+| **Playthrough** | Full 2–3 h path, soft-locks | `PLAYTEST_SCRIPT.md` (human, Phase 8) |
+| **Localization** | en / ja / zh keys present | `game/locale/translations.csv` (Phase 2+) |
 | **Audio** | Scene BGM map, loops, boss phases | `AUDIO_PRODUCTION_GUIDE.md` §11 |
 | **3D / art** | No primitives, hero meshes | `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md` |
 

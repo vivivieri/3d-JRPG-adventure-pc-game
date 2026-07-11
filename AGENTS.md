@@ -5,7 +5,7 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.3+ Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
-**Workflow:** **GodotPrompter + GDAI MCP only** — see `.cursorrules` §0
+**Workflow:** **GodotPrompter + GDAI MCP only** — see `.cursorrules` §0 and `docs/AI_DEV_WORKFLOW.md`
 
 ### Environment bootstrap
 
@@ -64,9 +64,9 @@ Use **both** tools together. **Do not** hand-edit `.tscn` or implement editor wo
 
 No web-scraped art/audio. See `docs/ASSET_COMPLIANCE.md`.
 
-### Headless validation (supplement only — not a substitute for GDAI)
+### Automated testing (required every commit)
 
-Headless tests confirm data/logic after GDAI editor verification:
+See `docs/AI_DEV_WORKFLOW.md` for full policy and **phase acceptance criteria**.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
@@ -74,10 +74,15 @@ export XDG_DATA_HOME="/workspace/.cache/godot-data"
 export XDG_CONFIG_HOME="/workspace/.cache/godot-config"
 export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
 
-python3 tools/validate_story_data.py
-bash tools/run_playtest_smoke.sh
+python3 tools/validate_story_data.py   # L0 data validation
+bash tools/run_unit_tests.sh           # L1 unit tests
+bash tools/run_playtest_smoke.sh       # L2 smoke (includes L0+L1)
+bash tools/run_integration_tests.sh    # L4 phase gates (Phase 2+)
+bash tools/run_e2e_playthrough.sh      # L5 endings (Phase 6+)
 bash tools/check_asset_compliance.sh
 ```
+
+GDAI MCP F5 + viewport = **L3 editor verify** (mandatory for scene work; not replaced by headless).
 
 ### Rendering & environment (Phase 1)
 

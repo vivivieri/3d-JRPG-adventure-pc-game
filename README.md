@@ -33,12 +33,13 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 bash tools/setup_dev_environment.sh
 bash tools/ensure_gdai_mcp.sh          # GDAI MCP + Godot editor HTTP bridge
 bash tools/check_dev_environment.sh
-bash tools/run_playtest_smoke.sh       # story data + boot load
+bash tools/run_unit_tests.sh
+bash tools/run_playtest_smoke.sh       # story data + unit tests + boot load
 ```
 
 Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5** — dev boot screen only.
 
-**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0 and `AGENTS.md`. No manual `.tscn` fallback.
+**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`, and `AGENTS.md`. No manual `.tscn` fallback.
 
 **Cloud agents:** `bash tools/install_cloud_dev.sh` via `.cursor/environment.json`. See [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md) and [`AGENTS.md`](AGENTS.md).
 
@@ -136,7 +137,9 @@ tools/
   ensure_gdai_mcp.sh     # Bootstrap GDAI MCP + editor HTTP bridge
   setup_dev_environment.sh
   check_dev_environment.sh
-  run_playtest_smoke.sh
+  run_unit_tests.sh
+  run_integration_tests.sh
+  run_e2e_playthrough.sh   # Phase 6+
   validate_story_data.py
   check_asset_compliance.sh
   install_gdai_plugin.sh # Cloud snapshot: install plugin from zip
@@ -172,6 +175,7 @@ var scenes = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/s
 
 ## Documentation
 
+- [AI Dev Workflow](docs/AI_DEV_WORKFLOW.md) — AI build, unit tests, acceptance criteria
 - [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) — rebuild phases
 - [GDAI Cloud Setup](docs/GDAI_CLOUD_SETUP.md) — MCP + editor bridge
 - [Game Design Document](docs/GDD.md)
