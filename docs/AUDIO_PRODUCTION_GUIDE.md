@@ -411,7 +411,7 @@ Store per-track loop documentation in `docs/audio_sheets/<track_id>.md`:
 
 **Relative balance** (from `AUDIO_DIRECTION.md` §5): dialogue always readable over Music; Ambient always under Music.
 
-**Ducking:** Long dialogue scenes may duck Music -6 dB for readability; SC-16 choice ducks to -24 dBFS effective. No voice bus in v1.
+**Ducking:** Long dialogue scenes may duck Music -6 dB for readability; SC-16 choice ducks to -24 dBFS effective. **Selective VO** (`voice_id` lines): Voice bus −12 dBFS; duck music per `vo_prompts.json` `duck_bgm_db` (SC-16: −18 dB).
 
 ---
 

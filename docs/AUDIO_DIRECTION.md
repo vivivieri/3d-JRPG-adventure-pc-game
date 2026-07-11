@@ -15,7 +15,7 @@
 | Reference | *NieR* restraint, *Ghost of Tsushima* wind/shore, traditional koto/shamisen accents |
 | Replace | Procedural placeholder audio (`tools/generate_game_audio.py`) before ship |
 | Languages | Music is non-vocal or JP lyrics buried in mix; SFX universal |
-| Voice acting | **None** — story is text dialogue only (`NARRATIVE_WRITING_GUIDE.md` §1) |
+| Voice acting | **Selective** — 12 short AI clips at peaks only (`docs/VO_HIT_LIST.md`); all other dialogue text-only |
 
 ---
 
@@ -61,9 +61,9 @@
 
 | Scene | Audio beat |
 |-------|------------|
-| SC-01 | Surf + distant thunder; VO line over ambient |
-| SC-03 | Spirit voice with reverb; fox bell distant |
-| SC-08 | Overlapping whisper VO under water drone |
+| SC-01 | Surf + distant thunder; optional `sc01_urashima_01` VO over ambient |
+| SC-03 | Yuzu `sc03_yuzu_01` VO with reverb; fox bell distant |
+| SC-08 | Overlapping whisper **SFX** bed under water drone — not voiced crowd |
 | SC-10 | Yuzu join fanfare — short, not triumphant |
 | SC-11 | Palace harp; unsettling perfect fifth |
 | SC-16 | Music drops to near-silence during choice |
@@ -76,7 +76,7 @@
 |-----|----------|
 | Music | -12 dBFS peak |
 | SFX | -6 dBFS peak |
-| Voice / dialogue | N/A — text only; optional UI open SFX |
+| Voice / dialogue | Selective VO clips only — see `docs/VO_HIT_LIST.md` |
 | Ambient | -18 dBFS under music |
 
 ---

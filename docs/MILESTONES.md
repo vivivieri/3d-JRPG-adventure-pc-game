@@ -41,7 +41,7 @@ Track implementation progress against the GDD milestones.
 - [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
 ## M0f — Pre-build design (narrative & polish)
-- [x] Narrative writing guide (`docs/NARRATIVE_WRITING_GUIDE.md`) — no VO; SC-07 silence
+- [x] Narrative writing guide (`docs/NARRATIVE_WRITING_GUIDE.md`) — selective VO (12 clips); SC-07 silence
 - [x] Progression tuning (`docs/PROGRESSION_TUNING.md`)
 - [x] Game feel (`docs/GAME_FEEL.md`)
 - [x] Lore & environmental story (`docs/LORE_AND_ENVIRONMENTAL_STORY.md`)

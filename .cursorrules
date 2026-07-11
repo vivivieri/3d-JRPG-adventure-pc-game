@@ -62,6 +62,7 @@ Generate ship-safe placeholders with project tools — register in manifest:
 |------------|------|---------|
 | BGM / SFX placeholder | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
 | BGM zone prototype | **ACE-Step 1.5** (`bash tools/generate_ai_bgm.sh`) | MIT (ACE-Step) |
+| Selective VO (12 clips) | **ElevenLabs** (`bash tools/generate_ai_vo.sh`) | Commercial AI — log in `LICENSES.md` |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
 | Zone textures / UI | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
 | Hero 3D meshes | **Blender + AI Render** → GLB import | ORIGINAL / documented |

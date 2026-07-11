@@ -75,4 +75,5 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 - `docs/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
 - `docs/ENCOUNTER_TABLE.md` — pacing
 - `docs/REPLAY_DESIGN.md` — replay & gallery
-- `docs/NARRATIVE_WRITING_GUIDE.md` — writing & no-VO policy
+- `docs/NARRATIVE_WRITING_GUIDE.md` — writing, selective VO, i18n prose
+- `docs/VO_HIT_LIST.md` — emotional VO clip list + ElevenLabs generation

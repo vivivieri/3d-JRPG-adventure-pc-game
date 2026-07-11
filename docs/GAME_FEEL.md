@@ -14,7 +14,7 @@ Defines **moment-to-moment juice** — how the game responds to player actions. 
 | **Restraint** | Melancholy tone — no arcade combo spam |
 | **Clarity** | Every hit, reward, and quest update readable in &lt;0.5 s |
 | **Weight** | Bosses feel heavy; village feels hollow |
-| **No VO** | Feedback is visual + SFX + text only |
+| **Selective VO** | 12 hit clips only (`voice_id` lines) — text+subtitles always; not full script |
 
 ---
 

@@ -83,7 +83,8 @@ Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5** — dev boot 
 | [Achievements](docs/ACHIEVEMENTS.md) | 12 Steam achievements |
 | [Playtest Script](docs/PLAYTEST_SCRIPT.md) | 2–3h QA path (re-enable after Phase 2+) |
 | [QA & Bug Process](docs/QA_AND_BUG_PROCESS.md) | Severity, triage, regression |
-| [Narrative Writing Guide](docs/NARRATIVE_WRITING_GUIDE.md) | Voice, silence, no VO, i18n prose |
+| [Narrative Writing Guide](docs/NARRATIVE_WRITING_GUIDE.md) | Voice, silence, selective VO, i18n prose |
+| [VO Hit List](docs/VO_HIT_LIST.md) | 12 emotional AI VO clips + ElevenLabs workflow |
 | [Progression Tuning](docs/PROGRESSION_TUNING.md) | XP, stats, economy, difficulty |
 | [Game Feel](docs/GAME_FEEL.md) | Combat juice, feedback, rewards |
 | [Lore & Environmental Story](docs/LORE_AND_ENVIRONMENTAL_STORY.md) | 8 lore entries, hub emptiness |

@@ -27,6 +27,7 @@
 ├─────────────────────────────────────────────────────────────────┤
 │  AUDIO PLACEHOLDER    tools/generate_game_audio.py              │
 │  AUDIO PROTOTYPE      ACE-Step 1.5 (MIT, local) via generate_ai_bgm │
+│  VO SELECTIVE         ElevenLabs via generate_ai_vo (12 clips only) │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -41,6 +42,7 @@
 | Test | **Godot MCP Pro** | `godot-mcp-pro` | L4/L5 scenarios, asserts, input replay |
 | Audio placeholder | `generate_game_audio.py` | Shell | Copyright-safe BGM/SFX until replaced |
 | Audio prototype | **ACE-Step 1.5** | Local (`bash tools/install_ace_step.sh`) | Zone + opening/boss/ending hero BGM |
+| VO selective | **ElevenLabs** | `ELEVENLABS_API_KEY` + `generate_ai_vo.py` | 12 emotional hit clips only — `docs/VO_HIT_LIST.md` |
 
 ```
 GodotPrompter (plan/code)
@@ -70,6 +72,7 @@ GodotPrompter (plan/code)
 | Read Godot Output without copy-paste | **Godotiq** `godotiq_read_debug_console` |
 | Screenshot game viewport | **GDAI**, **Godotiq**, or **MCP Pro**; save to `artifacts/screenshots/` |
 | Zone BGM iteration | **ACE-Step** via `bash tools/generate_ai_bgm.sh` or `generate_game_audio.py` fallback → **GDAI** wires in editor |
+| Selective story VO | **ElevenLabs** via `bash tools/generate_ai_vo.sh` — **only** lines with `voice_id` in `chapter_01.json`; never full script |
 | Edit node tree / reparent | **GDAI only** |
 
 **Never** use GameLab, Summer Engine, or Fennara for scene graph mutations when GDAI is available.
@@ -271,6 +274,21 @@ Prompt catalog: `game/data/audio/ace_step_prompts.json`
 
 **Ship rule:** Human mix pass or commission final tracks before release (`docs/AUDIO_PRODUCTION_GUIDE.md`).
 
+### ElevenLabs — selective VO (12 clips, not full dialogue)
+
+**Role:** Short emotional punches at peaks (SC-03, SC-13, SC-16, etc.) — see `docs/VO_HIT_LIST.md`.  
+**Not for:** Full script, tutorials, inspectables, SC-08 crowd (SFX bed), SC-17 endings (music only).
+
+```bash
+bash tools/generate_ai_vo.sh --list
+bash tools/generate_ai_vo.sh --tier p0 --locale ja
+export ELEVENLABS_API_KEY=...   # Cursor Secrets
+```
+
+Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines in `chapter_01.json`
+
+**Agent rules:** Do not add `voice_id` to new lines without updating `vo_prompts.json` + `VO_HIT_LIST.md`. P0 before P1/P2. Verify ElevenLabs commercial terms before ship.
+
 ---
 
 ## Explicitly rejected (do not adopt)
@@ -316,11 +334,12 @@ Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_
 | **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
 | **Blender AI Render** | ❌ Free OSS addon | Install inside Blender: Edit → Preferences → Add-ons |
 | **ACE-Step 1.5** | ❌ Free (local GPU) | `bash tools/install_ace_step.sh`; prompts in `game/data/audio/ace_step_prompts.json` |
+| **ElevenLabs VO** | Paid API | `ELEVENLABS_API_KEY` in Cursor Secrets; `bash tools/generate_ai_vo.sh` |
 | **generate_game_audio.py** | ❌ Free (repo tool) | Procedural fallback — auto on install |
 
 **Cursor cloud dashboard:** Register all MCP servers from `.cursor/mcp.json` plus `gamelab-mcp` and `notion`. Restart agent after saving.
 
-**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + human export), Blender AI Render addon enable.
+**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + human export), Blender AI Render addon enable.
 
 ---
 

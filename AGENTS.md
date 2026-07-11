@@ -17,6 +17,7 @@
 | `notion` | **Design context** — formulas, lore, balance |
 | Blender + AI Render | **3D hero pipeline** (offline) |
 | `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
+| `generate_ai_vo.py` + ElevenLabs | **Selective VO** — 12 emotional clips only (`docs/VO_HIT_LIST.md`) |
 
 **All tools are required.** If any are missing → STOP and notify user. See `docs/MCP_STACK.md`.
 
@@ -72,6 +73,7 @@ Register all installed servers in Cursor (desktop Settings or cloud dashboard). 
 | Type | Generator |
 |------|-----------|
 | BGM / SFX | `python3 tools/generate_game_audio.py --all` |
+| Selective VO | `bash tools/generate_ai_vo.sh --tier p0` (needs `ELEVENLABS_API_KEY`) |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` |
 | Manifest | `python3 tools/register_asset.py` |
 
