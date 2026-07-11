@@ -53,9 +53,16 @@ game/assets/audio/
     bgm_ending_rewind.ogg
     bgm_ending_anchor.ogg
     bgm_ending_drift.ogg
+    cine_opening_hero.ogg
+    cine_ending_rewind_hero.ogg
+    cine_ending_anchor_hero.ogg
+    cine_ending_drift_hero.ogg
   stings/
     sting_combat_start.ogg
     sting_boss_intro.ogg
+    cine_boss_wraith_intro.ogg
+    cine_boss_sentinel_intro.ogg
+    cine_boss_tide_keeper_intro.ogg
     sting_yuzu_join.ogg
     sting_phase_change.ogg
     sting_victory.ogg

@@ -16,7 +16,7 @@
 | `gamelab-mcp` | **Art generate** — textures, UI sheets |
 | `notion` | **Design context** — formulas, lore, balance |
 | Blender + AI Render | **3D hero pipeline** (offline) |
-| `generate_game_audio.py` + Suno/Udio | **Audio** placeholders + zone BGM prototypes |
+| `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
 
 **All tools are required.** If any are missing → STOP and notify user. See `docs/MCP_STACK.md`.
 

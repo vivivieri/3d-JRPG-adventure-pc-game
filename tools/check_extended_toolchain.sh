@@ -52,9 +52,8 @@ else
 fi
 
 echo
-echo "Manual accounts (required for zone BGM prototypes):"
-echo "  Suno  — https://suno.com/ (budget tier)"
-echo "  Udio  — https://www.udio.com/ (budget tier)"
+echo "  ACE-Step 1.5 — bash tools/install_ace_step.sh (local GPU, MIT)"
+echo "  Free cloud mood preview only: AIVA free tier (non-commercial, do not ship)"
 echo "  Blender AI Render addon — install inside Blender (free OSS)"
 
 echo

@@ -26,7 +26,7 @@
 │  TEST                 Godot MCP Pro (`godot-mcp-pro`, `--minimal`)│
 ├─────────────────────────────────────────────────────────────────┤
 │  AUDIO PLACEHOLDER    tools/generate_game_audio.py              │
-│  AUDIO PROTOTYPE      Suno / Udio (zone BGM until authored)      │
+│  AUDIO PROTOTYPE      ACE-Step 1.5 (MIT, local) via generate_ai_bgm │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -40,7 +40,7 @@
 | Analyze | **Godotiq** | `godotiq` | Signals, debug console, `ui_map`, validation |
 | Test | **Godot MCP Pro** | `godot-mcp-pro` | L4/L5 scenarios, asserts, input replay |
 | Audio placeholder | `generate_game_audio.py` | Shell | Copyright-safe BGM/SFX until replaced |
-| Audio prototype | **Suno / Udio** | Web (human export) | Zone BGM loops during iteration |
+| Audio prototype | **ACE-Step 1.5** | Local (`bash tools/install_ace_step.sh`) | Zone + opening/boss/ending hero BGM |
 
 ```
 GodotPrompter (plan/code)
@@ -69,7 +69,7 @@ GodotPrompter (plan/code)
 | Automated JRPG menu / combat test | **Godot MCP Pro** testing tools |
 | Read Godot Output without copy-paste | **Godotiq** `godotiq_read_debug_console` |
 | Screenshot game viewport | **GDAI**, **Godotiq**, or **MCP Pro**; save to `artifacts/screenshots/` |
-| Zone BGM iteration | **Suno/Udio** export or `generate_game_audio.py` → **GDAI** wires in editor |
+| Zone BGM iteration | **ACE-Step** via `bash tools/generate_ai_bgm.sh` or `generate_game_audio.py` fallback → **GDAI** wires in editor |
 | Edit node tree / reparent | **GDAI only** |
 
 **Never** use GameLab, Summer Engine, or Fennara for scene graph mutations when GDAI is available.
@@ -242,12 +242,34 @@ Blender mesh → AI Render / hand paint → GLB → game/assets/models/
 
 External cel-shading preset packs are **reference only** — GodotPrompter authors the project’s single `toon_base.gdshader` ramp family. No full PBR `StandardMaterial3D` in player-facing scenes.
 
-### Suno / Udio — audio prototype
+### ACE-Step 1.5 — audio prototype (replaces Suno/Udio)
 
-**Role:** Zone BGM loops during gameplay iteration.  
-**Also required:** `python3 tools/generate_game_audio.py` for copyright-safe placeholders.
+**Role:** Zone loops, opening movie, boss fight, boss intro cinematics, ending hero scores.  
+**License:** MIT — commercial indie use; register in `docs/LICENSES.md`.  
+**Also required:** `python3 tools/generate_game_audio.py` for instant procedural fallback.
 
-**Ship rule:** Replace all procedural and temp AI audio before release (`docs/AUDIO_PRODUCTION_GUIDE.md`). Log licenses in `docs/LICENSES.md`.
+**Install:**
+
+```bash
+bash tools/install_ace_step.sh          # clone to .cache/ace-step-1.5
+cd .cache/ace-step-1.5 && uv run acestep   # Gradio UI
+# or: uv run acestep-api  →  export ACESTEP_API_URL=http://127.0.0.1:8001
+```
+
+**Generate:**
+
+```bash
+bash tools/generate_ai_bgm.sh --list
+bash tools/generate_ai_bgm.sh --category opening          # menu, prologue, opening hero
+bash tools/generate_ai_bgm.sh --category boss_cinematic   # SC-09/14/15 intro movies
+bash tools/generate_ai_bgm.sh --category ending           # SC-17a/b/c hero endings
+bash tools/generate_ai_bgm.sh --category zone --fallback  # procedural if no GPU
+bash tools/generate_ai_bgm.sh --all-prompts               # docs/audio_sheets/*.md
+```
+
+Prompt catalog: `game/data/audio/ace_step_prompts.json`
+
+**Ship rule:** Human mix pass or commission final tracks before release (`docs/AUDIO_PRODUCTION_GUIDE.md`).
 
 ---
 
@@ -274,7 +296,7 @@ External cel-shading preset packs are **reference only** — GodotPrompter autho
 | GameLab Studio | Commercial | Free tier + paid | API key in Secrets |
 | Notion MCP | Notion ToS | Per workspace | N/A |
 | Blender + AI Render | OSS / varies | Free–paid | Offline |
-| Suno / Udio | Commercial | Budget tiers | Exported audio only |
+| ACE-Step 1.5 | MIT | Free (local GPU) | `.cache/ace-step-1.5` gitignored |
 
 **Ship builds:** disable/remove all Godot dev plugins before Steam export.
 
@@ -293,12 +315,12 @@ Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_
 | **Notion MCP** | ❌ Uses your Notion workspace | **Cursor → Integrations → Notion → Connect** (OAuth — agent cannot do this for you) |
 | **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
 | **Blender AI Render** | ❌ Free OSS addon | Install inside Blender: Edit → Preferences → Add-ons |
-| **Suno / Udio** | ⚠️ Budget subscription for prototypes | Create account; export BGM manually; log license before ship |
-| **generate_game_audio.py** | ❌ Free (repo tool) | Auto-runs on install — procedural placeholders |
+| **ACE-Step 1.5** | ❌ Free (local GPU) | `bash tools/install_ace_step.sh`; prompts in `game/data/audio/ace_step_prompts.json` |
+| **generate_game_audio.py** | ❌ Free (repo tool) | Procedural fallback — auto on install |
 
 **Cursor cloud dashboard:** Register all MCP servers from `.cursor/mcp.json` plus `gamelab-mcp` and `notion`. Restart agent after saving.
 
-**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), Suno/Udio login, Blender AI Render addon enable.
+**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + human export), Blender AI Render addon enable.
 
 ---
 

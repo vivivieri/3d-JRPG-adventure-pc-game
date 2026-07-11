@@ -46,11 +46,16 @@ else
   echo "   Cursor Settings → Integrations → Notion → Connect workspace"
 fi
 
-# --- Audio placeholders (ship-safe, no purchase) ---
+# --- ACE-Step prompt sheets ---
+if [[ -f "$ROOT/game/data/audio/ace_step_prompts.json" ]]; then
+  echo "==> Writing ACE-Step prompt sheets..."
+  bash "$ROOT/tools/generate_ai_bgm.sh" --all-prompts 2>/dev/null || true
+fi
+
+# --- Procedural audio placeholders ---
 if [[ ! -d "$ROOT/game/assets/audio/bgm" ]] || [[ -z "$(ls -A "$ROOT/game/assets/audio/bgm" 2>/dev/null || true)" ]]; then
   echo "==> Generating procedural audio placeholders..."
-  python3 "$ROOT/tools/generate_game_audio.py" --all 2>/dev/null || \
-    echo "!! generate_game_audio.py skipped (run manually when needed)"
+  python3 "$ROOT/tools/generate_game_audio.py" --all 2>/dev/null || true
 fi
 
 echo

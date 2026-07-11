@@ -148,7 +148,7 @@ fi
 echo "  MCP cfg: ${MCP_JSON}"
 echo ""
 echo "NEXT: Register in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp, notion"
-echo "      Offline required: Blender + AI Render, Suno/Udio (audio prototypes)"
+echo "      Offline required: Blender + AI Render, ACE-Step 1.5 (audio prototypes)"
 echo "      Docs: docs/MCP_STACK.md"
 echo ""
 exit 0

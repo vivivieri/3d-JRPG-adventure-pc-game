@@ -1,0 +1,246 @@
+{
+  "version": "1.0",
+  "engine": "ACE-Step 1.5",
+  "license": "MIT",
+  "global_negative": "vocals, lyrics, singing, upbeat pop, EDM drop, heavy metal, bright cheerful, cartoon comedy, European fantasy brass, copyrighted melody",
+  "categories": {
+    "zone": "Field loop BGM — village, caves, palace, combat",
+    "opening": "Title + SC-00 prologue opening movie",
+    "boss": "Boss fight loops + phase tracks",
+    "boss_cinematic": "Boss intro movie hero scores (SC-09, SC-14, SC-15)",
+    "ending": "SC-17 ending movie hero tracks (non-loop)",
+    "stings": "Short combat/story stingers"
+  },
+  "tracks": {
+    "bgm_menu": {
+      "category": "opening",
+      "scene": "Title screen",
+      "output": "game/assets/audio/bgm/bgm_menu.ogg",
+      "duration_sec": 150,
+      "loop": true,
+      "bpm": 72,
+      "key": "D minor",
+      "prompt": "melancholy Japanese coastal JRPG title theme, solo koto and sparse synth pad, distant ocean waves, slow 72 BPM, instrumental, no vocals, still and fateful, NieR restraint, seamless loop"
+    },
+    "bgm_prologue": {
+      "category": "opening",
+      "scene": "SC-00 opening movie",
+      "output": "game/assets/audio/bgm/bgm_prologue.ogg",
+      "duration_sec": 105,
+      "loop": false,
+      "bpm": 60,
+      "key": "A minor",
+      "prompt": "cinematic opening movie score, dark Urashima folklore, kappa turtle rescue myth, low strings and distant wordless choir pad, single temple bell, mythic and fateful 60 BPM, instrumental hero theme, no vocals, fade ending not loop"
+    },
+    "cine_opening_hero": {
+      "category": "opening",
+      "scene": "SC-00 full montage hero cut",
+      "output": "game/assets/audio/bgm/cine_opening_hero.ogg",
+      "duration_sec": 105,
+      "loop": false,
+      "bpm": 60,
+      "key": "A minor",
+      "prompt": "epic cinematic opening movie hero score, Japanese coastal folklore, palace silhouette gift of lacquer box, emotional swell then ominous turn, orchestral strings shamisen accents, 60 BPM, instrumental only, no vocals, film intro not loop"
+    },
+    "bgm_village": {
+      "category": "zone",
+      "scene": "beach_shore, ruined_village",
+      "output": "game/assets/audio/bgm/bgm_village.ogg",
+      "duration_sec": 180,
+      "loop": true,
+      "bpm": 66,
+      "key": "E minor",
+      "prompt": "ruined coastal village field theme, empty dread and wind, shakuhachi lead low cello drone, muted grey sky, Japanese decay not bright, 66 BPM instrumental loop seamless"
+    },
+    "bgm_caves": {
+      "category": "zone",
+      "scene": "tidal_caves",
+      "output": "game/assets/audio/bgm/bgm_caves.ogg",
+      "duration_sec": 210,
+      "loop": true,
+      "bpm": 78,
+      "key": "F# minor",
+      "prompt": "tidal cave exploration, wonder and unease, bioluminescent water bells synth pad, dripping cavern atmosphere, 78 BPM instrumental seamless loop, no vocals"
+    },
+    "bgm_palace": {
+      "category": "zone",
+      "scene": "dragon_palace_gate",
+      "output": "game/assets/audio/bgm/bgm_palace.ogg",
+      "duration_sec": 180,
+      "loop": true,
+      "bpm": 84,
+      "key": "B minor",
+      "prompt": "sterile beautiful dragon palace gate, ethereal harp and choir pad unsettling perfect fifth, coral gold void sky, ryūgū palace not European castle, 84 BPM instrumental loop"
+    },
+    "bgm_combat": {
+      "category": "zone",
+      "scene": "standard encounters",
+      "output": "game/assets/audio/bgm/bgm_combat.ogg",
+      "duration_sec": 120,
+      "loop": true,
+      "bpm": 108,
+      "key": "D minor",
+      "prompt": "JRPG battle theme mid tension, light taiko and strings, restrained not heroic anime, 108 BPM instrumental combat loop seamless"
+    },
+    "bgm_boss": {
+      "category": "boss",
+      "scene": "Shore Wraith, Palace Sentinel phase 1, Tide Keeper phase 1",
+      "output": "game/assets/audio/bgm/bgm_boss.ogg",
+      "duration_sec": 150,
+      "loop": true,
+      "bpm": 132,
+      "key": "G minor",
+      "prompt": "boss battle hero theme, dark coastal JRPG, full taiko ensemble low brass stabs, escalating dread not triumphant, 132 BPM instrumental loop seamless"
+    },
+    "bgm_boss_tide_keeper_p2": {
+      "category": "boss",
+      "scene": "Tide Keeper phase 2 surge",
+      "output": "game/assets/audio/bgm/bgm_boss_tide_keeper_p2.ogg",
+      "duration_sec": 120,
+      "loop": true,
+      "bpm": 144,
+      "key": "A minor",
+      "prompt": "boss phase two tidal surge, faster 144 BPM, water percussion and choir hits, ominous rising energy, instrumental loop seamless"
+    },
+    "bgm_boss_tide_keeper_p3": {
+      "category": "boss",
+      "scene": "Tide Keeper phase 3 choice gate",
+      "output": "game/assets/audio/bgm/bgm_boss_tide_keeper_p3.ogg",
+      "duration_sec": 90,
+      "loop": true,
+      "bpm": 72,
+      "key": "A minor",
+      "prompt": "boss final phase tragic stillness, ebb and mercy, sparse piano and shakuhachi, 72 BPM emotional instrumental loop, space for silence"
+    },
+    "cine_boss_wraith_intro": {
+      "category": "boss_cinematic",
+      "scene": "SC-09 Shore Wraith intro movie 5s",
+      "output": "game/assets/audio/stings/cine_boss_wraith_intro.ogg",
+      "duration_sec": 8,
+      "loop": false,
+      "bpm": 120,
+      "key": "E minor",
+      "prompt": "cinematic boss intro sting, drowned spirit rises from pool, water surge and choir stab, horror coastal folklore, 5 to 8 seconds hero hit instrumental no vocals"
+    },
+    "cine_boss_sentinel_intro": {
+      "category": "boss_cinematic",
+      "scene": "SC-14 Palace Sentinel intro movie 3s",
+      "output": "game/assets/audio/stings/cine_boss_sentinel_intro.ogg",
+      "duration_sec": 5,
+      "loop": false,
+      "bpm": 96,
+      "key": "C minor",
+      "prompt": "cinematic boss intro, lacquer armored sentinel footsteps in void hall, metallic march and eye slit glow, 3 to 5 seconds instrumental sting no vocals"
+    },
+    "cine_boss_tide_keeper_intro": {
+      "category": "boss_cinematic",
+      "scene": "SC-15 Tide Keeper intro movie 6s",
+      "output": "game/assets/audio/stings/cine_boss_tide_keeper_intro.ogg",
+      "duration_sec": 10,
+      "loop": false,
+      "bpm": 84,
+      "key": "A minor",
+      "prompt": "cinematic final boss intro hero score, tide keeper materializes from void sea throne, wide orchestral swell and clock tick undertone, tragic ruler 6 to 10 seconds instrumental"
+    },
+    "bgm_ending_rewind": {
+      "category": "ending",
+      "scene": "SC-17a Rewind ending movie",
+      "output": "game/assets/audio/bgm/bgm_ending_rewind.ogg",
+      "duration_sec": 105,
+      "loop": false,
+      "bpm": 96,
+      "key": "G major",
+      "prompt": "ending movie hero score bittersweet festival, village restored time lapse, shamisen and crowd ambience swell, emotional rewind fate, 96 BPM instrumental no loop fade out"
+    },
+    "cine_ending_rewind_hero": {
+      "category": "ending",
+      "scene": "SC-17a full cinematic crane shot",
+      "output": "game/assets/audio/bgm/cine_ending_rewind_hero.ogg",
+      "duration_sec": 120,
+      "loop": false,
+      "bpm": 96,
+      "key": "G major",
+      "prompt": "full ending cinematic hero orchestral score, festival crowd crane up figure dissolves, bittersweet triumph and loss, Japanese coastal folk instruments with strings, film ending not loop"
+    },
+    "bgm_ending_anchor": {
+      "category": "ending",
+      "scene": "SC-17b Anchor ending movie",
+      "output": "game/assets/audio/bgm/bgm_ending_anchor.ogg",
+      "duration_sec": 90,
+      "loop": false,
+      "bpm": 80,
+      "key": "C major",
+      "prompt": "ending movie dawn hope, box shatters spirit light scatters, soft piano and koto sapling planting, gentle rebuild 80 BPM instrumental fade ending"
+    },
+    "cine_ending_anchor_hero": {
+      "category": "ending",
+      "scene": "SC-17b dawn wide cinematic",
+      "output": "game/assets/audio/bgm/cine_ending_anchor_hero.ogg",
+      "duration_sec": 105,
+      "loop": false,
+      "bpm": 80,
+      "key": "C major",
+      "prompt": "ending cinematic hero score anchor ending, dawn shore rebuild small figures planting tree, warm restrained hope not Disney, orchestral koto blend instrumental film outro"
+    },
+    "bgm_ending_drift": {
+      "category": "ending",
+      "scene": "SC-17c Drift ending movie",
+      "output": "game/assets/audio/bgm/bgm_ending_drift.ogg",
+      "duration_sec": 120,
+      "loop": false,
+      "bpm": 54,
+      "key": "E minor",
+      "prompt": "ending movie open tragedy, solo shakuhachi endless sea boat rows away, underwater palace glimmer, 54 BPM sparse instrumental fade to surf only no loop"
+    },
+    "cine_ending_drift_hero": {
+      "category": "ending",
+      "scene": "SC-17c pull back boat cinematic",
+      "output": "game/assets/audio/bgm/cine_ending_drift_hero.ogg",
+      "duration_sec": 135,
+      "loop": false,
+      "bpm": 54,
+      "key": "E minor",
+      "prompt": "final ending cinematic hero score tragic drift, Urashima rows into void sea palace below, emotional orchestral shakuhachi waves, slow 54 BPM film ending instrumental"
+    },
+    "sting_boss_intro": {
+      "category": "stings",
+      "scene": "generic boss intro",
+      "output": "game/assets/audio/stings/sting_boss_intro.ogg",
+      "duration_sec": 3,
+      "loop": false,
+      "bpm": 120,
+      "key": "G minor",
+      "prompt": "short boss intro sting hit, taiko and low brass stab, 1.2 seconds impactful instrumental"
+    },
+    "sting_combat_start": {
+      "category": "stings",
+      "scene": "combat enter",
+      "output": "game/assets/audio/stings/sting_combat_start.ogg",
+      "duration_sec": 2,
+      "loop": false,
+      "bpm": 120,
+      "key": "D minor",
+      "prompt": "JRPG combat start sting, quick ink-wash whoosh and drum hit, 0.8 seconds instrumental"
+    },
+    "sting_yuzu_join": {
+      "category": "stings",
+      "scene": "SC-10 Yuzu joins",
+      "output": "game/assets/audio/stings/sting_yuzu_join.ogg",
+      "duration_sec": 3,
+      "loop": false,
+      "bpm": 90,
+      "key": "A minor",
+      "prompt": "spirit ally join sting, soft fox bell and cyan chime, short not triumphant, 2 seconds instrumental"
+    },
+    "sting_choice_silence": {
+      "category": "stings",
+      "scene": "SC-16 choice gate",
+      "output": "game/assets/audio/stings/sting_choice_silence.ogg",
+      "duration_sec": 4,
+      "loop": false,
+      "bpm": 60,
+      "key": "A minor",
+      "prompt": "dramatic choice moment near silence, single low bell and breath pad, tense stillness 3 seconds instrumental"
+    }
+  }
+}
