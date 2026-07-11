@@ -1,7 +1,7 @@
 # Tides of Urashima — Implementation Plan
 
 **Version:** 1.1 (Fresh rebuild)  
-**Branch:** `cursor/gdai-fresh-rebuild-01be`  
+**Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
 **Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
 
