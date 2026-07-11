@@ -172,14 +172,31 @@ bash tools/check_dev_environment.sh
 3. Waits for GDAI HTTP `http://127.0.0.1:3571/tools`
 4. Exits non-zero with notify instructions if the bridge is not ready
 
-### 4.2 GDAI plugin in cloud (manual once per environment)
+### 4.2 GDAI plugin in cloud (required — not in git)
 
-GDAI MCP is **commercial** and not in git. To use in cloud:
+GDAI MCP is **commercial** and **gitignored**. Snapshots cloned from GitHub **do not** include it. Install it once, then **save a snapshot**.
 
-1. Copy plugin to `game/addons/gdai-mcp-plugin-godot/` (upload zip or environment secret mount)
-2. Re-run `bash tools/install_cloud_dev.sh`
-3. Run `bash tools/ensure_gdai_mcp.sh`
-4. In Godot editor (if panel not auto-started): **GDAI MCP** tab → **Start**
+**Option A — Rebuild snapshot (recommended)**
+
+1. [cursor.com/agents](https://cursor.com/agents) → your environment → **Start Setup Agent**
+2. Upload your purchase zip to the VM:
+   ```
+   game/addons/gdai-mcp-plugin-godot-YYYYMMDD.zip
+   ```
+3. Run in the setup terminal:
+   ```bash
+   bash tools/install_gdai_plugin.sh
+   bash tools/ensure_gdai_mcp.sh
+   curl -sf http://127.0.0.1:3571/tools | head -c 100
+   ```
+4. When setup succeeds, **save the snapshot**
+5. Future agents boot with the plugin pre-installed
+
+**Option B — Zip in snapshot folder**
+
+If `game/addons/gdai-mcp-plugin-godot*.zip` exists, `install_cloud_dev.sh` auto-extracts on boot.
+
+**Without the plugin:** `ensure_gdai_mcp.sh` fails, `.cursor/mcp.json` is not written, and `godot-mcp` MCP calls fail even if registered in the dashboard.
 
 ### 4.3 Register MCP in Cursor dashboard (required for agent tools)
 
