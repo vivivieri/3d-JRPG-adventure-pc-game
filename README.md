@@ -25,8 +25,6 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 
 **Next build step:** Phase 1 — `ruined_village` vertical slice (SC-02). Checklist: [`docs/MILESTONES.md`](docs/MILESTONES.md).
 
-### Implementation phases (build order)
-
 | Phase | Milestone | Focus |
 |-------|-----------|-------|
 | 1 | — | Environment + SC-02 vertical slice gate |
@@ -34,20 +32,25 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | 4 | M2 | Combat vertical slice |
 | 5 | M3 | Chapter 1 (caves, puzzle, Shore Wraith) |
 | 6 | M4 | Full story + three endings |
-| 7 | **M5** | Art rebuild — replace greybox/Kenney placeholders |
-| 8 | **M6** | Steam ship — GodotSteam 4.20+, export, playtest |
+| 7 | **M5** | Art rebuild |
+| 8 | **M6** | Steam ship — GodotSteam 4.20+ |
 
 ---
 
-## Documentation authority
+## Documentation
 
-When docs disagree, use this order:
+**Full index:** [`docs/README.md`](docs/README.md)
 
-1. [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) — **what to build, in what order**
-2. [`docs/MILESTONES.md`](docs/MILESTONES.md) — deliverable checklist
-3. [`docs/MCP_STACK.md`](docs/MCP_STACK.md) — which tool owns which task
-4. [`.cursorrules`](.cursorrules) — agent hard rules
-5. [`game/data/`](game/data/) — runtime content source of truth
+| Task | Read |
+|------|------|
+| Build next phase | [IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) |
+| Runtime architecture (TDD) | [TECHNICAL_DESIGN.md](docs/TECHNICAL_DESIGN.md) |
+| GDScript conventions | [CODE_STYLE.md](docs/CODE_STYLE.md) |
+| Zones, interactables, triggers | [LEVEL_DESIGN.md](docs/LEVEL_DESIGN.md) |
+| Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
+| MCP toolchain | [MCP_STACK.md](docs/MCP_STACK.md) |
+
+**Authority:** IMPLEMENTATION_PLAN → MILESTONES → TECHNICAL_DESIGN → DATA_ARCHITECTURE → MCP_STACK / `.cursorrules`
 
 ---
 
@@ -55,173 +58,57 @@ When docs disagree, use this order:
 
 ```bash
 bash tools/setup_dev_environment.sh
-bash tools/ensure_mcp_stack.sh          # GDAI + Godotiq + MCP Pro bridges
+bash tools/ensure_mcp_stack.sh
 bash tools/check_dev_environment.sh
 bash tools/run_unit_tests.sh
-bash tools/run_playtest_smoke.sh       # story data + unit tests + boot load
 python3 tools/validate_story_data.py
 ```
 
-Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5** — dev boot screen only.
-
-### Agent workflow
+Open `game/project.godot` in Godot 4.7 → **F5** (boot screen only).
 
 | Tool | Role |
 |------|------|
-| **GodotPrompter** (Cursor) | Plan + write `.gd`, `.gdshader`, tests |
-| **GDAI MCP** | Build scenes in editor — no manual `.tscn` edits |
-| **Godotiq** | Debug signals, trace flows, read Output |
-| **Godot MCP Pro** | L4/L5 automated test scenarios (`--minimal`) |
-| **GameLab MCP** | Generate zone textures, UI sheets |
-| **Notion MCP** | Design context (formulas, lore index) |
+| GodotPrompter | Plan + write `.gd`, shaders, tests |
+| GDAI MCP | Build scenes in editor |
+| Godotiq | Debug signals, Output panel |
+| Godot MCP Pro | L4/L5 test scenarios |
+| GameLab / Notion MCP | Art generation / design context |
 
-Full map: [`docs/MCP_STACK.md`](docs/MCP_STACK.md) · Rules: [`.cursorrules`](.cursorrules) §0
-
-**Cloud agents:** [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md)
+Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md)
 
 ---
 
-## Pre-build design package
-
-### Art & compliance (M0c)
-
-| Document | Purpose |
-|----------|---------|
-| [Character Bible](docs/CHARACTER_BIBLE.md) | Models, colors, animations, portraits |
-| [Items 3D Model Guide](docs/ITEMS_3D_MODEL_GUIDE.md) | Weapons, props, pickups, attachment rig |
-| [Environment Kits](docs/ENVIRONMENT_KITS.md) | Modular assets per zone + lore placements |
-| [Boss Designs](docs/BOSS_DESIGNS.md) | Phases, patterns, hard mode |
-| [Encounter Table](docs/ENCOUNTER_TABLE.md) | Pacing, XP, shop, equipment |
-| [Cinematics](docs/CINEMATICS.md) | In-engine cameras — **no FMV** |
-| [Audio Direction](docs/AUDIO_DIRECTION.md) | Music map, SFX, selective VO policy |
-| [Audio Production Guide](docs/AUDIO_PRODUCTION_GUIDE.md) | BGM/SFX specs, buses, scene map |
-| [Asset Compliance](docs/ASSET_COMPLIANCE.md) | Copyright-safe policy + verification |
-| [Art Direction](docs/ART_DIRECTION.md) | Muted Japanese coastal stylized 3D |
-| [Rendering Guide](docs/RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
-| [Storyboard Illustrations](docs/STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec + scene briefs |
-| [Pitch images](docs/pitch/illustrations/) | 25 images (20 scenes + 5 characters) |
-| [Marketing trailer](steam/trailer.mp4) | ~75s EN / JA / ZH — `python3 tools/generate_marketing_trailer.py --all-locales` |
-
-### Gameplay systems (M0d)
-
-| Document | Purpose |
-|----------|---------|
-| [Quest & Flags](docs/QUEST_AND_FLAGS.md) | 5 quests, story flags, zone blockers |
-| [Tutorial Design](docs/TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
-| [Ending Design](docs/ENDING_DESIGN.md) | Choice UI, 3 endings, replay |
-| [Items & Economy](docs/ITEMS_AND_ECONOMY.md) | 20 items, shop, drops |
-| [Combat Systems](docs/COMBAT_SYSTEMS.md) | Turn order, elements, intent UI |
-| [Skills Bible](docs/SKILLS_BIBLE.md) | 15 player + 6 enemy skills |
-| [UI / UX Flow](docs/UI_UX_FLOW.md) | Menus, HUD, controller |
-| [Save & Fail States](docs/SAVE_AND_FAIL_STATES.md) | Autosave, game over |
-| [Settings & Accessibility](docs/SETTINGS_ACCESSIBILITY.md) | Options, hard mode, a11y |
-| [Puzzle Design](docs/PUZZLE_DESIGN.md) | SC-07 water puzzle (silent) |
-| [Achievements](docs/ACHIEVEMENTS.md) | 12 Steam achievements |
-| [Playtest Script](docs/PLAYTEST_SCRIPT.md) | 2–3h QA path (after Phase 2+) |
-| [QA & Bug Process](docs/QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
-| [Narrative Writing Guide](docs/NARRATIVE_WRITING_GUIDE.md) | Voice, silence, i18n prose |
-| [VO Hit List](docs/VO_HIT_LIST.md) | 12 selective ElevenLabs clips |
-| [Progression Tuning](docs/PROGRESSION_TUNING.md) | XP, stats, economy |
-| [Game Feel](docs/GAME_FEEL.md) | Combat juice, feedback |
-| [Lore & Environmental Story](docs/LORE_AND_ENVIRONMENTAL_STORY.md) | 8 lore entries |
-| [World Map & Flow](docs/WORLD_MAP_AND_FLOW.md) | Zones, transitions, save points |
-| [Replay Design](docs/REPLAY_DESIGN.md) | Endings gallery, second run |
-| [Pacing Chart](docs/PACING_CHART.md) | Emotional beat timeline |
-
-### Story data (M0e)
-
-| Path | Purpose |
-|------|---------|
-| [Data Architecture](docs/DATA_ARCHITECTURE.md) | Story-first DB design + schema versions |
-| `game/data/story/scenes.json` | 23 scene rows (SC-00…SC-17c) |
-| `game/data/story/flags.json` | Flag registry |
-| `game/data/dialogue/chapter_01.json` | 22 dialogue scenes, 12 `voice_id` VO lines |
-| `game/data/quests/main_quests.json` | 5 main quests |
-| `game/data/encounters/story_encounters.json` | 8 scripted fights |
-| `game/data/skills/skills.json` | Player + enemy skills |
-| `game/data/items/items.json` | Full item catalog |
-
-```bash
-python3 tools/validate_story_data.py
-bash tools/check_asset_compliance.sh   # when assets exist
-```
-
----
-
-## Repository layout (`main`)
+## Repository layout
 
 ```
-docs/                    # Design docs (source of truth)
-game/
-  data/                  # Story JSON spine
-  scenes/boot.tscn       # Dev boot shell only
-  scripts/
-    core/                # boot_scene.gd, game_bootstrap.gd
-    story/               # CinematicDirector, VoiceLinePlayer, story_data.gd
-  assets/                # Placeholder tree for Phase 1+
-  addons/                # GDAI MCP, Godotiq (commercial/gitignored — see addons/README.md)
-  project.godot          # Godot 4.7 Forward+
-tools/
-  ensure_mcp_stack.sh
-  validate_story_data.py
-  generate_marketing_trailer.py
-  generate_ai_bgm.py / generate_ai_vo.py
-.cursorrules             # GodotPrompter + MCP workflow
-AGENTS.md                # Cloud agent instructions
-steam/                   # Store copy + trailer (EN / JA / ZH)
+docs/README.md           # Documentation index (start here)
+game/data/               # Story JSON spine
+game/scenes/boot.tscn    # Dev boot only
+game/scripts/            # Boot + story stubs (Phase 2+ expands)
+tools/validate_story_data.py
+steam/                   # Store copy + trailer
 ```
 
 ---
 
 ## Design highlights
 
-- **Story:** Dark retelling — Urashima returns to a ruined village; the lacquer box holds stolen years
-- **Combat:** Turn-based, speed-initiative, data-driven JSON skills/enemies
-- **Endings:** Rewind / Anchor / Drift (player choice at final boss)
-- **Cinematics:** Godot cameras + `CinematicDirector` — no FMV in-game
-- **VO:** 12 selective emotional clips (ElevenLabs) — not full dialogue
-- **Visuals:** Muted Japanese coastal stylized 3D — Kenney/primitives greybox only until M5 art pass
-- **Assets:** Copyright-safe only (CC0, MIT, OFL, commissioned). See [`docs/ASSET_COMPLIANCE.md`](docs/ASSET_COMPLIANCE.md)
+- **Story:** Dark Urashima retelling — ruined village, lacquer box, stolen years
+- **Combat:** Turn-based, speed-initiative, JSON-driven skills/enemies
+- **Endings:** Rewind / Anchor / Drift
+- **Cinematics:** Godot cameras — no FMV
+- **VO:** 12 selective clips — not full dialogue
+- **Visuals:** Muted Japanese coastal 3D; greybox until M5 art pass
 
 ---
 
-## Data-driven content
+## Steam (M6)
 
-All combat and narrative content lives in `game/data/`. See [`game/data/README.md`](game/data/README.md).
-
-```gdscript
-# Phase 2+ — GameManager.load_json API (planned)
-var scenes = StoryData.load_json("res://data/story/scenes.json")
-```
-
----
-
-## Key documentation
-
-| Doc | Purpose |
-|-----|---------|
-| [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Rebuild phases 0–8 |
-| [Milestones](docs/MILESTONES.md) | Feature checklist |
-| [MCP Stack](docs/MCP_STACK.md) | Full toolchain R&R |
-| [AI Dev Workflow](docs/AI_DEV_WORKFLOW.md) | Build policy + acceptance criteria |
-| [AI Testing Spec](docs/AI_TESTING_SPEC.md) | L0–L6 test layers |
-| [Tech Stack](docs/TECH_STACK.md) | Godot 4.7 + plugin versions |
-| [GDD](docs/GDD.md) | Game design document |
-| [Storyboard](docs/STORYBOARD.md) | 19-scene narrative bible |
-| [Licenses](docs/LICENSES.md) | Attribution log |
-
----
-
-## Steam (M6 / Phase 8)
-
-- Store copy: [`steam/STORE_PAGE.md`](steam/STORE_PAGE.md)
-- Trailer: `steam/trailer.mp4` (+ `_ja`, `_zh`)
-- GodotSteam **4.20+** required for Godot 4.7 — [`steam/GODOTSTEAM_SETUP.md`](steam/GODOTSTEAM_SETUP.md)
-- Export: `tools/export_windows.sh` · Target price: $4.99–$9.99
+[`steam/STORE_PAGE.md`](steam/STORE_PAGE.md) · GodotSteam 4.20+ · [`steam/GODOTSTEAM_SETUP.md`](steam/GODOTSTEAM_SETUP.md)
 
 ---
 
 ## Credits
 
-- Story adapted from *Urashima Tarō* (Japanese folklore, public domain)
-- Built with [Godot Engine](https://godotengine.org) (MIT License)
+- Story: *Urashima Tarō* (public domain)
+- Engine: [Godot](https://godotengine.org) (MIT)

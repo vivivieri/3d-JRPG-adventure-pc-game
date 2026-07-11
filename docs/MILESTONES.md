@@ -58,6 +58,10 @@ Track implementation progress against the GDD milestones.
 - [x] Steam achievements (`docs/ACHIEVEMENTS.md`)
 - [x] Playtest script (`docs/PLAYTEST_SCRIPT.md`)
 - [x] QA & bug process (`docs/QA_AND_BUG_PROCESS.md`)
+- [x] Technical design TDD (`docs/TECHNICAL_DESIGN.md`)
+- [x] Code style guide (`docs/CODE_STYLE.md`)
+- [x] Level design breakdown (`docs/LEVEL_DESIGN.md`)
+- [x] Documentation index (`docs/README.md`)
 - [x] Emotional pacing chart (`docs/PACING_CHART.md`)
 
 ## M0f — Pre-build design (narrative & polish)

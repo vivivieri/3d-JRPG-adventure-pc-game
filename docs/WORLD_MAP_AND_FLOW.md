@@ -2,9 +2,9 @@
 
 **Version:** 1.0 (Pre-build)  
 **Story reference:** `docs/STORYBOARD.md`, `game/data/story/scenes.json`  
-**Cross-refs:** `docs/ENVIRONMENT_KITS.md`, `docs/QUEST_AND_FLAGS.md`, `docs/SAVE_AND_FAIL_STATES.md`
+**Cross-refs:** `docs/LEVEL_DESIGN.md` (per-zone interactables & triggers), `docs/ENVIRONMENT_KITS.md`, `docs/QUEST_AND_FLAGS.md`, `docs/SAVE_AND_FAIL_STATES.md`
 
----
+> **Level designers / GDAI:** Use [`LEVEL_DESIGN.md`](LEVEL_DESIGN.md) for node names, encounter triggers, and blockout tables. This doc is the **zone graph summary**.
 
 ## 1. World overview
 

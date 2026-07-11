@@ -56,6 +56,8 @@ bash tools/run_playtest_smoke.sh
 
 ## Phase 1 — Environment foundation (NEXT)
 
+**Read first:** `docs/LEVEL_DESIGN.md` (zone `ruined_village`), `docs/RENDERING_GUIDE.md`
+
 Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GUIDE.md`.
 
 | # | Task | Docs |
@@ -74,6 +76,8 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 ---
 
 ## Phase 2 — Core systems shell
+
+**Read first:** `docs/TECHNICAL_DESIGN.md`, `docs/CODE_STYLE.md`
 
 | # | Task | Docs |
 |---|------|------|

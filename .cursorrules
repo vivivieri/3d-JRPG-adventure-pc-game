@@ -75,6 +75,10 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 - **GDAI MCP** — execute in the live Godot Editor, configure scenes, verify & iterate
 
 **Authoritative design docs (read before visual work):**
+- `docs/README.md` — documentation index
+- `docs/TECHNICAL_DESIGN.md` — runtime architecture (TDD)
+- `docs/CODE_STYLE.md` — GDScript conventions
+- `docs/LEVEL_DESIGN.md` — zones, interactables, triggers
 - `docs/ART_DIRECTION.md` — palette, silhouettes, what to avoid
 - `docs/RENDERING_GUIDE.md` — tonemap, fog, glow, shadows, zone presets
 - `docs/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
