@@ -25,9 +25,10 @@
 On every cloud agent start:
 
 ```bash
-bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, MCP Pro
+bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, MCP Pro, Blender
 bash tools/ensure_mcp_stack.sh       # Editor + MCP bridges — REQUIRED
-bash tools/check_dev_environment.sh
+bash tools/install_extended_toolchain.sh  # Blender, audio placeholders, GameLab config
+bash tools/check_extended_toolchain.sh    # Full toolchain status
 ```
 
 Installed components:

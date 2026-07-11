@@ -280,6 +280,28 @@ External cel-shading preset packs are **reference only** — GodotPrompter autho
 
 ---
 
+## User setup checklist (purchase & secrets)
+
+Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_toolchain.sh`
+
+| Tool | You need to buy? | What you do |
+|------|------------------|-------------|
+| **GDAI MCP** | ✅ ~$19 one-time | Already installed — keep zip in cloud snapshot |
+| **Godotiq** | ❌ Free (Pro $19 optional) | Already installed |
+| **Godot MCP Pro** | ✅ $15 one-time | Already installed |
+| **GameLab Studio** | ❌ Free tier works; paid for heavy use | Sign up → API key → **Cursor Secrets: `GAMELAB_API_KEY`** → re-run install script |
+| **Notion MCP** | ❌ Uses your Notion workspace | **Cursor → Integrations → Notion → Connect** (OAuth — agent cannot do this for you) |
+| **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
+| **Blender AI Render** | ❌ Free OSS addon | Install inside Blender: Edit → Preferences → Add-ons |
+| **Suno / Udio** | ⚠️ Budget subscription for prototypes | Create account; export BGM manually; log license before ship |
+| **generate_game_audio.py** | ❌ Free (repo tool) | Auto-runs on install — procedural placeholders |
+
+**Cursor cloud dashboard:** Register all MCP servers from `.cursor/mcp.json` plus `gamelab-mcp` and `notion`. Restart agent after saving.
+
+**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), Suno/Udio login, Blender AI Render addon enable.
+
+---
+
 ## Ports (defaults)
 
 | Server | Port | Check |

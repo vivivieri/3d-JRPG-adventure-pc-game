@@ -122,20 +122,27 @@ else
   echo "!! Godot smoke test had warnings (check output above)"
 fi
 
-# --- Godotiq (MIT — analyze/debug MCP) ---
+# --- Godotiq (required — analyze/debug MCP) ---
 if [[ -d "$ROOT/game/addons/godotiq" ]]; then
   echo "==> Godotiq addon already installed"
 else
   echo "==> Installing Godotiq..."
-  bash "$ROOT/tools/install_godotiq.sh" || echo "!! install_godotiq.sh failed (optional)"
+  bash "$ROOT/tools/install_godotiq.sh"
 fi
 
-# --- Godot MCP Pro (commercial zip — optional) ---
+# --- Godot MCP Pro (required) ---
 if [[ -f "$ROOT/tools/godot-mcp-pro-server/build/index.js" ]]; then
   echo "==> Godot MCP Pro server already built"
 elif ls "$ROOT/game/addons"/godot-mcp-pro*.zip >/dev/null 2>&1; then
   echo "==> Installing Godot MCP Pro from zip..."
-  bash "$ROOT/tools/install_godot_mcp_pro.sh" || echo "!! install_godot_mcp_pro.sh failed (optional)"
+  bash "$ROOT/tools/install_godot_mcp_pro.sh"
+else
+  echo "!! Godot MCP Pro not installed — place godot-mcp-pro.zip in game/addons/"
+fi
+
+# --- Extended toolchain (Blender, GameLab config, audio placeholders) ---
+if [[ -f "$ROOT/tools/install_extended_toolchain.sh" ]]; then
+  bash "$ROOT/tools/install_extended_toolchain.sh" || echo "!! install_extended_toolchain.sh had failures — see output"
 fi
 
 # --- MCP config ---
@@ -175,3 +182,10 @@ bash "$ROOT/tools/check_dev_environment.sh" || true
 echo
 echo "==> Bootstrapping MCP stack..."
 bash "$ROOT/tools/ensure_mcp_stack.sh" || echo "!! ensure_mcp_stack.sh failed — see docs/MCP_STACK.md"
+
+echo
+echo "Required Cursor Secrets (user must configure):"
+echo "  GAMELAB_API_KEY  — https://gamelabstudio.co/"
+echo "  NOTION_API_KEY   — optional if using OAuth in Integrations instead"
+echo "Register in Cursor: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp, notion"
+echo "See: docs/MCP_STACK.md"
