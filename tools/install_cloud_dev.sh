@@ -2,7 +2,7 @@
 # Idempotent cloud dev environment installer for Tides of Urashima.
 # Used by .cursor/environment.json and manual setup.
 #
-# Installs: uv, Godot 4.3 editor + export templates, Python deps, project dirs.
+# Installs: uv, Godot 4.7 editor + export templates, Python deps, project dirs.
 # Does NOT install GDAI MCP (commercial — user must add game/addons/gdai-mcp-plugin-godot/).
 #
 # Usage: bash tools/install_cloud_dev.sh
@@ -12,7 +12,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-GODOT_VERSION="${GODOT_VERSION:-4.3-stable}"
+GODOT_VERSION="${GODOT_VERSION:-4.7-stable}"
 GODOT_INSTALL_DIR="${GODOT_INSTALL_DIR:-/opt/godot}"
 GODOT_BIN_NAME="Godot_v${GODOT_VERSION}_linux.x86_64"
 GODOT_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/${GODOT_BIN_NAME}.zip"
@@ -42,7 +42,7 @@ if ! command -v uv >/dev/null 2>&1; then
 fi
 echo "==> uv: $(uv --version)"
 
-# --- Godot 4.3 editor ---
+# --- Godot editor ---
 sudo mkdir -p "$GODOT_INSTALL_DIR"
 if [[ ! -x "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" ]]; then
   echo "==> Downloading Godot ${GODOT_VERSION}..."
@@ -60,8 +60,8 @@ ln -sf "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" "${HOME}/.local/bin/godot"
 echo "==> Godot: $(${HOME}/.local/bin/godot4 --version 2>&1 | head -1)"
 
 # --- Export templates (headless export / validation) ---
-TEMPLATE_VER="${GODOT_VERSION#4.3-stable}"
-TEMPLATE_VER="4.3.stable"
+# Export template folder: 4.7-stable → 4.7.stable
+TEMPLATE_VER="${GODOT_VERSION/-/.}"
 export XDG_DATA_HOME="${ROOT}/.cache/godot-data"
 export XDG_CONFIG_HOME="${ROOT}/.cache/godot-config"
 export XDG_CACHE_HOME="${ROOT}/.cache/godot-cache"

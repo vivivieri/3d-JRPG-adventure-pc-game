@@ -22,7 +22,7 @@ Track every third-party asset, story source, and engine dependency.
 
 | Item | Source | License | Notes |
 |------|--------|---------|-------|
-| Godot Engine 4.3 | https://godotengine.org | MIT | Credits screen required |
+| Godot Engine 4.7 | https://godotengine.org | MIT | Credits screen required |
 | GodotSteam 4.15 | https://codeberg.org/godotsteam/godotsteam | MIT | `game/addons/godotsteam/` — credits screen |
 
 ---

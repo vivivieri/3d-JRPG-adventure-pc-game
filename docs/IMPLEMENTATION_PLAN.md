@@ -13,7 +13,7 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 
 | Task | Status |
 |------|--------|
-| `game/project.godot` (Godot 4.3+ Forward+) | Done |
+| `game/project.godot` (Godot 4.7 Forward+) | Done |
 | Folder structure (`tools/setup_dev_environment.sh`) | Done |
 | `tools/check_dev_environment.sh` | Done |
 | `.cursor/mcp.json.example` (GDAI MCP) | Done |
@@ -35,7 +35,7 @@ bash tools/ensure_gdai_mcp.sh
 bash tools/check_dev_environment.sh
 bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh
-# Open game/project.godot in Godot 4.3+ → F5
+# Open game/project.godot in Godot 4.7 → F5
 ```
 
 ---

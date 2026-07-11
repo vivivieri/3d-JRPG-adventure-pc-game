@@ -14,7 +14,7 @@ config/name="Tides of Urashima"
 config/description="A short stylized 3D JRPG adapted from Japanese folklore."
 config/version="0.1.0-rebuild"
 run/main_scene="res://scenes/boot.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/ui/icon.svg"
 
 [autoload]

@@ -1,7 +1,7 @@
 # Tides of Urashima — Rendering Guide
 
 **Version:** 1.0 (Pre-build)  
-**Engine:** Godot 4.3+ Forward+  
+**Engine:** Godot 4.7 Forward+  
 **Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.  
 **Cross-refs:** `docs/ART_DIRECTION.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/SETTINGS_ACCESSIBILITY.md`
 

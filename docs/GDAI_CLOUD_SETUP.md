@@ -59,9 +59,9 @@ uv --version
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.sh | iex"
 ```
 
-### Godot 4.3+
+### Godot 4.7 stable
 
-Open `game/project.godot` in the editor (same version as the project — see `README.md`).
+Open `game/project.godot` in Godot **4.7** (Forward+). Cloud: `bash tools/install_cloud_dev.sh`. See `docs/TECH_STACK.md`.
 
 ---
 
@@ -153,7 +153,7 @@ Cloud agents run in a remote VM. You need **both** VM bootstrap **and** Cursor d
 Cloud agents install dependencies via `.cursor/environment.json`:
 
 ```bash
-bash tools/install_cloud_dev.sh   # Godot 4.3, uv, export templates
+bash tools/install_cloud_dev.sh   # Godot 4.7, uv, export templates
 bash tools/ensure_gdai_mcp.sh     # Editor + GDAI HTTP bridge — REQUIRED
 bash tools/check_dev_environment.sh
 ```
@@ -162,7 +162,7 @@ bash tools/check_dev_environment.sh
 
 | Component | Location |
 |-----------|----------|
-| Godot 4.3 editor | `godot4` → `~/.local/bin` |
+| Godot 4.7 editor | `godot4` → `~/.local/bin` |
 | Export templates | `.cache/godot-data/godot/export_templates/` |
 | uv | `~/.local/bin/uv` |
 | numpy | Python (trailer tool) |

@@ -12,7 +12,7 @@ bash tools/ensure_mcp_stack.sh          # GDAI MCP + Godot editor HTTP bridge
 bash tools/check_dev_environment.sh
 ```
 
-Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5**. You should see the dev boot screen with no missing-data errors in Output.
+Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5**. You should see the dev boot screen with no missing-data errors in Output.
 
 ## Dev toolchain (required)
 

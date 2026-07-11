@@ -1,7 +1,7 @@
 # MCP Stack — GDAI + Godotiq + Godot MCP Pro
 
 **Version:** 1.0  
-**Applies to:** `main` rebuild workflow  
+**Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
 **Cross-refs:** `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`
 
 Three MCP servers work **together**. Each has a distinct role — agents must not use all three for the same task blindly.

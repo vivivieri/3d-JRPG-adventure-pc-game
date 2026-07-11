@@ -2,7 +2,7 @@
 
 ## Cursor Cloud specific instructions
 
-**Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.3+ Forward+)  
+**Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
 **Workflow:** **GodotPrompter + MCP stack** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
@@ -24,7 +24,7 @@ bash tools/check_dev_environment.sh
 ```
 
 Installed components:
-- **Godot 4.3** editor → `godot4` in `~/.local/bin`
+- **Godot 4.7** editor → `godot4` in `~/.local/bin`
 - **uv / uvx** → GDAI + Godotiq MCP bridges
 - **Node.js** → Godot MCP Pro server (if installed)
 - **GDAI MCP** → `game/addons/gdai-mcp-plugin-godot/` (commercial)

@@ -61,7 +61,7 @@ else
   echo "   Install: curl -LsSf https://astral.sh/uv/install.sh | sh"
 fi
 
-# --- Godot 4.3+ ---
+# --- Godot 4.7+ ---
 GODOT=""
 for cmd in godot4 godot Godot; do
   if command -v "$cmd" >/dev/null 2>&1; then
@@ -73,7 +73,7 @@ done
 if [[ -n "$GODOT" ]]; then
   echo "==> Godot: $($GODOT --version 2>&1 | head -1)"
 else
-  echo "!! Godot 4.3+ not in PATH"
+  echo "!! Godot 4.7+ not in PATH"
   echo "   Download: https://godotengine.org/download"
   echo "   Open: $ROOT/game/project.godot"
 fi
@@ -107,7 +107,7 @@ fi
 
 echo
 echo "==> Setup complete."
-echo "    1. Install Godot 4.3+ and open game/project.godot"
+echo "    1. Install Godot 4.7 and open game/project.godot (see docs/TECH_STACK.md)"
 echo "    2. Install GDAI MCP plugin → game/addons/gdai-mcp-plugin-godot/"
 echo "    3. Configure .cursor/mcp.json from .cursor/mcp.json.example"
 echo "    4. Ship build: bash tools/export_windows.sh"

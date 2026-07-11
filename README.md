@@ -2,7 +2,7 @@
 
 A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Japanese folktale *Urashima Tarō*.
 
-**Engine:** Godot 4.3+ (MIT, no royalties)  
+**Engine:** Godot 4.7 stable (MIT, no royalties)  
 **Languages:** English, 日本語, 简体中文 (Noto Sans fonts bundled)  
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
@@ -37,7 +37,7 @@ bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh       # story data + unit tests + boot load
 ```
 
-Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5** — dev boot screen only.
+Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5** — dev boot screen only.
 
 **Workflow:** GodotPrompter + **MCP stack** (GDAI build, Godotiq analyze, Godot MCP Pro test) — see `docs/MCP_STACK.md`, `.cursorrules` §0.
 
@@ -178,6 +178,7 @@ var scenes = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/s
 - [AI Dev Workflow](docs/AI_DEV_WORKFLOW.md) — AI build, unit tests, acceptance criteria
 - [AI Testing Spec](docs/AI_TESTING_SPEC.md) — L0–L6 procedures; GDAI UI discovery & playtesting (§11)
 - [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) — rebuild phases
+- [Tech stack](docs/TECH_STACK.md) — Godot 4.7 + MCP versions
 - [MCP Stack](docs/MCP_STACK.md) — GDAI + Godotiq + Godot MCP Pro roles
 - [Game Design Document](docs/GDD.md)
 - [Storyboard](docs/STORYBOARD.md)

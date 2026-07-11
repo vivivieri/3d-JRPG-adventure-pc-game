@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # Install GodotSteam GDExtension into game/addons/godotsteam/
-# Run once before Steam-enabled exports. See steam/GODOTSTEAM_SETUP.md
+# GodotSteam 4.20+ required for Godot 4.7. See steam/GODOTSTEAM_SETUP.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEST="$ROOT/game/addons/godotsteam"
-VERSION="${GODOTSTEAM_VERSION:-4.15}"
+VERSION="${GODOTSTEAM_VERSION:-4.20}"
+GODOT_MIN="${GODOTSTEAM_GODOT:-4.4}"
 
 echo "==> GodotSteam installer"
 echo "    Target: $DEST"
-echo "    Version: $VERSION (override with GODOTSTEAM_VERSION)"
+echo "    GodotSteam: $VERSION (Godot ${GODOT_MIN}+)"
 echo ""
 
 if [[ -f "$DEST/godotsteam.gdextension" ]]; then
@@ -19,10 +20,10 @@ fi
 
 mkdir -p "$DEST"
 
-ZIP_URL="https://codeberg.org/godotsteam/godotsteam/releases/download/v4.15-gde/godotsteam-4.15-gdextension-plugin-4.1-4.3.zip"
+ZIP_URL="https://codeberg.org/godotsteam/godotsteam/releases/download/v${VERSION}-gde/godotsteam-${VERSION}-gdextension-plugin-${GODOT_MIN}.zip"
 TMP_ZIP="$(mktemp /tmp/godotsteam-XXXXXX.zip)"
 
-echo "==> Downloading GodotSteam $VERSION for Godot 4.1–4.3..."
+echo "==> Downloading GodotSteam ${VERSION} GDExtension (Godot ${GODOT_MIN}+)..."
 if curl -fsSL -o "$TMP_ZIP" "$ZIP_URL"; then
   unzip -qo "$TMP_ZIP" -d "$DEST"
   if [[ -d "$DEST/addons/godotsteam" ]]; then
@@ -40,18 +41,17 @@ rm -f "$TMP_ZIP"
 cat > "$DEST/README.md" <<'EOF'
 # GodotSteam (manual install required)
 
-Download the **Godot 4.x Windows** release from:
+Download **GodotSteam 4.20+** (Godot 4.7 compatible) from:
 https://codeberg.org/godotsteam/godotsteam/releases
+
+Use: `godotsteam-4.20-gdextension-plugin-4.4.zip` or newer.
 
 Copy into this folder:
 - `godotsteam.gdextension`
-- `win64/godotsteam.windows.dll` (and related binaries per upstream README)
-
-Then register the plugin in Project Settings if required by your GodotSteam version.
+- platform binaries per upstream README
 
 See `steam/GODOTSTEAM_SETUP.md` in the repo root.
 EOF
 
 echo "[INFO] Scaffold created at $DEST"
-echo "[INFO] Download GodotSteam $VERSION binaries and place them in $DEST before Steam export."
-echo "[INFO] SteamManager autoload will no-op until GodotSteam is installed."
+echo "[INFO] Download GodotSteam ${VERSION}+ and place in $DEST before Steam export."
