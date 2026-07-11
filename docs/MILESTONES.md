@@ -63,7 +63,7 @@ Track implementation progress against the GDD milestones.
 - [x] `tools/validate_story_data.py`
 
 ## M0h — AI dev workflow & testing (main baseline)
-- [x] AI build policy — GodotPrompter + GDAI MCP only (`.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`)
+- [x] AI build policy — GodotPrompter + MCP stack (`.cursorrules` §0, `docs/MCP_STACK.md`)
 - [x] Unit test scaffold (`game/tests/unit/`, `tools/run_unit_tests.sh`)
 - [x] Smoke tests (`tools/run_playtest_smoke.sh`)
 - [x] Phase acceptance criteria documented (`docs/AI_DEV_WORKFLOW.md` §4)

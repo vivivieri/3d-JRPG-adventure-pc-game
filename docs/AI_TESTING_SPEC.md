@@ -425,9 +425,10 @@ These techniques come from live-runtime MCP testing (recommended for JRPG UI-hea
 | **Viewport screenshots + visual review** | ✅ Yes | L3, L4 | Agent analyzes overlap, clipping, missing fonts |
 | **Runtime GDScript injection** | ✅ Yes | L4, L5 | Edge cases: HP=1, boss phase, grant item, set flag |
 | **GodotPrompter for test code** | ✅ Yes | L1, L4 | Already policy — Godot 4 APIs only, no Unity-style tests |
-| **GUT (Godot Unit Test)** | ⚠️ Optional | L1 | Keep lightweight `game/tests/unit/` now; consider GUT Phase 4+ for combat math |
-| **Godot MCP Pro / Godotiq** | ❌ No | — | **GDAI MCP only** per `.cursorrules` §0 |
-| **LimboAI / Beehave** | ❌ No (v1) | — | Turn-based enemy AI is **data-driven** (`enemies.json`); revisit if real-time AI added |
+| **GUT (Godot Unit Test)** | ⚠️ Optional | L1 | Keep lightweight `test_runner.gd`; GUT optional Phase 4+ |
+| **Godot MCP Pro** | ✅ Yes | L4, L5 | `run_test_scenario`, `assert_screen_text`, `compare_screenshots` — **test role only** (`--minimal`) |
+| **Godotiq** | ✅ Yes | L3–L5 | `godotiq_signal_map`, `godotiq_trace_flow`, `godotiq_ui_map`, `godotiq_read_debug_console`, `godotiq_verify_project_runs` |
+| **LimboAI / Beehave** | ❌ No (v1) | — | Turn-based enemy AI is **data-driven** (`enemies.json`) |
 
 ### 11.2 UI discovery + action sequences
 
@@ -504,15 +505,19 @@ Take one enemy action that deals damage.
 Verify game over screen appears and Continue returns to last save.
 ```
 
-### 11.5 Division of labor (GDAI vs headless)
+### 11.5 Division of labor (MCP stack)
 
 | Concern | Tool |
 |---------|------|
-| Fire spell deals 25–30 vs fire-weak enemy | **L1 unit test** (`test_damage_calculator.gd`) |
-| Skills menu opens and lists 15 skills | **GDAI** UI discovery + action sequence |
-| Full story three endings | **L5** headless E2E **+** GDAI for brittle UI steps |
-| Zone fog / materials | **GDAI** F5 + screenshot |
-| JSON flag after quest stage | **L1 unit test** or headless integration |
+| Fire spell damage 25–30 vs fire-weak enemy | **L1 unit test** |
+| Skills menu opens and lists skills | **GDAI** or **Godotiq** `godotiq_ui_map` |
+| Why turn order stuck after enemy action | **Godotiq** `godotiq_trace_flow` |
+| Automated scenario + on-screen text assert | **Godot MCP Pro** `run_test_scenario`, `assert_screen_text` |
+| Full story three endings | **L5** headless + **Godot MCP Pro** input replay |
+| Create/edit zone scene | **GDAI only** (`docs/MCP_STACK.md`) |
+| JSON flag after quest stage | **L1 unit test** |
+
+See `docs/MCP_STACK.md` for conflict rules and install.
 
 ---
 

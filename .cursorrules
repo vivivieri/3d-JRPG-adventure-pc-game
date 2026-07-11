@@ -4,14 +4,25 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 
 ---
 
-## 0. HARD RULES — GodotPrompter + GDAI MCP only
+## 0. HARD RULES — GodotPrompter + MCP stack
 
-**The AI agent implements this project using ONLY these two tools:**
+**The AI agent implements this project using GodotPrompter plus the MCP servers below.**
 
-| Tool | Role |
-|------|------|
-| **GodotPrompter** | Plan, architect, write GDScript (`.gd`), shaders (`.gdshader`), data hooks, procedural asset *generators* |
-| **GDAI MCP** | All editor work: scenes (`.tscn`), nodes, materials, lights, inspector properties, F5 playtest, debugger/output |
+| Tool / Server | Cursor name | Role |
+|---------------|-------------|------|
+| **GodotPrompter** | (Cursor) | Plan, architect, write GDScript (`.gd`), shaders (`.gdshader`), tests |
+| **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
+| **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
+| **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
+
+Full stack guide: `docs/MCP_STACK.md`
+
+### Role rules (avoid MCP conflicts)
+
+- **Scene/node edits:** GDAI MCP only — do not use Godot MCP Pro or Godotiq for `.tscn` mutations  
+- **Debug “why did combat hang?”:** Godotiq `godotiq_signal_map`, `godotiq_trace_flow`  
+- **Automated test scenarios with assertions:** Godot MCP Pro testing tools  
+- **Hand-editing `.tscn` in Cursor:** forbidden when GDAI is available  
 
 ### Forbidden without explicit user override
 
@@ -23,11 +34,11 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 ### Session startup (every agent run)
 
 ```bash
-bash tools/ensure_gdai_mcp.sh
+bash tools/ensure_mcp_stack.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list `godot-mcp` as a connected server → **STOP and notify the user** to register `.cursor/mcp.json` in Cursor Settings → MCP, then restart the agent. Do not substitute hand-editing.
+2. If **Cursor MCP** does not list required servers (`godot-mcp` minimum; `godotiq` + `godot-mcp-pro` recommended) → **STOP and notify the user**. See `docs/MCP_STACK.md`.
 3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
 
 ### Notify the user when unavailable

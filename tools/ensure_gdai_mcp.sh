@@ -55,19 +55,9 @@ command -v godot4 >/dev/null 2>&1 || fail "godot4 not in PATH. Run: bash tools/i
 [[ -d "$PLUGIN_DIR" ]] || fail "GDAI plugin missing at game/addons/gdai-mcp-plugin-godot/"
 [[ -f "$SERVER_PY" ]] || fail "gdai_mcp_server.py missing in plugin folder"
 
-# Write MCP config for Cursor
-mkdir -p "${ROOT}/.cursor"
-cat > "$MCP_JSON" <<EOF
-{
-  "mcpServers": {
-    "godot-mcp": {
-      "command": "uv",
-      "args": ["run", "${SERVER_PY}"]
-    }
-  }
-}
-EOF
-log "Wrote ${MCP_JSON}"
+# Write MCP config for all installed servers
+bash "${ROOT}/tools/write_mcp_config.sh"
+log "MCP config updated"
 
 # Kill headless Godot processes that steal GDAI runtime port
 for pid in $(pgrep -f "godot4.*--headless.*${ROOT}/game" 2>/dev/null || true); do
@@ -116,14 +106,35 @@ if ! timeout 8 uv run "$SERVER_PY" </dev/null >/dev/null 2>&1; then
   log "WARN: stdio bridge slow to start (uv deps); HTTP bridge is up"
 fi
 
+# 3) Optional: Godotiq + Godot MCP Pro — see docs/MCP_STACK.md
+if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
+  log "Godotiq addon present"
+else
+  log "WARN: Godotiq not installed — bash tools/install_godotiq.sh (recommended)"
+fi
+
+if [[ -f "${ROOT}/tools/godot-mcp-pro-server/build/index.js" ]]; then
+  log "Godot MCP Pro server built"
+else
+  log "WARN: Godot MCP Pro not installed — bash tools/install_godot_mcp_pro.sh (recommended for L4/L5)"
+fi
+
 echo ""
-echo "=== GDAI MCP BRIDGE READY (HTTP) ==="
-echo "  Editor:  running"
-echo "  HTTP:    http://127.0.0.1:${GDAI_MCP_SERVER_PORT}"
-echo "  Tools:   ${TOOL_COUNT}"
+echo "=== MCP STACK STATUS ==="
+echo "  GDAI (build):     HTTP :${GDAI_MCP_SERVER_PORT} — ${TOOL_COUNT} tools"
+if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
+  echo "  Godotiq (analyze): addon installed — enable GodotIQ plugin"
+else
+  echo "  Godotiq (analyze): not installed"
+fi
+if [[ -f "${ROOT}/tools/godot-mcp-pro-server/build/index.js" ]]; then
+  echo "  MCP Pro (test):   server ready (${GODOT_MCP_PRO_MODE:---minimal})"
+else
+  echo "  MCP Pro (test):   not installed"
+fi
 echo "  MCP cfg: ${MCP_JSON}"
 echo ""
-echo "NEXT: Ensure Cursor MCP lists 'godot-mcp' as connected."
-echo "      If agent has no godot-mcp tools, register MCP in Cursor Settings and restart agent."
+echo "NEXT: Register in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro (as installed)"
+echo "      Docs: docs/MCP_STACK.md"
 echo ""
 exit 0

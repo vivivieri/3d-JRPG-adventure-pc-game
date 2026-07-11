@@ -63,6 +63,20 @@ else
   echo "[WARN] GDAI MCP plugin not installed (dev-only)"
 fi
 
+if [[ -d game/addons/godotiq ]]; then
+  echo "[OK]   Godotiq addon present"
+  OK=$((OK + 1))
+else
+  echo "[WARN] Godotiq not installed — bash tools/install_godotiq.sh"
+fi
+
+if [[ -f tools/godot-mcp-pro-server/build/index.js ]]; then
+  echo "[OK]   Godot MCP Pro server built"
+  OK=$((OK + 1))
+else
+  echo "[WARN] Godot MCP Pro not installed — optional for L4/L5 testing"
+fi
+
 if curl -sf "http://127.0.0.1:${GDAI_MCP_SERVER_PORT:-3571}/tools" >/dev/null 2>&1; then
   echo "[OK]   GDAI HTTP bridge (:${GDAI_MCP_SERVER_PORT:-3571})"
   OK=$((OK + 1))

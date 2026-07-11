@@ -31,7 +31,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 
 ```bash
 bash tools/setup_dev_environment.sh
-bash tools/ensure_gdai_mcp.sh          # GDAI MCP + Godot editor HTTP bridge
+bash tools/ensure_mcp_stack.sh          # GDAI + Godotiq + MCP Pro bridges
 bash tools/check_dev_environment.sh
 bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh       # story data + unit tests + boot load
@@ -39,7 +39,7 @@ bash tools/run_playtest_smoke.sh       # story data + unit tests + boot load
 
 Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5** — dev boot screen only.
 
-**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`, and `AGENTS.md`. No manual `.tscn` fallback.
+**Workflow:** GodotPrompter + **MCP stack** (GDAI build, Godotiq analyze, Godot MCP Pro test) — see `docs/MCP_STACK.md`, `.cursorrules` §0.
 
 **Cloud agents:** `bash tools/install_cloud_dev.sh` via `.cursor/environment.json`. See [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md) and [`AGENTS.md`](AGENTS.md).
 
@@ -178,7 +178,7 @@ var scenes = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/s
 - [AI Dev Workflow](docs/AI_DEV_WORKFLOW.md) — AI build, unit tests, acceptance criteria
 - [AI Testing Spec](docs/AI_TESTING_SPEC.md) — L0–L6 procedures; GDAI UI discovery & playtesting (§11)
 - [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) — rebuild phases
-- [GDAI Cloud Setup](docs/GDAI_CLOUD_SETUP.md) — MCP + editor bridge
+- [MCP Stack](docs/MCP_STACK.md) — GDAI + Godotiq + Godot MCP Pro roles
 - [Game Design Document](docs/GDD.md)
 - [Storyboard](docs/STORYBOARD.md)
 - [Art Direction](docs/ART_DIRECTION.md)

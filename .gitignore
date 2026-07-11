@@ -10,8 +10,12 @@ tools/__pycache__/
 export.cfg
 export_presets.cfg
 
-# Dev-only plugins (install locally — see game/addons/README.md)
+# Dev-only plugins (install locally — see game/addons/README.md, docs/MCP_STACK.md)
 game/addons/gdai-mcp-plugin-godot/
+game/addons/godotiq/
+game/addons/godot_mcp/
+tools/godot-mcp-pro-server/
+game/addons/godot-mcp-pro*.zip
 
 # Build output
 build/

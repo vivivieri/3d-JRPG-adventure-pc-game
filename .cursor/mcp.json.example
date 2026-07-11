@@ -3,9 +3,25 @@
     "godot-mcp": {
       "command": "uv",
       "args": [
-        "run",
         "/ABSOLUTE/PATH/TO/game/addons/gdai-mcp-plugin-godot/gdai_mcp_server.py"
       ]
+    },
+    "godotiq": {
+      "command": "uvx",
+      "args": ["godotiq"],
+      "env": {
+        "GODOTIQ_PROJECT_ROOT": "/ABSOLUTE/PATH/TO/game"
+      }
+    },
+    "godot-mcp-pro": {
+      "command": "node",
+      "args": [
+        "/ABSOLUTE/PATH/TO/tools/godot-mcp-pro-server/build/index.js",
+        "--minimal"
+      ],
+      "env": {
+        "GODOT_MCP_PORT": "6505"
+      }
     }
   }
 }

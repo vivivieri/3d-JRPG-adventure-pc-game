@@ -5,54 +5,53 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.3+ Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
-**Workflow:** **GodotPrompter + GDAI MCP only** — see `.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`
+**Workflow:** **GodotPrompter + MCP stack** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
+
+| MCP server | Role |
+|------------|------|
+| `godot-mcp` (GDAI) | **Build** scenes — required |
+| `godotiq` | **Analyze** signals/debug — recommended |
+| `godot-mcp-pro` | **Test** scenarios/asserts — recommended for L4/L5 |
 
 ### Environment bootstrap
 
 On every cloud agent start:
 
 ```bash
-bash tools/install_cloud_dev.sh      # Godot, uv, export templates
-bash tools/ensure_gdai_mcp.sh        # Editor + GDAI HTTP bridge — REQUIRED
+bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, optional MCP Pro
+bash tools/ensure_mcp_stack.sh       # Editor + MCP bridges — REQUIRED
 bash tools/check_dev_environment.sh
 ```
 
 Installed components:
 - **Godot 4.3** editor → `godot4` in `~/.local/bin`
-- **uv** → GDAI MCP Python stdio bridge
-- **Export templates** → `.cache/godot-data/godot/export_templates/`
-- **GDAI MCP plugin** → `game/addons/gdai-mcp-plugin-godot/` (dev-only, not in git)
+- **uv / uvx** → GDAI + Godotiq MCP bridges
+- **Node.js** → Godot MCP Pro server (if installed)
+- **GDAI MCP** → `game/addons/gdai-mcp-plugin-godot/` (commercial)
+- **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
+- **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
-### GodotPrompter + GDAI MCP workflow (mandatory)
-
-Use **both** tools together. **Do not** hand-edit `.tscn` or implement editor work without GDAI MCP.
+### MCP workflow (mandatory)
 
 ```
-0. bash tools/ensure_gdai_mcp.sh
-1. GodotPrompter — plan shaders, GDScript, architecture
-2. GDAI MCP     — execute in live Godot Editor (scenes, nodes, materials, F5)
-3. GDAI MCP     — verify viewport + debugger; loop until clean
+0. bash tools/ensure_mcp_stack.sh
+1. GodotPrompter — plan GDScript, shaders, tests
+2. godot-mcp (GDAI) — build scenes, materials, F5 verify
+3. godotiq — trace_flow / signal_map when debugging systems
+4. godot-mcp-pro — run_test_scenario for L4/L5 playthrough asserts
 ```
 
-### If GDAI MCP is unavailable — NOTIFY USER, DO NOT FALL BACK
+**Scene edits:** GDAI only. Do not hand-edit `.tscn`.
 
-| Check | Command / signal |
-|-------|------------------|
-| HTTP bridge | `curl -sf http://127.0.0.1:3571/tools` |
-| Editor running | `pgrep -f 'godot4.*game.*--editor'` |
-| Cursor MCP | `godot-mcp` listed in Cursor Settings → MCP (connected) |
-| Plugin present | `game/addons/gdai-mcp-plugin-godot/` |
+### If MCP unavailable — NOTIFY USER, DO NOT FALL BACK
 
-**If `godot-mcp` is not in the agent's MCP server list:**
+| Server | Check |
+|--------|-------|
+| GDAI | `curl -sf http://127.0.0.1:3571/tools`; plugin + `godot-mcp` in Cursor |
+| Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
+| MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
 
-1. Run `bash tools/ensure_gdai_mcp.sh` (VM bootstrap)
-2. Register MCP:
-   - **Desktop:** Cursor **Settings → Tools & MCP** → add `godot-mcp`
-   - **Cloud:** [cursor.com/agents](https://cursor.com/agents) dashboard → add custom MCP server (see `docs/GDAI_CLOUD_SETUP.md` §4.3)
-3. Restart cloud agent
-4. Agent: **stop implementation** until `godot-mcp` tools appear
-
-**Never substitute** manual `.tscn` editing or headless-only work for GDAI MCP editor integration.
+Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/MCP_STACK.md`.
 
 ### Copyright-safe procedural assets
 
@@ -82,7 +81,7 @@ bash tools/run_e2e_playthrough.sh      # L5 endings (Phase 6+; blocks human QA)
 bash tools/check_asset_compliance.sh
 ```
 
-GDAI MCP F5 + viewport = **L3 editor verify** (mandatory for scene work; see `docs/AI_TESTING_SPEC.md` §5).
+GDAI MCP F5 = **L3**; Godotiq = debug/trace; Godot MCP Pro = L4/L5 scenarios (`docs/AI_TESTING_SPEC.md`, `docs/MCP_STACK.md`).
 
 **Human QA:** Only after L0–L5 pass — `docs/PLAYTEST_SCRIPT.md` (`docs/AI_TESTING_SPEC.md` §8).
 
@@ -104,5 +103,5 @@ Configure in Cursor **Secrets** tab (not committed):
 
 ### Do not ship
 
-- `game/addons/gdai-mcp-plugin-godot/` — dev only, gitignored
+- Do not ship: `game/addons/gdai-mcp-plugin-godot/`, `game/addons/godotiq/`, `game/addons/godot_mcp/`
 - Disable GDAI before Steam export

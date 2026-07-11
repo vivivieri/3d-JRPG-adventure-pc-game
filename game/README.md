@@ -8,7 +8,7 @@ All gameplay scenes and systems were removed for a clean rebuild under the GDAI 
 ```bash
 # From repo root
 bash tools/setup_dev_environment.sh
-bash tools/ensure_gdai_mcp.sh          # GDAI MCP + Godot editor HTTP bridge
+bash tools/ensure_mcp_stack.sh          # GDAI MCP + Godot editor HTTP bridge
 bash tools/check_dev_environment.sh
 ```
 
@@ -22,7 +22,7 @@ Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5**. You should 
 | **GDAI MCP** | Build scenes in the live Godot Editor — **no manual `.tscn` edits** |
 | **`.cursorrules`** | Project workflow + stylized rendering rules |
 
-See `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, and `docs/AI_TESTING_SPEC.md`.
+See `docs/MCP_STACK.md`, `docs/GDAI_CLOUD_SETUP.md`, and `docs/AI_TESTING_SPEC.md`.
 
 ## What exists today
 

@@ -3,7 +3,7 @@
 **Version:** 1.1 (Fresh rebuild)  
 **Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
-**Workflow:** GodotPrompter (plan/code) + GDAI MCP (editor) **only** — see `.cursorrules` §0 and `docs/AI_DEV_WORKFLOW.md`. Run `bash tools/ensure_gdai_mcp.sh` before every session. No manual `.tscn` fallback.
+**Workflow:** GodotPrompter + MCP stack — see `docs/MCP_STACK.md`.
 
 Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
 
