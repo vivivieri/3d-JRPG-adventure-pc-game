@@ -3,7 +3,7 @@
 **Version:** 1.1  
 **Applies to:** All implementation on `main` (Phases 1–8)  
 **Parent doc:** `docs/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
-**Cross-refs:** `AGENTS.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`
+**Cross-refs:** `AGENTS.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/FLOW_QA.md`, `docs/QA_REMEDIATION_LOOP.md`
 
 This document is the **detailed spec** for AI agent testing. It defines **how** to run each layer (L0–L5) and when humans may begin QA.
 
@@ -60,6 +60,8 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 ```
 [L0] validate_story_data: PASS (0 errors)
 ```
+
+**On FAIL:** `bash tools/qa_emit_remediation.sh data-story` — fix `game/data/` per brief; do not patch runtime without data fix when L0 fails.
 
 ---
 
@@ -260,6 +262,8 @@ bash tools/ensure_gdai_mcp.sh
 ```
 [L4] integration: 12/12 PASS
 ```
+
+**On scenario FAIL:** `bash tools/qa_emit_remediation.sh flow-scenario INT-<ID>` — see `docs/FLOW_QA.md`.
 
 ---
 

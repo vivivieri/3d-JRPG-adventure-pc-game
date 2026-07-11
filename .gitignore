@@ -42,3 +42,7 @@ artifacts/audio_reviews/*
 !artifacts/audio_reviews/.gitkeep
 artifacts/model_reviews/*
 !artifacts/model_reviews/.gitkeep
+artifacts/flow_reviews/*
+!artifacts/flow_reviews/.gitkeep
+artifacts/data_reviews/*
+!artifacts/data_reviews/.gitkeep

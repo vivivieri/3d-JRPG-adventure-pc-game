@@ -114,6 +114,7 @@
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
 | [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | **Industry polish refs + FAIL iteration** (anti infinite retry) |
+| [FLOW_QA.md](FLOW_QA.md) | **Game flow QA** — L0/L4/L5 progression + flow remediation |
 | [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |
@@ -130,6 +131,7 @@
 | [AI_DEV_WORKFLOW.md](AI_DEV_WORKFLOW.md) | Build policy, phase acceptance |
 | [AI_TESTING_SPEC.md](AI_TESTING_SPEC.md) | L0–L6 automated + human QA |
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
+| [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
 | [GDAI_CLOUD_SETUP.md](GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |
 | [PLUGIN_INSTALL_GUIDE.md](PLUGIN_INSTALL_GUIDE.md) | MCP plugin install |

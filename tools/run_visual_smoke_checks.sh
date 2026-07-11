@@ -52,9 +52,12 @@ if python3 "${ROOT}/tools/check_screenshot_palette.py" \
   pass "Screenshot palette check (${ZONE})"
 else
   fail "Screenshot palette check (${ZONE})"
+  bash "${ROOT}/tools/qa_emit_remediation.sh" visual-palette "$ZONE" || true
 fi
 
 JURY_LOG="$(mktemp)"
+SCREENSHOT_STEM="$(basename "$SCREENSHOT" .png)"
+JURY_JSON="${ROOT}/artifacts/visual_reviews/${SCREENSHOT_STEM}.jury.json"
 set +e
 python3 "${ROOT}/tools/review_screenshot_vision.py" \
   --zone "$ZONE" \
@@ -66,8 +69,6 @@ python3 "${ROOT}/tools/review_screenshot_vision.py" \
 JURY_EXIT=$?
 set -e
 cat "$JURY_LOG"
-rm -f "$JURY_LOG"
-
 case "$JURY_EXIT" in
   0)
     pass "Multi-LLM vision jury (>=${VISUAL_JURY_MIN_PASS:-2} models)"
@@ -79,8 +80,12 @@ case "$JURY_EXIT" in
     ;;
   *)
     fail "Multi-LLM vision jury consensus FAIL"
+    if [[ -f "$JURY_JSON" ]]; then
+      bash "${ROOT}/tools/qa_emit_remediation.sh" visual-jury "$JURY_JSON" "$ZONE" || true
+    fi
     ;;
 esac
+rm -f "$JURY_LOG"
 
 echo ""
 echo "Visual smoke: ${WARN} warning(s), ${FAIL} failure(s)"

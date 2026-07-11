@@ -50,6 +50,7 @@ if [[ "$TECH_EXIT" -eq 0 ]]; then
   fi
 else
   fail "Technical GLB check (${GATE_MODEL})"
+  bash "${ROOT}/tools/qa_emit_remediation.sh" model-tech "$GATE_MODEL" || true
 fi
 rm -f "$TECH_LOG"
 
@@ -70,7 +71,12 @@ if command -v blender >/dev/null 2>&1; then
       2)
         warn "Model vision jury skipped — no API keys"
         ;;
-      *) fail "Model vision jury FAIL (${GATE_MODEL})" ;;
+      *)
+        fail "Model vision jury FAIL (${GATE_MODEL})"
+        bash "${ROOT}/tools/qa_emit_remediation.sh" \
+          model-jury "${ROOT}/artifacts/model_reviews/${GATE_MODEL}.model_jury.json" \
+          "$GATE_MODEL" || true
+        ;;
     esac
     rm -f "$JURY_LOG"
   else

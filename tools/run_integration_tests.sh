@@ -23,6 +23,9 @@ check() {
   else
     echo "[FAIL] $label"
     FAIL=$((FAIL + 1))
+    if [[ "$label" == *"Boot scene"* ]]; then
+      bash "${ROOT}/tools/qa_emit_remediation.sh" flow-scenario INT-BOOT-01 || true
+    fi
   fi
 }
 

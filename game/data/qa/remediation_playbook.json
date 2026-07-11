@@ -279,6 +279,274 @@
         "Update LICENSES.md + register_asset.py"
       ],
       "escalate": "Curated manual ACE-Step session"
+    },
+    "palette_drift": {
+      "lever": "texture",
+      "root_cause": "Screenshot average color far from zone anchors",
+      "do_not_repeat": "Re-screenshot without palette_remap or sky/fog change",
+      "actions": [
+        "python3 tools/palette_remap.py --zone <zone> on zone albedos",
+        "Tune fog/sky in RENDERING_GUIDE.md zone row",
+        "python3 tools/check_screenshot_palette.py --zone <zone> --screenshot <png>"
+      ],
+      "escalate": "Regenerate zone albedos via ComfyUI NPR workflow"
+    },
+    "primitives_in_scene": {
+      "lever": "mesh_ops",
+      "root_cause": "BoxMesh/CapsuleMesh in player-facing .tscn",
+      "do_not_repeat": "check_scene_visuals.sh pass bypass via greybox path rename",
+      "actions": [
+        "bash tools/check_scene_visuals.sh — fix every reported file",
+        "Replace with GLB per MODEL_QA.md pipeline",
+        "Re-screenshot only after lint PASS"
+      ],
+      "escalate": "MODEL_QA turntable before in-scene placement"
+    }
+  },
+  "data": {
+    "unknown_flag": {
+      "lever": "data_fix",
+      "root_cause": "Flag referenced in JSON but missing from story/flags.json",
+      "do_not_repeat": "Commenting out the reference without registering the flag",
+      "actions": [
+        "Add canonical flag to game/data/story/flags.json per QUEST_AND_FLAGS.md",
+        "Wire quest/dialogue/encounter to use exact snake_case id",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "Reconcile scenes.json vs flags.json in one commit"
+    },
+    "missing_dialogue": {
+      "lever": "data_fix",
+      "root_cause": "scenes.json dialogue id not in chapter_01.json",
+      "do_not_repeat": "Renaming scene_id without adding dialogue block",
+      "actions": [
+        "Add scene block to game/data/dialogue/chapter_01.json",
+        "Match scene_id to STORYBOARD.md beat",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "NARRATIVE_WRITING_GUIDE.md review for beat"
+    },
+    "unknown_item": {
+      "lever": "data_fix",
+      "root_cause": "Item id in grant/require/shop not in items.json",
+      "do_not_repeat": "Typo fix in only one file",
+      "actions": [
+        "Add item to game/data/items/items.json per ITEMS_AND_ECONOMY.md",
+        "Grep all references to item id across game/data/",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "ITEMS_3D_MODEL_GUIDE if pickup mesh needed"
+    },
+    "unknown_enemy": {
+      "lever": "data_fix",
+      "root_cause": "Encounter references enemy not in enemies.json",
+      "do_not_repeat": "Swapping enemy id in encounter only",
+      "actions": [
+        "Add enemy row to game/data/enemies/enemies.json",
+        "Cross-check ENCOUNTER_TABLE.md pacing",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "CHARACTER_BIBLE enemy mesh when art phase ready"
+    },
+    "broken_cinematic_hook": {
+      "lever": "data_fix",
+      "root_cause": "cinematic_hooks.json references invalid scene/flag/item/step",
+      "do_not_repeat": "Deleting hook instead of fixing chain",
+      "actions": [
+        "Read game/data/story/cinematic_hooks.json + CINEMATICS.md",
+        "Fix then[] step ids (dialogue/encounter)",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "Godotiq trace CinematicDirector hook id"
+    },
+    "vo_catalog_mismatch": {
+      "lever": "data_fix",
+      "root_cause": "voice_id or vo_tier mismatch vs vo_prompts.json",
+      "do_not_repeat": "Removing voice_id from dialogue to silence error",
+      "actions": [
+        "Align line voice_id + vo_tier with game/data/audio/vo_prompts.json",
+        "VO_HIT_LIST.md selective clip list only",
+        "python3 tools/validate_story_data.py"
+      ],
+      "escalate": "generate_ai_vo.sh for missing clip"
+    }
+  },
+  "flow": {
+    "INT-BOOT-01": {
+      "lever": "godotiq_trace",
+      "root_cause": "Main scene fails headless boot",
+      "do_not_repeat": "Disabling autoloads randomly to boot",
+      "actions": [
+        "Run godot4 --headless --path game --quit-after 3 — read full Output",
+        "Godotiq validate + trace boot autoload chain",
+        "Fix first error in stack (project.godot main scene, missing JSON)"
+      ],
+      "escalate": "TECHNICAL_DESIGN.md boot path audit"
+    },
+    "INT-MENU-01": {
+      "lever": "ui_navigation",
+      "root_cause": "New Game does not start beach_shore or set game_started",
+      "do_not_repeat": "Hardcoding beach in dev shortcut without menu path",
+      "actions": [
+        "GDAI: MainMenu New Game button → GameManager.start_new_game()",
+        "Assert game/data/starting/new_game.json initial scene + flags",
+        "Godotiq ui_map on main menu scene"
+      ],
+      "escalate": "Godot MCP Pro assert_screen_text on menu"
+    },
+    "INT-ZONE-01": {
+      "lever": "zone_transition",
+      "root_cause": "Beach → village transition errors or wrong spawn",
+      "do_not_repeat": "Teleport cheat without transition volume",
+      "actions": [
+        "LEVEL_DESIGN.md transition trigger + spawn marker",
+        "GDAI: wire ZoneTransition area and target scene",
+        "Headless load ruined_village.tscn after transition script"
+      ],
+      "escalate": "Integration test logs + scene path audit"
+    },
+    "INT-SAVE-01": {
+      "lever": "save_system",
+      "root_cause": "Well save does not persist flags",
+      "do_not_repeat": "Manual flag set in test without save pipeline",
+      "actions": [
+        "SAVE_AND_FAIL_STATES.md — SaveManager slot write/read",
+        "GDAI: well interactable → save UI → confirm file in user://",
+        "Unit test flag round-trip if logic-only bug"
+      ],
+      "escalate": "Godotiq trace save signal chain"
+    },
+    "INT-DLG-01": {
+      "lever": "trigger_wiring",
+      "root_cause": "Torii interact does not start SC-03 dialogue",
+      "do_not_repeat": "Embedding dialogue text in scene script",
+      "actions": [
+        "Data-driven DialogueManager.start(scene_id) from interactable",
+        "Verify chapter_01.json SC-03 block exists",
+        "GDAI: Area3D + interact prompt on torii"
+      ],
+      "escalate": "godotiq_signal_map on torii interactable"
+    },
+    "INT-QUEST-01": {
+      "lever": "flag_logic",
+      "root_cause": "Q1 stage does not advance after inspectables",
+      "do_not_repeat": "Bumping quest stage in JSON without runtime set_flags",
+      "actions": [
+        "QUEST_AND_FLAGS.md Q1 stage conditions",
+        "Each inspectable on_interact must set_flags listed in scenes.json",
+        "Godotiq trace QuestManager.advance after third inspectable"
+      ],
+      "escalate": "trigger_wiring if flags never set"
+    },
+    "INT-FIELD-01": {
+      "lever": "godotiq_trace",
+      "root_cause": "Soft-lock in SC-01–05 field sequence",
+      "do_not_repeat": "Skipping beats via debug flag without fixing gate",
+      "actions": [
+        "Map required flags per scenes.json SC-01–05",
+        "Identify blocking requires_flags on transitions",
+        "Godotiq trace_flow from current scene to next beat"
+      ],
+      "escalate": "Human L6 charter: reproduce with steps"
+    },
+    "INT-CMB-01": {
+      "lever": "combat_logic",
+      "root_cause": "Salt Crab tutorial does not end or grant tutorial_combat_done",
+      "do_not_repeat": "Force-win via debug key without encounter on_win",
+      "actions": [
+        "story_encounters.json SC-05 on_win set_flags",
+        "CombatManager victory state → return to field",
+        "ENCOUNTER_TABLE.md tutorial pacing"
+      ],
+      "escalate": "Unit test combat resolver if math hang"
+    },
+    "INT-CMB-02": {
+      "lever": "combat_logic",
+      "root_cause": "Turn never completes (attack → enemy turn stuck)",
+      "do_not_repeat": "Disabling enemy turn to unstick",
+      "actions": [
+        "Trace turn state machine in CombatManager",
+        "Verify enemy AI returns control to player",
+        "Check UI modal not blocking input"
+      ],
+      "escalate": "Godot MCP Pro input replay scenario"
+    },
+    "INT-PUZ-01": {
+      "lever": "flag_logic",
+      "root_cause": "SC-07 water puzzle does not set water_puzzle_solved or grant saber",
+      "do_not_repeat": "Granting saber via shop debug",
+      "actions": [
+        "PUZZLE_DESIGN.md SC-07 flag + item grant chain",
+        "Puzzle interactables set_flags on correct water level",
+        "items.json tide_saber exists"
+      ],
+      "escalate": "trigger_wiring on tide mechanism"
+    },
+    "INT-BOSS-01": {
+      "lever": "combat_logic",
+      "root_cause": "Shore Wraith win does not grant wraith_pearl",
+      "do_not_repeat": "Grant pearl via dialogue without boss win",
+      "actions": [
+        "Encounter on_win grant_items in story_encounters.json",
+        "Boss phase scripts exit to field",
+        "BOSS_DESIGNS.md Shore Wraith rewards"
+      ],
+      "escalate": "Cinematic hook after boss if scene blocks"
+    },
+    "INT-PARTY-01": {
+      "lever": "flag_logic",
+      "root_cause": "Yuzu does not join party at SC-10",
+      "do_not_repeat": "Adding Yuzu to party.json without runtime join",
+      "actions": [
+        "SC-10 scenes.json sets_flags + party join script",
+        "PartyManager.add_member('yuzu') on scene complete",
+        "Dialogue on_complete flags"
+      ],
+      "escalate": "trigger_wiring on SC-10 entry"
+    },
+    "INT-GATE-01": {
+      "lever": "flag_logic",
+      "root_cause": "Palace gate blocked despite wraith_pearl",
+      "do_not_repeat": "Removing requires_items from scene data",
+      "actions": [
+        "scenes.json gate requires_items + requires_flags",
+        "InventoryManager.has_item('wraith_pearl') at interact",
+        "LEVEL_DESIGN.md palace gate beat"
+      ],
+      "escalate": "zone_transition into palace zone"
+    },
+    "INT-BOSS-02": {
+      "lever": "combat_logic",
+      "root_cause": "Sentinel / Tide Keeper sequence does not reach SC-16 choice",
+      "do_not_repeat": "Skipping boss phases via story flag cheat",
+      "actions": [
+        "BOSS_DESIGNS.md multi-phase flags",
+        "Encounter chain SC-14–16 in scenes.json",
+        "Cinematic hooks between phases"
+      ],
+      "escalate": "E2E partial run logging per scene"
+    },
+    "E2E-SOFT-LOCK": {
+      "lever": "godotiq_trace",
+      "root_cause": "L5 E2E cannot reach ending — progression blocked",
+      "do_not_repeat": "Re-running E2E without identifying blocking scene_id",
+      "actions": [
+        "Log last completed scene_id + active flags from E2E runner",
+        "validate_story_data.py + scenes.json requires_* for next beat",
+        "Fix narrowest INT-* scenario that covers blocker first"
+      ],
+      "escalate": "Human L6 with PLAYTEST_SCRIPT.md steps to blocker"
+    },
+    "E2E-WRONG-ENDING": {
+      "lever": "flag_logic",
+      "root_cause": "Ending choice flags wrong — Rewind/Anchor/Drift mismatch",
+      "do_not_repeat": "Hardcoding ending scene without SC-16 choice gate",
+      "actions": [
+        "REPLAY_DESIGN.md three ending flags",
+        "SC-16 attack input block during choice (S1 bug class)",
+        "Verify ending scene requires correct choice flag"
+      ],
+      "escalate": "DATA_ARCHITECTURE.md ending branch audit"
     }
   }
 }

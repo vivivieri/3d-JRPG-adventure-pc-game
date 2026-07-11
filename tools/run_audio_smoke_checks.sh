@@ -51,6 +51,7 @@ if [[ "$TECH_EXIT" -eq 0 ]]; then
   fi
 else
   fail "Technical check (${GATE_TRACK})"
+  bash "${ROOT}/tools/qa_emit_remediation.sh" audio-tech "$GATE_TRACK" || true
 fi
 rm -f "$TECH_LOG"
 
@@ -69,7 +70,12 @@ case "$JURY_EXIT" in
     warn "Audio LLM jury skipped — no OPENAI/GEMINI keys or manual packet written"
     echo "       Set API keys in Cursor Secrets or complete artifacts/audio_reviews/*.manual.json"
     ;;
-  *) fail "Audio LLM jury consensus FAIL (${GATE_TRACK})" ;;
+  *)
+    fail "Audio LLM jury consensus FAIL (${GATE_TRACK})"
+    bash "${ROOT}/tools/qa_emit_remediation.sh" \
+      audio-jury "${ROOT}/artifacts/audio_reviews/${GATE_TRACK}.jury.json" \
+      "$GATE_TRACK" || true
+    ;;
 esac
 rm -f "$JURY_LOG"
 

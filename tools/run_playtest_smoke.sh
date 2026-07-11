@@ -27,6 +27,47 @@ check() {
   fi
 }
 
+check_story_data() {
+  local label="Story data validates"
+  local log
+  log="$(mktemp)"
+  set +e
+  python3 tools/validate_story_data.py >"$log" 2>&1
+  local rc=$?
+  set -e
+  if [[ "$rc" -eq 0 ]]; then
+    cat "$log"
+    echo "[PASS] $label"
+    PASS=$((PASS + 1))
+  else
+    cat "$log"
+    echo "[FAIL] $label"
+    FAIL=$((FAIL + 1))
+    bash tools/qa_emit_remediation.sh data-story || true
+  fi
+  rm -f "$log"
+}
+
+check_scene_visuals() {
+  local label="Scene visual lint (no primitives)"
+  local log
+  log="$(mktemp)"
+  set +e
+  bash tools/check_scene_visuals.sh >"$log" 2>&1
+  local rc=$?
+  set -e
+  cat "$log"
+  if [[ "$rc" -eq 0 ]]; then
+    echo "[PASS] $label"
+    PASS=$((PASS + 1))
+  else
+    echo "[FAIL] $label"
+    FAIL=$((FAIL + 1))
+    bash tools/qa_emit_remediation.sh scene-primitives || true
+  fi
+  rm -f "$log"
+}
+
 check_visual_smoke() {
   local label="Visual smoke (palette + LLM jury when screenshot exists)"
   local log
@@ -102,8 +143,8 @@ check_model_smoke() {
 echo "==> Fresh-rebuild smoke checks"
 echo ""
 
-check "Story data validates" python3 tools/validate_story_data.py
-check "Scene visual lint (no primitives)" bash tools/check_scene_visuals.sh
+check_story_data
+check_scene_visuals
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh
 check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3

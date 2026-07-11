@@ -198,6 +198,31 @@ python3 tools/qa_remediation_brief.py --technical-audio bgm_village
 
 | Doc | Role |
 |-----|------|
+| `docs/FLOW_QA.md` | **Game flow** — L0/L4/L5 progression + flow levers |
 | `docs/QA_AND_BUG_PROCESS.md` | Gameplay bugs (S0–S3) — separate from art QA loop |
 | `docs/AI_TESTING_SPEC.md` | L0–L6 test layers |
 | `docs/PLAYTEST_SCRIPT.md` | Human L6 after automated pass |
+
+---
+
+## 10. Unified iterative improvement (all domains)
+
+Everything in the project improves the same way:
+
+```
+BUILD → MEASURE (automated QA) → BRIEF on FAIL → change ONE lever → REBUILD
+```
+
+| Domain | Measure | Brief command |
+|--------|---------|---------------|
+| Story data | `validate_story_data.py` | `qa_emit_remediation.sh data-story` |
+| Game flow | `run_integration_tests.sh` / E2E | `qa_emit_remediation.sh flow-scenario INT-*` |
+| 3D model | model smoke / MODEL_QA | `qa_emit_remediation.sh model-tech\|model-jury` |
+| Visual | visual smoke / VISUAL_QA | `qa_emit_remediation.sh visual-palette\|visual-jury` |
+| Audio | audio smoke / AUDIO_QA | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+
+Smoke and integration scripts **auto-emit** briefs on FAIL via `tools/qa_emit_remediation.sh`.
+
+**Game flow detail:** `docs/FLOW_QA.md` — critical path testing, INT-* scenarios, flow lever taxonomy (`data_fix`, `trigger_wiring`, `flag_logic`, `godotiq_trace`, …).
+
+**Stop rules apply to all domains:** max 3 attempts per asset/scenario; same lever class twice → blocked; then escalate (tool tier ↑ or human L6).

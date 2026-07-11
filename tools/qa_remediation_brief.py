@@ -52,6 +52,17 @@ TECH_PATTERN_MAP = [
     (re.compile(r"LUFS|loudness", re.I), "lufs_out_of_range"),
     (re.compile(r"peak|clip", re.I), "peak_too_hot"),
     (re.compile(r"placeholder|generate_game_audio", re.I), "placeholder_audio"),
+    (re.compile(r"palette|color distance|muted", re.I), "palette_drift"),
+    (re.compile(r"BoxMesh|CapsuleMesh|primitive", re.I), "primitives_in_scene"),
+]
+
+DATA_ERROR_MAP = [
+    (re.compile(r"unknown flag|sets unknown flag|requires unknown flag", re.I), "unknown_flag"),
+    (re.compile(r"missing dialogue|references missing dialogue", re.I), "missing_dialogue"),
+    (re.compile(r"unknown item|grants unknown|requires unknown item|Shop unknown", re.I), "unknown_item"),
+    (re.compile(r"unknown enemy", re.I), "unknown_enemy"),
+    (re.compile(r"cinematic_hook", re.I), "broken_cinematic_hook"),
+    (re.compile(r"voice_id|vo_tier|vo_prompts", re.I), "vo_catalog_mismatch"),
 ]
 
 
@@ -165,11 +176,35 @@ def run_technical_audio(track_id: str) -> tuple[str, list[str]]:
     return out, codes
 
 
+def parse_data_errors(text: str) -> list[str]:
+    codes: list[str] = []
+    for line in text.splitlines():
+        for pattern, code in DATA_ERROR_MAP:
+            if pattern.search(line) and code not in codes:
+                codes.append(code)
+    return codes
+
+
+def run_validate_story() -> tuple[str, list[str]]:
+    proc = subprocess.run(
+        [sys.executable, str(ROOT / "tools/validate_story_data.py")],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+    )
+    out = (proc.stdout or "") + (proc.stderr or "")
+    issues = [ln.strip().lstrip("- ").strip() for ln in out.splitlines() if ln.strip().startswith("-")]
+    codes = parse_data_errors(out)
+    return out, codes, issues
+
+
 def revision_log_path(asset_id: str, domain: str) -> Path:
     folder = {
         "visual": ROOT / "artifacts/visual_reviews",
         "model": ROOT / "artifacts/model_reviews",
         "audio": ROOT / "artifacts/audio_reviews",
+        "flow": ROOT / "artifacts/flow_reviews",
+        "data": ROOT / "artifacts/data_reviews",
     }.get(domain, ROOT / "artifacts/qa_reviews")
     return folder / asset_id / "revision_log.json"
 
@@ -295,9 +330,29 @@ def format_brief(
                 "```",
             ]
         )
+    elif domain == "data":
+        lines.extend(
+            [
+                "```bash",
+                "python3 tools/validate_story_data.py",
+                "bash tools/run_unit_tests.sh",
+                "```",
+            ]
+        )
+    elif domain == "flow":
+        lines.extend(
+            [
+                "```bash",
+                "python3 tools/validate_story_data.py",
+                f"bash tools/run_integration_tests.sh  # includes {asset_id} when implemented",
+                "bash tools/run_e2e_playthrough.sh    # Phase 6+",
+                "```",
+            ]
+        )
     lines.append("")
+    doc = "docs/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio") else "docs/FLOW_QA.md"
     lines.append("---")
-    lines.append("See `docs/QA_REMEDIATION_LOOP.md` for industry refs and stop rules.")
+    lines.append(f"See `{doc}` for industry refs and stop rules.")
     return "\n".join(lines)
 
 
@@ -306,6 +361,11 @@ def main() -> int:
     ap.add_argument("--jury", type=Path, help="Path to *.jury.json from review_*_vision.py")
     ap.add_argument("--technical-model", dest="tech_model", metavar="ID")
     ap.add_argument("--technical-audio", dest="tech_audio", metavar="TRACK")
+    ap.add_argument("--validate-story", action="store_true", help="Run validate_story_data.py and brief")
+    ap.add_argument("--flow-scenario", metavar="ID", help="L4/L5 scenario id e.g. INT-QUEST-01")
+    ap.add_argument("--visual-palette", action="store_true", help="Brief for palette_drift technical fail")
+    ap.add_argument("--scene-primitives", action="store_true", help="Brief for BoxMesh lint fail")
+    ap.add_argument("--zone", default="ruined_village", help="Zone for visual palette brief")
     ap.add_argument("--out", type=Path, help="Write brief markdown to file")
     ap.add_argument(
         "--log-attempt",
@@ -346,6 +406,36 @@ def main() -> int:
         asset_id = args.tech_audio
         tech_output, failed_codes = run_technical_audio(args.tech_audio)
         issues = [ln.strip() for ln in tech_output.splitlines() if "FAIL" in ln]
+        entries = lookup_entries(playbook, "technical", failed_codes)
+    elif args.validate_story:
+        domain = "data"
+        asset_id = args.asset_id or "story_data"
+        tech_output, failed_codes, issues = run_validate_story()
+        if not issues:
+            issues = [ln.strip() for ln in tech_output.splitlines() if "FAILED" in ln or "error" in ln.lower()]
+        entries = lookup_entries(playbook, "data", failed_codes)
+        if not entries and issues:
+            entries = lookup_entries(playbook, "data", ["unknown_flag"])
+    elif args.flow_scenario:
+        domain = "flow"
+        asset_id = args.flow_scenario
+        failed_codes = [args.flow_scenario]
+        issues = [f"Integration/E2E scenario {args.flow_scenario} failed"]
+        entries = lookup_entries(playbook, "flow", failed_codes)
+        if not entries:
+            entries = lookup_entries(playbook, "flow", ["INT-FIELD-01"])
+            failed_codes = ["INT-FIELD-01"]
+    elif args.visual_palette:
+        domain = "visual"
+        asset_id = args.asset_id or args.zone
+        failed_codes = ["palette_drift"]
+        issues = [f"Palette check failed for zone {args.zone}"]
+        entries = lookup_entries(playbook, "technical", failed_codes)
+    elif args.scene_primitives:
+        domain = "visual"
+        asset_id = args.asset_id or "scene_visual_lint"
+        failed_codes = ["primitives_in_scene"]
+        issues = ["check_scene_visuals.sh reported primitive meshes in player-facing .tscn"]
         entries = lookup_entries(playbook, "technical", failed_codes)
     else:
         ap.print_help()
