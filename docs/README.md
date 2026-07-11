@@ -87,7 +87,7 @@
 | [CODE_STYLE.md](CODE_STYLE.md) | GDScript conventions, folders, signals, naming |
 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) | Story-first JSON layout, schema versions |
 | [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md) | Save slots, autosave, game over |
-| [LOCALIZATION.md](LOCALIZATION.md) | en / ja / zh, CSV, fonts |
+| [LOCALIZATION.md](LOCALIZATION.md) | en / ja / zh / zh-Hant, dialect VO, CSV, fonts |
 | [TECH_STACK.md](TECH_STACK.md) | Godot 4.7, plugin versions |
 | [PLUGIN_COMPATIBILITY.md](PLUGIN_COMPATIBILITY.md) | GDAI, Godotiq, MCP Pro, GodotSteam |
 

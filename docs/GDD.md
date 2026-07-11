@@ -211,7 +211,7 @@ game/
 | ID | Deliverable | Done when |
 |----|-------------|-----------|
 | M0 | GDD + storyboard + repo | ✓ This doc |
-| M0b | i18n (en / ja / zh) | ✓ Spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+ |
+| M0b | i18n (en / ja / zh / zh-Hant + dialect VO) | ✓ Spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+ |
 | M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
 | M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, COMBAT, UI, etc. |
 | M0e | Story data layer (`game/data/`) | ✓ DATA_ARCHITECTURE, validate_story_data.py |
@@ -234,10 +234,11 @@ game/
 
 ## 15. Localization
 
-Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**.
+Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**, **Traditional Chinese** (粵語 or 國語 VO).
 
 - UI and game data: `game/locale/translations.csv`
-- Story dialogue: inline `{ en, ja, zh }` per line
+- Story dialogue: inline `{ en, ja, zh, zh-Hant }` per line
+- Traditional Chinese VO: player picks **Cantonese** or **Mandarin** in settings (`vo_dialect`)
 - Language selector on main menu; preference saved to `user://settings.json`
 - See `docs/LOCALIZATION.md` for translator workflow
 

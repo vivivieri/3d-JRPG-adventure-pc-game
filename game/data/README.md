@@ -70,8 +70,8 @@ python3 tools/check_asset_compliance.sh   # when assets exist
 | Scene IDs | `SC-00` … `SC-17c` match `STORYBOARD.md` |
 | Flags | snake_case; defined only in `story/flags.json` |
 | Item IDs | snake_case; all drops must exist in `items.json` |
-| i18n inline | `{ "en": "...", "ja": "...", "zh": "..." }` |
-| Selective VO | `voice_id` on line → `game/assets/audio/voice/{locale}/{voice_id}.ogg` |
+| i18n inline | `{ "en": "...", "ja": "...", "zh": "...", "zh-Hant": "..." }` |
+| Selective VO | `voice_id` on line → `game/assets/audio/voice/{locale}/{voice_id}.ogg` (zh-Hant: `.../zh-Hant/{dialect}/...`) |
 
 ## Schema versions
 

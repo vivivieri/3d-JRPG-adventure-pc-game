@@ -12,7 +12,7 @@
 
 | Layer | v1 ship |
 |-------|---------|
-| **Dialogue** | Written text — dialogue box + portraits (canonical en / ja / zh) |
+| **Dialogue** | Written text — dialogue box + portraits (canonical en / ja / zh / zh-Hant) |
 | **Voice acting** | **Selective short VO** — 12 emotional hit clips only (`docs/VO_HIT_LIST.md`) |
 | **VO engine** | ElevenLabs AI (`tools/generate_ai_vo.py`) — not full script |
 | **Music** | BGM per zone / boss (`docs/AUDIO_PRODUCTION_GUIDE.md`) |
@@ -185,12 +185,12 @@ Other silent beats:
 
 ---
 
-## 6. Localization writing (en / ja / zh)
+## 6. Localization writing (en / ja / zh / zh-Hant)
 
 | Rule | Detail |
 |------|--------|
-| **Parity** | Same meaning and emotional beat across all three |
-| **Line count** | JA/ZH may use 1–2 lines where EN uses 1; max +1 line vs EN |
+| **Parity** | Same meaning and emotional beat across all four written locales |
+| **Line count** | JA/ZH/zh-Hant may use 1–2 lines where EN uses 1; max +1 line vs EN |
 | **Choice subtext** | Max 2 lines wrap (`ENDING_DESIGN.md`) |
 | **Names** | Urashima, Yuzu, Roku, Otohime — consistent transliteration in CSV |
 | **Folklore terms** | 龍宮 / 漆箱 / 環貝 — use established terms in JA; gloss in ZH if needed |
@@ -200,15 +200,22 @@ Other silent beats:
 - Roku → 六さん in dialogue (respectful distance)
 - Spirit speech: slightly archaic but readable (avoid heavy classical grammar)
 
-### ZH notes
+### ZH notes (Simplified — `zh`)
 
 - Simplified characters throughout
 - 浦岛, 柚, 六, 乙姬 — fixed cast table in `LOCALIZATION.md`
 
+### zh-Hant notes (Traditional)
+
+- Traditional characters throughout — **not** auto-converted from `zh`
+- 浦島, 柚, 六, 乙姬 — Taiwan/HK standard forms
+- VO dialect (Cantonese / Mandarin) is separate from written text; subtitles always `zh-Hant`
+- Cantonese VO may use spoken particles in TTS direction notes only — subtitles stay literary Traditional
+
 ### QA
 
 - No raw `UI_*` keys in ship build
-- Playtest 1/3 per language (`PLAYTEST_SCRIPT.md`)
+- Playtest 1/4 per written language + both zh-Hant dialects (`PLAYTEST_SCRIPT.md`)
 
 ---
 
@@ -254,7 +261,7 @@ If playtest fails, add lore or one Roku line — **not** SC-07 dialogue (preserv
 
 - [ ] Matches character voice §3
 - [ ] Within line count §4
-- [ ] en / ja / zh drafted together
+- [ ] en / ja / zh / zh-Hant drafted together
 - [ ] No full-VO assumptions — only lines with `voice_id` get audio
 - [ ] Scene ID exists in `STORYBOARD.md`
 - [ ] No morality label on endings
@@ -269,7 +276,7 @@ If playtest fails, add lore or one Roku line — **not** SC-07 dialogue (preserv
 3. Act II horror + boss (SC-08–SC-11)
 4. Act III revelation + choice copy (SC-13–SC-16)
 5. Three ending scripts (SC-17a/b/c)
-6. Localization pass en → ja → zh
+6. Localization pass en → ja → zh → zh-Hant (VO: cant + cmn)
 
 ---
 

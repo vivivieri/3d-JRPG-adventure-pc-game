@@ -16,7 +16,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Stage | Status |
 |-------|--------|
 | **M0** — GDD, storyboard, specs | Done |
-| **M0b** — i18n (en / ja / zh) | Spec done — `LocalizationManager` Phase 2+ |
+| **M0b** — i18n (en / ja / zh / zh-Hant) | Spec done — `LocalizationManager` Phase 2+ |
 | **M0c–M0h** — Art, gameplay, narrative, data, AI workflow docs | Done |
 | **Phase 0** — Dev environment + boot shell | **Done** |
 | **Phases 1–6** — Zones, systems, combat, full story | **Not started** |

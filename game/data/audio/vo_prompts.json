@@ -3,10 +3,28 @@
   "engine": "elevenlabs",
   "model_id": "eleven_multilingual_v2",
   "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
-  "locales": ["en", "ja", "zh"],
+  "output_pattern_dialect": "game/assets/audio/voice/{locale}/{dialect}/{voice_id}.ogg",
+  "text_locales": ["en", "ja", "zh", "zh-Hant"],
+  "locales": ["en", "ja", "zh", "zh-Hant"],
+  "vo_dialects": {
+    "cant": {
+      "label_en": "Cantonese",
+      "label_zh-Hant": "粵語",
+      "applies_to_text_locale": "zh-Hant"
+    },
+    "cmn": {
+      "label_en": "Mandarin",
+      "label_zh-Hant": "國語",
+      "applies_to_text_locale": "zh-Hant"
+    }
+  },
   "characters": {
     "urashima": {
       "elevenlabs_voice_id": "PLACEHOLDER_URASHIMA",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_URASHIMA_CANT",
+        "cmn": "PLACEHOLDER_URASHIMA_CMN"
+      },
       "voice_settings": {
         "stability": 0.55,
         "similarity_boost": 0.72,
@@ -17,6 +35,10 @@
     },
     "yuzu": {
       "elevenlabs_voice_id": "PLACEHOLDER_YUZU",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_YUZU_CANT",
+        "cmn": "PLACEHOLDER_YUZU_CMN"
+      },
       "voice_settings": {
         "stability": 0.62,
         "similarity_boost": 0.78,
@@ -27,6 +49,10 @@
     },
     "roku": {
       "elevenlabs_voice_id": "PLACEHOLDER_ROKU",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_ROKU_CANT",
+        "cmn": "PLACEHOLDER_ROKU_CMN"
+      },
       "voice_settings": {
         "stability": 0.68,
         "similarity_boost": 0.7,
@@ -37,6 +63,10 @@
     },
     "otohime": {
       "elevenlabs_voice_id": "PLACEHOLDER_OTOHIME",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_OTOHIME_CANT",
+        "cmn": "PLACEHOLDER_OTOHIME_CMN"
+      },
       "voice_settings": {
         "stability": 0.7,
         "similarity_boost": 0.8,
@@ -47,6 +77,10 @@
     },
     "tide_keeper": {
       "elevenlabs_voice_id": "PLACEHOLDER_TIDE_KEEPER",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_TIDE_KEEPER_CANT",
+        "cmn": "PLACEHOLDER_TIDE_KEEPER_CMN"
+      },
       "voice_settings": {
         "stability": 0.72,
         "similarity_boost": 0.75,
@@ -57,6 +91,10 @@
     },
     "shore_wraith": {
       "elevenlabs_voice_id": "PLACEHOLDER_SHORE_WRAITH",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_SHORE_WRAITH_CANT",
+        "cmn": "PLACEHOLDER_SHORE_WRAITH_CMN"
+      },
       "voice_settings": {
         "stability": 0.5,
         "similarity_boost": 0.65,
@@ -67,6 +105,10 @@
     },
     "narrator": {
       "elevenlabs_voice_id": "PLACEHOLDER_NARRATOR",
+      "dialect_voices": {
+        "cant": "PLACEHOLDER_NARRATOR_CANT",
+        "cmn": "PLACEHOLDER_NARRATOR_CMN"
+      },
       "voice_settings": {
         "stability": 0.75,
         "similarity_boost": 0.7,

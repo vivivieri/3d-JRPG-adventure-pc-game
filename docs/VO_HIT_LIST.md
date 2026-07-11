@@ -13,7 +13,7 @@
 |------|--------|
 | One VO clip per scene max | Remaining lines in scene stay text-only |
 | Length | ~1–6 seconds spoken |
-| Subtitles | Always on (en / ja / zh text canonical) |
+| Subtitles | Always on (en / ja / zh / zh-Hant text canonical) |
 | Crowds | SC-08 whispers = SFX bed, not voiced |
 | Endings SC-17 | Music + cinematic hero BGM, no narrator VO |
 | Mix | Duck music −6 dB (SC-16: −18 dB effective) |
@@ -37,7 +37,7 @@
 | **P2** | `sc04_roku_01` | SC-04 | Roku | That box isn't a gift. Don't open it. | 4s |
 | **P2** | `sc14_narrator_01` | SC-14 | Narrator | No mortal leaves with stolen time. | 3s |
 
-**Totals:** 12 clips × 3 locales = **36 OGG files**  
+**Totals:** 12 clips × 3 locales (`en`, `ja`, `zh`) + 12 clips × 2 zh-Hant dialects (`cant`, `cmn`) = **60 OGG files**  
 **Text-only by design:** SC-02 inspectables, SC-05–07, SC-12 gate (music), SC-17 endings, choice UI
 
 ---
@@ -49,9 +49,14 @@ game/assets/audio/voice/
   en/sc03_yuzu_01.ogg
   ja/sc03_yuzu_01.ogg
   zh/sc03_yuzu_01.ogg
+  zh-Hant/cant/sc03_yuzu_01.ogg
+  zh-Hant/cmn/sc03_yuzu_01.ogg
 ```
 
-Dialogue lines with `voice_id` in `chapter_01.json` resolve to `res://assets/audio/voice/{locale}/{voice_id}.ogg`.
+Dialogue lines with `voice_id` in `chapter_01.json` resolve to:
+
+- `en` / `ja` / `zh` → `res://assets/audio/voice/{locale}/{voice_id}.ogg`
+- `zh-Hant` → `res://assets/audio/voice/zh-Hant/{vo_dialect}/{voice_id}.ogg` (`cant` or `cmn`)
 
 ---
 
@@ -66,6 +71,8 @@ Dialogue lines with `voice_id` in `chapter_01.json` resolve to `res://assets/aud
 bash tools/generate_ai_vo.sh --list
 bash tools/generate_ai_vo.sh --tier p0 --locale ja
 bash tools/generate_ai_vo.sh --clip sc03_yuzu_01 --locale en --locale ja --locale zh
+bash tools/generate_ai_vo.sh --locale zh-Hant --dialect cant --tier p0
+bash tools/generate_ai_vo.sh --locale zh-Hant --all-dialects
 bash tools/generate_ai_vo.sh --all
 ```
 

@@ -158,7 +158,7 @@ One file per chapter; scenes reference story IDs.
 ```json
 {
   "scene_id": "SC-03",
-  "lines": [{ "speaker": "yuzu", "text": { "en": "...", "ja": "...", "zh": "..." } }],
+  "lines": [{ "speaker": "yuzu", "text": { "en": "...", "ja": "...", "zh": "...", "zh-Hant": "..." } }],
   "on_complete": {
     "set_flags": ["met_yuzu_spirit"],
     "start_quest": "echoes_at_torii"
@@ -229,7 +229,7 @@ One file per chapter; scenes reference story IDs.
 
 | Content | Where |
 |---------|-------|
-| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh }` |
+| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh, zh-Hant }` |
 | UI, tutorials | `game/locale/translations.csv` |
 | Quest titles | JSON inline OR CSV `quest.{id}.title` |
 | Item names | JSON `display_name` + CSV mirror optional |

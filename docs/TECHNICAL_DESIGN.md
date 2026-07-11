@@ -210,7 +210,7 @@ sequenceDiagram
 | Component | File | Notes |
 |-----------|------|-------|
 | `DialogueRunner` | `scripts/narrative/dialogue_runner.gd` | Filters lines by `requires_flags` via `StoryData.filter_dialogue_lines` |
-| `VoiceLinePlayer` | `scripts/story/voice_line_player.gd` ✅ | Resolves `res://assets/audio/voice/{locale}/{voice_id}.ogg` |
+| `VoiceLinePlayer` | `scripts/story/voice_line_player.gd` ✅ | Resolves `res://assets/audio/voice/{locale}/{voice_id}.ogg`; `zh-Hant` uses `{vo_dialect}` subfolder (`cant` / `cmn`) |
 | `CinematicDirector` | `scripts/story/cinematic_director.gd` ✅ | Reads `cinematic_hooks.json`; emits `then_step_requested` |
 | `QuestTracker` | `scripts/narrative/quest_tracker.gd` | HUD + stage evaluation from `main_quests.json` |
 
