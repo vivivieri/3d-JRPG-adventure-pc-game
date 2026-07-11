@@ -5,7 +5,7 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.3+ Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
-**Workflow:** **GodotPrompter + GDAI MCP only** — see `.cursorrules` §0 and `docs/AI_DEV_WORKFLOW.md`
+**Workflow:** **GodotPrompter + GDAI MCP only** — see `.cursorrules` §0, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`
 
 ### Environment bootstrap
 
@@ -78,11 +78,13 @@ python3 tools/validate_story_data.py   # L0 data validation
 bash tools/run_unit_tests.sh           # L1 unit tests
 bash tools/run_playtest_smoke.sh       # L2 smoke (includes L0+L1)
 bash tools/run_integration_tests.sh    # L4 phase gates (Phase 2+)
-bash tools/run_e2e_playthrough.sh      # L5 endings (Phase 6+)
+bash tools/run_e2e_playthrough.sh      # L5 endings (Phase 6+; blocks human QA)
 bash tools/check_asset_compliance.sh
 ```
 
-GDAI MCP F5 + viewport = **L3 editor verify** (mandatory for scene work; not replaced by headless).
+GDAI MCP F5 + viewport = **L3 editor verify** (mandatory for scene work; see `docs/AI_TESTING_SPEC.md` §5).
+
+**Human QA:** Only after L0–L5 pass — `docs/PLAYTEST_SCRIPT.md` (`docs/AI_TESTING_SPEC.md` §8).
 
 ### Rendering & environment (Phase 1)
 

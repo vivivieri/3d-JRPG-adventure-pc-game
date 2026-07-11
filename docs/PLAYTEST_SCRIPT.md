@@ -1,9 +1,12 @@
 # Tides of Urashima — Playtest Script
 
-**Version:** 1.1 (Pre-build)  
+**Version:** 1.2  
 **Target duration:** 2–3 hours  
-**Build:** Implementation branch with full story  
-**Cross-refs:** `docs/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
+**Build:** Release candidate on `main`  
+**Prerequisite:** **All AI tests L0–L5 must pass** on the same commit before any human runs this script. See `docs/AI_TESTING_SPEC.md` §8.  
+**Cross-refs:** `docs/AI_TESTING_SPEC.md`, `docs/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
+
+> **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `bash tools/run_e2e_playthrough.sh` exits 0 (not SKIP).
 
 ---
 
@@ -20,6 +23,15 @@
 ---
 
 ## 2. Session setup
+
+**Before starting — verify AI suite (or ask agent for report):**
+
+- [ ] `bash tools/run_playtest_smoke.sh` → PASS  
+- [ ] `bash tools/run_integration_tests.sh` → PASS  
+- [ ] `bash tools/run_e2e_playthrough.sh` → PASS (not `[SKIP]`)  
+- [ ] Record commit SHA: `git rev-parse HEAD`
+
+**Human session:**
 
 - [ ] Fresh `user://` delete
 - [ ] Record playtime, deaths, ending chosen

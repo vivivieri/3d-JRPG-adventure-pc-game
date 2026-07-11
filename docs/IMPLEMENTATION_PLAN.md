@@ -24,6 +24,7 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |
 | Fresh-rebuild smoke (`tools/run_playtest_smoke.sh`) | Done |
 | AI dev workflow doc (`docs/AI_DEV_WORKFLOW.md`) | Done |
+| AI testing spec (`docs/AI_TESTING_SPEC.md`) | Done |
 | Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | Done |
 
 **Verify:**

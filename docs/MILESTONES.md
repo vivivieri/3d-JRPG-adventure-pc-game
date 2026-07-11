@@ -67,6 +67,7 @@ Track implementation progress against the GDD milestones.
 - [x] Unit test scaffold (`game/tests/unit/`, `tools/run_unit_tests.sh`)
 - [x] Smoke tests (`tools/run_playtest_smoke.sh`)
 - [x] Phase acceptance criteria documented (`docs/AI_DEV_WORKFLOW.md` §4)
+- [x] AI testing spec L0–L6 (`docs/AI_TESTING_SPEC.md`) — human QA after L5
 - [ ] Integration tests (`tools/run_integration_tests.sh`) — expand Phase 2+
 - [ ] E2E three endings (`tools/run_e2e_playthrough.sh`) — Phase 6
 

@@ -1,13 +1,13 @@
 # AI Dev Workflow — Build, Test & Acceptance Criteria
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Applies to:** `main` clean baseline → Phases 1–8 rebuild  
-**Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
+**Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_TESTING_SPEC.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
 
 This document is the **single source of truth** for:
 
 1. **AI build policy** — how Cursor agents implement the game  
-2. **AI testing policy** — what agents must verify automatically vs manually  
+2. **AI testing policy** — what agents must verify automatically vs manually (`docs/AI_TESTING_SPEC.md` for L3–L5 detail)  
 3. **Unit tests** — headless GDScript tests for logic and data  
 4. **Acceptance criteria** — phase gates before moving to the next phase  
 
@@ -63,6 +63,8 @@ Both must be true before implementation:
 
 Testing is **layered**. Higher layers run after lower layers pass.
 
+**Golden rule:** **Human QA (L6) runs only after all AI playthrough layers (L0–L5) pass** on the same release-candidate commit. See `docs/AI_TESTING_SPEC.md` §0.
+
 | Layer | Runner | Who runs it | Purpose |
 |-------|--------|-------------|---------|
 | **L0 — Data validation** | `python3 tools/validate_story_data.py` | AI agent (every commit) | JSON schema, cross-refs, scene IDs |
@@ -70,8 +72,8 @@ Testing is **layered**. Higher layers run after lower layers pass.
 | **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, env health, scene load headless |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
-| **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6+) | Scripted full story + 3 endings (headless or recorded) |
-| **L6 — Human playtest** | `docs/PLAYTEST_SCRIPT.md` | Human (Phase 8 ship) | Feel, pacing, localization quality |
+| **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
+| **L6 — Human QA** | `docs/PLAYTEST_SCRIPT.md` | Human (**after L0–L5 pass**) | Feel, pacing, localization — **ship gate only** |
 
 ### 2.1 AI agent obligations
 
@@ -80,8 +82,10 @@ Before marking **any** implementation task done, the agent must:
 1. Run L0 + L1 + L2 (always)  
 2. Run L3 for any scene/visual change  
 3. Run L4 when the phase acceptance criteria require it  
-4. Report pass/fail counts in the PR or session summary  
-5. **Never** claim “tested” based only on code review  
+4. Run L5 when Phase 6 is complete and on every release candidate  
+5. **Do not request human QA until L0–L5 all pass**  
+6. Report pass/fail counts in the PR or session summary (template: `docs/AI_TESTING_SPEC.md` §10)  
+7. **Never** claim “tested” based only on code review  
 
 ### 2.2 Headless vs editor
 
@@ -90,7 +94,7 @@ Before marking **any** implementation task done, the agent must:
 | Scene tree, materials, lighting | **GDAI MCP** (editor) — headless cannot replace |
 | JSON loading, damage math, flag logic | **Unit tests** (headless) |
 | Scene loads without crash | **Smoke / integration** (headless) |
-| Art checklist (palette, fog, silhouettes) | **GDAI MCP** screenshot + human review at vertical slice gates |
+| Art checklist (palette, fog, silhouettes) | **GDAI MCP** screenshot + `ART_DIRECTION.md` checklist (AI); human art sign-off post-L5 / Phase 7 |
 
 ### 2.3 Test artifacts
 
@@ -201,7 +205,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 1.6 | ProceduralSky (no HDRI) per `RENDERING_GUIDE.md` §4 | GDAI viewport |
 | 1.7 | Greybox scenes exist for all 4 zones; each loads headless | Integration test |
 | 1.8 | L0 + L1 + L2 + L3 pass after every commit | CI scripts |
-| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 checklist | Human + screenshot in `artifacts/screenshots/` |
+| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 checklist | AI screenshot in `artifacts/screenshots/` + L3 pass |
 
 ### Phase 2 — Core systems shell
 
@@ -271,13 +275,15 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 
 ### Phase 8 — Ship prep
 
+**Order:** L0–L5 on release candidate → **then** L6 human QA → export.
+
 | # | Criterion | Verification |
 |---|-----------|--------------|
 | 8.1 | GDAI MCP plugin **disabled and removed** from export tree | Manual + export preset review |
 | 8.2 | Windows export succeeds (`tools/export_windows.sh`) | Artifact exists |
 | 8.3 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
-| 8.4 | Human playtest `docs/PLAYTEST_SCRIPT.md` ≥80% complete without guide | Human sign-off |
-| 8.5 | L0–L5 pass on release candidate | All automated scripts |
+| 8.4 | **L0–L5 pass** on release candidate | All AI test scripts exit 0 |
+| 8.5 | **Human QA** `docs/PLAYTEST_SCRIPT.md` ≥80% complete without guide | Human sign-off **after 8.4** |
 
 ---
 
@@ -295,12 +301,12 @@ bash tools/run_playtest_smoke.sh
 # Phase gates (L4 — add scripts as phases land)
 bash tools/run_integration_tests.sh
 
-# Phase 6+ (L5)
+# Phase 6+ (L5 — required before human QA)
 bash tools/run_e2e_playthrough.sh
 
-# Ship (L6 + compliance)
+# Ship — AI tests first, then human (L6)
 bash tools/check_asset_compliance.sh
-# Human: docs/PLAYTEST_SCRIPT.md
+# Human QA only after L0–L5 pass: docs/PLAYTEST_SCRIPT.md
 ```
 
 ---
@@ -309,8 +315,9 @@ bash tools/check_asset_compliance.sh
 
 | Doc | Focus |
 |-----|-------|
+| `docs/AI_TESTING_SPEC.md` | **Detailed L0–L6 spec**, L3 procedures, E2E matrix, human QA gate |
 | `docs/GDAI_CLOUD_SETUP.md` | MCP install, cloud snapshot, editor bridge |
 | `docs/IMPLEMENTATION_PLAN.md` | What to build each phase |
-| `docs/QA_AND_BUG_PROCESS.md` | Bug severity, triage, human QA |
-| `docs/PLAYTEST_SCRIPT.md` | Manual 2–3 h playthrough (Phase 8) |
+| `docs/QA_AND_BUG_PROCESS.md` | Bug severity, triage, human QA process |
+| `docs/PLAYTEST_SCRIPT.md` | Manual 2–3 h playthrough (**after L5**) |
 | `AGENTS.md` | Cloud agent quick reference |

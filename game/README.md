@@ -22,7 +22,7 @@ Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5**. You should 
 | **GDAI MCP** | Build scenes in the live Godot Editor — **no manual `.tscn` edits** |
 | **`.cursorrules`** | Project workflow + stylized rendering rules |
 
-See `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, and `docs/IMPLEMENTATION_PLAN.md`.
+See `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_DEV_WORKFLOW.md`, and `docs/AI_TESTING_SPEC.md`.
 
 ## What exists today
 
