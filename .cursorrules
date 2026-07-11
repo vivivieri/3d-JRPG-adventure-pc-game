@@ -88,6 +88,7 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 - `docs/VISUAL_QA.md` — screenshot + vision gates (look & feel)
 - `docs/ASSET_COMPLIANCE.md` — license-safe assets only
 - `docs/AUDIO_PRODUCTION_GUIDE.md` — audio layout; ACE-Step ship path
+- `docs/AUDIO_QA.md` — technical + LLM listen gates for BGM
 
 **Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
 

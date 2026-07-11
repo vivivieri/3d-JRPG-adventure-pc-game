@@ -111,6 +111,7 @@
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
+| [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
 | [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |

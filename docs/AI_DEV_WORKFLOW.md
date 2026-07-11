@@ -69,7 +69,7 @@ Testing is **layered**. Higher layers run after lower layers pass.
 |-------|--------|-------------|---------|
 | **L0 — Data validation** | `python3 tools/validate_story_data.py` | AI agent (every commit) | JSON schema, cross-refs, scene IDs |
 | **L1 — Unit tests** | `bash tools/run_unit_tests.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags |
-| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, env health, scene lint; visual jury when screenshots exist |
+| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, env, scene lint; visual + audio smoke when assets exist |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
 | **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |

@@ -119,6 +119,7 @@ All scene work via **GDAI MCP** after GodotPrompter plans.
 Configure in Cursor **Secrets** tab (not committed):
 - GDAI plugin license path / download token (if applicable)
 - `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` — visual jury (`tools/review_screenshot_vision.py`)
+- `OPENAI_API_KEY` / `GEMINI_API_KEY` — audio jury (`tools/review_audio_vision.py`)
 - Steam API keys (Phase 8 only)
 
 ### Do not ship

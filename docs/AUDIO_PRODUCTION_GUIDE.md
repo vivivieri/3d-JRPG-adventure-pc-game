@@ -453,6 +453,8 @@ See `docs/SETTINGS_ACCESSIBILITY.md` §1.
 
 ## 11. QA checklist
 
+Automated gates: `docs/AUDIO_QA.md` (`check_audio_catalog.py`, `check_audio_technical.py`, optional `review_audio_vision.py` on hero BGM).
+
 - [ ] All track IDs in §3 exist as `.ogg` under `game/assets/audio/`
 - [ ] No audible click at loop points (10 min loop test per BGM)
 - [ ] Scene map §4 verified in-game for SC-00, SC-05, SC-09, SC-15, SC-16, SC-17a

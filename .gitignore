@@ -34,3 +34,9 @@ Thumbs.db
 
 # Godot runtime cache (cloud)
 .cache/
+
+# Generated QA jury outputs (keep .gitkeep)
+artifacts/visual_reviews/*
+!artifacts/visual_reviews/.gitkeep
+artifacts/audio_reviews/*
+!artifacts/audio_reviews/.gitkeep

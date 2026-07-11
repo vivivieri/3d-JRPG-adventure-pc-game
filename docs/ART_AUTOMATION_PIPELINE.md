@@ -135,7 +135,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 | Selective VO | ElevenLabs via `generate_ai_vo.sh` | 12 lines only — `docs/VO_HIT_LIST.md` |
 | SFX layers | Freesound **CC0-only** + procedural | Register each file |
 
-**No human mix pass or commission** on the ship path. Quality gate = prompt curation + loudness + playtest listen (L6), not DAW hand-mixing.
+**No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (technical + optional hero jury) + L6 listen.
 
 ---
 
