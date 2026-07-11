@@ -12,22 +12,25 @@
 
 | Layer | v1 ship |
 |-------|---------|
-| **Dialogue** | Written text only — dialogue box + portraits |
-| **Voice acting** | **None** — no recorded VO lines |
+| **Dialogue** | Written text — dialogue box + portraits (canonical en / ja / zh) |
+| **Voice acting** | **Selective short VO** — 12 emotional hit clips only (`docs/VO_HIT_LIST.md`) |
+| **VO engine** | ElevenLabs AI (`tools/generate_ai_vo.py`) — not full script |
 | **Music** | BGM per zone / boss (`docs/AUDIO_PRODUCTION_GUIDE.md`) |
-| **Sound** | SFX + ambient beds only |
+| **Sound** | SFX + ambient beds; SC-08 crowd = whisper bed, not voiced |
+
+Lines with `voice_id` in `chapter_01.json` play one short clip; **all other lines stay text-only**.
 
 ### What “narrator” means
 
-`speaker: "narrator"` in dialogue JSON is **on-screen text**, not voice-over. Do not write as if a voice actor will read it aloud.
+`speaker: "narrator"` is **on-screen text** by default. Only `sc14_narrator_01` has optional VO (P2 tier).
 
 | Term in old notes | Correct v1 term |
 |-------------------|-----------------|
-| Voice-over | Narrator line (text) |
-| Spirit voice | Yuzu dialogue line (text) + optional reverb SFX |
-| Drowned whispers (SC-08) | Layered **text** lines + whisper SFX bed — not VO |
+| Spirit voice | Yuzu dialogue (text) + optional `sc03_yuzu_01` VO + reverb SFX |
+| Drowned whispers (SC-08) | Layered **text** + whisper SFX bed — not 20 voice actors |
+| Full voice acting | **Rejected** — hurts pacing in 2–3 h game |
 
-**Mix implication:** No voice bus. Dialogue readability = font size + contrast only (`docs/SETTINGS_ACCESSIBILITY.md`).
+**Mix implication:** Voice bus for `voice_id` clips only; duck music −6 dB (SC-16: −18 dB). Subtitles always on.
 
 ---
 
@@ -252,7 +255,7 @@ If playtest fails, add lore or one Roku line — **not** SC-07 dialogue (preserv
 - [ ] Matches character voice §3
 - [ ] Within line count §4
 - [ ] en / ja / zh drafted together
-- [ ] No VO assumptions
+- [ ] No full-VO assumptions — only lines with `voice_id` get audio
 - [ ] Scene ID exists in `STORYBOARD.md`
 - [ ] No morality label on endings
 - [ ] Registered in `chapter_01.json` if shippable

@@ -11,7 +11,9 @@ game/data/
     flags.json               # Canonical flag registry
     cinematic_hooks.json     # SC-08 vignette + SC-12 gate reveal hooks
   dialogue/
-    chapter_01.json          # Dialogue by scene_id (en / ja / zh)
+    chapter_01.json          # Dialogue by scene_id; optional voice_id per line
+  audio/
+    vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
   quests/
     main_quests.json         # 5 main quests
   encounters/

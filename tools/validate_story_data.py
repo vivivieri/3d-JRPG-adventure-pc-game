@@ -32,6 +32,9 @@ def main() -> int:
     hooks = load("story/cinematic_hooks.json").get("hooks", [])
     hook_ids = {h["id"] for h in hooks}
     enc_ids = {e["id"] for e in encounters}
+    vo_catalog = load("audio/vo_prompts.json")
+    vo_clip_ids = set(vo_catalog.get("clips", {}).keys())
+    dialogue_voice_ids: set[str] = set()
 
     # Dialogue scenes referenced in story spine
     for s in scenes:
@@ -72,6 +75,17 @@ def main() -> int:
                 for fk in req.keys():
                     if fk not in flags:
                         errors.append(f"dialogue line requires unknown flag: {fk} ({block['scene_id']})")
+            vid = line.get("voice_id")
+            if vid:
+                dialogue_voice_ids.add(vid)
+                if vid not in vo_clip_ids:
+                    errors.append(f"dialogue voice_id missing from vo_prompts.json: {vid} ({block['scene_id']})")
+                tier = line.get("vo_tier")
+                if tier and vo_catalog.get("clips", {}).get(vid, {}).get("tier") != tier:
+                    errors.append(f"dialogue vo_tier mismatch for {vid}: {tier}")
+
+    for vid in vo_clip_ids - dialogue_voice_ids:
+        errors.append(f"vo_prompts clip not used in dialogue: {vid}")
 
     # Cinematic hooks
     for hook in hooks:
@@ -132,7 +146,7 @@ def main() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"OK — {len(scene_ids)} scenes, {len(dialogue_ids)} dialogue blocks, {len(quests)} quests, {len(encounters)} encounters, {len(hooks)} cinematic hooks")
+    print(f"OK — {len(scene_ids)} scenes, {len(dialogue_ids)} dialogue blocks, {len(quests)} quests, {len(encounters)} encounters, {len(hooks)} cinematic hooks, {len(vo_clip_ids)} vo clips")
     return 0
 
 
