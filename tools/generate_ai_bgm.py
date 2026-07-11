@@ -34,9 +34,14 @@ PROCEDURAL = ROOT / "tools/generate_game_audio.py"
 
 # Tracks with procedural fallback in generate_game_audio.py
 PROCEDURAL_IDS = {
-    "bgm_menu", "bgm_prologue", "bgm_village", "bgm_caves", "bgm_combat", "bgm_palace",
+    "bgm_menu", "bgm_prologue", "cine_opening_hero",
+    "bgm_village", "bgm_caves", "bgm_combat", "bgm_palace",
     "bgm_boss", "bgm_boss_tide_keeper_p2", "bgm_boss_tide_keeper_p3",
-    "bgm_ending_rewind", "bgm_ending_anchor", "bgm_ending_drift",
+    "cine_boss_wraith_intro", "cine_boss_sentinel_intro", "cine_boss_tide_keeper_intro",
+    "bgm_ending_rewind", "cine_ending_rewind_hero",
+    "bgm_ending_anchor", "cine_ending_anchor_hero",
+    "bgm_ending_drift", "cine_ending_drift_hero",
+    "sting_boss_intro", "sting_combat_start", "sting_yuzu_join", "sting_choice_silence",
     "sfx_ui", "sfx_ui_confirm", "sfx_hit", "sfx_victory",
 }
 

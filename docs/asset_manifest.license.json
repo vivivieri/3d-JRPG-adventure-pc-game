@@ -304,6 +304,126 @@
       "author": "Project tooling",
       "used_for": "Procedural sfx: sfx_victory",
       "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_prologue.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_prologue",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/cine_opening_hero.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: cine_opening_hero",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_boss.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_boss",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_boss_tide_keeper_p2.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_boss_tide_keeper_p2",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/bgm_boss_tide_keeper_p3.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: bgm_boss_tide_keeper_p3",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/cine_ending_rewind_hero.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: cine_ending_rewind_hero",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/cine_ending_anchor_hero.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: cine_ending_anchor_hero",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/bgm/cine_ending_drift_hero.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural bgm: cine_ending_drift_hero",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/cine_boss_wraith_intro.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: cine_boss_wraith_intro",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/cine_boss_sentinel_intro.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: cine_boss_sentinel_intro",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/cine_boss_tide_keeper_intro.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: cine_boss_tide_keeper_intro",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/sting_boss_intro.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sting_boss_intro",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/sting_combat_start.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sting_combat_start",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/sting_yuzu_join.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sting_yuzu_join",
+      "notes": "Copyright-safe; replace before final ship if desired"
+    },
+    {
+      "path": "game/assets/audio/stings/sting_choice_silence.ogg",
+      "license": "ORIGINAL",
+      "source": "Procedural synthesis (tools/generate_game_audio.py)",
+      "author": "Project tooling",
+      "used_for": "Procedural sfx: sting_choice_silence",
+      "notes": "Copyright-safe; replace before final ship if desired"
     }
   ]
 }
