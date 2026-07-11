@@ -19,6 +19,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
+
 PROMPTS = ROOT / "game/data/audio/ace_step_prompts.json"
 
 HERO_TRACKS = [
@@ -227,6 +230,8 @@ def main() -> int:
             return 2
         try:
             result = fn(prompt, wav_b64)
+            if not result.get("skipped") and not result.get("error"):
+                result = normalize_jury_review(result, "audio")
         except (urllib.error.URLError, urllib.error.HTTPError, ValueError, KeyError, json.JSONDecodeError) as exc:
             result = {"model": name, "error": str(exc), "overall_pass": False}
         report["reviews"].append(result)
@@ -237,32 +242,36 @@ def main() -> int:
             print(f"[ERR]  {name}: {result['error']}")
             continue
         active += 1
-        ok = bool(result.get("overall_pass"))
+        ok = bool(result.get("acceptance", {}).get("valid_pass", result.get("overall_pass")))
         if ok:
             passed += 1
         print(f"[{'PASS' if ok else 'FAIL'}] {result.get('model', name)}: {result.get('summary', '')}")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     out_path = args.out_dir / f"{args.track}.jury.json"
-    report["active_models"] = active
-    report["passed_models"] = passed
-    report["consensus_pass"] = active >= args.min_pass and passed >= args.min_pass
+    consensus = evaluate_jury_consensus(report, "audio")
+    report["acceptance"] = consensus
+    report["active_models"] = consensus["active_models"]
+    report["passed_models"] = consensus["passed_models"]
+    report["consensus_pass"] = consensus["consensus_pass"]
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"\nWrote {out_path}")
 
     if active == 0:
         manual = write_manual_packet(args.out_dir, args.track, path, prompt)
         print(f"No audio API keys. Manual jury: {manual}")
+        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
         return 2
     if report["consensus_pass"]:
-        print(f"CONSENSUS PASS ({passed}/{active})")
+        print(f"CONSENSUS PASS ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
         return 0
-    print(f"CONSENSUS FAIL ({passed}/{active}, need {args.min_pass})")
+    print(f"CONSENSUS FAIL ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
     print(
         f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} "
         f"--asset-id {args.track} --log-attempt"
     )
     print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
+    print("See docs/ACCEPTANCE_CRITERIA.md — PASS requires measurable criteria met.")
     return 1
 
 

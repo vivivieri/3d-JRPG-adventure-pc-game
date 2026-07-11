@@ -1,0 +1,245 @@
+{
+  "version": "1.0",
+  "authority": "Source of truth for measurable QA pass/fail. If a check is not listed here with a threshold, it cannot block ship.",
+  "global_rules": {
+    "warn_is_not_pass": true,
+    "skip_is_not_pass": true,
+    "exit_zero_with_warn_is_not_ship_pass": true,
+    "jury_min_pass_models": 2,
+    "jury_min_active_models": 2,
+    "jury_min_confidence": 0.65,
+    "remediation_required_on_fail": true,
+    "evidence_required_for_pass": true,
+    "agent_must_cite_criterion_id": true
+  },
+  "invalid_pass_patterns": [
+    "F5 runs with 0 errors but no screenshot",
+    "Jury skipped (no API keys) counted as PASS",
+    "WARN-only technical lint counted as PASS for M5 ship",
+    "overall_pass true with confidence below jury_min_confidence",
+    "overall_pass true when any criterion boolean is false",
+    "Re-running jury without rebuilding asset",
+    "Lowering min_pass or thresholds to force green",
+    "Marking phase complete with E2E script SKIP",
+    "Claiming visual PASS without artifacts/screenshots evidence",
+    "Procedural placeholder audio/model marked ship-ready"
+  ],
+  "gates": {
+    "L0_story_data": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_story_data.py",
+      "description": "Story JSON cross-references are consistent",
+      "pass": { "exit_code": 0, "error_count": 0 },
+      "evidence": [],
+      "design_ref": "docs/DATA_ARCHITECTURE.md"
+    },
+    "L1_unit_tests": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/run_unit_tests.sh",
+      "pass": { "exit_code": 0, "failed_tests": 0 },
+      "evidence": [],
+      "design_ref": "docs/AI_DEV_WORKFLOW.md §3"
+    },
+    "L2_boot_headless": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "godot4 --headless --path game --quit-after 3",
+      "pass": { "exit_code": 0 },
+      "evidence": [],
+      "design_ref": "docs/TECHNICAL_DESIGN.md"
+    },
+    "L2_scene_primitives": {
+      "layer": "L2",
+      "domain": "visual",
+      "command": "bash tools/check_scene_visuals.sh",
+      "pass": { "exit_code": 0, "banned_mesh_count": 0 },
+      "evidence": [],
+      "design_ref": "docs/VISUAL_QA.md §L1"
+    },
+    "L2_visual_palette": {
+      "layer": "L2",
+      "domain": "visual",
+      "command": "python3 tools/check_screenshot_palette.py",
+      "metrics": {
+        "max_avg_anchor_dist": { "op": "<=", "value": 85.0, "unit": "rgb_euclidean" },
+        "max_bright_ratio": { "op": "<=", "value": 0.35, "unit": "sample_ratio" }
+      },
+      "evidence": ["artifacts/screenshots/phase1_{zone}_gameplay.png"],
+      "design_ref": "docs/ART_DIRECTION.md §1"
+    },
+    "L2_model_catalog": {
+      "layer": "L2",
+      "domain": "model",
+      "command": "python3 tools/check_model_catalog.py --phase {phase}",
+      "pass": { "missing_models": 0 },
+      "evidence": ["game/data/models/qa_catalog.json"],
+      "design_ref": "docs/MODEL_QA.md §M1"
+    },
+    "L2_model_technical": {
+      "layer": "L2",
+      "domain": "model",
+      "command": "python3 tools/check_model_technical.py",
+      "metrics_source": "game/data/models/qa_catalog.json",
+      "per_model": {
+        "tris": { "op": "between", "from": "tris_min", "to": "tris_max" },
+        "embedded_textures": { "op": ">=", "from": "texture_min" },
+        "hero_min_bytes_dev": { "op": ">=", "value": 100000, "ship_only_warn": true }
+      },
+      "ship_extra": { "greybox_banned": true },
+      "evidence": ["game/assets/models/**/*.glb"],
+      "design_ref": "docs/MODEL_QA.md §M2"
+    },
+    "L2_audio_technical": {
+      "layer": "L2",
+      "domain": "audio",
+      "command": "python3 tools/check_audio_technical.py",
+      "metrics": {
+        "sample_rate_hz": { "op": "==", "value": 44100 },
+        "channels": { "op": "in", "value": [1, 2] },
+        "bgm_lufs": { "op": "within", "target": -16.0, "tolerance": 4.0 },
+        "bgm_true_peak_dbtp": { "op": "<=", "value": -1.0 },
+        "voice_lufs": { "op": "within", "target": -18.0, "tolerance": 4.0 },
+        "amb_lufs": { "op": "within", "target": -22.0, "tolerance": 4.0 }
+      },
+      "ship_extra": { "procedural_placeholder_banned": true },
+      "evidence": ["game/assets/audio/**/*.ogg"],
+      "design_ref": "docs/AUDIO_QA.md §A2"
+    },
+    "L2_audio_catalog": {
+      "layer": "L2",
+      "domain": "audio",
+      "command": "python3 tools/check_audio_catalog.py --phase {phase}",
+      "pass": { "missing_tracks": 0 },
+      "design_ref": "docs/AUDIO_QA.md §A1"
+    },
+    "L4_integration": {
+      "layer": "L4",
+      "domain": "flow",
+      "command": "bash tools/run_integration_tests.sh",
+      "pass": { "exit_code": 0, "failed_scenarios": 0 },
+      "evidence": ["game/tests/integration/"],
+      "design_ref": "docs/AI_TESTING_SPEC.md §6"
+    },
+    "L5_e2e_three_endings": {
+      "layer": "L5",
+      "domain": "flow",
+      "command": "bash tools/run_e2e_playthrough.sh",
+      "pass": { "exit_code": 0, "skip_allowed": false, "endings_passed": ["rewind", "anchor", "drift"] },
+      "evidence": ["artifacts/videos/e2e_*.mp4"],
+      "design_ref": "docs/AI_TESTING_SPEC.md §7"
+    },
+    "L6_human_playtest": {
+      "layer": "L6",
+      "domain": "flow",
+      "command": "docs/PLAYTEST_SCRIPT.md",
+      "pass": { "completion_percent": 80, "s0_s1_open": 0 },
+      "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
+      "design_ref": "docs/PLAYTEST_SCRIPT.md"
+    },
+    "M5_asset_compliance": {
+      "layer": "ship",
+      "domain": "compliance",
+      "command": "bash tools/check_asset_compliance.sh",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/ASSET_COMPLIANCE.md"
+    }
+  },
+  "jury": {
+    "visual": {
+      "gate_id": "L2_visual_jury",
+      "min_pass_models": 2,
+      "min_active_models": 2,
+      "min_confidence": 0.65,
+      "require_issues_on_fail": true,
+      "criteria": {
+        "v1_primitives_visible": { "expect": false, "label": "No obvious axis-aligned box primitives" },
+        "v2_muted_palette": { "expect": true, "label": "Muted coastal palette" },
+        "v3_npr_not_pbr": { "expect": true, "label": "Stylized NPR not glossy PBR" },
+        "v4_japanese_coastal": { "expect": true, "label": "Japanese coastal motifs" },
+        "v5_silhouette_readable": { "expect": true, "label": "Readable silhouettes" },
+        "v6_ui_clean": { "expect": true, "label": "UI clean if visible" }
+      },
+      "evidence": ["artifacts/screenshots/*.png", "artifacts/visual_reviews/*.jury.json"],
+      "design_ref": "docs/VISUAL_QA.md §2G"
+    },
+    "model": {
+      "gate_id": "L2_model_jury",
+      "min_pass_models": 2,
+      "min_active_models": 2,
+      "min_confidence": 0.65,
+      "require_issues_on_fail": true,
+      "criteria": {
+        "m1_not_block_primitive": { "expect": true, "label": "Not block primitive" },
+        "m2_japanese_coastal_style": { "expect": true, "label": "Japanese coastal style" },
+        "m3_adult_not_chibi": { "expect": true, "label": "Adult proportions not chibi" },
+        "m4_silhouette_readable": { "expect": true, "label": "Silhouette readable" },
+        "m5_sufficient_detail": { "expect": true, "label": "Sufficient NPR detail" },
+        "m6_matches_brief": { "expect": true, "label": "Matches CHARACTER_BIBLE brief" }
+      },
+      "evidence": ["artifacts/model_reviews/*/front.png", "artifacts/model_reviews/*.model_jury.json"],
+      "design_ref": "docs/MODEL_QA.md §M3b"
+    },
+    "audio": {
+      "gate_id": "L2_audio_jury",
+      "min_pass_models": 2,
+      "min_active_models": 2,
+      "min_confidence": 0.65,
+      "require_issues_on_fail": true,
+      "hero_tracks_only": true,
+      "criteria": {
+        "a1_not_cheap_procedural": { "expect": true, "label": "Not cheap procedural placeholder" },
+        "a2_melancholy_coastal": { "expect": true, "label": "Melancholy coastal mood" },
+        "a3_not_upbeat_pop": { "expect": true, "label": "Not upbeat pop/EDM" },
+        "a4_instrumental_no_vocals": { "expect": true, "label": "Instrumental no vocals" },
+        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" }
+      },
+      "evidence": ["artifacts/audio_reviews/*.jury.json"],
+      "design_ref": "docs/AUDIO_QA.md §A3"
+    }
+  },
+  "phase_gates": {
+    "phase_1": {
+      "required_gates": [
+        "L0_story_data",
+        "L1_unit_tests",
+        "L2_boot_headless",
+        "L2_scene_primitives"
+      ],
+      "conditional_gates": [
+        "L2_visual_palette",
+        "L2_visual_jury",
+        "L2_model_technical",
+        "L2_model_jury",
+        "L2_audio_technical",
+        "L2_audio_jury"
+      ],
+      "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS",
+      "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 1"
+    },
+    "phase_6": {
+      "required_gates": ["L0_story_data", "L1_unit_tests", "L2_boot_headless", "L4_integration", "L5_e2e_three_endings"],
+      "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 6"
+    },
+    "m5_ship": {
+      "required_gates": [
+        "L0_story_data",
+        "L1_unit_tests",
+        "L2_boot_headless",
+        "L2_scene_primitives",
+        "L2_model_technical",
+        "L2_model_jury",
+        "L2_visual_palette",
+        "L2_visual_jury",
+        "L2_audio_technical",
+        "L2_audio_jury",
+        "L4_integration",
+        "L5_e2e_three_endings",
+        "M5_asset_compliance"
+      ],
+      "ship_flags": { "check_model_technical_ship": true, "check_audio_technical_ship": true },
+      "design_ref": "docs/MILESTONES.md M5"
+    }
+  }
+}

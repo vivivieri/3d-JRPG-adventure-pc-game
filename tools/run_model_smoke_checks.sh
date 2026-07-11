@@ -51,6 +51,8 @@ if [[ "$TECH_EXIT" -eq 0 ]]; then
 else
   fail "Technical GLB check (${GATE_MODEL})"
   bash "${ROOT}/tools/qa_emit_remediation.sh" model-tech "$GATE_MODEL" || true
+  python3 "${ROOT}/tools/qa_write_gate_result.py" --gate L2_model_technical --status fail \
+    --message "technical lint failed for ${GATE_MODEL}" 2>/dev/null || true
 fi
 rm -f "$TECH_LOG"
 

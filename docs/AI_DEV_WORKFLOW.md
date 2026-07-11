@@ -9,7 +9,7 @@ This document is the **single source of truth** for:
 1. **AI build policy** — how Cursor agents implement the game  
 2. **AI testing policy** — what agents must verify automatically vs manually (`docs/AI_TESTING_SPEC.md` for L3–L5 detail)  
 3. **Unit tests** — headless GDScript tests for logic and data  
-4. **Acceptance criteria** — phase gates before moving to the next phase  
+4. **Acceptance criteria** — measurable phase gates (`docs/ACCEPTANCE_CRITERIA.md`, `game/data/qa/acceptance_criteria.json`)
 
 ---
 

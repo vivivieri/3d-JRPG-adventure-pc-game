@@ -15,6 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from model_qa_lib import ROOT, load_catalog  # noqa: E402
+from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
 
 VIEWS = ("front", "side", "back", "three_quarter")
 
@@ -200,6 +201,8 @@ def main() -> int:
             return 2
         try:
             result = fn(prompt, images)
+            if not result.get("skipped") and not result.get("error"):
+                result = normalize_jury_review(result, "model")
         except (urllib.error.URLError, urllib.error.HTTPError, ValueError, KeyError, json.JSONDecodeError) as exc:
             result = {"model": name, "error": str(exc), "overall_pass": False}
         report["reviews"].append(result)
@@ -210,15 +213,17 @@ def main() -> int:
             print(f"[ERR]  {name}: {result['error']}")
             continue
         active += 1
-        ok = bool(result.get("overall_pass"))
+        ok = bool(result.get("acceptance", {}).get("valid_pass", result.get("overall_pass")))
         if ok:
             passed += 1
         print(f"[{'PASS' if ok else 'FAIL'}] {result.get('model', name)}: {result.get('summary', '')}")
 
     out_path = args.out_dir / f"{args.model}.model_jury.json"
-    report["active_models"] = active
-    report["passed_models"] = passed
-    report["consensus_pass"] = active >= args.min_pass and passed >= args.min_pass
+    consensus = evaluate_jury_consensus(report, "model")
+    report["acceptance"] = consensus
+    report["active_models"] = consensus["active_models"]
+    report["passed_models"] = consensus["passed_models"]
+    report["consensus_pass"] = consensus["consensus_pass"]
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"\nWrote {out_path}")
 
@@ -237,11 +242,12 @@ def main() -> int:
             encoding="utf-8",
         )
         print(f"No API keys. Manual jury: {manual}")
+        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
         return 2
     if report["consensus_pass"]:
-        print(f"CONSENSUS PASS ({passed}/{active})")
+        print(f"CONSENSUS PASS ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
         return 0
-    print(f"CONSENSUS FAIL ({passed}/{active}, need {args.min_pass})")
+    print(f"CONSENSUS FAIL ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
     print(
         f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} "
         f"--asset-id {args.model} --log-attempt"

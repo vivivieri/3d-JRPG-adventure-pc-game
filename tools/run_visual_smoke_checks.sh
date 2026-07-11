@@ -53,6 +53,8 @@ if python3 "${ROOT}/tools/check_screenshot_palette.py" \
 else
   fail "Screenshot palette check (${ZONE})"
   bash "${ROOT}/tools/qa_emit_remediation.sh" visual-palette "$ZONE" || true
+  python3 "${ROOT}/tools/qa_write_gate_result.py" --gate L2_visual_palette --status fail \
+    --message "palette check failed zone=${ZONE}" 2>/dev/null || true
 fi
 
 JURY_LOG="$(mktemp)"

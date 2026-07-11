@@ -5,7 +5,7 @@
 
 **Rule:** Models pass **catalog + GLB technical lint + turntable vision jury** (hero/set-pieces) before ship. In-game screenshot QA (`docs/VISUAL_QA.md`) catches placement; this doc catches **the asset itself**.
 
-**Cross-refs:** `docs/CHARACTER_BIBLE.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/QA_REMEDIATION_LOOP.md`, `game/data/models/qa_catalog.json`
+**Cross-refs:** `docs/CHARACTER_BIBLE.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/QA_REMEDIATION_LOOP.md`, `docs/ACCEPTANCE_CRITERIA.md`, `game/data/models/qa_catalog.json`
 
 ---
 
@@ -87,7 +87,7 @@ Sends **4 turntable PNGs** to vision models with `CHARACTER_BIBLE` / catalog bri
 | M5 | **Sufficient detail** for high-detail NPR target — not low-poly kitbash? |
 | M6 | Matches model brief (coat, box, torii, etc.)? |
 
-**Pass:** ≥2 models `overall_pass: true`.
+**Pass:** ≥2 models `acceptance.valid_pass: true` (confidence ≥ 0.65, all M1–M6 met). See `docs/ACCEPTANCE_CRITERIA.md` gate `L2_model_jury`.
 
 ### Why turntable + in-game screenshot?
 

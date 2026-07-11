@@ -5,7 +5,7 @@
 
 **Rule:** Flow tasks pass **data validation (L0) → integration scenarios (L4) → E2E spine (L5)** before human playtest. Every FAIL produces a **flow remediation brief** with one changed lever — same as art/audio (`docs/QA_REMEDIATION_LOOP.md`).
 
-**Cross-refs:** `docs/AI_TESTING_SPEC.md`, `docs/TECHNICAL_DESIGN.md`, `docs/QUEST_AND_FLAGS.md`, `docs/QA_REMEDIATION_LOOP.md`, `game/data/qa/remediation_playbook.json` §`flow` / §`data`
+**Cross-refs:** `docs/AI_TESTING_SPEC.md`, `docs/TECHNICAL_DESIGN.md`, `docs/QUEST_AND_FLAGS.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/ACCEPTANCE_CRITERIA.md`, `game/data/qa/remediation_playbook.json` §`flow` / §`data`
 
 ---
 

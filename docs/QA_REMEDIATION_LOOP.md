@@ -5,7 +5,7 @@
 
 **Rule:** Every FAIL produces a **structured remediation brief** with a **changed lever** before the next build. Same pipeline + same prompt = **blocked** after 2 attempts.
 
-**Cross-refs:** `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`, `docs/ART_AUTOMATION_PIPELINE.md`, `game/data/qa/remediation_playbook.json`
+**Cross-refs:** `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`, `docs/FLOW_QA.md`, `docs/ACCEPTANCE_CRITERIA.md`, `docs/ART_AUTOMATION_PIPELINE.md`, `game/data/qa/remediation_playbook.json`
 
 ---
 

@@ -92,6 +92,7 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 - `docs/AUDIO_QA.md` — technical + LLM listen gates for BGM
 - `docs/QA_REMEDIATION_LOOP.md` — industry polish refs + FAIL iteration (anti infinite retry)
 - `docs/FLOW_QA.md` — game flow QA + progression remediation loop
+- `docs/ACCEPTANCE_CRITERIA.md` — measurable QA pass/fail (gates, jury, evidence)
 
 **Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
 

@@ -5,7 +5,7 @@
 
 **Rule:** AI does **not** pass visual work on log output or node counts alone. It must pass **automated visual gates** + **screenshot review** against `docs/ART_DIRECTION.md`.
 
-**Cross-refs:** `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/MODEL_QA.md` (asset QA before in-scene), `docs/QA_REMEDIATION_LOOP.md` (FAIL → fix loop)
+**Cross-refs:** `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/MODEL_QA.md` (asset QA before in-scene), `docs/QA_REMEDIATION_LOOP.md` (FAIL → fix loop), `docs/ACCEPTANCE_CRITERIA.md` (gate `L2_visual_*`)
 
 ---
 
@@ -109,7 +109,7 @@ Subjective feel, pacing, audio, localization — `docs/PLAYTEST_SCRIPT.md`. Runs
 
 **Why:** A single model (especially the same one that placed the `BoxMesh`) can rationalize bad output. **Independent models reduce blind spots.**
 
-**Rule:** Configure **≥2** vision APIs. **Pass only if ≥2 return `overall_pass: true`** on the same screenshot + prompt.
+**Rule:** Configure **≥2** vision APIs. **Pass only if ≥2 return `acceptance.valid_pass: true`** (all V1–V6 + confidence ≥ 0.65). See `docs/ACCEPTANCE_CRITERIA.md`.
 
 ```bash
 python3 tools/review_screenshot_vision.py \

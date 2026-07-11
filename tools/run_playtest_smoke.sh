@@ -44,6 +44,8 @@ check_story_data() {
     echo "[FAIL] $label"
     FAIL=$((FAIL + 1))
     bash tools/qa_emit_remediation.sh data-story || true
+    python3 tools/qa_write_gate_result.py --gate L0_story_data --status fail \
+      --message "validate_story_data failed" 2>/dev/null || true
   fi
   rm -f "$log"
 }
@@ -147,6 +149,7 @@ check_story_data
 check_scene_visuals
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh
+check "Acceptance criteria catalog valid" python3 tools/validate_acceptance_criteria.py
 check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
 check_visual_smoke
 check_audio_smoke

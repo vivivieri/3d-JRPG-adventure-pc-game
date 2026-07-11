@@ -18,6 +18,7 @@ game/data/
     qa_catalog.json          # 3D model paths, tri budgets, hero_jury list (docs/MODEL_QA.md)
   qa/
     remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
+    acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
   quests/
     main_quests.json         # 5 main quests
   encounters/

@@ -46,3 +46,5 @@ artifacts/flow_reviews/*
 !artifacts/flow_reviews/.gitkeep
 artifacts/data_reviews/*
 !artifacts/data_reviews/.gitkeep
+artifacts/qa_reports/*
+!artifacts/qa_reports/.gitkeep
