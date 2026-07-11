@@ -109,6 +109,11 @@ fi
 # 3) Optional: Godotiq + Godot MCP Pro — see docs/MCP_STACK.md
 if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
   log "Godotiq addon present"
+  if ss -tln 2>/dev/null | grep -q ':6007 ' || netstat -tln 2>/dev/null | grep -q ':6007 '; then
+    log "Godotiq WebSocket OK on :6007"
+  else
+    log "WARN: Godotiq :6007 not listening — enable GodotIQ plugin in Project → Plugins"
+  fi
 else
   log "WARN: Godotiq not installed — bash tools/install_godotiq.sh (recommended)"
 fi

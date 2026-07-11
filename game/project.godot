@@ -21,6 +21,7 @@ config/icon="res://assets/ui/icon.svg"
 
 GameBootstrap="*res://scripts/core/game_bootstrap.gd"
 GDAIMCPRuntime="*res://addons/gdai-mcp-plugin-godot/gdai_mcp_runtime.gd"
+GodotIQRuntime="*res://addons/godotiq/godotiq_runtime.gd"
 
 [display]
 
@@ -31,14 +32,9 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdai-mcp-plugin-godot/plugin.cfg")
-
-[internationalization]
-
-locale/fallback="en"
+enabled=PackedStringArray("res://addons/gdai-mcp-plugin-godot/plugin.cfg", "res://addons/godotiq/plugin.cfg")
 
 [rendering]
 
-renderer/rendering_method="forward_plus"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=2

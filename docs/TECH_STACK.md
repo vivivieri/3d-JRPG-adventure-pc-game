@@ -22,11 +22,14 @@ See `docs/MCP_STACK.md`.
 
 ## MCP plugin compatibility (Godot 4.7)
 
-| Plugin | Min Godot | Action after upgrade |
-|--------|-----------|----------------------|
-| GDAI MCP | 4.3+ | Re-download latest plugin if editor errors |
-| Godotiq | 4.x | `bash tools/install_godotiq.sh` |
-| Godot MCP Pro | 4.4+ | Re-run `install_godot_mcp_pro.sh` from latest zip |
+**Full audit:** `docs/PLUGIN_COMPATIBILITY.md` — run `bash tools/check_plugin_compatibility.sh` before Phase 1.
+
+| Plugin | Min Godot | 4.7 status | Action |
+|--------|-----------|--------------|--------|
+| GDAI MCP 0.3.2 | 4.2+ | Verified | Re-download if editor errors |
+| Godotiq 0.5.15 | 4.x | Verified | `bash tools/install_godotiq.sh`; enable GodotIQ |
+| Godot MCP Pro | 4.4+ | Not installed | `bash tools/install_godot_mcp_pro.sh` (L4/L5) |
+| GodotSteam | **4.20+** | 4.15 loads (dev); upgrade for ship | `bash tools/install_godotsteam.sh` (Phase 8) |
 
 ## Ship (Phase 8)
 
