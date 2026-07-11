@@ -24,7 +24,8 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 | **Playthrough** | Full 2–3 h path, soft-locks | `PLAYTEST_SCRIPT.md` (human, **after L5**) |
 | **Localization** | en / ja / zh keys present | `game/locale/translations.csv` (Phase 2+) |
 | **Audio** | Scene BGM map, loops, boss phases | `AUDIO_PRODUCTION_GUIDE.md` §11 |
-| **3D / art** | No primitives, hero meshes | `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md` |
+| **3D / art** | No primitives, hero meshes | `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `docs/MODEL_QA.md` |
+| **Art/audio QA fail loop** | Structured fix, not infinite retry | `docs/QA_REMEDIATION_LOOP.md`, `tools/qa_remediation_brief.py` |
 
 ---
 

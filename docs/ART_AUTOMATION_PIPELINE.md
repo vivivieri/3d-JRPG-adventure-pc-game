@@ -138,6 +138,8 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 
 **No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (technical + optional hero jury) + L6 listen.
 
+**On any art/audio/model QA FAIL:** `docs/QA_REMEDIATION_LOOP.md` — brief + one lever change before rebuild (max 3 attempts).
+
 ---
 
 ## 8. Quality gates (M5)

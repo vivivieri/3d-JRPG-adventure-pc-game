@@ -1,0 +1,284 @@
+{
+  "version": "1.0",
+  "iteration_rules": {
+    "max_attempts_per_asset": 3,
+    "max_same_lever_class": 2,
+    "require_lever_change_between_attempts": true
+  },
+  "visual": {
+    "v1_primitives_visible": {
+      "lever": "mesh_ops",
+      "root_cause": "Placeholder primitive in scene or untextured block mesh",
+      "do_not_repeat": "Re-screenshot without replacing meshes; hiding primitive with fog",
+      "actions": [
+        "Run bash tools/check_scene_visuals.sh and fix every reported primitive",
+        "Import GLB from MODEL_QA pipeline (Meshy/Tripo → Blender → export)",
+        "Re-run MODEL_QA turntable before in-scene screenshot"
+      ],
+      "escalate": "tool_tier: bump 3D gen tier; verify not using BoxMesh in .tscn"
+    },
+    "v2_muted_palette": {
+      "lever": "texture",
+      "root_cause": "Candy-bright albedo, sunny sky, or wrong zone color script",
+      "do_not_repeat": "Only lowering exposure while albedo stays saturated",
+      "actions": [
+        "python3 tools/palette_remap.py --zone <zone> on albedo sources",
+        "Tune WorldEnvironment fog + sky per docs/RENDERING_GUIDE.md zone row",
+        "python3 tools/check_screenshot_palette.py --zone <zone>"
+      ],
+      "escalate": "Regenerate zone albedos via ComfyUI locked NPR workflow"
+    },
+    "v3_npr_not_pbr": {
+      "lever": "shader_scene",
+      "root_cause": "StandardMaterial3D PBR, HDRI sky, or glossy metallic skin",
+      "do_not_repeat": "Swapping HDRI only; increasing bloom to hide PBR",
+      "actions": [
+        "Assign project toon_base.gdshader family on hero meshes",
+        "Replace PhysicalSky with ProceduralSkyMaterial per zone",
+        "Disable SSIL/SSAO per RENDERING_GUIDE.md §3.2"
+      ],
+      "escalate": "GodotPrompter: custom zone NPR material pass"
+    },
+    "v4_japanese_coastal": {
+      "lever": "prompt",
+      "root_cause": "European castle kit, generic fantasy, wrong environment kit",
+      "do_not_repeat": "Recoloring Kenney castle assets; same Meshy prompt with 'Japanese' added once",
+      "actions": [
+        "Swap mesh per docs/ENVIRONMENT_KITS.md zone module list",
+        "Regenerate set-piece with Japanese coastal / ryūgū prompt from bible",
+        "Remove models/nature/ or models/castle/ greybox paths"
+      ],
+      "escalate": "tool_tier: new AI 3D gen with reference silhouette image"
+    },
+    "v5_silhouette_readable": {
+      "lever": "placement_camera",
+      "root_cause": "Camera too far/near, clutter, or weak mesh silhouette",
+      "do_not_repeat": "Cranking contrast post-process only",
+      "actions": [
+        "Re-screenshot gameplay camera distance per SC-02 checklist",
+        "Simplify foreground clutter blocking torii/character read",
+        "If turntable M4 failed too: fix mesh before camera tweak"
+      ],
+      "escalate": "CHARACTER_BIBLE silhouette pass on mesh"
+    },
+    "v6_ui_clean": {
+      "lever": "shader_scene",
+      "root_cause": "Missing font, clipped Control nodes, pink placeholder",
+      "do_not_repeat": "Cropping screenshot to hide UI",
+      "actions": [
+        "Fix theme font paths in UI scenes",
+        "GameLab or procedural UI per ART_AUTOMATION_PIPELINE.md §4",
+        "GDAI: resolve Output panel font/texture errors"
+      ],
+      "escalate": "Godotiq ui_map for broken Control paths"
+    }
+  },
+  "model": {
+    "m1_not_block_primitive": {
+      "lever": "tool_tier",
+      "root_cause": "Axis-aligned block or untextured primitive exported as GLB",
+      "do_not_repeat": "Texturing a cube; importing Kenney greybox for ship",
+      "actions": [
+        "Regenerate via Meshy/Tripo/Rodin with CHARACTER_BIBLE silhouette prompt",
+        "Blender: confirm non-box topology before export",
+        "check_model_technical.py --ship to catch greybox paths"
+      ],
+      "escalate": "Manual Blender blockout → sculpt pass"
+    },
+    "m2_japanese_coastal_style": {
+      "lever": "prompt",
+      "root_cause": "Generic fantasy / European props in mesh gen",
+      "do_not_repeat": "Same prompt with one word changed",
+      "actions": [
+        "Use bible prompt: muted coastal, weathered wood, ryūgū motifs",
+        "Negative prompt: castle, medieval, MMORPG armor",
+        "Reference image from ENVIRONMENT_KITS.md mood board if available"
+      ],
+      "escalate": "tool_tier: higher-quality 3D gen + manual kitbash in Blender"
+    },
+    "m3_adult_not_chibi": {
+      "lever": "prompt",
+      "root_cause": "Head:body ratio too large (chibi)",
+      "do_not_repeat": "Scaling head down in Blender without regenerating (breaks rig)",
+      "actions": [
+        "Prompt: adult 1:5 proportions, not chibi, not big head",
+        "Regenerate character mesh; re-rig Mixamo",
+        "Verify side view on turntable before texture work"
+      ],
+      "escalate": "Manual proportion edit in Blender with rig rebind"
+    },
+    "m4_silhouette_readable": {
+      "lever": "mesh_ops",
+      "root_cause": "Blob silhouette, symmetric mush, missing costume peaks",
+      "do_not_repeat": "Adding emission to hide silhouette",
+      "actions": [
+        "Add coat tails, box strap, hat brim per CHARACTER_BIBLE §2",
+        "Blender: exaggerate silhouette before decimate",
+        "Check three_quarter turntable view specifically"
+      ],
+      "escalate": "Sculpt pass on hero read shapes"
+    },
+    "m5_sufficient_detail": {
+      "lever": "mesh_ops",
+      "root_cause": "Over-decimated or low-poly gen",
+      "do_not_repeat": "Same decimate ratio; same low-tier gen",
+      "actions": [
+        "Reduce decimate ratio or skip decimate if under tris_max",
+        "tool_tier: regenerate at higher detail setting",
+        "Add edge loops on folds before bake"
+      ],
+      "escalate": "Subdivide + sculpt wrinkles; target tris_min from qa_catalog.json"
+    },
+    "m6_matches_brief": {
+      "lever": "prompt",
+      "root_cause": "Wrong costume, prop identity, or missing story item read",
+      "do_not_repeat": "Renaming file without changing mesh",
+      "actions": [
+        "Re-read CHARACTER_BIBLE.md / ITEMS_3D_MODEL_GUIDE.md section for asset",
+        "Prompt must list distinctive features (lacquer box corners, torn torii, etc.)",
+        "Compare turntable to bible bullet list"
+      ],
+      "escalate": "Kitbash correct part in Blender from second gen"
+    }
+  },
+  "audio": {
+    "a1_not_cheap_procedural": {
+      "lever": "tool_tier",
+      "root_cause": "Procedural sine placeholder still registered",
+      "do_not_repeat": "Re-running generate_game_audio.py for ship path",
+      "actions": [
+        "bash tools/generate_ai_bgm.sh --track <id> per ace_step_prompts.json",
+        "Update manifest source away from generate_game_audio.py",
+        "register_asset.py + check_audio_technical.py"
+      ],
+      "escalate": "Manual ACE-Step session with curated negative prompts"
+    },
+    "a2_melancholy_coastal": {
+      "lever": "prompt",
+      "root_cause": "Missing melancholy coastal mood — too bright or generic",
+      "do_not_repeat": "Same ACE-Step prompt with 'sad' added once",
+      "actions": [
+        "Edit game/data/audio/ace_step_prompts.json — one variable (tempo OR mode OR instrumentation)",
+        "Reference AUDIO_DIRECTION.md melancholy coastal brief",
+        "A/B export 2 variants; jury both"
+      ],
+      "escalate": "Compose hybrid: ACE-Step stem + manual arrangement"
+    },
+    "a3_not_upbeat_pop": {
+      "lever": "prompt",
+      "root_cause": "Upbeat adventure, EDM, or heroic fanfare",
+      "do_not_repeat": "Only lowering tempo without changing instrumentation",
+      "actions": [
+        "Add negative prompt: upbeat, EDM, fanfare, adventure",
+        "Reduce percussion and major-key keywords in ace_step_prompts.json",
+        "Compare against bgm_village reference brief"
+      ],
+      "escalate": "Manual re-arrangement in DAW"
+    },
+    "a4_instrumental_no_vocals": {
+      "lever": "prompt",
+      "root_cause": "Vocals or lyrics in export",
+      "do_not_repeat": "EQ notch to hide vocals",
+      "actions": [
+        "Regenerate with explicit instrumental-only prompt",
+        "ACE-Step negative: vocals, lyrics, singing",
+        "Re-run check_audio_technical.py"
+      ],
+      "escalate": "Manual edit or different model export"
+    },
+    "a5_fits_scene_mood": {
+      "lever": "prompt",
+      "root_cause": "Track does not match scene/category in catalog",
+      "do_not_repeat": "Renaming file without changing audio",
+      "actions": [
+        "Re-read ace_step_prompts.json scene + prompt for track",
+        "Align tempo and instrumentation to zone (village vs caves vs palace)",
+        "Human A/B in Godot zone with correct BGM bus"
+      ],
+      "escalate": "Scene-specific stem mix per AUDIO_PRODUCTION_GUIDE.md"
+    }
+  },
+  "technical": {
+    "tris_below_min": {
+      "lever": "mesh_ops",
+      "root_cause": "Over-decimated or empty/blockout mesh",
+      "do_not_repeat": "Lowering tris_min in catalog",
+      "actions": [
+        "Regenerate or reduce Blender decimate",
+        "Verify GLB is not 12-triangle placeholder"
+      ],
+      "escalate": "tool_tier"
+    },
+    "tris_above_max": {
+      "lever": "mesh_ops",
+      "root_cause": "Mesh over budget for GTX 1060 target",
+      "do_not_repeat": "Deleting random faces without UV check",
+      "actions": [
+        "Blender decimate to qa_catalog.json tris_max",
+        "Merge materials if over 8 visible per zone"
+      ],
+      "escalate": "LOD plan per CHARACTER_BIBLE (future)"
+    },
+    "textures_missing": {
+      "lever": "texture",
+      "root_cause": "GLB has no embedded images",
+      "do_not_repeat": "Importing untextured mesh to Godot hoping shader fixes it",
+      "actions": [
+        "ComfyUI or Material Maker albedo bake",
+        "Embed textures on GLB export in Blender",
+        "palette_remap.py before embed"
+      ],
+      "escalate": "Manual UV + hand-painted albedo"
+    },
+    "greybox_banned": {
+      "lever": "tool_tier",
+      "root_cause": "Kenney/greybox path or nature kit in ship build",
+      "do_not_repeat": "Moving file path without replacing mesh",
+      "actions": [
+        "Replace with AI 3D or approved CC0 per ASSET_COMPLIANCE.md",
+        "Run check_model_technical.py --ship"
+      ],
+      "escalate": "Set-piece regen from ENVIRONMENT_KITS.md"
+    },
+    "file_too_small": {
+      "lever": "tool_tier",
+      "root_cause": "Likely empty or stub GLB",
+      "do_not_repeat": "Padding file size artificially",
+      "actions": [
+        "Delete stub; full regen pipeline",
+        "Confirm Blender export includes mesh + textures"
+      ],
+      "escalate": "Manual modeling"
+    },
+    "lufs_out_of_range": {
+      "lever": "mastering",
+      "root_cause": "Integrated loudness outside bus target",
+      "do_not_repeat": "Re-composing entire track for ±2 LU drift",
+      "actions": [
+        "ffmpeg loudnorm to AUDIO_QA.md bus target",
+        "Re-run check_audio_technical.py"
+      ],
+      "escalate": "DAW mastering chain"
+    },
+    "peak_too_hot": {
+      "lever": "mastering",
+      "root_cause": "True peak clipping",
+      "do_not_repeat": "Hard clip export",
+      "actions": [
+        "Limit true peak to bus table in AUDIO_QA.md",
+        "Check for inter-sample peaks after Ogg encode"
+      ],
+      "escalate": "Manual limiter in DAW"
+    },
+    "placeholder_audio": {
+      "lever": "tool_tier",
+      "root_cause": "generate_game_audio.py source in manifest",
+      "do_not_repeat": "Renaming placeholder without regenerating audio",
+      "actions": [
+        "ACE-Step export per ace_step_prompts.json",
+        "Update LICENSES.md + register_asset.py"
+      ],
+      "escalate": "Curated manual ACE-Step session"
+    }
+  }
+}

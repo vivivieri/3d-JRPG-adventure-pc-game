@@ -5,7 +5,7 @@
 
 **Rule:** AI does **not** pass visual work on log output or node counts alone. It must pass **automated visual gates** + **screenshot review** against `docs/ART_DIRECTION.md`.
 
-**Cross-refs:** `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/MODEL_QA.md` (asset QA before in-scene)
+**Cross-refs:** `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/MODEL_QA.md` (asset QA before in-scene), `docs/QA_REMEDIATION_LOOP.md` (FAIL → fix loop)
 
 ---
 
@@ -77,6 +77,8 @@ After screenshot, agent answers **in the session report** (yes/no + evidence):
 | V6 | UI: no pink font boxes, no clipped dialogue? | `UI_UX_FLOW.md` |
 
 **If any V1–V6 fails → task is FAIL** even if Godot Output is clean. Replace assets; re-screenshot.
+
+**On FAIL:** `python3 tools/qa_remediation_brief.py --jury <path>.jury.json --log-attempt` — see `docs/QA_REMEDIATION_LOOP.md`.
 
 ### Layer D — Palette sampling (automated)
 

@@ -5,7 +5,7 @@
 
 **Rule:** Models pass **catalog + GLB technical lint + turntable vision jury** (hero/set-pieces) before ship. In-game screenshot QA (`docs/VISUAL_QA.md`) catches placement; this doc catches **the asset itself**.
 
-**Cross-refs:** `docs/CHARACTER_BIBLE.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §5, `game/data/models/qa_catalog.json`
+**Cross-refs:** `docs/CHARACTER_BIBLE.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §5, `docs/QA_REMEDIATION_LOOP.md`, `game/data/models/qa_catalog.json`
 
 ---
 
@@ -125,7 +125,7 @@ bash tools/run_model_smoke_checks.sh
 |-------|----------|
 | No `urashima.glb` | **WARN** skip |
 | GLB exists | catalog + technical; turntable + jury if Blender + API keys |
-| Jury fail | **FAIL** |
+| Jury fail | **FAIL** → run `qa_remediation_brief.py` before rebuild |
 
 Wired into `run_playtest_smoke.sh`.
 

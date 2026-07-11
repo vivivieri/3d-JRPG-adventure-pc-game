@@ -258,6 +258,11 @@ def main() -> int:
         print(f"CONSENSUS PASS ({passed}/{active})")
         return 0
     print(f"CONSENSUS FAIL ({passed}/{active}, need {args.min_pass})")
+    print(
+        f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} "
+        f"--asset-id {args.track} --log-attempt"
+    )
+    print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
     return 1
 
 

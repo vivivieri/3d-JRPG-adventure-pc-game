@@ -310,6 +310,8 @@ def main() -> int:
         return 0
 
     print(f"CONSENSUS FAIL ({passed}/{active} models, required {args.min_pass})")
+    print(f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} --log-attempt")
+    print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
     return 1
 
 

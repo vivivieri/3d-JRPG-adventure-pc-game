@@ -5,7 +5,7 @@
 
 **Rule:** Audio tasks pass **catalog + technical checks** first. **Hero BGM** may use optional **multi-LLM listen jury**. Human **L6** still owns in-game mix feel.
 
-**Cross-refs:** `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/AUDIO_DIRECTION.md`, `docs/VISUAL_QA.md`, `game/data/audio/ace_step_prompts.json`
+**Cross-refs:** `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/AUDIO_DIRECTION.md`, `docs/VISUAL_QA.md`, `docs/QA_REMEDIATION_LOOP.md`, `game/data/audio/ace_step_prompts.json`
 
 ---
 
