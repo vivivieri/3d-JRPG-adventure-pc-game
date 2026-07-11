@@ -1,4 +1,4 @@
 {
   "install": "bash tools/install_cloud_dev.sh",
-  "start": "bash tools/start_godot_editor.sh"
+  "start": "bash tools/ensure_gdai_mcp.sh"
 }

@@ -131,19 +131,31 @@ GDAI MCP is **commercial** and not in git. To use in cloud:
 3. In Godot editor: enable plugin → **Start** MCP server
 4. Register MCP in Cursor dashboard if not using project `.cursor/mcp.json`
 
-Without GDAI, cloud agents can still edit `.gd` / `.tscn` / shaders and validate with:
+### Automated bootstrap (required for agents)
 
 ```bash
-godot4 --headless --path game --quit-after 2
+bash tools/ensure_gdai_mcp.sh
 ```
 
-### Hybrid workflow (recommended)
+This script:
+1. Writes `.cursor/mcp.json` for the `godot-mcp` stdio bridge
+2. Starts Godot Editor if not running
+3. Waits for GDAI HTTP `http://127.0.0.1:3571/tools`
+4. **Exits non-zero** with notify instructions if the bridge is not ready
 
-| Work | Where |
-|------|--------|
-| Godot code, shaders, environment zones | **Cloud Agent** (`godot4` + headless validation) |
-| GDAI in-editor polish | **Cloud or local** — after plugin installed |
-| Scene nudging, material tweaks in viewport | **GDAI MCP** when editor + plugin running |
+**Agents must not implement editor/scene work until this passes AND Cursor lists `godot-mcp` as connected.**
+
+Register MCP in **Cursor Settings → MCP** if the agent has no `godot-mcp` tools, then restart the agent.
+
+### Workflow (mandatory — no manual fallback)
+
+| Work | Tool |
+|------|------|
+| GDScript, shaders, architecture | **GodotPrompter** (Cursor) |
+| Scenes, nodes, materials, F5 verify | **GDAI MCP** only |
+| Procedural BGM/SFX (copyright-safe) | `python3 tools/generate_game_audio.py` |
+| Procedural portrait placeholders | `python3 tools/generate_procedural_portraits.py` |
+| Logic/data smoke (after GDAI verify) | `bash tools/run_playtest_smoke.sh` |
 | Steam build | **No GDAI** in `game/addons/` |
 
 ---
@@ -178,4 +190,4 @@ Common issues: https://gdaimcp.com/docs/common-issues
 | GodotSteam | Yes | `game/addons/godotsteam/` |
 | GDAI MCP | **No (dev only)** | `game/addons/gdai-mcp-plugin-godot/` (gitignored) |
 
-Environment visuals are primarily built in `game/scripts/world/zone_visuals.gd` and `game/scripts/world/terrain_shapes.gd` so cloud agents can improve zones without GDAI.
+Environment visuals: GodotPrompter drafts `zone_visuals.gd` / shaders; **GDAI MCP** applies lights, materials, and meshes in the editor.
