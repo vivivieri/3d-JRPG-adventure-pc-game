@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install required extended toolchain (Blender, MCP config for GameLab).
-# GameLab API key + Notion OAuth must be configured by user in Cursor Secrets / Integrations.
+# GameLab API key must be configured by user in Cursor Secrets when using UI art MCP.
 #
 # Usage: bash tools/install_extended_toolchain.sh
 set -euo pipefail
@@ -36,14 +36,6 @@ else
   echo "   1. Sign up: https://gamelabstudio.co/"
   echo "   2. Cursor → Secrets → add GAMELAB_API_KEY"
   echo "   3. Re-run: bash tools/install_extended_toolchain.sh"
-fi
-
-# --- Notion ---
-if [[ -n "${NOTION_API_KEY:-}" ]]; then
-  echo "==> NOTION_API_KEY present (register Notion MCP in Cursor Integrations if not connected)"
-else
-  echo "!! Notion MCP requires OAuth in Cursor"
-  echo "   Cursor Settings → Integrations → Notion → Connect workspace"
 fi
 
 # --- ACE-Step prompt sheets ---

@@ -13,7 +13,7 @@
 | Layer | Tool | Cursor / access | Role |
 |-------|------|-----------------|------|
 | Plan & code | **GodotPrompter** | Cursor agent | GDScript, shaders, tests, architecture |
-| Design context | **Notion MCP** *(optional)* | `notion` | Stat formulas, flag glossary — `docs/` + `game/data/` are authoritative |
+| Design context | **`docs/` + `game/data/`** | Repo | Stat formulas, flags, dialogue — authoritative |
 | Zone NPR albedos | **ComfyUI** or **Material Maker** | Offline — not MCP | Stylized tileables; `tools/palette_remap.py` post-step |
 | UI art generate | **GameLab Studio MCP** | `gamelab-mcp` (SSE) | UI frames, ink borders, icon/VFX sheets *(P1 — WARN if absent)* |
 | 3D heroes / props | **Meshy / Tripo / Rodin** + Blender | Offline — not MCP | AI 3D → GLB; Mixamo rig; automated stylized textures |
@@ -32,7 +32,6 @@ GodotPrompter (plan/code)
        ├─► ComfyUI / Material Maker ─► zone albedos → palette_remap.py → game/assets/
        ├─► GameLab MCP ─────────────► UI sheets / frames → palette_remap.py → game/assets/
        ├─► AI 3D + Blender (offline) ► hero GLB → import → GDAI places
-       ├─► Notion MCP (optional) ───► design context before data/combat edits
        ├─► GDAI MCP ────────────────► create/edit scenes, F5 verify
        ├─► Godotiq ─────────────────► trace_flow, signal_map, debug console
        └─► Godot MCP Pro ───────────► run_test_scenario, assert_screen_text
@@ -49,7 +48,7 @@ GodotPrompter (plan/code)
 | Create/edit `.tscn`, nodes, materials in editor | **GDAI MCP only** |
 | Generate tileable zone albedo | **ComfyUI** or **Material Maker** → `palette_remap.py` → **GDAI** assigns |
 | Generate UI frame / ink border | **GameLab MCP** → `palette_remap.py` → **GDAI** UI scenes |
-| Read stat formula before balancing skill | **`docs/` + `game/data/`** (Notion optional) → edit JSON |
+| Read stat formula before balancing skill | **`docs/` + `game/data/`** → edit JSON |
 | Hero 3D model + stylized albedo | **Meshy/Tripo/Rodin** → Blender → GLB → **GDAI** places |
 | Combat signal hang — which signal failed? | **Godotiq** `godotiq_signal_map`, `godotiq_trace_flow` |
 | Automated JRPG menu / combat test | **Godot MCP Pro** testing tools |
@@ -82,7 +81,6 @@ bash tools/check_dev_environment.sh
 | Godot Editor | Running with `game/project.godot` open |
 | Cursor MCP catalog (P0) | **Required:** `godot-mcp`, `godotiq`, `godot-mcp-pro` |
 | Cursor MCP catalog (P1) | **WARN:** `gamelab-mcp` — UI art; zone path has ComfyUI/Material Maker fallbacks |
-| Cursor MCP catalog (P2) | **Optional:** `notion` — `docs/` + `game/data/` sufficient |
 | Offline art/audio | ComfyUI, Material Maker, Blender, ACE-Step GPU — WARN per task |
 
 If **P0** MCP servers are missing from Cursor → **STOP and notify the user**. See registration below.
@@ -132,7 +130,7 @@ Writes `.cursor/mcp.json` for installed Godot MCP servers, starts editor, checks
 
 Register **every** server in Cursor (desktop Settings → Tools & MCP, or [cursor.com/agents](https://cursor.com/agents) cloud dashboard). Restart agent after save.
 
-`tools/write_mcp_config.sh` generates Godot-related entries. Merge with GameLab and Notion manually (secrets in Cursor Secrets tab).
+`tools/write_mcp_config.sh` generates Godot-related entries. Merge with GameLab manually when `GAMELAB_API_KEY` is set (Cursor Secrets tab).
 
 ### Full `mcpServers` example
 
@@ -170,8 +168,6 @@ Register **every** server in Cursor (desktop Settings → Tools & MCP, or [curso
   }
 }
 ```
-
-**Notion MCP:** Enable via Cursor Integrations (Notion plugin). Used for design-context queries before editing `game/data/` or combat systems.
 
 **GameLab API key:** Store in Cursor Secrets — not committed to git.
 
@@ -219,16 +215,7 @@ Template: `.cursor/mcp.json.example`
 
 Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamelab-mcp` SSE server. **WARN** if absent — procedural UI placeholders for dev only.
 
-### Notion MCP — design context & balancing (optional)
-
-**Role:** Agent-readable index for stat formulas, skill curves, tone guides, lore tables.  
-**Does NOT:** Replace `game/data/` JSON or `docs/` as source of truth.
-
-**Workflow:**
-
-1. Mirror key tables in Notion: combat formulas, item tiers, flag glossary, dialogue tone
-2. Before editing `game/data/*.json` or combat GDScript → query Notion for design intent
-3. Commit repo JSON changes; keep Notion synchronized
+**Design context:** Read `docs/` + `game/data/` before balancing combat or editing JSON. No external design-index MCP.
 
 **Why not Ink (Inkle):** Story spine is JSON-driven (`scenes.json` → `dialogue/` → `flags.json`). Ink adds a second runtime with no v1 benefit. See `docs/NARRATIVE_WRITING_GUIDE.md`.
 
@@ -304,6 +291,7 @@ Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines i
 | **Ink narrative rewrite** | JSON spine already defined |
 | **Kenney town kits** | European visual read; banned for player-facing builds |
 | **Kenney knight / Castle kit** | Deprecated for ship (`ART_DIRECTION.md`) |
+| **Notion MCP** | `docs/` + `game/data/` are authoritative — duplicate index adds OAuth friction, no ship value |
 
 ---
 
@@ -316,8 +304,7 @@ Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines i
 | Godotiq Pro | Commercial | $19 one-time | Optional upgrade |
 | Godot MCP Pro | Commercial | $15 one-time | ❌ gitignored |
 | GameLab Studio | Commercial | Free tier + paid | API key in Secrets |
-| Notion MCP | Notion ToS | Per workspace | N/A |
-| Blender + AI Render | OSS / varies | Free–paid | Offline |
+| Blender | OSS | Free | Offline |
 | ACE-Step 1.5 | MIT | Free (local GPU) | `.cache/ace-step-1.5` gitignored |
 
 **Ship builds:** disable/remove all Godot dev plugins before Steam export.
@@ -336,7 +323,6 @@ Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_
 | **GameLab Studio** | Paid OK for quality; free tier for light UI | Sign up → API key → **Cursor Secrets: `GAMELAB_API_KEY`** → re-run install script |
 | **ComfyUI / Material Maker** | ❌ Free | Local install; locked stylized workflows per `ART_AUTOMATION_PIPELINE.md` |
 | **Meshy / Tripo / Rodin** | Paid OK for hero quality | Service ToS → register outputs in `LICENSES.md` |
-| **Notion MCP** | ❌ Optional | **Cursor → Integrations → Notion → Connect** (OAuth) |
 | **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
 | **ACE-Step 1.5** | ❌ Free (local GPU) | `bash tools/install_ace_step.sh`; prompts in `game/data/audio/ace_step_prompts.json` |
 | **ElevenLabs VO** | Paid API | `ELEVENLABS_API_KEY` in Cursor Secrets; `bash tools/generate_ai_vo.sh` |
@@ -344,7 +330,7 @@ Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_
 
 **Cursor cloud dashboard:** Register P0 MCP servers from `.cursor/mcp.json`; add `gamelab-mcp` when `GAMELAB_API_KEY` is set. Restart agent after saving.
 
-**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + export), ComfyUI workflow runs (local GPU).
+**Cannot be automated by agents:** GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + export), ComfyUI workflow runs (local GPU).
 
 ---
 
@@ -400,10 +386,10 @@ Using gamelab-mcp: generate ink-wash menu border, muted palette, 512×128.
 palette_remap.py → game/assets/textures/ui/menu_border.png → assign in tab_menu.tscn.
 ```
 
-**Combat balance (Notion → code):**
+**Combat balance (docs → code):**
 
 ```
-Query Notion for current turn-order and damage formulas.
+Read docs/COMBAT_SYSTEMS.md + game/data/skills.json for turn-order and damage formulas.
 Update game/data/skills.json and CombatManager.gd to match.
 Run bash tools/run_unit_tests.sh.
 ```
@@ -433,7 +419,6 @@ Assert battle menu text visible.
 | GDAI + MCP Pro both edit scene | **Rule:** GDAI builds; MCP Pro tests only |
 | Godotiq bridge offline | Enable GodotIQ plugin; wait 5s |
 | GameLab SSE fails | Check API key in Secrets; verify SSE URL |
-| Notion queries fail | Re-authenticate Notion MCP in Cursor Integrations |
 | `node` not found | Install Node 18+ for Godot MCP Pro |
 
 ---

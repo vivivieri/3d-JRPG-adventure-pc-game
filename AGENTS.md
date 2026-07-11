@@ -17,7 +17,6 @@
 | `godot-mcp-pro` | **Test** scenarios/asserts (L4/L5) |
 | `gamelab-mcp` | **UI art** — frames, icon sheets *(P1 — WARN if absent)* |
 | ComfyUI / Material Maker | **Zone NPR albedos** — offline |
-| `notion` | **Optional** design context |
 | Meshy / Tripo / Rodin + Blender | **3D hero pipeline** — offline |
 | `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
 | `generate_ai_vo.py` + ElevenLabs | **Selective VO** — 12 emotional clips only (`docs/VO_HIT_LIST.md`) |
@@ -48,7 +47,7 @@ Installed components:
 ```
 0. bash tools/ensure_mcp_stack.sh
 1. GodotPrompter — plan GDScript, shaders, tests
-2. docs/ + game/data/ — design context (Notion optional)
+2. docs/ + game/data/ — design context before data/combat edits
 3. ComfyUI/Material Maker or gamelab-mcp — art gen → palette_remap.py → game/assets/
 4. godot-mcp (GDAI) — build scenes, materials, F5 verify
 5. godotiq — trace_flow / signal_map when debugging systems
@@ -66,7 +65,6 @@ Installed components:
 | Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
 | MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
 | GameLab | `gamelab-mcp` in Cursor MCP; API key in Secrets *(WARN if absent — UI art)* |
-| Notion | `notion` in Cursor Integrations *(optional)* |
 | ComfyUI / Material Maker | Local install for zone albedos |
 
 Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/MCP_STACK.md`.

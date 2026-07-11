@@ -27,7 +27,7 @@
 | **Selective VO** (12 clips) | **ElevenLabs** | No equal free tier | Register in `LICENSES.md` | Voice bus |
 | **In-game video** | Godot `CinematicDirector` | No FMV | — | — |
 | **Marketing trailer** | `generate_marketing_trailer.py` + pitch PNGs | — | Optional Runway/Kling b-roll | `steam/` only |
-| **Design context** | `docs/` + `game/data/` | **Notion MCP** (optional index) | — | JSON commits |
+| **Design context** | `docs/` + `game/data/` | — | JSON commits |
 
 ---
 
@@ -38,8 +38,7 @@ Not every MCP server blocks every task. Agents use this table at session startup
 | Tier | Servers | If missing |
 |------|---------|------------|
 | **P0 — block** | `godot-mcp`, `godotiq`, `godot-mcp-pro` | **STOP** — notify user |
-| **P1 — UI art** | `gamelab-mcp` + `GAMELAB_API_KEY` | **WARN** — use procedural UI placeholders; cannot ship ink-wash frames without GameLab or ComfyUI substitute |
-| **P2 — optional** | `notion` | **OK** — use `docs/` + `game/data/` |
+| **P1 — UI art** | `gamelab-mcp` + `GAMELAB_API_KEY` | **WARN** — procedural UI placeholders |
 | **Offline** | ComfyUI, Blender, ACE-Step GPU | **WARN** per task — document fallback used |
 
 ```bash

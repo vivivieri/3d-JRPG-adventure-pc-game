@@ -15,7 +15,6 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 | **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
 | **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
 | **GameLab Studio MCP** | `gamelab-mcp` | **UI art generate** — ink frames, icon sheets, VFX sheets *(P1)* |
-| **Notion MCP** | `notion` | **Design context** *(optional)* — `docs/` + `game/data/` authoritative |
 
 Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP required; art generators tiered)
 
@@ -40,7 +39,7 @@ bash tools/ensure_mcp_stack.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list **P0** servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) → **STOP and notify the user**. See `docs/MCP_STACK.md`. Missing `gamelab-mcp` or `notion` → **WARN** and use fallbacks per `docs/ART_AUTOMATION_PIPELINE.md`.
+2. If **Cursor MCP** does not list **P0** servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) → **STOP and notify the user**. See `docs/MCP_STACK.md`. Missing `gamelab-mcp` → **WARN** and use fallbacks per `docs/ART_AUTOMATION_PIPELINE.md`.
 3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
 
 ### Notify the user when unavailable
@@ -49,7 +48,6 @@ Always report clearly if any of these are missing:
 
 - `godot-mcp`, `godotiq`, or `godot-mcp-pro` not in Cursor MCP server list
 - `gamelab-mcp` not in Cursor MCP server list *(WARN — UI art; zone path uses ComfyUI/Material Maker)*
-- `notion` not connected *(OK — use docs/ + game/data/)*
 - GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
 - Godot Editor not running
 - GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
@@ -148,21 +146,14 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | **When to use** | Zone albedos per `docs/ART_AUTOMATION_PIPELINE.md` §3 |
 | **Handoff** | `palette_remap.py` → register → GDAI material assign |
 
-### Tool G: Notion MCP — *Design context* (optional)
-| | |
-|---|---|
-| **Role** | Agent-readable index for stat formulas, skill curves, flag glossary |
-| **When to use** | Phase 2–3 before editing `game/data/*.json` — `docs/` sufficient if absent |
-| **Does NOT** | Replace `game/data/` or `docs/` as source of truth |
-
-### Tool H: AI 3D + Blender — *Hero pipeline* (offline, not MCP)
+### Tool G: AI 3D + Blender — *Hero pipeline* (offline, not MCP)
 | | |
 |---|---|
 | **Role** | Automated stylized meshes (Meshy/Tripo/Rodin) + GLB export |
 | **When to use** | Characters, torii, lacquer box, palace trim per `CHARACTER_BIBLE.md` |
 | **Handoff** | Mixamo rig → Godot import → GDAI MCP placement |
 
-### Tool I: ACE-Step 1.5 — *Audio prototype*
+### Tool H: ACE-Step 1.5 — *Audio prototype*
 | | |
 |---|---|
 | **Role** | Zone BGM, opening movie, boss loops, boss intro cinematics, ending hero scores |
@@ -175,6 +166,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 - **Summer Engine** — replaces Godot editor; breaks GDAI stack
 - **Fennara** — fourth scene editor; overlaps GDAI/Godotiq/MCP Pro
 - **Ink narrative rewrite** — JSON spine already defined
+- **Notion MCP** — `docs/` + `game/data/` are authoritative; no duplicate index
 - **Kenney town kits** — wrong visual read for Japanese coastal JRPG
 
 ### Combined workflow (default — use every session)
@@ -209,7 +201,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | BGM / SFX | Run `generate_game_audio.py`; wire `audio_manager.gd` | Assign streams in editor, test F5 with audio bus |
 | Zone wood/stone albedo | ComfyUI/Material Maker + `palette_remap.py` per `ART_DIRECTION.md` | Assign `toon_base` in zone `.tscn` |
 | UI ink-wash frames | GameLab MCP + `palette_remap.py` | Assign in UI `.tscn` |
-| Combat balance pass | `docs/` + `game/data/` (Notion optional) | F5 combat scene via GDAI after data change |
+| Combat balance pass | `docs/COMBAT_SYSTEMS.md` + `game/data/skills.json` | F5 combat scene via GDAI after data change |
 | Hero prop (torii, box) | Meshy/Blender → GLB import | Place mesh, assign NPR material, tune emission |
 
 **Startup order:** `ensure_mcp_stack.sh` → Godot Editor + P0 bridges → Cursor MCP (P0 required; GameLab WARN) → plan in GodotPrompter.

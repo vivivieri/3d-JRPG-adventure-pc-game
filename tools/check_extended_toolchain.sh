@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Report status of full toolchain (Godot MCP P0 + extended art/audio layers).
-# GameLab and Notion are WARN (not FAIL) — see docs/ART_AUTOMATION_PIPELINE.md.
+# GameLab is WARN (not FAIL) — see docs/ART_AUTOMATION_PIPELINE.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -38,13 +38,6 @@ if grep -q '"gamelab-mcp"' "$ROOT/.cursor/mcp.json" 2>/dev/null; then
   check_ok "gamelab-mcp in .cursor/mcp.json"
 else
   check_warn "gamelab-mcp missing — zone path: ComfyUI/Material Maker; UI: procedural placeholders"
-fi
-
-# Notion — optional
-if [[ -n "${NOTION_API_KEY:-}" ]]; then
-  check_ok "NOTION_API_KEY secret set"
-else
-  check_warn "Notion MCP optional — use docs/ + game/data/ if not connected"
 fi
 
 if [[ -f "$ROOT/tools/palette_remap.py" ]]; then

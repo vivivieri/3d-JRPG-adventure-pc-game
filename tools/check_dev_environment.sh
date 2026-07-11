@@ -104,7 +104,7 @@ else
 fi
 
 echo
-echo "Note: gamelab-mcp is P1 (WARN if missing). notion MCP is optional."
+echo "Note: gamelab-mcp is P1 (WARN if missing)."
 echo "      ACE-Step 1.5 — bash tools/install_ace_step.sh (audio prototypes)"
 
 echo

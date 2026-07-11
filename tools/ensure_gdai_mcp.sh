@@ -148,7 +148,7 @@ fi
 echo "  MCP cfg: ${MCP_JSON}"
 echo ""
 echo "NEXT: Register P0 in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro"
-echo "      Optional: gamelab-mcp (UI art), notion (design index)"
+echo "      Optional: gamelab-mcp (UI art)"
 echo "      Offline: ComfyUI/Material Maker, Meshy/Blender, ACE-Step 1.5"
 echo "      Docs: docs/MCP_STACK.md"
 echo ""
