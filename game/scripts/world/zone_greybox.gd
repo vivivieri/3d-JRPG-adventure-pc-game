@@ -89,6 +89,7 @@ func _build_village() -> void:
 	_add_plane(self, "Puddle", Vector2(2.5, 2.5), Vector3(-6, 0.02, 5), "water")
 	_add_marker(self, "ToriiShrine", Vector3(0, 0, 2))
 	_add_marker(self, "RokuShack", Vector3(8, 0, -2))
+	_add_marker(self, "RokuShop", Vector3(9.5, 0, -1))
 	_add_marker(self, "VillageWell", Vector3(-4, 0, -4))
 	_add_marker(self, "InspectBanner", Vector3(-8, 0, 6))
 	_add_marker(self, "InspectSandal", Vector3(-6, 0, 5))

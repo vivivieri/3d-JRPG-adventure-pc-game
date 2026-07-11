@@ -22,4 +22,4 @@ echo "Captured $COUNT screenshots:"
 ls -1 "$OUT"/*.png 2>/dev/null || true
 grep -E "CAPTURE_(SAVED|DONE)" /tmp/capture.log || true
 
-test "$COUNT" -ge 7
+test "$COUNT" -ge 9

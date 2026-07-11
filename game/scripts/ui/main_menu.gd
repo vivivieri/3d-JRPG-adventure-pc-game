@@ -6,6 +6,7 @@ func _ready() -> void:
 	%ContinueButton.disabled = not SaveSystem.has_save()
 	%SettingsPanel.hide()
 	_sync_graphics_option()
+	AudioManager.play_bgm(AudioManager.BGM_MENU)
 
 
 func _sync_graphics_option() -> void:

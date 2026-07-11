@@ -225,6 +225,8 @@ func _apply_skill_damage(actor, target, sk: Dictionary) -> void:
 	if actor.is_enemy and not target.is_enemy:
 		target.limit_gauge = min(100.0, target.limit_gauge + dmg * 0.5)
 	_log.append("  → %d damage to %s" % [dmg, target.display_name])
+	if dmg > 0:
+		AudioManager.play_sfx("hit")
 	if _tutorial and not actor.is_enemy and target.is_enemy and target.hp <= 0:
 		pass
 	if _tutorial and actor.is_enemy and not target.is_enemy and target.hp <= 0:

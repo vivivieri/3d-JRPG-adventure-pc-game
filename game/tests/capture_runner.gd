@@ -19,11 +19,13 @@ func _build_steps() -> void:
 		{"id": "02_prologue_dialogue", "fn": _cap_prologue},
 		{"id": "03_beach_field", "fn": _cap_beach},
 		{"id": "04_village_field", "fn": _cap_village},
-		{"id": "05_combat_tutorial", "fn": _cap_combat},
-		{"id": "06_tidal_caves", "fn": _cap_caves},
-		{"id": "07_palace_gate", "fn": _cap_palace},
-		{"id": "08_ending_rewind", "fn": _cap_ending},
-		{"id": "09_credits", "fn": _cap_credits},
+		{"id": "05_tab_menu", "fn": _cap_tab_menu},
+		{"id": "06_shop_menu", "fn": _cap_shop},
+		{"id": "07_combat_tutorial", "fn": _cap_combat},
+		{"id": "08_tidal_caves", "fn": _cap_caves},
+		{"id": "09_palace_gate", "fn": _cap_palace},
+		{"id": "10_ending_rewind", "fn": _cap_ending},
+		{"id": "11_credits", "fn": _cap_credits},
 	]
 
 
@@ -116,6 +118,28 @@ func _cap_village(id: String) -> void:
 	await _shot(id)
 
 
+func _cap_tab_menu(id: String) -> void:
+	_setup_act1_progress()
+	GameManager.add_item("sea_salve", 1)
+	get_tree().change_scene_to_file("res://scenes/world/ruined_village.tscn")
+	await _wait(8)
+	TabMenuUI.open_menu()
+	await _wait(10)
+	await _shot(id)
+	TabMenuUI.close_menu()
+
+
+func _cap_shop(id: String) -> void:
+	_setup_act1_progress()
+	GameManager.set_flag("met_roku")
+	get_tree().change_scene_to_file("res://scenes/world/ruined_village.tscn")
+	await _wait(8)
+	TabMenuUI.open_shop("roku_shack")
+	await _wait(10)
+	await _shot(id)
+	TabMenuUI.close_menu()
+
+
 func _cap_combat(id: String) -> void:
 	_setup_act1_progress()
 	GameManager.pending_spawn = "TutorialEncounter"
@@ -172,6 +196,7 @@ func _setup_act1_progress() -> void:
 	GameManager.set_flag("game_started")
 	GameManager.set_flag("met_yuzu_spirit")
 	GameManager.set_flag("cave_entrance_unlocked")
+	GameManager.set_flag("met_roku")
 	GameManager.add_item("cave_map", 1)
 	GameManager.gold = 120
 

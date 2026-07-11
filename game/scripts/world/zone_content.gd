@@ -13,6 +13,7 @@ const INTERACTABLES := {
 		"VillageWell": {"type": "dialogue", "scene": "SC-02-WELL", "label": "Inspect well"},
 		"ToriiShrine": {"type": "dialogue", "scene": "SC-03", "label": "Approach torii", "requires_not_scene": "SC-03"},
 		"RokuShack": {"type": "dialogue", "scene": "SC-04", "label": "Enter shack", "requires_not_scene": "SC-04"},
+		"RokuShop": {"type": "shop", "shop_id": "roku_shack", "label": "Browse wares", "requires_flag": "met_roku"},
 		"TutorialEncounter": {"type": "encounter", "encounter": "enc_sc05_tutorial_crab", "label": "Fight Salt Crab", "requires_not_flag": "tutorial_combat_done"},
 		"CaveEntrance": {"type": "zone", "zone": "tidal_caves", "spawn": "WorldSpawn", "label": "Enter caves", "requires_flag": "cave_entrance_unlocked"},
 		"fishing_ledger": {"type": "lore", "lore": "fishing_ledger", "label": "Read ledger"},

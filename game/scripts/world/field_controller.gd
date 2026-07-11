@@ -2,6 +2,7 @@ extends Node3D
 ## Field gameplay layer — player, camera, interactables, zone story hooks.
 
 const ZoneContentLib = preload("res://scripts/world/zone_content.gd")
+const CharacterVisual = preload("res://scripts/visuals/character_visual.gd")
 const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 
 @export var zone_id: String = "ruined_village"
@@ -51,16 +52,20 @@ func _spawn_player() -> void:
 	var spawn_name := GameManager.pending_spawn if GameManager.pending_spawn != "" else "WorldSpawn"
 	spawn_at_marker(spawn_name)
 	GameManager.pending_spawn = ""
-	_tint_player_mesh()
+	_apply_player_visual()
 	call_deferred("_spawn_followers")
 
 
-func _tint_player_mesh() -> void:
+func _apply_player_visual() -> void:
 	var mesh: MeshInstance3D = _player.get_node_or_null("Mesh")
 	if mesh:
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = Color(0.55, 0.78, 0.95)
-		mesh.material_override = mat
+		mesh.visible = false
+	var col: CollisionShape3D = _player.get_node_or_null("CollisionShape3D")
+	var lead := GameManager.party_field[0] if GameManager.party_field.size() > 0 else "urashima"
+	for child in _player.get_children():
+		if str(child.name).begins_with("CharacterVisual"):
+			child.queue_free()
+	CharacterVisual.build_character(_player, str(lead))
 
 
 func _on_party_changed() -> void:
@@ -80,8 +85,8 @@ func _spawn_followers() -> void:
 		if cid == lead:
 			continue
 		var follower := CharacterBody3D.new()
-		follower.set_script(load("res://scripts/player/party_follower.gd"))
 		follower.name = "Follower_%s" % cid
+		follower.set_script(load("res://scripts/player/party_follower.gd"))
 		add_child(follower)
 		follower.setup(str(cid), _player, slot)
 		follower.global_position = _player.global_position
@@ -190,6 +195,11 @@ func _update_nearest() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("tab_menu") and not TabMenuUI.is_open():
+		_set_field_blocked(true)
+		TabMenuUI.open_menu()
+		get_viewport().set_input_as_handled()
+		return
 	if _blocked:
 		return
 	if event.is_action_pressed("interact") and _nearest != "":
@@ -241,6 +251,8 @@ func _trigger_interact(marker_name: String, data: Dictionary) -> void:
 				_hud.toast("Game saved.")
 		"puzzle":
 			_open_puzzle()
+		"shop":
+			_open_shop(str(data.get("shop_id", "roku_shack")))
 		"ending_choice":
 			_open_ending_choice()
 
@@ -279,6 +291,11 @@ func _open_ending_choice() -> void:
 	_blocked = true
 	if _hud and _hud.has_method("open_ending_choice"):
 		_hud.open_ending_choice()
+
+
+func _open_shop(vendor_id: String) -> void:
+	_set_field_blocked(true)
+	TabMenuUI.open_shop(vendor_id)
 
 
 func _start_encounter(encounter_id: String) -> void:

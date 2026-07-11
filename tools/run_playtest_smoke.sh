@@ -41,6 +41,10 @@ check "Player movement works" godot4 --headless --rendering-driver opengl3 --pat
 check "XP and level-up work" godot4 --headless --rendering-driver opengl3 --path game res://tests/xp_level_test.tscn
 check "Party followers spawn" godot4 --headless --rendering-driver opengl3 --path game res://tests/follower_smoke_test.tscn
 check "Portrait assets exist" test -f game/assets/ui/portraits/urashima_weary.png
+check "Shop buy flow works" godot4 --headless --rendering-driver opengl3 --path game res://tests/shop_smoke_test.tscn
+check "Tab menu opens" godot4 --headless --rendering-driver opengl3 --path game res://tests/tab_menu_smoke_test.tscn
+check "Audio assets exist" test -f game/assets/audio/bgm/field.ogg -a -f game/assets/audio/sfx/hit.ogg
+check "Three endings E2E" godot4 --headless --rendering-driver opengl3 --path game res://tests/e2e_three_endings_test.tscn
 
 echo ""
 echo "Passed: $PASS | Failed: $FAIL"

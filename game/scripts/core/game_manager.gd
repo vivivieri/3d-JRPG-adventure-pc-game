@@ -127,6 +127,7 @@ func reset_new_game() -> void:
 	playtime_sec = 0.0
 	_init_party_state(int(ng.get("level", 1)), ng.get("equipment", {}))
 	current_zone = str(ng.get("start_scene", "beach_shore"))
+	ShopManager.reset_for_new_game()
 
 
 func _init_party_state(level: int, equipment: Dictionary) -> void:
@@ -228,6 +229,9 @@ func apply_dialogue_complete(data: Dictionary) -> void:
 		EventBus.quest_updated.emit(quest_id)
 	for member in data.get("add_party", []):
 		add_party_member(str(member))
+	var gold_grant: int = int(data.get("gold", 0))
+	if gold_grant > 0:
+		add_gold(gold_grant)
 
 
 func add_party_member(char_id: String) -> void:
@@ -268,6 +272,48 @@ func has_key_item(item_id: String) -> bool:
 func add_gold(amount: int) -> void:
 	gold += amount
 	EventBus.gold_changed.emit(gold)
+
+
+func equip_item(char_id: String, item_id: String) -> bool:
+	if not party_state.has(char_id):
+		return false
+	var def: Dictionary = items.get(item_id, {})
+	if str(def.get("type", "")) != "equipment":
+		return false
+	var equip_by: Array = def.get("equip_by", [])
+	if char_id not in equip_by:
+		return false
+	if int(inventory.get(item_id, 0)) <= 0:
+		return false
+	var slot := str(def.get("slot", "weapon"))
+	party_state[char_id].equipment[slot] = item_id
+	EventBus.inventory_changed.emit()
+	return true
+
+
+func use_item_field(char_id: String, item_id: String) -> bool:
+	if not party_state.has(char_id):
+		return false
+	var def: Dictionary = items.get(item_id, {})
+	if not bool(def.get("field_use", false)):
+		return false
+	if int(inventory.get(item_id, 0)) <= 0:
+		return false
+	var effect: Dictionary = def.get("effect", {})
+	var ps: Dictionary = party_state[char_id]
+	var stats := get_character_stats(char_id)
+	match str(effect.get("type", "")):
+		"heal_hp":
+			ps.hp = mini(int(ps.hp) + int(effect.get("value", 0)), stats.max_hp)
+		"heal_mp":
+			ps.mp = mini(int(ps.mp) + int(effect.get("value", 0)), stats.max_mp)
+		_:
+			return false
+	inventory[item_id] = int(inventory[item_id]) - 1
+	if int(inventory[item_id]) <= 0:
+		inventory.erase(item_id)
+	EventBus.inventory_changed.emit()
+	return true
 
 
 func xp_to_next_level(level: int) -> int:
@@ -368,6 +414,7 @@ func get_save_dict() -> Dictionary:
 		"lore_collected": lore_collected,
 		"current_zone": current_zone,
 		"playtime_sec": playtime_sec,
+		"shop_stock": ShopManager.get_save_dict(),
 	}
 
 
@@ -384,6 +431,7 @@ func load_save_dict(data: Dictionary) -> void:
 	lore_collected = _to_string_array(data.get("lore_collected", []))
 	current_zone = str(data.get("current_zone", "ruined_village"))
 	playtime_sec = float(data.get("playtime_sec", 0.0))
+	ShopManager.load_save_dict(data.get("shop_stock", {}))
 
 
 func _to_string_array(arr: Array) -> Array[String]:

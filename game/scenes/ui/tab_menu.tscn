@@ -1,0 +1,158 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/tab_menu.gd" id="1"]
+
+[node name="TabMenu" type="CanvasLayer"]
+layer = 35
+script = ExtResource("1")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.04, 0.08, 0.65)
+
+[node name="Panel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -300.0
+offset_right = 420.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Menu"
+
+[node name="GoldLabel" type="Label" parent="Panel/VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Gold: 0"
+horizontal_alignment = 2
+
+[node name="TabContainer" type="TabContainer" parent="Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Items" type="VBoxContainer" parent="Panel/VBox/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ItemsList" type="ItemList" parent="Panel/VBox/TabContainer/Items"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemDetail" type="RichTextLabel" parent="Panel/VBox/TabContainer/Items"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+fit_content = true
+
+[node name="ItemActions" type="HBoxContainer" parent="Panel/VBox/TabContainer/Items"]
+layout_mode = 2
+alignment = 1
+
+[node name="UseButton" type="Button" parent="Panel/VBox/TabContainer/Items/ItemActions"]
+layout_mode = 2
+text = "Use"
+
+[node name="EquipButton" type="Button" parent="Panel/VBox/TabContainer/Items/ItemActions"]
+layout_mode = 2
+text = "Equip"
+
+[node name="Equipment" type="VBoxContainer" parent="Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="EquipCharOption" type="OptionButton" parent="Panel/VBox/TabContainer/Equipment"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EquipSlotsList" type="ItemList" parent="Panel/VBox/TabContainer/Equipment"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Party" type="VBoxContainer" parent="Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="PartyList" type="ItemList" parent="Panel/VBox/TabContainer/Party"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+item_selected_signal_connected = true
+
+[node name="PartyDetail" type="RichTextLabel" parent="Panel/VBox/TabContainer/Party"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+fit_content = true
+
+[node name="KeyItems" type="VBoxContainer" parent="Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="KeyItemsList" type="ItemList" parent="Panel/VBox/TabContainer/KeyItems"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopTab" type="VBoxContainer" parent="Panel/VBox/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="ShopList" type="ItemList" parent="Panel/VBox/TabContainer/ShopTab"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopDetail" type="RichTextLabel" parent="Panel/VBox/TabContainer/ShopTab"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+fit_content = true
+
+[node name="BuyButton" type="Button" parent="Panel/VBox/TabContainer/ShopTab"]
+layout_mode = 2
+text = "Buy"
+
+[node name="Hint" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.78, 1)
+text = "Tab or Esc to close"
+horizontal_alignment = 1
+
+[connection signal="item_selected" from="Panel/VBox/TabContainer/Party/PartyList" to="." method="_on_party_selected"]
+[connection signal="pressed" from="Panel/VBox/TabContainer/Items/ItemActions/UseButton" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="Panel/VBox/TabContainer/Items/ItemActions/EquipButton" to="." method="_on_equip_pressed"]
+[connection signal="pressed" from="Panel/VBox/TabContainer/ShopTab/BuyButton" to="." method="_on_buy_pressed"]
