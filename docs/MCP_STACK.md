@@ -10,27 +10,6 @@
 
 ## Full R&R map
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  PLAN & CODE          GodotPrompter — GDScript, .gdshader, tests │
-├─────────────────────────────────────────────────────────────────┤
-│  DESIGN CONTEXT       Notion MCP — formulas, lore index, balance │
-├─────────────────────────────────────────────────────────────────┤
-│  ART GENERATE         GameLab MCP — textures, UI sheets, VFX     │
-│  ART PIPELINE         Blender + AI Render (offline, human)       │
-├─────────────────────────────────────────────────────────────────┤
-│  BUILD                GDAI MCP (`godot-mcp`)                     │
-├─────────────────────────────────────────────────────────────────┤
-│  ANALYZE              Godotiq (`godotiq`)                        │
-├─────────────────────────────────────────────────────────────────┤
-│  TEST                 Godot MCP Pro (`godot-mcp-pro`, `--minimal`)│
-├─────────────────────────────────────────────────────────────────┤
-│  AUDIO PLACEHOLDER    tools/generate_game_audio.py              │
-│  AUDIO PROTOTYPE      ACE-Step 1.5 (MIT, local) via generate_ai_bgm │
-│  VO SELECTIVE         ElevenLabs via generate_ai_vo (12 clips only) │
-└─────────────────────────────────────────────────────────────────┘
-```
-
 | Layer | Tool | Cursor / access | Role |
 |-------|------|-----------------|------|
 | Plan & code | **GodotPrompter** | Cursor agent | GDScript, shaders, tests, architecture |
@@ -39,10 +18,12 @@
 | Art pipeline | **Blender + AI Render** | Offline — not MCP | Hand-painted albedo on low-poly hero meshes |
 | Build | **GDAI MCP** | `godot-mcp` | Scenes, nodes, materials, lights, F5 playtest |
 | Analyze | **Godotiq** | `godotiq` | Signals, debug console, `ui_map`, validation |
-| Test | **Godot MCP Pro** | `godot-mcp-pro` | L4/L5 scenarios, asserts, input replay |
+| Test | **Godot MCP Pro** | `godot-mcp-pro` (`--minimal`) | L4/L5 scenarios, asserts, input replay |
 | Audio placeholder | `generate_game_audio.py` | Shell | Copyright-safe BGM/SFX until replaced |
 | Audio prototype | **ACE-Step 1.5** | Local (`bash tools/install_ace_step.sh`) | Zone + opening/boss/ending hero BGM |
-| VO selective | **ElevenLabs** | `ELEVENLABS_API_KEY` + `generate_ai_vo.py` | 12 emotional hit clips only — `docs/VO_HIT_LIST.md` |
+| VO selective | **ElevenLabs** | `ELEVENLABS_API_KEY` + `generate_ai_vo.py` | 12 emotional hit clips — `docs/VO_HIT_LIST.md` |
+| Marketing trailer | `generate_marketing_trailer.py` | Shell (`ffmpeg`, `numpy`) | Ken Burns pitch PNGs → `steam/trailer*.mp4` |
+| Video AI (optional) | Runway / Kling / similar | Offline — not MCP | Marketing trailer b-roll only — never in-game |
 
 ```
 GodotPrompter (plan/code)
