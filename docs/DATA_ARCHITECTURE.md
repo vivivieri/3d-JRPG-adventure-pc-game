@@ -85,9 +85,9 @@ One row per storyboard beat. Engine loads this for QA tools and progression vali
 | SC-10 | II | tidal_caves | dialogue | yuzu_joined | — |
 | SC-11 | II | tidal_caves | cinematic | saw_palace_vision | — |
 | SC-12 | II | dragon_palace_gate | field | gate_reached, roku_combat_active | — |
-| SC-13 | III | dragon_palace_gate | dialogue | knows_box_truth, mirror_choice | — |
+| SC-13 | III | dragon_palace_gate | dialogue | knows_box_truth *(`mirror_choice` is registered in `flags.json` but not yet set by any `scenes.json`/dialogue row — SC-13 needs a choice block to set it; see `docs/ENDING_DESIGN.md`)* | — |
 | SC-14 | III | dragon_palace_gate | boss | sentinel_defeated | — |
-| SC-15 | III | dragon_palace_gate | boss | tide_keeper_phase3 | — |
+| SC-15 | III | dragon_palace_gate | boss | tide_keeper_defeated, tide_keeper_phase3 *(both currently set together in `encounters/story_encounters.json` `on_win`, i.e. after the fight ends — see the open question in `docs/BOSS_DESIGNS.md` §4 about wiring the mid-fight 10%-HP choice gate)* | — |
 | SC-16 | III | dragon_palace_gate | choice | ending_chosen | ending_* |
 | SC-17a/b/c | end | ending_* | cinematic | game_completed | — |
 
@@ -189,8 +189,9 @@ One file per chapter; scenes reference story IDs.
 {
   "vendor_id": "roku_shack",
   "requires_flag": "met_roku",
-  "restock_flag": "shore_wraith_defeated",
-  "inventory": [{ "item_id": "sea_salve", "price": 40, "stock": -1 }]
+  "restock_on_flag": "shore_wraith_defeated",
+  "inventory": [{ "item_id": "sea_salve", "price": 40, "stock": -1 }],
+  "scrolls": [{ "skill_id": "purify", "price": 200, "stock": 1, "character_id": "yuzu", "restock": true }]
 }
 ```
 
@@ -203,10 +204,13 @@ One file per chapter; scenes reference story IDs.
 ```json
 {
   "id": "ACH_ENDING_ANCHOR",
-  "trigger": { "flag": "ending_chosen", "value": "anchor" },
-  "steam_api_name": "ENDING_ANCHOR"
+  "steam_api": "ENDING_ANCHOR",
+  "trigger": { "flag_equals": { "ending_chosen": "anchor" } },
+  "hidden": false
 }
 ```
+
+Trigger shapes actually in use: `{ "flag": "..." }`, `{ "flag_equals": { "<flag>": "<value>" } }`, `{ "all_flags": [...] }`, `{ "lore_count": N }`, `{ "meta_endings_count": N }`, and `{ "flag": "...", "setting": "hard_mode" }` for hard-mode-gated achievements.
 
 ---
 
@@ -214,14 +218,22 @@ One file per chapter; scenes reference story IDs.
 
 ```json
 {
-  "party": ["urashima"],
+  "start_scene": "beach_shore",
+  "spawn_marker": "PlayerSpawn",
+  "party_field": ["urashima"],
+  "party_combat": ["urashima"],
+  "level": 1,
   "inventory": { "sea_salve": 2 },
-  "equipment": { "urashima": { "weapon": "fisher_katana", "armor": "worn_haori" } },
+  "key_items": ["lacquer_box"],
+  "equipment": { "urashima": { "weapon": "fisher_katana", "armor": "worn_haori", "charm": null } },
+  "gold": 0,
   "flags": {},
-  "scene": "beach_shore",
-  "quests_active": ["the_return"]
+  "quests_active": ["the_return"],
+  "play_prologue": true
 }
 ```
+
+Note the split between `party_field` (who's visible/walking around) and `party_combat` (who's in the active battle roster) — they may diverge once Yuzu/Roku join.
 
 ---
 
@@ -243,12 +255,19 @@ One file per chapter; scenes reference story IDs.
 python3 tools/validate_story_data.py
 ```
 
-Checks:
-- Every `scene_id` in storyboard exists in `scenes.json`
-- Every `set_flags` in dialogue exists in `flags.json`
-- Every quest `completion.flag` is set somewhere
-- Every encounter `scene_id` exists
-- No item drop references missing `items.json` ids
+Checks actually implemented in `tools/validate_story_data.py` today:
+- `scenes.json` → dialogue/item/flag/cinematic-hook references resolve
+- Dialogue `on_complete.set_flags` + line `requires_flags` resolve to `flags.json`
+- Every `voice_id` in dialogue exists in `vo_prompts.json` (and vice versa — no orphan clips)
+- Cinematic hooks: `scene_id`, `sets_flags`, `skip_if_flag`, `requires_flags`, `requires_items`, and `then` dialogue/encounter references resolve
+- Encounters: `scene_id`, `enemies`, `on_win.grant_items`, `cinematic_hook`, `requires_flags` resolve
+- Quest count == 5
+- Shop `inventory[].item_id` resolves to `items.json`
+- `items.json` `story_grant` resolves to `"new_game"`, a real `scene_id`, or a real `lore_entries.json` id (added during the pre-Phase-1 doc audit — this caught a real bug: `spirit_bell.story_grant` pointed at `lore_sailor_charm`, which didn't exist; fixed to `sailor_charm`)
+
+**Not yet implemented** (do not rely on these until added — see `docs/AI_DEV_WORKFLOW.md` L0 gate):
+- Cross-check against `docs/STORYBOARD.md` scene headings (the validator never parses Markdown)
+- "Every quest `completion.flag` is set somewhere" (quest stage `completion` fields are not read at all)
 
 ---
 
@@ -279,8 +298,8 @@ Checks:
 
 | Source | Count | Notes |
 |--------|-------|-------|
-| `docs/STORYBOARD.md` | **19** narrative beats | SC-00 + 18 main-path scenes |
-| `story/scenes.json` | **23** rows | Adds SC-02 inspectable sub-scenes + SC-17a/b/c ending variants |
+| `docs/STORYBOARD.md` | **20** scene headings | SC-00 + SC-01–16 + 3 ending variants (SC-17a/b/c); a single playthrough experiences 18 (one ending only) |
+| `story/scenes.json` | **23** rows | The 20 headings + 3 SC-02 inspectable sub-scenes |
 | `dialogue/chapter_01.json` | **22** scene keys | SC-07 silent puzzle — no dialogue block by design |
 
 All `scene_id` values in dialogue, encounters, and flags must exist in `scenes.json`.
