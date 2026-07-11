@@ -29,6 +29,7 @@
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
 | Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
+| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) |
 | Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [steam/GODOTSTEAM_SETUP.md](../steam/GODOTSTEAM_SETUP.md) |
 
 ---
@@ -104,8 +105,8 @@
 
 | Doc | Purpose |
 |-----|---------|
+| [VISUAL_QA.md](VISUAL_QA.md) | **Screenshot + vision gates** — prevent primitive/placeholder spread |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
-| [ART_DIRECTION.md](ART_DIRECTION.md) | Visual pivot — muted Japanese coastal 3D |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |

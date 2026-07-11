@@ -85,6 +85,7 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 - `docs/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
 - `docs/CHARACTER_BIBLE.md` — models, box glow states, spirit materials
 - `docs/ART_AUTOMATION_PIPELINE.md` — quality-first automated art/audio policy
+- `docs/VISUAL_QA.md` — screenshot + vision gates (look & feel)
 - `docs/ASSET_COMPLIANCE.md` — license-safe assets only
 - `docs/AUDIO_PRODUCTION_GUIDE.md` — audio layout; ACE-Step ship path
 

@@ -30,6 +30,7 @@ echo "==> Fresh-rebuild smoke checks"
 echo ""
 
 check "Story data validates" python3 tools/validate_story_data.py
+check "Scene visual lint (no primitives)" bash tools/check_scene_visuals.sh
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh
 check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3

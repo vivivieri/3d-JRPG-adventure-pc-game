@@ -146,7 +146,7 @@ bash tools/ensure_gdai_mcp.sh
 | 4 | **F5** play scene (or main flow to scene) | No crash; reaches expected state |
 | 5 | Read **Debugger** if scripts changed | No unhandled exceptions |
 | 6 | **Runtime action sequence** if UI/combat (keypress batch + waits) | Menu opens, selection succeeds (see §11.2) |
-| 7 | Capture viewport **screenshot** | Save to `artifacts/screenshots/<phase>_<scene>_<date>.png`; check overlap/clipping |
+| 7 | Capture viewport **screenshot** | Save to `artifacts/screenshots/<phase>_<scene>_<date>.png`; **vision review** per `docs/VISUAL_QA.md` §2C (V1–V6) |
 | 8 | For zones: verify WorldEnvironment | Filmic tonemap, fog per `RENDERING_GUIDE.md` |
 | 9 | Stop scene | Clean exit |
 
@@ -185,7 +185,7 @@ bash tools/ensure_gdai_mcp.sh
 1. Copy exact Output/Debugger text into session notes  
 2. GodotPrompter fixes `.gd` / `.gdshader`  
 3. GDAI MCP reapplies and re-runs steps 1–7  
-4. Do not mark task done until L3 pass  
+4. Do not mark task done until L3 pass **and** `docs/VISUAL_QA.md` report template filled
 
 ### Agent report line
 

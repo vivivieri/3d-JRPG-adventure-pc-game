@@ -143,7 +143,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 
 Before marking M5 complete (`docs/MILESTONES.md`):
 
-- [ ] No primitive placeholders in player-facing scenes
+- [ ] `bash tools/check_scene_visuals.sh` passes (no primitives in ship `.tscn`)
 - [ ] All zone albedos pass `palette_remap.py` + gameplay-camera palette check (ART_DIRECTION §10)
 - [ ] Single toon ramp family (`RENDERING_GUIDE.md`)
 - [ ] Every external asset in `LICENSES.md` + `asset_manifest.license.json`
