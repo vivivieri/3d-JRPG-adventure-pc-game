@@ -63,7 +63,7 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 | Party members | 3 (Urashima, Yuzu the shrine maiden spirit, Roku the diver) |
 | Main quests | 5 — see `docs/QUEST_AND_FLAGS.md` |
 | Side lore collectibles | 8 |
-| Skills (total) | 15 player + 6 enemy — see `docs/SKILLS_BIBLE.md` |
+| Skills (total) | 15 player loadout slots / 14 unique player skill IDs + 6 enemy — see `docs/SKILLS_BIBLE.md` |
 | Playtime | 2–3 hours |
 
 ---
