@@ -52,6 +52,27 @@ python3 tools/validate_story_data.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
 
+`tools/run_playtest_smoke.sh` runs the scene-load smoke suite. Its `Windows exe exists`
+and `GodotSteam gdextension present` checks only pass after a full Steam export, so
+they FAIL in a dev-only environment — that is expected, not a setup problem.
+
+### Running the game GUI
+
+A VNC desktop is available on `DISPLAY=:1`. Launch the actual game window with:
+
+```bash
+DISPLAY=:1 bash tools/run_game.sh   # main menu; pass a res:// scene to start elsewhere
+```
+
+Non-obvious caveats (all harmless in cloud):
+- Must use the OpenGL driver (`run_game.sh` already passes `--rendering-driver opengl3`);
+  the cloud VM renders via software `llvmpipe`, so Forward+/Vulkan is unavailable.
+- No sound card → Godot logs ALSA errors and falls back to the dummy audio driver.
+- The `GDAIMCPRuntime` autoload logs a "File not found" / "Failed to instantiate an
+  autoload" error at startup because the commercial GDAI plugin is gitignored. The game
+  still boots and plays normally — do not treat this as a fatal error.
+- New Game plays the prologue dialogue, then loads a greybox field zone; `E` interacts.
+
 ### Rendering & environment (Phase 1)
 
 Before building zones, read:
