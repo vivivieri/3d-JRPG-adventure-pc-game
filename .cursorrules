@@ -32,6 +32,19 @@ Full toolchain: `docs/MCP_STACK.md` (all tools required)
 - Implementing gameplay/visual features when GDAI MCP is not connected
 - Importing copyrighted or unknown-license art, audio, fonts, or models from the web
 - Using Kenney packs, random Google images, CC-BY-NC, or franchise IP traces
+- **FMV or AI-generated video as in-game cutscenes** (`VideoStreamPlayer` story playback, Runway/Kling/etc. in `game/`)
+- **AI video tools for gameplay** — marketing/trailer b-roll only (`docs/TRAILER_V2_PLAN.md`)
+
+### Video & cinematics policy
+
+| Context | Allowed | Forbidden |
+|---------|---------|-----------|
+| **In-game story** | Godot `Camera3D` + `CinematicDirector` + ACE-Step hero BGM (`docs/CINEMATICS.md`) | FMV, pre-rendered MP4 cutscenes, AI video in player builds |
+| **Marketing trailer v1** | `python3 tools/generate_marketing_trailer.py` — Ken Burns on pitch PNGs + BGM | N/A |
+| **Marketing trailer v2** | Optional Godot viewport captures; optional **2–3 s** Runway/Kling b-roll between cards | Using AI video as in-game assets |
+| **Compliance** | Log pitch art, AI b-roll, VO in `docs/LICENSES.md` | Shipping unlogged third-party video |
+
+**Rule:** In-game movies = Godot cinematics. Video AI = **marketing/trailer only**, never player-facing FMV.
 
 ### Session startup (every agent run)
 
@@ -63,6 +76,7 @@ Generate ship-safe placeholders with project tools — register in manifest:
 | BGM / SFX placeholder | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
 | BGM zone prototype | **ACE-Step 1.5** (`bash tools/generate_ai_bgm.sh`) | MIT (ACE-Step) |
 | Selective VO (12 clips) | **ElevenLabs** (`bash tools/generate_ai_vo.sh`) | Commercial AI — log in `LICENSES.md` |
+| Marketing trailer MP4 | `python3 tools/generate_marketing_trailer.py` | MIT (repo) + pitch art — see `steam/TRAILER_SCRIPT.md` |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
 | Zone textures / UI | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
 | Hero 3D meshes | **Blender + AI Render** → GLB import | ORIGINAL / documented |
@@ -162,6 +176,8 @@ Core tools are **complementary, not alternatives**. Use the **full** toolchain i
 - **Fennara** — fourth scene editor; overlaps GDAI/Godotiq/MCP Pro
 - **Ink narrative rewrite** — JSON spine already defined
 - **Kenney town kits** — wrong visual read for Japanese coastal JRPG
+- **FMV / `VideoStreamPlayer` story cutscenes** — use Godot cinematics (`docs/CINEMATICS.md`); no FMV v1
+- **AI video in gameplay** (Runway, Kling, etc.) — optional marketing trailer b-roll only (`docs/TRAILER_V2_PLAN.md`)
 
 ### Combined workflow (default — use every session)
 

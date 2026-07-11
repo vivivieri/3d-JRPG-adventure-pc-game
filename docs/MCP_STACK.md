@@ -1,8 +1,8 @@
 # MCP Stack — Full Toolchain (Godot 4.7)
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
-**Cross-refs:** `.cursorrules` §0–§1, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
+**Cross-refs:** `.cursorrules` §0–§1, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`, `docs/TRAILER_V2_PLAN.md`, `docs/CINEMATICS.md`
 
 **All tools in this document are required.** Agents must not treat any layer as optional or “recommended only.” If a required tool is missing, **STOP and notify the user** — do not fall back to manual scene edits or undocumented web assets.
 
@@ -28,6 +28,8 @@
 │  AUDIO PLACEHOLDER    tools/generate_game_audio.py              │
 │  AUDIO PROTOTYPE      ACE-Step 1.5 (MIT, local) via generate_ai_bgm │
 │  VO SELECTIVE         ElevenLabs via generate_ai_vo (12 clips only) │
+│  MARKETING TRAILER    generate_marketing_trailer.py (not MCP)       │
+│  VIDEO AI (optional)  Runway/Kling — trailer b-roll only, not game  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -43,6 +45,8 @@
 | Audio placeholder | `generate_game_audio.py` | Shell | Copyright-safe BGM/SFX until replaced |
 | Audio prototype | **ACE-Step 1.5** | Local (`bash tools/install_ace_step.sh`) | Zone + opening/boss/ending hero BGM |
 | VO selective | **ElevenLabs** | `ELEVENLABS_API_KEY` + `generate_ai_vo.py` | 12 emotional hit clips only — `docs/VO_HIT_LIST.md` |
+| Marketing trailer | `generate_marketing_trailer.py` | Shell (`ffmpeg`, `numpy`) | Ken Burns on pitch PNGs → `steam/trailer*.mp4` — `steam/TRAILER_SCRIPT.md` |
+| Video AI (optional) | Runway / Kling / similar | Offline — **not MCP** | **Marketing trailer b-roll only** — never in-game FMV — `docs/TRAILER_V2_PLAN.md` |
 
 ```
 GodotPrompter (plan/code)
@@ -73,6 +77,9 @@ GodotPrompter (plan/code)
 | Screenshot game viewport | **GDAI**, **Godotiq**, or **MCP Pro**; save to `artifacts/screenshots/` |
 | Zone BGM iteration | **ACE-Step** via `bash tools/generate_ai_bgm.sh` or `generate_game_audio.py` fallback → **GDAI** wires in editor |
 | Selective story VO | **ElevenLabs** via `bash tools/generate_ai_vo.sh` — **only** lines with `voice_id` in `chapter_01.json`; never full script |
+| Steam / social trailer | `python3 tools/generate_marketing_trailer.py` — pitch PNGs + BGM; locales in `steam/trailer_locales.json` |
+| In-game cinematic beat | **GDAI MCP** + `CinematicDirector` — cameras, tweens, ACE-Step hero BGM — **no FMV** |
+| AI video b-roll (optional) | Runway/Kling offline → `steam/broll/` — **marketing only**; log `LICENSES.md`; **never** `game/assets/` story playback |
 | Edit node tree / reparent | **GDAI only** |
 
 **Never** use GameLab, Summer Engine, or Fennara for scene graph mutations when GDAI is available.
@@ -289,6 +296,29 @@ Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines i
 
 **Agent rules:** Do not add `voice_id` to new lines without updating `vo_prompts.json` + `VO_HIT_LIST.md`. P0 before P1/P2. Verify ElevenLabs commercial terms before ship.
 
+### Marketing trailer & video AI
+
+**In-game:** Godot cinematics only — `docs/CINEMATICS.md`. **No FMV** v1 (`VideoStreamPlayer` story playback forbidden).
+
+**Marketing trailer (v1):**
+
+```bash
+python3 tools/generate_marketing_trailer.py --all-locales
+```
+
+- Visuals: Ken Burns on `docs/pitch/illustrations/` PNGs
+- Audio: procedural `steam/trailer_bgm.ogg` or ACE-Step stitch (v2 — `docs/TRAILER_V2_PLAN.md`)
+- Script: `steam/TRAILER_SCRIPT.md` · Locales: `steam/trailer_locales.json`
+
+**AI video (Runway, Kling, etc.):**
+
+| Allowed | Forbidden |
+|---------|-----------|
+| Optional **2–3 s** b-roll inserts in Steam/social trailer | In-game cutscenes, `game/assets/` story video, FMV endings |
+| Log every clip in `docs/LICENSES.md` + `asset_manifest.license.json` | Treating video AI as a required MCP layer |
+
+**Agent rules:** Do not wire AI video into `CinematicDirector`, scene hooks, or export templates. Godot viewport captures for trailer (post-M6) are OK — still marketing-only, not FMV gameplay.
+
 ---
 
 ## Explicitly rejected (do not adopt)
@@ -300,6 +330,8 @@ Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines i
 | **Ink narrative rewrite** | JSON spine already defined |
 | **Kenney town kits** | European visual read; banned for player-facing builds |
 | **Kenney knight / Castle kit** | Deprecated for ship (`ART_DIRECTION.md`) |
+| **FMV / in-game video cutscenes** | Use Godot `CinematicDirector`; no `VideoStreamPlayer` story playback v1 |
+| **AI video in gameplay** (Runway, Kling, etc.) | Marketing trailer b-roll only — `docs/TRAILER_V2_PLAN.md` |
 
 ---
 

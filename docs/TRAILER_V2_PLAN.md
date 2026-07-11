@@ -18,7 +18,7 @@
 | **Locales** | en / ja / zh | Same three outputs |
 | **Length** | ~75 s | Same beat sheet unless script edit approved |
 
-**Policy (unchanged):** In-game movies = Godot cinematics + `CinematicDirector`. Video AI = marketing/trailer only.
+**Policy (unchanged):** In-game movies = Godot cinematics + `CinematicDirector`. Video AI = marketing/trailer only. Codified in `.cursorrules` §0 and `docs/MCP_STACK.md`.
 
 ---
 
