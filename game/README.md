@@ -1,64 +1,59 @@
-# Godot project — Tides of Urashima
+# Godot project — Tides of Urashima (fresh rebuild)
 
-Fresh implementation branch. **Design docs on `main` are source of truth.**
+**Design docs on `main` and `game/data/` JSON are the source of truth.**  
+All gameplay scenes and systems were removed for a clean rebuild under the GDAI MCP workflow.
 
 ## Quick start
 
 ```bash
 # From repo root
 bash tools/setup_dev_environment.sh
+bash tools/ensure_gdai_mcp.sh          # GDAI MCP + Godot editor HTTP bridge
 bash tools/check_dev_environment.sh
-
-# Open in Godot 4.3+ (Forward+)
-# File → Open Project → game/project.godot
 ```
 
-Press **F5** — you should see the dev boot screen and no missing-data errors in the Output panel.
+Open `game/project.godot` in Godot 4.3+ (Forward+) and press **F5**. You should see the dev boot screen with no missing-data errors in Output.
 
-## Dev toolchain (use together)
+## Dev toolchain (required)
 
 | Tool | Role |
 |------|------|
 | **GodotPrompter** | Plan shaders, GDScript, architecture |
-| **GDAI MCP** | Build scenes in the live Godot Editor |
+| **GDAI MCP** | Build scenes in the live Godot Editor — **no manual `.tscn` edits** |
 | **`.cursorrules`** | Project workflow + stylized rendering rules |
 
 See `docs/GDAI_CLOUD_SETUP.md` and `docs/IMPLEMENTATION_PLAN.md`.
 
-## Folder layout
+## What exists today
 
 ```
 game/
-  project.godot          # Godot 4.3+ Forward+
-  data/                  # Story JSON (from main — do not duplicate)
-  assets/
-    models/environment/  # Per-zone kits (beach, village, caves, palace)
-    shaders/             # Toon ramp, water, spirit materials
-    textures/zones/      # Hand-painted tileables
-    fonts/               # Noto OFL bundle (see fonts/README.md)
-  scenes/world/          # Zone scenes
-  scenes/ui/             # Dialogue, combat HUD
-  scripts/               # GDScript systems
-  environments/          # WorldEnvironment .tres presets per zone
-  addons/                # Dev plugins (see addons/README.md)
+  project.godot              # Main scene: scenes/boot.tscn
+  scenes/boot.tscn           # Dev boot UI
+  scripts/core/
+    boot_scene.gd            # Boot screen
+    game_bootstrap.gd        # Validates required data paths at startup
+  data/                      # Story JSON (do not duplicate in docs)
+  assets/                    # Placeholder folders for Phase 1+ assets
+  addons/                    # GDAI MCP plugin (commercial — see addons/README.md)
 ```
 
 ## Data loading
 
 ```gdscript
-# Future GameManager API — data lives at res://data/
 var scenes = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/scenes.json"))
 ```
 
-Validate data from repo root:
+Validate from repo root:
 
 ```bash
 python3 tools/validate_story_data.py
 ```
 
-## Rendering
+## Next build step
 
-Follow `docs/RENDERING_GUIDE.md` — Filmic/ACES tonemap, zone fog, toon materials, muted coastal palette.
+**Phase 1** — Environment foundation: `ruined_village` vertical slice per `docs/RENDERING_GUIDE.md`.  
+Use GodotPrompter for shaders/scripts → GDAI MCP for scene assembly.
 
 ## Related docs
 

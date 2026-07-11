@@ -1,9 +1,15 @@
 extends Control
-## Placeholder boot screen until main menu is implemented (Phase 2).
+## Dev boot screen — validates data paths via GameBootstrap autoload.
+## Gameplay scenes rebuild via GodotPrompter + GDAI MCP (see docs/IMPLEMENTATION_PLAN.md).
 
 
 @onready var _status: Label = %Status
 
 
 func _ready() -> void:
-	_status.text = "Dev build %s\nData: game/data/ | Docs: docs/\nPhase 1 zones: res://scenes/world/zone_hub.tscn" % ProjectSettings.get_setting("application/config/version", "0.1.0")
+	var version: String = ProjectSettings.get_setting("application/config/version", "0.1.0")
+	_status.text = (
+		"Fresh rebuild %s\n"
+		+ "Data: game/data/ | Docs: docs/\n"
+		+ "Next: Phase 1 — ruined_village vertical slice (GDAI MCP)"
+	) % version
