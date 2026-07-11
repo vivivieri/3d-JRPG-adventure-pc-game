@@ -1,7 +1,9 @@
 # Tides of Urashima — Art Direction Bible
 
 **Version:** 1.1 (Pre-build pivot)  
-**Visual target:** **High-detail stylized Japanese 3D** — hand-painted albedo, readable silhouettes, authored environments. Not anime-realistic or photoreal PBR — closer to *Ni no Kuni* environmental richness and *Eastward* clarity with Japanese coastal motifs.
+**Visual target:** **High-detail stylized Japanese 3D** — automated stylized albedo, readable silhouettes, authored environments. Not anime-realistic or photoreal PBR — closer to *Ni no Kuni* environmental richness and *Eastward* clarity with Japanese coastal motifs.
+
+**Production policy:** Quality-first **automated** pipeline — no human artists in art/audio production. See `docs/ART_AUTOMATION_PIPELINE.md`.
 
 **Audience note (men 20–30):** Muted palette, emotional weight, no chibi comedy. Beauty with decay.
 
@@ -73,7 +75,7 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 
 1. **Modular kits first** — 80% reused pieces (walls, floors, rocks, props); see `docs/ENVIRONMENT_KITS.md`
 2. **Poly budget** — Modules 500–3k tris; hero set-pieces (torii, palace gate) 8k–20k
-3. **Hand-painted albedo** + light normal maps OK; single toon ramp across scene
+3. **Automated stylized albedo** (ComfyUI/Material Maker + `palette_remap.py`) + light normal maps OK; single toon ramp across scene
 4. **No PBR realism** — avoid glossy skin, HDR reflections
 5. **Fog always on** in hub (draw distance mask)
 6. **Water** is stylized (sculpted basins + foam decals, not simulation)
@@ -108,38 +110,42 @@ Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:
 
 ---
 
-## 6. Asset sourcing plan (revised)
+## 6. Asset sourcing plan (automated)
 
-**Priority:** Custom or commissioned for heroes + set-pieces; curated Japanese-environment packs for modular fill.
+**Priority:** AI-generated heroes + set-pieces; curated CC0 Japanese-environment packs for modular fill. **No commission or hand-paint ship path.**
 
 | Need | Approach | License |
 |------|----------|---------|
-| Characters (Urashima, Yuzu, Roku, bosses) | **Custom Blender** or commission | Own / contract |
-| Japanese ruins / coastal kits | Curated packs (itch.io, Sketchfab CC0) + custom trim | CC0 / own |
-| Rocks, cliffs (shared) | Custom + Poly Haven / ambientCG | CC0 |
-| Textures | Hand-painted tileables; ambientCG base | CC0 |
+| Characters (Urashima, Yuzu, Roku, bosses) | **Meshy / Tripo / Rodin** + Mixamo rig | Service ToS + register |
+| Japanese ruins / coastal kits | Curated packs (itch.io, Sketchfab CC0) + AI trim | CC0 / documented |
+| Rocks, cliffs (shared) | Poly Haven + toon shader | CC0 |
+| Zone textures | **ComfyUI** or **Material Maker** + `palette_remap.py` | Workflow output |
+| UI frames / icons | **GameLab MCP** or ComfyUI UI workflow | Per tool ToS |
 | Animations | Mixamo (humanoid rig) | Mixamo ToS |
-| UI icons | Kenney Game Icons or custom ink-wash | CC0 / own |
-| SFX | Freesound (filter CC0) | CC0 |
-| Music | OpenGameArt or commissioned short score | Per-track |
+| UI icons (fallback) | Procedural / GameLab ink-wash | CC0 / own |
+| SFX | Freesound (filter CC0) + procedural | CC0 |
+| Music | **ACE-Step 1.5** curated prompts | MIT (ACE-Step) |
 
 **Deprecated for ship builds (M5):** Kenney Castle kit (European read), Quaternius as final character base, procedural primitive placeholders. Kenney Nature may remain only if art-reviewed — see `docs/LICENSES.md` §Kenney (dev greybox only).
 
 **Rule:** Log every download in `docs/LICENSES.md` before import. **Run `bash tools/check_asset_compliance.sh` before commit.**
 
-**Copyright policy:** Only ship-safe licenses (CC0, MIT, OFL, public domain, commissioned with rights). **Banned:** all-rights-reserved, CC-BY-NC, CC-BY-SA, unknown sources. Full list: `docs/ASSET_COMPLIANCE.md`.
+**Copyright policy:** Only ship-safe licenses (CC0, MIT, OFL, public domain, documented AI service ToS). **Banned:** all-rights-reserved, CC-BY-NC, CC-BY-SA, unknown sources. Full list: `docs/ASSET_COMPLIANCE.md`.
 
 ---
 
-## 7. Blender → Godot pipeline
+## 7. AI 3D → Godot pipeline
 
-1. Model in Blender per `docs/CHARACTER_BIBLE.md` poly budgets
+1. Generate mesh via Meshy/Tripo/Rodin per `docs/CHARACTER_BIBLE.md` poly budgets
 2. Items & props per `docs/ITEMS_3D_MODEL_GUIDE.md`
-3. UV unwrap → hand-paint albedo (4K heroes, 2K modules, 1K weapons)
-4. Export as `.glb` (embedded textures)
-5. Import to `game/assets/models/characters/`, `environment/`, or `items/`
-6. Rig humanoids via Mixamo if needed
-7. Materials: Godot toon shader family; spirits use alpha on lower body
+3. Blender — decimate, UV unwrap; ComfyUI/Material Maker albedo (4K heroes, 2K modules, 1K weapons)
+4. `python3 tools/palette_remap.py` on texture sheets
+5. Export as `.glb` (embedded textures)
+6. Import to `game/assets/models/characters/`, `environment/`, or `items/`
+7. Rig humanoids via Mixamo if needed
+8. Materials: Godot toon shader family; spirits use alpha on lower body
+
+Full workflow: `docs/ART_AUTOMATION_PIPELINE.md` §5.
 
 ---
 

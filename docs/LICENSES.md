@@ -42,7 +42,7 @@ Track every third-party asset, story source, and engine dependency.
 | Item | Source | License | Date | Used for |
 |------|--------|---------|------|----------|
 | Procedural BGM/SFX (`bgm/*.ogg`, `sfx/*.ogg`) | `tools/generate_game_audio.py` | MIT (repo) | 2026-07 | **Dev placeholder** — replace before M5 ship |
-| ACE-Step prototype tracks | ACE-Step 1.5 via `tools/generate_ai_bgm.py` | MIT (ACE-Step) | 2026-07 | Zone + cinematic hero BGM — human mix pass before ship |
+| ACE-Step ship tracks | ACE-Step 1.5 via `tools/generate_ai_bgm.py` | MIT (ACE-Step) | 2026-07 | Zone + cinematic hero BGM — curated prompts + loudness normalize |
 | Selective VO (12 clips) | ElevenLabs via `tools/generate_ai_vo.py` | Commercial AI — verify ToS | 2026-07 | `game/assets/audio/voice/{locale}/*.ogg` — log each clip |
 | Marketing trailer BGM | `tools/generate_marketing_trailer.py` or ACE-Step stitch | MIT / ACE-Step | 2026-07 | `steam/trailer_bgm.ogg` — marketing only |
 
@@ -105,7 +105,7 @@ Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG onl
 |--------|-------|
 | **Kenney CC0 kits** | Dev greybox in `game/assets/models/` — **replace before M5 ship** for palace/hero props |
 | **Poly Haven CC0** | High-poly nature glTF in `game/assets/models/polyhaven/`. Not committed — run installer |
-| **Hero meshes** | Blender + NPR albedo per `docs/CHARACTER_BIBLE.md` — M5 deliverable |
+| **Hero meshes** | AI 3D + automated NPR albedo per `docs/CHARACTER_BIBLE.md` — M5 deliverable |
 
 ---
 

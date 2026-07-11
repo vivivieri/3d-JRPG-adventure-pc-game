@@ -269,7 +269,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 |---|-----------|--------------|
 | 7.1 | No primitive/Kenney placeholder art in shipping scenes | `check_asset_compliance.sh` + human review |
 | 7.2 | Hero meshes: Urashima, Yuzu, Roku per `CHARACTER_BIBLE.md` | Screenshot gate |
-| 7.3 | Hand-painted zone textures per zone | Art checklist |
+| 7.3 | Automated stylized zone textures per zone (`palette_remap.py`) | Art checklist |
 | 7.4 | Curated BGM per `AUDIO_PRODUCTION_GUIDE.md` | Audio QA §11 |
 | 7.5 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
 

@@ -138,13 +138,13 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 
 ## Phase 7 — M5 art rebuild
 
-Replace greybox with authored assets per `docs/ART_DIRECTION.md`:
+Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `docs/ART_AUTOMATION_PIPELINE.md`:
 
-- Urashima, Yuzu, Roku models
+- Urashima, Yuzu, Roku models (Meshy/Tripo/Rodin + Mixamo)
 - Hero set-pieces (torii, palace gate)
-- Hand-painted zone textures
-- Painted portraits
-- Curated BGM (`docs/AUDIO_PRODUCTION_GUIDE.md`)
+- Automated stylized zone textures (ComfyUI/Material Maker + `palette_remap.py`)
+- ComfyUI/GameLab portraits (replace procedural silhouettes)
+- ACE-Step curated BGM (`docs/AUDIO_PRODUCTION_GUIDE.md`)
 
 ---
 

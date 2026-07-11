@@ -85,7 +85,7 @@
 
 | Type | Source options |
 |------|----------------|
-| Music | Commission, OpenGameArt (CC-BY log), Freesound CC0 layers |
+| Music | ACE-Step 1.5 curated prompts, OpenGameArt (CC-BY log), Freesound CC0 layers |
 | SFX | Freesound CC0, Sonniss GDC packs (check license) |
 | **Rule** | Log in `docs/LICENSES.md`; register with `tools/register_asset.py`; verify with `tools/check_asset_compliance.sh` |
 

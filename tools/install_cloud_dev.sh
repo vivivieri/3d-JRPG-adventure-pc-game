@@ -187,5 +187,6 @@ echo
 echo "Required Cursor Secrets (user must configure):"
 echo "  GAMELAB_API_KEY  — https://gamelabstudio.co/"
 echo "  NOTION_API_KEY   — optional if using OAuth in Integrations instead"
-echo "Register in Cursor: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp, notion"
+echo "Register P0 in Cursor: godot-mcp, godotiq, godot-mcp-pro"
+echo "Optional: gamelab-mcp (UI art), notion — see docs/ART_AUTOMATION_PIPELINE.md"
 echo "See: docs/MCP_STACK.md"

@@ -5,7 +5,7 @@
 **Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.  
 **Cross-refs:** `docs/ART_DIRECTION.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/SETTINGS_ACCESSIBILITY.md`
 
-This document is the single checklist for M6 art rebuild and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: hand-painted albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
+This document is the single checklist for M6 art rebuild and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
 
 ---
 
@@ -20,7 +20,7 @@ This document is the single checklist for M6 art rebuild and Godot scene polish.
 | **Volumetric fog** | Off | **Subtle** in ruined village only | ⚠️ Optional |
 | **Glow (bloom)** | Off | **On** for emissive props (box, algae, palace) | ✅ Yes |
 | **SSAO / SSIL** | Off | **Skip** (or very subtle SSIL in caves only) | ❌ No (v1) |
-| **PBR materials** | StandardMaterial3D | **Toon ramp** + hand-painted albedo + light normals | ✅ Adapted |
+| **PBR materials** | StandardMaterial3D | **Toon ramp** + automated stylized albedo + light normals | ✅ Adapted |
 | **SDFGI / VoxelGI** | Off | **Skip** — authored fill lights instead | ❌ No (v1) |
 | **LightmapGI** | Off | **Defer** — consider for static village later | ⏳ Later |
 
@@ -141,11 +141,11 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 
 | Map / technique | Usage |
 |-----------------|-------|
-| **Albedo** | Hand-painted; 4K heroes, 2K modules, 1K weapons |
+| **Albedo** | Automated stylized (ComfyUI/Material Maker + palette_remap); 4K heroes, 2K modules, 1K weapons |
 | **Normal map** | Light normals OK — brick mortar, wood grain, stone cracks |
 | **Emission** | Algae, lacquer box, palace gold, spirit lower body |
 | **Toon ramp** | Single shader family across scene |
-| **Roughness variation** | Via hand-painted albedo grunge — not metallic PBR workflow |
+| **Roughness variation** | Via stylized albedo grunge — not metallic PBR workflow |
 
 ### 7.2 Do not use (v1)
 
@@ -275,7 +275,7 @@ When evaluating generic “make Godot look professional” tips:
 
 | Tip | Our answer |
 |-----|------------|
-| “Use full PBR ORM textures” | **No** — hand-painted + toon |
+| “Use full PBR ORM textures” | **No** — automated stylized + toon |
 | “Enable SSAO + SSIL” | **No** (v1) — stylized, not realistic |
 | “Use SDFGI for open worlds” | **No** — small authored zones |
 | “PhysicalSky + HDRI” | **No** — ProceduralSky + palette |

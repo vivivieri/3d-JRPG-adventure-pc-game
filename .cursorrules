@@ -14,10 +14,10 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 | **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
 | **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
 | **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
-| **GameLab Studio MCP** | `gamelab-mcp` | **Art generate** — tileable textures, UI sheets, spritesheets |
-| **Notion MCP** | `notion` | **Design context** — formulas, lore index, balancing tables |
+| **GameLab Studio MCP** | `gamelab-mcp` | **UI art generate** — ink frames, icon sheets, VFX sheets *(P1)* |
+| **Notion MCP** | `notion` | **Design context** *(optional)* — `docs/` + `game/data/` authoritative |
 
-Full toolchain: `docs/MCP_STACK.md` (all tools required)
+Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP required; art generators tiered)
 
 ### Role rules (avoid MCP conflicts)
 
@@ -40,14 +40,16 @@ bash tools/ensure_mcp_stack.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list **all** required servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, `notion`) → **STOP and notify the user**. See `docs/MCP_STACK.md`.
+2. If **Cursor MCP** does not list **P0** servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) → **STOP and notify the user**. See `docs/MCP_STACK.md`. Missing `gamelab-mcp` or `notion` → **WARN** and use fallbacks per `docs/ART_AUTOMATION_PIPELINE.md`.
 3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
 
 ### Notify the user when unavailable
 
 Always report clearly if any of these are missing:
 
-- `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, or `notion` not in Cursor MCP server list
+- `godot-mcp`, `godotiq`, or `godot-mcp-pro` not in Cursor MCP server list
+- `gamelab-mcp` not in Cursor MCP server list *(WARN — UI art; zone path uses ComfyUI/Material Maker)*
+- `notion` not connected *(OK — use docs/ + game/data/)*
 - GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
 - Godot Editor not running
 - GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
@@ -64,8 +66,9 @@ Generate ship-safe placeholders with project tools — register in manifest:
 | BGM zone prototype | **ACE-Step 1.5** (`bash tools/generate_ai_bgm.sh`) | MIT (ACE-Step) |
 | Selective VO (12 clips) | **ElevenLabs** (`bash tools/generate_ai_vo.sh`) | Commercial AI — log in `LICENSES.md` |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
-| Zone textures / UI | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
-| Hero 3D meshes | **Blender + AI Render** → GLB import | ORIGINAL / documented |
+| Zone NPR albedos | **ComfyUI** or **Material Maker** → `palette_remap.py` | Document workflow |
+| UI frames / icon sheets | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
+| Hero 3D meshes | **Meshy/Tripo/Rodin** + Blender → GLB | Service ToS + register |
 | Scene placement | GodotPrompter shaders + **GDAI MCP** | ORIGINAL |
 
 After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_compliance.sh`
@@ -83,8 +86,9 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 - `docs/RENDERING_GUIDE.md` — tonemap, fog, glow, shadows, zone presets
 - `docs/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
 - `docs/CHARACTER_BIBLE.md` — models, box glow states, spirit materials
+- `docs/ART_AUTOMATION_PIPELINE.md` — quality-first automated art/audio policy
 - `docs/ASSET_COMPLIANCE.md` — license-safe assets only
-- `docs/AUDIO_PRODUCTION_GUIDE.md` — audio layout; use `tools/generate_game_audio.py` for placeholders
+- `docs/AUDIO_PRODUCTION_GUIDE.md` — audio layout; ACE-Step ship path
 
 **Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
 
@@ -92,7 +96,7 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 
 ## 1. Roles & responsibilities (R&R) — GodotPrompter + MCP stack
 
-Core tools are **complementary, not alternatives**. Use the **full** toolchain in every normal task. All layers are required — see `docs/MCP_STACK.md`.
+Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godotiq`, `godot-mcp-pro`) is **required**; art generators are tiered per `docs/ART_AUTOMATION_PIPELINE.md`.
 
 ### Tool A: GodotPrompter — *Architect & code generator*
 | | |
@@ -128,38 +132,44 @@ Core tools are **complementary, not alternatives**. Use the **full** toolchain i
 | **When to use** | Phase gates, combat/menu E2E, regression after narrative changes |
 | **Does NOT** | Build or edit scenes (GDAI only) |
 
-### Tool E: GameLab Studio MCP — *Art generate*
+### Tool E: GameLab Studio MCP — *UI art generate* (P1)
 | | |
 |---|---|
-| **Role** | Tileable textures, UI frames, sprite/VFX sheets via MCP generation |
-| **Owns** | Exported PNG/WebP assets saved under `game/assets/` |
-| **When to use** | Phase 1+ zone albedos, ink-wash UI borders, placeholder VFX sheets |
+| **Role** | Ink-wash UI frames, combat icon sheets, VFX sprite sheets via MCP |
+| **Owns** | Exported PNG/WebP under `game/assets/textures/ui/` |
+| **When to use** | UI borders, menu frames, icon sheets — **not** default zone tileables |
 | **Does NOT** | Place nodes, assign materials, or edit `.tscn` — hand off to GDAI MCP |
-| **Prerequisite** | `gamelab-mcp` registered in Cursor; palette from `docs/ART_DIRECTION.md` |
+| **Prerequisite** | `gamelab-mcp` + API key; `palette_remap.py` after every gen |
 
-### Tool F: Notion MCP — *Design context*
+### Tool F: ComfyUI / Material Maker — *Zone NPR albedos* (offline)
 | | |
 |---|---|
-| **Role** | Agent-readable index for stat formulas, skill curves, flag glossary, tone guides |
-| **Owns** | Design intent lookup — not runtime data |
-| **When to use** | Phase 2–3 before editing `game/data/*.json` or combat GDScript |
+| **Role** | Stylized tileable wood, stone, ground; hero texture sheets |
+| **When to use** | Zone albedos per `docs/ART_AUTOMATION_PIPELINE.md` §3 |
+| **Handoff** | `palette_remap.py` → register → GDAI material assign |
+
+### Tool G: Notion MCP — *Design context* (optional)
+| | |
+|---|---|
+| **Role** | Agent-readable index for stat formulas, skill curves, flag glossary |
+| **When to use** | Phase 2–3 before editing `game/data/*.json` — `docs/` sufficient if absent |
 | **Does NOT** | Replace `game/data/` or `docs/` as source of truth |
 
-### Tool G: Blender + AI Render — *3D hero pipeline* (offline, not MCP)
+### Tool H: AI 3D + Blender — *Hero pipeline* (offline, not MCP)
 | | |
 |---|---|
-| **Role** | Hand-painted albedo on low-poly Japanese coastal meshes before Godot import |
-| **When to use** | Hero set-pieces (torii, lacquer box, palace trim) per `CHARACTER_BIBLE.md` |
-| **Handoff** | Export GLB → Godot import → GodotPrompter shader → GDAI MCP placement |
+| **Role** | Automated stylized meshes (Meshy/Tripo/Rodin) + GLB export |
+| **When to use** | Characters, torii, lacquer box, palace trim per `CHARACTER_BIBLE.md` |
+| **Handoff** | Mixamo rig → Godot import → GDAI MCP placement |
 
-### Tool H: ACE-Step 1.5 — *Audio prototype*
+### Tool I: ACE-Step 1.5 — *Audio prototype*
 | | |
 |---|---|
 | **Role** | Zone BGM, opening movie, boss loops, boss intro cinematics, ending hero scores |
 | **When to use** | Every audio pass; pair with `generate_game_audio.py` for instant fallback |
 | **Install** | `bash tools/install_ace_step.sh` → Gradio or REST API |
 | **Generate** | `bash tools/generate_ai_bgm.sh --category opening\|boss_cinematic\|ending\|zone` |
-| **Ship rule** | Human mix or commission before release — `docs/AUDIO_PRODUCTION_GUIDE.md` |
+| **Ship rule** | Curated ACE-Step exports + loudness normalize — `docs/AUDIO_PRODUCTION_GUIDE.md` |
 
 ### Rejected for v1 (do not adopt)
 - **Summer Engine** — replaces Godot editor; breaks GDAI stack
@@ -197,11 +207,12 @@ Core tools are **complementary, not alternatives**. Use the **full** toolchain i
 | Tab menu / shop UI | Plan `tab_menu.gd` logic | Build `tab_menu.tscn` node tree, connect signals, verify in viewport |
 | Lacquer box glow | Shader with 3 emission states by uniform | Place box mesh on Urashima, swap material states via story flags |
 | BGM / SFX | Run `generate_game_audio.py`; wire `audio_manager.gd` | Assign streams in editor, test F5 with audio bus |
-| Zone wood/stone albedo | GameLab MCP: muted palette texture per `ART_DIRECTION.md` | Assign `toon_base` material on meshes in zone `.tscn` |
-| Combat balance pass | Query Notion for formulas; update `skills.json` + GDScript | F5 combat scene via GDAI after data change |
-| Hero prop (torii, box) | Blender offline → GLB import | Place mesh, assign NPR material, tune emission |
+| Zone wood/stone albedo | ComfyUI/Material Maker + `palette_remap.py` per `ART_DIRECTION.md` | Assign `toon_base` in zone `.tscn` |
+| UI ink-wash frames | GameLab MCP + `palette_remap.py` | Assign in UI `.tscn` |
+| Combat balance pass | `docs/` + `game/data/` (Notion optional) | F5 combat scene via GDAI after data change |
+| Hero prop (torii, box) | Meshy/Blender → GLB import | Place mesh, assign NPR material, tune emission |
 
-**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + all bridges → Cursor MCP connected (all five servers) → then plan in GodotPrompter.
+**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + P0 bridges → Cursor MCP (P0 required; GameLab WARN) → plan in GodotPrompter.
 
 **Full toolchain:** `docs/MCP_STACK.md`
 
@@ -232,7 +243,7 @@ When configuring nodes, environments, or materials, enforce **Tides of Urashima*
 
 ### D. NPR materials & textures
 - **Toon ramp shader family** across the scene — single cohesive look (`ART_DIRECTION.md` §7).
-- **Hand-painted albedo** on all hero assets; light normal maps OK for wood/stone detail.
+- **Automated stylized albedo** on all hero assets (ComfyUI/Material Maker + `palette_remap.py`); light normal maps OK for wood/stone detail.
 - **No full PBR workflow:** Avoid metallic/glossy skin, ORM packs, StandardMaterial3D realism in player-facing scenes.
 - **Emission:** Lacquer box (3 glow states), algae, palace trim, spirit lower body (alpha/additive).
 - **Outlines:** **Optional / subtle only** — not required. Prefer readable silhouettes and value contrast over heavy inverted-hull outlines unless art review approves.

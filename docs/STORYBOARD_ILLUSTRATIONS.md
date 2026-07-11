@@ -1,7 +1,7 @@
 # Tides of Urashima — Storyboard Illustrations (Pitch Package)
 
 **Version:** 1.0  
-**Purpose:** Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless commissioned and modeled in 3D.  
+**Purpose:** Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless regenerated as 3D via `ART_AUTOMATION_PIPELINE.md`.  
 **Cross-refs:** `docs/STORYBOARD.md`, `docs/ART_DIRECTION.md`, `docs/CHARACTER_BIBLE.md`, `docs/CINEMATICS.md`
 
 ---
@@ -23,7 +23,7 @@
 
 | Attribute | Spec |
 |-----------|------|
-| Style | High-detail **stylized Japanese** — hand-painted look, not photoreal |
+| Style | High-detail **stylized Japanese** — automated stylized NPR look, not photoreal |
 | Reference tone | *Ni no Kuni* richness, *Eastward* clarity, Japanese coastal motifs |
 | Mood | Melancholy, muted, beauty with decay |
 | Proportions | Adult 1:5 head-to-body — **no chibi** |
@@ -115,7 +115,7 @@ docs/pitch/illustrations/
 
 ## 5. Per-scene illustration briefs
 
-Briefs align with `STORYBOARD.md`. Use as artist commission or AI prompt body.
+Briefs align with `STORYBOARD.md`. Use as ComfyUI/GameLab prompt body.
 
 ### SC-00 — Prologue
 - **Mood:** Mythic, fateful  
@@ -170,7 +170,7 @@ Briefs align with `STORYBOARD.md`. Use as artist commission or AI prompt body.
 
 ```
 [Subject from §5], Tides of Urashima stylized Japanese game concept art,
-hand-painted illustration, muted melancholy coastal JRPG mood,
+hand-painted illustration style, muted melancholy coastal JRPG mood,
 adult proportions head-to-body 1:5, palette [hex list from zone],
 high detail environment, readable silhouette, fog and decay,
 no chibi, no text, no watermark, 16:9 cinematic composition
@@ -181,23 +181,23 @@ no chibi, no text, no watermark, 16:9 cinematic composition
 Ruined Japanese fishing village overtaken by sea, rotting festival banners,
 submerged wooden houses, grey fog sky #8B9AF, moss and rust accents,
 lonely fisherman silhouette with red lacquer box on hip, wide establishing shot,
-stylized hand-painted game concept art, melancholy, no people, no text
+stylized NPR game concept art, melancholy, no people, no text
 ```
 
 ---
 
-## 7. Human artist commission brief
+## 7. Automated regeneration brief
 
-| Deliverable | Format | Count |
-|-------------|--------|-------|
-| Key scenes P0 | PNG 1920×1080 | 5 |
-| Full storyboard P1 | PNG 1920×1080 | 14 |
-| Character portraits | PNG 1024×1024 | 4 |
-| Contact sheet | PNG 3840×2160 | 1 optional |
+| Deliverable | Format | Tool |
+|-------------|--------|------|
+| Key scenes P0 | PNG 1920×1080 | ComfyUI / Cursor image gen |
+| Full storyboard P1 | PNG 1920×1080 | ComfyUI batch |
+| Character portraits | PNG 1024×1024 | ComfyUI + `palette_remap.py` |
+| Contact sheet | PNG 3840×2160 | ComfyUI batch (optional) |
 
-**Rights:** Commission with full commercial rights; log in `docs/LICENSES.md` + `tools/register_asset.py`.
+**Rights:** Log AI tool + prompt in `docs/LICENSES.md` + `tools/register_asset.py`.
 
-**AI-generated pitch art:** Log as tool-generated; acceptable for **pitch only** until 3D replaces for ship (`ASSET_COMPLIANCE.md`).
+**Pitch art:** Tool-generated illustrations are acceptable for **marketing/pitch** until 3D replaces for ship (`ASSET_COMPLIANCE.md`).
 
 ---
 

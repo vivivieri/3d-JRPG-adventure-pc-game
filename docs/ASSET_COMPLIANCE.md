@@ -9,7 +9,7 @@
 
 > **Every file used in the shipped game must be copyright-safe for commercial PC release.**
 
-That means you must **own it**, **commission it with rights assigned to the project**, or have a **documented permissive license** that allows commercial use and redistribution without paying royalties.
+That means you must have a **documented permissive license** or **documented AI service ToS** that allows commercial use and redistribution. Production is **fully automated** — no human artist commission path (`docs/ART_AUTOMATION_PIPELINE.md`).
 
 **If you cannot prove the license, do not import the file.**
 
@@ -26,16 +26,8 @@ That means you must **own it**, **commission it with rights assigned to the proj
 | **BSD 2/3-Clause** | ✓ | ✓ | Yes | |
 | **SIL OFL 1.1** | ✓ | ✓ | Yes | Noto fonts — no sold-by-itself |
 | **CC-BY 4.0** | ✓ | ✓ | **Required** | Log author + credit screen |
-| **Original / commissioned** | ✓ | ✓ | Optional | Contract must grant commercial rights |
-
-### Commissioned work
-
-Keep email or contract stating:
-- Artist grants commercial game rights
-- No third-party copyrighted references traced
-- Work is original or fully licensed sub-components
-
-Store proof in `docs/compliance/contracts/` (gitignored if sensitive) and register in manifest.
+| **AI-generated (documented ToS)** | ✓ | ✓ | Per service | Meshy, GameLab, ACE-Step, ElevenLabs — register in `LICENSES.md` |
+| **Original / repo procedural** | ✓ | ✓ | Optional | `tools/generate_*` scripts |
 
 ---
 
@@ -148,6 +140,6 @@ If `verify_asset_licenses.py` fails:
 
 1. **Remove** the unlisted file, or
 2. **Register** it with correct license + update LICENSES.md, or
-3. **Replace** with original / CC0 / commissioned work
+3. **Replace** with documented AI-generated, CC0, or repo procedural work
 
 Do not ship until the checker passes with zero errors.

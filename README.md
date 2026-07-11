@@ -72,7 +72,9 @@ Open `game/project.godot` in Godot 4.7 → **F5** (boot screen only).
 | GDAI MCP | Build scenes in editor |
 | Godotiq | Debug signals, Output panel |
 | Godot MCP Pro | L4/L5 test scenarios |
-| GameLab / Notion MCP | Art generation / design context |
+| GameLab MCP *(P1)* | UI art — frames, icon sheets |
+| ComfyUI / Material Maker | Zone NPR albedos (offline) |
+| Notion MCP *(optional)* | Design context index |
 
 Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md)
 

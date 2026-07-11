@@ -15,13 +15,14 @@
 | `godot-mcp` (GDAI) | **Build** scenes |
 | `godotiq` | **Analyze** signals/debug |
 | `godot-mcp-pro` | **Test** scenarios/asserts (L4/L5) |
-| `gamelab-mcp` | **Art generate** — textures, UI sheets |
-| `notion` | **Design context** — formulas, lore, balance |
-| Blender + AI Render | **3D hero pipeline** (offline) |
+| `gamelab-mcp` | **UI art** — frames, icon sheets *(P1 — WARN if absent)* |
+| ComfyUI / Material Maker | **Zone NPR albedos** — offline |
+| `notion` | **Optional** design context |
+| Meshy / Tripo / Rodin + Blender | **3D hero pipeline** — offline |
 | `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
 | `generate_ai_vo.py` + ElevenLabs | **Selective VO** — 12 emotional clips only (`docs/VO_HIT_LIST.md`) |
 
-**All tools are required.** If any are missing → STOP and notify user. See `docs/MCP_STACK.md`.
+**P0 MCP required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`). Art generators tiered — see `docs/ART_AUTOMATION_PIPELINE.md`. If P0 missing → STOP and notify user.
 
 ### Environment bootstrap
 
@@ -47,12 +48,12 @@ Installed components:
 ```
 0. bash tools/ensure_mcp_stack.sh
 1. GodotPrompter — plan GDScript, shaders, tests
-2. notion — design context before data/combat edits
-3. gamelab-mcp — generate textures/UI → game/assets/
+2. docs/ + game/data/ — design context (Notion optional)
+3. ComfyUI/Material Maker or gamelab-mcp — art gen → palette_remap.py → game/assets/
 4. godot-mcp (GDAI) — build scenes, materials, F5 verify
 5. godotiq — trace_flow / signal_map when debugging systems
 6. godot-mcp-pro — run_test_scenario for L4/L5 playthrough asserts
-7. Blender offline — hero GLB meshes when 3D art task requires it
+7. Meshy/Blender offline — hero GLB meshes when 3D art task requires it
 ```
 
 **Scene edits:** GDAI only. Do not hand-edit `.tscn`.
@@ -64,9 +65,9 @@ Installed components:
 | GDAI | `curl -sf http://127.0.0.1:3571/tools`; plugin + `godot-mcp` in Cursor |
 | Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
 | MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
-| GameLab | `gamelab-mcp` in Cursor MCP; API key in Secrets |
-| Notion | `notion` in Cursor Integrations |
-| Blender | Installed locally for hero 3D pipeline |
+| GameLab | `gamelab-mcp` in Cursor MCP; API key in Secrets *(WARN if absent — UI art)* |
+| Notion | `notion` in Cursor Integrations *(optional)* |
+| ComfyUI / Material Maker | Local install for zone albedos |
 
 Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/MCP_STACK.md`.
 
@@ -74,7 +75,9 @@ Register all installed servers in Cursor (desktop Settings or cloud dashboard). 
 
 | Type | Generator |
 |------|-----------|
-| BGM / SFX | `python3 tools/generate_game_audio.py --all` |
+| Zone NPR albedos | ComfyUI / Material Maker + `palette_remap.py` |
+| UI art | GameLab MCP (when key set) |
+| BGM / SFX | `python3 tools/generate_game_audio.py --all` + ACE-Step ship path |
 | Selective VO | `bash tools/generate_ai_vo.sh --tier p0` (needs `ELEVENLABS_API_KEY`) |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` |
 | Manifest | `python3 tools/register_asset.py` |

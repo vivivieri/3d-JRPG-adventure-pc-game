@@ -1,7 +1,7 @@
 # Tides of Urashima — Character Bible
 
 **Version:** 1.1 (Pre-build)  
-**Visual target:** High-detail stylized Japanese — hand-painted albedo, readable silhouettes, no primitive placeholders in ship builds.  
+**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds.  
 **Cross-refs:** `docs/ART_DIRECTION.md`, `docs/STORYBOARD.md`, `docs/BOSS_DESIGNS.md`, `docs/ITEMS_3D_MODEL_GUIDE.md`
 
 ---

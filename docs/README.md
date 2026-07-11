@@ -12,7 +12,7 @@
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
 | 3 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | How runtime code fits together |
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
-| 5 | [MCP_STACK.md](MCP_STACK.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
+| 5 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
 
 ---
 
@@ -27,6 +27,7 @@
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
 | Author dialogue / flags | [QUEST_AND_FLAGS.md](QUEST_AND_FLAGS.md) + `game/data/dialogue/` |
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
+| Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
 | Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [steam/GODOTSTEAM_SETUP.md](../steam/GODOTSTEAM_SETUP.md) |
 
@@ -103,6 +104,7 @@
 
 | Doc | Purpose |
 |-----|---------|
+| [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
 | [ART_DIRECTION.md](ART_DIRECTION.md) | Visual pivot — muted Japanese coastal 3D |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
@@ -179,6 +181,6 @@ python3 tools/validate_story_data.py
 | Technical design (TDD) | **`TECHNICAL_DESIGN.md`** |
 | Database / save schema | `DATA_ARCHITECTURE.md` + `SAVE_AND_FAIL_STATES.md` |
 | Code style guide | **`CODE_STYLE.md`** |
-| Art bible / asset pipeline | `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
+| Art bible / asset pipeline | `ART_AUTOMATION_PIPELINE.md` + `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
 | Asset registry | `LICENSES.md` + `asset_manifest.license.json` |
 | Production timeline | `IMPLEMENTATION_PLAN.md` + `MILESTONES.md` |

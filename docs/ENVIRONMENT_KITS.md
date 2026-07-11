@@ -12,7 +12,7 @@
 |------|--------|
 | Modular first | 80% kit pieces; 20% hero set-pieces |
 | Poly per module | 500–3k tris (rocks/walls); hero props 8k–20k |
-| Textures | Hand-painted tileable albedo; light normal maps OK |
+| Textures | ComfyUI / Material Maker + `palette_remap.py`; light normal maps OK |
 | No primitives | No `BoxMesh` / `CylinderMesh` in player-facing scenes |
 | Fog | Always on in hub (`#8B9DAF`); zone-specific elsewhere |
 | Water | Stylized planes + foam decals; sculpted pool basins in caves |

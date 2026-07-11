@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 ERR=0
+WARN=0
 OK=0
 
 check() {
@@ -94,8 +95,8 @@ if [[ -f .cursor/mcp.json ]]; then
     echo "[OK]   gamelab-mcp in .cursor/mcp.json"
     OK=$((OK + 1))
   else
-    echo "[FAIL] gamelab-mcp missing from .cursor/mcp.json — see docs/MCP_STACK.md"
-    ERR=$((ERR + 1))
+    echo "[WARN] gamelab-mcp missing — UI art fallback; zone path uses ComfyUI/Material Maker"
+    WARN=$((WARN + 1))
   fi
 else
   echo "[FAIL] .cursor/mcp.json missing — run: bash tools/ensure_mcp_stack.sh"
@@ -103,7 +104,7 @@ else
 fi
 
 echo
-echo "Note: notion MCP must be registered in Cursor Integrations (not in mcp.json)."
+echo "Note: gamelab-mcp is P1 (WARN if missing). notion MCP is optional."
 echo "      ACE-Step 1.5 — bash tools/install_ace_step.sh (audio prototypes)"
 
 echo

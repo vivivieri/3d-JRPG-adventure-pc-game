@@ -2,9 +2,9 @@
 
 **Version:** 2.0  
 **Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
-**Cross-refs:** `.cursorrules` §0–§1, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
+**Cross-refs:** `.cursorrules` §0–§1, `docs/ART_AUTOMATION_PIPELINE.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
 
-**All tools in this document are required.** Agents must not treat any layer as optional or “recommended only.” If a required tool is missing, **STOP and notify the user** — do not fall back to manual scene edits or undocumented web assets.
+**Tiered requirements:** P0 MCP servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) are **required** — if missing, **STOP and notify the user**. Art generators (`gamelab-mcp`, ComfyUI, ACE-Step) use **quality-first fallbacks** per `docs/ART_AUTOMATION_PIPELINE.md`. Do not fall back to manual `.tscn` edits or undocumented web assets.
 
 ---
 
@@ -13,9 +13,10 @@
 | Layer | Tool | Cursor / access | Role |
 |-------|------|-----------------|------|
 | Plan & code | **GodotPrompter** | Cursor agent | GDScript, shaders, tests, architecture |
-| Design context | **Notion MCP** | `notion` | Stat formulas, flag glossary, tone guides |
-| Art generate | **GameLab Studio MCP** | `gamelab-mcp` (SSE) | Tileable textures, UI frames, sprite/VFX sheets |
-| Art pipeline | **Blender + AI Render** | Offline — not MCP | Hand-painted albedo on low-poly hero meshes |
+| Design context | **Notion MCP** *(optional)* | `notion` | Stat formulas, flag glossary — `docs/` + `game/data/` are authoritative |
+| Zone NPR albedos | **ComfyUI** or **Material Maker** | Offline — not MCP | Stylized tileables; `tools/palette_remap.py` post-step |
+| UI art generate | **GameLab Studio MCP** | `gamelab-mcp` (SSE) | UI frames, ink borders, icon/VFX sheets *(P1 — WARN if absent)* |
+| 3D heroes / props | **Meshy / Tripo / Rodin** + Blender | Offline — not MCP | AI 3D → GLB; Mixamo rig; automated stylized textures |
 | Build | **GDAI MCP** | `godot-mcp` | Scenes, nodes, materials, lights, F5 playtest |
 | Analyze | **Godotiq** | `godotiq` | Signals, debug console, `ui_map`, validation |
 | Test | **Godot MCP Pro** | `godot-mcp-pro` (`--minimal`) | L4/L5 scenarios, asserts, input replay |
@@ -28,12 +29,13 @@
 ```
 GodotPrompter (plan/code)
        │
-       ├─► Notion MCP ────────► design context before data/combat edits
-       ├─► GameLab MCP ───────► generate textures/UI → save to game/assets/
-       ├─► Blender (offline) ─► hero GLB meshes → import → GDAI places
-       ├─► GDAI MCP ──────────► create/edit scenes, F5 verify
-       ├─► Godotiq ───────────► trace_flow, signal_map, debug console
-       └─► Godot MCP Pro ─────► run_test_scenario, assert_screen_text
+       ├─► ComfyUI / Material Maker ─► zone albedos → palette_remap.py → game/assets/
+       ├─► GameLab MCP ─────────────► UI sheets / frames → palette_remap.py → game/assets/
+       ├─► AI 3D + Blender (offline) ► hero GLB → import → GDAI places
+       ├─► Notion MCP (optional) ───► design context before data/combat edits
+       ├─► GDAI MCP ────────────────► create/edit scenes, F5 verify
+       ├─► Godotiq ─────────────────► trace_flow, signal_map, debug console
+       └─► Godot MCP Pro ───────────► run_test_scenario, assert_screen_text
 ```
 
 **Rule:** Each tool owns its layer. They **supplement** each other — none replaces GDAI for `.tscn` mutations, Godotiq for debug, or MCP Pro for L4/L5 tests.
@@ -45,9 +47,10 @@ GodotPrompter (plan/code)
 | Situation | Required tool |
 |-----------|---------------|
 | Create/edit `.tscn`, nodes, materials in editor | **GDAI MCP only** |
-| Generate tileable zone texture | **GameLab MCP** → save file → **GDAI** assigns |
-| Read stat formula before balancing skill | **Notion MCP** → edit `game/data/*.json` |
-| Hero 3D model with painted albedo | **Blender offline** → GLB import → **GDAI** places |
+| Generate tileable zone albedo | **ComfyUI** or **Material Maker** → `palette_remap.py` → **GDAI** assigns |
+| Generate UI frame / ink border | **GameLab MCP** → `palette_remap.py` → **GDAI** UI scenes |
+| Read stat formula before balancing skill | **`docs/` + `game/data/`** (Notion optional) → edit JSON |
+| Hero 3D model + stylized albedo | **Meshy/Tripo/Rodin** → Blender → GLB → **GDAI** places |
 | Combat signal hang — which signal failed? | **Godotiq** `godotiq_signal_map`, `godotiq_trace_flow` |
 | Automated JRPG menu / combat test | **Godot MCP Pro** testing tools |
 | Read Godot Output without copy-paste | **Godotiq** `godotiq_read_debug_console` |
@@ -77,10 +80,12 @@ bash tools/check_dev_environment.sh
 | Godotiq WebSocket | Port `6007` listening; GodotIQ plugin enabled |
 | MCP Pro server | `tools/godot-mcp-pro-server/build/index.js` exists; plugin enabled |
 | Godot Editor | Running with `game/project.godot` open |
-| Cursor MCP catalog | **All** of: `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, `notion` |
-| Blender pipeline | Blender installed for hero 3D work (offline — verify with user if headless) |
+| Cursor MCP catalog (P0) | **Required:** `godot-mcp`, `godotiq`, `godot-mcp-pro` |
+| Cursor MCP catalog (P1) | **WARN:** `gamelab-mcp` — UI art; zone path has ComfyUI/Material Maker fallbacks |
+| Cursor MCP catalog (P2) | **Optional:** `notion` — `docs/` + `game/data/` sufficient |
+| Offline art/audio | ComfyUI, Material Maker, Blender, ACE-Step GPU — WARN per task |
 
-If any MCP server is missing from Cursor → **STOP and notify the user**. See registration below.
+If **P0** MCP servers are missing from Cursor → **STOP and notify the user**. See registration below.
 
 ---
 
@@ -174,30 +179,47 @@ Template: `.cursor/mcp.json.example`
 
 ---
 
-## Art & design tools (required)
+## Art & design tools
 
-### GameLab Studio MCP — textures & 2D art
+**Canonical policy:** `docs/ART_AUTOMATION_PIPELINE.md` — quality-first, zero human artists, tiered MCP.
 
-**Role:** Tileable albedos, UI frames, sprite/VFX sheets.  
+### ComfyUI / Material Maker — zone NPR albedos
+
+**Role:** Stylized tileable wood, stone, ground, hero texture sheets.  
 **Does NOT:** Edit `.tscn` — hand off to GDAI after export.
 
 **Workflow:**
 
 ```
 1. READ  docs/ART_DIRECTION.md palette for target zone
-2. GameLab MCP — generate tileable wood/stone/ground albedo (muted coastal decay)
-3. Save PNG → game/assets/textures/zones/<zone>/
-4. python3 tools/register_asset.py + docs/LICENSES.md
-5. GodotPrompter — tune toon shader if needed
-6. GDAI MCP — assign materials in zone .tscn, F5 verify
-7. bash tools/check_asset_compliance.sh
+2. ComfyUI (locked workflow) OR Material Maker — tileable albedo (muted coastal decay)
+3. python3 tools/palette_remap.py --zone <zone> --input <png>
+4. Save PNG → game/assets/textures/zones/<zone>/
+5. python3 tools/register_asset.py + docs/LICENSES.md
+6. GodotPrompter — tune toon shader if needed
+7. GDAI MCP — assign materials in zone .tscn, F5 verify
+8. bash tools/check_asset_compliance.sh
 ```
 
 **Art constraints:** Muted palette (`#8B9DAF` fog, `#5C4A3A` wood, `#4AE8D8` biolume). Japanese coastal motifs — **not** bright Ghibli candy, not PBR realism, no European medieval reads.
 
-Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamelab-mcp` SSE server.
+### GameLab Studio MCP — UI & 2D sheets (P1)
 
-### Notion MCP — design context & balancing
+**Role:** Ink-wash UI frames, combat icon sheets, menu borders, VFX sprite sheets.  
+**Does NOT:** Default path for zone tileables (use ComfyUI/Material Maker) or `.tscn` edits.
+
+**Workflow:**
+
+```
+1. READ  docs/ART_DIRECTION.md §4 UI style
+2. GameLab MCP — generate UI frame / icon sheet (muted, not candy-bright)
+3. palette_remap.py → game/assets/textures/ui/
+4. register_asset.py → GDAI assigns in UI .tscn
+```
+
+Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamelab-mcp` SSE server. **WARN** if absent — procedural UI placeholders for dev only.
+
+### Notion MCP — design context & balancing (optional)
 
 **Role:** Agent-readable index for stat formulas, skill curves, tone guides, lore tables.  
 **Does NOT:** Replace `game/data/` JSON or `docs/` as source of truth.
@@ -210,17 +232,18 @@ Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamel
 
 **Why not Ink (Inkle):** Story spine is JSON-driven (`scenes.json` → `dialogue/` → `flags.json`). Ink adds a second runtime with no v1 benefit. See `docs/NARRATIVE_WRITING_GUIDE.md`.
 
-### Blender + AI Render — offline 3D hero pipeline
+### AI 3D + Blender — offline hero pipeline
 
-**Role:** Hand-painted albedo on low-poly Japanese coastal meshes.  
-**Not MCP** — required human-in-the-loop before Godot import.
+**Role:** Automated stylized meshes and albedos for Japanese coastal heroes and set-pieces.  
+**Not MCP** — offline batch before Godot import.
 
 ```
-Blender mesh → AI Render / hand paint → GLB → game/assets/models/
-  → toon_base.gdshader → GDAI MCP places in zone scene
+Meshy / Tripo / Rodin → Blender (decimate, UV) → ComfyUI/Material Maker albedo
+  → palette_remap.py → GLB → game/assets/models/
+  → toon_base.gdshader → Mixamo rig → GDAI MCP places in zone scene
 ```
 
-**Use for:** Torii, lacquer box, palace trim, hero set-pieces (8k–20k tris per `ART_DIRECTION.md`).
+**Use for:** Characters, torii, lacquer box, palace trim (poly budgets per `ART_DIRECTION.md`).
 
 ### Shader policy
 
@@ -253,7 +276,7 @@ bash tools/generate_ai_bgm.sh --all-prompts               # docs/audio_sheets/*.
 
 Prompt catalog: `game/data/audio/ace_step_prompts.json`
 
-**Ship rule:** Human mix pass or commission final tracks before release (`docs/AUDIO_PRODUCTION_GUIDE.md`).
+**Ship rule:** Curated ACE-Step exports per prompt sheet — loudness normalize (-16 LUFS); no human mix pass (`docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §7).
 
 ### ElevenLabs — selective VO (12 clips, not full dialogue)
 
@@ -310,17 +333,18 @@ Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_
 | **GDAI MCP** | ✅ ~$19 one-time | Already installed — keep zip in cloud snapshot |
 | **Godotiq** | ❌ Free (Pro $19 optional) | Already installed |
 | **Godot MCP Pro** | ✅ $15 one-time | Already installed |
-| **GameLab Studio** | ❌ Free tier works; paid for heavy use | Sign up → API key → **Cursor Secrets: `GAMELAB_API_KEY`** → re-run install script |
-| **Notion MCP** | ❌ Uses your Notion workspace | **Cursor → Integrations → Notion → Connect** (OAuth — agent cannot do this for you) |
+| **GameLab Studio** | Paid OK for quality; free tier for light UI | Sign up → API key → **Cursor Secrets: `GAMELAB_API_KEY`** → re-run install script |
+| **ComfyUI / Material Maker** | ❌ Free | Local install; locked stylized workflows per `ART_AUTOMATION_PIPELINE.md` |
+| **Meshy / Tripo / Rodin** | Paid OK for hero quality | Service ToS → register outputs in `LICENSES.md` |
+| **Notion MCP** | ❌ Optional | **Cursor → Integrations → Notion → Connect** (OAuth) |
 | **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
-| **Blender AI Render** | ❌ Free OSS addon | Install inside Blender: Edit → Preferences → Add-ons |
 | **ACE-Step 1.5** | ❌ Free (local GPU) | `bash tools/install_ace_step.sh`; prompts in `game/data/audio/ace_step_prompts.json` |
 | **ElevenLabs VO** | Paid API | `ELEVENLABS_API_KEY` in Cursor Secrets; `bash tools/generate_ai_vo.sh` |
 | **generate_game_audio.py** | ❌ Free (repo tool) | Procedural fallback — auto on install |
 
-**Cursor cloud dashboard:** Register all MCP servers from `.cursor/mcp.json` plus `gamelab-mcp` and `notion`. Restart agent after saving.
+**Cursor cloud dashboard:** Register P0 MCP servers from `.cursor/mcp.json`; add `gamelab-mcp` when `GAMELAB_API_KEY` is set. Restart agent after saving.
 
-**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + human export), Blender AI Render addon enable.
+**Cannot be automated by agents:** Notion OAuth, GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + export), ComfyUI workflow runs (local GPU).
 
 ---
 
@@ -360,13 +384,20 @@ See `docs/AI_TESTING_SPEC.md` §11.
 
 ### Example prompts
 
-**Zone texture (GameLab → GDAI):**
+**Zone albedo (ComfyUI/Material Maker → GDAI):**
 
 ```
-Using gamelab-mcp: generate seamless tileable weathered wood albedo,
-muted #5C4A3A, Japanese coastal decay, 1024×1024.
-Save to game/assets/textures/zones/ruined_village/wood_planks.png.
+Generate seamless tileable weathered wood albedo, muted #5C4A3A, Japanese coastal decay, 1024×1024
+via Material Maker or ComfyUI locked workflow.
+Run: python3 tools/palette_remap.py --zone ruined_village --input game/assets/textures/zones/ruined_village/wood_planks.png
 Then using godot-mcp only: assign to pier meshes in ruined_village.tscn. F5 verify.
+```
+
+**UI frame (GameLab → GDAI):**
+
+```
+Using gamelab-mcp: generate ink-wash menu border, muted palette, 512×128.
+palette_remap.py → game/assets/textures/ui/menu_border.png → assign in tab_menu.tscn.
 ```
 
 **Combat balance (Notion → code):**
@@ -409,6 +440,7 @@ Assert battle menu text visible.
 
 ## Related
 
+- `docs/ART_AUTOMATION_PIPELINE.md` — quality-first art/audio automation policy
 - `game/.godotiq.json` — Godotiq project conventions
 - `game/addons/README.md` — addon policy
 - `.cursor/mcp.json.example` — MCP config template

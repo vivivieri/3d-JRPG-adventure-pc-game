@@ -16,7 +16,7 @@ The content below is kept for historical reference only.
 
 **Branch:** `cursor/gdai-regen-dc91` *(deleted)*  
 **Design source:** `main` — `docs/GDD.md`, `docs/STORYBOARD.md`, `docs/ART_DIRECTION.md`  
-**Tooling:** ~~GDAI MCP only~~ — **obsolete**; current policy requires GodotPrompter + GDAI + Godotiq + MCP Pro + GameLab + Notion.
+**Tooling:** ~~GDAI MCP only~~ — **obsolete**; current policy: GodotPrompter + GDAI + Godotiq + MCP Pro + tiered art automation (`docs/ART_AUTOMATION_PIPELINE.md`).
 
 ---
 

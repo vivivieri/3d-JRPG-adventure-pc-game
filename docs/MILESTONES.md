@@ -126,9 +126,9 @@ Track implementation progress against the GDD milestones.
 - [ ] Replace all primitive / Kenney greybox art in player-facing builds
 - [ ] Japanese palace gate hero set-piece (`palace_gate_main` — SC-12)
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
-- [ ] Painted portraits (replace procedural silhouettes)
+- [ ] Automated stylized portraits (ComfyUI/GameLab — replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
-- [ ] Curated BGM per act (ACE-Step or commissioned — replace dev procedural placeholders)
+- [ ] Curated BGM per act (ACE-Step curated prompts — replace dev procedural placeholders)
 - [ ] `bash tools/check_asset_compliance.sh` passes on release branch
 
 ### M5 cinematic budget (`docs/CINEMATICS.md` §12)
