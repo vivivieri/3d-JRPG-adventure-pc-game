@@ -39,9 +39,10 @@ fail() {
   echo "Required steps:"
   echo "  1. bash tools/install_cloud_dev.sh"
   echo "  2. bash tools/ensure_gdai_mcp.sh"
-  echo "  3. Cursor → Settings → MCP → add server from .cursor/mcp.json (name: godot-mcp)"
+  echo "  3. Desktop: Cursor Settings → Tools & MCP → add godot-mcp from .cursor/mcp.json"
+  echo "     Cloud:  https://cursor.com/agents → register godot-mcp custom MCP server"
   echo "  4. In Godot Editor: GDAI MCP panel → Start (if HTTP :${GDAI_MCP_SERVER_PORT} not up)"
-  echo "  5. Restart Cursor agent after MCP shows connected"
+  echo "  5. Restart Cursor / cloud agent after MCP shows connected"
   echo ""
   echo "Docs: docs/GDAI_CLOUD_SETUP.md"
   exit 1
