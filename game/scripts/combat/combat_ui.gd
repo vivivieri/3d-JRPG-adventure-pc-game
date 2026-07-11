@@ -1,5 +1,19 @@
 extends CanvasLayer
-## Combat UI — HP bars, action menu, battle log.
+## Combat UI — unit cards with HP/MP bars, placeholders, action menu, battle log.
+
+const ENEMY_COLORS := {
+	"salt_crab": Color(0.95, 0.55, 0.2),
+	"tide_wraith": Color(0.35, 0.75, 0.95),
+	"shore_wraith": Color(0.65, 0.35, 0.9),
+	"palace_sentinel": Color(0.9, 0.78, 0.25),
+	"tide_keeper": Color(0.2, 0.45, 0.85),
+}
+
+const ALLY_COLORS := {
+	"urashima": Color(0.55, 0.78, 0.95),
+	"yuzu": Color(0.85, 0.55, 0.75),
+	"roku": Color(0.55, 0.7, 0.55),
+}
 
 @onready var _ally_box: VBoxContainer = %AllyBox
 @onready var _enemy_box: HBoxContainer = %EnemyBox
@@ -37,14 +51,90 @@ func _render_units(units: Array, container: Node, is_enemy: bool) -> void:
 	for child in container.get_children():
 		child.queue_free()
 	for unit in units:
-		var lbl := Label.new()
-		var intent := ""
-		if is_enemy and unit.intent_skill != "":
-			intent = " [%s]" % unit.intent_skill
-		lbl.text = "%s %d/%d%s" % [unit.display_name, unit.hp, unit.max_hp, intent]
-		if not unit.is_alive():
-			lbl.modulate = Color(0.5, 0.5, 0.5)
-		container.add_child(lbl)
+		container.add_child(_make_unit_card(unit, is_enemy))
+
+
+func _make_unit_card(unit, is_enemy: bool) -> PanelContainer:
+	var card := PanelContainer.new()
+	card.custom_minimum_size = Vector2(168 if is_enemy else 220, 0)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 10)
+	margin.add_theme_constant_override("margin_right", 10)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	card.add_child(margin)
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
+	margin.add_child(vbox)
+
+	var placeholder := ColorRect.new()
+	placeholder.custom_minimum_size = Vector2(72, 72)
+	placeholder.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var color: Color = ENEMY_COLORS.get(unit.id, Color(0.7, 0.7, 0.75))
+	if not is_enemy:
+		color = ALLY_COLORS.get(unit.id, Color(0.6, 0.75, 0.9))
+	placeholder.color = color if unit.is_alive() else color.darkened(0.45)
+	vbox.add_child(placeholder)
+
+	var name_lbl := Label.new()
+	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_lbl.add_theme_font_size_override("font_size", 15)
+	name_lbl.text = str(unit.display_name)
+	vbox.add_child(name_lbl)
+
+	vbox.add_child(_make_bar_row("HP", unit.hp, unit.max_hp, Color(0.35, 0.82, 0.45) if not is_enemy else Color(0.9, 0.35, 0.35)))
+
+	if not is_enemy:
+		vbox.add_child(_make_bar_row("MP", unit.mp, unit.max_mp, Color(0.35, 0.55, 0.95)))
+
+	if is_enemy and unit.intent_skill != "":
+		var sk: Dictionary = GameManager.skills.get(unit.intent_skill, {})
+		var intent_lbl := Label.new()
+		intent_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		intent_lbl.add_theme_font_size_override("font_size", 12)
+		intent_lbl.add_theme_color_override("font_color", Color(0.95, 0.82, 0.45))
+		intent_lbl.text = "Intent: %s" % sk.get("display_name", unit.intent_skill)
+		vbox.add_child(intent_lbl)
+
+	if not unit.is_alive():
+		card.modulate = Color(0.55, 0.55, 0.55, 0.85)
+	return card
+
+
+func _make_bar_row(label_text: String, current: int, maximum: int, fill_color: Color) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	var tag := Label.new()
+	tag.custom_minimum_size = Vector2(24, 0)
+	tag.add_theme_font_size_override("font_size", 12)
+	tag.text = label_text
+	row.add_child(tag)
+	var bar := ProgressBar.new()
+	bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	bar.custom_minimum_size = Vector2(80, 18)
+	bar.max_value = maxi(maximum, 1)
+	bar.value = current
+	bar.show_percentage = false
+	var bg := StyleBoxFlat.new()
+	bg.bg_color = Color(0.12, 0.14, 0.18)
+	bg.corner_radius_top_left = 4
+	bg.corner_radius_top_right = 4
+	bg.corner_radius_bottom_left = 4
+	bg.corner_radius_bottom_right = 4
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = fill_color
+	fill.corner_radius_top_left = 4
+	fill.corner_radius_top_right = 4
+	fill.corner_radius_bottom_left = 4
+	fill.corner_radius_bottom_right = 4
+	bar.add_theme_stylebox_override("background", bg)
+	bar.add_theme_stylebox_override("fill", fill)
+	row.add_child(bar)
+	var val := Label.new()
+	val.add_theme_font_size_override("font_size", 11)
+	val.text = "%d/%d" % [current, maximum]
+	row.add_child(val)
+	return row
 
 
 func _build_actions(state: Dictionary) -> void:

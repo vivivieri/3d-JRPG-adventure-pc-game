@@ -302,6 +302,7 @@ func _end_battle(victory: bool, escaped: bool = false) -> void:
 	_awaiting_player = false
 	for a in _allies:
 		a.sync_to_party()
+	var level_ups: Array = []
 	if victory:
 		var xp := 0
 		var gold_reward := 0
@@ -309,13 +310,16 @@ func _end_battle(victory: bool, escaped: bool = false) -> void:
 			xp += int(e.rewards.get("xp", 0))
 			gold_reward += int(e.rewards.get("gold", 0))
 		GameManager.add_gold(gold_reward)
+		level_ups = GameManager.add_xp_to_party(xp)
 		_log.append("Victory! +%d XP, +%d gold" % [xp, gold_reward])
 		var on_win: Dictionary = _encounter.get("on_win", {})
 		GameManager.apply_dialogue_complete(on_win)
 		if _encounter.has("scene_id"):
 			GameManager.mark_scene_done(str(_encounter.scene_id))
 	if _ui:
-		_ui.show_result(victory or escaped, _log)
+		await _ui.show_result(victory or escaped, _log)
+	if victory and not level_ups.is_empty():
+		await LevelUpUI.show_level_ups(level_ups)
 	EventBus.scene_blocked_changed.emit(false)
 	EventBus.combat_finished.emit(victory)
 	battle_ended.emit(victory or escaped)

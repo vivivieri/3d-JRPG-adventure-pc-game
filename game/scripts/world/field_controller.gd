@@ -12,6 +12,7 @@ var _markers: Dictionary = {}
 var _blocked := false
 var _nearest: String = ""
 var _hud: Node = null
+var _followers: Array[CharacterBody3D] = []
 
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func _ready() -> void:
 func _connect_events() -> void:
 	EventBus.scene_blocked_changed.connect(_on_blocked)
 	EventBus.dialogue_finished.connect(_on_dialogue_finished)
+	EventBus.party_changed.connect(_on_party_changed)
 	CombatManager.battle_ended.connect(_on_battle_ended)
 
 
@@ -49,6 +51,42 @@ func _spawn_player() -> void:
 	var spawn_name := GameManager.pending_spawn if GameManager.pending_spawn != "" else "WorldSpawn"
 	spawn_at_marker(spawn_name)
 	GameManager.pending_spawn = ""
+	_tint_player_mesh()
+	call_deferred("_spawn_followers")
+
+
+func _tint_player_mesh() -> void:
+	var mesh: MeshInstance3D = _player.get_node_or_null("Mesh")
+	if mesh:
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.55, 0.78, 0.95)
+		mesh.material_override = mat
+
+
+func _on_party_changed() -> void:
+	call_deferred("_spawn_followers")
+
+
+func _spawn_followers() -> void:
+	for f in _followers:
+		if is_instance_valid(f):
+			f.queue_free()
+	_followers.clear()
+	if not _player:
+		return
+	var lead := GameManager.party_field[0] if GameManager.party_field.size() > 0 else "urashima"
+	var slot := 0
+	for cid in GameManager.party_field:
+		if cid == lead:
+			continue
+		var follower := CharacterBody3D.new()
+		follower.set_script(load("res://scripts/player/party_follower.gd"))
+		follower.name = "Follower_%s" % cid
+		add_child(follower)
+		follower.setup(str(cid), _player, slot)
+		follower.global_position = _player.global_position
+		_followers.append(follower)
+		slot += 1
 
 
 func spawn_at_marker(marker_name: String) -> void:

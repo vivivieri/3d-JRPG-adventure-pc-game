@@ -136,7 +136,7 @@ func _cap_caves(id: String) -> void:
 
 
 func _cap_palace(id: String) -> void:
-	_setup_act2_progress()
+	_setup_act3_progress()
 	GameManager.add_item("wraith_pearl", 1)
 	GameManager.set_flag("roku_combat_active")
 	GameManager.set_flag("yuzu_joined")

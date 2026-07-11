@@ -108,7 +108,8 @@ Tier 6 — Localization       (pre-ship)             en / ja / zh full pass
 | TC-FIELD-07 | Unblock after dialogue | SC-00 ends | Player enabled; mouse captured | Tier 2 |
 | TC-FIELD-08 | Sprint | Hold Shift + W | Faster movement | Tier 4 |
 | TC-FIELD-09 | Gravity / floor | Spawn on beach | Player stands on ground | Tier 1 |
-| TC-FIELD-10 | Return path | Caves → ToVillage | Spawns at CaveEntrance | Tier 4 |
+| TC-FIELD-11 | Party followers | After Yuzu joins | Pink capsule trails player | Tier 2 |
+| TC-FIELD-12 | Roku follower | After SC-12 | Green capsule trails player | Tier 4 |
 
 ### 2.3 Dialogue & narrative (TC-DLG)
 
@@ -137,7 +138,7 @@ Tier 6 — Localization       (pre-ship)             en / ja / zh full pass
 | TC-DLG-17C | SC-17c | ending_drift spawn | `game_completed` | Tier 4 |
 | TC-DLG-18 | Typewriter | Any line | Text reveals at CPS | Tier 4 |
 | TC-DLG-19 | Choice branch | SC-16 each option | Correct ending zone | Tier 4 ×3 |
-| TC-DLG-20 | Portrait display | Any line with portrait | **N/A — not implemented** | — |
+| TC-DLG-20 | Portrait display | Lines with portrait field | 128×128 portrait left of text | Tier 3 |
 | TC-DLG-21 | Localization en | Settings language en | English text | Tier 6 |
 | TC-DLG-22 | Localization ja | Language ja | Japanese text | Tier 6 |
 | TC-DLG-23 | Localization zh | Language zh | Chinese text | Tier 6 |
@@ -164,8 +165,10 @@ Tier 6 — Localization       (pre-ship)             en / ja / zh full pass
 | TC-CMB-16 | Game Over | All allies dead | — | — | Defeat panel; reload behavior | Tier 4 |
 | TC-CMB-17 | Intent display | Enemy turn | — | — | `[claw_snap]` etc. in label | Tier 2 |
 | TC-CMB-18 | Boss phases | Tide Keeper | — | — | Phase flags at HP thresholds | Tier 2 |
-| TC-CMB-19 | XP applied | Win fight | — | — | **N/A — XP not saved** | — |
-| TC-CMB-20 | Level up | Gain XP | — | — | **N/A — not implemented** | — |
+| TC-CMB-19 | XP applied | Win fight | — | `party_state.xp` increases | Tier 2 |
+| TC-CMB-20 | Level up | Win enough fights | — | Level-up popup; level increments | Tier 2 |
+| TC-CMB-21 | HP bars visible | Any fight | — | ProgressBar on unit cards | Tier 3 |
+| TC-CMB-22 | Enemy placeholder | Any fight | — | Colored 72×72 placeholder per enemy | Tier 3 |
 
 ### 2.5 Items & economy (TC-ITEM)
 

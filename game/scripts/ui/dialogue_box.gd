@@ -2,6 +2,7 @@ extends CanvasLayer
 ## Lower-third dialogue box with typewriter text and choices.
 
 @onready var _panel: PanelContainer = %Panel
+@onready var _portrait: TextureRect = %Portrait
 @onready var _speaker: Label = %Speaker
 @onready var _text: RichTextLabel = %Text
 @onready var _choices: VBoxContainer = %Choices
@@ -42,6 +43,7 @@ func _show_line() -> void:
 	var line: Dictionary = _lines[_line_idx]
 	var speaker_id := str(line.get("speaker", ""))
 	_speaker.text = _format_speaker(speaker_id)
+	_set_portrait(str(line.get("portrait", "")))
 	_full_text = LocalizationManager.tr_text(line.get("text", ""))
 	_text.text = ""
 	_char_idx = 0
@@ -67,6 +69,20 @@ func _format_speaker(speaker_id: String) -> String:
 			return "Tide Keeper"
 		_:
 			return speaker_id.capitalize()
+
+
+func _set_portrait(portrait_id: String) -> void:
+	if portrait_id == "":
+		_portrait.texture = null
+		_portrait.hide()
+		return
+	var path := "res://assets/ui/portraits/%s.png" % portrait_id
+	if ResourceLoader.exists(path):
+		_portrait.texture = load(path)
+		_portrait.show()
+	else:
+		_portrait.texture = null
+		_portrait.hide()
 
 
 func _process(delta: float) -> void:

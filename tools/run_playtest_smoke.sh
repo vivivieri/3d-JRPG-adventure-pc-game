@@ -38,6 +38,9 @@ check "Palace zone loads" godot4 --headless --rendering-driver opengl3 --path ga
 check "Windows exe exists" test -f build/TidesOfUrashima.exe
 check "GodotSteam gdextension present" test -f game/addons/godotsteam/godotsteam.gdextension
 check "Player movement works" godot4 --headless --rendering-driver opengl3 --path game res://tests/movement_smoke_test.tscn
+check "XP and level-up work" godot4 --headless --rendering-driver opengl3 --path game res://tests/xp_level_test.tscn
+check "Party followers spawn" godot4 --headless --rendering-driver opengl3 --path game res://tests/follower_smoke_test.tscn
+check "Portrait assets exist" test -f game/assets/ui/portraits/urashima_weary.png
 
 echo ""
 echo "Passed: $PASS | Failed: $FAIL"

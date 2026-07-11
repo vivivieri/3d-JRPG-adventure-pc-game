@@ -27,6 +27,7 @@ DialogueRunner="*res://scripts/narrative/dialogue_runner.gd"
 CombatManager="*res://scripts/combat/combat_manager.gd"
 SettingsManager="*res://scripts/core/settings_manager.gd"
 SteamManager="*res://scripts/core/steam_manager.gd"
+LevelUpUI="*res://scripts/ui/level_up_ui.gd"
 GDAIMCPRuntime="*res://addons/gdai-mcp-plugin-godot/gdai_mcp_runtime.gd"
 
 [input]

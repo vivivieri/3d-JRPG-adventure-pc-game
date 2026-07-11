@@ -270,6 +270,54 @@ func add_gold(amount: int) -> void:
 	EventBus.gold_changed.emit(gold)
 
 
+func xp_to_next_level(level: int) -> int:
+	return 40 + maxi(level - 1, 0) * 25
+
+
+func add_xp(char_id: String, amount: int) -> Array:
+	var results: Array = []
+	if amount <= 0 or not party_state.has(char_id):
+		return results
+	var ps: Dictionary = party_state[char_id]
+	ps.xp = int(ps.get("xp", 0)) + amount
+	while ps.xp >= xp_to_next_level(int(ps.level)):
+		ps.xp -= xp_to_next_level(int(ps.level))
+		ps.level = int(ps.level) + 1
+		var unlocked: Array = _apply_level_up(char_id, ps)
+		var def: Dictionary = characters.get(char_id, {})
+		results.append({
+			"char_id": char_id,
+			"display_name": str(def.get("display_name", char_id)),
+			"level": int(ps.level),
+			"new_skills": unlocked,
+		})
+	return results
+
+
+func add_xp_to_party(amount: int) -> Array:
+	var all: Array = []
+	for cid in party_combat:
+		all.append_array(add_xp(str(cid), amount))
+	return all
+
+
+func _apply_level_up(char_id: String, ps: Dictionary) -> Array:
+	var def: Dictionary = characters[char_id]
+	var old_stats := _stats_at_level(def, int(ps.level) - 1)
+	var stats := _stats_at_level(def, int(ps.level))
+	var hp_gain: int = stats.max_hp - old_stats.max_hp
+	ps.hp = mini(int(ps.hp) + hp_gain + 10, stats.max_hp)
+	ps.mp = stats.max_mp
+	var unlocked: Array = []
+	for entry in def.get("skill_unlocks", []):
+		if int(entry.get("level", 0)) == int(ps.level):
+			var sid := str(entry.skill_id)
+			if sid not in ps.skills:
+				ps.skills.append(sid)
+				unlocked.append(sid)
+	return unlocked
+
+
 func collect_lore(lore_id: String) -> void:
 	if lore_id in lore_collected:
 		return
