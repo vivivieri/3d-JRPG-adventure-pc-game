@@ -1,0 +1,189 @@
+{
+  "version": "1.0",
+  "engine": "elevenlabs",
+  "model_id": "eleven_multilingual_v2",
+  "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
+  "locales": ["en", "ja", "zh"],
+  "characters": {
+    "urashima": {
+      "elevenlabs_voice_id": "PLACEHOLDER_URASHIMA",
+      "voice_settings": {
+        "stability": 0.55,
+        "similarity_boost": 0.72,
+        "style": 0.15,
+        "use_speaker_boost": true
+      },
+      "casting": "Adult male, tired coastal fisherman, short breaths Act I, firmer Act III, never boastful"
+    },
+    "yuzu": {
+      "elevenlabs_voice_id": "PLACEHOLDER_YUZU",
+      "voice_settings": {
+        "stability": 0.62,
+        "similarity_boost": 0.78,
+        "style": 0.12,
+        "use_speaker_boost": true
+      },
+      "casting": "Young woman spirit, quiet accusation and sorrow, not bright anime heroine"
+    },
+    "roku": {
+      "elevenlabs_voice_id": "PLACEHOLDER_ROKU",
+      "voice_settings": {
+        "stability": 0.68,
+        "similarity_boost": 0.7,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "casting": "Elder diver, gravelly, few words, no comic old man"
+    },
+    "otohime": {
+      "elevenlabs_voice_id": "PLACEHOLDER_OTOHIME",
+      "voice_settings": {
+        "stability": 0.7,
+        "similarity_boost": 0.8,
+        "style": 0.18,
+        "use_speaker_boost": true
+      },
+      "casting": "Palace princess, soft seductive calm, unsettling perfection, not cruel villain"
+    },
+    "tide_keeper": {
+      "elevenlabs_voice_id": "PLACEHOLDER_TIDE_KEEPER",
+      "voice_settings": {
+        "stability": 0.72,
+        "similarity_boost": 0.75,
+        "style": 0.08,
+        "use_speaker_boost": true
+      },
+      "casting": "Cosmic ruler of time, slow tragic authority, not shouting boss"
+    },
+    "shore_wraith": {
+      "elevenlabs_voice_id": "PLACEHOLDER_SHORE_WRAITH",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.65,
+        "style": 0.25,
+        "use_speaker_boost": false
+      },
+      "casting": "Drowned collective spirit, layered undertone OK, 2-3 seconds max"
+    },
+    "narrator": {
+      "elevenlabs_voice_id": "PLACEHOLDER_NARRATOR",
+      "voice_settings": {
+        "stability": 0.75,
+        "similarity_boost": 0.7,
+        "style": 0.05,
+        "use_speaker_boost": false
+      },
+      "casting": "Neutral restrained narrator, documentary weight, not fantasy bard"
+    }
+  },
+  "clips": {
+    "sc00_urashima_01": {
+      "scene_id": "SC-00",
+      "speaker": "urashima",
+      "tier": "p0",
+      "max_duration_sec": 3,
+      "direction": "Mythic promise, fateful, quiet",
+      "duck_bgm_db": -6,
+      "reverb": "none"
+    },
+    "sc01_urashima_01": {
+      "scene_id": "SC-01",
+      "speaker": "urashima",
+      "tier": "p1",
+      "max_duration_sec": 3,
+      "direction": "Disoriented fragment, surf in background",
+      "duck_bgm_db": -6,
+      "reverb": "none"
+    },
+    "sc03_yuzu_01": {
+      "scene_id": "SC-03",
+      "speaker": "yuzu",
+      "tier": "p0",
+      "max_duration_sec": 3,
+      "direction": "First gut-punch accusation, still and sharp",
+      "duck_bgm_db": -6,
+      "reverb": "spirit_light"
+    },
+    "sc04_roku_01": {
+      "scene_id": "SC-04",
+      "speaker": "roku",
+      "tier": "p2",
+      "max_duration_sec": 4,
+      "direction": "Urgent warning about the box only",
+      "duck_bgm_db": -6,
+      "reverb": "none"
+    },
+    "sc08_urashima_01": {
+      "scene_id": "SC-08",
+      "speaker": "urashima",
+      "tier": "p1",
+      "max_duration_sec": 3,
+      "direction": "Guilt after pool vignette, not shouting",
+      "duck_bgm_db": -8,
+      "reverb": "cave_light"
+    },
+    "sc09_shore_wraith_01": {
+      "scene_id": "SC-09",
+      "speaker": "shore_wraith",
+      "tier": "p1",
+      "max_duration_sec": 2,
+      "direction": "Boss intro sting line, tragic not monstrous",
+      "duck_bgm_db": -4,
+      "reverb": "water_hall"
+    },
+    "sc10_yuzu_01": {
+      "scene_id": "SC-10",
+      "speaker": "yuzu",
+      "tier": "p1",
+      "max_duration_sec": 4,
+      "direction": "Resolve to join, melancholy not triumphant",
+      "duck_bgm_db": -6,
+      "reverb": "spirit_light"
+    },
+    "sc11_otohime_01": {
+      "scene_id": "SC-11",
+      "speaker": "otohime",
+      "tier": "p0",
+      "max_duration_sec": 5,
+      "direction": "Seductive flashback, too perfect",
+      "duck_bgm_db": -8,
+      "reverb": "palace_dream"
+    },
+    "sc13_roku_01": {
+      "scene_id": "SC-13",
+      "speaker": "roku",
+      "tier": "p0",
+      "max_duration_sec": 5,
+      "direction": "Story pivot, heavy truth about the box",
+      "duck_bgm_db": -8,
+      "reverb": "mirror_chamber"
+    },
+    "sc14_narrator_01": {
+      "scene_id": "SC-14",
+      "speaker": "narrator",
+      "tier": "p2",
+      "max_duration_sec": 3,
+      "direction": "Sentinel decree, epic but brief",
+      "duck_bgm_db": -4,
+      "reverb": "hall"
+    },
+    "sc15_tide_keeper_01": {
+      "scene_id": "SC-15",
+      "speaker": "tide_keeper",
+      "tier": "p1",
+      "max_duration_sec": 5,
+      "direction": "Final boss opening, cosmic mercy argument",
+      "duck_bgm_db": -4,
+      "reverb": "void_throne"
+    },
+    "sc16_tide_keeper_01": {
+      "scene_id": "SC-16",
+      "speaker": "tide_keeper",
+      "tier": "p0",
+      "max_duration_sec": 3,
+      "direction": "Near-silence before choice, slow and still",
+      "duck_bgm_db": -18,
+      "reverb": "void_throne"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "scenes": [
     {
       "scene_id": "SC-00",
@@ -32,7 +32,9 @@
             "ja": "三日だ。三日で戻る。",
             "zh": "三天。我三天就回来。"
           },
-          "emotion": "neutral"
+          "emotion": "neutral",
+          "voice_id": "sc00_urashima_01",
+          "vo_tier": "p0"
         }
       ],
       "on_complete": {
@@ -62,7 +64,9 @@
             "ja": "三日……たったの三日だったはずなのに……",
             "zh": "三天……明明只有三天……"
           },
-          "emotion": "confused"
+          "emotion": "confused",
+          "voice_id": "sc01_urashima_01",
+          "vo_tier": "p1"
         }
       ],
       "on_complete": {
@@ -203,7 +207,9 @@
             "ja": "あなたは去った。私たちは待っていた。",
             "zh": "你离开了。我们一直等着。"
           },
-          "emotion": "accusatory"
+          "emotion": "accusatory",
+          "voice_id": "sc03_yuzu_01",
+          "vo_tier": "p0"
         },
         {
           "speaker": "urashima",
@@ -264,7 +270,9 @@
             "ja": "あの箱は贈り物じゃない。開くな。下の潮穴からだ。",
             "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。"
           },
-          "emotion": "urgent"
+          "emotion": "urgent",
+          "voice_id": "sc04_roku_01",
+          "vo_tier": "p2"
         }
       ],
       "on_complete": {
@@ -356,7 +364,9 @@
             "ja": "わかっている。俺は皆を置いていった。",
             "zh": "我认识你们。我把你们都抛下了。"
           },
-          "emotion": "guilt"
+          "emotion": "guilt",
+          "voice_id": "sc08_urashima_01",
+          "vo_tier": "p1"
         },
         {
           "speaker": "urashima",
@@ -389,7 +399,9 @@
             "ja": "お前は私たちより彼女を選んだ。",
             "zh": "你选择了她，而不是我们。"
           },
-          "emotion": "neutral"
+          "emotion": "neutral",
+          "voice_id": "sc09_shore_wraith_01",
+          "vo_tier": "p1"
         },
         {
           "speaker": "urashima",
@@ -427,7 +439,9 @@
             "ja": "潮に答えが出るまで休めない。一緒に歩かせて、浦島。",
             "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。"
           },
-          "emotion": "resolve"
+          "emotion": "resolve",
+          "voice_id": "sc10_yuzu_01",
+          "vo_tier": "p1"
         },
         {
           "speaker": "urashima",
@@ -460,7 +474,9 @@
             "ja": "留まりなさい、浦島。宮にいれば、世の苦しみは届きません。",
             "zh": "留下吧，浦岛。在宫殿里，尘世伤不到你。"
           },
-          "emotion": "seductive"
+          "emotion": "seductive",
+          "voice_id": "sc11_otohime_01",
+          "vo_tier": "p0"
         },
         {
           "speaker": "urashima",
@@ -535,7 +551,9 @@
             "ja": "箱には彼らの歳がある。開けば彼らは生き、お前は消える。",
             "zh": "盒子里装着他们的岁月。打开它，他们能活——你不能。"
           },
-          "emotion": "heavy"
+          "emotion": "heavy",
+          "voice_id": "sc13_roku_01",
+          "vo_tier": "p0"
         },
         {
           "speaker": "urashima",
@@ -575,7 +593,9 @@
             "ja": "「盗んだ時間を持って去る者はいない。」",
             "zh": "「凡人无权带着被偷走的时间离开。」"
           },
-          "emotion": "threatening"
+          "emotion": "threatening",
+          "voice_id": "sc14_narrator_01",
+          "vo_tier": "p2"
         }
       ],
       "on_complete": {
@@ -595,7 +615,9 @@
             "ja": "楽園は慈悲だ。お前は苦しみから逃げた——私は安らぎを与えた。",
             "zh": "乐园即是慈悲。你逃离了痛苦——我赐予了安宁。"
           },
-          "emotion": "cosmic"
+          "emotion": "cosmic",
+          "voice_id": "sc15_tide_keeper_01",
+          "vo_tier": "p1"
         },
         {
           "speaker": "urashima",
@@ -625,7 +647,9 @@
             "ja": "潮は待つ。彼らもそうだった。",
             "zh": "潮汐在等待。他们也曾等待。"
           },
-          "emotion": "neutral"
+          "emotion": "neutral",
+          "voice_id": "sc16_tide_keeper_01",
+          "vo_tier": "p0"
         }
       ],
       "choices": [
