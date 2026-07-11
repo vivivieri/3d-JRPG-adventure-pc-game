@@ -90,6 +90,8 @@ Track implementation progress against the GDD milestones.
 - [x] AI build policy — GodotPrompter + MCP stack (`.cursorrules` §0, `docs/MCP_STACK.md`)
 - [x] Unit test scaffold (`game/tests/unit/`, `tools/run_unit_tests.sh`)
 - [x] Smoke tests (`tools/run_playtest_smoke.sh`)
+- [x] Acceptance criteria catalog (`docs/ACCEPTANCE_CRITERIA.md`, `game/data/qa/acceptance_criteria.json`)
+- [x] Domain QA gates (MODEL/VISUAL/AUDIO/FLOW QA + `QA_REMEDIATION_LOOP.md`)
 - [x] Phase acceptance criteria documented (`docs/AI_DEV_WORKFLOW.md` §4)
 - [x] AI testing spec L0–L6 (`docs/AI_TESTING_SPEC.md`) — human QA after L5
 - [ ] Integration tests (`tools/run_integration_tests.sh`) — expand Phase 2+

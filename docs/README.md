@@ -29,7 +29,9 @@
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
 | Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
-| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) |
+| QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
+| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
+| Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |
 | Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [steam/GODOTSTEAM_SETUP.md](../steam/GODOTSTEAM_SETUP.md) |
 
 ---
@@ -113,9 +115,6 @@
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
 | [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
-| [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | **Industry polish refs + FAIL iteration** (anti infinite retry) |
-| [FLOW_QA.md](FLOW_QA.md) | **Game flow QA** — L0/L4/L5 progression + flow remediation |
-| [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | **Measurable pass/fail thresholds** — gates, jury rules, evidence |
 | [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |
@@ -125,6 +124,8 @@
 
 ## 7. Production & QA
 
+**Start:** [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) (measurable gates) · `game/data/qa/acceptance_criteria.json`
+
 | Doc | Purpose |
 |-----|---------|
 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | Rebuild phases 0–8 |
@@ -133,6 +134,7 @@
 | [AI_TESTING_SPEC.md](AI_TESTING_SPEC.md) | L0–L6 automated + human QA |
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA gates — WARN/SKIP ≠ PASS |
+| [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
 | [GDAI_CLOUD_SETUP.md](GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |

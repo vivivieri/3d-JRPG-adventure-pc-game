@@ -1,7 +1,7 @@
 # Tides of Urashima — QA & Bug Process
 
-**Version:** 1.2 (Pre-build)  
-**Cross-refs:** `docs/PLAYTEST_SCRIPT.md`, `docs/MILESTONES.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `tools/validate_story_data.py`, `tools/check_asset_compliance.sh`
+**Version:** 1.3 (Pre-build)  
+**Cross-refs:** `docs/PLAYTEST_SCRIPT.md`, `docs/MILESTONES.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ACCEPTANCE_CRITERIA.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/FLOW_QA.md`, `tools/validate_story_data.py`, `tools/check_asset_compliance.sh`
 
 This doc defines **how to find, report, triage, and verify bugs** for *Tides of Urashima*. Playtest scripts live in `PLAYTEST_SCRIPT.md`; this doc is the **process and templates**.
 
@@ -16,7 +16,11 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 | **AI build & test policy** | GDAI-only build; layered AI tests L0–L5; human after | `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md` |
 | **Story data** | Scene IDs, flags, items, encounters align | `python3 tools/validate_story_data.py` |
 | **Unit tests (L1)** | Logic, parsers, calculators, flags | `bash tools/run_unit_tests.sh` |
-| **Smoke (L2)** | Boot load, dev environment | `bash tools/run_playtest_smoke.sh` |
+| **Smoke (L2)** | Boot, lint, art/flow smokes | `bash tools/run_playtest_smoke.sh` |
+| **Acceptance gates** | Measurable pass/fail; WARN/SKIP ≠ PASS | `docs/ACCEPTANCE_CRITERIA.md`, `validate_acceptance_criteria.py` |
+| **3D / visual / audio QA** | Asset quality before/at ship | `MODEL_QA.md`, `VISUAL_QA.md`, `AUDIO_QA.md` |
+| **Flow QA** | Progression, soft-locks, INT-* | `docs/FLOW_QA.md`, `run_integration_tests.sh` |
+| **QA remediation** | Structured fix on FAIL | `docs/QA_REMEDIATION_LOOP.md`, `qa_emit_remediation.sh` |
 | **Integration (L4)** | Multi-scene flows, combat, save | `bash tools/run_integration_tests.sh` |
 | **E2E (L5)** | Full story + 3 endings | `bash tools/run_e2e_playthrough.sh` (Phase 6+) |
 | **Asset compliance** | Copyright-safe shipped assets | `bash tools/check_asset_compliance.sh` |
@@ -25,7 +29,6 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 | **Localization** | en / ja / zh keys present | `game/locale/translations.csv` (Phase 2+) |
 | **Audio** | Scene BGM map, loops, boss phases | `AUDIO_PRODUCTION_GUIDE.md` §11 |
 | **3D / art** | No primitives, hero meshes | `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `docs/MODEL_QA.md` |
-| **Art/audio QA fail loop** | Structured fix, not infinite retry | `docs/QA_REMEDIATION_LOOP.md`, `tools/qa_remediation_brief.py` |
 
 ---
 

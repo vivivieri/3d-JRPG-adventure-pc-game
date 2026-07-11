@@ -2,7 +2,7 @@
 
 **Version:** 2.0  
 **Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
-**Cross-refs:** `.cursorrules` §0–§1, `docs/ART_AUTOMATION_PIPELINE.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
+**Cross-refs:** `.cursorrules` §0–§1, `docs/ART_AUTOMATION_PIPELINE.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ACCEPTANCE_CRITERIA.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
 
 **Tiered requirements:** P0 MCP servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) are **required** — if missing, **STOP and notify the user**. Art generators (`gamelab-mcp`, ComfyUI, ACE-Step) use **quality-first fallbacks** per `docs/ART_AUTOMATION_PIPELINE.md`. Do not fall back to manual `.tscn` edits or undocumented web assets.
 
@@ -356,17 +356,43 @@ Start **GDAI MCP** panel → **Start** after editor opens.
 
 ---
 
-## Testing workflow
+## Testing & QA workflow
 
-See `docs/AI_TESTING_SPEC.md` §11.
+See `docs/AI_TESTING_SPEC.md` §11 and `docs/ACCEPTANCE_CRITERIA.md` (measurable gates).
 
-| Layer | Tools |
-|-------|-------|
-| L0–L2 | Shell scripts (no MCP) |
-| L3 | GDAI F5 + screenshot; Godotiq `godotiq_ui_map` for menus |
-| L4 | Godot MCP Pro `run_test_scenario`; Godotiq `godotiq_verify_project_runs` |
-| L5 | Godot MCP Pro input replay + `assert_screen_text`; Godotiq `godotiq_trace_flow` on failure |
-| L6 | Human — **after** L5 |
+| Layer | Tools | MCP role |
+|-------|-------|----------|
+| L0–L2 | Shell scripts (no MCP) | — |
+| L3 | GDAI F5 + screenshot; Godotiq `godotiq_ui_map` for menus | `godot-mcp` |
+| L4 | Godot MCP Pro `run_test_scenario`; Godotiq `godotiq_verify_project_runs` | `godot-mcp-pro`, `godotiq` |
+| L5 | Godot MCP Pro input replay + `assert_screen_text`; Godotiq `godotiq_trace_flow` on failure | `godot-mcp-pro`, `godotiq` |
+| L6 | Human — **after** L5 | — |
+
+### QA stack (every commit + per art/flow task)
+
+**Catalog:** `game/data/qa/acceptance_criteria.json` · **Policy:** `docs/ACCEPTANCE_CRITERIA.md`
+
+```bash
+python3 tools/validate_story_data.py          # L0_story_data
+python3 tools/validate_acceptance_criteria.py
+bash tools/run_playtest_smoke.sh              # L2 bundle
+bash tools/run_model_smoke_checks.sh          # when urashima.glb exists
+bash tools/run_visual_smoke_checks.sh         # when zone screenshot exists
+bash tools/run_audio_smoke_checks.sh          # when bgm_village.ogg exists
+bash tools/run_integration_tests.sh           # L4 / INT-*
+bash tools/run_e2e_playthrough.sh             # L5 — not SKIP
+```
+
+| Domain | Doc | FAIL → |
+|--------|-----|--------|
+| Thresholds | `ACCEPTANCE_CRITERIA.md` | Cite gate id + measured value |
+| 3D | `MODEL_QA.md` | `qa_emit_remediation.sh model-*` |
+| Visual | `VISUAL_QA.md` | `qa_emit_remediation.sh visual-*` |
+| Audio | `AUDIO_QA.md` | `qa_emit_remediation.sh audio-*` |
+| Flow | `FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario` |
+| Iteration | `QA_REMEDIATION_LOOP.md` | `qa_remediation_brief.py` |
+
+**Rules:** WARN ≠ PASS · SKIP ≠ PASS · jury needs ≥2 models @ confidence ≥ 0.65 · vision keys in Cursor Secrets.
 
 ### Example prompts
 
@@ -426,6 +452,10 @@ Assert battle menu text visible.
 ## Related
 
 - `docs/ART_AUTOMATION_PIPELINE.md` — quality-first art/audio automation policy
+- `docs/ACCEPTANCE_CRITERIA.md` — measurable QA gates (WARN/SKIP ≠ PASS)
+- `docs/QA_REMEDIATION_LOOP.md` — FAIL iteration policy
+- `docs/MODEL_QA.md` · `docs/VISUAL_QA.md` · `docs/AUDIO_QA.md` · `docs/FLOW_QA.md`
+- `game/data/qa/acceptance_criteria.json` — machine-readable thresholds
 - `game/.godotiq.json` — Godotiq project conventions
 - `game/addons/README.md` — addon policy
 - `.cursor/mcp.json.example` — MCP config template

@@ -406,10 +406,16 @@ GDAI MCP: connected / NOT AVAILABLE (blocked)
 |-------|--------|--------|
 | L0 | PASS/FAIL | validate_story_data |
 | L1 | PASS/FAIL | N/N unit tests |
-| L2 | PASS/FAIL | N/N smoke checks |
+| L2 | PASS/FAIL/WARN | smoke — WARN ≠ ship PASS (`ACCEPTANCE_CRITERIA.md`) |
 | L3 | PASS/FAIL/SKIP | <scene> F5, screenshot path |
 | L4 | PASS/FAIL/SKIP | N/N integration scenarios |
-| L5 | PASS/FAIL/SKIP | E2E 3/3 endings |
+| L5 | PASS/FAIL/SKIP | E2E 3/3 endings (SKIP ≠ PASS) |
+
+Acceptance gates (when applicable):
+- L2_visual_palette / jury: PASS/FAIL/SKIP + evidence path
+- L2_model_technical / jury: PASS/FAIL/SKIP + evidence path
+- L2_audio_technical / jury: PASS/FAIL/SKIP + evidence path
+- QA remediation: none | attempt N — <lever> (`QA_REMEDIATION_LOOP.md`)
 
 Human QA: NOT STARTED (L5 prerequisite) / READY FOR HUMAN / N/A
 ```
@@ -550,3 +556,5 @@ If `game/tests/unit/` becomes crowded, adopt **[GUT](https://github.com/bitwes/G
 | `game/tests/e2e/` | L5 tests (to add) |
 | `docs/PLAYTEST_SCRIPT.md` | L6 human script |
 | `docs/AI_DEV_WORKFLOW.md` | Build policy + acceptance criteria |
+| `docs/ACCEPTANCE_CRITERIA.md` | Measurable QA gates |
+| `docs/QA_REMEDIATION_LOOP.md` | FAIL iteration |

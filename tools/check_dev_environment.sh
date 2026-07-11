@@ -26,6 +26,8 @@ echo
 check "game/project.godot exists" test -f game/project.godot
 check "export preset configured" test -f game/export_presets.cfg -o -f game/export_presets.cfg.example
 check "story data valid" python3 tools/validate_story_data.py
+check "acceptance criteria catalog" python3 tools/validate_acceptance_criteria.py
+check "QA policy docs" test -f docs/ACCEPTANCE_CRITERIA.md
 check "setup script executable" test -x tools/setup_dev_environment.sh
 check "implementation plan doc" test -f docs/IMPLEMENTATION_PLAN.md
 check "rendering guide" test -f docs/RENDERING_GUIDE.md

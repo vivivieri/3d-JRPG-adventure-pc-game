@@ -82,9 +82,9 @@ Register all installed servers in Cursor (desktop Settings or cloud dashboard). 
 
 No web-scraped art/audio. See `docs/ASSET_COMPLIANCE.md`.
 
-### Automated testing (required every commit)
+### Automated testing & QA (required every commit)
 
-See `docs/AI_DEV_WORKFLOW.md` for full policy and **phase acceptance criteria**.
+See `docs/AI_DEV_WORKFLOW.md` for policy and `docs/ACCEPTANCE_CRITERIA.md` for **measurable** pass/fail.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
@@ -92,13 +92,23 @@ export XDG_DATA_HOME="/workspace/.cache/godot-data"
 export XDG_CONFIG_HOME="/workspace/.cache/godot-config"
 export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
 
-python3 tools/validate_story_data.py   # L0 data validation
-bash tools/run_unit_tests.sh           # L1 unit tests
-bash tools/run_playtest_smoke.sh       # L2 smoke (includes L0+L1)
-bash tools/run_integration_tests.sh    # L4 phase gates (Phase 2+)
-bash tools/run_e2e_playthrough.sh      # L5 endings (Phase 6+; blocks human QA)
+python3 tools/validate_story_data.py          # L0
+python3 tools/validate_acceptance_criteria.py # catalog lint
+bash tools/run_unit_tests.sh                  # L1
+bash tools/run_playtest_smoke.sh              # L2 (data + boot + art smokes)
+bash tools/run_integration_tests.sh           # L4 phase gates (Phase 2+)
+bash tools/run_e2e_playthrough.sh             # L5 (Phase 6+; blocks human QA)
 bash tools/check_asset_compliance.sh
 ```
+
+| QA domain | Policy doc | On FAIL |
+|-----------|------------|---------|
+| Acceptance thresholds | `docs/ACCEPTANCE_CRITERIA.md` | Fix metric; cite gate id in report |
+| 3D models | `docs/MODEL_QA.md` | `qa_emit_remediation.sh model-tech\|model-jury` |
+| Visuals | `docs/VISUAL_QA.md` | `qa_emit_remediation.sh visual-palette\|visual-jury` |
+| Audio | `docs/AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Game flow | `docs/FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario INT-*` |
+| Iteration | `docs/QA_REMEDIATION_LOOP.md` | One lever per attempt; max 3 |
 
 GDAI MCP F5 = **L3**; Godotiq = debug/trace; Godot MCP Pro = L4/L5 scenarios (`docs/AI_TESTING_SPEC.md`, `docs/MCP_STACK.md`).
 
@@ -118,8 +128,8 @@ All scene work via **GDAI MCP** after GodotPrompter plans.
 
 Configure in Cursor **Secrets** tab (not committed):
 - GDAI plugin license path / download token (if applicable)
-- `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` — visual jury (`tools/review_screenshot_vision.py`)
-- `OPENAI_API_KEY` / `GEMINI_API_KEY` — audio jury (`tools/review_audio_vision.py`)
+- `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` — visual + model turntable jury
+- `OPENAI_API_KEY` / `GEMINI_API_KEY` — audio listen jury
 - Steam API keys (Phase 8 only)
 
 ### Do not ship

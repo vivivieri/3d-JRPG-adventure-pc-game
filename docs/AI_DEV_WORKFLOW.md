@@ -295,6 +295,7 @@ bash tools/ensure_gdai_mcp.sh
 
 # Every commit (L0–L2)
 python3 tools/validate_story_data.py
+python3 tools/validate_acceptance_criteria.py
 bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh
 

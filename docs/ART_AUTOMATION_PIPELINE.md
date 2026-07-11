@@ -108,6 +108,7 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 8. GodotPrompter — toon shader + emission states (lacquer box)
 9. GDAI MCP — place in scene, F5 verify
 10. `docs/MODEL_QA.md` — GLB lint + turntable jury before import; `docs/VISUAL_QA.md` after in-scene
+11. `docs/ACCEPTANCE_CRITERIA.md` — cite gate id + measured values in agent report; FAIL → `QA_REMEDIATION_LOOP.md`
 ```
 
 **No commission path.** Rights = service ToS + `register_asset.py` + `LICENSES.md`.
@@ -144,13 +145,15 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 
 ## 8. Quality gates (M5)
 
-Before marking M5 complete (`docs/MILESTONES.md`):
+Before marking M5 complete (`docs/MILESTONES.md`). **All gates must meet `docs/ACCEPTANCE_CRITERIA.md`** — WARN/SKIP is not ship PASS.
 
 - [ ] `bash tools/check_scene_visuals.sh` passes (no primitives in ship `.tscn`)
-- [ ] All zone albedos pass `palette_remap.py` + gameplay-camera palette check (ART_DIRECTION §10)
+- [ ] `L2_model_*` + `L2_visual_*` + `L2_audio_*` gates PASS with evidence (`artifacts/`)
+- [ ] All zone albedos pass `palette_remap.py` + `check_screenshot_palette.py` per zone
 - [ ] Single toon ramp family (`RENDERING_GUIDE.md`)
 - [ ] Every external asset in `LICENSES.md` + `asset_manifest.license.json`
 - [ ] `bash tools/check_asset_compliance.sh` passes
+- [ ] `python3 tools/validate_acceptance_criteria.py` passes
 - [ ] 60 FPS @ 1080p on GTX 1060 — SC-02 first
 - [ ] No FMV in `game/` — cinematics are Godot-only (`docs/CINEMATICS.md`)
 

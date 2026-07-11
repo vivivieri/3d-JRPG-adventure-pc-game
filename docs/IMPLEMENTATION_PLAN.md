@@ -37,6 +37,8 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | Story data validator (`tools/validate_story_data.py`) | Done |
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |
 | Fresh-rebuild smoke (`tools/run_playtest_smoke.sh`) | Done |
+| QA acceptance catalog (`game/data/qa/acceptance_criteria.json`, `docs/ACCEPTANCE_CRITERIA.md`) | Done |
+| QA remediation + domain gates (MODEL/VISUAL/AUDIO/FLOW QA docs) | Done |
 | AI dev workflow doc (`docs/AI_DEV_WORKFLOW.md`) | Done |
 | AI testing spec (`docs/AI_TESTING_SPEC.md`) | Done |
 | Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | Done |
@@ -47,6 +49,7 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 bash tools/setup_dev_environment.sh
 bash tools/ensure_gdai_mcp.sh
 bash tools/check_dev_environment.sh
+python3 tools/validate_acceptance_criteria.py
 bash tools/run_unit_tests.sh
 bash tools/run_playtest_smoke.sh
 # Open game/project.godot in Godot 4.7 → F5
@@ -174,14 +177,20 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 
 ```bash
 python3 tools/validate_story_data.py
+python3 tools/validate_acceptance_criteria.py
 bash tools/ensure_gdai_mcp.sh
 bash tools/run_unit_tests.sh
 bash tools/check_dev_environment.sh
 bash tools/run_playtest_smoke.sh
-bash tools/run_integration_tests.sh   # Phase 2+ gates
-bash tools/run_e2e_playthrough.sh     # Phase 6 gate
-bash tools/check_asset_compliance.sh  # when assets exist
+bash tools/run_model_smoke_checks.sh      # when gate GLBs exist
+bash tools/run_visual_smoke_checks.sh     # when zone screenshots exist
+bash tools/run_audio_smoke_checks.sh      # when gate BGM exists
+bash tools/run_integration_tests.sh       # Phase 2+ gates
+bash tools/run_e2e_playthrough.sh         # Phase 6 gate (not SKIP)
+bash tools/check_asset_compliance.sh      # when assets exist
 ```
+
+**QA policy:** `docs/ACCEPTANCE_CRITERIA.md` · **On FAIL:** `tools/qa_emit_remediation.sh` per `docs/QA_REMEDIATION_LOOP.md`
 
 ---
 

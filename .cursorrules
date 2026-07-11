@@ -185,7 +185,8 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 4. VERIFY   → GDAI MCP: run scene (F5), read editor errors/output, check visuals in viewport
 5. REFINE   → GodotPrompter: fix script/shader bugs GDAI surfaced → GDAI MCP applies fixes in editor
 6. ASSETS   → Procedural audio/art via project tools; GDAI MCP assigns in editor
-7. SHIP     → commit; run bash tools/check_asset_compliance.sh
+7. QA       → L0–L2 every commit; art/flow QA per task (see §0 QA stack below)
+8. SHIP     → commit; acceptance gates + bash tools/check_asset_compliance.sh
 ```
 
 **Handoff rules:**
@@ -213,6 +214,35 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 **Startup order:** `ensure_mcp_stack.sh` → Godot Editor + P0 bridges → Cursor MCP (P0 required; GameLab WARN) → plan in GodotPrompter.
 
 **Full toolchain:** `docs/MCP_STACK.md`
+
+### QA stack (mandatory — measurable acceptance)
+
+**Authority:** `docs/ACCEPTANCE_CRITERIA.md` + `game/data/qa/acceptance_criteria.json`  
+**Policy:** WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS · re-run jury without rebuild = invalid
+
+| Layer | Command | Gate ids (examples) |
+|-------|---------|---------------------|
+| L0 data | `python3 tools/validate_story_data.py` | `L0_story_data` |
+| L1 unit | `bash tools/run_unit_tests.sh` | `L1_unit_tests` |
+| L2 smoke | `bash tools/run_playtest_smoke.sh` | boot, primitives, art smokes when assets exist |
+| L2 model | `bash tools/run_model_smoke_checks.sh` | `L2_model_technical`, `L2_model_jury` |
+| L2 visual | `bash tools/run_visual_smoke_checks.sh` | `L2_visual_palette`, `L2_visual_jury` |
+| L2 audio | `bash tools/run_audio_smoke_checks.sh` | `L2_audio_technical`, `L2_audio_jury` |
+| L4 flow | `bash tools/run_integration_tests.sh` | `L4_integration`, `INT-*` |
+| L5 E2E | `bash tools/run_e2e_playthrough.sh` | `L5_e2e_three_endings` (not SKIP) |
+
+**On FAIL:** `bash tools/qa_emit_remediation.sh <kind>` → change **one** lever → re-measure (`docs/QA_REMEDIATION_LOOP.md`).
+
+| Domain | Policy doc |
+|--------|------------|
+| Acceptance thresholds | `docs/ACCEPTANCE_CRITERIA.md` |
+| 3D assets | `docs/MODEL_QA.md` |
+| In-scene visuals | `docs/VISUAL_QA.md` |
+| Audio | `docs/AUDIO_QA.md` |
+| Game flow | `docs/FLOW_QA.md` |
+| FAIL iteration | `docs/QA_REMEDIATION_LOOP.md` |
+
+**Vision jury API keys (Cursor Secrets):** `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`
 
 ---
 
@@ -301,5 +331,6 @@ Extend with emission for interactables; keep one ramp family project-wide.
 3. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.
 4. **Execute** with GDAI MCP — apply plan in editor (scenes, materials, lights).
 5. **Verify** with GDAI MCP — F5 playtest, fix errors (loop GodotPrompter ↔ GDAI until clean).
-6. **Assets** — procedural audio/portraits; GDAI assigns in editor.
-7. **Ship check** — palette hex, shadows, fog, glow targets, 60 FPS @ 1080p, asset compliance.
+6. **QA** — `bash tools/run_playtest_smoke.sh`; domain smokes + jury when assets exist; cite gate ids in report (`docs/ACCEPTANCE_CRITERIA.md`).
+7. **Assets** — procedural audio/portraits; GDAI assigns in editor; MODEL/VISUAL/AUDIO QA before ship art.
+8. **Ship check** — acceptance criteria for phase; palette hex; 60 FPS @ 1080p; `check_asset_compliance.sh`.

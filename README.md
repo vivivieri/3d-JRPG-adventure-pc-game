@@ -49,8 +49,9 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Zones, interactables, triggers | [LEVEL_DESIGN.md](docs/LEVEL_DESIGN.md) |
 | Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
 | MCP toolchain | [MCP_STACK.md](docs/MCP_STACK.md) |
+| QA gates & acceptance | [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) |
 
-**Authority:** IMPLEMENTATION_PLAN → MILESTONES → TECHNICAL_DESIGN → DATA_ARCHITECTURE → MCP_STACK / `.cursorrules`
+**Authority:** IMPLEMENTATION_PLAN → MILESTONES → TECHNICAL_DESIGN → DATA_ARCHITECTURE → ACCEPTANCE_CRITERIA → MCP_STACK / `.cursorrules`
 
 ---
 
@@ -62,6 +63,8 @@ bash tools/ensure_mcp_stack.sh
 bash tools/check_dev_environment.sh
 bash tools/run_unit_tests.sh
 python3 tools/validate_story_data.py
+python3 tools/validate_acceptance_criteria.py
+bash tools/run_playtest_smoke.sh       # L2 smoke (recommended every commit)
 ```
 
 Open `game/project.godot` in Godot 4.7 → **F5** (boot screen only).
