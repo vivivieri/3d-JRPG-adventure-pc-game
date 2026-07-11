@@ -213,22 +213,29 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 |---|-----------|--------------|
 | 2.1 | Autoloads: `GameManager`, `EventBus`, `SaveSystem`, `DialogueRunner`, `CombatManager` | Project settings + unit tests |
 | 2.2 | `GameManager.load_json("res://data/...")` works for all data types | Unit test |
-| 2.3 | Main menu → New Game → `beach_shore` without errors | GDAI F5 + integration test |
-| 2.4 | Player WASD + camera orbit per `GAME_FEEL.md` | GDAI F5 |
-| 2.5 | Zone transitions per `WORLD_MAP_AND_FLOW.md` | Integration `test_zone_transitions.gd` |
-| 2.6 | Save at village well → reload → flags persist | Unit + integration |
-| 2.7 | L0–L4 pass | All test scripts |
+| 2.3 | `LocalizationManager` + `FontThemeManager`; en / ja / zh / zh-Hant fonts | GDAI F5 language switch |
+| 2.4 | Main menu → New Game → SC-00 prologue → `beach_shore` without errors | GDAI F5 + integration test |
+| 2.5 | Player WASD + camera orbit per `GAME_FEEL.md` | GDAI F5 |
+| 2.6 | Zone transitions per `WORLD_MAP_AND_FLOW.md` | Integration `test_zone_transitions.gd` |
+| 2.7 | `AudioManager` plays zone BGM; SFX on Voice/Music buses | GDAI F5 |
+| 2.8 | Settings menu: language, `vo_dialect` (when zh-Hant), volumes persist | GDAI F5 + unit test |
+| 2.9 | Save at village well → reload → flags persist | Unit + integration |
+| 2.10 | L0–L4 pass | All test scripts |
 
 ### Phase 3 — Narrative & exploration
 
 | # | Criterion | Verification |
 |---|-----------|--------------|
 | 3.1 | Dialogue box shows speaker + body from `chapter_01.json` | GDAI F5 SC-03 |
-| 3.2 | Interactable prompt (E) per `UI_UX_FLOW.md` | GDAI F5 |
-| 3.3 | Quest stages advance per `main_quests.json` | Unit `test_flag_system.gd` |
-| 3.4 | SC-01 through SC-05 reachable without soft-lock | Integration test |
-| 3.5 | 8 lore entries discoverable per `lore_placements.json` | Integration test |
-| 3.6 | L0–L4 pass | All test scripts |
+| 3.2 | `VoiceLinePlayer` resolves path for `voice_id`; ducks BGM −6 dB (SC-16: −18 dB); no crash if clip missing | GDAI F5 SC-03; unit test path resolver |
+| 3.3 | Interactable prompt (E) per `UI_UX_FLOW.md` | GDAI F5 |
+| 3.4 | Quest stages advance per `main_quests.json` | Unit `test_flag_system.gd` |
+| 3.5 | Tab inventory + Roku shop prices match `roku_shop.json` | Unit + GDAI F5 |
+| 3.6 | SC-00 prologue plays; `prologue_seen` flag set | Integration test |
+| 3.7 | SC-01 through SC-05 reachable without soft-lock | Integration test |
+| 3.8 | 8 lore entries discoverable per `lore_placements.json` | Integration test |
+| 3.9 | All four written locales render (en / ja / zh / zh-Hant); no raw keys on main path | GDAI F5 + FLOW QA |
+| 3.10 | L0–L4 pass | All test scripts |
 
 ### Phase 4 — Combat vertical slice
 
@@ -249,7 +256,8 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 5.2 | SC-07 water puzzle: silent, no VO; state machine matches `PUZZLE_DESIGN.md` | Unit + GDAI F5 |
 | 5.3 | Shore Wraith SC-09 win/lose paths | Integration test |
 | 5.4 | Yuzu joins at SC-10; party size = 2 | Flag unit test |
-| 5.5 | L0–L4 pass | All test scripts |
+| 5.5 | SC-08 vignette plays; whisper SFX bed, no full VO | GDAI F5 |
+| 5.6 | L0–L4 pass | All test scripts |
 
 ### Phase 6 — Full story & endings
 
@@ -260,10 +268,11 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 6.3 | SC-16 choice UI blocks attack input per `ENDING_DESIGN.md` | GDAI F5 |
 | 6.4 | All 3 endings reachable: Rewind, Anchor, Drift | E2E `test_three_endings.gd` |
 | 6.5 | Credits roll after each ending | E2E test |
-| 6.6 | `bash tools/run_e2e_playthrough.sh` passes | Exit 0 |
-| 6.7 | L0–L5 pass | All test scripts |
+| 6.6 | SC-12 gate cinematic + SC-11 flashback skippable after 3s | GDAI F5 |
+| 6.7 | `bash tools/run_e2e_playthrough.sh` passes | Exit 0 |
+| 6.8 | L0–L5 pass | All test scripts |
 
-### Phase 7 — M6 art rebuild
+### Phase 7 — M5 art rebuild
 
 | # | Criterion | Verification |
 |---|-----------|--------------|
@@ -271,7 +280,11 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 7.2 | Hero meshes: Urashima, Yuzu, Roku per `CHARACTER_BIBLE.md` | Screenshot gate |
 | 7.3 | Automated stylized zone textures per zone (`palette_remap.py`) | Art checklist |
 | 7.4 | Curated BGM per `AUDIO_PRODUCTION_GUIDE.md` | Audio QA §11 |
-| 7.5 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
+| 7.5 | SFX + ambient beds per scene map | Audio QA technical |
+| 7.6 | Selective VO: 12 clips × locales + zh-Hant dialects generated; `generate_ai_vo.sh --list` = 60 files | File manifest + `run_audio_smoke_checks.sh` |
+| 7.7 | VO passes `AUDIO_QA.md` jury gates (P0 clips first) | Jury scripts |
+| 7.8 | Cinematic hero assets (SC-00, SC-12, SC-17) per `CINEMATICS.md` §12 | GDAI F5 |
+| 7.9 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
 
 ### Phase 8 — Ship prep
 
@@ -282,8 +295,9 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 8.1 | GDAI MCP plugin **disabled and removed** from export tree | Manual + export preset review |
 | 8.2 | Windows export succeeds (`tools/export_windows.sh`) | Artifact exists |
 | 8.3 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
-| 8.4 | **L0–L5 pass** on release candidate | All AI test scripts exit 0 |
-| 8.5 | **Human QA** `docs/PLAYTEST_SCRIPT.md` ≥80% complete without guide | Human sign-off **after 8.4** |
+| 8.4 | Steam achievements unlock per `ACHIEVEMENTS.md` | Integration test |
+| 8.5 | **L0–L5 pass** on release candidate | All AI test scripts exit 0 |
+| 8.6 | **Human QA** `docs/PLAYTEST_SCRIPT.md` ≥80% complete without guide | Human sign-off **after 8.5** |
 
 ---
 

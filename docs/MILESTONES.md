@@ -31,7 +31,7 @@ Track implementation progress against the GDD milestones.
 - [x] Godot 4 project scaffold (boot shell on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
-- [x] **Multi-language support (en / ja / zh)** — spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+
+- [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+
 
 ## M0c — Pre-build design (art rebuild specs)
 - [x] Character bible (`docs/CHARACTER_BIBLE.md`) — v1.1: LOD, boss 3D, attachment rig
@@ -101,25 +101,35 @@ Track implementation progress against the GDD milestones.
 - [ ] Player movement polish (camera orbit — right-mouse + scroll)
 - [ ] Interaction prompt HUD (Press E — action, localized)
 - [ ] Dialogue box UI scene (typewriter, speaker, locale fonts)
-- [ ] CJK font bundle + locale-aware `FontThemeManager`
+- [ ] CJK font bundle + locale-aware `FontThemeManager` (incl. NotoSansTC for zh-Hant)
+- [ ] `LocalizationManager` + settings menu (language + `vo_dialect` for zh-Hant)
+- [ ] `AudioManager` shell — procedural BGM/SFX placeholders (upgrade in M5)
+- [ ] `VoiceLinePlayer` wired to `DialogueRunner` (runtime paths; clips optional until M5)
+- [ ] SC-00 prologue + `CinematicDirector` opening hook
+- [ ] Tab inventory / equipment menu
+- [ ] Roku shop UI (`shop/roku_shop.json`)
 - [ ] Quest tracker UI
 - [ ] Save point at village well
+- [ ] Written i18n pass — `translations.csv` + `zh-Hant` in `chapter_01.json`
 
 ## M2 — Combat vertical slice
 - [ ] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)
 - [ ] Combat polish (transitions, damage flash, items, escape, boss banners)
 
 ## M3 — Chapter 1
-- [ ] Tidal Caves greybox map
-- [ ] Water level puzzle
-- [ ] Shore Wraith boss
-- [ ] Yuzu joins party
+- [ ] Tidal Caves greybox map + SC-06 entrance
+- [ ] Water level puzzle (SC-07 — silent, no VO)
+- [ ] SC-08 echo vignette (`CinematicDirector` + whisper bed)
+- [ ] Shore Wraith boss (SC-09)
+- [ ] Yuzu joins party (SC-10)
 
 ## M4 — Full game
-- [ ] Dragon Palace Gate dungeon
-- [ ] Palace Sentinel + Tide Keeper bosses
-- [ ] Three endings
+- [ ] Dragon Palace Gate dungeon + SC-12 gate cinematic
+- [ ] SC-11 flashback + SC-13 box revelation
+- [ ] Palace Sentinel (SC-14) + Tide Keeper (SC-15) bosses
+- [ ] SC-16 choice UI + three endings (SC-17a/b/c)
 - [ ] Credits sequence
+- [ ] E2E three endings (`bash tools/run_e2e_playthrough.sh`)
 
 ## M5 — Art rebuild (high-detail Japanese)
 - [ ] Rendering guide applied per zone (`docs/RENDERING_GUIDE.md`)
@@ -131,6 +141,11 @@ Track implementation progress against the GDD milestones.
 - [ ] Automated stylized portraits (ComfyUI/GameLab — replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
 - [ ] Curated BGM per act (ACE-Step curated prompts — replace dev procedural placeholders)
+- [ ] SFX + ambient beds per `AUDIO_PRODUCTION_GUIDE.md` scene map
+- [ ] ElevenLabs voice casting — replace `PLACEHOLDER_*` in `vo_prompts.json` (incl. zh-Hant `dialect_voices`)
+- [ ] Generate selective VO — P0 listen pass → P1/P2; `en`/`ja`/`zh` + zh-Hant `cant`/`cmn` (60 clips)
+- [ ] VO passes `AUDIO_QA.md` technical + jury gates (`bash tools/run_audio_smoke_checks.sh`)
+- [ ] Cinematic hero assets — SC-00 opening, SC-12 gate reveal, SC-17 endings
 - [ ] `bash tools/check_asset_compliance.sh` passes on release branch
 
 ### M5 cinematic budget (`docs/CINEMATICS.md` §12)
@@ -148,8 +163,7 @@ Track implementation progress against the GDD milestones.
 **Marginal cost rule:** SC-12 cinematic is cheap once `palace_gate_main` exists — fund the gate mesh first, camera path second.
 
 ## M6 — Steam & ship prep
-- [ ] `AudioManager` + procedural BGM/SFX placeholders during Phases 1–6 (replace with curated tracks in M5)
-- [ ] Field item use + equipment UI (Tab menu) — if not done in Phase 3–6
+- [ ] Steam achievements (`AchievementManager` + `game/data/achievements.json`)
 - [ ] Steam store page copy + capsule art from final M5 assets
 - [ ] Windows export preset + `tools/export_windows.sh`
 - [ ] Steam screenshots from 3D builds (`steam/screenshots/`)
