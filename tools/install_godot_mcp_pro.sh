@@ -13,7 +13,11 @@ SERVER_DEST="${ROOT}/tools/godot-mcp-pro-server"
 
 ZIP="${GODOT_MCP_PRO_ZIP:-}"
 if [[ -z "$ZIP" ]]; then
-  ZIP="$(ls -1 "${ROOT}/game/addons"/godot-mcp-pro*.zip "${ROOT}/game/addons"/godot_mcp_pro*.zip 2>/dev/null | head -1 || true)"
+  # Prefer full package zip (contains server/) over addon-only archives
+  ZIP="$(ls -1 "${ROOT}/game/addons"/godot-mcp-pro*.zip 2>/dev/null | head -1 || true)"
+fi
+if [[ -z "$ZIP" ]]; then
+  ZIP="$(ls -1 "${ROOT}/game/addons"/godot_mcp_pro*.zip 2>/dev/null | head -1 || true)"
 fi
 
 if [[ -z "$ZIP" || ! -f "$ZIP" ]]; then
