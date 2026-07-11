@@ -1,6 +1,6 @@
 # Tides of Urashima — Implementation Plan
 
-**Version:** 1.1 (Fresh rebuild)  
+**Version:** 1.2 (Fresh rebuild)  
 **Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
 **Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.  
@@ -86,10 +86,12 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 |---|------|------|
 | 2.1 | Autoloads: `GameManager`, `EventBus`, `SaveSystem`, `DialogueRunner`, `CombatManager` | GDD, DATA_ARCHITECTURE |
 | 2.2 | `GameManager.load_json("res://data/...")` API | game/data/README.md |
-| 2.3 | `LocalizationManager` + Noto fonts | LOCALIZATION.md |
-| 2.4 | Main menu → New Game → beach_shore | UI_UX_FLOW.md |
+| 2.3 | `LocalizationManager` + `FontThemeManager` + Noto fonts (en / ja / zh / zh-Hant) | LOCALIZATION.md |
+| 2.4 | Main menu → New Game → SC-00 prologue → `beach_shore` | UI_UX_FLOW.md, TUTORIAL_DESIGN |
 | 2.5 | Player controller + camera orbit | GAME_FEEL.md |
 | 2.6 | Scene transitions between zones | WORLD_MAP_AND_FLOW.md |
+| 2.7 | `AudioManager` shell — BGM crossfade, SFX buses, procedural placeholders | AUDIO_PRODUCTION_GUIDE |
+| 2.8 | Settings menu — language, `vo_dialect` (zh-Hant), volume sliders | SETTINGS_ACCESSIBILITY.md, LOCALIZATION.md |
 
 ---
 
@@ -98,10 +100,15 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | # | Task | Docs |
 |---|------|------|
 | 3.1 | Dialogue box UI + `DialogueRunner` wired to `game/data/dialogue/` | NARRATIVE_WRITING_GUIDE |
-| 3.2 | Interactables + interaction prompt HUD | UI_UX_FLOW.md |
-| 3.3 | Quest tracker + flag system from `story/flags.json` | QUEST_AND_FLAGS.md |
-| 3.4 | SC-01 through SC-05 field content (village hub) | STORYBOARD.md |
-| 3.5 | Lore collectibles | LORE_AND_ENVIRONMENTAL_STORY.md |
+| 3.2 | `VoiceLinePlayer` + `DialogueRunner` VO hookup (locale paths; zh-Hant `cant`/`cmn`; BGM duck) | VO_HIT_LIST.md, TECHNICAL_DESIGN |
+| 3.3 | Interactables + interaction prompt HUD | UI_UX_FLOW.md |
+| 3.4 | Quest tracker + flag system from `story/flags.json` | QUEST_AND_FLAGS.md |
+| 3.5 | Tab inventory / equipment menu | UI_UX_FLOW.md, ITEMS_AND_ECONOMY |
+| 3.6 | Roku shop UI (`shop/roku_shop.json`) | ITEMS_AND_ECONOMY |
+| 3.7 | SC-00 prologue + `CinematicDirector` opening hook | CINEMATICS.md, TUTORIAL_DESIGN |
+| 3.8 | SC-01 through SC-05 field content (village hub) | STORYBOARD.md |
+| 3.9 | Lore collectibles | LORE_AND_ENVIRONMENTAL_STORY.md |
+| 3.10 | Written i18n pass — `translations.csv` + `zh-Hant` keys in `chapter_01.json` | LOCALIZATION.md |
 
 ---
 
@@ -120,10 +127,11 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 
 | # | Task | Docs |
 |---|------|------|
-| 5.1 | Tidal caves greybox → art pass | ENVIRONMENT_KITS §5 |
+| 5.1 | Tidal caves greybox → art pass; SC-06 entrance | ENVIRONMENT_KITS §5 |
 | 5.2 | Water level puzzle SC-07 (silent — no VO) | PUZZLE_DESIGN.md |
-| 5.3 | Shore Wraith boss SC-09 | BOSS_DESIGNS.md |
-| 5.4 | Yuzu joins SC-10 | CHARACTER_BIBLE.md |
+| 5.3 | SC-08 echo vignette (`CinematicDirector` + whisper SFX bed) | CINEMATICS.md, STORYBOARD |
+| 5.4 | Shore Wraith boss SC-09 | BOSS_DESIGNS.md |
+| 5.5 | Yuzu joins SC-10 | CHARACTER_BIBLE.md |
 
 ---
 
@@ -131,11 +139,13 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 
 | # | Task | Docs |
 |---|------|------|
-| 6.1 | Dragon Palace Gate zone | ENVIRONMENT_KITS §6 |
-| 6.2 | Palace Sentinel + Tide Keeper | BOSS_DESIGNS.md |
-| 6.3 | SC-16 choice UI + three endings | ENDING_DESIGN.md |
-| 6.4 | Ending environment variants | ENVIRONMENT_KITS §7 |
-| 6.5 | Credits sequence | CINEMATICS.md |
+| 6.1 | Dragon Palace Gate zone + SC-12 gate cinematic | ENVIRONMENT_KITS §6, CINEMATICS.md |
+| 6.2 | SC-11 flashback + SC-13 box revelation | STORYBOARD.md, CINEMATICS.md |
+| 6.3 | Palace Sentinel SC-14 + Tide Keeper SC-15 | BOSS_DESIGNS.md |
+| 6.4 | SC-16 choice UI + three endings | ENDING_DESIGN.md |
+| 6.5 | Ending environment variants + SC-17 cinematics | ENVIRONMENT_KITS §7, CINEMATICS.md |
+| 6.6 | Credits sequence | CINEMATICS.md |
+| 6.7 | `bash tools/run_e2e_playthrough.sh` — all 3 endings | AI_TESTING_SPEC.md |
 
 ---
 
@@ -143,11 +153,21 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 
 Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `docs/ART_AUTOMATION_PIPELINE.md`:
 
-- Urashima, Yuzu, Roku models (Meshy/Tripo/Rodin + Mixamo)
-- Hero set-pieces (torii, palace gate)
-- Automated stylized zone textures (ComfyUI/Material Maker + `palette_remap.py`)
-- ComfyUI/GameLab portraits (replace procedural silhouettes)
-- ACE-Step curated BGM (`docs/AUDIO_PRODUCTION_GUIDE.md`)
+| # | Task | Docs |
+|---|------|------|
+| 7.1 | Hero character models — Urashima, Yuzu, Roku + 5 enemies (Meshy/Tripo/Rodin + Mixamo) | CHARACTER_BIBLE.md |
+| 7.2 | Hero set-pieces — torii, `palace_gate_main` (SC-12) | ENVIRONMENT_KITS.md |
+| 7.3 | Automated stylized zone textures (ComfyUI/Material Maker + `palette_remap.py`) | ART_AUTOMATION_PIPELINE.md |
+| 7.4 | ComfyUI/GameLab portraits (replace procedural silhouettes) | ART_AUTOMATION_PIPELINE.md |
+| 7.5 | Curated BGM per act — ACE-Step (`bash tools/generate_ai_bgm.sh`) | AUDIO_PRODUCTION_GUIDE.md |
+| 7.6 | SFX + ambient beds per scene map | AUDIO_PRODUCTION_GUIDE.md |
+| 7.7 | **ElevenLabs voice casting** — replace `PLACEHOLDER_*` in `vo_prompts.json` (incl. `dialect_voices` for zh-Hant) | VO_HIT_LIST.md |
+| 7.8 | **Generate selective VO** — P0 listen pass → P1/P2; `en`/`ja`/`zh` + `zh-Hant` `cant`/`cmn` (`bash tools/generate_ai_vo.sh`) | VO_HIT_LIST.md, LOCALIZATION.md |
+| 7.9 | VO QA — `bash tools/run_audio_smoke_checks.sh` + `AUDIO_QA.md` jury gates | AUDIO_QA.md |
+| 7.10 | Cinematic hero assets — SC-00 opening, SC-12 gate reveal, SC-17 endings | CINEMATICS.md §12 |
+| 7.11 | `bash tools/check_asset_compliance.sh` passes on release branch | ASSET_COMPLIANCE.md |
+
+**VO clip budget:** 12 clips × 3 locales (`en`, `ja`, `zh`) + 12 × 2 zh-Hant dialects (`cant`, `cmn`) = **60 OGG files**. Runtime `VoiceLinePlayer` ships in Phase 3; clip files land here in M5.
 
 ---
 
@@ -158,8 +178,10 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 | 8.1 | GodotSteam + `tools/export_windows.sh` |
 | 8.2 | `bash tools/check_asset_compliance.sh` |
 | 8.3 | Graphics quality presets (Low/Med/High) |
-| 8.4 | Playtest script (`docs/PLAYTEST_SCRIPT.md`) |
-| 8.5 | Disable/remove GDAI MCP before export |
+| 8.4 | Steam achievements (`AchievementManager` + `game/data/achievements.json`) | ACHIEVEMENTS.md |
+| 8.5 | Steam store page + screenshots from M5 assets | steam/STORE_PAGE.md |
+| 8.6 | Playtest script (`docs/PLAYTEST_SCRIPT.md`) |
+| 8.7 | Disable/remove GDAI MCP before export |
 
 ---
 
@@ -184,13 +206,36 @@ bash tools/check_dev_environment.sh
 bash tools/run_playtest_smoke.sh
 bash tools/run_model_smoke_checks.sh      # when gate GLBs exist
 bash tools/run_visual_smoke_checks.sh     # when zone screenshots exist
-bash tools/run_audio_smoke_checks.sh      # when gate BGM exists
+bash tools/run_audio_smoke_checks.sh      # when gate BGM + VO clips exist
+bash tools/generate_ai_vo.sh --list       # VO plan (dry-run: add --dry-run via python3)
 bash tools/run_integration_tests.sh       # Phase 2+ gates
 bash tools/run_e2e_playthrough.sh         # Phase 6 gate (not SKIP)
 bash tools/check_asset_compliance.sh      # when assets exist
 ```
 
 **QA policy:** `docs/ACCEPTANCE_CRITERIA.md` · **On FAIL:** `tools/qa_emit_remediation.sh` per `docs/QA_REMEDIATION_LOOP.md`
+
+---
+
+## Coverage review (gaps closed in v1.2)
+
+This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DEV_WORKFLOW.md`. The following were **missing** from earlier versions and are now scheduled:
+
+| Gap | Where added |
+|-----|-------------|
+| `VoiceLinePlayer` runtime (paths + BGM duck) | Phase 3.2 |
+| VO clip **generation** (ElevenLabs batch) | Phase 7.7–7.9 |
+| `AudioManager` shell (procedural audio during greybox) | Phase 2.7 |
+| Settings menu (language + `vo_dialect` + volumes) | Phase 2.8 |
+| SC-00 prologue + `CinematicDirector` | Phase 3.7 |
+| Shop + inventory UI | Phase 3.5–3.6 |
+| Written `zh-Hant` translation pass | Phase 3.10 |
+| SC-08 / SC-11 / SC-12 / SC-13 story beats | Phases 5.3, 6.1–6.2 |
+| SFX/ambient production | Phase 7.6 |
+| Steam achievements + store assets | Phase 8.4–8.5 |
+| E2E three-endings gate | Phase 6.7 |
+
+**Still deferred (intentional):** full dialogue VO (12 selective clips only per `VO_HIT_LIST.md`); human L6 playtest until Phase 8 after L0–L5 pass.
 
 ---
 
