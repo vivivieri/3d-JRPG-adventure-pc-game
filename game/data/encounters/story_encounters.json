@@ -38,6 +38,8 @@
       "trigger": "DeepPoolEncounter",
       "enemies": ["tide_wraith", "tide_wraith"],
       "party": ["urashima"],
+      "requires_flags": ["water_puzzle_solved", "deep_pool_dialogue_done"],
+      "cinematic_hook": "sc08_deep_pool_vignette",
       "on_win": { "set_flags": ["deep_pool_seen"] }
     },
     {
@@ -58,6 +60,7 @@
       "enemies": ["tide_wraith", "tide_wraith"],
       "party": ["urashima", "yuzu", "roku"],
       "requires_flags": ["roku_combat_active", "yuzu_joined"],
+      "cinematic_hook": "sc12_gate_reveal",
       "on_win": { "set_flags": [] }
     },
     {

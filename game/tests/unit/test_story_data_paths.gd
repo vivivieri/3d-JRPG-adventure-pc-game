@@ -7,6 +7,7 @@ static func test_required_boot_paths_exist() -> String:
 	var required := [
 		"res://data/story/scenes.json",
 		"res://data/story/flags.json",
+		"res://data/story/cinematic_hooks.json",
 		"res://data/dialogue/chapter_01.json",
 	]
 	for path in required:

@@ -111,11 +111,14 @@
 | `tutorial_combat_done` | SC-05 | Hide combat prompts |
 | `caves_entered` | SC-06 | Q2 stage 2 |
 | `water_puzzle_solved` | SC-07 | Deep pool access |
-| `deep_pool_seen` | SC-08 | Lore / mood |
+| `deep_pool_vignette_seen` | sc08_deep_pool_vignette | Skip SC-08 vignette on replay |
+| `deep_pool_dialogue_done` | SC-08 dialogue | Gates `enc_sc08_deep_pool` |
+| `deep_pool_seen` | SC-08 encounter win | Lore / mood |
 | `shore_wraith_defeated` | SC-09 | Q2 complete; cave exit |
 | `yuzu_joined` | SC-10 | Yuzu in party |
 | `saw_palace_vision` | SC-11 | Q3 stage 2 |
-| `gate_reached` | SC-12 | Q3 complete; Q4 unlock |
+| `sc12_gate_reveal_seen` | sc12_gate_reveal | Skip SC-12 gate movie on replay |
+| `gate_reached` | SC-12 dialogue | Q3 complete; Q4 unlock |
 | `roku_in_party` | SC-04 or SC-12 | Roku combat active |
 | `knows_box_truth` | SC-13 | Q4 stage 1; choice context |
 | `mirror_choice` | SC-13 dialogue | Recorded; see ENDING_DESIGN.md |

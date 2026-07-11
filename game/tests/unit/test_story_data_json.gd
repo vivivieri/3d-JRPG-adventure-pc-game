@@ -27,6 +27,17 @@ static func test_scenes_json_parses() -> String:
 	return ""
 
 
+static func test_cinematic_hooks_json_parses() -> String:
+	var data = _parse_json_file("res://data/story/cinematic_hooks.json")
+	if data == null:
+		return "cinematic_hooks.json missing or invalid JSON"
+	if typeof(data) != TYPE_DICTIONARY:
+		return "cinematic_hooks.json root must be a Dictionary"
+	if not data.has("hooks"):
+		return "cinematic_hooks.json must contain 'hooks' key"
+	return ""
+
+
 static func test_flags_json_parses() -> String:
 	var data = _parse_json_file("res://data/story/flags.json")
 	if data == null:

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "description": "Cinematic beat hooks — vignettes and reveals before dialogue/encounters. See docs/CINEMATICS.md §7.",
+  "hooks": [
+    {
+      "id": "sc08_deep_pool_vignette",
+      "scene_id": "SC-08",
+      "zone": "tidal_caves",
+      "trigger": "DeepPoolEncounter",
+      "sequence_id": "sc08_deep_pool_vignette",
+      "duration_sec": 8,
+      "skip_after_sec": 3,
+      "skip_if_flag": "deep_pool_vignette_seen",
+      "sets_flags": ["deep_pool_vignette_seen"],
+      "requires_flags": {
+        "water_puzzle_solved": true
+      },
+      "then": [
+        { "type": "dialogue", "id": "SC-08" },
+        { "type": "encounter", "id": "enc_sc08_deep_pool" }
+      ],
+      "audio": {
+        "duck_bgm": 0.4,
+        "sfx": ["sfx_story_whisper_bed"]
+      },
+      "markers": []
+    },
+    {
+      "id": "sc12_gate_reveal",
+      "scene_id": "SC-12",
+      "zone": "dragon_palace_gate",
+      "trigger": "PalaceGateReveal",
+      "sequence_id": "sc12_gate_reveal",
+      "duration_sec": 15,
+      "skip_after_sec": 3,
+      "skip_if_flag": "sc12_gate_reveal_seen",
+      "skip_on_first_play": false,
+      "sets_flags": ["sc12_gate_reveal_seen"],
+      "requires_flags": {
+        "yuzu_joined": true
+      },
+      "requires_items": ["wraith_pearl"],
+      "then": [
+        { "type": "dialogue", "id": "SC-12" },
+        { "type": "encounter", "id": "enc_sc12_palace_wraiths" }
+      ],
+      "audio": {
+        "bgm": "bgm_palace",
+        "sfx": ["sfx_story_pearl_insert"]
+      },
+      "markers": [
+        "CameraMarker_sc12_wide",
+        "CameraMarker_sc12_tilt_mid",
+        "CameraMarker_sc12_gate_hero"
+      ]
+    }
+  ]
+}
