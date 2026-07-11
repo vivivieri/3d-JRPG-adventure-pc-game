@@ -60,7 +60,7 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 2. ComfyUI — locked workflow: stylized NPR tileable, muted coastal decay
 3. Export PNG → game/assets/textures/zones/<zone>/
 4. python3 tools/palette_remap.py --zone <zone> --input <path>   # enforce §1 hex
-5. python3 tools/register_asset.py + docs/LICENSES.md
+5. python3 tools/register_asset.py add --path <path> --license <id> --source <name> --author <name> --used-for <desc>  # see docs/LICENSES.md
 6. GodotPrompter — tune toon_base.gdshader if needed
 7. GDAI MCP — assign in zone .tscn, F5 verify
 8. bash tools/check_asset_compliance.sh

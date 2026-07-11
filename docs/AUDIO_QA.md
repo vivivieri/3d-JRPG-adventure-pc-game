@@ -110,7 +110,7 @@ Wired into `bash tools/run_playtest_smoke.sh`.
 ```
 1. bash tools/generate_ai_bgm.sh --track bgm_village --api  (or ACE-Step export)
 2. Loudness normalize toward −16 LUFS in DAW/ffmpeg if needed
-3. python3 tools/register_asset.py
+3. python3 tools/register_asset.py add --path <path> --license <id> --source <name> --author <name> --used-for <desc>
 4. python3 tools/check_audio_catalog.py --phase 1
 5. python3 tools/check_audio_technical.py --track bgm_village
 6. python3 tools/review_audio_vision.py --track bgm_village  (hero tracks)

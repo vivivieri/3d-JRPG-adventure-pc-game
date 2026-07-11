@@ -69,7 +69,7 @@ Generate ship-safe placeholders with project tools — register in manifest:
 | Hero 3D meshes | **Meshy/Tripo/Rodin** + Blender → GLB | Service ToS + register |
 | Scene placement | GodotPrompter shaders + **GDAI MCP** | ORIGINAL |
 
-After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_compliance.sh`
+After generation: `python3 tools/register_asset.py add --help` + `bash tools/check_asset_compliance.sh`
 
 **Default toolchain (always work together):**
 - **GodotPrompter** — plan, architect, generate GDScript & shaders
