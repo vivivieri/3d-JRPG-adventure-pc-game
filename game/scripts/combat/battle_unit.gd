@@ -48,7 +48,7 @@ static func from_party(char_id: String):
 	u.mag = stats.mag
 	u.res = stats.res
 	u.spd = stats.spd
-	u.skills = []
+	u.skills.clear()
 	for sid in ps.skills:
 		u.skills.append(str(sid))
 	u.limit_gauge = float(ps.get("limit_gauge", 0.0))
