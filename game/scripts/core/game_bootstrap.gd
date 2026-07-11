@@ -7,6 +7,7 @@ func _ready() -> void:
 	var required := [
 		"res://data/story/scenes.json",
 		"res://data/story/flags.json",
+		"res://data/story/cinematic_hooks.json",
 		"res://data/dialogue/chapter_01.json",
 	]
 	for path in required:

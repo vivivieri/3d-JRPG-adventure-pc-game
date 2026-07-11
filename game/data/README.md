@@ -9,6 +9,7 @@ game/data/
   story/
     scenes.json              # Master scene spine (SC-00 … SC-17c)
     flags.json               # Canonical flag registry
+    cinematic_hooks.json     # SC-08 vignette + SC-12 gate reveal hooks
   dialogue/
     chapter_01.json          # Dialogue by scene_id (en / ja / zh)
   quests/

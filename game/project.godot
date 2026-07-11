@@ -20,6 +20,7 @@ config/icon="res://assets/ui/icon.svg"
 [autoload]
 
 GameBootstrap="*res://scripts/core/game_bootstrap.gd"
+CinematicDirector="*res://scripts/story/cinematic_director.gd"
 GDAIMCPRuntime="*res://addons/gdai-mcp-plugin-godot/gdai_mcp_runtime.gd"
 GodotIQRuntime="*uid://d3fwd3vsbc27b"
 MCPScreenshot="*res://addons/godot_mcp/mcp_screenshot_service.gd"

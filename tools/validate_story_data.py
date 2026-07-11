@@ -29,6 +29,9 @@ def main() -> int:
     items = {i["id"] for i in load("items/items.json")["items"]}
     encounters = load("encounters/story_encounters.json")["encounters"]
     quests = load("quests/main_quests.json")["quests"]
+    hooks = load("story/cinematic_hooks.json").get("hooks", [])
+    hook_ids = {h["id"] for h in hooks}
+    enc_ids = {e["id"] for e in encounters}
 
     # Dialogue scenes referenced in story spine
     for s in scenes:
@@ -49,6 +52,51 @@ def main() -> int:
                         errors.append(f"Unknown flag in scenes.json: {part}")
             elif base not in flags:
                 errors.append(f"Unknown flag in scenes.json: {fl}")
+        hook = s.get("cinematic_hook")
+        if hook and hook not in hook_ids:
+            errors.append(f"scenes.json unknown cinematic_hook: {hook} ({s['scene_id']})")
+        req = s.get("requires_flags") or {}
+        if isinstance(req, dict):
+            for fk in req.keys():
+                if fk not in flags:
+                    errors.append(f"scenes.json requires unknown flag: {fk} ({s['scene_id']})")
+
+    # Dialogue on_complete flags + optional line requires_flags
+    for block in dialogue["scenes"]:
+        for fl in block.get("on_complete", {}).get("set_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"dialogue sets unknown flag: {fl} ({block['scene_id']})")
+        for line in block.get("lines", []) or []:
+            req = line.get("requires_flags") or {}
+            if isinstance(req, dict):
+                for fk in req.keys():
+                    if fk not in flags:
+                        errors.append(f"dialogue line requires unknown flag: {fk} ({block['scene_id']})")
+
+    # Cinematic hooks
+    for hook in hooks:
+        hid = hook.get("id", "?")
+        if hook.get("scene_id") not in scene_ids:
+            errors.append(f"cinematic_hooks unknown scene_id: {hook.get('scene_id')} ({hid})")
+        for fl in hook.get("sets_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"cinematic_hooks sets unknown flag: {fl} ({hid})")
+        skip = hook.get("skip_if_flag")
+        if skip and skip not in flags:
+            errors.append(f"cinematic_hooks skip_if_flag unknown: {skip} ({hid})")
+        req = hook.get("requires_flags") or {}
+        if isinstance(req, dict):
+            for fk in req.keys():
+                if fk not in flags:
+                    errors.append(f"cinematic_hooks requires unknown flag: {fk} ({hid})")
+        for item in hook.get("requires_items", []) or []:
+            if item not in items:
+                errors.append(f"cinematic_hooks requires unknown item: {item} ({hid})")
+        for step in hook.get("then", []) or []:
+            if step.get("type") == "dialogue" and step.get("id") not in dialogue_ids:
+                errors.append(f"cinematic_hooks then dialogue missing: {step.get('id')} ({hid})")
+            if step.get("type") == "encounter" and step.get("id") not in enc_ids:
+                errors.append(f"cinematic_hooks then encounter missing: {step.get('id')} ({hid})")
 
     # Encounters reference valid scenes and enemies
     enemy_ids = {e["id"] for e in load("enemies/enemies.json")["enemies"]}
@@ -61,6 +109,12 @@ def main() -> int:
         for item in enc.get("on_win", {}).get("grant_items", []) or []:
             if item not in items:
                 errors.append(f"Encounter {enc['id']} grants unknown item: {item}")
+        hook = enc.get("cinematic_hook")
+        if hook and hook not in hook_ids:
+            errors.append(f"Encounter {enc['id']} unknown cinematic_hook: {hook}")
+        for fl in enc.get("requires_flags", []) or []:
+            if fl not in flags:
+                errors.append(f"Encounter {enc['id']} requires unknown flag: {fl}")
 
     # Quest count
     if len(quests) != 5:
@@ -78,7 +132,7 @@ def main() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"OK — {len(scene_ids)} scenes, {len(dialogue_ids)} dialogue blocks, {len(quests)} quests, {len(encounters)} encounters")
+    print(f"OK — {len(scene_ids)} scenes, {len(dialogue_ids)} dialogue blocks, {len(quests)} quests, {len(encounters)} encounters, {len(hooks)} cinematic hooks")
     return 0
 
 

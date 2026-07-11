@@ -270,7 +270,7 @@
       "on_complete": {
         "set_flags": [
           "met_roku",
-          "caves_unlocked"
+          "cave_entrance_unlocked"
         ],
         "grant_key_items": [
           "cave_map"
@@ -355,6 +355,19 @@
             "en": "I know you. I left you all behind.",
             "ja": "わかっている。俺は皆を置いていった。",
             "zh": "我认识你们。我把你们都抛下了。"
+          },
+          "emotion": "guilt"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_guilty",
+          "requires_flags": {
+            "inspected_sandal": true
+          },
+          "text": {
+            "en": "That sandal in the village puddle... you're still here, under the water.",
+            "ja": "村の水たまりのあの草履……お前たちはまだここにいる、水の下に。",
+            "zh": "村里水洼中的那只草鞋……你们还在这里，在水下。"
           },
           "emotion": "guilt"
         }
