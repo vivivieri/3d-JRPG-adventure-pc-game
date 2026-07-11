@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Write .cursor/mcp.json for all installed MCP servers (GDAI + Godotiq + Godot MCP Pro).
+# Write .cursor/mcp.json for required Godot MCP servers + GameLab when API key is set.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -48,6 +48,14 @@ if os.path.isfile(mcp_pro):
         "command": "node",
         "args": [mcp_pro, mcp_pro_mode],
         "env": {"GODOT_MCP_PORT": os.environ.get("GODOT_MCP_PORT", "6505")},
+    }
+
+gamelab_key = os.environ.get("GAMELAB_API_KEY", "").strip()
+if gamelab_key:
+    servers["gamelab-mcp"] = {
+        "type": "sse",
+        "url": "http://api.gamelabstudio.co:8765/sse",
+        "headers": {"X-API-Key": gamelab_key},
     }
 
 with open(mcp_path, "w", encoding="utf-8") as f:

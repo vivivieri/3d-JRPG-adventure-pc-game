@@ -106,22 +106,30 @@ if ! timeout 8 uv run "$SERVER_PY" </dev/null >/dev/null 2>&1; then
   log "WARN: stdio bridge slow to start (uv deps); HTTP bridge is up"
 fi
 
-# 3) Optional: Godotiq + Godot MCP Pro — see docs/MCP_STACK.md
+# Godotiq + Godot MCP Pro — required — see docs/MCP_STACK.md
+STACK_OK=1
 if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
   log "Godotiq addon present"
   if ss -tln 2>/dev/null | grep -q ':6007 ' || netstat -tln 2>/dev/null | grep -q ':6007 '; then
     log "Godotiq WebSocket OK on :6007"
   else
-    log "WARN: Godotiq :6007 not listening — enable GodotIQ plugin in Project → Plugins"
+    log "FAIL: Godotiq :6007 not listening — enable GodotIQ plugin in Project → Plugins"
+    STACK_OK=0
   fi
 else
-  log "WARN: Godotiq not installed — bash tools/install_godotiq.sh (recommended)"
+  log "FAIL: Godotiq not installed — bash tools/install_godotiq.sh"
+  STACK_OK=0
 fi
 
 if [[ -f "${ROOT}/tools/godot-mcp-pro-server/build/index.js" ]]; then
   log "Godot MCP Pro server built"
 else
-  log "WARN: Godot MCP Pro not installed — bash tools/install_godot_mcp_pro.sh (recommended for L4/L5)"
+  log "FAIL: Godot MCP Pro not installed — bash tools/install_godot_mcp_pro.sh"
+  STACK_OK=0
+fi
+
+if [[ $STACK_OK -eq 0 ]]; then
+  fail "Required MCP stack incomplete (Godotiq and/or MCP Pro). See docs/MCP_STACK.md"
 fi
 
 echo ""
@@ -139,7 +147,8 @@ else
 fi
 echo "  MCP cfg: ${MCP_JSON}"
 echo ""
-echo "NEXT: Register in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro (as installed)"
+echo "NEXT: Register in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp, notion"
+echo "      Offline required: Blender + AI Render, Suno/Udio (audio prototypes)"
 echo "      Docs: docs/MCP_STACK.md"
 echo ""
 exit 0

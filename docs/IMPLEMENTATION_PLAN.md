@@ -3,7 +3,7 @@
 **Version:** 1.1 (Fresh rebuild)  
 **Branch:** `main` (clean baseline)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
-**Workflow:** GodotPrompter + MCP stack — see `docs/MCP_STACK.md`, `docs/MCP_EXTENDED_STACK.md`.
+**Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.
 
 Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
 

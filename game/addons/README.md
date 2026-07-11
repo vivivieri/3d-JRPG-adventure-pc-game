@@ -2,8 +2,7 @@
 
 Plugins in this folder extend Godot. **Only ship-safe addons** go in release builds.
 
-See **`docs/MCP_STACK.md`** for how GDAI + Godotiq + Godot MCP Pro work together.  
-**Extended art/design tools:** `docs/MCP_EXTENDED_STACK.md` (GameLab, Notion, Blender).  
+See **`docs/MCP_STACK.md`** for the full required toolchain (GDAI + Godotiq + MCP Pro + GameLab + Notion + Blender).  
 **Install steps:** `docs/PLUGIN_INSTALL_GUIDE.md`
 
 ## GDAI MCP (dev — build primary)

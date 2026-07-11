@@ -67,14 +67,16 @@ if [[ -d game/addons/godotiq ]]; then
   echo "[OK]   Godotiq addon present"
   OK=$((OK + 1))
 else
-  echo "[WARN] Godotiq not installed — bash tools/install_godotiq.sh"
+  echo "[FAIL] Godotiq not installed — bash tools/install_godotiq.sh"
+  ERR=$((ERR + 1))
 fi
 
 if [[ -f tools/godot-mcp-pro-server/build/index.js ]]; then
   echo "[OK]   Godot MCP Pro server built"
   OK=$((OK + 1))
 else
-  echo "[WARN] Godot MCP Pro not installed — optional for L4/L5 testing"
+  echo "[FAIL] Godot MCP Pro not installed — bash tools/install_godot_mcp_pro.sh"
+  ERR=$((ERR + 1))
 fi
 
 if curl -sf "http://127.0.0.1:${GDAI_MCP_SERVER_PORT:-3571}/tools" >/dev/null 2>&1; then
@@ -88,9 +90,21 @@ fi
 if [[ -f .cursor/mcp.json ]]; then
   echo "[OK]   .cursor/mcp.json present"
   OK=$((OK + 1))
+  if grep -q '"gamelab-mcp"' .cursor/mcp.json 2>/dev/null; then
+    echo "[OK]   gamelab-mcp in .cursor/mcp.json"
+    OK=$((OK + 1))
+  else
+    echo "[FAIL] gamelab-mcp missing from .cursor/mcp.json — see docs/MCP_STACK.md"
+    ERR=$((ERR + 1))
+  fi
 else
-  echo "[WARN] .cursor/mcp.json missing — run: bash tools/ensure_gdai_mcp.sh"
+  echo "[FAIL] .cursor/mcp.json missing — run: bash tools/ensure_mcp_stack.sh"
+  ERR=$((ERR + 1))
 fi
+
+echo
+echo "Note: notion MCP must be registered in Cursor Integrations (not in mcp.json)."
+echo "      Blender + Suno/Udio are required offline tools — verify manually."
 
 echo
 echo "Passed: $OK | Failed: $ERR"

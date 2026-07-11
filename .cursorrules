@@ -14,10 +14,10 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 | **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
 | **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
 | **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
-| **GameLab Studio MCP** | `gamelab-mcp` | **Art generate** (optional) — tileable textures, UI sheets, spritesheets |
-| **Notion MCP** | `notion` | **Design context** (optional) — formulas, lore index, balancing tables |
+| **GameLab Studio MCP** | `gamelab-mcp` | **Art generate** — tileable textures, UI sheets, spritesheets |
+| **Notion MCP** | `notion` | **Design context** — formulas, lore index, balancing tables |
 
-Core stack: `docs/MCP_STACK.md` — extended art/design roles: `docs/MCP_EXTENDED_STACK.md`
+Full toolchain: `docs/MCP_STACK.md` (all tools required)
 
 ### Role rules (avoid MCP conflicts)
 
@@ -40,14 +40,14 @@ bash tools/ensure_mcp_stack.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list required servers (`godot-mcp` minimum; `godotiq` + `godot-mcp-pro` recommended) → **STOP and notify the user**. See `docs/MCP_STACK.md`.
+2. If **Cursor MCP** does not list **all** required servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, `notion`) → **STOP and notify the user**. See `docs/MCP_STACK.md`.
 3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
 
 ### Notify the user when unavailable
 
 Always report clearly if any of these are missing:
 
-- `godot-mcp` not in Cursor MCP server list
+- `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, or `notion` not in Cursor MCP server list
 - GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
 - Godot Editor not running
 - GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
@@ -60,9 +60,12 @@ Generate ship-safe placeholders with project tools — register in manifest:
 
 | Asset type | Tool | License |
 |------------|------|---------|
-| BGM / SFX | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
+| BGM / SFX placeholder | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
+| BGM zone prototype | Suno / Udio export → register in manifest | Per service ToS |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
-| 3D meshes / zone art | GodotPrompter shaders + **GDAI MCP** scene build | ORIGINAL |
+| Zone textures / UI | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
+| Hero 3D meshes | **Blender + AI Render** → GLB import | ORIGINAL / documented |
+| Scene placement | GodotPrompter shaders + **GDAI MCP** | ORIGINAL |
 
 After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_compliance.sh`
 
@@ -84,7 +87,7 @@ After generation: `python3 tools/register_asset.py` + `bash tools/check_asset_co
 
 ## 1. Roles & responsibilities (R&R) — GodotPrompter + MCP stack
 
-Core tools are **complementary, not alternatives**. Use the full core stack in every normal task unless a branch doc explicitly says otherwise. Optional extended tools (GameLab, Notion, Blender offline) supplement art and design context — see `docs/MCP_EXTENDED_STACK.md`.
+Core tools are **complementary, not alternatives**. Use the **full** toolchain in every normal task. All layers are required — see `docs/MCP_STACK.md`.
 
 ### Tool A: GodotPrompter — *Architect & code generator*
 | | |
@@ -120,7 +123,7 @@ Core tools are **complementary, not alternatives**. Use the full core stack in e
 | **When to use** | Phase gates, combat/menu E2E, regression after narrative changes |
 | **Does NOT** | Build or edit scenes (GDAI only) |
 
-### Tool E: GameLab Studio MCP — *Art generate* (optional)
+### Tool E: GameLab Studio MCP — *Art generate*
 | | |
 |---|---|
 | **Role** | Tileable textures, UI frames, sprite/VFX sheets via MCP generation |
@@ -129,7 +132,7 @@ Core tools are **complementary, not alternatives**. Use the full core stack in e
 | **Does NOT** | Place nodes, assign materials, or edit `.tscn` — hand off to GDAI MCP |
 | **Prerequisite** | `gamelab-mcp` registered in Cursor; palette from `docs/ART_DIRECTION.md` |
 
-### Tool F: Notion MCP — *Design context* (optional)
+### Tool F: Notion MCP — *Design context*
 | | |
 |---|---|
 | **Role** | Agent-readable index for stat formulas, skill curves, flag glossary, tone guides |
@@ -137,12 +140,19 @@ Core tools are **complementary, not alternatives**. Use the full core stack in e
 | **When to use** | Phase 2–3 before editing `game/data/*.json` or combat GDScript |
 | **Does NOT** | Replace `game/data/` or `docs/` as source of truth |
 
-### Offline: Blender + AI Render — *3D hero pipeline* (optional, not MCP)
+### Tool G: Blender + AI Render — *3D hero pipeline* (offline, not MCP)
 | | |
 |---|---|
 | **Role** | Hand-painted albedo on low-poly Japanese coastal meshes before Godot import |
 | **When to use** | Hero set-pieces (torii, lacquer box, palace trim) per `CHARACTER_BIBLE.md` |
 | **Handoff** | Export GLB → Godot import → GodotPrompter shader → GDAI MCP placement |
+
+### Tool H: Suno / Udio — *Audio prototype*
+| | |
+|---|---|
+| **Role** | Zone BGM loops during gameplay iteration (until authored tracks) |
+| **When to use** | Every zone pass; pair with `generate_game_audio.py` for SFX placeholders |
+| **Ship rule** | Replace before release — `docs/AUDIO_PRODUCTION_GUIDE.md` |
 
 ### Rejected for v1 (do not adopt)
 - **Summer Engine** — replaces Godot editor; breaks GDAI stack
@@ -184,9 +194,9 @@ Core tools are **complementary, not alternatives**. Use the full core stack in e
 | Combat balance pass | Query Notion for formulas; update `skills.json` + GDScript | F5 combat scene via GDAI after data change |
 | Hero prop (torii, box) | Blender offline → GLB import | Place mesh, assign NPR material, tune emission |
 
-**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + GDAI HTTP → Cursor MCP connected (`godot-mcp` minimum) → then plan in GodotPrompter.
+**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + all bridges → Cursor MCP connected (all five servers) → then plan in GodotPrompter.
 
-**Extended stack:** `docs/MCP_EXTENDED_STACK.md`
+**Full toolchain:** `docs/MCP_STACK.md`
 
 ---
 

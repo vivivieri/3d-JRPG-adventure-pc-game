@@ -5,22 +5,27 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  
-**Workflow:** **GodotPrompter + MCP stack** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/MCP_EXTENDED_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
+**Workflow:** **GodotPrompter + full MCP toolchain** — see `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/AI_DEV_WORKFLOW.md`
 
-| MCP server | Role |
-|------------|------|
-| `godot-mcp` (GDAI) | **Build** scenes — required |
-| `godotiq` | **Analyze** signals/debug — recommended |
-| `godot-mcp-pro` | **Test** scenarios/asserts — recommended for L4/L5 |
+| Tool / MCP server | Role |
+|-------------------|------|
+| GodotPrompter | Plan, GDScript, shaders, tests |
+| `godot-mcp` (GDAI) | **Build** scenes |
+| `godotiq` | **Analyze** signals/debug |
+| `godot-mcp-pro` | **Test** scenarios/asserts (L4/L5) |
+| `gamelab-mcp` | **Art generate** — textures, UI sheets |
+| `notion` | **Design context** — formulas, lore, balance |
+| Blender + AI Render | **3D hero pipeline** (offline) |
+| `generate_game_audio.py` + Suno/Udio | **Audio** placeholders + zone BGM prototypes |
 
-**Optional extended tools** (art/design — not required for boot): GameLab MCP (`gamelab-mcp`), Notion MCP, Blender offline pipeline. See `docs/MCP_EXTENDED_STACK.md`.
+**All tools are required.** If any are missing → STOP and notify user. See `docs/MCP_STACK.md`.
 
 ### Environment bootstrap
 
 On every cloud agent start:
 
 ```bash
-bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, optional MCP Pro
+bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, MCP Pro
 bash tools/ensure_mcp_stack.sh       # Editor + MCP bridges — REQUIRED
 bash tools/check_dev_environment.sh
 ```
@@ -33,14 +38,17 @@ Installed components:
 - **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
 - **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
-### MCP workflow (mandatory)
+### MCP workflow (mandatory — all tools)
 
 ```
 0. bash tools/ensure_mcp_stack.sh
 1. GodotPrompter — plan GDScript, shaders, tests
-2. godot-mcp (GDAI) — build scenes, materials, F5 verify
-3. godotiq — trace_flow / signal_map when debugging systems
-4. godot-mcp-pro — run_test_scenario for L4/L5 playthrough asserts
+2. notion — design context before data/combat edits
+3. gamelab-mcp — generate textures/UI → game/assets/
+4. godot-mcp (GDAI) — build scenes, materials, F5 verify
+5. godotiq — trace_flow / signal_map when debugging systems
+6. godot-mcp-pro — run_test_scenario for L4/L5 playthrough asserts
+7. Blender offline — hero GLB meshes when 3D art task requires it
 ```
 
 **Scene edits:** GDAI only. Do not hand-edit `.tscn`.
@@ -52,6 +60,9 @@ Installed components:
 | GDAI | `curl -sf http://127.0.0.1:3571/tools`; plugin + `godot-mcp` in Cursor |
 | Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
 | MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
+| GameLab | `gamelab-mcp` in Cursor MCP; API key in Secrets |
+| Notion | `notion` in Cursor Integrations |
+| Blender | Installed locally for hero 3D pipeline |
 
 Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/MCP_STACK.md`.
 
