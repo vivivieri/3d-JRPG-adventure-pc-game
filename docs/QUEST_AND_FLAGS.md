@@ -11,9 +11,11 @@
 |---|----------|-------|-----|---------------|
 | 1 | `the_return` | The Return | I | `met_roku` |
 | 2 | `echoes_at_torii` | Echoes at the Torii | I–II | `shore_wraith_defeated` |
-| 3 | `depths_of_guilt` | Depths of Guilt | II | `yuzu_joined` |
+| 3 | `depths_of_guilt` | Depths of Guilt | II | `gate_reached` |
 | 4 | `palace_gate` | The Palace Gate | II–III | `sentinel_defeated` |
-| 5 | `the_tide_answer` | The Tide's Answer | III | `ending_chosen` |
+| 5 | `the_tide_answer` | The Tide's Answer | III | `game_completed` |
+
+*("Complete when" = the final stage's completion flag in `main_quests.json`, which is authoritative.)*
 
 ---
 
@@ -119,7 +121,7 @@
 | `saw_palace_vision` | SC-11 | Q3 stage 2 |
 | `sc12_gate_reveal_seen` | sc12_gate_reveal | Skip SC-12 gate movie on replay |
 | `gate_reached` | SC-12 dialogue | Q3 complete; Q4 unlock |
-| `roku_in_party` | SC-04 or SC-12 | Roku combat active |
+| `roku_combat_active` | SC-12 | Roku playable in combat |
 | `knows_box_truth` | SC-13 | Q4 stage 1; choice context |
 | `mirror_choice` | SC-13 dialogue | Recorded; see ENDING_DESIGN.md |
 | `sentinel_defeated` | SC-14 | Q4 complete |
@@ -148,12 +150,12 @@
 | Character | Join flag | Combat active | Field visible | Scene |
 |-----------|-----------|---------------|---------------|-------|
 | Urashima | always | SC-01+ | always | — |
-| Roku | `roku_in_party` | SC-05+ (NPC advise only) → **SC-12+** full combat | SC-04 shack; SC-12+ follower | SC-04 meet; SC-12 party if missed |
+| Roku | `met_roku` / `roku_combat_active` | SC-05+ (NPC advise only) → **SC-12+** full combat | SC-04 shack; SC-12+ follower | SC-04 meet; SC-12 party if missed |
 | Yuzu | `yuzu_joined` | SC-10+ | SC-10+ follower | SC-10 |
 
 **Design rule:** Roku is **not** playable in SC-05 tutorial. He provides bark lines only. Full 3-party combat from SC-12 (or SC-10 if Roku joined early — he stays out of combat until gate).
 
-**Clarification:** `roku_in_party` = narrative met. `roku_combat_active` = set at SC-12 when entering palace gate dungeon.
+**Clarification:** `met_roku` = narrative met (SC-04). `roku_combat_active` = set at SC-12 when entering the palace gate dungeon. *(There is no `roku_in_party` flag — use these two canonical flags from `flags.json`.)*
 
 ---
 
@@ -166,9 +168,9 @@
 
 ---
 
-## 7. Implementation JSON (target)
+## 7. Implementation JSON (status)
 
-Extend `game/data/quests/main_quests.json` to 5 quests matching this doc. Add `depths_of_guilt` and `the_tide_answer`; split stages per tables above.
+`game/data/quests/main_quests.json` already contains all **5** quests (`the_return`, `echoes_at_torii`, `depths_of_guilt`, `palace_gate`, `the_tide_answer`) with the stages above. The JSON is canonical — keep these tables in sync with it, not the other way around.
 
 ---
 

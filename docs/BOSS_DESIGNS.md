@@ -4,6 +4,8 @@
 **Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
 **Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/CHARACTER_BIBLE.md` §6 (3D specs)
 
+> **Source of truth:** `game/data/enemies/enemies.json` is authoritative for runtime stats (HP/ATK/DEF/MAG/RES/SPD), rewards, and AI weights. The stat blocks below have been synced to it. The **named turn patterns** (e.g. "Drowned Grasp", "Oath of Stillness", "Maelstrom") are *design intent*: the current data schema only supports `weighted` and `phase` skill tables, so these scripted sequences, turn counters, conditional triggers, and summon actions are **not yet representable in data**. See the "AI schema gap" note in the review PR — the schema must be extended (or these patterns downgraded) before the fights match this doc.
+
 ---
 
 ## 1. Global boss rules
@@ -51,11 +53,12 @@
 
 | Stat | Value |
 |------|-------|
-| HP | 420 |
-| ATK | 14 |
-| DEF | 8 |
-| SPD | 6 |
-| MP | 0 |
+| HP | 320 |
+| ATK | 13 |
+| DEF | 10 |
+| MAG | 16 |
+| RES | 12 |
+| SPD | 10 |
 
 ### Phase 1 — Accusation (100% → 50% HP)
 
@@ -70,7 +73,7 @@
 
 **Player teach moment:** Use Defend on Slam turn; Yuzu heal on Grasp turn if available (joined after fight — solo Urashima for this fight in v1 data; if Yuzu pre-join, adjust HP up 15%).
 
-**Note:** Current story order has Yuzu join **after** SC-09. Boss is **Urashima solo** — tune HP to ~320 for solo.
+**Note:** Current story order has Yuzu join **after** SC-09. Boss is **Urashima solo** — `enemies.json` HP is 320 for the solo fight.
 
 ### Phase 2 — Collective (50% → 0% HP)
 
@@ -94,9 +97,9 @@
 
 | Drop | Rate |
 |------|------|
-| XP | 120 (solo) / 150 (if party) |
+| XP | 120 |
 | Shell coins | 45 |
-| Item | Antidote ×1 (100% first kill) |
+| Item | `wraith_pearl` (story key, 100%) |
 
 ### Audio / VFX
 
@@ -124,11 +127,12 @@
 
 | Stat | Value |
 |------|-------|
-| HP | 380 |
+| HP | 250 |
 | ATK | 16 |
 | DEF | 14 |
+| MAG | 6 |
+| RES | 10 |
 | SPD | 8 |
-| MP | 20 |
 
 ### Phase 1 — Guardian (100% → 0% HP, single phase)
 
@@ -141,7 +145,7 @@
 | Cycle B | Palace Reprisal | Skull | Single 160% ATK if target healed last turn |
 | Every 3rd | Barrier Pulse | Shield | Self Regen 5% HP |
 
-**Spirit weakness:** Yuzu Purify / Holy Light deals **150%** damage. UI hint after first Barrier Pulse: *"Spirit arts pierce the lacquer."*
+**Spirit weakness:** Yuzu Purify / Spirit Light (`spirit_light`) deals **150%** damage (`enemies.json` `spirit_weakness: 1.5`). UI hint after first Barrier Pulse: *"Spirit arts pierce the lacquer."*
 
 ### Hard mode deltas
 
@@ -155,7 +159,7 @@
 |------|------|
 | XP | 100 |
 | Shell coins | 60 |
-| Item | Skill scroll `spirit_veil` (one-time 100%) |
+| Item | `palace_edge` (story key, 100%) + `palace_fragment` (50%) |
 
 ---
 
@@ -179,11 +183,12 @@
 
 | Stat | Value |
 |------|-------|
-| HP | 900 |
-| ATK | 18 |
-| DEF | 10 |
-| SPD | 9 |
-| MP | 50 |
+| HP | 580 |
+| ATK | 15 |
+| DEF | 12 |
+| MAG | 20 |
+| RES | 14 |
+| SPD | 11 |
 
 ### Phase 1 — Calm (100% → 66% HP)
 
@@ -197,7 +202,7 @@
 
 **Pattern:** Fingers → Pull → Fingers → Borrowed (loop)
 
-### Phase 2 — Surge (66% → 25% HP)
+### Phase 2 — Surge (66% → 33% HP)
 
 **Trigger:** Banner "Then let the sea decide!"  
 **Camera:** Slow orbit during phase (see `CINEMATICS.md`)
@@ -208,7 +213,7 @@
 | New | Maelstrom | Waves | All 120% ATK; Def Down 1 turn |
 | Pattern | Maelstrom every 3rd turn; Borrowed Moment → Pull between |
 
-### Phase 3 — Ebb (25% → 10% HP)
+### Phase 3 — Ebb (33% → 10% HP)
 
 **Trigger:** Banner "Even mercy... tires."
 
@@ -229,7 +234,7 @@
 
 **After choice:** Boss uses final skill `Last Mercy` (cosmetic 1 turn) → scripted defeat → ending scene.
 
-**Technical:** Set flag `final_choice_made`; do not allow attack input during prompt.
+**Technical:** At the 10% HP threshold, `enemies.json` sets `triggers_choice: true` (announcement "Choose."). The runtime must set the canonical flag **`tide_keeper_phase3`** (defined in `flags.json`, `used_by: choice_gate`) and open the SC-16 choice overlay; do not allow attack input during the prompt. Only after the player confirms a choice (`ending_chosen`) and the scripted resolution plays should `tide_keeper_defeated` be set. *(Note: there is no `final_choice_made` flag — the earlier name was removed. See review PR: the choice must open mid-fight at 10% HP, not on encounter `on_win`.)*
 
 ### Hard mode deltas
 
@@ -253,10 +258,10 @@
 **Storyboard:** SC-05  
 **Not a boss** but combat template.
 
-| Stat | HP 40 | ATK 6 | DEF 4 | SPD 4 |
-|------|-------|-------|-------|-------|
-| Skills | Pinch (100% ATK) only |
-| AI | Attack lowest HP |
+| Stat | HP 40 | ATK 7 | DEF 5 | MAG 4 | RES 4 | SPD 6 |
+|------|-------|-------|-------|-------|-------|-------|
+| Skills | `claw_snap` (ATK ×1.0); `shell_harden` (Def Up, below 50% HP) |
+| AI | Weighted (claw_snap 80 / shell_harden 20) |
 | Tutorial | Force Attack → Skill → Defend prompts |
 
 Guaranteed win; no escape needed.
@@ -267,10 +272,10 @@ Guaranteed win; no escape needed.
 
 ### Tide Wraith (`tide_wraith`)
 
-| HP 70 | ATK 10 | DEF 3 | SPD 9 |
-|-------|--------|-------|-------|
-| Skill | Drown Touch — 90% ATK + Poison 2 turns |
-| AI | Target lowest HP; 30% double attack if alone |
+| HP 50 | ATK 6 | DEF 4 | MAG 10 | RES 6 | SPD 9 |
+|-------|-------|-------|--------|-------|-------|
+| Skill | `drown_touch` — MAG ×1.1 water + 40% Poison 3 turns |
+| AI | Weighted (drown_touch 100) |
 
 ### Salt Crab (`salt_crab`) — field
 

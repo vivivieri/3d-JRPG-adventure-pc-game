@@ -18,7 +18,7 @@
 | Lost time target | Player not lost >2 min without hint (`WORLD_MAP_AND_FLOW.md` §8) |
 | Save points | Village well, palace gate exterior |
 | Autosave | Zone transition, quest stage, pre-boss |
-| Greybox | Kenney/primitives Phase 1–6 only — replace M5 |
+| Greybox | Godot primitive meshes only, editor/dev builds Phase 1–6 — replaced by M5 art; never shipped. *(`.cursorrules` forbids Kenney packs; if licensed Kenney greybox is ever wanted in-editor it needs an explicit user override — see review PR "Kenney policy" note.)* |
 
 ### Standard node names (all zones)
 
@@ -136,7 +136,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 ## 4. Zone: `tidal_caves` (SC-06–11)
 
 **Scene:** `res://scenes/world/tidal_caves.tscn`  
-**Act:** II · **BGM:** `bgm_caves` · **Fog:** none (interior)
+**Act:** II · **BGM:** `bgm_caves` · **Fog:** distance fog per `RENDERING_GUIDE.md` §6 (density 0.028); **no volumetric fog** (interior)
 
 ### Blockout
 

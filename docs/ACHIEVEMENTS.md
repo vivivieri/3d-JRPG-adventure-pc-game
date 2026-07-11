@@ -3,7 +3,7 @@
 **Version:** 1.0 (Pre-build)  
 **Cross-refs:** `docs/ENDING_DESIGN.md`, `docs/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`
 
-**Total:** 12 achievements (easy distribution for short game)
+**Total:** 13 achievements (easy distribution for short game)
 
 ---
 
@@ -54,4 +54,4 @@
 
 - [ ] No achievement fires twice
 - [ ] Offline: queue unlock when Steam connects
-- [ ] Names localized in Steam backend (en/ja/zh)
+- [ ] Names localized in Steam backend (en/ja/zh/zh-Hant)

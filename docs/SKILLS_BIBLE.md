@@ -3,8 +3,10 @@
 **Version:** 1.0 (Pre-build)  
 **Cross-refs:** `docs/COMBAT_SYSTEMS.md`, `game/data/skills/skills.json`, `game/data/characters/party.json`
 
-**Player skills:** 15 total (5 per character)  
+**Player skills:** 14 unique IDs across 15 character slots (`strike` is shared by Urashima & Roku)  
 **Enemy skills:** 6 (documented in `BOSS_DESIGNS.md` / `enemies.json`)
+
+> **Source of truth:** `game/data/skills/skills.json` is authoritative for MP cost, target, power, and effects. The tables below mirror it — if they ever diverge, the JSON wins and this doc must be resynced.
 
 ---
 
@@ -28,9 +30,9 @@
 |----|------|-----|--------|-------|---------|--------|
 | `purify` | Purify | 5 | 1 enemy | MAG ×1.2 spirit | — | Join |
 | `spirit_light` | Spirit Light | 7 | 1 ally | Heal 60 | — | Join |
-| `sacred_mend` | Sacred Mend | 16 | All allies | Heal 40 | Cure Def Down | Lv 4 |
-| `torii_ward` | Torii Ward | 10 | All allies | — | Regen 3t | Lv 8 |
-| `last_prayer` | Last Prayer | 0 | All allies | Heal 50% max HP | Cure all status | Limit |
+| `sacred_mend` | Sacred Mend | 16 | All allies | Heal 40 | — | Lv 4 |
+| `torii_ward` | Torii Ward | 12 | All allies | — | Regen 3t (+8), Def Up +2 3t | Lv 8 |
+| `last_prayer` | Last Prayer | 0 | All allies | Full heal (999) | Cleanse all status | Limit |
 
 **Role:** Healer + Sentinel counter (Spirit damage).
 
@@ -42,9 +44,9 @@
 |----|------|-----|--------|-------|---------|--------|
 | `strike` | Strike | 0 | 1 enemy | ATK ×1.0 | — | Join |
 | `shell_guard` | Shell Guard | 4 | Self | — | Def Up +6, 2t | Join |
-| `harpoon_drive` | Harpoon Drive | 8 | 1 enemy | ATK ×1.5 phys | Def Down -2, 2t | Lv 3 |
-| `tide_taunt` | Tide Taunt | 6 | 1 enemy | — | Force target Roku 2t | Lv 7 |
-| `depth_charge` | Depth Charge | 0 | 1 enemy | ATK ×2.8 phys | Ignore 50% DEF | Limit |
+| `harpoon_drive` | Harpoon Drive | 8 | 1 enemy | ATK ×1.5 phys | Ignore 50% DEF (pierce) | Lv 3 |
+| `tide_taunt` | Tide Taunt | 6 | Self | — | Taunt 2t + Def Up +3, 2t | Lv 7 |
+| `depth_charge` | Depth Charge | 0 | All enemies | ATK ×2.2 phys | Def Down -3, 2t (80%) | Limit |
 
 **Role:** Tank + DEF shred; joins combat SC-12+.
 
@@ -55,11 +57,11 @@
 | ID | User | Effect |
 |----|------|--------|
 | `claw_snap` | Salt Crab | ATK ×1.0 |
-| `drown_touch` | Tide Wraith | ATK ×0.9 + Poison |
-| `regret_surge` | Shore Wraith | AoE Def Down |
-| `sentinel_cleave` | Palace Sentinel | ATK ×1.3 |
-| `shell_harden` | Sentinel | Def Up |
-| `tide_lament` | Tide Keeper | Multi-phase kit |
+| `drown_touch` | Tide Wraith, Shore Wraith, Tide Keeper | MAG ×1.1 water + 40% Poison |
+| `regret_surge` | Shore Wraith, Tide Keeper | AoE MAG ×1.3 spirit + 60% Def Down |
+| `sentinel_cleave` | Palace Sentinel | ATK ×1.6 |
+| `shell_harden` | Salt Crab, Palace Sentinel | Def Up +4, 2t |
+| `tide_lament` | Tide Keeper | AoE MAG ×1.5 water + 25% Stun |
 
 ---
 
@@ -99,7 +101,7 @@
 
 ## 8. QA checklist
 
-- [ ] 15 player skills all usable in combat UI
+- [ ] All 14 unique player skills usable in combat UI (Strike shared by Urashima & Roku)
 - [ ] Level unlocks fire at correct levels
 - [ ] Limit skills appear only at 100% gauge
 - [ ] Yuzu heal sufficient for Normal without spam

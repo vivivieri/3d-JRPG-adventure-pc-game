@@ -12,7 +12,10 @@
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
 | 3 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | How runtime code fits together |
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
-| 5 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
+| 5 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) + `game/data/qa/acceptance_criteria.json` | Measurable QA pass/fail gates |
+| 6 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules (`.cursorrules` = non-overridable hard rules) |
+
+*(This matches the root [`README.md`](../README.md) authority line. `game/data/` JSON is authoritative for runtime numbers; design docs describe intent.)*
 
 ---
 
@@ -68,14 +71,14 @@
 | Doc | Purpose |
 |-----|---------|
 | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) | Turn order, elements, status, intent UI |
-| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 15 player + 6 enemy skills |
+| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 14 unique player + 6 enemy skills (Strike shared by Urashima & Roku) |
 | [BOSS_DESIGNS.md](BOSS_DESIGNS.md) | Shore Wraith, Sentinel, Tide Keeper |
 | [ENCOUNTER_TABLE.md](ENCOUNTER_TABLE.md) | Pacing, XP, drops, shop timing |
 | [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) | XP curve, stats at milestones, difficulty |
 | [ITEMS_AND_ECONOMY.md](ITEMS_AND_ECONOMY.md) | 20 items, shop, drops, inflation guards |
 | [TUTORIAL_DESIGN.md](TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
 | [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards |
-| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 12 Steam achievements |
+| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 13 Steam achievements |
 
 ---
 

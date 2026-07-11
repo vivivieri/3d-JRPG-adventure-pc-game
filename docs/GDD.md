@@ -1,7 +1,7 @@
 # Tides of Urashima — Game Design Document
 
 **Version:** 0.2 (Pre-build)  
-**Engine:** Godot 4  
+**Engine:** Godot 4.7 stable  
 **Platform:** PC (Steam)  
 **Target audience:** Men 20–30  
 **Playtime target:** 2–3 hours (main story)  
@@ -74,19 +74,19 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 - **Role:** Balanced fighter / party leader
 - **Arc:** From escapist to accountable
 - **Combat:** Sword + tidal skills (water element)
-- **Key stat spread:** ATK 8, DEF 6, SPD 7, MP 5
+- **Key stat spread:** balanced ATK/DEF/SPD. Exact base stats & growth are authoritative in `game/data/characters/party.json` (this doc gives role only, not numbers).
 
 ### Yuzu (Companion — Shrine Maiden Spirit)
 - **Role:** Healer / buffer
 - **Backstory:** Died waiting for Urashima's return; bound to the broken torii gate
-- **Combat:** Purify, heal, holy light
-- **Unlock:** After clearing Tidal Caves
+- **Combat:** Purify, Spirit Light (heal), spirit magic
+- **Unlock:** Joins party at SC-10, after clearing the Tidal Caves (Shore Wraith)
 
 ### Roku (Companion — Old Diver)
 - **Role:** Tank / debuffer
 - **Backstory:** Only living elder; remembers the truth about the box
-- **Combat:** Taunt, shell guard, harpoon strike
-- **Unlock:** After finding him in the village ruins
+- **Combat:** Tide Taunt, Shell Guard, Harpoon Drive
+- **Unlock:** Met at SC-04 (shop NPC in the village); playable in combat from SC-12 (`roku_combat_active`)
 
 ### Otohime (NPC / moral mirror)
 - Not a party member. Appears in palace flashbacks and final confrontation dialogue.

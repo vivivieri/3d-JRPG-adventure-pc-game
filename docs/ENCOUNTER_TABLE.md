@@ -12,7 +12,7 @@
 | Total combats (main path) | 8–10 fights |
 | Level at final boss | 8–10 (cap 15) |
 | Grinding required (Normal) | No |
-| Fights per zone before boss | ~2 random + 1 boss |
+| Fights per zone before boss | ~1–2 scripted + 1 boss (no random encounters — see §11) |
 | Playtime combat portion | ~35–40% of 2–3 hours |
 
 ---
@@ -58,11 +58,13 @@
 | 5 | SC-09 | Boss arena | **Shore Wraith** | Boss | Urashima solo | 120 | 4–5 |
 | — | SC-10 | Shrine alcove | — | Yuzu joins | +party | — | 5 |
 
-**Post SC-10 optional:**
+**Post SC-10 optional (PLANNED — not yet in data):**
 
 | # | Zone | Encounter | Type | Party | XP |
 |---|------|-----------|------|-------|-----|
-| 6 | Caves exit path | Tide Wraith ×1 | Optional | Urashima + Yuzu | 35 |
+| — | Caves exit path | Tide Wraith ×1 | Optional | Urashima + Yuzu | 35 |
+
+> ⚠️ This optional fight has **no row** in `story_encounters.json`. Either add an encounter row for it or drop it from this table. It is **not** counted in the authoritative totals below.
 
 ---
 
@@ -89,7 +91,7 @@
 | Palace Sentinel | 1 | Spirit tutorial miniboss |
 | Tide Keeper | 1 | Final boss |
 
-**Total scripted fights:** 9 minimum, 10 with optional cave fight.
+**Total scripted fights (authoritative — `story_encounters.json`):** **8** encounters = 7 mandatory (SC-05, SC-06, SC-08, SC-09 boss, SC-12, SC-14 boss, SC-15 boss) + 1 optional (`enc_sc07_optional_crabs`, Salt Crab ×2). The planned post-SC-10 Tide Wraith fight above is not yet in data.
 
 ---
 

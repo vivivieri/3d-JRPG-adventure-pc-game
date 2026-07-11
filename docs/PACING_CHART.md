@@ -21,7 +21,7 @@
 | 0:50 | SC-09 | Confrontation | **Boss** | Solo peak |
 | 0:58 | SC-10 | Melancholy resolve | — | Yuzu join |
 | 1:05 | SC-11 | Seduction, wrongness | — | Flashback |
-| 1:12 | SC-12 | Awe | — | Party complete |
+| 1:12 | SC-12 | Awe | Medium | Party complete; Tide Wraith ×2 gate approach (`enc_sc12_palace_wraiths`) |
 | 1:22 | SC-13 | Revelation, weight | — | Box truth |
 | 1:32 | SC-14 | Discipline, epic | Miniboss | Yuzu shines |
 | 1:45 | SC-15 | Catharsis | **Final boss** | Phases |

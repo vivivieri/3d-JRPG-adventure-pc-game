@@ -59,7 +59,7 @@
 | ID | Display | Slot | Stats | Obtain | Equip |
 |----|---------|------|-------|--------|-------|
 | `shrine_charm` | Shrine Charm | charm | MAG +3, RES +2 | Shop 120 | all |
-| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `lore_06` | all |
+| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `sailor_charm` (grant on read) | all |
 | `shell_charm` | Shell Charm | charm | DEF +2 | Shop 80 | all |
 
 **Slots:** weapon + armor + charm (3 per character)  

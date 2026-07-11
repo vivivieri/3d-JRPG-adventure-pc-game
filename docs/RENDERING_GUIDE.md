@@ -5,7 +5,7 @@
 **Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.  
 **Cross-refs:** `docs/ART_DIRECTION.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/SETTINGS_ACCESSIBILITY.md`
 
-This document is the single checklist for M6 art rebuild and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
+This document is the single checklist for the **M5 / Phase 7** art rebuild and Godot scene polish. *(Art rebuild is M5 = Phase 7; M6 = Phase 8 is Steam ship — see `IMPLEMENTATION_PLAN.md`.)* It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
 
 ---
 
@@ -49,7 +49,7 @@ Every world scene needs a `WorldEnvironment` node. Apply via `game/scripts/world
 | Property | Value |
 |----------|-------|
 | `background_mode` | `BG_SKY` |
-| `tonemap_mode` | `TONE_MAPPER_FILMIC` (or `TONE_MAPPER_ACES` — pick one and keep consistent) |
+| `tonemap_mode` | `TONE_MAPPER_FILMIC` (canonical — the acceptance/visual-QA gate requires Filmic project-wide) |
 | `ambient_light_source` | `AMBIENT_SOURCE_COLOR` |
 | `fog_enabled` | `true` |
 | `fog_sky_affect` | `0.85` |
@@ -127,7 +127,7 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 |------|-----------|---------|-------------------|-------|
 | `beach_shore` | `#9AB8C8` | 0.010 | 0.78 | Light coastal haze |
 | `ruined_village` | `#8B9DAF` | 0.008 | 0.72 | **Always on** — draw-distance mask |
-| `tidal_caves` | `#0A141C` | 0.028 | 0.48 | Heavier — depth in tunnels |
+| `tidal_caves` | `#0A141C` | 0.028 | 0.48 | Heavier **distance** fog for tunnel depth; **no volumetric fog** interior (see LEVEL_DESIGN) |
 | `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.68 | Void atmosphere |
 
 **Hub rule:** Fog always on in ruined village (`ART_DIRECTION.md` §3.5).  
