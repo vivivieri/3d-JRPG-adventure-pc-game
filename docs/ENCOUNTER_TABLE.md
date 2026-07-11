@@ -58,11 +58,13 @@
 | 5 | SC-09 | Boss arena | **Shore Wraith** | Boss | Urashima solo | 120 | 4–5 |
 | — | SC-10 | Shrine alcove | — | Yuzu joins | +party | — | 5 |
 
-**Post SC-10 optional:**
+**Post SC-10 optional (target design — not yet in `game/data/encounters/story_encounters.json`):**
 
 | # | Zone | Encounter | Type | Party | XP |
 |---|------|-----------|------|-------|-----|
 | 6 | Caves exit path | Tide Wraith ×1 | Optional | Urashima + Yuzu | 35 |
+
+> Add an `enc_*` entry with `"optional": true` for this fight before counting it in the "Total scripted fights" line below, or remove this row if it's being cut for v1.
 
 ---
 
@@ -89,7 +91,7 @@
 | Palace Sentinel | 1 | Spirit tutorial miniboss |
 | Tide Keeper | 1 | Final boss |
 
-**Total scripted fights:** 9 minimum, 10 with optional cave fight.
+**Total scripted fights (current data — `game/data/encounters/story_encounters.json`):** 7 forced + 1 optional (SC-07 flooded chamber) = **8 encounters**. The post-SC-10 "Caves exit" optional fight above is target design and does not yet exist in data; add it to reach "9 forced-equivalent, 10 with both optionals" as originally intended, or drop this line to "8" if it's cut.
 
 ---
 
