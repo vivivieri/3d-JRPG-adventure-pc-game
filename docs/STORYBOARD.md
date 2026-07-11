@@ -104,6 +104,7 @@
 |-------|--------|
 | **Location** | Tidal Caves — deep pool |
 | **Camera** | Close on water surface reflection |
+| **Cinematic** | 5–8s vignette — faces under water; **not** 15s movie (`CINEMATICS.md` §7 SC-08) |
 | **Summary** | Faces appear beneath the water. Voices overlap: "Why didn't you come back?" |
 | **Gameplay** | Dialogue + forced encounter (2x Tide Wraith) |
 | **Mood** | Horror, guilt |
@@ -147,12 +148,12 @@
 | Field | Detail |
 |-------|--------|
 | **Location** | Dungeon 2 entrance — impossible architecture |
-| **Camera** | Vertigo tilt up massive gate |
+| **Camera** | Vertigo tilt up massive gate (`CINEMATICS.md` §7 SC-12) |
+| **Cinematic** | 12–15s gate reveal — mid-game hero shot; skippable replay after 3s |
 | **Summary** | Gate floats above water. Roku arrives (if not in party, joins here). "This is where time was stolen." |
 | **Gameplay** | Party complete; save point; enter dungeon |
 | **Mood** | Awe, scale |
 | **Assets** | `palace_gate_main` (hero), skybox shift, Roku join if needed |
-| **Camera** | Vertigo tilt up gate (`CINEMATICS.md` SC-12) |
 | **Scope** | No reverse-gravity rooms in v1 — floating walkways only |
 
 ---

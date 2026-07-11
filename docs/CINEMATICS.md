@@ -1,6 +1,6 @@
 # Tides of Urashima — Cinematics & Camera Spec
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.1 (Pre-build)  
 **Engine:** Godot 4 — `Camera3D`, `AnimationPlayer`, optional `Tween`  
 **Cross-refs:** `docs/STORYBOARD.md`, `docs/CHARACTER_BIBLE.md`
 
@@ -161,6 +161,49 @@ See `docs/TUTORIAL_DESIGN.md` §2.
 
 **Skippable:** Yes after 3s
 
+### SC-08 — Deep pool vignette (not a full movie)
+
+**Type:** In-scene vignette — **5–8s**; do **not** expand to 15s (horror beat; SC-09 boss intro carries spectacle).
+
+| Time | Shot |
+|------|------|
+| 0–2s | Close on `cave_deep_pool` surface; drip ambient |
+| 2–6s | `cave_face_decal_set` (4 faces) fade in under water; slow push-in |
+| 6–8s | Cut to dialogue UI → 2× Tide Wraith encounter |
+
+**Audio:** `sfx_story_whisper_bed` + BGM duck 40% (`AUDIO_PRODUCTION_GUIDE.md` SC-08 row)  
+**Letterbox:** No  
+**Skippable:** After 3s  
+**Assets:** `cave_deep_pool` (2k), face decals — see `ENVIRONMENT_KITS.md` §5  
+**Flag:** `deep_pool_seen`
+
+### SC-12 — Palace gate reveal (mid-game hero cinematic)
+
+**Type:** Optional **12–15s** reveal — the **one** mid-game “movie” worth full camera authorship. Rides on `palace_gate_main` (18k), which M6 must build for the zone anyway.
+
+| Time | Shot |
+|------|------|
+| 0–3s | Wide from cave exit; party small in frame; void sky `#1A1A3A` |
+| 3–10s | Vertigo tilt up `palace_gate_main` above `palace_void_sea` |
+| 10–13s | Hold on gate; gold trim catches directional `#FFD890` |
+| 13–15s | Ease to gameplay follow cam; `sfx_story_pearl_insert` chime |
+
+**Dialogue:** Roku line *after* cinematic handoff — not inside the 15s block  
+**Audio:** `bgm_palace` fade in at 3s; `amb_palace_hum` bed  
+**Letterbox:** No (reserve 2.39:1 for SC-11 + SC-17)  
+**Skippable:** After 3s on replay; first play — full shot  
+**Out of scope v1:** FMV, Roku walk-in animation inside shot, reverse-gravity rooms
+
+**Camera markers (author in `dragon_palace_gate.tscn`):**
+
+| Marker | Use |
+|--------|-----|
+| `CameraMarker_sc12_wide` | Party at cave exit |
+| `CameraMarker_sc12_tilt_mid` | Mid vertigo on gate |
+| `CameraMarker_sc12_gate_hero` | Hero hold on `palace_gate_main` |
+
+**Director sequence id:** `sc12_gate_reveal` on `CinematicDirector`
+
 ### SC-13 — Mirror chamber
 
 | Beat | Camera |
@@ -236,6 +279,7 @@ EventBus.combat_intro_requested(boss_id: String)
 - `CinematicDirector` (autoload or per-zone) — owns camera override stack
 - `CombatCamera` — child of combat root
 - Markers: `CameraMarker_establishing`, `CameraMarker_boss_intro` in boss arenas
+- SC-12: `CameraMarker_sc12_wide`, `_tilt_mid`, `_gate_hero` (see §7 SC-12)
 
 ---
 
@@ -244,7 +288,9 @@ EventBus.combat_intro_requested(boss_id: String)
 | Cinematic | Skip after |
 |-----------|------------|
 | SC-02 hub pan | Immediate |
+| SC-08 pool vignette | 3s |
 | SC-11 flashback | 3s |
+| SC-12 gate reveal | 3s (replay only; first play full) |
 | Boss intros | 2s |
 | Endings | Never (first play) |
 | Endings replay | After first clear — skip to credits OK |
@@ -253,10 +299,30 @@ Store `seen_cinematics: []` in save data.
 
 ---
 
-## 12. Production checklist
+## 12. Mid-game cinematic priority (M6)
+
+Ship in this order — emotional ROI over runtime:
+
+| Priority | Scene | Treatment | Duration |
+|----------|-------|-----------|----------|
+| P0 | SC-02 | Hub pan | 4s |
+| P0 | SC-00 | Opening montage | ~45s |
+| P0 | SC-17a/b/c | Ending crane + hero BGM | 60–120s each |
+| P1 | SC-09 / 14 / 15 | Boss intros | 3–6s |
+| P1 | **SC-12** | Palace gate reveal | 12–15s |
+| P2 | SC-08 | Deep pool vignette | 5–8s |
+| P2 | SC-11 | Palace flashback | skippable |
+
+**Rule:** One 15s mid-game movie only (SC-12). SC-08 stays a vignette to avoid water/guilt overlap with SC-09.
+
+---
+
+## 13. Production checklist
 
 - [ ] Every storyboard scene has camera row in this doc or STORYBOARD
 - [ ] Boss arenas have `CameraMarker_boss_intro` placed
+- [ ] SC-12 gate markers + `sc12_gate_reveal` sequence authored
+- [ ] SC-08 face decals + pool vignette trigger at `DeepPoolEncounter`
 - [ ] Combat transition shader works at 1080p60
 - [ ] Ending crane paths authored in `ending_*.tscn`
 - [ ] No camera clip through palace gate hero mesh
