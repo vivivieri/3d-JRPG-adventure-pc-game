@@ -115,9 +115,23 @@ Track implementation progress against the GDD milestones.
 - [ ] Fresh implementation on `main` per `docs/IMPLEMENTATION_PLAN.md` + `docs/AI_DEV_WORKFLOW.md`
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
 - [ ] Replace all primitive / Kenney placeholder art
-- [ ] Japanese palace gate hero set-piece (no European castle kit)
+- [ ] Japanese palace gate hero set-piece (`palace_gate_main` — SC-12)
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
 - [ ] Painted portraits (replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
 - [ ] Curated BGM per act (replace procedural audio)
 - [ ] `bash tools/check_asset_compliance.sh` passes on release branch
+
+### M6 cinematic budget (`docs/CINEMATICS.md` §12)
+
+| Priority | Deliverable | Assets / hooks | Notes |
+|----------|-------------|----------------|-------|
+| **P0** | SC-00 opening montage | `cine_opening_hero`, prologue BGM | Myth setup; skippable replay |
+| **P0** | SC-17 three endings | `cine_ending_*_hero`, ending env kits | Not skippable first play |
+| **P0** | SC-02 hub pan | Village kit, torii silhouette | 4s; immediate skip OK |
+| **P1** | Boss intros ×3 | Boss models, `cine_boss_*_intro` stings | 3–6s each |
+| **P1** | **SC-12 gate reveal** | `palace_gate_main`, `CameraMarker_sc12_*`, `sc12_gate_reveal` | **12–15s** — only mid-game hero movie |
+| **P2** | SC-08 pool vignette | `cave_deep_pool`, face decals, whisper bed | **5–8s** — not 15s |
+| **P2** | SC-11 flashback | Otohime silhouette, letterbox | Skippable after 3s |
+
+**Marginal cost rule:** SC-12 cinematic is cheap once `palace_gate_main` exists — fund the gate mesh first, camera path second.
