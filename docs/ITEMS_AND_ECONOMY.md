@@ -13,7 +13,7 @@
 |----|--------------|--------|-------|
 | `shell_coin` | Shell Coin | 環貝 | Only currency; integer, no decimals |
 
-**Sources:** Combat drops, quest rewards, lore (5 coins ×8 optional), sell materials  
+**Sources:** Combat drops, quest rewards, sell materials *(lore-entry coin bonus cut for v1 — `lore_entries.json` has no reward field)*  
 **Sinks:** Roku's shop, no other vendors v1
 
 ---
@@ -59,7 +59,7 @@
 | ID | Display | Slot | Stats | Obtain | Equip |
 |----|---------|------|-------|--------|-------|
 | `shrine_charm` | Shrine Charm | charm | MAG +3, RES +2 | Shop 120 | all |
-| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `lore_06` | all |
+| `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `sailor_charm` (read grant) | all |
 | `shell_charm` | Shell Charm | charm | DEF +2 | Shop 80 | all |
 
 **Slots:** weapon + armor + charm (3 per character)  
@@ -119,8 +119,8 @@ No crafting v1. Sell at shop interface (future) or auto — **v1: no sell UI; ma
 | `diver_mail` | 150 | 1 |
 | `harpoon_rod` | 150 | 1 |
 | `spirit_knife` | 180 | 1 |
-| Skill scroll: `tidal_slash` | 200 | 1 (Urashima) |
-| Skill scroll: `purify` | 200 | 1 (Yuzu) |
+| Skill scroll: `returning_wave` | 200 | 1 (Urashima — early unlock, appears post SC-09 restock) |
+| Skill scroll: `torii_ward` | 200 | 1 (Yuzu — early unlock, appears post SC-09 restock) |
 
 **Interact:** E at shack → shop UI OR Tab → Shop when near Roku (shack radius 5m)
 
@@ -128,13 +128,14 @@ No crafting v1. Sell at shop interface (future) or auto — **v1: no sell UI; ma
 
 ## 8. Economy pacing (main path)
 
-| Milestone | Expected coins | Expected spends |
-|-----------|----------------|-----------------|
-| Post Act I | ~80 | 2 salves |
-| Post Act II | ~200 | salves + 1 charm |
-| Pre-final boss | ~350 | optional equipment |
+| Milestone | Expected coins (from data) | Expected spends |
+|-----------|-----------------------------|-----------------|
+| Post Act I | ~10 | — |
+| Post Act II (post SC-09 + Q2) | ~130–150 | salves + 1 charm |
+| Pre-final boss | ~225–280 | optional equipment or scroll |
 
-**Soft-lock prevention:** Main path drops ≥300 coins without optional fights. SC-07 chest gives `tide_cut_saber` free.
+**Soft-lock prevention:** Main path grants ≥220 coins (mandatory fights + Q2) without optional fights;
+consumables never required to win on Normal. SC-07 chest gives `tide_cut_saber` free.
 
 ---
 

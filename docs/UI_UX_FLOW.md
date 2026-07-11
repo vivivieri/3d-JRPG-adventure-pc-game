@@ -69,7 +69,10 @@ flowchart TD
 | **Lore** | 8 entries; unread dot |
 | **Shop** | Only near Roku shack |
 
-**Pause:** Esc opens overlay — Resume, Settings, Save, Return to Title
+**Pause:** Esc opens overlay — Resume, Settings, Save, Return to Title.
+**Pause → Save** writes the autosave slot; available anywhere in the field **except mid-combat and
+during SC-16** — it does not replace SavePoints (well/palace gate remain the "ritual" manual saves
+with their own toast; `SAVE_AND_FAIL_STATES.md` §1).
 
 ---
 
@@ -95,7 +98,7 @@ flowchart TD
 │ [Enemy intent icons]     Enemy HP bars  │
 ├─────────────────────────────────────────┤
 │                                         │
-│         Battle stage (sprites)          │
+│   Battle stage (3D arena, fixed cam)    │
 │                                         │
 ├─────────────────────────────────────────┤
 │ Party HP/MP/Limit    │ Action menu       │
@@ -157,6 +160,23 @@ No retry-in-place v1.
 | Confirm | Space / Enter / LMB |
 | Cancel | Esc / RMB |
 | Camera | RMB drag, scroll zoom |
+
+### Canonical InputMap action names (`project.godot`)
+
+Use exactly these action IDs in GDScript and scene wiring — do not invent variants:
+
+| Action ID | Keyboard | Gamepad |
+|-----------|----------|---------|
+| `move_left` / `move_right` / `move_forward` / `move_back` | A / D / W / S | Left stick |
+| `interact` | E | A |
+| `ui_accept` (built-in) | Space / Enter | A |
+| `ui_cancel` (built-in) | Esc | B |
+| `open_menu` | Tab | Y |
+| `pause` | Esc | Start |
+| `camera_orbit` | RMB (hold) | Right stick |
+| `camera_zoom_in` / `camera_zoom_out` | Scroll up / down | — (auto-frame) |
+| `dialogue_advance` | Space / Enter / E | A |
+| `skip_hold` (prologue/cinematic skip) | Confirm held 1 s | A held 1 s |
 
 ---
 

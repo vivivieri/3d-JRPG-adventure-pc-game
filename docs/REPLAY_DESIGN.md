@@ -24,8 +24,8 @@ Expands replay, gallery, and second-run value. **No NG+ stat carry in v1.**
 
 | Feature | First run | Replay |
 |---------|-----------|--------|
-| SC-00 prologue | Full | Skippable (hold Confirm 1 s after 3 s) |
-| Tutorials | Shown | Dismissed if flags set |
+| SC-00 prologue | Full | Skippable (hold Confirm 1 s after 3 s — `prologue_seen` in profile meta) |
+| Tutorials | Shown | Reshown (run flags reset) — auto-skipped entirely once `game_completed_once` in profile meta |
 | Story | Full dialogue | Same |
 | Combat | Normal default | Player may enable Hard |
 | Lore | Discover 8 | Can re-read in gallery run |
@@ -35,12 +35,14 @@ Expands replay, gallery, and second-run value. **No NG+ stat carry in v1.**
 
 ## 3. New Game flow
 
-1. Title → **New Game** (always fresh `user://` slot or overwrite — single slot v1)
-2. All flags cleared
-3. `prologue_seen` allows skip only — not other shortcuts
+1. Title → **New Game** (overwrites `user://save_slot_0.json` — single run slot v1)
+2. All **run** flags cleared; `user://profile_meta.json` (gallery, prologue skip, playtime) persists (`SAVE_AND_FAIL_STATES.md` §1)
+3. `prologue_seen` (profile meta) allows prologue skip only — not other shortcuts
 4. **No chapter select** v1
 
-**Continue:** Available until credits complete; after `game_completed`, slot shows ending icon — Continue loads pre-ending save **or** prompts New Game (implementation: last save before SC-17).
+**Continue:** Available until credits complete. After `game_completed`, the slot shows the ending
+icon and **Continue is disabled until a New Game is started** (canonical rule:
+`SAVE_AND_FAIL_STATES.md` §4). Other endings are earned via replay, not save reload.
 
 ---
 

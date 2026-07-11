@@ -173,9 +173,19 @@ Full workflow: `docs/ART_AUTOMATION_PIPELINE.md` §5.
 
 ## 10. Vertical slice gate
 
-Before full production, **SC-02 Ruined Village** must pass:
+**SC-02 Ruined Village** is gated twice — greybox first, final art later:
+
+### Phase 1 gate (greybox slice — rendering foundation)
+
+- [ ] Palette matches §1 hex values at gameplay camera distance (lights, fog, sky)
+- [ ] Filmic/ACES tonemap + zone fog per `RENDERING_GUIDE.md` (no default grey)
+- [ ] Toon ramp shader on ground/blockout meshes
+- [ ] 60 FPS @ 1080p on target hardware
+- Greybox/primitive meshes **allowed** at this gate (dev only — `LEVEL_DESIGN.md` §1)
+
+### M5 / Phase 7 gate (final art — before ship)
 
 - [ ] Urashima authored model + walk/idle
 - [ ] Hero torii + shack + well (no primitives)
-- [ ] Palette matches §1 hex values at gameplay camera distance
-- [ ] 60 FPS @ 1080p on target hardware
+- [ ] Zero primitive/greybox meshes in player-facing scenes
+- [ ] 60 FPS @ 1080p maintained after art pass

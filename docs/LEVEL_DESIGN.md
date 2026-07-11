@@ -18,7 +18,7 @@
 | Lost time target | Player not lost >2 min without hint (`WORLD_MAP_AND_FLOW.md` §8) |
 | Save points | Village well, palace gate exterior |
 | Autosave | Zone transition, quest stage, pre-boss |
-| Greybox | Kenney/primitives Phase 1–6 only — replace M5 |
+| Greybox | Primitives + already-imported CC0 Kenney kits (`docs/LICENSES.md` — dev greybox **only**, Phase 1–6) — replace at M5 art pass; never in player-facing ship builds; no new third-party imports (`.cursorrules` §0) |
 
 ### Standard node names (all zones)
 
@@ -112,7 +112,7 @@ Wide establishing → follow cam (`CINEMATICS.md` SC-01). No authored pan v1.
 | `Interactable_SC-02-BANNER` | SC-02-BANNER | `inspected_banner` | — |
 | `Interactable_SC-02-SANDAL` | SC-02-SANDAL | `inspected_sandal` | — |
 | `SavePoint_well` | SC-02-WELL | `inspected_well` | Manual save + first heal |
-| `Interactable_SC-03` | SC-03 | `met_yuzu_spirit` | After 2 inspects (soft arrow) |
+| `Interactable_SC-03` | SC-03 | `met_yuzu_spirit` | None (freely reachable) — soft quest arrow appears after 2 inspects (`GAME_FEEL.md`) |
 | `Interactable_SC-04` | SC-04 | `met_roku`, `cave_entrance_unlocked` | Grants `cave_map` |
 | `EncounterTrigger_enc_sc05_tutorial_crab` | SC-05 | `tutorial_combat_done` | Near pier |
 | `ZoneTransition_tidal_caves` | — | `caves_entered` | Requires `cave_entrance_unlocked` |
@@ -286,7 +286,7 @@ Full registry: `game/data/story/flags.json`.
 - [ ] Every `Interactable_*` has matching `chapter_01.json` key or inspect sub-scene
 - [ ] Every `EncounterTrigger_*` exists in `story_encounters.json`
 - [ ] Spawn markers tested for Continue load
-- [ ] No soft-lock: SC-07 hint after 90s stuck (`PUZZLE_DESIGN.md`)
+- [ ] No soft-lock: SC-07 hint after 3 min stuck (`PUZZLE_DESIGN.md` §5)
 - [ ] Zone transitions show 2s area name toast
 - [ ] Backtrack village → caves → village works after Yuzu join
 - [ ] SC-12 cinematic skippable after 3s on replay

@@ -50,10 +50,13 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 
 ### Checks (automated)
 
-- Scene IDs in `scenes.json` match dialogue / encounter references  
-- Flag names in `flags.json` referenced by quests exist  
-- Item IDs in shop/encounters exist in `items.json`  
-- Enemy/skill IDs cross-reference  
+- Scene IDs in `scenes.json` match dialogue / encounter / cinematic-hook references  
+- Flag names (set/required by scenes, dialogue on_complete + choices, encounters incl. `on_phase_trigger`, quests, achievements) exist in `flags.json`; enum values validated  
+- Item IDs in shop / encounters / enemy drops / quest rewards exist in `items.json`  
+- Enemy skill kits + AI weight tables reference `skills.json`; party starting skills / unlocks / limits exist  
+- Shop scroll `skill_id` / `character_id` resolve  
+- Every enum flag (`mirror_choice`, `ending_chosen`) is written by at least one dialogue choice  
+- VO `voice_id`s exist in `vo_prompts.json` with matching tier  
 
 ### Agent report line
 
@@ -286,11 +289,11 @@ Full story automation per `game/data/story/scenes.json`:
 
 ### 7.2 E2E matrix (implement in `game/tests/e2e/`)
 
-| Run ID | Path | Key scenes | Ending flag |
-|--------|------|------------|-------------|
-| `E2E-REWIND` | Full story → choice A | SC-00 … SC-16 → ending_rewind | `ending_rewind_seen` |
-| `E2E-ANCHOR` | Full story → choice B | SC-00 … SC-16 → ending_anchor | `ending_anchor_seen` |
-| `E2E-DRIFT` | Full story → choice C | SC-00 … SC-16 → ending_drift | `ending_drift_seen` |
+| Run ID | Path | Key scenes | Assert (end of run) |
+|--------|------|------------|----------------------|
+| `E2E-REWIND` | Full story → choice A | SC-00 … SC-16 → ending_rewind | `ending_chosen == "rewind"` + `game_completed` + profile meta `endings_unlocked` contains `"rewind"` |
+| `E2E-ANCHOR` | Full story → choice B | SC-00 … SC-16 → ending_anchor | `ending_chosen == "anchor"` + `game_completed` + profile meta contains `"anchor"` |
+| `E2E-DRIFT` | Full story → choice C | SC-00 … SC-16 → ending_drift | `ending_chosen == "drift"` + `game_completed` + profile meta contains `"drift"` |
 
 ### 7.3 Per-scene beat checklist (agent implements script)
 
@@ -321,8 +324,10 @@ Full story automation per `game/data/story/scenes.json`:
 
 ### 7.5 Current status
 
-**Not implemented** — stub exits 0 with `[SKIP]`. Implement at Phase 6.  
-Until L5 is real, **do not start human QA**.
+**Not implemented** — stub prints `[SKIP]` and exits 0 for routine per-commit runs
+(pre-Phase 6). **Gate runs must invoke `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh`**,
+which makes the stub exit 1 — SKIP can never satisfy the `L5_e2e_three_endings` gate
+(`skip_allowed: false`). Implement at Phase 6. Until L5 is real, **do not start human QA**.
 
 ### Agent report line
 

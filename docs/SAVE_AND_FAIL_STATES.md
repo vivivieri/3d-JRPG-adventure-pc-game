@@ -9,15 +9,26 @@
 
 | Parameter | Value |
 |-----------|-------|
-| Slots | **1** slot v1 (`user://save_slot_0.json`) |
-| Autosave | **Yes** — on scene transition + quest stage complete |
-| Manual save | Village well (`VillageWell`) — full heal first visit only |
+| Slots | **1** run slot v1 (`user://save_slot_0.json`) + **1** profile file (`user://profile_meta.json`) |
+| Autosave | **Yes** — on scene transition + quest stage complete + pre-boss |
+| Manual save | Village well (`VillageWell`, full heal first visit only) + palace gate exterior SavePoint (SC-12+, no heal) — both write the same slot |
+| Pause-menu Save | Writes the autosave slot; anywhere in field except mid-combat / SC-16 (`UI_UX_FLOW.md` §4) |
 | Save on quit | Autosave current state |
 | Mid-combat save | **No** |
+
+**Two files, two lifetimes:**
+
+| File | Contains | Cleared by New Game? |
+|------|----------|----------------------|
+| `user://save_slot_0.json` | Current run: flags, party, inventory, quests | **Yes** (overwritten) |
+| `user://profile_meta.json` | Cross-run meta: ending gallery, prologue skip, playtime | **No** (persists forever) |
+| `user://settings.json` | Options: locale, volume, hard_mode… (`SETTINGS_ACCESSIBILITY.md`) | **No** |
 
 ---
 
 ## 2. Save data schema
+
+### `user://save_slot_0.json` (per run)
 
 ```json
 {
@@ -26,16 +37,39 @@
   "scene": "res://scenes/world/ruined_village.tscn",
   "spawn_marker": "default",
   "flags": { "met_roku": true },
-  "party": { "levels": {}, "hp": {}, "mp": {} },
-  "inventory": { "items": {}, "equipment": {} },
-  "quests": { "active_stage": {} },
+  "party": {
+    "level": 5,
+    "field": ["urashima", "yuzu"],
+    "combat": ["urashima", "yuzu"],
+    "hp": { "urashima": 168 },
+    "mp": { "urashima": 42 },
+    "limit": { "urashima": 40 },
+    "extra_skills": { "urashima": ["returning_wave"] }
+  },
+  "inventory": { "items": { "sea_salve": 2 }, "key_items": ["lacquer_box"], "equipment": {}, "gold": 120 },
+  "quests": { "active": ["echoes_at_torii"], "stage": { "echoes_at_torii": "enter_caves" } },
+  "encounters_completed": ["enc_sc05_tutorial_crab"],
   "lore_read": ["fishing_ledger"],
-  "settings": { "locale": "en" },
-  "meta": {
-    "playtime_sec": 3600,
-    "ending_unlocked": ["anchor"],
-    "seen_cinematics": ["SC-11"]
-  }
+  "chests_opened": ["cave_chest_ancient"],
+  "tutorial_seen": ["interact", "save_point"],
+  "run_ending": null
+}
+```
+
+Notes: `party.level` is the shared party level (`COMBAT_SYSTEMS.md` §8); `extra_skills` holds
+scroll-taught skills; `encounters_completed` / `chests_opened` prevent retrigger and re-loot on
+reload or backtrack (every non-repeatable trigger persists its ID here).
+
+### `user://profile_meta.json` (cross-run)
+
+```json
+{
+  "version": 1,
+  "prologue_seen": true,
+  "game_completed_once": true,
+  "endings_unlocked": ["anchor"],
+  "hard_cleared": false,
+  "playtime_total_sec": 9200
 }
 ```
 
@@ -43,24 +77,28 @@
 
 ## 3. What persists
 
-| Data | Persist |
-|------|---------|
-| Story flags | ✓ |
-| Quest stages | ✓ |
-| Party level/stats | ✓ |
-| Inventory/equipment | ✓ |
-| Lore read | ✓ |
-| Ending gallery unlocks | ✓ meta |
-| Tutorial flags | ✓ |
-| Mid-battle state | ✗ |
+| Data | Persist | Where |
+|------|---------|-------|
+| Story flags | ✓ per run | slot |
+| Quest stages | ✓ per run | slot |
+| Party level/stats | ✓ per run | slot |
+| Inventory/equipment/gold | ✓ per run | slot |
+| Encounter/chest completion | ✓ per run | slot |
+| Lore read | ✓ per run | slot |
+| Tutorial flags | ✓ per run | slot (reshown on new runs; skipped entirely if `game_completed_once`) |
+| Ending gallery unlocks | ✓ **forever** | `profile_meta.json` |
+| Prologue skip | ✓ **forever** | `profile_meta.json` |
+| Mid-battle state | ✗ | — |
 
 ---
 
-## 4. Continue behavior
+## 4. Continue behavior (canonical — `ENDING_DESIGN.md` §7 and `REPLAY_DESIGN.md` §3 defer here)
 
-- **Continue** loads autosave
+- **Continue** loads the run slot's latest autosave
 - If save corrupt: message + New Game only
-- Post-credits: slot cleared or marked complete; **Continue** disabled until new run started
+- **Post-credits:** the slot is marked complete (`run_ending` set) and shows the ending icon.
+  **Continue is disabled** until the player starts a New Game. Endings are revisited via the
+  gallery, not by reloading pre-ending saves.
 
 ---
 

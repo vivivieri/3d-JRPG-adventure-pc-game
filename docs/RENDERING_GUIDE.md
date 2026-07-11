@@ -5,7 +5,7 @@
 **Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.  
 **Cross-refs:** `docs/ART_DIRECTION.md`, `docs/ENVIRONMENT_KITS.md`, `docs/CINEMATICS.md`, `docs/SETTINGS_ACCESSIBILITY.md`
 
-This document is the single checklist for M6 art rebuild and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
+This document is the single checklist for the M5 art rebuild (Phase 7) and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
 
 ---
 
@@ -229,9 +229,9 @@ Apply at runtime by updating `WorldEnvironment.environment` and `DirectionalLigh
 
 ---
 
-## 12. M6 acceptance checklist
+## 12. M5 art acceptance checklist
 
-Before marking M6 zone complete, verify:
+Before marking an M5 art-pass zone complete, verify:
 
 - [ ] `WorldEnvironment` present; tonemap Filmic or ACES
 - [ ] Directional shadows on; light color matches zone table (§5)
@@ -258,7 +258,7 @@ On Godot implementation branches, `game/scripts/world/zone_visuals.gd` already a
 - Glow in `dragon_palace_gate` only
 - Colored `DirectionalLight3D` per zone
 
-**Gaps to close in M6:**
+**Gaps to close in M5 (art rebuild):**
 
 1. Extend glow to caves + lacquer box emission states
 2. Shadow quality tiers + soft filter

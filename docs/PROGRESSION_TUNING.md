@@ -50,7 +50,11 @@
 | SC-14 Sentinel | 100 | 420 → L6–7 |
 | SC-15 Tide Keeper | 250 | 670 → L8–10 |
 
-Quest XP (`QUEST_AND_FLAGS.md`): +30 (Q1) +100 (Q2) + etc. — included in encounter pacing.
+**Quest XP is additive** (`main_quests.json`): Q1 +30, Q2 +100, Q3 +50, Q4 +100, Q5 +250 (= 530 total).
+Pre–Tide Keeper the player has fight XP 420 + quest XP 280 (Q1–Q4) ≈ **700 → L8**, which is how the
+curve reaches its target without grinding. Q5's 250 XP lands post-choice (flavor only). Boss kills do
+**not** double-grant quest XP — encounter rewards come from `enemies.json`, quest rewards from
+`main_quests.json`, both fire once.
 
 ---
 
@@ -74,9 +78,9 @@ Formula: `base + growth × (level − 1)` from `party.json`.
 
 | Level | HP | MP | MAG | RES | Notes |
 |-------|-----|-----|-----|-----|-------|
-| 5 | 117 | 65 | 22 | 16 | Join fight |
-| 7 | 133 | 75 | 26 | 18 | Sentinel |
-| 10 | 157 | 90 | 32 | 21 | Final boss |
+| 5 | 117 | 65 | 22 | 20 | Join fight |
+| 7 | 133 | 75 | 26 | 24 | Sentinel |
+| 10 | 157 | 90 | 32 | 30 | Final boss |
 
 **Skill unlocks:** Lv4 `sacred_mend` | Lv8 `torii_ward` | Join: `purify`, `spirit_light`
 
@@ -102,22 +106,24 @@ Formula: `base + growth × (level − 1)` from `party.json`.
 
 | Shop (SC-04+) | Price | When affordable |
 |---------------|-------|-----------------|
-| `sea_salve` ×2 | 80 | Act I |
-| `cave_wet_coat` | 120 | Post SC-09 (~200 coins) |
+| `sea_salve` ×2 | 80 | Post SC-09 |
+| `cave_wet_coat` | 120 | Post SC-09 + Q2 (~130 coins) |
 | `shell_charm` | 80 | Act II |
-| Skill scroll | 200 | Post boss (~250 coins) |
+| Skill scroll | 200 | Pre-Keeper (~225 coins, if saved) |
 
-**Affordance rule:** Main path grants ≥300 coins without optional fights. Player can buy 6–8 salves + one charm OR one scroll.
+**Affordance rule:** Main path grants **≈220–280 coins** before the final boss (mandatory fights
++ Q2 reward + optional fights/material sales — computed from `enemies.json` / `main_quests.json`).
+Player can buy several salves + one charm, OR save for one 200-coin scroll — not both.
 
 ---
 
 ## 5. Boss tuning reference
 
-| Boss | Party at fight | Solo? | HP target (Normal) | Attempts target |
-|------|----------------|-------|--------------------|-----------------|
-| Shore Wraith | Urashima L4–5 | Yes | ~320 HP (solo tune) | ≤2 |
-| Palace Sentinel | Full L6–7 | No | 380 HP | ≤2 |
-| Tide Keeper | Full L8–10 | No | 900 HP | ≤3 |
+| Boss | Party at fight | Solo? | HP (Normal, `enemies.json`) | Attempts target |
+|------|----------------|-------|------------------------------|-----------------|
+| Shore Wraith | Urashima L4–5 | Yes | 320 (solo tune) | ≤2 |
+| Palace Sentinel | Full L6–7 | No | 250 | ≤2 |
+| Tide Keeper | Full L8–10 | No | 580 | ≤3 |
 
 Full patterns: `BOSS_DESIGNS.md`. Sentinel Spirit ×1.5 for Yuzu skills.
 
@@ -172,12 +178,12 @@ Full patterns: `BOSS_DESIGNS.md`. Sentinel Spirit ×1.5 for Yuzu skills.
 
 ## 8. Milestone affordance table
 
-| Milestone | Coins (expected) | Can afford |
-|-----------|------------------|------------|
-| Post SC-05 | ~40 | 1 salve |
-| Post SC-09 | ~200 | 3 salves + charm OR save for scroll |
-| Pre-Sentinel | ~280 | Coat + salves |
-| Pre-Keeper | ~350 | Scroll + stock |
+| Milestone | Coins (expected, from data) | Can afford |
+|-----------|------------------------------|------------|
+| Post SC-05 | ~10 | — (window shopping) |
+| Post SC-09 (+Q2) | ~130–150 | 2–3 salves OR start saving |
+| Pre-Sentinel | ~160–190 | Coat OR salve stock |
+| Pre-Keeper | ~225–280 | Scroll (if saved) OR charm + salves |
 
 ---
 

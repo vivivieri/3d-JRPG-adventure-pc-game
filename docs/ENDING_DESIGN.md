@@ -123,9 +123,9 @@ See **`docs/REPLAY_DESIGN.md`** for full replay, gallery, and Hard mode guidance
 
 | Feature | Design |
 |---------|--------|
-| **New Game** | Fresh flags; prologue skippable |
-| **Continue** | Not available after credits (run complete) |
-| **Ending gallery** | Title menu after `game_completed` — 3 slots show silhouette; locked endings greyed |
+| **New Game** | Fresh run flags; prologue skippable (profile meta persists — `SAVE_AND_FAIL_STATES.md` §1) |
+| **Continue** | Disabled after credits until New Game (`SAVE_AND_FAIL_STATES.md` §4 is canonical) |
+| **Ending gallery** | Title menu after first completion — unlocks stored in `profile_meta.json`; locked endings greyed |
 | **NG+** | **No** stat carry for v1 |
 | **Chapter select** | **No** for v1 |
 

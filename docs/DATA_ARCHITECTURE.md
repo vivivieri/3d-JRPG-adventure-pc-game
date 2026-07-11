@@ -21,7 +21,7 @@ SC-00 … SC-17  →  story/scenes.json   (spine)
        ↓
 dialogue / fights →  dialogue/*.json + encounters/story_encounters.json
        ↓
-   rewards       →  items.json + shop.json + enemies.json drops
+   rewards       →  items.json + shop/roku_shop.json + enemies.json drops
 ```
 
 **Rule:** Every flag must trace to a `scene_id`. Every quest stage must trace to a flag. No orphan data.
@@ -74,7 +74,7 @@ One row per storyboard beat. Engine loads this for QA tools and progression vali
 |----------|-----|------|------|------------|--------------|
 | SC-00 | prologue | — | cinematic | prologue_seen | — |
 | SC-01 | I | beach_shore | field | tutorial_movement_done | ruined_village |
-| SC-02 | I | ruined_village | explore | inspected_* | — |
+| SC-02 | I | ruined_village | explore | village_arrival_seen (inspects: SC-02-BANNER/SANDAL/WELL sub-scenes) | — |
 | SC-03 | I | ruined_village | dialogue | met_yuzu_spirit | — |
 | SC-04 | I | ruined_village | dialogue | met_roku, cave_entrance_unlocked | tidal_caves |
 | SC-05 | I | ruined_village | combat | tutorial_combat_done | — |
@@ -87,7 +87,7 @@ One row per storyboard beat. Engine loads this for QA tools and progression vali
 | SC-12 | II | dragon_palace_gate | field | gate_reached, roku_combat_active | — |
 | SC-13 | III | dragon_palace_gate | dialogue | knows_box_truth, mirror_choice | — |
 | SC-14 | III | dragon_palace_gate | boss | sentinel_defeated | — |
-| SC-15 | III | dragon_palace_gate | boss | tide_keeper_phase3 | — |
+| SC-15 | III | dragon_palace_gate | boss | tide_keeper_defeated (on win); tide_keeper_phase3 (combat @ 10% HP via `on_phase_trigger`) | — |
 | SC-16 | III | dragon_palace_gate | choice | ending_chosen | ending_* |
 | SC-17a/b/c | end | ending_* | cinematic | game_completed | — |
 
@@ -122,9 +122,9 @@ Central list prevents `caves_entered` vs `caves_unlocked` drift.
 |-------|----------------|-----------|
 | `the_return` | What happened to home? | Meet Roku |
 | `echoes_at_torii` | Who waits at the shrine? | Defeat Shore Wraith |
-| `depths_of_guilt` | Can the dead forgive? | Yuzu joins + palace vision |
+| `depths_of_guilt` | Can the dead forgive? | Reach the palace gate (`gate_reached`) |
 | `palace_gate` | What was stolen? | Defeat Sentinel |
-| `the_tide_answer` | What do you owe the living? | Choose ending |
+| `the_tide_answer` | What do you owe the living? | See the ending (`game_completed`) |
 
 Stages use `completion: { "flag": "..." }` or `{ "all_flags": [...] }`.
 
@@ -143,11 +143,19 @@ Hand-placed fights only — no random tables.
   "enemies": ["salt_crab"],
   "party": ["urashima"],
   "tutorial": true,
-  "on_win": { "set_flags": ["tutorial_combat_done"] }
+  "on_win": { "set_flags": ["tutorial_combat_done"], "grant_items": [] }
 }
 ```
 
-Maps 1:1 to `ENCOUNTER_TABLE.md`.
+Maps 1:1 to `ENCOUNTER_TABLE.md`. Optional fields: `optional: true`, `boss: true`,
+`escape_allowed: false`, `requires_flags: [...]`, `cinematic_hook`, and
+`on_phase_trigger: { "set_flags": [...] }` (fires when an enemy's `phases[].triggers_choice`
+threshold is hit mid-combat — used by the Tide Keeper choice gate).
+
+**Persistence / re-entry contract:** every encounter ID is appended to the save's
+`encounters_completed[]` on **win**. Completed triggers never re-fire (on backtrack, reload, or
+zone re-entry). On **escape or defeat** the trigger stays armed. This prevents both retrigger
+loops and XP/coin farming.
 
 ---
 
@@ -179,7 +187,7 @@ One file per chapter; scenes reference story IDs.
 | SC-07 chest | `tide_cut_saber` |
 | SC-09 boss | `wraith_pearl` (key) |
 | SC-14 boss | `palace_edge` |
-| SC-06 lore | `spirit_bell` via `sailor_charm` lore → grant on read (optional) |
+| Lore read | `spirit_bell` — `items.json` `story_grant: "lore:sailor_charm"` (granted when the `sailor_charm` lore entry is read; `lore:` prefix = lore-entry source, plain `SC-*` = scene source) |
 
 ---
 
@@ -189,24 +197,36 @@ One file per chapter; scenes reference story IDs.
 {
   "vendor_id": "roku_shack",
   "requires_flag": "met_roku",
-  "restock_flag": "shore_wraith_defeated",
-  "inventory": [{ "item_id": "sea_salve", "price": 40, "stock": -1 }]
+  "restock_on_flag": "shore_wraith_defeated",
+  "inventory": [{ "item_id": "sea_salve", "price": 40, "stock": -1 }],
+  "scrolls": [{ "skill_id": "returning_wave", "price": 200, "stock": 1, "character_id": "urashima", "restock": true }]
 }
 ```
 
-`-1` stock = infinite.
+`-1` stock = infinite. `scrolls[].restock: true` = the entry appears once `restock_on_flag` is set
+(post SC-09). Scrolls teach a skill early (`SKILLS_BIBLE.md` §6); greyed out if already learned.
 
 ---
 
 ## 10. Achievements (`achievements/achievements.json`)
 
+Trigger forms used in the data (all present in `achievements.json`):
+
 ```json
-{
-  "id": "ACH_ENDING_ANCHOR",
-  "trigger": { "flag": "ending_chosen", "value": "anchor" },
-  "steam_api_name": "ENDING_ANCHOR"
-}
+{ "id": "ACH_ENDING_ANCHOR", "trigger": { "flag_equals": { "ending_chosen": "anchor" } }, "steam_api": "ENDING_ANCHOR" }
+{ "id": "ACH_FIRST_STEP",    "trigger": { "flag": "game_started" },                      "steam_api": "FIRST_STEP" }
+{ "id": "ACH_ALL_ENDINGS",   "trigger": { "meta_endings_count": 3 },                     "steam_api": "ALL_ENDINGS" }
+{ "id": "ACH_LORE_COMPLETE", "trigger": { "lore_count": 8 },                             "steam_api": "LORE_COMPLETE" }
+{ "id": "ACH_HARD_TIDE",     "trigger": { "flag": "tide_keeper_defeated", "setting": "hard_mode" }, "steam_api": "HARD_TIDE" }
 ```
+
+| Trigger key | Fires when |
+|-------------|-----------|
+| `flag` | Bool flag set true (optionally AND `setting` true) |
+| `all_flags` | Every listed bool flag true |
+| `flag_equals` | Enum flag equals value |
+| `meta_endings_count` | `profile_meta.endings_unlocked` size ≥ N |
+| `lore_count` | `lore_read` size ≥ N |
 
 ---
 
@@ -214,12 +234,19 @@ One file per chapter; scenes reference story IDs.
 
 ```json
 {
-  "party": ["urashima"],
+  "schema_version": 1,
+  "start_scene": "beach_shore",
+  "spawn_marker": "PlayerSpawn",
+  "party_field": ["urashima"],
+  "party_combat": ["urashima"],
+  "level": 1,
   "inventory": { "sea_salve": 2 },
-  "equipment": { "urashima": { "weapon": "fisher_katana", "armor": "worn_haori" } },
+  "key_items": ["lacquer_box"],
+  "equipment": { "urashima": { "weapon": "fisher_katana", "armor": "worn_haori", "charm": null } },
+  "gold": 0,
   "flags": {},
-  "scene": "beach_shore",
-  "quests_active": ["the_return"]
+  "quests_active": ["the_return"],
+  "play_prologue": true
 }
 ```
 
@@ -229,26 +256,25 @@ One file per chapter; scenes reference story IDs.
 
 | Content | Where |
 |---------|-------|
-| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh, zh-Hant }` |
-| UI, tutorials | `game/locale/translations.csv` |
-| Quest titles | JSON inline OR CSV `quest.{id}.title` |
-| Item names | JSON `display_name` + CSV mirror optional |
+| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh, zh-Hant }` — **zh-Hant added in Phase 3.10**; current data is `{ en, ja, zh }` |
+| UI, tutorials, combat log, skill/enemy names | `game/locale/translations.csv` (**created in Phase 3.10** — does not exist yet) |
+| Quest / item / lore display text | JSON inline `display_name` / `title` objects — **JSON is authoritative**; CSV mirrors optional |
 
 ---
 
-## 13. Validation tools (recommended)
+## 13. Validation tools (implemented)
 
 ```bash
-# Future: validate story data integrity
-python3 tools/validate_story_data.py
+python3 tools/validate_story_data.py   # L0 gate — run after every data edit
 ```
 
-Checks:
-- Every `scene_id` in storyboard exists in `scenes.json`
-- Every `set_flags` in dialogue exists in `flags.json`
-- Every quest `completion.flag` is set somewhere
-- Every encounter `scene_id` exists
-- No item drop references missing `items.json` ids
+Checks (see the script for the authoritative list):
+- Every dialogue/scene/hook reference resolves (scenes, dialogue blocks, cinematic hooks, VO clips)
+- Every `set_flags` / `requires_flags` (incl. dialogue choices) exists in `flags.json`
+- Quest stage completion flags exist in the registry
+- Encounter `scene_id` / `enemies` / `grant_items` / `on_phase_trigger` flags resolve
+- Enemy `skills` and drop `item_id`s exist; party skills/unlocks/limits exist
+- Shop inventory items and scroll `skill_id`s exist
 
 ---
 

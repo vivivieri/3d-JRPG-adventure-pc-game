@@ -11,6 +11,12 @@
 
 Players switch **written language** from the **main menu** (saved to `user://settings.json`). When `zh-Hant` is selected, a second setting — **voice dialect** — offers **粵語 (Cantonese)** or **國語 (Mandarin)** for the 12 selective VO clips. Subtitles always use Traditional Chinese text regardless of dialect.
 
+> **Population status:** `game/data/**` JSON currently carries `en` / `ja` / `zh` inline text only.
+> The `zh-Hant` keys and `game/locale/translations.csv` are **created in Phase 3.10**
+> (`docs/IMPLEMENTATION_PLAN.md`). Until then, `zh-Hant` falls back to `zh` at runtime — the
+> four-language contract is a **ship requirement**, not a current-data invariant. The L0 validator
+> gains a locale-completeness check when Phase 3.10 lands.
+
 ---
 
 ## Architecture

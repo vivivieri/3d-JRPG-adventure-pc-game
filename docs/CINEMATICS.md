@@ -179,7 +179,7 @@ See `docs/TUTORIAL_DESIGN.md` §2.
 
 ### SC-12 — Palace gate reveal (mid-game hero cinematic)
 
-**Type:** Optional **12–15s** reveal — the **one** mid-game “movie” worth full camera authorship. Rides on `palace_gate_main` (18k), which M6 must build for the zone anyway.
+**Type:** Optional **12–15s** reveal — the **one** mid-game “movie” worth full camera authorship. Rides on `palace_gate_main` (18k), which the M5 art rebuild must build for the zone anyway.
 
 | Time | Shot |
 |------|------|
@@ -299,7 +299,7 @@ Store `seen_cinematics: []` in save data.
 
 ---
 
-## 12. Mid-game cinematic priority (M6)
+## 12. Mid-game cinematic priority (M5 art rebuild)
 
 Ship in this order — emotional ROI over runtime:
 

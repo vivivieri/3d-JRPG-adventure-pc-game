@@ -327,7 +327,7 @@ One callback per act is enough. Avoid winking at the player.
 | Roku | Grounding elder | Gravelly wisdom; never comic relief |
 | Urashima | Player avatar | Act I fragments → Act III declarations (`§3`) |
 
-**Field barks:** After `met_yuzu_spirit`, `wraith_defeated`, `knows_box_truth` — swap idle barks so the world feels changed without new cutscenes.
+**Field barks:** After `met_yuzu_spirit`, `shore_wraith_defeated`, `knows_box_truth` — swap idle barks so the world feels changed without new cutscenes.
 
 ### E. Combat as punctuation
 

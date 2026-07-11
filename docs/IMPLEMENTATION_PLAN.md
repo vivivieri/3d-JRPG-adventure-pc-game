@@ -72,7 +72,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 1.5 | Greybox zone scenes: `beach_shore`, `ruined_village`, `tidal_caves`, `dragon_palace_gate` | STORYBOARD, ENVIRONMENT_KITS |
 | 1.6 | DirectionalLight3D + fog per zone table | RENDERING_GUIDE §5 |
 | 1.7 | ProceduralSky per zone (no HDRI) | RENDERING_GUIDE §4 |
-| 1.8 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist | ART_DIRECTION §10 |
+| 1.8 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist (**Phase 1 greybox section** of ART_DIRECTION §10; final-art section lands in Phase 7) | ART_DIRECTION §10 |
 
 **GDAI workflow:** GodotPrompter drafts shaders/`zone_visuals.gd` → GDAI MCP places nodes in `.tscn` → F5 verify. **Acceptance criteria:** `docs/AI_DEV_WORKFLOW.md` §4 Phase 1.
 

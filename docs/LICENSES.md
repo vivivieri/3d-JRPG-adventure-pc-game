@@ -88,7 +88,7 @@ Greybox floor/wall primitives remain procedural Godot meshes — replace before 
 | Zone textures (`textures/zones/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | World material albedo |
 | UI panels & bars (`ui/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Dialogue, menu, HP/MP |
 | Portraits (`ui/portraits/*.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Dialogue silhouettes |
-| Icons (`ui/icons/*.png`, `ui/icon.png`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | App icon, combat intents |
+| Icons (`ui/icons/*.png`, `ui/icon.png`, `ui/icon.svg`) | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | App icon (PNG + SVG), combat intents |
 | Main menu background | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Title screen |
 | Steam capsules & screenshots | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Store page marketing |
 | Pitch illustrations (`docs/pitch/illustrations/**/*.png`) | Cursor AI image generation | Pitch/marketing use | 2026-07 | Storyboard set — replace with 3D for ship |

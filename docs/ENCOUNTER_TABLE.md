@@ -9,10 +9,10 @@
 
 | Goal | Target |
 |------|--------|
-| Total combats (main path) | 8–10 fights |
+| Total combats (main path) | 6 unavoidable, up to 9 with optional |
 | Level at final boss | 8–10 (cap 15) |
 | Grinding required (Normal) | No |
-| Fights per zone before boss | ~2 random + 1 boss |
+| Fights per zone before boss | ~2 scripted triggers + 1 boss (no random encounters) |
 | Playtime combat portion | ~35–40% of 2–3 hours |
 
 ---
@@ -52,13 +52,13 @@
 
 | # | Scene | Zone | Encounter | Type | Party | XP | Level after |
 |---|-------|------|-----------|------|-------|-----|-------------|
-| 2 | SC-06 | Cave entrance | Salt Crab ×1 | Scripted | Urashima | 30 | 2–3 |
-| 3 | SC-07 area | Flooded chamber | Salt Crab ×2 | Optional | Urashima | 55 | 3 |
+| 2 | SC-06 | Cave entrance | Salt Crab ×1 | Scripted (avoidable) | Urashima | 30 | 2–3 |
+| 3 | SC-07 area | Flooded chamber | Salt Crab ×2 | Optional | Urashima | 60 | 3 |
 | 4 | SC-08 | Deep pool | Tide Wraith ×2 | Forced | Urashima | 70 | 4 |
 | 5 | SC-09 | Boss arena | **Shore Wraith** | Boss | Urashima solo | 120 | 4–5 |
 | — | SC-10 | Shrine alcove | — | Yuzu joins | +party | — | 5 |
 
-**Post SC-10 optional:**
+**Post SC-10 optional** (`enc_sc10_optional_wraith` — doubles as heal tutorial, `TUTORIAL_DESIGN.md` SC-10):
 
 | # | Zone | Encounter | Type | Party | XP |
 |---|------|-----------|------|-------|-----|
@@ -89,7 +89,8 @@
 | Palace Sentinel | 1 | Spirit tutorial miniboss |
 | Tide Keeper | 1 | Final boss |
 
-**Total scripted fights:** 9 minimum, 10 with optional cave fight.
+**Total scripted encounters (data):** 9 in `story_encounters.json` — 6 unavoidable
+(SC-05, SC-08, SC-09, SC-12, SC-14, SC-15), 1 avoidable (SC-06), 2 optional (SC-07 crabs, SC-10 wraith).
 
 ---
 
@@ -99,10 +100,11 @@
 
 | Source | Amount |
 |--------|--------|
-| Per trash fight | 8–15 |
+| Per trash fight | 10–24 |
 | Per boss | 45–100 |
-| Lore collectibles | 5 each (×8 = 40) |
-| **Expected total** | ~350–450 coins |
+| Q2 quest reward | 50 |
+| Material sales (optional) | ~20–40 |
+| **Expected total (pre-Keeper)** | ~225–280 coins |
 
 ### Roku's shop (`roku_shack`)
 
@@ -114,9 +116,10 @@ Available after SC-04; restocks after SC-09. **Full catalog:** `docs/ITEMS_AND_E
 | `coral_antidote` | 30 | ∞ | Cure poison |
 | `spirit_tonic` | 50 | ∞ | Restore 25 MP |
 | `shell_charm` | 80 | 1 | +2 DEF charm |
-| Skill scrolls | 200 | 1 each | `tidal_slash`, `purify` |
+| Skill scrolls | 200 | 1 each | `returning_wave` (Urashima), `torii_ward` (Yuzu) — early unlocks |
 
-**Design intent:** Player can afford 6–8 salves + one scroll on main path without grind.
+**Design intent:** Player can afford several salves + one charm, OR save for one 200-coin scroll,
+on the main path without grind (see `PROGRESSION_TUNING.md` §8 affordance table).
 
 ---
 

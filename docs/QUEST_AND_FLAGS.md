@@ -7,13 +7,15 @@
 
 ## 1. Main quests (5)
 
-| # | Quest ID | Title | Act | Complete when |
-|---|----------|-------|-----|---------------|
+| # | Quest ID | Title | Act | Complete when (final stage flag) |
+|---|----------|-------|-----|----------------------------------|
 | 1 | `the_return` | The Return | I | `met_roku` |
 | 2 | `echoes_at_torii` | Echoes at the Torii | I–II | `shore_wraith_defeated` |
-| 3 | `depths_of_guilt` | Depths of Guilt | II | `yuzu_joined` |
+| 3 | `depths_of_guilt` | Depths of Guilt | II | `gate_reached` |
 | 4 | `palace_gate` | The Palace Gate | II–III | `sentinel_defeated` |
-| 5 | `the_tide_answer` | The Tide's Answer | III | `ending_chosen` |
+| 5 | `the_tide_answer` | The Tide's Answer | III | `game_completed` |
+
+**Rule:** a quest is complete when its **last stage's** completion flag is set (`main_quests.json` stages are ordered).
 
 ---
 
@@ -77,7 +79,7 @@
 | 2 | `defeat_sentinel` | Defeat Palace Sentinel | `sentinel_defeated` |
 
 **Rewards:** 100 XP, `palace_edge` (weapon drop)  
-**Blocker:** `wraith_pearl` required to open gate interior (set at SC-12)
+**Blocker:** `wraith_pearl` required to open gate interior (dropped by Shore Wraith at SC-09)
 
 ---
 
@@ -119,11 +121,11 @@
 | `saw_palace_vision` | SC-11 | Q3 stage 2 |
 | `sc12_gate_reveal_seen` | sc12_gate_reveal | Skip SC-12 gate movie on replay |
 | `gate_reached` | SC-12 dialogue | Q3 complete; Q4 unlock |
-| `roku_in_party` | SC-04 or SC-12 | Roku combat active |
+| `roku_combat_active` | SC-12 dialogue | Roku in combat roster |
 | `knows_box_truth` | SC-13 | Q4 stage 1; choice context |
-| `mirror_choice` | SC-13 dialogue | Recorded; see ENDING_DESIGN.md |
+| `mirror_choice` | SC-13 dialogue choice | `open` \| `break` \| `unknown` — SC-16 subtext flavor (ENDING_DESIGN.md §4) |
 | `sentinel_defeated` | SC-14 | Q4 complete |
-| `tide_keeper_phase3` | SC-15 @ 10% HP | Choice gate |
+| `tide_keeper_phase3` | SC-15 combat @ 10% HP (`triggers_choice` phase → `on_phase_trigger`) | Choice gate; Q5 stage 1 |
 | `ending_chosen` | SC-16 | `rewind` \| `anchor` \| `drift` |
 | `game_completed` | Credits end | Continue → title; achievements |
 
@@ -136,7 +138,7 @@
 | `beach_shore` | New game | Walk to village gate |
 | `ruined_village` | SC-01 | — |
 | `tidal_caves` | `cave_entrance_unlocked` | `shore_wraith_defeated` (boss door) |
-| `dragon_palace_gate` | `wraith_pearl` + `gate_reached` | `ending_chosen` |
+| `dragon_palace_gate` | `wraith_pearl` (key item) + `yuzu_joined` | `ending_chosen` |
 | `ending_*` | `ending_chosen` matching value | Credits → title |
 
 **Backtracking:** Allowed after Shore Wraith. Hub shop restocks after SC-09.
@@ -148,12 +150,15 @@
 | Character | Join flag | Combat active | Field visible | Scene |
 |-----------|-----------|---------------|---------------|-------|
 | Urashima | always | SC-01+ | always | — |
-| Roku | `roku_in_party` | SC-05+ (NPC advise only) → **SC-12+** full combat | SC-04 shack; SC-12+ follower | SC-04 meet; SC-12 party if missed |
+| Roku | `met_roku` (narrative) | `roku_combat_active` — **SC-12+** only | SC-04 shack; SC-12+ follower | SC-04 meet; joins party at SC-12 |
 | Yuzu | `yuzu_joined` | SC-10+ | SC-10+ follower | SC-10 |
 
-**Design rule:** Roku is **not** playable in SC-05 tutorial. He provides bark lines only. Full 3-party combat from SC-12 (or SC-10 if Roku joined early — he stays out of combat until gate).
+**Design rule:** Roku is **not** playable before SC-12. In SC-05 he provides bark lines only.
+Full 3-party combat from SC-12 onward.
 
-**Clarification:** `roku_in_party` = narrative met. `roku_combat_active` = set at SC-12 when entering palace gate dungeon.
+**Clarification:** `met_roku` (SC-04) = narrative met / shop open. `roku_combat_active` (SC-12
+dialogue) = Roku enters the combat roster. There is **no** `roku_in_party` flag — the two flags
+above are the only Roku state.
 
 ---
 
@@ -166,9 +171,10 @@
 
 ---
 
-## 7. Implementation JSON (target)
+## 7. Implementation JSON
 
-Extend `game/data/quests/main_quests.json` to 5 quests matching this doc. Add `depths_of_guilt` and `the_tide_answer`; split stages per tables above.
+`game/data/quests/main_quests.json` already contains all 5 quests with stages matching the
+tables above (schema v2). When editing quests, change the JSON first, then this doc.
 
 ---
 

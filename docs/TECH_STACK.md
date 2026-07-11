@@ -34,7 +34,7 @@ See `docs/MCP_STACK.md` for full R&R and conflict rules.
 | GDAI MCP 0.3.2 | 4.2+ | Verified | Re-download if editor errors |
 | Godotiq 0.5.15 | 4.x | Verified | `bash tools/install_godotiq.sh`; enable GodotIQ |
 | Godot MCP Pro | 4.4+ | Not installed | `bash tools/install_godot_mcp_pro.sh` (L4/L5) |
-| GodotSteam | **4.20+** | 4.15 loads (dev); upgrade for ship | `bash tools/install_godotsteam.sh` (Phase 8) |
+| GodotSteam | Godot 4.7 needs **GodotSteam plugin v4.20+** (plugin version, not engine) | plugin 4.15 loads (dev); upgrade for ship | `bash tools/install_godotsteam.sh` (Phase 8) |
 
 ## Ship (Phase 8)
 

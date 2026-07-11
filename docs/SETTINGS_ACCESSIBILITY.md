@@ -11,7 +11,8 @@ Accessible from: Main menu, Pause menu (field + combat)
 
 | Setting | Type | Default | Storage key |
 |---------|------|---------|-------------|
-| **Language** | en / ja / zh | System or en | `locale` |
+| **Language** | en / ja / zh / zh-Hant | System or en | `locale` |
+| **Voice dialect** (zh-Hant only) | 粵語 (Cantonese) / 國語 (Mandarin) | cant | `vo_dialect` |
 | **Master volume** | 0–100% | 80 | `master_volume` |
 | **Music volume** | 0–100% | 70 | `music_volume` |
 | **SFX volume** | 0–100% | 80 | `sfx_volume` |

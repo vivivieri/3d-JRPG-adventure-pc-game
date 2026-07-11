@@ -3,16 +3,16 @@
 **Version:** 1.0 (Pre-build)  
 **Cross-refs:** `docs/ENDING_DESIGN.md`, `docs/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`
 
-**Total:** 12 achievements (easy distribution for short game)
+**Total:** 13 achievements (easy distribution for short game) — matches `game/data/achievements/achievements.json`
 
 ---
 
 ## 1. Story & endings
 
-| ID | Name (EN) | Trigger | Hidden |
-|----|-----------|---------|--------|
-| `ACH_FIRST_STEP` | Washed Ashore | Complete SC-01 | No |
-| `ACH_EMPTY_HOME` | Empty Home | Complete SC-02 all inspects | No |
+| ID | Name (EN) | Trigger (data: `achievements.json`) | Hidden |
+|----|-----------|--------------------------------------|--------|
+| `ACH_FIRST_STEP` | Washed Ashore | Flag `game_started` (set during SC-01) | No |
+| `ACH_EMPTY_HOME` | Empty Home | All 3 `inspected_*` flags (SC-02) | No |
 | `ACH_ENDING_REWIND` | The Rewind | Choose Rewind ending | No |
 | `ACH_ENDING_ANCHOR` | The Anchor | Choose Anchor ending | No |
 | `ACH_ENDING_DRIFT` | The Drift | Choose Drift ending | No |
@@ -54,4 +54,4 @@
 
 - [ ] No achievement fires twice
 - [ ] Offline: queue unlock when Steam connects
-- [ ] Names localized in Steam backend (en/ja/zh)
+- [ ] Names localized in Steam backend (en/ja/zh/zh-Hant)

@@ -49,7 +49,7 @@
 ## 4. Solution path
 
 1. Enter chamber (LOW default)
-2. Optional: loot chest in side alcove (LOW)
+2. Optional: loot chest in side alcove (LOW) — contains `tide_cut_saber` (`scenes.json` `grants_items`)
 3. Flip Switch A → HIGH
 4. Cross platform to **Ancient Latch** (interact E)
 5. Latch opens north gate → SC-08 deep pool
@@ -77,7 +77,7 @@ Requires `hints_enabled` in settings (default on).
 | Risk | Mitigation |
 |------|------------|
 | Player leaves HIGH, can't reach latch | Switch visible from all paths |
-| Chest missable | Optional; antidote in chest not required |
+| Chest missable | Optional; `tide_cut_saber` is a bonus weapon, never required (Normal clear possible on `fisher_katana`) |
 | Water animation interrupt | Player can move; no lock-in |
 
 ---
@@ -87,7 +87,7 @@ Requires `hints_enabled` in settings (default on).
 - `cave_switch_stone` — interactable
 - `cave_flood_basin` — water mesh
 - `WaterPuzzle` node — state machine
-- `cave_chest_ancient` — optional `coral_antidote` or `sea_salve` ×2
+- `cave_chest_ancient` — optional chest: `tide_cut_saber` (canonical, `scenes.json` SC-07 `grants_items`)
 
 ---
 

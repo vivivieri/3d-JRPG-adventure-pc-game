@@ -1,8 +1,12 @@
 # Tides of Urashima — Boss Design Sheets
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.1 (Pre-build — reconciled with data)  
 **Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
 **Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/CHARACTER_BIBLE.md` §6 (3D specs)
+
+> **Canonical numbers:** All stats, skill IDs, phase thresholds, and drops below mirror
+> `game/data/enemies/enemies.json` + `game/data/skills/skills.json` (see `docs/README.md`
+> numeric values rule). Flavor action names are listed next to their data skill IDs.
 
 ---
 
@@ -47,56 +51,53 @@
 
 **3D production:** Full mesh breakdown, poly budgets, GLB paths — `docs/CHARACTER_BIBLE.md` §6 (`shore_wraith`).
 
-### Stats (Normal)
+### Stats (Normal) — from `enemies.json`
 
 | Stat | Value |
 |------|-------|
-| HP | 420 |
-| ATK | 14 |
-| DEF | 8 |
-| SPD | 6 |
-| MP | 0 |
+| HP | 320 (tuned for **solo Urashima** — Yuzu joins after SC-09) |
+| ATK | 13 |
+| DEF | 10 |
+| MAG | 16 |
+| RES | 12 |
+| SPD | 10 |
+
+### Skill kit (data IDs)
+
+| Data skill ID | Flavor name | Intent | Effect (see `skills.json`) |
+|---------------|-------------|--------|-----------------------------|
+| `drown_touch` | Drowned Grasp | Skull | Single target, MAG ×1.1 water; 40% Poison 3t |
+| `regret_surge` | Regret Aura | Waves | All party, MAG ×1.3 spirit; 60% Def Down 2t |
 
 ### Phase 1 — Accusation (100% → 50% HP)
 
-**Behavior:** Slow, heavy hits; punishes idle healing.
+**Behavior:** Slow, heavy hits; punishes idle healing.  
+**AI weights (data):** `drown_touch` 70 / `regret_surge` 30.
 
-| Turn priority | Action | Intent | Effect |
-|---------------|--------|--------|--------|
-| 1 | Drowned Grasp | Skull | Single target 120% ATK |
-| 2 | Regret Aura | Waves | All party: Def Down 2 turns |
-| 3 | Heavy Slam | Sword | Single 150% ATK; skip if stunned |
-| Repeat | Cycle with 20% chance Grasp → Slam swap |
-
-**Player teach moment:** Use Defend on Slam turn; Yuzu heal on Grasp turn if available (joined after fight — solo Urashima for this fight in v1 data; if Yuzu pre-join, adjust HP up 15%).
-
-**Note:** Current story order has Yuzu join **after** SC-09. Boss is **Urashima solo** — tune HP to ~320 for solo.
+**Player teach moment:** Use Defend when Skull intent shows; cure Poison with `coral_antidote`.
 
 ### Phase 2 — Collective (50% → 0% HP)
 
-**Trigger:** Banner "The drowned rise with me!"
+**Trigger:** Banner "The drowned rise with me!" (`phases[0].hp_threshold: 0.5`)
 
-| Change | Detail |
-|--------|--------|
-| SPD | +2 |
-| New skill | Summon Tide Wraith (once, at 40% HP) |
-| Pattern | Grasp → Aura → Slam → Grasp (faster) |
+**AI weights (data):** `regret_surge` 60 / `drown_touch` 40 — pressure shifts to AoE.
 
-**Add — Tide Wraith:** 80 HP, ATK 8; dies in 2–3 hits; no intent on add (standard enemy rules).
+> **Cut for v1:** the earlier "Summon Tide Wraith" add mechanic is **not** in
+> `enemies.json` and is not implemented. If reinstated post-v1, add a summon skill
+> to `skills.json` and an `adds` block to the boss entry first.
 
 ### Hard mode deltas
 
 - Intent icons appear **same turn** (no preview) in phase 2
-- Regret Aura also applies Poison 2 turns
-- Add spawns at 50% instead of 40%
+- Global Hard multipliers apply (HP ×1.15, ATK ×1.10 — `PROGRESSION_TUNING.md` §6)
 
-### Rewards
+### Rewards — from `enemies.json`
 
 | Drop | Rate |
 |------|------|
-| XP | 120 (solo) / 150 (if party) |
+| XP | 120 |
 | Shell coins | 45 |
-| Item | Antidote ×1 (100% first kill) |
+| Item | `wraith_pearl` ×1 (100% — key item, opens palace gate) |
 
 ### Audio / VFX
 
@@ -120,42 +121,43 @@
 - Tall (~2.5m); spear + tower shield
 - No European plate mail — lacquer plates only
 
-### Stats (Normal)
+### Stats (Normal) — from `enemies.json`
 
 | Stat | Value |
 |------|-------|
-| HP | 380 |
+| HP | 250 |
 | ATK | 16 |
 | DEF | 14 |
+| MAG | 6 |
+| RES | 10 |
 | SPD | 8 |
-| MP | 20 |
+
+### Skill kit (data IDs)
+
+| Data skill ID | Flavor name | Intent | Effect (see `skills.json`) |
+|---------------|-------------|--------|-----------------------------|
+| `sentinel_cleave` | Spear Thrust | Sword | Single target, ATK ×1.6 physical |
+| `shell_harden` | Oath of Stillness | Shield | Self Def Up +4, 2 turns |
 
 ### Phase 1 — Guardian (100% → 0% HP, single phase)
 
-**Behavior:** Defensive rotation; spike damage if ignored.
+**Behavior:** Heavy single-target pressure; hardens when low.  
+**AI weights (data):** `sentinel_cleave` 75 / `shell_harden` 25 (only below 40% HP).
 
-| Turn priority | Action | Intent | Effect |
-|---------------|--------|--------|--------|
-| Opening | Oath of Stillness | Shield | Def Up 3 turns |
-| Cycle A | Spear Thrust | Sword | Single 130% ATK |
-| Cycle B | Palace Reprisal | Skull | Single 160% ATK if target healed last turn |
-| Every 3rd | Barrier Pulse | Shield | Self Regen 5% HP |
-
-**Spirit weakness:** Yuzu Purify / Holy Light deals **150%** damage. UI hint after first Barrier Pulse: *"Spirit arts pierce the lacquer."*
+**Spirit weakness:** `spirit_weakness: 1.5` in data — Spirit-element damage (Yuzu `purify`, Urashima `box_unbound`) deals **×1.5**. UI hint after first `shell_harden`: *"Spirit arts pierce the lacquer."*
 
 ### Hard mode deltas
 
-- DEF +4
-- Reprisal triggers on **any** buff, not just heal
-- Barrier Pulse every 2nd turn
+- Global Hard multipliers (HP ×1.15, ATK ×1.10)
+- Intent shown same-turn in second half of fight
 
-### Rewards
+### Rewards — from `enemies.json`
 
 | Drop | Rate |
 |------|------|
 | XP | 100 |
 | Shell coins | 60 |
-| Item | Skill scroll `spirit_veil` (one-time 100%) |
+| Item | `palace_edge` (100% — best Urashima weapon), `palace_fragment` (50%) |
 
 ---
 
@@ -175,76 +177,71 @@
 
 **3D production:** Phase mesh swaps, materials, animations — `docs/CHARACTER_BIBLE.md` §6 (`tide_keeper`).
 
-### Stats (Normal)
+### Stats (Normal) — from `enemies.json`
 
 | Stat | Value |
 |------|-------|
-| HP | 900 |
-| ATK | 18 |
-| DEF | 10 |
-| SPD | 9 |
-| MP | 50 |
+| HP | 580 |
+| ATK | 15 |
+| DEF | 12 |
+| MAG | 20 |
+| RES | 14 |
+| SPD | 11 |
+
+### Skill kit (data IDs)
+
+| Data skill ID | Flavor name | Intent | Effect (see `skills.json`) |
+|---------------|-------------|--------|-----------------------------|
+| `drown_touch` | Gentle Pull | Sword | Single target, MAG ×1.1 water; 40% Poison 3t |
+| `tide_lament` | Tidal Fingers / Maelstrom | Waves | All party, MAG ×1.5 water; 25% Stun 1t |
+| `regret_surge` | Borrowed Moment | Clock | All party, MAG ×1.3 spirit; 60% Def Down 2t |
 
 ### Phase 1 — Calm (100% → 66% HP)
 
-**Tone:** "Paradise is mercy."
+**Tone:** "Paradise is mercy."  
+**AI weights (data):** `drown_touch` 50 / `tide_lament` 50.
 
-| Action | Intent | Effect |
-|--------|--------|--------|
-| Tidal Fingers | Waves | All party 80% ATK water |
-| Borrowed Moment | Clock | Urashima SPD Down 2 turns |
-| Gentle Pull | Sword | Single 110% ATK + MP drain 5 |
+### Phase 2 — Surge (66% → 33% HP)
 
-**Pattern:** Fingers → Pull → Fingers → Borrowed (loop)
+**Trigger:** Banner "The tide rises..." (`phases[0].hp_threshold: 0.66`)  
+**Camera:** Slow orbit during phase (see `CINEMATICS.md`)  
+**AI weights (data):** `regret_surge` 40 / `tide_lament` 60 — AoE pressure peaks.
 
-### Phase 2 — Surge (66% → 25% HP)
+### Phase 3 — Ebb (33% → 10% HP)
 
-**Trigger:** Banner "Then let the sea decide!"  
-**Camera:** Slow orbit during phase (see `CINEMATICS.md`)
-
-| Change | Detail |
-|--------|--------|
-| ATK | +3 |
-| New | Maelstrom | Waves | All 120% ATK; Def Down 1 turn |
-| Pattern | Maelstrom every 3rd turn; Borrowed Moment → Pull between |
-
-### Phase 3 — Ebb (25% → 10% HP)
-
-**Trigger:** Banner "Even mercy... tires."
-
-| Change | Detail |
-|--------|--------|
-| SPD | -2 |
-| Tone | Dialogue barks shorter; more pauses |
-| New | Ebb Remembrance | Sparkles | Single 100% Spirit; heals self 3% (ironic) |
+**Trigger:** Banner "Time fractures." (`phases[1].hp_threshold: 0.33`)  
+**AI weights (data):** `tide_lament` 100. Dialogue barks shorter; more pauses.
 
 ### Choice gate (10% HP)
 
-**Combat pauses.** No timer.
+**Trigger:** `phases[2].hp_threshold: 0.1` with `triggers_choice: true` → banner "Choose." →
+**combat freezes** and combat logic sets flag **`tide_keeper_phase3`**. No timer.
 
 | UI | Options |
 |----|---------|
 | Choice overlay | **Rewind** / **Anchor** / **Drift** |
 | Dialogue | Tide Keeper: "Return what was taken — or become the tide." |
 
-**After choice:** Boss uses final skill `Last Mercy` (cosmetic 1 turn) → scripted defeat → ending scene.
+**After choice:** SC-16 dialogue choice sets **`ending_chosen`** (`rewind` \| `anchor` \| `drift`) →
+scripted `Last Mercy` beat (cosmetic 1 turn, cinematic — not a data skill) → scripted defeat sets
+**`tide_keeper_defeated`** → ending scene SC-17a/b/c.
 
-**Technical:** Set flag `final_choice_made`; do not allow attack input during prompt.
+**Technical:** Flag sequence is `tide_keeper_phase3` (at 10% HP) → `ending_chosen` (SC-16 choice)
+→ `tide_keeper_defeated` (scripted resolution). No attack input during the prompt.
 
 ### Hard mode deltas
 
-- HP 1100
-- Maelstrom in phase 2 has **no** intent preview
-- Borrowed Moment also applies Stun 1 turn (25% chance)
+- Global Hard multipliers (HP ×1.15 → ~667, ATK ×1.10)
+- `tide_lament` in phase 2+ has **no** intent preview
 - Choice gate at 15% HP (less room for error)
 
-### Rewards
+### Rewards — from `enemies.json`
 
 | Drop | Rate |
 |------|------|
 | XP | 250 |
 | Shell coins | 100 |
-| Item | None (story reward = ending) |
+| Item | `palace_fragment` (100%) — story reward = ending |
 
 ---
 
@@ -253,10 +250,10 @@
 **Storyboard:** SC-05  
 **Not a boss** but combat template.
 
-| Stat | HP 40 | ATK 6 | DEF 4 | SPD 4 |
+| Stat | HP 40 | ATK 7 | DEF 5 | SPD 6 |
 |------|-------|-------|-------|-------|
-| Skills | Pinch (100% ATK) only |
-| AI | Attack lowest HP |
+| Skills | `claw_snap` (ATK ×1.0) 80% / `shell_harden` (Def Up) 20% below 50% HP |
+| AI | Weighted (see `enemies.json`) |
 | Tutorial | Force Attack → Skill → Defend prompts |
 
 Guaranteed win; no escape needed.
@@ -267,10 +264,11 @@ Guaranteed win; no escape needed.
 
 ### Tide Wraith (`tide_wraith`)
 
-| HP 70 | ATK 10 | DEF 3 | SPD 9 |
-|-------|--------|-------|-------|
-| Skill | Drown Touch — 90% ATK + Poison 2 turns |
-| AI | Target lowest HP; 30% double attack if alone |
+| HP 50 | ATK 6 | MAG 10 | DEF 4 | RES 6 | SPD 9 |
+|-------|-------|--------|-------|-------|-------|
+| Skill | `drown_touch` — MAG ×1.1 water + 40% Poison 3 turns |
+| AI | Weighted 100% `drown_touch` |
+| Drops | `spirit_shard` 30% |
 
 ### Salt Crab (`salt_crab`) — field
 
@@ -290,22 +288,21 @@ See tutorial above; field versions identical, lower XP.
 
 ## 8. Data implementation notes
 
-Add to `game/data/enemies/enemies.json`:
+Boss phases are already encoded in `game/data/enemies/enemies.json` — the combat runtime consumes:
 
 ```json
 {
-  "intent_delay": 1,
+  "ai": { "type": "phase", "phases": [{ "hp_above": 0.5, "weights": [...] }] },
   "phases": [
-    { "hp_threshold": 0.5, "skill_unlock": ["summon_wraith"], "stat_mod": { "spd": 2 } }
-  ],
-  "hard_mode": {
-    "intent_delay": 0,
-    "stat_mod": { "hp": 1.15 }
-  }
+    { "hp_threshold": 0.5, "announcement": "The drowned rise with me!" },
+    { "hp_threshold": 0.1, "announcement": "Choose.", "triggers_choice": true }
+  ]
 }
 ```
 
-**Hard mode toggle:** `user://settings.json` → `hard_mode: bool`; menu option in M5 polish.
+- `ai.phases[].hp_above` — skill-weight bands (behavior per phase)
+- `phases[].hp_threshold` — banner announcements; `triggers_choice: true` freezes combat and sets `tide_keeper_phase3`
+- Hard mode multipliers (HP ×1.15, ATK ×1.10, intent delay 0 in phase 2+) are applied at runtime from `user://settings.json` → `hard_mode: bool` — not stored per enemy.
 
 ---
 

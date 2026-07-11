@@ -325,7 +325,7 @@ Extend with emission for interactables; keep one ramp family project-wide.
 
 ---
 
-## 6. Workflow checklist (M6 art rebuild)
+## 6. Workflow checklist (M5 art rebuild)
 1. **Boot** — `bash tools/ensure_gdai_mcp.sh`; notify user if GDAI MCP unavailable.
 2. **Read** zone row in `docs/RENDERING_GUIDE.md` + `docs/ENVIRONMENT_KITS.md`.
 3. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.

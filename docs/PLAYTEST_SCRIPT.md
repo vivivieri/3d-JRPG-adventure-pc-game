@@ -18,7 +18,7 @@
 | Understand 3 endings | Post-survey |
 | Combat too easy/hard | Boss attempts ≤3 Normal |
 | Soft-lock | Zero |
-| Localization | No missing keys en/ja/zh |
+| Localization | No missing keys en/ja/zh/zh-Hant |
 
 ---
 
@@ -36,7 +36,7 @@
 - [ ] Fresh `user://` delete
 - [ ] Record playtime, deaths, ending chosen
 - [ ] Note build commit + branch
-- [ ] Language rotation: 1/3 each en/ja/zh across testers
+- [ ] Language rotation across testers: en / ja / zh / zh-Hant (incl. one zh-Hant + Cantonese VO session)
 
 ---
 

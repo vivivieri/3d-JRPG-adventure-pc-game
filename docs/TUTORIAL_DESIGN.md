@@ -57,6 +57,12 @@
 | **Lore journal** | SC-02 | First lore read | "Tab → Lore — collected memories" | `tutorial_lore_done` |
 | **Field menu** | SC-04 | First Tab press | "Tab — menu (items, equipment, quests, lore)" | `tutorial_menu_done` |
 
+**Flag storage:** only `tutorial_movement_done`, `tutorial_camera_done`, and `tutorial_combat_done`
+are **story flags** (`game/data/story/flags.json` — set by scene spine, usable in scene conditions).
+All other `tutorial_*` names above are **UI tutorial flags** owned by the tutorial system and stored
+in the save slot's `tutorial_seen[]` array (`SAVE_AND_FAIL_STATES.md` §2) — do **not** add them to
+the story-flag registry.
+
 ---
 
 ## 4. Scene-by-scene script
@@ -123,11 +129,11 @@ Urashima cannot die; HP floor at 1.
 
 ## 7. Replay behavior
 
-| Flag | Replay |
-|------|--------|
-| `prologue_seen` | Skip prologue offered |
-| `tutorial_*` | All prompts suppressed |
-| `game_completed` | Full skip on tutorials; optional "Hints" in settings |
+| Flag | Where stored | Replay behavior |
+|------|--------------|-----------------|
+| `prologue_seen` | `profile_meta.json` (cross-run) | Skip prologue offered on every later run |
+| `tutorial_*` | run save slot | Suppressed within a run; **reset on New Game** (prompts reshow) |
+| `game_completed_once` | `profile_meta.json` (cross-run) | All tutorials auto-skipped on later runs; optional "Hints" in settings |
 
 ---
 
@@ -136,5 +142,5 @@ Urashima cannot die; HP floor at 1.
 - [ ] New player reaches SC-05 combat without reading a manual
 - [ ] Intent UI understood by 90% playtesters without extra text
 - [ ] Shop tutorial does not trap player in UI
-- [ ] All tutorial strings exist in en / ja / zh
+- [ ] All tutorial strings exist in en / ja / zh / zh-Hant
 - [ ] No tutorial prompt during SC-16 choice

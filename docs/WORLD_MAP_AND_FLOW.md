@@ -41,7 +41,7 @@ Single continuous coastal region — no world map screen v1. Player walks betwee
 |------|-----|---------|-------------|
 | `beach_shore` | `ruined_village` | Walk to gate | SC-01 complete |
 | `ruined_village` | `tidal_caves` | Cave entrance below cliffs | `cave_entrance_unlocked` (SC-04) |
-| `tidal_caves` | `dragon_palace_gate` | Palace gate at cave exit | `wraith_pearl` + SC-11 |
+| `tidal_caves` | `dragon_palace_gate` | Palace gate at cave exit | `wraith_pearl` (key item) + `yuzu_joined` |
 | `dragon_palace_gate` | Ending zones | SC-16 choice | `ending_chosen` |
 
 **Backtracking:** Allowed. Village hub revisitable until ending. No fast travel v1.

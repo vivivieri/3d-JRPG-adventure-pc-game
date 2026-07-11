@@ -14,6 +14,8 @@
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
 | 5 | [MCP_STACK.md](MCP_STACK.md) + [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) + [`.cursorrules`](../.cursorrules) | Tools and agent rules |
 
+**Numeric values rule:** For any runtime number — enemy/party stats, skill costs and powers, prices, XP, drop rates, flag names — **`game/data/*.json` wins** over design-doc prose. Design docs mirror the JSON; when tuning changes, update the JSON first, then the doc tables. Run `python3 tools/validate_story_data.py` after any data edit.
+
 ---
 
 ## Quick links by role
@@ -68,14 +70,14 @@
 | Doc | Purpose |
 |-----|---------|
 | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) | Turn order, elements, status, intent UI |
-| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 15 player + 6 enemy skills |
+| [SKILLS_BIBLE.md](SKILLS_BIBLE.md) | 14 player + 6 enemy skills |
 | [BOSS_DESIGNS.md](BOSS_DESIGNS.md) | Shore Wraith, Sentinel, Tide Keeper |
 | [ENCOUNTER_TABLE.md](ENCOUNTER_TABLE.md) | Pacing, XP, drops, shop timing |
 | [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) | XP curve, stats at milestones, difficulty |
 | [ITEMS_AND_ECONOMY.md](ITEMS_AND_ECONOMY.md) | 20 items, shop, drops, inflation guards |
 | [TUTORIAL_DESIGN.md](TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
 | [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards |
-| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 12 Steam achievements |
+| [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 13 Steam achievements |
 
 ---
 

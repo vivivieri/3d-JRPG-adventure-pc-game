@@ -1,7 +1,7 @@
 # Tides of Urashima — Game Design Document
 
-**Version:** 0.2 (Pre-build)  
-**Engine:** Godot 4  
+**Version:** 0.3 (Pre-build)  
+**Engine:** Godot 4.7 (Forward+)  
 **Platform:** PC (Steam)  
 **Target audience:** Men 20–30  
 **Playtime target:** 2–3 hours (main story)  
@@ -63,7 +63,7 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 | Party members | 3 (Urashima, Yuzu the shrine maiden spirit, Roku the diver) |
 | Main quests | 5 — see `docs/QUEST_AND_FLAGS.md` |
 | Side lore collectibles | 8 |
-| Skills (total) | 15 player + 6 enemy — see `docs/SKILLS_BIBLE.md` |
+| Skills (total) | 14 player (unique IDs; `strike` shared) + 6 enemy — see `docs/SKILLS_BIBLE.md` |
 | Playtime | 2–3 hours |
 
 ---
@@ -74,12 +74,12 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 - **Role:** Balanced fighter / party leader
 - **Arc:** From escapist to accountable
 - **Combat:** Sword + tidal skills (water element)
-- **Key stat spread:** ATK 8, DEF 6, SPD 7, MP 5
+- **Base stats (L1, `party.json`):** HP 120, MP 30, ATK 14, DEF 10, MAG 8, RES 9, SPD 11
 
 ### Yuzu (Companion — Shrine Maiden Spirit)
 - **Role:** Healer / buffer
 - **Backstory:** Died waiting for Urashima's return; bound to the broken torii gate
-- **Combat:** Purify, heal, holy light
+- **Combat:** Purify, heals, spirit light (`SKILLS_BIBLE.md` §2)
 - **Unlock:** After clearing Tidal Caves
 
 ### Roku (Companion — Old Diver)
@@ -200,7 +200,7 @@ game/
   scenes/             Godot scenes (world, combat, UI)
 ```
 
-**Data-driven design:** All combat and dialogue content in JSON/YAML for fast AI-assisted iteration.
+**Data-driven design:** All combat and dialogue content in JSON (`game/data/` — no YAML) for fast AI-assisted iteration.
 
 ---
 

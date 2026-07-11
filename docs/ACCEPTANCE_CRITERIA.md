@@ -72,7 +72,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | Gate ID | Pass when |
 |---------|-----------|
 | `L4_integration` | All `INT-*` scenarios pass, exit 0 |
-| `L5_e2e_three_endings` | Exit 0, **not SKIP**, Rewind + Anchor + Drift |
+| `L5_e2e_three_endings` | Exit 0, **not SKIP** (gate runs use `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` — the stub then exits 1), Rewind + Anchor + Drift |
 
 ### Ship
 

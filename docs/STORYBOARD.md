@@ -95,7 +95,7 @@
 | **Location** | Tidal Caves — flooded chamber |
 | **Camera** | Top-down wide for puzzle readability |
 | **Summary** | Urashima must raise/lower water to reach an ancient latch. **No dialogue — quiet puzzle by design** (`NARRATIVE_WRITING_GUIDE.md` §4). |
-| **Gameplay** | Switch puzzle (2 states); optional chest with antidote |
+| **Gameplay** | Switch puzzle (2 states); optional chest with `tide_cut_saber` (Act II weapon spike — `scenes.json`) |
 | **Mood** | Quiet problem-solving |
 | **Assets** | Water plane animation, switch props, chest |
 

@@ -145,7 +145,7 @@ Quiet guilt; short sentences in Act I; firm declarations in Act III.
 
 ### Field presence
 
-- Joins party SC-10; **optional follower** in field from SC-12 (2m behind Urashima, no collision)
+- Joins party SC-10 (`yuzu_joined`); field follower from SC-10 onward (2m behind Urashima, no collision)
 - Idle: hands clasped; occasional bell chime SFX
 
 ### Combat read
@@ -180,7 +180,7 @@ Small, upright; heal cast = hands raised, light pillar; purify = bell shake + wa
 ### Field presence
 
 - SC-04: emerges from shack interior trigger
-- SC-04–12: stays near shack unless story flag `roku_joins_party`
+- SC-04–12: stays near shack; becomes field follower when `roku_combat_active` is set (SC-12)
 - Shop UI: same model in window silhouette or portrait only (performance)
 
 ### Combat read

@@ -215,7 +215,11 @@ bash tools/check_asset_compliance.sh
 
 ### Full regression
 
-Follow `PLAYTEST_SCRIPT.md` Acts I–III once per milestone (**M2** combat slice, **M4** full story, **M5** art pass, **M6** ship gate).
+Follow `PLAYTEST_SCRIPT.md` Acts I–III once per milestone. **Who runs it:** at **M2** and any
+milestone where L5 has not yet passed, the regression is executed by **AI agents** (GDAI F5 +
+Godot MCP Pro scripted runs — the golden rule in `AI_TESTING_SPEC.md` §1 forbids human playtests
+before L0–L5 pass). **Human** testers run it at **M4+** only after L0–L5 are green (**M4** full
+story, **M5** art pass, **M6** ship gate).
 
 ### Post-fix regression
 

@@ -27,16 +27,19 @@ This document is the **single source of truth** for:
 ### 1.2 Session startup (every agent run)
 
 ```bash
-bash tools/ensure_gdai_mcp.sh
+bash tools/ensure_mcp_stack.sh   # full stack — wraps ensure_gdai_mcp.sh
 ```
 
-Both must be true before implementation:
+All must be true before implementation (`.cursorrules` §0 / `MCP_STACK.md`):
 
 | Check | How |
 |-------|-----|
 | GDAI HTTP bridge | `curl -sf http://127.0.0.1:3571/tools` returns JSON |
-| Cursor MCP | `godot-mcp` connected (desktop Settings or cloud dashboard) |
+| Cursor MCP servers | `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`, `notion` all connected |
 | Godot Editor | Running with `game/project.godot` open |
+
+If any server is missing → **stop and notify the user** (`godot-mcp-pro` hard-blocks L4/L5 gates;
+others block their respective roles — see `MCP_STACK.md`).
 
 ### 1.3 Build loop (per task)
 
@@ -205,7 +208,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 1.6 | ProceduralSky (no HDRI) per `RENDERING_GUIDE.md` §4 | GDAI viewport |
 | 1.7 | Greybox scenes exist for all 4 zones; each loads headless | Integration test |
 | 1.8 | L0 + L1 + L2 + L3 pass after every commit | CI scripts |
-| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 checklist | AI screenshot in `artifacts/screenshots/` + L3 pass |
+| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 **Phase 1 (greybox) checklist** — final-art items defer to Phase 7 | AI screenshot in `artifacts/screenshots/` + L3 pass |
 
 ### Phase 2 — Core systems shell
 
@@ -219,7 +222,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 2.6 | Zone transitions per `WORLD_MAP_AND_FLOW.md` | Integration `test_zone_transitions.gd` |
 | 2.7 | `AudioManager` plays zone BGM; SFX on Voice/Music buses | GDAI F5 |
 | 2.8 | Settings menu: language, `vo_dialect` (when zh-Hant), volumes persist | GDAI F5 + unit test |
-| 2.9 | Save at village well → reload → flags persist | Unit + integration |
+| 2.9 | SaveSystem round-trip: save (well SavePoint in greybox village, or direct API call) → reload → flags persist | Unit + integration |
 | 2.10 | L0–L4 pass | All test scripts |
 
 ### Phase 3 — Narrative & exploration
@@ -233,7 +236,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 3.5 | Tab inventory + Roku shop prices match `roku_shop.json` | Unit + GDAI F5 |
 | 3.6 | SC-00 prologue plays; `prologue_seen` flag set | Integration test |
 | 3.7 | SC-01 through SC-05 reachable without soft-lock | Integration test |
-| 3.8 | 8 lore entries discoverable per `lore_placements.json` | Integration test |
+| 3.8 | 8 lore entries discoverable per `lore_placements.json` (greybox zones from Phase 1 are sufficient) | Integration test |
 | 3.9 | All four written locales render (en / ja / zh / zh-Hant); no raw keys on main path | GDAI F5 + FLOW QA |
 | 3.10 | L0–L4 pass | All test scripts |
 
@@ -252,7 +255,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 
 | # | Criterion | Verification |
 |---|-----------|--------------|
-| 5.1 | `tidal_caves.tscn` art pass per `ENVIRONMENT_KITS.md` §5 | GDAI screenshot |
+| 5.1 | `tidal_caves.tscn` lighting/palette pass per `ENVIRONMENT_KITS.md` §5 (greybox meshes OK — final art is Phase 7) | GDAI screenshot |
 | 5.2 | SC-07 water puzzle: silent, no VO; state machine matches `PUZZLE_DESIGN.md` | Unit + GDAI F5 |
 | 5.3 | Shore Wraith SC-09 win/lose paths | Integration test |
 | 5.4 | Yuzu joins at SC-10; party size = 2 | Flag unit test |
