@@ -189,6 +189,16 @@ One file per chapter; scenes reference story IDs.
 | SC-14 boss | `palace_edge` |
 | Lore read | `spirit_bell` — `items.json` `story_grant: "lore:sailor_charm"` (granted when the `sailor_charm` lore entry is read; `lore:` prefix = lore-entry source, plain `SC-*` = scene source) |
 
+### Reward ownership rule (avoid double-grants)
+
+Several story items currently appear in **multiple** grant paths — e.g. `wraith_pearl` is a boss `drops` entry (`enemies.json`), an encounter `on_win.grant_items` (`story_encounters.json`), a quest `rewards.items` (`main_quests.json`), and an item `story_grant` (`items.json`); `palace_edge` is similar. To prevent duplicate grants or races, **exactly one** path is canonical:
+
+- **Combat/story key items:** the encounter `on_win.grant_items` is the single source that actually adds the item to inventory.
+- Enemy `drops`, quest `rewards.items`, and item `story_grant` for the *same* item are **descriptive only** (UI/economy documentation) and must be no-ops at runtime, or de-duplicated by item id on grant.
+- Quest `rewards` should otherwise grant only XP/gold (distinct from the combat drop).
+
+The runtime grant code and `validate_story_data.py` should enforce single-grant-per-item-id.
+
 ---
 
 ## 9. Shop as data (`shop/roku_shop.json`)
@@ -250,6 +260,11 @@ Trigger forms used in the data (all present in `achievements.json`):
 }
 ```
 
+**Field notes:**
+- `start_scene` holds a **zone id** (`beach_shore`), *not* a `SC-*` scene id. It is the first playable **zone** loaded after the optional prologue. (Consider renaming to `start_zone` in a future schema bump for clarity.)
+- Load order when `play_prologue: true`: **SC-00 prologue cinematic → load `beach_shore` zone → SC-01** begins there. When `play_prologue: false` (replay with `prologue_seen`), skip straight to the `beach_shore` load.
+- `party_field` = follower/overworld roster; `party_combat` = battle roster (they diverge as Yuzu/Roku join).
+
 ---
 
 ## 12. Localization split
@@ -289,15 +304,17 @@ Checks (see the script for the authoritative list):
 
 ---
 
-## 15. Priority implementation order
+## 15. File maintenance order (all files already exist)
+
+All spine files below are already present in `game/data/`. This is the dependency order to keep in mind when editing — change upstream files before downstream references:
 
 1. `story/scenes.json` + `story/flags.json` — spine
 2. `quests/main_quests.json` — 5 quests
 3. `items/items.json` + `starting/new_game.json`
 4. `encounters/story_encounters.json`
-5. `dialogue/chapter_01.json` — fill missing scenes
+5. `dialogue/chapter_01.json`
 6. `shop/roku_shop.json` + `achievements/achievements.json`
-7. `tools/validate_story_data.py`
+7. Re-run `python3 tools/validate_story_data.py` after any edit
 
 ---
 
