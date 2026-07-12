@@ -80,7 +80,9 @@ Testing is **layered**. Higher layers run after lower layers pass.
 | **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
 | **L6 — Human QA** | `docs/PLAYTEST_SCRIPT.md` | Human (**after L0–L5 pass**) | Feel, pacing, localization — **ship gate only** |
 
-**GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_ci_checks.sh` — L0, L1, L2 primitives, L4 integration, asset compliance. Does **not** run MCP readiness, GDAI F5, jury, or E2E. See `docs/CI.md`.
+**GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_docs_ci_checks.sh` on `main`.  
+**Game CI** (`game-ci.yml` on `game/development`): `bash tools/run_ci_checks.sh`.  
+**Environments & multi-agent:** `docs/ENVIRONMENTS.md`, `docs/MULTI_AGENT_TEAM.md`, `docs/PROJECT_MANAGEMENT.md`.
 
 ### 2.1 AI agent obligations
 

@@ -1,0 +1,82 @@
+{
+  "version": "1.0",
+  "authority": "Deployment environment catalog — docs/ENVIRONMENTS.md",
+  "environments": {
+    "design": {
+      "branch": "main",
+      "purpose": "Documentation and design data only",
+      "ci_workflow": ".github/workflows/ci.yml",
+      "ci_runner": "bash tools/run_docs_ci_checks.sh",
+      "cd_workflow": null,
+      "human_gate": false,
+      "agent_lead": "pm"
+    },
+    "development": {
+      "branch": "game/development",
+      "purpose": "Daily Godot implementation",
+      "ci_workflow": ".github/workflows/game-ci.yml",
+      "ci_runner": "bash tools/run_ci_checks.sh",
+      "cd_workflow": null,
+      "mcp_required": ["godot-mcp", "godotiq", "godot-mcp-pro"],
+      "human_gate": false,
+      "agent_lead": "architect",
+      "agent_support": ["builder", "debugger"]
+    },
+    "qa": {
+      "branch": "game/development",
+      "purpose": "Automated L0-L2+ gates on every push",
+      "ci_workflow": ".github/workflows/game-ci.yml",
+      "ci_runner": "bash tools/run_ci_checks.sh",
+      "github_environment": "qa",
+      "human_gate": false,
+      "agent_lead": "qa",
+      "issue_labels": ["env/qa"]
+    },
+    "uat": {
+      "branch": "game/development",
+      "tag_patterns": ["v*-rc*", "v*-uat*"],
+      "purpose": "Release candidate artifacts for human playtest",
+      "cd_workflow": ".github/workflows/cd-artifact.yml",
+      "cd_runner": "bash tools/run_cd_gates.sh --channel rc",
+      "github_environment": "uat",
+      "human_gate": true,
+      "human_gate_doc": "docs/PLAYTEST_SCRIPT.md",
+      "prerequisite_gates": ["L0", "L1", "L2", "L4"],
+      "agent_lead": "pm",
+      "issue_labels": ["env/uat"]
+    },
+    "preproduction": {
+      "branch": "game/development",
+      "tag_patterns": ["v*-beta*"],
+      "purpose": "Steam beta depot — near-ship validation",
+      "optional_until": "M6 Phase 8",
+      "skip_when": "No Steamworks app ID — use UAT artifacts instead",
+      "cd_workflow": ".github/workflows/cd-steam.yml",
+      "cd_runner": "bash tools/run_cd_gates.sh --channel beta",
+      "github_environment": "steam-beta",
+      "human_gate": true,
+      "prerequisite_gates": ["L0", "L1", "L2", "L4", "L5"],
+      "agent_lead": "release",
+      "issue_labels": ["env/preprod"]
+    },
+    "production": {
+      "branch": "game/development",
+      "tag_patterns": ["v*.*.*"],
+      "purpose": "Steam public release",
+      "cd_workflow": ".github/workflows/cd-steam.yml",
+      "cd_runner": "bash tools/run_cd_gates.sh --channel prod",
+      "github_environment": "steam-production",
+      "manual_approval": true,
+      "human_gate": true,
+      "prerequisite_gates": ["L0", "L1", "L2", "L4", "L5", "L6"],
+      "agent_lead": "release",
+      "issue_labels": ["env/production"],
+      "design_ref": "docs/STEAM_RELEASE_CHECKLIST.md"
+    }
+  },
+  "promotion_chain": ["design", "development", "qa", "uat", "preproduction", "production"],
+  "multi_agent_roles": [
+    "pm", "architect", "builder", "qa", "flow", "debugger", "release", "visual", "human"
+  ],
+  "design_ref": "docs/ENVIRONMENTS.md, docs/MULTI_AGENT_TEAM.md, docs/PROJECT_MANAGEMENT.md"
+}

@@ -67,7 +67,8 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 
 ## 3. Bug report template
 
-Copy into GitHub issue, Discord, or playtest spreadsheet.
+Copy into GitHub issue (**template: Gate failure / Bug report**), Discord, or playtest spreadsheet.  
+See `docs/PROJECT_MANAGEMENT.md` for labels and `bash tools/report_gate_failure.sh` for gate failures.
 
 ```markdown
 ## Summary

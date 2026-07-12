@@ -1,0 +1,51 @@
+name: QA — nightly gate sweep
+
+# Optional scheduled QA on game/development. Complements per-push game-ci.yml.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: qa-nightly
+  cancel-in-progress: true
+
+jobs:
+  qa-sweep:
+    name: Nightly L0-L2 gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: qa
+
+    steps:
+      - name: Checkout game/development
+        uses: actions/checkout@v4
+        with:
+          ref: game/development
+
+      - name: Guard — game project
+        run: test -f game/project.godot || (echo "::error::game/development must have project.godot" && exit 1)
+
+      - name: Install CI dependencies
+        run: bash tools/install_ci_deps.sh
+
+      - name: Run full CI checks
+        id: ci
+        continue-on-error: true
+        run: bash tools/run_ci_checks.sh 2>&1 | tee /tmp/qa-sweep.log
+
+      - name: Upload QA log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-sweep-log-${{ github.run_id }}
+          path: /tmp/qa-sweep.log
+          retention-days: 30
+
+      - name: Fail if gates failed
+        if: steps.ci.outcome == 'failure'
+        run: |
+          echo "::error::Nightly QA failed — open issue with template 'Gate failure'"
+          bash tools/report_gate_failure.sh --gate nightly_sweep --env qa --commit "${{ github.sha }}" --log-file /tmp/qa-sweep.log \
+            --workflow-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          exit 1

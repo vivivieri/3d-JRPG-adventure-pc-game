@@ -1,0 +1,60 @@
+name: Gate failure (CI/CD)
+description: Automated test or acceptance gate failed — use for QA agent traceability
+title: "[QA][GATE] "
+labels: ["env/qa", "agent/qa"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use when `run_ci_checks.sh`, `run_cd_gates.sh`, or GitHub Actions fails.
+        See `docs/PROJECT_MANAGEMENT.md` and `docs/QA_REMEDIATION_LOOP.md`.
+  - type: input
+    id: gate_id
+    attributes:
+      label: Gate ID
+      description: e.g. L0_story_data, L1_unit_tests, L4_integration
+      placeholder: L0_story_data
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - development
+        - qa
+        - uat
+        - preproduction
+        - production
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit SHA
+      placeholder: abc1234
+    validations:
+      required: true
+  - type: input
+    id: workflow_run
+    attributes:
+      label: GitHub Actions run URL (if applicable)
+      placeholder: https://github.com/.../actions/runs/...
+  - type: textarea
+    id: log_excerpt
+    attributes:
+      label: Log excerpt
+      description: Paste failing gate output
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: remediation
+    attributes:
+      label: Remediation
+      description: Output of `bash tools/qa_emit_remediation.sh <brief-id>` or proposed fix lever
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence paths
+      description: artifacts/screenshots/, test reports, etc.

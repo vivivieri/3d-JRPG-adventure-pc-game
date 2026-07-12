@@ -4,6 +4,8 @@
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
 **Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/BRANCHING.md`  
+**Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ENVIRONMENTS.md`  
+**Multi-agent team:** `docs/MULTI_AGENT_TEAM.md` · **Issues:** `docs/PROJECT_MANAGEMENT.md` (GitHub Issues P0)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Documentation index:** `docs/README.md`  
 **Build order:** `docs/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/MILESTONES.md`  

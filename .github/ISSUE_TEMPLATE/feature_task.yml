@@ -1,0 +1,49 @@
+name: Feature / task
+description: Implementation plan task or milestone work item
+title: "[DEV] "
+labels: ["env/development", "agent/architect"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Link to `docs/IMPLEMENTATION_PLAN.md` phase and acceptance gate IDs.
+        Assign builder after architect plan is complete.
+  - type: input
+    id: phase
+    attributes:
+      label: Phase / milestone
+      placeholder: Phase 1 / M5-art
+    validations:
+      required: true
+  - type: textarea
+    id: spec
+    attributes:
+      label: Spec summary
+      description: What to build and why
+    validations:
+      required: true
+  - type: textarea
+    id: gates
+    attributes:
+      label: Acceptance gate IDs
+      description: One per line — e.g. L2_scene_primitives, L2_visual_palette
+    validations:
+      required: true
+  - type: textarea
+    id: design_refs
+    attributes:
+      label: Design doc links
+      placeholder: docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md ruined_village row
+  - type: dropdown
+    id: agent_owner
+    attributes:
+      label: Lead agent role
+      options:
+        - architect
+        - builder
+        - qa
+        - flow
+        - release
+        - pm
+    validations:
+      required: true

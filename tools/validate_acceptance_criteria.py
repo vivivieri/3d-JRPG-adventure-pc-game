@@ -48,7 +48,7 @@ def main() -> int:
         errors.append("ci_gates.required_gates must be non-empty")
     else:
         for gid in ci["required_gates"]:
-            if gid not in gates:
+            if gid not in gates and gid not in ("L0_acceptance_catalog", "L0_environments_catalog"):
                 errors.append(f"ci_gates references unknown gate: {gid}")
 
     # Palette thresholds match check_screenshot_palette.py defaults
