@@ -1,0 +1,90 @@
+name: CD — Release artifact
+
+on:
+  push:
+    tags:
+      - 'v*-rc*'
+      - 'v*-beta*'
+      - 'v*.*.*'
+
+concurrency:
+  group: cd-artifact-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    name: Export Windows + GitHub Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Guard — game project required
+        run: |
+          if [[ ! -f game/project.godot ]]; then
+            echo "::error::CD requires a tag on game/development (game/project.godot missing)."
+            echo "Tag from: git checkout game/development && git tag v0.1.0-rc1 && git push origin v0.1.0-rc1"
+            exit 1
+          fi
+
+      - name: Resolve CD channel from tag
+        id: channel
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [[ "$TAG" == *-rc* ]]; then
+            CHANNEL=rc
+          elif [[ "$TAG" == *-beta* ]]; then
+            CHANNEL=beta
+          else
+            CHANNEL=prod
+          fi
+          echo "channel=${CHANNEL}" >> "$GITHUB_OUTPUT"
+          echo "Resolved channel=${CHANNEL} for tag=${TAG}"
+
+      - name: Install CI dependencies
+        run: bash tools/install_ci_deps.sh
+
+      - name: Run CD gates
+        run: bash tools/run_cd_gates.sh --channel "${{ steps.channel.outputs.channel }}"
+
+      - name: Install GodotSteam
+        run: GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh
+
+      - name: Export Windows build
+        run: bash tools/export_windows.sh
+
+      - name: Prepare Steam depot layout
+        run: bash tools/prepare_steam_depot.sh
+
+      - name: Package depot zip
+        run: |
+          cd build
+          zip -r "TidesOfUrashima-steam-depot-${GITHUB_REF_NAME}.zip" steam_depot TidesOfUrashima.exe
+          ls -lh *.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Tides of Urashima ${{ github.ref_name }}
+          body: |
+            Automated CD artifact from commit ${{ github.sha }}.
+
+            **Channel:** ${{ steps.channel.outputs.channel }}
+            **Contents:** `TidesOfUrashima.exe` + Steam depot folder (exe + Steam API DLLs)
+
+            ### Verify locally (Windows)
+            1. Extract zip
+            2. Run `steam_depot/TidesOfUrashima.exe` with Steam client running
+            3. Replace `steam_appid.txt` with your real App ID before Steam upload
+
+            See `docs/CD.md` and `docs/STEAM_RELEASE_CHECKLIST.md`.
+          files: |
+            build/TidesOfUrashima-steam-depot-${{ github.ref_name }}.zip
+            build/TidesOfUrashima.exe
+          draft: ${{ steps.channel.outputs.channel != 'prod' }}
+          prerelease: ${{ steps.channel.outputs.channel != 'prod' }}

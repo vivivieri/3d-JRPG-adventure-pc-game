@@ -1,6 +1,6 @@
 # Asset Compliance Report
 
-**Generated:** 2026-07-12 08:26:42 UTC  
+**Generated:** 2026-07-12 09:01:51 UTC  
 **Status:** PASSED  
 **Policy:** [docs/ASSET_COMPLIANCE.md](../ASSET_COMPLIANCE.md)  
 **Manifest:** `docs/asset_manifest.license.json`
@@ -11,23 +11,53 @@
 ASSET LICENSE CHECK PASSED
   Policy: docs/ASSET_COMPLIANCE.md
   Manifest: docs/asset_manifest.license.json
-  Media files scanned: 34
-  Covered by manifest: 34
+  Media files scanned: 5
+  Covered by manifest: 5
   Allowed license types: 12
-  Warnings: 6 (paths not present on this branch)
+  Warnings: 36 (paths not present on this branch)
+    - Scan path not present (no media to check): game/assets
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Regular.ttf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Bold.ttf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSansJP-Regular.otf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSansJP-Bold.otf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSansSC-Regular.otf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSansSC-Bold.otf
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_menu.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_field.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_village.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_caves.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_combat.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_palace.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_ending_rewind.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_ending_anchor.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_ending_drift.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/sfx/sfx_ui.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/sfx/sfx_ui_confirm.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/sfx/sfx_hit.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/sfx/sfx_victory.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_prologue.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/cine_opening_hero.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_boss.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_boss_tide_keeper_p2.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/bgm_boss_tide_keeper_p3.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/cine_ending_rewind_hero.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/cine_ending_anchor_hero.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/bgm/cine_ending_drift_hero.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/cine_boss_wraith_intro.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/cine_boss_sentinel_intro.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/cine_boss_tide_keeper_intro.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/sting_boss_intro.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/sting_combat_start.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/sting_yuzu_join.ogg
+    - Manifest entry file not on disk yet: game/assets/audio/stings/sting_choice_silence.ogg
+    - Manifest entry file not on disk yet: game/assets/ui/icon.svg
 ```
 
 ## Statistics
 
 | Metric | Value |
 |--------|-------|
-| Media files on disk | 34 |
+| Media files on disk | 5 |
 | Unlisted files | 0 |
 | Manifest entries | 47 |
 
@@ -35,7 +65,7 @@ ASSET LICENSE CHECK PASSED
 
 | License | File count |
 |---------|------------|
-| ORIGINAL | 34 |
+| ORIGINAL | 5 |
 
 ## Allowed license types
 

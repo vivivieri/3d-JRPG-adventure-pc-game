@@ -11,23 +11,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  l0-l2-headless:
-    name: L0–L2 headless gates
+  docs-and-data:
+    name: Docs + design data gates
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install CI dependencies
-        run: bash tools/install_ci_deps.sh
+      - name: Install Python validators
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3 python3-pip ripgrep
 
-      - name: Run CI checks
-        run: bash tools/run_ci_checks.sh
+      - name: Run main-branch CI checks
+        run: bash tools/run_docs_ci_checks.sh
 
       - name: Upload CI summary on failure
         if: failure()
         run: |
-          echo "::error::CI failed — see docs/CI.md for gate definitions and remediation"
-          echo "Run locally: bash tools/install_ci_deps.sh && bash tools/run_ci_checks.sh"
+          echo "::error::Main CI failed — see docs/BRANCHING.md and docs/CI.md"
+          echo "Run locally: bash tools/run_docs_ci_checks.sh"

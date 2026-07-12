@@ -9,6 +9,7 @@
 | Priority | Document | Answers |
 |----------|----------|---------|
 | 1 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
+| 1b | [BRANCHING.md](BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
 | 3 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | How runtime code fits together |
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
@@ -23,7 +24,8 @@
 | I need to… | Read |
 |------------|------|
 | Understand the game | [GDD.md](GDD.md) → [STORYBOARD.md](STORYBOARD.md) |
-| Build the next phase | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) |
+| Build the next phase | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · branch: `game/development` |
+| Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
 | Write GDScript | [CODE_STYLE.md](CODE_STYLE.md) + [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) |
 | Place zones & interactables | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) |
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
@@ -34,7 +36,7 @@
 | QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
 | Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
 | Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |
-| Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [steam/GODOTSTEAM_SETUP.md](../steam/GODOTSTEAM_SETUP.md) |
+| Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [STEAM_RELEASE_CHECKLIST.md](STEAM_RELEASE_CHECKLIST.md) + [CD.md](CD.md) |
 
 ---
 
