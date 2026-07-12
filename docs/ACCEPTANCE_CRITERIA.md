@@ -42,10 +42,11 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 
 ## 3. Gate catalog (summary)
 
-### L0 — Data
+### L0 — Data & workflow
 
 | Gate ID | Pass when |
 |---------|-----------|
+| `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — no hand-built ship `.tscn`; `main_scene` requires `game/scenes/.gdai_built` |
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
 
 ### L1 — Unit tests

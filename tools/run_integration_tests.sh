@@ -32,8 +32,15 @@ check() {
 echo "==> Integration tests"
 echo ""
 
-check "Boot scene loads headless" \
-  godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
+check "R&R compliance" bash tools/check_rr_compliance.sh
+
+MAIN_SCENE="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | cut -d= -f2- | tr -d '"' || true)"
+if [[ -z "$MAIN_SCENE" ]]; then
+  echo "[SKIP] Boot scene loads headless — no run/main_scene until GDAI MCP builds first scene"
+else
+  check "Boot scene loads headless" \
+    godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
+fi
 
 # Phase 2+: add zone transition, save/load, combat round scripts here.
 

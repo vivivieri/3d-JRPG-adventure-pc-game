@@ -24,6 +24,8 @@ This document is the **single source of truth** for:
 
 **Rule:** No hand-edited `.tscn` or inspector-only work in Cursor. If GDAI MCP is unavailable → **stop and notify the user**. Do not fall back to manual scene edits.
 
+**Enforcement:** `bash tools/check_rr_compliance.sh` (L0 gate) — fails CI/smoke if ship `.tscn` is committed without `game/scenes/.gdai_built`. `bash tools/check_mcp_ready.sh` — agents run before scene work.
+
 ### 1.2 Session startup (every agent run)
 
 ```bash

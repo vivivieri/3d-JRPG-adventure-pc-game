@@ -44,6 +44,17 @@ Installed components:
 
 ### MCP workflow (mandatory — all tools)
 
+**First commands every implementation session (before any `game/scenes/` work):**
+
+```bash
+bash tools/ensure_mcp_stack.sh
+bash tools/check_mcp_ready.sh
+bash tools/check_rr_compliance.sh
+```
+
+If `ensure_mcp_stack.sh` or `check_mcp_ready.sh` fails → **STOP scene/editor work** and notify the user.  
+Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
+
 ```
 0. bash tools/ensure_mcp_stack.sh
 1. GodotPrompter — plan GDScript, shaders, tests
@@ -94,6 +105,7 @@ export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
 
 python3 tools/validate_story_data.py          # L0
 python3 tools/validate_acceptance_criteria.py # catalog lint
+bash tools/check_rr_compliance.sh             # L0 — no hand-built scenes
 bash tools/run_unit_tests.sh                  # L1
 bash tools/run_playtest_smoke.sh              # L2 (data + boot + art smokes)
 bash tools/run_integration_tests.sh           # L4 phase gates (Phase 2+)

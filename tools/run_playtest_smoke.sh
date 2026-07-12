@@ -145,6 +145,7 @@ check_model_smoke() {
 echo "==> Fresh-rebuild smoke checks"
 echo ""
 
+check "R&R compliance (no hand-built scenes)" bash tools/check_rr_compliance.sh
 check_story_data
 check_scene_visuals
 check "Unit tests pass" bash tools/run_unit_tests.sh

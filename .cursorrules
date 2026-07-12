@@ -36,6 +36,8 @@ Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP 
 
 ```bash
 bash tools/ensure_mcp_stack.sh
+bash tools/check_mcp_ready.sh
+bash tools/check_rr_compliance.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.

@@ -30,6 +30,7 @@ check "acceptance criteria catalog" python3 tools/validate_acceptance_criteria.p
 check "QA policy docs" test -f docs/ACCEPTANCE_CRITERIA.md
 check "setup script executable" test -x tools/setup_dev_environment.sh
 check "implementation plan doc" test -f docs/IMPLEMENTATION_PLAN.md
+check "R&R compliance (no hand-built scenes)" bash tools/check_rr_compliance.sh
 check "rendering guide" test -f docs/RENDERING_GUIDE.md
 check "MCP example config" test -f .cursor/mcp.json.example
 
@@ -45,7 +46,7 @@ else
   echo "[WARN] uv not installed (needed for GDAI MCP)"
 fi
 
-  if command -v godot4 >/dev/null 2>&1; then
+if command -v godot4 >/dev/null 2>&1; then
   echo "[OK]   Godot in PATH"
   OK=$((OK + 1))
   if godot4 --headless --path game -s res://tests/unit/test_runner.gd >/dev/null 2>&1; then

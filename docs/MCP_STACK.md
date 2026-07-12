@@ -68,6 +68,8 @@ GodotPrompter (plan/code)
 
 ```bash
 bash tools/ensure_mcp_stack.sh
+bash tools/check_mcp_ready.sh
+bash tools/check_rr_compliance.sh
 bash tools/check_dev_environment.sh
 ```
 

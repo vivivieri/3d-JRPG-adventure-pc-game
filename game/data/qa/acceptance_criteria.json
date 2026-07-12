@@ -22,9 +22,19 @@
     "Lowering min_pass or thresholds to force green",
     "Marking phase complete with E2E script SKIP",
     "Claiming visual PASS without artifacts/screenshots evidence",
-    "Procedural placeholder audio/model marked ship-ready"
+    "Procedural placeholder audio/model marked ship-ready",
+    "Hand-edited ship .tscn merged without game/scenes/.gdai_built marker"
   ],
   "gates": {
+    "L0_rr_compliance": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "bash tools/check_rr_compliance.sh",
+      "description": "No hand-built ship .tscn; main_scene requires GDAI .gdai_built marker",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/scenes/.gdai_built"],
+      "design_ref": ".cursorrules §0, docs/MCP_STACK.md"
+    },
     "L0_story_data": {
       "layer": "L0",
       "domain": "data",
@@ -204,6 +214,7 @@
   "phase_gates": {
     "phase_1": {
       "required_gates": [
+        "L0_rr_compliance",
         "L0_story_data",
         "L1_unit_tests",
         "L2_boot_headless",
@@ -221,11 +232,12 @@
       "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 1"
     },
     "phase_6": {
-      "required_gates": ["L0_story_data", "L1_unit_tests", "L2_boot_headless", "L4_integration", "L5_e2e_three_endings"],
+      "required_gates": ["L0_rr_compliance", "L0_story_data", "L1_unit_tests", "L2_boot_headless", "L4_integration", "L5_e2e_three_endings"],
       "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 6"
     },
     "m5_ship": {
       "required_gates": [
+        "L0_rr_compliance",
         "L0_story_data",
         "L1_unit_tests",
         "L2_boot_headless",
