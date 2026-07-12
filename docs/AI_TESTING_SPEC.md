@@ -1,9 +1,9 @@
 # AI Testing Specification
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Applies to:** All implementation on `main` (Phases 1–8)  
 **Parent doc:** `docs/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
-**Cross-refs:** `AGENTS.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/FLOW_QA.md`, `docs/QA_REMEDIATION_LOOP.md`
+**Cross-refs:** `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/FLOW_QA.md`, `docs/QA_REMEDIATION_LOOP.md`
 
 This document is the **detailed spec** for AI agent testing. It defines **how** to run each layer (L0–L5) and when humans may begin QA.
 
@@ -32,9 +32,9 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 
 | Layer | Command / tool | Frequency | Blocks |
 |-------|----------------|-----------|--------|
-| **L0** | `python3 tools/validate_story_data.py` | Every commit | — |
-| **L1** | `bash tools/run_unit_tests.sh` | Every commit | — |
-| **L2** | `bash tools/run_playtest_smoke.sh` | Every commit | — |
+| **L0** | `validate_story_data.py`, `validate_base_classes.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
+| **L1** | `run_unit_tests.sh`, `check_gdscript_changed.sh` | Every commit | — |
+| **L2** | `run_playtest_smoke.sh`, `check_animation_whitelist.py` | Every commit | — |
 | **L3** | GDAI MCP (see §3) | Every scene/visual task | — |
 | **L4** | `bash tools/run_integration_tests.sh` | Phase gates 2–6 | Phase advance |
 | **L5** | `bash tools/run_e2e_playthrough.sh` | Phase 6 complete + release candidate | **Human QA** |
@@ -65,6 +65,28 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 ```
 
 **On FAIL:** `bash tools/qa_emit_remediation.sh data-story` — fix `game/data/` per brief; do not patch runtime without data fix when L0 fails.
+
+### L0b — Base class registry
+
+**Runner:** `python3 tools/validate_base_classes.py`  
+**Owner:** Architect (GodotPrompter)  
+**Exit:** 0 = pass
+
+### Checks (automated)
+
+- `game/data/code/base_classes.json` schema valid  
+- All `architect_owns` paths documented  
+- `component_scenes` entries reference valid zone/component ids  
+
+**On FAIL:** Fix `base_classes.json` per `docs/CODE_BASE_CLASS_RULES.md`.
+
+### L0c — Base class compliance (game branch)
+
+**Runner:** `bash tools/check_base_class_compliance.sh`  
+**Owner:** Architect  
+**Skip when:** `game/scripts/` not present (main branch)
+
+Ensures no rogue `CharacterBody3D` player controllers outside `PlayerController` base class.
 
 ---
 
@@ -103,6 +125,18 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 [L1] unit tests: 5/5 PASS
 ```
 
+### L1b — GDScript lint (changed files)
+
+**Runner:** `bash tools/check_gdscript_changed.sh`  
+**Owner:** Architect  
+**Skip when:** No `.gd` changes in diff, or no `game/project.godot`
+
+Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools/install_ci_deps.sh`.
+
+```
+[L1] gdscript_lint: PASS (0 warnings on changed files)
+```
+
 ---
 
 ## 4. L2 — Smoke tests
@@ -117,13 +151,22 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 |---|--------|
 | 1 | Story data validates (L0) |
 | 2 | Unit tests pass (L1) |
-| 3 | Dev environment healthy (`check_dev_environment.sh`) |
-| 4 | Boot scene loads headless 3s |
+| 3 | GDScript lint on changed files (L1b) |
+| 4 | Dev environment healthy (`check_dev_environment.sh`) |
+| 5 | Boot scene loads headless 3s |
+| 6 | Animation whitelist when rigged GLB exists (`check_animation_whitelist.py`) |
+
+### L2b — Animation whitelist
+
+**Runner:** `python3 tools/check_animation_whitelist.py --phase 1`  
+**Owner:** Builder / Visual  
+**Authority:** `game/data/models/qa_catalog.json` → `allowed_animations` · `docs/CHARACTER_BIBLE.md` §8  
+**Skip when:** No rigged GLB on disk for current phase
 
 ### Agent report line
 
 ```
-[L2] smoke: 4/4 PASS
+[L2] smoke: 6/6 PASS
 ```
 
 ---

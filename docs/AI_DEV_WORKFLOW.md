@@ -1,8 +1,8 @@
 # AI Dev Workflow — Build, Test & Acceptance Criteria
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Applies to:** `main` clean baseline → Phases 1–8 rebuild  
-**Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_TESTING_SPEC.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
+**Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_TESTING_SPEC.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
 
 This document is the **single source of truth** for:
 
@@ -25,6 +25,20 @@ This document is the **single source of truth** for:
 **Rule:** No hand-edited `.tscn` or inspector-only work in Cursor. If GDAI MCP is unavailable → **stop and notify the user**. Do not fall back to manual scene edits.
 
 **Enforcement:** `bash tools/check_rr_compliance.sh` (L0 gate) — fails CI/smoke if ship `.tscn` is committed without `game/scenes/.gdai_built`. `bash tools/check_mcp_ready.sh` — agents run before scene work.
+
+### 1.1b Code base classes (extend-only)
+
+Gameplay controllers and interactables **extend Architect-owned base classes** — do not create new `CharacterBody3D` stacks from scratch.
+
+| Base class | Path | Builder uses via |
+|------------|------|------------------|
+| `PlayerController` | `game/scripts/player/player_controller.gd` | `player.tscn` component scene |
+| `Combatant` | `game/scripts/combat/combatant.gd` | Enemy/party prefabs |
+| `Interactable` | `game/scripts/world/interactable.gd` | `interactable_*.tscn` catalog |
+
+**Authority:** `docs/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json` · component scenes in `docs/LEVEL_DESIGN.md` §1b.
+
+**CI:** `L0_base_classes` (registry schema) · `L0_base_class_compliance` (no rogue controllers) · `L1_gdscript_lint` (changed `.gd` files).
 
 ### 1.2 Session startup (every agent run)
 
@@ -61,6 +75,7 @@ others block their respective roles — see `MCP_STACK.md`).
 - Hand-edit `.tscn` when GDAI MCP is available  
 - Ship with GDAI MCP plugin enabled (dev-only; remove before export)  
 - Mark a phase complete without passing its acceptance criteria  
+- Add new `CharacterBody3D` / `Area3D` interaction stacks outside `base_classes.json` registry
 
 ---
 
@@ -72,9 +87,9 @@ Testing is **layered**. Higher layers run after lower layers pass.
 
 | Layer | Runner | Who runs it | Purpose |
 |-------|--------|-------------|---------|
-| **L0 — Data validation** | `python3 tools/validate_story_data.py` | AI agent (every commit) | JSON schema, cross-refs, scene IDs |
-| **L1 — Unit tests** | `bash tools/run_unit_tests.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags |
-| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; visual + audio + model smoke when assets exist |
+| **L0 — Data validation** | `python3 tools/validate_story_data.py` + base-class validators | AI agent (every commit) | JSON schema, cross-refs, scene IDs, `base_classes.json` |
+| **L1 — Unit tests + lint** | `bash tools/run_unit_tests.sh` + `check_gdscript_changed.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags; `gdlint` on changed `.gd` |
+| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, visual/audio/model smoke when assets exist |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
 | **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |

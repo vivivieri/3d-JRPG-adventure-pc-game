@@ -54,7 +54,7 @@
 | Role | Agent | Owns | Must NOT | Control hook |
 |------|-------|------|----------|--------------|
 | **PM / Sprint facilitator** | PM Agent | Issues, milestones, env promotion, batch planning | Write code or `.tscn` | Issue template: phase + gates; PR template opened |
-| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`; **owns base classes** (`CODE_BASE_CLASS_RULES.md`) |
+| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
 | **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr`, **`L3_gdai_built`**, **component `.tscn` catalog** |
 | **QA** | QA Agent | L0–L3 gates, evidence, bugs | Mark ship without gates | CI green + **gate report in PR** |
 | **Integration** | Flow Agent | L4/L5 integration/E2E | Build scenes | `L4_integration`; L5 in CD beta/prod |
@@ -128,9 +128,9 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 
 | Layer | Who | Examples |
 |-------|-----|----------|
-| L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance` |
-| L1 | QA | `L1_unit_tests` |
-| L2 | QA + Visual | `L2_scene_primitives`, `L2_visual_palette`, jury |
+| L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance`, `L0_base_classes`, `L0_base_class_compliance` |
+| L1 | QA + Architect | `L1_unit_tests`, `L1_gdscript_lint` |
+| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_visual_palette`, jury |
 | L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) |
 | L4 | Flow | `L4_integration` |
 | L5 | Flow | `L5_e2e_three_endings` |

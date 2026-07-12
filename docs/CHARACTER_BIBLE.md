@@ -303,6 +303,8 @@ Taunt = harpoon planted, roar anim; Shell Guard = crouch behind folded arms
 
 ## 8. Master animation list
 
+**CI whitelist:** Clip names on rigged GLB files must ⊆ `game/data/models/qa_catalog.json` → `allowed_animations`. Enforced by `L2_animation_whitelist` (`check_animation_whitelist.py`). Update the catalog when adding Mixamo clips.
+
 ### Urashima
 
 | Anim | Loop | Priority |

@@ -1,10 +1,10 @@
 # Acceptance Criteria — Measurable QA Pass/Fail
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
 **Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  
-**Cross-refs:** `docs/AI_DEV_WORKFLOW.md` §4, `docs/QA_REMEDIATION_LOOP.md`, `docs/FLOW_QA.md`, `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`
+**Cross-refs:** `docs/AI_DEV_WORKFLOW.md` §4, `docs/CODE_BASE_CLASS_RULES.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/FLOW_QA.md`, `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`
 
 ---
 
@@ -48,12 +48,15 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — no hand-built ship `.tscn`; `main_scene` requires `game/scenes/.gdai_built` |
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
+| `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
+| `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue `CharacterBody3D` controllers (game branch) |
 
-### L1 — Unit tests
+### L1 — Unit tests & lint
 
 | Gate ID | Pass when |
 |---------|-----------|
 | `L1_unit_tests` | All registered tests return `""` (no error string) |
+| `L1_gdscript_lint` | `check_gdscript_changed.sh` exit 0 on changed `.gd` files (SKIP when no diff) |
 
 ### L2 — Smoke
 
@@ -61,6 +64,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L2_boot_headless` | Godot headless boot exit 0 |
 | `L2_scene_primitives` | `check_scene_visuals.sh` exit 0, 0 banned meshes |
+| `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — clip names ⊆ `qa_catalog.json` → `allowed_animations` |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
 | `L2_visual_jury` | ≥2 models, all V1–V6 met, confidence ≥ 0.65 |
 | `L2_model_technical` | Tris in `qa_catalog.json` range, textures ≥ min, no greybox on ship |

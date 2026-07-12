@@ -8,6 +8,7 @@
 **Delivery model:** Phase-gated Agile — see `docs/AGILE_WITHIN_PHASES.md`  
 **Multi-agent team:** `docs/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/PROJECT_MANAGEMENT.md` (GitHub Issues P0)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
+**Code base classes:** `docs/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json`  
 **Documentation index:** `docs/README.md`  
 **Build order:** `docs/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/MILESTONES.md`  
 **Implementation plan:** `docs/IMPLEMENTATION_PLAN.md`  

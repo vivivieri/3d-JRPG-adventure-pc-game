@@ -1,6 +1,6 @@
 # Controls Cheat Sheet — How We Enforce Roles
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Print this:** One-page reference for automated + process controls  
 **Companion:** `docs/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)  
 **Authority:** `docs/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/PROJECT_MANAGEMENT.md`
@@ -42,6 +42,7 @@
 | `L0_acceptance_catalog` | Gate catalog schema |
 | `L0_environments_catalog` | Env catalog |
 | `L0_sprint_phases` | Sprint config |
+| `L0_base_classes` | Code base class registry schema |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -52,6 +53,7 @@
 | `L0_rr_compliance` | **Builder** — no hand-built ship `.tscn` |
 | `L0_story_data` | **Architect** / data |
 | `L0_acceptance_catalog` | **QA** catalog |
+| `L0_base_classes` | **Architect** — base class registry |
 | `L1_unit_tests` | **Architect** |
 | `L2_scene_primitives` | **Builder** / **Visual** |
 | `L2_boot_headless` | **Builder** (when `main_scene` set) |
