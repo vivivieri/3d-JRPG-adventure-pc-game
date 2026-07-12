@@ -20,6 +20,8 @@
 
 **Rule:** `docs/` + `game/data/` remain authoritative for game design. PM tools track **work**, not **spec**.
 
+**One-time GitHub config:** `bash tools/setup_github_project.sh` — see `docs/GITHUB_SETUP.md`.
+
 ---
 
 ## 2. GitHub Issues — label taxonomy

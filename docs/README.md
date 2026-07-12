@@ -30,6 +30,7 @@
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
 | Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) |
 | Issues, logs, GitHub / Linear / Notion | [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md) |
+| GitHub labels, environments, branch rules | [GITHUB_SETUP.md](GITHUB_SETUP.md) |
 | Write GDScript | [CODE_STYLE.md](CODE_STYLE.md) + [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) |
 | Place zones & interactables | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) |
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
