@@ -16,7 +16,7 @@ One agent doing plan + build + test + deploy violates R&R and skips gates. This 
 
 | Role | Agent name | Primary tools | Owns | Must NOT |
 |------|------------|---------------|------|----------|
-| **Product / PM** | PM Agent | GitHub Issues, optional Linear/Notion MCP | Milestones, issue triage, env promotion | Write `.tscn` or game code |
+| **Product / PM** | PM Agent | GitHub Issues, optional Linear/Notion MCP | Milestones, issue triage, env promotion, **sprint facilitator** (see `AGILE_WITHIN_PHASES.md` §11) | Write `.tscn` or game code |
 | **Tech Lead / Architect** | GodotPrompter | Cursor, `docs/`, `game/data/` | Plans, `.gd`, `.gdshader`, unit tests, refactors | Hand-edit scenes |
 | **Gameplay Builder** | GDAI Builder | `godot-mcp` (GDAI) | `.tscn`, materials, lights, F5 | Replace architect for system design |
 | **QA Engineer** | QA Agent | `run_ci_checks.sh`, `run_playtest_smoke.sh`, jury scripts | L0–L2 gates, evidence paths, bug reports | Mark ship without gates |

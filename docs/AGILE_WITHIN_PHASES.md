@@ -99,8 +99,8 @@ Or date-based: `2026-W28` with description `Phase 1 — ruined village`.
 
 | Ceremony | When | Owner | Output |
 |----------|------|-------|--------|
-| **Phase kickoff** | Start of phase N | PM Agent | Linear project/cycle + issues from IMPLEMENTATION_PLAN §Phase N table |
-| **Sprint planning** | Cycle start | PM Agent | 5–10 issues max; each has gate IDs + `agent/*` label |
+| **Phase kickoff** | Start of phase N | PM Agent (sprint facilitator) | Linear project/cycle + issues from IMPLEMENTATION_PLAN §Phase N table |
+| **Sprint planning** | Cycle start | PM Agent (sprint facilitator) | 5–10 issues max; each has gate IDs + `agent/*` label |
 | **Daily** | Each agent session | Active agent | Commit + CI; update issue status |
 | **Sprint review** | Cycle end | QA Agent | Gate report pasted in issue/PR |
 | **Phase review** | All phase tasks done | QA + Flow Agent | Phase exit gates; optional `v*-rc*` tag → UAT |
@@ -213,4 +213,77 @@ Do not use velocity to skip phase gates.
 - `docs/GITHUB_SETUP.md` — labels/milestones script  
 - `docs/MULTI_AGENT_TEAM.md` — role handoffs  
 - `docs/ENVIRONMENTS.md` — dev → qa → uat promotion  
-- `game/data/qa/sprint_phases.json` — phase ↔ Linear ↔ gates catalog
+- `game/data/qa/sprint_phases.json` — phase ↔ Linear ↔ gates catalog  
+
+---
+
+## 11. Sprint Master (facilitator role)
+
+**There is no separate “Sprint Master” hire or agent.** In this repo the **PM Agent** is the sprint facilitator — the closest equivalent to a Scrum Master.
+
+| Question | Answer |
+|----------|--------|
+| Who runs ceremonies? | **PM Agent** (planning, kickoff, retro notes) |
+| Who owns delivery proof? | **QA Agent** (sprint review = gate report) |
+| Who unblocks agents? | **PM Agent** first; **Architect** for technical blockers; **Human** for scope/L6 |
+| Machine-readable | `sprint_phases.json` → `sprint_master.role` = `"pm"` |
+
+### PM Agent as facilitator (not product owner only)
+
+| Duty | When | Output |
+|------|------|--------|
+| Protect phase scope | Every cycle | Reject issues that skip phases or change `game/data/` without a `main` PR |
+| Run sprint planning | Cycle start | ≤10 issues, gate IDs, `agent/*` labels, Linear cycle name |
+| Track WIP | Daily (per session) | No more than 2 in-progress builder issues without QA pickup |
+| Surface blockers | When CI/gates fail | `severity/S0`/`S1` issue; assign Architect or Release |
+| Timebox the cycle | Cycle end | Close or carry over issues; schedule sprint review with QA |
+| Retro | After UAT or phase exit | Update `sprint_phases.json` notes; adjust next `recommended_cadence_weeks` if needed |
+
+**Human** retains veto on phase order, ship scope, and L6 sign-off — not day-to-day ceremony facilitation.
+
+### What PM Agent must not do (even as facilitator)
+
+- Write `.gd` / `.tscn` / shaders (R&R — Architect + Builder)  
+- Mark gates PASS without QA evidence  
+- Extend a phase deadline by reprioritizing waterfall milestones  
+
+---
+
+## 12. Sprint duration — recommendations
+
+**Default:** **2 weeks** per Linear cycle (`sprint_phases.json` → `sprint_cadence.default_weeks`).
+
+Allowed range: **1–3 weeks**. Change only when the phase row’s `recommended_cadence_weeks` or retro notes justify it — not for arbitrary deadline pressure.
+
+### Per-phase cadence
+
+| Phase | Focus | Recommended | Rationale |
+|-------|-------|-------------|-----------|
+| **1** | SC-02 vertical slice, shaders, first GDAI scenes | **1–2 weeks** | Tight feedback on palette/fog; first sprint can be **1 week** to learn agent throughput |
+| **2** | Boot shell, localization, settings | **2 weeks** | Several small systems; stable integration window |
+| **3** | Dialogue, quests, exploration | **2 weeks** | L4 scenarios need full cycle to stabilize |
+| **4** | Combat vertical slice | **2 weeks** | Combat + boss framework = multi-agent handoffs |
+| **5** | Chapter 1 dungeons | **2 weeks** | Zone flow tests span Architect → Builder → Flow |
+| **6** | Full story, three endings | **2–3 weeks** | L5 E2E is long; prefer **3 weeks** for final integration sprint |
+| **7** | M5 art rebuild | **3 weeks** | Asset import, jury loops, visual gates need buffer |
+| **8** | M6 Steam ship | **2–3 weeks** | Checklist + export + store assets; last sprint often **3 weeks** |
+
+### When to shorten (1 week)
+
+- Phase 1 greybox iteration before first UAT screenshot  
+- Hotfix sprint after `env/uat` feedback (RC tag already cut)  
+- Single-gate remediation (one shader, one scene) with ≤3 issues  
+
+### When to lengthen (3 weeks)
+
+- Phase 6 or 8 integration sprint (L5 / L6 adjacent)  
+- Phase 7 jury cycle (model + audio + visual evidence)  
+- First sprint after a **phase kickoff** if planning uncovered >8 issues — split across two cycles instead of inflating WIP  
+
+### Linear configuration
+
+1. Set team **default cycle length** = 2 weeks.  
+2. Override per cycle in Linear UI when starting Phase1-Sprint1 (1 week) or Phase6-SprintN (3 weeks).  
+3. Name cycles `Phase{N}-Sprint{K}`; description = phase task IDs from `IMPLEMENTATION_PLAN.md`.  
+
+**Do not** use velocity or burndown to skip **phase exit gates** — cadence only affects issue batching inside a phase.
