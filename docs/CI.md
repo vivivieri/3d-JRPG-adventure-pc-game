@@ -122,5 +122,6 @@ On GitHub → Settings → Branches → `main`:
 
 - `docs/AI_DEV_WORKFLOW.md` §2 — test layers L0–L6
 - `docs/ACCEPTANCE_CRITERIA.md` — full gate catalog
+- `docs/CD.md` — continuous deployment (tags on `game/development`)
 - `game/data/qa/acceptance_criteria.json` — machine-readable thresholds
 - `AGENTS.md` — cloud agent bootstrap (MCP stack separate from CI)

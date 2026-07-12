@@ -234,7 +234,7 @@
   },
   "ci_gates": {
     "branch": "game/development",
-    "workflow": ".github/workflows/ci.yml",
+    "workflow": ".github/workflows/game-ci.yml",
     "runner": "bash tools/run_ci_checks.sh",
     "required_gates": [
       "L0_rr_compliance",
@@ -262,6 +262,19 @@
       "L6_human_playtest"
     ],
     "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
+  },
+  "cd_gates": {
+    "branch": "game/development",
+    "artifact_workflow": ".github/workflows/cd-artifact.yml",
+    "steam_workflow": ".github/workflows/cd-steam.yml",
+    "runner": "bash tools/run_cd_gates.sh",
+    "tag_patterns": ["v*-rc*", "v*-beta*", "v*.*.*"],
+    "channels": {
+      "rc": { "l5_required": false, "github_release": true },
+      "beta": { "l5_required": true, "steam_upload": true },
+      "prod": { "l5_required": true, "l6_required": true, "steam_upload": true, "manual_approval": true }
+    },
+    "design_ref": "docs/CD.md, docs/STEAM_RELEASE_CHECKLIST.md"
   },
   "phase_gates": {
     "phase_1": {

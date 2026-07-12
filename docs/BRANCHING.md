@@ -41,8 +41,11 @@ Merge `game/development` → `main` **once**, when:
 1. All phase gates L0–L5 pass on a release-candidate commit
 2. L6 human playtest sign-off (`docs/PLAYTEST_SCRIPT.md`)
 3. `M5_asset_compliance` and Steam export ready (Phase 8 / M6)
+4. Production Steam release complete (or RC approved for doc merge)
 
 Until then: **do not merge game implementation to `main`**.
+
+**CD:** Tag releases on `game/development` only — see `docs/CD.md`.
 
 ---
 
@@ -67,10 +70,10 @@ git commit && git push                  # to game/development only
 
 ## 4. CI per branch
 
-| Branch | Workflow | Script | Gates |
-|--------|----------|--------|-------|
-| `main` | `.github/workflows/ci.yml` | `run_docs_ci_checks.sh` | Story data, acceptance catalog, R&R policy, asset licenses |
-| `game/development` | `.github/workflows/game-ci.yml` | `run_ci_checks.sh` | Full L0–L2 + L4 + unit tests |
+| Branch | CI workflow | CD workflow |
+|--------|-------------|-------------|
+| `main` | `ci.yml` | — (no game build) |
+| `game/development` | `game-ci.yml` | `cd-artifact.yml` (tags) · `cd-steam.yml` (manual) |
 
 ---
 

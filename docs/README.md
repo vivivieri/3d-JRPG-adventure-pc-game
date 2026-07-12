@@ -36,7 +36,7 @@
 | QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
 | Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
 | Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |
-| Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [steam/GODOTSTEAM_SETUP.md](../steam/GODOTSTEAM_SETUP.md) |
+| Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [STEAM_RELEASE_CHECKLIST.md](STEAM_RELEASE_CHECKLIST.md) + [CD.md](CD.md) |
 
 ---
 
