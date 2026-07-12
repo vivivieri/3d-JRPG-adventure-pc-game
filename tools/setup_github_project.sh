@@ -131,11 +131,16 @@ done
 protect_branch() {
   local branch="$1"
   local check_name="$2"
+  local review_count="${3:-1}"
   local enc_branch
   enc_branch="$(urlencode "$branch")"
   if [[ "$DRY_RUN" -eq 1 ]]; then
-    echo "  [DRY] protect ${branch} — require ${check_name}"
+    echo "  [DRY] protect ${branch} — require ${check_name} + ${review_count} PR review(s)"
     return 0
+  fi
+  local reviews_json="null"
+  if [[ "$review_count" -gt 0 ]]; then
+    reviews_json="{\"required_approving_review_count\": ${review_count}, \"dismiss_stale_reviews\": false}"
   fi
   if gh api -X PUT "repos/${REPO}/branches/${enc_branch}/protection" --input - <<JSON
 {
@@ -144,7 +149,7 @@ protect_branch() {
     "checks": [{"context": "${check_name}"}]
   },
   "enforce_admins": false,
-  "required_pull_request_reviews": null,
+  "required_pull_request_reviews": ${reviews_json},
   "restrictions": null,
   "required_linear_history": false,
   "allow_force_pushes": false,
@@ -152,7 +157,7 @@ protect_branch() {
 }
 JSON
   then
-    echo "  [OK] ${branch} — requires status check: ${check_name}"
+    echo "  [OK] ${branch} — status: ${check_name}; PR reviews: ${review_count}"
   else
     echo "  [WARN] Could not protect ${branch} — needs admin PAT. See docs/GITHUB_SETUP.md §2"
   fi
@@ -160,8 +165,8 @@ JSON
 
 echo ""
 echo "==> Branch protection"
-protect_branch "main" "Docs + design data gates"
-protect_branch "game/development" "L0–L2 headless gates"
+protect_branch "main" "Docs + design data gates" 1
+protect_branch "game/development" "L0–L2 headless gates" 1
 
 echo ""
 echo "==> GitHub Projects (manual)"

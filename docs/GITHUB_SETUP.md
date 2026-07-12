@@ -43,9 +43,9 @@ bash tools/setup_github_project.sh --dry-run
 | **Labels** | 23 — `env/*`, `severity/S*`, `gate/*`, `domain/*`, `agent/*`, `status/*` |
 | **Milestones** | M1-core, M5-art, M6-steam |
 | **Environments** | `qa`, `uat`, `steam-beta`, `steam-production` |
-| **Branch protection** | `main` + `game/development` (if token has admin) |
+| **Branch protection** | `main` + `game/development` — CI status + **1 PR review** (when `GH_TOKEN` admin) |
 
-**Already in repo (no script needed):** issue templates, CI/CD/QA workflows.
+**Already in repo (no script needed):** issue templates, PR templates, CI/CD/QA workflows.
 
 ---
 
@@ -85,10 +85,13 @@ Used by: `qa-nightly.yml`, `cd-steam.yml`
 
 - Require status check: **Docs + design data gates**
 - Require pull request before merging
+- Require **1 approving review**
 
 **`game/development`:**
 
 - Require status check: **L0–L2 headless gates**
+- Require pull request before merging
+- Require **1 approving review**
 - Do not require merge to main (long-lived dev branch)
 
 ### GitHub Projects board

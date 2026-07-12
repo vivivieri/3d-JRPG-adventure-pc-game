@@ -168,6 +168,8 @@ python3 tools/validate_story_data.py     # L0_story_data
 | Doc | Contents |
 |-----|----------|
 | `.cursorrules` §0–§1 | Hard rules, combined workflow |
+| `docs/CONTROLS_CHEATSHEET.md` | How roles are enforced (CI, PR, branch protection) |
+| `docs/RR_CHEATSHEET.md` | Role ownership |
 | `docs/MCP_STACK.md` | Full toolchain, install, troubleshooting |
 | `docs/MULTI_AGENT_TEAM.md` | Handoffs, parallel patterns, definition of done |
 | `docs/AGILE_WITHIN_PHASES.md` | Sprint facilitator, AI-native cadence |

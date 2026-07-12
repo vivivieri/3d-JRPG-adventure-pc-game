@@ -135,6 +135,25 @@
       "pass": { "missing_tracks": 0 },
       "design_ref": "docs/AUDIO_QA.md §A1"
     },
+    "L3_gdai_built": {
+      "layer": "L3",
+      "domain": "flow",
+      "command": "bash tools/check_l3_gdai_built.sh",
+      "description": "When ship scenes or main_scene change in diff, game/scenes/.gdai_built must update with verified_f5=true",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no ship scene or main_scene changes in diff",
+      "evidence": ["game/scenes/.gdai_built"],
+      "design_ref": "docs/CI.md, docs/CONTROLS_CHEATSHEET.md, game/scenes/README.md"
+    },
+    "L3_gdai_f5": {
+      "layer": "L3",
+      "domain": "flow",
+      "command": "GDAI MCP F5 playtest in Godot editor",
+      "description": "Full viewport verify — agent-local; not GitHub Actions",
+      "pass": { "verified_f5": true, "editor_errors": 0 },
+      "evidence": ["game/scenes/.gdai_built"],
+      "design_ref": "docs/MCP_STACK.md, .cursorrules §0"
+    },
     "L4_integration": {
       "layer": "L4",
       "domain": "flow",
@@ -244,6 +263,7 @@
       "L0_acceptance_catalog",
       "L1_unit_tests",
       "L2_scene_primitives",
+      "L3_gdai_built",
       "L4_integration",
       "M5_asset_compliance"
     ],

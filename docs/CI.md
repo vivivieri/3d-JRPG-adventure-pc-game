@@ -37,6 +37,7 @@ CI is **not** a substitute for GDAI MCP editor verification (L3) or human QA (L6
 | `L1_unit_tests` | `bash tools/run_unit_tests.sh` | All unit tests pass headless |
 | `L2_scene_primitives` | `bash tools/check_scene_visuals.sh` | 0 banned meshes in ship scenes |
 | `L2_boot_headless` | `godot4 --headless …` | Exit 0 when `run/main_scene` is set; **SKIP** (not fail) when unset |
+| `L3_gdai_built` | `bash tools/check_l3_gdai_built.sh` | Exit 0 — **SKIP** when no scene diff; else `.gdai_built` updated + `verified_f5=true` |
 | `L4_integration` | `bash tools/run_integration_tests.sh` | Exit 0 (boot step skipped when no `main_scene`) |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
 
@@ -49,7 +50,8 @@ These are **agent-local or ship-only** — intentionally excluded from GitHub Ac
 | Check | Why excluded | Where it runs |
 |-------|--------------|---------------|
 | `check_mcp_ready.sh` | Commercial GDAI plugin + live editor | `install_cloud_dev.sh`, Cursor cloud agents |
-| L3 GDAI F5 viewport | Requires Godot editor + GDAI MCP | Per-scene agent tasks |
+| L3_gdai_f5 (full viewport) | Requires Godot editor + GDAI MCP F5 | Per-scene agent tasks |
+| L3_gdai_built | Runs in CI — see §2 | `check_l3_gdai_built.sh` on scene diffs |
 | L2 visual/audio/model jury | Needs screenshots + LLM API keys | `run_playtest_smoke.sh` when assets exist |
 | L5 E2E three endings | Needs Godot MCP Pro + playable build | Phase 6 gate, release candidates |
 | L6 human playtest | Human-only | `docs/PLAYTEST_SCRIPT.md` after L0–L5 |
@@ -88,10 +90,11 @@ CI **hard-blocks**:
 
 - Committed ship `.tscn` outside `greybox/` / `_dev/` without `game/scenes/.gdai_built`
 - `run/main_scene` set without matching `.gdai_built` + `verified_f5=true`
+- Ship scene or `main_scene` changed in PR without updating `.gdai_built` (`L3_gdai_built`)
 
 **MCP autoloads:** `tools/with_ci_godot.sh` strips dev-only GDAI/MCP Pro autoloads when commercial addons are absent (clean GitHub checkout). Does not install or require MCP.
 
-CI **does not** prove scenes were built via GDAI MCP — that requires L3 (agent F5 + marker file). The R&R gate prevents the common bypass: merging hand-edited scenes.
+CI **does not** replace full L3 F5 viewport verify in the editor — `L3_gdai_built` catches the common bypass (scene diff without Builder marker).
 
 ---
 

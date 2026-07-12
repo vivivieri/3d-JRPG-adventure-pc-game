@@ -58,6 +58,9 @@ run_gate "L1_unit_tests" "Godot headless unit tests" \
 run_gate "L2_scene_primitives" "Banned primitive meshes in ship scenes" \
   bash tools/check_scene_visuals.sh
 
+run_gate "L3_gdai_built" "GDAI marker updated when scenes change" \
+  bash tools/check_l3_gdai_built.sh
+
 MAIN_SCENE="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' || true)"
 if [[ -z "$MAIN_SCENE" ]]; then
   skip_gate "L2_boot_headless" "no run/main_scene (design-phase baseline; GDAI builds first scene)"
@@ -82,7 +85,7 @@ echo "==> CI summary: PASS=${PASS} FAIL=${FAIL} SKIP=${SKIP}"
 echo ""
 echo "Not run in CI (agent/editor only):"
 echo "  - check_mcp_ready.sh — GDAI MCP stack (Cursor cloud / local dev)"
-echo "  - L3 GDAI F5 viewport verify"
+echo "  - L3_gdai_f5 full viewport verify (editor F5 — subset L3_gdai_built runs in CI)"
 echo "  - L2 visual/audio/model jury (requires screenshots + API keys)"
 echo "  - L5 E2E three endings (requires Godot MCP Pro + playable build)"
 echo "  - L6 human playtest"
