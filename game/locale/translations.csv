@@ -14,6 +14,11 @@ UI_PAUSE,Pause,ポーズ,暂停,暫停
 UI_BACK,Back,戻る,返回,返回
 UI_CONFIRM,Confirm,決定,确认,確認
 UI_CANCEL,Cancel,キャンセル,取消,取消
+UI_QUIT,Quit,終了,退出,退出
+UI_VOLUME,Volume,音量,音量,音量
+UI_MASTER_VOLUME,Master Volume,マスター音量,主音量,主音量
+UI_MUSIC_VOLUME,Music Volume,BGM音量,音乐音量,音樂音量
+UI_SFX_VOLUME,SFX Volume,効果音音量,音效音量,音效音量
 speaker.urashima,Urashima,浦島,浦岛,浦島
 speaker.yuzu,Yuzu,柚,柚,柚
 speaker.roku,Roku,六,六,六
@@ -21,3 +26,77 @@ speaker.otohime,Otohime,乙姫,乙姬,乙姬
 speaker.tide_keeper,Tide Keeper,潮の王,潮汐之王,潮汐之王
 speaker.narrator,Narrator,ナレーター,旁白,旁白
 speaker.shore_wraith,Shore Wraith,岸の亡霊,岸之亡灵,岸之亡靈
+character.urashima.name,Urashima,浦島,浦岛,浦島
+character.yuzu.name,Yuzu,柚,柚,柚
+character.roku.name,Roku,六,六,六
+skill.strike.name,Strike,打撃,打击,打擊
+skill.strike.desc,A basic physical attack.,基本的な物理攻撃。,基础物理攻击。,基礎物理攻擊。
+skill.tidal_slash.name,Tidal Slash,潮斬り,潮汐斩击,潮汐斬擊
+skill.tidal_slash.desc,A swift strike infused with sea current.,海流を帯びた一撃。,蕴含海流的迅捷斩击。,蘊含海流的迅捷斬擊。
+skill.ocean_veil.name,Ocean Veil,海の帳,海洋帷幕,海洋帷幕
+skill.ocean_veil.desc,Shroud an ally in protective currents.,味方を守る海流で包む。,以护流笼罩一名盟友。,以護流籠罩一名盟友。
+skill.returning_wave.name,Returning Wave,返り潮,归潮,歸潮
+skill.returning_wave.desc,Damage all enemies with a crushing tide.,押し寄せる潮で敵全体にダメージ。,以汹涌潮水伤害全体敌人。,以洶湧潮水傷害全體敵人。
+skill.box_unbound.name,Box Unbound,箱解き,匣中无量,匣中無量
+skill.box_unbound.desc,Release stolen years in a devastating surge.,奪われた年月を解き放つ。,释放被偷走的岁月，掀起毁灭浪潮。,釋放被偷走的歲月，掀起毀滅浪潮。
+skill.purify.name,Purify,浄化,净化,淨化
+skill.purify.desc,Holy light damages a single foe.,聖なる光で単体の敵にダメージ。,以圣光伤害单个敌人。,以聖光傷害單個敵人。
+skill.spirit_light.name,Spirit Light,霊光,灵光,靈光
+skill.spirit_light.desc,Heal an ally for a moderate amount.,味方単体を中程度回復。,中等量治疗一名盟友。,中等量治療一名盟友。
+skill.sacred_mend.name,Sacred Mend,聖癒,圣愈,聖癒
+skill.sacred_mend.desc,Heal all allies.,味方全体を回復。,治疗全体盟友。,治療全體盟友。
+skill.torii_ward.name,Torii Ward,鳥居の守,鸟居庇护,鳥居庇護
+skill.torii_ward.desc,Grant regen and spirit resistance to the party.,味方全体に再生と霊耐性を付与。,为全队赋予再生与灵抗。,為全隊賦予再生與靈抗。
+skill.last_prayer.name,Last Prayer,最後の祈り,终焉祈祷,終焉祈禱
+skill.last_prayer.desc,Fully heal all allies and cleanse status.,味方全体を全回復し状態異常を解除。,完全治疗全队并净化状态。,完全治療全隊並淨化狀態。
+skill.shell_guard.name,Shell Guard,甲殻の守り,甲壳防御,甲殼防禦
+skill.shell_guard.desc,Brace and reduce damage taken.,身を固め被ダメージを軽減。,固守并减少所受伤害。,固守並減少所受傷害。
+skill.harpoon_drive.name,Harpoon Drive,銛突き,鱼叉冲锋,魚叉衝鋒
+skill.harpoon_drive.desc,A piercing strike that ignores some defense.,防御を一部無視する突き。,穿透部分防御的突刺。,穿透部分防禦的突刺。
+skill.tide_taunt.name,Tide Taunt,潮の挑発,潮汐挑衅,潮汐挑釁
+skill.tide_taunt.desc,Draw enemy attention and harden.,敵の注意を引き身を固める。,吸引敌人注意并强化自身。,吸引敵人注意並強化自身。
+skill.depth_charge.name,Depth Charge,深海爆弾,深雷爆破,深雷爆破
+skill.depth_charge.desc,Massive physical blast to all enemies.,敵全体に巨大な物理ダメージ。,对全体敌人造成巨大物理伤害。,對全體敵人造成巨大物理傷害。
+skill.claw_snap.name,Claw Snap,爪撃,钳击,鉗擊
+skill.claw_snap.desc,Enemy: pinching attack.,敵：はさみ攻撃。,敌人：钳击攻击。,敵人：鉗擊攻擊。
+skill.shell_harden.name,Shell Harden,甲殻硬化,甲壳硬化,甲殼硬化
+skill.shell_harden.desc,Enemy: raise defense.,敵：防御を上げる。,敌人：提升防御。,敵人：提升防禦。
+skill.drown_touch.name,Drown Touch,溺れの手,溺触,溺觸
+skill.drown_touch.desc,Enemy: chilling wraith attack.,敵：冷たい亡霊の攻撃。,敌人：冰冷的亡灵攻击。,敵人：冰冷的亡靈攻擊。
+skill.regret_surge.name,Regret Surge,悔恨の波,悔恨之潮,悔恨之潮
+skill.regret_surge.desc,Boss: AoE wave of sorrow.,ボス：悲しみの全体攻撃。,首领：悲伤的全体攻击。,首領：悲傷的全體攻擊。
+skill.sentinel_cleave.name,Sentinel Cleave,衛兵の斬撃,卫兵斩击,衛兵斬擊
+skill.sentinel_cleave.desc,Boss: heavy single-target slash.,ボス：単体への重い斬撃。,首领：沉重的单体斩击。,首領：沉重的單體斬擊。
+skill.tide_lament.name,Tide Lament,潮の嘆き,潮汐哀歌,潮汐哀歌
+skill.tide_lament.desc,Final boss: cosmic tide attack.,最終ボス：宇宙の潮攻撃。,最终首领：宇宙潮汐攻击。,最終首領：宇宙潮汐攻擊。
+enemy.salt_crab.name,Salt Crab,塩蟹,盐蟹,鹽蟹
+enemy.tide_wraith.name,Tide Wraith,潮の亡霊,潮汐亡灵,潮汐亡靈
+enemy.shore_wraith.name,Shore Wraith,岸の亡霊,岸之亡灵,岸之亡靈
+enemy.palace_sentinel.name,Palace Sentinel,宮殿の衛兵,宫殿卫兵,宮殿衛兵
+enemy.tide_keeper.name,Tide Keeper,潮の王,潮汐之王,潮汐之王
+status.poison,Poison,毒,中毒,中毒
+status.regen,Regen,再生,回复,回復
+status.stun,Stun,気絶,眩晕,眩暈
+status.def_up,Def Up,防御上昇,防御提升,防禦提升
+status.def_down,Def Down,防御下降,防御降低,防禦降低
+status.spd_down,SPD Down,速度下降,速度降低,速度降低
+status.taunt,Taunt,挑発,挑衅,挑釁
+combat.action_attack,{actor} attacks {target}!,{actor}は{target}を攻撃！,{actor}攻击了{target}！,{actor}攻擊了{target}！
+combat.action_skill,{actor} uses {skill}!,{actor}は{skill}を使った！,{actor}使用了{skill}！,{actor}使用了{skill}！
+combat.damage_dealt,{target} takes {damage} damage!,{target}は{damage}ダメージ！,{target}受到{damage}点伤害！,{target}受到{damage}點傷害！
+combat.heal,{target} recovers {amount} HP!,{target}のHPが{amount}回復！,{target}恢复了{amount}点生命！,{target}恢復了{amount}點生命！
+combat.mp_restore,{target} recovers {amount} MP!,{target}のMPが{amount}回復！,{target}恢复了{amount}点法力！,{target}恢復了{amount}點法力！
+combat.status_applied,{target} suffers {status}!,{target}は{status}になった！,{target}陷入了{status}！,{target}陷入了{status}！
+combat.status_removed,{target} is cured of {status}!,{target}の{status}が治った！,{target}的{status}解除了！,{target}的{status}解除了！
+combat.defend,{actor} braces!,{actor}は身を固めた！,{actor}固守防御！,{actor}固守防禦！
+combat.escape_success,Escaped successfully!,逃げ出した！,成功逃脱！,成功逃脫！
+combat.escape_failed,Could not escape!,逃げられなかった！,无法逃脱！,無法逃脫！
+combat.victory,Victory!,勝利！,胜利！,勝利！
+combat.defeat,Defeated...,敗北…,战败…,戰敗…
+combat.ko,{actor} is knocked out!,{actor}は倒れた！,{actor}倒下了！,{actor}倒下了！
+combat.item_use,{actor} uses {item}!,{actor}は{item}を使った！,{actor}使用了{item}！,{actor}使用了{item}！
+combat.turn_order,{actor}'s turn,{actor}のターン,{actor}的回合,{actor}的回合
+combat.boss_phase,{announcement},{announcement},{announcement},{announcement}
+combat.intent.attack,Attack,攻撃,攻击,攻擊
+combat.intent.debuff,Debuff,弱体,减益,減益
+combat.intent.charge,Charge,溜め,蓄力,蓄力

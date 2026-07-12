@@ -9,6 +9,7 @@ func _ready() -> void:
 		"res://data/story/flags.json",
 		"res://data/story/cinematic_hooks.json",
 		"res://data/dialogue/chapter_01.json",
+		"res://locale/translations.csv",
 	]
 	for path in required:
 		if not FileAccess.file_exists(path):

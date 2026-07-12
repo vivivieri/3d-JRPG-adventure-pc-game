@@ -12,7 +12,7 @@ bash tools/ensure_mcp_stack.sh          # GDAI MCP + Godot editor HTTP bridge
 bash tools/check_dev_environment.sh
 ```
 
-Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5**. You should see the dev boot screen with no missing-data errors in Output.
+Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5**. You should see the main menu with localized labels and a working Settings overlay.
 
 ## Dev toolchain (required)
 
@@ -28,11 +28,15 @@ See `docs/MCP_STACK.md`, `docs/GDAI_CLOUD_SETUP.md`, and `docs/AI_TESTING_SPEC.m
 
 ```
 game/
-  project.godot              # Main scene: scenes/boot.tscn
-  scenes/boot.tscn           # Dev boot UI
+  project.godot              # Main scene: scenes/ui/main_menu.tscn
+  scenes/ui/main_menu.tscn   # Main menu + settings overlay
   scripts/core/
-    boot_scene.gd            # Boot screen
+    event_bus.gd             # Global signals
+    settings_manager.gd      # user://settings.json
+    localization_manager.gd  # CSV i18n (en / ja / zh / zh-Hant)
+    font_theme_manager.gd    # Noto per locale (fallback if fonts missing)
     game_bootstrap.gd        # Validates required data paths at startup
+  locale/translations.csv    # UI, skills, enemies, combat log keys
   data/                      # Story JSON (do not duplicate in docs)
   assets/                    # Placeholder folders for Phase 1+ assets
   addons/                    # GDAI MCP plugin (commercial — see addons/README.md)

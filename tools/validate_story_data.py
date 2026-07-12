@@ -6,6 +6,7 @@ encounters, items, and dialogue scene IDs.
 """
 from __future__ import annotations
 
+import csv
 import json
 import sys
 from pathlib import Path
@@ -284,6 +285,42 @@ def main() -> int:
 
     for rel, data in locale_files:
         check_locales(data, "", rel)
+
+    # translations.csv — required keys for skills, enemies, combat
+    csv_path = ROOT / "game" / "locale" / "translations.csv"
+    if not csv_path.is_file():
+        errors.append("Missing game/locale/translations.csv")
+    else:
+        with open(csv_path, encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            rows = {row["keys"]: row for row in reader if row.get("keys")}
+        required_locales = ("en", "ja", "zh", "zh-Hant")
+
+        def require_csv_key(key: str) -> None:
+            if key not in rows:
+                errors.append(f"translations.csv missing key: {key}")
+                return
+            for loc in required_locales:
+                if not str(rows[key].get(loc, "")).strip():
+                    errors.append(f"translations.csv empty {loc} for key: {key}")
+
+        for skill in load("skills/skills.json")["skills"]:
+            sid = skill["id"]
+            require_csv_key(f"skill.{sid}.name")
+            require_csv_key(f"skill.{sid}.desc")
+        for enemy in load("enemies/enemies.json")["enemies"]:
+            require_csv_key(f"enemy.{enemy['id']}.name")
+        for combat_key in (
+            "action_attack",
+            "action_skill",
+            "damage_dealt",
+            "heal",
+            "victory",
+            "defeat",
+        ):
+            require_csv_key(f"combat.{combat_key}")
+        for status in ("poison", "regen", "stun", "def_up", "def_down"):
+            require_csv_key(f"status.{status}")
 
     if errors:
         print("STORY DATA VALIDATION FAILED", file=sys.stderr)

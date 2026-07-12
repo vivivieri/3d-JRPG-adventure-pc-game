@@ -7,14 +7,17 @@ const VO_PROMPTS_PATH := "res://data/audio/vo_prompts.json"
 const VOICE_ROOT := "res://assets/audio/voice"
 
 
-static func voice_path(voice_id: String, locale: String) -> String:
+static func voice_path(voice_id: String, locale: String, vo_dialect: String = "cant") -> String:
 	if voice_id.is_empty():
 		return ""
+	if locale == "zh-Hant":
+		var dialect := vo_dialect if vo_dialect in ["cant", "cmn"] else "cant"
+		return "%s/zh-Hant/%s/%s.ogg" % [VOICE_ROOT, dialect, voice_id]
 	return "%s/%s/%s.ogg" % [VOICE_ROOT, locale, voice_id]
 
 
-static func clip_exists(voice_id: String, locale: String) -> bool:
-	var path := voice_path(voice_id, locale)
+static func clip_exists(voice_id: String, locale: String, vo_dialect: String = "cant") -> bool:
+	var path := voice_path(voice_id, locale, vo_dialect)
 	return path != "" and FileAccess.file_exists(path)
 
 

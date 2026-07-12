@@ -72,7 +72,7 @@ flowchart TB
 | `CombatManager` | `scripts/combat/combat_manager.gd` | Battle lifecycle, links UI + turn system |
 | `CinematicDirector` | `scripts/story/cinematic_director.gd` | Hook registry, gating, `then` chain ✅ partial |
 
-**Today:** `GameBootstrap`, `CinematicDirector` registered; others Phase 2+.
+**Today:** `GameBootstrap`, `EventBus`, `SettingsManager`, `LocalizationManager`, `FontThemeManager`, `CinematicDirector` registered; others Phase 2+.
 
 ---
 

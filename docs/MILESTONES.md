@@ -31,7 +31,7 @@ Track implementation progress against the GDD milestones.
 - [x] Godot 4 project scaffold (boot shell on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
-- [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+; VO clips Phase 7
+- [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — written data + `LocalizationManager` runtime; VO clips Phase 7
 
 ## M0c — Pre-build design (art rebuild specs)
 - [x] Character bible (`docs/CHARACTER_BIBLE.md`) — v1.1: LOD, boss 3D, attachment rig
@@ -101,8 +101,8 @@ Track implementation progress against the GDD milestones.
 - [ ] Player movement polish (camera orbit — right-mouse + scroll)
 - [ ] Interaction prompt HUD (Press E — action, localized)
 - [ ] Dialogue box UI scene (typewriter, speaker, locale fonts)
-- [ ] CJK font bundle + locale-aware `FontThemeManager` (incl. NotoSansTC for zh-Hant)
-- [ ] `LocalizationManager` + settings menu (language + `vo_dialect` for zh-Hant)
+- [x] CJK font bundle + locale-aware `FontThemeManager` (incl. NotoSansTC for zh-Hant)
+- [x] `LocalizationManager` + settings menu (language + `vo_dialect` for zh-Hant)
 - [ ] `AudioManager` shell — procedural BGM/SFX placeholders (upgrade in M5)
 - [ ] `VoiceLinePlayer` wired to `DialogueRunner` (runtime paths; clips optional until M5)
 - [ ] SC-00 prologue + `CinematicDirector` opening hook
@@ -110,7 +110,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Roku shop UI (`shop/roku_shop.json`)
 - [ ] Quest tracker UI
 - [ ] Save point at village well
-- [x] Written i18n data — `zh-Hant` in `game/data/` + core `game/locale/translations.csv` (skills/combat CSV keys Phase 3)
+- [x] Written i18n data — `zh-Hant` in `game/data/` + expanded `game/locale/translations.csv` (skills, enemies, combat, status)
 
 ## M2 — Combat vertical slice
 - [ ] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)

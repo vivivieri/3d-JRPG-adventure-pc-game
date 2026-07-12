@@ -24,6 +24,7 @@ static func test_core_data_catalog_exists() -> String:
 		"res://data/skills/skills.json",
 		"res://data/enemies/enemies.json",
 		"res://data/starting/new_game.json",
+		"res://locale/translations.csv",
 	]
 	for path in paths:
 		if not FileAccess.file_exists(path):
