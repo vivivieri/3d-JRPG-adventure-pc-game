@@ -1,0 +1,164 @@
+{
+  "version": "1.0",
+  "model": "phase_gated_agile",
+  "authority": "Waterfall roadmap (phases 0-8) with agile sprints inside each phase. See docs/AGILE_WITHIN_PHASES.md",
+  "active_phase": 1,
+  "active_phase_name": "Environment foundation — SC-02 vertical slice",
+  "sprint_cadence_weeks": 2,
+  "cycle_name_pattern": "Phase{phase}-Sprint{sprint}",
+  "linear": {
+    "team_suggested_name": "Tides of Urashima",
+    "authenticate": "Cursor Integrations → Linear MCP",
+    "projects": [
+      { "id": "m1-core", "title": "M1-core", "phases": [1, 2, 3, 4, 5, 6], "milestone": "M1/M2/M3/M4" },
+      { "id": "m5-art", "title": "M5-art", "phases": [7], "milestone": "M5" },
+      { "id": "m6-steam", "title": "M6-steam", "phases": [8], "milestone": "M6" }
+    ],
+    "label_mirror": [
+      "env/development", "env/qa", "env/uat",
+      "severity/S0", "severity/S1", "severity/S2", "severity/S3",
+      "agent/architect", "agent/builder", "agent/qa", "agent/release",
+      "gate/L0_story_data", "gate/L1_unit_tests", "gate/L4_integration", "gate/L5_e2e"
+    ]
+  },
+  "github": {
+    "primary_traceability": true,
+    "milestones": ["M1-core", "M5-art", "M6-steam"],
+    "branch": "game/development"
+  },
+  "phases": [
+    {
+      "phase": 0,
+      "name": "Dev environment + design baseline",
+      "status": "done",
+      "linear_project": null,
+      "milestone": "M0",
+      "exit_gates": ["L0_story_data", "L0_acceptance_catalog", "L0_environments_catalog"],
+      "exit_command": "bash tools/run_docs_ci_checks.sh"
+    },
+    {
+      "phase": 1,
+      "name": "Environment foundation — ruined_village vertical slice",
+      "status": "active",
+      "linear_project": "m1-core",
+      "milestone": null,
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 1",
+      "sprint_goals_example": [
+        "toon_base.gdshader + zone_visuals.gd",
+        "GDAI ruined_village.tscn lights fog materials",
+        "SC-02 vertical slice gate"
+      ],
+      "exit_gates_ref": "acceptance_criteria.json → phase_gates.phase_1",
+      "exit_gates_required": [
+        "L0_rr_compliance",
+        "L0_story_data",
+        "L1_unit_tests",
+        "L2_boot_headless",
+        "L2_scene_primitives"
+      ],
+      "exit_gates_conditional": [
+        "L2_visual_palette",
+        "L2_visual_jury",
+        "L2_model_technical",
+        "L2_model_jury",
+        "L2_audio_technical",
+        "L2_audio_jury"
+      ],
+      "uat_tag_pattern": "v0.1.*-rc*"
+    },
+    {
+      "phase": 2,
+      "name": "Core systems shell",
+      "status": "pending",
+      "linear_project": "m1-core",
+      "milestone": "M1",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 2",
+      "sprint_goals_example": [
+        "boot + main menu via GDAI",
+        "LocalizationManager + settings UI",
+        "game/scenes/.gdai_built"
+      ],
+      "exit_gates_required": ["L0_rr_compliance", "L0_story_data", "L1_unit_tests", "L2_boot_headless"],
+      "uat_tag_pattern": "v0.2.*-rc*"
+    },
+    {
+      "phase": 3,
+      "name": "Narrative + exploration",
+      "status": "pending",
+      "linear_project": "m1-core",
+      "milestone": "M1",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 3",
+      "exit_gates_required": ["L4_integration"],
+      "uat_tag_pattern": "v0.3.*-rc*"
+    },
+    {
+      "phase": 4,
+      "name": "Combat vertical slice",
+      "status": "pending",
+      "linear_project": "m1-core",
+      "milestone": "M2",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 4",
+      "exit_gates_required": ["L4_integration"],
+      "uat_tag_pattern": "v0.4.*-rc*"
+    },
+    {
+      "phase": 5,
+      "name": "Chapter 1 dungeons",
+      "status": "pending",
+      "linear_project": "m1-core",
+      "milestone": "M3",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 5",
+      "exit_gates_required": ["L4_integration"],
+      "uat_tag_pattern": "v0.5.*-rc*"
+    },
+    {
+      "phase": 6,
+      "name": "Full story + three endings",
+      "status": "pending",
+      "linear_project": "m1-core",
+      "milestone": "M4",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 6",
+      "exit_gates_required": [
+        "L0_rr_compliance",
+        "L0_story_data",
+        "L1_unit_tests",
+        "L2_boot_headless",
+        "L4_integration",
+        "L5_e2e_three_endings"
+      ],
+      "uat_tag_pattern": "v0.9.*-rc*"
+    },
+    {
+      "phase": 7,
+      "name": "M5 art rebuild",
+      "status": "pending",
+      "linear_project": "m5-art",
+      "milestone": "M5",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 7",
+      "note": "Waterfall ordering: art after playable gameplay (phase 6)",
+      "exit_gates_ref": "acceptance_criteria.json → phase_gates.m5_ship (subset)",
+      "uat_tag_pattern": "v0.9.*-beta*"
+    },
+    {
+      "phase": 8,
+      "name": "M6 Steam ship",
+      "status": "pending",
+      "linear_project": "m6-steam",
+      "milestone": "M6",
+      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 8",
+      "exit_doc": "docs/STEAM_RELEASE_CHECKLIST.md",
+      "exit_gates_required": ["M5_asset_compliance", "L5_e2e_three_endings", "L6_human_playtest"],
+      "uat_tag_pattern": "v1.0.*"
+    }
+  ],
+  "sprint_issue_template": {
+    "required_fields": ["phase", "implementation_plan_task", "acceptance_gate_ids", "agent_owner"],
+    "max_issues_per_cycle": 10,
+    "definition_of_done": [
+      "Gate IDs PASS on PR commit",
+      "GDAI .gdai_built if scenes touched",
+      "GitHub issue closed with evidence paths"
+    ]
+  },
+  "design_ref": "docs/AGILE_WITHIN_PHASES.md"
+}

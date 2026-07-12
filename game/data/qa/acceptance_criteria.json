@@ -228,6 +228,7 @@
       "L0_story_data",
       "L0_acceptance_catalog",
       "L0_environments_catalog",
+      "L0_sprint_phases",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],
