@@ -38,5 +38,6 @@ Build loop: `docs/AI_DEV_WORKFLOW.md` · Phases: `docs/IMPLEMENTATION_PLAN.md`
 ## Related docs
 
 - `docs/BRANCHING.md` — branch policy
+- `docs/RR_CHEATSHEET.md` · `docs/CONTROLS_CHEATSHEET.md` — agent cheat sheets
 - `docs/DATA_ARCHITECTURE.md` — JSON schema
 - `docs/IMPLEMENTATION_PLAN.md` — build phases

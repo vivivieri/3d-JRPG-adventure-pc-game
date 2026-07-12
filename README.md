@@ -7,7 +7,21 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
-> **`main` is the clean baseline:** design docs, story JSON (`game/data/`), workflow rules, and a minimal Godot boot shell. **Gameplay is not implemented yet** — rebuild via GodotPrompter + full MCP stack per [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+> **`main` is docs + design data only** — no `project.godot`, scenes, or gameplay code.  
+> **Implementation** lives on **`game/development`** until M6 ship. See [`docs/BRANCHING.md`](docs/BRANCHING.md).
+
+Build via GodotPrompter + MCP stack per [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+
+---
+
+## Agent quick refs (printable)
+
+| Cheat sheet | Purpose |
+|-------------|---------|
+| [`docs/RR_CHEATSHEET.md`](docs/RR_CHEATSHEET.md) | **Who** owns what — roles, handoffs, tools |
+| [`docs/CONTROLS_CHEATSHEET.md`](docs/CONTROLS_CHEATSHEET.md) | **How** roles are enforced — CI, PR templates, gates |
+
+Full index: [`docs/README.md`](docs/README.md) · Cloud agents: [`AGENTS.md`](AGENTS.md)
 
 ---
 
@@ -18,8 +32,8 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | **M0** — GDD, storyboard, specs | Done |
 | **M0b** — i18n (en / ja / zh / zh-Hant) | Written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+ via GDAI; VO clips Phase 7 |
 | **M0c–M0h** — Art, gameplay, narrative, data, AI workflow docs | Done |
-| **Phase 0** — Dev environment + boot shell | **Done** |
-| **Phases 1–6** — Zones, systems, combat, full story | **Not started** |
+| **Phase 0** — Dev environment + design baseline | **Done** (on `main`) |
+| **Phases 1–6** — Zones, systems, combat, full story | **`game/development`** — not started |
 | **M5 / Phase 7** — Art rebuild (NPR zones, hero meshes, curated audio) | Not started |
 | **M6 / Phase 8** — Steam export, compliance, Windows playtest | Not started |
 
@@ -43,31 +57,40 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 
 | Task | Read |
 |------|------|
-| Build next phase | [IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) |
-| Runtime architecture (TDD) | [TECHNICAL_DESIGN.md](docs/TECHNICAL_DESIGN.md) |
-| GDScript conventions | [CODE_STYLE.md](docs/CODE_STYLE.md) |
-| Zones, interactables, triggers | [LEVEL_DESIGN.md](docs/LEVEL_DESIGN.md) |
-| Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
+| Build next phase | [IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) on branch `game/development` |
+| Branch policy | [BRANCHING.md](docs/BRANCHING.md) |
+| Roles & handoffs | [RR_CHEATSHEET.md](docs/RR_CHEATSHEET.md) · [MULTI_AGENT_TEAM.md](docs/MULTI_AGENT_TEAM.md) |
+| Enforcement / CI | [CONTROLS_CHEATSHEET.md](docs/CONTROLS_CHEATSHEET.md) · [CI.md](docs/CI.md) |
+| Sprints (Linear) | [AGILE_WITHIN_PHASES.md](docs/AGILE_WITHIN_PHASES.md) |
 | MCP toolchain | [MCP_STACK.md](docs/MCP_STACK.md) |
-| QA gates & acceptance | [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) |
+| QA gates | [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) |
+| Ship / CD | [CD.md](docs/CD.md) · [STEAM_RELEASE_CHECKLIST.md](docs/STEAM_RELEASE_CHECKLIST.md) |
+| Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
 
-**Authority:** IMPLEMENTATION_PLAN → MILESTONES → TECHNICAL_DESIGN → DATA_ARCHITECTURE → ACCEPTANCE_CRITERIA → MCP_STACK / `.cursorrules`
+**Authority:** IMPLEMENTATION_PLAN → BRANCHING → MILESTONES → DATA_ARCHITECTURE → ACCEPTANCE_CRITERIA → MCP_STACK / `.cursorrules`
 
 ---
 
 ## Quick start
 
+**On `main` (docs + data only):**
+
 ```bash
 bash tools/setup_dev_environment.sh
-bash tools/ensure_mcp_stack.sh
-bash tools/check_dev_environment.sh
-bash tools/run_unit_tests.sh
 python3 tools/validate_story_data.py
-python3 tools/validate_acceptance_criteria.py
-bash tools/run_playtest_smoke.sh       # L2 smoke (recommended every commit)
+bash tools/run_docs_ci_checks.sh
 ```
 
-Open `game/project.godot` in Godot 4.7 → **F5** (boot screen only).
+**On `game/development` (Godot implementation):**
+
+```bash
+git checkout game/development
+bash tools/install_cloud_dev.sh
+bash tools/ensure_mcp_stack.sh
+bash tools/check_mcp_ready.sh
+bash tools/run_ci_checks.sh
+# Open game/project.godot in Godot 4.7 → GDAI MCP → F5
+```
 
 | Tool | Role |
 |------|------|
@@ -86,12 +109,16 @@ Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_
 
 ```
 docs/README.md           # Documentation index (start here)
-game/data/               # Story JSON spine
-game/scenes/             # No .tscn until GDAI MCP builds (see game/scenes/README.md)
-game/scripts/            # Boot + story stubs (Phase 2+ expands)
-tools/validate_story_data.py
+docs/RR_CHEATSHEET.md    # Roles (who)
+docs/CONTROLS_CHEATSHEET.md  # Enforcement (how)
+game/data/               # Story JSON spine (on main)
+game/locale/             # translations.csv
+game/scenes/README.md    # GDAI scene policy (no .tscn on main)
+tools/                   # Validators, CI, CD scripts
 steam/                   # Store copy + trailer
 ```
+
+**Godot project** (`project.godot`, scripts, assets, scenes): branch **`game/development`** only.
 
 ---
 

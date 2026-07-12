@@ -6,7 +6,7 @@
 **Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/BRANCHING.md`  
 **Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ENVIRONMENTS.md`  
 **Delivery model:** Phase-gated Agile — see `docs/AGILE_WITHIN_PHASES.md`  
-**Multi-agent team:** `docs/MULTI_AGENT_TEAM.md` · **Issues:** `docs/PROJECT_MANAGEMENT.md` (GitHub Issues P0)  
+**Multi-agent team:** `docs/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/PROJECT_MANAGEMENT.md` (GitHub Issues P0)  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Documentation index:** `docs/README.md`  
 **Build order:** `docs/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/MILESTONES.md`  

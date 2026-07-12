@@ -68,6 +68,13 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_audio_technical` | 44.1 kHz, LUFS/peak per bus table, no procedural on ship |
 | `L2_audio_jury` | ≥2 models, A1–A5 met, confidence ≥ 0.65 (hero tracks) |
 
+### L3 — GDAI Builder handoff
+
+| Gate ID | Pass when |
+|---------|-----------|
+| `L3_gdai_built` | `check_l3_gdai_built.sh` exit 0 — if ship scenes or `main_scene` changed in diff, `.gdai_built` updated with `verified_f5=true` |
+| `L3_gdai_f5` | GDAI MCP F5 in editor — agent-local; not full CI |
+
 ### L4 / L5 — Flow
 
 | Gate ID | Pass when |

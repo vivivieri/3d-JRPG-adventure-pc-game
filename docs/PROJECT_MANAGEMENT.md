@@ -85,6 +85,8 @@ Use `.github/ISSUE_TEMPLATE/`:
 | **Gate failure** | CI/CD or `run_*_checks.sh` fail |
 | **Feature / task** | Phase work from implementation plan |
 
+**Pull request templates:** `.github/PULL_REQUEST_TEMPLATE/` — role handoff checklists + gate report (`docs/CONTROLS_CHEATSHEET.md`).
+
 Title convention: `[ENV][Severity?][Gate?] Summary`
 
 ---

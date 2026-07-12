@@ -30,6 +30,31 @@ def main() -> int:
     linear_projects = data.get("linear", {}).get("projects", [])
     if not linear_projects:
         errors.append("linear.projects must be non-empty")
+    sm = data.get("sprint_master", {})
+    if sm and sm.get("role") not in (None, "pm"):
+        errors.append("sprint_master.role must be 'pm' when set")
+    cadence = data.get("sprint_cadence", {})
+    if cadence:
+        for key in ("default_weeks", "min_weeks", "max_weeks"):
+            if key in cadence and not isinstance(cadence[key], int):
+                errors.append(f"sprint_cadence.{key} must be int")
+        if all(k in cadence for k in ("min_weeks", "max_weeks", "default_weeks")):
+            if not (cadence["min_weeks"] <= cadence["default_weeks"] <= cadence["max_weeks"]):
+                errors.append("sprint_cadence min <= default <= max")
+    for p in phases:
+        rc = p.get("recommended_cadence_weeks")
+        if rc is not None and (not isinstance(rc, int) or rc < 1 or rc > 4):
+            errors.append(f"phase {p.get('phase')}: recommended_cadence_weeks must be 1-4")
+        atd = p.get("ai_native_target_days")
+        if atd is not None and (not isinstance(atd, int) or atd < 1):
+            errors.append(f"phase {p.get('phase')}: ai_native_target_days must be positive int")
+    batch = data.get("ai_native_batch", {})
+    if batch:
+        micro = batch.get("micro_cycle", {})
+        if micro and micro.get("max_issues", 0) < 1:
+            errors.append("ai_native_batch.micro_cycle.max_issues must be >= 1")
+        if batch.get("primary_unit") not in (None, "session_batch"):
+            errors.append("ai_native_batch.primary_unit must be 'session_batch' when set")
     if errors:
         print("SPRINT PHASES VALIDATION FAILED", file=sys.stderr)
         for e in errors:
