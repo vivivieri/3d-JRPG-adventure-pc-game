@@ -147,6 +147,7 @@ All scene work via **GDAI MCP** after GodotPrompter plans.
 ### Secrets (if needed)
 
 Configure in Cursor **Secrets** tab (not committed):
+- `GH_TOKEN` — GitHub PAT for `bash tools/setup_github_project.sh` (labels, environments, branch protection)
 - GDAI plugin license path / download token (if applicable)
 - `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` — visual + model turntable jury
 - `OPENAI_API_KEY` / `GEMINI_API_KEY` — audio listen jury
