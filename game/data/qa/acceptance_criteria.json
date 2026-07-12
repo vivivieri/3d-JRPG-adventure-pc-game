@@ -44,6 +44,15 @@
       "evidence": [],
       "design_ref": "docs/DATA_ARCHITECTURE.md"
     },
+    "L0_acceptance_catalog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_acceptance_criteria.py",
+      "description": "Acceptance criteria catalog schema and threshold alignment",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/acceptance_criteria.json"],
+      "design_ref": "docs/ACCEPTANCE_CRITERIA.md"
+    },
     "L1_unit_tests": {
       "layer": "L1",
       "domain": "flow",
@@ -210,6 +219,36 @@
       "evidence": ["artifacts/audio_reviews/*.jury.json"],
       "design_ref": "docs/AUDIO_QA.md §A3"
     }
+  },
+  "ci_gates": {
+    "workflow": ".github/workflows/ci.yml",
+    "runner": "bash tools/run_ci_checks.sh",
+    "required_gates": [
+      "L0_rr_compliance",
+      "L0_story_data",
+      "L0_acceptance_catalog",
+      "L1_unit_tests",
+      "L2_scene_primitives",
+      "L4_integration",
+      "M5_asset_compliance"
+    ],
+    "conditional_gates": [
+      {
+        "gate_id": "L2_boot_headless",
+        "skip_when": "no run/main_scene in project.godot",
+        "skip_is_not_ship_pass": true
+      }
+    ],
+    "excluded_gates": [
+      "check_mcp_ready",
+      "L3_gdai_f5",
+      "L2_visual_jury",
+      "L2_model_jury",
+      "L2_audio_jury",
+      "L5_e2e_three_endings",
+      "L6_human_playtest"
+    ],
+    "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
   },
   "phase_gates": {
     "phase_1": {

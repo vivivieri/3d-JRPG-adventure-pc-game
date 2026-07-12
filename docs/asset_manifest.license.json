@@ -494,6 +494,16 @@
       "attribution": null
     },
     {
+      "path": "steam/trailer_zh-Hant.mp4",
+      "license": "ORIGINAL",
+      "source": "Project tooling (composited from registered pitch art + procedural BGM)",
+      "source_url": null,
+      "author": "Project tooling",
+      "date_added": "2026-07-12",
+      "used_for": "Steam marketing trailer (zh-Hant / Traditional Chinese)",
+      "attribution": null
+    },
+    {
       "path": "steam/trailer_bgm.ogg",
       "license": "ORIGINAL",
       "source": "Procedural synthesis (tools/generate_game_audio.py)",

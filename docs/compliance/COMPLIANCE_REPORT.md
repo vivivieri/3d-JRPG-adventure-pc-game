@@ -1,6 +1,6 @@
 # Asset Compliance Report
 
-**Generated:** 2026-07-11 21:07:40 UTC  
+**Generated:** 2026-07-12 08:26:42 UTC  
 **Status:** PASSED  
 **Policy:** [docs/ASSET_COMPLIANCE.md](../ASSET_COMPLIANCE.md)  
 **Manifest:** `docs/asset_manifest.license.json`
@@ -11,8 +11,8 @@
 ASSET LICENSE CHECK PASSED
   Policy: docs/ASSET_COMPLIANCE.md
   Manifest: docs/asset_manifest.license.json
-  Media files scanned: 33
-  Covered by manifest: 33
+  Media files scanned: 34
+  Covered by manifest: 34
   Allowed license types: 12
   Warnings: 6 (paths not present on this branch)
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Regular.ttf
@@ -27,15 +27,15 @@ ASSET LICENSE CHECK PASSED
 
 | Metric | Value |
 |--------|-------|
-| Media files on disk | 33 |
+| Media files on disk | 34 |
 | Unlisted files | 0 |
-| Manifest entries | 46 |
+| Manifest entries | 47 |
 
 ### Files by license
 
 | License | File count |
 |---------|------------|
-| ORIGINAL | 33 |
+| ORIGINAL | 34 |
 
 ## Allowed license types
 

@@ -18,7 +18,7 @@ def main() -> int:
         return 2
 
     data = json.loads(CRITERIA_PATH.read_text(encoding="utf-8"))
-    required_top = ("version", "global_rules", "gates", "jury", "invalid_pass_patterns")
+    required_top = ("version", "global_rules", "gates", "jury", "invalid_pass_patterns", "ci_gates")
     for key in required_top:
         if key not in data:
             errors.append(f"Missing top-level key: {key}")
@@ -41,6 +41,15 @@ def main() -> int:
             errors.append(f"jury.{domain}.criteria empty")
         if jury.get("min_confidence", 0) < 0.5:
             errors.append(f"jury.{domain}.min_confidence too low (<0.5)")
+
+    # CI gate catalog must reference known gates
+    ci = data.get("ci_gates", {})
+    if not ci.get("required_gates"):
+        errors.append("ci_gates.required_gates must be non-empty")
+    else:
+        for gid in ci["required_gates"]:
+            if gid not in gates:
+                errors.append(f"ci_gates references unknown gate: {gid}")
 
     # Palette thresholds match check_screenshot_palette.py defaults
     palette = gates.get("L2_visual_palette", {}).get("metrics", {})

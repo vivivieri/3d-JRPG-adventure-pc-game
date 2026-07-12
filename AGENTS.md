@@ -95,7 +95,9 @@ No web-scraped art/audio. See `docs/ASSET_COMPLIANCE.md`.
 
 ### Automated testing & QA (required every commit)
 
-See `docs/AI_DEV_WORKFLOW.md` for policy and `docs/ACCEPTANCE_CRITERIA.md` for **measurable** pass/fail.
+See `docs/AI_DEV_WORKFLOW.md` for policy, `docs/ACCEPTANCE_CRITERIA.md` for **measurable** pass/fail, and **`docs/CI.md`** for GitHub Actions gates.
+
+**CI (GitHub — every PR):** `bash tools/run_ci_checks.sh` — headless L0–L2; no MCP required.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"

@@ -92,7 +92,7 @@ Greybox floor/wall primitives remain procedural Godot meshes — replace before 
 | Main menu background | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Title screen |
 | Steam capsules & screenshots | `tools/generate_game_art.py` | MIT (repo) | 2026-07 | Store page marketing |
 | Pitch illustrations (`docs/pitch/illustrations/**/*.png`) | Cursor AI image generation | Pitch/marketing use | 2026-07 | Storyboard set — replace with 3D for ship |
-| Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~75s; procedural or ACE-Step BGM (`steam/trailer_bgm.ogg`) |
+| Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`, `trailer_zh-Hant.mp4`) | `tools/generate_marketing_trailer.py` | MIT (repo) + pitch art above | 2026-07 | ~75s; procedural or ACE-Step BGM (`steam/trailer_bgm.ogg`) |
 | AI video b-roll (optional) | Runway / Kling / similar | Per vendor ToS | — | **Marketing trailer only** — log in manifest; never in-game |
 
 Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG only.

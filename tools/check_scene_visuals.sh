@@ -10,6 +10,11 @@ SCENES_DIR="${ROOT}/game/scenes"
 FAIL=0
 CHECKED=0
 
+if ! command -v rg >/dev/null 2>&1; then
+  echo "[FAIL] ripgrep (rg) required — install via apt or bash tools/install_ci_deps.sh"
+  exit 1
+fi
+
 # Primitive mesh types banned in player-facing ship scenes.
 BANNED_MESH_RE='BoxMesh|CapsuleMesh|CylinderMesh|SphereMesh|PrismMesh|QuadMesh'
 # Kenney castle kit — European read; dev greybox only.
