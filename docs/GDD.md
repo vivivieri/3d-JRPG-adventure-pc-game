@@ -195,7 +195,7 @@ game/
   scripts/core/       GameManager, SaveSystem, EventBus
   scripts/combat/     TurnManager, Combatant, SkillResolver
   scripts/narrative/  DialogueRunner, QuestTracker
-  scripts/player/     PlayerController (exploration)
+  scripts/exploration/     PlayerController, Interactable, zone triggers
   data/               JSON — skills, enemies, dialogue, quests
   scenes/             Godot scenes (world, combat, UI)
 ```

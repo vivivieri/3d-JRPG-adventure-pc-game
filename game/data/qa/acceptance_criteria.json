@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "Source of truth for measurable QA pass/fail. If a check is not listed here with a threshold, it cannot block ship.",
   "global_rules": {
     "warn_is_not_pass": true,
@@ -109,12 +109,32 @@
     "L2_animation_whitelist": {
       "layer": "L2",
       "domain": "model",
-      "command": "python3 tools/check_animation_whitelist.py --phase 1",
-      "description": "Rigged GLB animation names ⊆ qa_catalog allowed_animations",
+      "command": "python3 tools/check_animation_whitelist.py --phase m5 --strict",
+      "description": "Rigged GLB: required ⊆ found ⊆ allowed_animations",
       "pass": { "exit_code": 0 },
-      "skip_when": "no rigged GLB on disk for phase",
+      "skip_when": "no rigged GLB on disk for phase (docs-only baseline)",
       "evidence": ["game/data/models/qa_catalog.json"],
       "design_ref": "docs/MODEL_QA.md §M2c, docs/CHARACTER_BIBLE.md §8"
+    },
+    "L2_feel_smoke": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_feel_smoke_checks.sh",
+      "description": "GAME_FEEL thresholds catalog + player constant audit",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot",
+      "evidence": ["game/data/qa/feel_thresholds.json"],
+      "design_ref": "docs/GAME_FEEL.md"
+    },
+    "L2_glb_import": {
+      "layer": "L2",
+      "domain": "model",
+      "command": "python3 tools/check_glb_import_scripts.py --strict",
+      "description": "Ship GLBs use glb_toon_post_import.gd",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no GLB assets on disk",
+      "evidence": ["game/scripts/editor/glb_toon_post_import.gd"],
+      "design_ref": "docs/MODEL_QA.md §M2b"
     },
     "L2_visual_palette": {
       "layer": "L2",
@@ -202,7 +222,7 @@
     "L5_e2e_three_endings": {
       "layer": "L5",
       "domain": "flow",
-      "command": "bash tools/run_e2e_playthrough.sh",
+      "command": "REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh",
       "pass": { "exit_code": 0, "skip_allowed": false, "endings_passed": ["rewind", "anchor", "drift"] },
       "evidence": ["artifacts/videos/e2e_*.mp4"],
       "design_ref": "docs/AI_TESTING_SPEC.md §7"
@@ -211,7 +231,7 @@
       "layer": "L6",
       "domain": "flow",
       "command": "docs/PLAYTEST_SCRIPT.md",
-      "pass": { "completion_percent": 80, "s0_s1_open": 0 },
+      "pass": { "completion_percent": 80, "s0_s1_open": 0, "min_testers": 5 },
       "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
       "design_ref": "docs/PLAYTEST_SCRIPT.md"
     },
@@ -306,6 +326,8 @@
       "L2_scene_primitives",
       "L3_gdai_built",
       "L2_animation_whitelist",
+      "L2_feel_smoke",
+      "L2_glb_import",
       "L4_integration",
       "M5_asset_compliance"
     ],
@@ -368,9 +390,15 @@
       "required_gates": [
         "L0_rr_compliance",
         "L0_story_data",
+        "L0_base_classes",
+        "L0_base_class_compliance",
         "L1_unit_tests",
+        "L1_gdscript_lint",
         "L2_boot_headless",
         "L2_scene_primitives",
+        "L2_animation_whitelist",
+        "L2_feel_smoke",
+        "L2_glb_import",
         "L2_model_technical",
         "L2_model_jury",
         "L2_visual_palette",
@@ -379,6 +407,7 @@
         "L2_audio_jury",
         "L4_integration",
         "L5_e2e_three_endings",
+        "L6_human_playtest",
         "M5_asset_compliance"
       ],
       "ship_flags": { "check_model_technical_ship": true, "check_audio_technical_ship": true },

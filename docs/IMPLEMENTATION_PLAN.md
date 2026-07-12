@@ -73,7 +73,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | # | Task | Docs |
 |---|------|------|
 | 1.1 | `environments/*.tres` — WorldEnvironment per zone (tonemap, fog, glow) | RENDERING_GUIDE §3–6 |
-| 1.2 | `scripts/world/zone_visuals.gd` — apply palette, sky, lights at runtime | ENVIRONMENT_KITS §1 |
+| 1.2 | `scripts/exploration/zone_visuals.gd` — apply palette, sky, lights at runtime | ENVIRONMENT_KITS §1 |
 | 1.3 | `shaders/toon_base.gdshader` — single ramp family | ART_DIRECTION §7 |
 | 1.4 | `shaders/water_stylized.gdshader` — foam + gentle displacement | ART_DIRECTION §3.6 |
 | 1.5 | Greybox zone scenes: `beach_shore`, `ruined_village`, `tidal_caves`, `dragon_palace_gate` | STORYBOARD, ENVIRONMENT_KITS |

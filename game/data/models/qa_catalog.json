@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "phase_required": {
     "1": ["urashima", "village_torii_damaged", "village_well_stone", "village_shack_roku"],
     "m5": [
@@ -25,6 +25,9 @@
         "idle", "walk", "run", "interact", "attack_light", "attack_heavy",
         "skill_cast", "hit", "defeat", "ending_dissolve", "ending_stand", "ending_row"
       ],
+      "required_animations": [
+        "idle", "walk", "interact", "attack_light", "hit"
+      ],
       "bible": "CHARACTER_BIBLE.md §2 Urashima"
     },
     "yuzu": {
@@ -35,6 +38,7 @@
       "texture_min": 1,
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "walk", "heal_cast", "purify_cast", "hit", "materialize"],
+      "required_animations": ["idle", "walk", "heal_cast", "hit"],
       "bible": "CHARACTER_BIBLE.md §3 Yuzu"
     },
     "roku": {
@@ -45,6 +49,7 @@
       "texture_min": 1,
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "walk", "taunt", "guard", "harpoon_strike", "hit"],
+      "required_animations": ["idle", "walk", "harpoon_strike", "hit"],
       "bible": "CHARACTER_BIBLE.md §4 Roku"
     },
     "salt_crab": {
@@ -53,7 +58,9 @@
       "tris_min": 3000,
       "tris_max": 12000,
       "texture_min": 1,
+      "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "attack", "hit", "death"],
+      "required_animations": ["idle", "attack", "hit", "death"],
       "bible": "CHARACTER_BIBLE.md enemies"
     },
     "tide_wraith": {
@@ -62,7 +69,9 @@
       "tris_min": 4000,
       "tris_max": 14000,
       "texture_min": 1,
+      "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "attack", "hit", "death"],
+      "required_animations": ["idle", "attack", "hit", "death"],
       "bible": "CHARACTER_BIBLE.md enemies"
     },
     "shore_wraith": {
@@ -71,10 +80,12 @@
       "tris_min": 20000,
       "tris_max": 50000,
       "texture_min": 1,
+      "rig": "mixamo_humanoid",
       "allowed_animations": [
         "idle_float", "drowned_grasp", "regret_aura", "heavy_slam",
         "phase_transition", "summon_wraith", "death_collapse"
       ],
+      "required_animations": ["idle_float", "drowned_grasp", "heavy_slam", "death_collapse"],
       "bible": "CHARACTER_BIBLE.md § Shore Wraith"
     },
     "palace_sentinel": {
@@ -83,6 +94,11 @@
       "tris_min": 15000,
       "tris_max": 45000,
       "texture_min": 1,
+      "rig": "mixamo_humanoid",
+      "allowed_animations": [
+        "idle", "spear_thrust", "shell_harden", "hit", "death"
+      ],
+      "required_animations": ["idle", "spear_thrust", "shell_harden", "hit", "death"],
       "bible": "BOSS_DESIGNS.md Sentinel"
     },
     "tide_keeper_p1": {
@@ -91,6 +107,12 @@
       "tris_min": 20000,
       "tris_max": 50000,
       "texture_min": 1,
+      "rig": "mixamo_humanoid",
+      "allowed_animations": [
+        "idle_drift", "tidal_fingers", "borrowed_moment", "gentle_pull",
+        "maelstrom", "ebb_remembrance", "phase_transition", "last_mercy", "death_dissolve"
+      ],
+      "required_animations": ["idle_drift", "tidal_fingers", "maelstrom", "death_dissolve"],
       "bible": "CHARACTER_BIBLE.md Tide Keeper"
     },
     "village_torii_damaged": {

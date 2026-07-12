@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "authority": "docs/AI_TESTING_SPEC.md §6 — L4 integration scenarios",
+  "scenarios": [
+    {
+      "id": "INT-BOOT-01",
+      "phase_min": 1,
+      "required_on_game_branch": true,
+      "implemented": true,
+      "runner": "headless_boot",
+      "description": "Main scene loads headless 3s"
+    },
+    {
+      "id": "INT-MENU-01",
+      "phase_min": 2,
+      "required_on_game_branch": false,
+      "implemented": false,
+      "description": "New game start"
+    },
+    {
+      "id": "INT-ZONE-01",
+      "phase_min": 2,
+      "required_on_game_branch": false,
+      "implemented": false,
+      "description": "Beach to ruined_village transition"
+    },
+    {
+      "id": "INT-SAVE-01",
+      "phase_min": 2,
+      "required_on_game_branch": false,
+      "implemented": false,
+      "description": "Well save round-trip"
+    },
+    {
+      "id": "INT-CMB-01",
+      "phase_min": 4,
+      "required_on_game_branch": false,
+      "implemented": false,
+      "description": "Salt Crab tutorial combat"
+    },
+    {
+      "id": "INT-BOSS-01",
+      "phase_min": 5,
+      "required_on_game_branch": false,
+      "implemented": false,
+      "description": "Shore Wraith boss"
+    }
+  ]
+}

@@ -83,8 +83,14 @@ def evaluate_jury_consensus(report: dict, domain: str, criteria: dict | None = N
         if rev.get("skipped") or rev.get("error"):
             continue
         active += 1
-        if rev.get("acceptance", {}).get("valid_pass") or rev.get("overall_pass"):
+        acceptance = rev.get("acceptance", {})
+        if acceptance.get("valid_pass") is True:
             passed += 1
+        elif acceptance and acceptance.get("valid_pass") is False:
+            continue
+        elif rev.get("overall_pass"):
+            # Legacy reports without acceptance block — do not count as pass
+            continue
 
     consensus = active >= min_active and passed >= min_pass
     return {

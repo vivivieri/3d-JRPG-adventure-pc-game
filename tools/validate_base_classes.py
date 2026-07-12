@@ -10,16 +10,23 @@ ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "game/data/code/base_classes.json"
 
 
+def res_to_disk(res_path: str) -> Path:
+    return ROOT / "game" / res_path.removeprefix("res://")
+
+
 def main() -> int:
     if not PATH.is_file():
         print(f"Missing {PATH}", file=sys.stderr)
-        return 2
+        return 1
+
     data = json.loads(PATH.read_text(encoding="utf-8"))
     errors: list[str] = []
     bases = data.get("bases", [])
     if not bases:
         errors.append("bases must be non-empty")
-    ids = set()
+
+    ids: set[str] = set()
+    base_ids: set[str] = set()
     for b in bases:
         if "id" not in b or "path" not in b:
             errors.append("each base needs id and path")
@@ -27,19 +34,46 @@ def main() -> int:
         if b["id"] in ids:
             errors.append(f"duplicate base id: {b['id']}")
         ids.add(b["id"])
+        base_ids.add(b["id"])
         if b.get("agent_rule") not in ("extend_only", "architect_only"):
             errors.append(f"invalid agent_rule for {b.get('id')}")
+
     comps = data.get("component_scenes", [])
     if not comps:
         errors.append("component_scenes must be non-empty")
+
+    for comp in comps:
+        script = comp.get("script")
+        if script and script not in base_ids:
+            errors.append(
+                f"component {comp.get('id')} references script {script} not in bases[]"
+            )
+        comp_path = comp.get("path")
+        if comp_path and (ROOT / "game/project.godot").is_file():
+            disk = res_to_disk(comp_path)
+            if not disk.is_file():
+                errors.append(f"component scene missing on disk: {comp_path}")
+
+    game_branch = (ROOT / "game/project.godot").is_file()
+    for b in bases:
+        if game_branch:
+            disk = res_to_disk(b["path"])
+            if not disk.is_file():
+                errors.append(f"base class path missing on disk: {b['path']}")
+
+    for own in data.get("architect_owns", []):
+        if not own.startswith("res://"):
+            errors.append(f"architect_owns entry must be res:// path: {own}")
+
     if errors:
         print("BASE CLASSES VALIDATION FAILED", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         return 1
+
     print(f"OK — {len(bases)} bases, {len(comps)} component scenes")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

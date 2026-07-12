@@ -81,9 +81,10 @@ Gameplay entities **extend** Architect-owned scripts — Builder instantiates co
 
 | `class_name` | Script | Instanced by |
 |--------------|--------|--------------|
-| `PlayerController` | `scripts/player/player_controller.gd` | `player.tscn` |
+| `PlayerController` | `scripts/exploration/player_controller.gd` | `player.tscn` |
 | `Combatant` | `scripts/combat/combatant.gd` | Enemy/party prefabs |
-| `Interactable` | `scripts/world/interactable.gd` | `interactable_*.tscn` catalog |
+| `Interactable` | `scripts/exploration/interactable.gd` | `interactable_*.tscn` catalog |
+| `SavePoint` | `scripts/exploration/save_point.gd` | `save_point.tscn` |
 
 **Registry:** `game/data/code/base_classes.json` · **Rules:** `docs/CODE_BASE_CLASS_RULES.md` · **Component catalog:** `docs/LEVEL_DESIGN.md` §1b · **CI:** `L0_base_classes`, `L0_base_class_compliance`, `L1_gdscript_lint`.
 

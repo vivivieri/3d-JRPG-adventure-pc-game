@@ -25,6 +25,8 @@ CI enforces **measurable, headless gates** on every push and pull request. It al
 
 CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA (L6).
 
+**Tri-state gates:** Gate commands use exit `0`=PASS, `1`=FAIL, `2`=SKIP. On `game/development`, SKIP is treated as FAIL for required gates (`global_rules.skip_is_not_pass`). On `main`, SKIP is allowed for game-only gates (lint, animation, feel, boot).
+
 ---
 
 ## 2. What CI runs (required — blocks merge)

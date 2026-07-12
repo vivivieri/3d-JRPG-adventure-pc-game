@@ -48,7 +48,11 @@ def main() -> int:
     print(f"  status={args.status} valid_pass={result['valid_pass']}")
     if args.message:
         print(f"  message={args.message}")
-    return 0 if result["valid_pass"] or args.status in ("warn", "skip") else 1
+    if args.status == "pass":
+        return 0
+    if args.status in ("warn", "skip"):
+        return 2
+    return 1
 
 
 if __name__ == "__main__":

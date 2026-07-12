@@ -64,7 +64,9 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L2_boot_headless` | Godot headless boot exit 0 |
 | `L2_scene_primitives` | `check_scene_visuals.sh` exit 0, 0 banned meshes |
-| `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — clip names ⊆ `qa_catalog.json` → `allowed_animations` |
+| `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — required ⊆ clips ⊆ `allowed_animations` |
+| `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
+| `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
 | `L2_visual_jury` | ≥2 models, all V1–V6 met, confidence ≥ 0.65 |
 | `L2_model_technical` | Tris in `qa_catalog.json` range, textures ≥ min, no greybox on ship |

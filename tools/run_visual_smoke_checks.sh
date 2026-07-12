@@ -35,6 +35,13 @@ echo "    Zone: ${ZONE}"
 echo ""
 
 if ! SCREENSHOT="$(find_gameplay_screenshot)"; then
+  if [[ "${VISUAL_SMOKE_STRICT:-}" == "1" ]] || [[ "${M5_SHIP:-}" == "1" ]]; then
+    fail "Visual jury required — no ${ZONE} screenshot in artifacts/screenshots/"
+    echo "       Expected e.g. artifacts/screenshots/phase1_${ZONE}_gameplay.png"
+    echo ""
+    echo "Visual smoke: ${WARN} warning(s), ${FAIL} failure(s)"
+    exit 1
+  fi
   warn "Visual jury skipped — no ${ZONE} screenshot in artifacts/screenshots/"
   echo "       Expected e.g. artifacts/screenshots/phase1_${ZONE}_gameplay.png"
   echo "       Capture via GDAI MCP after Phase 1 ruined_village slice."
@@ -71,14 +78,18 @@ python3 "${ROOT}/tools/review_screenshot_vision.py" \
 JURY_EXIT=$?
 set -e
 cat "$JURY_LOG"
-case "$JURY_EXIT" in
+  case "$JURY_EXIT" in
   0)
     pass "Multi-LLM vision jury (>=${VISUAL_JURY_MIN_PASS:-2} models)"
     ;;
   2)
-    warn "Multi-LLM vision jury skipped — no vision API keys (manual jury packet written)"
-    echo "       Set OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY in Cursor Secrets,"
-    echo "       or complete manual jury per artifacts/visual_reviews/*.manual.json"
+    if [[ "${VISUAL_SMOKE_STRICT:-}" == "1" ]] || [[ "${M5_SHIP:-}" == "1" ]]; then
+      fail "Multi-LLM vision jury required — no vision API keys"
+    else
+      warn "Multi-LLM vision jury skipped — no vision API keys (manual jury packet written)"
+      echo "       Set OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY in Cursor Secrets,"
+      echo "       or complete manual jury per artifacts/visual_reviews/*.manual.json"
+    fi
     ;;
   *)
     fail "Multi-LLM vision jury consensus FAIL"
