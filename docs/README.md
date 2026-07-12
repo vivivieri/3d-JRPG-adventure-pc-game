@@ -95,7 +95,7 @@
 | [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) | XP curve, stats at milestones, difficulty |
 | [ITEMS_AND_ECONOMY.md](ITEMS_AND_ECONOMY.md) | 20 items, shop, drops, inflation guards |
 | [TUTORIAL_DESIGN.md](TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
-| [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards |
+| [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards · `game/data/qa/feel_thresholds.json` |
 | [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 13 Steam achievements |
 
 ---

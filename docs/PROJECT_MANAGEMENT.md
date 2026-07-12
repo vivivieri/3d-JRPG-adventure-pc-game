@@ -54,7 +54,9 @@
 | `gate/L0_base_class_compliance` | Rogue controller fail |
 | `gate/L1_unit_tests` | Unit test fail |
 | `gate/L1_gdscript_lint` | GDScript lint fail |
-| `gate/L2_animation_whitelist` | Animation name fail |
+| `gate/L2_animation_whitelist` | Animation name / required floor fail |
+| `gate/L2_feel_smoke` | Feel constant fail |
+| `gate/L2_glb_import` | GLB post-import fail |
 | `gate/L4_integration` | Flow scenario fail |
 | `gate/L5_e2e` | Ending path fail |
 | `domain/visual` | Art jury |

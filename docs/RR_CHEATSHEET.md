@@ -130,7 +130,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 |-------|-----|----------|
 | L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance`, `L0_base_classes`, `L0_base_class_compliance` |
 | L1 | QA + Architect | `L1_unit_tests`, `L1_gdscript_lint` |
-| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_visual_palette`, jury |
+| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_feel_smoke`, `L2_glb_import`, `L2_visual_palette`, jury |
 | L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) |
 | L4 | Flow | `L4_integration` |
 | L5 | Flow | `L5_e2e_three_endings` |

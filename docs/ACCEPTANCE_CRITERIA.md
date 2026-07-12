@@ -1,6 +1,6 @@
 # Acceptance Criteria — Measurable QA Pass/Fail
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
 **Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  
@@ -46,17 +46,17 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 
 | Gate ID | Pass when |
 |---------|-----------|
-| `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — no hand-built ship `.tscn`; `main_scene` requires `game/scenes/.gdai_built` |
+| `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — ship `.tscn` requires `.gdai_built` with `verified_f5=true`; `main_scene` must match marker |
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
 | `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
-| `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue `CharacterBody3D` controllers (game branch) |
+| `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue native `extends` (game branch) |
 
 ### L1 — Unit tests & lint
 
 | Gate ID | Pass when |
 |---------|-----------|
 | `L1_unit_tests` | All registered tests return `""` (no error string) |
-| `L1_gdscript_lint` | `check_gdscript_changed.sh` exit 0 on changed `.gd` files (SKIP when no diff) |
+| `L1_gdscript_lint` | `check_gdscript_changed.sh` exit 0 on changed `.gd` files (exit 2 SKIP when no diff — FAIL on game branch) |
 
 ### L2 — Smoke
 
@@ -93,7 +93,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | Gate ID | Pass when |
 |---------|-----------|
 | `M5_asset_compliance` | `check_asset_compliance.sh` exit 0 |
-| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, 0 open S0/S1 — **after L5** |
+| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, feel checklist avg ≥3.5, ≥5 testers, 0 open S0/S1 — **after L5** |
 
 Full thresholds: `game/data/qa/acceptance_criteria.json`.
 

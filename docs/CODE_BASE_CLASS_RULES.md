@@ -1,6 +1,6 @@
 # Code Base Classes — Agent R&R (Not 3D Meshes)
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Machine-readable:** `game/data/code/base_classes.json`  
 **Cross-refs:** `docs/TECHNICAL_DESIGN.md`, `docs/RR_CHEATSHEET.md`, `docs/ASSET_COMPLIANCE.md`, `docs/ART_AUTOMATION_PIPELINE.md`
 
@@ -35,7 +35,7 @@
 
 ### Forbidden without Architect PR + TDD update
 
-- `extends CharacterBody3D` on player rig in a zone scene
+- Native `extends CharacterBody3D` / `Area3D` / `Node` outside registered base class files
 - New autoload singletons
 - Rewriting `InputMap` actions (canonical list: `UI_UX_FLOW.md`)
 - Parallel combat stack “for one boss”
@@ -76,12 +76,14 @@ Builder **instances** these in zones; does not author new trigger types without 
 
 ```bash
 python3 tools/validate_base_classes.py
-bash tools/check_rr_compliance.sh          # no rogue ship scene scripts
-bash tools/check_animation_whitelist.py    # when GLB present
-bash tools/install_glb_import_pipeline.sh  # once per dev env (game/development)
+bash tools/check_base_class_compliance.sh   # native extends audit
+bash tools/check_rr_compliance.sh
+bash tools/check_animation_whitelist.py --phase m5 --strict   # when GLB present on game branch
+bash tools/install_glb_import_pipeline.sh   # once per dev env (game/development)
+python3 tools/check_glb_import_scripts.py --strict
 ```
 
-On `game/development` CI: `L0_base_classes`, `L2_animation_whitelist` (conditional), `L1_gdscript_lint` (changed files).
+On `game/development` CI: `L0_base_classes`, `L0_base_class_compliance`, `L2_animation_whitelist`, `L2_glb_import`, `L2_feel_smoke`, `L1_gdscript_lint`. SKIP (exit 2) is FAIL on game branch per `tools/gate_lib.sh`.
 
 ---
 

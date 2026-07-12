@@ -115,11 +115,17 @@ export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
 
 python3 tools/validate_story_data.py          # L0
 python3 tools/validate_acceptance_criteria.py # catalog lint
-bash tools/check_rr_compliance.sh             # L0 — no hand-built scenes
+python3 tools/validate_base_classes.py        # L0 base class registry
+bash tools/check_rr_compliance.sh             # L0 — GDAI-verified scenes only
+bash tools/check_base_class_compliance.sh     # L0 — native extends audit
 bash tools/run_unit_tests.sh                  # L1
-bash tools/run_playtest_smoke.sh              # L2 (data + boot + art smokes)
+bash tools/check_gdscript_changed.sh          # L1 — gdlint on changed .gd
+bash tools/run_playtest_smoke.sh              # L2 (incl. animation, feel, art smokes)
+python3 tools/check_animation_whitelist.py --phase m5 --strict  # L2 when GLBs exist
+bash tools/run_feel_smoke_checks.sh           # L2 feel
+python3 tools/check_glb_import_scripts.py --strict  # L2 GLB import
 bash tools/run_integration_tests.sh           # L4 phase gates (Phase 2+)
-bash tools/run_e2e_playthrough.sh             # L5 (Phase 6+; blocks human QA)
+REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh  # L5 (Phase 6+; blocks human QA)
 bash tools/check_asset_compliance.sh
 ```
 

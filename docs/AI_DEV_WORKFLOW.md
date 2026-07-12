@@ -1,6 +1,6 @@
 # AI Dev Workflow — Build, Test & Acceptance Criteria
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Applies to:** `main` clean baseline → Phases 1–8 rebuild  
 **Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_TESTING_SPEC.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
 
@@ -90,10 +90,10 @@ Testing is **layered**. Higher layers run after lower layers pass.
 |-------|--------|-------------|---------|
 | **L0 — Data validation** | `python3 tools/validate_story_data.py` + base-class validators | AI agent (every commit) | JSON schema, cross-refs, scene IDs, `base_classes.json` |
 | **L1 — Unit tests + lint** | `bash tools/run_unit_tests.sh` + `check_gdscript_changed.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags; `gdlint` on changed `.gd` |
-| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, visual/audio/model smoke when assets exist |
+| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, feel smoke, GLB import, visual/audio/model smoke when assets exist |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
-| **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
+| **L5 — AI E2E playthrough** | `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
 | **L6 — Human QA** | `docs/PLAYTEST_SCRIPT.md` | Human (**after L0–L5 pass**) | Feel, pacing, localization — **ship gate only** |
 
 **GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_docs_ci_checks.sh` on `main`.  

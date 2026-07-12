@@ -1,6 +1,6 @@
 # 3D Model QA — Technical Gates + Turntable Vision Jury
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Problem:** An agent can import a **low-poly blockout**, **Kenney greybox**, or **chibi AI mesh** and call it “Urashima done” — then reuse that quality bar everywhere.
 
 **Rule:** Models pass **catalog + GLB technical lint + turntable vision jury** (hero/set-pieces) before ship. In-game screenshot QA (`docs/VISUAL_QA.md`) catches placement; this doc catches **the asset itself**.
@@ -60,20 +60,23 @@ python3 tools/check_model_technical.py --model urashima --ship  # M5: fail greyb
 ### M2b — GLB import sanitizer (EditorScenePostImport)
 
 ```bash
-bash tools/install_glb_import_pipeline.sh
+bash tools/install_glb_import_pipeline.sh   # copies script + toon shader; patches .import sidecars
+python3 tools/check_glb_import_scripts.py --strict
 ```
 
-Template: `tools/godot_templates/editor/glb_toon_post_import.gd` — forces NPR roughness/metallic; warns on non-Mixamo skeleton.
+Templates:
+- `tools/godot_templates/editor/glb_toon_post_import.gd` — assigns `toon_base.gdshader` ShaderMaterial; handles `StandardMaterial3D` + `ORMMaterial3D`
+- `tools/godot_templates/shaders/toon_base.gdshader` — project NPR ramp family
 
-**Godot:** `.glb` → Import → Scene → Advanced → Post Import Script → `res://scripts/editor/glb_toon_post_import.gd`
+**Godot (manual fallback):** `.glb` → Import → Scene → Advanced → Post Import Script → `res://scripts/editor/glb_toon_post_import.gd`
 
 ### M2c — Animation whitelist
 
 ```bash
-python3 tools/check_animation_whitelist.py --phase 1
+python3 tools/check_animation_whitelist.py --phase m5 --strict
 ```
 
-Clip names must ⊆ `qa_catalog.json` → `allowed_animations` (see `CHARACTER_BIBLE.md` §8).
+For each rigged model: `required_animations` ⊆ GLB clips ⊆ `allowed_animations` (see `CHARACTER_BIBLE.md` §8). Bosses `palace_sentinel` and `tide_keeper_p1` must have full animation contracts in `qa_catalog.json`.
 
 ### M3 — Turntable render (Blender)
 

@@ -7,7 +7,7 @@
 **Minimum cohort:** 5 testers (diverse language rotation) — recorded in `artifacts/qa_reports/L6_human_playtest.json`  
 **Cross-refs:** `docs/AI_TESTING_SPEC.md`, `docs/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
 
-> **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `bash tools/run_e2e_playthrough.sh` exits 0 (not SKIP).
+> **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` exits 0.
 
 ---
 
@@ -30,7 +30,7 @@
 
 - [ ] `bash tools/run_playtest_smoke.sh` → PASS  
 - [ ] `bash tools/run_integration_tests.sh` → PASS  
-- [ ] `bash tools/run_e2e_playthrough.sh` → PASS (not `[SKIP]`)  
+- [ ] `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` → PASS  
 - [ ] Record commit SHA: `git rev-parse HEAD`
 
 **Human session:**

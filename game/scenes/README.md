@@ -21,6 +21,8 @@ Do **not** hand-edit ship `.tscn` in Cursor when GDAI MCP is available.
 
 **Allowed without GDAI marker:** paths under `greybox/`, `_dev/`, or `*.greybox.tscn` only.
 
+**Ship scenes with valid marker:** committing `.tscn` is allowed when `game/scenes/.gdai_built` exists with `verified_f5=true` (see `check_rr_compliance.sh`).
+
 ## After GDAI builds a scene (required for merge)
 
 Create or update `game/scenes/.gdai_built`:

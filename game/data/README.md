@@ -15,10 +15,12 @@ game/data/
   audio/
     vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
   models/
-    qa_catalog.json          # 3D model paths, tri budgets, hero_jury list (docs/MODEL_QA.md)
+    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md)
   qa/
     remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
     acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
+    feel_thresholds.json       # GAME_FEEL automated smoke thresholds
+    integration_scenarios.json # L4 INT-* catalog (implemented / required flags)
   code/
     base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
   quests/

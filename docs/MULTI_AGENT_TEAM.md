@@ -95,6 +95,8 @@ Must include:
 - L1_gdscript_lint: PASS
 - L2_scene_primitives: PASS
 - L2_animation_whitelist: PASS
+- L2_feel_smoke: PASS
+- L2_glb_import: PASS
 - L2_visual_palette: PASS (avg_anchor_dist=72)
 - Evidence: artifacts/screenshots/ruined_village_gameplay.png
 ```
