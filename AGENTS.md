@@ -78,7 +78,7 @@ Register all installed servers in Cursor (desktop Settings or cloud dashboard). 
 | BGM / SFX | `python3 tools/generate_game_audio.py --all` + ACE-Step ship path |
 | Selective VO | `bash tools/generate_ai_vo.sh --tier p0` (needs `ELEVENLABS_API_KEY`) |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` |
-| Manifest | `python3 tools/register_asset.py` |
+| Manifest | `python3 tools/register_asset.py add --help` |
 
 No web-scraped art/audio. See `docs/ASSET_COMPLIANCE.md`.
 

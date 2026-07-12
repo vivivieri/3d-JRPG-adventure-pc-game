@@ -105,7 +105,7 @@ Use **both**.
 ```
 1. Meshy/Tripo/Rodin → Blender decimate/UV → export GLB
 2. ComfyUI/Material Maker albedo + palette_remap.py
-3. python3 tools/register_asset.py
+3. python3 tools/register_asset.py add --path <path> --license <id> --source <name> --author <name> --used-for <desc>
 4. python3 tools/check_model_catalog.py --phase 1
 5. python3 tools/check_model_technical.py --model urashima
 6. python3 tools/render_model_turntable.py --model urashima

@@ -191,7 +191,7 @@ Template: `.cursor/mcp.json.example`
 2. ComfyUI (locked workflow) OR Material Maker — tileable albedo (muted coastal decay)
 3. python3 tools/palette_remap.py --zone <zone> --input <png>
 4. Save PNG → game/assets/textures/zones/<zone>/
-5. python3 tools/register_asset.py + docs/LICENSES.md
+5. python3 tools/register_asset.py add --path <path> --license <id> --source <name> --author <name> --used-for <desc>  # see docs/LICENSES.md
 6. GodotPrompter — tune toon shader if needed
 7. GDAI MCP — assign materials in zone .tscn, F5 verify
 8. bash tools/check_asset_compliance.sh

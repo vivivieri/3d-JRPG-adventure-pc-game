@@ -1,5 +1,7 @@
 # In-game screenshots
 
+> **Deprecated.** This file references `*-dc91` branches that `docs/IMPLEMENTATION_PLAN.md` records as **deleted** ("do not restore old code") and a `tools/capture_screenshots.sh` script that does not exist in this repo. Kept for historical reference only — do not follow these links or commands. When Phase 1+ produces real screenshots, capture them per `docs/VISUAL_QA.md` and replace this file's contents.
+
 **Note:** This repository is **private**. `raw.githubusercontent.com` links will **404** unless the repo is public. Use the GitHub file browser links below while logged into GitHub.
 
 ## Latest screenshots (PR #5 branch — CC0 3D models)

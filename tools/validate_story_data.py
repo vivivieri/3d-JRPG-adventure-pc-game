@@ -234,6 +234,16 @@ def main() -> int:
     for missing in sorted(enum_flags - written_enums):
         errors.append(f"Enum flag never set by any dialogue choice: {missing}")
 
+    # Items story_grant resolves to "new_game", a real scene_id, or a real lore entry
+    lore_ids = {e["id"] for e in load("lore/lore_entries.json")["entries"]}
+    for item in load("items/items.json")["items"]:
+        grant = item.get("story_grant")
+        if grant and grant != "new_game" and grant not in scene_ids and grant not in lore_ids:
+            errors.append(
+                f"Item {item['id']} story_grant is not 'new_game', a known scene_id, "
+                f"or a known lore entry: {grant}"
+            )
+
     if errors:
         print("STORY DATA VALIDATION FAILED", file=sys.stderr)
         for e in errors:

@@ -2,7 +2,7 @@
 
 **Format per scene:** ID, location, camera, dialogue summary, gameplay type, mood, assets needed.
 
-**Total scenes:** 19 (SC-00 prologue + 18 main path)
+**Total scenes:** 20 storyboard headings (`SC-00` prologue + `SC-01`–`SC-16` + three ending variants `SC-17a`/`SC-17b`/`SC-17c`). A single playthrough experiences **18** of them (`SC-00`→`SC-16` = 17, plus exactly one `SC-17` ending). `story/scenes.json` adds 3 SC-02 inspectable rows on top of these 20 → 23 rows; `dialogue/chapter_01.json` omits the silent `SC-07` → 22 keys. See `game/data/README.md` §Scene count.
 
 **Related docs:** `docs/CINEMATICS.md`, `docs/CHARACTER_BIBLE.md`, `docs/ENVIRONMENT_KITS.md`, `docs/TUTORIAL_DESIGN.md`, `docs/ENDING_DESIGN.md`, `docs/PACING_CHART.md`, `docs/NARRATIVE_WRITING_GUIDE.md`, `docs/STORYBOARD_ILLUSTRATIONS.md`, `docs/pitch/illustrations/`
 

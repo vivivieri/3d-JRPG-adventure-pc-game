@@ -24,7 +24,7 @@ Track implementation progress against the GDD milestones.
 
 ## M0 — Pre-production
 - [x] Game Design Document (`docs/GDD.md`)
-- [x] Storyboard — 19 scenes (`docs/STORYBOARD.md` — SC-00 + 18 main)
+- [x] Storyboard — 20 scene headings (`docs/STORYBOARD.md` — SC-00 + SC-01–16 + 3 ending variants; 18 experienced per playthrough)
 - [x] Art direction bible (`docs/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/LICENSES.md`)
 - [x] Asset compliance policy + verification tools (`docs/ASSET_COMPLIANCE.md`, `tools/`)
@@ -50,7 +50,7 @@ Track implementation progress against the GDD milestones.
 - [x] Ending design (`docs/ENDING_DESIGN.md`)
 - [x] Items & economy (`docs/ITEMS_AND_ECONOMY.md`)
 - [x] Combat systems (`docs/COMBAT_SYSTEMS.md`)
-- [x] Skills bible (`docs/SKILLS_BIBLE.md`) — 15 player skills
+- [x] Skills bible (`docs/SKILLS_BIBLE.md`) — 15 player loadout slots / 14 unique skill IDs
 - [x] UI / UX flow (`docs/UI_UX_FLOW.md`)
 - [x] Save & fail states (`docs/SAVE_AND_FAIL_STATES.md`)
 - [x] Settings & accessibility (`docs/SETTINGS_ACCESSIBILITY.md`)
@@ -163,7 +163,7 @@ Track implementation progress against the GDD milestones.
 **Marginal cost rule:** SC-12 cinematic is cheap once `palace_gate_main` exists — fund the gate mesh first, camera path second.
 
 ## M6 — Steam & ship prep
-- [ ] Steam achievements (`AchievementManager` + `game/data/achievements.json`)
+- [ ] Steam achievements (`AchievementManager` + `game/data/achievements/achievements.json`)
 - [ ] Steam store page copy + capsule art from final M5 assets
 - [ ] Windows export preset + `tools/export_windows.sh`
 - [ ] Steam screenshots from 3D builds (`steam/screenshots/`)

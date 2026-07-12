@@ -178,7 +178,7 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 | 8.1 | GodotSteam + `tools/export_windows.sh` |
 | 8.2 | `bash tools/check_asset_compliance.sh` |
 | 8.3 | Graphics quality presets (Low/Med/High) |
-| 8.4 | Steam achievements (`AchievementManager` + `game/data/achievements.json`) | ACHIEVEMENTS.md |
+| 8.4 | Steam achievements (`AchievementManager` + `game/data/achievements/achievements.json`) | ACHIEVEMENTS.md |
 | 8.5 | Steam store page + screenshots from M5 assets | steam/STORE_PAGE.md |
 | 8.6 | Playtest script (`docs/PLAYTEST_SCRIPT.md`) |
 | 8.7 | Disable/remove GDAI MCP before export |
