@@ -83,23 +83,23 @@ Legend: ✅ / ⚠️ / ❌ as above.
 | ID | ✅ Specified today | ⚠️ Partial | ❌ Missing (add before ship) | Phase |
 |----|-------------------|------------|---------------------------|-------|
 | **urashima** | Silhouette, layers, box states, tri budget, rig attachments, `required_animations` floor, **generation brief** | Coat wind bones, portrait match | Walk cycle **duration** validation in CI; gameplay-cam face read golden shot | 1 |
-| **village_torii_damaged** | Set-piece role, zone palette, tri budget | Modular scale vs player | Brief: splinter pattern, **height vs Urashima** (≥4 m arch); golden in-scene screenshot at torii interact | 1 |
-| **village_well_stone** | Prop role, save marker linkage | Weathering level | Brief: stone type (granite vs wood rim); interact highlight read | 1 |
-| **village_shack_roku** | Set-piece ID, hub layout position | Interior lantern glow | Brief: door height, porch steps count; interior visible from doorway at gameplay cam | 1 |
+| **village_torii_damaged** | Set-piece role, zone palette, tri budget, **generation brief** | Splinter detail in-engine | Golden in-scene screenshot at torii interact | 1 |
+| **village_well_stone** | Prop role, save marker linkage, **generation brief** | Weathering variation | Interact highlight golden shot | 1 |
+| **village_shack_roku** | Set-piece ID, hub layout, **generation brief** | Interior clutter | SC-04 emerge F5 verify | 1 |
 
 ### Phase M5 — Party & enemies
 
 | ID | ✅ Specified today | ⚠️ Partial | ❌ Missing (add before ship) | Phase |
 |----|-------------------|------------|---------------------------|-------|
-| **yuzu** | Spirit lower-body material rule, anim list, portrait framing | Float walk style | Brief: bell + knife attachment QA; `materialize` clip duration; additive shader params | M5 |
-| **roku** | Harpoon strap, anim list | Taunt/guard readability | Brief: harpoon stowed vs drawn mesh states; `harpoon_strike` wind-up frames | M5 |
-| **salt_crab** | Enemy anim contract | Silhouette vs crab tutorial | Brief: attack telegraph readable at 6 m; hit react timing | M5 |
-| **tide_wraith** | Standard enemy kit | Coastal ghost read | Brief: transparency/additive limits (no Z-fight) | M5 |
-| **shore_wraith** | Boss anims, BOSS_DESIGNS kit | Phase transition VFX hook | Brief: `heavy_slam` telegraph; arena scale; boss cam framing golden shot | M5 |
-| **palace_sentinel** | Stats/skills in data | Visual in CHARACTER_BIBLE (thin) | **Full bible row** like Shore Wraith; generation brief; spear+shield silhouette at 12 m | M5 |
-| **tide_keeper_p1** | Phase materials, anim list, height phases | Phase 2/3 GLB swap rules | Brief per phase mesh; choice-moment idle hold; numerals **unreadable** blur check | M5 |
-| **palace_gate_main** | Set-piece in hero_jury | Palace void sky pairing | Brief: gate scale vs party; gold trim emission caps | M5 |
-| **lacquer_box** | Item guide, glow states on Urashima | Standalone prop GLB | Brief: 3 emission states as material presets; hip attach offset | M5 |
+| **yuzu** | Spirit lower-body material rule, anim list, portrait framing, **generation brief** | Float walk polish | `materialize` duration in CI | M5 |
+| **roku** | Harpoon strap, anim list, **generation brief** | Taunt/guard polish | Harpoon drawn mesh variant QA | M5 |
+| **salt_crab** | Enemy anim contract, **generation brief** | Pier arena dressing | Tutorial intent UI timing verify | M5 |
+| **tide_wraith** | Standard enemy kit, **generation brief** | Particle drip polish | Z-fight smoke in caves | M5 |
+| **shore_wraith** | Boss anims, BOSS_DESIGNS kit, **generation brief** | Phase transition VFX | Boss arena golden shot | M5 |
+| **palace_sentinel** | Stats/skills, **generation brief** | Full bible row depth | 12 m hall scale golden shot | M5 |
+| **tide_keeper_p1** | Phase materials, anim list, **generation brief** | P2/P3 GLB ship | Numerals unreadable jury check | M5 |
+| **palace_gate_main** | Set-piece in hero_jury, **generation brief** | Pearl socket tune | SC-12 vertigo golden shot | M5 |
+| **lacquer_box** | Item guide, glow states, **generation brief** | Ground prop SC-01 | 3-state emission screenshot | M5 |
 
 ### Characters not yet in `qa_catalog.json`
 
@@ -114,10 +114,10 @@ Legend: ✅ / ⚠️ / ❌ as above.
 
 | Zone ID | ✅ Specified today | ⚠️ Partial | ❌ Missing (add before ship) | Build phase |
 |---------|-------------------|------------|---------------------------|-------------|
-| **beach_shore** (SC-01) | Mood, palette, kit table, spawn→gate path ASCII | Water hook name | Brief: path **min width 2 m**; max 3 hero props in spawn sightline; dunes ≤30% of vista; golden `phase1_beach_shore_gameplay.png` | 2 |
-| **ruined_village** (SC-02 hub) | Full kit + layout + lighting row + gameplay markers, **generation brief** | Pier submerge depth | Golden screenshot captured + `L2_visual_jury` PASS; prop density smoke | **1** |
-| **tidal_caves** (SC-06–10) | Biolume palette, modular kit list | Puzzle water height cues | Brief: cyan emissive **max** to avoid bloom clip; ceiling height min 3 m; puzzle switch sightlines from entry | 5 |
-| **dragon_palace_gate** (SC-12+) | Palace void sky, gold trim rules | Sentinel hall scale | Brief: corridor rhythm (module repeat every N m); void sky **no stars**; save shrine exterior placement | 6 |
+| **beach_shore** (SC-01) | Mood, palette, kit table, spawn path, **generation brief** | Water foam polish | Golden screenshot capture | 2 |
+| **ruined_village** (SC-02 hub) | Full kit + layout + lighting + **generation brief** | Pier submerge depth | Golden screenshot + `L2_visual_jury` PASS | **1** |
+| **tidal_caves** (SC-06–10) | Biolume palette, modular kit, **generation brief** | Face decal polish | Puzzle state screenshots | 5 |
+| **dragon_palace_gate** (SC-12+) | Palace void sky, gold trim, **generation brief** | Mirror chamber polish | SC-12 vertigo golden shot | 6 |
 
 ### Per-zone composition contract (to add to `ENVIRONMENT_KITS.md` or `game/data/qa/zone_composition.json`)
 
@@ -154,9 +154,9 @@ For each new hero mesh or zone slice:
 
 | Milestone | Characters | Zones | Human expectation |
 |-----------|------------|-------|-------------------|
-| **Phase 1 slice** | `urashima` brief + golden shot | `ruined_village` brief + golden shot | “Looks like our game” — not “best JRPG ever” |
-| **Phase 4** | Party + salt crab briefs | — | Combat read at 6 m |
-| **M5 ship** | All `m5` catalog rows have briefs | All hub/dungeon zones have composition contract | L2 juries + L6 feel ≥3.5 |
+| **Phase 1 slice** | `urashima` + village set-pieces briefs | `ruined_village` brief | Golden shots pending capture |
+| **Phase 4** | Party + salt crab briefs ✅ | `beach_shore` brief ✅ | Combat read at 6 m |
+| **M5 ship** | All `m5` catalog rows have briefs ✅ | All player zones briefed ✅ | L2 juries + L6 feel ≥3.5 |
 | **M6 Steam** | Portrait parity with field model | No greybox in any player scene | L6 ≥80% complete |
 
 ---
@@ -165,7 +165,7 @@ For each new hero mesh or zone slice:
 
 | Priority | Deliverable | Owner | Status |
 |----------|-------------|-------|--------|
-| P0 | `docs/generation_briefs/urashima.md` + `ruined_village.md` | Architect + Visual | ✅ Done |
+| P0 | All `qa_catalog.json` + player-zone briefs | Architect + Visual | ✅ Done (17 briefs) |
 | P0 | Golden screenshot path enforced (`VISUAL_SMOKE_STRICT=1` on M5) | QA | Pending capture |
 | P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | Pending |
 | P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | Pending |

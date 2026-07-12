@@ -133,7 +133,7 @@
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
 | [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
-| [generation_briefs/](generation_briefs/README.md) | **P0 briefs** — `urashima`, `ruined_village` prompt recipes |
+| [generation_briefs/](generation_briefs/README.md) | **17 gen briefs** — all `qa_catalog` heroes + 4 player zones |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
