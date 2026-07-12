@@ -165,6 +165,7 @@ Resume agents only for **same role continuation** (e.g. Builder session 2 on sam
 
 ## 10. Cross-refs
 
+- `docs/RR_CHEATSHEET.md` — **printable one-page R&R summary**
 - `docs/PROJECT_MANAGEMENT.md` — GitHub Issues + MCP
 - `docs/AGILE_WITHIN_PHASES.md` — sprint cadence inside each phase
 - `docs/ENVIRONMENTS.md` — dev/qa/uat/preprod/prod

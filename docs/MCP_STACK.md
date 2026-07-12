@@ -454,6 +454,7 @@ Assert battle menu text visible.
 
 ## Related
 
+- `docs/RR_CHEATSHEET.md` — printable one-page R&R summary
 - `docs/ART_AUTOMATION_PIPELINE.md` — quality-first art/audio automation policy
 - `docs/ACCEPTANCE_CRITERIA.md` — measurable QA gates (WARN/SKIP ≠ PASS)
 - `docs/QA_REMEDIATION_LOOP.md` — FAIL iteration policy
