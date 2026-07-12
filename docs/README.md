@@ -2,6 +2,13 @@
 
 **Start here.** All design, technical, and production docs for the 2–3 hour stylized 3D JRPG.
 
+### Printable cheat sheets (agents)
+
+| Doc | Purpose |
+|-----|---------|
+| [RR_CHEATSHEET.md](RR_CHEATSHEET.md) | **Roles** — who owns what, handoffs, tools |
+| [CONTROLS_CHEATSHEET.md](CONTROLS_CHEATSHEET.md) | **Controls** — CI gates, PR templates, branch protection |
+
 ---
 
 ## Authority chain (when docs disagree)
@@ -30,7 +37,8 @@
 | Sprint planning (Linear) | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
 | Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
-| Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) |
+| Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) · [RR_CHEATSHEET.md](RR_CHEATSHEET.md) |
+| Role enforcement / CI | [CONTROLS_CHEATSHEET.md](CONTROLS_CHEATSHEET.md) · [CI.md](CI.md) |
 | Issues, logs, GitHub / Linear / Notion | [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md) |
 | GitHub labels, environments, branch rules | [GITHUB_SETUP.md](GITHUB_SETUP.md) |
 | Write GDScript | [CODE_STYLE.md](CODE_STYLE.md) + [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) |
@@ -135,12 +143,18 @@
 
 ## 7. Production & QA
 
-**Start:** [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) (measurable gates) · `game/data/qa/acceptance_criteria.json`
+**Start:** [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) (measurable gates) · `game/data/qa/acceptance_criteria.json`  
+**Agents:** [RR_CHEATSHEET.md](RR_CHEATSHEET.md) · [CONTROLS_CHEATSHEET.md](CONTROLS_CHEATSHEET.md)
 
 | Doc | Purpose |
 |-----|---------|
 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | Rebuild phases 0–8 |
+| [BRANCHING.md](BRANCHING.md) | `main` vs `game/development` merge policy |
+| [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) | Phase-gated Agile + sprint cadence |
 | [MILESTONES.md](MILESTONES.md) | Feature checklist (M5 art → M6 Steam) |
+| [CI.md](CI.md) | GitHub Actions — `main` vs `game/development` gates |
+| [CD.md](CD.md) | Artifact + Steam deploy pipelines |
+| [STEAM_RELEASE_CHECKLIST.md](STEAM_RELEASE_CHECKLIST.md) | Ship gaps (technical + store) |
 | [AI_DEV_WORKFLOW.md](AI_DEV_WORKFLOW.md) | Build policy, phase acceptance |
 | [AI_TESTING_SPEC.md](AI_TESTING_SPEC.md) | L0–L6 automated + human QA |
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
