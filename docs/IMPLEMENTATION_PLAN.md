@@ -32,7 +32,7 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | `tools/check_dev_environment.sh` | Done |
 | `.cursor/mcp.json.example` (GDAI MCP) | Done |
 | `game/addons/README.md` | Done |
-| Boot scene validates `game/data/` paths | Done |
+| Boot / data validation (`GameBootstrap` autoload) | Done — **no `.tscn` committed**; scenes via GDAI MCP only |
 | Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
 | Story data validator (`tools/validate_story_data.py`) | Done |
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |

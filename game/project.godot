@@ -13,16 +13,11 @@ config_version=5
 config/name="Tides of Urashima"
 config/description="A short stylized 3D JRPG adapted from Japanese folklore."
 config/version="0.1.0-rebuild"
-run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/ui/icon.svg"
 
 [autoload]
 
-EventBus="*res://scripts/core/event_bus.gd"
-SettingsManager="*res://scripts/core/settings_manager.gd"
-FontThemeManager="*res://scripts/core/font_theme_manager.gd"
-LocalizationManager="*res://scripts/core/localization_manager.gd"
 GameBootstrap="*res://scripts/core/game_bootstrap.gd"
 CinematicDirector="*res://scripts/story/cinematic_director.gd"
 GDAIMCPRuntime="*res://addons/gdai-mcp-plugin-godot/gdai_mcp_runtime.gd"

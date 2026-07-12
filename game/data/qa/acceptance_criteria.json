@@ -46,7 +46,9 @@
       "layer": "L2",
       "domain": "flow",
       "command": "godot4 --headless --path game --quit-after 3",
+      "description": "Main scene loads headless when run/main_scene is set (GDAI-built)",
       "pass": { "exit_code": 0 },
+      "skip_when": "no run/main_scene in project.godot",
       "evidence": [],
       "design_ref": "docs/TECHNICAL_DESIGN.md"
     },

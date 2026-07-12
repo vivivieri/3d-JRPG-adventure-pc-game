@@ -1,24 +1,24 @@
 # Godot project — Tides of Urashima (fresh rebuild)
 
 **Design docs on `main` and `game/data/` JSON are the source of truth.**  
-All gameplay scenes and systems were removed for a clean rebuild under the GDAI MCP workflow.
+Gameplay **scenes** are built only via **GDAI MCP** in the live editor — see `game/scenes/README.md`.
 
 ## Quick start
 
 ```bash
 # From repo root
 bash tools/setup_dev_environment.sh
-bash tools/ensure_mcp_stack.sh          # GDAI MCP + Godot editor HTTP bridge
+bash tools/ensure_mcp_stack.sh          # GDAI MCP + Godot editor HTTP bridge — REQUIRED
 bash tools/check_dev_environment.sh
 ```
 
-Open `game/project.godot` in Godot 4.7 (Forward+) and press **F5**. You should see the main menu with localized labels and a working Settings overlay.
+Open `game/project.godot` in Godot 4.7 (Forward+). **No main scene is set** until GDAI MCP builds the first menu/boot scene (Phase 2.4).
 
 ## Dev toolchain (required)
 
 | Tool | Role |
 |------|------|
-| **GodotPrompter** | Plan shaders, GDScript, architecture |
+| **GodotPrompter** | Plan shaders, GDScript, architecture, unit tests |
 | **GDAI MCP** | Build scenes in the live Godot Editor — **no manual `.tscn` edits** |
 | **`.cursorrules`** | Project workflow + stylized rendering rules |
 
@@ -28,15 +28,15 @@ See `docs/MCP_STACK.md`, `docs/GDAI_CLOUD_SETUP.md`, and `docs/AI_TESTING_SPEC.m
 
 ```
 game/
-  project.godot              # Main scene: scenes/ui/main_menu.tscn
-  scenes/ui/main_menu.tscn   # Main menu + settings overlay
+  project.godot              # Autoloads only — no run/main_scene until GDAI builds UI
+  scenes/README.md           # Scene build policy (no committed .tscn)
   scripts/core/
-    event_bus.gd             # Global signals
-    settings_manager.gd      # user://settings.json
-    localization_manager.gd  # CSV i18n (en / ja / zh / zh-Hant)
-    font_theme_manager.gd    # Noto per locale (fallback if fonts missing)
     game_bootstrap.gd        # Validates required data paths at startup
-  locale/translations.csv    # UI, skills, enemies, combat log keys
+  scripts/story/
+    cinematic_director.gd    # Cinematic hook registry (partial)
+    story_data.gd            # JSON helpers
+    voice_line_player.gd     # VO path resolver (spec; clips Phase 7)
+  locale/translations.csv    # UI/skills/combat i18n keys (data)
   data/                      # Story JSON (do not duplicate in docs)
   assets/                    # Placeholder folders for Phase 1+ assets
   addons/                    # GDAI MCP plugin (commercial — see addons/README.md)
@@ -57,8 +57,7 @@ bash tools/run_unit_tests.sh
 
 ## Next build step
 
-**Phase 1** — Environment foundation: `ruined_village` vertical slice per `docs/RENDERING_GUIDE.md`.  
-Use GodotPrompter for shaders/scripts → GDAI MCP for scene assembly.
+**Phase 1** — GodotPrompter plans shaders/`zone_visuals.gd` → **GDAI MCP** builds `ruined_village.tscn` per `docs/RENDERING_GUIDE.md`.
 
 ## Related docs
 

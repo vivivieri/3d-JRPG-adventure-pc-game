@@ -15,6 +15,4 @@ Bundle these for en / ja / zh / zh-Hant UI (see `docs/LOCALIZATION.md`):
 
 Download from [Google Noto](https://fonts.google.com/noto) or copy from a previous build.
 
-`FontThemeManager` falls back to the engine default font when files are missing (dev boot without font bundle).
-
-Place files here before Phase 2 UI ship. Log in `docs/LICENSES.md` (OFL).
+Place files here before Phase 2 UI ship. `FontThemeManager` is built via GDAI MCP in Phase 2.3. Log in `docs/LICENSES.md` (OFL).

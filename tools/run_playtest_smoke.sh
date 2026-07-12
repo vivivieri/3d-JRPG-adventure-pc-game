@@ -150,7 +150,13 @@ check_scene_visuals
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh
 check "Acceptance criteria catalog valid" python3 tools/validate_acceptance_criteria.py
-check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
+MAIN_SCENE="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | cut -d= -f2- | tr -d '"' || true)"
+if [[ -z "$MAIN_SCENE" ]]; then
+  echo "[SKIP] Boot scene loads — no run/main_scene until GDAI MCP builds first scene"
+  WARN=$((WARN + 1))
+else
+  check "Boot scene loads" godot4 --headless --rendering-driver opengl3 --path game --quit-after 3
+fi
 check_visual_smoke
 check_audio_smoke
 check_model_smoke

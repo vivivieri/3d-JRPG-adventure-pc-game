@@ -16,7 +16,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Stage | Status |
 |-------|--------|
 | **M0** — GDD, storyboard, specs | Done |
-| **M0b** — i18n (en / ja / zh / zh-Hant) | Written data + `LocalizationManager` runtime; VO clips Phase 7 |
+| **M0b** — i18n (en / ja / zh / zh-Hant) | Written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+ via GDAI; VO clips Phase 7 |
 | **M0c–M0h** — Art, gameplay, narrative, data, AI workflow docs | Done |
 | **Phase 0** — Dev environment + boot shell | **Done** |
 | **Phases 1–6** — Zones, systems, combat, full story | **Not started** |
@@ -87,7 +87,7 @@ Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_
 ```
 docs/README.md           # Documentation index (start here)
 game/data/               # Story JSON spine
-game/scenes/boot.tscn    # Dev boot only
+game/scenes/             # No .tscn until GDAI MCP builds (see game/scenes/README.md)
 game/scripts/            # Boot + story stubs (Phase 2+ expands)
 tools/validate_story_data.py
 steam/                   # Store copy + trailer

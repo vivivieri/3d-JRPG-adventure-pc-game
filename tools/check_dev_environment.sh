@@ -45,14 +45,14 @@ else
   echo "[WARN] uv not installed (needed for GDAI MCP)"
 fi
 
-if command -v godot4 >/dev/null 2>&1; then
+  if command -v godot4 >/dev/null 2>&1; then
   echo "[OK]   Godot in PATH"
   OK=$((OK + 1))
-  if godot4 --headless --path game --quit-after 1 >/dev/null 2>&1; then
-    echo "[OK]   Godot smoke test"
+  if godot4 --headless --path game -s res://tests/unit/test_runner.gd >/dev/null 2>&1; then
+    echo "[OK]   Godot unit test runner"
     OK=$((OK + 1))
   else
-    echo "[FAIL] Godot smoke test"
+    echo "[FAIL] Godot unit test runner"
     ERR=$((ERR + 1))
   fi
 else
