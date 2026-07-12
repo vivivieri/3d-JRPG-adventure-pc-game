@@ -56,6 +56,9 @@
 | `L2_scene_primitives` | **Builder** / **Visual** |
 | `L2_boot_headless` | **Builder** (when `main_scene` set) |
 | `L3_gdai_built` | **Builder** — marker updated with scene diff |
+| `L2_animation_whitelist` | **Builder** / **Visual** — Mixamo clip names only |
+| `L1_gdscript_lint` | **Architect** — changed `.gd` files |
+| `L0_base_class_compliance` | **Architect** — no rogue controllers |
 | `L4_integration` | **Flow** |
 | `M5_asset_compliance` | **Release** / compliance |
 
@@ -68,8 +71,8 @@
 | Role | Hard (automated) | Soft (process) |
 |------|------------------|----------------|
 | **PM** | Branch split (`main` vs `game/development`); issue template requires phase + gates | PR checklist; sprint batch ≤10 issues |
-| **Architect** | `L1_unit_tests`; no ship `.tscn` in PR | Handoff doc in issue; design refs |
-| **Builder** | `L0_rr_compliance`, `L2_*`, **`L3_gdai_built`**, `check_mcp_ready.sh` at session start | `.gdai_built` content; F5 in editor |
+| **Architect** | `L1_unit_tests`, `L1_gdscript_lint`, `L0_base_class_compliance` | Handoff + **base class** registry |
+| **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, component scenes | `.gdai_built`; F5 in editor |
 | **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |
 | **Flow** | `L4_integration`; L5 in `run_cd_gates.sh` for beta/prod | MCP Pro `--minimal` only |
 | **Debugger** | Godotiq read-only by policy | — |

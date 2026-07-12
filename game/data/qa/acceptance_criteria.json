@@ -53,6 +53,24 @@
       "evidence": ["game/data/qa/acceptance_criteria.json"],
       "design_ref": "docs/ACCEPTANCE_CRITERIA.md"
     },
+    "L0_base_classes": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_base_classes.py",
+      "description": "Code base class registry schema (CODE_BASE_CLASS_RULES)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/code/base_classes.json"],
+      "design_ref": "docs/CODE_BASE_CLASS_RULES.md"
+    },
+    "L0_base_class_compliance": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "bash tools/check_base_class_compliance.sh",
+      "description": "No rogue CharacterBody3D outside PlayerController on game/development",
+      "pass": { "exit_code": 0 },
+      "skip_when": "game/scripts/ not present",
+      "design_ref": "docs/CODE_BASE_CLASS_RULES.md"
+    },
     "L1_unit_tests": {
       "layer": "L1",
       "domain": "flow",
@@ -60,6 +78,15 @@
       "pass": { "exit_code": 0, "failed_tests": 0 },
       "evidence": [],
       "design_ref": "docs/AI_DEV_WORKFLOW.md §3"
+    },
+    "L1_gdscript_lint": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_gdscript_changed.sh",
+      "description": "gdlint on changed .gd files in PR diff",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no .gd changes or no game/project.godot",
+      "design_ref": "docs/CODE_STYLE.md, docs/CODE_BASE_CLASS_RULES.md"
     },
     "L2_boot_headless": {
       "layer": "L2",
@@ -78,6 +105,16 @@
       "pass": { "exit_code": 0, "banned_mesh_count": 0 },
       "evidence": [],
       "design_ref": "docs/VISUAL_QA.md §L1"
+    },
+    "L2_animation_whitelist": {
+      "layer": "L2",
+      "domain": "model",
+      "command": "python3 tools/check_animation_whitelist.py --phase 1",
+      "description": "Rigged GLB animation names ⊆ qa_catalog allowed_animations",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no rigged GLB on disk for phase",
+      "evidence": ["game/data/models/qa_catalog.json"],
+      "design_ref": "docs/MODEL_QA.md §M2c, docs/CHARACTER_BIBLE.md §8"
     },
     "L2_visual_palette": {
       "layer": "L2",
@@ -248,6 +285,7 @@
       "L0_acceptance_catalog",
       "L0_environments_catalog",
       "L0_sprint_phases",
+      "L0_base_classes",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],
@@ -261,9 +299,13 @@
       "L0_rr_compliance",
       "L0_story_data",
       "L0_acceptance_catalog",
+      "L0_base_classes",
       "L1_unit_tests",
+      "L1_gdscript_lint",
+      "L0_base_class_compliance",
       "L2_scene_primitives",
       "L3_gdai_built",
+      "L2_animation_whitelist",
       "L4_integration",
       "M5_asset_compliance"
     ],

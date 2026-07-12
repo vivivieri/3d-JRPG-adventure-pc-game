@@ -32,6 +32,21 @@
 | Save | `SavePoint_{name}` | `SavePoint.gd` |
 | Cinematic | `CinematicTrigger_{hook_id}` | calls `CinematicDirector` |
 
+### 1b. Reusable component scenes (GDAI Builder catalog)
+
+**Policy:** Instance these `.tscn` components in zones — do not rebuild trigger logic per zone.  
+**Authority:** `game/data/code/base_classes.json` → `component_scenes` · `docs/CODE_BASE_CLASS_RULES.md`
+
+| Component scene | Path | Script base | Phase |
+|-----------------|------|-------------|-------|
+| Inspectable | `res://scenes/components/interactable_inspect.tscn` | `Interactable` | 3 |
+| Zone exit | `res://scenes/components/zone_transition.tscn` | `ZoneTransition` | 3 |
+| Battle trigger | `res://scenes/components/encounter_trigger.tscn` | `EncounterTrigger` | 4 |
+| Save point | `res://scenes/components/save_point.tscn` | `SavePoint` | 3 |
+| Lantern fill | `res://scenes/components/lantern_fill.tscn` | *(light only)* | 1 |
+
+**Builder handoff:** duplicate component into zone → set export vars (`scene_id`, `encounter_id`, `target_zone`) in GDAI inspector — no new root types.
+
 ---
 
 ## 2. Zone: `beach_shore` (SC-01)

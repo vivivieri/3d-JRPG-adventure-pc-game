@@ -17,6 +17,7 @@
 6. **One writer per `.tscn`** — never parallel two agents on the same scene file.
 7. **`docs/` + `game/data/`** are design truth — not sprint backlog reprioritization.
 8. **Open PRs with the role template** — `game_development` or `docs_main` checklist (`docs/CONTROLS_CHEATSHEET.md`).
+9. **Extend base classes only** — no new `CharacterBody3D` stacks (`docs/CODE_BASE_CLASS_RULES.md`).
 
 ---
 
@@ -53,8 +54,8 @@
 | Role | Agent | Owns | Must NOT | Control hook |
 |------|-------|------|----------|--------------|
 | **PM / Sprint facilitator** | PM Agent | Issues, milestones, env promotion, batch planning | Write code or `.tscn` | Issue template: phase + gates; PR template opened |
-| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1_unit_tests`; handoff in PR/issue |
-| **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr_compliance`, **`L3_gdai_built`**, `L2_*` |
+| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`; **owns base classes** (`CODE_BASE_CLASS_RULES.md`) |
+| **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr`, **`L3_gdai_built`**, **component `.tscn` catalog** |
 | **QA** | QA Agent | L0–L3 gates, evidence, bugs | Mark ship without gates | CI green + **gate report in PR** |
 | **Integration** | Flow Agent | L4/L5 integration/E2E | Build scenes | `L4_integration`; L5 in CD beta/prod |
 | **Debugger** | Analyze Agent | Godotiq diagnosis | Scene mutations | Policy only (read-only tools) |
@@ -111,7 +112,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 
 ## Handoff minimums
 
-**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs.
+**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b).
 
 **Builder → QA:** commit SHA, `game/scenes/.gdai_built` (`verified_f5=true`), scenes touched, screenshots if visual.
 
@@ -188,6 +189,7 @@ python3 tools/validate_story_data.py     # L0_story_data
 | Doc | Contents |
 |-----|----------|
 | `.cursorrules` §0–§1 | Hard rules, combined workflow |
+| **`docs/CODE_BASE_CLASS_RULES.md`** | **Extend-only code bases** + license-safe 3D sources |
 | **`docs/CONTROLS_CHEATSHEET.md`** | **Enforcement** — CI, PR templates, branch protection |
 | `docs/MCP_STACK.md` | Full toolchain, install, troubleshooting |
 | `docs/MULTI_AGENT_TEAM.md` | Handoffs, parallel patterns, definition of done |
