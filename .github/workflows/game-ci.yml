@@ -1,0 +1,33 @@
+name: Game CI
+
+on:
+  push:
+    branches: [game/development]
+  pull_request:
+    branches: [game/development]
+
+concurrency:
+  group: game-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  l0-l2-headless:
+    name: L0–L2 headless gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install CI dependencies
+        run: bash tools/install_ci_deps.sh
+
+      - name: Run full game CI checks
+        run: bash tools/run_ci_checks.sh
+
+      - name: Upload CI summary on failure
+        if: failure()
+        run: |
+          echo "::error::Game CI failed — see docs/CI.md"
+          echo "Run locally: bash tools/install_ci_deps.sh && bash tools/run_ci_checks.sh"

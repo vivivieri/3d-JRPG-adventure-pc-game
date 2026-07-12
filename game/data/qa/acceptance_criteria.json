@@ -220,7 +220,20 @@
       "design_ref": "docs/AUDIO_QA.md §A3"
     }
   },
+  "docs_ci_gates": {
+    "branch": "main",
+    "workflow": ".github/workflows/ci.yml",
+    "runner": "bash tools/run_docs_ci_checks.sh",
+    "required_gates": [
+      "L0_story_data",
+      "L0_acceptance_catalog",
+      "L0_rr_compliance",
+      "M5_asset_compliance"
+    ],
+    "design_ref": "docs/BRANCHING.md"
+  },
   "ci_gates": {
+    "branch": "game/development",
     "workflow": ".github/workflows/ci.yml",
     "runner": "bash tools/run_ci_checks.sh",
     "required_gates": [

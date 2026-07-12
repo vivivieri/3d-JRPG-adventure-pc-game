@@ -3,6 +3,7 @@
 ## Cursor Cloud specific instructions
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
+**Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/BRANCHING.md`  
 **Design source of truth:** `docs/` on `main` + `game/data/` JSON  
 **Documentation index:** `docs/README.md`  
 **Build order:** `docs/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/MILESTONES.md`  
@@ -97,7 +98,10 @@ No web-scraped art/audio. See `docs/ASSET_COMPLIANCE.md`.
 
 See `docs/AI_DEV_WORKFLOW.md` for policy, `docs/ACCEPTANCE_CRITERIA.md` for **measurable** pass/fail, and **`docs/CI.md`** for GitHub Actions gates.
 
-**CI (GitHub — every PR):** `bash tools/run_ci_checks.sh` — headless L0–L2; no MCP required.
+| Branch | CI script |
+|--------|-----------|
+| `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
+| `game/development` | `bash tools/run_ci_checks.sh` — full L0–L2 game gates |
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"

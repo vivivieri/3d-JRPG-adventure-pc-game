@@ -1,12 +1,15 @@
 # Tides of Urashima — Implementation Plan
 
 **Version:** 1.2 (Fresh rebuild)  
-**Branch:** `main` (clean baseline)  
+**Branch:** `main` (documentation + `game/data/` only) · **`game/development`** (Godot implementation)  
 **Source of truth:** `main` design docs + `game/data/` JSON  
+**Branch policy:** `docs/BRANCHING.md`  
 **Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.  
 **Milestone checklist:** `docs/MILESTONES.md` (M5 art → M6 Steam).
 
-Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP.
+Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP on **`game/development`**.
+
+**All Phase 1–8 implementation work happens on `game/development`.** Do not merge to `main` until M6 ship-ready.
 
 ### Phase ↔ milestone map
 

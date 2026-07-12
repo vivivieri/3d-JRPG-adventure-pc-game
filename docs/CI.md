@@ -1,13 +1,25 @@
 # Continuous Integration — GitHub Actions
 
 **Version:** 1.0  
-**Workflow:** `.github/workflows/ci.yml`  
-**Runner script:** `bash tools/run_ci_checks.sh`  
-**Authority:** `game/data/qa/acceptance_criteria.json` → `ci_gates`
+**Workflow:** `.github/workflows/ci.yml` (main) · `.github/workflows/game-ci.yml` (`game/development`)  
+**Runner scripts:** `bash tools/run_docs_ci_checks.sh` (main) · `bash tools/run_ci_checks.sh` (game)  
+**Authority:** `game/data/qa/acceptance_criteria.json` → `ci_gates` / `docs_ci_gates`  
+**Branch policy:** `docs/BRANCHING.md`
 
 ---
 
-## 1. Purpose
+## 0. Branch split
+
+| Branch | CI workflow | What runs |
+|--------|-------------|-----------|
+| **`main`** | `ci.yml` | Docs + design data validation only — **no Godot runtime** |
+| **`game/development`** | `game-ci.yml` | Full headless L0–L2 + L4 game gates |
+
+Game implementation does **not** merge to `main` until ship-ready (M6). See `docs/BRANCHING.md`.
+
+---
+
+## 1. Purpose (game branch)
 
 CI enforces **measurable, headless gates** on every push to `main` and every pull request. It aligns with `.cursorrules` §0 (GDAI R&R), `docs/AI_DEV_WORKFLOW.md` §2, and `docs/ACCEPTANCE_CRITERIA.md`.
 
@@ -47,6 +59,14 @@ These are **agent-local or ship-only** — intentionally excluded from GitHub Ac
 ---
 
 ## 4. Local reproduction
+
+**Main branch (docs/data):**
+
+```bash
+bash tools/run_docs_ci_checks.sh
+```
+
+**Game branch (`game/development`):**
 
 ```bash
 bash tools/install_ci_deps.sh

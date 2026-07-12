@@ -18,7 +18,7 @@ def main() -> int:
         return 2
 
     data = json.loads(CRITERIA_PATH.read_text(encoding="utf-8"))
-    required_top = ("version", "global_rules", "gates", "jury", "invalid_pass_patterns", "ci_gates")
+    required_top = ("version", "global_rules", "gates", "jury", "invalid_pass_patterns", "ci_gates", "docs_ci_gates")
     for key in required_top:
         if key not in data:
             errors.append(f"Missing top-level key: {key}")

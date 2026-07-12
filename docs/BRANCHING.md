@@ -1,0 +1,101 @@
+# Branching policy — documentation vs game development
+
+**Version:** 1.0  
+**Authority:** This document defines which branches hold what, and when code may land on `main`.
+
+---
+
+## 1. Branch roles
+
+| Branch | Purpose | What it contains | Merge policy |
+|--------|---------|------------------|--------------|
+| **`main`** | Design & documentation | `docs/`, `game/data/`, `game/locale/`, `tools/`, `steam/` marketing, QA catalogs | Docs/data updates anytime via PR |
+| **`game/development`** | Full game implementation | Everything on `main` **plus** `game/project.godot`, scripts, scenes, assets, tests, addons | **No merge to `main` until the game is ship-ready (M6)** |
+
+---
+
+## 2. Rules
+
+### On `main`
+
+- ✅ Design docs, GDD, art direction, implementation plan
+- ✅ Story/combat JSON (`game/data/`)
+- ✅ i18n string table (`game/locale/translations.csv`)
+- ✅ Validators, CI for data + docs (`tools/run_docs_ci_checks.sh`)
+- ✅ Steam store copy and marketing trailers (`steam/`)
+- ❌ Godot project file, GDScript gameplay code, `.tscn` scenes, ship assets
+- ❌ Game implementation PRs
+
+### On `game/development`
+
+- ✅ All Godot implementation (Phases 1–8)
+- ✅ GDAI MCP–built scenes, shaders, assets
+- ✅ Unit/integration/E2E tests
+- ✅ Full game CI (`tools/run_ci_checks.sh`, `.github/workflows/game-ci.yml`)
+- ⚠️ Work in progress is expected — this branch is **not** public-facing documentation
+
+### Merge to `main` (game complete only)
+
+Merge `game/development` → `main` **once**, when:
+
+1. All phase gates L0–L5 pass on a release-candidate commit
+2. L6 human playtest sign-off (`docs/PLAYTEST_SCRIPT.md`)
+3. `M5_asset_compliance` and Steam export ready (Phase 8 / M6)
+
+Until then: **do not merge game implementation to `main`**.
+
+---
+
+## 3. Workflow for developers & agents
+
+```bash
+# Documentation or story data change
+git checkout main
+# edit docs/ or game/data/
+bash tools/run_docs_ci_checks.sh
+git commit && git push && open PR → main
+
+# Game implementation
+git checkout game/development
+bash tools/ensure_mcp_stack.sh          # before scene work
+# GodotPrompter + GDAI MCP build loop
+bash tools/run_ci_checks.sh             # full game CI
+git commit && git push                  # to game/development only
+```
+
+---
+
+## 4. CI per branch
+
+| Branch | Workflow | Script | Gates |
+|--------|----------|--------|-------|
+| `main` | `.github/workflows/ci.yml` | `run_docs_ci_checks.sh` | Story data, acceptance catalog, R&R policy, asset licenses |
+| `game/development` | `.github/workflows/game-ci.yml` | `run_ci_checks.sh` | Full L0–L2 + L4 + unit tests |
+
+---
+
+## 5. Creating the game branch (one-time)
+
+Already done:
+
+```bash
+git checkout -b game/development   # from last main snapshot with full game tree
+git push -u origin game/development
+```
+
+New clones:
+
+```bash
+git clone <repo>
+git checkout game/development   # for implementation
+git checkout main               # for docs/data only
+```
+
+---
+
+## 6. Cross-refs
+
+- `docs/IMPLEMENTATION_PLAN.md` — build phases (executed on `game/development`)
+- `docs/CI.md` — full game CI gate catalog
+- `AGENTS.md` — agent bootstrap; design source on `main`, build on `game/development`
+- `.cursorrules` §0 — GDAI MCP scene policy (applies on `game/development`)
