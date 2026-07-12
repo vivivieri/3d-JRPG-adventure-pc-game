@@ -34,26 +34,54 @@ W, H = 1920, 1080
 FPS = 30
 SAMPLE_RATE = 44100
 
-LOCALE_FONTS: dict[str, tuple[str, str]] = {
-    "en": (
-        "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    ),
-    "ja": (
-        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
-        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
-    ),
-    "zh": (
-        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
-        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
-    ),
+ALL_LOCALES = ["en", "ja", "zh", "zh-Hant"]
+CJK_LOCALES = frozenset({"ja", "zh", "zh-Hant"})
+
+FONT_CANDIDATES: dict[str, list[tuple[str, str]]] = {
+    "en": [
+        (
+            "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        ),
+    ],
+    "ja": [
+        (
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        ),
+    ],
+    "zh": [
+        (
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        ),
+    ],
+    "zh-Hant": [
+        (
+            str(ROOT / "game" / "assets" / "fonts" / "NotoSansTC-Bold.otf"),
+            str(ROOT / "game" / "assets" / "fonts" / "NotoSansTC-Regular.otf"),
+        ),
+        (
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        ),
+    ],
 }
 
 LOCALE_OUTPUTS: dict[str, Path] = {
     "en": ROOT / "steam" / "trailer.mp4",
     "ja": ROOT / "steam" / "trailer_ja.mp4",
     "zh": ROOT / "steam" / "trailer_zh.mp4",
+    "zh-Hant": ROOT / "steam" / "trailer_zh-Hant.mp4",
 }
+
+
+def resolve_locale_fonts(locale: str) -> tuple[str, str]:
+    """Pick first available bold/regular font pair for a locale."""
+    for bold, regular in FONT_CANDIDATES.get(locale, FONT_CANDIDATES["en"]):
+        if Path(bold).exists() and Path(regular).exists():
+            return bold, regular
+    raise FileNotFoundError(f"No fonts found for locale {locale}")
 
 
 def esc(text: str) -> str:
@@ -70,8 +98,11 @@ def load_segments(locale: str) -> list[tuple[str | None, float, str, str, str]]:
     """Load segment metadata and localized on-screen text."""
     data = json.loads(LOCALES_FILE.read_text(encoding="utf-8"))
     segments: list[tuple[str | None, float, str, str, str]] = []
-    for seg in data["segments"]:
-        text = seg["text"][locale]
+    for i, seg in enumerate(data["segments"]):
+        text_map: dict[str, Any] = seg["text"]
+        if locale not in text_map:
+            raise KeyError(f"Segment {i}: missing locale {locale!r} in trailer_locales.json")
+        text = text_map[locale]
         headline = text[0] if len(text) > 0 else ""
         subline = text[1] if len(text) > 1 else ""
         segments.append((seg["image"], float(seg["duration"]), headline, subline, seg["zoom"]))
@@ -96,7 +127,7 @@ def zoom_filter(mode: str, frames: int) -> str:
 
 
 def headline_fontsize(headline: str, locale: str) -> int:
-    if locale in ("ja", "zh"):
+    if locale in CJK_LOCALES:
         if len(headline) <= 12:
             return 52
         if len(headline) <= 18:
@@ -116,8 +147,8 @@ def drawtext_filters(
     """Build drawtext filter chain."""
     parts: list[str] = []
     if title_card:
-        title_fs = 64 if locale in ("ja", "zh") else 72
-        sub_fs = 34 if locale in ("ja", "zh") else 36
+        title_fs = 64 if locale in CJK_LOCALES else 72
+        sub_fs = 34 if locale in CJK_LOCALES else 36
         parts.append(
             f"drawtext=fontfile={font_bold}:text='{esc(headline)}':fontsize={title_fs}:fontcolor=white:"
             f"x=(w-text_w)/2:y=(h-text_h)/2-30:box=1:boxcolor=0x1A1A2A@0.85:boxborderw=24"
@@ -139,7 +170,7 @@ def drawtext_filters(
             f"x=(w-text_w)/2:y=h-175"
         )
     if subline:
-        sub_fs = 30 if locale in ("ja", "zh") and len(subline) > 24 else 32
+        sub_fs = 30 if locale in CJK_LOCALES and len(subline) > 24 else 32
         parts.append(
             f"drawtext=fontfile={font_reg}:text='{esc(subline)}':fontsize={sub_fs}:fontcolor=0x8B9DAF:"
             f"x=(w-text_w)/2:y=h-95"
@@ -332,11 +363,7 @@ def build_trailer(
     segments: list[tuple[str | None, float, str, str, str]],
     bgm_path: Path,
 ) -> float:
-    font_bold, font_reg = LOCALE_FONTS[locale]
-    for font in (font_bold, font_reg):
-        if not Path(font).exists():
-            raise FileNotFoundError(f"Font not found for locale {locale}: {font}")
-
+    font_bold, font_reg = resolve_locale_fonts(locale)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     total_dur = sum(s[1] for s in segments)
     print(f"[{locale}] Generating {len(segments)} segments (~{total_dur:.0f}s) -> {out_path.name}")
@@ -369,10 +396,10 @@ def build_trailer(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate marketing trailer from pitch art")
-    parser.add_argument("--locale", choices=["en", "ja", "zh"], default="en",
+    parser.add_argument("--locale", choices=ALL_LOCALES, default="en",
                         help="On-screen text language (default: en)")
     parser.add_argument("--all-locales", action="store_true",
-                        help="Render en, ja, and zh trailers")
+                        help="Render en, ja, zh, and zh-Hant trailers")
     parser.add_argument("--output", type=Path, default=None,
                         help="Output path (single-locale mode only)")
     parser.add_argument("--regen-bgm", action="store_true",
@@ -386,7 +413,7 @@ def main() -> int:
         print(f"Missing locale data: {LOCALES_FILE}", file=sys.stderr)
         return 1
 
-    locales = ["en", "ja", "zh"] if args.all_locales else [args.locale]
+    locales = ALL_LOCALES if args.all_locales else [args.locale]
     segments_by_locale = {loc: load_segments(loc) for loc in locales}
     duration = sum(s[1] for s in segments_by_locale[locales[0]])
 

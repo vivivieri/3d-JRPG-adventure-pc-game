@@ -77,7 +77,7 @@ Track implementation progress against the GDD milestones.
 - [x] P0 pitch images (`docs/pitch/illustrations/`) — party + 4 key scenes
 - [x] P1 full storyboard pass (20 scene images)
 - [x] P2 character portraits (4 + party lineup)
-- [x] Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`) — multilingual + procedural BGM
+- [x] Marketing trailer (`steam/trailer.mp4`, `trailer_ja.mp4`, `trailer_zh.mp4`, `trailer_zh-Hant.mp4`) — four on-screen-text locales + shared procedural BGM
 
 ## M0e — Story data layer (main branch)
 - [x] Data architecture (`docs/DATA_ARCHITECTURE.md`)
@@ -167,7 +167,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Steam store page copy + capsule art from final M5 assets
 - [ ] Windows export preset + `tools/export_windows.sh`
 - [ ] Steam screenshots from 3D builds (`steam/screenshots/`)
-- [ ] Marketing trailer upload (`steam/trailer.mp4` — regenerate after M5 art if needed)
+- [ ] Marketing trailer upload — four locale MP4s (`steam/trailer*.mp4`; regenerate after M5 art if illustrations change)
 - [ ] GodotSteam scaffold (`SteamManager` + `game/addons/godotsteam/README.md`)
 - [ ] Install GodotSteam **4.20+** GDExtension (`bash tools/install_godotsteam.sh`) — required for Godot 4.7
 - [ ] Steamworks app ID + depot upload

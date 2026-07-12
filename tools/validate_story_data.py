@@ -322,6 +322,17 @@ def main() -> int:
         for status in ("poison", "regen", "stun", "def_up", "def_down"):
             require_csv_key(f"status.{status}")
 
+    # Marketing trailer locale completeness
+    trailer_locales_path = ROOT / "steam" / "trailer_locales.json"
+    if trailer_locales_path.is_file():
+        trailer_data = json.loads(trailer_locales_path.read_text(encoding="utf-8"))
+        trailer_locales = trailer_data.get("locales", [])
+        for i, seg in enumerate(trailer_data.get("segments", [])):
+            text_map = seg.get("text", {})
+            for loc in trailer_locales:
+                if loc not in text_map:
+                    errors.append(f"trailer_locales.json segment {i}: missing locale {loc}")
+
     if errors:
         print("STORY DATA VALIDATION FAILED", file=sys.stderr)
         for e in errors:

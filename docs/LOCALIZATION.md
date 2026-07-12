@@ -177,6 +177,8 @@ Plan separate store pages or one page with language bullets:
 - 简体中文
 - 繁體中文（粵語／國語配音）
 
+**Marketing trailers:** `steam/trailer.mp4` (EN), `trailer_ja.mp4`, `trailer_zh.mp4` (Simplified), `trailer_zh-Hant.mp4` (Traditional) — on-screen text only; see `steam/TRAILER_SCRIPT.md`.
+
 Tag: **Localized** (when all story scenes are translated).
 
 ---
