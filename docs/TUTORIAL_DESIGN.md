@@ -57,11 +57,11 @@
 | **Lore journal** | SC-02 | First lore read | "Tab → Lore — collected memories" | `tutorial_lore_done` |
 | **Field menu** | SC-04 | First Tab press | "Tab — menu (items, equipment, quests, lore)" | `tutorial_menu_done` |
 
-**Flag storage:** only `tutorial_movement_done`, `tutorial_camera_done`, and `tutorial_combat_done`
-are **story flags** (`game/data/story/flags.json` — set by scene spine, usable in scene conditions).
-All other `tutorial_*` names above are **UI tutorial flags** owned by the tutorial system and stored
-in the save slot's `tutorial_seen[]` array (`SAVE_AND_FAIL_STATES.md` §2) — do **not** add them to
-the story-flag registry.
+**Flag storage:** all `tutorial_*` flags in the table above are registered in
+`game/data/story/flags.json` (set by scene spine / encounters; usable in conditions and
+quest gates). The save slot's `tutorial_seen[]` array (`SAVE_AND_FAIL_STATES.md` §2) is an
+optional **UI dedupe** list (suppress re-showing the same prompt text within a run) — it does
+not replace story flags.
 
 ---
 

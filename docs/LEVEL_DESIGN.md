@@ -182,6 +182,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 | ID | Scene | Type |
 |----|-------|------|
 | `enc_sc06_cave_crab` | SC-06 | Trash |
+| `enc_sc07_optional_crabs` | SC-07 | Optional trash (puzzle zone) |
 | `enc_sc08_deep_pool` | SC-08 | Mob |
 | `enc_sc09_shore_wraith` | SC-09 | Boss |
 
@@ -258,8 +259,10 @@ Each: single authored space, no combat, cinematic camera only, credits handoff.
 |--------------|------|-------|-------|
 | `enc_sc05_tutorial_crab` | ruined_village | SC-05 | No |
 | `enc_sc06_cave_crab` | tidal_caves | SC-06 | No |
+| `enc_sc07_optional_crabs` | tidal_caves | SC-07 | No (optional) |
 | `enc_sc08_deep_pool` | tidal_caves | SC-08 | No |
 | `enc_sc09_shore_wraith` | tidal_caves | SC-09 | **Yes** |
+| `enc_sc10_optional_wraith` | tidal_caves | SC-10 | No (optional) |
 | `enc_sc12_palace_wraiths` | dragon_palace_gate | SC-12 | No |
 | `enc_sc14_sentinel` | dragon_palace_gate | SC-14 | **Yes** |
 | `enc_sc15_tide_keeper` | dragon_palace_gate | SC-15 | **Yes** |

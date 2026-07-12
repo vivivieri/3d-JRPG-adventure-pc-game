@@ -43,7 +43,7 @@
           { "hp_above": 0.0, "weights": [{ "skill_id": "regret_surge", "weight": 60 }, { "skill_id": "drown_touch", "weight": 40 }] }
         ]
       },
-      "rewards": { "xp": 120, "gold": 45, "drops": [{ "item_id": "wraith_pearl", "chance": 1.0 }] },
+      "rewards": { "xp": 120, "gold": 45, "drops": [] },
       "intent_display": "charge",
       "phases": [{ "hp_threshold": 0.5, "announcement": "The drowned rise with me!" }]
     },
@@ -65,7 +65,6 @@
         "xp": 100,
         "gold": 60,
         "drops": [
-          { "item_id": "palace_edge", "chance": 1.0 },
           { "item_id": "palace_fragment", "chance": 0.5 }
         ]
       },

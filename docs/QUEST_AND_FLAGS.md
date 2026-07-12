@@ -12,10 +12,12 @@
 | 1 | `the_return` | The Return | I | `met_roku` |
 | 2 | `echoes_at_torii` | Echoes at the Torii | I–II | `shore_wraith_defeated` |
 | 3 | `depths_of_guilt` | Depths of Guilt | II | `gate_reached` |
-| 4 | `palace_gate` | The Palace Gate | II–III | `sentinel_defeated` |
+| 4 | `palace_gate` | The Palace Gate | III | `sentinel_defeated` |
 | 5 | `the_tide_answer` | The Tide's Answer | III | `game_completed` |
 
 **Rule:** a quest is complete when its **last stage's** completion flag is set (`main_quests.json` stages are ordered).
+
+**Activation:** `start_quest` in dialogue `on_complete` (Q1–Q2, Q4) or `QuestManager` auto-start when the player **enters** the `start_scene` zone after that scene's dialogue completes (Q3 `SC-09`, Q5 `SC-14`). `start_scene` values are **scene IDs** (`SC-*`), not zone ids — distinct from `new_game.json` `start_scene: beach_shore`.
 
 ---
 
@@ -78,7 +80,7 @@
 | 1 | `learn_box_truth` | Hear Roku in the mirror chamber | `knows_box_truth` |
 | 2 | `defeat_sentinel` | Defeat Palace Sentinel | `sentinel_defeated` |
 
-**Rewards:** 100 XP, `palace_edge` (weapon drop)  
+**Rewards:** 100 XP; `palace_edge` granted by `enc_sc14_sentinel` on win (not quest JSON)  
 **Blocker:** `wraith_pearl` required to open gate interior (dropped by Shore Wraith at SC-09)
 
 ---

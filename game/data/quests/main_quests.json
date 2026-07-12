@@ -48,7 +48,7 @@
           "completion": { "flag": "shore_wraith_defeated" }
         }
       ],
-      "rewards": { "xp": 100, "gold": 50, "items": ["wraith_pearl"] },
+      "rewards": { "xp": 100, "gold": 50 },
       "start_scene": "SC-03"
     },
     {

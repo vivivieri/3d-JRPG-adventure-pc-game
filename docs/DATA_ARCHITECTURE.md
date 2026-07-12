@@ -174,7 +174,7 @@ One file per chapter; scenes reference story IDs.
 }
 ```
 
-**Choices** (SC-13, SC-16): add `choices[]` with `set_flags` per option.
+**Choices** (SC-13, SC-16): add `choices[]` with `set_flags` per option. SC-16 sets `"choice_confirm": true` — UI shows two-step confirm per `ENDING_DESIGN.md` §2 before applying `ending_chosen`.
 
 ---
 
@@ -187,11 +187,11 @@ One file per chapter; scenes reference story IDs.
 | SC-07 chest | `tide_cut_saber` |
 | SC-09 boss | `wraith_pearl` (key) |
 | SC-14 boss | `palace_edge` |
-| Lore read | `spirit_bell` — `items.json` `story_grant: "lore:sailor_charm"` (granted when the `sailor_charm` lore entry is read; `lore:` prefix = lore-entry source, plain `SC-*` = scene source) |
+| Lore read | `spirit_bell` — `items.json` `story_grant: "sailor_charm"` (granted when the `sailor_charm` lore entry is read; matches `lore_entries.json` id) |
 
 ### Reward ownership rule (avoid double-grants)
 
-Several story items currently appear in **multiple** grant paths — e.g. `wraith_pearl` is a boss `drops` entry (`enemies.json`), an encounter `on_win.grant_items` (`story_encounters.json`), a quest `rewards.items` (`main_quests.json`), and an item `story_grant` (`items.json`); `palace_edge` is similar. To prevent duplicate grants or races, **exactly one** path is canonical:
+Several story items may be **documented** in multiple files (enemy `drops`, quest `rewards.items`, item `story_grant` trace the story beat), but **exactly one path grants** the item at runtime:
 
 - **Combat/story key items:** the encounter `on_win.grant_items` is the single source that actually adds the item to inventory.
 - Enemy `drops`, quest `rewards.items`, and item `story_grant` for the *same* item are **descriptive only** (UI/economy documentation) and must be no-ops at runtime, or de-duplicated by item id on grant.

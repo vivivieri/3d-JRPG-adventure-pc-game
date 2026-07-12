@@ -30,7 +30,7 @@ The three endings are **equally valid**. No "true" ending. No achievement for "b
 
 **JA / ZH:** Localize with equal line count; subtext may wrap 2 lines max.
 
-**Confirm:** Two-step — select → "Are you certain?" → Confirm / Go back
+**Confirm:** Two-step — select → "Are you certain?" → Confirm / Go back. Data: `chapter_01.json` SC-16 sets `"choice_confirm": true`; `DialogueRunner` / choice UI must not apply `ending_chosen` until confirm.
 
 ---
 

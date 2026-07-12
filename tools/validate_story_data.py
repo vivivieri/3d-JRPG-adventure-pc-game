@@ -128,6 +128,12 @@ def main() -> int:
     # Encounters reference valid scenes and enemies
     enemies_data = load("enemies/enemies.json")["enemies"]
     enemy_ids = {e["id"] for e in enemies_data}
+    # Duplicate grant guard (DATA_ARCHITECTURE §8)
+    encounter_grants: dict[str, str] = {}
+    for enc in encounters:
+        for item in enc.get("on_win", {}).get("grant_items", []) or []:
+            encounter_grants[item] = enc["id"]
+
     for enc in encounters:
         if enc["scene_id"] not in scene_ids:
             errors.append(f"Encounter {enc['id']} unknown scene: {enc['scene_id']}")
@@ -163,8 +169,14 @@ def main() -> int:
                 if w.get("skill_id") not in skill_ids:
                     errors.append(f"Enemy {en['id']} AI references unknown skill: {w.get('skill_id')}")
         for drop in en.get("rewards", {}).get("drops", []) or []:
-            if drop.get("item_id") not in items:
-                errors.append(f"Enemy {en['id']} drops unknown item: {drop.get('item_id')}")
+            iid = drop.get("item_id")
+            if iid not in items:
+                errors.append(f"Enemy {en['id']} drops unknown item: {iid}")
+            elif iid in encounter_grants:
+                errors.append(
+                    f"Enemy {en['id']} drops {iid} but encounter "
+                    f"{encounter_grants[iid]} already grants it (DATA_ARCHITECTURE §8)"
+                )
 
     party = load("characters/party.json")["characters"]
     char_ids = {c["id"] for c in party}
@@ -194,6 +206,11 @@ def main() -> int:
         for item in q.get("rewards", {}).get("items", []) or []:
             if item not in items:
                 errors.append(f"Quest {q['id']} rewards unknown item: {item}")
+            elif item in encounter_grants:
+                errors.append(
+                    f"Quest {q['id']} rewards item {item} but encounter "
+                    f"{encounter_grants[item]} already grants it (DATA_ARCHITECTURE §8)"
+                )
 
     # Shop items + scroll skills exist
     shop = load("shop/roku_shop.json")

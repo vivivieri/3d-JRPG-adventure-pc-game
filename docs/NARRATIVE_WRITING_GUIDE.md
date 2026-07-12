@@ -189,7 +189,7 @@ Other silent beats:
 
 | Rule | Detail |
 |------|--------|
-| **Parity** | Same meaning and emotional beat across all four written locales |
+| **Parity** | Same meaning and emotional beat across all four written locales (zh-Hant strings Phase 3.10) |
 | **Line count** | JA/ZH/zh-Hant may use 1–2 lines where EN uses 1; max +1 line vs EN |
 | **Choice subtext** | Max 2 lines wrap (`ENDING_DESIGN.md`) |
 | **Names** | Urashima, Yuzu, Roku, Otohime — consistent transliteration in CSV |

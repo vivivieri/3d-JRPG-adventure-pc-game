@@ -175,7 +175,7 @@ See `docs/TUTORIAL_DESIGN.md` §2.
 **Letterbox:** No  
 **Skippable:** After 3s  
 **Assets:** `cave_deep_pool` (2k), face decals — see `ENVIRONMENT_KITS.md` §5  
-**Flag:** `deep_pool_seen`
+**Flag:** `deep_pool_vignette_seen` (set by `sc08_deep_pool_vignette` hook; encounter win sets separate `deep_pool_seen`)
 
 ### SC-12 — Palace gate reveal (mid-game hero cinematic)
 

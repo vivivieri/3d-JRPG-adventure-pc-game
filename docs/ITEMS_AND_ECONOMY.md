@@ -145,8 +145,8 @@ consumables never required to win on Normal. SC-07 chest gives `tide_cut_saber` 
 |--------|-------|-------|
 | Salt Crab | 10 | — |
 | Tide Wraith | 12 | `spirit_shard` 30% |
-| Shore Wraith | 45 | `wraith_pearl` 100% |
-| Palace Sentinel | 60 | `palace_edge` 100%, `palace_fragment` 50% |
+| Shore Wraith | 45 | — (`wraith_pearl` via encounter `enc_sc09_shore_wraith` on_win, not enemy drop) |
+| Palace Sentinel | 60 | `palace_fragment` 50% (`palace_edge` via encounter `enc_sc14_sentinel` on_win) |
 | Tide Keeper | 100 | `palace_fragment` 100% |
 
 ---

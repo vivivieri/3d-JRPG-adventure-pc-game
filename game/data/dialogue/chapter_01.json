@@ -71,7 +71,9 @@
       ],
       "on_complete": {
         "set_flags": [
-          "game_started"
+          "game_started",
+          "tutorial_movement_done",
+          "tutorial_camera_done"
         ],
         "start_quest": "the_return"
       }
@@ -732,6 +734,7 @@
           }
         }
       ],
+      "choice_confirm": true,
       "on_complete": {}
     },
     {

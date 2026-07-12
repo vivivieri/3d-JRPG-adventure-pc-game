@@ -43,7 +43,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [GDD.md](GDD.md) | Master game design — scope, pillars, audience |
-| [STORYBOARD.md](STORYBOARD.md) | 19-scene narrative bible (SC-00 + 18 main) |
+| [STORYBOARD.md](STORYBOARD.md) | 20-scene narrative bible (SC-00…SC-17a/b/c; 18 experienced per run) |
 | [NARRATIVE_WRITING_GUIDE.md](NARRATIVE_WRITING_GUIDE.md) | Voice, silence, selective VO, i18n prose |
 | [VO_HIT_LIST.md](VO_HIT_LIST.md) | 12 ElevenLabs clips — not full dialogue |
 | [ENDING_DESIGN.md](ENDING_DESIGN.md) | Three endings, choice UI, replay |
@@ -153,7 +153,7 @@
 | `story/flags.json` | Canonical flag registry |
 | `dialogue/chapter_01.json` | All dialogue + 12 `voice_id` lines |
 | `quests/main_quests.json` | 5 main quests |
-| `encounters/story_encounters.json` | 8 scripted fights |
+| `encounters/story_encounters.json` | 9 scripted fights |
 
 ```bash
 python3 tools/validate_story_data.py

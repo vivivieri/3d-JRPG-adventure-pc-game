@@ -87,7 +87,7 @@ stateDiagram-v2
     Prologue --> BeachShore: SC-00 done
     BeachShore --> RuinedVillage
     RuinedVillage --> TidalCaves: cave_entrance_unlocked
-    TidalCaves --> PalaceGate: wraith_pearl + SC-11
+    TidalCaves --> PalaceGate: wraith_pearl + yuzu_joined (SC-10); SC-11 flashback optional before SC-12
     PalaceGate --> EndingZone: SC-16 choice
     EndingZone --> Credits
     Credits --> MainMenu

@@ -228,17 +228,19 @@ game/
 
 - **Tags:** JRPG, Story Rich, Short, Atmospheric, Turn-Based Combat
 - **Price band:** $4.99–$9.99 (short narrative game)
-- **USP:** "A 2-hour emotional folktale — Dark Urashima Tarō"
+- **USP:** "A 2–3 hour emotional folktale — Dark Urashima Tarō"
 
 ---
 
 ## 15. Localization
 
-Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**, **Traditional Chinese** (粵語 or 國語 VO).
+Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**, plus **Traditional Chinese** (written + dialect VO).
 
-- UI and game data: `game/locale/translations.csv`
-- Story dialogue: inline `{ en, ja, zh, zh-Hant }` per line
-- Traditional Chinese VO: player picks **Cantonese** or **Mandarin** in settings (`vo_dialect`)
+- **Ship data today:** `en`, `ja`, `zh` in dialogue JSON and `game/data/` text fields
+- **Traditional Chinese (`zh-Hant`):** spec complete in `docs/LOCALIZATION.md`; inline strings added in **Phase 3.10** (`IMPLEMENTATION_PLAN.md`); runtime falls back to `zh` until then
+- UI and game data: `game/locale/translations.csv` (four columns when created)
+- Story dialogue: inline `{ en, ja, zh, zh-Hant }` per line (target schema)
+- Traditional Chinese VO: player picks **Cantonese** or **Mandarin** in settings (`vo_dialect`) — clips generated Phase 7
 - Language selector on main menu; preference saved to `user://settings.json`
 - See `docs/LOCALIZATION.md` for translator workflow
 
