@@ -271,8 +271,8 @@ Trigger forms used in the data (all present in `achievements.json`):
 
 | Content | Where |
 |---------|-------|
-| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh, zh-Hant }` — **zh-Hant added in Phase 3.10**; current data is `{ en, ja, zh }` |
-| UI, tutorials, combat log, skill/enemy names | `game/locale/translations.csv` (**created in Phase 3.10** — does not exist yet) |
+| Dialogue lines | `dialogue/*.json` inline `{ en, ja, zh, zh-Hant }` |
+| UI, tutorials, combat log, skill/enemy names | `game/locale/translations.csv` (core keys ship; expand in Phase 3) |
 | Quest / item / lore display text | JSON inline `display_name` / `title` objects — **JSON is authoritative**; CSV mirrors optional |
 
 ---

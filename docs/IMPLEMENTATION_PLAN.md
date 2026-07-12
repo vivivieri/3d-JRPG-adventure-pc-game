@@ -108,7 +108,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 3.7 | SC-00 prologue + `CinematicDirector` opening hook | CINEMATICS.md, TUTORIAL_DESIGN |
 | 3.8 | SC-01 through SC-05 field content (village hub) | STORYBOARD.md |
 | 3.9 | Lore collectibles | LORE_AND_ENVIRONMENTAL_STORY.md |
-| 3.10 | Written i18n pass — `translations.csv` + `zh-Hant` keys in `chapter_01.json` | LOCALIZATION.md |
+| 3.10 | Written i18n — `zh-Hant` in `game/data/` + core `translations.csv` (expand CSV for skills/combat in Phase 3) | LOCALIZATION.md |
 
 ---
 
@@ -229,7 +229,7 @@ This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DE
 | Settings menu (language + `vo_dialect` + volumes) | Phase 2.8 |
 | SC-00 prologue + `CinematicDirector` | Phase 3.7 |
 | Shop + inventory UI | Phase 3.5–3.6 |
-| Written `zh-Hant` translation pass | Phase 3.10 |
+| Written `zh-Hant` in `game/data/` + `translations.csv` | Done — expand CSV for skills/combat in Phase 3 |
 | SC-08 / SC-11 / SC-12 / SC-13 story beats | Phases 5.3, 6.1–6.2 |
 | SFX/ambient production | Phase 7.6 |
 | Steam achievements + store assets | Phase 8.4–8.5 |

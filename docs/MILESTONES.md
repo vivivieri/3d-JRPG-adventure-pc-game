@@ -31,7 +31,7 @@ Track implementation progress against the GDD milestones.
 - [x] Godot 4 project scaffold (boot shell on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
-- [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — spec complete (`docs/LOCALIZATION.md`); **written zh-Hant data** Phase 3.10; runtime `LocalizationManager` Phase 2+
+- [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+; VO clips Phase 7
 
 ## M0c — Pre-build design (art rebuild specs)
 - [x] Character bible (`docs/CHARACTER_BIBLE.md`) — v1.1: LOD, boss 3D, attachment rig
@@ -110,7 +110,7 @@ Track implementation progress against the GDD milestones.
 - [ ] Roku shop UI (`shop/roku_shop.json`)
 - [ ] Quest tracker UI
 - [ ] Save point at village well
-- [ ] Written i18n pass — `translations.csv` + `zh-Hant` in `chapter_01.json`
+- [x] Written i18n data — `zh-Hant` in `game/data/` + core `game/locale/translations.csv` (skills/combat CSV keys Phase 3)
 
 ## M2 — Combat vertical slice
 - [ ] Combat UI vertical slice (HP/MP bars, action menu, battle log, enemy intent)

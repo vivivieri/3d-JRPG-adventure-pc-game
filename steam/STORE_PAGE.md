@@ -39,7 +39,7 @@ The sea returns what it claims.
 - **2–3 hour story** across three acts — village, tidal caves, Dragon Palace Gate
 - **Turn-based combat** with speed initiative, boss phases, and party skills
 - **Three endings** — Rewind, Anchor, or Drift — chosen during the final confrontation
-- **Full localization** — English, Japanese, Simplified Chinese at ship; **Traditional Chinese** (written + 粵語/國語 VO) per `docs/LOCALIZATION.md` Phase 3.10 / 7
+- **Full localization** — English, Japanese, Simplified Chinese, Traditional Chinese (粵語 or 國語 VO)
 - **Stylized coastal aesthetic** — muted ruins, bioluminescent caves, ethereal palace architecture
 
 Walk the shore. Answer the tide.

@@ -3,7 +3,7 @@
 A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Japanese folktale *Urashima Tarō*.
 
 **Engine:** Godot 4.7 stable (MIT, no royalties)  
-**Languages:** English, 日本語, 简体中文, 繁體中文（粵語／國語配音）(Noto Sans — bundled at ship; `zh-Hant` written strings Phase 3.10 per `docs/LOCALIZATION.md`)  
+**Languages:** English, 日本語, 简体中文, 繁體中文（粵語／國語配音）(Noto Sans — bundled at ship; all four written locales in `game/data/` + `game/locale/translations.csv`)  
 **Target audience:** Men 20–30  
 **Playtime:** 2–3 hours  
 
@@ -16,7 +16,7 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 | Stage | Status |
 |-------|--------|
 | **M0** — GDD, storyboard, specs | Done |
-| **M0b** — i18n (en / ja / zh / zh-Hant) | Spec done — `LocalizationManager` Phase 2+ |
+| **M0b** — i18n (en / ja / zh / zh-Hant) | Written data in `game/data/` + `translations.csv` — `LocalizationManager` Phase 2+ |
 | **M0c–M0h** — Art, gameplay, narrative, data, AI workflow docs | Done |
 | **Phase 0** — Dev environment + boot shell | **Done** |
 | **Phases 1–6** — Zones, systems, combat, full story | **Not started** |

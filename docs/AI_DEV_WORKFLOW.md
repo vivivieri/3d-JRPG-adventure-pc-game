@@ -237,7 +237,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 3.6 | SC-00 prologue plays; `prologue_seen` flag set | Integration test |
 | 3.7 | SC-01 through SC-05 reachable without soft-lock | Integration test |
 | 3.8 | 8 lore entries discoverable per `lore_placements.json` (greybox zones from Phase 1 are sufficient) | Integration test |
-| 3.9 | All four written locales render (en / ja / zh / zh-Hant); no raw keys on main path | GDAI F5 + FLOW QA |
+| 3.9 | All four written locales render (en / ja / zh / zh-Hant); no raw keys on main path | GDAI F5 + FLOW QA + `validate_story_data.py` |
 | 3.10 | L0–L4 pass | All test scripts |
 
 ### Phase 4 — Combat vertical slice

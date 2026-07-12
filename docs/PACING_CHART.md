@@ -47,7 +47,7 @@ Low  │ prologue──village dread──────────────�
 
 ## Design rules from chart
 
-1. **No combat** in first 18 min (except SC-05 at ~22 min) — establish mood
+1. **No combat** before SC-05 (~22 min) — establish mood through exploration and dialogue
 2. **Breather** before boss at SC-07 puzzle
 3. **Emotional low** after SC-09 win → Yuzu join heals tone
 4. **Choice** immediately after peak combat — no extra grind

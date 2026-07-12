@@ -95,9 +95,9 @@
 | **Location** | Tidal Caves — flooded chamber |
 | **Camera** | Top-down wide for puzzle readability |
 | **Summary** | Urashima must raise/lower water to reach an ancient latch. **No dialogue — quiet puzzle by design** (`NARRATIVE_WRITING_GUIDE.md` §4). |
-| **Gameplay** | Switch puzzle (2 states); optional chest with `tide_cut_saber` (Act II weapon spike — `scenes.json`) |
+| **Gameplay** | Switch puzzle (2 states); LOW-path grants `tide_cut_saber` on puzzle solve (`scenes.json` `grants_items`) |
 | **Mood** | Quiet problem-solving |
-| **Assets** | Water plane animation, switch props, chest |
+| **Assets** | Water plane animation, switch props |
 
 ### SC-08 — Echo of the Drowned
 | Field | Detail |

@@ -80,13 +80,13 @@ Explore hub/wilderness → Talk / investigate → Trigger encounter or story bea
 - **Role:** Healer / buffer
 - **Backstory:** Died waiting for Urashima's return; bound to the broken torii gate
 - **Combat:** Purify, heals, spirit light (`SKILLS_BIBLE.md` §2)
-- **Unlock:** After clearing Tidal Caves
+- **Unlock:** SC-10 — after defeating the Shore Wraith in Tidal Caves (`yuzu_joined`)
 
 ### Roku (Companion — Old Diver)
 - **Role:** Tank / debuffer
 - **Backstory:** Only living elder; remembers the truth about the box
 - **Combat:** Taunt, shell guard, harpoon strike
-- **Unlock:** After finding him in the village ruins
+- **Unlock:** SC-12 — Roku joins combat at the Dragon Palace Gate (`roku_combat_active`); narrative meet at SC-04 (`met_roku`)
 
 ### Otohime (NPC / moral mirror)
 - Not a party member. Appears in palace flashbacks and final confrontation dialogue.
@@ -211,7 +211,7 @@ game/
 | ID | Deliverable | Done when |
 |----|-------------|-----------|
 | M0 | GDD + storyboard + repo | ✓ This doc |
-| M0b | i18n (en / ja / zh / zh-Hant + dialect VO) | ✓ Spec complete (`docs/LOCALIZATION.md`); runtime `LocalizationManager` Phase 2+ |
+| M0b | i18n (en / ja / zh / zh-Hant + dialect VO) | ✓ Written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+; VO clips Phase 7 |
 | M0c | Pre-build art specs | ✓ CHARACTER_BIBLE, ENVIRONMENT_KITS, BOSS_DESIGNS, ENCOUNTER_TABLE, CINEMATICS |
 | M0d | Pre-build game design specs | ✓ QUEST_AND_FLAGS, TUTORIAL, ENDING, COMBAT, UI, etc. |
 | M0e | Story data layer (`game/data/`) | ✓ DATA_ARCHITECTURE, validate_story_data.py |
@@ -234,12 +234,9 @@ game/
 
 ## 15. Localization
 
-Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**, plus **Traditional Chinese** (written + dialect VO).
+Supported languages at launch: **English**, **Japanese**, **Simplified Chinese**, **Traditional Chinese** (粵語 or 國語 VO).
 
-- **Ship data today:** `en`, `ja`, `zh` in dialogue JSON and `game/data/` text fields
-- **Traditional Chinese (`zh-Hant`):** spec complete in `docs/LOCALIZATION.md`; inline strings added in **Phase 3.10** (`IMPLEMENTATION_PLAN.md`); runtime falls back to `zh` until then
-- UI and game data: `game/locale/translations.csv` (four columns when created)
-- Story dialogue: inline `{ en, ja, zh, zh-Hant }` per line (target schema)
+- **Ship data:** `en`, `ja`, `zh`, `zh-Hant` in dialogue, items, lore, quests, shop JSON + `game/locale/translations.csv` (core UI keys)
 - Traditional Chinese VO: player picks **Cantonese** or **Mandarin** in settings (`vo_dialect`) — clips generated Phase 7
 - Language selector on main menu; preference saved to `user://settings.json`
 - See `docs/LOCALIZATION.md` for translator workflow

@@ -144,7 +144,7 @@ Player may hit inspect first, find lore later — both valid.
 - [ ] `sailor_charm` grants `spirit_bell` on read
 - [ ] Inspect scenes don't duplicate lore text verbatim
 - [ ] Journal Tab shows unread indicator
-- [ ] Lore readable in all ship locales when present — **today:** en / ja / zh in `lore_entries.json`; **zh-Hant** Phase 3.10
+- [ ] Lore readable in all ship locales (en / ja / zh / zh-Hant in `lore_entries.json`)
 - [ ] SC-07 remains dialogue-free
 
 ---

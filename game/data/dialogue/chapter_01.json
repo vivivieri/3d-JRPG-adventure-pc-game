@@ -10,7 +10,8 @@
           "text": {
             "en": "A wounded spirit-turtle thrashed in the nets. Urashima cut it free.",
             "ja": "傷ついた霊亀が網にもがいた。浦島はそれを解放した。",
-            "zh": "受伤的灵龟在网中挣扎。浦岛将它释放。"
+            "zh": "受伤的灵龟在网中挣扎。浦岛将它释放。",
+            "zh-Hant": "受傷的靈龜在網中掙扎。浦島將它釋放。"
           },
           "emotion": "neutral"
         },
@@ -20,7 +21,8 @@
           "text": {
             "en": "Beneath the waves: the Dragon Palace. Days became a dream. Otohime placed a lacquer box in his hands.",
             "ja": "波の下に龍宮。日々は夢となった。乙姫は漆箱を手渡した。",
-            "zh": "海浪之下是龙宫。岁月如梦。乙姬将漆盒放入他手中。"
+            "zh": "海浪之下是龙宫。岁月如梦。乙姬将漆盒放入他手中。",
+            "zh-Hant": "海浪之下是龍宮。歲月如夢。乙姬將漆盒放入他手中。"
           },
           "emotion": "neutral"
         },
@@ -30,7 +32,8 @@
           "text": {
             "en": "Three days. I'll be back in three days.",
             "ja": "三日だ。三日で戻る。",
-            "zh": "三天。我三天就回来。"
+            "zh": "三天。我三天就回来。",
+            "zh-Hant": "三天。我三天就回來。"
           },
           "emotion": "neutral",
           "voice_id": "sc00_urashima_01",
@@ -52,7 +55,8 @@
           "text": {
             "en": "The sea returns what it claims. Urashima washes ashore, the lacquer box cold against his chest.",
             "ja": "海は奪ったものを返す。浦島は打ち上げられ、胸に漆箱の冷たさを感じていた。",
-            "zh": "大海归还它索取的一切。浦岛被冲上岸边，胸口的漆盒冰冷刺骨。"
+            "zh": "大海归还它索取的一切。浦岛被冲上岸边，胸口的漆盒冰冷刺骨。",
+            "zh-Hant": "大海歸還它索取的一切。浦島被衝上岸邊，胸口的漆盒冰冷刺骨。"
           },
           "emotion": "neutral"
         },
@@ -62,7 +66,8 @@
           "text": {
             "en": "Three days... it was only three days...",
             "ja": "三日……たったの三日だったはずなのに……",
-            "zh": "三天……明明只有三天……"
+            "zh": "三天……明明只有三天……",
+            "zh-Hant": "三天……明明只有三天……"
           },
           "emotion": "confused",
           "voice_id": "sc01_urashima_01",
@@ -87,7 +92,8 @@
           "text": {
             "en": "Anyone...? The festival grounds are empty.",
             "ja": "誰か……？祭りの場は、誰もいない。",
-            "zh": "有人吗……？节庆的空地上空无一人。"
+            "zh": "有人吗……？节庆的空地上空无一人。",
+            "zh-Hant": "有人嗎……？節慶的空地上空無一人。"
           },
           "emotion": "uneasy"
         },
@@ -97,7 +103,8 @@
           "text": {
             "en": "Rotting banners flap in the wind. The village holds its breath.",
             "ja": "朽ちた幟が風に揺れる。村は息を止めている。",
-            "zh": "腐烂的旗帜在风中拍打。村庄屏住了呼吸。"
+            "zh": "腐烂的旗帜在风中拍打。村庄屏住了呼吸。",
+            "zh-Hant": "腐爛的旗幟在風中拍打。村莊屏住了呼吸。"
           },
           "emotion": "dread"
         }
@@ -117,7 +124,8 @@
           "text": {
             "en": "The festival banner hangs in tatters. Salt has bleached the kanji to ghosts.",
             "ja": "祭りの幟はぼろぼろに垂れている。塩気が文字を幽霊のように褪せさせた。",
-            "zh": "节庆旗帜残破下垂。盐气把字迹漂白成了幽灵。"
+            "zh": "节庆旗帜残破下垂。盐气把字迹漂白成了幽灵。",
+            "zh-Hant": "節慶旗幟殘破下垂。鹽氣把字跡漂白成了幽靈。"
           },
           "emotion": "melancholy"
         },
@@ -127,7 +135,8 @@
           "text": {
             "en": "They raised this for the tide-god. Who took them?",
             "ja": "潮の神のために掲げたはずだ。誰が連れ去った？",
-            "zh": "他们是为潮神挂起这面旗的。谁把他们带走了？"
+            "zh": "他们是为潮神挂起这面旗的。谁把他们带走了？",
+            "zh-Hant": "他們是為潮神掛起這面旗的。誰把他們帶走了？"
           },
           "emotion": "confused"
         }
@@ -147,7 +156,8 @@
           "text": {
             "en": "A child's sandal floats in a rain puddle, turning in slow circles.",
             "ja": "子供の草履が雨溜まりに浮かび、ゆっくりと回っている。",
-            "zh": "一只孩子的草鞋漂在雨洼里，缓缓打转。"
+            "zh": "一只孩子的草鞋漂在雨洼里，缓缓打转。",
+            "zh-Hant": "一隻孩子的草鞋漂在雨窪裡，緩緩打轉。"
           },
           "emotion": "dread"
         },
@@ -157,7 +167,8 @@
           "text": {
             "en": "...I know that pattern. The Tanaka family's.",
             "ja": "……この柄、知っている。田中家の。",
-            "zh": "……这花纹我认识。是田中家的。"
+            "zh": "……这花纹我认识。是田中家的。",
+            "zh-Hant": "……這花紋我認識。是田中家的。"
           },
           "emotion": "guilt"
         }
@@ -177,7 +188,8 @@
           "text": {
             "en": "The well is choked with seaweed. Something glints far below — not coin, not stone.",
             "ja": "井戸は海藻で詰まっている。底の奥で何かが光る——貨幣でも石でもない。",
-            "zh": "井口被海藻堵住了。深处有什么在闪光——不是铜钱，也不是石头。"
+            "zh": "井口被海藻堵住了。深处有什么在闪光——不是铜钱，也不是石头。",
+            "zh-Hant": "井口被海藻堵住了。深處有什麼在閃光——不是銅錢，也不是石頭。"
           },
           "emotion": "uneasy"
         },
@@ -187,7 +199,8 @@
           "text": {
             "en": "The water tastes of the open sea. As if the tide rose through the earth itself.",
             "ja": "水は外海の味がする。まるで潮が地中から溢れ出したかのように。",
-            "zh": "这水有外海的味道。仿佛潮水从地底涌了上来。"
+            "zh": "这水有外海的味道。仿佛潮水从地底涌了上来。",
+            "zh-Hant": "這水有外海的味道。彷彿潮水從地底湧了上來。"
           },
           "emotion": "confused"
         }
@@ -207,7 +220,8 @@
           "text": {
             "en": "You left. We waited.",
             "ja": "あなたは去った。私たちは待っていた。",
-            "zh": "你离开了。我们一直等着。"
+            "zh": "你离开了。我们一直等着。",
+            "zh-Hant": "你離開了。我們一直等著。"
           },
           "emotion": "accusatory",
           "voice_id": "sc03_yuzu_01",
@@ -219,7 +233,8 @@
           "text": {
             "en": "That voice... the shrine?",
             "ja": "この声……神社か？",
-            "zh": "这声音……是神社？"
+            "zh": "这声音……是神社？",
+            "zh-Hant": "這聲音……是神社？"
           },
           "emotion": "confused"
         },
@@ -229,7 +244,8 @@
           "text": {
             "en": "The tide took our years. You took our tomorrow.",
             "ja": "潮が歳を奪った。あなたは明日を奪った。",
-            "zh": "潮水夺走了我们的岁月。你夺走了我们的明天。"
+            "zh": "潮水夺走了我们的岁月。你夺走了我们的明天。",
+            "zh-Hant": "潮水奪走了我們的歲月。你奪走了我們的明天。"
           },
           "emotion": "sorrow"
         }
@@ -250,7 +266,8 @@
           "text": {
             "en": "Boy. You're back. That's worse than never returning.",
             "ja": "小僧。戻ったか。帰らぬより厄介だ。",
-            "zh": "小子。你回来了。这比不回来更糟。"
+            "zh": "小子。你回来了。这比不回来更糟。",
+            "zh-Hant": "小子。你回來了。這比不回來更糟。"
           },
           "emotion": "grim"
         },
@@ -260,7 +277,8 @@
           "text": {
             "en": "Roku? What happened here?",
             "ja": "六さん？ここで何があった？",
-            "zh": "六叔？这里发生了什么？"
+            "zh": "六叔？这里发生了什么？",
+            "zh-Hant": "六叔？這裡發生了什麼？"
           },
           "emotion": "desperate"
         },
@@ -270,7 +288,8 @@
           "text": {
             "en": "That box isn't a gift. Don't open it. The caves below — start there.",
             "ja": "あの箱は贈り物じゃない。開くな。下の潮穴からだ。",
-            "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。"
+            "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。",
+            "zh-Hant": "那盒子不是禮物。別開啟。從下面的潮穴開始。"
           },
           "emotion": "urgent",
           "voice_id": "sc04_roku_01",
@@ -296,7 +315,8 @@
           "text": {
             "en": "A Salt Crab scuttles across the path — even the sea forgets you.",
             "ja": "塩蟹が道を横切る——海でさえお前を忘れた。",
-            "zh": "一只盐蟹爬过道路——连大海都忘了你。"
+            "zh": "一只盐蟹爬过道路——连大海都忘了你。",
+            "zh-Hant": "一隻鹽蟹爬過道路——連大海都忘了你。"
           },
           "emotion": "neutral"
         },
@@ -306,7 +326,8 @@
           "text": {
             "en": "Move, creature. I have no quarrel with you.",
             "ja": "どけ。お前と喧嘩する暇はない。",
-            "zh": "让开，我无意与你争斗。"
+            "zh": "让开，我无意与你争斗。",
+            "zh-Hant": "讓開，我無意與你爭鬥。"
           },
           "emotion": "neutral"
         }
@@ -324,7 +345,8 @@
           "text": {
             "en": "Bioluminescent algae paints the cave walls. Somewhere deep inside, a bell tolls — the palace, calling across years.",
             "ja": "生物発光の藻が洞窟の壁を染める。奥深くで鐘が鳴る——宮殿が、歳を越えて呼んでいる。",
-            "zh": "生物发光的藻类染亮了洞壁。深处传来钟声——宫殿在跨越岁月呼唤。"
+            "zh": "生物发光的藻类染亮了洞壁。深处传来钟声——宫殿在跨越岁月呼唤。",
+            "zh-Hant": "生物發光的藻類染亮了洞壁。深處傳來鐘聲——宮殿在跨越歲月呼喚。"
           },
           "emotion": "wonder"
         },
@@ -334,7 +356,8 @@
           "text": {
             "en": "The tide carved this place. Every echo sounds like an accusation.",
             "ja": "潮がここを穿った。どの反響も非難のように聞こえる。",
-            "zh": "潮水凿出了这个地方。每一声回响都像指责。"
+            "zh": "潮水凿出了这个地方。每一声回响都像指责。",
+            "zh-Hant": "潮水鑿出了這個地方。每一聲迴響都像指責。"
           },
           "emotion": "uneasy"
         }
@@ -354,7 +377,8 @@
           "text": {
             "en": "Faces ripple beneath the black water. Dozens of voices overlap: \"Why didn't you come back?\"",
             "ja": "黒い水面の下で顔が揺れる。無数の声が重なる——「なぜ戻らなかった？」",
-            "zh": "黑水之下面孔荡漾。无数声音重叠：「你为什么没有回来？」"
+            "zh": "黑水之下面孔荡漾。无数声音重叠：「你为什么没有回来？」",
+            "zh-Hant": "黑水之下面孔盪漾。無數聲音重疊：「你為什麼沒有回來？」"
           },
           "emotion": "horror"
         },
@@ -364,7 +388,8 @@
           "text": {
             "en": "I know you. I left you all behind.",
             "ja": "わかっている。俺は皆を置いていった。",
-            "zh": "我认识你们。我把你们都抛下了。"
+            "zh": "我认识你们。我把你们都抛下了。",
+            "zh-Hant": "我認識你們。我把你們都拋下了。"
           },
           "emotion": "guilt",
           "voice_id": "sc08_urashima_01",
@@ -379,7 +404,8 @@
           "text": {
             "en": "That sandal in the village puddle... you're still here, under the water.",
             "ja": "村の水たまりのあの草履……お前たちはまだここにいる、水の下に。",
-            "zh": "村里水洼中的那只草鞋……你们还在这里，在水下。"
+            "zh": "村里水洼中的那只草鞋……你们还在这里，在水下。",
+            "zh-Hant": "村裡水窪中的那隻草鞋……你們還在這裡，在水下。"
           },
           "emotion": "guilt"
         }
@@ -399,7 +425,8 @@
           "text": {
             "en": "You chose her over us.",
             "ja": "お前は私たちより彼女を選んだ。",
-            "zh": "你选择了她，而不是我们。"
+            "zh": "你选择了她，而不是我们。",
+            "zh-Hant": "你選擇了她，而不是我們。"
           },
           "emotion": "neutral",
           "voice_id": "sc09_shore_wraith_01",
@@ -411,7 +438,8 @@
           "text": {
             "en": "I know. That's why I came back.",
             "ja": "わかっている。だから戻った。",
-            "zh": "我知道。所以我回来了。"
+            "zh": "我知道。所以我回来了。",
+            "zh-Hant": "我知道。所以我回來了。"
           },
           "emotion": "neutral"
         }
@@ -429,7 +457,8 @@
           "text": {
             "en": "The wraith was our sorrow given shape. It cannot rest — and neither can I.",
             "ja": "あの霊は私たちの悲しみの形だった。それは休めない——私もまた。",
-            "zh": "那亡魂是我们悲伤的化身。它无法安息——我也一样。"
+            "zh": "那亡魂是我们悲伤的化身。它无法安息——我也一样。",
+            "zh-Hant": "那亡魂是我們悲傷的化身。它無法安息——我也一樣。"
           },
           "emotion": "melancholy"
         },
@@ -439,7 +468,8 @@
           "text": {
             "en": "I can't rest until the tide is answered. Let me walk with you, Urashima.",
             "ja": "潮に答えが出るまで休めない。一緒に歩かせて、浦島。",
-            "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。"
+            "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。",
+            "zh-Hant": "在潮水得到回應之前我無法安息。讓我與你同行，浦島。"
           },
           "emotion": "resolve",
           "voice_id": "sc10_yuzu_01",
@@ -451,7 +481,8 @@
           "text": {
             "en": "Then we face what I owe — together.",
             "ja": "なら、俺の借りを——一緒に向き合おう。",
-            "zh": "那我们一起面对我欠下的债。"
+            "zh": "那我们一起面对我欠下的债。",
+            "zh-Hant": "那我們一起面對我欠下的債。"
           },
           "emotion": "resolved"
         }
@@ -474,7 +505,8 @@
           "text": {
             "en": "Stay, Urashima. In the palace, the world will not touch you.",
             "ja": "留まりなさい、浦島。宮にいれば、世の苦しみは届きません。",
-            "zh": "留下吧，浦岛。在宫殿里，尘世伤不到你。"
+            "zh": "留下吧，浦岛。在宫殿里，尘世伤不到你。",
+            "zh-Hant": "留下吧，浦島。在宮殿裡，塵世傷不到你。"
           },
           "emotion": "seductive",
           "voice_id": "sc11_otohime_01",
@@ -486,7 +518,8 @@
           "text": {
             "en": "It was so quiet. I almost believed forever was real.",
             "ja": "あまりにも静かだった。永遠が本物だと、ほとんど信じた。",
-            "zh": "那里太安静了。我几乎相信永恒是真的。"
+            "zh": "那里太安静了。我几乎相信永恒是真的。",
+            "zh-Hant": "那裡太安靜了。我幾乎相信永恆是真的。"
           },
           "emotion": "dreamlike"
         }
@@ -506,7 +539,8 @@
           "text": {
             "en": "The gate floats above black water — architecture that should not stand.",
             "ja": "門は黒い水面の上に浮かぶ——立つはずのない造形。",
-            "zh": "门扉浮于黑水之上——本不该存在的建筑。"
+            "zh": "门扉浮于黑水之上——本不该存在的建筑。",
+            "zh-Hant": "門扉浮於黑水之上——本不該存在的建築。"
           },
           "emotion": "awe"
         },
@@ -516,7 +550,8 @@
           "text": {
             "en": "This is where time was stolen. I dive one last time with you.",
             "ja": "ここが時間を奪った場所だ。最後の潜りに付き合う。",
-            "zh": "时间就是在彼处被偷走的。我陪你下最后一次水。"
+            "zh": "时间就是在彼处被偷走的。我陪你下最后一次水。",
+            "zh-Hant": "時間就是在彼處被偷走的。我陪你下最後一次水。"
           },
           "emotion": "grim"
         },
@@ -526,7 +561,8 @@
           "text": {
             "en": "Then let's answer the tide — all of us.",
             "ja": "なら、潮に答えよう——俺たち全員で。",
-            "zh": "那我们就一起回应潮水吧。"
+            "zh": "那我们就一起回应潮水吧。",
+            "zh-Hant": "那我們就一起回應潮水吧。"
           },
           "emotion": "resolved"
         }
@@ -551,7 +587,8 @@
           "text": {
             "en": "The box holds their years. Open it, they live — you won't.",
             "ja": "箱には彼らの歳がある。開けば彼らは生き、お前は消える。",
-            "zh": "盒子里装着他们的岁月。打开它，他们能活——你不能。"
+            "zh": "盒子里装着他们的岁月。打开它，他们能活——你不能。",
+            "zh-Hant": "盒子裡裝著他們的歲月。開啟它，他們能活——你不能。"
           },
           "emotion": "heavy",
           "voice_id": "sc13_roku_01",
@@ -563,7 +600,8 @@
           "text": {
             "en": "Then I finally face what I owe.",
             "ja": "なら、ようやく償いと向き合おう。",
-            "zh": "那么，我终于要直面所欠的债。"
+            "zh": "那么，我终于要直面所欠的债。",
+            "zh-Hant": "那麼，我終於要直面所欠的債。"
           },
           "emotion": "resolved"
         },
@@ -573,7 +611,8 @@
           "text": {
             "en": "So — knowing that. Would you open it?",
             "ja": "それを知って——お前は開けるのか？",
-            "zh": "知道了这些——你还会打开它吗？"
+            "zh": "知道了这些——你还会打开它吗？",
+            "zh-Hant": "知道了這些——你還會開啟它嗎？"
           },
           "emotion": "searching"
         }
@@ -584,7 +623,8 @@
           "text": {
             "en": "I would open it.",
             "ja": "俺は開ける。",
-            "zh": "我会打开它。"
+            "zh": "我会打开它。",
+            "zh-Hant": "我會開啟它。"
           },
           "set_flags": {
             "mirror_choice": "open"
@@ -595,7 +635,8 @@
           "text": {
             "en": "I would break it.",
             "ja": "俺は壊す。",
-            "zh": "我会打碎它。"
+            "zh": "我会打碎它。",
+            "zh-Hant": "我會打碎它。"
           },
           "set_flags": {
             "mirror_choice": "break"
@@ -606,7 +647,8 @@
           "text": {
             "en": "I don't know yet.",
             "ja": "まだ分からない。",
-            "zh": "我还不知道。"
+            "zh": "我还不知道。",
+            "zh-Hant": "我還不知道。"
           },
           "set_flags": {
             "mirror_choice": "unknown"
@@ -628,7 +670,8 @@
           "text": {
             "en": "Armored coral rises from the hall floor. The sentinel's visor burns with borrowed years.",
             "ja": "武装した珊瑚が床から立ち上がる。衛兵の面は借りた歳で燃えている。",
-            "zh": "披甲珊瑚从大厅地面升起。卫士的面甲燃烧着借来的岁月。"
+            "zh": "披甲珊瑚从大厅地面升起。卫士的面甲燃烧着借来的岁月。",
+            "zh-Hant": "披甲珊瑚從大廳地面升起。衛士的面甲燃燒著借來的歲月。"
           },
           "emotion": "epic"
         },
@@ -638,7 +681,8 @@
           "text": {
             "en": "\"No mortal leaves with stolen time.\"",
             "ja": "「盗んだ時間を持って去る者はいない。」",
-            "zh": "「凡人无权带着被偷走的时间离开。」"
+            "zh": "「凡人无权带着被偷走的时间离开。」",
+            "zh-Hant": "「凡人無權帶著被偷走的時間離開。」"
           },
           "emotion": "threatening",
           "voice_id": "sc14_narrator_01",
@@ -660,7 +704,8 @@
           "text": {
             "en": "Paradise is mercy. You fled pain — I offered peace.",
             "ja": "楽園は慈悲だ。お前は苦しみから逃げた——私は安らぎを与えた。",
-            "zh": "乐园即是慈悲。你逃离了痛苦——我赐予了安宁。"
+            "zh": "乐园即是慈悲。你逃离了痛苦——我赐予了安宁。",
+            "zh-Hant": "樂園即是慈悲。你逃離了痛苦——我賜予了安寧。"
           },
           "emotion": "cosmic",
           "voice_id": "sc15_tide_keeper_01",
@@ -672,7 +717,8 @@
           "text": {
             "en": "Mercy that drowns the world isn't mercy.",
             "ja": "世界を溺らす慈悲は、慈悲じゃない。",
-            "zh": "溺毙世界的慈悲，不是慈悲。"
+            "zh": "溺毙世界的慈悲，不是慈悲。",
+            "zh-Hant": "溺斃世界的慈悲，不是慈悲。"
           },
           "emotion": "defiant"
         }
@@ -692,7 +738,8 @@
           "text": {
             "en": "The tide waits. So did they.",
             "ja": "潮は待つ。彼らもそうだった。",
-            "zh": "潮汐在等待。他们也曾等待。"
+            "zh": "潮汐在等待。他们也曾等待。",
+            "zh-Hant": "潮汐在等待。他們也曾等待。"
           },
           "emotion": "neutral",
           "voice_id": "sc16_tide_keeper_01",
@@ -705,7 +752,8 @@
           "text": {
             "en": "Open the box",
             "ja": "箱を開ける",
-            "zh": "打开盒子"
+            "zh": "打开盒子",
+            "zh-Hant": "開啟盒子"
           },
           "set_flags": {
             "ending_chosen": "rewind"
@@ -716,7 +764,8 @@
           "text": {
             "en": "Break the box",
             "ja": "箱を壊す",
-            "zh": "打碎盒子"
+            "zh": "打碎盒子",
+            "zh-Hant": "打碎盒子"
           },
           "set_flags": {
             "ending_chosen": "anchor"
@@ -727,7 +776,8 @@
           "text": {
             "en": "Walk into the tide",
             "ja": "潮へ歩む",
-            "zh": "走向潮水"
+            "zh": "走向潮水",
+            "zh-Hant": "走向潮水"
           },
           "set_flags": {
             "ending_chosen": "drift"
@@ -746,7 +796,8 @@
           "text": {
             "en": "The village lives again. At the festival edge, Urashima dissolves like foam.",
             "ja": "村は再び生きる。祭りの縁で、浦島は泡のように消えた。",
-            "zh": "村庄重获生机。在节庆边缘，浦岛如泡沫消散。"
+            "zh": "村庄重获生机。在节庆边缘，浦岛如泡沫消散。",
+            "zh-Hant": "村莊重獲生機。在節慶邊緣，浦島如泡沫消散。"
           },
           "emotion": "neutral"
         }
@@ -766,7 +817,8 @@
           "text": {
             "en": "Spirits sink into the soil. Roku plants a sapling. Urashima stays, older but present.",
             "ja": "霊は土に沈む。六が若木を植える。浦島は老いたが、そこにいる。",
-            "zh": "灵魂沉入土地。六种下新苗。浦岛老去，却仍在。"
+            "zh": "灵魂沉入土地。六种下新苗。浦岛老去，却仍在。",
+            "zh-Hant": "靈魂沉入土地。六種下新苗。浦島老去，卻仍在。"
           },
           "emotion": "neutral"
         }
@@ -786,7 +838,8 @@
           "text": {
             "en": "The boat grows small. Beneath the waves, the palace glimmers — waiting.",
             "ja": "舟は小さくなる。波の下で宮殿が瞬く——待っている。",
-            "zh": "小船渐小。海浪之下宫殿闪烁——仍在等待。"
+            "zh": "小船渐小。海浪之下宫殿闪烁——仍在等待。",
+            "zh-Hant": "小船漸小。海浪之下宮殿閃爍——仍在等待。"
           },
           "emotion": "neutral"
         }

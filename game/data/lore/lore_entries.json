@@ -4,81 +4,129 @@
     {
       "id": "fishing_ledger",
       "zone": "ruined_village",
-      "title": { "en": "Fishing Ledger", "ja": "漁師の帳簿", "zh": "渔获账本" },
+      "title": {
+        "en": "Fishing Ledger",
+        "ja": "漁師の帳簿",
+        "zh": "渔获账本",
+        "zh-Hant": "漁獲賬本"
+      },
       "body": {
         "en": "The last entry reads: 'Urashima did not return with the tide.' Ink smeared by salt water.",
         "ja": "最後の記録——「浦島は潮とともに戻らなかった」。塩で滲んだ墨。",
-        "zh": "最后一页写着：「浦岛没有随潮水归来。」墨迹被海水晕开。"
+        "zh": "最后一页写着：「浦岛没有随潮水归来。」墨迹被海水晕开。",
+        "zh-Hant": "最後一頁寫著：「浦島沒有隨潮水歸來。」墨跡被海水暈開。"
       }
     },
     {
       "id": "festival_banner",
       "zone": "ruined_village",
-      "title": { "en": "Faded Festival Banner", "ja": "色褪せた祭りの幟", "zh": "褪色的祭旗" },
+      "title": {
+        "en": "Faded Festival Banner",
+        "ja": "色褪せた祭りの幟",
+        "zh": "褪色的祭旗",
+        "zh-Hant": "褪色的祭旗"
+      },
       "body": {
         "en": "A summer fishing festival was planned the week Urashima vanished. The drums never sounded.",
         "ja": "浦島が消えた週、夏の漁祭が予定されていた。太鼓は鳴らなかった。",
-        "zh": "浦岛消失那周本该举办夏日渔祭。鼓声从未响起。"
+        "zh": "浦岛消失那周本该举办夏日渔祭。鼓声从未响起。",
+        "zh-Hant": "浦島消失那周本該舉辦夏日漁祭。鼓聲從未響起。"
       }
     },
     {
       "id": "yuzu_prayer",
       "zone": "ruined_village",
-      "title": { "en": "Prayer Slip at the Torii", "ja": "鳥居のお札", "zh": "鸟居上的祈愿签" },
+      "title": {
+        "en": "Prayer Slip at the Torii",
+        "ja": "鳥居のお札",
+        "zh": "鸟居上的祈愿签",
+        "zh-Hant": "鳥居上的祈願籤"
+      },
       "body": {
         "en": "Yuzu's handwriting: 'Wait for him. Even if the sea forgets his name.'",
         "ja": "柚の筆跡——「待とう。海が名を忘れても。」",
-        "zh": "柚的笔迹：「等他。哪怕大海忘了他的名字。」"
+        "zh": "柚的笔迹：「等他。哪怕大海忘了他的名字。」",
+        "zh-Hant": "柚的筆跡：「等他。哪怕大海忘了他的名字。」"
       }
     },
     {
       "id": "roku_dive_log",
       "zone": "ruined_village",
-      "title": { "en": "Roku's Dive Log", "ja": "六の潜水記録", "zh": "六的潜水日志" },
+      "title": {
+        "en": "Roku's Dive Log",
+        "ja": "六の潜水記録",
+        "zh": "六的潜水日志",
+        "zh-Hant": "六的潛水日誌"
+      },
       "body": {
         "en": "Depth records stop at the cave mouth. A note: 'Something breathes down there. Not water.'",
         "ja": "深度記録は洞窟の入口で止まる。メモ——「下で何かが息をしている。水ではない。」",
-        "zh": "深度记录在洞口戛然而止。旁注：「下面有东西在呼吸。不是水。」"
+        "zh": "深度记录在洞口戛然而止。旁注：「下面有东西在呼吸。不是水。」",
+        "zh-Hant": "深度記錄在洞口戛然而止。旁註：「下面有東西在呼吸。不是水。」"
       }
     },
     {
       "id": "cave_inscription",
       "zone": "tidal_caves",
-      "title": { "en": "Cave Wall Inscription", "ja": "洞窟の碑文", "zh": "洞壁铭文" },
+      "title": {
+        "en": "Cave Wall Inscription",
+        "ja": "洞窟の碑文",
+        "zh": "洞壁铭文",
+        "zh-Hant": "洞壁銘文"
+      },
       "body": {
         "en": "Carved by drowning hands: 'The palace takes years like shells from the shore.'",
         "ja": "溺れた手で刻まれた——「宮は岸の貝のように年を奪う。」",
-        "zh": "溺水者刻下：「龙宫像拾贝壳一样取走岁月。」"
+        "zh": "溺水者刻下：「龙宫像拾贝壳一样取走岁月。」",
+        "zh-Hant": "溺水者刻下：「龍宮像拾貝殼一樣取走歲月。」"
       }
     },
     {
       "id": "sailor_charm",
       "zone": "tidal_caves",
-      "title": { "en": "Sailor's Charm", "ja": "水夫の護符", "zh": "水手的护符" },
+      "title": {
+        "en": "Sailor's Charm",
+        "ja": "水夫の護符",
+        "zh": "水手的护符",
+        "zh-Hant": "水手的護符"
+      },
       "body": {
         "en": "A shell coin on rotted cord. Villagers tied these before storms. This one never came home.",
         "ja": "腐った紐に環貝。村人は嵐の前に結んだ。これは帰らなかった。",
-        "zh": "朽绳穿着环贝。村民暴风雨前都会系上。这一枚再也没有回家。"
+        "zh": "朽绳穿着环贝。村民暴风雨前都会系上。这一枚再也没有回家。",
+        "zh-Hant": "朽繩穿著環貝。村民暴風雨前都會繫上。這一枚再也沒有回家。"
       }
     },
     {
       "id": "palace_seal",
       "zone": "dragon_palace_gate",
-      "title": { "en": "Palace Invitation Seal", "ja": "宮殿の招きの印", "zh": "龙宫请柬印玺" },
+      "title": {
+        "en": "Palace Invitation Seal",
+        "ja": "宮殿の招きの印",
+        "zh": "龙宫请柬印玺",
+        "zh-Hant": "龍宮請柬印璽"
+      },
       "body": {
         "en": "Wax imprint of a turtle crest. Paradise is offered only to those who leave everything behind.",
         "ja": "亀の紋章の蝋印。楽園はすべてを置いていく者にだけ与えられる。",
-        "zh": "龟纹蜡封。乐园只赐予抛弃一切之人。"
+        "zh": "龟纹蜡封。乐园只赐予抛弃一切之人。",
+        "zh-Hant": "龜紋蠟封。樂園只賜予拋棄一切之人。"
       }
     },
     {
       "id": "otohime_letter",
       "zone": "dragon_palace_gate",
-      "title": { "en": "Letter Fragment", "ja": "手紙の断片", "zh": "信笺残页" },
+      "title": {
+        "en": "Letter Fragment",
+        "ja": "手紙の断片",
+        "zh": "信笺残页",
+        "zh-Hant": "信箋殘頁"
+      },
       "body": {
         "en": "Otohime's script: 'Do not open the box. Time is kinder inside than out.'",
         "ja": "乙姫の筆——「箱を開けないで。時は外より内の方が優しい。」",
-        "zh": "乙姬的字迹：「不要打开盒子。时间在里面比外面仁慈。」"
+        "zh": "乙姬的字迹：「不要打开盒子。时间在里面比外面仁慈。」",
+        "zh-Hant": "乙姬的字跡：「不要開啟盒子。時間在裡面比外面仁慈。」"
       }
     }
   ]

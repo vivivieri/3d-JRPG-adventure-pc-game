@@ -261,6 +261,30 @@ def main() -> int:
                 f"or a known lore entry: {grant}"
             )
 
+    # Locale completeness (en / ja / zh / zh-Hant) in inline i18n objects
+    locale_files = [
+        ("dialogue/chapter_01.json", dialogue),
+        ("items/items.json", load("items/items.json")),
+        ("lore/lore_entries.json", load("lore/lore_entries.json")),
+        ("quests/main_quests.json", load("quests/main_quests.json")),
+        ("shop/roku_shop.json", load("shop/roku_shop.json")),
+    ]
+
+    def check_locales(obj, path: str, rel: str) -> None:
+        if isinstance(obj, dict):
+            if "zh" in obj and isinstance(obj["zh"], str):
+                hant = str(obj.get("zh-Hant", "")).strip()
+                if not hant:
+                    errors.append(f"{rel}: missing zh-Hant at {path}")
+            for k, v in obj.items():
+                check_locales(v, f"{path}.{k}" if path else k, rel)
+        elif isinstance(obj, list):
+            for i, item in enumerate(obj):
+                check_locales(item, f"{path}[{i}]", rel)
+
+    for rel, data in locale_files:
+        check_locales(data, "", rel)
+
     if errors:
         print("STORY DATA VALIDATION FAILED", file=sys.stderr)
         for e in errors:

@@ -1,0 +1,23 @@
+keys,en,ja,zh,zh-Hant
+UI_NEW_GAME,New Game,はじめから,新游戏,新遊戲
+UI_CONTINUE,Continue,つづきから,继续,繼續
+UI_SETTINGS,Settings,設定,设置,設定
+UI_GALLERY,Ending Gallery,エンディングギャラリー,结局画廊,結局畫廊
+UI_LANGUAGE,Language,言語,语言,語言
+UI_VOICE_DIALECT,Voice Dialect,ボイス方言,配音方言,配音方言
+UI_VOICE_DIALECT_CANT,Cantonese,広東語,粤语,粵語
+UI_VOICE_DIALECT_CMN,Mandarin,普通話,普通话,國語
+UI_INTERACT,Press E — Investigate,E — 調べる,按 E — 调查,按 E — 調查
+UI_SAVE,Save,セーブ,存档,存檔
+UI_LOAD,Load,ロード,读档,讀檔
+UI_PAUSE,Pause,ポーズ,暂停,暫停
+UI_BACK,Back,戻る,返回,返回
+UI_CONFIRM,Confirm,決定,确认,確認
+UI_CANCEL,Cancel,キャンセル,取消,取消
+speaker.urashima,Urashima,浦島,浦岛,浦島
+speaker.yuzu,Yuzu,柚,柚,柚
+speaker.roku,Roku,六,六,六
+speaker.otohime,Otohime,乙姫,乙姬,乙姬
+speaker.tide_keeper,Tide Keeper,潮の王,潮汐之王,潮汐之王
+speaker.narrator,Narrator,ナレーター,旁白,旁白
+speaker.shore_wraith,Shore Wraith,岸の亡霊,岸之亡灵,岸之亡靈

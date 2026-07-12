@@ -3,122 +3,289 @@
   "quests": [
     {
       "id": "the_return",
-      "title": { "en": "The Return", "ja": "帰還", "zh": "归来" },
-      "description": { "en": "Explore the ruined village and learn what became of home.", "ja": "廃れた村を調べ、故郷に何が起きたか突き止める。", "zh": "探索废墟村庄，查明家园的遭遇。" },
+      "title": {
+        "en": "The Return",
+        "ja": "帰還",
+        "zh": "归来",
+        "zh-Hant": "歸來"
+      },
+      "description": {
+        "en": "Explore the ruined village and learn what became of home.",
+        "ja": "廃れた村を調べ、故郷に何が起きたか突き止める。",
+        "zh": "探索废墟村庄，查明家园的遭遇。",
+        "zh-Hant": "探索廢墟村莊，查明家園的遭遇。"
+      },
       "act": "I",
       "stages": [
         {
           "id": "explore_village",
-          "description": { "en": "Investigate the banner, sandal, and well.", "ja": "幟・草履・井戸を調べる。", "zh": "调查旗帜、草鞋与古井。" },
-          "completion": { "all_flags": ["inspected_banner", "inspected_sandal", "inspected_well"] }
+          "description": {
+            "en": "Investigate the banner, sandal, and well.",
+            "ja": "幟・草履・井戸を調べる。",
+            "zh": "调查旗帜、草鞋与古井。",
+            "zh-Hant": "調查旗幟、草鞋與古井。"
+          },
+          "completion": {
+            "all_flags": [
+              "inspected_banner",
+              "inspected_sandal",
+              "inspected_well"
+            ]
+          }
         },
         {
           "id": "meet_roku",
-          "description": { "en": "Speak with Roku at his shack.", "ja": "六の小屋で話を聞く。", "zh": "在六的小屋与他交谈。" },
-          "completion": { "flag": "met_roku" }
+          "description": {
+            "en": "Speak with Roku at his shack.",
+            "ja": "六の小屋で話を聞く。",
+            "zh": "在六的小屋与他交谈。",
+            "zh-Hant": "在六的小屋與他交談。"
+          },
+          "completion": {
+            "flag": "met_roku"
+          }
         }
       ],
-      "rewards": { "xp": 30, "gold": 0 },
+      "rewards": {
+        "xp": 30,
+        "gold": 0
+      },
       "start_scene": "SC-01"
     },
     {
       "id": "echoes_at_torii",
-      "title": { "en": "Echoes at the Torii", "ja": "鳥居の残響", "zh": "鸟居的回响" },
-      "description": { "en": "Follow the spirit's voice into the Tidal Caves.", "ja": "精霊の声を辿り、潮穴へ入る。", "zh": "追随精灵的声音进入潮汐洞穴。" },
+      "title": {
+        "en": "Echoes at the Torii",
+        "ja": "鳥居の残響",
+        "zh": "鸟居的回响",
+        "zh-Hant": "鳥居的迴響"
+      },
+      "description": {
+        "en": "Follow the spirit's voice into the Tidal Caves.",
+        "ja": "精霊の声を辿り、潮穴へ入る。",
+        "zh": "追随精灵的声音进入潮汐洞穴。",
+        "zh-Hant": "追隨精靈的聲音進入潮汐洞穴。"
+      },
       "act": "I-II",
       "stages": [
         {
           "id": "investigate_shrine",
-          "description": { "en": "Hear Yuzu at the cracked torii.", "ja": "割れた鳥居で柚の声を聞く。", "zh": "在破裂的鸟居听见柚的声音。" },
-          "completion": { "flag": "met_yuzu_spirit" }
+          "description": {
+            "en": "Hear Yuzu at the cracked torii.",
+            "ja": "割れた鳥居で柚の声を聞く。",
+            "zh": "在破裂的鸟居听见柚的声音。",
+            "zh-Hant": "在破裂的鳥居聽見柚的聲音。"
+          },
+          "completion": {
+            "flag": "met_yuzu_spirit"
+          }
         },
         {
           "id": "enter_caves",
-          "description": { "en": "Enter the Tidal Caves.", "ja": "潮穴に入る。", "zh": "进入潮汐洞穴。" },
-          "completion": { "flag": "caves_entered" }
+          "description": {
+            "en": "Enter the Tidal Caves.",
+            "ja": "潮穴に入る。",
+            "zh": "进入潮汐洞穴。",
+            "zh-Hant": "進入潮汐洞穴。"
+          },
+          "completion": {
+            "flag": "caves_entered"
+          }
         },
         {
           "id": "solve_tide_lock",
-          "description": { "en": "Raise or lower the water to reach the latch.", "ja": "水門を操作し、錠前へ辿り着く。", "zh": "调节水位抵达机关。" },
-          "completion": { "flag": "water_puzzle_solved" }
+          "description": {
+            "en": "Raise or lower the water to reach the latch.",
+            "ja": "水門を操作し、錠前へ辿り着く。",
+            "zh": "调节水位抵达机关。",
+            "zh-Hant": "調節水位抵達機關。"
+          },
+          "completion": {
+            "flag": "water_puzzle_solved"
+          }
         },
         {
           "id": "defeat_shore_wraith",
-          "description": { "en": "Confront the Shore Wraith.", "ja": "岸の亡霊と対峙する。", "zh": "直面岸之亡灵。" },
-          "completion": { "flag": "shore_wraith_defeated" }
+          "description": {
+            "en": "Confront the Shore Wraith.",
+            "ja": "岸の亡霊と対峙する。",
+            "zh": "直面岸之亡灵。",
+            "zh-Hant": "直面岸之亡靈。"
+          },
+          "completion": {
+            "flag": "shore_wraith_defeated"
+          }
         }
       ],
-      "rewards": { "xp": 100, "gold": 50 },
+      "rewards": {
+        "xp": 100,
+        "gold": 50
+      },
       "start_scene": "SC-03"
     },
     {
       "id": "depths_of_guilt",
-      "title": { "en": "Depths of Guilt", "ja": "罪の深淵", "zh": "罪孽之渊" },
-      "description": { "en": "Yuzu walks with you. Learn what the palace stole.", "ja": "柚が共に歩む。宮殿が奪ったものを知る。", "zh": "柚与你同行。弄清龙宫夺走了什么。" },
+      "title": {
+        "en": "Depths of Guilt",
+        "ja": "罪の深淵",
+        "zh": "罪孽之渊",
+        "zh-Hant": "罪孽之淵"
+      },
+      "description": {
+        "en": "Yuzu walks with you. Learn what the palace stole.",
+        "ja": "柚が共に歩む。宮殿が奪ったものを知る。",
+        "zh": "柚与你同行。弄清龙宫夺走了什么。",
+        "zh-Hant": "柚與你同行。弄清龍宮奪走了什麼。"
+      },
       "act": "II",
       "stages": [
         {
           "id": "yuzu_joins",
-          "description": { "en": "Accept Yuzu at the shrine alcove.", "ja": "社の奥で柚を迎え入れる。", "zh": "在神社凹室接纳柚。" },
-          "completion": { "flag": "yuzu_joined" }
+          "description": {
+            "en": "Accept Yuzu at the shrine alcove.",
+            "ja": "社の奥で柚を迎え入れる。",
+            "zh": "在神社凹室接纳柚。",
+            "zh-Hant": "在神社凹室接納柚。"
+          },
+          "completion": {
+            "flag": "yuzu_joined"
+          }
         },
         {
           "id": "palace_vision",
-          "description": { "en": "Witness Otohime's flashback.", "ja": "乙姫の幻視を見る。", "zh": "目睹乙姬的幻景。" },
-          "completion": { "flag": "saw_palace_vision" }
+          "description": {
+            "en": "Witness Otohime's flashback.",
+            "ja": "乙姫の幻視を見る。",
+            "zh": "目睹乙姬的幻景。",
+            "zh-Hant": "目睹乙姬的幻景。"
+          },
+          "completion": {
+            "flag": "saw_palace_vision"
+          }
         },
         {
           "id": "reach_gate",
-          "description": { "en": "Arrive at the Dragon Palace Gate.", "ja": "龍宮の門に辿り着く。", "zh": "抵达龙宫之门。" },
-          "completion": { "flag": "gate_reached" }
+          "description": {
+            "en": "Arrive at the Dragon Palace Gate.",
+            "ja": "龍宮の門に辿り着く。",
+            "zh": "抵达龙宫之门。",
+            "zh-Hant": "抵達龍宮之門。"
+          },
+          "completion": {
+            "flag": "gate_reached"
+          }
         }
       ],
-      "rewards": { "xp": 50, "gold": 0 },
+      "rewards": {
+        "xp": 50,
+        "gold": 0
+      },
       "start_scene": "SC-09"
     },
     {
       "id": "palace_gate",
-      "title": { "en": "The Palace Gate", "ja": "宮殿の門", "zh": "宫殿之门" },
-      "description": { "en": "Enter stolen-time palace; face its guardian.", "ja": "奪われた時間の宮へ入り、守護者と対峙する。", "zh": "进入被偷走时间的宫殿，面对守护者。" },
+      "title": {
+        "en": "The Palace Gate",
+        "ja": "宮殿の門",
+        "zh": "宫殿之门",
+        "zh-Hant": "宮殿之門"
+      },
+      "description": {
+        "en": "Enter stolen-time palace; face its guardian.",
+        "ja": "奪われた時間の宮へ入り、守護者と対峙する。",
+        "zh": "进入被偷走时间的宫殿，面对守护者。",
+        "zh-Hant": "進入被偷走時間的宮殿，面對守護者。"
+      },
       "act": "III",
       "stages": [
         {
           "id": "learn_box_truth",
-          "description": { "en": "Learn the truth of the lacquer box.", "ja": "漆箱の真実を知る。", "zh": "知晓漆盒的真相。" },
-          "completion": { "flag": "knows_box_truth" }
+          "description": {
+            "en": "Learn the truth of the lacquer box.",
+            "ja": "漆箱の真実を知る。",
+            "zh": "知晓漆盒的真相。",
+            "zh-Hant": "知曉漆盒的真相。"
+          },
+          "completion": {
+            "flag": "knows_box_truth"
+          }
         },
         {
           "id": "defeat_sentinel",
-          "description": { "en": "Defeat the Palace Sentinel.", "ja": "宮殿の近衛を倒す。", "zh": "击败宫殿近卫。" },
-          "completion": { "flag": "sentinel_defeated" }
+          "description": {
+            "en": "Defeat the Palace Sentinel.",
+            "ja": "宮殿の近衛を倒す。",
+            "zh": "击败宫殿近卫。",
+            "zh-Hant": "擊敗宮殿近衛。"
+          },
+          "completion": {
+            "flag": "sentinel_defeated"
+          }
         }
       ],
-      "rewards": { "xp": 100, "gold": 0 },
+      "rewards": {
+        "xp": 100,
+        "gold": 0
+      },
       "start_scene": "SC-12"
     },
     {
       "id": "the_tide_answer",
-      "title": { "en": "The Tide's Answer", "ja": "潮の答え", "zh": "潮汐的答复" },
-      "description": { "en": "Face the Tide Keeper and decide the village's fate.", "ja": "潮の王と対峙し、村の運命を決める。", "zh": "直面潮汐之王，决定村庄的命运。" },
+      "title": {
+        "en": "The Tide's Answer",
+        "ja": "潮の答え",
+        "zh": "潮汐的答复",
+        "zh-Hant": "潮汐的答覆"
+      },
+      "description": {
+        "en": "Face the Tide Keeper and decide the village's fate.",
+        "ja": "潮の王と対峙し、村の運命を決める。",
+        "zh": "直面潮汐之王，决定村庄的命运。",
+        "zh-Hant": "直面潮汐之王，決定村莊的命運。"
+      },
       "act": "III",
       "stages": [
         {
           "id": "face_keeper",
-          "description": { "en": "Reach the Tide Keeper's final phase.", "ja": "潮の王の最終段階まで進む。", "zh": "推进至潮汐之王最终阶段。" },
-          "completion": { "flag": "tide_keeper_phase3" }
+          "description": {
+            "en": "Reach the Tide Keeper's final phase.",
+            "ja": "潮の王の最終段階まで進む。",
+            "zh": "推进至潮汐之王最终阶段。",
+            "zh-Hant": "推進至潮汐之王最終階段。"
+          },
+          "completion": {
+            "flag": "tide_keeper_phase3"
+          }
         },
         {
           "id": "make_choice",
-          "description": { "en": "Choose Rewind, Anchor, or Drift.", "ja": "巻き戻し・留まる・漂うを選ぶ。", "zh": "选择倒流、锚定或漂泊。" },
-          "completion": { "flag": "ending_chosen" }
+          "description": {
+            "en": "Choose Rewind, Anchor, or Drift.",
+            "ja": "巻き戻し・留まる・漂うを選ぶ。",
+            "zh": "选择倒流、锚定或漂泊。",
+            "zh-Hant": "選擇倒流、錨定或漂泊。"
+          },
+          "completion": {
+            "flag": "ending_chosen"
+          }
         },
         {
           "id": "see_ending",
-          "description": { "en": "Witness the ending.", "ja": "結末を見届ける。", "zh": "见证结局。" },
-          "completion": { "flag": "game_completed" }
+          "description": {
+            "en": "Witness the ending.",
+            "ja": "結末を見届ける。",
+            "zh": "见证结局。",
+            "zh-Hant": "見證結局。"
+          },
+          "completion": {
+            "flag": "game_completed"
+          }
         }
       ],
-      "rewards": { "xp": 250, "gold": 0 },
+      "rewards": {
+        "xp": 250,
+        "gold": 0
+      },
       "start_scene": "SC-14"
     }
   ]
