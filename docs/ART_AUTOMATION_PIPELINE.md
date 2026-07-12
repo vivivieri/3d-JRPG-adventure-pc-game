@@ -6,7 +6,7 @@
 
 **Principle:** Ship **high-detail stylized Japanese 3D** using the **best automated tool per job**. Quality over cost — paid tools are fine when no free option matches output. **No human artists** in the art or audio production path (modeling, texturing, painting, mixing, VO performance). **Human playtest** (L6) is separate — see `docs/PLAYTEST_SCRIPT.md`.
 
-**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/MCP_STACK.md`, `docs/RENDERING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ASSET_COMPLIANCE.md`, `.cursorrules` §0
+**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/MCP_STACK.md`, `docs/RENDERING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ASSET_COMPLIANCE.md`, `docs/GENERATION_READINESS.md` (per-asset briefs + human-expectation gaps), `.cursorrules` §0
 
 ---
 
@@ -98,7 +98,7 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 ## 5. 3D character & prop workflow
 
 ```
-1. READ  docs/CHARACTER_BIBLE.md poly budgets
+1. READ  docs/CHARACTER_BIBLE.md poly budgets + docs/GENERATION_READINESS.md row (write docs/generation_briefs/<id>.md if missing)
 2. Meshy / Tripo / Rodin — text prompt from bible silhouettes (Japanese coastal, not chibi)
 3. Blender — decimate to budget, UV unwrap, export GLB
 4. ComfyUI or Material Maker — stylized albedo bake / projection

@@ -46,7 +46,7 @@
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
 | Author dialogue / flags | [QUEST_AND_FLAGS.md](QUEST_AND_FLAGS.md) + `game/data/dialogue/` |
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
-| Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
+| Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) · [GENERATION_READINESS.md](GENERATION_READINESS.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
 | Code base classes (extend-only) | [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md) · `game/data/code/base_classes.json` |
 | Component scenes (GDAI) | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) §1b |
@@ -132,6 +132,7 @@
 | [MODEL_QA.md](MODEL_QA.md) | **3D GLB lint + turntable vision jury** |
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
+| [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
@@ -220,5 +221,6 @@ python3 tools/validate_story_data.py
 | Database / save schema | `DATA_ARCHITECTURE.md` + `SAVE_AND_FAIL_STATES.md` |
 | Code style guide | **`CODE_STYLE.md`** |
 | Art bible / asset pipeline | `ART_AUTOMATION_PIPELINE.md` + `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
+| Generation readiness (AI 3D) | `GENERATION_READINESS.md` + `docs/generation_briefs/` |
 | Asset registry | `LICENSES.md` + `asset_manifest.license.json` |
 | Production timeline | `IMPLEMENTATION_PLAN.md` + `MILESTONES.md` |
