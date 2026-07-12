@@ -1,10 +1,10 @@
 # Tides of Urashima — Technical Design Document (TDD)
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Engine:** Godot 4.7 stable, Forward+  
 **Architecture:** Scene-tree JRPG with autoload singletons — **not** ECS  
 **Status:** Pre-build spec — Phase 2+ implementation  
-**Cross-refs:** [CODE_STYLE.md](CODE_STYLE.md), [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md), [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md), [UI_UX_FLOW.md](UI_UX_FLOW.md), [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md)
+**Cross-refs:** [CODE_STYLE.md](CODE_STYLE.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md), [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md), [UI_UX_FLOW.md](UI_UX_FLOW.md), [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md)
 
 ---
 
@@ -15,6 +15,7 @@
 | **Data-driven** | Combat, dialogue, quests, encounters live in `game/data/*.json` |
 | **Story spine first** | `scenes.json` → flags → quests → content (`DATA_ARCHITECTURE.md`) |
 | **Thin scenes, fat autoloads** | Zone `.tscn` files place geometry + triggers; systems live in autoloads |
+| **Extend base classes** | `PlayerController`, `Combatant`, `Interactable` — see `CODE_BASE_CLASS_RULES.md` |
 | **Signals over polling** | `EventBus` for cross-system events; typed `.connect()` only |
 | **No FMV** | Cinematics = `Camera3D` + `CinematicDirector` + audio (`CINEMATICS.md`) |
 | **Single save slot v1** | `user://save_slot_0.json` — schema in `SAVE_AND_FAIL_STATES.md` |
@@ -73,6 +74,18 @@ flowchart TB
 | `CinematicDirector` | `scripts/story/cinematic_director.gd` | Hook registry, gating, `then` chain ✅ partial |
 
 **Today:** `GameBootstrap`, `CinematicDirector` registered; scenes and runtime UI via **GDAI MCP only** (Phase 2+).
+
+### 2.1 Code base classes (extend-only)
+
+Gameplay entities **extend** Architect-owned scripts — Builder instantiates component `.tscn` prefabs, never forks new controller stacks.
+
+| `class_name` | Script | Instanced by |
+|--------------|--------|--------------|
+| `PlayerController` | `scripts/player/player_controller.gd` | `player.tscn` |
+| `Combatant` | `scripts/combat/combatant.gd` | Enemy/party prefabs |
+| `Interactable` | `scripts/world/interactable.gd` | `interactable_*.tscn` catalog |
+
+**Registry:** `game/data/code/base_classes.json` · **Rules:** `docs/CODE_BASE_CLASS_RULES.md` · **Component catalog:** `docs/LEVEL_DESIGN.md` §1b · **CI:** `L0_base_classes`, `L0_base_class_compliance`, `L1_gdscript_lint`.
 
 ---
 

@@ -47,6 +47,8 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | AI dev workflow doc (`docs/AI_DEV_WORKFLOW.md`) | Done |
 | AI testing spec (`docs/AI_TESTING_SPEC.md`) | Done |
 | Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | Done |
+| Code base class registry (`docs/CODE_BASE_CLASS_RULES.md`, `game/data/code/base_classes.json`) | Done |
+| Base-class + animation + gdlint CI gates (`acceptance_criteria.json`, `run_ci_checks.sh`) | Done |
 
 **Verify:**
 
@@ -77,7 +79,8 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 1.5 | Greybox zone scenes: `beach_shore`, `ruined_village`, `tidal_caves`, `dragon_palace_gate` | STORYBOARD, ENVIRONMENT_KITS |
 | 1.6 | DirectionalLight3D + fog per zone table | RENDERING_GUIDE §5 |
 | 1.7 | ProceduralSky per zone (no HDRI) | RENDERING_GUIDE §4 |
-| 1.8 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist (**Phase 1 greybox section** of ART_DIRECTION §10; final-art section lands in Phase 7) | ART_DIRECTION §10 |
+| 1.8 | Component scenes from `LEVEL_DESIGN.md` §1b — wells, doors, triggers via GDAI | CODE_BASE_CLASS_RULES, LEVEL_DESIGN §1b |
+| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist (**Phase 1 greybox section** of ART_DIRECTION §10; final-art section lands in Phase 7) | ART_DIRECTION §10 |
 
 **GDAI workflow:** GodotPrompter drafts shaders/`zone_visuals.gd` → GDAI MCP places nodes in `.tscn` → F5 verify. **Acceptance criteria:** `docs/AI_DEV_WORKFLOW.md` §4 Phase 1.
 
@@ -93,7 +96,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 2.2 | `GameManager.load_json("res://data/...")` API | game/data/README.md |
 | 2.3 | `LocalizationManager` + `FontThemeManager` + Noto fonts (en / ja / zh / zh-Hant) | LOCALIZATION.md |
 | 2.4 | Main menu → New Game → SC-00 prologue → `beach_shore` | UI_UX_FLOW.md, TUTORIAL_DESIGN |
-| 2.5 | Player controller + camera orbit | GAME_FEEL.md |
+| 2.5 | `PlayerController` base class + `player.tscn` component scene | CODE_BASE_CLASS_RULES, GAME_FEEL.md |
 | 2.6 | Scene transitions between zones | WORLD_MAP_AND_FLOW.md |
 | 2.7 | `AudioManager` shell — BGM crossfade, SFX buses, procedural placeholders | AUDIO_PRODUCTION_GUIDE |
 | 2.8 | Settings menu — language, `vo_dialect` (zh-Hant), volume sliders | SETTINGS_ACCESSIBILITY.md, LOCALIZATION.md |
@@ -161,6 +164,8 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 | # | Task | Docs |
 |---|------|------|
 | 7.1 | Hero character models — Urashima, Yuzu, Roku + 5 enemies (Meshy/Tripo/Rodin + Mixamo) | CHARACTER_BIBLE.md |
+| 7.1b | GLB post-import NPR sanitizer (`install_glb_import_pipeline.sh`) | MODEL_QA.md §M2b |
+| 7.1c | Animation whitelist in `qa_catalog.json` — `check_animation_whitelist.py` | MODEL_QA.md §M2c, CHARACTER_BIBLE §8 |
 | 7.2 | Hero set-pieces — torii, `palace_gate_main` (SC-12) | ENVIRONMENT_KITS.md |
 | 7.3 | Automated stylized zone textures (ComfyUI/Material Maker + `palette_remap.py`) | ART_AUTOMATION_PIPELINE.md |
 | 7.4 | ComfyUI/GameLab portraits (replace procedural silhouettes) | ART_AUTOMATION_PIPELINE.md |

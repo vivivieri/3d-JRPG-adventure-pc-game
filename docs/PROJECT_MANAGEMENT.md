@@ -50,7 +50,11 @@
 | Label | Example |
 |-------|---------|
 | `gate/L0_story_data` | Validator fail |
+| `gate/L0_base_classes` | Base class registry fail |
+| `gate/L0_base_class_compliance` | Rogue controller fail |
 | `gate/L1_unit_tests` | Unit test fail |
+| `gate/L1_gdscript_lint` | GDScript lint fail |
+| `gate/L2_animation_whitelist` | Animation name fail |
 | `gate/L4_integration` | Flow scenario fail |
 | `gate/L5_e2e` | Ending path fail |
 | `domain/visual` | Art jury |

@@ -1,9 +1,9 @@
 # Tides of Urashima — Code Style Guide
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Language:** GDScript 2.0 (Godot 4.7)  
 **Architecture:** Scene-tree + autoload singletons — **not** Entity-Component-System  
-**Cross-refs:** [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md), [`.cursorrules`](../.cursorrules) §5, [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md)
+**Cross-refs:** [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [`.cursorrules`](../.cursorrules) §5, [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md)
 
 ---
 
@@ -82,6 +82,22 @@ func get_flag(name: String) -> Variant:
 | `await get_tree().create_timer(1.0).timeout` | `yield()` |
 | `GameManager.load_json(path)` | Duplicate JSON parse in every system |
 | `is_instance_valid(node)` before await resume | Hold dangling node refs |
+| Extend `PlayerController` / `Combatant` / `Interactable` | New `CharacterBody3D` controller from scratch |
+
+### 3.1 Base classes (extend-only)
+
+All gameplay controllers and interactables **extend** scripts listed in `game/data/code/base_classes.json`. Architect owns the base `.gd` files; Builder composes component `.tscn` scenes.
+
+See `docs/CODE_BASE_CLASS_RULES.md`. CI enforces via `L0_base_class_compliance`.
+
+### 3.2 GDScript lint (CI)
+
+Changed `.gd` files must pass `gdlint` (gdtoolkit):
+
+```bash
+bash tools/check_gdscript_changed.sh   # L1_gdscript_lint
+bash tools/install_ci_deps.sh          # installs gdtoolkit
+```
 
 ---
 
@@ -143,6 +159,7 @@ var enc: Dictionary = _encounters["encounters"][encounter_id]
 | Rule | Detail |
 |------|--------|
 | **GDAI MCP builds `.tscn`** | No hand-editing scene trees in Cursor when GDAI is up |
+| **Component scenes** | Use catalog from `LEVEL_DESIGN.md` §1b — wells, doors, triggers |
 | **Groups** | `player`, `interactable`, `encounter_trigger` for queries |
 | **Markers** | `SpawnMarker_default`, `CameraMarker_sc12_wide` — match `LEVEL_DESIGN.md` |
 | **Layers** | Collision layers documented per zone in level design |
@@ -190,7 +207,8 @@ Keep error handling minimal — this is a linear game, not a live service.
 | Location | Style |
 |----------|-------|
 | `game/tests/unit/` | Extend `test_runner.gd`; no engine restart per assert |
-| Python validators | `tools/validate_story_data.py` for data integrity |
+| Python validators | `tools/validate_story_data.py`, `validate_base_classes.py` for data integrity |
+| GDScript lint | `tools/check_gdscript_changed.sh` on changed `.gd` (L1 gate) |
 | MCP Pro | Scenario names match `AI_TESTING_SPEC.md` |
 
 ---

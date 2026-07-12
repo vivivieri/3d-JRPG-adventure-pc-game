@@ -1,6 +1,6 @@
 # Art Automation Pipeline — Quality-First, Zero Human Artists
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Applies to:** M5 art rebuild and all player-facing assets on `main`  
 **Authority:** When this doc conflicts with older “hand-painted / commission” language elsewhere, **this doc wins** for production tooling.
 
@@ -103,12 +103,14 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 3. Blender — decimate to budget, UV unwrap, export GLB
 4. ComfyUI or Material Maker — stylized albedo bake / projection
 5. palette_remap.py on texture sheets
-6. Mixamo — humanoid rig + walk/idle/combat clips (Mixamo ToS)
-7. Import → game/assets/models/characters/ or environment/
-8. GodotPrompter — toon shader + emission states (lacquer box)
-9. GDAI MCP — place in scene, F5 verify
-10. `docs/MODEL_QA.md` — GLB lint + turntable jury before import; `docs/VISUAL_QA.md` after in-scene
-11. `docs/ACCEPTANCE_CRITERIA.md` — cite gate id + measured values in agent report; FAIL → `QA_REMEDIATION_LOOP.md`
+6. Mixamo — humanoid rig + walk/idle/combat clips (Mixamo ToS); clip names must match §8 below
+7. `bash tools/install_glb_import_pipeline.sh` — NPR post-import sanitizer on GLB import
+8. Import → game/assets/models/characters/ or environment/
+9. GodotPrompter — toon shader + emission states (lacquer box)
+10. GDAI MCP — place in scene, F5 verify
+11. `python3 tools/check_animation_whitelist.py` — clip names ⊆ `qa_catalog.json` → `allowed_animations`
+12. `docs/MODEL_QA.md` — GLB lint + turntable jury before import; `docs/VISUAL_QA.md` after in-scene
+13. `docs/ACCEPTANCE_CRITERIA.md` — cite gate id + measured values in agent report; FAIL → `QA_REMEDIATION_LOOP.md`
 ```
 
 **No commission path.** Rights = service ToS + `register_asset.py` + `LICENSES.md`.

@@ -64,6 +64,7 @@ Full index: [`docs/README.md`](docs/README.md) · Cloud agents: [`AGENTS.md`](AG
 | Sprints (Linear) | [AGILE_WITHIN_PHASES.md](docs/AGILE_WITHIN_PHASES.md) |
 | MCP toolchain | [MCP_STACK.md](docs/MCP_STACK.md) |
 | QA gates | [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) |
+| Code base classes | [CODE_BASE_CLASS_RULES.md](docs/CODE_BASE_CLASS_RULES.md) |
 | Ship / CD | [CD.md](docs/CD.md) · [STEAM_RELEASE_CHECKLIST.md](docs/STEAM_RELEASE_CHECKLIST.md) |
 | Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
 

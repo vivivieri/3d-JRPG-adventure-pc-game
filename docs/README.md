@@ -105,6 +105,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | **TDD** — autoloads, scene flow, combat stack, save pipeline |
+| [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md) | **Extend-only** base classes + component scene catalog |
 | [CODE_STYLE.md](CODE_STYLE.md) | GDScript conventions, folders, signals, naming |
 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) | Story-first JSON layout, schema versions |
 | [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md) | Save slots, autosave, game over |

@@ -31,6 +31,7 @@ Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP 
 - Implementing gameplay/visual features when GDAI MCP is not connected
 - Importing copyrighted or unknown-license art, audio, fonts, or models from the web
 - Using Kenney packs, random Google images, CC-BY-NC, or franchise IP traces
+- Creating new `CharacterBody3D` player stacks outside `PlayerController` (`docs/CODE_BASE_CLASS_RULES.md`)
 
 ### Session startup (every agent run)
 

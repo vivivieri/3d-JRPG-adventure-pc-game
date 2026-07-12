@@ -19,6 +19,8 @@ game/data/
   qa/
     remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
     acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
+  code/
+    base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
   quests/
     main_quests.json         # 5 main quests
   encounters/
@@ -52,7 +54,9 @@ GameManager.load_json("res://data/story/scenes.json")
 
 ```bash
 python3 tools/validate_story_data.py
-python3 tools/check_asset_compliance.sh   # when assets exist
+python3 tools/validate_base_classes.py
+python3 tools/validate_acceptance_criteria.py
+bash tools/check_asset_compliance.sh   # when assets exist
 ```
 
 ## Story → data flow

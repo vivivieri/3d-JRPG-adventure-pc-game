@@ -89,8 +89,12 @@ Must include:
 ## Gate report
 - Commit: abc1234
 - L0_rr_compliance: PASS
+- L0_base_classes: PASS
+- L0_base_class_compliance: PASS
 - L1_unit_tests: PASS
+- L1_gdscript_lint: PASS
 - L2_scene_primitives: PASS
+- L2_animation_whitelist: PASS
 - L2_visual_palette: PASS (avg_anchor_dist=72)
 - Evidence: artifacts/screenshots/ruined_village_gameplay.png
 ```

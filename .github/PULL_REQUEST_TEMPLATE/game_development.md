@@ -9,11 +9,15 @@ Link the GitHub issue. Check every box that applies to this PR.
 ### Architect (GodotPrompter)
 - [ ] Handoff in issue/PR: design doc row, node tree outline, target **gate IDs**
 - [ ] This PR touches **`.gd` / `.gdshader` / tests`** only (no ship `.tscn` edits in Cursor)
+- [ ] New gameplay scripts **extend** base classes in `game/data/code/base_classes.json` — no rogue `CharacterBody3D` stacks
+- [ ] Changed `.gd` files pass `bash tools/check_gdscript_changed.sh`
 
 ### Builder (GDAI MCP)
 - [ ] Scenes built via **GDAI MCP** — not hand-edited ship `.tscn`
+- [ ] Uses **component scenes** from `LEVEL_DESIGN.md` §1b where applicable
 - [ ] **`game/scenes/.gdai_built`** updated (`verified_f5=true`, `verified_at`, `main_scene` if set)
 - [ ] F5 playtest clean in Godot editor
+- [ ] Rigged GLB clips ⊆ `qa_catalog.json` → `allowed_animations` (if models changed)
 
 ### QA Agent
 - [ ] Gate report below with **commit SHA**, **gate IDs**, **PASS/FAIL**, **evidence paths**
@@ -32,8 +36,12 @@ Commit:
 Gates:
   - L0_rr_compliance:
   - L0_story_data:
+  - L0_base_classes:
+  - L0_base_class_compliance:
   - L1_unit_tests:
+  - L1_gdscript_lint:
   - L2_scene_primitives:
+  - L2_animation_whitelist:
   - L3_gdai_built:
   - L4_integration:
 Evidence paths:
@@ -50,3 +58,4 @@ Evidence paths:
 - [ ] `bash tools/run_ci_checks.sh`
 - [ ] `bash tools/check_rr_compliance.sh`
 - [ ] `bash tools/check_l3_gdai_built.sh` (if scenes or main_scene changed)
+- [ ] `python3 tools/validate_base_classes.py` (if `base_classes.json` changed)
