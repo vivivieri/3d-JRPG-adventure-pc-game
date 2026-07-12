@@ -133,6 +133,7 @@
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
 | [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
+| [generation_briefs/](generation_briefs/README.md) | **P0 briefs** — `urashima`, `ruined_village` prompt recipes |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
@@ -221,6 +222,6 @@ python3 tools/validate_story_data.py
 | Database / save schema | `DATA_ARCHITECTURE.md` + `SAVE_AND_FAIL_STATES.md` |
 | Code style guide | **`CODE_STYLE.md`** |
 | Art bible / asset pipeline | `ART_AUTOMATION_PIPELINE.md` + `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
-| Generation readiness (AI 3D) | `GENERATION_READINESS.md` + `docs/generation_briefs/` |
+| Generation readiness (AI 3D) | `GENERATION_READINESS.md` + [`generation_briefs/`](generation_briefs/README.md) |
 | Asset registry | `LICENSES.md` + `asset_manifest.license.json` |
 | Production timeline | `IMPLEMENTATION_PLAN.md` + `MILESTONES.md` |

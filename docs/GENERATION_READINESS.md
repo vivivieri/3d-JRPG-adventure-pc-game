@@ -82,7 +82,7 @@ Legend: ✅ / ⚠️ / ❌ as above.
 
 | ID | ✅ Specified today | ⚠️ Partial | ❌ Missing (add before ship) | Phase |
 |----|-------------------|------------|---------------------------|-------|
-| **urashima** | Silhouette, layers, box states, tri budget, rig attachments, `required_animations` floor | Coat wind bones, portrait match | Generation brief; walk cycle **duration**; gameplay-cam face read at 8 m; Mixamo retarget notes for 1:5 proportions | 1 |
+| **urashima** | Silhouette, layers, box states, tri budget, rig attachments, `required_animations` floor, **generation brief** | Coat wind bones, portrait match | Walk cycle **duration** validation in CI; gameplay-cam face read golden shot | 1 |
 | **village_torii_damaged** | Set-piece role, zone palette, tri budget | Modular scale vs player | Brief: splinter pattern, **height vs Urashima** (≥4 m arch); golden in-scene screenshot at torii interact | 1 |
 | **village_well_stone** | Prop role, save marker linkage | Weathering level | Brief: stone type (granite vs wood rim); interact highlight read | 1 |
 | **village_shack_roku** | Set-piece ID, hub layout position | Interior lantern glow | Brief: door height, porch steps count; interior visible from doorway at gameplay cam | 1 |
@@ -115,7 +115,7 @@ Legend: ✅ / ⚠️ / ❌ as above.
 | Zone ID | ✅ Specified today | ⚠️ Partial | ❌ Missing (add before ship) | Build phase |
 |---------|-------------------|------------|---------------------------|-------------|
 | **beach_shore** (SC-01) | Mood, palette, kit table, spawn→gate path ASCII | Water hook name | Brief: path **min width 2 m**; max 3 hero props in spawn sightline; dunes ≤30% of vista; golden `phase1_beach_shore_gameplay.png` | 2 |
-| **ruined_village** (SC-02 hub) | Full kit + layout + lighting row + gameplay markers | Pier submerge depth | Brief: lantern pool radius; **well save** visible from path without compass; prop density ≤8 per 20×20 m; golden screenshot (L2 visual gate) | **1** |
+| **ruined_village** (SC-02 hub) | Full kit + layout + lighting row + gameplay markers, **generation brief** | Pier submerge depth | Golden screenshot captured + `L2_visual_jury` PASS; prop density smoke | **1** |
 | **tidal_caves** (SC-06–10) | Biolume palette, modular kit list | Puzzle water height cues | Brief: cyan emissive **max** to avoid bloom clip; ceiling height min 3 m; puzzle switch sightlines from entry | 5 |
 | **dragon_palace_gate** (SC-12+) | Palace void sky, gold trim rules | Sentinel hall scale | Brief: corridor rhythm (module repeat every N m); void sky **no stars**; save shrine exterior placement | 6 |
 
@@ -163,14 +163,14 @@ For each new hero mesh or zone slice:
 
 ## 8. Recommended next docs/data (priority)
 
-| Priority | Deliverable | Owner |
-|----------|-------------|-------|
-| P0 | `docs/generation_briefs/urashima.md` + `ruined_village.md` | Architect + Visual |
-| P0 | Golden screenshot path enforced (`VISUAL_SMOKE_STRICT=1` on M5) | QA |
-| P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect |
-| P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect |
-| P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual |
-| P2 | `L2_zone_composition` smoke script | QA |
+| Priority | Deliverable | Owner | Status |
+|----------|-------------|-------|--------|
+| P0 | `docs/generation_briefs/urashima.md` + `ruined_village.md` | Architect + Visual | ✅ Done |
+| P0 | Golden screenshot path enforced (`VISUAL_SMOKE_STRICT=1` on M5) | QA | Pending capture |
+| P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | Pending |
+| P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | Pending |
+| P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual | Pending |
+| P2 | `L2_zone_composition` smoke script | QA | Pending |
 
 ---
 
@@ -181,6 +181,7 @@ For each new hero mesh or zone slice:
 | What to build | `IMPLEMENTATION_PLAN.md` |
 | How assets are generated | `ART_AUTOMATION_PIPELINE.md` |
 | Character look | `CHARACTER_BIBLE.md` |
+| Generation briefs | `generation_briefs/` |
 | Zone modules | `ENVIRONMENT_KITS.md` |
 | Measurable pass/fail | `ACCEPTANCE_CRITERIA.md` |
 | Feel targets | `GAME_FEEL.md`, `game/data/qa/feel_thresholds.json` |
