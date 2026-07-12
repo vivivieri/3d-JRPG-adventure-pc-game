@@ -14,7 +14,7 @@
 | **GitHub Issues** | **P0 required** | Bugs, gate failures, features, env labels | ✅ Use now |
 | **GitHub Actions** | **P0** | CI/CD logs, artifact retention | ✅ Live |
 | **GitHub Projects** | P1 | Kanban by milestone / env | Optional board |
-| **Linear MCP** | P1 optional | Sprint cycles, velocity | Needs auth in Cursor |
+| **Linear MCP** | P1 optional | Sprint cycles inside each phase | Needs auth — see `AGILE_WITHIN_PHASES.md` |
 | **Notion MCP** | P2 optional | Design notes, meeting notes | Needs auth; **not** design authority (`docs/` wins) |
 | **Datadog MCP** | N/A ship | Not needed for Godot indie | Skip |
 
@@ -131,15 +131,19 @@ GitHub Issue (#123)
 
 ### Linear (P1 — sprint board)
 
-**When:** Multiple parallel agents + weekly milestones.
+**When:** Multiple parallel agents executing the **current implementation phase**.
+
+**Model:** Phase-gated Agile — waterfall phases 0–8, 2-week cycles **inside** each phase. See `docs/AGILE_WITHIN_PHASES.md`.
 
 | Action | Linear MCP |
 |--------|------------|
-| Create task from phase | `create-task` skill |
+| Create tasks from phase | `spec-to-implementation` or `create-task` skill |
 | Query open blockers | `database-query` |
-| Link design spec | URL to `docs/` path in description |
+| Active phase + gates | Read `game/data/qa/sprint_phases.json` |
 
-**Setup:** Authenticate Linear MCP in Cursor Integrations. Do not duplicate `game/data/` into Linear.
+**Setup:** Team `Tides of Urashima` · Projects `M1-core`, `M5-art`, `M6-steam` · Cycles named `Phase{N}-Sprint{K}`.
+
+Do not duplicate `game/data/` into Linear — link to repo paths in issue descriptions.
 
 ### Notion (P2 — narrative / planning notes)
 

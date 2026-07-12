@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Applies to:** `game/development` implementation on Cursor Cloud Agents  
-**Cross-refs:** `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/ENVIRONMENTS.md`, `docs/PROJECT_MANAGEMENT.md`, `docs/AI_DEV_WORKFLOW.md`
+**Cross-refs:** `.cursorrules` §0, `docs/MCP_STACK.md`, `docs/ENVIRONMENTS.md`, `docs/PROJECT_MANAGEMENT.md`, `docs/AGILE_WITHIN_PHASES.md`, `docs/AI_DEV_WORKFLOW.md`
 
 ---
 
@@ -166,6 +166,7 @@ Resume agents only for **same role continuation** (e.g. Builder session 2 on sam
 ## 10. Cross-refs
 
 - `docs/PROJECT_MANAGEMENT.md` — GitHub Issues + MCP
+- `docs/AGILE_WITHIN_PHASES.md` — sprint cadence inside each phase
 - `docs/ENVIRONMENTS.md` — dev/qa/uat/preprod/prod
 - `docs/QA_REMEDIATION_LOOP.md` — fix iteration rules
 - `AGENTS.md` — cloud bootstrap

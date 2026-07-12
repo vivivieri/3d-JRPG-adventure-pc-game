@@ -11,6 +11,8 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 
 **All Phase 1–8 implementation work happens on `game/development`.** Do not merge to `main` until M6 ship-ready.
 
+**Sprint execution:** Phase-gated Agile — 2-week Linear cycles inside each phase (`docs/AGILE_WITHIN_PHASES.md`, `game/data/qa/sprint_phases.json`).
+
 ### Phase ↔ milestone map
 
 | Phase | Milestone | Focus |

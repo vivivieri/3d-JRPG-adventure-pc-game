@@ -11,6 +11,7 @@
 | 1 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
 | 1b | [BRANCHING.md](BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
 | 1c | [ENVIRONMENTS.md](ENVIRONMENTS.md) | dev · qa · uat · preprod · prod promotion |
+| 1d | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) | Phase-gated Agile + Linear sprint map |
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
 | 3 | [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) | How runtime code fits together |
 | 4 | [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) + `game/data/` | Story JSON spine + save shape |
@@ -26,6 +27,7 @@
 |------------|------|
 | Understand the game | [GDD.md](GDD.md) → [STORYBOARD.md](STORYBOARD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · branch: `game/development` |
+| Sprint planning (Linear) | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
 | Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
 | Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) |
