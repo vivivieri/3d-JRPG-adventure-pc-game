@@ -13,7 +13,7 @@
 |-------|-------|------|----------------|
 | **Roadmap** | Waterfall | `IMPLEMENTATION_PLAN.md` Phases 0–8 | Major milestone only |
 | **Scope** | Fixed (GDD + `game/data/`) | `docs/` + JSON | Data PRs to `main` |
-| **Sprint execution** | Agile | **Linear** cycles (optional) + GitHub Issues | Every 1–2 weeks |
+| **Sprint execution** | Agile | **Linear** cycles (optional) + GitHub Issues | Per agent batch (§12.1); ≤1 week calendar ceiling |
 | **Task delivery** | Agile | Multi-agent handoffs | Daily / per session |
 | **Quality** | Gated | CI + acceptance criteria | Every commit / phase exit |
 | **Release** | Staged waterfall | UAT → preprod → prod | RC / beta / ship tags |
@@ -63,7 +63,7 @@
 | **Workspace** | Your studio / personal workspace |
 | **Team** | `Tides of Urashima` |
 | **Projects** | `M1-core`, `M5-art`, `M6-steam` (+ optional `M0-foundation`) |
-| **Cycles** | 2-week sprints **inside** current implementation phase |
+| **Cycles** | 1-week batches **inside** current phase (close on gates, not calendar) |
 | **Issues** | GitHub Issues (mirror or primary in Linear, link both ways) |
 | **Labels** | Mirror `env/*`, `agent/*`, `gate/*` from `PROJECT_MANAGEMENT.md` |
 
@@ -236,7 +236,7 @@ Do not use velocity to skip phase gates.
 | Run sprint planning | Cycle start | ≤10 issues, gate IDs, `agent/*` labels, Linear cycle name |
 | Track WIP | Daily (per session) | No more than 2 in-progress builder issues without QA pickup |
 | Surface blockers | When CI/gates fail | `severity/S0`/`S1` issue; assign Architect or Release |
-| Timebox the cycle | Cycle end | Close or carry over issues; schedule sprint review with QA |
+| Timebox the cycle | Batch end | Close Linear cycle when gates PASS — do not wait for calendar week |
 | Retro | After UAT or phase exit | Update `sprint_phases.json` notes; adjust next `recommended_cadence_weeks` if needed |
 
 **Human** retains veto on phase order, ship scope, and L6 sign-off — not day-to-day ceremony facilitation.
@@ -251,39 +251,85 @@ Do not use velocity to skip phase gates.
 
 ## 12. Sprint duration — recommendations
 
-**Default:** **2 weeks** per Linear cycle (`sprint_phases.json` → `sprint_cadence.default_weeks`).
+**Primary model (pure AI agents):** **session batches** — see **§12.1**. Close a cycle when gate evidence is on the PR, not when a calendar week ends.
 
-Allowed range: **1–3 weeks**. Change only when the phase row’s `recommended_cadence_weeks` or retro notes justify it — not for arbitrary deadline pressure.
+**Linear calendar ceiling:** **1 week** default (`sprint_phases.json` → `sprint_cadence.default_weeks`). Weeks are a **max batch window** for issue grouping in Linear, **not** expected implementation time.
 
-### Per-phase cadence
+Allowed ceiling range: **1–3 weeks** (phase rows → `recommended_cadence_weeks`). Extend only for human-blocked work (L6, jury, Steam store) — not because agents “need” two weeks to code.
 
-| Phase | Focus | Recommended | Rationale |
-|-------|-------|-------------|-----------|
-| **1** | SC-02 vertical slice, shaders, first GDAI scenes | **1–2 weeks** | Tight feedback on palette/fog; first sprint can be **1 week** to learn agent throughput |
-| **2** | Boot shell, localization, settings | **2 weeks** | Several small systems; stable integration window |
-| **3** | Dialogue, quests, exploration | **2 weeks** | L4 scenarios need full cycle to stabilize |
-| **4** | Combat vertical slice | **2 weeks** | Combat + boss framework = multi-agent handoffs |
-| **5** | Chapter 1 dungeons | **2 weeks** | Zone flow tests span Architect → Builder → Flow |
-| **6** | Full story, three endings | **2–3 weeks** | L5 E2E is long; prefer **3 weeks** for final integration sprint |
-| **7** | M5 art rebuild | **3 weeks** | Asset import, jury loops, visual gates need buffer |
-| **8** | M6 Steam ship | **2–3 weeks** | Checklist + export + store assets; last sprint often **3 weeks** |
+### Per-phase calendar ceiling (Linear)
 
-### When to shorten (1 week)
+| Phase | Focus | Max weeks (ceiling) | AI-native target (active agents) |
+|-------|-------|---------------------|----------------------------------|
+| **1** | SC-02 vertical slice | **1** | **2–5 days** |
+| **2** | Boot shell, localization | **1** | **~1 week** |
+| **3** | Dialogue, quests, exploration | **1** | **~1 week** |
+| **4** | Combat vertical slice | **1** | **~1 week** |
+| **5** | Chapter 1 dungeons | **1** | **~1 week** |
+| **6** | Full story, three endings | **2** | **1–2 weeks** (L5 validation depth) |
+| **7** | M5 art rebuild | **3** | **Weeks+** (assets + jury, not agent speed) |
+| **8** | M6 Steam ship | **2** | **1–2 weeks** (+ external store review) |
 
-- Phase 1 greybox iteration before first UAT screenshot  
-- Hotfix sprint after `env/uat` feedback (RC tag already cut)  
-- Single-gate remediation (one shader, one scene) with ≤3 issues  
+Machine-readable targets: `game/data/qa/sprint_phases.json` → `ai_native_target_days` per phase.
 
-### When to lengthen (3 weeks)
+### When to use a 1-week ceiling (default)
 
-- Phase 6 or 8 integration sprint (L5 / L6 adjacent)  
+- Every implementation batch on `game/development` unless a row below applies  
+- Phase 1 greybox, hotfix after `env/uat`, single-gate remediation (≤3 issues)  
+
+### When to extend the ceiling (2–3 weeks)
+
+- Phase 6 or 8 integration batch waiting on **L5 / L6**  
 - Phase 7 jury cycle (model + audio + visual evidence)  
-- First sprint after a **phase kickoff** if planning uncovered >8 issues — split across two cycles instead of inflating WIP  
+- First batch after phase kickoff with >8 issues — **split into two batches** instead of one long cycle  
 
 ### Linear configuration
 
-1. Set team **default cycle length** = 2 weeks.  
-2. Override per cycle in Linear UI when starting Phase1-Sprint1 (1 week) or Phase6-SprintN (3 weeks).  
+1. Set team **default cycle length** = **1 week** (ceiling only).  
+2. End cycles early when all batch issues have gate evidence — do not wait for the week to expire.  
 3. Name cycles `Phase{N}-Sprint{K}`; description = phase task IDs from `IMPLEMENTATION_PLAN.md`.  
 
 **Do not** use velocity or burndown to skip **phase exit gates** — cadence only affects issue batching inside a phase.
+
+---
+
+## 12.1 AI-native cadence (pure agent implementation)
+
+For a **pure AI agent team**, sprints are **outcome batches**, not human capacity sprints.
+
+### Cycle units
+
+| Unit | Size | Close when |
+|------|------|------------|
+| **Micro-cycle** | 1–3 issues or 1–2 agent sessions | Named gate IDs PASS on PR |
+| **Standard cycle** | ≤10 issues (`max_issues_per_cycle`) | All batch issues closed **or** explicit carry-over logged |
+| **Integration cycle** | L4 / L5 scope | `run_integration_tests.sh` / `run_e2e_playthrough.sh` green |
+| **Human-blocked** | L6, Steam, external assets | Human sign-off or asset delivery — calendar time irrelevant to agent throughput |
+
+### What actually consumes calendar time
+
+| Bottleneck | AI impact |
+|------------|-----------|
+| Architect → Builder → QA handoffs | Separate sessions; batch small |
+| CI + gate scripts | Wall-clock minutes per run |
+| GDAI F5 + `.gdai_built` | One builder session per scene batch |
+| Remediation loops | Re-run until PASS — count **iterations**, not weeks |
+| L5 three endings, L6 playtest, M5 assets | **Validation / human** — can exceed any sprint ceiling |
+
+### PM Agent batch checklist (replaces “two-week planning”)
+
+1. Pull ≤10 issues from current phase (`sprint_phases.json` → `active_phase`).  
+2. Label each with gate IDs + `agent/*`.  
+3. Run **micro-cycles** for isolated shaders/scenes (1–2 sessions).  
+4. When batch gates PASS → **close Linear cycle immediately** (even mid-week).  
+5. Open next `Phase{N}-Sprint{K+1}` without waiting.  
+
+### Example: Phase 1 at AI speed
+
+| Batch | Issues | Sessions (typical) | Close trigger |
+|-------|--------|-------------------|---------------|
+| Phase1-Sprint1 | `toon_base.gdshader`, `zone_visuals.gd` | Architect + QA | L1 PASS |
+| Phase1-Sprint2 | ruined_village lights/fog (GDAI) | Builder + QA | L2_scene_primitives, L3 |
+| Phase1-Sprint3 | SC-02 screenshot + palette smoke | Visual + QA | `phase_1` exit review |
+
+Three batches might finish in **2–5 calendar days** with active agents — not three weeks.

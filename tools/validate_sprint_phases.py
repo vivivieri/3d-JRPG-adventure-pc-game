@@ -45,6 +45,16 @@ def main() -> int:
         rc = p.get("recommended_cadence_weeks")
         if rc is not None and (not isinstance(rc, int) or rc < 1 or rc > 4):
             errors.append(f"phase {p.get('phase')}: recommended_cadence_weeks must be 1-4")
+        atd = p.get("ai_native_target_days")
+        if atd is not None and (not isinstance(atd, int) or atd < 1):
+            errors.append(f"phase {p.get('phase')}: ai_native_target_days must be positive int")
+    batch = data.get("ai_native_batch", {})
+    if batch:
+        micro = batch.get("micro_cycle", {})
+        if micro and micro.get("max_issues", 0) < 1:
+            errors.append("ai_native_batch.micro_cycle.max_issues must be >= 1")
+        if batch.get("primary_unit") not in (None, "session_batch"):
+            errors.append("ai_native_batch.primary_unit must be 'session_batch' when set")
     if errors:
         print("SPRINT PHASES VALIDATION FAILED", file=sys.stderr)
         for e in errors:
