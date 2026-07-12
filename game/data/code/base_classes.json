@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "authority": "docs/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
+  "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See §3 in CODE_BASE_CLASS_RULES.md for asset licenses.",
+  "architect_owns": [
+    "res://scripts/autoload/",
+    "res://scripts/combat/",
+    "res://scripts/exploration/player_controller.gd",
+    "res://scripts/exploration/interactable.gd",
+    "res://scripts/exploration/zone_transition.gd",
+    "res://scripts/exploration/encounter_trigger.gd"
+  ],
+  "bases": [
+    {
+      "id": "PlayerController",
+      "path": "res://scripts/exploration/player_controller.gd",
+      "extends": "CharacterBody3D",
+      "phase": 2,
+      "agent_rule": "extend_only",
+      "description": "Field movement, interaction ray — single player implementation"
+    },
+    {
+      "id": "Combatant",
+      "path": "res://scripts/combat/combatant.gd",
+      "extends": "Node",
+      "phase": 4,
+      "agent_rule": "extend_only",
+      "description": "Battle actor HP/MP/status — PlayerCombatant / EnemyCombatant subclasses"
+    },
+    {
+      "id": "Interactable",
+      "path": "res://scripts/exploration/interactable.gd",
+      "extends": "Area3D",
+      "phase": 3,
+      "agent_rule": "extend_only",
+      "description": "Inspectables, NPC dialogue hooks — scene instances only"
+    },
+    {
+      "id": "ZoneTransition",
+      "path": "res://scripts/exploration/zone_transition.gd",
+      "extends": "Area3D",
+      "phase": 3,
+      "agent_rule": "extend_only",
+      "description": "Zone loads with spawn marker"
+    },
+    {
+      "id": "EncounterTrigger",
+      "path": "res://scripts/exploration/encounter_trigger.gd",
+      "extends": "Area3D",
+      "phase": 4,
+      "agent_rule": "extend_only",
+      "description": "Starts encounter from story_encounters.json"
+    },
+    {
+      "id": "CombatManager",
+      "path": "res://scripts/autoload/combat_manager.gd",
+      "extends": "Node",
+      "phase": 4,
+      "agent_rule": "architect_only",
+      "description": "Autoload — agents wire scenes; do not fork combat math"
+    },
+    {
+      "id": "TurnManager",
+      "path": "res://scripts/combat/turn_manager.gd",
+      "extends": "Node",
+      "phase": 4,
+      "agent_rule": "architect_only",
+      "description": "SPD sort, round tick — state machine owned by Architect"
+    }
+  ],
+  "component_scenes": [
+    {
+      "id": "interactable_inspect",
+      "path": "res://scenes/components/interactable_inspect.tscn",
+      "script": "Interactable",
+      "phase": 3
+    },
+    {
+      "id": "zone_transition",
+      "path": "res://scenes/components/zone_transition.tscn",
+      "script": "ZoneTransition",
+      "phase": 3
+    },
+    {
+      "id": "encounter_trigger",
+      "path": "res://scenes/components/encounter_trigger.tscn",
+      "script": "EncounterTrigger",
+      "phase": 4
+    },
+    {
+      "id": "save_point",
+      "path": "res://scenes/components/save_point.tscn",
+      "script": "SavePoint",
+      "phase": 3
+    },
+    {
+      "id": "lantern_fill",
+      "path": "res://scenes/components/lantern_fill.tscn",
+      "script": null,
+      "phase": 1,
+      "note": "OmniLight3D + mesh instance — palette from ENVIRONMENT_KITS"
+    }
+  ],
+  "forbidden": [
+    "extends CharacterBody3D in zone .tscn root for player (use PlayerController scene)",
+    "new combat damage formulas in scene scripts (use SkillResolver + game/data/skills.json)",
+    "duplicate InputMap actions (UI_UX_FLOW.md canonical names only)",
+    "free-form AI state machine replacing TurnManager without Architect PR"
+  ],
+  "design_ref": "docs/TECHNICAL_DESIGN.md, docs/CODE_BASE_CLASS_RULES.md"
+}

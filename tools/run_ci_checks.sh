@@ -52,14 +52,26 @@ run_gate "L0_story_data" "Story JSON cross-references" \
 run_gate "L0_acceptance_catalog" "Acceptance criteria catalog" \
   python3 tools/validate_acceptance_criteria.py
 
+run_gate "L0_base_classes" "Code base class registry" \
+  python3 tools/validate_base_classes.py
+
 run_gate "L1_unit_tests" "Godot headless unit tests" \
   bash tools/run_unit_tests.sh
+
+run_gate "L1_gdscript_lint" "GDScript lint on changed files" \
+  bash tools/check_gdscript_changed.sh
+
+run_gate "L0_base_class_compliance" "No rogue CharacterBody3D controllers" \
+  bash tools/check_base_class_compliance.sh
 
 run_gate "L2_scene_primitives" "Banned primitive meshes in ship scenes" \
   bash tools/check_scene_visuals.sh
 
 run_gate "L3_gdai_built" "GDAI marker updated when scenes change" \
   bash tools/check_l3_gdai_built.sh
+
+run_gate "L2_animation_whitelist" "GLB animation names in catalog whitelist" \
+  python3 tools/check_animation_whitelist.py --phase 1
 
 MAIN_SCENE="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' || true)"
 if [[ -z "$MAIN_SCENE" ]]; then

@@ -48,6 +48,8 @@
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
 | Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
+| Code base classes (extend-only) | [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md) · `game/data/code/base_classes.json` |
+| Component scenes (GDAI) | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) §1b |
 | QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
 | Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
 | Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |

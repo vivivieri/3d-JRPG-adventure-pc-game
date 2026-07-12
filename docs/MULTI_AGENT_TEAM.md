@@ -72,6 +72,8 @@ Must include:
 - Shader/uniform list
 - Properties to set in inspector (GDAI applies)
 - Target gate IDs (e.g. `L2_scene_primitives`, `L2_visual_palette`)
+- **Component scene** from `LEVEL_DESIGN.md` §1b / `base_classes.json` (if applicable)
+- **Base class** to extend — never new `CharacterBody3D` controller (`CODE_BASE_CLASS_RULES.md`)
 
 ### Builder → QA
 

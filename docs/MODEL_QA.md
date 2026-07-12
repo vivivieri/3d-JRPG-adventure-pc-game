@@ -57,6 +57,24 @@ python3 tools/check_model_technical.py --model urashima --ship  # M5: fail greyb
 | Source | Path under `models/nature/`, `models/castle/`, or manifest Kenney greybox (`--ship`) |
 | File size | Hero < 100 KB (likely empty/blockout) |
 
+### M2b — GLB import sanitizer (EditorScenePostImport)
+
+```bash
+bash tools/install_glb_import_pipeline.sh
+```
+
+Template: `tools/godot_templates/editor/glb_toon_post_import.gd` — forces NPR roughness/metallic; warns on non-Mixamo skeleton.
+
+**Godot:** `.glb` → Import → Scene → Advanced → Post Import Script → `res://scripts/editor/glb_toon_post_import.gd`
+
+### M2c — Animation whitelist
+
+```bash
+python3 tools/check_animation_whitelist.py --phase 1
+```
+
+Clip names must ⊆ `qa_catalog.json` → `allowed_animations` (see `CHARACTER_BIBLE.md` §8).
+
 ### M3 — Turntable render (Blender)
 
 ```bash

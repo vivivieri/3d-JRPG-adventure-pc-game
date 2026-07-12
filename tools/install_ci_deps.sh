@@ -61,6 +61,11 @@ if [[ ! -f "${XDG_DATA_HOME}/godot/export_templates/${TEMPLATE_VER}/version" ]];
   rm -rf "$TMPDIR_TPL" "$TMPTPZ"
 fi
 
+if [[ -f "${ROOT}/tools/requirements-ci.txt" ]]; then
+  pip3 install --user -q -r "${ROOT}/tools/requirements-ci.txt" 2>/dev/null || \
+    pip3 install -q -r "${ROOT}/tools/requirements-ci.txt" 2>/dev/null || true
+fi
+
 if [[ -f "${ROOT}/requirements.txt" ]]; then
   pip3 install --user -q -r "${ROOT}/requirements.txt" 2>/dev/null || \
     pip3 install -q -r "${ROOT}/requirements.txt" 2>/dev/null || true
