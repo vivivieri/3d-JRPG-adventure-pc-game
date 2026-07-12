@@ -1,0 +1,67 @@
+name: Bug report
+description: Gameplay, visual, audio, or flow defect
+title: "[DEV][S?] "
+labels: ["env/development"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Severity: S0 blocker · S1 major · S2 minor · S3 polish
+        See `docs/QA_AND_BUG_PROCESS.md` §2.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - S0 - Blocker
+        - S1 - Major
+        - S2 - Minor
+        - S3 - Polish
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment found in
+      options:
+        - development
+        - uat
+        - preproduction
+        - production
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Build (branch + commit or tag)
+      placeholder: game/development @ abc1234 or v0.8.0-rc1
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. New game\n2. Go to SC-07\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+    validations:
+      required: true
+  - type: input
+    id: scene
+    attributes:
+      label: Scene / zone ID
+      placeholder: SC-07 / tidal_caves
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (screenshots, saves, logs)
