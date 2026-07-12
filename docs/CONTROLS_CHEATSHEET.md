@@ -1,8 +1,8 @@
 # Controls Cheat Sheet — How We Enforce Roles
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Print this:** One-page reference for automated + process controls  
-**Companion:** `docs/RR_CHEATSHEET.md` (who does what)  
+**Companion:** `docs/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)  
 **Authority:** `docs/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/PROJECT_MANAGEMENT.md`
 
 ---
