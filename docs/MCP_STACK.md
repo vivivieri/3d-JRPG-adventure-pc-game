@@ -77,6 +77,7 @@ bash tools/check_dev_environment.sh
 
 | Check | How |
 |-------|-----|
+| R&R compliance (no hand `.tscn`) | `bash tools/check_rr_compliance.sh` exit 0 |
 | GDAI HTTP bridge | `curl -sf http://127.0.0.1:3571/tools` returns JSON |
 | Godotiq WebSocket | Port `6007` listening; GodotIQ plugin enabled |
 | MCP Pro server | `tools/godot-mcp-pro-server/build/index.js` exists; plugin enabled |
