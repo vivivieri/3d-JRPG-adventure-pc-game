@@ -186,8 +186,8 @@ bash "$ROOT/tools/check_mcp_ready.sh"
 
 echo
 echo "Required Cursor Secrets (user must configure):"
-echo "  GAMELAB_API_KEY  — https://gamelabstudio.co/"
+echo "  GAMELAB_API_KEY  — https://gamelabstudio.co/ (required — gamelab-mcp UI art)"
 echo "  NOTION_API_KEY   — optional if using OAuth in Integrations instead"
-echo "Register P0 in Cursor: godot-mcp, godotiq, godot-mcp-pro"
-echo "Optional: gamelab-mcp (UI art) — see docs/ART_AUTOMATION_PIPELINE.md"
+echo "Register in Cursor: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp (all required)"
+echo "Blender: required for M5 turntable QA — bash tools/install_extended_toolchain.sh"
 echo "See: docs/MCP_STACK.md"

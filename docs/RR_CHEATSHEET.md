@@ -41,7 +41,7 @@
 | Build | **GDAI MCP** (`godot-mcp`) | `.tscn`, materials, lights, F5 | System design |
 | Analyze | **Godotiq** (`godotiq`) | Signals, `trace_flow`, debug console | Scene mutations |
 | Test | **MCP Pro** (`godot-mcp-pro`, `--minimal`) | L4/L5 scenarios, asserts | Build/edit scenes |
-| UI art | **GameLab MCP** *(P1)* | UI PNG/WebP → `game/assets/textures/ui/` | Place nodes / `.tscn` |
+| UI art | **GameLab MCP** | UI PNG/WebP → `game/assets/textures/ui/` | Place nodes / `.tscn` |
 | Zone albedo | **ComfyUI / Material Maker** | Tileables → `palette_remap.py` | Assign in editor (→ GDAI) |
 | Hero 3D | **Meshy/Tripo/Rodin + Blender** | GLB import | Scene placement (→ GDAI) |
 | Audio | **ACE-Step / ElevenLabs** + `audio_qa_catalog.json` | BGM hero jury + P0 VO jury (`docs/AUDIO_QA.md`) | — |

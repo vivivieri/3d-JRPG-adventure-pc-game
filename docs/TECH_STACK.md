@@ -17,7 +17,7 @@
 | **GDAI MCP** (`godot-mcp`) | Build scenes in editor |
 | **Godotiq** (`godotiq`) | Analyze signals, debug, `ui_map` |
 | **Godot MCP Pro** (`godot-mcp-pro`) | Automated test scenarios (`--minimal` mode) |
-| **GameLab Studio MCP** (`gamelab-mcp`) | UI frames, icon sheets — P1 per `ART_AUTOMATION_PIPELINE.md` |
+| **GameLab Studio MCP** (`gamelab-mcp`) | UI frames, icon sheets — **required** per `ART_AUTOMATION_PIPELINE.md` |
 | **ComfyUI / Material Maker** | Zone NPR albedos — offline |
 | **ACE-Step 1.5** | BGM prototype (`tools/generate_ai_bgm.py`); GPU or `--fallback` |
 | **ElevenLabs** | 12 selective VO clips (`tools/generate_ai_vo.py`) |

@@ -100,7 +100,18 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | Gate ID | Pass when |
 |---------|-----------|
 | `M5_asset_compliance` | `check_asset_compliance.sh` exit 0 |
-| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, feel checklist avg ≥3.5, ≥5 testers, 0 open S0/S1 — **after L5** |
+| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, feel checklist avg ≥3.5, ≥5 testers, 0 open S0/S1 — **required ship gate**; **after L5** (Phase 8 prod CD) |
+
+### Required toolchain (not optional)
+
+| Requirement | Check | Notes |
+|-------------|-------|-------|
+| GameLab MCP | `gamelab-mcp` + `GAMELAB_API_KEY`; `check_extended_toolchain.sh` | Procedural UI fallbacks OK for **asset output** only |
+| Blender | `blender` in PATH; `check_extended_toolchain.sh` | M5 turntable QA (`docs/MODEL_QA.md` M3) |
+| `game/development` CI | `run_ci_checks.sh` exit 0 | Required merge gate; fails until `project.godot` + tests exist |
+| L6 human playtest | `L6_human_playtest` gate | Phase 8 only; after L0–L5 — still **required** for ship |
+
+Machine-readable: `acceptance_criteria.json` → `toolchain_requirements`.
 
 Full thresholds: `game/data/qa/acceptance_criteria.json`.
 

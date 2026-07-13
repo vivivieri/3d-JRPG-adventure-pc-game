@@ -32,10 +32,11 @@ if [[ -n "${GAMELAB_API_KEY:-}" ]]; then
   echo "==> GAMELAB_API_KEY found — writing gamelab-mcp to .cursor/mcp.json"
   bash "$ROOT/tools/write_mcp_config.sh"
 else
-  echo "!! GAMELAB_API_KEY not set"
+  echo "[FAIL] GAMELAB_API_KEY not set — required for gamelab-mcp"
   echo "   1. Sign up: https://gamelabstudio.co/"
   echo "   2. Cursor → Secrets → add GAMELAB_API_KEY"
   echo "   3. Re-run: bash tools/install_extended_toolchain.sh"
+  exit 1
 fi
 
 # --- ACE-Step prompt sheets ---
@@ -52,4 +53,4 @@ fi
 
 echo
 echo "==> Extended toolchain status:"
-bash "$ROOT/tools/check_extended_toolchain.sh" || true
+bash "$ROOT/tools/check_extended_toolchain.sh"

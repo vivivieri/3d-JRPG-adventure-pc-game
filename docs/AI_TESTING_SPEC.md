@@ -422,11 +422,12 @@ Full story automation per `game/data/story/scenes.json`:
 
 ---
 
-## 8. L6 — Human QA (after all AI playthrough)
+## 8. L6 — Human QA (required ship gate — after all AI playthrough)
 
 **Runner:** Human tester + `docs/PLAYTEST_SCRIPT.md`  
 **Owner:** Human (not AI)  
-**Prerequisite:** L0–L5 all PASS on release candidate commit
+**Prerequisite:** L0–L5 all PASS on release candidate commit  
+**Policy:** L6 is **required for ship** (Phase 8 prod CD). It is human-only and runs after L0–L5 — not optional.
 
 ### 8.1 Entry checklist (before human starts)
 

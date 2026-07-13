@@ -4,7 +4,7 @@
 **Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
 **Cross-refs:** `.cursorrules` §0–§1, `docs/ART_AUTOMATION_PIPELINE.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/PLUGIN_INSTALL_GUIDE.md`, `docs/AI_DEV_WORKFLOW.md`, `docs/AI_TESTING_SPEC.md`, `docs/ACCEPTANCE_CRITERIA.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/ART_DIRECTION.md`, `docs/ASSET_COMPLIANCE.md`
 
-**Tiered requirements:** P0 MCP servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) are **required** — if missing, **STOP and notify the user**. Art generators (`gamelab-mcp`, ComfyUI, ACE-Step) use **quality-first fallbacks** per `docs/ART_AUTOMATION_PIPELINE.md`. Do not fall back to manual `.tscn` edits or undocumented web assets.
+**Tiered requirements:** All MCP servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) are **required** — if missing, **STOP and notify the user**. **Blender** is **required** for M5 turntable QA (`docs/MODEL_QA.md`). Procedural UI placeholders are OK for **asset output** until GameLab gen ships — the MCP server itself is still required. Offline generators (ComfyUI, ACE-Step) use quality-first fallbacks per `docs/ART_AUTOMATION_PIPELINE.md`. Do not fall back to manual `.tscn` edits or undocumented web assets.
 
 ---
 
@@ -15,8 +15,8 @@
 | Plan & code | **GodotPrompter** | Cursor agent | GDScript, shaders, tests, architecture |
 | Design context | **`docs/` + `game/data/`** | Repo | Stat formulas, flags, dialogue — authoritative |
 | Zone NPR albedos | **ComfyUI** or **Material Maker** | Offline — not MCP | Stylized tileables; `tools/palette_remap.py` post-step |
-| UI art generate | **GameLab Studio MCP** | `gamelab-mcp` (SSE) | UI frames, ink borders, icon/VFX sheets *(P1 — WARN if absent)* |
-| 3D heroes / props | **Meshy / Tripo / Rodin** + Blender | Offline — not MCP | AI 3D → GLB; Mixamo rig; automated stylized textures |
+| UI art generate | **GameLab Studio MCP** | `gamelab-mcp` (SSE) | UI frames, ink borders, icon/VFX sheets **(required)** |
+| 3D heroes / props | **Meshy / Tripo / Rodin** + **Blender** (required) | Offline — not MCP | AI 3D → GLB; Mixamo rig; M5 turntable QA |
 | Build | **GDAI MCP** | `godot-mcp` | Scenes, nodes, materials, lights, F5 playtest |
 | Analyze | **Godotiq** | `godotiq` | Signals, debug console, `ui_map`, validation |
 | Test | **Godot MCP Pro** | `godot-mcp-pro` (`--minimal`) | L4/L5 scenarios, asserts, input replay |
@@ -71,6 +71,7 @@ bash tools/ensure_mcp_stack.sh
 bash tools/check_mcp_ready.sh
 bash tools/check_rr_compliance.sh
 bash tools/check_dev_environment.sh
+bash tools/check_extended_toolchain.sh
 ```
 
 ### Block until all required checks pass
@@ -82,11 +83,12 @@ bash tools/check_dev_environment.sh
 | Godotiq WebSocket | Port `6007` listening; GodotIQ plugin enabled |
 | MCP Pro server | `tools/godot-mcp-pro-server/build/index.js` exists; plugin enabled |
 | Godot Editor | Running with `game/project.godot` open |
-| Cursor MCP catalog (P0) | **Required:** `godot-mcp`, `godotiq`, `godot-mcp-pro` |
-| Cursor MCP catalog (P1) | **WARN:** `gamelab-mcp` — UI art; zone path has ComfyUI/Material Maker fallbacks |
-| Offline art/audio | ComfyUI, Material Maker, Blender, ACE-Step GPU — WARN per task |
+| Cursor MCP catalog | **Required:** `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp` |
+| GameLab API key | `GAMELAB_API_KEY` in Cursor Secrets |
+| Blender | `blender` in PATH — required for M5 turntable QA |
+| Offline art/audio | ComfyUI, Material Maker, ACE-Step GPU — document fallback used per task |
 
-If **P0** MCP servers are missing from Cursor → **STOP and notify the user**. See registration below.
+If **any required** MCP server or toolchain piece is missing → **STOP and notify the user**. See registration below.
 
 ---
 
@@ -202,7 +204,7 @@ Template: `.cursor/mcp.json.example`
 
 **Art constraints:** Muted palette (`#8B9DAF` fog, `#5C4A3A` wood, `#4AE8D8` biolume). Japanese coastal motifs — **not** bright Ghibli candy, not PBR realism, no European medieval reads.
 
-### GameLab Studio MCP — UI & 2D sheets (P1)
+### GameLab Studio MCP — UI & 2D sheets (required)
 
 **Role:** Ink-wash UI frames, combat icon sheets, menu borders, VFX sprite sheets.  
 **Does NOT:** Default path for zone tileables (use ComfyUI/Material Maker) or `.tscn` edits.
@@ -216,13 +218,13 @@ Template: `.cursor/mcp.json.example`
 4. register_asset.py → GDAI assigns in UI .tscn
 ```
 
-Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamelab-mcp` SSE server. **WARN** if absent — procedural UI placeholders for dev only.
+Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamelab-mcp` SSE server. **Required** — procedural UI placeholders OK for asset output until GameLab gen ships.
 
 **Design context:** Read `docs/` + `game/data/` before balancing combat or editing JSON. No external design-index MCP.
 
 **Why not Ink (Inkle):** Story spine is JSON-driven (`scenes.json` → `dialogue/` → `flags.json`). Ink adds a second runtime with no v1 benefit. See `docs/NARRATIVE_WRITING_GUIDE.md`.
 
-### AI 3D + Blender — offline hero pipeline
+### AI 3D + Blender — offline hero pipeline (required for turntable QA)
 
 **Role:** Automated stylized meshes and albedos for Japanese coastal heroes and set-pieces.  
 **Not MCP** — offline batch before Godot import.

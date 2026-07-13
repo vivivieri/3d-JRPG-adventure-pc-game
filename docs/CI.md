@@ -13,9 +13,9 @@
 | Branch | CI workflow | What runs |
 |--------|-------------|-----------|
 | **`main`** | `ci.yml` | Docs + design data validation only — **no Godot runtime** |
-| **`game/development`** | `game-ci.yml` | Full headless L0–L4 + game gates |
+| **`game/development`** | `game-ci.yml` | Full headless L0–L4 + game gates — **required green before PR merge** |
 
-Game implementation does **not** merge to `main` until ship-ready (M6). See `docs/BRANCHING.md`.
+Game implementation does **not** merge to `main` until ship-ready (M6). **`game/development` CI is a required merge gate** — it will fail until `game/project.godot` and tests are bootstrapped; that is expected, not a reason to treat CI as optional. See `docs/BRANCHING.md`.
 
 ---
 
@@ -80,7 +80,7 @@ These are **agent-local or ship-only** — intentionally excluded from GitHub Ac
 | L3_gdai_f5 (full viewport) | Requires Godot editor + GDAI MCP F5 | Per-scene agent tasks |
 | L2 visual/audio/model jury | Needs screenshots + LLM API keys | `run_playtest_smoke.sh` when assets exist |
 | L5 E2E three endings | Needs Godot MCP Pro + playable build | Phase 6 gate, release candidates |
-| L6 human playtest | Human-only | `docs/PLAYTEST_SCRIPT.md` after L0–L5 |
+| L6 human playtest | Human-only — **required ship gate** | `docs/PLAYTEST_SCRIPT.md` after L0–L5 (Phase 8 prod CD) |
 
 **Rule:** Exit **2** = SKIP. On `main`, SKIP is allowed for game-only gates. On `game/development`, `tools/gate_lib.sh` treats SKIP as **FAIL** for required gates (`global_rules.skip_is_not_pass`). Ship/M5 still requires real PASS with evidence — not SKIP.
 
@@ -101,7 +101,7 @@ bash tools/install_ci_deps.sh
 bash tools/run_ci_checks.sh
 ```
 
-Full dev smoke (includes MCP warnings, optional jury):
+Full dev smoke (includes extended toolchain + jury when assets exist):
 
 ```bash
 bash tools/install_cloud_dev.sh   # requires GDAI stack for scene work

@@ -20,13 +20,13 @@
 | `godot-mcp` (GDAI) | **Build** scenes |
 | `godotiq` | **Analyze** signals/debug |
 | `godot-mcp-pro` | **Test** scenarios/asserts (L4/L5) |
-| `gamelab-mcp` | **UI art** — frames, icon sheets *(P1 — WARN if absent)* |
+| `gamelab-mcp` | **UI art** — frames, icon sheets **(required)** |
 | ComfyUI / Material Maker | **Zone NPR albedos** — offline |
-| Meshy / Tripo / Rodin + Blender | **3D hero pipeline** — offline |
+| Meshy / Tripo / Rodin + **Blender** | **3D hero pipeline + M5 turntable QA** — required offline |
 | `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
 | `generate_ai_vo.py` + ElevenLabs | **Selective VO** — 12 emotional clips only (`docs/VO_HIT_LIST.md`) |
 
-**P0 MCP required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`). Art generators tiered — see `docs/ART_AUTOMATION_PIPELINE.md`. If P0 missing → STOP and notify user.
+**All MCP servers required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`). **Blender** required for M5 turntable QA. Procedural UI fallbacks OK for asset output only — see `docs/ART_AUTOMATION_PIPELINE.md`. If any required piece missing → STOP and notify user.
 
 ### Environment bootstrap
 
@@ -55,9 +55,10 @@ Installed components:
 bash tools/ensure_mcp_stack.sh
 bash tools/check_mcp_ready.sh
 bash tools/check_rr_compliance.sh
+bash tools/check_extended_toolchain.sh
 ```
 
-If `ensure_mcp_stack.sh` or `check_mcp_ready.sh` fails → **STOP scene/editor work** and notify the user.  
+If `ensure_mcp_stack.sh`, `check_mcp_ready.sh`, or `check_extended_toolchain.sh` fails → **STOP scene/editor work** and notify the user.  
 Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
 
 ```
@@ -80,7 +81,8 @@ Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
 | GDAI | `curl -sf http://127.0.0.1:3571/tools`; plugin + `godot-mcp` in Cursor |
 | Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
 | MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
-| GameLab | `gamelab-mcp` in Cursor MCP; API key in Secrets *(WARN if absent — UI art)* |
+| GameLab | `gamelab-mcp` in Cursor MCP; `GAMELAB_API_KEY` in Secrets **(required)** |
+| Blender | `blender` in PATH — `bash tools/install_extended_toolchain.sh` **(required for M5 turntable)** |
 | ComfyUI / Material Maker | Local install for zone albedos |
 
 Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/MCP_STACK.md`.
@@ -90,7 +92,7 @@ Register all installed servers in Cursor (desktop Settings or cloud dashboard). 
 | Type | Generator |
 |------|-----------|
 | Zone NPR albedos | ComfyUI / Material Maker + `palette_remap.py` |
-| UI art | GameLab MCP (when key set) |
+| UI art | GameLab MCP (required; procedural placeholders OK until gen ships) |
 | BGM / SFX | `python3 tools/generate_game_audio.py --all` + ACE-Step ship path |
 | Selective VO | `bash tools/generate_ai_vo.sh --tier p0` (needs `ELEVENLABS_API_KEY`) |
 | Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` |
@@ -105,7 +107,7 @@ See `docs/AI_DEV_WORKFLOW.md` for policy, `docs/ACCEPTANCE_CRITERIA.md` for **me
 | Branch | CI script |
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
-| `game/development` | `bash tools/run_ci_checks.sh` — full L0–L2 game gates |
+| `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"

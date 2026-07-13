@@ -118,7 +118,7 @@ Configure in **Settings → Environments**:
 
 | From → To | Promotion criteria |
 |-----------|-------------------|
-| Dev → QA | Push to `game/development`; CI green |
+| Dev → QA | Push to `game/development`; **CI green required** (bootstrap `project.godot` + tests first) |
 | QA → UAT | All phase gates for milestone; tag RC |
 | UAT → Preprod | L6 playtest ≥80%; S0/S1 = 0; Steamworks ready |
 | Preprod → Prod | Beta soak complete; store page live; compliance pass |

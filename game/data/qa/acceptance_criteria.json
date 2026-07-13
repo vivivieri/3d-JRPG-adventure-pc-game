@@ -23,7 +23,10 @@
     "Marking phase complete with E2E script SKIP",
     "Claiming visual PASS without artifacts/screenshots evidence",
     "Procedural placeholder audio/model marked ship-ready",
-    "Hand-edited ship .tscn merged without game/scenes/.gdai_built marker"
+    "Hand-edited ship .tscn merged without game/scenes/.gdai_built marker",
+    "Treating GameLab MCP or Blender as optional for ship",
+    "Merging game/development PR without green CI",
+    "Skipping L6 human playtest for ship"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -449,7 +452,36 @@
       "L5_e2e_three_endings",
       "L6_human_playtest"
     ],
-    "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
+    "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2",
+    "merge_policy": "game/development PRs require CI green — fails until project.godot + tests bootstrap; not deferrable"
+  },
+  "toolchain_requirements": {
+    "required_not_optional": [
+      {
+        "id": "gamelab_mcp",
+        "check": "gamelab-mcp in Cursor + GAMELAB_API_KEY",
+        "command": "bash tools/check_extended_toolchain.sh",
+        "asset_fallback": "Procedural UI placeholders OK for asset output until GameLab gen ships"
+      },
+      {
+        "id": "blender",
+        "check": "blender in PATH",
+        "purpose": "M5 turntable QA — docs/MODEL_QA.md M3",
+        "command": "bash tools/check_extended_toolchain.sh"
+      },
+      {
+        "id": "game_development_ci",
+        "check": "bash tools/run_ci_checks.sh exit 0",
+        "note": "Required merge gate on game/development — expected to fail until bootstrap"
+      },
+      {
+        "id": "l6_human_playtest",
+        "gate_id": "L6_human_playtest",
+        "when": "Phase 8 prod CD after L0–L5",
+        "note": "Required ship gate — not optional"
+      }
+    ],
+    "design_ref": "docs/MCP_STACK.md, docs/ART_AUTOMATION_PIPELINE.md §2, docs/CI.md"
   },
   "cd_gates": {
     "branch": "game/development",
