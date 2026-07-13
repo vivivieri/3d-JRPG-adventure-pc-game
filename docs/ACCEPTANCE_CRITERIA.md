@@ -50,6 +50,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
 | `L0_zone_composition` | `validate_zone_composition.py` exit 0 — zone composition contract schema |
 | `L0_qa_catalog` | `validate_qa_catalog.py` exit 0 — model catalog + `animation_timing` floor |
+| `L0_generation_readiness_backlog` | `validate_generation_readiness_backlog.py` exit 0 — GR-* items trace to plan tasks |
 | `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
 | `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue native `extends` (game branch) |
 
@@ -67,6 +68,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_boot_headless` | Godot headless boot exit 0 |
 | `L2_scene_primitives` | `check_scene_visuals.sh` exit 0, 0 banned meshes |
 | `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — required ⊆ clips ⊆ `allowed_animations` |
+| `L2_zone_composition` | `run_zone_composition_checks.sh` exit 0 — warn in early phases; `ZONE_COMPOSITION_STRICT=1` at M5 ship (**GR-003**) |
 | `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
 | `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |

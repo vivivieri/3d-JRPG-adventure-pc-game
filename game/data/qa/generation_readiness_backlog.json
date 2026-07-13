@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "authority": "Outstanding generation-readiness items that must close during game/development implementation. See docs/GENERATION_READINESS.md §8.",
+  "design_ref": "docs/GENERATION_READINESS.md",
+  "implementation_ref": "docs/IMPLEMENTATION_PLAN.md",
+  "items": [
+    {
+      "id": "GR-001",
+      "title": "Golden gameplay screenshots per zone",
+      "priority": "P0",
+      "status": "pending",
+      "implementation_plan_tasks": ["1.10", "7.12"],
+      "phases": [1, 7],
+      "owner": "QA + Builder (GDAI)",
+      "gate_ids": ["L2_visual_palette", "L2_visual_jury"],
+      "command": "VISUAL_SMOKE_STRICT=1 bash tools/run_visual_smoke_checks.sh",
+      "evidence": [
+        "artifacts/screenshots/phase1_ruined_village_gameplay.png",
+        "artifacts/screenshots/phase1_beach_shore_gameplay.png",
+        "artifacts/screenshots/phase5_tidal_caves_gameplay.png",
+        "artifacts/screenshots/phase6_dragon_palace_gate_gameplay.png"
+      ],
+      "data_ref": "game/data/qa/zone_composition.json",
+      "blocks_milestone": "M5",
+      "design_ref": "docs/GENERATION_READINESS.md §X-02"
+    },
+    {
+      "id": "GR-002",
+      "title": "palace_sentinel CHARACTER_BIBLE boss-standard row",
+      "priority": "P2",
+      "status": "pending",
+      "implementation_plan_tasks": ["6.3b"],
+      "phases": [6, 7],
+      "owner": "PM + Visual",
+      "gate_ids": [],
+      "evidence": ["docs/CHARACTER_BIBLE.md — Palace Sentinel section matches shore_wraith / tide_keeper depth"],
+      "blocks": ["7.1 palace_sentinel GLB generation", "SC-14 palace_sentinel_hall golden shot"],
+      "design_ref": "docs/GENERATION_READINESS.md §4 palace_sentinel, docs/BOSS_DESIGNS.md §3"
+    },
+    {
+      "id": "GR-003",
+      "title": "L2 zone composition in-scene strict smoke",
+      "priority": "P2",
+      "status": "pending",
+      "implementation_plan_tasks": ["1.11", "7.12"],
+      "phases": [1, 7],
+      "owner": "QA",
+      "gate_ids": ["L2_zone_composition"],
+      "command_warn": "bash tools/run_zone_composition_checks.sh",
+      "command_ship": "ZONE_COMPOSITION_STRICT=1 bash tools/run_zone_composition_checks.sh",
+      "evidence": ["game/scenes/world/*.tscn per zone_composition.json scene_path"],
+      "data_ref": "game/data/qa/zone_composition.json",
+      "blocks_milestone": "M5",
+      "design_ref": "docs/GENERATION_READINESS.md §X-04"
+    }
+  ]
+}

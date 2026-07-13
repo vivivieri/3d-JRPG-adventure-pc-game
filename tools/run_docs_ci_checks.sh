@@ -34,6 +34,7 @@ run_gate "L0_sprint_phases" python3 tools/validate_sprint_phases.py
 run_gate "L0_base_classes" python3 tools/validate_base_classes.py
 run_gate "L0_zone_composition" python3 tools/validate_zone_composition.py
 run_gate "L0_qa_catalog" python3 tools/validate_qa_catalog.py
+run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_rr_compliance" bash tools/check_rr_compliance.sh
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 

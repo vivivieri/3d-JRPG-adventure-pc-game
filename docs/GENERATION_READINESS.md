@@ -184,7 +184,9 @@ For each new hero mesh or zone slice:
 | P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | ✅ Done |
 | P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | ✅ Done |
 | P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual | Pending |
-| P2 | `L2_zone_composition` smoke script | QA | ✅ Script (`run_zone_composition_checks.sh`); in-scene strict when scenes exist |
+| P2 | `L2_zone_composition` smoke script | QA | ✅ Script; strict at M5 via **GR-003** / Phase 7.12 |
+
+**Implementation traceability:** `game/data/qa/generation_readiness_backlog.json` — **GR-001** … **GR-003** map to `IMPLEMENTATION_PLAN.md` tasks and phase gates (validated L0 on `main`).
 
 ---
 

@@ -135,6 +135,9 @@ Track implementation progress against the GDD milestones.
 - [ ] Rendering guide applied per zone (`docs/RENDERING_GUIDE.md`)
 - [ ] Fresh implementation on `main` per `docs/IMPLEMENTATION_PLAN.md` + `docs/AI_DEV_WORKFLOW.md`
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/ART_DIRECTION.md` §10)
+- [ ] **GR-001** Golden gameplay screenshots — all zones per `zone_composition.json` (`VISUAL_SMOKE_STRICT=1`)
+- [ ] **GR-003** Zone composition strict smoke (`ZONE_COMPOSITION_STRICT=1`) at M5 ship
+- [ ] **GR-002** `palace_sentinel` `CHARACTER_BIBLE.md` row at boss standard (close in Phase 6.3b before sentinel GLB)
 - [ ] Replace all primitive / Kenney greybox art in player-facing builds
 - [ ] Japanese palace gate hero set-piece (`palace_gate_main` — SC-12)
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies

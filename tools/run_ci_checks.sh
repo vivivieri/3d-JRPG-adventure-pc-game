@@ -51,6 +51,13 @@ run_tri_gate "L0_base_class_compliance" "No rogue native extends" \
 run_tri_gate "L2_scene_primitives" "Banned primitive meshes in ship scenes" \
   bash tools/check_scene_visuals.sh
 
+if [[ -f game/project.godot ]]; then
+  run_tri_gate "L2_zone_composition" "Zone scenes per zone_composition.json (GR-003)" \
+    bash tools/run_zone_composition_checks.sh
+else
+  skip_gate "L2_zone_composition" "no game/project.godot"
+fi
+
 run_tri_gate "L3_gdai_built" "GDAI marker updated when scenes change" \
   bash tools/check_l3_gdai_built.sh
 

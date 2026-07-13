@@ -81,6 +81,8 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 1.7 | ProceduralSky per zone (no HDRI) | RENDERING_GUIDE §4 |
 | 1.8 | Component scenes from `LEVEL_DESIGN.md` §1b — wells, doors, triggers via GDAI | CODE_BASE_CLASS_RULES, LEVEL_DESIGN §1b |
 | 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes art checklist (**Phase 1 greybox section** of ART_DIRECTION §10; final-art section lands in Phase 7) | ART_DIRECTION §10 |
+| 1.10 | **Golden gameplay screenshot** — `ruined_village` path in `zone_composition.json` → `artifacts/screenshots/phase1_ruined_village_gameplay.png` (GDAI capture) | GENERATION_READINESS §X-02, **GR-001** |
+| 1.11 | Zone composition smoke (warn) — `bash tools/run_zone_composition_checks.sh` after greybox zones load | `zone_composition.json`, **GR-003** |
 
 **GDAI workflow:** GodotPrompter drafts shaders/`zone_visuals.gd` → GDAI MCP places nodes in `.tscn` → F5 verify. **Acceptance criteria:** `docs/AI_DEV_WORKFLOW.md` §4 Phase 1.
 
@@ -150,6 +152,7 @@ Build stylized zone rendering before gameplay systems. Follow `docs/RENDERING_GU
 | 6.1 | Dragon Palace Gate zone + SC-12 gate cinematic | ENVIRONMENT_KITS §6, CINEMATICS.md |
 | 6.2 | SC-11 flashback + SC-13 box revelation | STORYBOARD.md, CINEMATICS.md |
 | 6.3 | Palace Sentinel SC-14 + Tide Keeper SC-15 | BOSS_DESIGNS.md |
+| 6.3b | Expand `palace_sentinel` `CHARACTER_BIBLE.md` row to **boss standard** (mesh breakdown, anims, GLB paths) **before** sentinel GLB gen | GENERATION_READINESS §4, **GR-002** |
 | 6.4 | SC-16 choice UI + three endings | ENDING_DESIGN.md |
 | 6.5 | Ending environment variants + SC-17 cinematics | ENVIRONMENT_KITS §7, CINEMATICS.md |
 | 6.6 | Credits sequence | CINEMATICS.md |
@@ -176,6 +179,7 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 | 7.9 | VO QA — `bash tools/run_audio_smoke_checks.sh` + `AUDIO_QA.md` jury gates | AUDIO_QA.md |
 | 7.10 | Cinematic hero assets — SC-00 opening, SC-12 gate reveal, SC-17 endings | CINEMATICS.md §12 |
 | 7.11 | `bash tools/check_asset_compliance.sh` passes on release branch | ASSET_COMPLIANCE.md |
+| 7.12 | **M5 visual evidence:** all zone golden screenshots per `zone_composition.json` + `ZONE_COMPOSITION_STRICT=1 bash tools/run_zone_composition_checks.sh` | GENERATION_READINESS §8, **GR-001**, **GR-003** |
 
 **VO clip budget:** 12 clips × 3 locales (`en`, `ja`, `zh`) + 12 × 2 zh-Hant dialects (`cant`, `cmn`) = **60 OGG files**. Runtime `VoiceLinePlayer` ships in Phase 3; clip files land here in M5.
 
@@ -244,6 +248,11 @@ This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DE
 | SFX/ambient production | Phase 7.6 |
 | Steam achievements + store assets | Phase 8.4–8.5 |
 | E2E three-endings gate | Phase 6.7 |
+| Golden zone gameplay screenshots (`GR-001`) | Phase 1.10, 7.12 |
+| `palace_sentinel` bible boss-standard row (`GR-002`) | Phase 6.3b (before Phase 7.1 enemy meshes) |
+| Zone composition strict smoke (`GR-003`) | Phase 1.11 warn → Phase 7.12 strict at M5 ship |
+
+**Traceability:** `game/data/qa/generation_readiness_backlog.json` — machine-readable **GR-*** items linked to plan tasks and gate IDs.
 
 **Still deferred (intentional):** full dialogue VO (12 selective clips only per `VO_HIT_LIST.md`); human L6 playtest until Phase 8 after L0–L5 pass.
 

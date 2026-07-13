@@ -80,6 +80,15 @@
       "evidence": ["game/data/models/qa_catalog.json"],
       "design_ref": "docs/MODEL_QA.md, docs/GENERATION_READINESS.md §X-03"
     },
+    "L0_generation_readiness_backlog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_generation_readiness_backlog.py",
+      "description": "GR-* backlog items trace to IMPLEMENTATION_PLAN tasks and gate IDs",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/generation_readiness_backlog.json"],
+      "design_ref": "docs/GENERATION_READINESS.md §8, docs/IMPLEMENTATION_PLAN.md"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -123,6 +132,17 @@
       "pass": { "exit_code": 0, "banned_mesh_count": 0 },
       "evidence": [],
       "design_ref": "docs/VISUAL_QA.md §L1"
+    },
+    "L2_zone_composition": {
+      "layer": "L2",
+      "domain": "visual",
+      "command": "bash tools/run_zone_composition_checks.sh",
+      "command_ship": "ZONE_COMPOSITION_STRICT=1 bash tools/run_zone_composition_checks.sh",
+      "description": "Zone scenes per zone_composition.json; golden screenshots when STRICT (GR-003)",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot (main branch data-only)",
+      "evidence": ["game/data/qa/zone_composition.json", "game/scenes/world/*.tscn"],
+      "design_ref": "docs/GENERATION_READINESS.md §X-04, generation_readiness_backlog.json GR-003"
     },
     "L2_animation_whitelist": {
       "layer": "L2",
@@ -330,6 +350,7 @@
       "L0_base_classes",
       "L0_zone_composition",
       "L0_qa_catalog",
+      "L0_generation_readiness_backlog",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],
@@ -398,12 +419,13 @@
       "conditional_gates": [
         "L2_visual_palette",
         "L2_visual_jury",
+        "L2_zone_composition",
         "L2_model_technical",
         "L2_model_jury",
         "L2_audio_technical",
         "L2_audio_jury"
       ],
-      "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS",
+      "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS. GR-001 golden screenshots enable L2_visual_*; GR-003 warn mode until M5 strict",
       "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 1"
     },
     "phase_6": {
@@ -427,6 +449,7 @@
         "L2_model_jury",
         "L2_visual_palette",
         "L2_visual_jury",
+        "L2_zone_composition",
         "L2_audio_technical",
         "L2_audio_jury",
         "L4_integration",
@@ -434,7 +457,12 @@
         "L6_human_playtest",
         "M5_asset_compliance"
       ],
-      "ship_flags": { "check_model_technical_ship": true, "check_audio_technical_ship": true },
+      "ship_flags": {
+        "check_model_technical_ship": true,
+        "check_audio_technical_ship": true,
+        "zone_composition_strict": true,
+        "visual_smoke_strict": true
+      },
       "design_ref": "docs/MILESTONES.md M5"
     }
   }

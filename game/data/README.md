@@ -22,6 +22,7 @@ game/data/
     feel_thresholds.json       # GAME_FEEL automated smoke thresholds
     integration_scenarios.json # L4 INT-* catalog (implemented / required flags)
     zone_composition.json      # Per-zone path width, vista anchor, golden screenshot paths (GENERATION_READINESS §5)
+    generation_readiness_backlog.json  # GR-* items → IMPLEMENTATION_PLAN tasks (must not miss during dev)
   code/
     base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
   quests/
@@ -61,6 +62,7 @@ python3 tools/validate_base_classes.py
 python3 tools/validate_acceptance_criteria.py
 python3 tools/validate_zone_composition.py
 python3 tools/validate_qa_catalog.py
+python3 tools/validate_generation_readiness_backlog.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
 

@@ -231,6 +231,8 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 1.7 | Greybox scenes exist for all 4 zones; each loads headless | Integration test |
 | 1.8 | L0 + L1 + L2 + L3 pass after every commit | CI scripts |
 | 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 **Phase 1 (greybox) checklist** — final-art items defer to Phase 7 | AI screenshot in `artifacts/screenshots/` + L3 pass |
+| 1.10 | **Golden screenshot** — `phase1_ruined_village_gameplay.png` per `zone_composition.json` (**GR-001**) | GDAI capture → `VISUAL_SMOKE_STRICT=1` enables `L2_visual_jury` |
+| 1.11 | Zone composition smoke (warn) — `bash tools/run_zone_composition_checks.sh` (**GR-003**) | Exit 0 warn until M5; strict at Phase 7.12 |
 
 ### Phase 2 — Core systems shell
 
@@ -288,6 +290,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 
 | # | Criterion | Verification |
 |---|-----------|--------------|
+| 6.0 | Expand `palace_sentinel` `CHARACTER_BIBLE.md` to boss-standard row **before** SC-14 mesh work (**GR-002**) | Doc review; backlog `status: done` |
 | 6.1 | Dragon Palace Gate zone per `ENVIRONMENT_KITS.md` §6 | GDAI + screenshot |
 | 6.2 | Palace Sentinel + Tide Keeper per `BOSS_DESIGNS.md` | Integration test |
 | 6.3 | SC-16 choice UI blocks attack input per `ENDING_DESIGN.md` | GDAI F5 |
@@ -310,6 +313,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 7.7 | VO passes `AUDIO_QA.md` jury gates (P0 clips first) | Jury scripts |
 | 7.8 | Cinematic hero assets (SC-00, SC-12, SC-17) per `CINEMATICS.md` §12 | GDAI F5 |
 | 7.9 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
+| 7.12 | All zone golden screenshots + `ZONE_COMPOSITION_STRICT=1` composition smoke (**GR-001**, **GR-003**) | `run_visual_smoke_checks.sh` + `run_zone_composition_checks.sh` |
 
 ### Phase 8 — Ship prep
 

@@ -93,11 +93,13 @@
       "exit_gates_conditional": [
         "L2_visual_palette",
         "L2_visual_jury",
+        "L2_zone_composition",
         "L2_model_technical",
         "L2_model_jury",
         "L2_audio_technical",
         "L2_audio_jury"
       ],
+      "generation_readiness": ["GR-001", "GR-003"],
       "uat_tag_pattern": "v0.1.*-rc*"
     },
     {
@@ -162,6 +164,7 @@
       "linear_project": "m1-core",
       "milestone": "M4",
       "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 6",
+      "generation_readiness": ["GR-002"],
       "exit_gates_required": [
         "L0_rr_compliance",
         "L0_story_data",
@@ -182,6 +185,7 @@
       "milestone": "M5",
       "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 7",
       "note": "Waterfall ordering: art after playable gameplay (phase 6). Calendar bound by assets + jury, not agent coding speed.",
+      "generation_readiness": ["GR-001", "GR-002", "GR-003"],
       "exit_gates_ref": "acceptance_criteria.json → phase_gates.m5_ship (subset)",
       "uat_tag_pattern": "v0.9.*-beta*"
     },
@@ -201,6 +205,8 @@
   ],
   "sprint_issue_template": {
     "required_fields": ["phase", "implementation_plan_task", "acceptance_gate_ids", "agent_owner"],
+    "optional_fields": ["generation_readiness_id"],
+    "generation_readiness_backlog": "game/data/qa/generation_readiness_backlog.json",
     "max_issues_per_cycle": 10,
     "definition_of_done": [
       "Gate IDs PASS on PR commit",
