@@ -89,6 +89,24 @@
       "evidence": ["game/data/qa/generation_readiness_backlog.json"],
       "design_ref": "docs/GENERATION_READINESS.md §8, docs/IMPLEMENTATION_PLAN.md"
     },
+    "L0_audio_qa_catalog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_audio_qa_catalog.py",
+      "description": "Audio QA catalog — tracks, VO clips, hero jury briefs, ACE-Step cross-ref",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/audio_qa_catalog.json"],
+      "design_ref": "docs/AUDIO_QA.md, docs/AUDIO_PRODUCTION_GUIDE.md"
+    },
+    "L0_scene_audio_map": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_scene_audio_map.py",
+      "description": "Scene/zone → BGM/ambient/sting map vs audio catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/scene_audio_map.json"],
+      "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -332,7 +350,9 @@
         "a2_melancholy_coastal": { "expect": true, "label": "Melancholy coastal mood" },
         "a3_not_upbeat_pop": { "expect": true, "label": "Not upbeat pop/EDM" },
         "a4_instrumental_no_vocals": { "expect": true, "label": "Instrumental no vocals" },
-        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" }
+        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" },
+        "a6_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "a7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer/EDM)" }
       },
       "evidence": ["artifacts/audio_reviews/*.jury.json"],
       "design_ref": "docs/AUDIO_QA.md §A3"
@@ -350,6 +370,8 @@
       "L0_base_classes",
       "L0_zone_composition",
       "L0_qa_catalog",
+      "L0_audio_qa_catalog",
+      "L0_scene_audio_map",
       "L0_generation_readiness_backlog",
       "L0_rr_compliance",
       "M5_asset_compliance"

@@ -37,6 +37,8 @@ These apply to every character and zone. Fill once, reference everywhere.
 | **X-04** | **Spatial composition** | Zone ASCII layouts in `ENVIRONMENT_KITS.md` | `zone_composition.json` — min path width, vista anchor, golden paths | `validate_zone_composition.py` (L0); in-scene `run_zone_composition_checks.sh` (P2) |
 | **X-05** | **Feel in motion** | `GAME_FEEL.md` + `feel_thresholds.json` | Input latency, turn p95, camera spring — measured in-engine | `L2_feel_smoke` strict on game branch |
 | **X-06** | **Human validation** | L6 playtest + feel checklist | ≥5 testers, feel avg ≥3.5 — cannot be automated away | `L6_human_playtest` |
+| **X-07** | **Audio generation brief** | ACE-Step prompts in `ace_step_prompts.json` | Per hero track + P0 VO: emotional intent, loudness/loop in `audio_qa_catalog.json` | `validate_audio_qa_catalog.py` + A6/A7 jury |
+| **X-08** | **Scene audio map** | Prose in `AUDIO_PRODUCTION_GUIDE.md` §4 | Zone/scene → BGM, amb, sting, duck rules machine-readable | `scene_audio_map.json` + `validate_scene_audio_map.py` |
 
 ---
 

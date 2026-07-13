@@ -79,7 +79,9 @@ python3 tools/review_audio_vision.py \
 
 **API keys:** `OPENAI_API_KEY`, `GEMINI_API_KEY` (audio-capable vision models). No Anthropic audio path in v1.
 
-**Pass:** ≥2 models `acceptance.valid_pass: true` (A1–A5 + confidence ≥ 0.65). Gate `L2_audio_jury`.
+**Pass:** ≥2 models `acceptance.valid_pass: true` (A1–A7 + confidence ≥ 0.65). Gate `L2_audio_jury`.
+
+Emotional intent for hero tracks loads from `docs/generation_briefs/audio/<track>.md` via `audio_brief_lib.py` (A6/A7 — same pattern as model M7/M8).
 
 ### Layer L6 — Human
 

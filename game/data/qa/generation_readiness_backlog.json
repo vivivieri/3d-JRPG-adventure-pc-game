@@ -53,6 +53,45 @@
       "data_ref": "game/data/qa/zone_composition.json",
       "blocks_milestone": "M5",
       "design_ref": "docs/GENERATION_READINESS.md §X-04"
+    },
+    {
+      "id": "GR-004",
+      "title": "Audio QA catalog + hero BGM generation briefs",
+      "priority": "P1",
+      "status": "done",
+      "completed_ref": "game/data/audio/audio_qa_catalog.json, docs/generation_briefs/audio/",
+      "implementation_plan_tasks": ["7.5", "7.9"],
+      "phases": [7],
+      "owner": "Architect + QA",
+      "gate_ids": ["L0_audio_qa_catalog", "L2_audio_jury"],
+      "evidence": ["docs/generation_briefs/audio/*.md", "tools/review_audio_vision.py A6/A7"],
+      "design_ref": "docs/GENERATION_READINESS.md §X-07"
+    },
+    {
+      "id": "GR-005",
+      "title": "P0 VO generation briefs",
+      "priority": "P1",
+      "status": "done",
+      "completed_ref": "docs/generation_briefs/vo/",
+      "implementation_plan_tasks": ["7.7", "7.8"],
+      "phases": [7],
+      "owner": "PM + Audio",
+      "gate_ids": ["L0_audio_qa_catalog"],
+      "evidence": ["docs/generation_briefs/vo/sc*.md"],
+      "design_ref": "docs/VO_HIT_LIST.md"
+    },
+    {
+      "id": "GR-006",
+      "title": "Scene audio map machine-readable",
+      "priority": "P1",
+      "status": "done",
+      "completed_ref": "game/data/audio/scene_audio_map.json",
+      "implementation_plan_tasks": ["7.5"],
+      "phases": [2, 7],
+      "owner": "Architect",
+      "gate_ids": ["L0_scene_audio_map"],
+      "data_ref": "game/data/audio/scene_audio_map.json",
+      "design_ref": "docs/GENERATION_READINESS.md §X-08, docs/AUDIO_PRODUCTION_GUIDE.md §4"
     }
   ]
 }

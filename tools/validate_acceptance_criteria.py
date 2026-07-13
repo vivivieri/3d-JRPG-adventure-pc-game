@@ -54,6 +54,8 @@ def main() -> int:
                 "L0_sprint_phases",
                 "L0_zone_composition",
                 "L0_qa_catalog",
+                "L0_audio_qa_catalog",
+                "L0_scene_audio_map",
             ):
                 errors.append(f"ci_gates references unknown gate: {gid}")
 

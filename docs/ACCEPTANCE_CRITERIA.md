@@ -50,7 +50,8 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
 | `L0_zone_composition` | `validate_zone_composition.py` exit 0 — zone composition contract schema |
 | `L0_qa_catalog` | `validate_qa_catalog.py` exit 0 — model catalog + `animation_timing` floor |
-| `L0_generation_readiness_backlog` | `validate_generation_readiness_backlog.py` exit 0 — GR-* items trace to plan tasks |
+| `L0_audio_qa_catalog` | `validate_audio_qa_catalog.py` exit 0 — audio catalog + brief cross-refs |
+| `L0_scene_audio_map` | `validate_scene_audio_map.py` exit 0 — scene/zone audio map |
 | `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
 | `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue native `extends` (game branch) |
 

@@ -13,7 +13,10 @@ game/data/
   dialogue/
     chapter_01.json          # Dialogue by scene_id; optional voice_id per line
   audio/
-    vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
+    ace_step_prompts.json     # ACE-Step generation prompts (MIT)
+    vo_prompts.json            # ElevenLabs selective VO (12 clips)
+    audio_qa_catalog.json      # Unified BGM/VO QA catalog (loudness, briefs, jury scope)
+    scene_audio_map.json       # Zone/scene → BGM, ambient, sting, duck (AUDIO_PRODUCTION_GUIDE §4)
   models/
     qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md); v1.3+ adds crowd/npc_cinematic rows
   qa/
