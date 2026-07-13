@@ -112,7 +112,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 
 ## Handoff minimums
 
-**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b).
+**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b); for art assets, link or attach `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`).
 
 **Builder → QA:** commit SHA, `game/scenes/.gdai_built` (`verified_f5=true`), scenes touched, screenshots if visual.
 

@@ -74,6 +74,7 @@ Must include:
 - Target gate IDs (e.g. `L2_scene_primitives`, `L2_visual_palette`)
 - **Component scene** from `LEVEL_DESIGN.md` §1b / `base_classes.json` (if applicable)
 - **Base class** to extend — never new `CharacterBody3D` controller (`CODE_BASE_CLASS_RULES.md`)
+- **Generation brief** for art assets — `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`); brief is plan input only — not ship approval
 
 ### Builder → QA
 
