@@ -21,6 +21,8 @@ This addendum lists, per **character** and **zone**, what is:
 
 **Rule:** Do not mark M5 art **ship-ready** for a row until **Required before ship** items are ✅ or explicitly waived in a PR with human L6 evidence.
 
+**Polish governance:** Structured iteration and direction authority — `docs/MODEL_QA.md` §8–§9 (who sets on-direction vs who arbitrates feel).
+
 ---
 
 ## 2. Cross-cutting gaps (all assets)
@@ -184,5 +186,6 @@ For each new hero mesh or zone slice:
 | Generation briefs | `generation_briefs/` |
 | Zone modules | `ENVIRONMENT_KITS.md` |
 | Measurable pass/fail | `ACCEPTANCE_CRITERIA.md` |
+| Model polish cadence + direction authority | `MODEL_QA.md` §8–§9 |
 | Feel targets | `GAME_FEEL.md`, `game/data/qa/feel_thresholds.json` |
 | Human playtest | `PLAYTEST_SCRIPT.md` §7b |
