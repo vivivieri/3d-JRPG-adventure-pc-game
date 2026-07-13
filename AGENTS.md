@@ -83,6 +83,15 @@ Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
 
 Authority: `docs/PM_AGENT_RUNBOOK.md`, `docs/SPRINT_ORCHESTRATION.md`, `game/data/qa/sprint_board.json`
 
+**End every completed issue with** (triggers PM via webhook — not cron):
+
+```bash
+python3 tools/pm_update_issue.py <issue_id> --status done --commit "$(git rev-parse HEAD)"
+bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <issue_id> --agent <role> --commit "$(git rev-parse HEAD)"
+```
+
+See `docs/CLOUD_AGENT_SETUP_RUNBOOK.md`.
+
 ### If MCP unavailable — NOTIFY USER, DO NOT FALL BACK
 
 | Server | Check |

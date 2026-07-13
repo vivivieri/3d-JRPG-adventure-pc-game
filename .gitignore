@@ -49,3 +49,5 @@ artifacts/data_reviews/*
 artifacts/qa_reports/*
 !artifacts/qa_reports/.gitkeep
 artifacts/pm_orchestrator_report.json
+artifacts/agent_cycle_event.json
+artifacts/.cycle_pending

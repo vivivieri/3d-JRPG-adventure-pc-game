@@ -67,10 +67,12 @@ Agent must deliver: commit SHA, PR URL, gate evidence paths.
 
 ```bash
 python3 tools/pm_update_issue.py P1-01 --status done --commit abc1234 --github-issue 42
-bash tools/run_pm_orchestrator.sh
+bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-01 --agent architect --commit abc1234
 ```
 
-Assign **next** agent from new `next_dispatch`. **Never skip re-running orchestrator.**
+This **immediately triggers** the PM Automation webhook (no cron). PM re-runs orchestrator in a new Cloud Agent session.
+
+Do **not** call `pm_emit_cycle_event` when PM only assigns work to another agent (worker emits when done).
 
 ---
 
@@ -143,6 +145,7 @@ Then update issue pack + board rows; clear `carry_over_queue`; re-run orchestrat
 | Agent clearance | `bash tools/run_agent_session_gate.sh <role> <issue_id>` |
 | Update issue state | `python3 tools/pm_update_issue.py <id> --status done --commit <sha>` |
 | Escalate | `bash tools/pm_emit_escalation.sh <id> <level>` |
+| **End cycle → trigger PM** | `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>` |
 | Close sprint | `python3 tools/pm_close_sprint.py --next-sprint-number N` |
 | Validate board | `python3 tools/validate_sprint_board.py --strict` |
 

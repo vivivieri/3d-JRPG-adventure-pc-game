@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "authority": "docs/CLOUD_AGENT_SETUP_RUNBOOK.md",
+  "design_ref": "docs/SPRINT_ORCHESTRATION.md",
+  "policy": "Event-driven only — no cron schedules for PM dispatch. AI agents do not need daily rest.",
+  "events": {
+    "agent_cycle_complete": {
+      "description": "Specialist agent finished one sprint issue (PR merged or pushed, board updated)",
+      "emits": ["tools/pm_emit_cycle_event.sh"],
+      "triggers": "PM Agent Automation (webhook)",
+      "payload_fields": ["event", "issue_id", "agent_role", "commit_sha", "sprint_id", "branch"]
+    },
+    "sprint_cycle_complete": {
+      "description": "All issues in active_sprint are done or carry_over resolved; PM may close sprint",
+      "emits": ["orchestrator when sprint_complete true + pm_close_sprint.py"],
+      "triggers": "PM Agent Automation → open Phase{N}-Sprint{K+1} or phase exit",
+      "payload_fields": ["event", "sprint_id", "phase", "next_sprint_number"]
+    },
+    "ci_cycle_complete": {
+      "description": "game/development CI green after agent push/merge (optional secondary trigger)",
+      "emits": [".github/workflows/agent-cycle-pm.yml on workflow_run success"],
+      "triggers": "PM Agent Automation (only if cycle_pending marker present)",
+      "payload_fields": ["event", "commit_sha", "workflow_run_id"]
+    },
+    "uat_ready": {
+      "description": "L0–L5 PASS on RC commit; human UAT required",
+      "emits": ["PM after run_cd_gates.sh --channel rc or manual tag"],
+      "triggers": "Human notification Automation (Slack/email) — not another worker",
+      "payload_fields": ["event", "tag", "commit_sha", "playtest_script"]
+    },
+    "mcp_blocked": {
+      "description": "check_mcp_ready.sh or check_extended_toolchain.sh failed",
+      "emits": ["any agent session startup"],
+      "triggers": "Human notification — fix secrets/snapshot before resume",
+      "payload_fields": ["event", "failed_check", "log_excerpt"]
+    }
+  },
+  "cycle_definition": {
+    "micro_cycle": "One sprint issue: dispatch → session gate → work → PR → board done → agent_cycle_complete event",
+    "sprint_cycle": "All issues in sprint_board → sprint_cycle_complete → PM opens next sprint pack",
+    "phase_cycle": "phase exit gates PASS → optional RC tag → uat_ready when L5 included"
+  },
+  "forbidden_triggers": [
+    "cron schedule for PM dispatch (wastes wall-clock; agents do not sleep)",
+    "PM self-trigger without cycle_complete event (orchestrator loop guard)",
+    "Worker agent start without run_agent_session_gate.sh PASS"
+  ]
+}

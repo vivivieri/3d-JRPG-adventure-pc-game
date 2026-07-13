@@ -1,0 +1,79 @@
+# Agent cycle dispatch — event-driven PM trigger (NOT cron)
+#
+# Triggers PM orchestration when a specialist cycle completes.
+# Primary: repository_dispatch from tools/pm_emit_cycle_event.sh
+# Secondary: game-ci success when artifacts/.cycle_pending exists (guarded)
+#
+# See docs/CLOUD_AGENT_SETUP_RUNBOOK.md
+
+name: Agent cycle PM dispatch
+
+on:
+  repository_dispatch:
+    types: [agent-cycle]
+  workflow_run:
+    workflows: [Game CI]
+    types: [completed]
+
+jobs:
+  dispatch-pm-cycle:
+    name: Emit PM cycle event artifact
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'repository_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'game/development')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Guard CI secondary trigger
+        if: github.event_name == 'workflow_run'
+        id: guard
+        run: |
+          if [[ ! -f artifacts/.cycle_pending ]]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "No cycle_pending marker — skipping CI→PM (prevents idle loops)"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build dispatch payload
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          mkdir -p artifacts
+          EVENT="${{ github.event.client_payload.event || 'ci_cycle_complete' }}"
+          cat > artifacts/agent_cycle_event.json <<EOF
+          {
+            "event": "${EVENT}",
+            "commit_sha": "${{ github.event.client_payload.commit_sha || github.sha }}",
+            "issue_id": "${{ github.event.client_payload.issue_id || '' }}",
+            "sprint_id": "${{ github.event.client_payload.sprint_id || '' }}",
+            "source": "${{ github.event_name }}",
+            "pm_command": "bash tools/run_pm_orchestrator.sh"
+          }
+          EOF
+          cat artifacts/agent_cycle_event.json
+
+      - name: POST Cursor PM webhook
+        if: steps.guard.outputs.skip != 'true' && env.CURSOR_PM_CYCLE_WEBHOOK_URL != ''
+        env:
+          CURSOR_PM_CYCLE_WEBHOOK_URL: ${{ secrets.CURSOR_PM_CYCLE_WEBHOOK_URL }}
+        run: |
+          curl -sf -X POST "$CURSOR_PM_CYCLE_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d @artifacts/agent_cycle_event.json
+          echo "Cursor PM webhook OK"
+
+      - name: Clear cycle pending marker
+        if: steps.guard.outputs.skip != 'true'
+        run: rm -f artifacts/.cycle_pending || true
+
+      - name: Upload event artifact
+        if: steps.guard.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-cycle-event
+          path: artifacts/agent_cycle_event.json
