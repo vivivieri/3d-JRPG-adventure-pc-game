@@ -219,7 +219,8 @@ BUILD → MEASURE (automated QA) → BRIEF on FAIL → change ONE lever → REBU
 | Game flow | `run_integration_tests.sh` / E2E | `qa_emit_remediation.sh flow-scenario INT-*` |
 | 3D model | model smoke / MODEL_QA | `qa_emit_remediation.sh model-tech\|model-jury` |
 | Visual | visual smoke / VISUAL_QA | `qa_emit_remediation.sh visual-palette\|visual-jury` |
-| Audio | audio smoke / AUDIO_QA | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Audio (BGM) | audio smoke / AUDIO_QA | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Audio (P0 VO) | audio smoke / AUDIO_QA §A4–A5 | `qa_emit_remediation.sh vo-tech\|vo-jury` |
 
 Smoke and integration scripts **auto-emit** briefs on FAIL via `tools/qa_emit_remediation.sh`.
 

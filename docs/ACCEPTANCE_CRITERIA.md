@@ -1,6 +1,6 @@
 # Acceptance Criteria — Measurable QA Pass/Fail
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
 **Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  

@@ -290,7 +290,7 @@ Per-zone interactable tables: [LEVEL_DESIGN.md](LEVEL_DESIGN.md).
 | Voice | 12 selective VO clips | `VoiceLinePlayer` on Voice bus |
 | Ambient | Zone loops | `play_ambient(id)` — ducks under Music −3 dB |
 
-Ducking rules: `AUDIO_PRODUCTION_GUIDE.md` §8; per-clip overrides in `vo_prompts.json`.
+Ducking rules: `AUDIO_PRODUCTION_GUIDE.md` §8; per-clip overrides in `vo_prompts.json`. Scene/zone BGM hooks: `game/data/audio/scene_audio_map.json` (runtime loads by `scene_id` / `zone_id`).
 
 ---
 

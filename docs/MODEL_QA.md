@@ -319,3 +319,17 @@ L0–L5 PASS ──▶ Human L6 ──▶ feedback ("coat too stiff")
 | No standing “polish sprint” without FAIL | M5 milestone + per-asset production order (`CHARACTER_BIBLE.md` §11) |
 
 See `docs/GENERATION_READINESS.md` for per-row ⚠️ Partial items that still need human judgment after gates pass.
+
+### 9.7 Audio parallel (BGM + P0 VO)
+
+Same governance shape as model turntable jury — different metrics:
+
+| | 3D model | BGM | P0 VO |
+|--|----------|-----|-------|
+| Catalog | `qa_catalog.json` | `audio_qa_catalog.json` | `audio_qa_catalog.json` `vo_clips` |
+| Technical | `check_model_technical.py` | `check_audio_technical.py` | `check_audio_vo.py` |
+| Brief mood | M7/M8 | A6/A7 | V6/V7 |
+| Jury tool | `review_model_vision.py` | `review_audio_vision.py` | `review_vo_vision.py` |
+| Scope | Hero/set-pieces | 8 hero tracks | 5 P0 clips (`en` jury gate) |
+
+Authority: `docs/AUDIO_QA.md` · Human L6 still owns loop seams, duck mix, subtitle timing.

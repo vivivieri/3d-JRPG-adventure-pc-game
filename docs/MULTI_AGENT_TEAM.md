@@ -23,7 +23,7 @@ One agent doing plan + build + test + deploy violates R&R and skips gates. This 
 | **Integration Tester** | Flow Agent | `godot-mcp-pro`, `run_integration_tests.sh`, `run_e2e_playthrough.sh` | L4/L5 scenarios, asserts | Build scenes |
 | **Debugger** | Analyze Agent | `godotiq` | Signals, `trace_flow`, debug console | Scene mutations |
 | **Release Engineer** | Release Agent | `run_cd_gates.sh`, tags, CD workflows | RC/beta/prod tags, export | Feature implementation |
-| **Art Reviewer** | Visual Agent | `docs/ART_DIRECTION.md`, palette/jury tools | L2 visual/model/audio jury evidence | Bypass jury with "looks fine" |
+| **Art Reviewer** | Visual Agent | `docs/ART_DIRECTION.md`, palette/jury tools | L2 visual/model/audio/vo jury evidence | Bypass jury with "looks fine" |
 | **Human QA Lead** | Human | `docs/PLAYTEST_SCRIPT.md` | L6 UAT sign-off | Before L0–L5 pass |
 
 ---

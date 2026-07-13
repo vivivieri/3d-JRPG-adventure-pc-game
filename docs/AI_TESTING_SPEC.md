@@ -1,6 +1,6 @@
 # AI Testing Specification
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Applies to:** All implementation on `main` (Phases 1–8)  
 **Parent doc:** `docs/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
 **Cross-refs:** `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/FLOW_QA.md`, `docs/QA_REMEDIATION_LOOP.md`
@@ -32,7 +32,7 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 
 | Layer | Command / tool | Frequency | Blocks |
 |-------|----------------|-----------|--------|
-| **L0** | `validate_story_data.py`, `validate_base_classes.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
+| **L0** | `validate_story_data.py`, `validate_base_classes.py`, `validate_audio_qa_catalog.py`, `validate_scene_audio_map.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
 | **L1** | `run_unit_tests.sh`, `check_gdscript_changed.sh` | Every commit | — |
 | **L2** | `run_playtest_smoke.sh`, `check_animation_whitelist.py`, `run_feel_smoke_checks.sh`, `check_glb_import_scripts.py` | Every commit | — |
 | **L3** | GDAI MCP (see §3) | Every scene/visual task | — |
@@ -87,6 +87,20 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 **Skip when:** `game/scripts/` not present (exit 2 — docs-only `main`)
 
 Blocks rogue native `extends CharacterBody3D` / `Area3D` / `Node` outside files listed in `base_classes.json`. Only registered base class files may extend Godot native types directly.
+
+### L0d — Audio QA catalog (`main` docs CI)
+
+**Runners:** `python3 tools/validate_audio_qa_catalog.py`, `python3 tools/validate_scene_audio_map.py`  
+**Owner:** Architect  
+**Exit:** 0 = pass
+
+### Checks (automated)
+
+- `audio_qa_catalog.json` tracks ↔ `ace_step_prompts.json`; P0 VO ↔ `vo_prompts.json` + generation briefs  
+- `scene_audio_map.json` BGM/sting/voice refs resolve to catalog  
+- P0 clips have `hero_listen_review` + `docs/generation_briefs/vo/*.md`
+
+**On FAIL:** Fix `game/data/audio/` or brief paths; see `docs/AUDIO_QA.md`.
 
 ---
 
@@ -171,6 +185,18 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 **Runner:** `bash tools/run_feel_smoke_checks.sh`  
 **Authority:** `game/data/qa/feel_thresholds.json` · `docs/GAME_FEEL.md`  
 **Skip when:** No `game/project.godot` (exit 2)
+
+### L2d — Audio smoke (BGM + P0 VO)
+
+**Runner:** `bash tools/run_audio_smoke_checks.sh` (included in `run_playtest_smoke.sh` when assets exist)  
+**Authority:** `docs/AUDIO_QA.md` · `game/data/audio/audio_qa_catalog.json`  
+**Gate tracks:** `bgm_village` (BGM); `sc00_urashima_01` / `en` (VO) — override via env vars in script  
+**Skip when:** Gate `.ogg` missing (WARN, exit 0 on dev)
+
+| Gate | Technical | Jury |
+|------|-----------|------|
+| BGM | `L2_audio_technical` | `L2_audio_jury` (8 hero tracks) |
+| P0 VO | `L2_vo_technical` | `L2_vo_jury` (5 clips, `en` gate locale) |
 
 ### L2d — GLB import pipeline
 
@@ -479,6 +505,7 @@ Acceptance gates (when applicable):
 - L2_visual_palette / jury: PASS/FAIL/SKIP + evidence path
 - L2_model_technical / jury: PASS/FAIL/SKIP + evidence path
 - L2_audio_technical / jury: PASS/FAIL/SKIP + evidence path
+- L2_vo_technical / jury: PASS/FAIL/SKIP + evidence path (P0 clips; jury gate locale `en`)
 - QA remediation: none | attempt N — <lever> (`QA_REMEDIATION_LOOP.md`)
 
 Human QA: NOT STARTED (L5 prerequisite) / READY FOR HUMAN / N/A

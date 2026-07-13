@@ -127,7 +127,8 @@ python3 tools/qa_remediation_brief.py --flow-scenario INT-QUEST-01 --log-attempt
 | Game flow | This doc | `--flow-scenario INT-*` |
 | 3D model | `MODEL_QA.md` | `--technical-model` / `--jury` |
 | Visual | `VISUAL_QA.md` | palette / jury |
-| Audio | `AUDIO_QA.md` | `--technical-audio` / `--jury` |
+| Audio (BGM) | `AUDIO_QA.md` | `--technical-audio` / `--jury` |
+| Audio (P0 VO) | `AUDIO_QA.md` §A4–A5 | `--technical-vo` / `--jury` (vo_reviews) |
 
 Master policy: `docs/QA_REMEDIATION_LOOP.md` §10.
 

@@ -143,11 +143,14 @@ Track implementation progress against the GDD milestones.
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
 - [ ] Automated stylized portraits (ComfyUI/GameLab — replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
+- [ ] **GR-004** Audio QA catalog + hero BGM briefs (`audio_qa_catalog.json`, `docs/generation_briefs/audio/`) — ✅ on `main`
+- [ ] **GR-005** P0 VO generation briefs + `L2_vo_*` gates — ✅ data on `main`; clip files at M5
+- [ ] **GR-006** `scene_audio_map.json` machine-readable scene map — ✅ on `main`
 - [ ] Curated BGM per act (ACE-Step curated prompts — replace dev procedural placeholders)
-- [ ] SFX + ambient beds per `AUDIO_PRODUCTION_GUIDE.md` scene map
+- [ ] SFX + ambient beds per `scene_audio_map.json`
 - [ ] ElevenLabs voice casting — replace `PLACEHOLDER_*` in `vo_prompts.json` (incl. zh-Hant `dialect_voices`)
-- [ ] Generate selective VO — P0 listen pass → P1/P2; `en`/`ja`/`zh` + zh-Hant `cant`/`cmn` (60 clips)
-- [ ] VO passes `AUDIO_QA.md` technical + jury gates (`bash tools/run_audio_smoke_checks.sh`)
+- [ ] Generate selective VO — P0 technical + jury → P1/P2; `en`/`ja`/`zh` + zh-Hant `cant`/`cmn` (60 clips)
+- [ ] BGM passes `L2_audio_technical` + `L2_audio_jury`; P0 VO passes `L2_vo_technical` + `L2_vo_jury` (`bash tools/run_audio_smoke_checks.sh`)
 - [ ] Cinematic hero assets — SC-00 opening, SC-12 gate reveal, SC-17 endings
 - [ ] `bash tools/check_asset_compliance.sh` passes on release branch
 
