@@ -139,7 +139,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 | Selective VO | ElevenLabs via `generate_ai_vo.sh` | 12 lines only — `docs/VO_HIT_LIST.md` |
 | SFX layers | Freesound **CC0-only** + procedural | Register each file |
 
-**No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (technical + optional hero jury) + L6 listen.
+**No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (BGM technical + hero jury A6/A7; P0 VO technical + jury V6/V7) + L6 listen.
 
 **On any art/audio/model QA FAIL:** `docs/QA_REMEDIATION_LOOP.md` — brief + one lever change before rebuild (max 3 attempts).
 
@@ -150,7 +150,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 Before marking M5 complete (`docs/MILESTONES.md`). **All gates must meet `docs/ACCEPTANCE_CRITERIA.md`** — WARN/SKIP is not ship PASS.
 
 - [ ] `bash tools/check_scene_visuals.sh` passes (no primitives in ship `.tscn`)
-- [ ] `L2_model_*` + `L2_visual_*` + `L2_audio_*` gates PASS with evidence (`artifacts/`)
+- [ ] `L2_model_*` + `L2_visual_*` + `L2_audio_*` + `L2_vo_*` gates PASS with evidence (`artifacts/`)
 - [ ] All zone albedos pass `palette_remap.py` + `check_screenshot_palette.py` per zone
 - [ ] Single toon ramp family (`RENDERING_GUIDE.md`)
 - [ ] Every external asset in `LICENSES.md` + `asset_manifest.license.json`

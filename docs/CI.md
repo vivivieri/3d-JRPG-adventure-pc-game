@@ -1,6 +1,6 @@
 # Continuous Integration — GitHub Actions
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Workflow:** `.github/workflows/ci.yml` (main) · `.github/workflows/game-ci.yml` (`game/development`)  
 **Runner scripts:** `bash tools/run_docs_ci_checks.sh` (main) · `bash tools/run_ci_checks.sh` (game)  
 **Authority:** `game/data/qa/acceptance_criteria.json` → `ci_gates` / `docs_ci_gates`  
@@ -40,6 +40,11 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L0_environments_catalog` | `python3 tools/validate_environments.py` | Env catalog valid |
 | `L0_sprint_phases` | `python3 tools/validate_sprint_phases.py` | Sprint config valid |
 | `L0_base_classes` | `python3 tools/validate_base_classes.py` | `base_classes.json` schema valid |
+| `L0_zone_composition` | `python3 tools/validate_zone_composition.py` | Zone composition contract valid |
+| `L0_qa_catalog` | `python3 tools/validate_qa_catalog.py` | 3D model QA catalog valid |
+| `L0_audio_qa_catalog` | `python3 tools/validate_audio_qa_catalog.py` | BGM/VO QA catalog + brief cross-refs |
+| `L0_scene_audio_map` | `python3 tools/validate_scene_audio_map.py` | Scene/zone audio map vs catalog |
+| `L0_generation_readiness_backlog` | `python3 tools/validate_generation_readiness_backlog.py` | GR-* traceability |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
 

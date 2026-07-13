@@ -43,6 +43,11 @@
 | `L0_environments_catalog` | Env catalog |
 | `L0_sprint_phases` | Sprint config |
 | `L0_base_classes` | Code base class registry schema |
+| `L0_zone_composition` | Zone composition contract |
+| `L0_qa_catalog` | 3D model QA catalog |
+| `L0_audio_qa_catalog` | BGM/VO QA catalog |
+| `L0_scene_audio_map` | Scene/zone audio map |
+| `L0_generation_readiness_backlog` | GR-* backlog traceability |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -81,7 +86,7 @@
 | **Flow** | `L4_integration`; L5 in `run_cd_gates.sh` for beta/prod | MCP Pro `--minimal` only |
 | **Debugger** | Godotiq read-only by policy | — |
 | **Release** | `run_cd_gates.sh`; CD workflows; tag patterns | Steam secrets + env reviewers |
-| **Visual** | L2 palette/model/audio scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
+| **Visual** | L2 palette/model/audio/vo scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
 | **Human** | L6 in ship checklist / CD prod (`min_testers: 5`, feel checklist §7b) | Playtest script + gate JSON |
 
 ---

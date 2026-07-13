@@ -134,7 +134,8 @@ bash tools/check_asset_compliance.sh
 | Acceptance thresholds | `docs/ACCEPTANCE_CRITERIA.md` | Fix metric; cite gate id in report |
 | 3D models | `docs/MODEL_QA.md` | `qa_emit_remediation.sh model-tech\|model-jury` |
 | Visuals | `docs/VISUAL_QA.md` | `qa_emit_remediation.sh visual-palette\|visual-jury` |
-| Audio | `docs/AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Audio (BGM) | `docs/AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Audio (P0 VO) | `docs/AUDIO_QA.md` §A4–A5 | `qa_emit_remediation.sh vo-tech\|vo-jury` |
 | Game flow | `docs/FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario INT-*` |
 | Iteration | `docs/QA_REMEDIATION_LOOP.md` | One lever per attempt; max 3 |
 

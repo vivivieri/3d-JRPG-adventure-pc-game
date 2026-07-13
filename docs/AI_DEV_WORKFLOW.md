@@ -307,10 +307,10 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 7.1 | No primitive/Kenney placeholder art in shipping scenes | `check_asset_compliance.sh` + human review |
 | 7.2 | Hero meshes: Urashima, Yuzu, Roku per `CHARACTER_BIBLE.md` | Screenshot gate |
 | 7.3 | Automated stylized zone textures per zone (`palette_remap.py`) | Art checklist |
-| 7.4 | Curated BGM per `AUDIO_PRODUCTION_GUIDE.md` | Audio QA §11 |
-| 7.5 | SFX + ambient beds per scene map | Audio QA technical |
-| 7.6 | Selective VO: 12 clips × locales + zh-Hant dialects generated; `generate_ai_vo.sh --list` = 60 files | File manifest + `run_audio_smoke_checks.sh` |
-| 7.7 | VO passes `AUDIO_QA.md` jury gates (P0 clips first) | Jury scripts |
+| 7.4 | Curated BGM per `audio_qa_catalog.json` + `AUDIO_PRODUCTION_GUIDE.md` | `L2_audio_technical` + `L2_audio_jury` |
+| 7.5 | SFX + ambient beds per `scene_audio_map.json` | `validate_scene_audio_map.py` + in-game verify |
+| 7.6 | Selective VO: 12 clips × locales + zh-Hant dialects; `generate_ai_vo.sh --list` = 60 files | File manifest + `run_audio_smoke_checks.sh` |
+| 7.7 | P0 VO: `L2_vo_technical` all locales + `L2_vo_jury` on `en` gate | `check_audio_vo.py` + `review_vo_vision.py` |
 | 7.8 | Cinematic hero assets (SC-00, SC-12, SC-17) per `CINEMATICS.md` §12 | GDAI F5 |
 | 7.9 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
 | 7.12 | All zone golden screenshots + `ZONE_COMPOSITION_STRICT=1` composition smoke (**GR-001**, **GR-003**) | `run_visual_smoke_checks.sh` + `run_zone_composition_checks.sh` |

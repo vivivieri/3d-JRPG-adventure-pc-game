@@ -264,7 +264,7 @@ bash tools/generate_ai_bgm.sh --category zone --fallback  # procedural if no GPU
 bash tools/generate_ai_bgm.sh --all-prompts               # docs/audio_sheets/*.md
 ```
 
-Prompt catalog: `game/data/audio/ace_step_prompts.json`
+Prompt catalog: `game/data/audio/ace_step_prompts.json` · QA targets: `game/data/audio/audio_qa_catalog.json` · Briefs: `docs/generation_briefs/audio/`
 
 **Ship rule:** Curated ACE-Step exports per prompt sheet — loudness normalize (-16 LUFS); no human mix pass (`docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ART_AUTOMATION_PIPELINE.md` §7).
 
@@ -279,7 +279,7 @@ bash tools/generate_ai_vo.sh --tier p0 --locale ja
 export ELEVENLABS_API_KEY=...   # Cursor Secrets
 ```
 
-Catalog: `game/data/audio/vo_prompts.json` · Dialogue: `voice_id` on 12 lines in `chapter_01.json`
+Catalog: `game/data/audio/vo_prompts.json` · QA: `game/data/audio/audio_qa_catalog.json` · Briefs: `docs/generation_briefs/vo/` · Dialogue: `voice_id` on 12 lines in `chapter_01.json`
 
 **Agent rules:** Do not add `voice_id` to new lines without updating `vo_prompts.json` + `VO_HIT_LIST.md`. P0 before P1/P2. Verify ElevenLabs commercial terms before ship.
 
@@ -381,7 +381,7 @@ python3 tools/validate_acceptance_criteria.py
 bash tools/run_playtest_smoke.sh              # L2 bundle
 bash tools/run_model_smoke_checks.sh          # when urashima.glb exists
 bash tools/run_visual_smoke_checks.sh         # when zone screenshot exists
-bash tools/run_audio_smoke_checks.sh          # when bgm_village.ogg exists
+bash tools/run_audio_smoke_checks.sh          # when bgm_village.ogg and/or P0 VO gate clip exist
 bash tools/run_integration_tests.sh           # L4 / INT-*
 bash tools/run_e2e_playthrough.sh             # L5 — not SKIP
 ```
@@ -391,7 +391,8 @@ bash tools/run_e2e_playthrough.sh             # L5 — not SKIP
 | Thresholds | `ACCEPTANCE_CRITERIA.md` | Cite gate id + measured value |
 | 3D | `MODEL_QA.md` | `qa_emit_remediation.sh model-*` |
 | Visual | `VISUAL_QA.md` | `qa_emit_remediation.sh visual-*` |
-| Audio | `AUDIO_QA.md` | `qa_emit_remediation.sh audio-*` |
+| Audio (BGM) | `AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
+| Audio (P0 VO) | `AUDIO_QA.md` §A4–A5 | `qa_emit_remediation.sh vo-tech\|vo-jury` |
 | Flow | `FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario` |
 | Iteration | `QA_REMEDIATION_LOOP.md` | `qa_remediation_brief.py` |
 

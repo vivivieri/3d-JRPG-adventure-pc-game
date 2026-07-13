@@ -65,6 +65,8 @@ python3 tools/validate_base_classes.py
 python3 tools/validate_acceptance_criteria.py
 python3 tools/validate_zone_composition.py
 python3 tools/validate_qa_catalog.py
+python3 tools/validate_audio_qa_catalog.py
+python3 tools/validate_scene_audio_map.py
 python3 tools/validate_generation_readiness_backlog.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
@@ -107,3 +109,4 @@ See `docs/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_versi
 - `docs/REPLAY_DESIGN.md` — replay & gallery
 - `docs/NARRATIVE_WRITING_GUIDE.md` — writing, selective VO, i18n prose
 - `docs/VO_HIT_LIST.md` — emotional VO clip list + ElevenLabs generation
+- `docs/AUDIO_QA.md` — BGM/P0 VO technical + listen jury gates

@@ -51,7 +51,7 @@
 | Code base classes (extend-only) | [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md) · `game/data/code/base_classes.json` |
 | Component scenes (GDAI) | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) §1b |
 | QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
-| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
+| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) + [AUDIO_QA.md](AUDIO_QA.md) |
 | Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |
 | Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [STEAM_RELEASE_CHECKLIST.md](STEAM_RELEASE_CHECKLIST.md) + [CD.md](CD.md) |
 
@@ -133,13 +133,13 @@
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
 | [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
-| [generation_briefs/](generation_briefs/README.md) | **17 gen briefs** — all `qa_catalog` heroes + 4 player zones |
+| [generation_briefs/](generation_briefs/README.md) | **30 gen briefs** — 3D heroes/zones + 8 hero BGM + 5 P0 VO |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
-| [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
-| [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
+| [AUDIO_QA.md](AUDIO_QA.md) | **BGM + P0 VO** — technical lint + scoped LLM listen jury |
+| [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness; scene map in `scene_audio_map.json` |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |
 | [LICENSES.md](LICENSES.md) | Attribution log |
@@ -222,6 +222,6 @@ python3 tools/validate_story_data.py
 | Database / save schema | `DATA_ARCHITECTURE.md` + `SAVE_AND_FAIL_STATES.md` |
 | Code style guide | **`CODE_STYLE.md`** |
 | Art bible / asset pipeline | `ART_AUTOMATION_PIPELINE.md` + `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
-| Generation readiness (AI 3D) | `GENERATION_READINESS.md` + [`generation_briefs/`](generation_briefs/README.md) |
+| Generation readiness (AI 3D + audio) | `GENERATION_READINESS.md` + [`generation_briefs/`](generation_briefs/README.md) + `game/data/audio/audio_qa_catalog.json` |
 | Asset registry | `LICENSES.md` + `asset_manifest.license.json` |
 | Production timeline | `IMPLEMENTATION_PLAN.md` + `MILESTONES.md` |

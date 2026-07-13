@@ -44,7 +44,7 @@
 | UI art | **GameLab MCP** *(P1)* | UI PNG/WebP → `game/assets/textures/ui/` | Place nodes / `.tscn` |
 | Zone albedo | **ComfyUI / Material Maker** | Tileables → `palette_remap.py` | Assign in editor (→ GDAI) |
 | Hero 3D | **Meshy/Tripo/Rodin + Blender** | GLB import | Scene placement (→ GDAI) |
-| Audio | **ACE-Step / generate_game_audio.py** | BGM/SFX prototypes | — |
+| Audio | **ACE-Step / ElevenLabs** + `audio_qa_catalog.json` | BGM hero jury + P0 VO jury (`docs/AUDIO_QA.md`) | — |
 | Design data | **`docs/` + `game/data/`** | Story, flags, skills, gates | — |
 
 ---
@@ -60,7 +60,7 @@
 | **Integration** | Flow Agent | L4/L5 integration/E2E | Build scenes | `L4_integration`; L5 in CD beta/prod |
 | **Debugger** | Analyze Agent | Godotiq diagnosis | Scene mutations | Policy only (read-only tools) |
 | **Release** | Release Agent | Tags, `run_cd_gates.sh`, export | Features | `run_cd_gates.sh`; CD workflows |
-| **Visual** | Visual Agent | L2 jury evidence (palette/model/audio) | Bypass jury | L2 jury scripts + thresholds |
+| **Visual** | Visual Agent | L2 jury evidence (palette/model/audio/vo) | Bypass jury | L2 jury scripts + thresholds |
 | **Human QA** | Human | L6 UAT sign-off | Before L0–L5 pass | `STEAM_RELEASE_CHECKLIST`; CD prod |
 
 **Sprint Master:** none — **PM Agent** facilitates; **QA Agent** owns sprint review evidence.

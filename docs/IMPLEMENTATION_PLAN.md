@@ -176,7 +176,7 @@ Replace greybox with automated authored assets per `docs/ART_DIRECTION.md` + `do
 | 7.6 | SFX + ambient beds per `scene_audio_map.json` | AUDIO_PRODUCTION_GUIDE.md, **GR-006** |
 | 7.7 | **ElevenLabs voice casting** — replace `PLACEHOLDER_*` in `vo_prompts.json` (incl. `dialect_voices` for zh-Hant) | VO_HIT_LIST.md, **GR-005** |
 | 7.8 | **Generate selective VO** — P0 listen pass → P1/P2; `en`/`ja`/`zh` + `zh-Hant` `cant`/`cmn` (`bash tools/generate_ai_vo.sh`) | VO_HIT_LIST.md, LOCALIZATION.md, **GR-005** |
-| 7.9 | Audio QA — `bash tools/run_audio_smoke_checks.sh` + `AUDIO_QA.md` jury gates (A6/A7 emotional intent) | AUDIO_QA.md, **GR-004** |
+| 7.9 | Audio QA — `bash tools/run_audio_smoke_checks.sh` + `AUDIO_QA.md` (BGM A6/A7 + P0 VO V6/V7) | AUDIO_QA.md, **GR-004**, **GR-005** |
 | 7.10 | Cinematic hero assets — SC-00 opening, SC-12 gate reveal, SC-17 endings | CINEMATICS.md §12 |
 | 7.11 | `bash tools/check_asset_compliance.sh` passes on release branch | ASSET_COMPLIANCE.md |
 | 7.12 | **M5 visual evidence:** all zone golden screenshots per `zone_composition.json` + `ZONE_COMPOSITION_STRICT=1 bash tools/run_zone_composition_checks.sh` | GENERATION_READINESS §8, **GR-001**, **GR-003** |
@@ -256,7 +256,7 @@ This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DE
 | `palace_sentinel` bible boss-standard row (`GR-002`) | Phase 6.3b (before Phase 7.1 enemy meshes) |
 | Zone composition strict smoke (`GR-003`) | Phase 1.11 warn → Phase 7.12 strict at M5 ship |
 | Audio QA catalog + hero BGM briefs (`GR-004`) | Phase 7.5, 7.9 — `audio_qa_catalog.json`, `docs/generation_briefs/audio/` |
-| P0 VO generation briefs (`GR-005`) | Phase 7.7–7.8 — `docs/generation_briefs/vo/` |
+| P0 VO generation briefs + jury (`GR-005`) | Phase 7.7–7.9 — `docs/generation_briefs/vo/`, `L2_vo_technical`, `L2_vo_jury` |
 | Scene audio map (`GR-006`) | Phase 7.5–7.6 — `scene_audio_map.json` |
 
 **Traceability:** `game/data/qa/generation_readiness_backlog.json` — machine-readable **GR-*** items linked to plan tasks and gate IDs.

@@ -27,7 +27,7 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 | **Gameplay systems** | Combat, save, quests, endings | Per-doc QA checklists (see §7) + phase acceptance criteria |
 | **Playthrough** | Full 2–3 h path, soft-locks | `PLAYTEST_SCRIPT.md` (human, **after L5**) |
 | **Localization** | en / ja / zh keys present | `game/locale/translations.csv` (Phase 2+) |
-| **Audio** | Scene BGM map, loops, boss phases | `AUDIO_PRODUCTION_GUIDE.md` §11 |
+| **Audio** | Scene BGM map, loops, boss phases, P0 VO gates | `scene_audio_map.json`, `AUDIO_PRODUCTION_GUIDE.md` §11, `AUDIO_QA.md` |
 | **3D / art** | No primitives, hero meshes | `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `docs/MODEL_QA.md` |
 
 ---
@@ -188,7 +188,7 @@ A bug is **closed** only when:
 | Combat | Win and lose fight; check intent UI; boss phases |
 | Save | Manual + autosave; load mid-act; game over reload |
 | Ending | Reach SC-16; each choice once per full playtest cycle |
-| Audio | Scene from `AUDIO_PRODUCTION_GUIDE.md` §4 map |
+| Audio | Scene from `scene_audio_map.json` (mirror: `AUDIO_PRODUCTION_GUIDE.md` §4) |
 | L10n | Switch language; revisit same scene |
 
 ---

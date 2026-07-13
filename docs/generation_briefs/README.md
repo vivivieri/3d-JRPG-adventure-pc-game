@@ -40,7 +40,7 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 | Index | Scope |
 |-------|-------|
 | [audio/README.md](audio/README.md) | Hero BGM tracks (8) — ACE-Step + A6/A7 jury |
-| [vo/README.md](vo/README.md) | P0 selective VO clips (5) — ElevenLabs + human listen |
+| [vo/README.md](vo/README.md) | P0 selective VO clips (5) — ElevenLabs + V1–V7 jury (`en` gate) |
 
 ## Crowd & ending NPCs (bible only — no generation brief)
 
@@ -55,4 +55,4 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 |----|--------|
 | `ending_*` environment kits | Defer to Phase 7 per `ENVIRONMENT_KITS.md` §7 |
 
-**Pipeline:** READ brief (incl. Emotional intent) → GEN → `palette_remap.py` → register → GDAI place → measure → jury (M7/M8, V7/V8) → L6.
+**Pipeline:** READ brief (incl. Emotional intent) → GEN → `palette_remap.py` (3D) / loudness normalize (audio) → register → GDAI place → measure → jury (M7/M8, A6/A7, V6/V7) → L6.
