@@ -35,6 +35,13 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 | [tidal_caves.md](tidal_caves.md) | Dungeon + first boss | 5 |
 | [dragon_palace_gate.md](dragon_palace_gate.md) | Finale palace | 6 |
 
+## Audio (BGM + P0 VO)
+
+| Index | Scope |
+|-------|-------|
+| [audio/README.md](audio/README.md) | Hero BGM tracks (8) — ACE-Step + A6/A7 jury |
+| [vo/README.md](vo/README.md) | P0 selective VO clips (5) — ElevenLabs + human listen |
+
 ## Crowd & ending NPCs (bible only — no generation brief)
 
 | ID | Spec | Phase |

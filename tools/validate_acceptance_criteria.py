@@ -32,7 +32,7 @@ def main() -> int:
     if not gates:
         errors.append("gates must be non-empty")
 
-    for domain in ("visual", "model", "audio"):
+    for domain in ("visual", "model", "audio", "vo"):
         jury = data.get("jury", {}).get(domain)
         if not jury:
             errors.append(f"jury.{domain} missing")
@@ -54,6 +54,8 @@ def main() -> int:
                 "L0_sprint_phases",
                 "L0_zone_composition",
                 "L0_qa_catalog",
+                "L0_audio_qa_catalog",
+                "L0_scene_audio_map",
             ):
                 errors.append(f"ci_gates references unknown gate: {gid}")
 

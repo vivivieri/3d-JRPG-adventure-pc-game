@@ -89,6 +89,24 @@
       "evidence": ["game/data/qa/generation_readiness_backlog.json"],
       "design_ref": "docs/GENERATION_READINESS.md §8, docs/IMPLEMENTATION_PLAN.md"
     },
+    "L0_audio_qa_catalog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_audio_qa_catalog.py",
+      "description": "Audio QA catalog — tracks, VO clips, hero jury briefs, ACE-Step cross-ref",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/audio_qa_catalog.json"],
+      "design_ref": "docs/AUDIO_QA.md, docs/AUDIO_PRODUCTION_GUIDE.md"
+    },
+    "L0_scene_audio_map": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_scene_audio_map.py",
+      "description": "Scene/zone → BGM/ambient/sting map vs audio catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/scene_audio_map.json"],
+      "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -223,6 +241,20 @@
       "evidence": ["game/assets/audio/**/*.ogg"],
       "design_ref": "docs/AUDIO_QA.md §A2"
     },
+    "L2_vo_technical": {
+      "layer": "L2",
+      "domain": "audio",
+      "command": "python3 tools/check_audio_vo.py",
+      "description": "P0 VO duration, loudness, locale paths vs dialogue script",
+      "metrics": {
+        "max_duration_sec": { "op": "<=", "from": "audio_qa_catalog.vo_clips.*.max_duration_sec" },
+        "voice_lufs": { "op": "within", "target": -18.0, "tolerance": 4.0 },
+        "voice_true_peak_dbtp": { "op": "<=", "value": -3.0 }
+      },
+      "ship_extra": { "all_p0_locales_required": true },
+      "evidence": ["game/assets/audio/voice/**/*.ogg"],
+      "design_ref": "docs/AUDIO_QA.md §A4"
+    },
     "L2_audio_catalog": {
       "layer": "L2",
       "domain": "audio",
@@ -332,10 +364,32 @@
         "a2_melancholy_coastal": { "expect": true, "label": "Melancholy coastal mood" },
         "a3_not_upbeat_pop": { "expect": true, "label": "Not upbeat pop/EDM" },
         "a4_instrumental_no_vocals": { "expect": true, "label": "Instrumental no vocals" },
-        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" }
+        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" },
+        "a6_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "a7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer/EDM)" }
       },
       "evidence": ["artifacts/audio_reviews/*.jury.json"],
       "design_ref": "docs/AUDIO_QA.md §A3"
+    },
+    "vo": {
+      "gate_id": "L2_vo_jury",
+      "min_pass_models": 2,
+      "min_active_models": 2,
+      "min_confidence": 0.65,
+      "require_issues_on_fail": true,
+      "p0_clips_only": true,
+      "gate_locale": "en",
+      "criteria": {
+        "v1_not_robotic_placeholder": { "expect": true, "label": "Not robotic TTS placeholder" },
+        "v2_script_semantics_match": { "expect": true, "label": "Script semantics match dialogue" },
+        "v3_matches_direction": { "expect": true, "label": "Matches vo_prompts direction" },
+        "v4_not_anime_exaggeration": { "expect": true, "label": "Not anime exaggeration" },
+        "v5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" },
+        "v6_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "v7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone from brief" }
+      },
+      "evidence": ["artifacts/vo_reviews/*.jury.json"],
+      "design_ref": "docs/AUDIO_QA.md §A5"
     }
   },
   "docs_ci_gates": {
@@ -350,6 +404,8 @@
       "L0_base_classes",
       "L0_zone_composition",
       "L0_qa_catalog",
+      "L0_audio_qa_catalog",
+      "L0_scene_audio_map",
       "L0_generation_readiness_backlog",
       "L0_rr_compliance",
       "M5_asset_compliance"
@@ -389,6 +445,7 @@
       "L2_visual_jury",
       "L2_model_jury",
       "L2_audio_jury",
+      "L2_vo_jury",
       "L5_e2e_three_endings",
       "L6_human_playtest"
     ],
@@ -423,7 +480,9 @@
         "L2_model_technical",
         "L2_model_jury",
         "L2_audio_technical",
-        "L2_audio_jury"
+        "L2_audio_jury",
+        "L2_vo_technical",
+        "L2_vo_jury"
       ],
       "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS. GR-001 golden screenshots enable L2_visual_*; GR-003 warn mode until M5 strict",
       "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 1"
@@ -452,6 +511,8 @@
         "L2_zone_composition",
         "L2_audio_technical",
         "L2_audio_jury",
+        "L2_vo_technical",
+        "L2_vo_jury",
         "L4_integration",
         "L5_e2e_three_endings",
         "L6_human_playtest",
@@ -460,6 +521,7 @@
       "ship_flags": {
         "check_model_technical_ship": true,
         "check_audio_technical_ship": true,
+        "check_vo_technical_ship": true,
         "zone_composition_strict": true,
         "visual_smoke_strict": true
       },

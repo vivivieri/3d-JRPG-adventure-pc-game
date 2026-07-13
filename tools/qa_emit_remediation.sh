@@ -5,6 +5,8 @@
 #   bash tools/qa_emit_remediation.sh model-jury <jury.json> [asset_id]
 #   bash tools/qa_emit_remediation.sh audio-tech <track_id>
 #   bash tools/qa_emit_remediation.sh audio-jury <jury.json> [track_id]
+#   bash tools/qa_emit_remediation.sh vo-tech <clip_id>
+#   bash tools/qa_emit_remediation.sh vo-jury <jury.json> [clip_id]
 #   bash tools/qa_emit_remediation.sh visual-palette <zone> [asset_id]
 #   bash tools/qa_emit_remediation.sh visual-jury <jury.json> [asset_id]
 #   bash tools/qa_emit_remediation.sh data-story
@@ -59,6 +61,23 @@ case "$kind" in
     header
     if [[ -n "$track" ]]; then
       python3 "$BRIEF" --jury "$jury" --asset-id "$track" || true
+    else
+      python3 "$BRIEF" --jury "$jury" || true
+    fi
+    footer
+    ;;
+  vo-tech)
+    clip="${1:?clip id}"
+    header
+    python3 "$BRIEF" --technical-vo "$clip" || true
+    footer
+    ;;
+  vo-jury)
+    jury="${1:?jury json path}"
+    clip="${2:-}"
+    header
+    if [[ -n "$clip" ]]; then
+      python3 "$BRIEF" --jury "$jury" --asset-id "$clip" || true
     else
       python3 "$BRIEF" --jury "$jury" || true
     fi
