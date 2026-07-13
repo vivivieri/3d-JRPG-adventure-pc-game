@@ -57,3 +57,6 @@ artifacts/factory_health_report.json
 artifacts/factory_cycle_log.jsonl
 artifacts/pm_dispatch_packet.json
 artifacts/linear_sync_manifest.json
+artifacts/stakeholder_dashboard.html
+artifacts/stakeholder_reports/*
+!artifacts/stakeholder_reports/.gitkeep

@@ -47,6 +47,7 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L0_generation_readiness_backlog` | `python3 tools/validate_generation_readiness_backlog.py` | GR-* traceability |
 | `L0_sprint_board` | `python3 tools/validate_sprint_board.py --strict` | Sprint board + issue pack alignment |
 | `L0_factory_watchdog` | `python3 tools/validate_factory_watchdog.py` | Factory stall/hang watchdog config |
+| `L0_stakeholder_report` | `python3 tools/validate_stakeholder_report_config.py` | Product owner report + Telegram config |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
 

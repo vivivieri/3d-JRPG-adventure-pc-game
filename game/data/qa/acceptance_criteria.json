@@ -35,7 +35,8 @@
     "Ignoring factory_halt flag and starting workers anyway",
     "Marking issue done without pm_check_done_criteria PASS",
     "Architect and Builder work in same agent session (strict role violation)",
-    "Skipping evidence bundle before issue done"
+    "Skipping evidence bundle before issue done",
+    "Cycle complete without stakeholder report (pm_emit_stakeholder_report)"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -118,6 +119,15 @@
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/factory_watchdog.json"],
       "design_ref": "docs/FACTORY_WATCHDOG.md"
+    },
+    "L0_stakeholder_report": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_stakeholder_report_config.py",
+      "description": "Stakeholder report + Telegram config for product owner cycle updates",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/stakeholder_report_config.json"],
+      "design_ref": "docs/PM_STAKEHOLDER_REPORTING.md"
     },
     "L0_audio_qa_catalog": {
       "layer": "L0",
@@ -439,6 +449,7 @@
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
       "L0_factory_watchdog",
+      "L0_stakeholder_report",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],

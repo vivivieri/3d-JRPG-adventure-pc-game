@@ -175,6 +175,7 @@ See `docs/FACTORY_WATCHDOG.md`.
 | **End cycle → trigger PM** | `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>` |
 | Factory health | `bash tools/run_factory_watchdog.sh` |
 | Stall recovery | `bash tools/run_factory_watchdog.sh --recover` |
+| **Stakeholder report** | Auto on `pm_emit_cycle_event.sh`; manual: `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |
 | Emergency stop | `bash tools/run_factory_watchdog.sh --halt "reason"` |
 | Close sprint | `python3 tools/pm_close_sprint.py --next-sprint-number N` |
 | Validate board | `python3 tools/validate_sprint_board.py --strict` |

@@ -96,6 +96,8 @@ See `docs/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 | `GAMELAB_API_KEY` | UI art MCP |
 | `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Event-driven PM** (copy from Automation webhook) |
 | `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Factory halt / recovery exhausted** (Automation D) |
+| `TELEGRAM_BOT_TOKEN` | **Stakeholder status** — bot token from @BotFather |
+| `TELEGRAM_CHAT_ID` | **Product owner** Telegram chat id |
 | `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ jury |
 | `ELEVENLABS_API_KEY` | Phase 7 VO |
 | `GH_TOKEN` | Optional: `repository_dispatch`, branch protection |

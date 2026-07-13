@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "authority": "docs/PM_STAKEHOLDER_REPORTING.md",
+  "product_owner": {
+    "role": "stakeholder",
+    "title": "Product Owner",
+    "note": "Receives automated cycle/phase status via Telegram"
+  },
+  "telegram": {
+    "enabled": true,
+    "secret_bot_token": "TELEGRAM_BOT_TOKEN",
+    "secret_chat_id": "TELEGRAM_CHAT_ID",
+    "parse_mode": "HTML",
+    "disable_web_page_preview": true,
+    "max_message_chars": 4000
+  },
+  "triggers": {
+    "agent_cycle_complete": { "send_telegram": true, "report_kind": "micro_cycle" },
+    "agent_cycle_failed": { "send_telegram": true, "report_kind": "micro_cycle_failure" },
+    "sprint_cycle_complete": { "send_telegram": true, "report_kind": "sprint_cycle" },
+    "phase_exit": { "send_telegram": true, "report_kind": "phase_exit" },
+    "uat_ready": { "send_telegram": true, "report_kind": "uat_ready" },
+    "watchdog_recovery": { "send_telegram": true, "report_kind": "factory_alert" },
+    "mcp_blocked": { "send_telegram": true, "report_kind": "factory_alert" },
+    "pm_session": { "send_telegram": false, "report_kind": "pm_dispatch", "note": "Written to artifacts only unless --telegram" }
+  },
+  "outputs": {
+    "json_dir": "artifacts/stakeholder_reports",
+    "latest_json": "artifacts/stakeholder_reports/latest.json",
+    "latest_markdown": "artifacts/stakeholder_reports/latest.md",
+    "latest_html": "artifacts/stakeholder_dashboard.html",
+    "history_keep": 50
+  },
+  "repo_links": {
+    "github": "https://github.com/vivivieri/3d-JRPG-adventure-pc-game",
+    "actions": "https://github.com/vivivieri/3d-JRPG-adventure-pc-game/actions"
+  }
+}

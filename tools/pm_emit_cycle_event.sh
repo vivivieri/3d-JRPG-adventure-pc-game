@@ -118,6 +118,33 @@ if [[ "$EVENT" == "mcp_blocked" || "$EVENT" == "factory_halt" ]]; then
   fi
 fi
 
+# Stakeholder status report → product owner (Telegram when TELEGRAM_* secrets set)
+echo "==> Stakeholder report for product owner"
+bash tools/pm_emit_stakeholder_report.sh \
+  --trigger "$EVENT" \
+  ${ISSUE_ID:+--issue "$ISSUE_ID"} \
+  ${AGENT_ROLE:+--agent "$AGENT_ROLE"} \
+  ${COMMIT_SHA:+--commit "$COMMIT_SHA"} \
+  ${NOTES:+--note "$NOTES"} \
+  || echo "[WARN] Stakeholder report failed (non-blocking)"
+
+# If last issue closed the sprint, also send sprint-cycle summary
+if [[ "$EVENT" == "agent_cycle_complete" ]]; then
+  SPRINT_DONE="$(python3 -c "
+import json
+b=json.load(open('game/data/qa/sprint_board.json'))
+issues=b.get('issues',[])
+done=sum(1 for i in issues if i.get('status')=='done')
+print('yes' if issues and done==len(issues) else 'no')
+" 2>/dev/null || echo no)"
+  if [[ "$SPRINT_DONE" == "yes" ]]; then
+    bash tools/pm_emit_stakeholder_report.sh --trigger sprint_cycle_complete \
+      ${ISSUE_ID:+--issue "$ISSUE_ID"} \
+      ${COMMIT_SHA:+--commit "$COMMIT_SHA"} \
+      || true
+  fi
+fi
+
 # agent_cycle_failed → PM webhook (remediation, not next issue)
 if [[ "$EVENT" == "agent_cycle_failed" ]]; then
   echo "cycle_pending=${EVENT} commit=${COMMIT_SHA}" > "${ARTIFACT_DIR}/.cycle_pending"
