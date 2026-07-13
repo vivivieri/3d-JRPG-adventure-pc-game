@@ -63,4 +63,4 @@ medieval knight, European castle guard, full face helmet, chibi, PBR chrome armo
 
 - [ ] Silhouette at 12 m gameplay cam
 - [ ] `L2_model_jury` PASS
-- [ ] Expand bible row parity with Shore Wraith (tracked P2 in GENERATION_READINESS)
+- [ ] `CHARACTER_BIBLE.md` §6 boss-standard row (GR-002 ✅)

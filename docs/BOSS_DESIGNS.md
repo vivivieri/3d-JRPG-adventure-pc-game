@@ -121,6 +121,8 @@
 - Tall (~2.5m); spear + tower shield
 - No European plate mail — lacquer plates only
 
+**3D production:** Full mesh breakdown, poly budgets, GLB paths, arena scale — `docs/CHARACTER_BIBLE.md` §6 (`palace_sentinel`).
+
 ### Stats (Normal) — from `enemies.json`
 
 | Stat | Value |

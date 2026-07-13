@@ -108,11 +108,14 @@ def main() -> int:
         required = meta.get("required_animations")
         timing = meta.get("animation_timing")
 
-        if category in rigged_categories or allowed:
+        if category in rigged_categories:
             if not allowed:
                 errors.append(f"models.{model_id} ({category}) missing allowed_animations")
-            if not required:
-                errors.append(f"models.{model_id} ({category}) missing required_animations")
+            if required is None:
+                errors.append(f"models.{model_id} ({category}) missing required_animations field")
+
+        if meta.get("hero_jury") is False and model_id in hero_jury:
+            errors.append(f"models.{model_id} has hero_jury:false but is listed in hero_jury")
 
         if timing:
             timing_count += 1

@@ -15,7 +15,7 @@ game/data/
   audio/
     vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
   models/
-    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md)
+    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md); v1.3+ adds crowd/npc_cinematic rows
   qa/
     remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
     acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)

@@ -110,7 +110,7 @@ Legend: ✅ / ⚠️ / ❌ as above.
 | **salt_crab** | Enemy anim contract, **generation brief** | Pier arena dressing | Tutorial intent UI timing verify | M5 |
 | **tide_wraith** | Standard enemy kit, **generation brief** | Particle drip polish | Z-fight smoke in caves | M5 |
 | **shore_wraith** | Boss anims, BOSS_DESIGNS kit, **generation brief** | Phase transition VFX | Boss arena golden shot | M5 |
-| **palace_sentinel** | Stats/skills, **generation brief** | Full bible row depth | 12 m hall scale golden shot | M5 |
+| **palace_sentinel** | Stats/skills, **generation brief**, **boss-standard bible row** | Hall intro VFX polish | 12 m hall scale golden shot | M5 |
 | **tide_keeper_p1** | Phase materials, anim list, **generation brief** | P2/P3 GLB ship | Numerals unreadable jury check | M5 |
 | **palace_gate_main** | Set-piece in hero_jury, **generation brief** | Pearl socket tune | SC-12 vertigo golden shot | M5 |
 | **lacquer_box** | Item guide, glow states, **generation brief** | Ground prop SC-01 | 3-state emission screenshot | M5 |
@@ -119,8 +119,15 @@ Legend: ✅ / ⚠️ / ❌ as above.
 
 | ID | Action |
 |----|--------|
-| `otohime` (bust) | Add catalog row + bible § when palace dialogue ships |
-| `villager_spirit`, `rebuilder` | Silhouette-only — document as **low-poly crowd**, not hero jury scope |
+| — | *(none — `otohime`, `villager_spirit`, `rebuilder` added v1.3)* |
+
+### Crowd / cinematic NPCs (`qa_catalog.json` v1.3 — excluded from `hero_jury`)
+
+| ID | Spec location | Ship scope |
+|----|---------------|------------|
+| `otohime` | `CHARACTER_BIBLE.md` §5 + `generation_briefs/otohime.md` | Bust + portrait; SC-11, SC-17c |
+| `villager_spirit` | `CHARACTER_BIBLE.md` §7 | 2 variants × 8–12 instances; SC-17a |
+| `rebuilder` | `CHARACTER_BIBLE.md` §7 | 3 tool poses; SC-17b |
 
 ---
 
@@ -183,7 +190,7 @@ For each new hero mesh or zone slice:
 | P0 | Golden screenshot path enforced (`VISUAL_SMOKE_STRICT=1` on M5) | QA | Pending capture |
 | P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | ✅ Done |
 | P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | ✅ Done |
-| P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual | Pending |
+| P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual | ✅ Done (GR-002) |
 | P2 | `L2_zone_composition` smoke script | QA | ✅ Script; strict at M5 via **GR-003** / Phase 7.12 |
 
 **Implementation traceability:** `game/data/qa/generation_readiness_backlog.json` — **GR-001** … **GR-003** map to `IMPLEMENTATION_PLAN.md` tasks and phase gates (validated L0 on `main`).

@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "phase_required": {
     "1": ["urashima", "village_torii_damaged", "village_well_stone", "village_shack_roku"],
     "m5": [
@@ -143,7 +143,7 @@
         "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 500, "root_motion": false },
         "death": { "loop": false, "duration_ms_min": 1500, "duration_ms_max": 2500, "root_motion": false }
       },
-      "bible": "BOSS_DESIGNS.md Sentinel"
+      "bible": "CHARACTER_BIBLE.md § Palace Sentinel"
     },
     "tide_keeper_p1": {
       "path": "game/assets/models/enemies/tide_keeper/tide_keeper_p1.glb",
@@ -204,6 +204,49 @@
       "tris_max": 4000,
       "texture_min": 1,
       "bible": "ITEMS_3D_MODEL_GUIDE.md lacquer_box"
+    },
+    "otohime": {
+      "path": "game/assets/models/npcs/otohime/otohime_bust.glb",
+      "category": "npc_cinematic",
+      "tris_min": 3000,
+      "tris_max": 6000,
+      "texture_min": 1,
+      "hero_jury": false,
+      "allowed_animations": ["idle_still"],
+      "required_animations": [],
+      "animation_timing": {
+        "idle_still": { "loop": true, "duration_ms_min": 3500, "duration_ms_max": 4500, "root_motion": false }
+      },
+      "bible": "CHARACTER_BIBLE.md §5 Otohime",
+      "generation_brief": "docs/generation_briefs/otohime.md"
+    },
+    "villager_spirit": {
+      "path": "game/assets/models/npcs/crowd/villager_spirit.glb",
+      "category": "crowd",
+      "tris_min": 400,
+      "tris_max": 800,
+      "texture_min": 1,
+      "hero_jury": false,
+      "variants": ["lantern_bearer", "festival_goer"],
+      "max_instances": 12,
+      "allowed_animations": ["idle_sway"],
+      "required_animations": [],
+      "bible": "CHARACTER_BIBLE.md §7 villager_spirit",
+      "usage": "SC-17a ending_rewind festival crowd"
+    },
+    "rebuilder": {
+      "path": "game/assets/models/npcs/crowd/rebuilder.glb",
+      "category": "crowd",
+      "tris_min": 600,
+      "tris_max": 1000,
+      "texture_min": 1,
+      "hero_jury": false,
+      "variants": ["hoe", "rope_pull", "timber_carry"],
+      "max_instances": 3,
+      "allowed_animations": ["work_loop"],
+      "required_animations": [],
+      "bible": "CHARACTER_BIBLE.md §7 rebuilder",
+      "usage": "SC-17b ending_anchor shore rebuild"
     }
   }
 }

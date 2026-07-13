@@ -14,6 +14,7 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 | [shore_wraith.md](shore_wraith.md) | First boss | M5 / SC-09 |
 | [palace_sentinel.md](palace_sentinel.md) | Miniboss | M5 / SC-14 |
 | [tide_keeper_p1.md](tide_keeper_p1.md) | Final boss (P1–P3) | M5 / SC-15–16 |
+| [otohime.md](otohime.md) | Cinematic bust (flashback / glimpse) | M5 / SC-11, SC-17c |
 
 ## Props & set-pieces
 
@@ -34,12 +35,17 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 | [tidal_caves.md](tidal_caves.md) | Dungeon + first boss | 5 |
 | [dragon_palace_gate.md](dragon_palace_gate.md) | Finale palace | 6 |
 
-## Not yet briefed
+## Crowd & ending NPCs (bible only — no generation brief)
+
+| ID | Spec | Phase |
+|----|------|-------|
+| `villager_spirit` | `CHARACTER_BIBLE.md` §7 — 2 variants, SC-17a festival | M5 |
+| `rebuilder` | `CHARACTER_BIBLE.md` §7 — 3 tool poses, SC-17b shore | M5 |
+
+## Deferred briefs
 
 | ID | Action |
 |----|--------|
-| `otohime` | Bust only — add when palace dialogue ships |
-| `villager_spirit`, `rebuilder` | Low-poly crowd silhouettes — ending zones only |
-| `ending_*` environments | Defer to Phase 7 per `ENVIRONMENT_KITS.md` §7 |
+| `ending_*` environment kits | Defer to Phase 7 per `ENVIRONMENT_KITS.md` §7 |
 
 **Pipeline:** READ brief (incl. Emotional intent) → GEN → `palette_remap.py` → register → GDAI place → measure → jury (M7/M8, V7/V8) → L6.
