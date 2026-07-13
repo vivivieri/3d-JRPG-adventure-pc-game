@@ -242,6 +242,74 @@
       "escalate": "Scene-specific stem mix per AUDIO_PRODUCTION_GUIDE.md"
     }
   },
+  "vo": {
+    "v1_not_robotic_placeholder": {
+      "lever": "tool_tier",
+      "root_cause": "Robotic TTS or placeholder voice export",
+      "do_not_repeat": "Re-export same ElevenLabs settings without voice casting change",
+      "actions": [
+        "Replace PLACEHOLDER_* in vo_prompts.json with cast ElevenLabs voice IDs",
+        "Tune stability/similarity per CHARACTER_BIBLE casting row",
+        "bash tools/generate_ai_vo.sh --clip <id> --locale en"
+      ],
+      "escalate": "Human recast + manual ElevenLabs take"
+    },
+    "v2_script_semantics_match": {
+      "lever": "prompt",
+      "root_cause": "Line meaning diverges from chapter_01.json script",
+      "do_not_repeat": "Trimming audio without fixing text source",
+      "actions": [
+        "Verify dialogue line in game/data/dialogue/chapter_01.json",
+        "Regenerate with exact locale text from dialogue JSON",
+        "Re-run check_audio_vo.py --clip <id> --locale en"
+      ],
+      "escalate": "Human VO session with script supervisor"
+    },
+    "v3_matches_direction": {
+      "lever": "prompt",
+      "root_cause": "Performance does not match vo_prompts direction",
+      "do_not_repeat": "Only changing stability without direction keywords",
+      "actions": [
+        "Edit direction in vo_prompts.json — one variable (pace OR breath OR weight)",
+        "Read docs/generation_briefs/vo/<clip>.md emotional intent",
+        "A/B two ElevenLabs exports; jury en gate locale"
+      ],
+      "escalate": "Human direction pass in ElevenLabs"
+    },
+    "v4_not_anime_exaggeration": {
+      "lever": "prompt",
+      "root_cause": "Anime squeal, comic old man, or villain cackle",
+      "do_not_repeat": "Lowering style slider only",
+      "actions": [
+        "Reduce style in voice_settings; increase stability",
+        "Add casting constraint: restrained, not bright anime heroine",
+        "Compare against VO_HIT_LIST.md forbidden tones"
+      ],
+      "escalate": "Recast voice in ElevenLabs"
+    },
+    "v6_emotional_mood_matches": {
+      "lever": "prompt",
+      "root_cause": "Emotional register off vs generation brief",
+      "do_not_repeat": "Same export with 'more emotional' note only",
+      "actions": [
+        "Edit one field in docs/generation_briefs/vo/<clip>.md Must avoid row",
+        "Align direction with Primary mood in brief",
+        "review_vo_vision.py --clip <id> --locale en"
+      ],
+      "escalate": "Human L6 listen in target scene"
+    },
+    "v7_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Forbidden tone from brief (fanservice, comedy cheer, horror)",
+      "do_not_repeat": "EQ-only fix",
+      "actions": [
+        "Expand Must avoid in generation brief",
+        "Regenerate with restrained casting from vo_prompts.json",
+        "Jury both old and new export"
+      ],
+      "escalate": "Human recast"
+    }
+  },
   "technical": {
     "tris_below_min": {
       "lever": "mesh_ops",
@@ -323,6 +391,17 @@
         "Update LICENSES.md + register_asset.py"
       ],
       "escalate": "Curated manual ACE-Step session"
+    },
+    "vo_duration_exceeded": {
+      "lever": "mastering",
+      "root_cause": "VO clip longer than max_duration_sec — subtitle/duck timing break",
+      "do_not_repeat": "Hard truncate without re-performance",
+      "actions": [
+        "Tighten delivery in ElevenLabs or trim silence in ffmpeg",
+        "Verify max_duration_sec in audio_qa_catalog.json",
+        "python3 tools/check_audio_vo.py --clip <id> --locale en"
+      ],
+      "escalate": "Rewrite line shorter in dialogue JSON (PM approval)"
     },
     "palette_drift": {
       "lever": "texture",

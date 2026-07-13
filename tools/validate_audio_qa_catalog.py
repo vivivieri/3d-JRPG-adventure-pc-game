@@ -60,6 +60,10 @@ def main() -> int:
         prefix = f"vo_clips.{cid}"
         if meta.get("tier") == "p0" and not meta.get("generation_brief"):
             errors.append(f"{prefix} p0 clip requires generation_brief")
+        if cid in p0 and not meta.get("hero_listen_review"):
+            errors.append(f"{prefix} p0 clip requires hero_listen_review: true")
+        if meta.get("hero_listen_review") and not meta.get("generation_brief"):
+            errors.append(f"{prefix} hero_listen_review requires generation_brief")
         brief = meta.get("generation_brief")
         if brief and not (ROOT / brief).is_file():
             errors.append(f"{prefix} generation_brief not found: {brief}")

@@ -216,6 +216,8 @@ python3 tools/validate_story_data.py
 python3 tools/validate_acceptance_criteria.py
 python3 tools/validate_audio_qa_catalog.py
 python3 tools/validate_scene_audio_map.py
+python3 tools/check_audio_vo.py --clip sc00_urashima_01 --locale en
+python3 tools/review_vo_vision.py --clip sc00_urashima_01 --locale en
 bash tools/ensure_gdai_mcp.sh
 bash tools/run_unit_tests.sh
 bash tools/check_dev_environment.sh

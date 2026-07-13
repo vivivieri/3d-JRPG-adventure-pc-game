@@ -32,7 +32,7 @@ def main() -> int:
     if not gates:
         errors.append("gates must be non-empty")
 
-    for domain in ("visual", "model", "audio"):
+    for domain in ("visual", "model", "audio", "vo"):
         jury = data.get("jury", {}).get(domain)
         if not jury:
             errors.append(f"jury.{domain} missing")

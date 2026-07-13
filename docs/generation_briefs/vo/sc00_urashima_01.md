@@ -1,6 +1,6 @@
 # Generation brief — VO `sc00_urashima_01`
 
-**Status:** P0 selective VO · human listen required  
+**Status:** P0 selective VO · automated jury on `en` gate locale  
 **Authority:** `game/data/audio/vo_prompts.json`, `docs/VO_HIT_LIST.md`  
 **Cross-refs:** `docs/NARRATIVE_WRITING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md` §8
 
@@ -10,7 +10,7 @@
 
 Mythic promise — three days — quiet fateful, not boastful.
 
-## Emotional intent (human rubric — no automated VO jury v1)
+## Emotional intent (jury V6/V7 + human L6 in-engine)
 
 | Field | Value |
 |-------|-------|
@@ -33,6 +33,8 @@ bash tools/generate_ai_vo.sh --clip sc00_urashima_01 --locale zh-Hant --all-dial
 
 ## Acceptance evidence
 
-- [ ] P0 human listen pass all required locales
+- [ ] Technical QA PASS (`check_audio_vo.py`)
+- [ ] V1–V7 jury PASS on `en` (`review_vo_vision.py`)
+- [ ] All P0 locales technical PASS at M5 ship
 - [ ] `duck_bgm_db` verified in-engine with subtitles on
 - [ ] Duration ≤ catalog `max_duration_ms`

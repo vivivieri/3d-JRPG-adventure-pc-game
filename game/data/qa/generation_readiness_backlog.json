@@ -76,7 +76,7 @@
       "implementation_plan_tasks": ["7.7", "7.8"],
       "phases": [7],
       "owner": "PM + Audio",
-      "gate_ids": ["L0_audio_qa_catalog"],
+      "gate_ids": ["L0_audio_qa_catalog", "L2_vo_jury"],
       "evidence": ["docs/generation_briefs/vo/sc*.md"],
       "design_ref": "docs/VO_HIT_LIST.md"
     },

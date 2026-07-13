@@ -77,7 +77,9 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_model_technical` | Tris in `qa_catalog.json` range, textures ≥ min, no greybox on ship |
 | `L2_model_jury` | ≥2 models, M1–M8 met, confidence ≥ 0.65 |
 | `L2_audio_technical` | 44.1 kHz, LUFS/peak per bus table, no procedural on ship |
-| `L2_audio_jury` | ≥2 models, A1–A5 met, confidence ≥ 0.65 (hero tracks) |
+| `L2_audio_jury` | ≥2 models, A1–A7 met, confidence ≥ 0.65 (hero BGM tracks) |
+| `L2_vo_technical` | P0 VO duration ≤ catalog max, voice loudness, locale paths vs dialogue |
+| `L2_vo_jury` | ≥2 models, V1–V7 met, confidence ≥ 0.65 (P0 clips, gate locale `en`) |
 
 ### L3 — GDAI Builder handoff
 
