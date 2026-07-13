@@ -33,8 +33,8 @@ These apply to every character and zone. Fill once, reference everywhere.
 |--------|-------|--------------|-------------------------------------|----------------|
 | **X-01** | **Generation brief** | Bible rows describe *what*; not *how* to prompt Meshy/ComfyUI | One-page brief per hero/zone: positive prompt, negative prompt, 2–3 reference mood words, forbidden shapes | `docs/generation_briefs/<id>.md` in repo |
 | **X-02** | **Camera-distance readability** | Jury checks silhouette at turntable | Golden screenshot at **gameplay FOV** (ruined_village cam, 8 m) with min face/boss read | `artifacts/screenshots/<zone>_gameplay.png` + `L2_visual_jury` |
-| **X-03** | **Motion timing** | Animation *names* whitelisted; not frame counts or cycle length | Per clip: duration (s), loop yes/no, root motion yes/no in `qa_catalog.json` | Extend `check_animation_whitelist.py` |
-| **X-04** | **Spatial composition** | Zone ASCII layouts in `ENVIRONMENT_KITS.md` | Min path width, max props per 10×10 m, vista anchor positions | Zone composition smoke (future `L2_zone_composition`) |
+| **X-03** | **Motion timing** | Animation *names* whitelisted; duration/loop/root motion in `qa_catalog.json` | Per clip: `animation_timing` validated L0; GLB duration when `--check-timing` | `validate_qa_catalog.py` + `check_animation_whitelist.py --check-timing` |
+| **X-04** | **Spatial composition** | Zone ASCII layouts in `ENVIRONMENT_KITS.md` | `zone_composition.json` — min path width, vista anchor, golden paths | `validate_zone_composition.py` (L0); in-scene `run_zone_composition_checks.sh` (P2) |
 | **X-05** | **Feel in motion** | `GAME_FEEL.md` + `feel_thresholds.json` | Input latency, turn p95, camera spring — measured in-engine | `L2_feel_smoke` strict on game branch |
 | **X-06** | **Human validation** | L6 playtest + feel checklist | ≥5 testers, feel avg ≥3.5 — cannot be automated away | `L6_human_playtest` |
 
@@ -181,10 +181,10 @@ For each new hero mesh or zone slice:
 |----------|-------------|-------|--------|
 | P0 | All `qa_catalog.json` + player-zone briefs | Architect + Visual | ✅ Done (17 briefs) |
 | P0 | Golden screenshot path enforced (`VISUAL_SMOKE_STRICT=1` on M5) | QA | Pending capture |
-| P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | Pending |
-| P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | Pending |
+| P1 | `game/data/qa/zone_composition.json` — machine-readable §5 table | Architect | ✅ Done |
+| P1 | `animation_timing` block in `qa_catalog.json` (duration_ms, loop) | Architect | ✅ Done |
 | P2 | Expand `palace_sentinel` CHARACTER_BIBLE row to boss standard | PM + Visual | Pending |
-| P2 | `L2_zone_composition` smoke script | QA | Pending |
+| P2 | `L2_zone_composition` smoke script | QA | ✅ Script (`run_zone_composition_checks.sh`); in-scene strict when scenes exist |
 
 ---
 

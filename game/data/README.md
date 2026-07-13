@@ -21,6 +21,7 @@ game/data/
     acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
     feel_thresholds.json       # GAME_FEEL automated smoke thresholds
     integration_scenarios.json # L4 INT-* catalog (implemented / required flags)
+    zone_composition.json      # Per-zone path width, vista anchor, golden screenshot paths (GENERATION_READINESS §5)
   code/
     base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
   quests/
@@ -58,6 +59,8 @@ GameManager.load_json("res://data/story/scenes.json")
 python3 tools/validate_story_data.py
 python3 tools/validate_base_classes.py
 python3 tools/validate_acceptance_criteria.py
+python3 tools/validate_zone_composition.py
+python3 tools/validate_qa_catalog.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
 

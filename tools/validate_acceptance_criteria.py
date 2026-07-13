@@ -52,6 +52,8 @@ def main() -> int:
                 "L0_acceptance_catalog",
                 "L0_environments_catalog",
                 "L0_sprint_phases",
+                "L0_zone_composition",
+                "L0_qa_catalog",
             ):
                 errors.append(f"ci_gates references unknown gate: {gid}")
 

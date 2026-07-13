@@ -315,7 +315,7 @@ L0–L5 PASS ──▶ Human L6 ──▶ feedback ("coat too stiff")
 | Gap | Mitigation today |
 |-----|------------------|
 | Jury cannot score “fun” or emotional attachment | Human L6 + `PLAYTEST_SCRIPT.md` §7b F6–F8 |
-| `animation_timing` not in CI yet | Brief targets + manual review until P1 catalog field |
+| `animation_timing` GLB duration check | L0 catalog schema + `--check-timing` on game branch when GLBs exist |
 | No standing “polish sprint” without FAIL | M5 milestone + per-asset production order (`CHARACTER_BIBLE.md` §11) |
 
 See `docs/GENERATION_READINESS.md` for per-row ⚠️ Partial items that still need human judgment after gates pass.

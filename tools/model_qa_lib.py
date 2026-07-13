@@ -71,6 +71,39 @@ def count_images(gltf: dict) -> int:
     return len(gltf.get("images", []))
 
 
+def animation_durations_ms(gltf: dict, bin_data: bytes) -> dict[str, int]:
+    """Max keyframe time per named animation clip (milliseconds)."""
+    import struct
+
+    accessors = gltf.get("accessors", [])
+    buffer_views = gltf.get("bufferViews", [])
+    durations: dict[str, int] = {}
+
+    for anim in gltf.get("animations", []):
+        name = (anim.get("name") or "").strip()
+        if not name:
+            continue
+        max_t = 0.0
+        for channel in anim.get("channels", []):
+            sampler_idx = channel.get("sampler")
+            if sampler_idx is None:
+                continue
+            sampler = gltf["samplers"][sampler_idx]
+            input_idx = sampler.get("input")
+            if input_idx is None:
+                continue
+            acc = accessors[input_idx]
+            bv = buffer_views[acc["bufferView"]]
+            offset = bv.get("byteOffset", 0) + acc.get("byteOffset", 0)
+            count = acc.get("count", 0)
+            for i in range(count):
+                t = struct.unpack_from("<f", bin_data, offset + i * 4)[0]
+                max_t = max(max_t, float(t))
+        durations[name] = int(round(max_t * 1000.0))
+
+    return durations
+
+
 def is_greybox_source(rel_path: str) -> bool:
     lower = rel_path.lower()
     if any(p in lower for p in BANNED_PATH_RE):

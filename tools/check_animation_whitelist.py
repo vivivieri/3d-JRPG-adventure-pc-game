@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from model_qa_lib import ROOT, load_catalog, model_path, parse_glb  # noqa: E402
+from model_qa_lib import ROOT, animation_durations_ms, load_catalog, model_path, parse_glb  # noqa: E402
 
 
 def animation_names(gltf: dict) -> list[str]:
@@ -19,7 +19,7 @@ def animation_names(gltf: dict) -> list[str]:
     return names
 
 
-def check_model(model_id: str, catalog: dict, *, strict: bool) -> tuple[bool, list[str]]:
+def check_model(model_id: str, catalog: dict, *, strict: bool, check_timing: bool) -> tuple[bool, list[str]]:
     meta = catalog["models"][model_id]
     allowed = meta.get("allowed_animations")
     if not allowed:
@@ -50,7 +50,36 @@ def check_model(model_id: str, catalog: dict, *, strict: bool) -> tuple[bool, li
     if missing:
         return False, [f"FAIL: missing required animations: {', '.join(missing)}"]
 
-    return True, [f"OK: {len(found)} animations (required floor met)"]
+    lines = [f"OK: {len(found)} animations (required floor met)"]
+
+    if check_timing:
+        timing = meta.get("animation_timing") or {}
+        if not timing:
+            if strict:
+                return False, lines + ["FAIL: missing animation_timing in catalog"]
+            return True, lines + ["SKIP: no animation_timing in catalog"]
+
+        gltf, bin_data = parse_glb(path)
+        measured = animation_durations_ms(gltf, bin_data)
+        timing_errors: list[str] = []
+        for anim_name, spec in timing.items():
+            if anim_name not in found:
+                continue
+            dur = measured.get(anim_name)
+            if dur is None:
+                timing_errors.append(f"FAIL: could not measure duration for {anim_name}")
+                continue
+            lo = int(spec.get("duration_ms_min", 0))
+            hi = int(spec.get("duration_ms_max", 0))
+            if dur < lo or dur > hi:
+                timing_errors.append(
+                    f"FAIL: {anim_name} duration {dur}ms outside [{lo}, {hi}]ms"
+                )
+        if timing_errors:
+            return False, lines + timing_errors
+        lines.append(f"OK: timing checked for {len(timing)} catalog clips")
+
+    return True, lines
 
 
 def resolve_phase(catalog: dict, phase: str) -> list[str]:
@@ -68,6 +97,11 @@ def main() -> int:
         "--strict",
         action="store_true",
         help="FAIL on missing models / missing animation policy (ship / game branch)",
+    )
+    ap.add_argument(
+        "--check-timing",
+        action="store_true",
+        help="When GLB exists, verify clip durations within animation_timing catalog ranges",
     )
     args = ap.parse_args()
 
@@ -97,7 +131,7 @@ def main() -> int:
             continue
         checked += 1
         print(f"\n==> {model_id}")
-        ok, lines = check_model(model_id, catalog, strict=args.strict)
+        ok, lines = check_model(model_id, catalog, strict=args.strict, check_timing=args.check_timing)
         for line in lines:
             print(f"  {line}")
         if not ok:

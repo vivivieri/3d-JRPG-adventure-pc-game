@@ -48,6 +48,8 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — ship `.tscn` requires `.gdai_built` with `verified_f5=true`; `main_scene` must match marker |
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
+| `L0_zone_composition` | `validate_zone_composition.py` exit 0 — zone composition contract schema |
+| `L0_qa_catalog` | `validate_qa_catalog.py` exit 0 — model catalog + `animation_timing` floor |
 | `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
 | `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue native `extends` (game branch) |
 

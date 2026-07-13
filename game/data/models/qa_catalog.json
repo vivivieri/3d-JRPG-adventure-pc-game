@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "phase_required": {
     "1": ["urashima", "village_torii_damaged", "village_well_stone", "village_shack_roku"],
     "m5": [
@@ -28,6 +28,13 @@
       "required_animations": [
         "idle", "walk", "interact", "attack_light", "hit"
       ],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false },
+        "walk": { "loop": true, "duration_ms_min": 1000, "duration_ms_max": 1200, "root_motion": true },
+        "interact": { "loop": false, "duration_ms_min": 1200, "duration_ms_max": 1800, "root_motion": false },
+        "attack_light": { "loop": false, "duration_ms_min": 500, "duration_ms_max": 700, "root_motion": false },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 500, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md §2 Urashima"
     },
     "yuzu": {
@@ -39,6 +46,12 @@
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "walk", "heal_cast", "purify_cast", "hit", "materialize"],
       "required_animations": ["idle", "walk", "heal_cast", "hit"],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false },
+        "walk": { "loop": true, "duration_ms_min": 1100, "duration_ms_max": 1300, "root_motion": true },
+        "heal_cast": { "loop": false, "duration_ms_min": 1500, "duration_ms_max": 2000, "root_motion": false },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 500, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md §3 Yuzu"
     },
     "roku": {
@@ -50,6 +63,12 @@
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "walk", "taunt", "guard", "harpoon_strike", "hit"],
       "required_animations": ["idle", "walk", "harpoon_strike", "hit"],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false },
+        "walk": { "loop": true, "duration_ms_min": 1100, "duration_ms_max": 1300, "root_motion": true },
+        "harpoon_strike": { "loop": false, "duration_ms_min": 800, "duration_ms_max": 1200, "root_motion": false },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 500, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md §4 Roku"
     },
     "salt_crab": {
@@ -61,6 +80,12 @@
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "attack", "hit", "death"],
       "required_animations": ["idle", "attack", "hit", "death"],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 1500, "duration_ms_max": 2500, "root_motion": false },
+        "attack": { "loop": false, "duration_ms_min": 600, "duration_ms_max": 900, "root_motion": false },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 400, "root_motion": false },
+        "death": { "loop": false, "duration_ms_min": 1000, "duration_ms_max": 1500, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md enemies"
     },
     "tide_wraith": {
@@ -72,6 +97,12 @@
       "rig": "mixamo_humanoid",
       "allowed_animations": ["idle", "attack", "hit", "death"],
       "required_animations": ["idle", "attack", "hit", "death"],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false },
+        "attack": { "loop": false, "duration_ms_min": 700, "duration_ms_max": 1000, "root_motion": true },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 300, "root_motion": false },
+        "death": { "loop": false, "duration_ms_min": 1200, "duration_ms_max": 1200, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md enemies"
     },
     "shore_wraith": {
@@ -86,6 +117,12 @@
         "phase_transition", "summon_wraith", "death_collapse"
       ],
       "required_animations": ["idle_float", "drowned_grasp", "heavy_slam", "death_collapse"],
+      "animation_timing": {
+        "idle_float": { "loop": true, "duration_ms_min": 2500, "duration_ms_max": 3500, "root_motion": false },
+        "drowned_grasp": { "loop": false, "duration_ms_min": 1000, "duration_ms_max": 1400, "root_motion": false },
+        "heavy_slam": { "loop": false, "duration_ms_min": 1500, "duration_ms_max": 2000, "root_motion": false },
+        "death_collapse": { "loop": false, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md § Shore Wraith"
     },
     "palace_sentinel": {
@@ -99,6 +136,13 @@
         "idle", "spear_thrust", "shell_harden", "hit", "death"
       ],
       "required_animations": ["idle", "spear_thrust", "shell_harden", "hit", "death"],
+      "animation_timing": {
+        "idle": { "loop": true, "duration_ms_min": 2000, "duration_ms_max": 3000, "root_motion": false },
+        "spear_thrust": { "loop": false, "duration_ms_min": 700, "duration_ms_max": 1000, "root_motion": false },
+        "shell_harden": { "loop": false, "duration_ms_min": 1200, "duration_ms_max": 1800, "root_motion": false },
+        "hit": { "loop": false, "duration_ms_min": 300, "duration_ms_max": 500, "root_motion": false },
+        "death": { "loop": false, "duration_ms_min": 1500, "duration_ms_max": 2500, "root_motion": false }
+      },
       "bible": "BOSS_DESIGNS.md Sentinel"
     },
     "tide_keeper_p1": {
@@ -113,6 +157,12 @@
         "maelstrom", "ebb_remembrance", "phase_transition", "last_mercy", "death_dissolve"
       ],
       "required_animations": ["idle_drift", "tidal_fingers", "maelstrom", "death_dissolve"],
+      "animation_timing": {
+        "idle_drift": { "loop": true, "duration_ms_min": 2500, "duration_ms_max": 4000, "root_motion": false },
+        "tidal_fingers": { "loop": false, "duration_ms_min": 1200, "duration_ms_max": 1800, "root_motion": false },
+        "maelstrom": { "loop": false, "duration_ms_min": 2000, "duration_ms_max": 3500, "root_motion": false },
+        "death_dissolve": { "loop": false, "duration_ms_min": 2500, "duration_ms_max": 4000, "root_motion": false }
+      },
       "bible": "CHARACTER_BIBLE.md Tide Keeper"
     },
     "village_torii_damaged": {
