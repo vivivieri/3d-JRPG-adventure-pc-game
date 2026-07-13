@@ -114,6 +114,11 @@ Per `docs/GAME_FEEL.md`. Record per tester; average ≥3.5 required for ship.
 | F3 | Combat hits feel readable (flash/SFX timing) | |
 | F4 | Dialogue pacing comfortable (not too fast/slow) | |
 | F5 | UI confirms/cancels feel snappy | |
+| F6 | Hero silhouette readable at gameplay distance (field) | |
+| F7 | Walk / combat animations feel natural (not robotic or floaty) | |
+| F8 | Key story props read clearly (lacquer box, torii, boss telegraphs) | |
+
+Per `docs/MODEL_QA.md` §9 — F6–F8 are the human arbiter for model polish direction when automated M1–M6 and visual jury pass but motion still feels wrong.
 
 ---
 
