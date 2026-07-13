@@ -74,6 +74,15 @@ Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
 
 **Scene edits:** GDAI only. Do not hand-edit `.tscn`.
 
+### Sprint orchestration (mandatory — no honor system)
+
+| Role | First command every session |
+|------|----------------------------|
+| **PM / Sprint Master** | `bash tools/run_pm_orchestrator.sh` — FAIL blocks all dispatch |
+| **Architect, Builder, QA, Flow, Release, Visual** | `bash tools/run_agent_session_gate.sh <role> <issue_id>` before work |
+
+Authority: `docs/PM_AGENT_RUNBOOK.md`, `docs/SPRINT_ORCHESTRATION.md`, `game/data/qa/sprint_board.json`
+
 ### If MCP unavailable — NOTIFY USER, DO NOT FALL BACK
 
 | Server | Check |

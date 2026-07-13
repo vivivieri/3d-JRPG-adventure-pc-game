@@ -37,6 +37,7 @@ run_gate "L0_qa_catalog" python3 tools/validate_qa_catalog.py
 run_gate "L0_audio_qa_catalog" python3 tools/validate_audio_qa_catalog.py
 run_gate "L0_scene_audio_map" python3 tools/validate_scene_audio_map.py
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
+run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
 run_gate "L0_rr_compliance" bash tools/check_rr_compliance.sh
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 

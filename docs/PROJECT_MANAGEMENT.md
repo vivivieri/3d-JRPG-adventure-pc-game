@@ -185,6 +185,18 @@ Agents use `ManagePullRequest` + Issues via cloud task tools. Labels and templat
 
 ## 8. PM Agent checklist (start of sprint)
 
+**Mandatory — enforced by orchestrator (not honor system):**
+
+```bash
+bash tools/run_pm_orchestrator.sh
+```
+
+See `docs/PM_AGENT_RUNBOOK.md` for full step list.
+
+- [ ] `validate_sprint_board.py --strict` PASS (`L0_sprint_board`)
+- [ ] `pm_sync_sprint_pack.py` PASS — pack ↔ board aligned
+- [ ] `next_dispatch` assigned to one agent; session gate run
+- [ ] After agent session: `pm_update_issue.py` + re-run orchestrator
 - [ ] Sync `docs/MILESTONES.md` with open issues
 - [ ] No open `severity/S0` on `env/uat` or `env/preprod`
 - [ ] RC tag planned with gate list

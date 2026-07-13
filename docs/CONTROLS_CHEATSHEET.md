@@ -48,6 +48,7 @@
 | `L0_audio_qa_catalog` | BGM/VO QA catalog |
 | `L0_scene_audio_map` | Scene/zone audio map |
 | `L0_generation_readiness_backlog` | GR-* backlog traceability |
+| `L0_sprint_board` | Sprint board + PM orchestrator state |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -79,7 +80,7 @@
 
 | Role | Hard (automated) | Soft (process) |
 |------|------------------|----------------|
-| **PM** | Branch split (`main` vs `game/development`); issue template requires phase + gates | PR checklist; sprint batch ≤10 issues |
+| **PM** | `L0_sprint_board`; **`run_pm_orchestrator.sh` PASS** | Dispatch + escalation via `pm_emit_escalation.sh` |
 | **Architect** | `L1_unit_tests`, `L1_gdscript_lint`, `L0_base_class_compliance` | Handoff + **base class** registry |
 | **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, `L2_glb_import`, component scenes | `.gdai_built`; F5 in editor; `install_glb_import_pipeline.sh` |
 | **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |

@@ -318,11 +318,14 @@ For a **pure AI agent team**, sprints are **outcome batches**, not human capacit
 
 ### PM Agent batch checklist (replaces “two-week planning”)
 
-1. Pull ≤10 issues from current phase (`sprint_phases.json` → `active_phase`).  
-2. Label each with gate IDs + `agent/*`.  
+**Enforced by:** `bash tools/run_pm_orchestrator.sh` — see `docs/PM_AGENT_RUNBOOK.md`
+
+1. Pull ≤10 issues from current phase (`sprint_phases.json` → `active_phase`) into `sprint_board.json`.  
+2. Label each with gate IDs + `agent/*`; sync `docs/sprints/` issue pack.  
 3. Run **micro-cycles** for isolated shaders/scenes (1–2 sessions).  
-4. When batch gates PASS → **close Linear cycle immediately** (even mid-week).  
-5. Open next `Phase{N}-Sprint{K+1}` without waiting.  
+4. Dispatch via orchestrator; agents pass `run_agent_session_gate.sh`.  
+5. When batch gates PASS → **close Linear cycle immediately** (even mid-week).  
+6. Open next `Phase{N}-Sprint{K+1}`; carry-over via `pm_close_sprint.py` if needed.  
 
 ### Example: Phase 1 at AI speed
 

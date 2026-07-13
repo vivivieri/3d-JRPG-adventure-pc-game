@@ -53,7 +53,7 @@
 
 | Role | Agent | Owns | Must NOT | Control hook |
 |------|-------|------|----------|--------------|
-| **PM / Sprint facilitator** | PM Agent | Issues, milestones, env promotion, batch planning | Write code or `.tscn` | Issue template: phase + gates; PR template opened |
+| **PM / Sprint facilitator** | PM Agent | Issues, milestones, orchestrator dispatch, escalations | Write code or `.tscn` | **`run_pm_orchestrator.sh` PASS**; `L0_sprint_board` |
 | **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
 | **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr`, **`L3_gdai_built`**, **component `.tscn` catalog** |
 | **QA** | QA Agent | L0–L3 gates, evidence, bugs | Mark ship without gates | CI green + **gate report in PR** |
@@ -77,7 +77,13 @@ bash tools/check_rr_compliance.sh      # All roles touching game/
 
 **PM-only (`main` docs/issues):**
 ```bash
+bash tools/run_pm_orchestrator.sh      # Sprint Master — required
 bash tools/run_docs_ci_checks.sh
+```
+
+**Architect / Builder / QA (before sprint issue work):**
+```bash
+bash tools/run_agent_session_gate.sh <role> <issue_id>
 ```
 
 ---

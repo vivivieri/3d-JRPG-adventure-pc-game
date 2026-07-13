@@ -4,7 +4,9 @@
 **Branch:** `game/development`  
 **Phase exit ref:** `acceptance_criteria.json` → `phase_gates.phase_1`  
 **Implementation ref:** `docs/IMPLEMENTATION_PLAN.md` §Phase 1 (tasks 1.1–1.11)  
-**Sprint master:** PM Agent  
+**Sprint master:** PM Agent — run `bash tools/run_pm_orchestrator.sh` before dispatch  
+**Board:** `game/data/qa/sprint_board.json`  
+**Runbook:** `docs/PM_AGENT_RUNBOOK.md`
 
 **WIP limit:** 7 issues · close when gate IDs PASS on merged PRs  
 

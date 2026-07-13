@@ -208,11 +208,14 @@
     "optional_fields": ["generation_readiness_id"],
     "generation_readiness_backlog": "game/data/qa/generation_readiness_backlog.json",
     "max_issues_per_cycle": 10,
+    "board_ref": "game/data/qa/sprint_board.json",
+    "orchestrator_command": "bash tools/run_pm_orchestrator.sh",
+    "agent_session_gate": "bash tools/run_agent_session_gate.sh <agent> <issue_id>",
     "definition_of_done": [
       "Gate IDs PASS on PR commit",
       "GDAI .gdai_built if scenes touched",
       "GitHub issue closed with evidence paths"
     ]
   },
-  "design_ref": "docs/AGILE_WITHIN_PHASES.md"
+  "design_ref": "docs/AGILE_WITHIN_PHASES.md, docs/SPRINT_ORCHESTRATION.md"
 }

@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "agent_role": "pm",
+  "aliases": ["sprint master", "sprint facilitator"],
+  "authority": "docs/PM_AGENT_RUNBOOK.md",
+  "design_ref": "docs/SPRINT_ORCHESTRATION.md",
+  "rule": "PM Agent MUST run bash tools/run_pm_orchestrator.sh at the start of every session. Exit non-zero blocks sprint work. Honor system is forbidden.",
+  "session_steps": [
+    {
+      "step": 1,
+      "id": "validate_sprint_phases",
+      "description": "Active phase and sprint config valid",
+      "command": "python3 tools/validate_sprint_phases.py",
+      "block_on_fail": true
+    },
+    {
+      "step": 2,
+      "id": "validate_sprint_board",
+      "description": "Sprint board schema, deps, required fields",
+      "command": "python3 tools/validate_sprint_board.py --strict",
+      "block_on_fail": true
+    },
+    {
+      "step": 3,
+      "id": "sync_issue_pack",
+      "description": "Issue pack matches board — create missing / carry-over",
+      "command": "python3 tools/pm_sync_sprint_pack.py",
+      "block_on_fail": true
+    },
+    {
+      "step": 4,
+      "id": "docs_ci_baseline",
+      "description": "Design data and docs gates green on main",
+      "command": "bash tools/run_docs_ci_checks.sh",
+      "block_on_fail": true
+    },
+    {
+      "step": 5,
+      "id": "dispatch_orchestrator",
+      "description": "Compute next agent dispatch, stale, escalations",
+      "command": "python3 tools/pm_orchestrator_lib.py --dispatch --write-report",
+      "block_on_fail": true
+    }
+  ],
+  "post_agent_steps": [
+    {
+      "id": "update_board",
+      "description": "PM updates issue status after every agent session",
+      "command": "python3 tools/pm_update_issue.py --help",
+      "required": true
+    },
+    {
+      "id": "re_run_orchestrator",
+      "description": "Re-run dispatch before assigning next agent",
+      "command": "bash tools/run_pm_orchestrator.sh",
+      "required": true
+    }
+  ],
+  "other_agent_session_gate": {
+    "command": "bash tools/run_agent_session_gate.sh <agent_role> <issue_id>",
+    "rule": "Architect, Builder, QA, Flow, Release, Visual agents MUST pass session gate before work"
+  }
+}

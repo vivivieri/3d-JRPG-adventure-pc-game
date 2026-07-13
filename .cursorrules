@@ -237,6 +237,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | L5 E2E | `bash tools/run_e2e_playthrough.sh` | `L5_e2e_three_endings` (not SKIP) |
 | L6 human | `docs/PLAYTEST_SCRIPT.md` | `L6_human_playtest` — **required ship gate** (Phase 8, after L0–L5) |
 | `game/development` CI | `bash tools/run_ci_checks.sh` | **Required merge gate** — green before PR merge |
+| PM orchestrator | `bash tools/run_pm_orchestrator.sh` | **Required** every PM session — dispatches agents |
 
 **On FAIL:** `bash tools/qa_emit_remediation.sh <kind>` → change **one** lever → re-measure (`docs/QA_REMEDIATION_LOOP.md`).
 

@@ -1,0 +1,259 @@
+{
+  "version": "1.0",
+  "authority": "docs/SPRINT_ORCHESTRATION.md",
+  "design_ref": "docs/sprints/Phase1-Sprint1-issues.md",
+  "active_sprint": {
+    "id": "Phase1-Sprint1",
+    "phase": 1,
+    "sprint_number": 1,
+    "status": "active",
+    "started_at": "2026-07-13",
+    "issue_pack_ref": "docs/sprints/Phase1-Sprint1-issues.md",
+    "max_issues": 10,
+    "branch": "game/development"
+  },
+  "previous_sprint": null,
+  "orchestration": {
+    "stale_hours": 24,
+    "max_in_progress": {
+      "pm": 2,
+      "architect": 2,
+      "builder": 1,
+      "qa": 2,
+      "flow": 1,
+      "release": 1,
+      "visual": 2
+    },
+    "escalation_labels": [
+      "remind",
+      "severity/S2",
+      "severity/S1",
+      "severity/S0",
+      "human"
+    ],
+    "status_enum": [
+      "pending",
+      "in_progress",
+      "blocked",
+      "done",
+      "carry_over"
+    ]
+  },
+  "issues": [
+    {
+      "id": "P1-00",
+      "title": "Bootstrap game/development — project.godot + CI baseline",
+      "sequence": 1,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "Phase 0 verify",
+        "branch bootstrap"
+      ],
+      "agent_owner": "pm",
+      "acceptance_gate_ids": [
+        "L0_rr_compliance",
+        "L0_story_data",
+        "L0_acceptance_catalog",
+        "L0_base_classes",
+        "L1_unit_tests"
+      ],
+      "status": "in_progress",
+      "depends_on": [],
+      "blocks": [
+        "P1-01",
+        "P1-02",
+        "P1-03",
+        "P1-04",
+        "P1-05"
+      ],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": "2026-07-13T12:37:57.256139+00:00",
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null
+    },
+    {
+      "id": "P1-01",
+      "title": "Phase 1.1–1.3 — toon_base.gdshader, zone_visuals.gd, ruined_village env preset",
+      "sequence": 2,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "1.1",
+        "1.2",
+        "1.3"
+      ],
+      "agent_owner": "architect",
+      "acceptance_gate_ids": [
+        "L1_unit_tests",
+        "L1_gdscript_lint",
+        "L0_base_class_compliance"
+      ],
+      "status": "pending",
+      "depends_on": [
+        "P1-00"
+      ],
+      "blocks": [
+        "P1-02"
+      ],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null
+    },
+    {
+      "id": "P1-02",
+      "title": "Phase 1.5–1.7 — GDAI ruined_village.tscn greybox + SC-02 lighting",
+      "sequence": 3,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "1.5",
+        "1.6",
+        "1.7",
+        "1.9"
+      ],
+      "agent_owner": "builder",
+      "acceptance_gate_ids": [
+        "L3_gdai_built",
+        "L2_scene_primitives",
+        "L2_boot_headless",
+        "L2_feel_smoke"
+      ],
+      "status": "pending",
+      "depends_on": [
+        "P1-00",
+        "P1-01"
+      ],
+      "blocks": [
+        "P1-04",
+        "P1-05"
+      ],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null
+    },
+    {
+      "id": "P1-03",
+      "title": "Phase 1.4 — water_stylized.gdshader (foam + displacement)",
+      "sequence": 4,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "1.4"
+      ],
+      "agent_owner": "architect",
+      "acceptance_gate_ids": [
+        "L1_unit_tests",
+        "L1_gdscript_lint"
+      ],
+      "status": "pending",
+      "depends_on": [
+        "P1-00"
+      ],
+      "blocks": [],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null,
+      "parallel_with": [
+        "P1-02"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "title": "Phase 1 — CI green + L0–L2 gate report on ruined_village PR",
+      "sequence": 5,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "sprint QA"
+      ],
+      "agent_owner": "qa",
+      "acceptance_gate_ids": [
+        "L0_rr_compliance",
+        "L0_story_data",
+        "L0_acceptance_catalog",
+        "L0_base_classes",
+        "L0_base_class_compliance",
+        "L1_unit_tests",
+        "L1_gdscript_lint",
+        "L2_scene_primitives",
+        "L3_gdai_built",
+        "L2_feel_smoke",
+        "L2_glb_import",
+        "L4_integration"
+      ],
+      "status": "pending",
+      "depends_on": [
+        "P1-02"
+      ],
+      "blocks": [
+        "P1-06"
+      ],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null
+    },
+    {
+      "id": "P1-05",
+      "title": "Phase 1.10–1.11 — ruined_village golden screenshot + zone composition smoke",
+      "sequence": 6,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "1.10",
+        "1.11"
+      ],
+      "agent_owner": "qa",
+      "acceptance_gate_ids": [
+        "L2_visual_palette",
+        "L2_zone_composition"
+      ],
+      "status": "pending",
+      "depends_on": [
+        "P1-02",
+        "P1-04"
+      ],
+      "blocks": [],
+      "generation_readiness_id": "GR-001",
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null,
+      "co_agent": "builder"
+    },
+    {
+      "id": "P1-06",
+      "title": "Phase1-Sprint1 review — phase_1 exit gap analysis",
+      "sequence": 7,
+      "phase": 1,
+      "implementation_plan_tasks": [
+        "sprint review"
+      ],
+      "agent_owner": "pm",
+      "acceptance_gate_ids": [],
+      "status": "pending",
+      "depends_on": [
+        "P1-04"
+      ],
+      "blocks": [],
+      "generation_readiness_id": null,
+      "github_issue": null,
+      "last_agent_session": null,
+      "last_commit_sha": null,
+      "escalation_level": 0,
+      "carry_over_from": null,
+      "co_agent": "qa"
+    }
+  ],
+  "carry_over_queue": [],
+  "closed_sprints": []
+}

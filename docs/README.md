@@ -35,6 +35,7 @@
 | Understand the game | [GDD.md](GDD.md) → [STORYBOARD.md](STORYBOARD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · branch: `game/development` |
 | Sprint planning (Linear) | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
+| **Sprint orchestration (enforced)** | [SPRINT_ORCHESTRATION.md](SPRINT_ORCHESTRATION.md) · [PM_AGENT_RUNBOOK.md](PM_AGENT_RUNBOOK.md) · `bash tools/run_pm_orchestrator.sh` |
 | Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
 | Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) · [RR_CHEATSHEET.md](RR_CHEATSHEET.md) |
