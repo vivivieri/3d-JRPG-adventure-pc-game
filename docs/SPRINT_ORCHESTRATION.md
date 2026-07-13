@@ -27,6 +27,9 @@
 | `game/data/qa/pm_orchestrator_steps.json` | **Mandatory PM session steps** (ordered) |
 | `docs/sprints/Phase{N}-Sprint{K}-issues.md` | Human-readable issue bodies (must match board IDs) |
 | `artifacts/pm_orchestrator_report.json` | Latest dispatch output (written each PM run) |
+| `artifacts/pm_dispatch_packet.json` | Structured worker handoff (gates, refs, branch) |
+| `artifacts/linear_sync_manifest.json` | Linear mirror state |
+| `game/data/qa/factory_health_snapshot.json` | Remote watchdog cycle signal (committed) |
 
 ---
 

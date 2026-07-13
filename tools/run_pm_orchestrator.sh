@@ -28,15 +28,18 @@ print("    Authority: docs/PM_AGENT_RUNBOOK.md")
 print()
 
 for step in data.get("session_steps", []):
-    if not step.get("block_on_fail", True):
-        continue
     n = step["step"]
     sid = step["id"]
     cmd = step["command"]
+    block = step.get("block_on_fail", True)
     print(f"── Step {n}: {sid}")
     print(f"    {cmd}")
     rc = subprocess.call(cmd, shell=True, cwd=root)
     if rc != 0:
+        if not block:
+            print(f"[WARN] Step {n} ({sid}) — non-blocking (exit {rc})")
+            print()
+            continue
         print(f"[FAIL] Step {n} ({sid}) — PM session BLOCKED (exit {rc})")
         print()
         print("PM ORCHESTRATOR: FAILED — do not assign agents until fixed")

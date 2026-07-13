@@ -34,6 +34,12 @@
       "triggers": "Human notification — fix secrets/snapshot before resume",
       "payload_fields": ["event", "failed_check", "log_excerpt"]
     },
+    "agent_cycle_failed": {
+      "description": "Worker or CI failed gates — PM must assign remediation on same issue",
+      "emits": ["tools/pm_emit_cycle_event.sh", ".github/workflows/game-ci-failure-triage.yml"],
+      "triggers": "PM Agent Automation — re-dispatch same issue, not next",
+      "payload_fields": ["event", "issue_id", "agent_role", "failed_check", "commit_sha", "note"]
+    },
     "watchdog_recovery": {
       "description": "Factory watchdog detected stall, hang, or orchestrator failure — PM must diagnose and re-dispatch",
       "emits": ["tools/run_factory_watchdog.sh --recover"],

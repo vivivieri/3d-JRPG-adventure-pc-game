@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
 PHASES_PATH = ROOT / "game/data/qa/sprint_phases.json"
 REPORT_PATH = ROOT / "artifacts/pm_orchestrator_report.json"
+DISPATCH_PACKET_PATH = ROOT / "artifacts/pm_dispatch_packet.json"
+SNAPSHOT_PATH = ROOT / "game/data/qa/factory_health_snapshot.json"
 
 REQUIRED_ISSUE_FIELDS = (
     "id",
@@ -23,11 +25,18 @@ REQUIRED_ISSUE_FIELDS = (
     "acceptance_gate_ids",
     "status",
     "depends_on",
-    "agent_owner",
 )
-VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual", "human"}
+VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual", "human", "watchdog"}
 VALID_STATUS = {"pending", "in_progress", "blocked", "done", "carry_over"}
+VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
+
+DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
+    "architect": ["docs/RENDERING_GUIDE.md", "docs/ENVIRONMENT_KITS.md", "docs/CODE_STYLE.md"],
+    "builder": ["docs/MCP_STACK.md", "docs/RENDERING_GUIDE.md", ".cursorrules §0"],
+    "qa": ["docs/ACCEPTANCE_CRITERIA.md", "docs/AI_TESTING_SPEC.md"],
+    "pm": ["docs/PM_AGENT_RUNBOOK.md", "docs/SPRINT_ORCHESTRATION.md"],
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -41,6 +50,12 @@ def save_json(path: Path, data: dict[str, Any]) -> None:
 
 def load_board() -> dict[str, Any]:
     return load_json(BOARD_PATH)
+
+
+def load_phases() -> dict[str, Any]:
+    if not PHASES_PATH.is_file():
+        return {}
+    return load_json(PHASES_PATH)
 
 
 def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -83,39 +98,30 @@ def validate_board_schema(board: dict[str, Any], strict: bool = False) -> list[s
         if iid in ids:
             errors.append(f"duplicate issue id {iid}")
         ids.add(iid)
-        for field in (
-            "title",
-            "sequence",
-            "phase",
-            "implementation_plan_tasks",
-            "agent_owner",
-            "acceptance_gate_ids",
-            "status",
-            "depends_on",
-        ):
+        for field in REQUIRED_ISSUE_FIELDS:
             if field not in issue:
                 errors.append(f"{iid}: missing {field}")
         if issue.get("agent_owner") not in VALID_AGENTS:
             errors.append(f"{iid}: invalid agent_owner {issue.get('agent_owner')!r}")
         if issue.get("status") not in VALID_STATUS:
             errors.append(f"{iid}: invalid status {issue.get('status')!r}")
+        done_req = issue.get("done_requires", "pr_merged")
+        if done_req not in VALID_DONE_REQUIRES:
+            errors.append(f"{iid}: invalid done_requires {done_req!r}")
         if strict and issue.get("status") not in ("done", "carry_over"):
             if not issue.get("implementation_plan_tasks"):
                 errors.append(f"{iid}: implementation_plan_tasks empty")
-            if issue.get("agent_owner") != "pm" and not issue.get("acceptance_gate_ids") and iid.endswith("-06") is False:
-                # sprint review may have empty gates
+            if issue.get("agent_owner") != "pm" and not issue.get("acceptance_gate_ids"):
                 if "review" not in issue.get("title", "").lower():
                     errors.append(f"{iid}: acceptance_gate_ids empty")
         for dep in issue.get("depends_on", []):
             if dep not in ids and dep not in {x.get("id") for x in issues}:
-                pass  # checked in second pass
-    # dependency refs
+                pass
     for issue in issues:
         iid = issue.get("id", "?")
         for dep in issue.get("depends_on", []):
             if dep not in ids:
                 errors.append(f"{iid}: depends_on unknown {dep}")
-    # phase alignment
     ap_phase = active.get("phase")
     for issue in issues:
         if issue.get("phase") != ap_phase:
@@ -170,6 +176,63 @@ def wip_violations(board: dict[str, Any]) -> list[dict[str, Any]]:
     return violations
 
 
+def session_budget_exceeded(board: dict[str, Any], phases: dict[str, Any]) -> tuple[bool, str]:
+    """Cost guard — max agent sessions per sprint."""
+    ai = phases.get("ai_native_batch", {})
+    max_sessions = ai.get("max_agent_sessions_per_sprint", 40)
+    snapshot = {}
+    if SNAPSHOT_PATH.is_file():
+        snapshot = load_json(SNAPSHOT_PATH)
+    used = int(snapshot.get("agent_sessions_this_sprint", 0))
+    if used >= max_sessions:
+        return True, f"agent sessions {used} >= max {max_sessions}"
+    return False, "ok"
+
+
+def phase_exit_summary(board: dict[str, Any], phases: dict[str, Any]) -> dict[str, Any]:
+    active = board.get("active_sprint", {})
+    phase_num = active.get("phase")
+    phase_row = next((p for p in phases.get("phases", []) if p.get("phase") == phase_num), {})
+    required = active.get("phase_exit_gate_ids") or phase_row.get("exit_gates_required", [])
+    conditional = phase_row.get("exit_gates_conditional", [])
+    sprint_issues_done = all(
+        i.get("status") in ("done", "carry_over") for i in board.get("issues", [])
+    )
+    return {
+        "phase": phase_num,
+        "sprint_issues_complete": sprint_issues_done,
+        "exit_gates_required": required,
+        "exit_gates_conditional": conditional,
+        "note": "Sprint complete != phase exit — PM verifies exit gates in P1-06 review",
+    }
+
+
+def _agent_wip_room(board: dict[str, Any], agent: str) -> int:
+    limits = board.get("orchestration", {}).get("max_in_progress", {})
+    cap = limits.get(agent, 1)
+    in_prog = sum(
+        1
+        for i in board.get("issues", [])
+        if i.get("status") == "in_progress" and i.get("agent_owner") == agent
+    )
+    return max(0, cap - in_prog)
+
+
+def _can_parallel_start(issue: dict[str, Any], idx: dict[str, dict[str, Any]], board: dict[str, Any]) -> bool:
+    parallel_with = issue.get("parallel_with") or []
+    if not parallel_with:
+        return False
+    for pid in parallel_with:
+        par = idx.get(pid)
+        if not par or par.get("status") not in ("in_progress", "pending"):
+            continue
+        if par.get("status") == "in_progress":
+            return True
+        if par.get("status") == "pending" and deps_satisfied(par, idx):
+            return True
+    return False
+
+
 def compute_dispatch(board: dict[str, Any]) -> dict[str, Any]:
     idx = issue_index(board)
     active = board.get("active_sprint", {})
@@ -198,16 +261,43 @@ def compute_dispatch(board: dict[str, Any]) -> dict[str, Any]:
                     "title": issue.get("title"),
                     "acceptance_gate_ids": issue.get("acceptance_gate_ids", []),
                     "implementation_plan_tasks": issue.get("implementation_plan_tasks", []),
+                    "done_requires": issue.get("done_requires", "pr_merged"),
+                    "branch_name_pattern": issue.get("branch_name_pattern", "cursor/{issue_id}-a091"),
+                    "parallel_with": issue.get("parallel_with", []),
                 }
             )
 
-    # only head of queue unless in_progress continues
     in_progress = [d for d in dispatch if d["action"] == "continue"]
     pending = [d for d in dispatch if d["action"] == "start"]
-    next_dispatch = in_progress[:3] + pending[:1]
+
+    max_parallel = board.get("orchestration", {}).get("max_parallel_starts", 2)
+    next_dispatch = list(in_progress[:3])
+
+    # Primary pending head
+    if pending and len(next_dispatch) < max_parallel:
+        next_dispatch.append(pending[0])
+        started_ids = {d["issue_id"] for d in next_dispatch}
+
+        # Parallel starts when WIP allows
+        for candidate in pending[1:]:
+            if len(next_dispatch) >= max_parallel:
+                break
+            if candidate["issue_id"] in started_ids:
+                continue
+            issue_row = idx.get(candidate["issue_id"], {})
+            if not _can_parallel_start(issue_row, idx, board):
+                continue
+            agent = candidate["agent"]
+            if _agent_wip_room(board, agent) <= 0:
+                continue
+            next_dispatch.append(candidate)
+            started_ids.add(candidate["issue_id"])
 
     incomplete = [i for i in board.get("issues", []) if i.get("status") not in ("done", "carry_over")]
     sprint_complete = len(incomplete) == 0
+
+    phases = load_phases()
+    budget_hit, budget_msg = session_budget_exceeded(board, phases)
 
     return {
         "sprint_id": active.get("id"),
@@ -219,11 +309,52 @@ def compute_dispatch(board: dict[str, Any]) -> dict[str, Any]:
         "stale_issues": detect_stale(board),
         "wip_violations": wip_violations(board),
         "incomplete_count": len(incomplete),
+        "session_budget_exceeded": budget_hit,
+        "session_budget_message": budget_msg,
+        "phase_exit": phase_exit_summary(board, phases),
     }
 
 
+def build_dispatch_packets(report: dict[str, Any], board: dict[str, Any]) -> dict[str, Any]:
+    idx = issue_index(board)
+    active = board.get("active_sprint", {})
+    packets = []
+    for d in report.get("next_dispatch", []):
+        iid = d["issue_id"]
+        issue = idx.get(iid, {})
+        agent = d.get("agent", "pm")
+        handoff = issue.get("handoff_refs") or DEFAULT_HANDOFF_REFS.get(agent, ["docs/README.md"])
+        branch = issue.get("branch_name_pattern", "cursor/{issue_id}-a091").replace("{issue_id}", iid)
+        packets.append(
+            {
+                "issue_id": iid,
+                "agent": agent,
+                "co_agent": d.get("co_agent"),
+                "action": d.get("action"),
+                "title": d.get("title"),
+                "acceptance_gate_ids": d.get("acceptance_gate_ids", []),
+                "done_requires": d.get("done_requires", "pr_merged"),
+                "branch": branch,
+                "sprint_branch": active.get("branch", "game/development"),
+                "handoff_refs": handoff,
+                "implementation_plan_tasks": d.get("implementation_plan_tasks", []),
+                "github_issue": issue.get("github_issue"),
+                "session_gate_command": f"bash tools/run_agent_session_gate.sh {agent} {iid}",
+                "evidence_dir": f"artifacts/sprint_evidence/{iid}",
+                "prior_commit": issue.get("last_commit_sha"),
+            }
+        )
+    payload = {
+        "version": "1.0",
+        "generated_at": report.get("generated_at"),
+        "sprint_id": report.get("sprint_id"),
+        "dispatch": packets,
+    }
+    save_json(DISPATCH_PACKET_PATH, payload)
+    return payload
+
+
 def sync_missing_from_pack(board: dict[str, Any], dry_run: bool = False) -> tuple[list[str], list[str]]:
-    """Return (added_ids, missing_in_pack)."""
     pack_ref = board.get("active_sprint", {}).get("issue_pack_ref", "")
     pack_path = ROOT / pack_ref if pack_ref else None
     pack_ids = parse_issue_pack(pack_path) if pack_path else []
@@ -253,6 +384,8 @@ def orchestrator_pass(report: dict[str, Any], board: dict[str, Any]) -> bool:
         return False
     if board.get("carry_over_queue"):
         return False
+    if report.get("session_budget_exceeded"):
+        return False
     return True
 
 
@@ -262,6 +395,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="PM sprint orchestrator dispatch")
     parser.add_argument("--dispatch", action="store_true", help="Compute next agent dispatch")
     parser.add_argument("--write-report", action="store_true", help="Write artifacts/pm_orchestrator_report.json")
+    parser.add_argument("--write-dispatch-packet", action="store_true", help="Write artifacts/pm_dispatch_packet.json")
     parser.add_argument("--json", action="store_true", help="Print report JSON to stdout")
     args = parser.parse_args()
 
@@ -275,17 +409,19 @@ def main() -> int:
 
     if args.write_report:
         save_json(REPORT_PATH, report)
+    if args.write_dispatch_packet or args.write_report:
+        build_dispatch_packets(report, board)
 
     if args.json:
-        import json as _json
-
-        print(_json.dumps(report, indent=2))
+        print(json.dumps(report, indent=2))
     else:
         print("==> PM Orchestrator dispatch")
         print(f"    Sprint: {report.get('sprint_id')} (phase {report.get('phase')})")
         print(f"    Incomplete: {report.get('incomplete_count')}")
         print(f"    Sprint complete: {report.get('sprint_complete')}")
         print(f"    Orchestrator pass: {report.get('orchestrator_pass')}")
+        if report.get("session_budget_exceeded"):
+            print(f"\n[FAIL] Session budget: {report.get('session_budget_message')}")
         if report.get("stale_issues"):
             print("\n[FAIL] Stale issues:")
             for s in report["stale_issues"]:
@@ -309,6 +445,8 @@ def main() -> int:
             head = report["next_dispatch"][0]
             print("\n==> AGENT_SESSION_COMMAND")
             print(f"bash tools/run_agent_session_gate.sh {head['agent']} {head['issue_id']}")
+            print("\n==> DISPATCH_PACKET")
+            print("artifacts/pm_dispatch_packet.json")
         if args.write_report:
             print(f"\nReport: {REPORT_PATH.relative_to(ROOT)}")
 

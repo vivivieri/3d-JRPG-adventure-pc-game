@@ -49,14 +49,26 @@ allowed = [
 if not allowed:
     print(f"[FAIL] Agent session gate — {agent} not dispatched for {issue_id}")
     print("PM must run: bash tools/run_pm_orchestrator.sh")
+    print("Read: artifacts/pm_dispatch_packet.json")
     print("Current next_dispatch:")
     for d in dispatch:
         print(f"  - {d.get('issue_id')} → {d.get('agent')} ({d.get('action')})")
     sys.exit(1)
 
-# Mark in_progress on board if still pending
+# Strict role — owner or co_agent only (no architect wearing builder hat)
 board_path = root / "game/data/qa/sprint_board.json"
 board = json.loads(board_path.read_text(encoding="utf-8"))
+issue_row = next((i for i in board.get("issues", []) if i.get("id") == issue_id), None)
+strict = os.environ.get("AGENT_SESSION_STRICT_ROLE", "1") != "0"
+if strict and issue_row:
+    owner = issue_row.get("agent_owner")
+    co = issue_row.get("co_agent")
+    if agent not in (owner, co):
+        print(f"[FAIL] Strict role — {agent} cannot run issue owned by {owner}")
+        print("Policy: one agent role per session (docs/MULTI_AGENT_BRANCH_STRATEGY.md)")
+        sys.exit(1)
+
+# Mark in_progress on board if still pending
 for issue in board.get("issues", []):
     if issue.get("id") == issue_id:
         if issue.get("status") == "pending":

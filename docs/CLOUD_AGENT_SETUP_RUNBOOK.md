@@ -186,10 +186,13 @@ AFTER orchestrator PASS, read artifacts/pm_orchestrator_report.json → next_dis
 NEVER: skip orchestrator, mark gates PASS without QA evidence, use cron logic.
 ```
 
-### Automation B — **CI failure triage** (optional)
+### Automation B — **CI failure triage** (required)
 
 | Trigger | **CI completed** — workflow `Game CI` — **failure** on `game/development` |
-| Prompt | Run remediation; `bash tools/qa_emit_remediation.sh`; assign Architect/Builder; do not dispatch PM on success (worker emits cycle event) |
+| Workflow | `.github/workflows/game-ci-failure-triage.yml` |
+| Prompt | Run remediation; `bash tools/qa_emit_remediation.sh`; re-dispatch **same issue** via `agent_cycle_failed`; do not mark done |
+
+On **success**, worker emits `agent_cycle_complete` — PM is not triggered by CI pass alone.
 
 ### Automation C — **Human UAT notify** (end of pipeline)
 

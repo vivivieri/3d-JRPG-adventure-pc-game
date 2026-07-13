@@ -40,6 +40,21 @@ def main() -> int:
         found["status"] = args.status
         if args.status == "in_progress":
             found["last_agent_session"] = now
+        if args.status == "done":
+            import subprocess
+
+            check = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "tools/pm_check_done_criteria.py"),
+                    args.issue_id,
+                    *(["--commit", args.commit] if args.commit else []),
+                ],
+                cwd=ROOT,
+            )
+            if check.returncode != 0:
+                print("Done criteria not met — use --status blocked or fix PR/CI", file=sys.stderr)
+                return check.returncode
     if args.agent:
         found["last_agent_session"] = now
     if args.commit:

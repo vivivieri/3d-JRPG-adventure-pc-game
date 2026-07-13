@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "updated_at": null,
+  "status": "idle",
+  "last_event": null,
+  "last_issue_id": null,
+  "last_agent_role": null,
+  "last_commit_sha": null,
+  "sprint_id": "Phase1-Sprint1",
+  "note": "Updated by pm_emit_cycle_event.sh after each cycle",
+  "agent_sessions_this_sprint": 0,
+  "factory_halted": false
+}

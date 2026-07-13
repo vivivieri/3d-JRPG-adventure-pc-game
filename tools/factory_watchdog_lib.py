@@ -86,6 +86,19 @@ def append_cycle_log(entry: dict[str, Any]) -> None:
 
 
 def last_cycle_event() -> dict[str, Any] | None:
+    snapshot_path = ROOT / "game/data/qa/factory_health_snapshot.json"
+    if snapshot_path.is_file():
+        snap = load_json(snapshot_path)
+        if snap.get("last_event"):
+            return {
+                "event": snap.get("last_event"),
+                "timestamp": snap.get("updated_at"),
+                "issue_id": snap.get("last_issue_id"),
+                "agent_role": snap.get("last_agent_role"),
+                "commit_sha": snap.get("last_commit_sha"),
+                "sprint_id": snap.get("sprint_id"),
+                "source": "factory_health_snapshot.json",
+            }
     if not CYCLE_LOG_PATH.is_file():
         event_file = ROOT / "artifacts/agent_cycle_event.json"
         if event_file.is_file():

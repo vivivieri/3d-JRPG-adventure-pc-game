@@ -18,7 +18,7 @@ shift || true
 
 if [[ -z "$EVENT" ]]; then
   echo "Usage: bash tools/pm_emit_cycle_event.sh <event> [options]"
-  echo "Events: agent_cycle_complete | sprint_cycle_complete | ci_cycle_complete | uat_ready | mcp_blocked | watchdog_recovery | factory_halt"
+  echo "Events: agent_cycle_complete | agent_cycle_failed | sprint_cycle_complete | ci_cycle_complete | uat_ready | mcp_blocked | watchdog_recovery | factory_halt"
   exit 2
 fi
 
@@ -84,20 +84,47 @@ PY
 echo ""
 echo "==> Cycle event written: ${EVENT_FILE}"
 
-# Append to cycle log for watchdog stall detection
-python3 - <<'LOGPY'
-import json
-from pathlib import Path
-src = Path("artifacts/agent_cycle_event.json")
-log = Path("artifacts/factory_cycle_log.jsonl")
-if src.is_file():
-    log.parent.mkdir(parents=True, exist_ok=True)
-    with log.open("a", encoding="utf-8") as fh:
-        fh.write(src.read_text(encoding="utf-8").strip() + "\n")
-LOGPY
+# Cycle log + health snapshot (committed path for remote watchdog)
+python3 - <<'SNAPPY'
+import os
+import sys
+sys.path.insert(0, "tools")
+from pm_event_lib import append_cycle_log, write_health_snapshot
+
+payload_path = __import__("pathlib").Path("artifacts/agent_cycle_event.json")
+if payload_path.is_file():
+    import json
+    payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    append_cycle_log(payload)
+    status = "halted" if payload.get("event") in ("mcp_blocked", "factory_halt") else "active"
+    write_health_snapshot(
+        event=payload.get("event"),
+        issue_id=payload.get("issue_id"),
+        agent_role=payload.get("agent_role"),
+        commit_sha=payload.get("commit_sha"),
+        sprint_id=payload.get("sprint_id"),
+        status=status,
+        note=payload.get("note"),
+    )
+    print("==> Health snapshot: game/data/qa/factory_health_snapshot.json")
+SNAPPY
+
+# mcp_blocked / factory_halt → stop automatic recovery
+if [[ "$EVENT" == "mcp_blocked" || "$EVENT" == "factory_halt" ]]; then
+  bash tools/run_factory_watchdog.sh --halt "${NOTES:-$EVENT}" 2>/dev/null || true
+  ALERT_URL="${CURSOR_FACTORY_ALERT_WEBHOOK_URL:-}"
+  if [[ -n "$ALERT_URL" ]]; then
+    curl -sf -X POST "$ALERT_URL" -H "Content-Type: application/json" -d @"${EVENT_FILE}" || true
+  fi
+fi
+
+# agent_cycle_failed → PM webhook (remediation, not next issue)
+if [[ "$EVENT" == "agent_cycle_failed" ]]; then
+  echo "cycle_pending=${EVENT} commit=${COMMIT_SHA}" > "${ARTIFACT_DIR}/.cycle_pending"
+fi
 
 # Marker for optional CI secondary trigger (avoid naked CI→PM loops)
-if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "sprint_cycle_complete" || "$EVENT" == "watchdog_recovery" ]]; then
+if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "sprint_cycle_complete" || "$EVENT" == "watchdog_recovery" || "$EVENT" == "agent_cycle_failed" ]]; then
   echo "cycle_pending=${EVENT} commit=${COMMIT_SHA}" > "${ARTIFACT_DIR}/.cycle_pending"
 fi
 

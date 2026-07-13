@@ -55,3 +55,5 @@ artifacts/factory_heartbeat.json
 artifacts/factory_state.json
 artifacts/factory_health_report.json
 artifacts/factory_cycle_log.jsonl
+artifacts/pm_dispatch_packet.json
+artifacts/linear_sync_manifest.json

@@ -32,7 +32,10 @@
     "GitHub issue closed but sprint_board status not done",
     "Sprint issue pack and sprint_board ID mismatch",
     "Skipping pm_emit_cycle_event.sh after issue done (factory stall)",
-    "Ignoring factory_halt flag and starting workers anyway"
+    "Ignoring factory_halt flag and starting workers anyway",
+    "Marking issue done without pm_check_done_criteria PASS",
+    "Architect and Builder work in same agent session (strict role violation)",
+    "Skipping evidence bundle before issue done"
   ],
   "gates": {
     "L0_rr_compliance": {

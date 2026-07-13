@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "docs/SPRINT_ORCHESTRATION.md",
   "design_ref": "docs/sprints/Phase1-Sprint1-issues.md",
   "active_sprint": {
@@ -10,7 +10,14 @@
     "started_at": "2026-07-13",
     "issue_pack_ref": "docs/sprints/Phase1-Sprint1-issues.md",
     "max_issues": 10,
-    "branch": "game/development"
+    "branch": "game/development",
+    "branch_pattern": "cursor/{issue_id}-a091",
+    "phase_exit_gate_ids": [
+      "L0_rr_compliance",
+      "L1_unit_tests",
+      "L2_boot_headless",
+      "L2_scene_primitives"
+    ]
   },
   "previous_sprint": null,
   "orchestration": {
@@ -37,7 +44,10 @@
       "blocked",
       "done",
       "carry_over"
-    ]
+    ],
+    "require_github_issues": false,
+    "max_parallel_starts": 2,
+    "preflight_mode": "auto"
   },
   "issues": [
     {
@@ -71,7 +81,15 @@
       "last_agent_session": "2026-07-13T12:37:57.256139+00:00",
       "last_commit_sha": null,
       "escalation_level": 0,
-      "carry_over_from": null
+      "carry_over_from": null,
+      "done_requires": "ci_green_on_branch",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/BRANCHING.md",
+        "AGENTS.md",
+        "tools/bootstrap_game_development.sh"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-01",
@@ -101,7 +119,15 @@
       "last_agent_session": null,
       "last_commit_sha": null,
       "escalation_level": 0,
-      "carry_over_from": null
+      "carry_over_from": null,
+      "done_requires": "pr_merged",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/RENDERING_GUIDE.md",
+        "docs/ENVIRONMENT_KITS.md",
+        "docs/ART_DIRECTION.md"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-02",
@@ -135,7 +161,15 @@
       "last_agent_session": null,
       "last_commit_sha": null,
       "escalation_level": 0,
-      "carry_over_from": null
+      "carry_over_from": null,
+      "done_requires": "pr_merged",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/MCP_STACK.md",
+        "docs/ENVIRONMENT_KITS.md",
+        "docs/RENDERING_GUIDE.md"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-03",
@@ -163,7 +197,14 @@
       "carry_over_from": null,
       "parallel_with": [
         "P1-02"
-      ]
+      ],
+      "done_requires": "pr_merged",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/RENDERING_GUIDE.md",
+        "docs/ART_DIRECTION.md"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-04",
@@ -200,7 +241,14 @@
       "last_agent_session": null,
       "last_commit_sha": null,
       "escalation_level": 0,
-      "carry_over_from": null
+      "carry_over_from": null,
+      "done_requires": "pr_merged",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/ACCEPTANCE_CRITERIA.md",
+        "docs/AI_TESTING_SPEC.md"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-05",
@@ -228,7 +276,14 @@
       "last_commit_sha": null,
       "escalation_level": 0,
       "carry_over_from": null,
-      "co_agent": "builder"
+      "co_agent": "builder",
+      "done_requires": "pr_merged",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/VISUAL_QA.md",
+        "docs/GENERATION_READINESS.md"
+      ],
+      "linear_issue": null
     },
     {
       "id": "P1-06",
@@ -251,7 +306,14 @@
       "last_commit_sha": null,
       "escalation_level": 0,
       "carry_over_from": null,
-      "co_agent": "qa"
+      "co_agent": "qa",
+      "done_requires": "push_only",
+      "branch_name_pattern": "cursor/{issue_id}-a091",
+      "handoff_refs": [
+        "docs/SPRINT_ORCHESTRATION.md",
+        "game/data/qa/sprint_phases.json"
+      ],
+      "linear_issue": null
     }
   ],
   "carry_over_queue": [],
