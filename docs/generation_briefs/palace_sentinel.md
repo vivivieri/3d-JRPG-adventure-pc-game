@@ -8,6 +8,18 @@
 
 Angular ryūgū-jō armor **~2.5 m** — spear + tower shield; single horizontal gold eye slit; **spear+shield silhouette at 12 m**; weak to Spirit (Yuzu).
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Sterile palace menace, obedient violence |
+| Secondary mood | Lacquer perfection — soulless not heroic |
+| Audience read | Miniboss — teaches Spirit weakness |
+| Static read (turntable) | Angular armor; spear+shield read at distance |
+| Motion feel (human L6) | Spear thrust telegraph clear; block stance reads heavy |
+| Must avoid | European knight, samurai hero, bright gold parade armor |
+| Story anchor | SC-14 sentinel hall |
+
 ## Tool chain
 
 Meshy → Blender (lacquer plates, no European mail) → Mixamo → GLB.

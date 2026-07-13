@@ -8,6 +8,18 @@
 
 Impossible floating ryūgū gate **~12–15 m** tall — coral gold trim, void sky `#1A1A3A` behind; gold emission **capped** to avoid bloom clip; pearl socket for `wraith_pearl`.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Vertigo awe, impossible scale |
+| Secondary mood | Sterile perfection over void — not triumphant portal |
+| Audience read | SC-12 arrival — party feels small |
+| Static read (turntable) | Floating gate; gold trim restrained; void behind |
+| Motion feel (human L6) | Vertigo establishing pan sells scale |
+| Must avoid | European castle gate, Roman arch, starry sky, neon gold |
+| Story anchor | SC-12 palace approach |
+
 ## Tool chain
 
 Meshy/Blender hero sculpt → ComfyUI gold trim albedo → `palette_remap.py --zone dragon_palace_gate` → GLB.

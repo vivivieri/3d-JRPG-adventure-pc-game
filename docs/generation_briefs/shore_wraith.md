@@ -8,6 +8,18 @@
 
 Colossal **4.0 m** draped monolith — pooled cloth base, 5–7 embedded villager faces; `heavy_slam` telegraph readable; emerges from pool (5 s intro).
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Colossal communal guilt, drowned grief |
+| Secondary mood | Faces under folds — unsettling not splatter horror |
+| Audience read | First boss — awe and dread |
+| Static read (turntable) | Draped monolith pools at base; faces glimpsed in folds |
+| Motion feel (human L6) | `heavy_slam` telegraph readable; emerge from pool feels inevitable |
+| Must avoid | Jump-scare horror, European reaper, anime villain pose |
+| Story anchor | SC-09 boss — village sins rise |
+
 ## Tool chain
 
 Meshy/Blender hero sculpt → particle drip cards → Mixamo/custom rig → GLB.

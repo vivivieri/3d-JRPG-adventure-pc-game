@@ -8,6 +8,18 @@
 
 Old stone well — granite basin + weathered wood rim; **interact highlight** readable; visible from main path without compass.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Lonely save anchor, village memory |
+| Secondary mood | Utility worn by time — not fairy-tale wishing well |
+| Audience read | Discoverable save without UI compass |
+| Static read (screenshot) | Stone mass readable on path sightline |
+| Motion feel (human L6) | Interact prompt feels safe but melancholy |
+| Must avoid | Glowing magic well, European fountain, pristine stone |
+| Story anchor | SC-02 well save |
+
 ## Tool chain
 
 Material Maker stone + Blender → GLB.

@@ -107,8 +107,12 @@ Sends **4 turntable PNGs** to vision models with `CHARACTER_BIBLE` / catalog bri
 | M4 | **Readable silhouette** at game distance (3/4 view)? |
 | M5 | **Sufficient detail** for high-detail NPR target — not low-poly kitbash? |
 | M6 | Matches model brief (coat, box, torii, etc.)? |
+| M7 | **Emotional mood matches** generation brief (`docs/generation_briefs/<id>.md`)? |
+| M8 | **No forbidden tone** (comedy cheer, horror gore, bright Ghibli swagger)? |
 
-**Pass:** ≥2 models `acceptance.valid_pass: true` (confidence ≥ 0.65, all M1–M6 met). See `docs/ACCEPTANCE_CRITERIA.md` gate `L2_model_jury`.
+**Pass:** ≥2 models `acceptance.valid_pass: true` (confidence ≥ 0.65, all M1–M8 met). Jury loads **Emotional intent** from generation brief when present. See `tools/generation_brief_lib.py`. Gate `L2_model_jury`.
+
+**Note:** M7/M8 judge **art-direction emotional register** from stills — not animation feel or player enjoyment (human L6).
 
 ### Why turntable + in-game screenshot?
 
@@ -174,7 +178,8 @@ Wired into `run_playtest_smoke.sh`.
 | `tools/check_model_catalog.py` | Phase required models |
 | `tools/check_model_technical.py` | GLB lint |
 | `tools/render_model_turntable.py` | Blender 4-view render |
-| `tools/review_model_vision.py` | Multi-LLM turntable jury |
+| `tools/review_model_vision.py` | Multi-LLM turntable jury (loads generation brief emotional intent) |
+| `tools/generation_brief_lib.py` | Load `## Emotional intent` from `docs/generation_briefs/` |
 | `tools/run_model_smoke_checks.sh` | L2 smoke wrapper |
 
 ---

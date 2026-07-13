@@ -7,6 +7,18 @@
 
 Bioluminescent guilt caves — **no sky**; cyan emissive algae primary fill; ceiling **≥3 m**; puzzle water heights readable; Shore Wraith arena at SC-09.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Wonder mixed with wrongness |
+| Secondary mood | Biolume beauty hiding guilt |
+| Audience read | Dungeon — awe then dread at boss |
+| Static read (screenshot) | Cyan algae on wet stone; no sky; readable tunnels |
+| Motion feel (human L6) | Puzzle water shifts feel deliberate; boss arena oppressive |
+| Must avoid | Horror gore dungeon, generic grey cave, lava, torch medieval |
+| Story anchor | SC-06–09 caves arc |
+
 ## Tool chain
 
 ComfyUI wet stone + emissive algae → modular tunnel kit → GDAI assembly + point lights.

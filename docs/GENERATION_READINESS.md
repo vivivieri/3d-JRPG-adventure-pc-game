@@ -58,6 +58,18 @@ Create `docs/generation_briefs/<asset_id>.md` when starting M5 work on that asse
 - Silhouette: <!-- from CHARACTER_BIBLE / ENVIRONMENT_KITS -->
 - Palette: <!-- hex anchors from ART_DIRECTION -->
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | <!-- e.g. quiet guilt, dread, awe --> |
+| Secondary mood | <!-- nuance — not comedy, not horror gore --> |
+| Audience read | Men 20–30 — melancholy coastal; beauty with decay |
+| Static read (turntable / screenshot) | <!-- what still image must communicate --> |
+| Motion feel (human L6 only) | <!-- walk weight, telegraph timing — not automated --> |
+| Must avoid | <!-- comedy cheer, horror gore, bright Ghibli, European medieval --> |
+| Story anchor | <!-- SC-XX scene reference --> |
+
 ## Negative prompt (required)
 - chibi, anime eyes, PBR glossy, European medieval, Kenney, low-poly blockout
 

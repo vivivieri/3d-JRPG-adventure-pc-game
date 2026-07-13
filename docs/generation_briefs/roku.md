@@ -8,6 +8,18 @@
 
 Bulky old diver — patched canvas suit, harpoon across back; **wide stance**; taunt/guard readable at 6 m; harpoon stowed vs strike states distinct.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Gruff survivor weight, stubborn duty |
+| Secondary mood | Weathered humor without comedy |
+| Audience read | Men 20–30 — working-class coastal elder |
+| Static read (turntable) | Wide stance, bowed legs, harpoon strap — reads immovable |
+| Motion feel (human L6) | Heavy planted taunt; harpoon strike has weight |
+| Must avoid | Action hero swagger, clean navy diver, comedy slapstick |
+| Story anchor | SC-04 shack — last diver who stayed |
+
 ## Tool chain
 
 Meshy → Blender (harpoon separate mesh, stowed + drawn variants or single with anim) → Mixamo → GLB → GDAI `village_shack_roku` interior.

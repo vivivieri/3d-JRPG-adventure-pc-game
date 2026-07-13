@@ -10,6 +10,18 @@
 
 Weathered late-20s Japanese fisherman, adult **1:5** proportions (~1.7 m), dark indigo coat and cream tunic — **lacquer box on left hip readable at 8 m gameplay camera** in `ruined_village`.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Quiet guilt, exhaustion |
+| Secondary mood | Weathered dignity — not self-pity or heroism |
+| Audience read | Men 20–30 — melancholy coastal; emotional weight |
+| Static read (turntable) | Slightly hunched posture; worn clothes; box visible — reads alone and tired |
+| Motion feel (human L6) | Heavy tired walk; not bouncy anime gait |
+| Must avoid | Chibi comedy, heroic swagger, bright hope, horror gore |
+| Story anchor | SC-01 — clutching box on grey beach |
+
 ---
 
 ## Tool chain

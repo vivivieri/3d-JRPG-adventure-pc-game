@@ -256,7 +256,9 @@
         "v3_npr_not_pbr": { "expect": true, "label": "Stylized NPR not glossy PBR" },
         "v4_japanese_coastal": { "expect": true, "label": "Japanese coastal motifs" },
         "v5_silhouette_readable": { "expect": true, "label": "Readable silhouettes" },
-        "v6_ui_clean": { "expect": true, "label": "UI clean if visible" }
+        "v6_ui_clean": { "expect": true, "label": "UI clean if visible" },
+        "v7_emotional_mood_matches": { "expect": true, "label": "Zone emotional mood matches brief" },
+        "v8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/screenshots/*.png", "artifacts/visual_reviews/*.jury.json"],
       "design_ref": "docs/VISUAL_QA.md §2G"
@@ -273,7 +275,9 @@
         "m3_adult_not_chibi": { "expect": true, "label": "Adult proportions not chibi" },
         "m4_silhouette_readable": { "expect": true, "label": "Silhouette readable" },
         "m5_sufficient_detail": { "expect": true, "label": "Sufficient NPR detail" },
-        "m6_matches_brief": { "expect": true, "label": "Matches CHARACTER_BIBLE brief" }
+        "m6_matches_brief": { "expect": true, "label": "Matches CHARACTER_BIBLE brief" },
+        "m7_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "m8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/model_reviews/*/front.png", "artifacts/model_reviews/*.model_jury.json"],
       "design_ref": "docs/MODEL_QA.md §M3b"

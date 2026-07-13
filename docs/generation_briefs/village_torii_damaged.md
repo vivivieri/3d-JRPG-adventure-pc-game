@@ -8,6 +8,18 @@
 
 Cracked shrine torii — **arch ≥4.0 m** (≥2.3× Urashima); splinter pattern + moss base; vista anchor for hub; spirit particles at interact.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Sacred threshold in decay |
+| Secondary mood | Broken festival gate — grief not demolition porn |
+| Audience read | Hub vista anchor — direction without compass |
+| Static read (turntable) | Cracked beam, moss, splinters; dominates skyline |
+| Motion feel (human L6) | Spirit particles at interact feel solemn |
+| Must avoid | Pristine vermillion torii, theme-park gate, European arch |
+| Story anchor | SC-03 Yuzu spirit shrine |
+
 ## Tool chain
 
 Meshy/Blender → ComfyUI wood + moss → `palette_remap.py --zone ruined_village` → GLB.

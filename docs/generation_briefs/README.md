@@ -42,4 +42,4 @@ Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/G
 | `villager_spirit`, `rebuilder` | Low-poly crowd silhouettes — ending zones only |
 | `ending_*` environments | Defer to Phase 7 per `ENVIRONMENT_KITS.md` §7 |
 
-**Pipeline:** READ brief → GEN → `palette_remap.py` → register → GDAI place → measure → jury → L6.
+**Pipeline:** READ brief (incl. Emotional intent) → GEN → `palette_remap.py` → register → GDAI place → measure → jury (M7/M8, V7/V8) → L6.

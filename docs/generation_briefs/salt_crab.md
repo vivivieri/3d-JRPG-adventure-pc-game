@@ -8,6 +8,18 @@
 
 Low wide crab — **one oversized claw**; barnacle shell; claw snap telegraph readable at **6 m** for first combat teach.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Threatening tutorial menace |
+| Secondary mood | Coastal wrongness — not cute pet |
+| Audience read | First combat teach — readable danger |
+| Static read (turntable) | Low wide silhouette; oversized claw dominates |
+| Motion feel (human L6) | Claw snap telegraph obvious; hit react sells impact |
+| Must avoid | Cartoon cute crab, bright red meme crab, spider horror |
+| Story anchor | SC-05 pier tutorial |
+
 ## Tool chain
 
 Meshy (creature) → Blender decimate → Mixamo creature rig or custom → GLB.

@@ -10,6 +10,18 @@
 
 Muted overcast **submerged Edo fishing hamlet** hub (~120×120 m) — dread and decay, torii silhouette at vista anchor, **well save visible from main path without compass**, ≤8 hero props in any 20×20 m gameplay view.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Dread, decay, submerged grief |
+| Secondary mood | Faint warmth at lantern/shack — not comfort |
+| Audience read | Men 20–30 — beauty with decay; not sunny slice-of-life |
+| Static read (screenshot) | Overcast fog, weathered wood, torii vista — oppressive but readable |
+| Motion feel (human L6) | Slow exploration weight; pier/submerge feels unsafe |
+| Must avoid | Sunny anime village, tropical resort, European medieval town |
+| Story anchor | SC-02 hub arrival — festival ended, village drowned in time |
+
 ---
 
 ## Tool chain

@@ -8,6 +8,18 @@
 
 Humanoid water form **~3.2 m** (P1–P2); blurred clock numerals in cloak (**unreadable**); phase mesh swaps; choice gate idle hold at 10% HP.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Tragic time deity — uncanny calm |
+| Secondary mood | Stolen time motif — blurred, not readable clocks |
+| Audience read | Final boss — awe, sorrow, moral weight |
+| Static read (turntable) | Flowing water body; numeral cards blurred; not horror face |
+| Motion feel (human L6) | `idle_drift` holds during choice; phase shrink feels tragic |
+| Must avoid | Readable clock horror, comedy wizard, heroic final boss pose |
+| Story anchor | SC-15–16 choice gate |
+
 ## Tool chain
 
 Meshy/Blender ×3 phase meshes → UV scroll shaders → GLB per phase.

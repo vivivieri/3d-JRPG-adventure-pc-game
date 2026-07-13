@@ -7,6 +7,18 @@
 
 Lonely grey arrival beach — spawn path to ruined gate silhouette; **min path 2 m**; ≤**3 hero props** in spawn sightline; dunes ≤30% of vista.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Lonely arrival, grey grief |
+| Secondary mood | Distant thunder — unease not action |
+| Audience read | SC-01 prologue isolation |
+| Static read (screenshot) | Pale sand, muted sky, ruined gate silhouette at vista |
+| Motion feel (human L6) | Slow walk to village; surf ambient oppressive |
+| Must avoid | Tropical paradise, sunny vacation beach, bright blue sky |
+| Story anchor | SC-01 after prologue |
+
 ## Tool chain
 
 ComfyUI sand textures → sculpted terrain meshes → GDAI `beach_shore.tscn` + `WaterController` hook.

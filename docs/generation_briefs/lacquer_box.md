@@ -7,6 +7,18 @@
 
 Edo lacquer box **18×12×8 cm** — gold clasp, red cord; **3 emission material presets** (dormant / awakened / choice); hip attach on Urashima.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Ominous sacred object, quiet curse |
+| Secondary mood | Precious but wrong — not treasure loot |
+| Audience read | Story-critical prop — always legible on hip |
+| Static read (turntable) | Lacquer mass, gold clasp, worn corners; dormant seam glow |
+| Motion feel (human L6) | Emission states sync story beats without blinding bloom |
+| Must avoid | Sparkling treasure chest, fantasy loot crate, comedy prop |
+| Story anchor | SC-16 choice — box as moral weight |
+
 ## Tool chain
 
 Meshy/Blender → 3 material variants or single mesh + shader uniforms → GLB.

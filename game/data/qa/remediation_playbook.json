@@ -71,6 +71,28 @@
         "GDAI: resolve Output panel font/texture errors"
       ],
       "escalate": "Godotiq ui_map for broken Control paths"
+    },
+    "v7_emotional_mood_matches": {
+      "lever": "shader_scene",
+      "root_cause": "Zone mood contradicts generation brief (wrong emotional register)",
+      "do_not_repeat": "Bloom-only mood fix without fog/sky/prop staging",
+      "actions": [
+        "Re-read docs/generation_briefs/<zone>.md Emotional intent",
+        "Tune fog, sky, lantern warmth per RENDERING_GUIDE.md zone row",
+        "Adjust prop staging (lanterns, decay, vista anchor) via GDAI"
+      ],
+      "escalate": "Regenerate zone albedos with brief mood keywords"
+    },
+    "v8_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Comedy cheer, horror gore, bright Ghibli sunshine, European triumph",
+      "do_not_repeat": "Desaturating in post without removing wrong motifs",
+      "actions": [
+        "Remove sunny HDRI / PhysicalSky; use ProceduralSky overcast",
+        "Swap European/medieval props per ENVIRONMENT_KITS.md",
+        "Expand negative prompts from brief Must avoid row"
+      ],
+      "escalate": "Human art review + brief update"
     }
   },
   "model": {
@@ -139,6 +161,28 @@
         "Compare turntable to bible bullet list"
       ],
       "escalate": "Kitbash correct part in Blender from second gen"
+    },
+    "m7_emotional_mood_matches": {
+      "lever": "prompt",
+      "root_cause": "Static read contradicts generation brief emotional intent",
+      "do_not_repeat": "Adding bloom/emission to fake mood without mesh/pose change",
+      "actions": [
+        "Re-read docs/generation_briefs/<id>.md Emotional intent table",
+        "Adjust Meshy prompt: posture, wear, staging per primary mood",
+        "Regenerate or sculpt pose/silhouette before texture polish"
+      ],
+      "escalate": "Manual Blender pose pass; update brief with human L6 note"
+    },
+    "m8_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Wrong emotional register (comedy, horror gore, bright cheer)",
+      "do_not_repeat": "Same prompt with one mood word swapped",
+      "actions": [
+        "Expand negative prompt from brief Must avoid row",
+        "Remove heroic/chibi/comedy keywords from positive prompt",
+        "Compare turntable to forbidden tone list in brief"
+      ],
+      "escalate": "tool_tier bump + reference mood words from ART_DIRECTION.md"
     }
   },
   "audio": {

@@ -8,6 +8,18 @@
 
 Shrine maiden spirit — white miko haori, red hakama, fox bell on left braid; **semi-transparent legs** with cyan ground tether; readable heal cast at 6 m combat cam.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Solemn grace, quiet sorrow |
+| Secondary mood | Otherworldly calm — not playful spirit |
+| Audience read | Men 20–30 — melancholy shrine maiden, not fanservice |
+| Static read (turntable) | Upright clasped hands; bell visible; spirit lower body reads ethereal |
+| Motion feel (human L6) | Float walk gentle; heal cast feels protective not flashy |
+| Must avoid | Fanservice pose, chibi miko, horror ghost gore |
+| Story anchor | SC-10 materialize at torii — grief made visible |
+
 ## Tool chain
 
 Meshy/Tripo → Blender (spirit alpha split on lower body) → Mixamo → `palette_remap.py` → GLB import → GDAI place in `cave_shrine_alcove` + party follower.

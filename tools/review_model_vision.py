@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from generation_brief_lib import format_emotional_context  # noqa: E402
 from model_qa_lib import ROOT, load_catalog  # noqa: E402
 from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
 
@@ -27,30 +28,43 @@ REVIEW_SCHEMA = """Respond with ONLY valid JSON:
   "m4_silhouette_readable": true,
   "m5_sufficient_detail": true,
   "m6_matches_brief": true,
+  "m7_emotional_mood_matches": true,
+  "m8_no_forbidden_tone": true,
   "overall_pass": true,
   "confidence": 0.8,
   "issues": ["short strings"],
   "summary": "one sentence"
 }
 
-Fail overall_pass if obvious grey box, European castle, chibi, or low-poly untextured kit."""
+Fail overall_pass if obvious grey box, European castle, chibi, low-poly untextured kit,
+wrong emotional register (comedy/horror gore/bright Ghibli cheer), or mood contradicts brief."""
 
 
 def build_prompt(model_id: str, meta: dict) -> str:
+    emotional = format_emotional_context(model_id)
+    emotional_block = (
+        f"\n\n### Emotional intent (generation brief — compliance only, NOT fun/enjoyment)\n{emotional}\n"
+        if emotional
+        else "\n\nEmotional intent: muted melancholy coastal JRPG — beauty with decay; men 20–30 audience.\n"
+    )
     return f"""You are a 3D model QA judge for Tides of Urashima — high-detail stylized Japanese coastal 3D (NOT chibi, NOT European fantasy, NOT untextured blocks).
 
 Model ID: {model_id}
 Category: {meta.get('category', '')}
 Creative brief: {meta.get('bible', '')}
-
+{emotional_block}
 You receive FOUR turntable renders: front, side, back, three_quarter.
 
 M1 — Obvious axis-aligned **block/cube** placeholder or untextured primitive?
 M2 — Stylized **Japanese coastal** read — not European castle / generic MMORPG?
-M3 — **Adult proportions** (head:body ~1:5) — not chibi?
+M3 — **Adult proportions** (head:body ~1:5) — not chibi? (Skip strict check for non-humanoid enemies if clearly intentional.)
 M4 — **Silhouette readable** on three_quarter view?
 M5 — **Enough geometric detail** for NPR hero asset — not a single low-poly lump?
 M6 — Matches brief (costume/prop identity)?
+M7 — **Emotional mood matches** brief primary mood (static read from posture, costume wear, prop staging)?
+M8 — **No forbidden tone** — no comedy/chibi cheer, horror gore, bright Ghibli sunshine, heroic swagger (unless brief allows)?
+
+Note: M7/M8 judge **art-direction emotional register** from still images — not animation feel or player enjoyment.
 
 {REVIEW_SCHEMA}"""
 

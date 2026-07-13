@@ -68,9 +68,9 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
 | `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
-| `L2_visual_jury` | ≥2 models, all V1–V6 met, confidence ≥ 0.65 |
+| `L2_visual_jury` | ≥2 models, all V1–V8 met, confidence ≥ 0.65 |
 | `L2_model_technical` | Tris in `qa_catalog.json` range, textures ≥ min, no greybox on ship |
-| `L2_model_jury` | ≥2 models, M1–M6 met, confidence ≥ 0.65 |
+| `L2_model_jury` | ≥2 models, M1–M8 met, confidence ≥ 0.65 |
 | `L2_audio_technical` | 44.1 kHz, LUFS/peak per bus table, no procedural on ship |
 | `L2_audio_jury` | ≥2 models, A1–A5 met, confidence ≥ 0.65 (hero tracks) |
 

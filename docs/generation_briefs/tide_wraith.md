@@ -8,6 +8,18 @@
 
 Tall dripping spirit — **no legs**, tapers to mist; featureless face; additive drip highlights without Z-fighting.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Coastal dread, impersonal guilt |
+| Secondary mood | Wrongness without gore |
+| Audience read | Standard enemy — unsettling not scary-movie |
+| Static read (turntable) | Tall taper to mist; faceless smooth head |
+| Motion feel (human L6) | Float lunge feels cold and inevitable |
+| Must avoid | Zombie gore, skeleton horror, jump-scare monster |
+| Story anchor | Caves trash mob — guilt made ambient |
+
 ## Tool chain
 
 Meshy → Blender (alpha mist cards at base) → rig → GLB with emission-friendly materials.

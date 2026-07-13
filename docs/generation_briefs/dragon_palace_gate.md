@@ -7,6 +7,18 @@
 
 Ryūgū-jō palace void — awe and sterile perfection; **corridor module every 8 m**; void sky `#1A1A3A` **no stars**; gold trim emission capped; Sentinel hall + Tide Keeper throne.
 
+## Emotional intent (jury + human rubric)
+
+| Field | Value |
+|-------|-------|
+| Primary mood | Awe, sterile perfection vs living world |
+| Secondary mood | Void loneliness — not triumphant fantasy castle |
+| Audience read | Finale zone — scale and moral coldness |
+| Static read (screenshot) | Gold trim restrained; void sky without stars; long corridors |
+| Motion feel (human L6) | Vertigo in gate approach; throne arena tragic |
+| Must avoid | European castle triumph, starry void sky, neon gold bloom |
+| Story anchor | SC-12–16 palace arc |
+
 ## Tool chain
 
 ComfyUI marble/lacquer → modular palace kit → hero gates/halls → GDAI + glow tuning.
