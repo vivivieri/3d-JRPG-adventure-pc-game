@@ -1,4 +1,3 @@
 {
-  "install": "bash tools/install_cloud_dev.sh",
-  "start": "bash tools/ensure_mcp_stack.sh"
+  "install": "pip3 install --user -q -r tools/requirements-ci.txt numpy"
 }

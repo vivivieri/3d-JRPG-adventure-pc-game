@@ -28,6 +28,16 @@
 
 **All MCP servers required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`). **Blender** required for M5 turntable QA. Procedural UI fallbacks OK for asset output only — see `docs/ART_AUTOMATION_PIPELINE.md`. If any required piece missing → STOP and notify user.
 
+### Cloud environment: which branch you are on matters
+
+The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) and the commercial GDAI plugin only exist / matter on `game/development`. **On `main` they are neither present nor needed** — `main` has no `project.godot`, no `.gd` gameplay code, and no `game/addons/`.
+
+- **`main` (default cloud checkout):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here only runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat` into `~/.local/bin`; `python3`/`numpy` ship in the base image). Do **not** boot the MCP/Godot stack on `main`.
+  - **Tests:** `bash tools/run_docs_ci_checks.sh` (L0 docs+data gates, pure `python3`).
+  - **Lint:** `bash tools/check_gdscript_changed.sh` (SKIPs on `main` — no `.gd`); `gdlint <file>` directly for any `.gd` (project scripts add `~/.local/bin` to PATH themselves).
+  - **Run the content pipeline (the runnable "app" on `main`):** e.g. `python3 tools/generate_game_audio.py --track bgm_village` writes a real `.ogg` under `game/assets/audio/bgm/` (untracked — do not commit demo output). `tools/generate_procedural_portraits.py` currently has a syntax error and is not runnable.
+- **`game/development`:** run the full bootstrap below. That heavy stack (Godot download, commercial plugins, MCP bridges) is intentionally **not** wired into `main`'s `environment.json`.
+
 ### Environment bootstrap
 
 On every cloud agent start:
