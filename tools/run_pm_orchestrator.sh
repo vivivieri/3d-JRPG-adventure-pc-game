@@ -9,6 +9,9 @@ cd "$ROOT"
 
 export ROOT
 
+# Heartbeat — PM session start (watchdog hang detection)
+bash tools/pm_record_heartbeat.sh --agent pm --phase start --note "orchestrator" 2>/dev/null || true
+
 python3 <<'PY'
 import json
 import os
@@ -38,11 +41,35 @@ for step in data.get("session_steps", []):
         print()
         print("PM ORCHESTRATOR: FAILED — do not assign agents until fixed")
         print("Docs: docs/PM_AGENT_RUNBOOK.md")
+        # Record fail for watchdog
+        from datetime import datetime, timezone
+        from pathlib import Path
+        import json
+        state_path = root / "artifacts/factory_state.json"
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        state = {}
+        if state_path.is_file():
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+        state["last_orchestrator_result"] = "fail"
+        state["last_orchestrator_at"] = datetime.now(timezone.utc).isoformat()
+        state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
         sys.exit(1)
     print(f"[PASS] Step {n} ({sid})")
     print()
 
 print("PM ORCHESTRATOR: PASS")
+# Record pass for watchdog
+from datetime import datetime, timezone
+from pathlib import Path
+import json
+state_path = root / "artifacts/factory_state.json"
+state_path.parent.mkdir(parents=True, exist_ok=True)
+state = {}
+if state_path.is_file():
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+state["last_orchestrator_result"] = "pass"
+state["last_orchestrator_at"] = datetime.now(timezone.utc).isoformat()
+state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
 print()
 print("Next: assign agent per artifacts/pm_orchestrator_report.json → next_dispatch")
 print("After agent session: python3 tools/pm_update_issue.py <id> --status done --commit <sha>")

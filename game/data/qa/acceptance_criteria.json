@@ -30,7 +30,9 @@
     "PM session without run_pm_orchestrator.sh PASS",
     "Agent work without run_agent_session_gate.sh PASS",
     "GitHub issue closed but sprint_board status not done",
-    "Sprint issue pack and sprint_board ID mismatch"
+    "Sprint issue pack and sprint_board ID mismatch",
+    "Skipping pm_emit_cycle_event.sh after issue done (factory stall)",
+    "Ignoring factory_halt flag and starting workers anyway"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -104,6 +106,15 @@
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/sprint_board.json", "artifacts/pm_orchestrator_report.json"],
       "design_ref": "docs/SPRINT_ORCHESTRATION.md, docs/PM_AGENT_RUNBOOK.md"
+    },
+    "L0_factory_watchdog": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_factory_watchdog.py",
+      "description": "Factory watchdog thresholds and exception-recovery config",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/factory_watchdog.json"],
+      "design_ref": "docs/FACTORY_WATCHDOG.md"
     },
     "L0_audio_qa_catalog": {
       "layer": "L0",
@@ -424,6 +435,7 @@
       "L0_scene_audio_map",
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
+      "L0_factory_watchdog",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],

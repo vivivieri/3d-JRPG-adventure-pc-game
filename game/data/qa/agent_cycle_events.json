@@ -33,6 +33,18 @@
       "emits": ["any agent session startup"],
       "triggers": "Human notification — fix secrets/snapshot before resume",
       "payload_fields": ["event", "failed_check", "log_excerpt"]
+    },
+    "watchdog_recovery": {
+      "description": "Factory watchdog detected stall, hang, or orchestrator failure — PM must diagnose and re-dispatch",
+      "emits": ["tools/run_factory_watchdog.sh --recover"],
+      "triggers": "PM Agent Automation (same webhook as agent_cycle_complete)",
+      "payload_fields": ["event", "issue_id", "agent_role", "note", "commit_sha", "sprint_id"]
+    },
+    "factory_halt": {
+      "description": "Human or exhausted recovery attempts — all automatic dispatch stopped",
+      "emits": ["tools/run_factory_watchdog.sh --halt", "watchdog when max recovery exceeded"],
+      "triggers": "Human alert Automation (CURSOR_FACTORY_ALERT_WEBHOOK_URL) — not workers",
+      "payload_fields": ["event", "reason", "halt_at"]
     }
   },
   "cycle_definition": {
@@ -43,6 +55,7 @@
   "forbidden_triggers": [
     "cron schedule for PM dispatch (wastes wall-clock; agents do not sleep)",
     "PM self-trigger without cycle_complete event (orchestrator loop guard)",
-    "Worker agent start without run_agent_session_gate.sh PASS"
-  ]
-}
+    "Worker agent start without run_agent_session_gate.sh PASS",
+    "Using factory-watchdog.yml schedule as primary dispatch (watchdog is exception-only)"
+  ],
+  "watchdog_ref": "docs/FACTORY_WATCHDOG.md"

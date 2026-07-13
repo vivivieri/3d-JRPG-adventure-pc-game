@@ -1,0 +1,72 @@
+# Factory Watchdog — stall/hang detection (exception layer only)
+#
+# NOT primary PM dispatch — runs on schedule to detect stalled factory.
+# Only POSTs webhook when run_factory_watchdog.sh --recover finds a problem.
+#
+# See docs/FACTORY_WATCHDOG.md
+
+name: Factory watchdog
+
+on:
+  schedule:
+    # Every 2 hours — exception monitoring only (not PM planning cron)
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      recover:
+        description: "Attempt recovery if unhealthy"
+        type: boolean
+        default: true
+
+jobs:
+  watchdog:
+    name: Stall and hang detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main (watchdog config)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Validate watchdog config
+        run: python3 tools/validate_factory_watchdog.py
+
+      - name: Analyze factory health
+        id: health
+        run: |
+          mkdir -p artifacts
+          bash tools/run_factory_watchdog.sh --json > artifacts/factory_health_report.json || true
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("artifacts/factory_health_report.json")
+          if not p.is_file():
+              print("status=unknown")
+              raise SystemExit(0)
+          r = json.loads(p.read_text())
+          print(f"status={r.get('status')}")
+          print(f"action={r.get('recommended_action')}")
+          PY
+
+      - name: Attempt recovery
+        if: >-
+          (github.event_name == 'schedule' || inputs.recover == true) &&
+          env.CURSOR_PM_CYCLE_WEBHOOK_URL != ''
+        env:
+          CURSOR_PM_CYCLE_WEBHOOK_URL: ${{ secrets.CURSOR_PM_CYCLE_WEBHOOK_URL }}
+          CURSOR_FACTORY_ALERT_WEBHOOK_URL: ${{ secrets.CURSOR_FACTORY_ALERT_WEBHOOK_URL }}
+        run: |
+          STATUS="$(python3 -c "import json; print(json.load(open('artifacts/factory_health_report.json')).get('status','unknown'))" 2>/dev/null || echo unknown)"
+          if [[ "$STATUS" == "healthy" || "$STATUS" == "idle_ok" || "$STATUS" == "halted" ]]; then
+            echo "No recovery needed (status=$STATUS)"
+            exit 0
+          fi
+          bash tools/run_factory_watchdog.sh --recover
+
+      - name: Upload health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: factory-health-report
+          path: artifacts/factory_health_report.json
+          if-no-files-found: ignore

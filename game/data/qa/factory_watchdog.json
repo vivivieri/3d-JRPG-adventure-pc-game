@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "authority": "docs/FACTORY_WATCHDOG.md",
+  "design_ref": "docs/CLOUD_AGENT_SETUP_RUNBOOK.md",
+  "policy": "Exception layer only — normal PM dispatch remains event-driven on cycle complete. Watchdog fires when factory is stalled, hung, or unhealthy.",
+  "thresholds": {
+    "stall_hours_idle": 4,
+    "stale_hours_in_progress": 24,
+    "recovery_cooldown_hours": 2,
+    "max_recovery_attempts_per_issue": 3,
+    "max_recovery_attempts_per_sprint": 12,
+    "heartbeat_stale_hours": 6
+  },
+  "triggers": {
+    "stalled": "No cycle event and incomplete sprint work for stall_hours_idle",
+    "stale_agent": "Issue in_progress longer than stale_hours_in_progress",
+    "no_heartbeat": "Active issue but no agent heartbeat for heartbeat_stale_hours",
+    "orchestrator_fail": "Last PM orchestrator run failed (reported in factory_state)",
+    "webhook_miss": "Cycle event saved locally but webhook not confirmed"
+  },
+  "recovery_actions": {
+    "stalled": "emit watchdog_recovery → PM Automation",
+    "stale_agent": "escalate + optional watchdog_recovery if past recovery_cooldown",
+    "no_heartbeat": "emit watchdog_recovery with hang suspicion",
+    "max_attempts_exceeded": "set factory_halt + notify human"
+  },
+  "halt_flag_path": "artifacts/factory_state.json",
+  "heartbeat_path": "artifacts/factory_heartbeat.json",
+  "cycle_log_path": "artifacts/factory_cycle_log.jsonl",
+  "health_report_path": "artifacts/factory_health_report.json",
+  "webhook_secrets": {
+    "recovery": "CURSOR_PM_CYCLE_WEBHOOK_URL",
+    "human_alert": "CURSOR_FACTORY_ALERT_WEBHOOK_URL"
+  },
+  "forbidden": [
+    "Using watchdog schedule as primary PM dispatch (replaces event-driven flow)",
+    "watchdog_recovery without cooldown when last recovery was recent",
+    "Clearing factory_halt without human or --force-halt-clear"
+  ]
+}

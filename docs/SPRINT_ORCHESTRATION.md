@@ -53,7 +53,7 @@ Agent or PM: bash tools/pm_emit_cycle_event.sh agent_cycle_complete ...  → tri
 PM: (new Automation run) run_pm_orchestrator.sh → next dispatch or sprint close
 ```
 
-**No hourly/daily PM schedule.** Next PM run is triggered only by `agent_cycle_complete`, `sprint_cycle_complete`, or guarded CI events. See `docs/CLOUD_AGENT_SETUP_RUNBOOK.md`.
+**No hourly/daily PM schedule.** Next PM run is triggered only by `agent_cycle_complete`, `sprint_cycle_complete`, `watchdog_recovery`, or guarded CI events. See `docs/CLOUD_AGENT_SETUP_RUNBOOK.md` and `docs/FACTORY_WATCHDOG.md` (stall exception layer).
 
 ---
 

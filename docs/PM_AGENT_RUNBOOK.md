@@ -127,7 +127,34 @@ Then update issue pack + board rows; clear `carry_over_queue`; re-run orchestrat
 
 ---
 
-## 7. What PM must never do
+## 7. Watchdog recovery (when factory stalls)
+
+Normal handoff uses `pm_emit_cycle_event.sh`. If the factory is **idle too long** while sprint work remains:
+
+```bash
+bash tools/run_factory_watchdog.sh          # health check
+bash tools/run_factory_watchdog.sh --recover # trigger PM via watchdog_recovery
+```
+
+When PM is triggered by `watchdog_recovery`:
+
+1. Read `artifacts/factory_health_report.json`
+2. Run `bash tools/run_pm_orchestrator.sh`
+3. Diagnose: missing cycle event? stale agent? webhook miss?
+4. Re-dispatch or mark `blocked` via `pm_update_issue.py`
+5. If unrecoverable: `bash tools/run_factory_watchdog.sh --halt "reason"`
+
+Long worker sessions — emit progress heartbeats:
+
+```bash
+bash tools/pm_record_heartbeat.sh --agent builder --issue P1-02 --phase progress
+```
+
+See `docs/FACTORY_WATCHDOG.md`.
+
+---
+
+## 8. What PM must never do
 
 - Mark gates PASS without QA evidence
 - Let agents start without `run_agent_session_gate.sh` PASS
@@ -146,6 +173,9 @@ Then update issue pack + board rows; clear `carry_over_queue`; re-run orchestrat
 | Update issue state | `python3 tools/pm_update_issue.py <id> --status done --commit <sha>` |
 | Escalate | `bash tools/pm_emit_escalation.sh <id> <level>` |
 | **End cycle → trigger PM** | `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>` |
+| Factory health | `bash tools/run_factory_watchdog.sh` |
+| Stall recovery | `bash tools/run_factory_watchdog.sh --recover` |
+| Emergency stop | `bash tools/run_factory_watchdog.sh --halt "reason"` |
 | Close sprint | `python3 tools/pm_close_sprint.py --next-sprint-number N` |
 | Validate board | `python3 tools/validate_sprint_board.py --strict` |
 
@@ -153,7 +183,8 @@ Then update issue pack + board rows; clear `carry_over_queue`; re-run orchestrat
 
 ## 9. Cross-refs
 
-- `docs/SPRINT_ORCHESTRATION.md` — enforcement model
+- `docs/CLOUD_AGENT_SETUP_RUNBOOK.md` — Cloud Agent factory setup
+- `docs/FACTORY_WATCHDOG.md` — stall/hang exception handling
 - `docs/MULTI_AGENT_TEAM.md` — handoff contracts
 - `docs/sprints/Phase1-Sprint1-issues.md` — current issue bodies
 - `game/data/qa/sprint_board.json` — live sprint state

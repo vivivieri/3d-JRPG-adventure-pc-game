@@ -18,7 +18,7 @@ shift || true
 
 if [[ -z "$EVENT" ]]; then
   echo "Usage: bash tools/pm_emit_cycle_event.sh <event> [options]"
-  echo "Events: agent_cycle_complete | sprint_cycle_complete | ci_cycle_complete | uat_ready | mcp_blocked"
+  echo "Events: agent_cycle_complete | sprint_cycle_complete | ci_cycle_complete | uat_ready | mcp_blocked | watchdog_recovery | factory_halt"
   exit 2
 fi
 
@@ -84,8 +84,20 @@ PY
 echo ""
 echo "==> Cycle event written: ${EVENT_FILE}"
 
+# Append to cycle log for watchdog stall detection
+python3 - <<'LOGPY'
+import json
+from pathlib import Path
+src = Path("artifacts/agent_cycle_event.json")
+log = Path("artifacts/factory_cycle_log.jsonl")
+if src.is_file():
+    log.parent.mkdir(parents=True, exist_ok=True)
+    with log.open("a", encoding="utf-8") as fh:
+        fh.write(src.read_text(encoding="utf-8").strip() + "\n")
+LOGPY
+
 # Marker for optional CI secondary trigger (avoid naked CI→PM loops)
-if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "sprint_cycle_complete" ]]; then
+if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "sprint_cycle_complete" || "$EVENT" == "watchdog_recovery" ]]; then
   echo "cycle_pending=${EVENT} commit=${COMMIT_SHA}" > "${ARTIFACT_DIR}/.cycle_pending"
 fi
 

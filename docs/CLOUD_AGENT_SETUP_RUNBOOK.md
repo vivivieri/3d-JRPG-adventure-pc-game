@@ -95,6 +95,7 @@ See `docs/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 | GDAI license / plugin | Phase 1+ scene work |
 | `GAMELAB_API_KEY` | UI art MCP |
 | `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Event-driven PM** (copy from Automation webhook) |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Factory halt / recovery exhausted** (Automation D) |
 | `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ jury |
 | `ELEVENLABS_API_KEY` | Phase 7 VO |
 | `GH_TOKEN` | Optional: `repository_dispatch`, branch protection |
@@ -196,6 +197,19 @@ NEVER: skip orchestrator, mark gates PASS without QA evidence, use cron logic.
 | Event | `uat_ready` only |
 | Prompt | Post Slack/email/checklist link to `docs/PLAYTEST_SCRIPT.md`; do not run game code |
 
+### Automation D — **Factory watchdog / human alert** (exception only)
+
+| Field | Value |
+|-------|--------|
+| **Name** | `Factory — human alert` |
+| **Trigger** | Webhook → `CURSOR_FACTORY_ALERT_WEBHOOK_URL` (separate from PM cycle webhook) |
+| **Events** | `factory_halt`, recovery exhausted |
+| **Prompt** | Notify project owner; link `artifacts/factory_health_report.json`; do **not** start workers |
+
+**Scheduled monitoring (GitHub):** `.github/workflows/factory-watchdog.yml` runs every 2h, calls `run_factory_watchdog.sh --recover` **only when unhealthy**. This is stall insurance — not primary PM dispatch. See `docs/FACTORY_WATCHDOG.md`.
+
+**PM webhook also handles `watchdog_recovery`** — same Automation A; add watchdog branch to PM prompt (see `docs/FACTORY_WATCHDOG.md` §5).
+
 ---
 
 ## 5. End-of-cycle contract (every worker agent)
@@ -290,7 +304,9 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 
 | Symptom | Fix |
 |---------|-----|
-| Factory stalled after PR merge | Worker forgot `pm_emit_cycle_event.sh` — run manually with last issue id |
+| Factory stalled after PR merge | Worker forgot `pm_emit_cycle_event.sh` — run manually or `bash tools/run_factory_watchdog.sh --recover` |
+| Agent hung mid-session | Heartbeat stale — watchdog emits `watchdog_recovery`; or `pm_record_heartbeat.sh` during long work |
+| Runaway recovery | Auto `factory_halt` at max attempts — `--clear-halt` after human fix |
 | Webhook 401/404 | Re-copy Automation webhook URL to Secrets |
 | PM runs but MCP FAIL | Fix snapshot; emit `mcp_blocked`; human fixes secrets |
 | CI→PM loop | Ensure `.cycle_pending` cleared; use guarded workflow only |

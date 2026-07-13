@@ -51,3 +51,7 @@ artifacts/qa_reports/*
 artifacts/pm_orchestrator_report.json
 artifacts/agent_cycle_event.json
 artifacts/.cycle_pending
+artifacts/factory_heartbeat.json
+artifacts/factory_state.json
+artifacts/factory_health_report.json
+artifacts/factory_cycle_log.jsonl
