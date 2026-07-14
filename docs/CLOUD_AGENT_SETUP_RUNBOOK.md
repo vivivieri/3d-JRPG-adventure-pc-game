@@ -90,19 +90,21 @@ See `docs/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 
 ### 3.2 Secrets (Cursor Cloud Agents → Secrets)
 
-| Secret | Required when |
-|--------|----------------|
-| GDAI license / plugin | Phase 1+ scene work |
-| `GAMELAB_API_KEY` | UI art MCP |
-| `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Event-driven PM** (copy from Automation webhook) |
-| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Factory halt / recovery exhausted** (Automation D) |
-| `TELEGRAM_BOT_TOKEN` | **Stakeholder status** — bot token from @BotFather |
-| `TELEGRAM_CHAT_ID` | **Product owner** Telegram chat id |
-| `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ jury |
-| `ELEVENLABS_API_KEY` | Phase 7 VO |
-| `GH_TOKEN` | Optional: `repository_dispatch`, branch protection |
+**Day-one compulsory (all 7):** see **`docs/CURSOR_SECRETS_SETUP.md`** — how to obtain each key, step by step. Verify: `bash tools/check_day_one_secrets.sh`.
 
-Also add `CURSOR_PM_CYCLE_WEBHOOK_URL` to **GitHub repo Secrets** if using `.github/workflows/agent-cycle-pm.yml`.
+| Secret | Day one | Purpose |
+|--------|---------|---------|
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Yes** | Automation A webhook — event-driven PM |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Yes** | Automation D webhook — factory halt alert |
+| `GAMELAB_API_KEY` | **Yes** | GameLab MCP — UI art |
+| `GH_TOKEN` | **Yes** | `gh` CLI, issue sync, GitHub dispatch |
+| `TELEGRAM_BOT_TOKEN` | **Yes** | Stakeholder Telegram bot |
+| `TELEGRAM_CHAT_ID` | **Yes** | Product owner chat id |
+| `ELEVENLABS_API_KEY` | **Yes** | Selective VO (12 clips) |
+| GDAI license / plugin | Phase 1+ | Commercial plugin — separate install |
+| `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ | Vision/audio jury scripts |
+
+**Scope:** Personal + Runtime Secret for each. Also add webhook URLs (+ Telegram if CI reports) to **GitHub repo Secrets** for Actions workflows.
 
 ### 3.3 MCP (Cloud dashboard — required)
 
@@ -322,10 +324,11 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 ## 11. Quick start checklist
 
 - [ ] Environment snapshot with GDAI + MCP PASS  
-- [ ] Secrets: GDAI, GameLab, `CURSOR_PM_CYCLE_WEBHOOK_URL`  
+- [ ] **Day-one secrets (all 7)** — `docs/CURSOR_SECRETS_SETUP.md` · `bash tools/check_day_one_secrets.sh`  
+- [ ] GDAI plugin in snapshot (Phase 1+ scene work)  
 - [ ] MCP servers in Cloud dashboard  
-- [ ] **Automation A** — webhook trigger only (no schedule)  
-- [ ] GitHub secret `CURSOR_PM_CYCLE_WEBHOOK_URL` for workflow  
+- [ ] **Automation A** + **Automation D** — webhook only (no schedule)  
+- [ ] GitHub repo secrets: both webhook URLs  
 - [ ] `game/development` bootstrapped (P1-00)  
 - [ ] First event: `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm`  
 - [ ] Confirm PM Automation starts within seconds, not next day  

@@ -2,6 +2,7 @@
 
 **Script:** `bash tools/setup_github_project.sh`  
 **Requires:** `GH_TOKEN` with **Issues**, **Pull requests**, **Actions**, and **Administration** (for branch protection)  
+**How to create token:** `docs/CURSOR_SECRETS_SETUP.md` §5 (day-one compulsory)  
 **Cross-refs:** `docs/PROJECT_MANAGEMENT.md`, `docs/ENVIRONMENTS.md`
 
 ---

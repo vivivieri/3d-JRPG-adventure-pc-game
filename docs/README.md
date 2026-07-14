@@ -37,6 +37,7 @@
 | Sprint planning (Linear) | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
 | **Sprint orchestration (enforced)** | [SPRINT_ORCHESTRATION.md](SPRINT_ORCHESTRATION.md) · [PM_AGENT_RUNBOOK.md](PM_AGENT_RUNBOOK.md) · `bash tools/run_pm_orchestrator.sh` |
 | **Cloud Agent factory (event-driven)** | [CLOUD_AGENT_SETUP_RUNBOOK.md](CLOUD_AGENT_SETUP_RUNBOOK.md) · `bash tools/pm_emit_cycle_event.sh` |
+| **Day-one secrets (how to get every key)** | [CURSOR_SECRETS_SETUP.md](CURSOR_SECRETS_SETUP.md) · `bash tools/check_day_one_secrets.sh` |
 | **Factory watchdog (stall/hang recovery)** | [FACTORY_WATCHDOG.md](FACTORY_WATCHDOG.md) · `bash tools/run_factory_watchdog.sh` |
 | **Branch + done criteria** | [MULTI_AGENT_BRANCH_STRATEGY.md](MULTI_AGENT_BRANCH_STRATEGY.md) |
 | **Stakeholder / Telegram reports** | [PM_STAKEHOLDER_REPORTING.md](PM_STAKEHOLDER_REPORTING.md) |

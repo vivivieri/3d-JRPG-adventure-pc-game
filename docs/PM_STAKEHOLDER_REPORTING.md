@@ -39,6 +39,8 @@ Or message [@userinfobot](https://t.me/userinfobot) for your user id (use for pr
 
 ### Step 3 — Cursor / GitHub Secrets
 
+**Full day-one guide:** `docs/CURSOR_SECRETS_SETUP.md` §6
+
 | Secret | Value |
 |--------|--------|
 | `TELEGRAM_BOT_TOKEN` | Bot token from BotFather |
