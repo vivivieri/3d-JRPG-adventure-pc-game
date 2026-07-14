@@ -183,14 +183,22 @@ Before building zones, read:
 Build order: **ruined_village** vertical slice → beach → caves → palace.  
 All scene work via **GDAI MCP** after GodotPrompter plans.
 
-### Secrets (if needed)
+### Secrets (day one — all compulsory)
 
-Configure in Cursor **Secrets** tab (not committed):
-- `GH_TOKEN` — GitHub PAT for `bash tools/setup_github_project.sh` (labels, environments, branch protection)
-- GDAI plugin license path / download token (if applicable)
-- `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` — visual + model turntable jury
-- `OPENAI_API_KEY` / `GEMINI_API_KEY` — audio listen jury
-- Steam API keys (Phase 8 only)
+**How to obtain each key:** `docs/CURSOR_SECRETS_SETUP.md` · verify: `bash tools/check_day_one_secrets.sh`
+
+| Secret | Purpose |
+|--------|---------|
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | PM Automation A webhook |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Factory alert Automation D webhook |
+| `GAMELAB_API_KEY` | GameLab MCP |
+| `GH_TOKEN` | `gh` CLI, issue sync, GitHub dispatch |
+| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Stakeholder status |
+| `ELEVENLABS_API_KEY` | Selective VO |
+
+Also in GitHub repo Secrets: both webhook URLs (Actions workflows). Scope: **Personal + Runtime Secret**.
+
+**Later phases:** GDAI license, `OPENAI_API_KEY` / `GEMINI_API_KEY` (M5+ jury), Steam keys (Phase 8).
 
 ### Do not ship
 
