@@ -60,3 +60,5 @@ artifacts/linear_sync_manifest.json
 artifacts/stakeholder_dashboard.html
 artifacts/stakeholder_reports/*
 !artifacts/stakeholder_reports/.gitkeep
+artifacts/telemetry_reports/*
+!artifacts/telemetry_reports/.gitkeep

@@ -449,6 +449,66 @@ def send_telegram(message: str, config: dict[str, Any]) -> tuple[bool, str]:
         return False, str(exc)
 
 
+def _telegram_credentials(config: dict[str, Any]) -> tuple[str, str]:
+    tg = config.get("telegram", {})
+    token = os.environ.get(tg.get("secret_bot_token", "TELEGRAM_BOT_TOKEN"), "")
+    chat_id = os.environ.get(tg.get("secret_chat_id", "TELEGRAM_CHAT_ID"), "")
+    return token, chat_id
+
+
+def send_telegram_photo(photo_path: str, caption: str, config: dict[str, Any]) -> tuple[bool, str]:
+    """Send a single image to the configured Telegram chat via multipart sendPhoto."""
+    tg = config.get("telegram", {})
+    if not tg.get("enabled", True):
+        return False, "telegram disabled in config"
+    token, chat_id = _telegram_credentials(config)
+    if not token or not chat_id:
+        return False, "TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set"
+
+    path = Path(photo_path)
+    if not path.is_file():
+        return False, f"photo not found: {photo_path}"
+
+    caption = (caption or "")[:1024]  # Telegram caption limit
+    boundary = "----urashimatelemetry" + datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")
+    parse_mode = tg.get("parse_mode", "HTML")
+
+    def _field(name: str, value: str) -> bytes:
+        return (
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"{name}\"\r\n\r\n{value}\r\n"
+        ).encode("utf-8")
+
+    body = bytearray()
+    body += _field("chat_id", str(chat_id))
+    if caption:
+        body += _field("caption", caption)
+        body += _field("parse_mode", parse_mode)
+    body += (
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"photo\"; "
+        f"filename=\"{path.name}\"\r\nContent-Type: image/png\r\n\r\n"
+    ).encode("utf-8")
+    body += path.read_bytes()
+    body += f"\r\n--{boundary}--\r\n".encode("utf-8")
+
+    url = f"https://api.telegram.org/bot{token}/sendPhoto"
+    req = urllib.request.Request(
+        url,
+        data=bytes(body),
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            payload = json.loads(resp.read().decode("utf-8"))
+        if payload.get("ok"):
+            return True, f"photo message_id={payload.get('result', {}).get('message_id')}"
+        return False, json.dumps(payload)
+    except urllib.error.HTTPError as e:
+        return False, f"HTTP {e.code}: {e.read().decode('utf-8', errors='replace')}"
+    except Exception as exc:  # noqa: BLE001
+        return False, str(exc)
+
+
 def emit_report(
     *,
     trigger: str,

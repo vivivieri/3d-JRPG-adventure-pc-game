@@ -81,9 +81,24 @@ python3 tools/analyze_playtest_telemetry.py logs_dir --json report.json --strict
 
 # Generate synthetic sample logs (for demos / trying the tool):
 python3 tools/analyze_playtest_telemetry.py --emit-sample /tmp/pt_logs --runs 6
+
+# Visual report — matplotlib charts + one-page Markdown:
+python3 tools/analyze_playtest_telemetry.py logs_dir \
+  --charts artifacts/telemetry_reports/charts \
+  --report artifacts/telemetry_reports/latest.md
+
+# Push summary + charts to the product owner's Telegram (opt-in):
+python3 tools/analyze_playtest_telemetry.py logs_dir --telegram
 ```
 
 A committed example lives at `game/data/qa/examples/playtest_telemetry_sample.jsonl` (6 runs; demonstrates a caves-puzzle stuck hotspot and a Tide Keeper difficulty spike).
+
+### Reports, charts & delivery
+
+- **Charts** (`--charts DIR`, default `artifacts/telemetry_reports/charts`): pacing curve (arrival vs `PACING_CHART` target), avg deaths per encounter (with difficulty flag line), and the ending/completion funnel — rendered with `matplotlib` (Agg, headless).
+- **Markdown report** (`--report PATH`): one-page summary with the metrics table + chart list, suitable for a stakeholder update.
+- **Telegram** (`--telegram`, **opt-in**): sends the summary + chart images to the product owner via the existing stakeholder pipeline (`tools/pm_stakeholder_report_lib.py`, `game/data/qa/stakeholder_report_config.json`, `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`). It is not automatic on every run.
+- **Storage:** all outputs live under `artifacts/telemetry_reports/**`, which is **git-ignored** — charts, reports, and raw logs are **not** committed to GitHub (only the tools/schema/docs/sample are). Raw telemetry stays local by default (see [Privacy](#privacy)).
 
 ---
 
@@ -93,7 +108,7 @@ The logger is gameplay code, so it is built on `game/development` through the Go
 
 ```gdscript
 extends Node
-## Local-only JSONL playtest telemetry. No PII. See docs/PLAYTEST_ANALYTICS.md.
+## Local-only JSONL playtest telemetry. No PII. See docs/PLAYTEST_TELEMETRY.md.
 
 const ENABLED := true              # gate behind a debug/consent flag for builds
 const HEARTBEAT_S := 45.0
