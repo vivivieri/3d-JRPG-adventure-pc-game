@@ -391,6 +391,15 @@
       "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
       "design_ref": "docs/PLAYTEST_SCRIPT.md"
     },
+    "L0_doc_sync": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/check_doc_sync.py",
+      "description": "Docs stay in sync — every top-level doc is indexed in README, links resolve, and runner gates match the acceptance catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/README.md"],
+      "design_ref": "docs/README.md, docs/BRANCHING.md"
+    },
     "M5_asset_compliance": {
       "layer": "ship",
       "domain": "compliance",
@@ -502,6 +511,7 @@
       "L0_stakeholder_report",
       "L0_pm_orchestrator",
       "L0_rr_compliance",
+      "L0_doc_sync",
       "M5_asset_compliance"
     ],
     "design_ref": "docs/BRANCHING.md"
