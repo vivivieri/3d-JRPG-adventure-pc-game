@@ -28,6 +28,10 @@
 
 **P0 MCP required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`). Art generators tiered — see `docs/ART_AUTOMATION_PIPELINE.md`. If P0 missing → STOP and notify user.
 
+### Cloud snapshot launch (`game/development` only)
+
+**Before implementation work:** read `docs/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`.
+
 ### Environment bootstrap
 
 On every cloud agent start:
