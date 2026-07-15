@@ -129,6 +129,15 @@
       "evidence": ["game/data/qa/stakeholder_report_config.json"],
       "design_ref": "docs/PM_STAKEHOLDER_REPORTING.md"
     },
+    "L0_pm_orchestrator": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_pm_orchestrator_steps.py",
+      "description": "PM session workflow well-formed — session + post-agent steps present and every step points at an existing tool",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/pm_orchestrator_steps.json"],
+      "design_ref": "docs/PM_AGENT_RUNBOOK.md, docs/SPRINT_ORCHESTRATION.md"
+    },
     "L0_audio_qa_catalog": {
       "layer": "L0",
       "domain": "data",
@@ -460,6 +469,7 @@
       "L0_sprint_board",
       "L0_factory_watchdog",
       "L0_stakeholder_report",
+      "L0_pm_orchestrator",
       "L0_rr_compliance",
       "M5_asset_compliance"
     ],
