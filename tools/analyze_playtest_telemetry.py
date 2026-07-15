@@ -434,12 +434,15 @@ def render_charts(agg: dict[str, Any], schema: dict[str, Any], out_dir: Path) ->
         encs = list(ed.keys())
         vals = [ed[e] for e in encs]
         colors = ["#e07a5f" if v > flag else "#81b29a" for v in vals]
-        fig, ax = plt.subplots(figsize=(8, 4))
-        ax.bar(encs, vals, color=colors)
+        positions = list(range(len(encs)))
+        fig, ax = plt.subplots(figsize=(max(6.0, len(encs) * 1.6), 4))
+        ax.bar(positions, vals, width=0.5, color=colors)
         ax.axhline(flag, color="#e07a5f", linestyle="--", label=f"flag > {flag}")
         ax.set_title("Combat difficulty — avg deaths per encounter")
         ax.set_ylabel("Deaths / run")
-        ax.tick_params(axis="x", rotation=30)
+        ax.set_xticks(positions)
+        ax.set_xticklabels(encs, rotation=30, ha="right")
+        ax.set_xlim(-0.75, len(encs) - 0.25)  # keep bars a fixed width even with one encounter
         ax.legend()
         fig.tight_layout()
         p = out_dir / "deaths_by_encounter.png"
