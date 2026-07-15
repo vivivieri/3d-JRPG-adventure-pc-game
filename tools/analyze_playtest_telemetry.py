@@ -180,11 +180,13 @@ def aggregate(runs: dict[str, list[dict]], schema: dict[str, Any]) -> dict[str, 
 
     # Scene pacing drift: avg arrival vs target.
     scene_drift: list[dict] = []
+    scene_avg_arrival: dict[str, float] = {}
     for sid, beat in beats.items():
         arrivals = [r["scene_arrival_min"][sid] for r in per_run.values() if sid in r["scene_arrival_min"]]
         if not arrivals:
             continue
         avg_arr = statistics.mean(arrivals)
+        scene_avg_arrival[sid] = round(avg_arr, 1)
         delta = avg_arr - beat["target_min"]
         if abs(delta) > drift_tol:
             scene_drift.append({"scene": sid, "label": beat["label"], "target_min": beat["target_min"],
@@ -195,6 +197,7 @@ def aggregate(runs: dict[str, list[dict]], schema: dict[str, Any]) -> dict[str, 
     for r in per_run.values():
         for enc, n in r["deaths"].items():
             death_totals[enc] = death_totals.get(enc, 0) + n
+    encounter_deaths = {enc: round(n / total, 2) for enc, n in death_totals.items()} if total else {}
     death_spikes = [{"encounter": enc, "avg_deaths": round(n / total, 2)}
                     for enc, n in death_totals.items() if total and (n / total) > death_flag]
 
@@ -224,7 +227,9 @@ def aggregate(runs: dict[str, list[dict]], schema: dict[str, Any]) -> dict[str, 
             "endings_seen": endings_seen,
         },
         "scene_drift": scene_drift,
+        "scene_avg_arrival": scene_avg_arrival,
         "death_spikes": death_spikes,
+        "encounter_deaths": encounter_deaths,
         "slow_turns": slow_turns,
         "combat_before_gate_runs": combat_before_gate_runs,
         "stuck_hotspots": hotspots,
@@ -392,11 +397,151 @@ def emit_sample(out_dir: Path, runs: int, schema: dict[str, Any]) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Charts + report + Telegram delivery
+# --------------------------------------------------------------------------- #
+def render_charts(agg: dict[str, Any], schema: dict[str, Any], out_dir: Path) -> list[Path]:
+    """Render matplotlib PNG charts. Returns written paths. Requires matplotlib."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    beats = schema["scene_beats"]
+    written: list[Path] = []
+
+    # 1. Pacing curve — target vs actual arrival per scene beat.
+    xs = [b["target_min"] for b in beats]
+    labels = [b["id"] for b in beats]
+    actual = [agg["scene_avg_arrival"].get(b["id"]) for b in beats]
+    fig, ax = plt.subplots(figsize=(10, 4.5))
+    ax.plot(labels, xs, "--", color="#8b9daf", label="Target (PACING_CHART)")
+    ax.plot(labels, [a if a is not None else float("nan") for a in actual], "-o",
+            color="#4ae8d8", label="Actual (avg)")
+    ax.set_title("Pacing — scene arrival vs target")
+    ax.set_ylabel("Minutes into run")
+    ax.tick_params(axis="x", rotation=90)
+    ax.legend()
+    fig.tight_layout()
+    p = out_dir / "pacing_curve.png"
+    fig.savefig(p, dpi=110)
+    plt.close(fig)
+    written.append(p)
+
+    # 2. Combat difficulty — avg deaths per encounter.
+    ed = agg["encounter_deaths"]
+    if ed:
+        flag = schema["thresholds"]["encounter_avg_deaths_flag"]["value"]
+        encs = list(ed.keys())
+        vals = [ed[e] for e in encs]
+        colors = ["#e07a5f" if v > flag else "#81b29a" for v in vals]
+        fig, ax = plt.subplots(figsize=(8, 4))
+        ax.bar(encs, vals, color=colors)
+        ax.axhline(flag, color="#e07a5f", linestyle="--", label=f"flag > {flag}")
+        ax.set_title("Combat difficulty — avg deaths per encounter")
+        ax.set_ylabel("Deaths / run")
+        ax.tick_params(axis="x", rotation=30)
+        ax.legend()
+        fig.tight_layout()
+        p = out_dir / "deaths_by_encounter.png"
+        fig.savefig(p, dpi=110)
+        plt.close(fig)
+        written.append(p)
+
+    # 3. Ending funnel + completion.
+    t = agg["totals"]
+    endings = t["endings_seen"] or {}
+    abandoned = t["runs"] - t["completed"]
+    cats = [f"ending: {k}" for k in endings] + ["abandoned"]
+    counts = list(endings.values()) + [abandoned]
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.bar(cats, counts, color=["#4ae8d8"] * len(endings) + ["#8b9daf"])
+    ax.set_title(f"Ending funnel — {t['completion_rate_percent']}% completion ({t['completed']}/{t['runs']})")
+    ax.set_ylabel("Runs")
+    ax.tick_params(axis="x", rotation=20)
+    fig.tight_layout()
+    p = out_dir / "ending_funnel.png"
+    fig.savefig(p, dpi=110)
+    plt.close(fig)
+    written.append(p)
+
+    return written
+
+
+def build_markdown_report(agg: dict[str, Any], checks: list[dict], chart_paths: list[Path]) -> str:
+    t = agg["totals"]
+    n_fail = sum(1 for c in checks if c["status"] == FAIL)
+    n_warn = sum(1 for c in checks if c["status"] == WARN)
+    lines = [
+        "# Tides of Urashima — Playtest Telemetry Report",
+        "",
+        f"**Runs:** {t['runs']} · **Completion:** {t['completion_rate_percent']}% "
+        f"({t['completed']}/{t['runs']}) · **Avg playtime:** {t['avg_playtime_min']} min",
+        f"**Endings:** {t['endings_seen'] or '(none)'}",
+        f"**Result:** {len(checks) - n_fail - n_warn} PASS · {n_warn} WARN · {n_fail} FAIL",
+        "",
+        "## Metrics",
+        "| Metric | Status | Detail |",
+        "|--------|--------|--------|",
+    ]
+    for c in checks:
+        lines.append(f"| {c['metric']} | {c['status']} | {c['detail']} |")
+    if chart_paths:
+        lines += ["", "## Charts"]
+        for p in chart_paths:
+            lines.append(f"- `{p}`")
+    lines += ["", "_Dev-time Games User Research telemetry — feeds docs/QA_REMEDIATION_LOOP.md. Not a ship gate._"]
+    return "\n".join(lines) + "\n"
+
+
+def telegram_summary_html(agg: dict[str, Any], checks: list[dict]) -> str:
+    import html
+    t = agg["totals"]
+    n_fail = sum(1 for c in checks if c["status"] == FAIL)
+    n_warn = sum(1 for c in checks if c["status"] == WARN)
+    flags = [c for c in checks if c["status"] != PASS]
+    lines = [
+        "📊 <b>Tides of Urashima — Playtest Telemetry</b>",
+        f"Runs: {t['runs']} · Completion: {t['completion_rate_percent']}% · Avg {t['avg_playtime_min']} min",
+        f"Endings: {html.escape(str(t['endings_seen'] or '(none)'))}",
+        f"Result: {len(checks) - n_fail - n_warn} PASS · {n_warn} WARN · {n_fail} FAIL",
+    ]
+    if flags:
+        lines.append("")
+        for c in flags[:6]:
+            icon = "🔴" if c["status"] == FAIL else "🟡"
+            lines.append(f"{icon} {html.escape(c['metric'])}: {html.escape(c['detail'])}")
+    return "\n".join(lines)
+
+
+def deliver_telegram(agg: dict[str, Any], checks: list[dict], chart_paths: list[Path]) -> int:
+    """Send the telemetry summary + charts to the configured Telegram chat."""
+    try:
+        import pm_stakeholder_report_lib as sr
+    except ImportError:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import pm_stakeholder_report_lib as sr
+
+    config = sr.load_config()
+    ok, detail = sr.send_telegram(telegram_summary_html(agg, checks), config)
+    print(f"[telegram] summary: {'sent' if ok else 'FAILED'} — {detail}")
+    any_fail = not ok
+    for p in chart_paths:
+        pok, pdetail = sr.send_telegram_photo(str(p), p.stem.replace("_", " "), config)
+        print(f"[telegram] {p.name}: {'sent' if pok else 'FAILED'} — {pdetail}")
+        any_fail = any_fail or not pok
+    return 1 if any_fail else 0
+
+
+# --------------------------------------------------------------------------- #
 def main() -> int:
     ap = argparse.ArgumentParser(description="Analyze playtest JSONL logs against QA thresholds.")
     ap.add_argument("logs", nargs="?", help="JSONL file or directory of *.jsonl logs")
     ap.add_argument("--schema", default=str(SCHEMA_PATH), help="analytics schema JSON")
     ap.add_argument("--json", dest="json_out", help="write full report JSON to this path")
+    ap.add_argument("--charts", dest="charts_dir", nargs="?", const="artifacts/telemetry_reports/charts",
+                    help="render matplotlib PNG charts to this dir (default artifacts/telemetry_reports/charts)")
+    ap.add_argument("--report", dest="report_md", help="write a one-page Markdown report to this path")
+    ap.add_argument("--telegram", action="store_true", help="send summary + charts to the configured Telegram chat")
     ap.add_argument("--strict", action="store_true", help="exit non-zero if any metric FAILs")
     ap.add_argument("--emit-sample", dest="emit_sample", metavar="OUT_DIR", help="generate synthetic sample logs and exit")
     ap.add_argument("--runs", type=int, default=5, help="number of runs for --emit-sample (default 5)")
@@ -434,6 +579,26 @@ def main() -> int:
     agg = aggregate(runs, schema)
     checks = evaluate(agg, schema)
     print_report(agg, checks)
+
+    # Charts (also auto-generated when --telegram is set so images can be sent).
+    chart_paths: list[Path] = []
+    charts_dir = args.charts_dir or ("artifacts/telemetry_reports/charts" if args.telegram else None)
+    if charts_dir:
+        try:
+            chart_paths = render_charts(agg, schema, Path(charts_dir))
+            print("-" * 68)
+            print(f"Charts written to {charts_dir}: " + ", ".join(p.name for p in chart_paths))
+        except ImportError:
+            print("[charts] matplotlib not installed — run: pip3 install matplotlib", file=sys.stderr)
+
+    if args.report_md:
+        Path(args.report_md).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.report_md).write_text(build_markdown_report(agg, checks, chart_paths), encoding="utf-8")
+        print(f"Wrote Markdown report: {args.report_md}")
+
+    if args.telegram:
+        print("-" * 68)
+        deliver_telegram(agg, checks, chart_paths)
 
     if parse_errors:
         print("-" * 68)
