@@ -172,6 +172,7 @@
 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA gates — WARN/SKIP ≠ PASS |
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
+| [PLAYTEST_ANALYTICS.md](PLAYTEST_ANALYTICS.md) | Gameplay-log analysis — pacing/combat/ending metrics |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
 | [GDAI_CLOUD_SETUP.md](GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |
 | [PLUGIN_INSTALL_GUIDE.md](PLUGIN_INSTALL_GUIDE.md) | MCP plugin install |
