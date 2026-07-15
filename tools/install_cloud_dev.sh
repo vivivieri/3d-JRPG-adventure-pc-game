@@ -179,10 +179,14 @@ echo
 echo "==> Cloud dev install complete."
 bash "$ROOT/tools/check_dev_environment.sh" || true
 
-echo
-echo "==> Bootstrapping MCP stack (required — blocks install on failure)..."
-bash "$ROOT/tools/ensure_mcp_stack.sh"
-bash "$ROOT/tools/check_mcp_ready.sh"
+if [[ "${SKIP_MCP_BOOTSTRAP:-0}" == "1" ]]; then
+  echo "==> SKIP_MCP_BOOTSTRAP=1 — deferring MCP stack to tools/rebuild_cloud_snapshot.sh"
+else
+  echo
+  echo "==> Bootstrapping MCP stack (required — blocks install on failure)..."
+  bash "$ROOT/tools/ensure_mcp_stack.sh"
+  bash "$ROOT/tools/check_mcp_ready.sh"
+fi
 
 echo
 echo "Required Cursor Secrets (user must configure):"
