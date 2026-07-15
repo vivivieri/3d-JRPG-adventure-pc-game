@@ -120,6 +120,15 @@
       "evidence": ["game/data/qa/factory_watchdog.json"],
       "design_ref": "docs/FACTORY_WATCHDOG.md"
     },
+    "L0_escalation_policy": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_escalation_policy.py",
+      "description": "Anti-infinite-loop escalation ladder well-formed — dev↔QA (capped) → arbitration (Architect/SA) → Product Owner",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/escalation_policy.json"],
+      "design_ref": "docs/ESCALATION_POLICY.md"
+    },
     "L0_stakeholder_report": {
       "layer": "L0",
       "domain": "flow",
@@ -459,6 +468,7 @@
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
       "L0_factory_watchdog",
+      "L0_escalation_policy",
       "L0_stakeholder_report",
       "L0_rr_compliance",
       "M5_asset_compliance"

@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "authority": "docs/ESCALATION_POLICY.md",
+  "design_ref": "docs/QA_REMEDIATION_LOOP.md, docs/QA_AND_BUG_PROCESS.md, docs/RR_CHEATSHEET.md",
+  "principles": [
+    "No infinite loops: every dispute converges to a decision within a bounded number of attempts.",
+    "dev and QA cannot change requirements — only the arbiter (Architect / Design Authority) or the Product Owner can.",
+    "Escalate UP when a tier's cap is exceeded; never loop sideways."
+  ],
+  "ladder": [
+    {
+      "tier": 1,
+      "id": "dev_qa_loop",
+      "owner": "dev+qa",
+      "cap": { "max_reopens": 3 },
+      "reopen_requires": ["failing acceptance_gate_id", "evidence"],
+      "on_cap_exceeded": "escalate:arbitration",
+      "note": "Normal fix<->reopen. QA must cite the failing gate + evidence on every reopen; flaky tests are quarantined, not reopened."
+    },
+    {
+      "tier": 2,
+      "id": "arbitration",
+      "owner": "architect",
+      "role_alias": "Design Authority (SA)",
+      "cap": { "max_arbitration_attempts": 2 },
+      "classify_root_cause": ["code_bug", "qa_too_strict", "requirement_ambiguous", "requirement_conflict", "infeasible"],
+      "resolutions": {
+        "code_bug": "return_to_dev",
+        "qa_too_strict": "adjust gate threshold/criteria (QA + Architect) then re-verify",
+        "requirement_ambiguous": "amend design doc / game data to disambiguate; reset acceptance; re-dispatch",
+        "requirement_conflict": "amend design/data to remove conflict; if a business trade-off is required -> escalate:product_owner",
+        "infeasible": "descope, or escalate:product_owner for a scope/priority decision"
+      },
+      "on_cap_exceeded": "escalate:product_owner",
+      "on_needs_business_decision": "escalate:product_owner"
+    },
+    {
+      "tier": 3,
+      "id": "product_owner",
+      "owner": "human",
+      "channel": "telegram",
+      "trigger": "product_owner_decision",
+      "decision_types": ["amend_requirement", "descope", "wont_fix", "approve_as_is", "reprioritize"],
+      "note": "Final authority. Only the Product Owner can change scope/business requirements. The decision is recorded and the issue is re-dispatched against the corrected spec (or closed)."
+    }
+  ],
+  "decision_record": {
+    "required_fields": ["issue_id", "tier", "root_cause_class", "decision", "decided_by", "rationale", "at"],
+    "dir": "artifacts/escalations"
+  }
+}

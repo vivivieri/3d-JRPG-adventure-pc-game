@@ -62,3 +62,5 @@ artifacts/stakeholder_reports/*
 !artifacts/stakeholder_reports/.gitkeep
 artifacts/telemetry_reports/*
 !artifacts/telemetry_reports/.gitkeep
+artifacts/escalations/*
+!artifacts/escalations/.gitkeep

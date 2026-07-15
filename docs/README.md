@@ -171,6 +171,7 @@
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA gates — WARN/SKIP ≠ PASS |
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
+| [ESCALATION_POLICY.md](ESCALATION_POLICY.md) | Anti-infinite-loop ladder — dev↔QA → Architect/SA → Product Owner |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
 | [PLAYTEST_TELEMETRY.md](PLAYTEST_TELEMETRY.md) | Playtest telemetry (GUR) — pacing/combat/ending tuning loop |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |

@@ -40,6 +40,7 @@ run_gate "L0_playtest_telemetry" python3 tools/validate_playtest_telemetry_schem
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
+run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py
 run_gate "L0_rr_compliance" bash tools/check_rr_compliance.sh
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
