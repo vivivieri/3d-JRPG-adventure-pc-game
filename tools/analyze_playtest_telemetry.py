@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Analyze gameplay/playtest JSONL logs against Tides of Urashima QA thresholds.
+"""Playtest Telemetry analyzer — Tides of Urashima Games User Research tuning loop.
 
-Reads one or more JSONL playtest logs (one event object per line, schema:
-game/data/qa/playtest_analytics_schema.json), rolls them into pacing / combat /
+Reads one or more JSONL playtest telemetry logs (one event object per line, schema:
+game/data/qa/playtest_telemetry_schema.json), rolls them into pacing / combat /
 progression / ending metrics, and reports each metric against the thresholds in
 the schema (cross-referenced to docs/ACCEPTANCE_CRITERIA.md gates). This is a
 development QA aid — a red metric opens a remediation item
 (docs/QA_REMEDIATION_LOOP.md), it does not by itself block ship.
 
 Usage:
-  python3 tools/analyze_playtest_logs.py <log.jsonl | logs_dir>
-  python3 tools/analyze_playtest_logs.py <logs_dir> --json report.json --strict
-  python3 tools/analyze_playtest_logs.py --emit-sample <out_dir> [--runs N]
+  python3 tools/analyze_playtest_telemetry.py <log.jsonl | logs_dir>
+  python3 tools/analyze_playtest_telemetry.py <logs_dir> --json report.json --strict
+  python3 tools/analyze_playtest_telemetry.py --emit-sample <out_dir> [--runs N]
 
 Exit codes:
   0  analysis ran; no malformed events (and, unless --strict, regardless of FAILs)
@@ -29,7 +29,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "game/data/qa/playtest_analytics_schema.json"
+SCHEMA_PATH = ROOT / "game/data/qa/playtest_telemetry_schema.json"
 
 PASS = "PASS"
 WARN = "WARN"
@@ -303,7 +303,7 @@ def evaluate(agg: dict[str, Any], schema: dict[str, Any]) -> list[dict]:
 def print_report(agg: dict[str, Any], checks: list[dict]) -> None:
     t = agg["totals"]
     print("=" * 68)
-    print("Tides of Urashima — Playtest log analysis")
+    print("Tides of Urashima — Playtest Telemetry Analysis")
     print("=" * 68)
     print(f"Runs: {t['runs']}  |  Completed: {t['completed']}  |  Completion: {t['completion_rate_percent']}%")
     print(f"Avg playtime: {t['avg_playtime_min']} min  |  Endings: {t['endings_seen'] or '(none)'}")

@@ -147,14 +147,14 @@
       "evidence": ["game/data/audio/scene_audio_map.json"],
       "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4"
     },
-    "L0_playtest_analytics": {
+    "L0_playtest_telemetry": {
       "layer": "L0",
       "domain": "data",
-      "command": "python3 tools/validate_playtest_analytics_schema.py",
-      "description": "Playtest telemetry schema + thresholds aligned to pacing/feel/endings (analyzer: tools/analyze_playtest_logs.py)",
+      "command": "python3 tools/validate_playtest_telemetry_schema.py",
+      "description": "Playtest telemetry schema + thresholds aligned to pacing/feel/endings (analyzer: tools/analyze_playtest_telemetry.py)",
       "pass": { "exit_code": 0 },
-      "evidence": ["game/data/qa/playtest_analytics_schema.json"],
-      "design_ref": "docs/PLAYTEST_ANALYTICS.md, docs/FLOW_QA.md"
+      "evidence": ["game/data/qa/playtest_telemetry_schema.json"],
+      "design_ref": "docs/PLAYTEST_TELEMETRY.md, docs/FLOW_QA.md"
     },
     "L0_base_class_compliance": {
       "layer": "L0",
@@ -455,7 +455,7 @@
       "L0_qa_catalog",
       "L0_audio_qa_catalog",
       "L0_scene_audio_map",
-      "L0_playtest_analytics",
+      "L0_playtest_telemetry",
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
       "L0_factory_watchdog",

@@ -1,7 +1,9 @@
-# Playtest Analytics — gameplay-log analysis
+# Playtest Telemetry
 
+**Discipline:** Games User Research (GUR) — telemetry-driven playtest tuning
+**Workflow:** measure → judge → tune → re-measure (a dev-time tuning loop, human-in-the-loop)
 **Version:** 1.0
-**Status:** Dev-time QA tool (design data + analyzer on `main`; in-game logger is a `game/development` implementation task)
+**Status:** Dev-time QA capability (schema + analyzer on `main`; in-game telemetry logger is a `game/development` implementation task)
 **Cross-refs:** `docs/FLOW_QA.md`, `docs/PACING_CHART.md`, `docs/GAME_FEEL.md`, `docs/COMBAT_SYSTEMS.md`, `docs/ENDING_DESIGN.md`, `docs/ACCEPTANCE_CRITERIA.md`, `docs/QA_REMEDIATION_LOOP.md`
 
 ---
@@ -10,9 +12,9 @@
 
 Turn structured gameplay logs from playtests into **measured** pacing / combat / progression / ending metrics, so tuning decisions for this 2–3 hr single-player narrative JRPG are driven by data, not vibes. It feeds the existing flow-QA and remediation loop — a red metric **opens a remediation item** (change one lever, re-measure), it does **not** by itself block ship.
 
-This is a **development** aid. It is deliberately *not* live-service / monetization analytics. Keep logs **local-only** during dev (see [Privacy](#privacy)).
+This is a **development** capability. It is deliberately *not* live-service / monetization telemetry, and it does not adapt the game at runtime. Keep logs **local-only** during dev (see [Privacy](#privacy)).
 
-**Authority for thresholds:** `game/data/qa/playtest_analytics_schema.json` (validated by the `L0_playtest_analytics` gate).
+**Authority for thresholds:** `game/data/qa/playtest_telemetry_schema.json` (validated by the `L0_playtest_telemetry` gate).
 
 ---
 
@@ -21,7 +23,7 @@ This is a **development** aid. It is deliberately *not* live-service / monetizat
 ```
 Godot logger (autoload)  ──>  user://playtest/<run_id>.jsonl
                                         │
-                     tools/analyze_playtest_logs.py
+                     tools/analyze_playtest_telemetry.py
                                         │
      report (pacing / combat / progression / endings)  ──>  docs/QA_REMEDIATION_LOOP.md
 ```
@@ -30,7 +32,7 @@ Godot logger (autoload)  ──>  user://playtest/<run_id>.jsonl
 
 ## Event schema (JSONL)
 
-One JSON object per line. Common fields on every event: `run_id`, `event`, `t` (seconds since `session_start`), optional `ts` (ISO-8601). Full definition + enums: `game/data/qa/playtest_analytics_schema.json`.
+One JSON object per line. Common fields on every event: `run_id`, `event`, `t` (seconds since `session_start`), optional `ts` (ISO-8601). Full definition + enums: `game/data/qa/playtest_telemetry_schema.json`.
 
 | Event | Key fields | Used for |
 |-------|-----------|----------|
@@ -50,7 +52,7 @@ One JSON object per line. Common fields on every event: `run_id`, `event`, `t` (
 
 ## Metrics & thresholds
 
-All thresholds live in `playtest_analytics_schema.json` and cross-reference existing gates:
+All thresholds live in `playtest_telemetry_schema.json` and cross-reference existing gates:
 
 | Metric | Threshold | Maps to |
 |--------|-----------|---------|
@@ -71,17 +73,17 @@ All thresholds live in `playtest_analytics_schema.json` and cross-reference exis
 
 ```bash
 # Analyze a directory of per-run logs, or a single multi-run JSONL file:
-python3 tools/analyze_playtest_logs.py path/to/logs_dir
-python3 tools/analyze_playtest_logs.py game/data/qa/examples/playtest_sample.jsonl
+python3 tools/analyze_playtest_telemetry.py path/to/logs_dir
+python3 tools/analyze_playtest_telemetry.py game/data/qa/examples/playtest_telemetry_sample.jsonl
 
 # Machine-readable report + fail the command on any hard FAIL:
-python3 tools/analyze_playtest_logs.py logs_dir --json report.json --strict
+python3 tools/analyze_playtest_telemetry.py logs_dir --json report.json --strict
 
 # Generate synthetic sample logs (for demos / trying the tool):
-python3 tools/analyze_playtest_logs.py --emit-sample /tmp/pt_logs --runs 6
+python3 tools/analyze_playtest_telemetry.py --emit-sample /tmp/pt_logs --runs 6
 ```
 
-A committed example lives at `game/data/qa/examples/playtest_sample.jsonl` (6 runs; demonstrates a caves-puzzle stuck hotspot and a Tide Keeper difficulty spike).
+A committed example lives at `game/data/qa/examples/playtest_telemetry_sample.jsonl` (6 runs; demonstrates a caves-puzzle stuck hotspot and a Tide Keeper difficulty spike).
 
 ---
 

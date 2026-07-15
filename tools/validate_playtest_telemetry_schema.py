@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Validate game/data/qa/playtest_analytics_schema.json — L0_playtest_analytics gate.
+"""Validate game/data/qa/playtest_telemetry_schema.json — L0_playtest_telemetry gate.
 
 Checks structure of the playtest telemetry schema and keeps its thresholds
 aligned with the rest of the QA catalog (feel_thresholds.json combat turn time,
-acceptance_criteria.json endings). See docs/PLAYTEST_ANALYTICS.md.
+acceptance_criteria.json endings). See docs/PLAYTEST_TELEMETRY.md.
 """
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "game/data/qa/playtest_analytics_schema.json"
+SCHEMA_PATH = ROOT / "game/data/qa/playtest_telemetry_schema.json"
 FEEL_PATH = ROOT / "game/data/qa/feel_thresholds.json"
 CRITERIA_PATH = ROOT / "game/data/qa/acceptance_criteria.json"
 
@@ -97,12 +97,12 @@ def main() -> int:
             errors.append(f"endings_required_coverage {endings} != L5_e2e_three_endings {l5}")
 
     if errors:
-        print("playtest_analytics_schema.json validation FAILED:")
+        print("playtest_telemetry_schema.json validation FAILED:")
         for e in errors:
             print(f"  - {e}")
         return 1
 
-    print(f"playtest_analytics_schema.json: OK ({len(event_names)} event types, {len(beats)} scene beats)")
+    print(f"playtest_telemetry_schema.json: OK ({len(event_names)} event types, {len(beats)} scene beats)")
     return 0
 
 

@@ -1,14 +1,14 @@
 {
   "version": "1.0",
-  "authority": "Schema + thresholds for dev-time playtest telemetry analysis. Analyzer: tools/analyze_playtest_logs.py. Informational QA input feeding docs/FLOW_QA.md + docs/QA_REMEDIATION_LOOP.md — NOT a ship gate (a red metric opens a remediation item, it does not by itself block ship).",
-  "design_ref": "docs/PLAYTEST_ANALYTICS.md, docs/PACING_CHART.md, docs/FLOW_QA.md, docs/ACCEPTANCE_CRITERIA.md",
+  "authority": "Schema + thresholds for dev-time playtest telemetry (Games User Research tuning loop). Analyzer: tools/analyze_playtest_telemetry.py. Informational QA input feeding docs/FLOW_QA.md + docs/QA_REMEDIATION_LOOP.md — NOT a ship gate (a red metric opens a remediation item, it does not by itself block ship).",
+  "design_ref": "docs/PLAYTEST_TELEMETRY.md, docs/PACING_CHART.md, docs/FLOW_QA.md, docs/ACCEPTANCE_CRITERIA.md",
   "privacy": {
     "local_only_by_default": true,
     "pii_forbidden": true,
     "forbidden_fields": ["player_name", "email", "ip", "geo", "machine_id"],
     "run_id_rule": "opaque random UUID generated per run — never tied to a real identity",
     "upload_requires_consent": true,
-    "design_ref": "docs/PLAYTEST_ANALYTICS.md#privacy"
+    "design_ref": "docs/PLAYTEST_TELEMETRY.md#privacy"
   },
   "log_format": {
     "encoding": "jsonl",
