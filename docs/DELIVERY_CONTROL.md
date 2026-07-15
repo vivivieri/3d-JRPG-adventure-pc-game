@@ -1,59 +1,60 @@
 # Delivery Control — pre-delivery review gate
 
-**Version:** 1.0
-**Purpose:** No outbound delivery (Telegram report, stakeholder update, etc.) goes out until automated checks pass **and** a human explicitly confirms. Everything is reviewable, and every attempt is audited.
+**Version:** 1.1
+**Purpose:** No outbound delivery (Telegram report, stakeholder update, etc.) goes out until automated checks pass **and** a designated reviewer (default **QA**) approves. The reviewer is shown an explicit checklist so it knows exactly what to review. Every action is audited.
 **Authority:** `game/data/qa/delivery_control.json` · gate: `tools/predelivery_gate.py`
-**Cross-refs:** `docs/CONTROLS_CHEATSHEET.md`, `docs/PLAYTEST_TELEMETRY.md`, `docs/PM_STAKEHOLDER_REPORTING.md`
+**Cross-refs:** `docs/CONTROLS_CHEATSHEET.md`, `docs/RR_CHEATSHEET.md`, `docs/PLAYTEST_TELEMETRY.md`, `docs/PM_STAKEHOLDER_REPORTING.md`
 
 ---
 
 ## Why
 
-We already gate merges and ships (CI, phase gates, remediation loop). Outbound **deliveries** deserve the same discipline: a report should be reviewed and verified before it reaches a stakeholder. This control adds a lightweight, reusable "review → approve → deliver" checkpoint with an audit trail.
+We already gate merges and ships (CI, phase gates, remediation loop). Outbound **deliveries** deserve the same discipline: a report must be reviewed and verified before it reaches a stakeholder. This adds a lightweight, reusable **producer → reviewer → deliver** handshake with separation of duties and an audit trail.
 
-## How it works
+## Roles & policy
 
-For any delivery `kind` defined in `delivery_control.json`, the gate:
+- **Producer** — the agent/tool that generates the report (e.g. the telemetry analyzer).
+- **Reviewer** — the role that approves delivery. Default: **QA** (`policy.approval.reviewer_roles`). Required approvals: **1** (`required_approvals`).
+- **Separation of duties** — an approver cannot be the producer (`separation_of_duties: true`), mirroring the Architect≠Builder rule in `docs/RR_CHEATSHEET.md`.
 
-1. **Runs automated checks** — e.g. config/schema valid (`command`), required charts rendered (`artifacts_exist`), and report metrics within bounds (`metric`, e.g. `parse_errors == 0`, `fail_count == 0`).
-2. **Requires explicit confirmation** — external channels (e.g. `telegram`) default to a **preview** (dry-run). Nothing is sent until `--confirm` is passed by a human who reviewed the output.
-3. **Writes an audit record** — every attempt (`preview` / `approved` / `blocked`) is written to `artifacts/delivery_audit/` (git-ignored) with checks, metrics, actor, and outcome.
+## Flow
 
-### Verdicts
+```
+producer:  analyze_playtest_telemetry.py … --telegram        # creates a review request, HOLDS (no send)
+reviewer:  predelivery_gate.py review  --request <id>         # shows checks + checklist + artifacts
+reviewer:  predelivery_gate.py approve --request <id> --actor qa   # records approval (separation of duties enforced)
+producer:  analyze_playtest_telemetry.py … --telegram        # same content now approved -> delivers, then marks delivered
+```
+
+The `request_id` is **content-derived** (kind + artifact names + metrics), so a producer re-run with the *same* result set maps to the same request the reviewer approved. If the results change, the id changes and a **fresh approval** is required.
+
+## What the reviewer sees (so it knows what to review)
+
+`predelivery_gate.py review --request <id>` prints:
+1. **Automated check results** (schema valid, charts present, no parse errors, no FAIL metric).
+2. **Artifacts to inspect** (the chart paths).
+3. **The review checklist** — the `review_checklist` for that delivery in `delivery_control.json`, e.g. for `playtest_telemetry`: charts match the summary numbers, WARN/FAIL flags are expected or acknowledged, no PII, sample size adequate, correct channel/timing.
+
+## Verdicts
 
 | Situation | Verdict | Delivered? |
 |-----------|---------|-----------|
 | A check FAILs | `HELD ⛔ blocked` | No |
-| Checks pass, no `--confirm` | `HELD ⛔ preview` | No (review first) |
-| Checks pass + `--confirm` | `APPROVED ✅` | Yes |
-| Overridable metric FAIL + `--confirm --allow-metric-fail` | `APPROVED ✅` (WARN) | Yes (after human review) |
-
-## Usage
-
-Standalone:
-
-```bash
-python3 tools/predelivery_gate.py --kind playtest_telemetry \
-  --artifact pacing_curve.png --artifact deaths_by_encounter.png --artifact ending_funnel.png \
-  --metric fail_count=0 --metric parse_errors=0 [--confirm] [--allow-metric-fail] [--actor you]
-```
-
-Integrated (telemetry): `--telegram` now runs the gate automatically —
-
-```bash
-python3 tools/analyze_playtest_telemetry.py logs_dir --telegram             # preview — reviews, does NOT send
-python3 tools/analyze_playtest_telemetry.py logs_dir --telegram --confirm    # deliver after review
-```
+| Checks pass, no approval yet | `HELD ⛔ pending_review` | No — reviewer must approve |
+| Approval by producer or non-reviewer role | approve `REJECTED` | No |
+| Required approvals recorded (QA) | `APPROVED ✅` | Yes (on next producer run) |
+| Same report already sent | `HELD ⛔ already_delivered` | No (dedupe) |
+| Overridable metric FAIL + reviewer `approve … --allow-metric-fail` | approved (WARN) | Yes (after review) |
 
 ## Config (`game/data/qa/delivery_control.json`)
 
-- `policy.require_confirmation` — external delivery needs `--confirm` (default `true`).
+- `policy.approval` — `required_approvals` (1), `separation_of_duties` (true), `reviewer_roles` (`["qa"]`).
 - `policy.block_on_fail` — any FAIL check blocks delivery.
 - `channels.<name>.external` / `requires_confirmation` — which channels need review.
-- `deliveries.<kind>.checks[]` — `command` | `artifacts_exist` | `metric` (with `op`/`value`; `severity: block_overridable` allows `--allow-metric-fail` after review).
+- `deliveries.<kind>` — `channel`, `required_artifacts`, `review_checklist` (what the reviewer confirms), and `checks[]` (`command` | `artifacts_exist` | `metric`; `severity: block_overridable` allows `--allow-metric-fail`).
 
-Validated by `tools/validate_delivery_control.py` (gate `L0_delivery_control`, run in `main` docs CI).
+Validated by `tools/validate_delivery_control.py` (gate `L0_delivery_control`, run in `main` docs CI). Audit + pending requests live under `artifacts/delivery_audit/` (git-ignored).
 
 ## Extending to other deliveries
 
-Add a new entry under `deliveries` (e.g. `stakeholder_report`) with its channel + checks, then call `predelivery_gate.gate(kind, artifacts, metrics, confirmed=...)` from that delivery path before sending. The gate is delivery-agnostic; the automated PM factory cycle events keep their own trigger gating and are unaffected unless explicitly wired in.
+Add an entry under `deliveries` (e.g. `stakeholder_report`) with its channel, `review_checklist`, and `checks`, then call `predelivery_gate.gate(kind, artifacts, metrics, actor=…, context=…)` from that delivery path. The automated PM factory cycle sends keep their own trigger gating and are unaffected unless explicitly wired in.

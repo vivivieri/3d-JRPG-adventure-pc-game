@@ -33,6 +33,16 @@ def main() -> int:
     if "require_confirmation" not in policy:
         errors.append("policy missing require_confirmation")
 
+    approval = policy.get("approval")
+    if approval is not None:
+        ra = approval.get("required_approvals")
+        if not isinstance(ra, int) or ra < 0:
+            errors.append("policy.approval.required_approvals must be a non-negative integer")
+        if not isinstance(approval.get("reviewer_roles", []), list):
+            errors.append("policy.approval.reviewer_roles must be a list")
+        if ra and not approval.get("reviewer_roles"):
+            errors.append("policy.approval requires reviewer_roles when required_approvals >= 1")
+
     channels = data.get("channels", {})
     if not channels:
         errors.append("channels must be non-empty")
@@ -45,6 +55,8 @@ def main() -> int:
         ch = spec.get("channel")
         if ch not in channels:
             errors.append(f"delivery '{name}' references unknown channel '{ch}'")
+        if not isinstance(spec.get("review_checklist", []), list):
+            errors.append(f"delivery '{name}' review_checklist must be a list")
         checks = spec.get("checks", [])
         if not checks:
             errors.append(f"delivery '{name}' has no checks")

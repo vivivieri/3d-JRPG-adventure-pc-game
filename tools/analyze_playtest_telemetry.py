@@ -608,22 +608,28 @@ def main() -> int:
         except ImportError:
             sys.path.insert(0, str(ROOT / "tools"))
             import predelivery_gate as pdg
+        import os
         record = pdg.gate(
             "playtest_telemetry",
             [str(p) for p in chart_paths],
             {"fail_count": n_fail, "warn_count": n_warn, "parse_errors": len(parse_errors)},
             confirmed=args.confirm,
             allow_metric_fail=args.allow_metric_fail,
+            actor=os.environ.get("AGENT_ROLE", "producer"),
+            context={"logs": str(target)},
         )
         pdg.print_result(record)
         if record["allowed"]:
             print("-" * 68)
             deliver_telegram(agg, checks, chart_paths)
+            pdg.mark_delivered(record["request_id"], pdg.load_config())
         else:
             print("-" * 68)
-            print("Delivery HELD by pre-delivery control — review the outputs above.")
-            print("To deliver after review: re-run with --confirm"
+            print("Delivery HELD by pre-delivery control — a reviewer must approve first.")
+            print(f"Reviewer (QA): {record['review_command']}")
+            print(f"Then approve:  python3 tools/predelivery_gate.py approve --request {record['request_id']} --actor qa"
                   + (" --allow-metric-fail" if n_fail else ""))
+            print("Once approved, re-run this same command to deliver.")
 
     if parse_errors:
         print("-" * 68)
