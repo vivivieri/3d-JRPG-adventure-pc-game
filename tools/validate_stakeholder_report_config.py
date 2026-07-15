@@ -19,6 +19,7 @@ VALID_TRIGGERS = {
     "watchdog_recovery",
     "mcp_blocked",
     "pm_session",
+    "product_owner_decision",
 }
 
 

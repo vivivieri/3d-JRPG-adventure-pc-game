@@ -120,6 +120,15 @@
       "evidence": ["game/data/qa/factory_watchdog.json"],
       "design_ref": "docs/FACTORY_WATCHDOG.md"
     },
+    "L0_escalation_policy": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_escalation_policy.py",
+      "description": "Anti-infinite-loop escalation ladder well-formed — dev↔QA (capped) → arbitration (Architect/SA) → Product Owner",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/escalation_policy.json"],
+      "design_ref": "docs/ESCALATION_POLICY.md"
+    },
     "L0_stakeholder_report": {
       "layer": "L0",
       "domain": "flow",
@@ -128,6 +137,15 @@
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/stakeholder_report_config.json"],
       "design_ref": "docs/PM_STAKEHOLDER_REPORTING.md"
+    },
+    "L0_pm_orchestrator": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_pm_orchestrator_steps.py",
+      "description": "PM session workflow well-formed — session + post-agent steps present and every step points at an existing tool",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/pm_orchestrator_steps.json"],
+      "design_ref": "docs/PM_AGENT_RUNBOOK.md, docs/SPRINT_ORCHESTRATION.md"
     },
     "L0_audio_qa_catalog": {
       "layer": "L0",
@@ -156,6 +174,15 @@
       "evidence": ["game/data/qa/playtest_telemetry_schema.json"],
       "design_ref": "docs/PLAYTEST_TELEMETRY.md, docs/FLOW_QA.md"
     },
+    "L0_delivery_control": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_delivery_control.py",
+      "description": "Pre-delivery control config — checks + confirmation policy for outbound reports (gate: tools/predelivery_gate.py)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/delivery_control.json"],
+      "design_ref": "docs/DELIVERY_CONTROL.md, docs/CONTROLS_CHEATSHEET.md"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -169,6 +196,7 @@
       "layer": "L1",
       "domain": "flow",
       "command": "bash tools/run_unit_tests.sh",
+      "description": "GDScript unit tests all pass — no failing tests",
       "pass": { "exit_code": 0, "failed_tests": 0 },
       "evidence": [],
       "design_ref": "docs/AI_DEV_WORKFLOW.md §3"
@@ -196,6 +224,7 @@
       "layer": "L2",
       "domain": "visual",
       "command": "bash tools/check_scene_visuals.sh",
+      "description": "No banned primitive meshes (BoxMesh/CapsuleMesh) in player-facing scenes",
       "pass": { "exit_code": 0, "banned_mesh_count": 0 },
       "evidence": [],
       "design_ref": "docs/VISUAL_QA.md §L1"
@@ -245,6 +274,7 @@
       "layer": "L2",
       "domain": "visual",
       "command": "python3 tools/check_screenshot_palette.py",
+      "description": "Gameplay screenshot palette stays muted-coastal (avg anchor distance + bright-pixel ratio within bounds)",
       "metrics": {
         "max_avg_anchor_dist": { "op": "<=", "value": 85.0, "unit": "rgb_euclidean" },
         "max_bright_ratio": { "op": "<=", "value": 0.35, "unit": "sample_ratio" }
@@ -256,6 +286,7 @@
       "layer": "L2",
       "domain": "model",
       "command": "python3 tools/check_model_catalog.py --phase {phase}",
+      "description": "All models required for the phase are present in the model QA catalog",
       "pass": { "missing_models": 0 },
       "evidence": ["game/data/models/qa_catalog.json"],
       "design_ref": "docs/MODEL_QA.md §M1"
@@ -264,6 +295,7 @@
       "layer": "L2",
       "domain": "model",
       "command": "python3 tools/check_model_technical.py",
+      "description": "GLB tris within budget + embedded textures ≥ min per model; no greybox at ship",
       "metrics_source": "game/data/models/qa_catalog.json",
       "per_model": {
         "tris": { "op": "between", "from": "tris_min", "to": "tris_max" },
@@ -278,6 +310,7 @@
       "layer": "L2",
       "domain": "audio",
       "command": "python3 tools/check_audio_technical.py",
+      "description": "Audio sample rate / channels / LUFS / true-peak within per-bus targets",
       "metrics": {
         "sample_rate_hz": { "op": "==", "value": 44100 },
         "channels": { "op": "in", "value": [1, 2] },
@@ -308,6 +341,7 @@
       "layer": "L2",
       "domain": "audio",
       "command": "python3 tools/check_audio_catalog.py --phase {phase}",
+      "description": "All BGM/SFX tracks required for the phase are present in the audio catalog",
       "pass": { "missing_tracks": 0 },
       "design_ref": "docs/AUDIO_QA.md §A1"
     },
@@ -334,6 +368,7 @@
       "layer": "L4",
       "domain": "flow",
       "command": "bash tools/run_integration_tests.sh",
+      "description": "Integration/flow scenarios (INT-*) all pass — no failing scenarios",
       "pass": { "exit_code": 0, "failed_scenarios": 0 },
       "evidence": ["game/tests/integration/"],
       "design_ref": "docs/AI_TESTING_SPEC.md §6"
@@ -342,6 +377,7 @@
       "layer": "L5",
       "domain": "flow",
       "command": "REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh",
+      "description": "End-to-end playthrough reaches all three endings (rewind/anchor/drift); SKIP not allowed",
       "pass": { "exit_code": 0, "skip_allowed": false, "endings_passed": ["rewind", "anchor", "drift"] },
       "evidence": ["artifacts/videos/e2e_*.mp4"],
       "design_ref": "docs/AI_TESTING_SPEC.md §7"
@@ -350,14 +386,25 @@
       "layer": "L6",
       "domain": "flow",
       "command": "docs/PLAYTEST_SCRIPT.md",
+      "description": "Human playtest sign-off — ≥80% completion, zero open S0/S1 bugs, ≥5 testers (only after L0–L5 pass)",
       "pass": { "completion_percent": 80, "s0_s1_open": 0, "min_testers": 5 },
       "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
       "design_ref": "docs/PLAYTEST_SCRIPT.md"
+    },
+    "L0_doc_sync": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/check_doc_sync.py",
+      "description": "Docs stay in sync — every top-level doc is indexed in README, links resolve, and runner gates match the acceptance catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/README.md"],
+      "design_ref": "docs/README.md, docs/BRANCHING.md"
     },
     "M5_asset_compliance": {
       "layer": "ship",
       "domain": "compliance",
       "command": "bash tools/check_asset_compliance.sh",
+      "description": "Every shipped media asset is covered by the license manifest (copyright-safe)",
       "pass": { "exit_code": 0 },
       "design_ref": "docs/ASSET_COMPLIANCE.md"
     }
@@ -456,11 +503,15 @@
       "L0_audio_qa_catalog",
       "L0_scene_audio_map",
       "L0_playtest_telemetry",
+      "L0_delivery_control",
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
       "L0_factory_watchdog",
+      "L0_escalation_policy",
       "L0_stakeholder_report",
+      "L0_pm_orchestrator",
       "L0_rr_compliance",
+      "L0_doc_sync",
       "M5_asset_compliance"
     ],
     "design_ref": "docs/BRANCHING.md"

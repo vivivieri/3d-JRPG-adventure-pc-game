@@ -141,6 +141,7 @@
 | [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
 | [generation_briefs/](generation_briefs/README.md) | **30 gen briefs** — 3D heroes/zones + 8 hero BGM + 5 P0 VO |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
+| [ART_DIRECTION.md](ART_DIRECTION.md) | Palette, silhouettes, muted-coastal look — what to avoid |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
@@ -171,8 +172,10 @@
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA gates — WARN/SKIP ≠ PASS |
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
+| [ESCALATION_POLICY.md](ESCALATION_POLICY.md) | Anti-infinite-loop ladder — dev↔QA → Architect/SA → Product Owner |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
 | [PLAYTEST_TELEMETRY.md](PLAYTEST_TELEMETRY.md) | Playtest telemetry (GUR) — pacing/combat/ending tuning loop |
+| [DELIVERY_CONTROL.md](DELIVERY_CONTROL.md) | Pre-delivery review gate — review + confirm before outbound delivery |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
 | [GDAI_CLOUD_SETUP.md](GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |
 | [PLUGIN_INSTALL_GUIDE.md](PLUGIN_INSTALL_GUIDE.md) | MCP plugin install |

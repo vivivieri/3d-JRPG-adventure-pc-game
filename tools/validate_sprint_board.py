@@ -32,6 +32,32 @@ def main() -> int:
     board = load_board()
     errors.extend(validate_board_schema(board, strict=args.strict))
 
+    # Developer traceability: the acceptance criteria a dev is handed must reference
+    # gates that actually exist (and are documented) in acceptance_criteria.json, and
+    # implementation issues must point to design docs (handoff_refs) telling the dev
+    # what to build. Keeps "what to develop + how it's judged" real and unambiguous.
+    crit_path = ROOT / "game/data/qa/acceptance_criteria.json"
+    if crit_path.is_file():
+        crit = json.loads(crit_path.read_text(encoding="utf-8"))
+        known_gates = set(crit.get("gates", {}))
+        # Catalog meta-gates validated elsewhere but legitimately referenceable by tasks.
+        known_gates.update({"L0_acceptance_catalog", "L0_environments_catalog", "L0_sprint_phases"})
+
+        active = board.get("active_sprint", {})
+        for gid in active.get("phase_exit_gate_ids", []):
+            if gid not in known_gates:
+                errors.append(f"active_sprint.phase_exit_gate_ids references unknown gate '{gid}'")
+
+        impl_owners = {"architect", "builder", "visual", "flow"}
+        for issue in board.get("issues", []):
+            iid = issue.get("id", "?")
+            for gid in issue.get("acceptance_gate_ids", []):
+                if gid not in known_gates:
+                    errors.append(f"{iid}: acceptance_gate_ids references unknown gate '{gid}'")
+            if args.strict and issue.get("status") not in ("done", "carry_over"):
+                if issue.get("agent_owner") in impl_owners and not issue.get("handoff_refs"):
+                    errors.append(f"{iid}: implementation issue missing handoff_refs (design docs telling the dev what to build)")
+
     # active phase alignment with sprint_phases.json
     if PHASES_PATH.is_file():
         phases = json.loads(PHASES_PATH.read_text(encoding="utf-8"))

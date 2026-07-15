@@ -22,6 +22,7 @@
     "uat_ready": { "send_telegram": true, "report_kind": "uat_ready" },
     "watchdog_recovery": { "send_telegram": true, "report_kind": "factory_alert" },
     "mcp_blocked": { "send_telegram": true, "report_kind": "factory_alert" },
+    "product_owner_decision": { "send_telegram": true, "report_kind": "product_owner_decision", "note": "Terminal escalation — Product Owner decision required (tools/pm_escalate.py)" },
     "pm_session": { "send_telegram": false, "report_kind": "pm_dispatch", "note": "Written to artifacts only unless --telegram" }
   },
   "outputs": {
