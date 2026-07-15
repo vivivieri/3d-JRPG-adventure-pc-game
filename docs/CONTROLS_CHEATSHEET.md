@@ -28,7 +28,8 @@
 | 5 | **R&R scripts** | ✅ in CI | ✅ |
 | 6 | **Remediation loop** | ⚠️ Process | ✅ anti-infinite-retry |
 | 7 | **Phase exit gates** | — | ✅ phase promotion |
-| 8 | **Agent rules** | — | — |
+| 8 | **Pre-delivery control** | — | ✅ blocks outbound delivery until reviewed + confirmed (`docs/DELIVERY_CONTROL.md`) |
+| 9 | **Agent rules** | — | — |
 
 ---
 

@@ -37,6 +37,7 @@ run_gate "L0_qa_catalog" python3 tools/validate_qa_catalog.py
 run_gate "L0_audio_qa_catalog" python3 tools/validate_audio_qa_catalog.py
 run_gate "L0_scene_audio_map" python3 tools/validate_scene_audio_map.py
 run_gate "L0_playtest_telemetry" python3 tools/validate_playtest_telemetry_schema.py
+run_gate "L0_delivery_control" python3 tools/validate_delivery_control.py
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
