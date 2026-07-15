@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "authority": "docs/DELIVERY_CONTROL.md — pre-delivery review gate for outbound reports/artifacts. Reusable across delivery activities (telemetry reports, stakeholder reports). Gate: tools/predelivery_gate.py.",
+  "policy": {
+    "require_confirmation": true,
+    "block_on_fail": true,
+    "audit": true,
+    "audit_dir": "artifacts/delivery_audit",
+    "approval": {
+      "required_approvals": 1,
+      "separation_of_duties": true,
+      "reviewer_roles": ["qa"]
+    }
+  },
+  "channels": {
+    "telegram": { "external": true, "requires_confirmation": true },
+    "local": { "external": false, "requires_confirmation": false }
+  },
+  "deliveries": {
+    "playtest_telemetry": {
+      "channel": "telegram",
+      "description": "Playtest telemetry summary + charts to product owner",
+      "required_artifacts": ["pacing_curve.png", "deaths_by_encounter.png", "ending_funnel.png"],
+      "review_checklist": [
+        "Charts render correctly and match the summary numbers (runs, completion %, endings).",
+        "Every WARN/FAIL metric is expected or acknowledged (e.g. is the boss difficulty spike intended, or a balance bug?).",
+        "Summary text is accurate and contains no player PII.",
+        "Sample size is adequate for the conclusion (small n = directional only, not statistical).",
+        "This is the intended product-owner Telegram channel and an appropriate time to send (not mid-broken-build)."
+      ],
+      "checks": [
+        { "id": "schema_valid", "type": "command", "cmd": "python3 tools/validate_playtest_telemetry_schema.py", "detail": "Telemetry schema valid" },
+        { "id": "charts_present", "type": "artifacts_exist", "detail": "All required charts rendered" },
+        { "id": "no_parse_errors", "type": "metric", "field": "parse_errors", "op": "==", "value": 0, "detail": "No malformed telemetry events" },
+        { "id": "no_metric_fail", "type": "metric", "field": "fail_count", "op": "==", "value": 0, "severity": "block_overridable", "detail": "No hard-FAIL metrics in the report (override with --allow-metric-fail after human review)" }
+      ]
+    }
+  }
+}

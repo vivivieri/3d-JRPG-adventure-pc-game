@@ -544,7 +544,10 @@ def main() -> int:
     ap.add_argument("--charts", dest="charts_dir", nargs="?", const="artifacts/telemetry_reports/charts",
                     help="render matplotlib PNG charts to this dir (default artifacts/telemetry_reports/charts)")
     ap.add_argument("--report", dest="report_md", help="write a one-page Markdown report to this path")
-    ap.add_argument("--telegram", action="store_true", help="send summary + charts to the configured Telegram chat")
+    ap.add_argument("--telegram", action="store_true", help="deliver summary + charts to Telegram (gated: preview unless --confirm)")
+    ap.add_argument("--confirm", action="store_true", help="approve external delivery through the pre-delivery control (default: preview only)")
+    ap.add_argument("--allow-metric-fail", dest="allow_metric_fail", action="store_true",
+                    help="override an overridable metric FAIL in the delivery gate after human review")
     ap.add_argument("--strict", action="store_true", help="exit non-zero if any metric FAILs")
     ap.add_argument("--emit-sample", dest="emit_sample", metavar="OUT_DIR", help="generate synthetic sample logs and exit")
     ap.add_argument("--runs", type=int, default=5, help="number of runs for --emit-sample (default 5)")
@@ -601,7 +604,35 @@ def main() -> int:
 
     if args.telegram:
         print("-" * 68)
-        deliver_telegram(agg, checks, chart_paths)
+        n_fail = sum(1 for c in checks if c["status"] == FAIL)
+        n_warn = sum(1 for c in checks if c["status"] == WARN)
+        try:
+            import predelivery_gate as pdg
+        except ImportError:
+            sys.path.insert(0, str(ROOT / "tools"))
+            import predelivery_gate as pdg
+        import os
+        record = pdg.gate(
+            "playtest_telemetry",
+            [str(p) for p in chart_paths],
+            {"fail_count": n_fail, "warn_count": n_warn, "parse_errors": len(parse_errors)},
+            confirmed=args.confirm,
+            allow_metric_fail=args.allow_metric_fail,
+            actor=os.environ.get("AGENT_ROLE", "producer"),
+            context={"logs": str(target)},
+        )
+        pdg.print_result(record)
+        if record["allowed"]:
+            print("-" * 68)
+            deliver_telegram(agg, checks, chart_paths)
+            pdg.mark_delivered(record["request_id"], pdg.load_config())
+        else:
+            print("-" * 68)
+            print("Delivery HELD by pre-delivery control — a reviewer must approve first.")
+            print(f"Reviewer (QA): {record['review_command']}")
+            print(f"Then approve:  python3 tools/predelivery_gate.py approve --request {record['request_id']} --actor qa"
+                  + (" --allow-metric-fail" if n_fail else ""))
+            print("Once approved, re-run this same command to deliver.")
 
     if parse_errors:
         print("-" * 68)
