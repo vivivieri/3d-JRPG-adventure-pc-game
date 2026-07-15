@@ -64,3 +64,5 @@ artifacts/telemetry_reports/*
 !artifacts/telemetry_reports/.gitkeep
 artifacts/delivery_audit/*
 !artifacts/delivery_audit/.gitkeep
+artifacts/escalations/*
+!artifacts/escalations/.gitkeep

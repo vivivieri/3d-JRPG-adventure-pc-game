@@ -41,6 +41,7 @@ run_gate "L0_delivery_control" python3 tools/validate_delivery_control.py
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
+run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py
 run_gate "L0_pm_orchestrator" python3 tools/validate_pm_orchestrator_steps.py
 run_gate "L0_rr_compliance" bash tools/check_rr_compliance.sh

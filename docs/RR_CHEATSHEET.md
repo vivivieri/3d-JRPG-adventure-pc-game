@@ -54,7 +54,7 @@
 | Role | Agent | Owns | Must NOT | Control hook |
 |------|-------|------|----------|--------------|
 | **PM / Sprint facilitator** | PM Agent | Issues, milestones, orchestrator dispatch, escalations | Write code or `.tscn` | **`run_pm_orchestrator.sh` PASS**; `L0_sprint_board` |
-| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
+| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests; **Design Authority (SA)** for arbitration | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
 | **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr`, **`L3_gdai_built`**, **component `.tscn` catalog** |
 | **QA** | QA Agent | L0–L3 gates, evidence, bugs | Mark ship without gates | CI green + **gate report in PR** |
 | **Integration** | Flow Agent | L4/L5 integration/E2E | Build scenes | `L4_integration`; L5 in CD beta/prod |
@@ -129,6 +129,18 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 **PM → all:** ensure linked issue + correct **PR template** before review.
 
 ---
+
+## Escalation ladder (no infinite dev↔QA loops)
+
+`docs/ESCALATION_POLICY.md` · `game/data/qa/escalation_policy.json` · `tools/pm_escalate.py`
+
+| Tier | Owner | Cap → next |
+|------|-------|-----------|
+| 1 · dev ↔ QA loop | dev + QA | **max 3 reopens** → arbitration |
+| 2 · Arbitration | **Architect (Design Authority / SA)** | classify root cause; resolve or (needs business decision) → Product Owner |
+| 3 · Product Owner | Human (Telegram) | final — `amend_requirement`/`descope`/`wont_fix`/`approve_as_is`/`reprioritize` |
+
+Only the arbiter (Architect/SA) or the Product Owner may change a requirement — that is what breaks the loop. Every tier is capped; escalation goes **up**, never sideways.
 
 ## QA gate layers
 
