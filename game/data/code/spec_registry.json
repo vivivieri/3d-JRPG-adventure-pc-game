@@ -112,9 +112,9 @@
     {
       "id": "impl_shaders",
       "kind": "implementation",
-      "spec_status": "partial",
+      "spec_status": "specified",
       "branch": "game/development",
-      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7"],
+      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7", "docs/art/SHADER_SPECS.md"],
       "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
       "phase": 1
     }

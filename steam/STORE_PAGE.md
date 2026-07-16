@@ -100,10 +100,29 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 
 ---
 
+## System requirements (Linux / Steam Deck)
+
+**Minimum:**
+- OS: Ubuntu 22.04+ or SteamOS 3.x (64-bit)
+- Processor: Dual-core 2.0 GHz x86_64
+- Memory: 4 GB RAM
+- Graphics: Vulkan 1.0 / OpenGL 3.3 compatible GPU (Mesa or proprietary)
+- Storage: 500 MB
+
+**Recommended:**
+- OS: Ubuntu 24.04 LTS or SteamOS 3.x
+- Memory: 8 GB RAM
+- Graphics: Dedicated GPU with 2 GB VRAM (GTX 1060 class or equivalent)
+
+**Note:** Linux is a **required ship platform** alongside Windows — see `docs/qa/PLATFORM_SUPPORT.md`. Cloud dev agents build and perf-test on Linux; Windows depot cross-exported from CI.
+
+---
+
 ## Build & upload
 
 ```bash
-./tools/export_windows.sh   # produces build/TidesOfUrashima.exe (~109 MB)
+./tools/export_windows.sh   # Windows — build/TidesOfUrashima.exe (~109 MB)
+./tools/export_linux.sh     # Linux — build/TidesOfUrashima.x86_64
 ```
 
 1. Open `game/project.godot` in Godot **4.7** stable (or use script above)
