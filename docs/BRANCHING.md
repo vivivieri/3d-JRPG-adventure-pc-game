@@ -1,7 +1,8 @@
 # Branching policy — documentation vs game development
 
-**Version:** 1.0  
-**Authority:** This document defines which branches hold what, and when code may land on `main`.
+**Version:** 1.1  
+**Authority:** This document defines which branches hold what, and when code may land on `main`.  
+**Spec-first policy:** `docs/SPEC_FIRST_DEVELOPMENT.md` — **complete specs on `main`; zero ship code until `SPEC_DEV_START` gate.**
 
 ---
 
@@ -9,7 +10,7 @@
 
 | Branch | Purpose | What it contains | Merge policy |
 |--------|---------|------------------|--------------|
-| **`main`** | Design & documentation | `docs/`, `game/data/`, `game/locale/`, `tools/`, `steam/` marketing, QA catalogs | Docs/data updates anytime via PR |
+| **`main`** | Design & **complete specifications** | `docs/`, `game/data/` (incl. `code/spec_registry.json`), `game/locale/`, `tools/`, validators | Docs/data updates anytime via PR |
 | **`game/development`** | Full game implementation | Everything on `main` **plus** `game/project.godot`, scripts, scenes, assets, tests, addons | **No merge to `main` until the game is ship-ready (M6)** |
 
 ---
@@ -21,14 +22,15 @@
 - ✅ Design docs, GDD, art direction, implementation plan
 - ✅ Story/combat JSON (`game/data/`)
 - ✅ i18n string table (`game/locale/translations.csv`)
+- ✅ Spec registries (`game/data/code/spec_registry.json`, `autoload_registry.json`, `scene_registry.json`)
 - ✅ Validators, CI for data + docs (`tools/run_docs_ci_checks.sh`)
 - ✅ Steam store copy and marketing trailers (`steam/`)
-- ❌ Godot project file, GDScript gameplay code, `.tscn` scenes, ship assets
+- ❌ Godot project file, GDScript gameplay code, `.tscn` scenes, ship assets (`tools/check_main_no_ship_code.sh`)
 - ❌ Game implementation PRs
 
 ### On `game/development`
 
-- ✅ All Godot implementation (Phases 1–8)
+- ✅ All Godot implementation (Phases 1–8) — **only after `SPEC_DEV_START` gate** (`docs/SPEC_FIRST_DEVELOPMENT.md`)
 - ✅ GDAI MCP–built scenes, shaders, assets
 - ✅ Unit/integration/E2E tests
 - ✅ Full game CI (`tools/run_ci_checks.sh`, `.github/workflows/game-ci.yml`) — **required green before PR merge**

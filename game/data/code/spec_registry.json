@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "policy_ref": "docs/SPEC_FIRST_DEVELOPMENT.md",
+  "development_start": {
+    "gate_id": "SPEC_DEV_START",
+    "description": "All blocking artifacts must be spec_status=specified before ship code on game/development",
+    "blocking_artifact_ids": [
+      "data_story_spine",
+      "data_combat",
+      "data_narrative_density",
+      "registry_autoloads",
+      "registry_scenes_phase1_2",
+      "registry_base_classes",
+      "doc_technical_design",
+      "doc_level_design"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "data_story_spine",
+      "kind": "data",
+      "spec_status": "specified",
+      "paths": ["game/data/story/scenes.json", "game/data/story/flags.json", "game/data/dialogue/chapter_01.json"],
+      "validator": "tools/validate_story_data.py",
+      "phase": 0
+    },
+    {
+      "id": "data_combat",
+      "kind": "data",
+      "spec_status": "specified",
+      "paths": ["game/data/enemies/enemies.json", "game/data/skills/skills.json", "game/data/encounters/story_encounters.json", "game/data/combat/difficulty.json"],
+      "phase": 0
+    },
+    {
+      "id": "data_narrative_density",
+      "kind": "data",
+      "spec_status": "specified",
+      "paths": ["game/data/narrative/narrative_density.json", "game/data/narrative/ending_gallery.json"],
+      "validator": "tools/validate_narrative_density.py",
+      "phase": 0
+    },
+    {
+      "id": "registry_autoloads",
+      "kind": "registry",
+      "spec_status": "specified",
+      "paths": ["game/data/code/autoload_registry.json"],
+      "phase": 2
+    },
+    {
+      "id": "registry_scenes_phase1_2",
+      "kind": "registry",
+      "spec_status": "specified",
+      "paths": ["game/data/code/scene_registry.json"],
+      "note": "Phase 1–2 zone/menu scenes catalogued",
+      "phase": 2
+    },
+    {
+      "id": "registry_base_classes",
+      "kind": "registry",
+      "spec_status": "specified",
+      "paths": ["game/data/code/base_classes.json"],
+      "validator": "tools/validate_base_classes.py",
+      "phase": 2
+    },
+    {
+      "id": "doc_technical_design",
+      "kind": "doc",
+      "spec_status": "specified",
+      "paths": ["docs/TECHNICAL_DESIGN.md"],
+      "phase": 0
+    },
+    {
+      "id": "doc_level_design",
+      "kind": "doc",
+      "spec_status": "specified",
+      "paths": ["docs/LEVEL_DESIGN.md"],
+      "phase": 1
+    },
+    {
+      "id": "impl_gdscript",
+      "kind": "implementation",
+      "spec_status": "not_started",
+      "branch": "game/development",
+      "paths": ["game/scripts/**/*.gd"],
+      "note": "Built after SPEC_DEV_START — must not exist on main"
+    },
+    {
+      "id": "impl_scenes",
+      "kind": "implementation",
+      "spec_status": "not_started",
+      "branch": "game/development",
+      "paths": ["game/scenes/**/*.tscn"],
+      "note": "Built via GDAI MCP after SPEC_DEV_START"
+    },
+    {
+      "id": "impl_shaders",
+      "kind": "implementation",
+      "spec_status": "partial",
+      "branch": "game/development",
+      "design_ref": ["docs/RENDERING_GUIDE.md", "docs/ART_DIRECTION.md §7"],
+      "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
+      "phase": 1
+    }
+  ]
+}

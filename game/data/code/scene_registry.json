@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "design_ref": "docs/LEVEL_DESIGN.md, docs/TECHNICAL_DESIGN.md §3",
+  "note": "Node catalog is spec — transforms and meshes are built via GDAI MCP on game/development.",
+  "scenes": [
+    {
+      "id": "boot",
+      "path": "res://scenes/boot.tscn",
+      "phase": 2,
+      "spec_status": "specified",
+      "root_type": "Node",
+      "required_children": ["BootLoader"],
+      "script": "res://scripts/core/boot_loader.gd",
+      "description": "Validates data then changes to main_menu"
+    },
+    {
+      "id": "main_menu",
+      "path": "res://scenes/ui/main_menu.tscn",
+      "phase": 2,
+      "spec_status": "specified",
+      "root_type": "Control",
+      "required_children": ["NewGameButton", "ContinueButton", "SettingsButton"],
+      "description": "New Game → SC-00 or beach_shore per settings"
+    },
+    {
+      "id": "beach_shore",
+      "path": "res://scenes/world/beach_shore.tscn",
+      "phase": 1,
+      "zone_id": "beach_shore",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_SC-01", "type": "Marker3D" },
+        { "name": "Interactable_SC-01-DRIFTWOOD", "type": "Interactable", "export": { "scene_id": "SC-01-DRIFTWOOD" } },
+        { "name": "ZoneTransition_ruined_village", "type": "ZoneTransition", "export": { "target_zone": "ruined_village" } },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" }
+      ]
+    },
+    {
+      "id": "ruined_village",
+      "path": "res://scenes/world/ruined_village.tscn",
+      "phase": 1,
+      "zone_id": "ruined_village",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_hub", "type": "Marker3D" },
+        { "name": "Interactable_SC-02-BANNER", "type": "Interactable", "export": { "scene_id": "SC-02-BANNER" } },
+        { "name": "Interactable_SC-02-SANDAL", "type": "Interactable", "export": { "scene_id": "SC-02-SANDAL" } },
+        { "name": "SavePoint_well", "type": "SavePoint", "export": { "scene_id": "SC-02-WELL" } },
+        { "name": "Interactable_SC-03", "type": "Interactable", "export": { "scene_id": "SC-03" } },
+        { "name": "Interactable_SC-04", "type": "Interactable", "export": { "scene_id": "SC-04" } },
+        { "name": "EncounterTrigger_enc_sc05_tutorial_crab", "type": "EncounterTrigger", "export": { "encounter_id": "enc_sc05_tutorial_crab" } },
+        { "name": "ZoneTransition_tidal_caves", "type": "ZoneTransition", "export": { "target_zone": "tidal_caves", "requires_flags": ["cave_entrance_unlocked"] } },
+        { "name": "CinematicTrigger_hub_pan", "type": "Area3D", "export": { "hook_id": "sc02_hub_pan" } }
+      ]
+    },
+    {
+      "id": "tidal_caves",
+      "path": "res://scenes/world/tidal_caves.tscn",
+      "phase": 5,
+      "zone_id": "tidal_caves",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_cave_entrance", "type": "Marker3D" },
+        { "name": "EncounterTrigger_enc_sc06_cave_crab", "type": "EncounterTrigger" },
+        { "name": "WaterPuzzle", "type": "Node3D", "description": "SC-07 puzzle FSM — see PUZZLE_DESIGN.md" },
+        { "name": "EncounterTrigger_enc_sc08_deep_pool", "type": "EncounterTrigger" },
+        { "name": "EncounterTrigger_enc_sc09_shore_wraith", "type": "EncounterTrigger" },
+        { "name": "Interactable_SC-10", "type": "Interactable", "export": { "scene_id": "SC-10" } },
+        { "name": "ZoneTransition_dragon_palace_gate", "type": "ZoneTransition" }
+      ]
+    },
+    {
+      "id": "dragon_palace_gate",
+      "path": "res://scenes/world/dragon_palace_gate.tscn",
+      "phase": 6,
+      "zone_id": "dragon_palace_gate",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_gate", "type": "Marker3D" },
+        { "name": "SavePoint_gate", "type": "SavePoint" },
+        { "name": "EncounterTrigger_enc_sc12_palace_wraiths", "type": "EncounterTrigger" },
+        { "name": "Interactable_SC-13", "type": "Interactable", "export": { "scene_id": "SC-13" } },
+        { "name": "EncounterTrigger_enc_sc14_sentinel", "type": "EncounterTrigger" },
+        { "name": "EncounterTrigger_enc_sc15_tide_keeper", "type": "EncounterTrigger" },
+        { "name": "Interactable_SC-16", "type": "Interactable", "export": { "scene_id": "SC-16" } }
+      ]
+    },
+    {
+      "id": "dialogue_box",
+      "path": "res://scenes/ui/dialogue_box.tscn",
+      "phase": 3,
+      "spec_status": "specified",
+      "root_type": "CanvasLayer",
+      "required_children": ["Portrait", "TextLabel", "ChoiceContainer"]
+    },
+    {
+      "id": "combat_instance",
+      "path": "res://scenes/combat/combat_instance.tscn",
+      "phase": 4,
+      "spec_status": "specified",
+      "required_children": ["TurnManager", "CombatUI", "BattleField"]
+    },
+    {
+      "id": "combat_ui",
+      "path": "res://scenes/ui/combat_ui.tscn",
+      "phase": 4,
+      "spec_status": "specified",
+      "required_children": ["IntentPanel", "ActionMenu", "PartyStatus"]
+    }
+  ],
+  "component_scenes_ref": "game/data/code/base_classes.json"
+}
