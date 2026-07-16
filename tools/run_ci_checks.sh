@@ -67,6 +67,9 @@ run_tri_gate "L2_animation_whitelist" "GLB animation whitelist + required floor"
 run_tri_gate "L2_feel_smoke" "Game feel thresholds (GAME_FEEL.md)" \
   bash tools/run_feel_smoke_checks.sh
 
+run_tri_gate "L2_perf_catalog" "Performance thresholds catalog" \
+  bash tools/run_perf_review_checks.sh
+
 MAIN_SCENE="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' || true)"
 if [[ -z "$MAIN_SCENE" ]]; then
   skip_gate "L2_boot_headless" "no run/main_scene (design-phase baseline)"
@@ -97,6 +100,7 @@ echo ""
 echo "Not run in CI (agent/editor only):"
 echo "  - check_mcp_ready.sh — GDAI MCP stack"
 echo "  - L3_gdai_f5 full viewport verify (editor F5)"
+echo "  - L3_perf_review — Godotiq perf_snapshot (FPS, draw calls)"
 echo "  - L2 visual/audio/model jury (requires screenshots + API keys; use run_*_smoke_checks.sh)"
 echo "  - L5 E2E three endings (REQUIRE_L5=1 for Phase 6+ / CD beta|prod)"
 echo "  - L6 human playtest"

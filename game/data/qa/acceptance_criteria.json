@@ -36,7 +36,9 @@
     "Marking issue done without pm_check_done_criteria PASS",
     "Architect and Builder work in same agent session (strict role violation)",
     "Skipping evidence bundle before issue done",
-    "Cycle complete without stakeholder report (pm_emit_stakeholder_report)"
+    "Cycle complete without stakeholder report (pm_emit_stakeholder_report)",
+    "Scene/visual PR merged without L3_perf_review evidence when scenes or shaders changed",
+    "Bug fix touching scenes/shaders merged without perf re-check in affected zone"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -260,6 +262,15 @@
       "evidence": ["game/data/qa/feel_thresholds.json"],
       "design_ref": "docs/GAME_FEEL.md"
     },
+    "L2_perf_catalog": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_perf_review_checks.sh",
+      "description": "Performance thresholds catalog (FPS target, material budget, zone list)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/perf_thresholds.json"],
+      "design_ref": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9"
+    },
     "L2_glb_import": {
       "layer": "L2",
       "domain": "model",
@@ -363,6 +374,20 @@
       "pass": { "verified_f5": true, "editor_errors": 0 },
       "evidence": ["game/scenes/.gdai_built"],
       "design_ref": "docs/MCP_STACK.md, .cursorrules §0"
+    },
+    "L3_perf_review": {
+      "layer": "L3",
+      "domain": "flow",
+      "command": "Godotiq godotiq_perf_snapshot after F5 in affected zone",
+      "description": "Lightweight performance review — FPS, draw calls, node count; not a code review",
+      "pass": {
+        "min_fps": 55,
+        "max_materials_per_view": 8,
+        "draw_calls_investigate_above": 1000
+      },
+      "skip_when": "no game/project.godot or docs/data-only PR",
+      "evidence": ["artifacts/perf_reviews/<zone>_<commit>.json"],
+      "design_ref": "docs/RENDERING_GUIDE.md, game/data/qa/perf_thresholds.json"
     },
     "L4_integration": {
       "layer": "L4",
@@ -532,6 +557,7 @@
       "L3_gdai_built",
       "L2_animation_whitelist",
       "L2_feel_smoke",
+      "L2_perf_catalog",
       "L2_glb_import",
       "L4_integration",
       "M5_asset_compliance"
@@ -546,6 +572,7 @@
     "excluded_gates": [
       "check_mcp_ready",
       "L3_gdai_f5",
+      "L3_perf_review",
       "L2_visual_jury",
       "L2_model_jury",
       "L2_audio_jury",

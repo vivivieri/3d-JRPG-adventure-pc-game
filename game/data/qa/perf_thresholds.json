@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "authority": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9",
+  "target": {
+    "resolution": "1920x1080",
+    "hardware_ref": "GTX 1060 equivalent",
+    "min_fps_gameplay": 60,
+    "min_fps_editor_viewport": 55
+  },
+  "budgets": {
+    "max_materials_per_view": 8,
+    "max_draw_calls_investigate": 1000,
+    "max_node_count_investigate": 5000,
+    "min_fps_investigate": 30
+  },
+  "zones": [
+    {
+      "id": "ruined_village",
+      "phase": 1,
+      "storyboard": "SC-02",
+      "scene_path": "res://scenes/world/ruined_village.tscn",
+      "test_duration_s": 30,
+      "camera": "gameplay_walk_hub",
+      "golden_screenshot": "artifacts/screenshots/phase1_ruined_village_gameplay.png"
+    },
+    {
+      "id": "beach_shore",
+      "phase": 2,
+      "storyboard": "SC-01",
+      "scene_path": "res://scenes/world/beach_shore.tscn",
+      "test_duration_s": 20,
+      "camera": "path_to_village_gate"
+    },
+    {
+      "id": "tidal_caves",
+      "phase": 5,
+      "storyboard": "SC-06",
+      "scene_path": "res://scenes/world/tidal_caves.tscn",
+      "test_duration_s": 30,
+      "camera": "tunnel_mid_emissive"
+    },
+    {
+      "id": "dragon_palace_gate",
+      "phase": 6,
+      "storyboard": "SC-12",
+      "scene_path": "res://scenes/world/dragon_palace_gate.tscn",
+      "test_duration_s": 30,
+      "camera": "corridor_void_sky"
+    }
+  ],
+  "post_fix_rerun": {
+    "perf_snapshot_required_when": [
+      "scene",
+      "shader",
+      "material",
+      "mesh",
+      "light",
+      "fog",
+      "particles",
+      "volumetric"
+    ],
+    "integration_rerun": "affected INT-* scenario plus one scene before and after",
+    "design_ref": "docs/QA_AND_BUG_PROCESS.md §6"
+  }
+}
