@@ -42,7 +42,7 @@
 | 1 | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
 | 1b | [BRANCHING.md](workflow/BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
 | 1b2 | [SPEC_FIRST_DEVELOPMENT.md](technical/SPEC_FIRST_DEVELOPMENT.md) | Complete specs on `main`; code after `SPEC_DEV_START` |
-| 1b3 | [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Rebuild core helpers from Python refs |
+| 1b3 | [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Rebuild core helpers + Phase 1 visuals from specs |
 | 1c | [ENVIRONMENTS.md](ci-cd/ENVIRONMENTS.md) | dev · qa · uat · preprod · prod promotion |
 | 1d | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) | Phase-gated Agile + sprint map |
 | 2 | [MILESTONES.md](workflow/MILESTONES.md) | Deliverable checklist |
@@ -139,7 +139,7 @@
 | [TECH_STACK.md](technical/TECH_STACK.md) | Godot 4.7, plugin versions |
 | [PLUGIN_COMPATIBILITY.md](technical/PLUGIN_COMPATIBILITY.md) | GDAI, Godotiq, MCP Pro |
 | [SPEC_FIRST_DEVELOPMENT.md](technical/SPEC_FIRST_DEVELOPMENT.md) | Spec on `main`; code after gate |
-| [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Core helper port workflow |
+| [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Core helper + Phase 1 visuals port workflow |
 
 ---
 

@@ -72,7 +72,9 @@
         "game/data/code/environment_registry.json",
         "game/data/code/shader_registry.json",
         "game/data/qa/unit_test_specs.json",
-        "tools/zone_visuals_lib.py"
+        "tools/zone_visuals_lib.py",
+        "tools/regenerate_phase1_visuals.sh",
+        "docs/technical/GDSCRIPT_REGENERATION.md"
       ],
       "validator": "tools/validate_base_classes.py",
       "phase": 1
