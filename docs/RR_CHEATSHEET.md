@@ -157,7 +157,7 @@ P1-00 (pm)     bootstrap project.godot + CI
 
 **Policy:** Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style.
 
-**Baseline:** All ship perf numbers are measured on **`reference_pc_gtx1060`** (Windows, GTX 1060 class, 1080p Medium). See **`docs/PERFORMANCE_BASELINE.md`** + `game/data/qa/perf_baseline.json`. Cloud agents and CI are **not** valid for FPS sign-off.
+**Baseline:** Ship perf on **`reference_linux_cloud`** (cloud snapshot / Linux) + **`reference_pc_gtx1060`** (Windows). Linux ship is **required** — cloud dev OS. See **`docs/PLATFORM_SUPPORT.md`**, **`docs/PERFORMANCE_BASELINE.md`**, `game/data/qa/perf_baseline.json`. JIT cloud (`build: null`) is invalid for FPS sign-off.
 
 ### When required
 

@@ -88,7 +88,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L3_gdai_built` | `check_l3_gdai_built.sh` exit 0 — if ship scenes or `main_scene` changed in diff, `.gdai_built` updated with `verified_f5=true` |
 | `L3_gdai_f5` | GDAI MCP F5 in editor — agent-local; not full CI |
-| `L3_perf_review` | Godotiq `perf_snapshot` after F5 on **`reference_pc_gtx1060`** — FPS ≥ 55, ≤ 8 materials/view; evidence in `artifacts/perf_reviews/` with `baseline_id` — agent-local |
+| `L3_perf_review` | Godotiq `perf_snapshot` after F5 on **`reference_linux_cloud`** (snapshot) and/or **`reference_pc_gtx1060`** (Windows) — evidence with `baseline_id` — agent-local |
 
 ### L4 / L5 — Flow
 

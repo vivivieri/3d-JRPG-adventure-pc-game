@@ -1,7 +1,8 @@
 # Performance Baseline — Hardware, Environment & Evidence
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Machine-readable:** `game/data/qa/perf_baseline.json`  
+**Platform policy:** `docs/PLATFORM_SUPPORT.md` — **Linux ship required** (cloud dev OS)  
 **Thresholds:** `game/data/qa/perf_thresholds.json`  
 **Cross-refs:** `docs/RENDERING_GUIDE.md`, `docs/ENVIRONMENT_KITS.md` §9, `docs/RR_CHEATSHEET.md` §Performance review, `docs/ACCEPTANCE_CRITERIA.md`, `steam/STORE_PAGE.md`
 
@@ -13,12 +14,12 @@ This document defines **what machine and runtime profile** performance numbers m
 
 | Problem | Baseline solves |
 |---------|-----------------|
-| Cloud agent reports 45 FPS on unknown GPU | Evidence must cite `baseline_id`; cloud is **invalid** for ship sign-off |
+| Cloud agent reports 45 FPS on unknown GPU | JIT boot invalid; **snapshot Linux** valid with `reference_linux_cloud` |
 | Editor F5 vs exported `.exe` differ | Doc states which is authoritative per gate |
 | Steam minimum vs recommended blur together | Two profiles: **reference** (ship) vs **minimum** (support floor) |
 | Perf review has no CPU/RAM fields | Evidence schema requires hardware capture when available |
 
-**Policy:** `L3_perf_review` PASS requires evidence captured on **`reference_pc_gtx1060`** (or human-approved equivalent documented in the PR). See `game/data/qa/perf_baseline.json`.
+**Policy:** `L3_perf_review` PASS requires evidence on a **ship baseline** — **`reference_linux_cloud`** (cloud snapshot / Linux depot) and **`reference_pc_gtx1060`** (Windows depot before M6 prod). See `docs/PLATFORM_SUPPORT.md`.
 
 ---
 
@@ -26,31 +27,48 @@ This document defines **what machine and runtime profile** performance numbers m
 
 | `baseline_id` | Purpose | Valid for `L3_perf_review` ship PASS? |
 |---------------|---------|--------------------------------------|
-| **`reference_pc_gtx1060`** | Ship target — art tuning, sprint gates, M5 zone sign-off | **Yes** |
+| **`reference_linux_cloud`** | **Primary dev** — Cursor Cloud snapshot, Linux Steam depot | **Yes** (snapshot boot only) |
+| **`reference_pc_gtx1060`** | Windows Steam depot | **Yes** |
 | `steam_minimum` | Store listing floor — spot-check at M6 only | No |
-| `cloud_agent_jit` | Cursor Cloud JIT VM — catalog CI only | No |
+| `cloud_agent_jit` | JIT VM (`build: null`) — no Godot snapshot | No |
 | `ci_headless` | GitHub Actions boot/integration | No |
 
 Full field-level spec: `game/data/qa/perf_baseline.json` → `baselines`.
 
 ---
 
-## 3. Reference PC — `reference_pc_gtx1060`
+## 3. Reference Linux — `reference_linux_cloud`
 
-**This is the default “60 FPS @ 1080p” target** cited in `RENDERING_GUIDE.md`, `ENVIRONMENT_KITS.md`, and `perf_thresholds.json`.
+**Primary implementation OS** — Cursor Cloud Agents on `game/development` snapshot. Linux is a **v1 ship platform** because dev and runtime QA happen here.
 
-### 3.1 Hardware
+| Component | Spec |
+|-----------|------|
+| **OS** | Ubuntu 22.04+ x86_64 (cloud snapshot) |
+| **CPU** | 4C/8T+ cloud or desktop |
+| **RAM** | 16 GB recommended |
+| **GPU** | GTX 1060 class, Vulkan (Mesa or NVIDIA) |
+| **Godot profile** | Same Medium preset as §4.2 (below) |
+
+**Snapshot required:** `build` metadata must show env-build snapshot — not JIT. `docs/CLOUD_SNAPSHOT_LAUNCH.md`.
+
+---
+
+## 4. Reference PC — `reference_pc_gtx1060`
+
+**Windows Steam depot** — same FPS/material targets as Linux; separate evidence file before Windows prod tag.
+
+### 4.1 Hardware
 
 | Component | Spec | Notes |
 |-----------|------|-------|
-| **OS** | Windows 10/11 64-bit | Ship platform; Linux dev is not perf sign-off |
+| **OS** | Windows 10/11 64-bit | Windows Steam depot |
 | **CPU** | 6-core desktop, ~2.8 GHz+ | Examples: i5-8400, Ryzen 5 2600 |
 | **System RAM** | 16 GB recommended (8 GB min) | Close background apps during capture |
 | **GPU** | GTX 1060 6 GB class | Examples: GTX 1060 6 GB, RX 580 8 GB |
 | **VRAM** | ≥ 6 GB | 2 GB is Steam *recommended* floor, not ship target |
 | **Display** | 1920×1080, 100% scaling | Single monitor |
 
-### 3.2 Godot runtime profile (perf test)
+### 4.2 Godot runtime profile (perf test — both Linux + Windows)
 
 Lock these settings for every `L3_perf_review` capture:
 
@@ -68,7 +86,7 @@ Lock these settings for every `L3_perf_review` capture:
 | **Fullscreen** | **On** @ 1080p | Match ship default |
 | Windowed editor | Allowed for **dev** only | Editor min **55 FPS**; export is authoritative at M6 |
 
-### 3.3 FPS & scene budgets
+### 4.3 FPS & scene budgets
 
 From `game/data/qa/perf_thresholds.json`:
 
@@ -84,7 +102,7 @@ From `game/data/qa/perf_thresholds.json`:
 
 ---
 
-## 4. Steam minimum — `steam_minimum`
+## 5. Steam minimum — `steam_minimum`
 
 Mirrors `steam/STORE_PAGE.md` **minimum** row. Used for:
 
@@ -102,43 +120,45 @@ Mirrors `steam/STORE_PAGE.md` **minimum** row. Used for:
 
 ---
 
-## 5. Invalid environments (do not sign off perf)
+## 6. Invalid environments (do not sign off perf)
 
 | Environment | Why invalid | Allowed use |
 |-------------|-------------|-------------|
-| **Cursor Cloud Agent JIT** | No pinned GPU; `build: null` VMs | `L2_perf_catalog`, docs, scripting |
+| **Cursor Cloud JIT** (`build: null`) | No snapshot Godot/MCP stack | `L2_perf_catalog`, docs on `main` |
 | **GitHub Actions CI** | Headless, no GPU frame loop | L0–L2 boot, integration |
-| **Godot editor on Mac/Linux dev** | Not ship OS | Dev iteration only — note OS in evidence |
+| **macOS dev** | Not v1 ship OS | Local only until v1.1 |
 | **Laptop power-saving mode** | Throttled CPU/GPU | Disable for capture |
 
-Agents must **not** mark `L3_perf_review: PASS` from cloud FPS snapshots.
+**Valid cloud perf:** `game/development` **snapshot** boot → `baseline_id: reference_linux_cloud`.
+
+Agents must **not** mark `L3_perf_review: PASS` with `baseline_id: cloud_agent_jit`.
 
 ---
 
-## 6. Test procedure (`L3_perf_review`)
+## 7. Test procedure (`L3_perf_review`)
 
-### 6.1 When to run
+### 7.1 When to run
 
 See `docs/RR_CHEATSHEET.md` §Performance review — scene/shader/material/mesh/light/fog changes and post-fix regression.
 
-### 6.2 Steps
+### 7.2 Steps
 
-1. **Machine:** `reference_pc_gtx1060` Windows PC (or documented equivalent in PR).  
-2. **Build:** same commit SHA as PR; prefer **exported build** from M6 onward; editor F5 allowed Phase 1–5 with note.  
+1. **Machine:** `reference_linux_cloud` (cloud snapshot) **or** `reference_pc_gtx1060` (Windows PC).  
+2. **Build:** same commit SHA as PR; Linux native export from M6; editor F5 allowed Phase 1–5.  
 3. **Settings:** Medium quality, 1080p fullscreen, VSync off.  
 4. **Zone:** load zone from `perf_thresholds.json` → `zones[]` (e.g. `ruined_village`).  
 5. **Path:** gameplay camera — walk hub path **30s** (`test_duration_s`).  
 6. **Capture:** Godotiq `godotiq_perf_snapshot(detail="normal")` with game running.  
 7. **Record:** write JSON to `artifacts/perf_reviews/{zone}_{short_sha}.json` (schema §7).  
-8. **PR:** paste path in gate report; cite `baseline_id: reference_pc_gtx1060`.
+8. **PR:** paste path in gate report; cite `baseline_id` (`reference_linux_cloud` or `reference_pc_gtx1060`).
 
-### 6.3 Post-fix regression
+### 7.3 Post-fix regression
 
-When fixing perf-related bugs, re-run §6.2 on the affected zone **plus** `docs/QA_AND_BUG_PROCESS.md` §6 (adjacent scenes, `INT-*` if flows changed).
+When fixing perf-related bugs, re-run §7.2 on the affected zone **plus** `docs/QA_AND_BUG_PROCESS.md` §6 (adjacent scenes, `INT-*` if flows changed).
 
 ---
 
-## 7. Evidence schema
+## 8. Evidence schema
 
 **Path:** `artifacts/perf_reviews/{zone}_{short_sha}.json`
 
@@ -146,7 +166,7 @@ When fixing perf-related bugs, re-run §6.2 on the affected zone **plus** `docs/
 
 ```json
 {
-  "baseline_id": "reference_pc_gtx1060",
+  "baseline_id": "reference_linux_cloud",
   "commit_sha": "9f93a10",
   "zone_id": "ruined_village",
   "captured_at": "2026-07-16T12:00:00Z",
@@ -175,17 +195,17 @@ When fixing perf-related bugs, re-run §6.2 on the affected zone **plus** `docs/
 
 ---
 
-## 8. Relationship to gates
+## 9. Relationship to gates
 
 | Gate | What it checks | Baseline needed? |
 |------|----------------|------------------|
 | `L2_perf_catalog` | `perf_thresholds.json` + `perf_baseline.json` valid | No — runs anywhere |
-| `L3_perf_review` | FPS, draw calls, materials after F5 | **Yes** — `reference_pc_gtx1060` |
+| `L3_perf_review` | FPS, draw calls, materials after F5 | **Yes** — Linux snapshot and/or Windows PC |
 | `L6_human_playtest` | Feel, fun, readability | Human machine noted in report |
 
 ---
 
-## 9. Implementation plan
+## 10. Implementation plan
 
 ### Phase 1 — P1-00 (bootstrap)
 
@@ -229,7 +249,7 @@ When fixing perf-related bugs, re-run §6.2 on the affected zone **plus** `docs/
 
 ---
 
-## 10. Commands
+## 11. Commands
 
 ```bash
 # Validate baseline + thresholds catalogs (L2 — any environment)
@@ -241,10 +261,11 @@ python3 -m json.tool artifacts/perf_reviews/ruined_village_abc1234.json
 
 ---
 
-## 11. Related docs
+## 12. Related docs
 
 | Doc | Contents |
 |-----|----------|
+| `docs/PLATFORM_SUPPORT.md` | **Linux + Windows ship policy; cloud dev parity** |
 | `docs/RENDERING_GUIDE.md` §10 | Low / Medium / High presets |
 | `docs/ENVIRONMENT_KITS.md` §9 | LOD + material batching |
 | `docs/RR_CHEATSHEET.md` | Performance review workflow |

@@ -2,7 +2,7 @@
 
 **Version:** 0.3 (Pre-build)  
 **Engine:** Godot 4.7 (Forward+)  
-**Platform:** PC (Steam)  
+**Platform:** PC (Steam) — **Linux + Windows** v1 (macOS v1.1+). Linux required because primary dev runs on Cursor Cloud (Linux). See `docs/PLATFORM_SUPPORT.md`.  
 **Target audience:** Men 20–30  
 **Playtime target:** 2–3 hours (main story)  
 **Genre:** 3D adventure JRPG, turn-based combat  

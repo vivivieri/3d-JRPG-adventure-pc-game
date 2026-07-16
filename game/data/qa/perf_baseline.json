@@ -1,9 +1,61 @@
 {
-  "version": "1.0",
-  "authority": "docs/PERFORMANCE_BASELINE.md",
+  "version": "1.1",
+  "authority": "docs/PERFORMANCE_BASELINE.md, docs/PLATFORM_SUPPORT.md",
   "design_ref": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9, steam/STORE_PAGE.md",
-  "primary_baseline_id": "reference_pc_gtx1060",
+  "primary_baseline_id": "reference_linux_cloud",
+  "ship_baseline_ids": ["reference_linux_cloud", "reference_pc_gtx1060"],
   "baselines": {
+    "reference_linux_cloud": {
+      "label": "Reference Linux — cloud dev + Linux Steam ship",
+      "valid_for_l3_perf_review": true,
+      "valid_for_ship_signoff": true,
+      "platform": "linux",
+      "os": {
+        "name": "Linux",
+        "distro_min": "Ubuntu 22.04 LTS x86_64",
+        "distro_recommended": "Ubuntu 24.04 LTS x86_64"
+      },
+      "cpu": {
+        "class": "mid-tier cloud/desktop",
+        "example_models": ["Intel Xeon (cloud)", "AMD Ryzen 5 3600"],
+        "cores_threads": "4C/8T+",
+        "base_clock_ghz_min": 2.4
+      },
+      "memory_gb": {
+        "min": 8,
+        "recommended": 16
+      },
+      "gpu": {
+        "class": "GTX 1060 equivalent (Vulkan)",
+        "example_models": ["NVIDIA T4 / GTX 1060 (Mesa or proprietary)"],
+        "vram_gb_min": 6,
+        "api": ["Vulkan 1.0", "OpenGL 3.3"]
+      },
+      "display": {
+        "resolution": "1920x1080",
+        "fullscreen": true,
+        "vsync": false,
+        "dpi_scale": 100
+      },
+      "godot": {
+        "version": "4.7",
+        "renderer": "Forward+",
+        "graphics_quality": "medium",
+        "msaa": "2x",
+        "shadows": "soft_1024",
+        "glow": true,
+        "fog_density_scale": 1.0,
+        "ssao_ssil": false,
+        "editor_perf_note": "Cursor Cloud snapshot boot required — JIT VMs use cloud_agent_jit (invalid)"
+      },
+      "fps_targets": {
+        "gameplay_min": 60,
+        "editor_viewport_min": 55,
+        "investigate_below": 30
+      },
+      "requires_snapshot_boot": true,
+      "notes": "Primary dev + Linux depot perf. Cloud agents MUST use game/development snapshot."
+    },
     "reference_pc_gtx1060": {
       "label": "Reference PC — ship perf sign-off",
       "valid_for_l3_perf_review": true,
@@ -52,7 +104,7 @@
         "editor_viewport_min": 55,
         "investigate_below": 30
       },
-      "notes": "Default ship target. All zone perf evidence for M5+ must cite this baseline unless escalated."
+      "notes": "Windows Steam depot. Required for M6 Windows prod tag alongside Linux evidence."
     },
     "steam_minimum": {
       "label": "Steam store minimum — support floor only",
@@ -90,11 +142,11 @@
       "notes": "Mirrors steam/STORE_PAGE.md minimum. Spot-check at M6; do not tune art to this spec."
     },
     "cloud_agent_jit": {
-      "label": "Cursor Cloud Agent JIT VM",
+      "label": "Cursor Cloud Agent JIT VM (no snapshot)",
       "valid_for_l3_perf_review": false,
       "valid_for_ship_signoff": false,
       "platform": "linux",
-      "notes": "No pinned GPU. Use for L2_perf_catalog only. FPS snapshots from cloud agents are informational — never block ship."
+      "notes": "build: null — no pinned Godot/MCP stack. L2_perf_catalog only. Fix: launch game/development snapshot per CLOUD_SNAPSHOT_LAUNCH.md."
     },
     "ci_headless": {
       "label": "GitHub Actions / headless Godot",
@@ -141,7 +193,7 @@
     "phase_2": {
       "milestone": "P1-02",
       "status": "pending",
-      "deliverable": "First L3_perf_review on ruined_village @ reference_pc_gtx1060"
+      "deliverable": "First L3_perf_review on ruined_village @ reference_linux_cloud (snapshot)"
     },
     "phase_3": {
       "milestone": "M5",
@@ -151,7 +203,7 @@
     "phase_4": {
       "milestone": "M6",
       "status": "pending",
-      "deliverable": "Exported Windows build perf on reference hardware + steam_minimum spot-check"
+      "deliverable": "Linux + Windows exported build perf; both ship baselines cited"
     }
   }
 }

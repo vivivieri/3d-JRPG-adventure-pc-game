@@ -42,6 +42,7 @@
 | **Branch + done criteria** | [MULTI_AGENT_BRANCH_STRATEGY.md](MULTI_AGENT_BRANCH_STRATEGY.md) |
 | **Stakeholder / Telegram reports** | [PM_STAKEHOLDER_REPORTING.md](PM_STAKEHOLDER_REPORTING.md) |
 | Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
+| **Platform (Linux + Windows ship)** | **[PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md)** — cloud dev requires Linux ship |
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
 | Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) · [RR_CHEATSHEET.md](RR_CHEATSHEET.md) |
 | Role enforcement / CI | [CONTROLS_CHEATSHEET.md](CONTROLS_CHEATSHEET.md) · [CI.md](CI.md) |
@@ -177,6 +178,7 @@
 | [ESCALATION_POLICY.md](ESCALATION_POLICY.md) | Anti-infinite-loop ladder — dev↔QA → Architect/SA → Product Owner |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
 | [PERFORMANCE_BASELINE.md](PERFORMANCE_BASELINE.md) | **Hardware + environment baseline** for `L3_perf_review` evidence |
+| [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md) | **Linux + Windows ship** — cloud dev parity policy |
 | [PLAYTEST_TELEMETRY.md](PLAYTEST_TELEMETRY.md) | Playtest telemetry (GUR) — pacing/combat/ending tuning loop |
 | [DELIVERY_CONTROL.md](DELIVERY_CONTROL.md) | Pre-delivery review gate — review + confirm before outbound delivery |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
