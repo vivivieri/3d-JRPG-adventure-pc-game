@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "scenes": [
     {
       "scene_id": "SC-00",
@@ -61,6 +61,17 @@
           "emotion": "neutral"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Gulls cry once and fall silent. The shore remembers every departure.",
+            "ja": "鴎が一声鳴き、静まる。岸はすべての別れを覚えている。",
+            "zh": "海鸥鸣叫一声便归于沉寂。海岸记得每一次离别。",
+            "zh-Hant": "海鷗鳴叫一聲便歸於沉寂。海岸記得每一次離別。"
+          },
+          "emotion": "quiet"
+        },
+        {
           "speaker": "urashima",
           "portrait": "urashima_weary",
           "text": {
@@ -81,6 +92,49 @@
           "tutorial_camera_done"
         ],
         "start_quest": "the_return"
+      }
+    },
+    {
+      "scene_id": "SC-01-DRIFTWOOD",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Driftwood knots the sand. A pale shell half-buried — not from this coast.",
+            "ja": "流木が砂を縛る。半分埋まった白い貝——この岸のものではない。",
+            "zh": "浮木缠住沙地。半埋的苍白贝壳——不属这片海岸。",
+            "zh-Hant": "浮木纏住沙地。半埋的蒼白貝殼——不屬這片海岸。"
+          },
+          "emotion": "melancholy"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Fishermen tied charms here before the first tide-god dance. The knots still hold.",
+            "ja": "漁師たちは最初の潮神の舞の前に、ここに護符を結んだ。結び目はまだ解けていない。",
+            "zh": "渔民们在首届潮神舞前曾在此系上护符。绳结仍未松开。",
+            "zh-Hant": "漁民們在首屆潮神舞前曾在此繫上護符。繩結仍未鬆開。"
+          },
+          "emotion": "melancholy"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "The turtle's shell... I cut those nets on a day like this.",
+            "ja": "亀の甲羅……こんな日に、俺は網を切った。",
+            "zh": "龟甲……我曾在这样的日子里割开那张网。",
+            "zh-Hant": "龜甲……我曾在這樣的日子裡割開那張網。"
+          },
+          "emotion": "guilt"
+        }
+      ],
+      "on_complete": {
+        "set_flags": [
+          "inspected_driftwood"
+        ]
       }
     },
     {
@@ -294,6 +348,17 @@
       "scene_id": "SC-04",
       "lines": [
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Fish oil and dried kelp — Roku's shack still smells like work, even empty.",
+            "ja": "魚油と干し昆布——六の小屋は、誰もいなくても仕事の匂いがする。",
+            "zh": "鱼油与干海带——六的小屋即使空着，仍有劳作的气息。",
+            "zh-Hant": "魚油與乾海帶——六的小屋即使空著，仍有勞作的氣息。"
+          },
+          "emotion": "melancholy"
+        },
+        {
           "speaker": "roku",
           "portrait": "roku_grim",
           "text": {
@@ -384,6 +449,17 @@
           "emotion": "wonder"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Water drips somewhere unseen. Each drop counts time Urashima cannot name.",
+            "ja": "見えぬどこかで水が滴る。一滴ごとに、浦島の名づけられない時間が数えられる。",
+            "zh": "看不见的地方有水滴落。每一滴都在计量浦岛无法命名的时间。",
+            "zh-Hant": "看不見的地方有水滴落。每一滴都在計量浦島無法命名的時間。"
+          },
+          "emotion": "quiet"
+        },
+        {
           "speaker": "urashima",
           "portrait": "urashima_weary",
           "text": {
@@ -414,6 +490,17 @@
             "zh-Hant": "黑水之下面孔盪漾。無數聲音重疊：「你為什麼沒有回來？」"
           },
           "emotion": "horror"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The pool holds its breath. Even the algae dims.",
+            "ja": "池は息を止めている。藻さえ光を弱めた。",
+            "zh": "深池屏住呼吸。连藻类也黯淡了光芒。",
+            "zh-Hant": "深池屏住呼吸。連藻類也黯淡了光芒。"
+          },
+          "emotion": "quiet"
         },
         {
           "speaker": "urashima",
@@ -566,6 +653,20 @@
             "zh-Hant": "那裡太安靜了。我幾乎相信永恆是真的。"
           },
           "emotion": "dreamlike"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_young",
+          "requires_flags": {
+            "inspected_banner": true
+          },
+          "text": {
+            "en": "The festival roster... I read those names every year. They waited longer than three days.",
+            "ja": "祭りの名簿……毎年あの名を読んでいた。彼らは三日より長く待った。",
+            "zh": "节庆名册……我年年都念那些名字。他们等的不止三天。",
+            "zh-Hant": "節慶名冊……我年年都念那些名字。他們等的不止三天。"
+          },
+          "emotion": "guilt"
         }
       ],
       "on_complete": {
@@ -756,6 +857,34 @@
           "emotion": "threatening",
           "voice_id": "sc14_narrator_01",
           "vo_tier": "p2"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "requires_flags": {
+            "knows_box_truth": true
+          },
+          "text": {
+            "en": "We know what the box holds now. This armor guards the lie.",
+            "ja": "箱に何があるか、もう分かっている。この鎧は嘘を守っている。",
+            "zh": "我们已知道盒中何物。这副铠甲守护着谎言。",
+            "zh-Hant": "我們已知道盒中何物。這副鎧甲守護著謊言。"
+          },
+          "emotion": "resolve"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "requires_flags": {
+            "inspected_banner": true
+          },
+          "text": {
+            "en": "Those names on the banner roster... paradise crossed them out too.",
+            "ja": "幟の名簿にあった名……楽園はそれらも線で消した。",
+            "zh": "旗帜名册上的那些名字……乐园也用线划掉了它们。",
+            "zh-Hant": "旗幟名冊上的那些名字……樂園也用線劃掉了它們。"
+          },
+          "emotion": "guilt"
         }
       ],
       "on_complete": {
@@ -790,6 +919,34 @@
             "zh-Hant": "溺斃世界的慈悲，不是慈悲。"
           },
           "emotion": "defiant"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "requires_flags": {
+            "knows_box_truth": true
+          },
+          "text": {
+            "en": "Their years are in that box. We won't let the tide erase them again.",
+            "ja": "彼らの歳はあの箱にある。もう潮に消させない。",
+            "zh": "他们的岁月在那盒子里。我们不会再让潮水抹去他们。",
+            "zh-Hant": "他們的歲月在那盒子裡。我們不會再讓潮水抹去他們。"
+          },
+          "emotion": "resolve"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_serious",
+          "requires_flags": {
+            "inspected_well": true
+          },
+          "text": {
+            "en": "The well tasted of open sea. This throne tastes the same.",
+            "ja": "井戸は外海の味がした。この玉座も同じだ。",
+            "zh": "那口井有外海的味道。这座王座也一样。",
+            "zh-Hant": "那口井有外海的味道。這座王座也一樣。"
+          },
+          "emotion": "grim"
         }
       ],
       "on_complete": {
@@ -813,6 +970,20 @@
           "emotion": "neutral",
           "voice_id": "sc16_tide_keeper_01",
           "vo_tier": "p0"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "requires_flags": {
+            "knows_box_truth": true
+          },
+          "text": {
+            "en": "Someone has to pay. I know that now.",
+            "ja": "誰かが払わなければならない。今は分かっている。",
+            "zh": "总得有人付出代价。我现在明白了。",
+            "zh-Hant": "總得有人付出代價。我現在明白了。"
+          },
+          "emotion": "resolved"
         }
       ],
       "choices": [
@@ -823,6 +994,21 @@
             "ja": "箱を開ける",
             "zh": "打开盒子",
             "zh-Hant": "開啟盒子"
+          },
+          "subtext": {
+            "en": "Return the stolen years. The village lives — you may not.",
+            "ja": "奪われた歳を返す。村は生きる——お前は残れないかもしれない。",
+            "zh": "归还被偷走的岁月。村庄活下去——你也许不能。",
+            "zh-Hant": "歸還被偷走的歲月。村莊活下去——你也許不能。"
+          },
+          "subtext_warm": {
+            "en": "You already said you would. Give them back — even if it costs you.",
+            "ja": "開けると言ったはずだ。返せ——たとえお前が代償を払っても。",
+            "zh": "你说过你会打开。还给他们吧——即便代价是你自己。",
+            "zh-Hant": "你說過你會開啟。還給他們吧——即便代價是你自己。"
+          },
+          "subtext_warm_requires_flags": {
+            "mirror_choice": "open"
           },
           "set_flags": {
             "ending_chosen": "rewind"
@@ -836,6 +1022,21 @@
             "zh": "打碎盒子",
             "zh-Hant": "打碎盒子"
           },
+          "subtext": {
+            "en": "Bind the spirits to this shore. Begin again, scarred but real.",
+            "ja": "霊をこの岸に縛れ。傷つき、しかし本物のやり直しを。",
+            "zh": "将灵魂锚定在这片海岸。带着伤痕，真实地重新开始。",
+            "zh-Hant": "將靈魂錨定在這片海岸。帶著傷痕，真實地重新開始。"
+          },
+          "subtext_warm": {
+            "en": "You chose to break it once. Shatter the bargain — stay and rebuild.",
+            "ja": "壊すと言ったはずだ。取引を砕け——残って建て直せ。",
+            "zh": "你曾选择打碎它。粉碎交易——留下重建。",
+            "zh-Hant": "你曾選擇打碎它。粉碎交易——留下重建。"
+          },
+          "subtext_warm_requires_flags": {
+            "mirror_choice": "break"
+          },
           "set_flags": {
             "ending_chosen": "anchor"
           }
@@ -847,6 +1048,12 @@
             "ja": "潮へ歩む",
             "zh": "走向潮水",
             "zh-Hant": "走向潮水"
+          },
+          "subtext": {
+            "en": "Refuse the bargain. Let the sea keep its secrets.",
+            "ja": "取引を拒め。海に秘密を任せよ。",
+            "zh": "拒绝交易。让大海守住秘密。",
+            "zh-Hant": "拒絕交易。讓大海守住秘密。"
           },
           "set_flags": {
             "ending_chosen": "drift"

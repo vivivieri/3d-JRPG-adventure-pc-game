@@ -6,6 +6,7 @@
     { "id": "game_started", "type": "bool", "set_by": "SC-01", "used_by": ["save_system"] },
     { "id": "tutorial_movement_done", "type": "bool", "set_by": "SC-01", "used_by": ["tutorial"] },
     { "id": "tutorial_camera_done", "type": "bool", "set_by": "SC-01", "used_by": ["tutorial"] },
+    { "id": "inspected_driftwood", "type": "bool", "set_by": "SC-01-DRIFTWOOD", "used_by": ["lore", "ending_flavor"] },
     { "id": "village_arrival_seen", "type": "bool", "set_by": "SC-02", "used_by": ["cinematic"] },
     { "id": "tutorial_interact_done", "type": "bool", "set_by": "SC-02", "used_by": ["tutorial"] },
     { "id": "tutorial_save_done", "type": "bool", "set_by": "SC-02", "used_by": ["tutorial"] },

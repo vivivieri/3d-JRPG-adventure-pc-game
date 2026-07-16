@@ -4,6 +4,7 @@
   "scenes": [
     { "scene_id": "SC-00", "act": "prologue", "zone": null, "type": "cinematic", "summary": "Kappa-turtle rescue; palace; lacquer box", "sets_flags": ["prologue_seen"], "dialogue": "SC-00", "encounter": null },
     { "scene_id": "SC-01", "act": "I", "zone": "beach_shore", "type": "field", "summary": "Wash ashore; movement tutorial", "sets_flags": ["tutorial_movement_done", "game_started"], "dialogue": "SC-01", "encounter": null },
+    { "scene_id": "SC-01-DRIFTWOOD", "act": "I", "zone": "beach_shore", "type": "inspect", "summary": "Driftwood and shell on shore", "sets_flags": ["inspected_driftwood"], "dialogue": "SC-01-DRIFTWOOD", "encounter": null },
     { "scene_id": "SC-02", "act": "I", "zone": "ruined_village", "type": "explore", "summary": "Empty village hub", "sets_flags": ["village_arrival_seen"], "dialogue": "SC-02", "encounter": null },
     { "scene_id": "SC-02-BANNER", "act": "I", "zone": "ruined_village", "type": "inspect", "summary": "Rotting festival banner", "sets_flags": ["inspected_banner"], "dialogue": "SC-02-BANNER", "encounter": null },
     { "scene_id": "SC-02-SANDAL", "act": "I", "zone": "ruined_village", "type": "inspect", "summary": "Child sandal in puddle", "sets_flags": ["inspected_sandal"], "dialogue": "SC-02-SANDAL", "encounter": null },

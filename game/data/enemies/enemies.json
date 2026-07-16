@@ -16,7 +16,29 @@
         ]
       },
       "rewards": { "xp": 30, "gold": 10, "drops": [] },
-      "intent_display": "attack"
+      "intent_display": "attack",
+      "combat_barks": {
+        "skills": {
+          "claw_snap": {
+            "en": "Click.",
+            "ja": "カチッ。",
+            "zh": "咔嗒。",
+            "zh-Hant": "咔嗒。"
+          },
+          "shell_harden": {
+            "en": "Shell shut.",
+            "ja": "殻を閉じる。",
+            "zh": "缩壳。",
+            "zh-Hant": "縮殼。"
+          }
+        },
+        "on_defeat": {
+          "en": "Salt scatters. The tide moves on.",
+          "ja": "塩が散る。潮は先へ進む。",
+          "zh": "盐屑四散。潮水继续向前。",
+          "zh-Hant": "鹽屑四散。潮水繼續向前。"
+        }
+      }
     },
     {
       "id": "tide_wraith",
@@ -27,7 +49,29 @@
       "skills": ["drown_touch"],
       "ai": { "type": "weighted", "weights": [{ "skill_id": "drown_touch", "weight": 100 }] },
       "rewards": { "xp": 35, "gold": 12, "drops": [{ "item_id": "spirit_shard", "chance": 0.3 }] },
-      "intent_display": "debuff"
+      "intent_display": "debuff",
+      "combat_barks": {
+        "battle_start": {
+          "en": "Why didn't you come back?",
+          "ja": "なぜ戻らなかった？",
+          "zh": "你为什么没有回来？",
+          "zh-Hant": "你為什麼沒有回來？"
+        },
+        "skills": {
+          "drown_touch": {
+            "en": "Cold fingers find your ankle.",
+            "ja": "冷たい指が足首を掴む。",
+            "zh": "冰冷的手指缠上你的脚踝。",
+            "zh-Hant": "冰冷的手指纏上你的腳踝。"
+          }
+        },
+        "on_defeat": {
+          "en": "The pool stills — for now.",
+          "ja": "池は静まる——今のところは。",
+          "zh": "水池暂时平静了下来。",
+          "zh-Hant": "水池暫時平靜了下來。"
+        }
+      }
     },
     {
       "id": "shore_wraith",

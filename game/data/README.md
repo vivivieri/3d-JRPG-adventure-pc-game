@@ -98,8 +98,8 @@ See `docs/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_versi
 ## Scene count
 
 - **20** scene headings in `docs/STORYBOARD.md` (`SC-00`…`SC-16` = 17, plus 3 ending variants `SC-17a`/`b`/`c`); a single playthrough experiences **18** (one ending only)
-- **23** rows in `story/scenes.json` = the 20 storyboard headings + 3 SC-02 inspectable rows (`SC-02-BANNER`/`SANDAL`/`WELL`)
-- **22** dialogue scene keys in `chapter_01.json` = the 23 rows minus the silent `SC-07` (no dialogue block)
+- **24** rows in `story/scenes.json` = storyboard spine + SC-01 driftwood inspect + 3 SC-02 inspectable rows
+- **23** dialogue scene keys in `chapter_01.json` = the 24 rows minus silent `SC-07` (no dialogue block)
 
 ## Related docs
 
