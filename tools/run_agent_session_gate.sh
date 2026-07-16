@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Gate for non-PM agents — must be dispatched by PM orchestrator before work.
 # Usage: bash tools/run_agent_session_gate.sh <agent_role> <issue_id>
-# Authority: docs/SPRINT_ORCHESTRATION.md
+# Authority: docs/agents/SPRINT_ORCHESTRATION.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -65,7 +65,7 @@ if strict and issue_row:
     co = issue_row.get("co_agent")
     if agent not in (owner, co):
         print(f"[FAIL] Strict role — {agent} cannot run issue owned by {owner}")
-        print("Policy: one agent role per session (docs/MULTI_AGENT_BRANCH_STRATEGY.md)")
+        print("Policy: one agent role per session (docs/agents/MULTI_AGENT_BRANCH_STRATEGY.md)")
         sys.exit(1)
 
 # Mark in_progress on board if still pending

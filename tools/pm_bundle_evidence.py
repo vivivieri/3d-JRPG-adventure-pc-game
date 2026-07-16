@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record per-issue gate evidence bundles — docs/SPRINT_ORCHESTRATION.md."""
+"""Record per-issue gate evidence bundles — docs/agents/SPRINT_ORCHESTRATION.md."""
 from __future__ import annotations
 
 import argparse

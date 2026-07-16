@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/qa/sprint_phases.json (docs/AGILE_WITHIN_PHASES.md)."""
+"""Validate game/data/qa/sprint_phases.json (docs/workflow/AGILE_WITHIN_PHASES.md)."""
 from __future__ import annotations
 
 import json

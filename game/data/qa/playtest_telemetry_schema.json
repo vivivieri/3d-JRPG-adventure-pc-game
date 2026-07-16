@@ -1,14 +1,14 @@
 {
   "version": "1.0",
-  "authority": "Schema + thresholds for dev-time playtest telemetry (Games User Research tuning loop). Analyzer: tools/analyze_playtest_telemetry.py. Informational QA input feeding docs/FLOW_QA.md + docs/QA_REMEDIATION_LOOP.md — NOT a ship gate (a red metric opens a remediation item, it does not by itself block ship).",
-  "design_ref": "docs/PLAYTEST_TELEMETRY.md, docs/PACING_CHART.md, docs/FLOW_QA.md, docs/ACCEPTANCE_CRITERIA.md",
+  "authority": "Schema + thresholds for dev-time playtest telemetry (Games User Research tuning loop). Analyzer: tools/analyze_playtest_telemetry.py. Informational QA input feeding docs/qa/FLOW_QA.md + docs/qa/QA_REMEDIATION_LOOP.md — NOT a ship gate (a red metric opens a remediation item, it does not by itself block ship).",
+  "design_ref": "docs/qa/PLAYTEST_TELEMETRY.md, docs/vision/PACING_CHART.md, docs/qa/FLOW_QA.md, docs/qa/ACCEPTANCE_CRITERIA.md",
   "privacy": {
     "local_only_by_default": true,
     "pii_forbidden": true,
     "forbidden_fields": ["player_name", "email", "ip", "geo", "machine_id"],
     "run_id_rule": "opaque random UUID generated per run — never tied to a real identity",
     "upload_requires_consent": true,
-    "design_ref": "docs/PLAYTEST_TELEMETRY.md#privacy"
+    "design_ref": "docs/qa/PLAYTEST_TELEMETRY.md#privacy"
   },
   "log_format": {
     "encoding": "jsonl",
@@ -37,14 +37,14 @@
   ],
   "progress_events": ["scene_beat", "zone_enter", "zone_exit", "combat_start", "combat_end", "choice_made", "puzzle_start", "puzzle_solved", "ending_reached", "progress"],
   "thresholds": {
-    "completion_rate_min_percent": { "value": 80, "op": ">=", "gate_ref": "L6_human_playtest.completion_percent", "design_ref": "docs/ACCEPTANCE_CRITERIA.md" },
-    "target_playtime_minutes": { "value": 150, "tolerance": 45, "design_ref": "docs/PACING_CHART.md" },
-    "stuck_seconds": { "value": 300, "op": ">", "note": "no progress event for longer than this = stuck/confusion hotspot", "design_ref": "docs/FLOW_QA.md" },
-    "combat_turn_resolve_max_s": { "value": 3.0, "op": "<=", "feel_ref": "feel_combat_turn_max", "design_ref": "docs/GAME_FEEL.md" },
-    "encounter_avg_deaths_flag": { "value": 3.0, "op": "<=", "note": "avg deaths/session for an encounter above this = difficulty spike", "design_ref": "docs/COMBAT_SYSTEMS.md" },
-    "no_combat_before_scene": { "value": "SC-05", "note": "PACING rule — no combat before SC-05 (~22 min)", "design_ref": "docs/PACING_CHART.md" },
-    "scene_beat_drift_tolerance_min": { "value": 12, "note": "arrival time drift vs scene_beats target before flagging pacing", "design_ref": "docs/PACING_CHART.md" },
-    "endings_required_coverage": { "value": ["rewind", "anchor", "drift"], "op": "all_present_across_runs", "gate_ref": "L5_e2e_three_endings", "design_ref": "docs/ENDING_DESIGN.md" }
+    "completion_rate_min_percent": { "value": 80, "op": ">=", "gate_ref": "L6_human_playtest.completion_percent", "design_ref": "docs/qa/ACCEPTANCE_CRITERIA.md" },
+    "target_playtime_minutes": { "value": 150, "tolerance": 45, "design_ref": "docs/vision/PACING_CHART.md" },
+    "stuck_seconds": { "value": 300, "op": ">", "note": "no progress event for longer than this = stuck/confusion hotspot", "design_ref": "docs/qa/FLOW_QA.md" },
+    "combat_turn_resolve_max_s": { "value": 3.0, "op": "<=", "feel_ref": "feel_combat_turn_max", "design_ref": "docs/gameplay/GAME_FEEL.md" },
+    "encounter_avg_deaths_flag": { "value": 3.0, "op": "<=", "note": "avg deaths/session for an encounter above this = difficulty spike", "design_ref": "docs/gameplay/COMBAT_SYSTEMS.md" },
+    "no_combat_before_scene": { "value": "SC-05", "note": "PACING rule — no combat before SC-05 (~22 min)", "design_ref": "docs/vision/PACING_CHART.md" },
+    "scene_beat_drift_tolerance_min": { "value": 12, "note": "arrival time drift vs scene_beats target before flagging pacing", "design_ref": "docs/vision/PACING_CHART.md" },
+    "endings_required_coverage": { "value": ["rewind", "anchor", "drift"], "op": "all_present_across_runs", "gate_ref": "L5_e2e_three_endings", "design_ref": "docs/vision/ENDING_DESIGN.md" }
   },
   "scene_beats": [
     { "id": "SC-00", "target_min": 0, "label": "Prologue" },

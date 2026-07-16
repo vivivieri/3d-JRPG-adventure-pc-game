@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared acceptance criteria enforcement for QA gates (docs/ACCEPTANCE_CRITERIA.md)."""
+"""Shared acceptance criteria enforcement for QA gates (docs/qa/ACCEPTANCE_CRITERIA.md)."""
 from __future__ import annotations
 
 import json

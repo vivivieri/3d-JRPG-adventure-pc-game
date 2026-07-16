@@ -23,7 +23,7 @@
       "do_not_repeat": "Only lowering exposure while albedo stays saturated",
       "actions": [
         "python3 tools/palette_remap.py --zone <zone> on albedo sources",
-        "Tune WorldEnvironment fog + sky per docs/RENDERING_GUIDE.md zone row",
+        "Tune WorldEnvironment fog + sky per docs/art/RENDERING_GUIDE.md zone row",
         "python3 tools/check_screenshot_palette.py --zone <zone>"
       ],
       "escalate": "Regenerate zone albedos via ComfyUI locked NPR workflow"
@@ -44,7 +44,7 @@
       "root_cause": "European castle kit, generic fantasy, wrong environment kit",
       "do_not_repeat": "Recoloring Kenney castle assets; same Meshy prompt with 'Japanese' added once",
       "actions": [
-        "Swap mesh per docs/ENVIRONMENT_KITS.md zone module list",
+        "Swap mesh per docs/world/ENVIRONMENT_KITS.md zone module list",
         "Regenerate set-piece with Japanese coastal / ryūgū prompt from bible",
         "Remove models/nature/ or models/castle/ greybox paths"
       ],

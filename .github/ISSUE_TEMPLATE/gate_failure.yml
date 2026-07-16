@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Use when `run_ci_checks.sh`, `run_cd_gates.sh`, or GitHub Actions fails.
-        See `docs/PROJECT_MANAGEMENT.md` and `docs/QA_REMEDIATION_LOOP.md`.
+        See `docs/agents/PROJECT_MANAGEMENT.md` and `docs/qa/QA_REMEDIATION_LOOP.md`.
   - type: input
     id: gate_id
     attributes:

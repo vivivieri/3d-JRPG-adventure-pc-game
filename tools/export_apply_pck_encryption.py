@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply PCK encryption + ship secrets for export (docs/SECURITY.md §9).
+"""Apply PCK encryption + ship secrets for export (docs/qa/SECURITY.md §9).
 
 PCK encryption requires export templates compiled with SCRIPT_AES256_ENCRYPTION_KEY.
 Official Godot 4.7 templates do not support encrypted PCK at runtime.

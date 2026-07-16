@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify required audio tracks exist for a build phase (docs/AUDIO_QA.md §A1)."""
+"""Verify required audio tracks exist for a build phase (docs/audio/AUDIO_QA.md §A1)."""
 from __future__ import annotations
 
 import argparse

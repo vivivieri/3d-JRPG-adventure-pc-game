@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Spec refinement mode — block ship implementation paths on main during design/spec work.
-# See docs/SPEC_FIRST_DEVELOPMENT.md §10
+# See docs/technical/SPEC_FIRST_DEVELOPMENT.md §10
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -81,7 +81,7 @@ if [[ "$FAIL" -ne 0 ]]; then
   echo "During design/spec work on main, change only:"
   echo "  docs/, game/data/, game/locale/, tools/*.py (validators + *_lib.py reference)"
   echo "Implementation: PR to game/development after PM dispatch + run_agent_session_gate.sh"
-  echo "Policy: docs/SPEC_FIRST_DEVELOPMENT.md §10"
+  echo "Policy: docs/technical/SPEC_FIRST_DEVELOPMENT.md §10"
   exit 1
 fi
 

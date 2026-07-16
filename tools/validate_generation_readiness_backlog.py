@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKLOG_PATH = ROOT / "game/data/qa/generation_readiness_backlog.json"
-PLAN_PATH = ROOT / "docs/IMPLEMENTATION_PLAN.md"
+PLAN_PATH = ROOT / "docs/workflow/IMPLEMENTATION_PLAN.md"
 CRITERIA_PATH = ROOT / "game/data/qa/acceptance_criteria.json"
 ZONE_PATH = ROOT / "game/data/qa/zone_composition.json"
 

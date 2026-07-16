@@ -4,7 +4,7 @@
 # Primary: repository_dispatch from tools/pm_emit_cycle_event.sh
 # Secondary: game-ci success when artifacts/.cycle_pending exists (guarded)
 #
-# See docs/CLOUD_AGENT_SETUP_RUNBOOK.md
+# See docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md
 
 name: Agent cycle PM dispatch
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # L3 gate (CI): if ship scenes or run/main_scene change in the diff, .gdai_built must update too.
 # Full L3 F5 viewport verify remains agent-local (editor + GDAI MCP).
-# See docs/CI.md, docs/CONTROLS_CHEATSHEET.md
+# See docs/ci-cd/CI.md, docs/cheat-sheets/CONTROLS_CHEATSHEET.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

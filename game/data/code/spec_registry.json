@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "policy_ref": "docs/SPEC_FIRST_DEVELOPMENT.md",
+  "policy_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md",
   "development_start": {
     "gate_id": "SPEC_DEV_START",
     "description": "All blocking artifacts must be spec_status=specified before ship code on game/development",
@@ -69,7 +69,7 @@
       "spec_status": "specified",
       "paths": [
         "game/data/code/helpers_registry.json",
-        "docs/GDSCRIPT_REGENERATION.md",
+        "docs/technical/GDSCRIPT_REGENERATION.md",
         "tools/difficulty_lib.py",
         "tools/save_integrity_lib.py",
         "tools/settings_store_lib.py",
@@ -83,14 +83,14 @@
       "id": "doc_technical_design",
       "kind": "doc",
       "spec_status": "specified",
-      "paths": ["docs/TECHNICAL_DESIGN.md"],
+      "paths": ["docs/technical/TECHNICAL_DESIGN.md"],
       "phase": 0
     },
     {
       "id": "doc_level_design",
       "kind": "doc",
       "spec_status": "specified",
-      "paths": ["docs/LEVEL_DESIGN.md"],
+      "paths": ["docs/world/LEVEL_DESIGN.md"],
       "phase": 1
     },
     {
@@ -114,7 +114,7 @@
       "kind": "implementation",
       "spec_status": "partial",
       "branch": "game/development",
-      "design_ref": ["docs/RENDERING_GUIDE.md", "docs/ART_DIRECTION.md §7"],
+      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7"],
       "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
       "phase": 1
     }

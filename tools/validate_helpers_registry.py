@@ -140,7 +140,7 @@ def main() -> int:
         print("HELPERS REGISTRY VALIDATION FAILED", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
-        print("\nPolicy: docs/GDSCRIPT_REGENERATION.md", file=sys.stderr)
+        print("\nPolicy: docs/technical/GDSCRIPT_REGENERATION.md", file=sys.stderr)
         return 1
 
     print(

@@ -1,6 +1,6 @@
 # VO generation briefs (P0 selective clips)
 
-P0 clips use the same **catalog → brief → technical → jury** pattern as hero BGM. Gate locale for automated jury: **`en`** (all locales get technical lint at M5 ship). See `docs/AUDIO_QA.md` §A4–A5 and `docs/VO_HIT_LIST.md`.
+P0 clips use the same **catalog → brief → technical → jury** pattern as hero BGM. Gate locale for automated jury: **`en`** (all locales get technical lint at M5 ship). See `docs/audio/AUDIO_QA.md` §A4–A5 and `docs/vision/VO_HIT_LIST.md`.
 
 | Brief | Scene | Speaker |
 |-------|-------|---------|

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/SECURITY.md",
-  "design_ref": "docs/PLUGIN_COMPATIBILITY.md, docs/STEAM_RELEASE_CHECKLIST.md §2.9–2.10",
+  "authority": "docs/qa/SECURITY.md",
+  "design_ref": "docs/technical/PLUGIN_COMPATIBILITY.md, docs/ci-cd/STEAM_RELEASE_CHECKLIST.md §2.9–2.10",
   "forbidden_autoloads": [
     "GDAIMCPRuntime",
     "GodotIQRuntime",
@@ -24,11 +24,11 @@
   "export_scripts_must_call": "export_strip_dev_plugins_begin",
   "secret_scan": {
     "allowlist_globs": [
-      "docs/CURSOR_SECRETS_SETUP.md",
-      "docs/GITHUB_SETUP.md",
-      "docs/CI.md",
-      "docs/CONTROLS_CHEATSHEET.md",
-      "docs/SECURITY.md",
+      "docs/agents/CURSOR_SECRETS_SETUP.md",
+      "docs/ci-cd/GITHUB_SETUP.md",
+      "docs/ci-cd/CI.md",
+      "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+      "docs/qa/SECURITY.md",
       "game/data/qa/stakeholder_report_config.json",
       "game/data/qa/ship_security.json",
       "tools/check_no_secrets.py",
@@ -55,7 +55,7 @@
     "notes": "Set pin_checksums true and add sha256 fields after first audited download"
   },
   "player_build_protection": {
-    "authority": "docs/SECURITY.md §9",
+    "authority": "docs/qa/SECURITY.md §9",
     "pck_encryption": {
       "requires_custom_templates": true,
       "env_key": "GODOT_SCRIPT_ENCRYPTION_KEY",

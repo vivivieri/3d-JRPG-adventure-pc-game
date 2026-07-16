@@ -3,7 +3,7 @@
 # NOT primary PM dispatch — runs on schedule to detect stalled factory.
 # Only POSTs webhook when run_factory_watchdog.sh --recover finds a problem.
 #
-# See docs/FACTORY_WATCHDOG.md
+# See docs/agents/FACTORY_WATCHDOG.md
 
 name: Factory watchdog
 

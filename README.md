@@ -8,9 +8,9 @@ A short **3D JRPG adventure** for PC (Steam), adapted from the public-domain Jap
 **Playtime:** 2–3 hours  
 
 > **`main` is docs + design data only** — no `project.godot`, scenes, or gameplay code.  
-> **Implementation** lives on **`game/development`** until M6 ship. See [`docs/BRANCHING.md`](docs/BRANCHING.md).
+> **Implementation** lives on **`game/development`** until M6 ship. See [`docs/workflow/BRANCHING.md`](docs/workflow/BRANCHING.md).
 
-Build via GodotPrompter + MCP stack per [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+Build via GodotPrompter + MCP stack per [`docs/workflow/IMPLEMENTATION_PLAN.md`](docs/workflow/IMPLEMENTATION_PLAN.md).
 
 ---
 
@@ -18,8 +18,8 @@ Build via GodotPrompter + MCP stack per [`docs/IMPLEMENTATION_PLAN.md`](docs/IMP
 
 | Cheat sheet | Purpose |
 |-------------|---------|
-| [`docs/RR_CHEATSHEET.md`](docs/RR_CHEATSHEET.md) | **Who** owns what — roles, handoffs, tools |
-| [`docs/CONTROLS_CHEATSHEET.md`](docs/CONTROLS_CHEATSHEET.md) | **How** roles are enforced — CI, PR templates, gates |
+| [`docs/cheat-sheets/RR_CHEATSHEET.md`](docs/cheat-sheets/RR_CHEATSHEET.md) | **Who** owns what — roles, handoffs, tools |
+| [`docs/cheat-sheets/CONTROLS_CHEATSHEET.md`](docs/cheat-sheets/CONTROLS_CHEATSHEET.md) | **How** roles are enforced — CI, PR templates, gates |
 
 Full index: [`docs/README.md`](docs/README.md) · Cloud agents: [`AGENTS.md`](AGENTS.md)
 
@@ -37,7 +37,7 @@ Full index: [`docs/README.md`](docs/README.md) · Cloud agents: [`AGENTS.md`](AG
 | **M5 / Phase 7** — Art rebuild (NPR zones, hero meshes, curated audio) | Not started |
 | **M6 / Phase 8** — Steam export, compliance, Windows playtest | Not started |
 
-**Next build step:** Phase 1 — `ruined_village` vertical slice (SC-02). Checklist: [`docs/MILESTONES.md`](docs/MILESTONES.md).
+**Next build step:** Phase 1 — `ruined_village` vertical slice (SC-02). Checklist: [`docs/workflow/MILESTONES.md`](docs/workflow/MILESTONES.md).
 
 | Phase | Milestone | Focus |
 |-------|-----------|-------|
@@ -57,16 +57,16 @@ Full index: [`docs/README.md`](docs/README.md) · Cloud agents: [`AGENTS.md`](AG
 
 | Task | Read |
 |------|------|
-| Build next phase | [IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) on branch `game/development` |
-| Branch policy | [BRANCHING.md](docs/BRANCHING.md) |
-| Roles & handoffs | [RR_CHEATSHEET.md](docs/RR_CHEATSHEET.md) · [MULTI_AGENT_TEAM.md](docs/MULTI_AGENT_TEAM.md) |
-| Enforcement / CI | [CONTROLS_CHEATSHEET.md](docs/CONTROLS_CHEATSHEET.md) · [CI.md](docs/CI.md) |
-| Sprints (Linear) | [AGILE_WITHIN_PHASES.md](docs/AGILE_WITHIN_PHASES.md) |
-| MCP toolchain | [MCP_STACK.md](docs/MCP_STACK.md) |
-| QA gates | [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) |
-| Code base classes | [CODE_BASE_CLASS_RULES.md](docs/CODE_BASE_CLASS_RULES.md) |
-| Ship / CD | [CD.md](docs/CD.md) · [STEAM_RELEASE_CHECKLIST.md](docs/STEAM_RELEASE_CHECKLIST.md) |
-| Story / combat JSON | [DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) + `game/data/` |
+| Build next phase | [IMPLEMENTATION_PLAN.md](docs/workflow/IMPLEMENTATION_PLAN.md) on branch `game/development` |
+| Branch policy | [BRANCHING.md](docs/workflow/BRANCHING.md) |
+| Roles & handoffs | [RR_CHEATSHEET.md](docs/cheat-sheets/RR_CHEATSHEET.md) · [MULTI_AGENT_TEAM.md](docs/agents/MULTI_AGENT_TEAM.md) |
+| Enforcement / CI | [CONTROLS_CHEATSHEET.md](docs/cheat-sheets/CONTROLS_CHEATSHEET.md) · [CI.md](docs/ci-cd/CI.md) |
+| Sprints (Linear) | [AGILE_WITHIN_PHASES.md](docs/workflow/AGILE_WITHIN_PHASES.md) |
+| MCP toolchain | [MCP_STACK.md](docs/agents/MCP_STACK.md) |
+| QA gates | [ACCEPTANCE_CRITERIA.md](docs/qa/ACCEPTANCE_CRITERIA.md) |
+| Code base classes | [CODE_BASE_CLASS_RULES.md](docs/technical/CODE_BASE_CLASS_RULES.md) |
+| Ship / CD | [CD.md](docs/ci-cd/CD.md) · [STEAM_RELEASE_CHECKLIST.md](docs/ci-cd/STEAM_RELEASE_CHECKLIST.md) |
+| Story / combat JSON | [DATA_ARCHITECTURE.md](docs/technical/DATA_ARCHITECTURE.md) + `game/data/` |
 
 **Authority:** IMPLEMENTATION_PLAN → BRANCHING → MILESTONES → DATA_ARCHITECTURE → ACCEPTANCE_CRITERIA → MCP_STACK / `.cursorrules`
 
@@ -102,7 +102,7 @@ bash tools/run_ci_checks.sh
 | GameLab MCP | UI art — frames, icon sheets **(required)** |
 | ComfyUI / Material Maker | Zone NPR albedos (offline) |
 
-Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md)
+Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/agents/GDAI_CLOUD_SETUP.md`](docs/agents/GDAI_CLOUD_SETUP.md)
 
 ---
 
@@ -110,8 +110,8 @@ Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_
 
 ```
 docs/README.md           # Documentation index (start here)
-docs/RR_CHEATSHEET.md    # Roles (who)
-docs/CONTROLS_CHEATSHEET.md  # Enforcement (how)
+docs/cheat-sheets/RR_CHEATSHEET.md    # Roles (who)
+docs/cheat-sheets/CONTROLS_CHEATSHEET.md  # Enforcement (how)
 game/data/               # Story JSON spine (on main)
 game/locale/             # translations.csv
 game/scenes/README.md    # GDAI scene policy (no .tscn on main)

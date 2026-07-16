@@ -1,7 +1,7 @@
 # Tides of Urashima — Steam Store Page (繁體中文)
 
 Use this document for the **Traditional Chinese** Steamworks store listing.  
-Cross-ref: `steam/STORE_PAGE.md` (master), `docs/LOCALIZATION.md`.
+Cross-ref: `steam/STORE_PAGE.md` (master), `docs/technical/LOCALIZATION.md`.
 
 ---
 

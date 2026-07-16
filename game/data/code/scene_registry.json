@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "design_ref": "docs/LEVEL_DESIGN.md, docs/TECHNICAL_DESIGN.md §3",
+  "design_ref": "docs/world/LEVEL_DESIGN.md, docs/technical/TECHNICAL_DESIGN.md §3",
   "note": "Node catalog is spec — transforms and meshes are built via GDAI MCP on game/development.",
   "scenes": [
     {

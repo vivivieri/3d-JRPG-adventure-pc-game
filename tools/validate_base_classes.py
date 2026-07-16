@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/code/base_classes.json (docs/CODE_BASE_CLASS_RULES.md)."""
+"""Validate game/data/code/base_classes.json (docs/technical/CODE_BASE_CLASS_RULES.md)."""
 from __future__ import annotations
 
 import json

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared VO QA helpers — paths, dialogue lines, catalog (docs/AUDIO_QA.md §A4)."""
+"""Shared VO QA helpers — paths, dialogue lines, catalog (docs/audio/AUDIO_QA.md §A4)."""
 from __future__ import annotations
 
 import json

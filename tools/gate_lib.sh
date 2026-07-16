@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Tri-state QA gate helpers (docs/ACCEPTANCE_CRITERIA.md global_rules).
+# Tri-state QA gate helpers (docs/qa/ACCEPTANCE_CRITERIA.md global_rules).
 # Exit codes for gate commands: 0=PASS, 1=FAIL, 2=SKIP (not applicable).
 set -euo pipefail
 

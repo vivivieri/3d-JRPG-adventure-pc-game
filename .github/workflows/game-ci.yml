@@ -29,7 +29,7 @@ jobs:
       - name: Upload CI summary on failure
         if: failure()
         run: |
-          echo "::error::Game CI failed — see docs/CI.md"
+          echo "::error::Game CI failed — see docs/ci-cd/CI.md"
           echo "Run locally: bash tools/install_ci_deps.sh && bash tools/run_ci_checks.sh"
 
   windows-export-run:
@@ -62,5 +62,5 @@ jobs:
         if: failure()
         shell: bash
         run: |
-          echo "::error::Windows export/run smoke failed — see docs/PLATFORM_SUPPORT.md"
+          echo "::error::Windows export/run smoke failed — see docs/qa/PLATFORM_SUPPORT.md"
           echo "Run locally on Windows: bash tools/install_ci_deps_windows.sh && bash tools/run_windows_export_run.sh"

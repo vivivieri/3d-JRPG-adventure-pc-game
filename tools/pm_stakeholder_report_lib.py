@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build stakeholder status reports + optional Telegram delivery.
 
-Authority: docs/PM_STAKEHOLDER_REPORTING.md
+Authority: docs/agents/PM_STAKEHOLDER_REPORTING.md
 """
 from __future__ import annotations
 

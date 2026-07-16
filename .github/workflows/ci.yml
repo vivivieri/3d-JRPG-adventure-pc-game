@@ -31,5 +31,5 @@ jobs:
       - name: Upload CI summary on failure
         if: failure()
         run: |
-          echo "::error::Main CI failed — see docs/BRANCHING.md and docs/CI.md"
+          echo "::error::Main CI failed — see docs/workflow/BRANCHING.md and docs/ci-cd/CI.md"
           echo "Run locally: bash tools/run_docs_ci_checks.sh"

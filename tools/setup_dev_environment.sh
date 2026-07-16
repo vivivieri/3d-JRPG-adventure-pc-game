@@ -10,7 +10,7 @@ echo "==> Tides of Urashima — dev environment setup"
 echo "    Root: $ROOT"
 echo
 
-# --- Directory layout (docs/ENVIRONMENT_KITS.md, docs/ART_DIRECTION.md) ---
+# --- Directory layout (docs/world/ENVIRONMENT_KITS.md, docs/art/ART_DIRECTION.md) ---
 DIRS=(
   game/assets/fonts
   game/assets/models/characters
@@ -97,7 +97,7 @@ fi
 # --- GDAI plugin reminder ---
 if [[ ! -d game/addons/gdai-mcp-plugin-godot ]]; then
   echo "!! GDAI MCP plugin not installed (dev-only, gitignored)"
-  echo "   See: game/addons/README.md + docs/GDAI_CLOUD_SETUP.md"
+  echo "   See: game/addons/README.md + docs/agents/GDAI_CLOUD_SETUP.md"
 fi
 
 # --- Export preset (gitignored locally; copy from example) ---
@@ -108,7 +108,7 @@ fi
 
 echo
 echo "==> Setup complete."
-echo "    1. Install Godot 4.7 and open game/project.godot (see docs/TECH_STACK.md)"
+echo "    1. Install Godot 4.7 and open game/project.godot (see docs/technical/TECH_STACK.md)"
 echo "    2. Install GDAI MCP plugin → game/addons/gdai-mcp-plugin-godot/"
 echo "    3. Configure .cursor/mcp.json from .cursor/mcp.json.example"
 echo "    4. Ship build: bash tools/export_windows.sh"

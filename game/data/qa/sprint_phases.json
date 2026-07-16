@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "model": "phase_gated_agile",
-  "authority": "Waterfall roadmap (phases 0-8) with agile sprints inside each phase. See docs/AGILE_WITHIN_PHASES.md",
+  "authority": "Waterfall roadmap (phases 0-8) with agile sprints inside each phase. See docs/workflow/AGILE_WITHIN_PHASES.md",
   "active_phase": 1,
   "active_phase_name": "Environment foundation — SC-02 vertical slice",
   "sprint_cadence_weeks": 1,
@@ -11,7 +11,7 @@
     "max_weeks": 3,
     "semantics": "calendar_ceiling",
     "note": "Weeks are max Linear batch window, not expected AI implementation time. Close cycles on gate evidence (see ai_native_batch).",
-    "adjust_when": "Human-blocked work only: L6 playtest, M5 jury, Steam store — see docs/AGILE_WITHIN_PHASES.md §12.1"
+    "adjust_when": "Human-blocked work only: L6 playtest, M5 jury, Steam store — see docs/workflow/AGILE_WITHIN_PHASES.md §12.1"
   },
   "ai_native_batch": {
     "primary_unit": "session_batch",
@@ -77,7 +77,7 @@
       "ai_native_target_days": 4,
       "linear_project": "m1-core",
       "milestone": null,
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 1",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 1",
       "sprint_goals_example": [
         "toon_base.gdshader + zone_visuals.gd",
         "GDAI ruined_village.tscn lights fog materials",
@@ -111,7 +111,7 @@
       "ai_native_target_days": 7,
       "linear_project": "m1-core",
       "milestone": "M1",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 2",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 2",
       "sprint_goals_example": [
         "boot + main menu via GDAI",
         "LocalizationManager + settings UI",
@@ -128,7 +128,7 @@
       "ai_native_target_days": 7,
       "linear_project": "m1-core",
       "milestone": "M1",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 3",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 3",
       "exit_gates_required": ["L4_integration"],
       "uat_tag_pattern": "v0.3.*-rc*"
     },
@@ -140,7 +140,7 @@
       "ai_native_target_days": 7,
       "linear_project": "m1-core",
       "milestone": "M2",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 4",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 4",
       "exit_gates_required": ["L4_integration"],
       "uat_tag_pattern": "v0.4.*-rc*"
     },
@@ -152,7 +152,7 @@
       "ai_native_target_days": 7,
       "linear_project": "m1-core",
       "milestone": "M3",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 5",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 5",
       "exit_gates_required": ["L4_integration"],
       "uat_tag_pattern": "v0.5.*-rc*"
     },
@@ -164,7 +164,7 @@
       "ai_native_target_days": 10,
       "linear_project": "m1-core",
       "milestone": "M4",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 6",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 6",
       "generation_readiness": ["GR-002"],
       "exit_gates_required": [
         "L0_rr_compliance",
@@ -184,7 +184,7 @@
       "ai_native_target_days": 21,
       "linear_project": "m5-art",
       "milestone": "M5",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 7",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 7",
       "note": "Waterfall ordering: art after playable gameplay (phase 6). Calendar bound by assets + jury, not agent coding speed.",
       "generation_readiness": ["GR-001", "GR-002", "GR-003"],
       "exit_gates_ref": "acceptance_criteria.json → phase_gates.m5_ship (subset)",
@@ -198,8 +198,8 @@
       "ai_native_target_days": 10,
       "linear_project": "m6-steam",
       "milestone": "M6",
-      "implementation_ref": "docs/IMPLEMENTATION_PLAN.md §Phase 8",
-      "exit_doc": "docs/STEAM_RELEASE_CHECKLIST.md",
+      "implementation_ref": "docs/workflow/IMPLEMENTATION_PLAN.md §Phase 8",
+      "exit_doc": "docs/ci-cd/STEAM_RELEASE_CHECKLIST.md",
       "exit_gates_required": ["M5_asset_compliance", "L5_e2e_three_endings", "L6_human_playtest"],
       "uat_tag_pattern": "v1.0.*"
     }
@@ -218,5 +218,5 @@
       "GitHub issue closed with evidence paths"
     ]
   },
-  "design_ref": "docs/AGILE_WITHIN_PHASES.md, docs/SPRINT_ORCHESTRATION.md"
+  "design_ref": "docs/workflow/AGILE_WITHIN_PHASES.md, docs/agents/SPRINT_ORCHESTRATION.md"
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "authority": "docs/SETTINGS_ACCESSIBILITY.md",
+  "authority": "docs/ui/SETTINGS_ACCESSIBILITY.md",
   "storage_path": "user://settings.json",
   "fields": {
     "locale": { "type": "enum", "values": ["en", "ja", "zh", "zh-Hant"], "default": "en" },
@@ -14,7 +14,7 @@
     "text_speed": { "type": "enum", "values": ["slow", "normal", "fast", "instant"], "default": "normal" },
     "dialogue_auto": { "type": "bool", "default": false },
     "screen_shake": { "type": "bool", "default": true },
-    "hard_mode": { "type": "bool", "default": false, "design_ref": "docs/COMBAT_SYSTEMS.md §10" },
+    "hard_mode": { "type": "bool", "default": false, "design_ref": "docs/gameplay/COMBAT_SYSTEMS.md §10" },
     "hints_enabled": { "type": "bool", "default": true },
     "intent_contrast": { "type": "enum", "values": ["standard", "high_contrast"], "default": "standard" },
     "graphics_quality": { "type": "enum", "values": ["low", "medium", "high"], "default": "medium" }

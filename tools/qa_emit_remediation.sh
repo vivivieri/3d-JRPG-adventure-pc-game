@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Emit remediation brief after smoke/integration FAIL (docs/QA_REMEDIATION_LOOP.md, docs/FLOW_QA.md).
+# Emit remediation brief after smoke/integration FAIL (docs/qa/QA_REMEDIATION_LOOP.md, docs/qa/FLOW_QA.md).
 # Usage:
 #   bash tools/qa_emit_remediation.sh model-tech <model_id>
 #   bash tools/qa_emit_remediation.sh model-jury <jury.json> [asset_id]
@@ -23,7 +23,7 @@ header() {
 
 footer() {
   echo "==================================================================="
-  echo "Policy: docs/QA_REMEDIATION_LOOP.md | Flow: docs/FLOW_QA.md"
+  echo "Policy: docs/qa/QA_REMEDIATION_LOOP.md | Flow: docs/qa/FLOW_QA.md"
   echo "Change ONE lever this attempt. Max 3 tries → escalate."
   echo ""
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/SECURITY.md §9, docs/SAVE_AND_FAIL_STATES.md §2",
+  "authority": "docs/qa/SECURITY.md §9, docs/technical/SAVE_AND_FAIL_STATES.md §2",
   "algorithm": "hmac-sha256",
   "integrity_field": "_integrity",
   "signature_format": "hex",

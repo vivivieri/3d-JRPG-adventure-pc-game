@@ -1,8 +1,8 @@
 # Generation brief — VO `sc03_yuzu_01`
 
 **Status:** P0 selective VO · automated jury on `en` gate locale  
-**Authority:** `game/data/audio/vo_prompts.json`, `docs/VO_HIT_LIST.md`  
-**Cross-refs:** `docs/NARRATIVE_WRITING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md` §8
+**Authority:** `game/data/audio/vo_prompts.json`, `docs/vision/VO_HIT_LIST.md`  
+**Cross-refs:** `docs/vision/NARRATIVE_WRITING_GUIDE.md`, `docs/audio/AUDIO_PRODUCTION_GUIDE.md` §8
 
 ---
 

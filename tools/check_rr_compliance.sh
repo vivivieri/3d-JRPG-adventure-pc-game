@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Enforce GodotPrompter + GDAI MCP role rules (.cursorrules §0, docs/MCP_STACK.md).
+# Enforce GodotPrompter + GDAI MCP role rules (.cursorrules §0, docs/agents/MCP_STACK.md).
 # Fails if hand-edited ship scenes are committed or main_scene lacks GDAI verification.
 set -euo pipefail
 
@@ -104,7 +104,7 @@ if [[ "$FAIL" -gt 0 ]]; then
   echo "  2. Build scenes in Godot via GDAI MCP (godot-mcp) — not Cursor file edits"
   echo "  3. F5 playtest in editor"
   echo "  4. Write game/scenes/.gdai_built (see game/scenes/README.md)"
-  echo "Docs: .cursorrules §0, docs/MCP_STACK.md, docs/GDAI_CLOUD_SETUP.md"
+  echo "Docs: .cursorrules §0, docs/agents/MCP_STACK.md, docs/agents/GDAI_CLOUD_SETUP.md"
   exit 1
 fi
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Technical VO QA: duration, loudness, locale paths (docs/AUDIO_QA.md §A4)."""
+"""Technical VO QA: duration, loudness, locale paths (docs/audio/AUDIO_QA.md §A4)."""
 from __future__ import annotations
 
 import argparse

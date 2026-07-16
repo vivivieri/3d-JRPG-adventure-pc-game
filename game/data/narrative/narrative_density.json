@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "design_ref": "docs/NARRATIVE_DENSITY.md",
+  "design_ref": "docs/vision/NARRATIVE_DENSITY.md",
   "description": "Ship budgets for §12 narrative patterns — prevents over-writing in a 2–3 h game.",
   "budgets": {
     "combat_barks": {

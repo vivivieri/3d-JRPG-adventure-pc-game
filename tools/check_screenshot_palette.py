@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check viewport screenshot palette against zone anchors (docs/VISUAL_QA.md §2D)."""
+"""Check viewport screenshot palette against zone anchors (docs/art/VISUAL_QA.md §2D)."""
 from __future__ import annotations
 
 import argparse
@@ -7,7 +7,7 @@ import math
 import sys
 from pathlib import Path
 
-# Mirrors docs/ART_DIRECTION.md §1 + tools/palette_remap.py
+# Mirrors docs/art/ART_DIRECTION.md §1 + tools/palette_remap.py
 ZONE_PALETTES: dict[str, list[tuple[int, int, int]]] = {
     "ruined_village": [
         (0x8B, 0x9D, 0xAF),

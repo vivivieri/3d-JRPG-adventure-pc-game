@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate acceptance_criteria.json and tool threshold alignment (docs/ACCEPTANCE_CRITERIA.md)."""
+"""Validate acceptance_criteria.json and tool threshold alignment (docs/qa/ACCEPTANCE_CRITERIA.md)."""
 from __future__ import annotations
 
 import json
@@ -34,7 +34,7 @@ def main() -> int:
 
     # Every gate must document WHAT it checks (description) and WHERE the criteria
     # live (design_ref), and how PASS is measured — so reviewers/gatekeepers always
-    # know what to verify. See docs/ACCEPTANCE_CRITERIA.md.
+    # know what to verify. See docs/qa/ACCEPTANCE_CRITERIA.md.
     for gid, g in gates.items():
         if not g.get("description"):
             errors.append(f"gate {gid} missing 'description' (what it checks)")

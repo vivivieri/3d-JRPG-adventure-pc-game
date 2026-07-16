@@ -15,7 +15,7 @@ Usage:
   # record the Product Owner's decision when it comes back:
   python3 tools/pm_escalate.py --issue P1-02 --record-decision amend_requirement --by "product_owner" --rationale "cut SC-12 second wraith"
 
-See docs/ESCALATION_POLICY.md.
+See docs/qa/ESCALATION_POLICY.md.
 """
 from __future__ import annotations
 

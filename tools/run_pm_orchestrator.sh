@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # PM Agent / Sprint Master — mandatory session entrypoint.
 # Fails non-zero if any step missed — no honor system.
-# Authority: docs/PM_AGENT_RUNBOOK.md, docs/SPRINT_ORCHESTRATION.md
+# Authority: docs/agents/PM_AGENT_RUNBOOK.md, docs/agents/SPRINT_ORCHESTRATION.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -24,7 +24,7 @@ steps_path = root / "game/data/qa/pm_orchestrator_steps.json"
 data = json.loads(steps_path.read_text(encoding="utf-8"))
 
 print("==> PM Orchestrator — enforced session workflow")
-print("    Authority: docs/PM_AGENT_RUNBOOK.md")
+print("    Authority: docs/agents/PM_AGENT_RUNBOOK.md")
 print()
 
 for step in data.get("session_steps", []):
@@ -43,7 +43,7 @@ for step in data.get("session_steps", []):
         print(f"[FAIL] Step {n} ({sid}) — PM session BLOCKED (exit {rc})")
         print()
         print("PM ORCHESTRATOR: FAILED — do not assign agents until fixed")
-        print("Docs: docs/PM_AGENT_RUNBOOK.md")
+        print("Docs: docs/agents/PM_AGENT_RUNBOOK.md")
         # Record fail for watchdog
         from datetime import datetime, timezone
         from pathlib import Path

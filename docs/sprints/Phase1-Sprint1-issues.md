@@ -3,10 +3,10 @@
 **Cycle:** `Phase1-Sprint1`  
 **Branch:** `game/development`  
 **Phase exit ref:** `acceptance_criteria.json` → `phase_gates.phase_1`  
-**Implementation ref:** `docs/IMPLEMENTATION_PLAN.md` §Phase 1 (tasks 1.1–1.11)  
+**Implementation ref:** `docs/workflow/IMPLEMENTATION_PLAN.md` §Phase 1 (tasks 1.1–1.11)  
 **Sprint master:** PM Agent — run `bash tools/run_pm_orchestrator.sh` before dispatch  
 **Board:** `game/data/qa/sprint_board.json`  
-**Runbook:** `docs/PM_AGENT_RUNBOOK.md`
+**Runbook:** `docs/agents/PM_AGENT_RUNBOOK.md`
 
 **WIP limit:** 7 issues · close when gate IDs PASS on merged PRs  
 
@@ -53,7 +53,7 @@ L2_boot_headless          # SKIP until main_scene set — OK for this issue only
 
 Merge latest `main` into `game/development`. Run `bash tools/setup_dev_environment.sh`. Create minimal Godot 4.7 Forward+ project shell (`game/project.godot`, autoload stubs, `game/tests/unit/test_runner.gd`). No ship `.tscn` without GDAI — stub `run/main_scene` only when boot test is ready.
 
-**Core helpers (R&R — `docs/GDSCRIPT_REGENERATION.md` §2):**
+**Core helpers (R&R — `docs/technical/GDSCRIPT_REGENERATION.md` §2):**
 - **Architect:** port `event_bus.gd` from `helpers_registry.json` (signals only)
 - **Builder:** register `EventBus` autoload in `project.godot` via GDAI MCP
 - Phase 2+ helpers (`SettingsStore`, `SaveIntegrity`, etc.) are **not** in P1-00 — PM dispatches per `helpers_registry.json` → `dispatch_by_phase`
@@ -71,8 +71,8 @@ bash tools/run_ci_checks.sh
 
 ### Design refs
 
-- `docs/BRANCHING.md`
-- `docs/MCP_STACK.md`
+- `docs/workflow/BRANCHING.md`
+- `docs/agents/MCP_STACK.md`
 - `AGENTS.md` — Environment bootstrap
 
 ### Definition of done
@@ -116,7 +116,7 @@ GodotPrompter drafts (no hand `.tscn`):
 2. **`game/scripts/exploration/zone_visuals.gd`** — applies per-zone palette, `WorldEnvironment`, `ProceduralSky`, directional + fill lights from zone id.
 3. **`game/environments/ruined_village.tres`** (or runtime-only if Architect prefers) — tonemap Filmic/ACES, fog `#8B9DAF` density `0.008`, glow for emissive props.
 
-**Ruined village targets** (`docs/RENDERING_GUIDE.md` §4–§6):
+**Ruined village targets** (`docs/art/RENDERING_GUIDE.md` §4–§6):
 
 | Property | Value |
 |----------|-------|
@@ -167,9 +167,9 @@ Add unit tests for `zone_visuals.gd` palette application (headless).
 
 ### Design refs
 
-- `docs/RENDERING_GUIDE.md` §3–§6
-- `docs/ART_DIRECTION.md` §1 (hub palette), §7
-- `docs/ENVIRONMENT_KITS.md` §4 (ruined_village)
+- `docs/art/RENDERING_GUIDE.md` §3–§6
+- `docs/art/ART_DIRECTION.md` §1 (hub palette), §7
+- `docs/world/ENVIRONMENT_KITS.md` §4 (ruined_village)
 - `.cursorrules` §6 — toon shader reference
 
 ### Definition of done
@@ -209,7 +209,7 @@ L2_feel_smoke           # constants only — no player yet OK
 **GDAI MCP only** — create `res://scenes/world/ruined_village.tscn`:
 
 1. Apply Architect handoff (lights, fog, sky, toon materials on greybox).
-2. Greybox layout per `docs/LEVEL_DESIGN.md` §3 (~120×120 m hub): torii north, well/shack mid, pier south, cave entrance marker.
+2. Greybox layout per `docs/world/LEVEL_DESIGN.md` §3 (~120×120 m hub): torii north, well/shack mid, pier south, cave entrance marker.
 3. Place **markers** from `game/data/qa/zone_composition.json` → `ruined_village.markers` (do not rename).
 4. Greybox meshes allowed at Phase 1 gate (`ART_DIRECTION.md` §10) — no Kenney/European kits.
 5. F5 verify: 0 errors, 60 FPS target @ 1080p in viewport.
@@ -236,9 +236,9 @@ L2_feel_smoke           # constants only — no player yet OK
 
 ### Design refs
 
-- `docs/LEVEL_DESIGN.md` §3
-- `docs/ENVIRONMENT_KITS.md` §4
-- `docs/ART_DIRECTION.md` §10 (Phase 1 gate)
+- `docs/world/LEVEL_DESIGN.md` §3
+- `docs/world/ENVIRONMENT_KITS.md` §4
+- `docs/art/ART_DIRECTION.md` §10 (Phase 1 gate)
 - `game/data/qa/zone_composition.json` → `ruined_village`
 
 ### Definition of done
@@ -284,8 +284,8 @@ Unit test: shader compiles headless (material create smoke if project supports).
 
 ### Design refs
 
-- `docs/ART_DIRECTION.md` §3.6
-- `docs/ENVIRONMENT_KITS.md` §3 (`beach_shoreline_water`)
+- `docs/art/ART_DIRECTION.md` §3.6
+- `docs/world/ENVIRONMENT_KITS.md` §3 (`beach_shoreline_water`)
 
 ### Definition of done
 
@@ -419,7 +419,7 @@ bash tools/run_visual_smoke_checks.sh
 
 ### Design refs
 
-- `docs/GENERATION_READINESS.md` §X-02
+- `docs/art/GENERATION_READINESS.md` §X-02
 - `game/data/qa/generation_readiness_backlog.json` → GR-001, GR-003
 - `game/data/qa/zone_composition.json` → `ruined_village`
 

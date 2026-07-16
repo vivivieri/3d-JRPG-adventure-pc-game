@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Static visual lint: banned primitive meshes and ship-forbidden assets in .tscn.
-# See docs/VISUAL_QA.md — catches BoxMesh placeholders before they spread.
+# See docs/art/VISUAL_QA.md — catches BoxMesh placeholders before they spread.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -28,7 +28,7 @@ is_greybox_path() {
   return 1
 }
 
-echo "==> Scene visual lint (docs/VISUAL_QA.md)"
+echo "==> Scene visual lint (docs/art/VISUAL_QA.md)"
 echo "    Scanning: ${SCENES_DIR}"
 echo ""
 
@@ -63,7 +63,7 @@ fi
 echo ""
 if [[ "$FAIL" -gt 0 ]]; then
   echo "Scene visual lint: FAILED ($FAIL issue(s) in $CHECKED scene(s))"
-  echo "Fix: replace primitives with NPR meshes per docs/ART_AUTOMATION_PIPELINE.md"
+  echo "Fix: replace primitives with NPR meshes per docs/art/ART_AUTOMATION_PIPELINE.md"
   exit 1
 fi
 

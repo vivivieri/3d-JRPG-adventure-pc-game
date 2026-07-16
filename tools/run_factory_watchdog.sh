@@ -10,7 +10,7 @@
 #   bash tools/run_factory_watchdog.sh --halt "reason"
 #   bash tools/run_factory_watchdog.sh --clear-halt   # human operator only
 #
-# Authority: docs/FACTORY_WATCHDOG.md
+# Authority: docs/agents/FACTORY_WATCHDOG.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

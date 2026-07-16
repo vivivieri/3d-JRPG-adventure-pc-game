@@ -7,7 +7,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 echo "==> Tides of Urashima — Asset Compliance Check"
-echo "    Policy: docs/ASSET_COMPLIANCE.md"
+echo "    Policy: docs/art/ASSET_COMPLIANCE.md"
 echo ""
 
 echo "==> Step 1/2: Verify licenses..."

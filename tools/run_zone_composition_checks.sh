@@ -17,7 +17,7 @@ warn() { echo "[WARN] $1"; WARN=$((WARN + 1)); }
 fail() { echo "[FAIL] $1"; FAIL=$((FAIL + 1)); }
 pass() { echo "[PASS] $1"; }
 
-echo "==> Zone composition smoke (docs/GENERATION_READINESS.md §X-04)"
+echo "==> Zone composition smoke (docs/art/GENERATION_READINESS.md §X-04)"
 echo ""
 
 if ! python3 "${ROOT}/tools/validate_zone_composition.py"; then

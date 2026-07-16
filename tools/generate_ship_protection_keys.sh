@@ -2,7 +2,7 @@
 # Generate 256-bit ship protection keys (store in GitHub Secrets — never commit).
 set -euo pipefail
 
-echo "==> Ship protection keys (docs/SECURITY.md §9)"
+echo "==> Ship protection keys (docs/qa/SECURITY.md §9)"
 echo ""
 echo "Store these in GitHub Environment steam-production (and Cursor Secrets for local RC builds):"
 echo ""

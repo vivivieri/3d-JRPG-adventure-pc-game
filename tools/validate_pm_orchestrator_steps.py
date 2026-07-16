@@ -5,7 +5,7 @@ The PM Agent's authoritative "what to do each session" (session_steps) and
 "what to do after each agent cycle" (post_agent_steps). This gate guarantees the
 PM's workflow is well-formed and every step points at a tool that actually exists —
 so the PM knows exactly what to do and can't be handed a broken/dangling step.
-See docs/PM_AGENT_RUNBOOK.md, docs/SPRINT_ORCHESTRATION.md.
+See docs/agents/PM_AGENT_RUNBOOK.md, docs/agents/SPRINT_ORCHESTRATION.md.
 """
 from __future__ import annotations
 

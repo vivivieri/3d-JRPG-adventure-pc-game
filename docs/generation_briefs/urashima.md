@@ -1,8 +1,8 @@
 # Generation brief — `urashima`
 
 **Status:** P0 · Phase 1 vertical slice  
-**Authority:** `docs/CHARACTER_BIBLE.md` §2, `game/data/models/qa_catalog.json`  
-**Cross-refs:** `docs/GENERATION_READINESS.md`, `docs/ART_AUTOMATION_PIPELINE.md` §5
+**Authority:** `docs/art/CHARACTER_BIBLE.md` §2, `game/data/models/qa_catalog.json`  
+**Cross-refs:** `docs/art/GENERATION_READINESS.md`, `docs/art/ART_AUTOMATION_PIPELINE.md` §5
 
 ---
 

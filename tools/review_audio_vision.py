@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Multi-model listen jury for hero BGM tracks (docs/AUDIO_QA.md §A3).
+"""Multi-model listen jury for hero BGM tracks (docs/audio/AUDIO_QA.md §A3).
 
 Requires OPENAI_API_KEY and/or GEMINI_API_KEY. Anthropic has no audio input in v1.
 """
@@ -274,7 +274,7 @@ def main() -> int:
     if active == 0:
         manual = write_manual_packet(args.out_dir, args.track, path, prompt)
         print(f"No audio API keys. Manual jury: {manual}")
-        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
+        print("SKIP is not PASS — see docs/qa/ACCEPTANCE_CRITERIA.md")
         return 2
     if report["consensus_pass"]:
         print(f"CONSENSUS PASS ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
@@ -284,8 +284,8 @@ def main() -> int:
         f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} "
         f"--asset-id {args.track} --log-attempt"
     )
-    print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
-    print("See docs/ACCEPTANCE_CRITERIA.md — PASS requires measurable criteria met.")
+    print("See docs/qa/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
+    print("See docs/qa/ACCEPTANCE_CRITERIA.md — PASS requires measurable criteria met.")
     return 1
 
 

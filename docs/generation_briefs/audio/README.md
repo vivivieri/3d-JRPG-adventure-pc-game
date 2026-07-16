@@ -1,6 +1,6 @@
 # Audio generation briefs (BGM)
 
-Hero BGM tracks in `L2_audio_jury` scope. Template: `docs/GENERATION_READINESS.md` §3.
+Hero BGM tracks in `L2_audio_jury` scope. Template: `docs/art/GENERATION_READINESS.md` §3.
 
 | Brief | Scene | Loop |
 |-------|-------|------|

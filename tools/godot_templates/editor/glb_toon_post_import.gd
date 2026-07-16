@@ -1,6 +1,6 @@
 @tool
 extends EditorScenePostImport
-## Sanitize AI-generated GLB on import (docs/MODEL_QA.md §M2b).
+## Sanitize AI-generated GLB on import (docs/art/MODEL_QA.md §M2b).
 ## Assign via tools/install_glb_import_pipeline.sh or Import dock per GLB.
 
 const TOON_SHADER := "res://assets/shaders/toon_base.gdshader"

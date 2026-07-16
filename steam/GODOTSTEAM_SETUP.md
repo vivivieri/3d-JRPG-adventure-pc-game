@@ -1,6 +1,6 @@
 # GodotSteam + Steamworks deployment
 
-**Engine:** Godot **4.7** stable · **GodotSteam 4.20+** required (see `docs/PLUGIN_COMPATIBILITY.md`)
+**Engine:** Godot **4.7** stable · **GodotSteam 4.20+** required (see `docs/technical/PLUGIN_COMPATIBILITY.md`)
 
 ## Install GodotSteam
 

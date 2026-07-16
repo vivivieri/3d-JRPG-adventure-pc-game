@@ -104,4 +104,4 @@ echo "       godotiq    → uvx godotiq"
 echo "       godot-mcp-pro → node ${ROOT}/tools/godot-mcp-pro-server/build/index.js --minimal"
 echo
 echo "Verify next agent boot: cursor-cloud environment-info → build should NOT be null"
-echo "Docs: docs/CLOUD_SNAPSHOT_LAUNCH.md"
+echo "Docs: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md"

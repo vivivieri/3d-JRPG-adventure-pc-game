@@ -3,7 +3,7 @@
 
 Guarantees the anti-infinite-loop escalation ladder is well-formed:
 dev<->QA (capped) -> arbitration (Architect / Design Authority) -> Product Owner.
-See docs/ESCALATION_POLICY.md.
+See docs/qa/ESCALATION_POLICY.md.
 """
 from __future__ import annotations
 

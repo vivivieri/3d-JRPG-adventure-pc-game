@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Save-slot HMAC helpers — reference for SaveSystem (docs/SECURITY.md §9)."""
+"""Save-slot HMAC helpers — reference for SaveSystem (docs/qa/SECURITY.md §9)."""
 from __future__ import annotations
 
 import hashlib

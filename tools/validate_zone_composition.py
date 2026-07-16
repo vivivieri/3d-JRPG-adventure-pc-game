@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/qa/zone_composition.json (docs/GENERATION_READINESS.md §5)."""
+"""Validate game/data/qa/zone_composition.json (docs/art/GENERATION_READINESS.md §5)."""
 from __future__ import annotations
 
 import json

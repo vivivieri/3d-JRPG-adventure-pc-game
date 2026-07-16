@@ -51,7 +51,7 @@ if [[ "$CHANNEL" == "prod" ]]; then
   L6_REPORT="${ROOT}/artifacts/qa_reports/L6_human_playtest.json"
   if [[ ! -f "$L6_REPORT" ]]; then
     echo "[FAIL] Missing ${L6_REPORT#${ROOT}/}"
-    echo "       Run docs/PLAYTEST_SCRIPT.md with min 5 testers; write gate result:"
+    echo "       Run docs/qa/PLAYTEST_SCRIPT.md with min 5 testers; write gate result:"
     echo "       python3 tools/qa_write_gate_result.py --gate L6_human_playtest --status pass \\"
     echo "         --metric completion_percent=80 --metric testers=5 --evidence artifacts/qa_reports/L6_human_playtest.json"
     exit 1
@@ -74,4 +74,4 @@ fi
 echo ""
 echo "CD gates: PASS (channel=${CHANNEL})"
 echo "Next: bash tools/export_windows.sh && bash tools/prepare_steam_depot.sh"
-echo "See: docs/CD.md, docs/STEAM_RELEASE_CHECKLIST.md"
+echo "See: docs/ci-cd/CD.md, docs/ci-cd/STEAM_RELEASE_CHECKLIST.md"

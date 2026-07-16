@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/PM_STAKEHOLDER_REPORTING.md",
+  "authority": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
   "product_owner": {
     "role": "stakeholder",
     "title": "Product Owner",

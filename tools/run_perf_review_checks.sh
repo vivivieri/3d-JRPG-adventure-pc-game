@@ -2,7 +2,7 @@
 # L2 perf catalog — validate perf_thresholds.json + perf_baseline.json (CI-safe, headless).
 # Runtime FPS / draw-call review is L3_perf_review (agent-local):
 #   reference_linux_cloud on game/development snapshot (primary dev)
-#   reference_pc_gtx1060 for Windows Steam depot — docs/PERFORMANCE_BASELINE.md
+#   reference_pc_gtx1060 for Windows Steam depot — docs/qa/PERFORMANCE_BASELINE.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -11,7 +11,7 @@ cd "$ROOT"
 THRESHOLDS="${ROOT}/game/data/qa/perf_thresholds.json"
 BASELINE="${ROOT}/game/data/qa/perf_baseline.json"
 
-echo "==> Perf review catalog (docs/PERFORMANCE_BASELINE.md, PLATFORM_SUPPORT.md)"
+echo "==> Perf review catalog (docs/qa/PERFORMANCE_BASELINE.md, PLATFORM_SUPPORT.md)"
 echo ""
 
 if [[ ! -f "$THRESHOLDS" ]]; then

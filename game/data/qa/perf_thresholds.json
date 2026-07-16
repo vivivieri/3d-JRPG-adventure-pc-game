@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "authority": "docs/PERFORMANCE_BASELINE.md, docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9",
+  "authority": "docs/qa/PERFORMANCE_BASELINE.md, docs/art/RENDERING_GUIDE.md, docs/world/ENVIRONMENT_KITS.md §9",
   "baseline_id": "reference_linux_cloud",
   "ship_baseline_ids": ["reference_linux_cloud", "reference_pc_gtx1060"],
   "baseline_catalog": "game/data/qa/perf_baseline.json",
@@ -63,6 +63,6 @@
       "volumetric"
     ],
     "integration_rerun": "affected INT-* scenario plus one scene before and after",
-    "design_ref": "docs/QA_AND_BUG_PROCESS.md §6"
+    "design_ref": "docs/qa/QA_AND_BUG_PROCESS.md §6"
   }
 }

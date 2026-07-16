@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build Godot 4.7 export templates with PCK encryption key baked in (M6).
 # Requires: SCRIPT_AES256_ENCRYPTION_KEY (same value as GODOT_SCRIPT_ENCRYPTION_KEY).
-# See docs/SECURITY.md §9 and Godot compiling_with_script_encryption_key.html
+# See docs/qa/SECURITY.md §9 and Godot compiling_with_script_encryption_key.html
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

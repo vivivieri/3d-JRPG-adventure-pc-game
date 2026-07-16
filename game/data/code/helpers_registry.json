@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "policy_ref": "docs/GDSCRIPT_REGENERATION.md",
+  "policy_ref": "docs/technical/GDSCRIPT_REGENERATION.md",
   "description": "RefCounted helpers and EventBus — spec + Python reference on main; GDScript ports on game/development.",
   "roles_and_responsibilities": {
-    "authority": "docs/GDSCRIPT_REGENERATION.md §2, docs/RR_CHEATSHEET.md",
+    "authority": "docs/technical/GDSCRIPT_REGENERATION.md §2, docs/cheat-sheets/RR_CHEATSHEET.md",
     "workflows": [
       {
         "id": "spec_and_python_reference",
@@ -14,7 +14,7 @@
           "game/data/code/helpers_registry.json",
           "tools/*_lib.py",
           "tools/test_reference_libs.py",
-          "docs/GDSCRIPT_REGENERATION.md"
+          "docs/technical/GDSCRIPT_REGENERATION.md"
         ],
         "gates": ["L0_helpers_registry", "L0_reference_libs"],
         "must_not": ["Ship GDScript on main", "Hand-edit .tscn"]
@@ -99,7 +99,7 @@
       "gdscript_path": "res://scripts/core/event_bus.gd",
       "extends": "Node",
       "python_reference": null,
-      "design_ref": ["docs/TECHNICAL_DESIGN.md §2", "game/data/code/autoload_registry.json"],
+      "design_ref": ["docs/technical/TECHNICAL_DESIGN.md §2", "game/data/code/autoload_registry.json"],
       "note": "Signals only — port signal list exactly; no gameplay logic in script body",
       "owners": {
         "spec": "architect",
@@ -125,7 +125,7 @@
       "gdscript_path": "res://scripts/core/settings_store.gd",
       "python_reference": "tools/settings_store_lib.py",
       "data_ref": ["game/data/settings/settings_defaults.json", "game/data/settings/settings_schema.json"],
-      "design_ref": ["docs/SETTINGS_ACCESSIBILITY.md"],
+      "design_ref": ["docs/ui/SETTINGS_ACCESSIBILITY.md"],
       "runtime_paths": {
         "defaults": "res://data/settings/settings_defaults.json",
         "user_save": "user://settings.json"
@@ -152,7 +152,7 @@
       "gdscript_path": "res://scripts/core/save_integrity.gd",
       "python_reference": "tools/save_integrity_lib.py",
       "data_ref": ["game/data/qa/save_integrity.json"],
-      "design_ref": ["docs/SECURITY.md §9", "docs/SAVE_AND_FAIL_STATES.md"],
+      "design_ref": ["docs/qa/SECURITY.md §9", "docs/technical/SAVE_AND_FAIL_STATES.md"],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
@@ -173,7 +173,7 @@
       "gdscript_path": "res://scripts/core/difficulty_service.gd",
       "python_reference": "tools/difficulty_lib.py",
       "data_ref": ["game/data/combat/difficulty.json"],
-      "design_ref": ["docs/COMBAT_SYSTEMS.md §10"],
+      "design_ref": ["docs/gameplay/COMBAT_SYSTEMS.md §10"],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
@@ -199,7 +199,7 @@
       "gdscript_path": "res://scripts/core/achievement_evaluator.gd",
       "python_reference": "tools/achievement_evaluator_lib.py",
       "data_ref": ["game/data/achievements/achievements.json"],
-      "design_ref": ["docs/ACHIEVEMENTS.md"],
+      "design_ref": ["docs/gameplay/ACHIEVEMENTS.md"],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
