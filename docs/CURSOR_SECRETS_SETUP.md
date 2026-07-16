@@ -248,7 +248,17 @@ Do **not** commit secrets to git. Do **not** paste tokens in issues, PRs, or age
 |--------|------|
 | `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` | M5+ visual/model/audio jury scripts |
 | GDAI license / plugin zip | Phase 1+ scene work (commercial — separate from this list) |
+| `GODOT_SCRIPT_ENCRYPTION_KEY` | M6 RC ship export — PCK encryption (GitHub `steam-production` only) |
+| `GODOT_SAVE_HMAC_KEY` | M6 RC ship export — save-slot HMAC pepper (same environment) |
 | Steam API keys | Phase 8 only |
+
+Generate ship keys (store output in GitHub Secrets — never commit):
+
+```bash
+bash tools/generate_ship_protection_keys.sh
+```
+
+See `docs/SECURITY.md` §9 for custom template build + `SHIP_RELEASE=1` export flow.
 
 ---
 

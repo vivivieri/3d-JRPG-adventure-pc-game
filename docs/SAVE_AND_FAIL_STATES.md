@@ -60,6 +60,8 @@ Notes: `party.level` is the shared party level (`COMBAT_SYSTEMS.md` §8); `extra
 scroll-taught skills; `encounters_completed` / `chests_opened` prevent retrigger and re-loot on
 reload or backtrack (every non-repeatable trigger persists its ID here).
 
+**Integrity (ship builds):** `SaveSystem` adds `"_integrity": "<hmac-sha256-hex>"` via `SaveIntegrity.attach()` before write. On load, `SaveIntegrity.verify()` must pass or the slot is treated as corrupt (`docs/SECURITY.md` §9.4). Spec: `game/data/qa/save_integrity.json`.
+
 ### `user://profile_meta.json` (cross-run)
 
 ```json

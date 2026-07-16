@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "authority": "docs/SECURITY.md §9, docs/SAVE_AND_FAIL_STATES.md §2",
+  "algorithm": "hmac-sha256",
+  "integrity_field": "_integrity",
+  "signature_format": "hex",
+  "canonical_json": {
+    "sort_keys": true,
+    "separators": [",", ":"],
+    "ensure_ascii": true
+  },
+  "signed_payload_fields": [
+    "version",
+    "timestamp",
+    "scene",
+    "spawn_marker",
+    "flags",
+    "party",
+    "inventory",
+    "quests",
+    "encounters_completed",
+    "lore_read",
+    "chests_opened",
+    "tutorial_seen",
+    "run_ending"
+  ],
+  "excluded_from_canonical": ["_integrity"],
+  "pepper_source": {
+    "project_setting": "application/config/save_hmac_pepper",
+    "env_at_export": "GODOT_SAVE_HMAC_KEY",
+    "dev_fallback": "dev-pepper-not-for-ship"
+  },
+  "implementation": {
+    "gdscript": "game/scripts/core/save_integrity.gd",
+    "python_reference": "tools/save_integrity_lib.py"
+  },
+  "policy": {
+    "blocks_casual_notepad_edits": true,
+    "stops_determined_reverser": false,
+    "steam_achievements_use_steam_api": true
+  }
+}

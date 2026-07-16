@@ -68,6 +68,8 @@ All items ❌ until `game/development` phases land.
 | 2.13 | `tools/run_cd_gates.sh` | ✅ | RC / beta / prod channel gates |
 | 2.14 | Save system + optional Steam Cloud | ❌ | Phase 8 future per `TECHNICAL_DESIGN.md` |
 | 2.15 | Noto fonts shipped in PCK | ❌ | Manifest lists fonts; files not on disk |
+| 2.16 | PCK encryption + save HMAC (RC) | 🟡 | `docs/SECURITY.md` §9; custom templates + `SHIP_RELEASE=1` |
+| 2.17 | `SaveIntegrity` wired in `SaveSystem` | ❌ | Reference GDScript exists; Phase 8 |
 
 ---
 
@@ -84,7 +86,7 @@ All items ❌ until `game/development` phases land.
 | 3.7 | Achievements registered in Steamworks | ❌ | 13 APIs per `ACHIEVEMENTS.md` / `achievements.json` |
 | 3.8 | Achievement icons (64×64) | ❌ | Upload per achievement in partner site |
 | 3.9 | Beta branch + playtest keys | ❌ | Internal testers before prod |
-| 3.10 | Steam DRM / depots config | ❌ | Default: none for indie; decide explicitly |
+| 3.10 | Steam DRM / depots config | ✅ | **Policy: none** — `ship_security.json` → `steam_drm`; achievements via Steam API |
 
 ---
 
