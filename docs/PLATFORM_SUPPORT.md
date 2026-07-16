@@ -79,8 +79,10 @@ See `docs/CLOUD_SNAPSHOT_LAUNCH.md`.
 
 | # | Item | Owner |
 |---|------|-------|
-| 8.1a | `tools/export_linux.sh` | Release |
-| 8.1b | `tools/export_windows.sh` (exists) | Release |
+| 8.1a | `tools/export_linux.sh` | Release | ✅ |
+| 8.1b | `tools/export_windows.sh` | Release | ✅ |
+| 8.1c | `tools/run_linux_export_smoke.sh` | QA / CI | ✅ ubuntu CI |
+| 8.1d | `tools/run_windows_export_run.sh` | QA / CI | ✅ windows-latest CI |
 | 8.2a | Steam **Linux** depot | Release |
 | 8.2b | Steam **Windows** depot | Release |
 | 8.3 | Store page — Linux + Windows requirements | PM |

@@ -71,6 +71,9 @@ Evidence paths:
 - [ ] `bash tools/check_rr_compliance.sh`
 - [ ] `bash tools/check_l3_gdai_built.sh` (if scenes or main_scene changed)
 - [ ] `bash tools/run_perf_review_checks.sh` (L2 catalog; L3 snapshot if scene/visual)
+- [ ] `bash tools/run_linux_export_smoke.sh` (when `project.godot` exists)
+- [ ] `bash tools/run_windows_cross_export.sh` (Linux CI — .exe build)
+- [ ] Windows run: **windows-latest CI** green (`run_windows_export_run.sh`) before M6 Windows prod
 - [ ] `python3 tools/validate_base_classes.py` (if `base_classes.json` changed)
 - [ ] `bash tools/install_glb_import_pipeline.sh` (if new GLBs added)
 - [ ] `python3 tools/check_glb_import_scripts.py --strict` (if models changed)

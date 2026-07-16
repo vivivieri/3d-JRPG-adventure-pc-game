@@ -71,7 +71,9 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — required ⊆ clips ⊆ `allowed_animations` |
 | `L2_zone_composition` | `run_zone_composition_checks.sh` exit 0 — warn in early phases; `ZONE_COMPOSITION_STRICT=1` at M5 ship (**GR-003**) |
 | `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
-| `L2_perf_catalog` | `run_perf_review_checks.sh` exit 0 — `perf_thresholds.json` + `perf_baseline.json` |
+| `L2_linux_export_smoke` | `run_linux_export_smoke.sh` exit 0 — Linux export + headless run |
+| `L2_windows_cross_export` | `run_windows_cross_export.sh` exit 0 — Windows .exe cross-built on Linux CI |
+| `L2_windows_export_run` | `run_windows_export_run.sh` exit 0 on **windows-latest** CI — native .exe run |
 | `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
 | `L2_visual_jury` | ≥2 models, all V1–V8 met, confidence ≥ 0.65 |

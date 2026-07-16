@@ -14,7 +14,7 @@ jobs:
   l0-l2-headless:
     name: L0–L2 headless gates
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -31,3 +31,36 @@ jobs:
         run: |
           echo "::error::Game CI failed — see docs/CI.md"
           echo "Run locally: bash tools/install_ci_deps.sh && bash tools/run_ci_checks.sh"
+
+  windows-export-run:
+    name: L2 Windows export + run
+    runs-on: windows-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Godot (Windows)
+        shell: bash
+        run: bash tools/install_ci_deps_windows.sh
+
+      - name: Windows export + run smoke
+        shell: bash
+        run: |
+          set +e
+          bash tools/run_windows_export_run.sh
+          rc=$?
+          set -e
+          if [[ "$rc" -eq 2 ]]; then
+            echo "[SKIP] Windows export/run — no game/project.godot yet"
+            exit 0
+          fi
+          exit "$rc"
+
+      - name: Upload CI summary on failure
+        if: failure()
+        shell: bash
+        run: |
+          echo "::error::Windows export/run smoke failed — see docs/PLATFORM_SUPPORT.md"
+          echo "Run locally on Windows: bash tools/install_ci_deps_windows.sh && bash tools/run_windows_export_run.sh"

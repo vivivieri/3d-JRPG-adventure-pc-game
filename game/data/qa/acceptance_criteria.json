@@ -274,6 +274,36 @@
       "evidence": ["game/data/qa/perf_thresholds.json", "game/data/qa/perf_baseline.json"],
       "design_ref": "docs/PERFORMANCE_BASELINE.md, docs/RENDERING_GUIDE.md"
     },
+    "L2_linux_export_smoke": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_linux_export_smoke.sh",
+      "description": "Linux export + native headless run of shipped binary (cloud / ubuntu CI)",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot",
+      "evidence": ["build/TidesOfUrashima.x86_64"],
+      "design_ref": "docs/PLATFORM_SUPPORT.md, tools/export_linux.sh"
+    },
+    "L2_windows_cross_export": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_windows_cross_export.sh",
+      "description": "Cross-export Windows .exe from Linux CI (PE build smoke)",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot",
+      "evidence": ["build/TidesOfUrashima.exe"],
+      "design_ref": "docs/PLATFORM_SUPPORT.md, tools/export_windows.sh"
+    },
+    "L2_windows_export_run": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_windows_export_run.sh",
+      "description": "Windows export + native headless .exe run — windows-latest CI or reference_pc_gtx1060",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot or non-Windows host",
+      "evidence": ["build/TidesOfUrashima.exe"],
+      "design_ref": "docs/PLATFORM_SUPPORT.md, .github/workflows/game-ci.yml"
+    },
     "L2_glb_import": {
       "layer": "L2",
       "domain": "model",
@@ -561,6 +591,8 @@
       "L2_animation_whitelist",
       "L2_feel_smoke",
       "L2_perf_catalog",
+      "L2_linux_export_smoke",
+      "L2_windows_cross_export",
       "L2_glb_import",
       "L4_integration",
       "M5_asset_compliance"
@@ -570,12 +602,23 @@
         "gate_id": "L2_boot_headless",
         "skip_when": "no run/main_scene in project.godot",
         "skip_is_not_ship_pass": true
+      },
+      {
+        "gate_id": "L2_linux_export_smoke",
+        "skip_when": "no game/project.godot",
+        "skip_is_not_ship_pass": true
+      },
+      {
+        "gate_id": "L2_windows_cross_export",
+        "skip_when": "no game/project.godot",
+        "skip_is_not_ship_pass": true
       }
     ],
     "excluded_gates": [
       "check_mcp_ready",
       "L3_gdai_f5",
       "L3_perf_review",
+      "L2_windows_export_run",
       "L2_visual_jury",
       "L2_model_jury",
       "L2_audio_jury",
