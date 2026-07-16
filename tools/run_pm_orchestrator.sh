@@ -73,6 +73,16 @@ if state_path.is_file():
 state["last_orchestrator_result"] = "pass"
 state["last_orchestrator_at"] = datetime.now(timezone.utc).isoformat()
 state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+
+sys.path.insert(0, str(root / "tools"))
+from pm_event_lib import write_health_snapshot  # noqa: E402
+
+write_health_snapshot(
+    event="orchestrator_pass",
+    sprint_id="Phase1-Sprint1",
+    status="healthy",
+    note="PM orchestrator PASS",
+)
 print()
 print("Next: assign agent per artifacts/pm_orchestrator_report.json → next_dispatch")
 print("After agent session: python3 tools/pm_update_issue.py <id> --status done --commit <sha>")

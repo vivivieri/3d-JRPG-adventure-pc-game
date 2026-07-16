@@ -71,9 +71,11 @@
 | # | Scene | Zone | Encounter | Type | Party | XP | Level after |
 |---|-------|------|-----------|------|-------|-----|-------------|
 | 7 | SC-12 approach | Palace exterior | Tide Wraith ×2 | Scripted | Full party | 70 | 6 |
-| 8 | SC-14 | Sentinel hall | **Palace Sentinel** | Miniboss | Full party | 100 | 7 |
-| — | SC-13 | Mirror chamber | — | Dialogue only | — | — | — |
-| 9 | SC-15 | Throne arena | **Tide Keeper** | Final boss | Full party | 250 | 8–10 |
+| 8 | SC-13 | Mirror chamber | — | Dialogue only | — | — | — |
+| 9 | SC-14 | Sentinel hall | **Palace Sentinel** | Miniboss | Full party | 100 | 7 |
+| 10 | SC-15 | Throne arena | **Tide Keeper** | Final boss | Full party | 250 | 8–10 |
+
+**Gate:** SC-13 mirror dialogue (`knows_box_truth`) must complete before SC-14 encounter (`sentinel_dialogue_done` gate).
 
 **No fights after choice gate (SC-16).**
 
