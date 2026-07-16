@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "authority": "docs/COMBAT_SYSTEMS.md §10, docs/PROGRESSION_TUNING.md §6, docs/ENCOUNTER_TABLE.md §10",
+  "modes": {
+    "normal": {
+      "id": "normal",
+      "label_key": "UI_DIFFICULTY_NORMAL",
+      "enemy_hp_multiplier": 1.0,
+      "enemy_atk_multiplier": 1.0,
+      "xp_multiplier": 1.0,
+      "boss_intent_preview_turns": 1,
+      "boss_intent_preview_in_phase_2_plus": true,
+      "tide_keeper_choice_gate_hp_percent": 0.1
+    },
+    "hard": {
+      "id": "hard",
+      "label_key": "UI_HARD_MODE",
+      "settings_key": "hard_mode",
+      "enemy_hp_multiplier": 1.15,
+      "enemy_atk_multiplier": 1.1,
+      "xp_multiplier": 1.1,
+      "boss_intent_preview_turns": 1,
+      "boss_intent_preview_in_phase_2_plus": false,
+      "tide_keeper_choice_gate_hp_percent": 0.15
+    }
+  },
+  "policy": {
+    "active_mode_when": { "hard_mode": false, "mode": "normal" },
+    "hard_mode_setting": "hard_mode",
+    "applies_on": "next_combat_load",
+    "change_mid_combat": false,
+    "first_play_tutorials_unaffected": true,
+    "all_endings_on_normal": true,
+    "suggest_hard_after_game_completed": true
+  },
+  "telemetry": {
+    "include_in_player_death": true,
+    "field": "hard_mode"
+  }
+}

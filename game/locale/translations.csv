@@ -100,3 +100,7 @@ combat.boss_phase,{announcement},{announcement},{announcement},{announcement}
 combat.intent.attack,Attack,攻撃,攻击,攻擊
 combat.intent.debuff,Debuff,弱体,减益,減益
 combat.intent.charge,Charge,溜め,蓄力,蓄力
+UI_HARD_MODE,Hard Mode,ハードモード,困难模式,困難模式
+UI_DIFFICULTY_NORMAL,Normal,ノーマル,普通,普通
+UI_HARD_MODE_DESC,Mastery: tougher foes; boss intents hidden in later phases.,上級：敵が強化。ボス第二段階以降は予告なし。,挑战：敌人更强；Boss二阶段起隐藏意图。,挑戰：敵人更強；Boss二階段起隱藏意圖。
+UI_HARD_MODE_SUGGEST,Hard mode unlocked — enable in Settings for a mastery run.,ハードモード解放 — 設定で有効化できます。,困难模式已解锁 — 可在设置中开启挑战。,困難模式已解鎖 — 可在設定中開啟挑戰。

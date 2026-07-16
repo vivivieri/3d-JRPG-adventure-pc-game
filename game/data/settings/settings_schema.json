@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "authority": "docs/SETTINGS_ACCESSIBILITY.md",
+  "storage_path": "user://settings.json",
+  "fields": {
+    "locale": { "type": "enum", "values": ["en", "ja", "zh", "zh-Hant"], "default": "en" },
+    "vo_dialect": { "type": "enum", "values": ["cant", "cmn"], "default": "cant" },
+    "master_volume": { "type": "int", "min": 0, "max": 100, "default": 80 },
+    "music_volume": { "type": "int", "min": 0, "max": 100, "default": 70 },
+    "sfx_volume": { "type": "int", "min": 0, "max": 100, "default": 80 },
+    "fullscreen": { "type": "enum", "values": ["windowed", "fullscreen", "borderless"], "default": "windowed" },
+    "resolution": { "type": "string", "default": "desktop" },
+    "vsync": { "type": "bool", "default": true },
+    "text_speed": { "type": "enum", "values": ["slow", "normal", "fast", "instant"], "default": "normal" },
+    "dialogue_auto": { "type": "bool", "default": false },
+    "screen_shake": { "type": "bool", "default": true },
+    "hard_mode": { "type": "bool", "default": false, "design_ref": "docs/COMBAT_SYSTEMS.md §10" },
+    "hints_enabled": { "type": "bool", "default": true },
+    "intent_contrast": { "type": "enum", "values": ["standard", "high_contrast"], "default": "standard" },
+    "graphics_quality": { "type": "enum", "values": ["low", "medium", "high"], "default": "medium" }
+  },
+  "achievement_settings_keys": ["hard_mode"]
+}
