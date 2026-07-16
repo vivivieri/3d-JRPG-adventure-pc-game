@@ -228,6 +228,8 @@ When fixing a bug, always re-run:
 
 - The **exact steps** from the report
 - **One scene before and after** the affected scene
+- **`L3_perf_review`** (Godotiq `perf_snapshot` → `artifacts/perf_reviews/`) when the fix touches scenes, shaders, materials, meshes, lights, or fog — see `docs/RR_CHEATSHEET.md` §Performance review
+- **Affected `INT-*`** integration scenario when narrative/combat flows changed (`bash tools/run_integration_tests.sh`)
 - **Automated checks** if any `game/data/` or `game/assets/` changed
 
 ---

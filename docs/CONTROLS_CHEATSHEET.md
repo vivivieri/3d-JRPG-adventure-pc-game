@@ -67,6 +67,7 @@
 | `L3_gdai_built` | **Builder** — marker updated with scene diff |
 | `L2_animation_whitelist` | **Builder** / **Visual** — required ⊆ Mixamo clips ⊆ whitelist |
 | `L2_feel_smoke` | **Architect** — `GAME_FEEL.md` constants |
+| `L2_perf_catalog` | **QA** / **Builder** — `perf_thresholds.json` catalog |
 | `L2_glb_import` | **Builder** / **Visual** — post-import toon pipeline |
 | `L1_gdscript_lint` | **Architect** — changed `.gd` files (`gdtoolkit` required) |
 | `L0_base_class_compliance` | **Architect** — no rogue native extends |
@@ -99,6 +100,7 @@
 |-------|--------|-------|
 | **L3_gdai_built** (CI) | `check_l3_gdai_built.sh` | GitHub Actions — marker updated when scenes change |
 | **L3_gdai_f5** (full) | GDAI F5 + editor | Agent session — viewport verify |
+| **L3_perf_review** | Godotiq `perf_snapshot` | Agent session — FPS / draw calls / materials |
 
 CI cannot run the editor; `L3_gdai_built` is the **merge blocker** for Builder handoffs.
 

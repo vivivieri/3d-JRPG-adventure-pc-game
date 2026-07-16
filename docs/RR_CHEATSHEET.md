@@ -1,6 +1,6 @@
 # R&R Cheat Sheet — Roles & Responsibilities
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Print this:** One-page reference for every agent session  
 **Companion:** `docs/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)  
 **Authority:** `.cursorrules` §0–§1 · `docs/MCP_STACK.md` · `docs/MULTI_AGENT_TEAM.md` · `docs/AGILE_WITHIN_PHASES.md` §11
@@ -145,10 +145,57 @@ P1-00 (pm)     bootstrap project.godot + CI
 - [ ] Gate IDs PASS on PR commit  
 - [ ] `bash tools/run_ci_checks.sh` green (game branch)  
 - [ ] `L3_gdai_built` if scenes touched  
+- [ ] **`L3_perf_review`** if scenes, shaders, materials, meshes, lights, or fog changed  
 - [ ] Evidence paths in PR / issue  
 - [ ] Board status `done` + GitHub issue closed  
 
 **Full policy:** `docs/SPRINT_ORCHESTRATION.md` · `docs/PM_AGENT_RUNBOOK.md` · `docs/AGILE_WITHIN_PHASES.md`
+
+---
+
+## Performance review (required — not code review)
+
+**Policy:** Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style.
+
+### When required
+
+| Trigger | Who runs | Gate |
+|---------|----------|------|
+| New/changed zone scene, material, shader, mesh, light, fog | **Builder** after F5 | `L3_perf_review` |
+| Bug fix in gameplay scene or rendering | **Builder** or **QA** on verify | `L3_perf_review` + post-fix regression |
+| Docs/data-only PR | — | Skip |
+
+### What to measure (thresholds in `game/data/qa/perf_thresholds.json`)
+
+| Metric | Target / investigate |
+|--------|----------------------|
+| FPS @ 1080p (gameplay cam) | **≥ 60** target (GTX 1060 ref); **< 30** = investigate |
+| Materials visible per view | **≤ 8** per zone |
+| Draw calls | **> 1000** = investigate batching/instancing |
+| Node count / memory | Steady growth during 30s walk = leak |
+
+### How to run (agent-local)
+
+```bash
+# 1. F5 in affected zone (GDAI MCP or Godot editor)
+# 2. Godotiq — game must be running
+godotiq_perf_snapshot(detail="normal")
+# 3. Save JSON evidence
+# artifacts/perf_reviews/<zone>_<short_sha>.json
+```
+
+**CI catalog (always):** `bash tools/run_perf_review_checks.sh` → `L2_perf_catalog`
+
+### Post-fix regression (with perf)
+
+When fixing a bug, re-run per `docs/QA_AND_BUG_PROCESS.md` §6:
+
+1. Original repro steps  
+2. One scene before and after the affected scene  
+3. **`L3_perf_review`** if fix touched scenes/shaders/materials  
+4. Affected **`INT-*`** integration scenario when flows changed  
+
+**Invalid PASS:** F5 clean but no perf snapshot on a scene PR · FPS below target with no remediation brief · merging without re-running affected `INT-*` after a fix.
 
 ---
 
@@ -213,7 +260,7 @@ Only the arbiter (Architect/SA) or the Product Owner may change a requirement �
 | L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance`, `L0_base_classes`, `L0_base_class_compliance` |
 | L1 | QA + Architect | `L1_unit_tests`, `L1_gdscript_lint` |
 | L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_feel_smoke`, `L2_glb_import`, `L2_visual_palette`, jury |
-| L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) |
+| L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) · **`L3_perf_review`** (FPS / draw calls — agent-local) |
 | L4 | Flow | `L4_integration` |
 | L5 | Flow | `L5_e2e_three_endings` |
 | L6 | Human | Playtest sign-off — **after** L0–L5 |
@@ -229,7 +276,7 @@ Only the arbiter (Architect/SA) or the Product Owner may change a requirement �
 | **L0** | Design data / policy | Dev / CI | JSON + CI log | No | No | `game/data/`, `game/scenes/.gdai_built` |
 | **L1** | **Architect** (`game/tests/unit/`) | Dev / CI | CI log (optional export) | No | No | `artifacts/test-reports/` (optional) |
 | **L2** | QA policy + catalogs | QA / CI | Gate output; screenshot when assets exist | **Yes** (visual/audio/model smokes) | No | `artifacts/screenshots/`, `artifacts/visual_reviews/*.jury.json`, `artifacts/model_reviews/`, `artifacts/audio_reviews/` |
-| **L3** | `AI_TESTING_SPEC.md` §5 + sprint issue | Builder + QA | **Yes** — F5 + screenshot for scene/visual work | **Yes — required** | No | `artifacts/screenshots/<phase>_<scene>_<view>.png` |
+| **L3** | `AI_TESTING_SPEC.md` §5 + sprint issue | Builder + QA | **Yes** — F5 + screenshot for scene/visual work; **perf JSON** when scenes/shaders change | **Yes — required** | No | `artifacts/screenshots/<phase>_<scene>_<view>.png`, `artifacts/perf_reviews/<zone>_<sha>.json` |
 | **L4** | **Architect** (`integration_scenarios.json`) | Flow / QA | Scenario pass/fail; screenshots for UI flows | Optional | No | `artifacts/flow_reviews/`, CI log |
 | **L5** | **Architect** (`AI_TESTING_SPEC.md` §7 E2E matrix) | Flow / QA | E2E pass/fail on same commit | Optional | **Optional** | `artifacts/videos/e2e_<ending>_<date>.mp4` |
 | **L6** | `PLAYTEST_SCRIPT.md` | Human | Bug report + repro steps | Recommended (S0–S1) | Recommended (S0–S1) | GitHub issue; `artifacts/qa_reports/L6_human_playtest.json` |
@@ -297,6 +344,7 @@ bash tools/check_rr_compliance.sh        # L0 — Builder R&R
 bash tools/check_l3_gdai_built.sh        # L3 — scene diff needs .gdai_built
 bash tools/run_cd_gates.sh --channel rc  # pre-export
 bash tools/check_asset_compliance.sh     # before commit with assets
+bash tools/run_perf_review_checks.sh     # L2 — perf thresholds catalog
 python3 tools/validate_story_data.py     # L0_story_data
 ```
 

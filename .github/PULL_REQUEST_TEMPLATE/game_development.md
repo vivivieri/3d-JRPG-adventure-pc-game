@@ -17,7 +17,14 @@ Link the GitHub issue. Check every box that applies to this PR.
 - [ ] Uses **component scenes** from `LEVEL_DESIGN.md` §1b where applicable
 - [ ] **`game/scenes/.gdai_built`** updated (`verified_f5=true`, `verified_at`, `main_scene` if set)
 - [ ] F5 playtest clean in Godot editor
+- [ ] **`L3_perf_review`** when scenes/shaders/materials/meshes/lights/fog changed — Godotiq `perf_snapshot` → `artifacts/perf_reviews/<zone>_<sha>.json`
 - [ ] Rigged GLB: `required_animations` ⊆ clips ⊆ `allowed_animations`; post-import via `install_glb_import_pipeline.sh`
+
+### Performance review (Builder or QA — not a code review)
+- [ ] Walk affected zone 30s at gameplay camera; FPS **≥ 55** in editor (60 target @ 1080p)
+- [ ] **≤ 8** materials visible per view (`perf_thresholds.json`)
+- [ ] Draw calls **< 1000** or remediation brief filed
+- [ ] Post-fix: re-run original repro + adjacent scenes + affected **`INT-*`** when flows changed
 
 ### QA Agent
 - [ ] Gate report below with **commit SHA**, **gate IDs**, **PASS/FAIL**, **evidence paths**
@@ -43,8 +50,10 @@ Gates:
   - L2_scene_primitives:
   - L2_animation_whitelist:
   - L2_feel_smoke:
+  - L2_perf_catalog:
   - L2_glb_import:
   - L3_gdai_built:
+  - L3_perf_review:
   - L4_integration:
 Evidence paths:
 ```
@@ -60,6 +69,7 @@ Evidence paths:
 - [ ] `bash tools/run_ci_checks.sh`
 - [ ] `bash tools/check_rr_compliance.sh`
 - [ ] `bash tools/check_l3_gdai_built.sh` (if scenes or main_scene changed)
+- [ ] `bash tools/run_perf_review_checks.sh` (L2 catalog; L3 snapshot if scene/visual)
 - [ ] `python3 tools/validate_base_classes.py` (if `base_classes.json` changed)
 - [ ] `bash tools/install_glb_import_pipeline.sh` (if new GLBs added)
 - [ ] `python3 tools/check_glb_import_scripts.py --strict` (if models changed)
