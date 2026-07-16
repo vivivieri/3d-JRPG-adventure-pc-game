@@ -53,5 +53,35 @@
     },
     "pin_checksums": false,
     "notes": "Set pin_checksums true and add sha256 fields after first audited download"
+  },
+  "player_build_protection": {
+    "authority": "docs/SECURITY.md §9",
+    "pck_encryption": {
+      "requires_custom_templates": true,
+      "env_key": "GODOT_SCRIPT_ENCRYPTION_KEY",
+      "template_build_env": "SCRIPT_AES256_ENCRYPTION_KEY",
+      "custom_template_env": {
+        "linux": "GODOT_CUSTOM_TEMPLATE_LINUX",
+        "windows": "GODOT_CUSTOM_TEMPLATE_WINDOWS"
+      },
+      "encryption_include_filters_default": "*",
+      "required_when_env": "SHIP_RELEASE=1",
+      "optional_in_dev": true,
+      "notes": "Official Godot export templates cannot decrypt encrypted PCK — compile templates with tools/build_godot_export_templates_encrypted.sh"
+    },
+    "save_integrity": {
+      "spec": "game/data/qa/save_integrity.json",
+      "env_hmac_key": "GODOT_SAVE_HMAC_KEY",
+      "project_setting": "application/config/save_hmac_pepper",
+      "implementation": "game/scripts/core/save_integrity.gd"
+    },
+    "release_export": {
+      "mode": "export-release",
+      "embed_pck_windows_recommended": true
+    },
+    "steam_drm": {
+      "policy": "none",
+      "rationale": "Single-player offline JRPG; Linux+Windows+Proton compatibility; Steam distribution is the primary lock; achievements via Steam API"
+    }
   }
 }

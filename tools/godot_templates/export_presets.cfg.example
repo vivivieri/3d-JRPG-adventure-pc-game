@@ -17,6 +17,8 @@ encryption_include_filters=""
 encryption_exclude_filters=""
 encrypt_pck=false
 encrypt_directory=false
+; Ship RC: export_ship_protection_begin sets encrypt_pck=true when GODOT_SCRIPT_ENCRYPTION_KEY
+; is set and custom encrypted templates are configured (docs/SECURITY.md §9.3).
 
 [preset.0.options]
 
@@ -45,6 +47,8 @@ encryption_include_filters=""
 encryption_exclude_filters=""
 encrypt_pck=false
 encrypt_directory=false
+; Ship RC: export_ship_protection_begin sets encrypt_pck=true when GODOT_SCRIPT_ENCRYPTION_KEY
+; is set and custom encrypted templates are configured (docs/SECURITY.md §9.3).
 
 [preset.1.options]
 

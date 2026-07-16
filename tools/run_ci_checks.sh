@@ -36,6 +36,9 @@ run_tri_gate "L0_no_secrets" "No secrets in tracked files" \
 run_tri_gate "L0_ship_build_security" "Ship export strips dev MCP/GDAI" \
   bash tools/check_ship_build_security.sh
 
+run_tri_gate "L0_player_build_protection" "Player build protection policy" \
+  bash tools/check_player_build_protection.sh
+
 run_tri_gate "L0_story_data" "Story JSON cross-references" \
   python3 tools/validate_story_data.py
 

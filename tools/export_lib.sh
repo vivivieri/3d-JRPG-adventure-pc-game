@@ -49,6 +49,34 @@ export_strip_dev_plugins_restore() {
 export_strip_gdai_begin() { export_strip_dev_plugins_begin "$@"; }
 export_strip_gdai_restore() { export_strip_dev_plugins_restore "$@"; }
 
+export_ship_protection_begin() {
+  local game_dir="${1:?game dir}"
+  local project="${2:?project.godot}"
+  local presets="${game_dir}/export_presets.cfg"
+  local presets_bak="${3:?presets backup}"
+  local require="${SHIP_RELEASE:-0}"
+
+  if [[ -f "$presets" ]]; then
+    cp "$presets" "$presets_bak"
+  fi
+
+  local args=(python3 tools/export_apply_pck_encryption.py apply --game-dir "$game_dir")
+  if [[ "$require" == "1" ]]; then
+    args+=(--require)
+  fi
+  "${args[@]}" || return 1
+}
+
+export_ship_protection_restore() {
+  local game_dir="${1:?}"
+  local presets_bak="${2:?}"
+  local presets="${game_dir}/export_presets.cfg"
+  if [[ -f "$presets_bak" ]]; then
+    mv -f "$presets_bak" "$presets"
+  fi
+  rm -f "${game_dir}/.godot/export_credentials.cfg"
+}
+
 export_require_godot() {
   if ! command -v godot4 >/dev/null 2>&1; then
     echo "[FAIL] godot4 not in PATH. Run: bash tools/install_cloud_dev.sh (Linux) or tools/install_ci_deps_windows.sh (Windows)"

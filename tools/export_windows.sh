@@ -10,6 +10,7 @@ source "${ROOT}/tools/export_lib.sh"
 GAME="$ROOT/game"
 PROJECT="$GAME/project.godot"
 BACKUP="$GAME/project.godot.export-bak"
+PRESETS_BAK="$GAME/export_presets.cfg.export-bak"
 OUT_DIR="$ROOT/build"
 OUT_EXE="$OUT_DIR/TidesOfUrashima.exe"
 PRESET="Windows Desktop"
@@ -30,7 +31,8 @@ export_pre_checks
 mkdir -p "$OUT_DIR"
 
 export_strip_dev_plugins_begin "$PROJECT" "$BACKUP"
-trap 'export_strip_dev_plugins_restore "$PROJECT" "$BACKUP"' EXIT
+export_ship_protection_begin "$GAME" "$PROJECT" "$PRESETS_BAK"
+trap 'export_ship_protection_restore "$GAME" "$PRESETS_BAK"; export_strip_dev_plugins_restore "$PROJECT" "$BACKUP"' EXIT
 
 echo "==> Exporting $PRESET -> $OUT_EXE"
 godot4 --headless --path "$GAME" --export-release "$PRESET" "$OUT_EXE"

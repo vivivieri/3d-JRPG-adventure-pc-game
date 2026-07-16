@@ -208,6 +208,19 @@
       "evidence": ["game/data/qa/ship_security.json", "tools/godot_strip_dev_plugins.py"],
       "design_ref": "docs/SECURITY.md, docs/STEAM_RELEASE_CHECKLIST.md §2.9–2.10"
     },
+    "L0_player_build_protection": {
+      "layer": "L0",
+      "domain": "security",
+      "command": "bash tools/check_player_build_protection.sh",
+      "description": "Player build protection policy — save HMAC spec, PCK encryption export hooks, Steam DRM none",
+      "pass": { "exit_code": 0 },
+      "evidence": [
+        "game/data/qa/ship_security.json",
+        "game/data/qa/save_integrity.json",
+        "tools/export_apply_pck_encryption.py"
+      ],
+      "design_ref": "docs/SECURITY.md §9"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -591,6 +604,7 @@
       "L0_rr_compliance",
       "L0_no_secrets",
       "L0_ship_build_security",
+      "L0_player_build_protection",
       "L0_doc_sync",
       "M5_asset_compliance"
     ],
@@ -604,6 +618,7 @@
       "L0_rr_compliance",
       "L0_no_secrets",
       "L0_ship_build_security",
+      "L0_player_build_protection",
       "L0_story_data",
       "L0_acceptance_catalog",
       "L0_base_classes",
