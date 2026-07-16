@@ -248,15 +248,28 @@ Before marking an M5 art-pass zone complete, verify:
 
 ---
 
-## 13. Reference: current prototype (`zone_visuals.gd`)
+## 13. Reference: `zone_visuals.gd` contract
 
-On Godot implementation branches, `game/scripts/exploration/zone_visuals.gd` applies:
+**Authority:** `game/data/code/base_classes.json` (`ZoneVisuals`) · `tools/zone_visuals_lib.py` · `game/data/world/zone_palettes.json`
 
-- `WorldEnvironment` with Filmic tonemap
-- `ProceduralSkyMaterial` per zone palette
-- Zone fog density + aerial perspective
-- Glow in `dragon_palace_gate` only
-- Colored `DirectionalLight3D` per zone
+### Canonical entry (zone load)
+
+`ZoneVisuals.apply_to_scene(root, zone_id)` — static; finds `WorldEnvironment`, `DirectionalLight3D`, and nodes in group `zone_fill_light`, then applies palette data.
+
+### Instance node (in-scene)
+
+`ZoneVisuals` node with `@export zone_id` — on `_ready` calls `apply_zone_visuals()` when `apply_on_ready` is true.
+
+### Runtime behavior
+
+- `WorldEnvironment` with Filmic tonemap (`defaults.tonemap_mode`)
+- `ProceduralSkyMaterial` per zone palette row
+- Zone fog density + aerial perspective (`defaults.fog_sky_affect`)
+- Glow enabled per zone `glow_intensity` (all Phase 1 zones)
+- Volumetric fog when zone row sets `volumetric_fog_enabled` (village hub)
+- Colored `DirectionalLight3D` + `OmniLight3D` fill (`zone_fill_light` group)
+
+Optional editor preset: `game/environments/ruined_village.tres` — see `environment_registry.json` (derived from palette; runtime may build via `build_environment()` instead).
 
 **Gaps to close in M5 (art rebuild):**
 

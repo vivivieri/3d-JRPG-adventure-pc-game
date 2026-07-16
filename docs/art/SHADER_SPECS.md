@@ -21,7 +21,9 @@
 |--------|------|---------|
 | Toon base | `game/shaders/toon_base.gdshader` | Wood, stone, props — stepped diffuse |
 | Water stylized | `game/shaders/water_stylized.gdshader` | Zone water planes — foam edge, gentle vertex displacement |
-| Zone visuals | `game/scripts/world/zone_visuals.gd` | Fog, sky, tonemap presets per zone |
+| Zone visuals | `game/scripts/exploration/zone_visuals.gd` | Fog, sky, tonemap presets per zone |
+
+**Machine-readable:** `game/data/code/shader_registry.json` · `game/data/code/environment_registry.json` · `tools/zone_visuals_lib.py`
 
 ---
 

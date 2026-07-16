@@ -262,7 +262,7 @@ CombatManager.start_encounter("enc_sc09_shore_wraith")
 | `ZoneVisuals` | Applies `environments/*.tres`, lights, fog per zone id |
 | `EncounterTrigger` | Starts combat when flag/area conditions met |
 
-**Zone entry:** `ZoneVisuals.apply_to_scene(root, zone_id)` (Phase 1) + `AudioManager.play_bgm(zone_bgm)`.
+**Zone entry:** `ZoneVisuals.apply_to_scene(root, zone_id)` (static — `base_classes.json` + `zone_visuals_lib.py`) then `AudioManager.play_bgm(zone_bgm)`.
 
 Per-zone interactable tables: [LEVEL_DESIGN.md](LEVEL_DESIGN.md).
 

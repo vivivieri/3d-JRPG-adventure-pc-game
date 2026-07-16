@@ -44,6 +44,9 @@
       "spec_status": "specified",
       "required_nodes": [
         { "name": "SpawnMarker_hub", "type": "Marker3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "ruined_village" } },
         { "name": "Interactable_SC-02-BANNER", "type": "Interactable", "export": { "scene_id": "SC-02-BANNER" } },
         { "name": "Interactable_SC-02-SANDAL", "type": "Interactable", "export": { "scene_id": "SC-02-SANDAL" } },
         { "name": "SavePoint_well", "type": "SavePoint", "export": { "scene_id": "SC-02-WELL" } },

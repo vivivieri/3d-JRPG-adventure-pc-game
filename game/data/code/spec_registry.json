@@ -64,6 +64,20 @@
       "phase": 2
     },
     {
+      "id": "data_zone_visuals",
+      "kind": "data",
+      "spec_status": "specified",
+      "paths": [
+        "game/data/world/zone_palettes.json",
+        "game/data/code/environment_registry.json",
+        "game/data/code/shader_registry.json",
+        "game/data/qa/unit_test_specs.json",
+        "tools/zone_visuals_lib.py"
+      ],
+      "validator": "tools/validate_base_classes.py",
+      "phase": 1
+    },
+    {
       "id": "registry_helpers",
       "kind": "registry",
       "spec_status": "specified",
@@ -73,7 +87,8 @@
         "tools/difficulty_lib.py",
         "tools/save_integrity_lib.py",
         "tools/settings_store_lib.py",
-        "tools/achievement_evaluator_lib.py"
+        "tools/achievement_evaluator_lib.py",
+        "tools/zone_visuals_lib.py"
       ],
       "validator": "tools/validate_helpers_registry.py",
       "note": "Python reference libs on main; GDScript ports on game/development",

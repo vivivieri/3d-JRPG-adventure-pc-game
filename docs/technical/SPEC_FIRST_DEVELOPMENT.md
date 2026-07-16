@@ -109,8 +109,9 @@ Never implement behavior on `game/development` that is not yet specified on `mai
 | Core helpers | **Specified** | `helpers_registry.json` + `tools/*_lib.py` on `main` |
 | Base classes | **Specified** | `base_classes.json` + TDD §2 |
 | Zone scene graphs | **Specified** | `scene_registry.json` + `LEVEL_DESIGN.md` |
-| Shader source files | **Partial** | Behavior in `ART_DIRECTION` / `RENDERING_GUIDE`; `.gdshader` files land Phase 1 on dev |
-| Unit test `.gd` | **Partial** | `AI_TESTING_SPEC.md`; test files land with implementation |
+| Shader source files | **Specified** | `shader_registry.json` + `SHADER_SPECS.md`; `.gdshader` on dev |
+| Zone visuals | **Specified** | `zone_palettes.json`, `environment_registry.json`, `zone_visuals_lib.py` |
+| Unit test `.gd` | **Specified** | `unit_test_specs.json` mirrors `test_reference_libs.py` cases |
 
 Run `python3 tools/validate_spec_registry.py` for the live gate result.
 

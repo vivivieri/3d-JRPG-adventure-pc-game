@@ -11,5 +11,7 @@ void fragment() {
 	ALBEDO = tex.rgb * base_color.rgb;
 	ROUGHNESS = 1.0;
 	METALLIC = 0.0;
-	EMISSION = emission_color.rgb * emission_energy;
+	if (emission_energy > 0.0) {
+		EMISSION = emission_color.rgb * emission_energy;
+	}
 }

@@ -90,7 +90,65 @@
       "extends": "Node3D",
       "phase": 1,
       "agent_rule": "architect_only",
-      "description": "Per-zone palette, sky, fog, and WorldEnvironment preset application"
+      "class_name": "ZoneVisuals",
+      "description": "Per-zone palette, sky, fog, and WorldEnvironment preset application",
+      "python_reference": "tools/zone_visuals_lib.py",
+      "data_ref": [
+        "game/data/world/zone_palettes.json",
+        "game/data/code/environment_registry.json"
+      ],
+      "design_ref": [
+        "docs/art/RENDERING_GUIDE.md §13",
+        "docs/art/SHADER_SPECS.md",
+        "docs/sprints/Phase1-Sprint1-issues.md §P1-01"
+      ],
+      "exports": [
+        { "name": "zone_id", "type": "String", "default": "ruined_village" },
+        { "name": "apply_on_ready", "type": "bool", "default": true }
+      ],
+      "public_api": [
+        {
+          "name": "apply_to_scene",
+          "args": ["root: Node", "zone_id: String"],
+          "returns": "void",
+          "static": true,
+          "note": "Canonical zone entry (TECHNICAL_DESIGN.md §8) — finds WorldEnvironment, DirectionalLight3D, zone_fill_light group"
+        },
+        {
+          "name": "apply_zone_visuals",
+          "args": [
+            "world_environment: WorldEnvironment = null",
+            "directional: DirectionalLight3D = null",
+            "fill_lights: Array[OmniLight3D] = []"
+          ],
+          "returns": "void",
+          "note": "Instance method; uses export zone_id and res://data/world/zone_palettes.json"
+        },
+        {
+          "name": "build_environment",
+          "args": ["preset: Dictionary"],
+          "returns": "Environment",
+          "note": "Builds Environment from palette row + catalog defaults"
+        },
+        {
+          "name": "hex_to_color",
+          "args": ["hex: String"],
+          "returns": "Color",
+          "static": true
+        },
+        {
+          "name": "get_preset",
+          "args": ["zone_key: String", "presets: Dictionary"],
+          "returns": "Dictionary",
+          "static": true
+        }
+      ],
+      "lifecycle": [
+        { "signal": "_ready", "when": "apply_on_ready", "calls": "apply_zone_visuals()" }
+      ],
+      "constants": [
+        { "name": "PALETTE_PATH", "value": "res://data/world/zone_palettes.json" }
+      ]
     }
   ],
   "component_scenes": [
