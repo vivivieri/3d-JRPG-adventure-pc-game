@@ -237,6 +237,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 | Balance / dialogue / flags | **`game/data/`** PR to `main` |
 | Spec refinement (design time) | **`main` only** — docs + data + `tools/*_lib.py`; **never** `.gd`/`.tscn` (`SPEC_FIRST_DEVELOPMENT.md` §10) |
 | Core helper spec / Python ref | **Architect** PR to `main` — `docs/technical/GDSCRIPT_REGENERATION.md` |
+| Phase 1 visuals port (P1-01) | **Architect** on `game/development` — `GDSCRIPT_REGENERATION.md` §10 · `bash tools/regenerate_phase1_visuals.sh` |
 | Core helper `.gd` port | **Architect** on `game/development` — PM dispatch by phase |
 | EventBus autoload registration | **Builder** (GDAI MCP) — after Architect `event_bus.gd` |
 | RC / beta / prod tag | **Release Agent** + `run_cd_gates.sh` |

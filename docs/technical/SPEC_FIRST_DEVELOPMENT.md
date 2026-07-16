@@ -50,6 +50,7 @@ python3 tools/validate_spec_registry.py      # L0_spec_registry
 python3 tools/validate_helpers_registry.py   # L0_helpers_registry
 python3 tools/test_reference_libs.py         # L0_reference_libs
 bash tools/regenerate_core_helpers.sh        # checklist + both checks
+bash tools/regenerate_phase1_visuals.sh      # P1-01 zone visuals + toon shader checklist
 bash tools/check_main_no_ship_code.sh        # L0_main_no_ship_code (main branch only)
 ```
 
@@ -169,6 +170,7 @@ Changing behavior or APIs?
        → PM: run_pm_orchestrator.sh
        → Worker: run_agent_session_gate.sh <role> <issue_id>
        → Architect: .gd / tests OR Builder: GDAI scenes
+       → Phase 1 visuals: docs/technical/GDSCRIPT_REGENERATION.md §10
        → QA: gate report on PR
 ```
 
@@ -204,7 +206,7 @@ bash tools/run_agent_session_gate.sh ...    # dispatch (game/development workers
 ## 11. Cross-refs
 
 - `docs/workflow/BRANCHING.md` — branch merge policy  
-- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers on `game/development`  
+- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers + Phase 1 visuals on `game/development`  
 - `docs/technical/TECHNICAL_DESIGN.md` — runtime architecture (prose + diagrams)  
 - `docs/technical/CODE_BASE_CLASS_RULES.md` — who writes bases vs instances  
 - `docs/workflow/IMPLEMENTATION_PLAN.md` — phase task list (execution on `game/development`)

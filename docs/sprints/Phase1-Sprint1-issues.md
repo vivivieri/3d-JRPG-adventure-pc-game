@@ -114,6 +114,8 @@ L0_base_class_compliance
 
 ### Spec summary
 
+**Regeneration runbook:** `docs/technical/GDSCRIPT_REGENERATION.md` §10 · `bash tools/regenerate_phase1_visuals.sh`
+
 GodotPrompter drafts (no hand `.tscn`):
 
 1. **`game/shaders/toon_base.gdshader`** — single ramp family (`diffuse_toon`, `specular_toon`); uniforms: `base_color`, `albedo_texture`, optional emission.
