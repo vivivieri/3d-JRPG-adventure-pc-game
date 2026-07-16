@@ -12,6 +12,8 @@ game/data/
     cinematic_hooks.json     # SC-08 vignette + SC-12 gate reveal hooks
   dialogue/
     chapter_01.json          # Dialogue by scene_id; optional voice_id per line
+  narrative/
+    ending_gallery.json      # Three ending philosophy blurbs (gallery UI)
   audio/
     ace_step_prompts.json     # ACE-Step generation prompts (MIT)
     vo_prompts.json            # ElevenLabs selective VO (12 clips)
