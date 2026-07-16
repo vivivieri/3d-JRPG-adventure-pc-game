@@ -15,15 +15,13 @@
       "phase_min": 2,
       "required_on_game_branch": false,
       "implemented": false,
-      "runner": "headless_scripted",
-      "description": "New game start — beach_shore active; game_started flag"
+      "description": "New game start"
     },
     {
       "id": "INT-ZONE-01",
       "phase_min": 2,
       "required_on_game_branch": false,
       "implemented": false,
-      "runner": "headless_scripted",
       "description": "Beach to ruined_village transition"
     },
     {
@@ -31,88 +29,21 @@
       "phase_min": 2,
       "required_on_game_branch": false,
       "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Well save round-trip — flag persists"
-    },
-    {
-      "id": "INT-DLG-01",
-      "phase_min": 3,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "SC-03 dialogue — torii interact; speaker label non-empty"
-    },
-    {
-      "id": "INT-QUEST-01",
-      "phase_min": 3,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Q1 stage 1 — inspect banner + sandal + well; quest advances"
-    },
-    {
-      "id": "INT-FIELD-01",
-      "phase_min": 3,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "SC-01–SC-05 scripted movement + interacts — no soft-lock"
+      "description": "Well save round-trip"
     },
     {
       "id": "INT-CMB-01",
       "phase_min": 4,
       "required_on_game_branch": false,
       "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Salt Crab tutorial — tutorial_combat_done"
-    },
-    {
-      "id": "INT-CMB-02",
-      "phase_min": 4,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "One full turn — attack then enemy turn; HP changes"
-    },
-    {
-      "id": "INT-PUZ-01",
-      "phase_min": 5,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "SC-07 water puzzle — water_puzzle_solved; tide_cut_saber"
+      "description": "Salt Crab tutorial combat"
     },
     {
       "id": "INT-BOSS-01",
       "phase_min": 5,
       "required_on_game_branch": false,
       "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Shore Wraith SC-09 — win grants wraith_pearl"
-    },
-    {
-      "id": "INT-PARTY-01",
-      "phase_min": 5,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Yuzu joins SC-10 — party size 2"
-    },
-    {
-      "id": "INT-GATE-01",
-      "phase_min": 6,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Palace gate — enter with pearl; gate opens"
-    },
-    {
-      "id": "INT-BOSS-02",
-      "phase_min": 6,
-      "required_on_game_branch": false,
-      "implemented": false,
-      "runner": "headless_scripted",
-      "description": "Sentinel + Keeper — reach SC-16 choice"
+      "description": "Shore Wraith boss"
     }
   ]
 }

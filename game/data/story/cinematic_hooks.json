@@ -53,29 +53,6 @@
         "CameraMarker_sc12_tilt_mid",
         "CameraMarker_sc12_gate_hero"
       ]
-    },
-    {
-      "id": "sc16_last_mercy_resolution",
-      "scene_id": "SC-16",
-      "zone": "dragon_palace_gate",
-      "trigger": "EndingChoiceConfirmed",
-      "sequence_id": "sc16_last_mercy",
-      "duration_sec": 6,
-      "skip_after_sec": 0,
-      "requires_flags": {
-        "ending_chosen": ["rewind", "anchor", "drift"]
-      },
-      "sets_flags": ["sc16_last_mercy_seen", "tide_keeper_defeated"],
-      "then": [
-        { "type": "combat_script", "id": "last_mercy_cosmetic" },
-        { "type": "cinematic", "id": "keeper_dissolve" },
-        { "type": "scene_transition", "id": "SC-17" }
-      ],
-      "audio": {
-        "duck_bgm": 0.1,
-        "sfx": ["sfx_story_choice_resolve"]
-      },
-      "markers": []
     }
   ]
 }

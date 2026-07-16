@@ -93,8 +93,7 @@
       "party": ["urashima", "yuzu", "roku"],
       "boss": true,
       "on_phase_trigger": { "set_flags": ["tide_keeper_phase3"] },
-      "on_win": { "set_flags": [] },
-      "note": "tide_keeper_defeated set by sc16_last_mercy_resolution hook after SC-16 choice + Last Mercy cosmetic"
+      "on_win": { "set_flags": ["tide_keeper_defeated"] }
     }
   ]
 }

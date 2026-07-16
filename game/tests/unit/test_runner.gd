@@ -4,7 +4,6 @@ extends SceneTree
 
 const TestStoryDataPaths := preload("res://tests/unit/test_story_data_paths.gd")
 const TestStoryDataJson := preload("res://tests/unit/test_story_data_json.gd")
-const TestZoneVisuals := preload("res://tests/unit/test_zone_visuals.gd")
 
 var _passed := 0
 var _failed := 0
@@ -26,15 +25,6 @@ func _initialize() -> void:
 	_run_test(
 		"story_data_json.chapter_01_dialogue_parses",
 		TestStoryDataJson.test_chapter_01_dialogue_parses,
-	)
-	_run_test("zone_visuals.hex_to_color", TestZoneVisuals.test_hex_to_color_parses_village_fog)
-	_run_test(
-		"zone_visuals.ruined_village_preset",
-		TestZoneVisuals.test_ruined_village_preset_has_directional,
-	)
-	_run_test(
-		"zone_visuals.build_environment",
-		TestZoneVisuals.test_build_environment_fog_enabled,
 	)
 	print("")
 	print("Passed: %d | Failed: %d" % [_passed, _failed])

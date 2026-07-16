@@ -8,8 +8,7 @@
     "res://scripts/exploration/player_controller.gd",
     "res://scripts/exploration/interactable.gd",
     "res://scripts/exploration/zone_transition.gd",
-    "res://scripts/exploration/encounter_trigger.gd",
-    "res://scripts/exploration/zone_visuals.gd"
+    "res://scripts/exploration/encounter_trigger.gd"
   ],
   "bases": [
     {
@@ -83,14 +82,6 @@
       "phase": 4,
       "agent_rule": "architect_only",
       "description": "SPD sort, round tick — state machine owned by Architect"
-    },
-    {
-      "id": "ZoneVisuals",
-      "path": "res://scripts/exploration/zone_visuals.gd",
-      "extends": "Node3D",
-      "phase": 1,
-      "agent_rule": "architect_only",
-      "description": "Per-zone palette, sky, fog, and WorldEnvironment preset application"
     }
   ],
   "component_scenes": [

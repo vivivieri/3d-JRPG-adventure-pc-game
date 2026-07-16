@@ -114,7 +114,6 @@
 | Doc | Purpose |
 |-----|---------|
 | [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) | Turn order, elements, intent UI |
-| [PLAYER_CONTROLS.md](gameplay/PLAYER_CONTROLS.md) | Keyboard, mouse, gamepad map |
 | [SKILLS_BIBLE.md](gameplay/SKILLS_BIBLE.md) | Player + enemy skills |
 | [BOSS_DESIGNS.md](gameplay/BOSS_DESIGNS.md) | Boss fights, emotional facets |
 | [ENCOUNTER_TABLE.md](gameplay/ENCOUNTER_TABLE.md) | Pacing, XP, drops |
@@ -159,7 +158,6 @@
 |-----|---------|
 | [ART_DIRECTION.md](art/ART_DIRECTION.md) | Palette, silhouettes, muted-coastal look |
 | [RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) | Tonemap, fog, glow, zone presets |
-| [SHADER_SPECS.md](art/SHADER_SPECS.md) | Spirit, box, mirror, water shader specs |
 | [CHARACTER_BIBLE.md](art/CHARACTER_BIBLE.md) | Models, portraits, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](art/ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickups |
 | [ART_AUTOMATION_PIPELINE.md](art/ART_AUTOMATION_PIPELINE.md) | Automated art/audio tiers |

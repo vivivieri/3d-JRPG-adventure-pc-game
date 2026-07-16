@@ -73,42 +73,6 @@
       "golden_screenshot": "artifacts/screenshots/phase6_dragon_palace_gate_gameplay.png",
       "generation_brief": "docs/generation_briefs/dragon_palace_gate.md",
       "markers": []
-    },
-    "ending_rewind": {
-      "phase": 6,
-      "storyboard": "SC-17a",
-      "scene_path": "res://scenes/world/endings/ending_rewind.tscn",
-      "emotional_mood": "bittersweet_restoration",
-      "min_path_width_m": 2.0,
-      "vista_anchor": "village_festival_lantern_row",
-      "gameplay_cam_height_m": 1.6,
-      "golden_screenshot": "artifacts/screenshots/phase6_ending_rewind.png",
-      "generation_brief": "docs/generation_briefs/ending_rewind.md",
-      "markers": ["FestivalEdge", "UrashimaDissolvePoint"]
-    },
-    "ending_anchor": {
-      "phase": 6,
-      "storyboard": "SC-17b",
-      "scene_path": "res://scenes/world/endings/ending_anchor.tscn",
-      "emotional_mood": "hopeful_accountability",
-      "min_path_width_m": 2.0,
-      "vista_anchor": "shore_dawn_skybox",
-      "gameplay_cam_height_m": 1.6,
-      "golden_screenshot": "artifacts/screenshots/phase6_ending_anchor.png",
-      "generation_brief": "docs/generation_briefs/ending_anchor.md",
-      "markers": ["SaplingPlant", "DawnShore"]
-    },
-    "ending_drift": {
-      "phase": 6,
-      "storyboard": "SC-17c",
-      "scene_path": "res://scenes/world/endings/ending_drift.tscn",
-      "emotional_mood": "tragic_open_cycle",
-      "min_path_width_m": 2.0,
-      "vista_anchor": "palace_underwater_glimpse",
-      "gameplay_cam_height_m": 1.6,
-      "golden_screenshot": "artifacts/screenshots/phase6_ending_drift.png",
-      "generation_brief": "docs/generation_briefs/ending_drift.md",
-      "markers": ["BoatDepart", "PalaceGlimpse"]
     }
   }
 }

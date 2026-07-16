@@ -785,7 +785,6 @@
         "L2_animation_whitelist",
         "L2_linux_export_smoke",
         "L2_windows_cross_export",
-        "L2_windows_export_run",
         "L2_boot_headless",
         "L4_integration"
       ],
@@ -810,7 +809,7 @@
       {
         "id": "game_development_ci",
         "check": "bash tools/run_ci_checks.sh exit 0",
-        "note": "Required merge gate on game/development — use run_bootstrap_ci_checks.sh during P1-00; full run_ci_checks.sh after P1-02 main_scene"
+        "note": "Required merge gate on game/development — expected to fail until bootstrap"
       },
       {
         "id": "l6_human_playtest",

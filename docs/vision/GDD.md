@@ -184,7 +184,7 @@ Roku reveals box truth. Assault palace gate. Final choice + boss.
 | Confirm | Enter / Space |
 | Cancel | Esc |
 
-**Gamepad:** Full main-path playable on Xbox-layout controller (M5 polish). See `docs/gameplay/PLAYER_CONTROLS.md` and `docs/ui/UI_UX_FLOW.md` §11. No remapping v1.
+Full controller support planned for polish milestone.
 
 ---
 

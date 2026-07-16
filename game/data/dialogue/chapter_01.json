@@ -1076,17 +1076,6 @@
             "zh-Hant": "村莊重獲生機。在節慶邊緣，浦島如泡沫消散。"
           },
           "emotion": "neutral"
-        },
-        {
-          "speaker": "yuzu",
-          "portrait": "yuzu_gentle",
-          "text": {
-            "en": "The breeze knows your name. It always did.",
-            "ja": "風はあなたの名を知っている。ずっと、知っていた。",
-            "zh": "风知道你的名字。它一直都知道。",
-            "zh-Hant": "風知道你的名字。它一直都知道。"
-          },
-          "emotion": "gentle"
         }
       ],
       "on_complete": {
@@ -1108,17 +1097,6 @@
             "zh-Hant": "靈魂沉入土地。六種下新苗。浦島老去，卻仍在。"
           },
           "emotion": "neutral"
-        },
-        {
-          "speaker": "roku",
-          "portrait": "roku_quiet",
-          "text": {
-            "en": "Slow growth. Honest tide.",
-            "ja": "ゆっくり育て。正直な潮だ。",
-            "zh": "慢慢长。诚实的潮汐。",
-            "zh-Hant": "慢慢長。誠實的潮汐。"
-          },
-          "emotion": "quiet"
         }
       ],
       "on_complete": {
@@ -1140,17 +1118,6 @@
             "zh-Hant": "小船漸小。海浪之下宮殿閃爍——仍在等待。"
           },
           "emotion": "neutral"
-        },
-        {
-          "speaker": "narrator",
-          "portrait": "",
-          "text": {
-            "en": "Far below, a silhouette moves behind gold lattice — Otohime, watching the tide carry him away.",
-            "ja": "遥か下で、金の格子の向こうに影が動く——乙姫が、潮に運ばれる彼を見送っている。",
-            "zh": "深处金格之后人影微动——乙姬目送潮水将他带走。",
-            "zh-Hant": "深處金格之後人影微動——乙姬目送潮水將他帶走。"
-          },
-          "emotion": "melancholy"
         }
       ],
       "on_complete": {

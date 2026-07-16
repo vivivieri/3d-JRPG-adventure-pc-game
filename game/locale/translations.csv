@@ -100,21 +100,6 @@ combat.boss_phase,{announcement},{announcement},{announcement},{announcement}
 combat.intent.attack,Attack,攻撃,攻击,攻擊
 combat.intent.debuff,Debuff,弱体,减益,減益
 combat.intent.charge,Charge,溜め,蓄力,蓄力
-TUTORIAL_MOVEMENT,WASD to move,WASDで移動,用WASD移动,用WASD移動
-TUTORIAL_CAMERA,Right-mouse drag to look · Scroll to zoom,右ドラッグで視点 · スクロールでズーム,右键拖动视角 · 滚轮缩放,右鍵拖動視角 · 滾輪縮放
-TUTORIAL_INTERACT,E — Investigate,E — 調べる,E — 调查,E — 調查
-TUTORIAL_SAVE,Save points — interact to record progress,セーブ地点 — 調べて進行を記録,存档点 — 互动以记录进度,存檔點 — 互動以記錄進度
-TUTORIAL_DIALOGUE,Space — advance dialogue,スペース — 会話を進める,空格 — 推进对话,空格 — 推進對話
-TUTORIAL_SHOP,Roku's cache — buy supplies here (Tab → Shop),六の物置 — 物資を買う（Tab → ショップ）,六的储藏 — 在此购买物资（Tab → 商店）,六的儲藏 — 在此購買物資（Tab → 商店）
-TUTORIAL_ATTACK,Attack — basic strike,攻撃 — 基本の一撃,攻击 — 基础打击,攻擊 — 基礎打擊
-TUTORIAL_SKILL,Skill — costs MP; stronger,スキル — MP消費、より強力,技能 — 消耗法力；更强,技能 — 消耗法力；更強
-TUTORIAL_DEFEND,Defend — reduce damage this turn,防御 — このターンの被ダメージを軽減,防御 — 本回合减伤,防禦 — 本回合減傷
-TUTORIAL_INTENT,Enemy intent — plan around telegraphed attacks,敵の意図 — 予告された攻撃に備える,敌人意图 — 针对预告攻击布局,敵人意圖 — 針對預告攻擊佈局
-TUTORIAL_HEAL,Yuzu — Spirit Light heals allies,柚 — 精霊の光で味方を回復,柚 — 精灵之光治疗队友,柚 — 精靈之光治療隊友
-TUTORIAL_LIMIT,Limit ready — devastating once-per-fight skill,リミット — 1戦1回の強力な技,极限技就绪 — 每场一次强力技能,極限技就緒 — 每場一次強力技能
-TUTORIAL_EQUIP,Tab → Equipment — arm yourself,Tab → 装備 — 武装する,Tab → 装备 — 武装自己,Tab → 裝備 — 武裝自己
-TUTORIAL_LORE,Tab → Lore — collected memories,Tab → 伝承 — 集めた記憶,Tab → 传说 — 收集的记忆,Tab → 傳說 — 收集的記憶
-TUTORIAL_MENU,Tab — menu (items, equipment, quests, lore),Tab — メニュー（アイテム・装備・クエスト・伝承）,Tab — 菜单（物品、装备、任务、传说）,Tab → 選單（物品、裝備、任務、傳說）
 UI_HARD_MODE,Hard Mode,ハードモード,困难模式,困難模式
 UI_DIFFICULTY_NORMAL,Normal,ノーマル,普通,普通
 UI_HARD_MODE_DESC,Mastery: tougher foes; boss intents hidden in later phases.,上級：敵が強化。ボス第二段階以降は予告なし。,挑战：敌人更强；Boss二阶段起隐藏意图。,挑戰：敵人更強；Boss二階段起隱藏意圖。
