@@ -34,10 +34,12 @@
 
 | Phase | Sprint ref | Helpers to port | Handoff |
 |-------|------------|-----------------|---------|
-| **0** | **P1-00** bootstrap | `EventBus` | Architect → `.gd` · Builder → `project.godot` autoload |
-| **2** | Save/settings shell | `SettingsStore`, `SaveIntegrity` | Architect → `.gd` + unit tests · Builder → F5 boot |
-| **4** | Combat | `DifficultyService` | Architect → `.gd` before encounter tuning |
-| **6** | Achievements | `AchievementEvaluator` | Architect → `.gd` before Steam hooks |
+| **1** | **P1-00** bootstrap | `EventBus` (`port_status: ported`) | Architect → `.gd` · Builder → `project.godot` autoload via GDAI |
+| **2** | Save/settings shell | `SettingsStore`, `SaveIntegrity` (`port_status: pending`) | Architect → `.gd` + unit tests · Builder → F5 boot |
+| **4** | Combat | `DifficultyService` (`port_status: pending`) | Architect → `.gd` before encounter tuning |
+| **6** | Achievements | `AchievementEvaluator` (`port_status: pending`) | Architect → `.gd` before Steam hooks |
+
+`port_status` in `helpers_registry.json`: `pending` | `ported` | `wired`. Do **not** port ahead of PM dispatch — early ports are reverted to keep phase handoffs clean.
 
 **No agent other than Architect** may author `game/scripts/core/*.gd` for these helpers.  
 **No agent other than Builder** may register autoloads in `project.godot` (GDAI MCP only).

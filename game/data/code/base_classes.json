@@ -12,6 +12,14 @@
   ],
   "bases": [
     {
+      "id": "EventBus",
+      "path": "res://scripts/core/event_bus.gd",
+      "extends": "Node",
+      "phase": 1,
+      "agent_rule": "architect_only",
+      "description": "Autoload — global typed signals only (helpers_registry.json)"
+    },
+    {
       "id": "PlayerController",
       "path": "res://scripts/exploration/player_controller.gd",
       "extends": "CharacterBody3D",

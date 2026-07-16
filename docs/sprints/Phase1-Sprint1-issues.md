@@ -43,6 +43,7 @@ Plus per-issue: `agent/*`, `gate/*` as listed below.
 ```
 L0_rr_compliance
 L0_story_data
+L0_narrative_density
 L0_acceptance_catalog
 L0_base_classes
 L1_unit_tests
@@ -189,7 +190,7 @@ Add unit tests for `zone_visuals.gd` palette application (headless).
 | Field | Value |
 |-------|-------|
 | Phase | 1 |
-| Implementation plan | **1.5** (ruined_village only), **1.6**, **1.7**, **1.9** |
+| Implementation plan | **1.5** (ruined_village only), **1.6**, **1.7**, **1.9** — task **1.8** (component scenes) deferred to Phase1-Sprint2 |
 | Lead agent | **builder** |
 | Depends on | P1-00, P1-01 handoff |
 | Unblocks | P1-04, P1-05 |
@@ -312,6 +313,7 @@ Unit test: shader compiles headless (material create smoke if project supports).
 ```
 L0_rr_compliance
 L0_story_data
+L0_narrative_density
 L0_acceptance_catalog
 L0_base_classes
 L0_base_class_compliance
@@ -321,8 +323,9 @@ L2_scene_primitives
 L3_gdai_built
 L2_feel_smoke
 L2_glb_import
-L4_integration
 ```
+
+**Not in Sprint1 scope:** `L4_integration` (Phase 3+ per `sprint_phases.json`; `INT-BOOT-01` runs when `main_scene` is set).
 
 ### Commands
 
@@ -351,9 +354,8 @@ bash tools/run_playtest_smoke.sh
 | L3_gdai_built | PASS | .gdai_built verified_f5=true |
 | L2_feel_smoke | PASS | run_feel_smoke_checks.sh |
 | L2_glb_import | PASS/SKIP | strict when GLBs present |
-| L4_integration | PASS | INT-BOOT-01 |
 
-**Not run (expected):** L2_visual_jury, L5 E2E, L6 human
+**Not run (expected):** L4_integration (Phase 3+), L2_visual_jury, L5 E2E, L6 human
 
 **Policy:** WARN ≠ PASS · SKIP ≠ PASS on game branch
 ```
@@ -386,7 +388,7 @@ Post remediation JSON + gate ID; reassign to Architect or Builder.
 | Implementation plan | **1.10**, **1.11** |
 | Generation readiness | **GR-001**, **GR-003** |
 | Lead agent | **qa** (Builder captures via GDAI) |
-| Depends on | P1-02, P1-04 |
+| Depends on | P1-02 merged (P1-04 gate report recommended but not blocking) |
 
 ### Acceptance gate IDs
 
@@ -450,6 +452,7 @@ bash tools/run_visual_smoke_checks.sh
 ```
 L0_rr_compliance
 L0_story_data
+L0_narrative_density
 L1_unit_tests
 L2_boot_headless
 L2_scene_primitives

@@ -220,19 +220,22 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 
 ### Phase 1 — Environment foundation
 
+**Task numbers match `docs/workflow/IMPLEMENTATION_PLAN.md` §Phase 1** (not a separate numbering scheme).
+
 | # | Criterion | Verification |
 |---|-----------|--------------|
-| 1.1 | `ruined_village.tscn` exists and loads headless | Smoke/integration |
-| 1.2 | WorldEnvironment matches `RENDERING_GUIDE.md` (Filmic tonemap, zone fog) | GDAI screenshot + art checklist `ART_DIRECTION.md` §10 |
-| 1.3 | `toon_base.gdshader` on ground meshes; no flat default grey | GDAI viewport |
-| 1.4 | `zone_visuals.gd` applies palette from `ENVIRONMENT_KITS.md` §2 | Unit test + GDAI F5 |
-| 1.5 | DirectionalLight + fog values match zone table | GDAI inspector readback |
-| 1.6 | ProceduralSky (no HDRI) per `RENDERING_GUIDE.md` §4 | GDAI viewport |
-| 1.7 | Greybox scenes exist for all 4 zones; each loads headless | Integration test |
-| 1.8 | L0 + L1 + L2 + L3 pass after every commit | CI scripts |
-| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 **Phase 1 (greybox) checklist** — final-art items defer to Phase 7 | AI screenshot in `artifacts/screenshots/` + L3 pass |
-| 1.10 | **Golden screenshot** — `phase1_ruined_village_gameplay.png` per `zone_composition.json` (**GR-001**) | GDAI capture → `VISUAL_SMOKE_STRICT=1` enables `L2_visual_jury` |
-| 1.11 | Zone composition smoke (warn) — `bash tools/run_zone_composition_checks.sh` (**GR-003**) | Exit 0 warn until M5; strict at Phase 7.12 |
+| 1.1 | `environments/*.tres` — WorldEnvironment per zone (tonemap, fog, glow) | GDAI + `RENDERING_GUIDE.md` |
+| 1.2 | `zone_visuals.gd` applies palette, sky, lights at runtime | Unit test + GDAI F5 |
+| 1.3 | `toon_base.gdshader` on ground meshes; single ramp family | GDAI viewport |
+| 1.4 | `water_stylized.gdshader` — foam + gentle displacement | Shader compiles headless |
+| 1.5 | Greybox zone scenes (Sprint1: `ruined_village`; Sprint2: beach/caves/palace) | Integration / headless load |
+| 1.6 | DirectionalLight + fog values match zone table | GDAI inspector readback |
+| 1.7 | ProceduralSky (no HDRI) per `RENDERING_GUIDE.md` §4 | GDAI viewport |
+| 1.8 | Component scenes from `LEVEL_DESIGN.md` §1b (Phase1-Sprint2) | GDAI `.tscn` + L3 |
+| 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 greybox checklist | GDAI F5 + L3 |
+| 1.10 | **Golden screenshot** — `phase1_ruined_village_gameplay.png` (**GR-001**) | GDAI capture |
+| 1.11 | Zone composition smoke (warn) — `run_zone_composition_checks.sh` (**GR-003**) | Exit 0 warn until M5 strict |
+| — | L0 + L1 + L2 + L3 pass after every commit on `game/development` | `bash tools/run_ci_checks.sh` |
 
 ### Phase 2 — Core systems shell
 

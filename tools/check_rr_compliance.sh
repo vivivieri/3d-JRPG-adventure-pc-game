@@ -37,8 +37,16 @@ is_allowed_scene_path() {
 echo "==> R&R compliance check (.cursorrules §0 — GDAI builds scenes)"
 echo ""
 
+BRANCH="$(git -C "$ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
+
 if [[ ! -d "$SCENES_DIR" ]]; then
-  fail "Missing ${SCENES_DIR}"
+  if [[ "$BRANCH" == "main" ]]; then
+    ok "main branch — no game/scenes tree (spec-first baseline)"
+    echo ""
+    echo "R&R compliance: PASS"
+    exit 0
+  fi
+  fail "Missing ${SCENES_DIR} (run bash tools/setup_dev_environment.sh or bootstrap_game_development.sh)"
   echo ""
   echo "R&R compliance: FAILED"
   exit 1

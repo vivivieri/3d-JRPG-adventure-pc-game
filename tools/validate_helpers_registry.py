@@ -71,10 +71,14 @@ def main() -> int:
             for sig in signals:
                 if not isinstance(sig, dict) or not sig.get("name"):
                     errors.append(f"EventBus: invalid signal entry: {sig!r}")
-        elif kind == "refcounted":
+        if kind == "refcounted":
             api = helper.get("public_api", [])
             if not api:
                 errors.append(f"{hid}: public_api required for refcounted helper")
+
+        port_status = helper.get("port_status")
+        if port_status is not None and port_status not in ("pending", "ported", "wired"):
+            errors.append(f"{hid}: invalid port_status {port_status!r}")
 
     # Cross-check EventBus signals with autoload_registry
     autoload_path = CODE / "autoload_registry.json"

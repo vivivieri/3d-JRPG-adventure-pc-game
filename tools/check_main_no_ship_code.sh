@@ -13,6 +13,14 @@ ok() { echo "[OK]   $*"; }
 echo "==> Main-branch ship code check (spec-first policy)"
 echo ""
 
+BRANCH="$(git -C "$ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
+if [[ "$BRANCH" == "game/development" ]]; then
+  ok "skipped on ${BRANCH} — ship code allowed; use bash tools/run_ci_checks.sh"
+  echo ""
+  echo "Main ship code check: PASSED (skipped on implementation branch)"
+  exit 0
+fi
+
 if [[ -f "${ROOT}/game/project.godot" ]]; then
   fail "game/project.godot must not exist on main (implementation belongs on game/development)"
 else

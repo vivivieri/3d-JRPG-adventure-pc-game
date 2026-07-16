@@ -63,9 +63,21 @@ def main() -> int:
         return 1
 
     impl = ROOT / "game/scripts/core/difficulty_service.gd"
-    if not impl.is_file():
-        print(f"[FAIL] missing {impl}")
+    port_status = "pending"
+    helpers_path = ROOT / "game/data/code/helpers_registry.json"
+    if helpers_path.is_file():
+        helpers = json.loads(helpers_path.read_text(encoding="utf-8")).get("helpers", [])
+        for h in helpers:
+            if h.get("id") == "DifficultyService":
+                port_status = h.get("port_status", "pending")
+                break
+    if port_status == "ported" and not impl.is_file():
+        print(f"[FAIL] missing {impl} (DifficultyService port_status=ported)")
         return 1
+    if port_status == "ported":
+        print(f"[OK]   DifficultyService GDScript present")
+    else:
+        print(f"[SKIP] DifficultyService GDScript — port_status={port_status} (Phase 4 dispatch)")
 
     # Reference math spot-check
     assert active_mode_id({"hard_mode": False}) == "normal"

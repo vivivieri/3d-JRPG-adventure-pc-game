@@ -58,7 +58,7 @@
     {
       "step": 7,
       "id": "docs_ci_baseline",
-      "description": "Design data and docs gates green on main",
+      "description": "Design data and docs gates green on main (branch-aware ship-code checks)",
       "command": "bash tools/run_docs_ci_checks.sh",
       "block_on_fail": true
     },

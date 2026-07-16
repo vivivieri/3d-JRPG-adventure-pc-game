@@ -174,7 +174,7 @@ Every QA task ends with this block. **Missing fields = report invalid.**
 
 | Phase | Required gates |
 |-------|----------------|
-| `phase_1` | L0, L1, L2 boot, L2 primitives + conditional art gates when assets exist |
+| `phase_1` | L0 (incl. narrative_density), L1, L2 boot, L2 primitives + conditional art gates when assets exist |
 | `phase_6` | L0–L2 + L4 + L5 (E2E not SKIP) |
 | `m5_ship` | All art/flow/compliance gates strict (`--ship` flags) |
 

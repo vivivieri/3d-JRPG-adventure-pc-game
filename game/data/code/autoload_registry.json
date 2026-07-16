@@ -33,7 +33,7 @@
     {
       "id": "EventBus",
       "script_path": "res://scripts/core/event_bus.gd",
-      "phase": 2,
+      "phase": 1,
       "spec_status": "specified",
       "design_ref": ["docs/technical/TECHNICAL_DESIGN.md §2", "docs/technical/CODE_STYLE.md"],
       "responsibility": "Global typed signals",

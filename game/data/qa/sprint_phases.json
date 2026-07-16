@@ -87,6 +87,7 @@
       "exit_gates_required": [
         "L0_rr_compliance",
         "L0_story_data",
+        "L0_narrative_density",
         "L1_unit_tests",
         "L2_boot_headless",
         "L2_scene_primitives"
