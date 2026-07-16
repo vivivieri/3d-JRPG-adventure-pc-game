@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "policy_ref": "docs/qa/AI_TESTING_SPEC.md",
+  "note": "GDScript unit tests on game/development must mirror these cases; Python reference in tools/test_reference_libs.py.",
+  "suites": [
+    {
+      "id": "zone_visuals",
+      "issue_id": "P1-01",
+      "phase": 1,
+      "gdscript_path": "game/tests/unit/test_zone_visuals.gd",
+      "gdscript_class": "TestZoneVisuals",
+      "target_script": "res://scripts/exploration/zone_visuals.gd",
+      "python_reference": "tools/zone_visuals_lib.py",
+      "data_ref": ["game/data/world/zone_palettes.json"],
+      "cases": [
+        {
+          "id": "hex_to_color_parses_village_fog",
+          "function": "test_hex_to_color_parses_village_fog",
+          "assert": "ZoneVisuals.hex_to_color('#8B9DAF') approx Color('#8B9DAF')"
+        },
+        {
+          "id": "ruined_village_preset_has_directional",
+          "function": "test_ruined_village_preset_has_directional",
+          "assert": "preset directional_color == '#B8C8D8' and fog_density == 0.008"
+        },
+        {
+          "id": "build_environment_fog_enabled",
+          "function": "test_build_environment_fog_enabled",
+          "assert": "fog_enabled, tonemap_mode == TONE_MAPPER_FILMIC, glow_enabled"
+        }
+      ]
+    }
+  ]
+}

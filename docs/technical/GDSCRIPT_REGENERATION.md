@@ -187,3 +187,4 @@ Use these as **diff hints** only — registry + Python reference win on conflict
 | `save_integrity.gd` | `tools/save_integrity_lib.py` | `qa/save_integrity.json` |
 | `difficulty_service.gd` | `tools/difficulty_lib.py` | `combat/difficulty.json` |
 | `achievement_evaluator.gd` | `tools/achievement_evaluator_lib.py` | `achievements/achievements.json` |
+| `zone_visuals.gd` | `tools/zone_visuals_lib.py` | `world/zone_palettes.json`, `code/environment_registry.json` |

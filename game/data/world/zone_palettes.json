@@ -1,6 +1,23 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "design_ref": "docs/art/RENDERING_GUIDE.md §4–§6",
+  "runtime_path": "res://data/world/zone_palettes.json",
+  "defaults": {
+    "tonemap_mode": "filmic",
+    "ambient_light_source": "color",
+    "ambient_light_energy": 0.4,
+    "fog_sky_affect": 0.85,
+    "glow_blend_mode": "softlight",
+    "procedural_sky_sun_angle_max": 28.0,
+    "ground_bottom_darken": 0.2,
+    "directional_shadow_enabled": true,
+    "fill_light_energy": 0.8,
+    "fill_light_omni_range": 12.0,
+    "fill_light_group": "zone_fill_light",
+    "volumetric_fog_density": 0.02,
+    "world_environment_node_name": "WorldEnvironment",
+    "directional_light_node_name": "DirectionalLight3D"
+  },
   "zones": {
     "beach_shore": {
       "sky_top": "#5A98B0",
