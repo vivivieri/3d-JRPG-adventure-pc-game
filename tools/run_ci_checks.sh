@@ -42,6 +42,9 @@ run_tri_gate "L0_player_build_protection" "Player build protection policy" \
 run_tri_gate "L0_story_data" "Story JSON cross-references" \
   python3 tools/validate_story_data.py
 
+run_tri_gate "L0_narrative_density" "Narrative pattern density budgets" \
+  python3 tools/validate_narrative_density.py
+
 run_tri_gate "L0_difficulty_data" "Normal + Hard difficulty catalog" \
   python3 tools/validate_difficulty_data.py
 

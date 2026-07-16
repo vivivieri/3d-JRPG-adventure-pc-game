@@ -64,6 +64,15 @@
       "evidence": [],
       "design_ref": "docs/DATA_ARCHITECTURE.md"
     },
+    "L0_narrative_density": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_narrative_density.py",
+      "description": "Narrative pattern density within ship budgets (barks, quiet beats, callbacks)",
+      "pass": { "exit_code": 0, "error_count": 0 },
+      "evidence": ["game/data/narrative/narrative_density.json"],
+      "design_ref": "docs/NARRATIVE_DENSITY.md"
+    },
     "L0_acceptance_catalog": {
       "layer": "L0",
       "domain": "data",
@@ -598,6 +607,7 @@
     "runner": "bash tools/run_docs_ci_checks.sh",
     "required_gates": [
       "L0_story_data",
+      "L0_narrative_density",
       "L0_acceptance_catalog",
       "L0_environments_catalog",
       "L0_sprint_phases",
@@ -635,6 +645,7 @@
       "L0_player_build_protection",
       "L0_difficulty_data",
       "L0_story_data",
+      "L0_narrative_density",
       "L0_acceptance_catalog",
       "L0_base_classes",
       "L1_unit_tests",
@@ -729,6 +740,7 @@
       "required_gates": [
         "L0_rr_compliance",
         "L0_story_data",
+        "L0_narrative_density",
         "L1_unit_tests",
         "L2_boot_headless",
         "L2_scene_primitives"

@@ -14,6 +14,7 @@ game/data/
     chapter_01.json          # Dialogue by scene_id; optional voice_id per line
   narrative/
     ending_gallery.json      # Three ending philosophy blurbs (gallery UI)
+    narrative_density.json   # Ship budgets for §12 patterns (NARRATIVE_DENSITY.md)
   audio/
     ace_step_prompts.json     # ACE-Step generation prompts (MIT)
     vo_prompts.json            # ElevenLabs selective VO (12 clips)

@@ -428,3 +428,13 @@ If (1) fails, add environment or camera — not more lines.
 | Roku | Blunt duty, shop pragmatism | SC-04 warning, post-wraith restock |
 
 Hard mode is **mechanical mastery only** — not a secret fourth ending (`REPLAY_DESIGN.md` §6).
+
+### Density gate (optimized application)
+
+Do not apply every §12 pattern everywhere. Use the **decision tree + ship budgets** in `docs/NARRATIVE_DENSITY.md` and enforce with:
+
+```bash
+python3 tools/validate_narrative_density.py   # L0_narrative_density
+```
+
+Budgets live in `game/data/narrative/narrative_density.json`.
