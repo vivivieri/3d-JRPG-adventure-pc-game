@@ -84,6 +84,36 @@ def main() -> int:
                         allowed = flag_defs[fk].get("values")
                         if allowed and fv not in allowed:
                             errors.append(f"dialogue choice sets invalid enum value: {fk}={fv} ({block['scene_id']})")
+            for field in ("subtext", "subtext_warm"):
+                text_obj = choice.get(field)
+                if text_obj:
+                    if not isinstance(text_obj, dict):
+                        errors.append(f"dialogue choice {choice.get('id')} {field} must be locale object ({block['scene_id']})")
+                    else:
+                        for loc in REQUIRED_LOCALES:
+                            if not str(text_obj.get(loc, "")).strip():
+                                errors.append(
+                                    f"dialogue choice {choice.get('id')} {field} missing locale: {loc} "
+                                    f"({block['scene_id']})"
+                                )
+            warm_req = choice.get("subtext_warm_requires_flags") or {}
+            if warm_req and not choice.get("subtext_warm"):
+                errors.append(
+                    f"dialogue choice {choice.get('id')} subtext_warm_requires_flags without subtext_warm "
+                    f"({block['scene_id']})"
+                )
+            if isinstance(warm_req, dict):
+                for fk, fv in warm_req.items():
+                    if fk not in flags:
+                        errors.append(
+                            f"dialogue choice subtext_warm_requires_flags unknown flag: {fk} ({block['scene_id']})"
+                        )
+                    else:
+                        allowed = flag_defs[fk].get("values")
+                        if allowed and fv not in allowed:
+                            errors.append(
+                                f"dialogue choice subtext_warm invalid enum: {fk}={fv} ({block['scene_id']})"
+                            )
         for line in block.get("lines", []) or []:
             req = line.get("requires_flags") or {}
             if isinstance(req, dict):

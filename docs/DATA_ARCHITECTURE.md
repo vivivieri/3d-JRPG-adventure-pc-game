@@ -174,7 +174,7 @@ One file per chapter; scenes reference story IDs.
 }
 ```
 
-**Choices** (SC-13, SC-16): add `choices[]` with `set_flags` per option. SC-16 sets `"choice_confirm": true` — UI shows two-step confirm per `ENDING_DESIGN.md` §2 before applying `ending_chosen`.
+**Choices** (SC-13, SC-16): add `choices[]` with `set_flags` per option. SC-16 sets `"choice_confirm": true` — UI shows two-step confirm per `ENDING_DESIGN.md` §2 before applying `ending_chosen`. SC-16 choices may include `subtext` (default) and optional `subtext_warm` + `subtext_warm_requires_flags` for `mirror_choice` flavor (`ENDING_DESIGN.md` §4).
 
 ---
 
@@ -323,8 +323,8 @@ All spine files below are already present in `game/data/`. This is the dependenc
 | Source | Count | Notes |
 |--------|-------|-------|
 | `docs/STORYBOARD.md` | **19** narrative beats | SC-00 + 18 main-path scenes |
-| `story/scenes.json` | **23** rows | Adds SC-02 inspectable sub-scenes + SC-17a/b/c ending variants |
-| `dialogue/chapter_01.json` | **22** scene keys | SC-07 silent puzzle — no dialogue block by design |
+| `story/scenes.json` | **24** rows | Adds SC-01 driftwood inspect + SC-02 inspectable sub-scenes + SC-17a/b/c ending variants |
+| `dialogue/chapter_01.json` | **23** scene keys | SC-07 silent puzzle — no dialogue block by design |
 
 All `scene_id` values in dialogue, encounters, and flags must exist in `scenes.json`.
 
@@ -336,7 +336,7 @@ Files use `schema_version` (integer) or `version` (string) to track format evolu
 
 | File | Key | Current | Notes |
 |------|-----|---------|-------|
-| `dialogue/chapter_01.json` | `schema_version` | **4** | Adds `voice_id` on selective VO lines |
+| `dialogue/chapter_01.json` | `schema_version` | **5** | Adds `subtext` / `subtext_warm` on SC-16 choices |
 | `quests/main_quests.json`, `items/items.json` | `schema_version` | **2** | — |
 | Most other `game/data/**/*.json` | `schema_version` | **1** | — |
 | `audio/vo_prompts.json`, `ace_step_prompts.json` | `version` | **"1.0"** | Audio generation metadata (not gameplay schema) |
@@ -352,7 +352,7 @@ Bump `schema_version` when breaking field renames; run `python3 tools/validate_s
 
 ## 18. `combat_barks` on enemy entries
 
-Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1: `shore_wraith`, `palace_sentinel`, `tide_keeper`). Intent UI shows one bark per telegraphed action; defeat lines are tragic, not celebratory (`BOSS_DESIGNS.md` §1, `NARRATIVE_WRITING_GUIDE.md` §12).
+Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`, `palace_sentinel`, `tide_keeper`; field mobs: `salt_crab`, `tide_wraith`). Intent UI shows one bark per telegraphed action; defeat lines are tragic, not celebratory (`BOSS_DESIGNS.md` §1, `NARRATIVE_WRITING_GUIDE.md` §12). Field mobs may omit `battle_start` (tutorial clarity).
 
 ```json
 "combat_barks": {
