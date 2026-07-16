@@ -1,6 +1,6 @@
 # Tides of Urashima — Boss Design Sheets
 
-**Version:** 1.1 (Pre-build — reconciled with data)  
+**Version:** 1.2 (Pre-build — reconciled with data)  
 **Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
 **Cross-refs:** `docs/GDD.md` §7, `docs/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/CHARACTER_BIBLE.md` §6 (3D specs)
 
@@ -21,6 +21,21 @@
 | Normal mode | Story completable without grinding |
 | Hard mode | Optional; faster patterns, less intent delay (post-normal unlock or menu toggle) |
 | Limit gauge | Fills on damage dealt/taken; boss fights teach by SC-09 |
+
+### Bosses as emotional facets (v1 — not “evil for evil”)
+
+Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt experience), **XC3 / Expedition 33** (bonds under inevitability). Bosses are **named feelings** made fightable — not cartoon villains.
+
+| Boss | Emotional facet | What the fight *means* | Writer rule |
+|------|-----------------|------------------------|-------------|
+| **Shore Wraith** | Collective **guilt** | Faces under the cloth = villagers Urashima abandoned | Barks accuse, don't taunt; defeat = release, not victory lap |
+| **Palace Sentinel** | **Duty frozen** | Oath of stillness — paradise that forbids change | Minimal dialogue; armor speaks; Yuzu's Spirit pierces rigidity |
+| **Tide Keeper** | **Temptation to erase pain** | Time offers paradise at cost of the living world | Speaks in tides/clock motifs, not essays; phase 3 shrinks — tragic, not monstrous |
+
+**Combat UI:** Intent label + one bark line should reinforce the facet (see intent table above).  
+**Defeat lines:** Tragic, not *"You win!"* — `NARRATIVE_WRITING_GUIDE.md` §11.E.
+
+**Do not add:** Mid-fight lore dumps, moral scoring, or a fourth “secret” boss ending.
 
 ### Intent icon mapping
 
