@@ -2,6 +2,88 @@
   "schema_version": 1,
   "policy_ref": "docs/GDSCRIPT_REGENERATION.md",
   "description": "RefCounted helpers and EventBus — spec + Python reference on main; GDScript ports on game/development.",
+  "roles_and_responsibilities": {
+    "authority": "docs/GDSCRIPT_REGENERATION.md §2, docs/RR_CHEATSHEET.md",
+    "workflows": [
+      {
+        "id": "spec_and_python_reference",
+        "owner_role": "architect",
+        "owner_agent": "GodotPrompter",
+        "branch": "main",
+        "deliverables": [
+          "game/data/code/helpers_registry.json",
+          "tools/*_lib.py",
+          "tools/test_reference_libs.py",
+          "docs/GDSCRIPT_REGENERATION.md"
+        ],
+        "gates": ["L0_helpers_registry", "L0_reference_libs"],
+        "must_not": ["Ship GDScript on main", "Hand-edit .tscn"]
+      },
+      {
+        "id": "gdscript_port",
+        "owner_role": "architect",
+        "owner_agent": "GodotPrompter",
+        "branch": "game/development",
+        "deliverables": [
+          "game/scripts/core/<helper>.gd per helpers_registry.gdscript_path",
+          "game/tests/unit/test_<helper>_*.gd mirroring tools/test_reference_libs.py"
+        ],
+        "gates": ["L1_unit_tests", "L1_gdscript_lint"],
+        "must_not": ["Invent behavior not in registry + Python reference", "Register autoloads in project.godot"]
+      },
+      {
+        "id": "autoload_wireup",
+        "owner_role": "builder",
+        "owner_agent": "GDAI Builder",
+        "branch": "game/development",
+        "deliverables": ["project.godot autoload entries for EventBus and future autoloads"],
+        "gates": ["L3_gdai_built", "L2_boot_headless"],
+        "must_not": ["Author helper logic in .gd", "Hand-edit project.godot in Cursor"]
+      },
+      {
+        "id": "parity_verification",
+        "owner_role": "qa",
+        "owner_agent": "QA Agent",
+        "branch": "main and game/development",
+        "deliverables": ["Gate report citing L0_reference_libs and L1_unit_tests"],
+        "gates": ["L0_helpers_registry", "L0_reference_libs", "L1_unit_tests"],
+        "must_not": ["Port GDScript", "Mark ship without gates"]
+      },
+      {
+        "id": "dispatch",
+        "owner_role": "pm",
+        "owner_agent": "PM Agent",
+        "deliverables": ["Sprint issue assignment per dispatch_by_phase below"],
+        "must_not": ["Self-assign without orchestrator", "Skip spec PR to main"]
+      }
+    ],
+    "dispatch_by_phase": [
+      {
+        "phase": 0,
+        "issue_ref": "P1-00",
+        "helpers": ["EventBus"],
+        "note": "Bootstrap — Architect ports EventBus.gd; Builder registers autoload"
+      },
+      {
+        "phase": 2,
+        "issue_ref": "Phase 2 shell (SaveSystem / settings)",
+        "helpers": ["SettingsStore", "SaveIntegrity"],
+        "note": "When SaveSystem autoload is built — Architect ports; Builder F5 verify"
+      },
+      {
+        "phase": 4,
+        "issue_ref": "Phase 4 combat",
+        "helpers": ["DifficultyService"],
+        "note": "Before first story encounter combat tuning"
+      },
+      {
+        "phase": 6,
+        "issue_ref": "Phase 6 achievements",
+        "helpers": ["AchievementEvaluator"],
+        "note": "Before Steam achievement integration"
+      }
+    ]
+  },
   "regeneration_order": [
     "EventBus",
     "SettingsStore",
@@ -19,6 +101,11 @@
       "python_reference": null,
       "design_ref": ["docs/TECHNICAL_DESIGN.md §2", "game/data/code/autoload_registry.json"],
       "note": "Signals only — port signal list exactly; no gameplay logic in script body",
+      "owners": {
+        "spec": "architect",
+        "gdscript": "architect",
+        "autoload_registration": "builder"
+      },
       "signals": [
         { "name": "locale_changed", "args": ["locale_code: String"] },
         { "name": "vo_dialect_changed", "args": ["dialect_code: String"] },
@@ -43,6 +130,10 @@
         "defaults": "res://data/settings/settings_defaults.json",
         "user_save": "user://settings.json"
       },
+      "owners": {
+        "spec": "architect",
+        "gdscript": "architect"
+      },
       "public_api": [
         { "name": "defaults", "returns": "Dictionary", "static": true },
         { "name": "load_settings", "returns": "Dictionary", "static": true },
@@ -62,6 +153,10 @@
       "python_reference": "tools/save_integrity_lib.py",
       "data_ref": ["game/data/qa/save_integrity.json"],
       "design_ref": ["docs/SECURITY.md §9", "docs/SAVE_AND_FAIL_STATES.md"],
+      "owners": {
+        "spec": "architect",
+        "gdscript": "architect"
+      },
       "public_api": [
         { "name": "pepper", "returns": "String", "static": true },
         { "name": "canonical_json", "args": ["save: Dictionary"], "returns": "String", "static": true },
@@ -79,6 +174,10 @@
       "python_reference": "tools/difficulty_lib.py",
       "data_ref": ["game/data/combat/difficulty.json"],
       "design_ref": ["docs/COMBAT_SYSTEMS.md §10"],
+      "owners": {
+        "spec": "architect",
+        "gdscript": "architect"
+      },
       "public_api": [
         { "name": "load_catalog", "returns": "Dictionary", "static": true },
         { "name": "active_mode_id", "args": ["settings: Dictionary"], "returns": "String", "static": true },
@@ -101,6 +200,10 @@
       "python_reference": "tools/achievement_evaluator_lib.py",
       "data_ref": ["game/data/achievements/achievements.json"],
       "design_ref": ["docs/ACHIEVEMENTS.md"],
+      "owners": {
+        "spec": "architect",
+        "gdscript": "architect"
+      },
       "public_api": [
         { "name": "trigger_met", "args": ["trigger: Dictionary", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "bool", "static": true },
         { "name": "evaluate_catalog", "args": ["achievements: Array", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "Array[String]", "static": true }

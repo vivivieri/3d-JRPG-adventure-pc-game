@@ -104,6 +104,38 @@ def main() -> int:
     if policy and not policy_path.is_file():
         errors.append(f"policy_ref missing: {policy}")
 
+    rr = registry.get("roles_and_responsibilities", {})
+    if not rr:
+        errors.append("roles_and_responsibilities block required")
+    else:
+        workflows = rr.get("workflows", [])
+        required_workflow_ids = {
+            "spec_and_python_reference",
+            "gdscript_port",
+            "autoload_wireup",
+            "parity_verification",
+            "dispatch",
+        }
+        found_ids = {w.get("id") for w in workflows}
+        missing_wf = required_workflow_ids - found_ids
+        if missing_wf:
+            errors.append(f"roles_and_responsibilities missing workflows: {sorted(missing_wf)}")
+        dispatch = rr.get("dispatch_by_phase", [])
+        if not dispatch:
+            errors.append("roles_and_responsibilities.dispatch_by_phase is empty")
+        for entry in dispatch:
+            for hid in entry.get("helpers", []):
+                if hid not in helper_ids:
+                    errors.append(f"dispatch_by_phase references unknown helper: {hid}")
+
+    for helper in helpers:
+        hid = helper.get("id", "?")
+        owners = helper.get("owners", {})
+        if not owners.get("spec") or not owners.get("gdscript"):
+            errors.append(f"{hid}: owners.spec and owners.gdscript required")
+        if helper.get("kind") == "autoload" and owners.get("autoload_registration") != "builder":
+            errors.append(f"{hid}: autoload must set owners.autoload_registration=builder")
+
     if errors:
         print("HELPERS REGISTRY VALIDATION FAILED", file=sys.stderr)
         for err in errors:

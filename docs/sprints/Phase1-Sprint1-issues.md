@@ -53,6 +53,11 @@ L2_boot_headless          # SKIP until main_scene set — OK for this issue only
 
 Merge latest `main` into `game/development`. Run `bash tools/setup_dev_environment.sh`. Create minimal Godot 4.7 Forward+ project shell (`game/project.godot`, autoload stubs, `game/tests/unit/test_runner.gd`). No ship `.tscn` without GDAI — stub `run/main_scene` only when boot test is ready.
 
+**Core helpers (R&R — `docs/GDSCRIPT_REGENERATION.md` §2):**
+- **Architect:** port `event_bus.gd` from `helpers_registry.json` (signals only)
+- **Builder:** register `EventBus` autoload in `project.godot` via GDAI MCP
+- Phase 2+ helpers (`SettingsStore`, `SaveIntegrity`, etc.) are **not** in P1-00 — PM dispatches per `helpers_registry.json` → `dispatch_by_phase`
+
 Verify full MCP + extended toolchain before marking done:
 
 ```bash
@@ -73,6 +78,8 @@ bash tools/run_ci_checks.sh
 ### Definition of done
 
 - [ ] `game/project.godot` exists on `game/development`
+- [ ] **Architect:** `event_bus.gd` ported per `helpers_registry.json`
+- [ ] **Builder:** `EventBus` autoload registered via GDAI MCP
 - [ ] `bash tools/run_ci_checks.sh` exits 0 (or only expected SKIP gates documented in PR)
 - [ ] MCP stack PASS (`check_mcp_ready.sh` + `check_extended_toolchain.sh`)
 - [ ] PR merged to `game/development`
