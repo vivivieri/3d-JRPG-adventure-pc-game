@@ -90,7 +90,8 @@
       "handoff_refs": [
         "docs/workflow/BRANCHING.md",
         "AGENTS.md",
-        "tools/bootstrap_game_development.sh"
+        "tools/bootstrap_game_development.sh",
+        "tools/run_bootstrap_ci_checks.sh"
       ],
       "linear_issue": null
     },

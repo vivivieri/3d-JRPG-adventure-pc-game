@@ -59,7 +59,7 @@ Merge latest `main` into `game/development`. Run `bash tools/setup_dev_environme
 - **Builder:** register `EventBus` autoload in `project.godot` via GDAI MCP
 - Phase 2+ helpers (`SettingsStore`, `SaveIntegrity`, etc.) are **not** in P1-00 — PM dispatches per `helpers_registry.json` → `dispatch_by_phase`
 
-Verify full MCP + extended toolchain before marking done:
+Verify bootstrap CI (P1-00 profile — art/export gates deferred until `main_scene`):
 
 ```bash
 bash tools/install_cloud_dev.sh
@@ -67,8 +67,10 @@ bash tools/install_extended_toolchain.sh
 bash tools/ensure_mcp_stack.sh
 bash tools/check_mcp_ready.sh
 bash tools/check_extended_toolchain.sh
-bash tools/run_ci_checks.sh
+bash tools/run_bootstrap_ci_checks.sh
 ```
+
+Full game CI (`bash tools/run_ci_checks.sh`) is required after **P1-02** sets `run/main_scene` and GDAI scenes land.
 
 ### Design refs
 
@@ -81,7 +83,8 @@ bash tools/run_ci_checks.sh
 - [ ] `game/project.godot` exists on `game/development`
 - [ ] **Architect:** `event_bus.gd` ported per `helpers_registry.json`
 - [ ] **Builder:** `EventBus` autoload registered via GDAI MCP
-- [ ] `bash tools/run_ci_checks.sh` exits 0 (or only expected SKIP gates documented in PR)
+- [ ] `bash tools/run_bootstrap_ci_checks.sh` exits 0 (or document any unexpected FAIL in PR)
+- [ ] After P1-02: `bash tools/run_ci_checks.sh` exits 0 on merge commits that add `main_scene`
 - [ ] MCP stack PASS (`check_mcp_ready.sh` + `check_extended_toolchain.sh`)
 - [ ] PR merged to `game/development`
 

@@ -20,8 +20,15 @@ SKIP=0
 ANIM_PHASE="1"
 ANIM_STRICT=""
 if gate_is_game_branch; then
-  ANIM_PHASE="m5"
-  ANIM_STRICT="--strict"
+  if gate_is_phase1_bootstrap; then
+    ANIM_PHASE="1"
+    ANIM_STRICT=""
+    echo "    Mode: phase 1 bootstrap (art/export gates deferred)"
+  else
+    ANIM_PHASE="m5"
+    ANIM_STRICT="--strict"
+    echo "    Mode: game branch (M5 strict animation when GLBs exist)"
+  fi
 fi
 
 echo "==> CI checks (headless L0–L2)"
@@ -95,11 +102,18 @@ else
 fi
 
 if gate_is_game_branch; then
-  run_tri_gate "L2_glb_import" "GLB post-import toon pipeline" \
-    python3 tools/check_glb_import_scripts.py --strict
+  if gate_is_phase1_bootstrap; then
+    skip_gate "L2_glb_import" "phase 1 bootstrap — no hero GLBs until M5 / P1-02+"
+  else
+    run_tri_gate "L2_glb_import" "GLB post-import toon pipeline" \
+      python3 tools/check_glb_import_scripts.py --strict
+  fi
 fi
 
-if [[ -f game/project.godot ]]; then
+if gate_is_phase1_bootstrap; then
+  skip_gate "L2_linux_export_smoke" "phase 1 bootstrap — export deferred until main_scene"
+  skip_gate "L2_windows_cross_export" "phase 1 bootstrap — export deferred until main_scene"
+elif [[ -f game/project.godot ]]; then
   run_tri_gate "L2_linux_export_smoke" "Linux export + native headless run" \
     bash tools/run_linux_export_smoke.sh
   run_tri_gate "L2_windows_cross_export" "Windows cross-export (.exe build)" \

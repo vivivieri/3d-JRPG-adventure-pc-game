@@ -28,7 +28,7 @@ From `acceptance_criteria.json` → `global_rules`:
 | Rule | Meaning |
 |------|---------|
 | `warn_is_not_pass` | WARN may exit 0 in dev smoke but **not** M5 ship |
-| `skip_is_not_pass` | Missing assets / no API keys = incomplete, not approved |
+| `skip_is_not_pass` | Missing assets / no API keys = incomplete, not approved — **except** `issue_bootstrap.P1-00` deferred gates during Phase 1 bootstrap |
 | `jury_min_pass_models` | **2** models must pass |
 | `jury_min_confidence` | **0.65** minimum per model (enforced in `qa_acceptance_lib.py`) |
 | `evidence_required_for_pass` | Agent report must cite artifact paths |

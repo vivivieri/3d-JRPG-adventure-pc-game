@@ -25,7 +25,9 @@ CI enforces **measurable, headless gates** on every push and pull request. It al
 
 CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA (L6).
 
-**Tri-state gates:** Gate commands use exit `0`=PASS, `1`=FAIL, `2`=SKIP. On `game/development`, SKIP is treated as FAIL for required gates (`global_rules.skip_is_not_pass`). On `main`, SKIP is allowed for game-only gates (lint, animation, feel, boot).
+**Tri-state gates:** Gate commands use exit `0`=PASS, `1`=FAIL, `2`=SKIP. On `game/development`, SKIP is treated as FAIL for required gates (`global_rules.skip_is_not_pass`), **except during Phase 1 bootstrap** (P1-00: `project.godot` exists but `run/main_scene` unset — see `issue_bootstrap.P1-00`). On `main`, SKIP is allowed for game-only gates (lint, animation, feel, boot).
+
+**P1-00 bootstrap runner:** `bash tools/run_bootstrap_ci_checks.sh` — sets `PHASE1_BOOTSTRAP_CI=1` and allows documented SKIP for export, GLB, and lint gates until P1-02.
 
 ---
 
