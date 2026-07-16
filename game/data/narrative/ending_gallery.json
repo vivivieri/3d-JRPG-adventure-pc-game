@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "endings": [
+    {
+      "id": "rewind",
+      "scene_id": "SC-17a",
+      "ending_chosen": "rewind",
+      "title": {
+        "en": "Rewind",
+        "ja": "巻き戻し",
+        "zh": "回溯",
+        "zh-Hant": "回溯"
+      },
+      "philosophy_blurb": {
+        "en": "Return the stolen years. Let the village live — even if you cannot stay.",
+        "ja": "奪われた歳を返す。村を生かせ——たとえお前が残れなくても。",
+        "zh": "归还被偷走的岁月。让村庄活下去——即便你无法留下。",
+        "zh-Hant": "歸還被偷走的歲月。讓村莊活下去——即便你無法留下。"
+      },
+      "thumbnail_key": "gallery_rewind"
+    },
+    {
+      "id": "anchor",
+      "scene_id": "SC-17b",
+      "ending_chosen": "anchor",
+      "title": {
+        "en": "Anchor",
+        "ja": "錨",
+        "zh": "锚定",
+        "zh-Hant": "錨定"
+      },
+      "philosophy_blurb": {
+        "en": "Break the bargain. Begin again on this shore — scarred, honest, slow.",
+        "ja": "取引を壊せ。この岸でやり直す——傷つき、正直に、ゆっくりと。",
+        "zh": "打碎交易。在这片海岸重新开始——带着伤痕，诚实而缓慢。",
+        "zh-Hant": "打碎交易。在這片海岸重新開始——帶著傷痕，誠實而緩慢。"
+      },
+      "thumbnail_key": "gallery_anchor"
+    },
+    {
+      "id": "drift",
+      "scene_id": "SC-17c",
+      "ending_chosen": "drift",
+      "title": {
+        "en": "Drift",
+        "ja": "漂う",
+        "zh": "漂流",
+        "zh-Hant": "漂流"
+      },
+      "philosophy_blurb": {
+        "en": "Refuse every price. Let the sea keep its secrets — and its temptation.",
+        "ja": "どの代償も拒め。海に秘密を——誘惑も——任せよ。",
+        "zh": "拒绝一切代价。让大海守住秘密——也守住诱惑。",
+        "zh-Hant": "拒絕一切代價。讓大海守住秘密——也守住誘惑。"
+      },
+      "thumbnail_key": "gallery_drift"
+    }
+  ]
+}

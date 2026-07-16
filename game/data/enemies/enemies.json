@@ -45,7 +45,46 @@
       },
       "rewards": { "xp": 120, "gold": 45, "drops": [] },
       "intent_display": "charge",
-      "phases": [{ "hp_threshold": 0.5, "announcement": "The drowned rise with me!" }]
+      "phases": [{ "hp_threshold": 0.5, "announcement": "The drowned rise with me!" }],
+      "combat_barks": {
+        "battle_start": {
+          "en": "You left us to the tide.",
+          "ja": "お前は俺たちを潮に残していった。",
+          "zh": "你把我们留给了潮水。",
+          "zh-Hant": "你把我們留給了潮水。"
+        },
+        "on_defeat": {
+          "en": "Rest... we only wanted you to see.",
+          "ja": "休め……ただ、見てほしかっただけだ。",
+          "zh": "安息吧……我们只是想让你看见。",
+          "zh-Hant": "安息吧……我們只是想讓你看見。"
+        },
+        "skills": {
+          "drown_touch": {
+            "en": "The tide remembers your face.",
+            "ja": "潮はお前の顔を覚えている。",
+            "zh": "潮水记得你的脸。",
+            "zh-Hant": "潮水記得你的臉。"
+          },
+          "regret_surge": {
+            "en": "We drowned waiting.",
+            "ja": "待つうちに、溺れた。",
+            "zh": "我们在等待中溺亡。",
+            "zh-Hant": "我們在等待中溺亡。"
+          }
+        },
+        "phases": [
+          {
+            "hp_threshold": 0.5,
+            "text": {
+              "en": "Do not look away from us now.",
+              "ja": "今こそ、俺たちから目を逸らすな。",
+              "zh": "现在别再把目光移开。",
+              "zh-Hant": "現在別再把目光移開。"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "palace_sentinel",
@@ -69,7 +108,35 @@
         ]
       },
       "intent_display": "attack",
-      "spirit_weakness": 1.5
+      "spirit_weakness": 1.5,
+      "combat_barks": {
+        "battle_start": {
+          "en": "Stillness is the oath.",
+          "ja": "静止こそが誓い。",
+          "zh": "静止即是誓言。",
+          "zh-Hant": "靜止即是誓言。"
+        },
+        "on_defeat": {
+          "en": "The lacquer cracks. Duty ends.",
+          "ja": "漆がひび割れる。務めは終わる。",
+          "zh": "漆层碎裂。职责终结。",
+          "zh-Hant": "漆層碎裂。職責終結。"
+        },
+        "skills": {
+          "sentinel_cleave": {
+            "en": "None may pass unchanged.",
+            "ja": "変わらぬ者のみ通れ。",
+            "zh": "唯有不变者可通过。",
+            "zh-Hant": "唯有不變者可通過。"
+          },
+          "shell_harden": {
+            "en": "Paradise forbids motion.",
+            "ja": "楽園は動きを禁じる。",
+            "zh": "乐园禁止变动。",
+            "zh-Hant": "樂園禁止變動。"
+          }
+        }
+      }
     },
     {
       "id": "tide_keeper",
@@ -92,7 +159,70 @@
         { "hp_threshold": 0.66, "announcement": "The tide rises..." },
         { "hp_threshold": 0.33, "announcement": "Time fractures." },
         { "hp_threshold": 0.1, "announcement": "Choose.", "triggers_choice": true }
-      ]
+      ],
+      "combat_barks": {
+        "battle_start": {
+          "en": "Rest here. The world need not hurt you.",
+          "ja": "ここで休みなさい。世の苦しみは届きません。",
+          "zh": "在此歇息吧。尘世伤不到你。",
+          "zh-Hant": "在此歇息吧。塵世傷不到你。"
+        },
+        "on_defeat": {
+          "en": "Then carry the tide yourself.",
+          "ja": "なら、潮を自分で背負え。",
+          "zh": "那就由你自己背负潮水吧。",
+          "zh-Hant": "那就由你自己背負潮水吧。"
+        },
+        "skills": {
+          "drown_touch": {
+            "en": "Gentle currents pull you back.",
+            "ja": "優しい流れが、お前を引き戻す。",
+            "zh": "温柔的洋流将你拉回。",
+            "zh-Hant": "溫柔的洋流將你拉回。"
+          },
+          "regret_surge": {
+            "en": "Borrow one moment — forget the cost.",
+            "ja": "一瞬を借りよ——代償を忘れて。",
+            "zh": "借走一刻——忘掉代价。",
+            "zh-Hant": "借走一刻——忘掉代價。"
+          },
+          "tide_lament": {
+            "en": "Time folds like wet paper.",
+            "ja": "時は濡れた紙のように折れる。",
+            "zh": "时间像湿纸一样折叠。",
+            "zh-Hant": "時間像濕紙一樣摺疊。"
+          }
+        },
+        "phases": [
+          {
+            "hp_threshold": 0.66,
+            "text": {
+              "en": "Paradise is mercy.",
+              "ja": "楽園は慈悲である。",
+              "zh": "乐园即是慈悲。",
+              "zh-Hant": "樂園即是慈悲。"
+            }
+          },
+          {
+            "hp_threshold": 0.33,
+            "text": {
+              "en": "Every clock you stole ticks here.",
+              "ja": "お前が奪った時計は、すべてここで鳴る。",
+              "zh": "你偷走的每一座钟，都在这里鸣响。",
+              "zh-Hant": "你偷走的每一座鐘，都在這裡鳴響。"
+            }
+          },
+          {
+            "hp_threshold": 0.1,
+            "text": {
+              "en": "Return what was taken — or become the tide.",
+              "ja": "奪ったものを返せ——さもなくば潮になれ。",
+              "zh": "归还所夺之物——或成为潮水。",
+              "zh-Hant": "歸還所奪之物——或成為潮水。"
+            }
+          }
+        ]
+      }
     }
   ]
 }

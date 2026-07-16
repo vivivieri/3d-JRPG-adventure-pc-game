@@ -13,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "game" / "data"
+REQUIRED_LOCALES = ("en", "ja", "zh", "zh-Hant")
 
 
 def load(rel: str) -> dict | list:
@@ -178,6 +179,36 @@ def main() -> int:
                     f"Enemy {en['id']} drops {iid} but encounter "
                     f"{encounter_grants[iid]} already grants it (DATA_ARCHITECTURE §8)"
                 )
+        # combat_barks: locales + skill keys must match enemy kit (DATA_ARCHITECTURE §18)
+        barks = en.get("combat_barks") or {}
+        enemy_skills = set(en.get("skills", []) or [])
+
+        def check_bark_text(label: str, text_obj: object) -> None:
+            if not isinstance(text_obj, dict):
+                errors.append(f"Enemy {en['id']} combat_barks {label} must be a locale object")
+                return
+            for loc in REQUIRED_LOCALES:
+                if not str(text_obj.get(loc, "")).strip():
+                    errors.append(f"Enemy {en['id']} combat_barks {label} missing locale: {loc}")
+
+        for key in ("battle_start", "on_defeat"):
+            if key in barks:
+                check_bark_text(key, barks[key])
+        for sk_id, text_obj in (barks.get("skills") or {}).items():
+            if sk_id not in enemy_skills:
+                errors.append(f"Enemy {en['id']} combat_barks references skill not in kit: {sk_id}")
+            if sk_id not in skill_ids:
+                errors.append(f"Enemy {en['id']} combat_barks unknown skill: {sk_id}")
+            check_bark_text(f"skills.{sk_id}", text_obj)
+        phase_thresholds = {p.get("hp_threshold") for p in en.get("phases", []) or []}
+        for phase_bark in barks.get("phases", []) or []:
+            threshold = phase_bark.get("hp_threshold")
+            if threshold is not None and phase_thresholds and threshold not in phase_thresholds:
+                errors.append(
+                    f"Enemy {en['id']} combat_barks phase hp_threshold {threshold} "
+                    f"not in phases[]"
+                )
+            check_bark_text(f"phases[{threshold}]", phase_bark.get("text"))
 
     party = load("characters/party.json")["characters"]
     char_ids = {c["id"] for c in party}
@@ -292,6 +323,42 @@ def main() -> int:
 
     for rel, data in locale_files:
         check_locales(data, "", rel)
+
+    # Ending gallery — three philosophies, no best-ending badge (REPLAY_DESIGN.md §4)
+    gallery_path = DATA / "narrative" / "ending_gallery.json"
+    if gallery_path.is_file():
+        gallery = load("narrative/ending_gallery.json")
+        ending_enum = flag_defs.get("ending_chosen", {}).get("values") or []
+        gallery_ids: set[str] = set()
+        for entry in gallery.get("endings", []) or []:
+            eid = entry.get("id", "?")
+            gallery_ids.add(eid)
+            chosen = entry.get("ending_chosen")
+            if chosen not in ending_enum:
+                errors.append(f"ending_gallery {eid} ending_chosen invalid: {chosen}")
+            sid = entry.get("scene_id")
+            if sid not in scene_ids:
+                errors.append(f"ending_gallery {eid} unknown scene_id: {sid}")
+            for field in ("title", "philosophy_blurb"):
+                text_obj = entry.get(field)
+                if not isinstance(text_obj, dict):
+                    errors.append(f"ending_gallery {eid} missing {field}")
+                    continue
+                for loc in REQUIRED_LOCALES:
+                    if not str(text_obj.get(loc, "")).strip():
+                        errors.append(f"ending_gallery {eid} {field} missing locale: {loc}")
+        if ending_enum and gallery_ids != set(ending_enum):
+            errors.append(
+                f"ending_gallery endings must cover ending_chosen values: "
+                f"missing {set(ending_enum) - gallery_ids}, extra {gallery_ids - set(ending_enum)}"
+            )
+    else:
+        errors.append("Missing game/data/narrative/ending_gallery.json")
+
+    # combat_barks locale pass (inline i18n on enemy entries)
+    for en in enemies_data:
+        if en.get("combat_barks"):
+            check_locales(en["combat_barks"], en["id"], "enemies/enemies.json")
 
     # translations.csv — required keys for skills, enemies, combat
     csv_path = ROOT / "game" / "locale" / "translations.csv"

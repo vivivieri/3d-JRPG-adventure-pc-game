@@ -130,6 +130,17 @@
           "emotion": "melancholy"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Last year's roster still hangs beside it — Tanaka, Mori, Suzuki, names crossed out in salt.",
+            "ja": "去年の名簿が傍に残っている——田中、森、鈴木。塩で線が引かれている。",
+            "zh": "去年的名册还挂在旁边——田中、森、铃木，名字被盐划掉了。",
+            "zh-Hant": "去年的名冊還掛在旁邊——田中、森、鈴木，名字被鹽劃掉了。"
+          },
+          "emotion": "melancholy"
+        },
+        {
           "speaker": "urashima",
           "portrait": "urashima_weary",
           "text": {
@@ -162,6 +173,17 @@
           "emotion": "dread"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The Tanaka twins always ran barefoot after the dance — their mother scolded them every year.",
+            "ja": "田中の双子は毎年、踊りのあと裸足で走った——母はいつも叱っていた。",
+            "zh": "田中家的双胞胎每年舞后都光着脚跑——他们的母亲年年责骂。",
+            "zh-Hant": "田中家的雙胞胎每年舞後都光著腳跑——他們的母親年年責罵。"
+          },
+          "emotion": "melancholy"
+        },
+        {
           "speaker": "urashima",
           "portrait": "urashima_guilty",
           "text": {
@@ -192,6 +214,17 @@
             "zh-Hant": "井口被海藻堵住了。深處有什麼在閃光——不是銅錢，也不是石頭。"
           },
           "emotion": "uneasy"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Old women drew water here at dawn. The rope is still damp, as if someone left only minutes ago.",
+            "ja": "老婆たちは明け方にここで水を汲んだ。縄はまだ湿っている——数分前に去ったかのように。",
+            "zh": "老妇人们曾在黎明时在此汲水。井绳仍湿漉漉的，仿佛有人刚离开。",
+            "zh-Hant": "老婦人們曾在黎明時在此汲水。井繩仍濕漉漉的，彷彿有人剛離開。"
+          },
+          "emotion": "melancholy"
         },
         {
           "speaker": "urashima",
@@ -463,6 +496,17 @@
           "emotion": "melancholy"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "For a breath, the cave is only salt and two people who remember.",
+            "ja": "一呼吸の間、洞窟は塩と、覚えている二人だけになる。",
+            "zh": "有一瞬，洞穴里只剩盐味和两个还记得的人。",
+            "zh-Hant": "有一瞬，洞穴裡只剩鹽味和兩個還記得的人。"
+          },
+          "emotion": "quiet"
+        },
+        {
           "speaker": "yuzu",
           "portrait": "yuzu_resolved",
           "text": {
@@ -545,6 +589,17 @@
           "emotion": "awe"
         },
         {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Yuzu's lantern steadies. Roku checks his net knots without looking up.",
+            "ja": "柚の灯りが落ち着く。六は顔を上げず、網の結び目を確かめる。",
+            "zh": "柚的灯火稳了下来。六没有抬头，仍在检查网结。",
+            "zh-Hant": "柚的燈火穩了下來。六沒有抬頭，仍在檢查網結。"
+          },
+          "emotion": "quiet"
+        },
+        {
           "speaker": "roku",
           "portrait": "roku_serious",
           "text": {
@@ -593,6 +648,20 @@
           "emotion": "heavy",
           "voice_id": "sc13_roku_01",
           "vo_tier": "p0"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_resolved",
+          "requires_flags": {
+            "inspected_sandal": true
+          },
+          "text": {
+            "en": "That sandal in the puddle... their years were in that water too.",
+            "ja": "あの雨溜まりの草履……彼らの歳も、その水の中にあった。",
+            "zh": "雨洼里的那只草鞋……他们的岁月也在那水里。",
+            "zh-Hant": "雨窪裡的那隻草鞋……他們的歲月也在那水裡。"
+          },
+          "emotion": "guilt"
         },
         {
           "speaker": "urashima",
