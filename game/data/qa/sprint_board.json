@@ -111,7 +111,7 @@
         "L1_gdscript_lint",
         "L0_base_class_compliance"
       ],
-      "status": "pending",
+      "status": "done",
       "depends_on": [
         "P1-00"
       ],
@@ -120,7 +120,7 @@
       ],
       "generation_readiness_id": null,
       "github_issue": null,
-      "last_agent_session": null,
+      "last_agent_session": "2026-07-16T17:28:00+00:00",
       "last_commit_sha": null,
       "escalation_level": 0,
       "carry_over_from": null,

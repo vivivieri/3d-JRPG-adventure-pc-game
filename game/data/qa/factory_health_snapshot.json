@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updated_at": "2026-07-16T17:21:34.777771+00:00",
-  "status": "halted",
-  "last_event": "mcp_blocked",
+  "updated_at": "2026-07-16T17:31:26.878183+00:00",
+  "status": "healthy",
+  "last_event": "orchestrator_pass",
   "last_issue_id": null,
   "last_agent_role": null,
-  "last_commit_sha": "c075cdca0f05f093c04f282f56c789b36869655e",
+  "last_commit_sha": null,
   "sprint_id": "Phase1-Sprint1",
-  "note": "MCP or toolchain check failed",
+  "note": "PM orchestrator PASS",
   "agent_sessions_this_sprint": 0,
-  "factory_halted": true
+  "factory_halted": false
 }

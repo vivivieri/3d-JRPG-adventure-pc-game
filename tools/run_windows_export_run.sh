@@ -20,6 +20,10 @@ fi
 
 # shellcheck source=gate_lib.sh
 source "${ROOT}/tools/gate_lib.sh"
+if ! gate_main_scene_set; then
+  echo "[SKIP] no run/main_scene — export/run deferred until P1-02"
+  exit 2
+fi
 if gate_is_phase1_bootstrap; then
   echo "[SKIP] phase 1 bootstrap — export deferred until main_scene set"
   exit 2

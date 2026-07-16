@@ -18,6 +18,10 @@ tools/godot-mcp-pro-server/
 game/addons/godot-mcp-pro*.zip
 game/addons/gdai-mcp-plugin-godot*.zip
 
+# Godot editor / import cache
+game/.godotiq/
+game/locale/*.translation
+
 # Build output
 build/
 *.exe
