@@ -49,6 +49,8 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L0_factory_watchdog` | `python3 tools/validate_factory_watchdog.py` | Factory stall/hang watchdog config |
 | `L0_stakeholder_report` | `python3 tools/validate_stakeholder_report_config.py` | Product owner report + Telegram config |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
+| `L0_no_secrets` | `bash tools/check_no_secrets.sh` | Exit 0 — no live keys in tracked files |
+| `L0_ship_build_security` | `bash tools/check_ship_build_security.sh` | Exit 0 — export strip policy + binary scan when present |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
 
 ### `game/development` — `game-ci.yml` → `run_ci_checks.sh`

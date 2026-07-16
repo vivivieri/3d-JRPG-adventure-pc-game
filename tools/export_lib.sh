@@ -30,35 +30,24 @@ export_ensure_presets() {
   return 1
 }
 
-export_strip_gdai_begin() {
+export_strip_dev_plugins_begin() {
   local project="${1:?project.godot path}"
   local backup="${2:?backup path}"
   cp "$project" "$backup"
-  python3 - "$project" <<'PY'
-import pathlib
-import re
-import sys
-
-path = pathlib.Path(sys.argv[1])
-text = path.read_text(encoding="utf-8")
-text = re.sub(r"^GDAIMCPRuntime=.*\n", "", text, flags=re.M)
-text = re.sub(
-    r'enabled=PackedStringArray\("res://addons/gdai-mcp-plugin-godot/plugin\.cfg"\)',
-    "enabled=PackedStringArray()",
-    text,
-)
-path.write_text(text, encoding="utf-8")
-print("    Removed GDAIMCPRuntime autoload and editor plugin entry")
-PY
+  python3 tools/godot_strip_dev_plugins.py strip "$project"
 }
 
-export_strip_gdai_restore() {
+export_strip_dev_plugins_restore() {
   local project="${1:?}"
   local backup="${2:?}"
   if [[ -f "$backup" ]]; then
     mv -f "$backup" "$project"
   fi
 }
+
+# Backward-compatible aliases
+export_strip_gdai_begin() { export_strip_dev_plugins_begin "$@"; }
+export_strip_gdai_restore() { export_strip_dev_plugins_restore "$@"; }
 
 export_require_godot() {
   if ! command -v godot4 >/dev/null 2>&1; then
@@ -71,6 +60,9 @@ export_pre_checks() {
   python3 tools/validate_story_data.py
   bash tools/check_asset_compliance.sh || {
     echo "[WARN] Asset compliance reported issues — review before Steam upload"
+  }
+  bash tools/check_ship_build_security.sh || {
+    echo "[WARN] Ship security pre-check reported issues"
   }
 }
 

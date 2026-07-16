@@ -30,6 +30,7 @@ Link the GitHub issue. Check every box that applies to this PR.
 ### QA Agent
 - [ ] Gate report below with **commit SHA**, **gate IDs**, **PASS/FAIL**, **evidence paths**
 - [ ] `bash tools/run_ci_checks.sh` PASS locally (or CI green on this PR)
+- [ ] `bash tools/check_no_secrets.sh` and `bash tools/check_ship_build_security.sh`
 
 ### Flow Agent (if L4/L5 touched)
 - [ ] `bash tools/run_integration_tests.sh` PASS when narrative/combat flows changed
@@ -68,6 +69,8 @@ Evidence paths:
 ## Test plan
 
 - [ ] `bash tools/run_ci_checks.sh`
+- [ ] `bash tools/check_no_secrets.sh`
+- [ ] `bash tools/check_ship_build_security.sh`
 - [ ] `bash tools/check_rr_compliance.sh`
 - [ ] `bash tools/check_l3_gdai_built.sh` (if scenes or main_scene changed)
 - [ ] `bash tools/run_perf_review_checks.sh` (L2 catalog; L3 snapshot if scene/visual)

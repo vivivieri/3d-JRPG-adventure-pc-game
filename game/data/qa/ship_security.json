@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "authority": "docs/SECURITY.md",
+  "design_ref": "docs/PLUGIN_COMPATIBILITY.md, docs/STEAM_RELEASE_CHECKLIST.md §2.9–2.10",
+  "forbidden_autoloads": [
+    "GDAIMCPRuntime",
+    "GodotIQRuntime",
+    "MCPScreenshot",
+    "MCPInputService",
+    "MCPGameInspector"
+  ],
+  "forbidden_editor_plugin_substrings": [
+    "gdai-mcp-plugin-godot",
+    "godot_mcp",
+    "godotiq"
+  ],
+  "forbidden_ship_path_substrings": [
+    "addons/gdai-mcp-plugin-godot",
+    "addons/godot_mcp",
+    "addons/godotiq",
+    "gdai_mcp_server",
+    "GDAIMCPRuntime"
+  ],
+  "export_scripts_must_call": "export_strip_dev_plugins_begin",
+  "secret_scan": {
+    "allowlist_globs": [
+      "docs/CURSOR_SECRETS_SETUP.md",
+      "docs/GITHUB_SETUP.md",
+      "docs/CI.md",
+      "docs/CONTROLS_CHEATSHEET.md",
+      "docs/SECURITY.md",
+      "game/data/qa/stakeholder_report_config.json",
+      "game/data/qa/ship_security.json",
+      "tools/check_no_secrets.py",
+      "tools/setup_github_project.sh",
+      ".github/**"
+    ],
+    "patterns": [
+      { "id": "github_pat", "regex": "github_pat_[A-Za-z0-9_]{20,}" },
+      { "id": "ghp_token", "regex": "ghp_[A-Za-z0-9]{20,}" },
+      { "id": "openai_sk", "regex": "sk-[A-Za-z0-9]{20,}" },
+      { "id": "anthropic_sk", "regex": "sk-ant-[A-Za-z0-9_-]{20,}" },
+      { "id": "telegram_bot", "regex": "[0-9]{8,}:[A-Za-z0-9_-]{30,}" },
+      { "id": "aws_key", "regex": "AKIA[0-9A-Z]{16}" },
+      { "id": "cursor_webhook", "regex": "https://api2\\.cursor\\.sh/auto[a-zA-Z0-9]+" }
+    ]
+  },
+  "supply_chain": {
+    "godot_version": "4.7-stable",
+    "download_urls": {
+      "linux_editor": "https://github.com/godotengine/godot/releases/download/4.7-stable/Godot_v4.7-stable_linux.x86_64.zip",
+      "export_templates": "https://github.com/godotengine/godot/releases/download/4.7-stable/Godot_v4.7-stable_export_templates.tpz"
+    },
+    "pin_checksums": false,
+    "notes": "Set pin_checksums true and add sha256 fields after first audited download"
+  }
+}

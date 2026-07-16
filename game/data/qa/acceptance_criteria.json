@@ -41,7 +41,9 @@
     "Bug fix touching scenes/shaders merged without perf re-check in affected zone",
     "L3_perf_review PASS without baseline_id reference_linux_cloud or reference_pc_gtx1060",
     "FPS ship sign-off from cloud_agent_jit or ci_headless baseline",
-    "Windows-only ship claim while primary dev runs on Linux cloud (see PLATFORM_SUPPORT.md)"
+    "Windows-only ship claim while primary dev runs on Linux cloud (see PLATFORM_SUPPORT.md)",
+    "Ship export without export_strip_dev_plugins_begin (dev MCP/GDAI in build)",
+    "Tracked file contains live API key or webhook URL (L0_no_secrets FAIL)"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -187,6 +189,24 @@
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/delivery_control.json"],
       "design_ref": "docs/DELIVERY_CONTROL.md, docs/CONTROLS_CHEATSHEET.md"
+    },
+    "L0_no_secrets": {
+      "layer": "L0",
+      "domain": "security",
+      "command": "bash tools/check_no_secrets.sh",
+      "description": "Tracked files must not contain API keys, PATs, or webhook URLs",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/ship_security.json"],
+      "design_ref": "docs/SECURITY.md"
+    },
+    "L0_ship_build_security": {
+      "layer": "L0",
+      "domain": "security",
+      "command": "bash tools/check_ship_build_security.sh",
+      "description": "Export scripts strip dev MCP/GDAI; ship binaries must not contain dev plugin strings",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/ship_security.json", "tools/godot_strip_dev_plugins.py"],
+      "design_ref": "docs/SECURITY.md, docs/STEAM_RELEASE_CHECKLIST.md §2.9–2.10"
     },
     "L0_base_class_compliance": {
       "layer": "L0",
@@ -569,6 +589,8 @@
       "L0_stakeholder_report",
       "L0_pm_orchestrator",
       "L0_rr_compliance",
+      "L0_no_secrets",
+      "L0_ship_build_security",
       "L0_doc_sync",
       "M5_asset_compliance"
     ],
@@ -580,6 +602,8 @@
     "runner": "bash tools/run_ci_checks.sh",
     "required_gates": [
       "L0_rr_compliance",
+      "L0_no_secrets",
+      "L0_ship_build_security",
       "L0_story_data",
       "L0_acceptance_catalog",
       "L0_base_classes",
