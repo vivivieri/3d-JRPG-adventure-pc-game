@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Quick automated smoke checks for fresh-rebuild dev shell.
-# Full manual playtest script: docs/PLAYTEST_SCRIPT.md (re-enable after Phase 2+).
+# Full manual playtest script: docs/qa/PLAYTEST_SCRIPT.md (re-enable after Phase 2+).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -184,7 +184,7 @@ check_model_smoke
 echo ""
 echo "Passed: $PASS | Failed: $FAIL | Warnings: $WARN"
 echo ""
-echo "Rebuild phases: docs/IMPLEMENTATION_PLAN.md"
+echo "Rebuild phases: docs/workflow/IMPLEMENTATION_PLAN.md"
 echo "  Phase 1: ruined_village environment vertical slice via GDAI MCP"
 
 exit "$FAIL"

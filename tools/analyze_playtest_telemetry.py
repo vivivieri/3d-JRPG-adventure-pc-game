@@ -4,9 +4,9 @@
 Reads one or more JSONL playtest telemetry logs (one event object per line, schema:
 game/data/qa/playtest_telemetry_schema.json), rolls them into pacing / combat /
 progression / ending metrics, and reports each metric against the thresholds in
-the schema (cross-referenced to docs/ACCEPTANCE_CRITERIA.md gates). This is a
+the schema (cross-referenced to docs/qa/ACCEPTANCE_CRITERIA.md gates). This is a
 development QA aid — a red metric opens a remediation item
-(docs/QA_REMEDIATION_LOOP.md), it does not by itself block ship.
+(docs/qa/QA_REMEDIATION_LOOP.md), it does not by itself block ship.
 
 Usage:
   python3 tools/analyze_playtest_telemetry.py <log.jsonl | logs_dir>
@@ -322,7 +322,7 @@ def print_report(agg: dict[str, Any], checks: list[dict]) -> None:
     n_warn = sum(1 for c in checks if c["status"] == WARN)
     print(f"Summary: {len(checks) - n_fail - n_warn} PASS, {n_warn} WARN, {n_fail} FAIL")
     if n_fail or n_warn:
-        print("On WARN/FAIL: open a remediation item (docs/QA_REMEDIATION_LOOP.md) — change one lever, re-measure.")
+        print("On WARN/FAIL: open a remediation item (docs/qa/QA_REMEDIATION_LOOP.md) — change one lever, re-measure.")
 
 
 # --------------------------------------------------------------------------- #
@@ -492,7 +492,7 @@ def build_markdown_report(agg: dict[str, Any], checks: list[dict], chart_paths: 
         lines += ["", "## Charts"]
         for p in chart_paths:
             lines.append(f"- `{p}`")
-    lines += ["", "_Dev-time Games User Research telemetry — feeds docs/QA_REMEDIATION_LOOP.md. Not a ship gate._"]
+    lines += ["", "_Dev-time Games User Research telemetry — feeds docs/qa/QA_REMEDIATION_LOOP.md. Not a ship gate._"]
     return "\n".join(lines) + "\n"
 
 

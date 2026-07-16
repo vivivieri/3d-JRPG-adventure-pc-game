@@ -2,7 +2,7 @@
 
 **Purpose:** Presentation art for pitches and storyboard alignment. **Not** final in-game 3D assets.
 
-**Full spec:** [`docs/STORYBOARD_ILLUSTRATIONS.md`](../../STORYBOARD_ILLUSTRATIONS.md)
+**Full spec:** [`docs/vision/STORYBOARD_ILLUSTRATIONS.md`](../../STORYBOARD_ILLUSTRATIONS.md)
 
 ## Complete set (P0 + P1 + P2)
 
@@ -47,4 +47,4 @@
 
 Drop images into slides in SC order above — one beat per act transition. See `STORYBOARD_ILLUSTRATIONS.md` §8.
 
-**License:** AI-generated pitch art (Cursor image generation, 2026-07) — pitch/marketing use; log in `docs/LICENSES.md`. Replace with 3D renders for final Steam ship.
+**License:** AI-generated pitch art (Cursor image generation, 2026-07) — pitch/marketing use; log in `docs/art/LICENSES.md`. Replace with 3D renders for final Steam ship.

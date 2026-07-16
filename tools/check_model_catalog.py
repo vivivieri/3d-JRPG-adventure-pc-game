@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify required 3D models exist for a phase (docs/MODEL_QA.md §M1)."""
+"""Verify required 3D models exist for a phase (docs/art/MODEL_QA.md §M1)."""
 from __future__ import annotations
 
 import argparse

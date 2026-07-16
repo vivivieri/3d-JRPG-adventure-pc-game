@@ -1,7 +1,7 @@
 name: CD — Steam depot upload
 
 # Manual Steam upload — requires Steamworks setup (App ID, depot VDF, secrets).
-# Do not enable until docs/STEAM_RELEASE_CHECKLIST.md §3 is complete.
+# Do not enable until docs/ci-cd/STEAM_RELEASE_CHECKLIST.md §3 is complete.
 
 on:
   workflow_dispatch:
@@ -48,7 +48,7 @@ jobs:
           fi
           for var in STEAM_APP_ID STEAM_DEPOT_ID STEAM_USERNAME; do
             if [[ -z "${!var}" ]]; then
-              echo "::error::Missing secret $var — see docs/CD.md §5"
+              echo "::error::Missing secret $var — see docs/ci-cd/CD.md §5"
               exit 1
             fi
           done

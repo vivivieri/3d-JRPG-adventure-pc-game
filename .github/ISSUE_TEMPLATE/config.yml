@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: QA process docs
-    url: https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/main/docs/QA_AND_BUG_PROCESS.md
+    url: https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/main/docs/qa/QA_AND_BUG_PROCESS.md
     about: Severity definitions and bug workflow
   - name: Multi-agent team guide
-    url: https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/main/docs/MULTI_AGENT_TEAM.md
+    url: https://github.com/vivivieri/3d-JRPG-adventure-pc-game/blob/main/docs/agents/MULTI_AGENT_TEAM.md
     about: Agent roles and handoffs

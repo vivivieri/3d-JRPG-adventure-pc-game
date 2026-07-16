@@ -1,7 +1,7 @@
 {
   "version": "1.1",
-  "authority": "docs/PERFORMANCE_BASELINE.md, docs/PLATFORM_SUPPORT.md",
-  "design_ref": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9, steam/STORE_PAGE.md",
+  "authority": "docs/qa/PERFORMANCE_BASELINE.md, docs/qa/PLATFORM_SUPPORT.md",
+  "design_ref": "docs/art/RENDERING_GUIDE.md, docs/world/ENVIRONMENT_KITS.md §9, steam/STORE_PAGE.md",
   "primary_baseline_id": "reference_linux_cloud",
   "ship_baseline_ids": ["reference_linux_cloud", "reference_pc_gtx1060"],
   "baselines": {

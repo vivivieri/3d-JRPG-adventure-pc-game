@@ -66,7 +66,7 @@ fi
 
 echo ""
 echo "Passed: $PASS | Failed: $FAIL | Skipped: $SKIP"
-echo "See docs/AI_TESTING_SPEC.md §6 for full INT-* catalog."
+echo "See docs/qa/AI_TESTING_SPEC.md §6 for full INT-* catalog."
 
 if [[ "$FAIL" -gt 0 ]]; then
   exit 1

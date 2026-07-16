@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/models/qa_catalog.json schema and animation_timing (docs/MODEL_QA.md)."""
+"""Validate game/data/models/qa_catalog.json schema and animation_timing (docs/art/MODEL_QA.md)."""
 from __future__ import annotations
 
 import json

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Multi-model listen jury for P0 selective VO clips (docs/AUDIO_QA.md §A5).
+"""Multi-model listen jury for P0 selective VO clips (docs/audio/AUDIO_QA.md §A5).
 
 Requires OPENAI_API_KEY and/or GEMINI_API_KEY. Default gate locale: en.
 """
@@ -177,7 +177,7 @@ def main() -> int:
     if active == 0:
         manual = write_vo_manual_packet(args.out_dir, args.clip, args.locale, path, prompt)
         print(f"No audio API keys. Manual jury: {manual}")
-        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
+        print("SKIP is not PASS — see docs/qa/ACCEPTANCE_CRITERIA.md")
         return 2
     if report["consensus_pass"]:
         print(f"CONSENSUS PASS ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "authority": "docs/SETTINGS_ACCESSIBILITY.md §1",
+  "authority": "docs/ui/SETTINGS_ACCESSIBILITY.md §1",
   "defaults": {
     "locale": "en",
     "vo_dialect": "cant",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Event idempotency and cycle logging — docs/SPRINT_ORCHESTRATION.md."""
+"""Event idempotency and cycle logging — docs/agents/SPRINT_ORCHESTRATION.md."""
 from __future__ import annotations
 
 import hashlib

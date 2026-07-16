@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Enforce CODE_BASE_CLASS_RULES — no rogue extends (docs/CODE_BASE_CLASS_RULES.md)."""
+"""Enforce CODE_BASE_CLASS_RULES — no rogue extends (docs/technical/CODE_BASE_CLASS_RULES.md)."""
 from __future__ import annotations
 
 import json

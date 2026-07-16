@@ -1,6 +1,6 @@
 # Generation briefs
 
-Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/GENERATION_READINESS.md` §3.
+Per-asset and per-zone prompts for autonomous AI 3D pipelines. Template: `docs/art/GENERATION_READINESS.md` §3.
 
 ## Characters & enemies
 

@@ -68,7 +68,7 @@ fi
 echo ""
 if [[ "$FAIL" -gt 0 ]]; then
   echo "MCP readiness: FAILED — do not hand-edit .tscn; notify user and STOP scene work"
-  echo "Docs: docs/GDAI_CLOUD_SETUP.md, docs/MCP_STACK.md"
+  echo "Docs: docs/agents/GDAI_CLOUD_SETUP.md, docs/agents/MCP_STACK.md"
   exit 1
 fi
 

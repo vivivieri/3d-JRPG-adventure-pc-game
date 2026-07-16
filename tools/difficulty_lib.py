@@ -1,4 +1,4 @@
-"""Difficulty multipliers — reference for DifficultyService (docs/COMBAT_SYSTEMS.md §10)."""
+"""Difficulty multipliers — reference for DifficultyService (docs/gameplay/COMBAT_SYSTEMS.md §10)."""
 from __future__ import annotations
 
 import json

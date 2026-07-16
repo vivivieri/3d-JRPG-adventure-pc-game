@@ -3,7 +3,7 @@
 # Triggers architect/builder remediation on game/development CI failure.
 # Does NOT dispatch PM on success — worker emits agent_cycle_complete when fixed.
 #
-# See docs/CLOUD_AGENT_SETUP_RUNBOOK.md · docs/FACTORY_WATCHDOG.md
+# See docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md · docs/agents/FACTORY_WATCHDOG.md
 
 name: Game CI failure triage
 

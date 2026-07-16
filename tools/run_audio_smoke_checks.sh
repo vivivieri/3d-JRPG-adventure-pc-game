@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # L2 audio smoke: catalog + technical + optional LLM jury when bgm_village.ogg exists.
-# WARN (exit 0) when gate track missing or dev placeholders — docs/AUDIO_QA.md.
+# WARN (exit 0) when gate track missing or dev placeholders — docs/audio/AUDIO_QA.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -16,7 +16,7 @@ warn() { echo "[WARN] $1"; WARN=$((WARN + 1)); }
 fail() { echo "[FAIL] $1"; FAIL=$((FAIL + 1)); }
 pass() { echo "[PASS] $1"; }
 
-echo "==> Audio smoke checks (docs/AUDIO_QA.md)"
+echo "==> Audio smoke checks (docs/audio/AUDIO_QA.md)"
 echo "    Gate track: ${GATE_TRACK}"
 echo ""
 

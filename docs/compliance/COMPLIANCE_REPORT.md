@@ -1,20 +1,21 @@
 # Asset Compliance Report
 
-**Generated:** 2026-07-16 09:35:50 UTC  
+**Generated:** 2026-07-16 15:51:09 UTC  
 **Status:** PASSED  
-**Policy:** [docs/ASSET_COMPLIANCE.md](../ASSET_COMPLIANCE.md)  
+**Policy:** [docs/art/ASSET_COMPLIANCE.md](../ASSET_COMPLIANCE.md)  
 **Manifest:** `docs/asset_manifest.license.json`
 
 ## Verification output
 
 ```
 ASSET LICENSE CHECK PASSED
-  Policy: docs/ASSET_COMPLIANCE.md
+  Policy: docs/art/ASSET_COMPLIANCE.md
   Manifest: docs/asset_manifest.license.json
   Media files scanned: 5
   Covered by manifest: 5
   Allowed license types: 12
-  Warnings: 35 (paths not present on this branch)
+  Warnings: 36 (paths not present on this branch)
+    - Scan path not present (no media to check): game/assets
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Regular.ttf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSans-Bold.ttf
     - Manifest entry file not on disk yet: game/assets/fonts/NotoSansJP-Regular.otf

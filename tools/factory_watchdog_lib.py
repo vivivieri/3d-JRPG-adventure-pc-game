@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Factory health watchdog — stall/hang detection and recovery hints.
 
-Authority: docs/FACTORY_WATCHDOG.md
+Authority: docs/agents/FACTORY_WATCHDOG.md
 Normal PM flow stays event-driven; this module handles exceptions only.
 """
 from __future__ import annotations

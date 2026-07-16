@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Multi-model vision jury for game screenshots (docs/VISUAL_QA.md §2G).
+"""Multi-model vision jury for game screenshots (docs/art/VISUAL_QA.md §2G).
 
 Calls configured vision LLM APIs with the same ART_DIRECTION checklist.
 Ship gate: >= min_pass of configured models must return overall_pass=true.
@@ -328,7 +328,7 @@ def main() -> int:
         manual = write_manual_packet(args.out_dir, args.screenshot, args.zone, args.scene, args.view, prompt)
         print(f"No vision API keys configured. Manual jury packet: {manual}")
         print("Set OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY in Cursor Secrets, or run manual jury in Cursor.")
-        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
+        print("SKIP is not PASS — see docs/qa/ACCEPTANCE_CRITERIA.md")
         return 2
 
     if report["consensus_pass"]:
@@ -337,8 +337,8 @@ def main() -> int:
 
     print(f"CONSENSUS FAIL ({consensus['passed_models']}/{consensus['active_models']} models, gate {consensus['gate_id']})")
     print(f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} --log-attempt")
-    print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
-    print("See docs/ACCEPTANCE_CRITERIA.md — PASS requires measurable criteria met.")
+    print("See docs/qa/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
+    print("See docs/qa/ACCEPTANCE_CRITERIA.md — PASS requires measurable criteria met.")
     return 1
 
 

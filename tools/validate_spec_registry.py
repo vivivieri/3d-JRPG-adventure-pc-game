@@ -67,7 +67,7 @@ def main() -> int:
         print("SPEC REGISTRY VALIDATION FAILED", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
-        print("\nPolicy: docs/SPEC_FIRST_DEVELOPMENT.md", file=sys.stderr)
+        print("\nPolicy: docs/technical/SPEC_FIRST_DEVELOPMENT.md", file=sys.stderr)
         return 1
 
     gate = registry.get("development_start", {}).get("gate_id", "SPEC_DEV_START")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Technical audio QA: format, loudness, duration, placeholder detection (docs/AUDIO_QA.md §A2)."""
+"""Technical audio QA: format, loudness, duration, placeholder detection (docs/audio/AUDIO_QA.md §A2)."""
 from __future__ import annotations
 
 import argparse

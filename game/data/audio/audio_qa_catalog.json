@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "Unified audio QA catalog \u2014 BGM + selective VO. See docs/AUDIO_PRODUCTION_GUIDE.md, docs/AUDIO_QA.md",
-  "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md",
+  "authority": "Unified audio QA catalog \u2014 BGM + selective VO. See docs/audio/AUDIO_PRODUCTION_GUIDE.md, docs/audio/AUDIO_QA.md",
+  "design_ref": "docs/audio/AUDIO_PRODUCTION_GUIDE.md",
   "phase_required": {
     "1": [
       "bgm_village"

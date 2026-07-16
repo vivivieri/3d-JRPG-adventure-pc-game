@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/ESCALATION_POLICY.md",
-  "design_ref": "docs/QA_REMEDIATION_LOOP.md, docs/QA_AND_BUG_PROCESS.md, docs/RR_CHEATSHEET.md",
+  "authority": "docs/qa/ESCALATION_POLICY.md",
+  "design_ref": "docs/qa/QA_REMEDIATION_LOOP.md, docs/qa/QA_AND_BUG_PROCESS.md, docs/cheat-sheets/RR_CHEATSHEET.md",
   "principles": [
     "No infinite loops: every dispute converges to a decision within a bounded number of attempts.",
     "dev and QA cannot change requirements — only the arbiter (Architect / Design Authority) or the Product Owner can.",

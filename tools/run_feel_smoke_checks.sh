@@ -8,7 +8,7 @@ cd "$ROOT"
 THRESHOLDS="${ROOT}/game/data/qa/feel_thresholds.json"
 PLAYER="${ROOT}/game/scripts/exploration/player_controller.gd"
 
-echo "==> Feel smoke checks (docs/GAME_FEEL.md)"
+echo "==> Feel smoke checks (docs/gameplay/GAME_FEEL.md)"
 echo ""
 
 if [[ ! -f "$THRESHOLDS" ]]; then

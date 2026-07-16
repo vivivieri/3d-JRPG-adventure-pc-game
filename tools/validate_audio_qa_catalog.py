@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/audio/audio_qa_catalog.json (docs/AUDIO_QA.md, AUDIO_PRODUCTION_GUIDE)."""
+"""Validate game/data/audio/audio_qa_catalog.json (docs/audio/AUDIO_QA.md, AUDIO_PRODUCTION_GUIDE)."""
 from __future__ import annotations
 
 import json

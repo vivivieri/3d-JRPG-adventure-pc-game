@@ -2,7 +2,7 @@
 """Validate narrative pattern density against ship budgets (L0 gate).
 
 Prevents over-application of combat barks, quiet beats, flag callbacks, and
-inspect lines in a 2–3 hour game. Policy: docs/NARRATIVE_DENSITY.md
+inspect lines in a 2–3 hour game. Policy: docs/vision/NARRATIVE_DENSITY.md
 """
 from __future__ import annotations
 
@@ -185,7 +185,7 @@ def main() -> int:
         print("NARRATIVE DENSITY VALIDATION FAILED", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
-        print("\nPolicy: docs/NARRATIVE_DENSITY.md", file=sys.stderr)
+        print("\nPolicy: docs/vision/NARRATIVE_DENSITY.md", file=sys.stderr)
         return 1
 
     print(

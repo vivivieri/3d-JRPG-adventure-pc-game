@@ -9,7 +9,7 @@ Enforces that a delivery (e.g. Telegram report) only goes out when:
 Reviewers are shown an explicit review checklist so they know exactly what to
 inspect. Every action (request / review / approve / deliver) is audited.
 Reusable across delivery activities via game/data/qa/delivery_control.json.
-See docs/DELIVERY_CONTROL.md.
+See docs/workflow/DELIVERY_CONTROL.md.
 
 Flow:
   producer:  analyze_...  --telegram            # creates a review request, HOLDS (no send)

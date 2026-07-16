@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "authority": "docs/SPRINT_ORCHESTRATION.md",
+  "authority": "docs/agents/SPRINT_ORCHESTRATION.md",
   "design_ref": "docs/sprints/Phase1-Sprint1-issues.md",
   "active_sprint": {
     "id": "Phase1-Sprint1",
@@ -85,7 +85,7 @@
       "done_requires": "ci_green_on_branch",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/BRANCHING.md",
+        "docs/workflow/BRANCHING.md",
         "AGENTS.md",
         "tools/bootstrap_game_development.sh"
       ],
@@ -123,9 +123,9 @@
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/RENDERING_GUIDE.md",
-        "docs/ENVIRONMENT_KITS.md",
-        "docs/ART_DIRECTION.md"
+        "docs/art/RENDERING_GUIDE.md",
+        "docs/world/ENVIRONMENT_KITS.md",
+        "docs/art/ART_DIRECTION.md"
       ],
       "linear_issue": null
     },
@@ -165,9 +165,9 @@
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/MCP_STACK.md",
-        "docs/ENVIRONMENT_KITS.md",
-        "docs/RENDERING_GUIDE.md"
+        "docs/agents/MCP_STACK.md",
+        "docs/world/ENVIRONMENT_KITS.md",
+        "docs/art/RENDERING_GUIDE.md"
       ],
       "linear_issue": null
     },
@@ -201,8 +201,8 @@
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/RENDERING_GUIDE.md",
-        "docs/ART_DIRECTION.md"
+        "docs/art/RENDERING_GUIDE.md",
+        "docs/art/ART_DIRECTION.md"
       ],
       "linear_issue": null
     },
@@ -245,8 +245,8 @@
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/ACCEPTANCE_CRITERIA.md",
-        "docs/AI_TESTING_SPEC.md"
+        "docs/qa/ACCEPTANCE_CRITERIA.md",
+        "docs/qa/AI_TESTING_SPEC.md"
       ],
       "linear_issue": null
     },
@@ -280,8 +280,8 @@
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/VISUAL_QA.md",
-        "docs/GENERATION_READINESS.md"
+        "docs/art/VISUAL_QA.md",
+        "docs/art/GENERATION_READINESS.md"
       ],
       "linear_issue": null
     },
@@ -310,7 +310,7 @@
       "done_requires": "push_only",
       "branch_name_pattern": "cursor/{issue_id}-a091",
       "handoff_refs": [
-        "docs/SPRINT_ORCHESTRATION.md",
+        "docs/agents/SPRINT_ORCHESTRATION.md",
         "game/data/qa/sprint_phases.json"
       ],
       "linear_issue": null

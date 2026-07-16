@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Main-branch CI — documentation and design data only (no Godot runtime).
 # Full game CI: game/development branch → bash tools/run_ci_checks.sh
-# See docs/BRANCHING.md
+# See docs/workflow/BRANCHING.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -25,7 +25,7 @@ run_gate() {
 }
 
 echo "==> Main branch CI (docs + design data)"
-echo "    Policy: docs/BRANCHING.md"
+echo "    Policy: docs/workflow/BRANCHING.md"
 
 run_gate "L0_story_data" python3 tools/validate_story_data.py
 run_gate "L0_narrative_density" python3 tools/validate_narrative_density.py

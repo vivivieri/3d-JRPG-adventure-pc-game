@@ -9,7 +9,7 @@ cd "$ROOT"
 CONFIG="${ROOT}/game/data/qa/ship_security.json"
 PROJECT="${ROOT}/game/project.godot"
 
-echo "==> Ship build security (docs/SECURITY.md)"
+echo "==> Ship build security (docs/qa/SECURITY.md)"
 echo ""
 
 if [[ ! -f "$CONFIG" ]]; then

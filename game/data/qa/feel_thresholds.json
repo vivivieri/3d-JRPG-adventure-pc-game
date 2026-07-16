@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/GAME_FEEL.md — measurable feel thresholds for automated smokes",
+  "authority": "docs/gameplay/GAME_FEEL.md — measurable feel thresholds for automated smokes",
   "scenarios": [
     {
       "id": "feel_input_latency",

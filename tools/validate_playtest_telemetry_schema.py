@@ -3,7 +3,7 @@
 
 Checks structure of the playtest telemetry schema and keeps its thresholds
 aligned with the rest of the QA catalog (feel_thresholds.json combat turn time,
-acceptance_criteria.json endings). See docs/PLAYTEST_TELEMETRY.md.
+acceptance_criteria.json endings). See docs/qa/PLAYTEST_TELEMETRY.md.
 """
 from __future__ import annotations
 

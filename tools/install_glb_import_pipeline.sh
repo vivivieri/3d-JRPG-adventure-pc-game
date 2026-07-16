@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copy GLB post-import + toon shader into game project (game/development).
-# See docs/MODEL_QA.md §M2b
+# See docs/art/MODEL_QA.md §M2b
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate structured remediation brief from QA jury JSON or technical checks.
 
-docs/QA_REMEDIATION_LOOP.md — prevents infinite retry with same pipeline.
+docs/qa/QA_REMEDIATION_LOOP.md — prevents infinite retry with same pipeline.
 """
 from __future__ import annotations
 
@@ -405,7 +405,7 @@ def format_brief(
             ]
         )
     lines.append("")
-    doc = "docs/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio", "vo") else "docs/FLOW_QA.md"
+    doc = "docs/qa/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio", "vo") else "docs/qa/FLOW_QA.md"
     lines.append("---")
     lines.append(f"See `{doc}` for industry refs and stop rules.")
     return "\n".join(lines)

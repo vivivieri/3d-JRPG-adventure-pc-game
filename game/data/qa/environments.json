@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "Deployment environment catalog — docs/ENVIRONMENTS.md",
+  "authority": "Deployment environment catalog — docs/ci-cd/ENVIRONMENTS.md",
   "environments": {
     "design": {
       "branch": "main",
@@ -40,7 +40,7 @@
       "cd_runner": "bash tools/run_cd_gates.sh --channel rc",
       "github_environment": "uat",
       "human_gate": true,
-      "human_gate_doc": "docs/PLAYTEST_SCRIPT.md",
+      "human_gate_doc": "docs/qa/PLAYTEST_SCRIPT.md",
       "prerequisite_gates": ["L0", "L1", "L2", "L4"],
       "agent_lead": "pm",
       "issue_labels": ["env/uat"]
@@ -71,12 +71,12 @@
       "prerequisite_gates": ["L0", "L1", "L2", "L4", "L5", "L6"],
       "agent_lead": "release",
       "issue_labels": ["env/production"],
-      "design_ref": "docs/STEAM_RELEASE_CHECKLIST.md"
+      "design_ref": "docs/ci-cd/STEAM_RELEASE_CHECKLIST.md"
     }
   },
   "promotion_chain": ["design", "development", "qa", "uat", "preproduction", "production"],
   "multi_agent_roles": [
     "pm", "architect", "builder", "qa", "flow", "debugger", "release", "visual", "human"
   ],
-  "design_ref": "docs/ENVIRONMENTS.md, docs/MULTI_AGENT_TEAM.md, docs/PROJECT_MANAGEMENT.md"
+  "design_ref": "docs/ci-cd/ENVIRONMENTS.md, docs/agents/MULTI_AGENT_TEAM.md, docs/agents/PROJECT_MANAGEMENT.md"
 }

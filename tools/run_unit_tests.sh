@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run Godot headless unit tests (L1 in docs/AI_DEV_WORKFLOW.md).
+# Run Godot headless unit tests (L1 in docs/workflow/AI_DEV_WORKFLOW.md).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

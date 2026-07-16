@@ -11,7 +11,7 @@
 #   TELEGRAM_BOT_TOKEN — from @BotFather
 #   TELEGRAM_CHAT_ID   — your chat id (message @userinfobot or getUpdates)
 #
-# Authority: docs/PM_STAKEHOLDER_REPORTING.md
+# Authority: docs/agents/PM_STAKEHOLDER_REPORTING.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

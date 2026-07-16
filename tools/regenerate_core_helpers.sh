@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Checklist + validation for porting core helpers from main specs to game/development.
-# See docs/GDSCRIPT_REGENERATION.md
+# See docs/technical/GDSCRIPT_REGENERATION.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -17,7 +17,7 @@ print_checklist() {
   echo "  EventBus autoload wire-up     -> Builder (GDAI MCP)"
   echo "  Gate verification             -> QA Agent"
   echo "  Dispatch timing               -> PM Agent (helpers_registry dispatch_by_phase)"
-  echo "  Full policy: docs/GDSCRIPT_REGENERATION.md §2"
+  echo "  Full policy: docs/technical/GDSCRIPT_REGENERATION.md §2"
   echo ""
   echo "Prerequisites:"
   echo "  git checkout game/development && git merge main"
@@ -45,7 +45,7 @@ PY
   echo "Recover prior ports (diff hints):"
   echo "  git show 544dca9^:game/scripts/core/<file>.gd"
   echo ""
-  echo "Full guide: docs/GDSCRIPT_REGENERATION.md"
+  echo "Full guide: docs/technical/GDSCRIPT_REGENERATION.md"
 }
 
 run_check() {

@@ -2,7 +2,7 @@
 """Generate BGM via ACE-Step 1.5 prompts (MIT) with procedural fallback.
 
 Reads track specs from game/data/audio/ace_step_prompts.json.
-Writes prompt sheets to docs/audio_sheets/ and optionally calls ACE-Step API.
+Writes prompt sheets to docs/audio/audio_sheets/ and optionally calls ACE-Step API.
 
 Usage:
   python3 tools/generate_ai_bgm.py --list

@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Severity: S0 blocker · S1 major · S2 minor · S3 polish
-        See `docs/QA_AND_BUG_PROCESS.md` §2.
+        See `docs/qa/QA_AND_BUG_PROCESS.md` §2.
   - type: dropdown
     id: severity
     attributes:

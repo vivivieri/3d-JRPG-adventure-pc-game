@@ -25,7 +25,7 @@ if gate_is_game_branch; then
 fi
 
 echo "==> CI checks (headless L0–L2)"
-echo "    Policy: docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
+echo "    Policy: docs/ci-cd/CI.md, .cursorrules §0, docs/workflow/AI_DEV_WORKFLOW.md §2"
 
 run_tri_gate "L0_rr_compliance" "R&R — no hand-built ship .tscn" \
   bash tools/check_rr_compliance.sh
@@ -131,6 +131,6 @@ echo "  - L2 visual/audio/model jury (requires screenshots + API keys; use run_*
 echo "  - L5 E2E three endings (REQUIRE_L5=1 for Phase 6+ / CD beta|prod)"
 echo "  - L6 human playtest"
 echo ""
-echo "Docs: docs/CI.md"
+echo "Docs: docs/ci-cd/CI.md"
 
 exit "$FAIL"

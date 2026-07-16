@@ -2,7 +2,7 @@
 
 **Status:** Hero BGM · M5 jury scope  
 **Authority:** `game/data/audio/audio_qa_catalog.json`, `game/data/audio/ace_step_prompts.json`  
-**Cross-refs:** `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/AUDIO_DIRECTION.md`
+**Cross-refs:** `docs/audio/AUDIO_PRODUCTION_GUIDE.md`, `docs/audio/AUDIO_DIRECTION.md`
 
 ---
 

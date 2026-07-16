@@ -1,7 +1,7 @@
 # Generation brief — `otohime`
 
 **Status:** M5 cinematic NPC bust  
-**Authority:** `CHARACTER_BIBLE.md` §5, `docs/NARRATIVE_WRITING_GUIDE.md`  
+**Authority:** `CHARACTER_BIBLE.md` §5, `docs/vision/NARRATIVE_WRITING_GUIDE.md`  
 **Phase:** SC-11 flashback, SC-17c underwater glimpse
 
 ## Intent

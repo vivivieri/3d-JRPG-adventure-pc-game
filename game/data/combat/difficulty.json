@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "authority": "docs/COMBAT_SYSTEMS.md §10, docs/PROGRESSION_TUNING.md §6, docs/ENCOUNTER_TABLE.md §10",
+  "authority": "docs/gameplay/COMBAT_SYSTEMS.md §10, docs/gameplay/PROGRESSION_TUNING.md §6, docs/gameplay/ENCOUNTER_TABLE.md §10",
   "modes": {
     "normal": {
       "id": "normal",

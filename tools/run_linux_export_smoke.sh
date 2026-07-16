@@ -10,7 +10,7 @@ source "${ROOT}/tools/export_lib.sh"
 
 export_godot_env "$ROOT"
 
-echo "==> Linux export + run smoke (docs/PLATFORM_SUPPORT.md)"
+echo "==> Linux export + run smoke (docs/qa/PLATFORM_SUPPORT.md)"
 echo ""
 
 if [[ ! -f "${ROOT}/game/project.godot" ]]; then

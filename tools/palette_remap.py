@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Remap generated texture hues toward zone palette rows in docs/ART_DIRECTION.md.
+"""Remap generated texture hues toward zone palette rows in docs/art/ART_DIRECTION.md.
 
 Post-process step for ComfyUI, GameLab, and Material Maker exports.
-See docs/ART_AUTOMATION_PIPELINE.md §6.
+See docs/art/ART_AUTOMATION_PIPELINE.md §6.
 """
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import argparse
 import sys
 from pathlib import Path
 
-# Zone palette anchors (hex) — mirrors docs/ART_DIRECTION.md §1
+# Zone palette anchors (hex) — mirrors docs/art/ART_DIRECTION.md §1
 ZONE_PALETTES: dict[str, list[str]] = {
     "ruined_village": ["#8B9DAF", "#5C4A3A", "#3D5C4A", "#8B3A2A", "#C9B89A"],
     "beach": ["#8B9DAF", "#C9B89A", "#3D5C4A", "#1A4A5A"],

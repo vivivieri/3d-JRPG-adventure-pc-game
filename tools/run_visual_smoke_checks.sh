@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # L2 visual smoke: palette + multi-LLM jury when ruined_village screenshots exist.
-# WARN (exit 0) when screenshots or API keys missing — see docs/VISUAL_QA.md §2G.
+# WARN (exit 0) when screenshots or API keys missing — see docs/art/VISUAL_QA.md §2G.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -30,7 +30,7 @@ find_gameplay_screenshot() {
   return 1
 }
 
-echo "==> Visual smoke checks (docs/VISUAL_QA.md)"
+echo "==> Visual smoke checks (docs/art/VISUAL_QA.md)"
 echo "    Zone: ${ZONE}"
 echo ""
 

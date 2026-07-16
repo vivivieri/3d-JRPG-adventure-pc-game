@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write structured QA gate result JSON (docs/ACCEPTANCE_CRITERIA.md)."""
+"""Write structured QA gate result JSON (docs/qa/ACCEPTANCE_CRITERIA.md)."""
 from __future__ import annotations
 
 import argparse

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Multi-model vision jury on 3D turntable renders (docs/MODEL_QA.md §M3b)."""
+"""Multi-model vision jury on 3D turntable renders (docs/art/MODEL_QA.md §M3b)."""
 from __future__ import annotations
 
 import argparse
@@ -256,7 +256,7 @@ def main() -> int:
             encoding="utf-8",
         )
         print(f"No API keys. Manual jury: {manual}")
-        print("SKIP is not PASS — see docs/ACCEPTANCE_CRITERIA.md")
+        print("SKIP is not PASS — see docs/qa/ACCEPTANCE_CRITERIA.md")
         return 2
     if report["consensus_pass"]:
         print(f"CONSENSUS PASS ({consensus['passed_models']}/{consensus['active_models']}, gate {consensus['gate_id']})")
@@ -266,7 +266,7 @@ def main() -> int:
         f"\nRemediation: python3 tools/qa_remediation_brief.py --jury {out_path} "
         f"--asset-id {args.model} --log-attempt"
     )
-    print("See docs/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
+    print("See docs/qa/QA_REMEDIATION_LOOP.md — change ONE lever before rebuild.")
     return 1
 
 

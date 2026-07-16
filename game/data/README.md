@@ -1,6 +1,6 @@
 # Data Schema — Tides of Urashima
 
-**Story-driven JSON database.** Read `docs/DATA_ARCHITECTURE.md` for design rationale.
+**Story-driven JSON database.** Read `docs/technical/DATA_ARCHITECTURE.md` for design rationale.
 
 ## File layout
 
@@ -21,19 +21,19 @@ game/data/
     audio_qa_catalog.json      # Unified BGM/VO QA catalog (loudness, briefs, jury scope)
     scene_audio_map.json       # Zone/scene → BGM, ambient, sting, duck (AUDIO_PRODUCTION_GUIDE §4)
   models/
-    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md); v1.3+ adds crowd/npc_cinematic rows
+    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/art/MODEL_QA.md); v1.3+ adds crowd/npc_cinematic rows
   qa/
-    remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
-    acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
+    remediation_playbook.json  # Failure code → fix actions (docs/qa/QA_REMEDIATION_LOOP.md)
+    acceptance_criteria.json   # Measurable gate thresholds (docs/qa/ACCEPTANCE_CRITERIA.md)
     feel_thresholds.json       # GAME_FEEL automated smoke thresholds
     integration_scenarios.json # L4 INT-* catalog (implemented / required flags)
     zone_composition.json      # Per-zone path width, vista anchor, golden screenshot paths (GENERATION_READINESS §5)
     generation_readiness_backlog.json  # GR-* items → IMPLEMENTATION_PLAN tasks (must not miss during dev)
   code/
-    base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
-    spec_registry.json         # Spec-first gate + artifact index (docs/SPEC_FIRST_DEVELOPMENT.md)
+    base_classes.json          # Architect-owned base classes + component scenes (docs/technical/CODE_BASE_CLASS_RULES.md)
+    spec_registry.json         # Spec-first gate + artifact index (docs/technical/SPEC_FIRST_DEVELOPMENT.md)
     autoload_registry.json     # Autoload public API contracts
-    helpers_registry.json      # Core helpers + EventBus signals + regen order (docs/GDSCRIPT_REGENERATION.md)
+    helpers_registry.json      # Core helpers + EventBus signals + regen order (docs/technical/GDSCRIPT_REGENERATION.md)
     scene_registry.json        # Canonical .tscn paths + required nodes per zone
   quests/
     main_quests.json         # 5 main quests
@@ -98,22 +98,22 @@ bash tools/check_asset_compliance.sh   # when assets exist
 
 ## Schema versions
 
-See `docs/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_version: 4`; audio catalogs use `"version": "1.0"`.
+See `docs/technical/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_version: 4`; audio catalogs use `"version": "1.0"`.
 
 ## Scene count
 
-- **20** scene headings in `docs/STORYBOARD.md` (`SC-00`…`SC-16` = 17, plus 3 ending variants `SC-17a`/`b`/`c`); a single playthrough experiences **18** (one ending only)
+- **20** scene headings in `docs/vision/STORYBOARD.md` (`SC-00`…`SC-16` = 17, plus 3 ending variants `SC-17a`/`b`/`c`); a single playthrough experiences **18** (one ending only)
 - **24** rows in `story/scenes.json` = storyboard spine + SC-01 driftwood inspect + 3 SC-02 inspectable rows
 - **23** dialogue scene keys in `chapter_01.json` = the 24 rows minus silent `SC-07` (no dialogue block)
 
 ## Related docs
 
-- `docs/DATA_ARCHITECTURE.md` — full architecture
-- `docs/QUEST_AND_FLAGS.md` — quest & flag detail
-- `docs/ITEMS_AND_ECONOMY.md` — item catalog
-- `docs/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
-- `docs/ENCOUNTER_TABLE.md` — pacing
-- `docs/REPLAY_DESIGN.md` — replay & gallery
-- `docs/NARRATIVE_WRITING_GUIDE.md` — writing, selective VO, i18n prose
-- `docs/VO_HIT_LIST.md` — emotional VO clip list + ElevenLabs generation
-- `docs/AUDIO_QA.md` — BGM/P0 VO technical + listen jury gates
+- `docs/technical/DATA_ARCHITECTURE.md` — full architecture
+- `docs/world/QUEST_AND_FLAGS.md` — quest & flag detail
+- `docs/gameplay/ITEMS_AND_ECONOMY.md` — item catalog
+- `docs/art/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
+- `docs/gameplay/ENCOUNTER_TABLE.md` — pacing
+- `docs/vision/REPLAY_DESIGN.md` — replay & gallery
+- `docs/vision/NARRATIVE_WRITING_GUIDE.md` — writing, selective VO, i18n prose
+- `docs/vision/VO_HIT_LIST.md` — emotional VO clip list + ElevenLabs generation
+- `docs/audio/AUDIO_QA.md` — BGM/P0 VO technical + listen jury gates

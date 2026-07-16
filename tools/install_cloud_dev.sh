@@ -189,10 +189,10 @@ else
 fi
 
 echo
-echo "Required Cursor Secrets (day one — see docs/CURSOR_SECRETS_SETUP.md):"
+echo "Required Cursor Secrets (day one — see docs/agents/CURSOR_SECRETS_SETUP.md):"
 echo "  CURSOR_PM_CYCLE_WEBHOOK_URL, CURSOR_FACTORY_ALERT_WEBHOOK_URL"
 echo "  GAMELAB_API_KEY, GH_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ELEVENLABS_API_KEY"
 echo "  Verify: bash tools/check_day_one_secrets.sh"
 echo "Register in Cursor: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp (all required)"
 echo "Blender: required for M5 turntable QA — bash tools/install_extended_toolchain.sh"
-echo "See: docs/MCP_STACK.md"
+echo "See: docs/agents/MCP_STACK.md"

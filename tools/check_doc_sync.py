@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """Documentation sync gate — L0_doc_sync.
 
-Keeps the docs consistent so nothing drifts:
-  1. Every top-level docs/*.md is discoverable from the docs/README.md index
-     (except README itself and explicitly deprecated files).
-  2. The docs-CI runner's gates exactly match docs_ci_gates.required_gates in
-     acceptance_criteria.json (no missing, extra, or duplicate gates).
-  3. README index links resolve to real files.
+Validates:
+  1. Every grouped docs/**/*.md is linked from docs/README.md (hub index).
+  2. README index links resolve to real files.
+  3. docs-CI runner gates match acceptance_criteria.json docs_ci_gates.
 
-See docs/README.md, docs/BRANCHING.md.
+See docs/README.md, docs/workflow/BRANCHING.md.
 """
 from __future__ import annotations
 
@@ -23,28 +21,51 @@ README = DOCS / "README.md"
 RUNNER = ROOT / "tools/run_docs_ci_checks.sh"
 CRITERIA = ROOT / "game/data/qa/acceptance_criteria.json"
 
-# Top-level docs intentionally not in the index (deprecated / historical).
-EXCLUDE = {"README.md", "SCREENSHOTS.md"}
+# Not required in hub index (nested indexes or historical).
+EXCLUDE_PATHS = {
+    "README.md",
+    "SCREENSHOTS.md",
+    "GDAI_REGEN_PLAN.md",
+}
+EXCLUDE_PREFIXES = (
+    "generation_briefs/",
+    "sprints/",
+    "compliance/",
+    "pitch/",
+    "audio/audio_sheets/",
+)
+
+
+def is_indexed_doc(rel: str) -> bool:
+    if rel in EXCLUDE_PATHS or rel.endswith("/SCREENSHOTS.md") or rel == "SCREENSHOTS.md":
+        return False
+    return not rel.startswith(EXCLUDE_PREFIXES)
 
 
 def main() -> int:
     errors: list[str] = []
     readme = README.read_text(encoding="utf-8")
     linked = set(re.findall(r"\(([\w./-]+\.md)\)", readme))
-    linked_names = {Path(link).name for link in linked}
+    linked_resolved = set()
+    for link in linked:
+        target = (DOCS / link).resolve()
+        if DOCS in target.parents or target.parent == DOCS:
+            linked_resolved.add(link.replace("\\", "/"))
 
-    # 1. Every top-level doc is indexed.
-    for md in sorted(DOCS.glob("*.md")):
-        if md.name in EXCLUDE:
+    # 1. Every grouped doc appears in hub index (by path suffix).
+    for md in sorted(DOCS.rglob("*.md")):
+        rel = md.relative_to(DOCS).as_posix()
+        if not is_indexed_doc(rel):
             continue
-        if md.name not in linked_names:
-            errors.append(f"docs/{md.name} is not linked from docs/README.md index")
+        name = md.name
+        if name not in readme and rel not in linked_resolved:
+            errors.append(f"docs/{rel} is not linked from docs/README.md index")
 
     # 2. README links resolve.
     for link in sorted(linked):
-        target = (DOCS / link).resolve()
-        if DOCS not in target.parents and target != DOCS:
-            continue  # link outside docs/ (e.g. ../.cursorrules) — skip
+        if link.startswith("../"):
+            continue
+        target = DOCS / link
         if not target.is_file():
             errors.append(f"docs/README.md links missing file: {link}")
 
@@ -62,14 +83,18 @@ def main() -> int:
     if extra:
         errors.append(f"gates in required_gates but not run by runner: {extra}")
 
+    indexed_count = sum(1 for md in DOCS.rglob("*.md") if is_indexed_doc(md.relative_to(DOCS).as_posix()))
+
     if errors:
         print("DOC SYNC FAILED:")
         for e in errors:
             print(f"  - {e}")
         return 1
 
-    print(f"doc sync: OK ({len(list(DOCS.glob('*.md')))} top-level docs indexed, "
-          f"{len(set(runner_gates))} docs-CI gates aligned)")
+    print(
+        f"doc sync: OK ({indexed_count} grouped docs indexed, "
+        f"{len(set(runner_gates))} docs-CI gates aligned)"
+    )
     return 0
 
 

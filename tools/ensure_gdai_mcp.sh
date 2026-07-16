@@ -44,7 +44,7 @@ fail() {
   echo "  4. In Godot Editor: GDAI MCP panel → Start (if HTTP :${GDAI_MCP_SERVER_PORT} not up)"
   echo "  5. Restart Cursor / cloud agent after MCP shows connected"
   echo ""
-  echo "Docs: docs/GDAI_CLOUD_SETUP.md"
+  echo "Docs: docs/agents/GDAI_CLOUD_SETUP.md"
   exit 1
 }
 
@@ -106,7 +106,7 @@ if ! timeout 8 uv run "$SERVER_PY" </dev/null >/dev/null 2>&1; then
   log "WARN: stdio bridge slow to start (uv deps); HTTP bridge is up"
 fi
 
-# Godotiq + Godot MCP Pro — required — see docs/MCP_STACK.md
+# Godotiq + Godot MCP Pro — required — see docs/agents/MCP_STACK.md
 STACK_OK=1
 if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
   log "Godotiq addon present"
@@ -129,7 +129,7 @@ else
 fi
 
 if [[ $STACK_OK -eq 0 ]]; then
-  fail "Required MCP stack incomplete (Godotiq and/or MCP Pro). See docs/MCP_STACK.md"
+  fail "Required MCP stack incomplete (Godotiq and/or MCP Pro). See docs/agents/MCP_STACK.md"
 fi
 
 echo ""
@@ -149,6 +149,6 @@ echo "  MCP cfg: ${MCP_JSON}"
 echo ""
 echo "NEXT: Register in Cursor MCP: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp (required)"
 echo "      Offline: ComfyUI/Material Maker, Blender (M5 turntable), ACE-Step 1.5"
-echo "      Docs: docs/MCP_STACK.md"
+echo "      Docs: docs/agents/MCP_STACK.md"
 echo ""
 exit 0

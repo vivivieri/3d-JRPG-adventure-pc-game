@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render 4-view turntable PNGs for a GLB via Blender (docs/MODEL_QA.md §M3).
+"""Render 4-view turntable PNGs for a GLB via Blender (docs/art/MODEL_QA.md §M3).
 
 Usage:
   python3 tools/render_model_turntable.py --model urashima

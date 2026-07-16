@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Technical GLB QA: triangles, textures, greybox ban (docs/MODEL_QA.md §M2)."""
+"""Technical GLB QA: triangles, textures, greybox ban (docs/art/MODEL_QA.md §M2)."""
 from __future__ import annotations
 
 import argparse

@@ -3,7 +3,7 @@
 **This folder on `main` holds design data only** — story JSON, QA catalogs, and i18n strings.
 
 **Godot implementation** (project file, scripts, scenes, assets) lives on branch **`game/development`**.  
-See `docs/BRANCHING.md`.
+See `docs/workflow/BRANCHING.md`.
 
 ## On `main` (this branch)
 
@@ -33,12 +33,12 @@ bash tools/ensure_mcp_stack.sh
 # Open game/project.godot in Godot 4.7
 ```
 
-Build loop: `docs/AI_DEV_WORKFLOW.md` · Phases: `docs/IMPLEMENTATION_PLAN.md`
+Build loop: `docs/workflow/AI_DEV_WORKFLOW.md` · Phases: `docs/workflow/IMPLEMENTATION_PLAN.md`
 
 ## Related docs
 
-- `docs/BRANCHING.md` — branch policy
-- `docs/RR_CHEATSHEET.md` · `docs/CONTROLS_CHEATSHEET.md` — agent cheat sheets
-- `docs/DATA_ARCHITECTURE.md` — JSON schema
-- `docs/CODE_BASE_CLASS_RULES.md` — base classes + component scenes
-- `docs/IMPLEMENTATION_PLAN.md` — build phases
+- `docs/workflow/BRANCHING.md` — branch policy
+- `docs/cheat-sheets/RR_CHEATSHEET.md` · `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — agent cheat sheets
+- `docs/technical/DATA_ARCHITECTURE.md` — JSON schema
+- `docs/technical/CODE_BASE_CLASS_RULES.md` — base classes + component scenes
+- `docs/workflow/IMPLEMENTATION_PLAN.md` — build phases

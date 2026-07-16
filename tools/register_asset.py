@@ -63,7 +63,7 @@ def cmd_add(args: argparse.Namespace) -> int:
     banned = set(manifest.get("banned_licenses", []))
 
     if args.license in banned:
-        print(f"ERROR: License '{args.license}' is banned. See docs/ASSET_COMPLIANCE.md", file=sys.stderr)
+        print(f"ERROR: License '{args.license}' is banned. See docs/art/ASSET_COMPLIANCE.md", file=sys.stderr)
         return 1
     if args.license not in allowed:
         print(f"ERROR: License '{args.license}' not in allowed list.", file=sys.stderr)
@@ -98,7 +98,7 @@ def cmd_add(args: argparse.Namespace) -> int:
     save_manifest(manifest)
     print(f"Registered: {path} ({args.license})")
     print("Next steps:")
-    print("  1. Add row to docs/LICENSES.md")
+    print("  1. Add row to docs/art/LICENSES.md")
     print("  2. Run: bash tools/check_asset_compliance.sh")
     return 0
 

@@ -1,8 +1,8 @@
 # Generation brief — `ruined_village`
 
 **Status:** P0 · Phase 1 vertical slice (SC-02 hub gate)  
-**Authority:** `docs/ENVIRONMENT_KITS.md` §4, `docs/LEVEL_DESIGN.md` §3, `docs/RENDERING_GUIDE.md`  
-**Cross-refs:** `docs/GENERATION_READINESS.md`, `docs/ART_AUTOMATION_PIPELINE.md` §4–5
+**Authority:** `docs/world/ENVIRONMENT_KITS.md` §4, `docs/world/LEVEL_DESIGN.md` §3, `docs/art/RENDERING_GUIDE.md`  
+**Cross-refs:** `docs/art/GENERATION_READINESS.md`, `docs/art/ART_AUTOMATION_PIPELINE.md` §4–5
 
 ---
 

@@ -9,4 +9,4 @@
 #     +run_app_build "$(pwd)/steam/depot/app_build.vdf" \
 #     +quit
 #
-# See docs/CD.md and docs/STEAM_RELEASE_CHECKLIST.md §3.4
+# See docs/ci-cd/CD.md and docs/ci-cd/STEAM_RELEASE_CHECKLIST.md §3.4

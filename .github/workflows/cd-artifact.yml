@@ -82,7 +82,7 @@ jobs:
             2. Run `steam_depot/TidesOfUrashima.exe` with Steam client running
             3. Replace `steam_appid.txt` with your real App ID before Steam upload
 
-            See `docs/CD.md` and `docs/STEAM_RELEASE_CHECKLIST.md`.
+            See `docs/ci-cd/CD.md` and `docs/ci-cd/STEAM_RELEASE_CHECKLIST.md`.
           files: |
             build/TidesOfUrashima-steam-depot-${{ github.ref_name }}.zip
             build/TidesOfUrashima.exe

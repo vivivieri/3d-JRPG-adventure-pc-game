@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Link to `docs/IMPLEMENTATION_PLAN.md` phase and acceptance gate IDs.
+        Link to `docs/workflow/IMPLEMENTATION_PLAN.md` phase and acceptance gate IDs.
         Assign builder after architect plan is complete.
   - type: input
     id: phase
@@ -33,7 +33,7 @@ body:
     id: design_refs
     attributes:
       label: Design doc links
-      placeholder: docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md ruined_village row
+      placeholder: docs/art/RENDERING_GUIDE.md, docs/world/ENVIRONMENT_KITS.md ruined_village row
   - type: dropdown
     id: agent_owner
     attributes:

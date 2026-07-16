@@ -7,7 +7,7 @@
 #   bash tools/setup_github_project.sh
 #   bash tools/setup_github_project.sh --dry-run
 #
-# See docs/GITHUB_SETUP.md
+# See docs/ci-cd/GITHUB_SETUP.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -26,7 +26,7 @@ fi
 TOKEN="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
 if [[ -z "$TOKEN" && "$DRY_RUN" -eq 0 ]]; then
   echo "[FAIL] GH_TOKEN or GITHUB_TOKEN not set."
-  echo "       Create a fine-grained PAT — see docs/GITHUB_SETUP.md §1"
+  echo "       Create a fine-grained PAT — see docs/ci-cd/GITHUB_SETUP.md §1"
   echo "       Add to Cursor Secrets as GH_TOKEN, then re-run this script."
   exit 1
 fi
@@ -159,7 +159,7 @@ JSON
   then
     echo "  [OK] ${branch} — status: ${check_name}; PR reviews: ${review_count}"
   else
-    echo "  [WARN] Could not protect ${branch} — needs admin PAT. See docs/GITHUB_SETUP.md §2"
+    echo "  [WARN] Could not protect ${branch} — needs admin PAT. See docs/ci-cd/GITHUB_SETUP.md §2"
   fi
 }
 

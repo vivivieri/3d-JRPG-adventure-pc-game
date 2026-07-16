@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "authority": "docs/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
+  "authority": "docs/technical/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
   "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See §3 in CODE_BASE_CLASS_RULES.md for asset licenses.",
   "architect_owns": [
     "res://scripts/autoload/",
@@ -115,5 +115,5 @@
     "duplicate InputMap actions (UI_UX_FLOW.md canonical names only)",
     "free-form AI state machine replacing TurnManager without Architect PR"
   ],
-  "design_ref": "docs/TECHNICAL_DESIGN.md, docs/CODE_BASE_CLASS_RULES.md"
+  "design_ref": "docs/technical/TECHNICAL_DESIGN.md, docs/technical/CODE_BASE_CLASS_RULES.md"
 }

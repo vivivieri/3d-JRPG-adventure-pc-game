@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate game/data/qa/delivery_control.json — L0_delivery_control gate.
 
-See docs/DELIVERY_CONTROL.md.
+See docs/workflow/DELIVERY_CONTROL.md.
 """
 from __future__ import annotations
 

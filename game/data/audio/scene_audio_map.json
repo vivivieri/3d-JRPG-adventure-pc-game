@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4",
+  "design_ref": "docs/audio/AUDIO_PRODUCTION_GUIDE.md §4",
   "zones": {
     "beach_shore": {
       "default_bgm": "bgm_village",
