@@ -39,8 +39,9 @@
     "Cycle complete without stakeholder report (pm_emit_stakeholder_report)",
     "Scene/visual PR merged without L3_perf_review evidence when scenes or shaders changed",
     "Bug fix touching scenes/shaders merged without perf re-check in affected zone",
-    "L3_perf_review PASS without baseline_id reference_pc_gtx1060 or valid equivalent",
-    "FPS ship sign-off from cloud_agent_jit or ci_headless baseline"
+    "L3_perf_review PASS without baseline_id reference_linux_cloud or reference_pc_gtx1060",
+    "FPS ship sign-off from cloud_agent_jit or ci_headless baseline",
+    "Windows-only ship claim while primary dev runs on Linux cloud (see PLATFORM_SUPPORT.md)"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -389,7 +390,7 @@
       },
       "skip_when": "no game/project.godot or docs/data-only PR",
       "evidence": ["artifacts/perf_reviews/<zone>_<commit>.json"],
-      "design_ref": "docs/PERFORMANCE_BASELINE.md, game/data/qa/perf_baseline.json, game/data/qa/perf_thresholds.json"
+      "design_ref": "docs/PERFORMANCE_BASELINE.md, docs/PLATFORM_SUPPORT.md, game/data/qa/perf_baseline.json, game/data/qa/perf_thresholds.json"
     },
     "L4_integration": {
       "layer": "L4",

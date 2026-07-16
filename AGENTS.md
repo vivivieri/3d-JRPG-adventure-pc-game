@@ -3,6 +3,7 @@
 ## Cursor Cloud specific instructions
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
+**Platforms (v1):** **Linux + Windows** (Steam) — Linux required because Cursor Cloud Agents run Linux; see `docs/PLATFORM_SUPPORT.md`. macOS v1.1+.  
 **Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/BRANCHING.md`  
 **Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ENVIRONMENTS.md`  
 **Delivery model:** Phase-gated Agile — see `docs/AGILE_WITHIN_PHASES.md`  
@@ -40,7 +41,7 @@ The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-
 
 ### Cloud snapshot launch (`game/development` only)
 
-**Before implementation work:** read `docs/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`.
+**Before implementation work:** read `docs/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`. **Linux ship is required** for cloud dev parity — `docs/PLATFORM_SUPPORT.md`.
 
 ### Environment bootstrap
 
