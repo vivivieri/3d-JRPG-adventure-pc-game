@@ -42,6 +42,13 @@ def main() -> int:
     if not comps:
         errors.append("component_scenes must be non-empty")
 
+    game_branch = (ROOT / "game/project.godot").is_file()
+    active_phase = 0
+    phases_path = ROOT / "game/data/qa/sprint_phases.json"
+    if phases_path.is_file():
+        active_phase = int(json.loads(phases_path.read_text(encoding="utf-8")).get("active_phase", 0))
+    require_impl_on_disk = game_branch and active_phase >= 2
+
     for comp in comps:
         script = comp.get("script")
         if script and script not in base_ids:
@@ -49,14 +56,13 @@ def main() -> int:
                 f"component {comp.get('id')} references script {script} not in bases[]"
             )
         comp_path = comp.get("path")
-        if comp_path and (ROOT / "game/project.godot").is_file():
+        if comp_path and require_impl_on_disk:
             disk = res_to_disk(comp_path)
             if not disk.is_file():
                 errors.append(f"component scene missing on disk: {comp_path}")
 
-    game_branch = (ROOT / "game/project.godot").is_file()
     for b in bases:
-        if game_branch:
+        if require_impl_on_disk:
             disk = res_to_disk(b["path"])
             if not disk.is_file():
                 errors.append(f"base class path missing on disk: {b['path']}")
@@ -71,7 +77,11 @@ def main() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"OK — {len(bases)} bases, {len(comps)} component scenes")
+    print(f"OK — {len(bases)} bases, {len(comps)} component scenes", end="")
+    if game_branch and active_phase < 2:
+        print(" (impl on-disk checks deferred until phase 2+)")
+    else:
+        print()
     return 0
 
 

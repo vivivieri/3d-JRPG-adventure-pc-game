@@ -49,11 +49,48 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 run/main_scene=""
 
 [autoload]
+EventBus="*res://scripts/core/event_bus.gd"
 
 [rendering]
 renderer/rendering_method="forward_plus"
 GODOT
-  echo "[OK] Created game/project.godot"
+  echo "[OK] Created game/project.godot (EventBus autoload stub — verify via GDAI when MCP up)"
+fi
+
+bash "${ROOT}/tools/setup_dev_environment.sh"
+
+mkdir -p "${GAME_DIR}/tests/unit"
+if [[ ! -f "${GAME_DIR}/tests/unit/test_runner.gd" ]]; then
+  git show 952dfe4:game/tests/unit/test_runner.gd > "${GAME_DIR}/tests/unit/test_runner.gd" 2>/dev/null || true
+  git show 952dfe4:game/tests/unit/test_story_data_paths.gd > "${GAME_DIR}/tests/unit/test_story_data_paths.gd" 2>/dev/null || true
+  git show 952dfe4:game/tests/unit/test_story_data_json.gd > "${GAME_DIR}/tests/unit/test_story_data_json.gd" 2>/dev/null || true
+  if [[ -f "${GAME_DIR}/tests/unit/test_runner.gd" ]]; then
+    echo "[OK] Restored game/tests/unit/test_runner.gd (+ story data tests)"
+  fi
+fi
+
+if [[ ! -f "${GAME_DIR}/scenes/README.md" ]]; then
+  cat > "${GAME_DIR}/scenes/README.md" <<'MD'
+# Scenes — GDAI MCP policy
+
+**Branch:** `game/development` only. No ship `.tscn` on `main`.
+
+## Rules
+
+1. **Build scenes in Godot via GDAI MCP** (`godot-mcp`) — not Cursor hand-edits.
+2. After F5 verify, update `game/scenes/.gdai_built`:
+   - `verified_f5=true`
+   - `main_scene=` (when `run/main_scene` is set)
+   - `scenes_touched=` list of `res://` paths
+3. Greybox paths (`greybox/`, `_dev/`, `*.greybox.tscn`) are exempt from the marker until promoted.
+
+## Docs
+
+- `docs/agents/MCP_STACK.md`
+- `.cursorrules` §0
+- `tools/check_rr_compliance.sh`
+MD
+  echo "[OK] Created game/scenes/README.md"
 fi
 
 mkdir -p "${GAME_DIR}/scenes" "${GAME_DIR}/scripts" "${GAME_DIR}/assets"

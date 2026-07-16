@@ -32,14 +32,10 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 
 | Task | Status |
 |------|--------|
-| `game/project.godot` (Godot 4.7 Forward+) | Done |
 | Folder structure (`tools/setup_dev_environment.sh`) | Done |
 | `tools/check_dev_environment.sh` | Done |
 | `.cursor/mcp.json.example` (GDAI MCP) | Done |
 | `game/addons/README.md` | Done |
-| Boot / data validation (`GameBootstrap` autoload) | **Specified** on `main` (`autoload_registry.json`) — **built** Phase 2 on `game/development` |
-| `game/project.godot` | **Not on `main`** — created Phase 1 on `game/development` |
-| Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
 | Story data validator (`tools/validate_story_data.py`) | Done |
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |
 | Fresh-rebuild smoke (`tools/run_playtest_smoke.sh`) | Done |
@@ -47,25 +43,39 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | QA remediation + domain gates (MODEL/VISUAL/AUDIO/FLOW QA docs) | Done |
 | AI dev workflow doc (`docs/workflow/AI_DEV_WORKFLOW.md`) | Done |
 | AI testing spec (`docs/qa/AI_TESTING_SPEC.md`) | Done |
-| Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | Done |
 | Code base class registry (`docs/technical/CODE_BASE_CLASS_RULES.md`, `game/data/code/base_classes.json`) | Done |
 | Base-class + animation + gdlint CI gates (`acceptance_criteria.json`, `run_ci_checks.sh`) | Done |
+| Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
+| Spec-first registries (`helpers_registry.json`, `spec_registry.json`, Python reference libs) | Done |
+| **`game/project.godot` on `game/development`** | **P1-00** — `bash tools/bootstrap_game_development.sh` (not on `main`) |
+| Boot / data validation (`GameBootstrap` autoload) | **Specified** on `main` — **built** Phase 2 on `game/development` |
+| Unit tests (`tools/run_unit_tests.sh`, `game/tests/unit/`) | **P1-00** shell on `game/development`; expand per phase |
 
-**Verify:**
+**Verify (main — docs/data only):**
 
 ```bash
 bash tools/setup_dev_environment.sh
-bash tools/ensure_gdai_mcp.sh
-bash tools/check_dev_environment.sh
 python3 tools/validate_acceptance_criteria.py
-bash tools/run_unit_tests.sh
+python3 tools/validate_story_data.py
+bash tools/run_docs_ci_checks.sh
 bash tools/run_playtest_smoke.sh
-# Open game/project.godot in Godot 4.7 → F5
+```
+
+**Verify (game/development — after P1-00 bootstrap):**
+
+```bash
+bash tools/bootstrap_game_development.sh
+bash tools/ensure_gdai_mcp.sh
+bash tools/run_ci_checks.sh
+bash tools/run_unit_tests.sh
+# Open game/project.godot in Godot 4.7 → F5 when main_scene is set
 ```
 
 ---
 
 ## Phase 1 — Environment foundation (NEXT)
+
+**Bootstrap (P1-00):** `bash tools/bootstrap_game_development.sh` — `project.godot`, `EventBus` autoload stub, unit test shell. See `docs/sprints/Phase1-Sprint1-issues.md` §P1-00.
 
 **Read first:** `docs/world/LEVEL_DESIGN.md` (zone `ruined_village`), `docs/art/RENDERING_GUIDE.md`
 

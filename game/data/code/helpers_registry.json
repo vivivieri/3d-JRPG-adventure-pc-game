@@ -59,10 +59,10 @@
     ],
     "dispatch_by_phase": [
       {
-        "phase": 0,
+        "phase": 1,
         "issue_ref": "P1-00",
         "helpers": ["EventBus"],
-        "note": "Bootstrap — Architect ports EventBus.gd; Builder registers autoload"
+        "note": "Bootstrap — Architect ports event_bus.gd; Builder registers autoload (GDAI MCP)"
       },
       {
         "phase": 2,
@@ -95,7 +95,8 @@
     {
       "id": "EventBus",
       "kind": "autoload",
-      "phase": 2,
+      "phase": 1,
+      "port_status": "ported",
       "gdscript_path": "res://scripts/core/event_bus.gd",
       "extends": "Node",
       "python_reference": null,
@@ -122,6 +123,7 @@
       "kind": "refcounted",
       "class_name": "SettingsStore",
       "phase": 2,
+      "port_status": "pending",
       "gdscript_path": "res://scripts/core/settings_store.gd",
       "python_reference": "tools/settings_store_lib.py",
       "data_ref": ["game/data/settings/settings_defaults.json", "game/data/settings/settings_schema.json"],
@@ -149,6 +151,7 @@
       "kind": "refcounted",
       "class_name": "SaveIntegrity",
       "phase": 2,
+      "port_status": "pending",
       "gdscript_path": "res://scripts/core/save_integrity.gd",
       "python_reference": "tools/save_integrity_lib.py",
       "data_ref": ["game/data/qa/save_integrity.json"],
@@ -170,6 +173,7 @@
       "kind": "refcounted",
       "class_name": "DifficultyService",
       "phase": 4,
+      "port_status": "pending",
       "gdscript_path": "res://scripts/core/difficulty_service.gd",
       "python_reference": "tools/difficulty_lib.py",
       "data_ref": ["game/data/combat/difficulty.json"],
@@ -196,6 +200,7 @@
       "kind": "refcounted",
       "class_name": "AchievementEvaluator",
       "phase": 6,
+      "port_status": "pending",
       "gdscript_path": "res://scripts/core/achievement_evaluator.gd",
       "python_reference": "tools/achievement_evaluator_lib.py",
       "data_ref": ["game/data/achievements/achievements.json"],

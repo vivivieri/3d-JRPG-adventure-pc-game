@@ -27,8 +27,8 @@ def load_registry() -> dict:
 def native_extends_allowed(path: Path, native: str, registry: dict) -> bool:
     rel = path.relative_to(ROOT).as_posix()
     for base in registry.get("bases", []):
-        disk = res_to_disk(base["path"]).as_posix()
-        if rel == disk and base.get("extends") == native:
+        disk = res_to_disk(base["path"])
+        if rel == disk.relative_to(ROOT).as_posix() and base.get("extends") == native:
             return True
     return False
 

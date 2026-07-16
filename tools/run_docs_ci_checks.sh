@@ -24,8 +24,12 @@ run_gate() {
   fi
 }
 
+BRANCH="$(bash "$(dirname "$0")/git_branch_name.sh")"
 echo "==> Main branch CI (docs + design data)"
 echo "    Policy: docs/workflow/BRANCHING.md"
+if [[ "$BRANCH" == "game/development" ]]; then
+  echo "    Note: checked out ${BRANCH} — ship-code gates skip via branch-aware scripts"
+fi
 
 run_gate "L0_story_data" python3 tools/validate_story_data.py
 run_gate "L0_narrative_density" python3 tools/validate_narrative_density.py

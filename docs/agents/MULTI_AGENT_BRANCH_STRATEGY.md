@@ -16,6 +16,8 @@
 
 Issue field: `branch_name_pattern` in `sprint_board.json` (default `cursor/{issue_id}-a091`).
 
+**Cursor Cloud agents:** session instructions may use suffix `-ec08` instead of `-a091` — same issue ID, same PR target (`game/development`). Factory dispatch uses the board pattern; cloud agents follow their session suffix when creating branches.
+
 ---
 
 ## 2. Per-issue workflow
