@@ -82,6 +82,29 @@
       "evidence": ["game/data/code/spec_registry.json"],
       "design_ref": "docs/SPEC_FIRST_DEVELOPMENT.md"
     },
+    "L0_helpers_registry": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_helpers_registry.py",
+      "description": "Core helper specs + EventBus signal parity with autoload_registry",
+      "pass": { "exit_code": 0, "error_count": 0 },
+      "evidence": ["game/data/code/helpers_registry.json"],
+      "design_ref": "docs/GDSCRIPT_REGENERATION.md"
+    },
+    "L0_reference_libs": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/test_reference_libs.py",
+      "description": "Python reference libs parity baseline before GDScript ports",
+      "pass": { "exit_code": 0, "error_count": 0 },
+      "evidence": [
+        "tools/difficulty_lib.py",
+        "tools/save_integrity_lib.py",
+        "tools/settings_store_lib.py",
+        "tools/achievement_evaluator_lib.py"
+      ],
+      "design_ref": "docs/GDSCRIPT_REGENERATION.md"
+    },
     "L0_main_no_ship_code": {
       "layer": "L0",
       "domain": "data",
@@ -629,6 +652,8 @@
 <<<<<<< HEAD
 =======
       "L0_spec_registry",
+      "L0_helpers_registry",
+      "L0_reference_libs",
       "L0_main_no_ship_code",
 >>>>>>> main
       "L0_acceptance_catalog",

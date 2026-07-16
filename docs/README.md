@@ -18,6 +18,7 @@
 | 1 | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
 | 1b | [BRANCHING.md](BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
 | 1b2 | [SPEC_FIRST_DEVELOPMENT.md](SPEC_FIRST_DEVELOPMENT.md) | Complete specs on `main`; code after `SPEC_DEV_START` |
+| 1b3 | [GDSCRIPT_REGENERATION.md](GDSCRIPT_REGENERATION.md) | Rebuild deleted core helpers from Python refs on `game/development` |
 | 1c | [ENVIRONMENTS.md](ENVIRONMENTS.md) | dev · qa · uat · preprod · prod promotion |
 | 1d | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) | Phase-gated Agile + Linear sprint map |
 | 2 | [MILESTONES.md](MILESTONES.md) | Deliverable checklist |
