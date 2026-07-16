@@ -50,6 +50,7 @@
 | Write GDScript | [CODE_STYLE.md](CODE_STYLE.md) + [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) |
 | Place zones & interactables | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) |
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
+| **Performance baseline (FPS hardware)** | **[PERFORMANCE_BASELINE.md](PERFORMANCE_BASELINE.md)** · `game/data/qa/perf_baseline.json` |
 | Author dialogue / flags | [QUEST_AND_FLAGS.md](QUEST_AND_FLAGS.md) + `game/data/dialogue/` |
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
 | Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) · [GENERATION_READINESS.md](GENERATION_READINESS.md) |
@@ -175,6 +176,7 @@
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
 | [ESCALATION_POLICY.md](ESCALATION_POLICY.md) | Anti-infinite-loop ladder — dev↔QA → Architect/SA → Product Owner |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
+| [PERFORMANCE_BASELINE.md](PERFORMANCE_BASELINE.md) | **Hardware + environment baseline** for `L3_perf_review` evidence |
 | [PLAYTEST_TELEMETRY.md](PLAYTEST_TELEMETRY.md) | Playtest telemetry (GUR) — pacing/combat/ending tuning loop |
 | [DELIVERY_CONTROL.md](DELIVERY_CONTROL.md) | Pre-delivery review gate — review + confirm before outbound delivery |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |

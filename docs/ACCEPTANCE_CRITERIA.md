@@ -4,7 +4,7 @@
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
 **Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  
-**Cross-refs:** `docs/AI_DEV_WORKFLOW.md` §4, `docs/CODE_BASE_CLASS_RULES.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/FLOW_QA.md`, `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`
+**Cross-refs:** `docs/AI_DEV_WORKFLOW.md` §4, `docs/CODE_BASE_CLASS_RULES.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/FLOW_QA.md`, `docs/MODEL_QA.md`, `docs/VISUAL_QA.md`, `docs/AUDIO_QA.md`, `docs/PERFORMANCE_BASELINE.md`
 
 ---
 
@@ -71,7 +71,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — required ⊆ clips ⊆ `allowed_animations` |
 | `L2_zone_composition` | `run_zone_composition_checks.sh` exit 0 — warn in early phases; `ZONE_COMPOSITION_STRICT=1` at M5 ship (**GR-003**) |
 | `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
-| `L2_perf_catalog` | `run_perf_review_checks.sh` exit 0 — `perf_thresholds.json` zone FPS/material budgets |
+| `L2_perf_catalog` | `run_perf_review_checks.sh` exit 0 — `perf_thresholds.json` + `perf_baseline.json` |
 | `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
 | `L2_visual_jury` | ≥2 models, all V1–V8 met, confidence ≥ 0.65 |
@@ -88,7 +88,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L3_gdai_built` | `check_l3_gdai_built.sh` exit 0 — if ship scenes or `main_scene` changed in diff, `.gdai_built` updated with `verified_f5=true` |
 | `L3_gdai_f5` | GDAI MCP F5 in editor — agent-local; not full CI |
-| `L3_perf_review` | Godotiq `perf_snapshot` after F5 — FPS ≥ 55, ≤ 8 materials/view; evidence in `artifacts/perf_reviews/` — agent-local |
+| `L3_perf_review` | Godotiq `perf_snapshot` after F5 on **`reference_pc_gtx1060`** — FPS ≥ 55, ≤ 8 materials/view; evidence in `artifacts/perf_reviews/` with `baseline_id` — agent-local |
 
 ### L4 / L5 — Flow
 
