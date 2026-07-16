@@ -29,6 +29,9 @@ gate_skip_is_fail() {
       # Still allowed to skip when run/main_scene unset (early Phase 1).
       return 1
       ;;
+    L2_windows_cross_export|L2_linux_export_smoke)
+      return 1
+      ;;
     L4_integration)
       return 0
       ;;

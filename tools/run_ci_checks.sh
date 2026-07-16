@@ -84,6 +84,16 @@ if gate_is_game_branch; then
     python3 tools/check_glb_import_scripts.py --strict
 fi
 
+if [[ -f game/project.godot ]]; then
+  run_tri_gate "L2_linux_export_smoke" "Linux export + native headless run" \
+    bash tools/run_linux_export_smoke.sh
+  run_tri_gate "L2_windows_cross_export" "Windows cross-export (.exe build)" \
+    bash tools/run_windows_cross_export.sh
+else
+  skip_gate "L2_linux_export_smoke" "no game/project.godot"
+  skip_gate "L2_windows_cross_export" "no game/project.godot"
+fi
+
 run_tri_gate "L4_integration" "Integration tests (headless subset)" \
   bash tools/run_integration_tests.sh
 
@@ -100,6 +110,7 @@ echo ""
 echo "Not run in CI (agent/editor only):"
 echo "  - check_mcp_ready.sh — GDAI MCP stack"
 echo "  - L3_gdai_f5 full viewport verify (editor F5)"
+echo "  - L2_windows_export_run — windows-latest CI (tools/run_windows_export_run.sh)"
 echo "  - L3_perf_review — Godotiq perf_snapshot (FPS, draw calls)"
 echo "  - L2 visual/audio/model jury (requires screenshots + API keys; use run_*_smoke_checks.sh)"
 echo "  - L5 E2E three endings (REQUIRE_L5=1 for Phase 6+ / CD beta|prod)"

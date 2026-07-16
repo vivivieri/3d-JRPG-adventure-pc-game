@@ -66,10 +66,21 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L3_gdai_built` | `bash tools/check_l3_gdai_built.sh` | Exit 0 — **SKIP** when no scene diff; else `.gdai_built` updated + `verified_f5=true` |
 | `L2_animation_whitelist` | `python3 tools/check_animation_whitelist.py --phase m5 --strict` | Exit 0 — required ⊆ clips ⊆ `allowed_animations` |
 | `L2_feel_smoke` | `bash tools/run_feel_smoke_checks.sh` | Exit 0 — `feel_thresholds.json` + player constants |
+| `L2_perf_catalog` | `bash tools/run_perf_review_checks.sh` | Exit 0 — perf baseline catalogs |
+| `L2_linux_export_smoke` | `bash tools/run_linux_export_smoke.sh` | Exit 0 — Linux export + headless run; SKIP when no `project.godot` |
+| `L2_windows_cross_export` | `bash tools/run_windows_cross_export.sh` | Exit 0 — Windows `.exe` cross-export on ubuntu; SKIP when no `project.godot` |
 | `L2_glb_import` | `python3 tools/check_glb_import_scripts.py --strict` | Exit 0 — GLB `.import` post-import script set |
 | `L2_boot_headless` | `godot4 --headless …` | Exit 0 when `run/main_scene` is set; exit **2** SKIP when unset |
 | `L4_integration` | `bash tools/run_integration_tests.sh` | Exit 0 — `INT-BOOT-01`; fails if `integration_scenarios.json` required scenarios missing |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
+
+**Second job — `windows-export-run` (windows-latest):**
+
+| Gate ID | Command | Pass when |
+|---------|---------|-----------|
+| `L2_windows_export_run` | `bash tools/run_windows_export_run.sh` | Exit 0 — Windows export + native `.exe` headless run; SKIP when no `project.godot` |
+
+See `docs/PLATFORM_SUPPORT.md` — Linux run on ubuntu CI; Windows **run** on windows-latest CI.
 
 ---
 
@@ -81,6 +92,7 @@ These are **agent-local or ship-only** — intentionally excluded from GitHub Ac
 |-------|--------------|---------------|
 | `check_mcp_ready.sh` | Commercial GDAI plugin + live editor | `install_cloud_dev.sh`, Cursor cloud agents |
 | L3_gdai_f5 (full viewport) | Requires Godot editor + GDAI MCP F5 | Per-scene agent tasks |
+| `L2_windows_export_run` | Requires Windows host | `game-ci.yml` **windows-latest** job (not ubuntu `run_ci_checks.sh`) |
 | L2 visual/audio/model jury | Needs screenshots + LLM API keys | `run_playtest_smoke.sh` when assets exist |
 | L5 E2E three endings | Needs Godot MCP Pro + playable build | Phase 6 gate, release candidates |
 | L6 human playtest | Human-only — **required ship gate** | `docs/PLAYTEST_SCRIPT.md` after L0–L5 (Phase 8 prod CD) |

@@ -52,6 +52,10 @@ All items ❌ until `game/development` phases land.
 | 2.1 | `game/project.godot` on ship branch | 🟡 | On `game/development` only; stripped from `main` |
 | 2.2 | `game/export_presets.cfg` | 🟡 | Example exists on dev branch; verify Windows preset |
 | 2.3 | `tools/export_windows.sh` | ✅ | Strips GDAI autoload; headless export |
+| 2.3a | `tools/export_linux.sh` | ✅ | Linux x86_64 export for Steam depot |
+| 2.3b | `tools/run_linux_export_smoke.sh` | ✅ | Ubuntu CI — export + native headless run |
+| 2.3c | `tools/run_windows_export_run.sh` | ✅ | **windows-latest** CI — export + .exe run |
+| 2.3d | `tools/run_windows_cross_export.sh` | ✅ | Ubuntu CI — cross-export .exe (build only) |
 | 2.4 | `tools/prepare_steam_depot.sh` | ✅ | Bundles exe + Steam DLLs |
 | 2.5 | Godot 4.7 + export templates in CI/CD | ✅ | `install_ci_deps.sh` |
 | 2.6 | GodotSteam **4.20+** installed | ❌ | `bash tools/install_godotsteam.sh` — v4.15 stale |

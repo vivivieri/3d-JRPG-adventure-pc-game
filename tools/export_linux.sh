@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Export Windows release build. Strips dev-only GDAI MCP autoload/plugin for the export.
+# Export Linux x86_64 release build. Strips dev-only GDAI MCP autoload/plugin for export.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -11,10 +11,10 @@ GAME="$ROOT/game"
 PROJECT="$GAME/project.godot"
 BACKUP="$GAME/project.godot.export-bak"
 OUT_DIR="$ROOT/build"
-OUT_EXE="$OUT_DIR/TidesOfUrashima.exe"
-PRESET="Windows Desktop"
+OUT_BIN="$OUT_DIR/TidesOfUrashima.x86_64"
+PRESET="Linux"
 
-echo "==> Tides of Urashima — Windows export"
+echo "==> Tides of Urashima — Linux export"
 echo ""
 
 export_godot_env "$ROOT"
@@ -32,12 +32,12 @@ mkdir -p "$OUT_DIR"
 export_strip_gdai_begin "$PROJECT" "$BACKUP"
 trap 'export_strip_gdai_restore "$PROJECT" "$BACKUP"' EXIT
 
-echo "==> Exporting $PRESET -> $OUT_EXE"
-godot4 --headless --path "$GAME" --export-release "$PRESET" "$OUT_EXE"
+echo "==> Exporting $PRESET -> $OUT_BIN"
+godot4 --headless --path "$GAME" --export-release "$PRESET" "$OUT_BIN"
 
+chmod +x "$OUT_BIN"
 echo ""
-echo "==> Export complete: $OUT_EXE"
-ls -lh "$OUT_EXE"
+echo "==> Export complete: $OUT_BIN"
+ls -lh "$OUT_BIN"
 echo ""
-echo "Next: bash tools/prepare_steam_depot.sh --platform windows"
-echo "Run smoke: bash tools/run_windows_export_run.sh (Windows host or CI windows-latest job)"
+echo "Next: bash tools/prepare_steam_depot.sh --platform linux"
