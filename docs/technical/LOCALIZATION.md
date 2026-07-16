@@ -1,17 +1,19 @@
 # Localization (i18n)
 
-**Tides of Urashima** supports four written languages at launch:
+**Tides of Urashima** supports four written languages at launch. **All four ship selective VO** for the 12 emotional hit clips (`docs/vision/VO_HIT_LIST.md`) — not Traditional Chinese only.
 
-| Code | Language | Script | VO |
-|------|----------|--------|-----|
-| `en` | English | Latin | English TTS |
-| `ja` | Japanese | CJK | Japanese TTS |
-| `zh` | Simplified Chinese | CJK (NotoSansSC) | Mandarin TTS |
-| `zh-Hant` | Traditional Chinese | CJK (NotoSansTC) | **Cantonese or Mandarin** (player choice) |
+| Code | Language | Script | Written UI + dialogue | Selective VO (12 clips) |
+|------|----------|--------|----------------------|-------------------------|
+| `en` | English | Latin | ✓ | **✓ English VO** — `voice/en/{voice_id}.ogg` |
+| `ja` | Japanese | CJK | ✓ | **✓ Japanese VO** — `voice/ja/{voice_id}.ogg` |
+| `zh` | Simplified Chinese | CJK (NotoSansSC) | ✓ | **✓ Mandarin VO** — `voice/zh/{voice_id}.ogg` |
+| `zh-Hant` | Traditional Chinese | CJK (NotoSansTC) | ✓ | **✓ Cantonese or Mandarin VO** (player choice) — `voice/zh-Hant/{cant\|cmn}/{voice_id}.ogg` |
 
-Players switch **written language** from the **main menu** (saved to `user://settings.json`). When `zh-Hant` is selected, a second setting — **voice dialect** — offers **粵語 (Cantonese)** or **國語 (Mandarin)** for the 12 selective VO clips. Subtitles always use Traditional Chinese text regardless of dialect.
+**Ship rule:** When the player selects `en`, `ja`, or `zh`, voiced lines play in that language. When they select `zh-Hant`, subtitles stay Traditional and VO follows the **voice dialect** setting (粵語 / 國語). There is no text-only mode for hit-list scenes in the player's chosen language.
 
-> **Ship data:** `game/data/**` JSON and `game/locale/translations.csv` include `en` / `ja` / `zh` / `zh-Hant` inline text. VO clips for `zh-Hant` (`cant` / `cmn`) are generated in Phase 7 (`docs/vision/VO_HIT_LIST.md`).
+Players switch **written language** from the **main menu** (saved to `user://settings.json`). When `zh-Hant` is selected, a second setting — **voice dialect** — offers **粵語 (Cantonese)** or **國語 (Mandarin)** for the same 12 clips. Subtitles always use Traditional Chinese text regardless of dialect.
+
+> **Ship data:** `game/data/**` JSON and `game/locale/translations.csv` include `en` / `ja` / `zh` / `zh-Hant` inline text. **All locales** get VO files in Phase 7: 12 clips × (`en` + `ja` + `zh`) + 12 × 2 zh-Hant dialects = **60 OGG files** (`docs/vision/VO_HIT_LIST.md`).
 
 ---
 

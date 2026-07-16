@@ -27,7 +27,7 @@ Accessible from: Main menu, Pause menu (field + combat)
 | **Intent icon style** | Standard / High contrast | Standard | `intent_contrast` |
 | **Graphics quality** | Low / Medium / High | Medium | `graphics_quality` |
 
-See `docs/art/RENDERING_GUIDE.md` §10 for preset details (shadows, MSAA, glow, fog).
+**VO behavior:** Selective story VO (12 hit clips) plays in the player's **language** — English, Japanese, or Simplified Chinese audio when `locale` is `en`/`ja`/`zh`; Traditional Chinese text with Cantonese or Mandarin audio when `locale` is `zh-Hant`. Subtitles always match written locale. See `docs/technical/LOCALIZATION.md`, `docs/vision/VO_HIT_LIST.md`.
 
 ---
 

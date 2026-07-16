@@ -1,6 +1,8 @@
 # VO generation briefs (P0 selective clips)
 
-P0 clips use the same **catalog → brief → technical → jury** pattern as hero BGM. Gate locale for automated jury: **`en`** (all locales get technical lint at M5 ship). See `docs/audio/AUDIO_QA.md` §A4–A5 and `docs/vision/VO_HIT_LIST.md`.
+**Ship rule:** Every P0 clip is generated in **English, Japanese, Simplified Chinese, and Traditional Chinese** (Cantonese + Mandarin dialects). **60 OGG files** total for the full hit list — see `docs/vision/VO_HIT_LIST.md`.
+
+P0 clips use the same **catalog → brief → technical → jury** pattern as hero BGM. Gate locale for automated jury: **`en`** (all locales get technical lint at M5 ship). See `docs/audio/AUDIO_QA.md` §A4–A5.
 
 | Brief | Scene | Speaker |
 |-------|-------|---------|
