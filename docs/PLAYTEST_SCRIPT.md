@@ -2,11 +2,12 @@
 
 **Version:** 1.2  
 **Target duration:** 2–3 hours  
-**Build:** Release candidate on `main`  
+**Build:** Release candidate on `game/development`  
 **Prerequisite:** **All AI tests L0–L5 must pass** on the same commit before any human runs this script. See `docs/AI_TESTING_SPEC.md` §8.  
+**Minimum cohort:** 5 testers (diverse language rotation) — recorded in `artifacts/qa_reports/L6_human_playtest.json`  
 **Cross-refs:** `docs/AI_TESTING_SPEC.md`, `docs/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
 
-> **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `bash tools/run_e2e_playthrough.sh` exits 0 (not SKIP).
+> **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` exits 0.
 
 ---
 
@@ -17,6 +18,7 @@
 | Complete without guide | ≥80% testers |
 | Understand 3 endings | Post-survey |
 | Combat too easy/hard | Boss attempts ≤3 Normal |
+| Movement / camera feel | Feel checklist §7b (1–5 scale) |
 | Soft-lock | Zero |
 | Localization | No missing keys en/ja/zh/zh-Hant |
 
@@ -28,7 +30,7 @@
 
 - [ ] `bash tools/run_playtest_smoke.sh` → PASS  
 - [ ] `bash tools/run_integration_tests.sh` → PASS  
-- [ ] `bash tools/run_e2e_playthrough.sh` → PASS (not `[SKIP]`)  
+- [ ] `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` → PASS  
 - [ ] Record commit SHA: `git rev-parse HEAD`
 
 **Human session:**
@@ -101,7 +103,26 @@
 
 ---
 
-## 7. Post-play survey (5 questions)
+## 7b. Feel checklist (required — rate 1–5)
+
+Per `docs/GAME_FEEL.md`. Record per tester; average ≥3.5 required for ship.
+
+| # | Question | 1 (bad) → 5 (great) |
+|---|----------|---------------------|
+| F1 | Movement feels responsive (no mushy input) | |
+| F2 | Camera follows smoothly in field | |
+| F3 | Combat hits feel readable (flash/SFX timing) | |
+| F4 | Dialogue pacing comfortable (not too fast/slow) | |
+| F5 | UI confirms/cancels feel snappy | |
+| F6 | Hero silhouette readable at gameplay distance (field) | |
+| F7 | Walk / combat animations feel natural (not robotic or floaty) | |
+| F8 | Key story props read clearly (lacquer box, torii, boss telegraphs) | |
+
+Per `docs/MODEL_QA.md` §9 — F6–F8 are the human arbiter for model polish direction when automated M1–M6 and visual jury pass but motion still feels wrong.
+
+---
+
+## 8. Post-play survey (5 questions)
 
 1. Which ending did you choose and why? (free text)
 2. Was combat difficulty appropriate? (1–5)
@@ -111,7 +132,7 @@
 
 ---
 
-## 8. Bug reporting
+## 9. Bug reporting
 
 Use the full template and severity definitions in **`docs/QA_AND_BUG_PROCESS.md`** §2–§3.
 

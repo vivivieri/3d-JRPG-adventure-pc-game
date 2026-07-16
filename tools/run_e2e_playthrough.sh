@@ -15,11 +15,17 @@ echo "IMPLEMENT: game/tests/e2e/test_three_endings.gd"
 echo "SPEC:     docs/AI_TESTING_SPEC.md §7"
 echo ""
 
-# SKIP is never PASS at a gate (acceptance_criteria.json: skip_allowed=false for
-# L5_e2e_three_endings). Gate runners (Phase 6+) must set REQUIRE_L5=1 so this
-# stub fails loudly; pre-Phase-6 per-commit runs tolerate the SKIP with exit 0.
+# Pre-Phase-6 dev runs may tolerate SKIP (exit 2). Gate runners treat SKIP as FAIL on
+# game branch unless ALLOW_L5_SKIP=1. Phase 6+ / CD must set REQUIRE_L5=1.
 if [[ "${REQUIRE_L5:-0}" == "1" ]]; then
   echo "[FAIL] REQUIRE_L5=1 — L5 gate requires a real E2E run, SKIP is not PASS."
   exit 1
 fi
-exit 0
+
+if [[ "${ALLOW_L5_SKIP:-0}" == "1" ]]; then
+  echo "[SKIP] ALLOW_L5_SKIP=1 — pre-Phase-6 development only"
+  exit 2
+fi
+
+echo "[FAIL] L5 not implemented — set ALLOW_L5_SKIP=1 only for pre-Phase-6 dev"
+exit 1

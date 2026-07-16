@@ -1,0 +1,163 @@
+{
+  "version": "1.0",
+  "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4",
+  "zones": {
+    "beach_shore": {
+      "default_bgm": "bgm_village",
+      "ambient": ["amb_beach_surf"],
+      "crossfade_sec": 1.5
+    },
+    "ruined_village": {
+      "default_bgm": "bgm_village",
+      "ambient": ["amb_village_wind"],
+      "crossfade_sec": 1.5
+    },
+    "tidal_caves": {
+      "default_bgm": "bgm_caves",
+      "ambient": ["amb_cave_drip"],
+      "crossfade_sec": 1.5
+    },
+    "dragon_palace_gate": {
+      "default_bgm": "bgm_palace",
+      "ambient": ["amb_palace_hum"],
+      "crossfade_sec": 1.5
+    },
+    "ending_rewind": {
+      "default_bgm": "bgm_ending_rewind",
+      "ambient": [],
+      "crossfade_sec": 2.0
+    },
+    "ending_anchor": {
+      "default_bgm": "bgm_ending_anchor",
+      "ambient": [],
+      "crossfade_sec": 2.0
+    },
+    "ending_drift": {
+      "default_bgm": "bgm_ending_drift",
+      "ambient": ["amb_beach_surf"],
+      "crossfade_sec": 2.0
+    }
+  },
+  "scenes": {
+    "SC-00": {
+      "bgm": "bgm_prologue",
+      "ambient": [],
+      "stings": [],
+      "notes": "One-shot prologue; fade to bgm_village on SC-01"
+    },
+    "SC-01": {
+      "zone": "beach_shore",
+      "bgm": "bgm_village",
+      "ambient": ["amb_beach_surf"],
+      "stings": ["sfx_story_thunder_distant"],
+      "voice_clips": []
+    },
+    "SC-02": {
+      "zone": "ruined_village",
+      "bgm": "bgm_village",
+      "ambient": ["amb_village_wind"],
+      "stings": [],
+      "notes": "Hub pan wind swell"
+    },
+    "SC-03": {
+      "zone": "ruined_village",
+      "bgm": "bgm_village",
+      "bgm_duck_db": -6,
+      "ambient": ["amb_village_wind"],
+      "voice_clips": ["sc03_yuzu_01"]
+    },
+    "SC-04": {
+      "zone": "ruined_village",
+      "bgm": "bgm_village",
+      "ambient": ["amb_village_wind"],
+      "voice_clips": []
+    },
+    "SC-05": {
+      "bgm": "bgm_combat",
+      "ambient": [],
+      "stings": ["sting_combat_start"],
+      "notes": "Tutorial combat"
+    },
+    "SC-06": {
+      "zone": "tidal_caves",
+      "bgm": "bgm_caves",
+      "ambient": ["amb_cave_drip"]
+    },
+    "SC-07": {
+      "zone": "tidal_caves",
+      "bgm": "bgm_caves",
+      "ambient": ["amb_cave_drip"],
+      "stings": ["sfx_story_puzzle_switch", "sfx_story_chest_open"]
+    },
+    "SC-08": {
+      "zone": "tidal_caves",
+      "bgm": "bgm_caves",
+      "bgm_duck_db": -8,
+      "ambient": ["amb_cave_drip", "sfx_story_whisper_bed"],
+      "notes": "Silent scene — whisper SFX bed, no VO"
+    },
+    "SC-09": {
+      "bgm": "bgm_boss",
+      "stings": ["sting_boss_intro", "cine_boss_wraith_intro"],
+      "voice_clips": ["sc09_shore_wraith_01"]
+    },
+    "SC-10": {
+      "zone": "tidal_caves",
+      "bgm": "bgm_caves",
+      "stings": ["sting_yuzu_join"],
+      "voice_clips": ["sc10_yuzu_01"]
+    },
+    "SC-11": {
+      "bgm": "bgm_caves",
+      "bgm_duck_db": -10,
+      "stings": ["sfx_story_palace_harp"],
+      "voice_clips": ["sc11_otohime_01"]
+    },
+    "SC-12": {
+      "zone": "dragon_palace_gate",
+      "bgm": "bgm_palace",
+      "ambient": ["amb_palace_hum"],
+      "stings": ["sfx_story_pearl_insert"]
+    },
+    "SC-13": {
+      "zone": "dragon_palace_gate",
+      "bgm": "bgm_palace",
+      "ambient": ["amb_palace_hum"],
+      "stings": ["sfx_story_mirror_shimmer"],
+      "voice_clips": ["sc13_roku_01"]
+    },
+    "SC-14": {
+      "bgm": "bgm_boss",
+      "stings": ["cine_boss_sentinel_intro"],
+      "voice_clips": ["sc14_narrator_01"]
+    },
+    "SC-15": {
+      "bgm": "bgm_boss",
+      "boss_phase_tracks": ["bgm_boss", "bgm_boss_tide_keeper_p2", "bgm_boss_tide_keeper_p3"],
+      "stings": ["cine_boss_tide_keeper_intro"],
+      "voice_clips": ["sc15_tide_keeper_01"]
+    },
+    "SC-16": {
+      "bgm": "bgm_boss_tide_keeper_p3",
+      "bgm_duck_db": -18,
+      "stings": ["sting_choice_silence"],
+      "voice_clips": ["sc16_tide_keeper_01"],
+      "notes": "Combat freeze; choice UI only"
+    },
+    "SC-17a": {
+      "zone": "ending_rewind",
+      "bgm": "cine_ending_rewind_hero",
+      "loop": false
+    },
+    "SC-17b": {
+      "zone": "ending_anchor",
+      "bgm": "cine_ending_anchor_hero",
+      "loop": false
+    },
+    "SC-17c": {
+      "zone": "ending_drift",
+      "bgm": "cine_ending_drift_hero",
+      "loop": false
+    }
+  }
+}

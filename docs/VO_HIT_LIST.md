@@ -1,9 +1,9 @@
 # Tides of Urashima — Selective VO Hit List (AI generation)
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Policy:** Short VO at emotional peaks only — **not** full dialogue.  
 **Engine:** ElevenLabs (`eleven_multilingual_v2`) via `tools/generate_ai_vo.py`  
-**Cross-refs:** `docs/NARRATIVE_WRITING_GUIDE.md` §1, `game/data/audio/vo_prompts.json`, `game/data/dialogue/chapter_01.json`
+**Cross-refs:** `docs/NARRATIVE_WRITING_GUIDE.md` §1, `game/data/audio/vo_prompts.json`, `game/data/audio/audio_qa_catalog.json`, `docs/generation_briefs/vo/`, `docs/AUDIO_QA.md` §A4–A5, `game/data/dialogue/chapter_01.json`
 
 ---
 
@@ -76,7 +76,14 @@ bash tools/generate_ai_vo.sh --locale zh-Hant --all-dialects
 bash tools/generate_ai_vo.sh --all
 ```
 
-5. Listen pass on P0 before generating P1/P2
+5. **P0 QA pass** (before P1/P2 batch):
+
+```bash
+python3 tools/check_audio_vo.py --clip sc00_urashima_01 --locale en
+python3 tools/review_vo_vision.py --clip sc00_urashima_01 --locale en --min-pass 2
+# Repeat for each P0 clip; all locales: check_audio_vo.py --all-p0 --ship at M5
+```
+
 6. Register: assets auto-logged in `docs/asset_manifest.license.json`
 
 ---
@@ -94,7 +101,8 @@ bash tools/generate_ai_vo.sh --all
 ## Ship checklist
 
 - [ ] Replace all `PLACEHOLDER_*` voice IDs
-- [ ] P0 clips approved in all 3 locales
+- [ ] P0 clips: `L2_vo_technical` PASS all locales; `L2_vo_jury` PASS on `en` gate per clip
+- [ ] Generation briefs satisfied — `docs/generation_briefs/vo/*.md`
 - [ ] No VO on tutorial / inspectable / puzzle scenes
 - [ ] `python3 tools/validate_story_data.py` passes
 - [ ] Log ElevenLabs license in `docs/LICENSES.md`

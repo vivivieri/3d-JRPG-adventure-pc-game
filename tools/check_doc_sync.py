@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+"""Documentation sync gate — L0_doc_sync.
+
+Keeps the docs consistent so nothing drifts:
+  1. Every top-level docs/*.md is discoverable from the docs/README.md index
+     (except README itself and explicitly deprecated files).
+  2. The docs-CI runner's gates exactly match docs_ci_gates.required_gates in
+     acceptance_criteria.json (no missing, extra, or duplicate gates).
+  3. README index links resolve to real files.
+
+See docs/README.md, docs/BRANCHING.md.
+"""
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
+README = DOCS / "README.md"
+RUNNER = ROOT / "tools/run_docs_ci_checks.sh"
+CRITERIA = ROOT / "game/data/qa/acceptance_criteria.json"
+
+# Top-level docs intentionally not in the index (deprecated / historical).
+EXCLUDE = {"README.md", "SCREENSHOTS.md"}
+
+
+def main() -> int:
+    errors: list[str] = []
+    readme = README.read_text(encoding="utf-8")
+    linked = set(re.findall(r"\(([\w./-]+\.md)\)", readme))
+    linked_names = {Path(link).name for link in linked}
+
+    # 1. Every top-level doc is indexed.
+    for md in sorted(DOCS.glob("*.md")):
+        if md.name in EXCLUDE:
+            continue
+        if md.name not in linked_names:
+            errors.append(f"docs/{md.name} is not linked from docs/README.md index")
+
+    # 2. README links resolve.
+    for link in sorted(linked):
+        target = (DOCS / link).resolve()
+        if DOCS not in target.parents and target != DOCS:
+            continue  # link outside docs/ (e.g. ../.cursorrules) — skip
+        if not target.is_file():
+            errors.append(f"docs/README.md links missing file: {link}")
+
+    # 3. Runner gates == docs_ci_gates.required_gates.
+    runner_gates = re.findall(r'run_gate "([^"]+)"', RUNNER.read_text(encoding="utf-8"))
+    dupes = sorted({g for g in runner_gates if runner_gates.count(g) > 1})
+    if dupes:
+        errors.append(f"duplicate run_gate ids in runner: {dupes}")
+    crit = json.loads(CRITERIA.read_text(encoding="utf-8"))
+    required = crit.get("docs_ci_gates", {}).get("required_gates", [])
+    missing = sorted(set(runner_gates) - set(required))
+    extra = sorted(set(required) - set(runner_gates))
+    if missing:
+        errors.append(f"gates run by runner but not in docs_ci_gates.required_gates: {missing}")
+    if extra:
+        errors.append(f"gates in required_gates but not run by runner: {extra}")
+
+    if errors:
+        print("DOC SYNC FAILED:")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+
+    print(f"doc sync: OK ({len(list(DOCS.glob('*.md')))} top-level docs indexed, "
+          f"{len(set(runner_gates))} docs-CI gates aligned)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

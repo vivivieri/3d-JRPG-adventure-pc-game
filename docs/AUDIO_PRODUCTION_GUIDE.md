@@ -230,6 +230,8 @@ See `AUDIO_DIRECTION.md` §2 for instrument notes. Each ending track **must not*
 
 ## 4. Scene → audio map
 
+**Machine-readable authority:** `game/data/audio/scene_audio_map.json` (validated L0 on `main`). The table below is the human-readable mirror; when they disagree, fix JSON first then sync this doc.
+
 | Scene | Zone | BGM | Ambient | Stings / one-shots |
 |-------|------|-----|---------|-------------------|
 | SC-00 | — | `bgm_prologue` | — | Box gift bell |
@@ -453,7 +455,14 @@ See `docs/SETTINGS_ACCESSIBILITY.md` §1.
 
 ## 11. QA checklist
 
-Automated gates: `docs/AUDIO_QA.md` (`check_audio_catalog.py`, `check_audio_technical.py`, optional `review_audio_vision.py` on hero BGM).
+Automated gates: `docs/AUDIO_QA.md`
+
+| Layer | BGM | P0 VO |
+|-------|-----|-------|
+| Catalog | `check_audio_catalog.py` + `audio_qa_catalog.json` | `audio_qa_catalog.json` `vo_clips` + `vo_prompts.json` |
+| Technical | `check_audio_technical.py` | `check_audio_vo.py` (duration, loudness, locale paths) |
+| Listen jury | `review_audio_vision.py` — 8 hero tracks, A6/A7 | `review_vo_vision.py` — 5 P0 clips, V6/V7, gate locale `en` |
+| Smoke | `bash tools/run_audio_smoke_checks.sh` | Same script when gate VO file exists |
 
 - [ ] All track IDs in §3 exist as `.ogg` under `game/assets/audio/`
 - [ ] No audible click at loop points (10 min loop test per BGM)

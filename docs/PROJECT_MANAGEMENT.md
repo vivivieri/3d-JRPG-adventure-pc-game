@@ -54,7 +54,9 @@
 | `gate/L0_base_class_compliance` | Rogue controller fail |
 | `gate/L1_unit_tests` | Unit test fail |
 | `gate/L1_gdscript_lint` | GDScript lint fail |
-| `gate/L2_animation_whitelist` | Animation name fail |
+| `gate/L2_animation_whitelist` | Animation name / required floor fail |
+| `gate/L2_feel_smoke` | Feel constant fail |
+| `gate/L2_glb_import` | GLB post-import fail |
 | `gate/L4_integration` | Flow scenario fail |
 | `gate/L5_e2e` | Ending path fail |
 | `domain/visual` | Art jury |
@@ -183,6 +185,18 @@ Agents use `ManagePullRequest` + Issues via cloud task tools. Labels and templat
 
 ## 8. PM Agent checklist (start of sprint)
 
+**Mandatory — enforced by orchestrator (not honor system):**
+
+```bash
+bash tools/run_pm_orchestrator.sh
+```
+
+See `docs/PM_AGENT_RUNBOOK.md` for full step list.
+
+- [ ] `validate_sprint_board.py --strict` PASS (`L0_sprint_board`)
+- [ ] `pm_sync_sprint_pack.py` PASS — pack ↔ board aligned
+- [ ] `next_dispatch` assigned to one agent; session gate run
+- [ ] After agent session: `pm_update_issue.py` + re-run orchestrator
 - [ ] Sync `docs/MILESTONES.md` with open issues
 - [ ] No open `severity/S0` on `env/uat` or `env/preprod`
 - [ ] RC tag planned with gate list

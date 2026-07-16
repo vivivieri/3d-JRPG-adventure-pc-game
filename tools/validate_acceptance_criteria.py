@@ -32,7 +32,23 @@ def main() -> int:
     if not gates:
         errors.append("gates must be non-empty")
 
-    for domain in ("visual", "model", "audio"):
+    # Every gate must document WHAT it checks (description) and WHERE the criteria
+    # live (design_ref), and how PASS is measured — so reviewers/gatekeepers always
+    # know what to verify. See docs/ACCEPTANCE_CRITERIA.md.
+    for gid, g in gates.items():
+        if not g.get("description"):
+            errors.append(f"gate {gid} missing 'description' (what it checks)")
+        if not g.get("design_ref"):
+            errors.append(f"gate {gid} missing 'design_ref' (where criteria are defined)")
+        if not any(k in g for k in ("pass", "metrics", "per_model", "per_run")):
+            errors.append(f"gate {gid} has no measurable pass/metrics")
+
+    # Every jury domain must define explicit review criteria (the reviewer's checklist).
+    for dom, j in data.get("jury", {}).items():
+        if not j.get("criteria"):
+            errors.append(f"jury {dom} has no explicit criteria (reviewer checklist)")
+
+    for domain in ("visual", "model", "audio", "vo"):
         jury = data.get("jury", {}).get(domain)
         if not jury:
             errors.append(f"jury.{domain} missing")
@@ -52,6 +68,10 @@ def main() -> int:
                 "L0_acceptance_catalog",
                 "L0_environments_catalog",
                 "L0_sprint_phases",
+                "L0_zone_composition",
+                "L0_qa_catalog",
+                "L0_audio_qa_catalog",
+                "L0_scene_audio_map",
             ):
                 errors.append(f"ci_gates references unknown gate: {gid}")
 

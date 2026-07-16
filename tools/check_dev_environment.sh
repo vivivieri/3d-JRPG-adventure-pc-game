@@ -98,8 +98,8 @@ if [[ -f .cursor/mcp.json ]]; then
     echo "[OK]   gamelab-mcp in .cursor/mcp.json"
     OK=$((OK + 1))
   else
-    echo "[WARN] gamelab-mcp missing — UI art fallback; zone path uses ComfyUI/Material Maker"
-    WARN=$((WARN + 1))
+    echo "[FAIL] gamelab-mcp missing — required — set GAMELAB_API_KEY and bash tools/write_mcp_config.sh"
+    ERR=$((ERR + 1))
   fi
 else
   echo "[FAIL] .cursor/mcp.json missing — run: bash tools/ensure_mcp_stack.sh"
@@ -107,7 +107,8 @@ else
 fi
 
 echo
-echo "Note: gamelab-mcp is P1 (WARN if missing)."
+echo "Note: gamelab-mcp + GAMELAB_API_KEY are required (procedural UI fallbacks OK for asset output)."
+echo "      Blender required for M5 turntable QA — bash tools/install_extended_toolchain.sh"
 echo "      ACE-Step 1.5 — bash tools/install_ace_step.sh (audio prototypes)"
 
 echo

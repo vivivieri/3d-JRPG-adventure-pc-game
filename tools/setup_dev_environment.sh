@@ -28,13 +28,14 @@ DIRS=(
   game/scenes/world
   game/scenes/ui
   game/scenes/combat
-  game/scripts/core
+  game/scripts/autoload
+  game/scripts/exploration
   game/scripts/combat
   game/scripts/narrative
-  game/scripts/player
+  game/scripts/core
   game/scripts/ui
-  game/scripts/world
   game/scripts/shaders
+  game/scripts/editor
   game/environments
   build
   .cursor

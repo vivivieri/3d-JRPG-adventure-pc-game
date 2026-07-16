@@ -1,0 +1,58 @@
+# Game CI failure triage — required remediation path (Automation B)
+#
+# Triggers architect/builder remediation on game/development CI failure.
+# Does NOT dispatch PM on success — worker emits agent_cycle_complete when fixed.
+#
+# See docs/CLOUD_AGENT_SETUP_RUNBOOK.md · docs/FACTORY_WATCHDOG.md
+
+name: Game CI failure triage
+
+on:
+  workflow_run:
+    workflows: [Game CI]
+    types: [completed]
+
+jobs:
+  triage-failure:
+    name: Emit remediation dispatch
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.head_branch == 'game/development'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Build failure payload
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/agent_cycle_event.json <<EOF
+          {
+            "event": "agent_cycle_failed",
+            "commit_sha": "${{ github.event.workflow_run.head_sha }}",
+            "branch": "game/development",
+            "source": "game_ci_failure",
+            "failed_check": "game-ci.yml",
+            "note": "CI failed — run qa_emit_remediation; fix before next dispatch",
+            "pm_command": "bash tools/run_pm_orchestrator.sh"
+          }
+          EOF
+          cat artifacts/agent_cycle_event.json
+
+      - name: POST Cursor PM webhook
+        if: env.CURSOR_PM_CYCLE_WEBHOOK_URL != ''
+        env:
+          CURSOR_PM_CYCLE_WEBHOOK_URL: ${{ secrets.CURSOR_PM_CYCLE_WEBHOOK_URL }}
+        run: |
+          curl -sf -X POST "$CURSOR_PM_CYCLE_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d @artifacts/agent_cycle_event.json
+          echo "PM webhook sent for CI failure triage"
+
+      - name: Upload failure event
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-cycle-failed
+          path: artifacts/agent_cycle_event.json

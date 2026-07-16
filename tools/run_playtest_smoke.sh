@@ -142,11 +142,30 @@ check_model_smoke() {
   rm -f "$log"
 }
 
+check_optional() {
+  local label="$1"
+  shift
+  set +e
+  "$@" >/dev/null 2>&1
+  local rc=$?
+  set -e
+  case "$rc" in
+    0) echo "[PASS] $label"; PASS=$((PASS + 1)) ;;
+    2) echo "[SKIP] $label"; WARN=$((WARN + 1)) ;;
+    *) echo "[FAIL] $label"; FAIL=$((FAIL + 1)) ;;
+  esac
+}
+
 echo "==> Fresh-rebuild smoke checks"
 echo ""
 
 check "R&R compliance (no hand-built scenes)" bash tools/check_rr_compliance.sh
 check_story_data
+check_optional "Base class registry" python3 tools/validate_base_classes.py
+check_optional "Base class compliance" bash tools/check_base_class_compliance.sh
+check_optional "GDScript lint (changed)" bash tools/check_gdscript_changed.sh
+check_optional "Animation whitelist" python3 tools/check_animation_whitelist.py --phase 1
+check_optional "Feel smoke" bash tools/run_feel_smoke_checks.sh
 check_scene_visuals
 check "Unit tests pass" bash tools/run_unit_tests.sh
 check "Dev environment healthy" bash tools/check_dev_environment.sh

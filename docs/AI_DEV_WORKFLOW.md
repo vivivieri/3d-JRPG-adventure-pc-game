@@ -1,6 +1,6 @@
 # AI Dev Workflow — Build, Test & Acceptance Criteria
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Applies to:** `main` clean baseline → Phases 1–8 rebuild  
 **Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/GDAI_CLOUD_SETUP.md`, `docs/AI_TESTING_SPEC.md`, `docs/IMPLEMENTATION_PLAN.md`, `docs/QA_AND_BUG_PROCESS.md`
 
@@ -32,9 +32,10 @@ Gameplay controllers and interactables **extend Architect-owned base classes** �
 
 | Base class | Path | Builder uses via |
 |------------|------|------------------|
-| `PlayerController` | `game/scripts/player/player_controller.gd` | `player.tscn` component scene |
+| `PlayerController` | `game/scripts/exploration/player_controller.gd` | `player.tscn` component scene |
 | `Combatant` | `game/scripts/combat/combatant.gd` | Enemy/party prefabs |
-| `Interactable` | `game/scripts/world/interactable.gd` | `interactable_*.tscn` catalog |
+| `Interactable` | `game/scripts/exploration/interactable.gd` | `interactable_*.tscn` catalog |
+| `SavePoint` | `game/scripts/exploration/save_point.gd` | `save_point.tscn` component |
 
 **Authority:** `docs/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json` · component scenes in `docs/LEVEL_DESIGN.md` §1b.
 
@@ -89,10 +90,10 @@ Testing is **layered**. Higher layers run after lower layers pass.
 |-------|--------|-------------|---------|
 | **L0 — Data validation** | `python3 tools/validate_story_data.py` + base-class validators | AI agent (every commit) | JSON schema, cross-refs, scene IDs, `base_classes.json` |
 | **L1 — Unit tests + lint** | `bash tools/run_unit_tests.sh` + `check_gdscript_changed.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags; `gdlint` on changed `.gd` |
-| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, visual/audio/model smoke when assets exist |
+| **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, feel smoke, GLB import, visual/audio/model smoke when assets exist |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
-| **L5 — AI E2E playthrough** | `bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
+| **L5 — AI E2E playthrough** | `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
 | **L6 — Human QA** | `docs/PLAYTEST_SCRIPT.md` | Human (**after L0–L5 pass**) | Feel, pacing, localization — **ship gate only** |
 
 **GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_docs_ci_checks.sh` on `main`.  
@@ -230,6 +231,8 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 1.7 | Greybox scenes exist for all 4 zones; each loads headless | Integration test |
 | 1.8 | L0 + L1 + L2 + L3 pass after every commit | CI scripts |
 | 1.9 | **Vertical slice gate:** SC-02 Ruined Village passes `ART_DIRECTION.md` §10 **Phase 1 (greybox) checklist** — final-art items defer to Phase 7 | AI screenshot in `artifacts/screenshots/` + L3 pass |
+| 1.10 | **Golden screenshot** — `phase1_ruined_village_gameplay.png` per `zone_composition.json` (**GR-001**) | GDAI capture → `VISUAL_SMOKE_STRICT=1` enables `L2_visual_jury` |
+| 1.11 | Zone composition smoke (warn) — `bash tools/run_zone_composition_checks.sh` (**GR-003**) | Exit 0 warn until M5; strict at Phase 7.12 |
 
 ### Phase 2 — Core systems shell
 
@@ -287,6 +290,7 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 
 | # | Criterion | Verification |
 |---|-----------|--------------|
+| 6.0 | Expand `palace_sentinel` `CHARACTER_BIBLE.md` to boss-standard row **before** SC-14 mesh work (**GR-002**) | Doc review; backlog `status: done` |
 | 6.1 | Dragon Palace Gate zone per `ENVIRONMENT_KITS.md` §6 | GDAI + screenshot |
 | 6.2 | Palace Sentinel + Tide Keeper per `BOSS_DESIGNS.md` | Integration test |
 | 6.3 | SC-16 choice UI blocks attack input per `ENDING_DESIGN.md` | GDAI F5 |
@@ -303,12 +307,13 @@ A phase is **done** only when **every** criterion below passes. AI agents must c
 | 7.1 | No primitive/Kenney placeholder art in shipping scenes | `check_asset_compliance.sh` + human review |
 | 7.2 | Hero meshes: Urashima, Yuzu, Roku per `CHARACTER_BIBLE.md` | Screenshot gate |
 | 7.3 | Automated stylized zone textures per zone (`palette_remap.py`) | Art checklist |
-| 7.4 | Curated BGM per `AUDIO_PRODUCTION_GUIDE.md` | Audio QA §11 |
-| 7.5 | SFX + ambient beds per scene map | Audio QA technical |
-| 7.6 | Selective VO: 12 clips × locales + zh-Hant dialects generated; `generate_ai_vo.sh --list` = 60 files | File manifest + `run_audio_smoke_checks.sh` |
-| 7.7 | VO passes `AUDIO_QA.md` jury gates (P0 clips first) | Jury scripts |
+| 7.4 | Curated BGM per `audio_qa_catalog.json` + `AUDIO_PRODUCTION_GUIDE.md` | `L2_audio_technical` + `L2_audio_jury` |
+| 7.5 | SFX + ambient beds per `scene_audio_map.json` | `validate_scene_audio_map.py` + in-game verify |
+| 7.6 | Selective VO: 12 clips × locales + zh-Hant dialects; `generate_ai_vo.sh --list` = 60 files | File manifest + `run_audio_smoke_checks.sh` |
+| 7.7 | P0 VO: `L2_vo_technical` all locales + `L2_vo_jury` on `en` gate | `check_audio_vo.py` + `review_vo_vision.py` |
 | 7.8 | Cinematic hero assets (SC-00, SC-12, SC-17) per `CINEMATICS.md` §12 | GDAI F5 |
 | 7.9 | `bash tools/check_asset_compliance.sh` passes | Exit 0 |
+| 7.12 | All zone golden screenshots + `ZONE_COMPOSITION_STRICT=1` composition smoke (**GR-001**, **GR-003**) | `run_visual_smoke_checks.sh` + `run_zone_composition_checks.sh` |
 
 ### Phase 8 — Ship prep
 

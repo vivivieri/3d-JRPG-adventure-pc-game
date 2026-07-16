@@ -26,6 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
+from generation_brief_lib import brief_id_for_zone, format_emotional_context  # noqa: E402
 from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
 
 ZONE_CONTEXT = {
@@ -43,22 +44,31 @@ REVIEW_SCHEMA = """Respond with ONLY valid JSON (no markdown fences):
   "v4_japanese_coastal": true,
   "v5_silhouette_readable": true,
   "v6_ui_clean": true,
+  "v7_emotional_mood_matches": true,
+  "v8_no_forbidden_tone": true,
   "overall_pass": true,
   "confidence": 0.85,
   "issues": ["short bullet strings"],
   "summary": "one sentence"
 }
 
-Fail overall_pass if ANY v1-v6 is false for this screenshot type. Zone screenshots: v6 may be true if no UI visible."""
+Fail overall_pass if ANY v1-v8 is false for this screenshot type. Zone screenshots: v6 may be true if no UI visible."""
 
 
 def build_prompt(zone: str, scene: str, view: str) -> str:
     ctx = ZONE_CONTEXT.get(zone, f"Zone: {zone}")
+    brief_id = brief_id_for_zone(zone)
+    emotional = format_emotional_context(brief_id)
+    emotional_block = (
+        f"\n\n### Emotional intent (generation brief — compliance only, NOT fun/enjoyment)\n{emotional}\n"
+        if emotional
+        else "\n\nEmotional intent: muted melancholy coastal JRPG — beauty with decay.\n"
+    )
     return f"""You are a visual QA judge for Tides of Urashima — a muted, melancholy stylized Japanese coastal 3D JRPG (NOT bright Ghibli, NOT photoreal PBR, NOT chibi).
 
 Scene: {scene} | Zone: {zone} | Camera: {view}
 Zone palette: {ctx}
-
+{emotional_block}
 Analyze the screenshot. Answer each criterion from visible evidence only:
 
 V1 — Any obvious grey/brown axis-aligned BOX primitives (placeholder cubes) as hero props or buildings?
@@ -67,6 +77,10 @@ V3 — Stylized NPR/toon read — not glossy realistic PBR or photographic HDRI 
 V4 — Japanese coastal / ryūgū motifs — no European medieval castle look?
 V5 — Key silhouettes (torii, character, gate) readable at this camera distance?
 V6 — UI clean: no pink missing-font boxes, no clipped text (N/A if no UI in frame)?
+V7 — **Emotional mood matches** zone brief (dread / melancholy / awe / wonder-wrongness per zone)?
+V8 — **No forbidden tone** — no comedy cheer, horror gore, bright Ghibli sunshine, European medieval triumph?
+
+Note: V7/V8 judge art-direction emotional register — not player enjoyment or controller feel.
 
 {REVIEW_SCHEMA}"""
 

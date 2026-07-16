@@ -1,6 +1,6 @@
 # Controls Cheat Sheet — How We Enforce Roles
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Print this:** One-page reference for automated + process controls  
 **Companion:** `docs/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)  
 **Authority:** `docs/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/PROJECT_MANAGEMENT.md`
@@ -11,7 +11,7 @@
 
 1. **Enforce outputs, not intentions** — gates PASS with evidence, or merge/tag is blocked.
 2. **CI is the hard floor** — agent honor system fills gaps CI cannot see.
-3. **WARN ≠ PASS · SKIP ≠ PASS** — for milestone and ship gates.
+3. **WARN ≠ PASS · SKIP ≠ PASS** — on `game/development`, CI maps SKIP → FAIL via `tools/gate_lib.sh`.
 4. **Builder proof** — scene changes require `.gdai_built` in the same PR (`L3_gdai_built`).
 5. **Human L6** — only after L0–L5 pass.
 
@@ -28,7 +28,8 @@
 | 5 | **R&R scripts** | ✅ in CI | ✅ |
 | 6 | **Remediation loop** | ⚠️ Process | ✅ anti-infinite-retry |
 | 7 | **Phase exit gates** | — | ✅ phase promotion |
-| 8 | **Agent rules** | — | — |
+| 8 | **Pre-delivery control** | — | ✅ blocks outbound delivery until checks pass + **QA** approves (separation of duties; `docs/DELIVERY_CONTROL.md`) |
+| 9 | **Agent rules** | — | — |
 
 ---
 
@@ -43,6 +44,12 @@
 | `L0_environments_catalog` | Env catalog |
 | `L0_sprint_phases` | Sprint config |
 | `L0_base_classes` | Code base class registry schema |
+| `L0_zone_composition` | Zone composition contract |
+| `L0_qa_catalog` | 3D model QA catalog |
+| `L0_audio_qa_catalog` | BGM/VO QA catalog |
+| `L0_scene_audio_map` | Scene/zone audio map |
+| `L0_generation_readiness_backlog` | GR-* backlog traceability |
+| `L0_sprint_board` | Sprint board + PM orchestrator state |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -50,7 +57,7 @@
 
 | Gate | Role mainly enforced |
 |------|----------------------|
-| `L0_rr_compliance` | **Builder** — no hand-built ship `.tscn` |
+| `L0_rr_compliance` | **Builder** — GDAI-verified ship `.tscn` only (`.gdai_built`) |
 | `L0_story_data` | **Architect** / data |
 | `L0_acceptance_catalog` | **QA** catalog |
 | `L0_base_classes` | **Architect** — base class registry |
@@ -58,9 +65,11 @@
 | `L2_scene_primitives` | **Builder** / **Visual** |
 | `L2_boot_headless` | **Builder** (when `main_scene` set) |
 | `L3_gdai_built` | **Builder** — marker updated with scene diff |
-| `L2_animation_whitelist` | **Builder** / **Visual** — Mixamo clip names only |
-| `L1_gdscript_lint` | **Architect** — changed `.gd` files |
-| `L0_base_class_compliance` | **Architect** — no rogue controllers |
+| `L2_animation_whitelist` | **Builder** / **Visual** — required ⊆ Mixamo clips ⊆ whitelist |
+| `L2_feel_smoke` | **Architect** — `GAME_FEEL.md` constants |
+| `L2_glb_import` | **Builder** / **Visual** — post-import toon pipeline |
+| `L1_gdscript_lint` | **Architect** — changed `.gd` files (`gdtoolkit` required) |
+| `L0_base_class_compliance` | **Architect** — no rogue native extends |
 | `L4_integration` | **Flow** |
 | `M5_asset_compliance` | **Release** / compliance |
 
@@ -72,15 +81,15 @@
 
 | Role | Hard (automated) | Soft (process) |
 |------|------------------|----------------|
-| **PM** | Branch split (`main` vs `game/development`); issue template requires phase + gates | PR checklist; sprint batch ≤10 issues |
+| **PM** | `L0_sprint_board`; **`run_pm_orchestrator.sh` PASS** | Dispatch + escalation via `pm_emit_escalation.sh` |
 | **Architect** | `L1_unit_tests`, `L1_gdscript_lint`, `L0_base_class_compliance` | Handoff + **base class** registry |
-| **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, component scenes | `.gdai_built`; F5 in editor |
+| **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, `L2_glb_import`, component scenes | `.gdai_built`; F5 in editor; `install_glb_import_pipeline.sh` |
 | **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |
 | **Flow** | `L4_integration`; L5 in `run_cd_gates.sh` for beta/prod | MCP Pro `--minimal` only |
 | **Debugger** | Godotiq read-only by policy | — |
 | **Release** | `run_cd_gates.sh`; CD workflows; tag patterns | Steam secrets + env reviewers |
-| **Visual** | L2 palette/model/audio scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
-| **Human** | L6 in ship checklist / CD prod channel | Playtest script |
+| **Visual** | L2 palette/model/audio/vo scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
+| **Human** | L6 in ship checklist / CD prod (`min_testers: 5`, feel checklist §7b) | Playtest script + gate JSON |
 
 ---
 

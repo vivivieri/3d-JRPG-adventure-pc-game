@@ -1,6 +1,6 @@
 # Continuous Deployment — Artifact & Steam
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Workflows:** `.github/workflows/cd-artifact.yml` · `.github/workflows/cd-steam.yml`  
 **Gate script:** `bash tools/run_cd_gates.sh`  
 **Steam checklist:** `docs/STEAM_RELEASE_CHECKLIST.md`  
@@ -29,8 +29,9 @@ Before first CD run:
 1. Game implementation on `game/development` (Phases 1–8)
 2. `bash tools/run_ci_checks.sh` green on the tagged commit
 3. For beta/prod: `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` passes
-4. For Steam CD: GitHub Secrets configured (see §5)
-5. Review `docs/STEAM_RELEASE_CHECKLIST.md` — many items are still open
+4. For prod: `artifacts/qa_reports/L6_human_playtest.json` with `status=pass`, ≥5 testers (`run_cd_gates.sh --channel prod`)
+5. For Steam CD: GitHub Secrets configured (see §5)
+6. Review `docs/STEAM_RELEASE_CHECKLIST.md` — many items are still open
 
 ---
 
@@ -111,6 +112,7 @@ Optional: store `steam/depot/*.vdf` in repo (without secrets) once App ID is ass
 | `run_ci_checks.sh` | Fix failing L0–L2 gate |
 | `check_asset_compliance.sh` | Update `docs/asset_manifest.license.json` |
 | L5 E2E | Complete Phase 6 playable build |
+| L6 sign-off | Run `PLAYTEST_SCRIPT.md`; write `qa_write_gate_result.py --gate L6_human_playtest` |
 | GodotSteam install | `GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh` |
 | Export fails | Check `game/export_presets.cfg`, templates installed |
 

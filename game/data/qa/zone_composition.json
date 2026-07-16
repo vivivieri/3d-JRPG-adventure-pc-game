@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "design_ref": "docs/generation_briefs/*.md § Spatial/Composition contract",
+  "zones": {
+    "beach_shore": {
+      "phase": 2,
+      "storyboard": "SC-01",
+      "scene_path": "res://scenes/world/beach_shore.tscn",
+      "emotional_mood": "lonely_arrival",
+      "min_path_width_m": 2.0,
+      "max_hero_props_spawn_sightline": 3,
+      "dune_vista_max_pct": 30,
+      "vista_anchor": "beach_ruined_gate_silhouette",
+      "gameplay_cam_height_m": 1.6,
+      "golden_screenshot": "artifacts/screenshots/phase1_beach_shore_gameplay.png",
+      "generation_brief": "docs/generation_briefs/beach_shore.md",
+      "markers": []
+    },
+    "ruined_village": {
+      "phase": 1,
+      "storyboard": "SC-02–SC-05",
+      "scene_path": "res://scenes/world/ruined_village.tscn",
+      "emotional_mood": "dread_decay",
+      "hub_size_m": [120, 120],
+      "min_path_width_m": 2.0,
+      "max_props_per_100m2": 12,
+      "max_hero_props_per_20x20m": 8,
+      "vista_anchor": "village_torii_damaged",
+      "gameplay_cam_height_m": 1.6,
+      "pier_drop_m": -2.0,
+      "torii_arch_height_m_min": 4.0,
+      "well_visible_from_path": true,
+      "golden_screenshot": "artifacts/screenshots/phase1_ruined_village_gameplay.png",
+      "golden_establishing": "artifacts/golden/ruined_village_establishing.png",
+      "generation_brief": "docs/generation_briefs/ruined_village.md",
+      "markers": [
+        "ToriiShrine",
+        "RokuShack",
+        "VillageWell",
+        "InspectBanner",
+        "InspectSandal",
+        "TutorialEncounter",
+        "CaveEntrance"
+      ]
+    },
+    "tidal_caves": {
+      "phase": 5,
+      "storyboard": "SC-06–SC-10",
+      "scene_path": "res://scenes/world/tidal_caves.tscn",
+      "emotional_mood": "wonder_wrongness",
+      "min_path_width_m": 2.0,
+      "min_ceiling_height_m": 3.0,
+      "max_emissive_intensity": 0.4,
+      "vista_anchor": "cave_shrine_alcove",
+      "gameplay_cam_height_m": 1.6,
+      "golden_screenshot": "artifacts/screenshots/phase5_tidal_caves_gameplay.png",
+      "generation_brief": "docs/generation_briefs/tidal_caves.md",
+      "markers": ["WaterPuzzle", "DeepPoolEncounter", "ShoreWraithBoss"],
+      "water_puzzle_y_m": { "low": -0.5, "high": 0.8 }
+    },
+    "dragon_palace_gate": {
+      "phase": 6,
+      "storyboard": "SC-12–SC-16",
+      "scene_path": "res://scenes/world/dragon_palace_gate.tscn",
+      "emotional_mood": "awe_sterile",
+      "corridor_module_repeat_m": 8.0,
+      "min_path_width_m": 2.5,
+      "void_sky_stars": false,
+      "vista_anchor": "palace_gate_main",
+      "save_shrine_exterior_before": "palace_sentinel_hall",
+      "gameplay_cam_height_m": 1.6,
+      "max_emissive_intensity": 0.4,
+      "golden_screenshot": "artifacts/screenshots/phase6_dragon_palace_gate_gameplay.png",
+      "generation_brief": "docs/generation_briefs/dragon_palace_gate.md",
+      "markers": []
+    }
+  }
+}

@@ -158,6 +158,10 @@ Silence is intentional — see `NARRATIVE_WRITING_GUIDE.md` §4.
 
 ## 9. QA checklist
 
+Automated: `bash tools/run_feel_smoke_checks.sh` audits `game/data/qa/feel_thresholds.json` against `player_controller.gd` constants.
+
+Human (L6): `docs/PLAYTEST_SCRIPT.md` §7b feel checklist — avg ≥3.5 across ≥5 testers.
+
 - [ ] SC-05 tutorial prompts sync with combat turns
 - [ ] Intent icon matches outcome 100%
 - [ ] SC-07 hints fire without dialogue

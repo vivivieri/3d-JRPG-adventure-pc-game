@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "authority": "docs/GAME_FEEL.md — measurable feel thresholds for automated smokes",
+  "scenarios": [
+    {
+      "id": "feel_input_latency",
+      "label": "Input to movement response",
+      "max_ms": 50,
+      "design_ref": "GAME_FEEL.md §3 Movement"
+    },
+    {
+      "id": "feel_hit_flash",
+      "label": "Combat hit flash duration",
+      "target_ms": 120,
+      "tolerance_ms": 20,
+      "design_ref": "GAME_FEEL.md §2 Hit resolution"
+    },
+    {
+      "id": "feel_camera_smooth",
+      "label": "Field camera orbit smoothing",
+      "min_spring_damping": 0.85,
+      "design_ref": "GAME_FEEL.md §3 Camera"
+    },
+    {
+      "id": "feel_dialogue_cps",
+      "label": "Typewriter characters per second (Normal)",
+      "target_cps": 40,
+      "tolerance_cps": 8,
+      "design_ref": "GAME_FEEL.md §5 Typewriter"
+    },
+    {
+      "id": "feel_combat_turn_max",
+      "label": "Max player turn resolve time",
+      "max_seconds": 3.0,
+      "design_ref": "GAME_FEEL.md §2 Combat feedback"
+    }
+  ]
+}

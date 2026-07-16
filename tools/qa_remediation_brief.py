@@ -42,6 +42,15 @@ AUDIO_KEYS = (
     "a4_instrumental_no_vocals",
     "a5_fits_scene_mood",
 )
+VO_KEYS = (
+    "v1_not_robotic_placeholder",
+    "v2_script_semantics_match",
+    "v3_matches_direction",
+    "v4_not_anime_exaggeration",
+    "v5_fits_scene_mood",
+    "v6_emotional_mood_matches",
+    "v7_no_forbidden_tone",
+)
 
 TECH_PATTERN_MAP = [
     (re.compile(r"tris.*below|below.*min|too few tris", re.I), "tris_below_min"),
@@ -49,6 +58,7 @@ TECH_PATTERN_MAP = [
     (re.compile(r"texture", re.I), "textures_missing"),
     (re.compile(r"greybox|kenney|banned", re.I), "greybox_banned"),
     (re.compile(r"too small|likely empty|100 KB", re.I), "file_too_small"),
+    (re.compile(r"duration.*max|exceeds max", re.I), "vo_duration_exceeded"),
     (re.compile(r"LUFS|loudness", re.I), "lufs_out_of_range"),
     (re.compile(r"peak|clip", re.I), "peak_too_hot"),
     (re.compile(r"placeholder|generate_game_audio", re.I), "placeholder_audio"),
@@ -93,11 +103,14 @@ def aggregate_jury_failures(report: dict) -> tuple[list[str], list[str], str]:
     elif any(k in sample for k in MODEL_KEYS):
         domain = "model"
         keys = MODEL_KEYS
+    elif any(k in sample for k in VO_KEYS):
+        domain = "vo"
+        keys = VO_KEYS
     elif any(k in sample for k in AUDIO_KEYS):
         domain = "audio"
         keys = AUDIO_KEYS
     else:
-        # Audio jury may use custom keys — infer from issues text
+        # Legacy audio jury without structured keys — infer from issues text
         domain = "audio"
         keys = AUDIO_KEYS
 
@@ -128,6 +141,19 @@ def aggregate_jury_failures(report: dict) -> tuple[list[str], list[str], str]:
         elif "mood" in text or "melanchol" in text or "coastal" in text:
             failed.append("a2_melancholy_coastal")
 
+    if domain == "vo" and not failed:
+        text = " ".join(all_issues).lower()
+        if "robotic" in text or "placeholder" in text:
+            failed.append("v1_not_robotic_placeholder")
+        elif "script" in text or "wrong line" in text or "meaning" in text:
+            failed.append("v2_script_semantics_match")
+        elif "anime" in text or "squeal" in text or "exaggerat" in text:
+            failed.append("v4_not_anime_exaggeration")
+        elif "forbidden" in text or "breathy" in text or "cackle" in text:
+            failed.append("v7_no_forbidden_tone")
+        elif "mood" in text or "direction" in text:
+            failed.append("v3_matches_direction")
+
     return failed, all_issues, domain
 
 
@@ -155,6 +181,25 @@ def parse_technical_output(text: str) -> list[str]:
 def run_technical_model(model_id: str) -> tuple[str, list[str]]:
     proc = subprocess.run(
         [sys.executable, str(ROOT / "tools/check_model_technical.py"), "--model", model_id],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+    )
+    out = (proc.stdout or "") + (proc.stderr or "")
+    codes = parse_technical_output(out)
+    return out, codes
+
+
+def run_technical_vo(clip_id: str, locale: str = "en") -> tuple[str, list[str]]:
+    proc = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "tools/check_audio_vo.py"),
+            "--clip",
+            clip_id,
+            "--locale",
+            locale,
+        ],
         capture_output=True,
         text=True,
         cwd=str(ROOT),
@@ -203,6 +248,7 @@ def revision_log_path(asset_id: str, domain: str) -> Path:
         "visual": ROOT / "artifacts/visual_reviews",
         "model": ROOT / "artifacts/model_reviews",
         "audio": ROOT / "artifacts/audio_reviews",
+        "vo": ROOT / "artifacts/vo_reviews",
         "flow": ROOT / "artifacts/flow_reviews",
         "data": ROOT / "artifacts/data_reviews",
     }.get(domain, ROOT / "artifacts/qa_reviews")
@@ -330,6 +376,15 @@ def format_brief(
                 "```",
             ]
         )
+    elif domain == "vo":
+        lines.extend(
+            [
+                "```bash",
+                f"python3 tools/check_audio_vo.py --clip {asset_id} --locale en",
+                f"python3 tools/review_vo_vision.py --clip {asset_id} --locale en --min-pass 2",
+                "```",
+            ]
+        )
     elif domain == "data":
         lines.extend(
             [
@@ -350,7 +405,7 @@ def format_brief(
             ]
         )
     lines.append("")
-    doc = "docs/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio") else "docs/FLOW_QA.md"
+    doc = "docs/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio", "vo") else "docs/FLOW_QA.md"
     lines.append("---")
     lines.append(f"See `{doc}` for industry refs and stop rules.")
     return "\n".join(lines)
@@ -361,6 +416,8 @@ def main() -> int:
     ap.add_argument("--jury", type=Path, help="Path to *.jury.json from review_*_vision.py")
     ap.add_argument("--technical-model", dest="tech_model", metavar="ID")
     ap.add_argument("--technical-audio", dest="tech_audio", metavar="TRACK")
+    ap.add_argument("--technical-vo", dest="tech_vo", metavar="CLIP")
+    ap.add_argument("--vo-locale", default="en", help="Locale for --technical-vo")
     ap.add_argument("--validate-story", action="store_true", help="Run validate_story_data.py and brief")
     ap.add_argument("--flow-scenario", metavar="ID", help="L4/L5 scenario id e.g. INT-QUEST-01")
     ap.add_argument("--visual-palette", action="store_true", help="Brief for palette_drift technical fail")
@@ -407,6 +464,14 @@ def main() -> int:
         tech_output, failed_codes = run_technical_audio(args.tech_audio)
         issues = [ln.strip() for ln in tech_output.splitlines() if "FAIL" in ln]
         entries = lookup_entries(playbook, "technical", failed_codes)
+    elif args.tech_vo:
+        domain = "vo"
+        asset_id = args.tech_vo
+        tech_output, failed_codes = run_technical_vo(args.tech_vo, args.vo_locale)
+        issues = [ln.strip() for ln in tech_output.splitlines() if "FAIL" in ln]
+        entries = lookup_entries(playbook, "technical", failed_codes) or lookup_entries(
+            playbook, "vo", failed_codes
+        )
     elif args.validate_story:
         domain = "data"
         asset_id = args.asset_id or "story_data"

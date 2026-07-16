@@ -1,0 +1,123 @@
+{
+  "version": "1.1",
+  "agent_role": "pm",
+  "aliases": ["sprint master", "sprint facilitator"],
+  "authority": "docs/PM_AGENT_RUNBOOK.md",
+  "design_ref": "docs/SPRINT_ORCHESTRATION.md",
+  "rule": "PM Agent MUST run bash tools/run_pm_orchestrator.sh at the start of every session. Exit non-zero blocks sprint work. Honor system is forbidden.",
+  "session_steps": [
+    {
+      "step": 0,
+      "id": "event_idempotency",
+      "description": "Skip duplicate webhook events within cooldown",
+      "command": "python3 tools/pm_check_event_idempotency.py",
+      "block_on_fail": false
+    },
+    {
+      "step": 1,
+      "id": "validate_sprint_phases",
+      "description": "Active phase and sprint config valid",
+      "command": "python3 tools/validate_sprint_phases.py",
+      "block_on_fail": true
+    },
+    {
+      "step": 2,
+      "id": "validate_sprint_board",
+      "description": "Sprint board schema, deps, required fields",
+      "command": "python3 tools/validate_sprint_board.py --strict",
+      "block_on_fail": true
+    },
+    {
+      "step": 3,
+      "id": "sync_issue_pack",
+      "description": "Issue pack matches board — create missing / carry-over",
+      "command": "python3 tools/pm_sync_sprint_pack.py",
+      "block_on_fail": true
+    },
+    {
+      "step": 4,
+      "id": "github_issues_validate",
+      "description": "GitHub issue links when require_github_issues enabled",
+      "command": "python3 tools/pm_sync_github_issues.py --validate",
+      "block_on_fail": true
+    },
+    {
+      "step": 5,
+      "id": "linear_sync_manifest",
+      "description": "Write Linear sync manifest for human/MCP visibility",
+      "command": "python3 tools/pm_sync_linear.py --write --validate",
+      "block_on_fail": true
+    },
+    {
+      "step": 6,
+      "id": "sprint_preflight",
+      "description": "MCP + toolchain preflight before worker dispatch",
+      "command": "bash tools/run_sprint_preflight.sh",
+      "block_on_fail": true
+    },
+    {
+      "step": 7,
+      "id": "docs_ci_baseline",
+      "description": "Design data and docs gates green on main",
+      "command": "bash tools/run_docs_ci_checks.sh",
+      "block_on_fail": true
+    },
+    {
+      "step": 8,
+      "id": "dispatch_orchestrator",
+      "description": "Compute next agent dispatch, stale, escalations, dispatch packet",
+      "command": "python3 tools/pm_orchestrator_lib.py --dispatch --write-report --write-dispatch-packet",
+      "block_on_fail": true
+    },
+    {
+      "step": 9,
+      "id": "mark_event_handled",
+      "description": "Record cycle event handled after orchestrator PASS",
+      "command": "python3 tools/pm_check_event_idempotency.py --mark-handled",
+      "block_on_fail": false
+    },
+    {
+      "step": 10,
+      "id": "stakeholder_report",
+      "description": "Write status dashboard for product owner (artifacts; Telegram on cycle events)",
+      "command": "bash tools/pm_emit_stakeholder_report.sh --trigger pm_session --no-telegram",
+      "block_on_fail": false
+    }
+  ],
+  "post_agent_steps": [
+    {
+      "id": "check_done_criteria",
+      "description": "Verify pr_merged / ci_green before marking done",
+      "command": "python3 tools/pm_check_done_criteria.py <issue_id> --commit <sha>",
+      "required": true
+    },
+    {
+      "id": "bundle_evidence",
+      "description": "Attach gate evidence to sprint bundle",
+      "command": "python3 tools/pm_bundle_evidence.py <issue_id> --gate <gate_id> --artifact <path>",
+      "required": true
+    },
+    {
+      "id": "update_board",
+      "description": "PM updates issue status after every agent session",
+      "command": "python3 tools/pm_update_issue.py --help",
+      "required": true
+    },
+    {
+      "id": "stakeholder_report",
+      "description": "Stakeholder status to product owner (auto on pm_emit_cycle_event)",
+      "command": "bash tools/pm_emit_stakeholder_report.sh --trigger agent_cycle_complete --issue <id> --agent <role>",
+      "required": true
+    },
+    {
+      "id": "re_run_orchestrator",
+      "description": "Re-run dispatch before assigning next agent",
+      "command": "bash tools/run_pm_orchestrator.sh",
+      "required": true
+    }
+  ],
+  "other_agent_session_gate": {
+    "command": "bash tools/run_agent_session_gate.sh <agent_role> <issue_id>",
+    "rule": "Architect, Builder, QA, Flow, Release, Visual agents MUST pass session gate before work. Strict role match enforced."
+  }
+}

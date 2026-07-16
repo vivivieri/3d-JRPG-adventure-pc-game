@@ -31,9 +31,9 @@
 F0  validate_story_data.py     → JSON cross-refs (flags, items, dialogue)
 F1  run_unit_tests.sh           → parsers, calculators, flag math
 F2  run_playtest_smoke.sh       → boot + art/audio/model smoke
-F4  run_integration_tests.sh    → INT-* multi-scene scenarios
-F5  run_e2e_playthrough.sh      → full spine + 3 endings (Phase 6+)
-F6  PLAYTEST_SCRIPT.md          → human 2–3h playthrough (ship only)
+F4  run_integration_tests.sh    → INT-* (`game/data/qa/integration_scenarios.json`)
+F5  REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh  → full spine + 3 endings (Phase 6+)
+F6  PLAYTEST_SCRIPT.md          → human 2–3h + feel checklist §7b (ship only)
 ```
 
 **Flow QA focuses on F0, F4, F5.** Art/audio/model gates run in F2 but are documented separately.
@@ -42,7 +42,7 @@ F6  PLAYTEST_SCRIPT.md          → human 2–3h playthrough (ship only)
 
 ## 3. Integration scenarios (L4)
 
-Implement in `game/tests/integration/` as phases land. IDs from `AI_TESTING_SPEC.md` §6:
+Implement in `game/tests/integration/` as phases land. **Catalog:** `game/data/qa/integration_scenarios.json`. IDs from `AI_TESTING_SPEC.md` §6:
 
 | Phase | ID | Asserts |
 |-------|-----|---------|
@@ -127,7 +127,8 @@ python3 tools/qa_remediation_brief.py --flow-scenario INT-QUEST-01 --log-attempt
 | Game flow | This doc | `--flow-scenario INT-*` |
 | 3D model | `MODEL_QA.md` | `--technical-model` / `--jury` |
 | Visual | `VISUAL_QA.md` | palette / jury |
-| Audio | `AUDIO_QA.md` | `--technical-audio` / `--jury` |
+| Audio (BGM) | `AUDIO_QA.md` | `--technical-audio` / `--jury` |
+| Audio (P0 VO) | `AUDIO_QA.md` §A4–A5 | `--technical-vo` / `--jury` (vo_reviews) |
 
 Master policy: `docs/QA_REMEDIATION_LOOP.md` §10.
 

@@ -17,9 +17,9 @@ Run this audit **before Phase 1 build** and after any engine or plugin upgrade.
 | **Godot MCP Pro** | Not installed | Godot 4.4+ | **Expected OK** | Needs purchased zip | Yes for L4/L5 |
 | **GodotSteam** | v4.15 (stale) | **4.20+** for 4.7 | **Upgrade before ship** | Class loads on Linux; vendor breaks at 4.20 | No until Phase 8 |
 
-**Verdict:** GDAI + Godotiq are verified on Godot 4.7. **However**, per `.cursorrules` §0 /
-`MCP_STACK.md`, the **full** stack (incl. `godot-mcp-pro`, `gamelab-mcp`, `notion`) is required —
-if Godot MCP Pro is missing, agents must **notify the user** rather than silently proceed.
+**Verdict:** GDAI + Godotiq are verified on Godot 4.7. Per `.cursorrules` §0 /
+`MCP_STACK.md`, the **full** stack (incl. `godot-mcp-pro`, `gamelab-mcp`) and **Blender** (M5 turntable) are **required** —
+if any piece is missing, agents must **notify the user** rather than silently proceed.
 Hard blocks: MCP Pro before any L4/L5 phase gate (Phase 2+); GodotSteam upgrade to 4.20+ before
 Steam export (Phase 8).
 

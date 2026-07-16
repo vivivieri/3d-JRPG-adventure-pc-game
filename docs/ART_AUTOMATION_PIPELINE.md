@@ -6,7 +6,7 @@
 
 **Principle:** Ship **high-detail stylized Japanese 3D** using the **best automated tool per job**. Quality over cost — paid tools are fine when no free option matches output. **No human artists** in the art or audio production path (modeling, texturing, painting, mixing, VO performance). **Human playtest** (L6) is separate — see `docs/PLAYTEST_SCRIPT.md`.
 
-**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/MCP_STACK.md`, `docs/RENDERING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ASSET_COMPLIANCE.md`, `.cursorrules` §0
+**Cross-refs:** `docs/ART_DIRECTION.md`, `docs/MCP_STACK.md`, `docs/RENDERING_GUIDE.md`, `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/ASSET_COMPLIANCE.md`, `docs/GENERATION_READINESS.md` (per-asset briefs + human-expectation gaps), `.cursorrules` §0
 
 ---
 
@@ -19,7 +19,7 @@
 | Debug, signal trace | **Godotiq** | — | — | GDAI if `.tscn` fix |
 | L4/L5 automated tests | **Godot MCP Pro** (`--minimal`) | Headless unit tests (L0–L2) | — | — |
 | **Zone NPR albedos** (wood, stone, ground) | **ComfyUI** locked stylized workflow **or** **Material Maker** | Material Maker for stone/wood; Poly Haven + toon shader for nature | **`tools/palette_remap.py`** | GDAI assigns |
-| **UI frames, ink borders, icon sheets** | **GameLab MCP** | Repo procedural placeholders (dev only) | palette remap | GDAI UI scenes |
+| **UI frames, ink borders, icon sheets** | **GameLab MCP** | Repo procedural placeholders (dev asset output only) | palette remap | GDAI UI scenes |
 | **Hero / enemy 3D** | **Meshy / Tripo / Rodin** → GLB | Poly Haven rocks/trees (CC0 props only) | Blender decimate/UV if needed | Mixamo rig → GDAI |
 | **Set-pieces** (torii, lacquer box, gate) | AI 3D + ComfyUI texture projection **or** Material Maker | Same | palette remap | GDAI placement |
 | **Portraits** | ComfyUI character sheet workflow | Procedural silhouettes (`generate_procedural_portraits.py`) until M5 | palette remap | UI |
@@ -31,20 +31,20 @@
 
 ---
 
-## 2. MCP requirement tiers
+## 2. MCP and toolchain requirement tiers
 
-Not every MCP server blocks every task. Agents use this table at session startup.
+All listed servers and offline tools are **required** for the project. Agents use this table at session startup.
 
-| Tier | Servers | If missing |
-|------|---------|------------|
-| **P0 — block** | `godot-mcp`, `godotiq`, `godot-mcp-pro` | **STOP** — notify user |
-| **P1 — UI art** | `gamelab-mcp` + `GAMELAB_API_KEY` | **WARN** — procedural UI placeholders |
-| **Offline** | ComfyUI, Blender, ACE-Step GPU | **WARN** per task — document fallback used |
+| Tier | Servers / tools | If missing |
+|------|-----------------|------------|
+| **MCP — block** | `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp` + `GAMELAB_API_KEY` | **STOP** — notify user |
+| **Offline — block** | **Blender** (M5 turntable QA) | **STOP** — `bash tools/install_extended_toolchain.sh` |
+| **Offline — per task** | ComfyUI, Material Maker, ACE-Step GPU | Document fallback used; quality-first per §1 |
 
 ```bash
 bash tools/ensure_mcp_stack.sh
 bash tools/check_dev_environment.sh
-bash tools/check_extended_toolchain.sh   # GameLab = WARN if absent; P0 MCP = FAIL
+bash tools/check_extended_toolchain.sh   # GameLab + Blender = FAIL if absent
 ```
 
 ---
@@ -91,14 +91,14 @@ GameLab is **UI-focused**. Zone albedos use ComfyUI or Material Maker.
 5. GDAI MCP — assign to Control themes / TextureRects in UI scenes
 ```
 
-**Dev fallback:** `generate_procedural_portraits.py` and flat-color UI placeholders until GameLab key is set.
+**Dev asset fallback:** `generate_procedural_portraits.py` and flat-color UI placeholders until GameLab output ships — **does not** waive the `gamelab-mcp` requirement.
 
 ---
 
 ## 5. 3D character & prop workflow
 
 ```
-1. READ  docs/CHARACTER_BIBLE.md poly budgets
+1. READ  docs/CHARACTER_BIBLE.md poly budgets + docs/GENERATION_READINESS.md row (write docs/generation_briefs/<id>.md if missing)
 2. Meshy / Tripo / Rodin — text prompt from bible silhouettes (Japanese coastal, not chibi)
 3. Blender — decimate to budget, UV unwrap, export GLB
 4. ComfyUI or Material Maker — stylized albedo bake / projection
@@ -139,7 +139,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 | Selective VO | ElevenLabs via `generate_ai_vo.sh` | 12 lines only — `docs/VO_HIT_LIST.md` |
 | SFX layers | Freesound **CC0-only** + procedural | Register each file |
 
-**No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (technical + optional hero jury) + L6 listen.
+**No human mix pass or commission** on the ship path. Quality gate = `docs/AUDIO_QA.md` (BGM technical + hero jury A6/A7; P0 VO technical + jury V6/V7) + L6 listen.
 
 **On any art/audio/model QA FAIL:** `docs/QA_REMEDIATION_LOOP.md` — brief + one lever change before rebuild (max 3 attempts).
 
@@ -150,7 +150,7 @@ Maps dominant hues toward zone rows in `docs/ART_DIRECTION.md` §1. Agents run t
 Before marking M5 complete (`docs/MILESTONES.md`). **All gates must meet `docs/ACCEPTANCE_CRITERIA.md`** — WARN/SKIP is not ship PASS.
 
 - [ ] `bash tools/check_scene_visuals.sh` passes (no primitives in ship `.tscn`)
-- [ ] `L2_model_*` + `L2_visual_*` + `L2_audio_*` gates PASS with evidence (`artifacts/`)
+- [ ] `L2_model_*` + `L2_visual_*` + `L2_audio_*` + `L2_vo_*` gates PASS with evidence (`artifacts/`)
 - [ ] All zone albedos pass `palette_remap.py` + `check_screenshot_palette.py` per zone
 - [ ] Single toon ramp family (`RENDERING_GUIDE.md`)
 - [ ] Every external asset in `LICENSES.md` + `asset_manifest.license.json`
@@ -193,4 +193,4 @@ Examples where **free typically wins:** Material Maker stone/wood, Poly Haven ro
 - `docs/MCP_STACK.md` — MCP R&R map (tiered requirements)
 - `docs/ART_DIRECTION.md` — palette, silhouettes, poly budgets
 - `tools/palette_remap.py` — post-gen palette enforcement
-- `tools/check_extended_toolchain.sh` — GameLab WARN vs P0 FAIL
+- `tools/check_extended_toolchain.sh` — GameLab + Blender FAIL if absent (required)

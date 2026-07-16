@@ -140,7 +140,7 @@ Output: `artifacts/visual_reviews/<screenshot>.jury.json` with per-model JSON vo
 
 | Tool | What it judges | Good for | Not good for |
 |------|----------------|----------|--------------|
-| **Multi-LLM vision jury** (`review_screenshot_vision.py`) | Primitives, palette mood, style rules, UI glitches | Semantic “is this a grey box?” | Fun, pacing, controller feel |
+| **Multi-LLM vision jury** (`review_screenshot_vision.py`) | Primitives, palette mood, style rules, UI glitches, **emotional mood (V7–V8)** | Semantic “is this a grey box?” | Fun, pacing, controller feel |
 | **Cursor agent (multimodal)** | Same as above when screenshot attached | Interactive iteration | Unbiased if same agent built scene |
 | **Godot MCP Pro `compare_screenshots`** | Pixel diff vs golden PNG | Regression “did art change?” | New scenes, style compliance |
 | **`check_screenshot_palette.py`** | Average color vs zone hex | Muted palette drift | Composition, silhouettes |

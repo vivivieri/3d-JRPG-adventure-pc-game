@@ -1,9 +1,9 @@
 # Audio QA — Technical Gates + Optional LLM Jury
 
-**Version:** 1.0  
-**Problem:** An agent can register `bgm_village.ogg` without listening — often a **procedural sine placeholder** or wrong loudness that ships everywhere.
+**Version:** 1.1  
+**Problem:** An agent can register `bgm_village.ogg` or `sc00_urashima_01.ogg` without listening — often a **procedural sine placeholder**, wrong loudness, or off-direction VO that ships everywhere.
 
-**Rule:** Audio tasks pass **catalog + technical checks** first. **Hero BGM** may use optional **multi-LLM listen jury**. Human **L6** still owns in-game mix feel.
+**Rule:** Audio tasks pass **catalog + technical checks** first. **Hero BGM** and **P0 VO** use optional **multi-LLM listen jury** (scoped — not every SFX). Human **L6** still owns in-game mix feel.
 
 **Cross-refs:** `docs/AUDIO_PRODUCTION_GUIDE.md`, `docs/AUDIO_DIRECTION.md`, `docs/VISUAL_QA.md`, `docs/QA_REMEDIATION_LOOP.md`, `docs/ACCEPTANCE_CRITERIA.md`, `game/data/audio/ace_step_prompts.json`
 
@@ -18,18 +18,21 @@
 | LUFS / true peak targets | Ending emotional landing |
 | Duration in expected range | Zone crossfade taste |
 | Not dev procedural placeholder on ship | Controller + mix comfort |
-| Hero mood (optional LLM jury) | Full playthrough listen |
+| Hero BGM mood (LLM jury) | P0 VO performance + script semantics (LLM jury, `en` gate) |
+| P0 VO duration / loudness / locale paths | Subtitle timing + duck mix in-engine |
 
-**Do not** run multi-LLM jury on every footstep SFX — cost/noise too high.
+**Do not** run multi-LLM jury on every footstep SFX or every locale variant — cost/noise too high. Gate locale for VO jury: **`en`** (all locales still get technical lint at M5 ship).
 
 ---
 
 ## 2. Defense layers
 
 ```
-A1  check_audio_catalog.py     → required tracks exist for phase
-A2  check_audio_technical.py   → LUFS, peak, format, duration, placeholder flag
-A3  review_audio_vision.py      → optional 2-of-N LLM listen (hero BGM only)
+A1  check_audio_catalog.py     → required BGM tracks exist for phase
+A2  check_audio_technical.py   → LUFS, peak, format, duration, placeholder flag (BGM/SFX)
+A3  review_audio_vision.py      → 2-of-N LLM listen (hero BGM only)
+A4  check_audio_vo.py           → P0 VO duration, loudness, locale paths vs dialogue script
+A5  review_vo_vision.py         → 2-of-N LLM listen (P0 VO, gate locale en)
 L6  PLAYTEST_SCRIPT.md          → human listen after L0–L5
 ```
 
@@ -79,7 +82,40 @@ python3 tools/review_audio_vision.py \
 
 **API keys:** `OPENAI_API_KEY`, `GEMINI_API_KEY` (audio-capable vision models). No Anthropic audio path in v1.
 
-**Pass:** ≥2 models `acceptance.valid_pass: true` (A1–A5 + confidence ≥ 0.65). Gate `L2_audio_jury`.
+**Pass:** ≥2 models `acceptance.valid_pass: true` (A1–A7 + confidence ≥ 0.65). Gate `L2_audio_jury`.
+
+Emotional intent for hero tracks loads from `docs/generation_briefs/audio/<track>.md` via `audio_brief_lib.py` (A6/A7 — same pattern as model M7/M8).
+
+### Layer A4 — P0 VO technical
+
+```bash
+python3 tools/check_audio_vo.py --clip sc00_urashima_01 --locale en
+python3 tools/check_audio_vo.py --all-p0 --ship
+```
+
+| Check | Fail if |
+|-------|---------|
+| Path | Missing `game/assets/audio/voice/{locale}/{clip_id}.ogg` (all P0 locales at M5 ship) |
+| Duration | Exceeds `max_duration_sec` in `audio_qa_catalog.json` |
+| Script | No dialogue line in `chapter_01.json` for clip/locale |
+| Loudness | Voice bus outside −18 ± 4 LUFS or peak > −3 dBTP |
+
+Gate: `L2_vo_technical`.
+
+### Layer A5 — Multi-LLM listen jury (P0 VO, gate locale `en`)
+
+```bash
+python3 tools/review_vo_vision.py \
+  --clip sc00_urashima_01 \
+  --locale en \
+  --min-pass 2
+```
+
+**P0 clips (jury scope):** `sc00_urashima_01`, `sc03_yuzu_01`, `sc11_otohime_01`, `sc13_roku_01`, `sc16_tide_keeper_01`
+
+**Pass:** ≥2 models `acceptance.valid_pass: true` (V1–V7 + confidence ≥ 0.65). Gate `L2_vo_jury`.
+
+V2 checks **semantic** script match (not word-perfect for `ja`/`zh`). V6/V7 load from `docs/generation_briefs/vo/<clip>.md` (same brief pattern as BGM A6/A7).
 
 ### Layer L6 — Human
 
@@ -95,26 +131,40 @@ bash tools/run_audio_smoke_checks.sh
 
 | State | Behavior |
 |-------|----------|
-| No `bgm_village.ogg` | **WARN** — skip (Phase 1 not ready) |
+| No `bgm_village.ogg` | **WARN** — BGM smoke skip (Phase 1 not ready) |
+| No P0 VO `en` clip | **WARN** — VO smoke skip until ElevenLabs batch |
 | Placeholder + dev mode | **WARN** — replace with ACE-Step before M5 |
 | Placeholder + `--ship` | **FAIL** |
 | ACE-Step export wrong LUFS | **FAIL** |
-| Hero jury, no API keys | **WARN** — manual packet |
+| Hero BGM jury, no API keys | **WARN** — manual packet |
+| P0 VO jury, no API keys | **WARN** — manual packet |
 
 Wired into `bash tools/run_playtest_smoke.sh`.
 
 ---
 
-## 4. Agent workflow (audio task)
+## 4. Agent workflow
+
+### BGM
 
 ```
-1. bash tools/generate_ai_bgm.sh --track bgm_village --api  (or ACE-Step export)
+1. bash tools/generate_ai_bgm.sh --track bgm_village --api
 2. Loudness normalize toward −16 LUFS in DAW/ffmpeg if needed
-3. python3 tools/register_asset.py add --path <path> --license <id> --source <name> --author <name> --used-for <desc>
+3. python3 tools/register_asset.py add --path <path> ...
 4. python3 tools/check_audio_catalog.py --phase 1
 5. python3 tools/check_audio_technical.py --track bgm_village
 6. python3 tools/review_audio_vision.py --track bgm_village  (hero tracks)
 7. GDAI MCP — wire in editor, F5 zone test
+```
+
+### P0 VO
+
+```
+1. bash tools/generate_ai_vo.sh --clip sc00_urashima_01 --locale en --locale ja --locale zh
+2. python3 tools/check_audio_vo.py --clip sc00_urashima_01 --locale en
+3. python3 tools/review_vo_vision.py --clip sc00_urashima_01 --locale en
+4. Repeat technical for all locales; jury gate on en only
+5. GDAI MCP — F5 scene with subtitles + duck_bgm_db
 ```
 
 ---
@@ -139,15 +189,17 @@ Wired into `bash tools/run_playtest_smoke.sh`.
 | `tools/check_audio_catalog.py` | Required track manifest per phase |
 | `tools/check_audio_technical.py` | ffprobe + ffmpeg ebur128 |
 | `tools/review_audio_vision.py` | Multi-LLM listen jury (hero BGM) |
-| `tools/run_audio_smoke_checks.sh` | L2 smoke wrapper |
+| `tools/check_audio_vo.py` | P0 VO technical (duration, loudness, paths) |
+| `tools/review_vo_vision.py` | Multi-LLM listen jury (P0 VO, gate locale) |
+| `tools/run_audio_smoke_checks.sh` | L2 smoke wrapper (BGM + P0 VO when files exist) |
 
 ---
 
 ## 7. vs Visual QA
 
-| | Visual | Audio |
-|--|--------|-------|
-| Cheap lint | `check_scene_visuals.sh` | `check_audio_technical.py` |
-| LLM jury scope | Every zone screenshot | **8 hero BGMs only** |
-| Golden reference | PNG compare | Optional reference WAV (future) |
-| Human gate | L6 playtest | L6 listen + loop test |
+| | Visual | BGM | P0 VO |
+|--|--------|-----|-------|
+| Cheap lint | `check_scene_visuals.sh` | `check_audio_technical.py` | `check_audio_vo.py` |
+| LLM jury scope | Zone screenshots | 8 hero tracks | 5 P0 clips (`en` gate) |
+| Brief-driven mood | `generation_briefs/*.md` M7/M8 | A6/A7 | V6/V7 |
+| Human gate | L6 playtest | Loop + crossfade | Duck + subtitle timing |

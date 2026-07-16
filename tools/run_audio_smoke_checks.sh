@@ -79,6 +79,62 @@ case "$JURY_EXIT" in
 esac
 rm -f "$JURY_LOG"
 
+# --- P0 VO smoke (when gate clip exists) ---
+VO_CLIP="${VO_SMOKE_GATE_CLIP:-sc00_urashima_01}"
+VO_LOCALE="${VO_SMOKE_GATE_LOCALE:-en}"
+VO_PATH="${ROOT}/game/assets/audio/voice/${VO_LOCALE}/${VO_CLIP}.ogg"
+
+echo ""
+echo "==> P0 VO smoke (gate clip: ${VO_CLIP}, locale: ${VO_LOCALE})"
+
+if [[ ! -f "$VO_PATH" ]]; then
+  warn "VO smoke skipped — ${VO_PATH#${ROOT}/} not found"
+  echo "       Generate via: bash tools/generate_ai_vo.sh --clip ${VO_CLIP} --locale ${VO_LOCALE}"
+else
+  VO_TECH_LOG="$(mktemp)"
+  set +e
+  python3 "${ROOT}/tools/check_audio_vo.py" --clip "$VO_CLIP" --locale "$VO_LOCALE" >"$VO_TECH_LOG" 2>&1
+  VO_TECH_EXIT=$?
+  set -e
+  cat "$VO_TECH_LOG"
+  if [[ "$VO_TECH_EXIT" -eq 0 ]]; then
+    if grep -q '^\s*\[WARN\]' "$VO_TECH_LOG" || grep -q 'WARN:' "$VO_TECH_LOG"; then
+      warn "VO technical (${VO_CLIP}/${VO_LOCALE}) — duration or loudness drift"
+    else
+      pass "VO technical (${VO_CLIP}/${VO_LOCALE})"
+    fi
+  else
+    fail "VO technical (${VO_CLIP}/${VO_LOCALE})"
+    bash "${ROOT}/tools/qa_emit_remediation.sh" vo-tech "$VO_CLIP" || true
+  fi
+  rm -f "$VO_TECH_LOG"
+
+  VO_JURY_LOG="$(mktemp)"
+  set +e
+  python3 "${ROOT}/tools/review_vo_vision.py" \
+    --clip "$VO_CLIP" \
+    --locale "$VO_LOCALE" \
+    --min-pass "${VO_JURY_MIN_PASS:-2}" \
+    >"$VO_JURY_LOG" 2>&1
+  VO_JURY_EXIT=$?
+  set -e
+  cat "$VO_JURY_LOG"
+  case "$VO_JURY_EXIT" in
+    0) pass "VO LLM jury (${VO_CLIP}/${VO_LOCALE}, >=${VO_JURY_MIN_PASS:-2} models)" ;;
+    2)
+      warn "VO LLM jury skipped — no OPENAI/GEMINI keys or manual packet written"
+      echo "       Set API keys or complete artifacts/vo_reviews/*.manual.json"
+      ;;
+    *)
+      fail "VO LLM jury consensus FAIL (${VO_CLIP}/${VO_LOCALE})"
+      bash "${ROOT}/tools/qa_emit_remediation.sh" \
+        vo-jury "${ROOT}/artifacts/vo_reviews/${VO_CLIP}_${VO_LOCALE}.jury.json" \
+        "$VO_CLIP" || true
+      ;;
+  esac
+  rm -f "$VO_JURY_LOG"
+fi
+
 echo ""
 echo "Audio smoke: ${WARN} warning(s), ${FAIL} failure(s)"
 exit "$FAIL"

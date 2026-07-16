@@ -1,6 +1,6 @@
 # Acceptance Criteria — Measurable QA Pass/Fail
 
-**Version:** 1.1  
+**Version:** 1.3  
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
 **Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  
@@ -46,17 +46,21 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 
 | Gate ID | Pass when |
 |---------|-----------|
-| `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — no hand-built ship `.tscn`; `main_scene` requires `game/scenes/.gdai_built` |
+| `L0_rr_compliance` | `check_rr_compliance.sh` exit 0 — ship `.tscn` requires `.gdai_built` with `verified_f5=true`; `main_scene` must match marker |
 | `L0_story_data` | `validate_story_data.py` exit 0, **0 errors** |
+| `L0_zone_composition` | `validate_zone_composition.py` exit 0 — zone composition contract schema |
+| `L0_qa_catalog` | `validate_qa_catalog.py` exit 0 — model catalog + `animation_timing` floor |
+| `L0_audio_qa_catalog` | `validate_audio_qa_catalog.py` exit 0 — audio catalog + brief cross-refs |
+| `L0_scene_audio_map` | `validate_scene_audio_map.py` exit 0 — scene/zone audio map |
 | `L0_base_classes` | `validate_base_classes.py` exit 0 — `base_classes.json` schema valid |
-| `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue `CharacterBody3D` controllers (game branch) |
+| `L0_base_class_compliance` | `check_base_class_compliance.sh` exit 0 — no rogue native `extends` (game branch) |
 
 ### L1 — Unit tests & lint
 
 | Gate ID | Pass when |
 |---------|-----------|
 | `L1_unit_tests` | All registered tests return `""` (no error string) |
-| `L1_gdscript_lint` | `check_gdscript_changed.sh` exit 0 on changed `.gd` files (SKIP when no diff) |
+| `L1_gdscript_lint` | `check_gdscript_changed.sh` exit 0 on changed `.gd` files (exit 2 SKIP when no diff — FAIL on game branch) |
 
 ### L2 — Smoke
 
@@ -64,13 +68,18 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 |---------|-----------|
 | `L2_boot_headless` | Godot headless boot exit 0 |
 | `L2_scene_primitives` | `check_scene_visuals.sh` exit 0, 0 banned meshes |
-| `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — clip names ⊆ `qa_catalog.json` → `allowed_animations` |
+| `L2_animation_whitelist` | `check_animation_whitelist.py` exit 0 — required ⊆ clips ⊆ `allowed_animations` |
+| `L2_zone_composition` | `run_zone_composition_checks.sh` exit 0 — warn in early phases; `ZONE_COMPOSITION_STRICT=1` at M5 ship (**GR-003**) |
+| `L2_feel_smoke` | `run_feel_smoke_checks.sh` exit 0 — `feel_thresholds.json` + player constants |
+| `L2_glb_import` | `check_glb_import_scripts.py --strict` exit 0 — post-import toon pipeline |
 | `L2_visual_palette` | `avg_anchor_dist ≤ 85`, `bright_ratio ≤ 0.35` |
-| `L2_visual_jury` | ≥2 models, all V1–V6 met, confidence ≥ 0.65 |
+| `L2_visual_jury` | ≥2 models, all V1–V8 met, confidence ≥ 0.65 |
 | `L2_model_technical` | Tris in `qa_catalog.json` range, textures ≥ min, no greybox on ship |
-| `L2_model_jury` | ≥2 models, M1–M6 met, confidence ≥ 0.65 |
+| `L2_model_jury` | ≥2 models, M1–M8 met, confidence ≥ 0.65 |
 | `L2_audio_technical` | 44.1 kHz, LUFS/peak per bus table, no procedural on ship |
-| `L2_audio_jury` | ≥2 models, A1–A5 met, confidence ≥ 0.65 (hero tracks) |
+| `L2_audio_jury` | ≥2 models, A1–A7 met, confidence ≥ 0.65 (hero BGM tracks) |
+| `L2_vo_technical` | P0 VO duration ≤ catalog max, voice loudness, locale paths vs dialogue |
+| `L2_vo_jury` | ≥2 models, V1–V7 met, confidence ≥ 0.65 (P0 clips, gate locale `en`) |
 
 ### L3 — GDAI Builder handoff
 
@@ -91,7 +100,18 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | Gate ID | Pass when |
 |---------|-----------|
 | `M5_asset_compliance` | `check_asset_compliance.sh` exit 0 |
-| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, 0 open S0/S1 — **after L5** |
+| `L6_human_playtest` | ≥80% `PLAYTEST_SCRIPT.md`, feel checklist avg ≥3.5, ≥5 testers, 0 open S0/S1 — **required ship gate**; **after L5** (Phase 8 prod CD) |
+
+### Required toolchain (not optional)
+
+| Requirement | Check | Notes |
+|-------------|-------|-------|
+| GameLab MCP | `gamelab-mcp` + `GAMELAB_API_KEY`; `check_extended_toolchain.sh` | Procedural UI fallbacks OK for **asset output** only |
+| Blender | `blender` in PATH; `check_extended_toolchain.sh` | M5 turntable QA (`docs/MODEL_QA.md` M3) |
+| `game/development` CI | `run_ci_checks.sh` exit 0 | Required merge gate; fails until `project.godot` + tests exist |
+| L6 human playtest | `L6_human_playtest` gate | Phase 8 only; after L0–L5 — still **required** for ship |
+
+Machine-readable: `acceptance_criteria.json` → `toolchain_requirements`.
 
 Full thresholds: `game/data/qa/acceptance_criteria.json`.
 

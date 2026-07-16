@@ -35,6 +35,12 @@
 | Understand the game | [GDD.md](GDD.md) → [STORYBOARD.md](STORYBOARD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · branch: `game/development` |
 | Sprint planning (Linear) | [AGILE_WITHIN_PHASES.md](AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
+| **Sprint orchestration (enforced)** | [SPRINT_ORCHESTRATION.md](SPRINT_ORCHESTRATION.md) · [PM_AGENT_RUNBOOK.md](PM_AGENT_RUNBOOK.md) · `bash tools/run_pm_orchestrator.sh` |
+| **Cloud Agent factory (event-driven)** | [CLOUD_AGENT_SETUP_RUNBOOK.md](CLOUD_AGENT_SETUP_RUNBOOK.md) · `bash tools/pm_emit_cycle_event.sh` |
+| **Day-one secrets (how to get every key)** | [CURSOR_SECRETS_SETUP.md](CURSOR_SECRETS_SETUP.md) · `bash tools/check_day_one_secrets.sh` |
+| **Factory watchdog (stall/hang recovery)** | [FACTORY_WATCHDOG.md](FACTORY_WATCHDOG.md) · `bash tools/run_factory_watchdog.sh` |
+| **Branch + done criteria** | [MULTI_AGENT_BRANCH_STRATEGY.md](MULTI_AGENT_BRANCH_STRATEGY.md) |
+| **Stakeholder / Telegram reports** | [PM_STAKEHOLDER_REPORTING.md](PM_STAKEHOLDER_REPORTING.md) |
 | Branch / merge policy | [BRANCHING.md](BRANCHING.md) |
 | Environments (dev/qa/uat/preprod) | [ENVIRONMENTS.md](ENVIRONMENTS.md) |
 | Multi-agent roles & handoffs | [MULTI_AGENT_TEAM.md](MULTI_AGENT_TEAM.md) · [RR_CHEATSHEET.md](RR_CHEATSHEET.md) |
@@ -46,12 +52,12 @@
 | Tune combat / economy | [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) |
 | Author dialogue / flags | [QUEST_AND_FLAGS.md](QUEST_AND_FLAGS.md) + `game/data/dialogue/` |
 | Set up lighting / materials | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) |
-| Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) |
+| Generate art (automated) | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) · [GENERATION_READINESS.md](GENERATION_READINESS.md) |
 | Run agents / MCP | [MCP_STACK.md](MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
 | Code base classes (extend-only) | [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md) · `game/data/code/base_classes.json` |
 | Component scenes (GDAI) | [LEVEL_DESIGN.md](LEVEL_DESIGN.md) §1b |
 | QA pass/fail (measurable) | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) → domain QA below |
-| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) |
+| Review look & feel (AI + human) | [VISUAL_QA.md](VISUAL_QA.md) + [MODEL_QA.md](MODEL_QA.md) + [AUDIO_QA.md](AUDIO_QA.md) |
 | Fix QA FAIL (no infinite retry) | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) |
 | Ship on Steam | [MILESTONES.md](MILESTONES.md) §M6 + [STEAM_RELEASE_CHECKLIST.md](STEAM_RELEASE_CHECKLIST.md) + [CD.md](CD.md) |
 
@@ -95,7 +101,7 @@
 | [PROGRESSION_TUNING.md](PROGRESSION_TUNING.md) | XP curve, stats at milestones, difficulty |
 | [ITEMS_AND_ECONOMY.md](ITEMS_AND_ECONOMY.md) | 20 items, shop, drops, inflation guards |
 | [TUTORIAL_DESIGN.md](TUTORIAL_DESIGN.md) | Onboarding + SC-00 prologue |
-| [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards |
+| [GAME_FEEL.md](GAME_FEEL.md) | Juice, feedback, rewards · `game/data/qa/feel_thresholds.json` |
 | [ACHIEVEMENTS.md](ACHIEVEMENTS.md) | 13 Steam achievements |
 
 ---
@@ -132,12 +138,15 @@
 | [MODEL_QA.md](MODEL_QA.md) | **3D GLB lint + turntable vision jury** |
 | [VISUAL_QA.md](VISUAL_QA.md) | Screenshot + vision gates (in-scene) |
 | [ART_AUTOMATION_PIPELINE.md](ART_AUTOMATION_PIPELINE.md) | **Quality-first automated art/audio** — tier matrix, workflows |
+| [GENERATION_READINESS.md](GENERATION_READINESS.md) | **Human-expectation gaps** — per-character/zone gen briefs, composition contracts |
+| [generation_briefs/](generation_briefs/README.md) | **30 gen briefs** — 3D heroes/zones + 8 hero BGM + 5 P0 VO |
 | [RENDERING_GUIDE.md](RENDERING_GUIDE.md) | Forward+ tonemap, fog, glow, zone presets |
+| [ART_DIRECTION.md](ART_DIRECTION.md) | Palette, silhouettes, muted-coastal look — what to avoid |
 | [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md) | Models, portraits, boss meshes, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickup meshes |
 | [AUDIO_DIRECTION.md](AUDIO_DIRECTION.md) | Music map, SFX philosophy |
-| [AUDIO_QA.md](AUDIO_QA.md) | **Technical + optional LLM listen jury** for BGM |
-| [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness, scene→track map |
+| [AUDIO_QA.md](AUDIO_QA.md) | **BGM + P0 VO** — technical lint + scoped LLM listen jury |
+| [AUDIO_PRODUCTION_GUIDE.md](AUDIO_PRODUCTION_GUIDE.md) | Buses, loudness; scene map in `scene_audio_map.json` |
 | [STORYBOARD_ILLUSTRATIONS.md](STORYBOARD_ILLUSTRATIONS.md) | Pitch art spec |
 | [ASSET_COMPLIANCE.md](ASSET_COMPLIANCE.md) | Copyright-safe policy |
 | [LICENSES.md](LICENSES.md) | Attribution log |
@@ -163,7 +172,10 @@
 | [QA_AND_BUG_PROCESS.md](QA_AND_BUG_PROCESS.md) | Severity, triage, milestone gates |
 | [ACCEPTANCE_CRITERIA.md](ACCEPTANCE_CRITERIA.md) | Measurable QA gates — WARN/SKIP ≠ PASS |
 | [QA_REMEDIATION_LOOP.md](QA_REMEDIATION_LOOP.md) | FAIL iteration — industry refs + anti-retry |
+| [ESCALATION_POLICY.md](ESCALATION_POLICY.md) | Anti-infinite-loop ladder — dev↔QA → Architect/SA → Product Owner |
 | [FLOW_QA.md](FLOW_QA.md) | Game flow QA + iterative fix loop |
+| [PLAYTEST_TELEMETRY.md](PLAYTEST_TELEMETRY.md) | Playtest telemetry (GUR) — pacing/combat/ending tuning loop |
+| [DELIVERY_CONTROL.md](DELIVERY_CONTROL.md) | Pre-delivery review gate — review + confirm before outbound delivery |
 | [PLAYTEST_SCRIPT.md](PLAYTEST_SCRIPT.md) | 2–3h human playthrough path |
 | [GDAI_CLOUD_SETUP.md](GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |
 | [PLUGIN_INSTALL_GUIDE.md](PLUGIN_INSTALL_GUIDE.md) | MCP plugin install |
@@ -220,5 +232,6 @@ python3 tools/validate_story_data.py
 | Database / save schema | `DATA_ARCHITECTURE.md` + `SAVE_AND_FAIL_STATES.md` |
 | Code style guide | **`CODE_STYLE.md`** |
 | Art bible / asset pipeline | `ART_AUTOMATION_PIPELINE.md` + `ART_DIRECTION.md` + `RENDERING_GUIDE.md` |
+| Generation readiness (AI 3D + audio) | `GENERATION_READINESS.md` + [`generation_briefs/`](generation_briefs/README.md) + `game/data/audio/audio_qa_catalog.json` |
 | Asset registry | `LICENSES.md` + `asset_manifest.license.json` |
 | Production timeline | `IMPLEMENTATION_PLAN.md` + `MILESTONES.md` |

@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "docs/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
   "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See §3 in CODE_BASE_CLASS_RULES.md for asset licenses.",
   "architect_owns": [
@@ -34,6 +34,14 @@
       "phase": 3,
       "agent_rule": "extend_only",
       "description": "Inspectables, NPC dialogue hooks — scene instances only"
+    },
+    {
+      "id": "SavePoint",
+      "path": "res://scripts/exploration/save_point.gd",
+      "extends": "Interactable",
+      "phase": 3,
+      "agent_rule": "extend_only",
+      "description": "Well / save shrine — extends Interactable with autosave hook"
     },
     {
       "id": "ZoneTransition",

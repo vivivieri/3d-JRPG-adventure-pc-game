@@ -42,7 +42,7 @@ This document is the single checklist for the M5 art rebuild (Phase 7) and Godot
 
 ## 3. WorldEnvironment (per zone)
 
-Every world scene needs a `WorldEnvironment` node. Apply via `game/scripts/world/zone_visuals.gd` or a saved `.tres` preset per zone.
+Every world scene needs a `WorldEnvironment` node. Apply via `game/scripts/exploration/zone_visuals.gd` or a saved `.tres` preset per zone.
 
 ### 3.1 Global defaults
 
@@ -250,7 +250,7 @@ Before marking an M5 art-pass zone complete, verify:
 
 ## 13. Reference: current prototype (`zone_visuals.gd`)
 
-On Godot implementation branches, `game/scripts/world/zone_visuals.gd` already applies:
+On Godot implementation branches, `game/scripts/exploration/zone_visuals.gd` applies:
 
 - `WorldEnvironment` with Filmic tonemap
 - `ProceduralSkyMaterial` per zone palette
@@ -296,5 +296,6 @@ When evaluating generic “make Godot look professional” tips:
 | `docs/CINEMATICS.md` | Camera fog overrides, combat FX |
 | `docs/CHARACTER_BIBLE.md` | Box glow states, spirit materials |
 | `docs/SETTINGS_ACCESSIBILITY.md` | Graphics quality presets (§10) |
-| `game/scripts/world/zone_visuals.gd` | Runtime zone environment (Godot branches) |
-| `game/scripts/world/water_material.gd` | Stylized water (Godot branches) |
+| `game/scripts/exploration/zone_visuals.gd` | Runtime zone environment (Godot branches) |
+| `game/assets/shaders/toon_base.gdshader` | NPR ramp family (GLB post-import + zones) |
+| `game/scripts/shaders/water_material.gdshader` | Stylized water (Godot branches) |

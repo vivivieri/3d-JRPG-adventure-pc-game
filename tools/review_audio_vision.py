@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
+from audio_brief_lib import format_emotional_context  # noqa: E402
 
 PROMPTS = ROOT / "game/data/audio/ace_step_prompts.json"
 
@@ -42,13 +43,16 @@ REVIEW_SCHEMA = """Respond with ONLY valid JSON:
   "a3_not_upbeat_pop": true,
   "a4_instrumental_no_vocals": true,
   "a5_fits_scene_mood": true,
+  "a6_emotional_mood_matches": true,
+  "a7_no_forbidden_tone": true,
   "overall_pass": true,
   "confidence": 0.8,
   "issues": ["short strings"],
   "summary": "one sentence"
 }
 
-Fail overall_pass if cheap sine-wave placeholder, upbeat adventure, EDM, vocals, or wrong mood."""
+Fail overall_pass if cheap sine-wave placeholder, upbeat adventure, EDM, vocals, wrong mood,
+or emotional register contradicts the generation brief (comedy cheer, horror gore, bright Ghibli)."""
 
 
 def load_track_meta(track_id: str) -> dict:
@@ -60,13 +64,19 @@ def load_track_meta(track_id: str) -> dict:
 
 
 def build_prompt(track_id: str, meta: dict) -> str:
+    emotional = format_emotional_context(track_id, kind="audio")
+    emotional_block = (
+        f"\n\n### Emotional intent (generation brief — compliance only, NOT in-game mix feel)\n{emotional}\n"
+        if emotional
+        else ""
+    )
     return f"""You are an audio QA judge for Tides of Urashima — a muted melancholy Japanese coastal JRPG (NOT upbeat adventure, NOT EDM, NOT bright Ghibli).
 
 Track: {track_id}
 Scene: {meta.get('scene', '')}
 Category: {meta.get('category', '')}
 Creative brief: {meta.get('prompt', '')}
-
+{emotional_block}
 Listen to the audio and judge:
 
 A1 — Sounds like composed game BGM, NOT a cheap procedural sine/beep placeholder?
@@ -74,6 +84,10 @@ A2 — Melancholy, coastal, restrained (NieR / coastal decay mood)?
 A3 — NOT upbeat pop, heroic anime fanfare, or party music?
 A4 — Instrumental — no vocals or lyrics?
 A5 — Fits the scene/category described above?
+A6 — Primary emotional mood matches the generation brief emotional intent?
+A7 — Does NOT exhibit forbidden tones from brief (comedy cheer, horror gore, bright anime, EDM)?
+
+Note: A6/A7 judge art-direction emotional register — not player enjoyment or mix ducking.
 
 {REVIEW_SCHEMA}"""
 

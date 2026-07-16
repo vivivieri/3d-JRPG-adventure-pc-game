@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "Source of truth for measurable QA pass/fail. If a check is not listed here with a threshold, it cannot block ship.",
   "global_rules": {
     "warn_is_not_pass": true,
@@ -23,7 +23,20 @@
     "Marking phase complete with E2E script SKIP",
     "Claiming visual PASS without artifacts/screenshots evidence",
     "Procedural placeholder audio/model marked ship-ready",
-    "Hand-edited ship .tscn merged without game/scenes/.gdai_built marker"
+    "Hand-edited ship .tscn merged without game/scenes/.gdai_built marker",
+    "Treating GameLab MCP or Blender as optional for ship",
+    "Merging game/development PR without green CI",
+    "Skipping L6 human playtest for ship",
+    "PM session without run_pm_orchestrator.sh PASS",
+    "Agent work without run_agent_session_gate.sh PASS",
+    "GitHub issue closed but sprint_board status not done",
+    "Sprint issue pack and sprint_board ID mismatch",
+    "Skipping pm_emit_cycle_event.sh after issue done (factory stall)",
+    "Ignoring factory_halt flag and starting workers anyway",
+    "Marking issue done without pm_check_done_criteria PASS",
+    "Architect and Builder work in same agent session (strict role violation)",
+    "Skipping evidence bundle before issue done",
+    "Cycle complete without stakeholder report (pm_emit_stakeholder_report)"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -62,11 +75,119 @@
       "evidence": ["game/data/code/base_classes.json"],
       "design_ref": "docs/CODE_BASE_CLASS_RULES.md"
     },
+    "L0_zone_composition": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_zone_composition.py",
+      "description": "Zone composition contract — path width, vista anchor, golden screenshot paths",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/zone_composition.json"],
+      "design_ref": "docs/GENERATION_READINESS.md §5"
+    },
+    "L0_qa_catalog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_qa_catalog.py",
+      "description": "Model QA catalog schema; animation_timing covers required_animations",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/models/qa_catalog.json"],
+      "design_ref": "docs/MODEL_QA.md, docs/GENERATION_READINESS.md §X-03"
+    },
+    "L0_generation_readiness_backlog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_generation_readiness_backlog.py",
+      "description": "GR-* backlog items trace to IMPLEMENTATION_PLAN tasks and gate IDs",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/generation_readiness_backlog.json"],
+      "design_ref": "docs/GENERATION_READINESS.md §8, docs/IMPLEMENTATION_PLAN.md"
+    },
+    "L0_sprint_board": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_sprint_board.py --strict",
+      "description": "Active sprint board — issues, deps, pack alignment; PM orchestrator source of truth",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/sprint_board.json", "artifacts/pm_orchestrator_report.json"],
+      "design_ref": "docs/SPRINT_ORCHESTRATION.md, docs/PM_AGENT_RUNBOOK.md"
+    },
+    "L0_factory_watchdog": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_factory_watchdog.py",
+      "description": "Factory watchdog thresholds and exception-recovery config",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/factory_watchdog.json"],
+      "design_ref": "docs/FACTORY_WATCHDOG.md"
+    },
+    "L0_escalation_policy": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_escalation_policy.py",
+      "description": "Anti-infinite-loop escalation ladder well-formed — dev↔QA (capped) → arbitration (Architect/SA) → Product Owner",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/escalation_policy.json"],
+      "design_ref": "docs/ESCALATION_POLICY.md"
+    },
+    "L0_stakeholder_report": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_stakeholder_report_config.py",
+      "description": "Stakeholder report + Telegram config for product owner cycle updates",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/stakeholder_report_config.json"],
+      "design_ref": "docs/PM_STAKEHOLDER_REPORTING.md"
+    },
+    "L0_pm_orchestrator": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_pm_orchestrator_steps.py",
+      "description": "PM session workflow well-formed — session + post-agent steps present and every step points at an existing tool",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/pm_orchestrator_steps.json"],
+      "design_ref": "docs/PM_AGENT_RUNBOOK.md, docs/SPRINT_ORCHESTRATION.md"
+    },
+    "L0_audio_qa_catalog": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_audio_qa_catalog.py",
+      "description": "Audio QA catalog — tracks, VO clips, hero jury briefs, ACE-Step cross-ref",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/audio_qa_catalog.json"],
+      "design_ref": "docs/AUDIO_QA.md, docs/AUDIO_PRODUCTION_GUIDE.md"
+    },
+    "L0_scene_audio_map": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_scene_audio_map.py",
+      "description": "Scene/zone → BGM/ambient/sting map vs audio catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/audio/scene_audio_map.json"],
+      "design_ref": "docs/AUDIO_PRODUCTION_GUIDE.md §4"
+    },
+    "L0_playtest_telemetry": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_playtest_telemetry_schema.py",
+      "description": "Playtest telemetry schema + thresholds aligned to pacing/feel/endings (analyzer: tools/analyze_playtest_telemetry.py)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/playtest_telemetry_schema.json"],
+      "design_ref": "docs/PLAYTEST_TELEMETRY.md, docs/FLOW_QA.md"
+    },
+    "L0_delivery_control": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_delivery_control.py",
+      "description": "Pre-delivery control config — checks + confirmation policy for outbound reports (gate: tools/predelivery_gate.py)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/delivery_control.json"],
+      "design_ref": "docs/DELIVERY_CONTROL.md, docs/CONTROLS_CHEATSHEET.md"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
       "command": "bash tools/check_base_class_compliance.sh",
-      "description": "No rogue CharacterBody3D outside PlayerController on game/development",
+      "description": "No rogue native extends outside registered base classes on game/development",
       "pass": { "exit_code": 0 },
       "skip_when": "game/scripts/ not present",
       "design_ref": "docs/CODE_BASE_CLASS_RULES.md"
@@ -75,6 +196,7 @@
       "layer": "L1",
       "domain": "flow",
       "command": "bash tools/run_unit_tests.sh",
+      "description": "GDScript unit tests all pass — no failing tests",
       "pass": { "exit_code": 0, "failed_tests": 0 },
       "evidence": [],
       "design_ref": "docs/AI_DEV_WORKFLOW.md §3"
@@ -102,24 +224,57 @@
       "layer": "L2",
       "domain": "visual",
       "command": "bash tools/check_scene_visuals.sh",
+      "description": "No banned primitive meshes (BoxMesh/CapsuleMesh) in player-facing scenes",
       "pass": { "exit_code": 0, "banned_mesh_count": 0 },
       "evidence": [],
       "design_ref": "docs/VISUAL_QA.md §L1"
     },
+    "L2_zone_composition": {
+      "layer": "L2",
+      "domain": "visual",
+      "command": "bash tools/run_zone_composition_checks.sh",
+      "command_ship": "ZONE_COMPOSITION_STRICT=1 bash tools/run_zone_composition_checks.sh",
+      "description": "Zone scenes per zone_composition.json; golden screenshots when STRICT (GR-003)",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot (main branch data-only)",
+      "evidence": ["game/data/qa/zone_composition.json", "game/scenes/world/*.tscn"],
+      "design_ref": "docs/GENERATION_READINESS.md §X-04, generation_readiness_backlog.json GR-003"
+    },
     "L2_animation_whitelist": {
       "layer": "L2",
       "domain": "model",
-      "command": "python3 tools/check_animation_whitelist.py --phase 1",
-      "description": "Rigged GLB animation names ⊆ qa_catalog allowed_animations",
+      "command": "python3 tools/check_animation_whitelist.py --phase m5 --strict --check-timing",
+      "description": "Rigged GLB: required ⊆ found ⊆ allowed_animations; optional duration_ms ranges",
       "pass": { "exit_code": 0 },
-      "skip_when": "no rigged GLB on disk for phase",
+      "skip_when": "no rigged GLB on disk for phase (docs-only baseline)",
       "evidence": ["game/data/models/qa_catalog.json"],
       "design_ref": "docs/MODEL_QA.md §M2c, docs/CHARACTER_BIBLE.md §8"
+    },
+    "L2_feel_smoke": {
+      "layer": "L2",
+      "domain": "flow",
+      "command": "bash tools/run_feel_smoke_checks.sh",
+      "description": "GAME_FEEL thresholds catalog + player constant audit",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot",
+      "evidence": ["game/data/qa/feel_thresholds.json"],
+      "design_ref": "docs/GAME_FEEL.md"
+    },
+    "L2_glb_import": {
+      "layer": "L2",
+      "domain": "model",
+      "command": "python3 tools/check_glb_import_scripts.py --strict",
+      "description": "Ship GLBs use glb_toon_post_import.gd",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no GLB assets on disk",
+      "evidence": ["game/scripts/editor/glb_toon_post_import.gd"],
+      "design_ref": "docs/MODEL_QA.md §M2b"
     },
     "L2_visual_palette": {
       "layer": "L2",
       "domain": "visual",
       "command": "python3 tools/check_screenshot_palette.py",
+      "description": "Gameplay screenshot palette stays muted-coastal (avg anchor distance + bright-pixel ratio within bounds)",
       "metrics": {
         "max_avg_anchor_dist": { "op": "<=", "value": 85.0, "unit": "rgb_euclidean" },
         "max_bright_ratio": { "op": "<=", "value": 0.35, "unit": "sample_ratio" }
@@ -131,6 +286,7 @@
       "layer": "L2",
       "domain": "model",
       "command": "python3 tools/check_model_catalog.py --phase {phase}",
+      "description": "All models required for the phase are present in the model QA catalog",
       "pass": { "missing_models": 0 },
       "evidence": ["game/data/models/qa_catalog.json"],
       "design_ref": "docs/MODEL_QA.md §M1"
@@ -139,6 +295,7 @@
       "layer": "L2",
       "domain": "model",
       "command": "python3 tools/check_model_technical.py",
+      "description": "GLB tris within budget + embedded textures ≥ min per model; no greybox at ship",
       "metrics_source": "game/data/models/qa_catalog.json",
       "per_model": {
         "tris": { "op": "between", "from": "tris_min", "to": "tris_max" },
@@ -153,6 +310,7 @@
       "layer": "L2",
       "domain": "audio",
       "command": "python3 tools/check_audio_technical.py",
+      "description": "Audio sample rate / channels / LUFS / true-peak within per-bus targets",
       "metrics": {
         "sample_rate_hz": { "op": "==", "value": 44100 },
         "channels": { "op": "in", "value": [1, 2] },
@@ -165,10 +323,25 @@
       "evidence": ["game/assets/audio/**/*.ogg"],
       "design_ref": "docs/AUDIO_QA.md §A2"
     },
+    "L2_vo_technical": {
+      "layer": "L2",
+      "domain": "audio",
+      "command": "python3 tools/check_audio_vo.py",
+      "description": "P0 VO duration, loudness, locale paths vs dialogue script",
+      "metrics": {
+        "max_duration_sec": { "op": "<=", "from": "audio_qa_catalog.vo_clips.*.max_duration_sec" },
+        "voice_lufs": { "op": "within", "target": -18.0, "tolerance": 4.0 },
+        "voice_true_peak_dbtp": { "op": "<=", "value": -3.0 }
+      },
+      "ship_extra": { "all_p0_locales_required": true },
+      "evidence": ["game/assets/audio/voice/**/*.ogg"],
+      "design_ref": "docs/AUDIO_QA.md §A4"
+    },
     "L2_audio_catalog": {
       "layer": "L2",
       "domain": "audio",
       "command": "python3 tools/check_audio_catalog.py --phase {phase}",
+      "description": "All BGM/SFX tracks required for the phase are present in the audio catalog",
       "pass": { "missing_tracks": 0 },
       "design_ref": "docs/AUDIO_QA.md §A1"
     },
@@ -195,6 +368,7 @@
       "layer": "L4",
       "domain": "flow",
       "command": "bash tools/run_integration_tests.sh",
+      "description": "Integration/flow scenarios (INT-*) all pass — no failing scenarios",
       "pass": { "exit_code": 0, "failed_scenarios": 0 },
       "evidence": ["game/tests/integration/"],
       "design_ref": "docs/AI_TESTING_SPEC.md §6"
@@ -202,7 +376,8 @@
     "L5_e2e_three_endings": {
       "layer": "L5",
       "domain": "flow",
-      "command": "bash tools/run_e2e_playthrough.sh",
+      "command": "REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh",
+      "description": "End-to-end playthrough reaches all three endings (rewind/anchor/drift); SKIP not allowed",
       "pass": { "exit_code": 0, "skip_allowed": false, "endings_passed": ["rewind", "anchor", "drift"] },
       "evidence": ["artifacts/videos/e2e_*.mp4"],
       "design_ref": "docs/AI_TESTING_SPEC.md §7"
@@ -211,14 +386,25 @@
       "layer": "L6",
       "domain": "flow",
       "command": "docs/PLAYTEST_SCRIPT.md",
-      "pass": { "completion_percent": 80, "s0_s1_open": 0 },
+      "description": "Human playtest sign-off — ≥80% completion, zero open S0/S1 bugs, ≥5 testers (only after L0–L5 pass)",
+      "pass": { "completion_percent": 80, "s0_s1_open": 0, "min_testers": 5 },
       "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
       "design_ref": "docs/PLAYTEST_SCRIPT.md"
+    },
+    "L0_doc_sync": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/check_doc_sync.py",
+      "description": "Docs stay in sync — every top-level doc is indexed in README, links resolve, and runner gates match the acceptance catalog",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/README.md"],
+      "design_ref": "docs/README.md, docs/BRANCHING.md"
     },
     "M5_asset_compliance": {
       "layer": "ship",
       "domain": "compliance",
       "command": "bash tools/check_asset_compliance.sh",
+      "description": "Every shipped media asset is covered by the license manifest (copyright-safe)",
       "pass": { "exit_code": 0 },
       "design_ref": "docs/ASSET_COMPLIANCE.md"
     }
@@ -236,7 +422,9 @@
         "v3_npr_not_pbr": { "expect": true, "label": "Stylized NPR not glossy PBR" },
         "v4_japanese_coastal": { "expect": true, "label": "Japanese coastal motifs" },
         "v5_silhouette_readable": { "expect": true, "label": "Readable silhouettes" },
-        "v6_ui_clean": { "expect": true, "label": "UI clean if visible" }
+        "v6_ui_clean": { "expect": true, "label": "UI clean if visible" },
+        "v7_emotional_mood_matches": { "expect": true, "label": "Zone emotional mood matches brief" },
+        "v8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/screenshots/*.png", "artifacts/visual_reviews/*.jury.json"],
       "design_ref": "docs/VISUAL_QA.md §2G"
@@ -253,7 +441,9 @@
         "m3_adult_not_chibi": { "expect": true, "label": "Adult proportions not chibi" },
         "m4_silhouette_readable": { "expect": true, "label": "Silhouette readable" },
         "m5_sufficient_detail": { "expect": true, "label": "Sufficient NPR detail" },
-        "m6_matches_brief": { "expect": true, "label": "Matches CHARACTER_BIBLE brief" }
+        "m6_matches_brief": { "expect": true, "label": "Matches CHARACTER_BIBLE brief" },
+        "m7_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "m8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/model_reviews/*/front.png", "artifacts/model_reviews/*.model_jury.json"],
       "design_ref": "docs/MODEL_QA.md §M3b"
@@ -270,10 +460,32 @@
         "a2_melancholy_coastal": { "expect": true, "label": "Melancholy coastal mood" },
         "a3_not_upbeat_pop": { "expect": true, "label": "Not upbeat pop/EDM" },
         "a4_instrumental_no_vocals": { "expect": true, "label": "Instrumental no vocals" },
-        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" }
+        "a5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" },
+        "a6_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "a7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer/EDM)" }
       },
       "evidence": ["artifacts/audio_reviews/*.jury.json"],
       "design_ref": "docs/AUDIO_QA.md §A3"
+    },
+    "vo": {
+      "gate_id": "L2_vo_jury",
+      "min_pass_models": 2,
+      "min_active_models": 2,
+      "min_confidence": 0.65,
+      "require_issues_on_fail": true,
+      "p0_clips_only": true,
+      "gate_locale": "en",
+      "criteria": {
+        "v1_not_robotic_placeholder": { "expect": true, "label": "Not robotic TTS placeholder" },
+        "v2_script_semantics_match": { "expect": true, "label": "Script semantics match dialogue" },
+        "v3_matches_direction": { "expect": true, "label": "Matches vo_prompts direction" },
+        "v4_not_anime_exaggeration": { "expect": true, "label": "Not anime exaggeration" },
+        "v5_fits_scene_mood": { "expect": true, "label": "Fits scene mood" },
+        "v6_emotional_mood_matches": { "expect": true, "label": "Emotional mood matches generation brief" },
+        "v7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone from brief" }
+      },
+      "evidence": ["artifacts/vo_reviews/*.jury.json"],
+      "design_ref": "docs/AUDIO_QA.md §A5"
     }
   },
   "docs_ci_gates": {
@@ -286,7 +498,20 @@
       "L0_environments_catalog",
       "L0_sprint_phases",
       "L0_base_classes",
+      "L0_zone_composition",
+      "L0_qa_catalog",
+      "L0_audio_qa_catalog",
+      "L0_scene_audio_map",
+      "L0_playtest_telemetry",
+      "L0_delivery_control",
+      "L0_generation_readiness_backlog",
+      "L0_sprint_board",
+      "L0_factory_watchdog",
+      "L0_escalation_policy",
+      "L0_stakeholder_report",
+      "L0_pm_orchestrator",
       "L0_rr_compliance",
+      "L0_doc_sync",
       "M5_asset_compliance"
     ],
     "design_ref": "docs/BRANCHING.md"
@@ -306,6 +531,8 @@
       "L2_scene_primitives",
       "L3_gdai_built",
       "L2_animation_whitelist",
+      "L2_feel_smoke",
+      "L2_glb_import",
       "L4_integration",
       "M5_asset_compliance"
     ],
@@ -322,10 +549,40 @@
       "L2_visual_jury",
       "L2_model_jury",
       "L2_audio_jury",
+      "L2_vo_jury",
       "L5_e2e_three_endings",
       "L6_human_playtest"
     ],
-    "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
+    "design_ref": "docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2",
+    "merge_policy": "game/development PRs require CI green — fails until project.godot + tests bootstrap; not deferrable"
+  },
+  "toolchain_requirements": {
+    "required_not_optional": [
+      {
+        "id": "gamelab_mcp",
+        "check": "gamelab-mcp in Cursor + GAMELAB_API_KEY",
+        "command": "bash tools/check_extended_toolchain.sh",
+        "asset_fallback": "Procedural UI placeholders OK for asset output until GameLab gen ships"
+      },
+      {
+        "id": "blender",
+        "check": "blender in PATH",
+        "purpose": "M5 turntable QA — docs/MODEL_QA.md M3",
+        "command": "bash tools/check_extended_toolchain.sh"
+      },
+      {
+        "id": "game_development_ci",
+        "check": "bash tools/run_ci_checks.sh exit 0",
+        "note": "Required merge gate on game/development — expected to fail until bootstrap"
+      },
+      {
+        "id": "l6_human_playtest",
+        "gate_id": "L6_human_playtest",
+        "when": "Phase 8 prod CD after L0–L5",
+        "note": "Required ship gate — not optional"
+      }
+    ],
+    "design_ref": "docs/MCP_STACK.md, docs/ART_AUTOMATION_PIPELINE.md §2, docs/CI.md"
   },
   "cd_gates": {
     "branch": "game/development",
@@ -352,12 +609,15 @@
       "conditional_gates": [
         "L2_visual_palette",
         "L2_visual_jury",
+        "L2_zone_composition",
         "L2_model_technical",
         "L2_model_jury",
         "L2_audio_technical",
-        "L2_audio_jury"
+        "L2_audio_jury",
+        "L2_vo_technical",
+        "L2_vo_jury"
       ],
-      "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS",
+      "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS. GR-001 golden screenshots enable L2_visual_*; GR-003 warn mode until M5 strict",
       "design_ref": "docs/AI_DEV_WORKFLOW.md §4 Phase 1"
     },
     "phase_6": {
@@ -368,20 +628,36 @@
       "required_gates": [
         "L0_rr_compliance",
         "L0_story_data",
+        "L0_base_classes",
+        "L0_base_class_compliance",
         "L1_unit_tests",
+        "L1_gdscript_lint",
         "L2_boot_headless",
         "L2_scene_primitives",
+        "L2_animation_whitelist",
+        "L2_feel_smoke",
+        "L2_glb_import",
         "L2_model_technical",
         "L2_model_jury",
         "L2_visual_palette",
         "L2_visual_jury",
+        "L2_zone_composition",
         "L2_audio_technical",
         "L2_audio_jury",
+        "L2_vo_technical",
+        "L2_vo_jury",
         "L4_integration",
         "L5_e2e_three_endings",
+        "L6_human_playtest",
         "M5_asset_compliance"
       ],
-      "ship_flags": { "check_model_technical_ship": true, "check_audio_technical_ship": true },
+      "ship_flags": {
+        "check_model_technical_ship": true,
+        "check_audio_technical_ship": true,
+        "check_vo_technical_ship": true,
+        "zone_composition_strict": true,
+        "visual_smoke_strict": true
+      },
       "design_ref": "docs/MILESTONES.md M5"
     }
   }

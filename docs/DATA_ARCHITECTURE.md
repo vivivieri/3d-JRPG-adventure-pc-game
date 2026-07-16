@@ -339,7 +339,10 @@ Files use `schema_version` (integer) or `version` (string) to track format evolu
 | `dialogue/chapter_01.json` | `schema_version` | **4** | Adds `voice_id` on selective VO lines |
 | `quests/main_quests.json`, `items/items.json` | `schema_version` | **2** | — |
 | Most other `game/data/**/*.json` | `schema_version` | **1** | — |
-| `audio/vo_prompts.json`, `ace_step_prompts.json` | `version` | **"1.0"** | Audio catalog metadata (not gameplay schema) |
+| `audio/vo_prompts.json`, `ace_step_prompts.json` | `version` | **"1.0"** | Audio generation metadata (not gameplay schema) |
+| `audio/audio_qa_catalog.json` | `version` | **"1.0"** | Unified BGM/VO QA catalog — loudness, jury scope, brief paths (`docs/AUDIO_QA.md`) |
+| `audio/scene_audio_map.json` | `version` | **"1.0"** | Zone/scene → BGM, ambient, sting, duck (`AUDIO_PRODUCTION_GUIDE.md` §4) |
+| `qa/generation_readiness_backlog.json` | `version` | **"1.0"** | GR-* items → IMPLEMENTATION_PLAN tasks |
 
 Bump `schema_version` when breaking field renames; run `python3 tools/validate_story_data.py` after edits.
 

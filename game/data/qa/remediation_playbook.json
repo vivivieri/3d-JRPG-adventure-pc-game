@@ -71,6 +71,28 @@
         "GDAI: resolve Output panel font/texture errors"
       ],
       "escalate": "Godotiq ui_map for broken Control paths"
+    },
+    "v7_emotional_mood_matches": {
+      "lever": "shader_scene",
+      "root_cause": "Zone mood contradicts generation brief (wrong emotional register)",
+      "do_not_repeat": "Bloom-only mood fix without fog/sky/prop staging",
+      "actions": [
+        "Re-read docs/generation_briefs/<zone>.md Emotional intent",
+        "Tune fog, sky, lantern warmth per RENDERING_GUIDE.md zone row",
+        "Adjust prop staging (lanterns, decay, vista anchor) via GDAI"
+      ],
+      "escalate": "Regenerate zone albedos with brief mood keywords"
+    },
+    "v8_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Comedy cheer, horror gore, bright Ghibli sunshine, European triumph",
+      "do_not_repeat": "Desaturating in post without removing wrong motifs",
+      "actions": [
+        "Remove sunny HDRI / PhysicalSky; use ProceduralSky overcast",
+        "Swap European/medieval props per ENVIRONMENT_KITS.md",
+        "Expand negative prompts from brief Must avoid row"
+      ],
+      "escalate": "Human art review + brief update"
     }
   },
   "model": {
@@ -139,6 +161,28 @@
         "Compare turntable to bible bullet list"
       ],
       "escalate": "Kitbash correct part in Blender from second gen"
+    },
+    "m7_emotional_mood_matches": {
+      "lever": "prompt",
+      "root_cause": "Static read contradicts generation brief emotional intent",
+      "do_not_repeat": "Adding bloom/emission to fake mood without mesh/pose change",
+      "actions": [
+        "Re-read docs/generation_briefs/<id>.md Emotional intent table",
+        "Adjust Meshy prompt: posture, wear, staging per primary mood",
+        "Regenerate or sculpt pose/silhouette before texture polish"
+      ],
+      "escalate": "Manual Blender pose pass; update brief with human L6 note"
+    },
+    "m8_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Wrong emotional register (comedy, horror gore, bright cheer)",
+      "do_not_repeat": "Same prompt with one mood word swapped",
+      "actions": [
+        "Expand negative prompt from brief Must avoid row",
+        "Remove heroic/chibi/comedy keywords from positive prompt",
+        "Compare turntable to forbidden tone list in brief"
+      ],
+      "escalate": "tool_tier bump + reference mood words from ART_DIRECTION.md"
     }
   },
   "audio": {
@@ -196,6 +240,74 @@
         "Human A/B in Godot zone with correct BGM bus"
       ],
       "escalate": "Scene-specific stem mix per AUDIO_PRODUCTION_GUIDE.md"
+    }
+  },
+  "vo": {
+    "v1_not_robotic_placeholder": {
+      "lever": "tool_tier",
+      "root_cause": "Robotic TTS or placeholder voice export",
+      "do_not_repeat": "Re-export same ElevenLabs settings without voice casting change",
+      "actions": [
+        "Replace PLACEHOLDER_* in vo_prompts.json with cast ElevenLabs voice IDs",
+        "Tune stability/similarity per CHARACTER_BIBLE casting row",
+        "bash tools/generate_ai_vo.sh --clip <id> --locale en"
+      ],
+      "escalate": "Human recast + manual ElevenLabs take"
+    },
+    "v2_script_semantics_match": {
+      "lever": "prompt",
+      "root_cause": "Line meaning diverges from chapter_01.json script",
+      "do_not_repeat": "Trimming audio without fixing text source",
+      "actions": [
+        "Verify dialogue line in game/data/dialogue/chapter_01.json",
+        "Regenerate with exact locale text from dialogue JSON",
+        "Re-run check_audio_vo.py --clip <id> --locale en"
+      ],
+      "escalate": "Human VO session with script supervisor"
+    },
+    "v3_matches_direction": {
+      "lever": "prompt",
+      "root_cause": "Performance does not match vo_prompts direction",
+      "do_not_repeat": "Only changing stability without direction keywords",
+      "actions": [
+        "Edit direction in vo_prompts.json — one variable (pace OR breath OR weight)",
+        "Read docs/generation_briefs/vo/<clip>.md emotional intent",
+        "A/B two ElevenLabs exports; jury en gate locale"
+      ],
+      "escalate": "Human direction pass in ElevenLabs"
+    },
+    "v4_not_anime_exaggeration": {
+      "lever": "prompt",
+      "root_cause": "Anime squeal, comic old man, or villain cackle",
+      "do_not_repeat": "Lowering style slider only",
+      "actions": [
+        "Reduce style in voice_settings; increase stability",
+        "Add casting constraint: restrained, not bright anime heroine",
+        "Compare against VO_HIT_LIST.md forbidden tones"
+      ],
+      "escalate": "Recast voice in ElevenLabs"
+    },
+    "v6_emotional_mood_matches": {
+      "lever": "prompt",
+      "root_cause": "Emotional register off vs generation brief",
+      "do_not_repeat": "Same export with 'more emotional' note only",
+      "actions": [
+        "Edit one field in docs/generation_briefs/vo/<clip>.md Must avoid row",
+        "Align direction with Primary mood in brief",
+        "review_vo_vision.py --clip <id> --locale en"
+      ],
+      "escalate": "Human L6 listen in target scene"
+    },
+    "v7_no_forbidden_tone": {
+      "lever": "prompt",
+      "root_cause": "Forbidden tone from brief (fanservice, comedy cheer, horror)",
+      "do_not_repeat": "EQ-only fix",
+      "actions": [
+        "Expand Must avoid in generation brief",
+        "Regenerate with restrained casting from vo_prompts.json",
+        "Jury both old and new export"
+      ],
+      "escalate": "Human recast"
     }
   },
   "technical": {
@@ -279,6 +391,17 @@
         "Update LICENSES.md + register_asset.py"
       ],
       "escalate": "Curated manual ACE-Step session"
+    },
+    "vo_duration_exceeded": {
+      "lever": "mastering",
+      "root_cause": "VO clip longer than max_duration_sec — subtitle/duck timing break",
+      "do_not_repeat": "Hard truncate without re-performance",
+      "actions": [
+        "Tighten delivery in ElevenLabs or trim silence in ffmpeg",
+        "Verify max_duration_sec in audio_qa_catalog.json",
+        "python3 tools/check_audio_vo.py --clip <id> --locale en"
+      ],
+      "escalate": "Rewrite line shorter in dialogue JSON (PM approval)"
     },
     "palette_drift": {
       "lever": "texture",

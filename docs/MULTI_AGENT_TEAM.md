@@ -16,14 +16,14 @@ One agent doing plan + build + test + deploy violates R&R and skips gates. This 
 
 | Role | Agent name | Primary tools | Owns | Must NOT |
 |------|------------|---------------|------|----------|
-| **Product / PM** | PM Agent | GitHub Issues, optional Linear/Notion MCP | Milestones, issue triage, env promotion, **sprint facilitator** (see `AGILE_WITHIN_PHASES.md` §11) | Write `.tscn` or game code |
+| **Product / PM** | PM Agent | GitHub Issues, optional Linear/Notion MCP | Milestones, issue triage, env promotion, **sprint facilitator** — **`run_pm_orchestrator.sh` required** | Write `.tscn` or game code |
 | **Tech Lead / Architect** | GodotPrompter | Cursor, `docs/`, `game/data/` | Plans, `.gd`, `.gdshader`, unit tests, refactors | Hand-edit scenes |
 | **Gameplay Builder** | GDAI Builder | `godot-mcp` (GDAI) | `.tscn`, materials, lights, F5 | Replace architect for system design |
 | **QA Engineer** | QA Agent | `run_ci_checks.sh`, `run_playtest_smoke.sh`, jury scripts | L0–L2 gates, evidence paths, bug reports | Mark ship without gates |
 | **Integration Tester** | Flow Agent | `godot-mcp-pro`, `run_integration_tests.sh`, `run_e2e_playthrough.sh` | L4/L5 scenarios, asserts | Build scenes |
 | **Debugger** | Analyze Agent | `godotiq` | Signals, `trace_flow`, debug console | Scene mutations |
 | **Release Engineer** | Release Agent | `run_cd_gates.sh`, tags, CD workflows | RC/beta/prod tags, export | Feature implementation |
-| **Art Reviewer** | Visual Agent | `docs/ART_DIRECTION.md`, palette/jury tools | L2 visual/model/audio jury evidence | Bypass jury with "looks fine" |
+| **Art Reviewer** | Visual Agent | `docs/ART_DIRECTION.md`, palette/jury tools | L2 visual/model/audio/vo jury evidence | Bypass jury with "looks fine" |
 | **Human QA Lead** | Human | `docs/PLAYTEST_SCRIPT.md` | L6 UAT sign-off | Before L0–L5 pass |
 
 ---
@@ -74,6 +74,7 @@ Must include:
 - Target gate IDs (e.g. `L2_scene_primitives`, `L2_visual_palette`)
 - **Component scene** from `LEVEL_DESIGN.md` §1b / `base_classes.json` (if applicable)
 - **Base class** to extend — never new `CharacterBody3D` controller (`CODE_BASE_CLASS_RULES.md`)
+- **Generation brief** for art assets — `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`); brief is plan input only — not ship approval
 
 ### Builder → QA
 
@@ -95,6 +96,8 @@ Must include:
 - L1_gdscript_lint: PASS
 - L2_scene_primitives: PASS
 - L2_animation_whitelist: PASS
+- L2_feel_smoke: PASS
+- L2_glb_import: PASS
 - L2_visual_palette: PASS (avg_anchor_dist=72)
 - Evidence: artifacts/screenshots/ruined_village_gameplay.png
 ```
@@ -137,6 +140,16 @@ Post remediation JSON + gate ID in issue.
 bash tools/ensure_mcp_stack.sh
 bash tools/check_mcp_ready.sh          # Builder, Flow, Debugger
 bash tools/check_rr_compliance.sh      # All roles touching game/
+```
+
+**PM / Sprint Master session (mandatory first):**
+```bash
+bash tools/run_pm_orchestrator.sh      # FAIL = do not dispatch agents
+```
+
+**Other agents (before any work on a sprint issue):**
+```bash
+bash tools/run_agent_session_gate.sh <agent_role> <issue_id>
 ```
 
 **PM-only session** (docs/issues on `main`):

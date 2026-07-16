@@ -29,7 +29,7 @@
 | Inspectable | `Interactable_{id}` | `Interactable.gd` |
 | NPC / dialogue | `Interactable_{scene_id}` | `Interactable.gd` |
 | Combat trigger | `EncounterTrigger_{encounter_id}` | `EncounterTrigger.gd` |
-| Save | `SavePoint_{name}` | `SavePoint.gd` |
+| Save | `SavePoint_{name}` | `save_point.gd` (extends `Interactable`) |
 | Cinematic | `CinematicTrigger_{hook_id}` | calls `CinematicDirector` |
 
 ### 1b. Reusable component scenes (GDAI Builder catalog)

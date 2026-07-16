@@ -1,6 +1,6 @@
 # AI Testing Specification
 
-**Version:** 1.2  
+**Version:** 1.4  
 **Applies to:** All implementation on `main` (Phases 1–8)  
 **Parent doc:** `docs/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
 **Cross-refs:** `AGENTS.md`, `docs/CODE_BASE_CLASS_RULES.md`, `docs/PLAYTEST_SCRIPT.md`, `docs/QA_AND_BUG_PROCESS.md`, `docs/FLOW_QA.md`, `docs/QA_REMEDIATION_LOOP.md`
@@ -19,8 +19,8 @@ L6 Human QA  (only after L0–L5 green on release candidate)
 
 | Rule | Detail |
 |------|--------|
-| **No human playtest for ship** until `bash tools/run_e2e_playthrough.sh` exits 0 | L5 is the final AI gate |
-| **No human sign-off** until L0–L5 all pass on the same commit | Same `main` SHA for AI + human |
+| **No human playtest for ship** until `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` exits 0 | L5 is the final AI gate |
+| **No human sign-off** until L0–L5 all pass on the same commit | Same `game/development` RC SHA for AI + human |
 | **Agents must not** ask humans to playtest to debug incomplete AI coverage | Fix via L0–L5 first |
 | **Phase 1–7 work** uses L0–L4 (and L5 at Phase 6); humans do not run `PLAYTEST_SCRIPT.md` mid-rebuild |
 
@@ -32,9 +32,9 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 
 | Layer | Command / tool | Frequency | Blocks |
 |-------|----------------|-----------|--------|
-| **L0** | `validate_story_data.py`, `validate_base_classes.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
+| **L0** | `validate_story_data.py`, `validate_base_classes.py`, `validate_audio_qa_catalog.py`, `validate_scene_audio_map.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
 | **L1** | `run_unit_tests.sh`, `check_gdscript_changed.sh` | Every commit | — |
-| **L2** | `run_playtest_smoke.sh`, `check_animation_whitelist.py` | Every commit | — |
+| **L2** | `run_playtest_smoke.sh`, `check_animation_whitelist.py`, `run_feel_smoke_checks.sh`, `check_glb_import_scripts.py` | Every commit | — |
 | **L3** | GDAI MCP (see §3) | Every scene/visual task | — |
 | **L4** | `bash tools/run_integration_tests.sh` | Phase gates 2–6 | Phase advance |
 | **L5** | `bash tools/run_e2e_playthrough.sh` | Phase 6 complete + release candidate | **Human QA** |
@@ -76,17 +76,31 @@ Human QA (`docs/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **alwa
 
 - `game/data/code/base_classes.json` schema valid  
 - All `architect_owns` paths documented  
-- `component_scenes` entries reference valid zone/component ids  
+- `component_scenes` entries reference valid base ids; paths exist on game branch  
 
 **On FAIL:** Fix `base_classes.json` per `docs/CODE_BASE_CLASS_RULES.md`.
 
 ### L0c — Base class compliance (game branch)
 
-**Runner:** `bash tools/check_base_class_compliance.sh`  
+**Runner:** `bash tools/check_base_class_compliance.sh` (→ `check_base_class_compliance.py`)  
 **Owner:** Architect  
-**Skip when:** `game/scripts/` not present (main branch)
+**Skip when:** `game/scripts/` not present (exit 2 — docs-only `main`)
 
-Ensures no rogue `CharacterBody3D` player controllers outside `PlayerController` base class.
+Blocks rogue native `extends CharacterBody3D` / `Area3D` / `Node` outside files listed in `base_classes.json`. Only registered base class files may extend Godot native types directly.
+
+### L0d — Audio QA catalog (`main` docs CI)
+
+**Runners:** `python3 tools/validate_audio_qa_catalog.py`, `python3 tools/validate_scene_audio_map.py`  
+**Owner:** Architect  
+**Exit:** 0 = pass
+
+### Checks (automated)
+
+- `audio_qa_catalog.json` tracks ↔ `ace_step_prompts.json`; P0 VO ↔ `vo_prompts.json` + generation briefs  
+- `scene_audio_map.json` BGM/sting/voice refs resolve to catalog  
+- P0 clips have `hero_listen_review` + `docs/generation_briefs/vo/*.md`
+
+**On FAIL:** Fix `game/data/audio/` or brief paths; see `docs/AUDIO_QA.md`.
 
 ---
 
@@ -152,21 +166,48 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 | 1 | Story data validates (L0) |
 | 2 | Unit tests pass (L1) |
 | 3 | GDScript lint on changed files (L1b) |
-| 4 | Dev environment healthy (`check_dev_environment.sh`) |
-| 5 | Boot scene loads headless 3s |
-| 6 | Animation whitelist when rigged GLB exists (`check_animation_whitelist.py`) |
+| 4 | Base class registry + compliance (L0b/c) |
+| 5 | Animation whitelist when rigged GLB exists |
+| 6 | Feel smoke (`feel_thresholds.json`) |
+| 7 | Dev environment healthy (`check_dev_environment.sh`) |
+| 8 | Boot scene loads headless when `main_scene` set |
+| 9 | Visual/audio/model smokes when gate assets exist |
 
 ### L2b — Animation whitelist
 
-**Runner:** `python3 tools/check_animation_whitelist.py --phase 1`  
+**Runner:** `python3 tools/check_animation_whitelist.py --phase m5 --strict` (game branch) · `--phase 1` (early dev)  
 **Owner:** Builder / Visual  
-**Authority:** `game/data/models/qa_catalog.json` → `allowed_animations` · `docs/CHARACTER_BIBLE.md` §8  
-**Skip when:** No rigged GLB on disk for current phase
+**Authority:** `game/data/models/qa_catalog.json` → `allowed_animations` + `required_animations` · `docs/CHARACTER_BIBLE.md` §8  
+**Skip when:** No rigged GLB on disk (exit 2 — FAIL on game branch when `--strict`)
+
+### L2c — Feel smoke
+
+**Runner:** `bash tools/run_feel_smoke_checks.sh`  
+**Authority:** `game/data/qa/feel_thresholds.json` · `docs/GAME_FEEL.md`  
+**Skip when:** No `game/project.godot` (exit 2)
+
+### L2d — Audio smoke (BGM + P0 VO)
+
+**Runner:** `bash tools/run_audio_smoke_checks.sh` (included in `run_playtest_smoke.sh` when assets exist)  
+**Authority:** `docs/AUDIO_QA.md` · `game/data/audio/audio_qa_catalog.json`  
+**Gate tracks:** `bgm_village` (BGM); `sc00_urashima_01` / `en` (VO) — override via env vars in script  
+**Skip when:** Gate `.ogg` missing (WARN, exit 0 on dev)
+
+| Gate | Technical | Jury |
+|------|-----------|------|
+| BGM | `L2_audio_technical` | `L2_audio_jury` (8 hero tracks) |
+| P0 VO | `L2_vo_technical` | `L2_vo_jury` (5 clips, `en` gate locale) |
+
+### L2d — GLB import pipeline
+
+**Runner:** `python3 tools/check_glb_import_scripts.py --strict`  
+**Setup:** `bash tools/install_glb_import_pipeline.sh` once per dev env  
+**Skip when:** No GLB assets on disk (exit 2)
 
 ### Agent report line
 
 ```
-[L2] smoke: 6/6 PASS
+[L2] smoke: PASS (incl. L2_animation_whitelist, L2_feel_smoke when applicable)
 ```
 
 ---
@@ -249,13 +290,17 @@ bash tools/ensure_gdai_mcp.sh
 **Owner:** GodotPrompter writes `game/tests/integration/*.gd`; AI agent runs at phase gates  
 **When:** End of Phases 2, 3, 4, 5, 6 (and after any regression fix to flows)
 
-### 6.1 Current (Phase 0 baseline)
+### 6.1 Machine-readable catalog
+
+**Authority:** `game/data/qa/integration_scenarios.json` — `implemented` + `required_on_game_branch` flags.
+
+### 6.2 Current (Phase 0 baseline)
 
 | Scenario ID | Description | Status |
 |-------------|-------------|--------|
-| `INT-BOOT-01` | Main scene loads headless 3s | ✅ Implemented |
+| `INT-BOOT-01` | Main scene loads headless | ✅ Implemented (`run_integration_tests.sh`) |
 
-### 6.2 Scenarios to implement
+### 6.3 Scenarios to implement
 
 #### Phase 2 — Core shell
 
@@ -367,10 +412,7 @@ Full story automation per `game/data/story/scenes.json`:
 
 ### 7.5 Current status
 
-**Not implemented** — stub prints `[SKIP]` and exits 0 for routine per-commit runs
-(pre-Phase 6). **Gate runs must invoke `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh`**,
-which makes the stub exit 1 — SKIP can never satisfy the `L5_e2e_three_endings` gate
-(`skip_allowed: false`). Implement at Phase 6. Until L5 is real, **do not start human QA**.
+**Not implemented** — stub exits **1** by default. Pre-Phase-6 dev may use `ALLOW_L5_SKIP=1` (exit 2). **Gate runs must invoke `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh`**, which exits 1 until real E2E exists (`skip_allowed: false`). Implement at Phase 6. Until L5 is real, **do not start human QA**.
 
 ### Agent report line
 
@@ -380,11 +422,12 @@ which makes the stub exit 1 — SKIP can never satisfy the `L5_e2e_three_endings
 
 ---
 
-## 8. L6 — Human QA (after all AI playthrough)
+## 8. L6 — Human QA (required ship gate — after all AI playthrough)
 
 **Runner:** Human tester + `docs/PLAYTEST_SCRIPT.md`  
 **Owner:** Human (not AI)  
-**Prerequisite:** L0–L5 all PASS on release candidate commit
+**Prerequisite:** L0–L5 all PASS on release candidate commit  
+**Policy:** L6 is **required for ship** (Phase 8 prod CD). It is human-only and runs after L0–L5 — not optional.
 
 ### 8.1 Entry checklist (before human starts)
 
@@ -463,6 +506,7 @@ Acceptance gates (when applicable):
 - L2_visual_palette / jury: PASS/FAIL/SKIP + evidence path
 - L2_model_technical / jury: PASS/FAIL/SKIP + evidence path
 - L2_audio_technical / jury: PASS/FAIL/SKIP + evidence path
+- L2_vo_technical / jury: PASS/FAIL/SKIP + evidence path (P0 clips; jury gate locale `en`)
 - QA remediation: none | attempt N — <lever> (`QA_REMEDIATION_LOOP.md`)
 
 Human QA: NOT STARTED (L5 prerequisite) / READY FOR HUMAN / N/A

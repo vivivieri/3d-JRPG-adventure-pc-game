@@ -13,7 +13,7 @@
 | Layer | v1 ship |
 |-------|---------|
 | **Dialogue** | Written text — dialogue box + portraits (canonical en / ja / zh / zh-Hant) |
-| **Voice acting** | **Selective short VO** — 12 emotional hit clips only (`docs/VO_HIT_LIST.md`) |
+| **Voice acting** | **Selective short VO** — 12 emotional hit clips only (`docs/VO_HIT_LIST.md`); P0 clips pass `docs/AUDIO_QA.md` §A4–A5 |
 | **VO engine** | ElevenLabs AI (`tools/generate_ai_vo.py`) — not full script |
 | **Music** | BGM per zone / boss (`docs/AUDIO_PRODUCTION_GUIDE.md`) |
 | **Sound** | SFX + ambient beds; SC-08 crowd = whisper bed, not voiced |

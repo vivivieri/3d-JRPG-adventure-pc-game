@@ -13,12 +13,19 @@ game/data/
   dialogue/
     chapter_01.json          # Dialogue by scene_id; optional voice_id per line
   audio/
-    vo_prompts.json          # ElevenLabs casting + 12 selective VO clips
+    ace_step_prompts.json     # ACE-Step generation prompts (MIT)
+    vo_prompts.json            # ElevenLabs selective VO (12 clips)
+    audio_qa_catalog.json      # Unified BGM/VO QA catalog (loudness, briefs, jury scope)
+    scene_audio_map.json       # Zone/scene → BGM, ambient, sting, duck (AUDIO_PRODUCTION_GUIDE §4)
   models/
-    qa_catalog.json          # 3D model paths, tri budgets, hero_jury list (docs/MODEL_QA.md)
+    qa_catalog.json          # 3D model paths, tri budgets, allowed/required animations (docs/MODEL_QA.md); v1.3+ adds crowd/npc_cinematic rows
   qa/
     remediation_playbook.json  # Failure code → fix actions (docs/QA_REMEDIATION_LOOP.md)
     acceptance_criteria.json   # Measurable gate thresholds (docs/ACCEPTANCE_CRITERIA.md)
+    feel_thresholds.json       # GAME_FEEL automated smoke thresholds
+    integration_scenarios.json # L4 INT-* catalog (implemented / required flags)
+    zone_composition.json      # Per-zone path width, vista anchor, golden screenshot paths (GENERATION_READINESS §5)
+    generation_readiness_backlog.json  # GR-* items → IMPLEMENTATION_PLAN tasks (must not miss during dev)
   code/
     base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
   quests/
@@ -56,6 +63,11 @@ GameManager.load_json("res://data/story/scenes.json")
 python3 tools/validate_story_data.py
 python3 tools/validate_base_classes.py
 python3 tools/validate_acceptance_criteria.py
+python3 tools/validate_zone_composition.py
+python3 tools/validate_qa_catalog.py
+python3 tools/validate_audio_qa_catalog.py
+python3 tools/validate_scene_audio_map.py
+python3 tools/validate_generation_readiness_backlog.py
 bash tools/check_asset_compliance.sh   # when assets exist
 ```
 
@@ -97,3 +109,4 @@ See `docs/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `schema_versi
 - `docs/REPLAY_DESIGN.md` — replay & gallery
 - `docs/NARRATIVE_WRITING_GUIDE.md` — writing, selective VO, i18n prose
 - `docs/VO_HIT_LIST.md` — emotional VO clip list + ElevenLabs generation
+- `docs/AUDIO_QA.md` — BGM/P0 VO technical + listen jury gates

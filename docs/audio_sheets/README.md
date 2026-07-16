@@ -1,6 +1,6 @@
 # Audio prompt sheets (ACE-Step 1.5)
 
-Per-track generation prompts for **Tides of Urashima** BGM. Source of truth: `game/data/audio/ace_step_prompts.json`.
+Per-track generation prompts for **Tides of Urashima** BGM. Source of truth: `game/data/audio/ace_step_prompts.json`. QA targets (loudness, duration, jury scope): `game/data/audio/audio_qa_catalog.json`. Hero emotional briefs: `docs/generation_briefs/audio/`.
 
 ## Generate sheets
 
@@ -29,6 +29,7 @@ bash tools/generate_ai_bgm.sh --category ending
 2. `cd .cache/ace-step-1.5 && uv run acestep`
 3. Open each `*.md` sheet → paste prompt, set BPM/key/duration
 4. Export WAV → convert to `.ogg` per `docs/AUDIO_PRODUCTION_GUIDE.md`
-5. `python3 tools/register_asset.py` + `docs/LICENSES.md` (MIT / ACE-Step)
+5. `python3 tools/check_audio_technical.py` + `review_audio_vision.py` (hero tracks) per `docs/AUDIO_QA.md`
+6. `python3 tools/register_asset.py` + `docs/LICENSES.md` (MIT / ACE-Step)
 
 Fallback (no GPU): `bash tools/generate_ai_bgm.sh --category zone --fallback`

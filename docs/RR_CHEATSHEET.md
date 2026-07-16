@@ -41,10 +41,10 @@
 | Build | **GDAI MCP** (`godot-mcp`) | `.tscn`, materials, lights, F5 | System design |
 | Analyze | **Godotiq** (`godotiq`) | Signals, `trace_flow`, debug console | Scene mutations |
 | Test | **MCP Pro** (`godot-mcp-pro`, `--minimal`) | L4/L5 scenarios, asserts | Build/edit scenes |
-| UI art | **GameLab MCP** *(P1)* | UI PNG/WebP → `game/assets/textures/ui/` | Place nodes / `.tscn` |
+| UI art | **GameLab MCP** | UI PNG/WebP → `game/assets/textures/ui/` | Place nodes / `.tscn` |
 | Zone albedo | **ComfyUI / Material Maker** | Tileables → `palette_remap.py` | Assign in editor (→ GDAI) |
 | Hero 3D | **Meshy/Tripo/Rodin + Blender** | GLB import | Scene placement (→ GDAI) |
-| Audio | **ACE-Step / generate_game_audio.py** | BGM/SFX prototypes | — |
+| Audio | **ACE-Step / ElevenLabs** + `audio_qa_catalog.json` | BGM hero jury + P0 VO jury (`docs/AUDIO_QA.md`) | — |
 | Design data | **`docs/` + `game/data/`** | Story, flags, skills, gates | — |
 
 ---
@@ -53,14 +53,14 @@
 
 | Role | Agent | Owns | Must NOT | Control hook |
 |------|-------|------|----------|--------------|
-| **PM / Sprint facilitator** | PM Agent | Issues, milestones, env promotion, batch planning | Write code or `.tscn` | Issue template: phase + gates; PR template opened |
-| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
+| **PM / Sprint facilitator** | PM Agent | Issues, milestones, orchestrator dispatch, escalations | Write code or `.tscn` | **`run_pm_orchestrator.sh` PASS**; `L0_sprint_board` |
+| **Architect** | GodotPrompter | Plans, `.gd`, shaders, unit tests; **Design Authority (SA)** for arbitration | Hand-edit scenes | `L1`, `L1_gdscript_lint`, `L0_base_class_compliance`; **owns base classes** |
 | **Builder** | GDAI Builder | Scenes, materials, F5, `.gdai_built` | Replace architect | `L0_rr`, **`L3_gdai_built`**, **component `.tscn` catalog** |
 | **QA** | QA Agent | L0–L3 gates, evidence, bugs | Mark ship without gates | CI green + **gate report in PR** |
 | **Integration** | Flow Agent | L4/L5 integration/E2E | Build scenes | `L4_integration`; L5 in CD beta/prod |
 | **Debugger** | Analyze Agent | Godotiq diagnosis | Scene mutations | Policy only (read-only tools) |
 | **Release** | Release Agent | Tags, `run_cd_gates.sh`, export | Features | `run_cd_gates.sh`; CD workflows |
-| **Visual** | Visual Agent | L2 jury evidence (palette/model/audio) | Bypass jury | L2 jury scripts + thresholds |
+| **Visual** | Visual Agent | L2 jury evidence (palette/model/audio/vo) | Bypass jury | L2 jury scripts + thresholds |
 | **Human QA** | Human | L6 UAT sign-off | Before L0–L5 pass | `STEAM_RELEASE_CHECKLIST`; CD prod |
 
 **Sprint Master:** none — **PM Agent** facilitates; **QA Agent** owns sprint review evidence.
@@ -77,7 +77,13 @@ bash tools/check_rr_compliance.sh      # All roles touching game/
 
 **PM-only (`main` docs/issues):**
 ```bash
+bash tools/run_pm_orchestrator.sh      # Sprint Master — required
 bash tools/run_docs_ci_checks.sh
+```
+
+**Architect / Builder / QA (before sprint issue work):**
+```bash
+bash tools/run_agent_session_gate.sh <role> <issue_id>
 ```
 
 ---
@@ -112,7 +118,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 
 ## Handoff minimums
 
-**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b).
+**Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b); for art assets, link or attach `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`). On-direction = bible + brief; feel polish = human L6 feedback loop (`MODEL_QA.md` §9).
 
 **Builder → QA:** commit SHA, `game/scenes/.gdai_built` (`verified_f5=true`), scenes touched, screenshots if visual.
 
@@ -124,13 +130,25 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 
 ---
 
+## Escalation ladder (no infinite dev↔QA loops)
+
+`docs/ESCALATION_POLICY.md` · `game/data/qa/escalation_policy.json` · `tools/pm_escalate.py`
+
+| Tier | Owner | Cap → next |
+|------|-------|-----------|
+| 1 · dev ↔ QA loop | dev + QA | **max 3 reopens** → arbitration |
+| 2 · Arbitration | **Architect (Design Authority / SA)** | classify root cause; resolve or (needs business decision) → Product Owner |
+| 3 · Product Owner | Human (Telegram) | final — `amend_requirement`/`descope`/`wont_fix`/`approve_as_is`/`reprioritize` |
+
+Only the arbiter (Architect/SA) or the Product Owner may change a requirement — that is what breaks the loop. Every tier is capped; escalation goes **up**, never sideways.
+
 ## QA gate layers
 
 | Layer | Who | Examples |
 |-------|-----|----------|
 | L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance`, `L0_base_classes`, `L0_base_class_compliance` |
 | L1 | QA + Architect | `L1_unit_tests`, `L1_gdscript_lint` |
-| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_visual_palette`, jury |
+| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_feel_smoke`, `L2_glb_import`, `L2_visual_palette`, jury |
 | L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) |
 | L4 | Flow | `L4_integration` |
 | L5 | Flow | `L5_e2e_three_endings` |

@@ -14,9 +14,9 @@ You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized 
 | **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
 | **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
 | **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
-| **GameLab Studio MCP** | `gamelab-mcp` | **UI art generate** — ink frames, icon sheets, VFX sheets *(P1)* |
+| **GameLab Studio MCP** | `gamelab-mcp` | **UI art generate** — ink frames, icon sheets, VFX sheets **(required)** |
 
-Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP required; art generators tiered)
+Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (all MCP servers required; procedural UI fallbacks OK for asset output only)
 
 ### Role rules (avoid MCP conflicts)
 
@@ -39,18 +39,20 @@ Full toolchain: `docs/MCP_STACK.md` + `docs/ART_AUTOMATION_PIPELINE.md` (P0 MCP 
 bash tools/ensure_mcp_stack.sh
 bash tools/check_mcp_ready.sh
 bash tools/check_rr_compliance.sh
+bash tools/check_extended_toolchain.sh
 ```
 
 1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list **P0** servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`) → **STOP and notify the user**. See `docs/MCP_STACK.md`. Missing `gamelab-mcp` → **WARN** and use fallbacks per `docs/ART_AUTOMATION_PIPELINE.md`.
-3. Only after both bridges are ready → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
+2. If **Cursor MCP** does not list required servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) → **STOP and notify the user**. See `docs/MCP_STACK.md`. Procedural UI placeholders are OK for **asset output** until GameLab gen ships — the MCP server itself is still required.
+3. Only after all checks pass → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
 
 ### Notify the user when unavailable
 
 Always report clearly if any of these are missing:
 
-- `godot-mcp`, `godotiq`, or `godot-mcp-pro` not in Cursor MCP server list
-- `gamelab-mcp` not in Cursor MCP server list *(WARN — UI art; zone path uses ComfyUI/Material Maker)*
+- `godot-mcp`, `godotiq`, `godot-mcp-pro`, or `gamelab-mcp` not in Cursor MCP server list
+- `GAMELAB_API_KEY` not set in Cursor Secrets
+- Blender not installed (`bash tools/install_extended_toolchain.sh`) — required for M5 turntable QA
 - GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
 - Godot Editor not running
 - GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
@@ -139,7 +141,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | **When to use** | Phase gates, combat/menu E2E, regression after narrative changes |
 | **Does NOT** | Build or edit scenes (GDAI only) |
 
-### Tool E: GameLab Studio MCP — *UI art generate* (P1)
+### Tool E: GameLab Studio MCP — *UI art generate* (required)
 | | |
 |---|---|
 | **Role** | Ink-wash UI frames, combat icon sheets, VFX sprite sheets via MCP |
@@ -155,7 +157,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | **When to use** | Zone albedos per `docs/ART_AUTOMATION_PIPELINE.md` §3 |
 | **Handoff** | `palette_remap.py` → register → GDAI material assign |
 
-### Tool G: AI 3D + Blender — *Hero pipeline* (offline, not MCP)
+### Tool G: AI 3D + Blender — *Hero pipeline + turntable QA* (required offline)
 | | |
 |---|---|
 | **Role** | Automated stylized meshes (Meshy/Tripo/Rodin) + GLB export |
@@ -214,7 +216,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | Combat balance pass | `docs/COMBAT_SYSTEMS.md` + `game/data/skills.json` | F5 combat scene via GDAI after data change |
 | Hero prop (torii, box) | Meshy/Blender → GLB import | Place mesh, assign NPR material, tune emission |
 
-**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + P0 bridges → Cursor MCP (P0 required; GameLab WARN) → plan in GodotPrompter.
+**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + MCP bridges → `check_extended_toolchain.sh` (Blender + GameLab required) → plan in GodotPrompter.
 
 **Full toolchain:** `docs/MCP_STACK.md`
 
@@ -233,6 +235,9 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 | L2 audio | `bash tools/run_audio_smoke_checks.sh` | `L2_audio_technical`, `L2_audio_jury` |
 | L4 flow | `bash tools/run_integration_tests.sh` | `L4_integration`, `INT-*` |
 | L5 E2E | `bash tools/run_e2e_playthrough.sh` | `L5_e2e_three_endings` (not SKIP) |
+| L6 human | `docs/PLAYTEST_SCRIPT.md` | `L6_human_playtest` — **required ship gate** (Phase 8, after L0–L5) |
+| `game/development` CI | `bash tools/run_ci_checks.sh` | **Required merge gate** — green before PR merge |
+| PM orchestrator | `bash tools/run_pm_orchestrator.sh` | **Required** every PM session — dispatches agents |
 
 **On FAIL:** `bash tools/qa_emit_remediation.sh <kind>` → change **one** lever → re-measure (`docs/QA_REMEDIATION_LOOP.md`).
 

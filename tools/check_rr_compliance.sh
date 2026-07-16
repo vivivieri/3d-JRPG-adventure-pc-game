@@ -21,6 +21,11 @@ ok() {
   echo "[OK]   $*"
 }
 
+marker_verified() {
+  [[ -f "$GDAI_MARKER" ]] || return 1
+  grep -qE '^verified_f5=true' "$GDAI_MARKER" 2>/dev/null
+}
+
 is_allowed_scene_path() {
   local rel="$1"
   [[ "$rel" == *"/greybox/"* ]] && return 0
@@ -39,7 +44,7 @@ if [[ ! -d "$SCENES_DIR" ]]; then
   exit 1
 fi
 
-# --- 1. No ship .tscn without GDAI marker ---
+# --- 1. Ship .tscn require valid GDAI marker ---
 SHIP_TSCN=()
 while IFS= read -r -d '' tscn; do
   rel="${tscn#${ROOT}/}"
@@ -51,11 +56,14 @@ while IFS= read -r -d '' tscn; do
 done < <(find "$SCENES_DIR" -name '*.tscn' -print0 2>/dev/null)
 
 if [[ ${#SHIP_TSCN[@]} -gt 0 ]]; then
-  for rel in "${SHIP_TSCN[@]}"; do
-    fail "Hand-built scene committed: $rel (use GDAI MCP; see game/scenes/README.md)"
-  done
-  if [[ ! -f "$GDAI_MARKER" ]]; then
-    fail "Missing ${GDAI_MARKER#${ROOT}/} — create after GDAI MCP F5 verify"
+  if ! marker_verified; then
+    for rel in "${SHIP_TSCN[@]}"; do
+      fail "Ship scene without GDAI verification: $rel (missing or incomplete ${GDAI_MARKER#${ROOT}/})"
+    done
+  else
+    for rel in "${SHIP_TSCN[@]}"; do
+      ok "GDAI-verified ship scene: $rel"
+    done
   fi
 fi
 
@@ -66,8 +74,8 @@ if [[ -f "$PROJECT_GODOT" ]]; then
 fi
 
 if [[ -n "$MAIN_SCENE" ]]; then
-  if [[ ! -f "$GDAI_MARKER" ]]; then
-    fail "project.godot sets run/main_scene=$MAIN_SCENE but ${GDAI_MARKER#${ROOT}/} is missing"
+  if ! marker_verified; then
+    fail "project.godot sets run/main_scene=$MAIN_SCENE but ${GDAI_MARKER#${ROOT}/} is missing or unverified"
   else
     MARKED_SCENE="$(grep -E '^main_scene=' "$GDAI_MARKER" 2>/dev/null | head -1 | cut -d= -f2- || true)"
     if [[ -z "$MARKED_SCENE" ]]; then
@@ -77,16 +85,13 @@ if [[ -n "$MAIN_SCENE" ]]; then
     else
       ok "main_scene verified by GDAI marker: $MAIN_SCENE"
     fi
-    if ! grep -qE '^verified_f5=true' "$GDAI_MARKER" 2>/dev/null; then
-      fail "${GDAI_MARKER#${ROOT}/} must include verified_f5=true after GDAI F5 playtest"
-    fi
   fi
 else
   ok "No run/main_scene set (design-phase baseline)"
 fi
 
 # --- 3. Marker without scenes is suspicious but allowed during transition ---
-if [[ -f "$GDAI_MARKER" && ${#SHIP_TSCN[@]} -eq 0 && -z "$MAIN_SCENE" ]]; then
+if marker_verified && [[ ${#SHIP_TSCN[@]} -eq 0 && -z "$MAIN_SCENE" ]]; then
   echo "[WARN] .gdai_built exists but no ship .tscn / main_scene — remove stale marker"
 fi
 

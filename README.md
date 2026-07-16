@@ -99,7 +99,7 @@ bash tools/run_ci_checks.sh
 | GDAI MCP | Build scenes in editor |
 | Godotiq | Debug signals, Output panel |
 | Godot MCP Pro | L4/L5 test scenarios |
-| GameLab MCP *(P1)* | UI art — frames, icon sheets |
+| GameLab MCP | UI art — frames, icon sheets **(required)** |
 | ComfyUI / Material Maker | Zone NPR albedos (offline) |
 
 Cloud: [`AGENTS.md`](AGENTS.md) · [`docs/GDAI_CLOUD_SETUP.md`](docs/GDAI_CLOUD_SETUP.md)

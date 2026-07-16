@@ -31,7 +31,7 @@
 - ✅ All Godot implementation (Phases 1–8)
 - ✅ GDAI MCP–built scenes, shaders, assets
 - ✅ Unit/integration/E2E tests
-- ✅ Full game CI (`tools/run_ci_checks.sh`, `.github/workflows/game-ci.yml`)
+- ✅ Full game CI (`tools/run_ci_checks.sh`, `.github/workflows/game-ci.yml`) — **required green before PR merge**
 - ⚠️ Work in progress is expected — this branch is **not** public-facing documentation
 
 ### Merge to `main` (game complete only)

@@ -55,6 +55,14 @@ def main() -> int:
             errors.append("ai_native_batch.micro_cycle.max_issues must be >= 1")
         if batch.get("primary_unit") not in (None, "session_batch"):
             errors.append("ai_native_batch.primary_unit must be 'session_batch' when set")
+    backlog_path = ROOT / "game/data/qa/generation_readiness_backlog.json"
+    backlog_ids: set[str] = set()
+    if backlog_path.is_file():
+        backlog_ids = {i.get("id") for i in json.loads(backlog_path.read_text(encoding="utf-8")).get("items", [])}
+    for p in phases:
+        for gr_id in p.get("generation_readiness", []):
+            if backlog_ids and gr_id not in backlog_ids:
+                errors.append(f"phase {p.get('phase')}: unknown generation_readiness id {gr_id!r}")
     if errors:
         print("SPRINT PHASES VALIDATION FAILED", file=sys.stderr)
         for e in errors:
