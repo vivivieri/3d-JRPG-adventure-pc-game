@@ -21,7 +21,8 @@ Link the GitHub issue. Check every box that applies to this PR.
 - [ ] Rigged GLB: `required_animations` ⊆ clips ⊆ `allowed_animations`; post-import via `install_glb_import_pipeline.sh`
 
 ### Performance review (Builder or QA — not a code review)
-- [ ] Walk affected zone 30s at gameplay camera; FPS **≥ 55** in editor (60 target @ 1080p)
+- [ ] **`baseline_id: reference_pc_gtx1060`** — Windows GTX 1060 class; not cloud/CI (`docs/PERFORMANCE_BASELINE.md`)
+- [ ] Walk affected zone 30s at gameplay camera; FPS **≥ 55** in editor (60 target @ 1080p Medium)
 - [ ] **≤ 8** materials visible per view (`perf_thresholds.json`)
 - [ ] Draw calls **< 1000** or remediation brief filed
 - [ ] Post-fix: re-run original repro + adjacent scenes + affected **`INT-*`** when flows changed

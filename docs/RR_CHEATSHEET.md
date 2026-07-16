@@ -157,6 +157,8 @@ P1-00 (pm)     bootstrap project.godot + CI
 
 **Policy:** Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style.
 
+**Baseline:** All ship perf numbers are measured on **`reference_pc_gtx1060`** (Windows, GTX 1060 class, 1080p Medium). See **`docs/PERFORMANCE_BASELINE.md`** + `game/data/qa/perf_baseline.json`. Cloud agents and CI are **not** valid for FPS sign-off.
+
 ### When required
 
 | Trigger | Who runs | Gate |
@@ -180,7 +182,7 @@ P1-00 (pm)     bootstrap project.godot + CI
 # 1. F5 in affected zone (GDAI MCP or Godot editor)
 # 2. Godotiq — game must be running
 godotiq_perf_snapshot(detail="normal")
-# 3. Save JSON evidence
+# 3. Save JSON evidence (baseline_id required — see docs/PERFORMANCE_BASELINE.md §7)
 # artifacts/perf_reviews/<zone>_<short_sha>.json
 ```
 
@@ -364,6 +366,7 @@ python3 tools/validate_story_data.py     # L0_story_data
 | **`docs/PM_AGENT_RUNBOOK.md`** | PM session steps, stale escalation |
 | `docs/sprints/Phase1-Sprint1-issues.md` | Active sprint issue bodies |
 | `docs/ACCEPTANCE_CRITERIA.md` | Gate thresholds |
+| **`docs/PERFORMANCE_BASELINE.md`** | **Hardware + environment baseline for perf evidence** |
 | **`docs/AI_TESTING_SPEC.md`** | **L0–L6 test layers, screenshots, E2E video** |
 | **`docs/VISUAL_QA.md`** | **Screenshot + vision jury procedure** |
 | `docs/CI.md` | GitHub Actions gate matrix |

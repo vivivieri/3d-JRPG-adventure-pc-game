@@ -38,7 +38,9 @@
     "Skipping evidence bundle before issue done",
     "Cycle complete without stakeholder report (pm_emit_stakeholder_report)",
     "Scene/visual PR merged without L3_perf_review evidence when scenes or shaders changed",
-    "Bug fix touching scenes/shaders merged without perf re-check in affected zone"
+    "Bug fix touching scenes/shaders merged without perf re-check in affected zone",
+    "L3_perf_review PASS without baseline_id reference_pc_gtx1060 or valid equivalent",
+    "FPS ship sign-off from cloud_agent_jit or ci_headless baseline"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -266,10 +268,10 @@
       "layer": "L2",
       "domain": "flow",
       "command": "bash tools/run_perf_review_checks.sh",
-      "description": "Performance thresholds catalog (FPS target, material budget, zone list)",
+      "description": "Performance thresholds + hardware baseline catalogs (perf_thresholds.json, perf_baseline.json)",
       "pass": { "exit_code": 0 },
-      "evidence": ["game/data/qa/perf_thresholds.json"],
-      "design_ref": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9"
+      "evidence": ["game/data/qa/perf_thresholds.json", "game/data/qa/perf_baseline.json"],
+      "design_ref": "docs/PERFORMANCE_BASELINE.md, docs/RENDERING_GUIDE.md"
     },
     "L2_glb_import": {
       "layer": "L2",
@@ -387,7 +389,7 @@
       },
       "skip_when": "no game/project.godot or docs/data-only PR",
       "evidence": ["artifacts/perf_reviews/<zone>_<commit>.json"],
-      "design_ref": "docs/RENDERING_GUIDE.md, game/data/qa/perf_thresholds.json"
+      "design_ref": "docs/PERFORMANCE_BASELINE.md, game/data/qa/perf_baseline.json, game/data/qa/perf_thresholds.json"
     },
     "L4_integration": {
       "layer": "L4",

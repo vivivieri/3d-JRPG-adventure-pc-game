@@ -36,7 +36,7 @@ This document is the single checklist for the M5 art rebuild (Phase 7) and Godot
 | Exposure | Authored per zone | Prevent fog `#8B9DAF` and biolume `#4AE8D8` clipping to white |
 | Max materials per view | **≤ 8** per zone | `docs/ENVIRONMENT_KITS.md` §9 |
 
-**Performance gate:** 60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production.
+**Performance gate:** 60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production. **Hardware + environment spec:** `docs/PERFORMANCE_BASELINE.md` · `game/data/qa/perf_baseline.json`.
 
 ---
 

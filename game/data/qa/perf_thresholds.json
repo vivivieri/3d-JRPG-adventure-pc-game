@@ -1,6 +1,8 @@
 {
-  "version": "1.0",
-  "authority": "docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9",
+  "version": "1.1",
+  "authority": "docs/PERFORMANCE_BASELINE.md, docs/RENDERING_GUIDE.md, docs/ENVIRONMENT_KITS.md §9",
+  "baseline_id": "reference_pc_gtx1060",
+  "baseline_catalog": "game/data/qa/perf_baseline.json",
   "target": {
     "resolution": "1920x1080",
     "hardware_ref": "GTX 1060 equivalent",
