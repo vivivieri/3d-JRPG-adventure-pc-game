@@ -1,6 +1,6 @@
 # R&R Cheat Sheet — Roles & Responsibilities
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Print this:** One-page reference for every agent session  
 **Companion:** `docs/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)  
 **Authority:** `.cursorrules` §0–§1 · `docs/MCP_STACK.md` · `docs/MULTI_AGENT_TEAM.md` · `docs/AGILE_WITHIN_PHASES.md` §11
@@ -85,6 +85,70 @@ bash tools/run_docs_ci_checks.sh
 ```bash
 bash tools/run_agent_session_gate.sh <role> <issue_id>
 ```
+
+---
+
+## How to pick work (dev & QA)
+
+**Rule:** Do **not** self-pick from the backlog. PM dispatches via orchestrator; workers pass session gate first.
+
+### Where work is defined
+
+| Question | Answer | Source |
+|----------|--------|--------|
+| What phase are we in? | **Phase 1** — ruined_village vertical slice | `game/data/qa/sprint_phases.json` → `active_phase` |
+| What sprint is active? | **Phase1-Sprint1** (7 issues) | `game/data/qa/sprint_board.json` |
+| What are the tasks? | P1-00 … P1-06 bodies + handoffs | `docs/sprints/Phase1-Sprint1-issues.md` |
+| What is the long-term order? | Phases 0→8 (do not reorder) | `docs/IMPLEMENTATION_PLAN.md` |
+| Story points? | **No** — use `sequence`, `depends_on`, gate IDs, severity | — |
+
+### Who picks the next item?
+
+| Role | Action |
+|------|--------|
+| **PM Agent** | `bash tools/run_pm_orchestrator.sh` → read `artifacts/pm_orchestrator_report.json` → `next_dispatch` |
+| **Dev / QA** | Wait for dispatch → `bash tools/run_agent_session_gate.sh <role> <issue_id>` → read issue section in sprint pack |
+
+### Phase 1 dependency chain (current sprint)
+
+```
+P1-00 (pm)     bootstrap project.godot + CI
+  ├─→ P1-01 (architect)  toon shader + zone_visuals
+  │     └─→ P1-02 (builder)  ruined_village.tscn
+  │           ├─→ P1-04 (qa)  CI + L0–L2 gate report
+  │           │     └─→ P1-06 (pm)  sprint review
+  │           └─→ P1-05 (qa)  golden screenshot + zone composition
+  └─→ P1-03 (architect)  water shader  [parallel with P1-02 after P1-00]
+```
+
+### Priority (no story points)
+
+| Kind | Scale | Use |
+|------|-------|-----|
+| **Phase order** | 0→8 waterfall | PM cannot skip phases via sprint |
+| **Sprint sequence** | `sequence` 1–7 on board | Orchestrator dispatch order |
+| **Blockers** | `depends_on` / `blocks` | QA waits until builder issue `done` |
+| **Bug severity** | S0–S3 | `severity/S0` … in GitHub Issues |
+| **Asset tier** | P0 / P1 | Art/audio docs (e.g. P0 VO clips) |
+| **Gate layers** | L0→L6 | Definition of done per issue |
+
+### How QA knows dev is done
+
+1. **Board:** QA issues list `depends_on` (e.g. P1-04 depends on P1-02).
+2. **Status:** Upstream issue set to `done` via `python3 tools/pm_update_issue.py`.
+3. **Event:** `bash tools/pm_emit_cycle_event.sh agent_cycle_complete` → PM re-runs orchestrator → dispatches QA.
+4. **Handoff:** Builder posts **Builder → QA** block in PR/issue (`docs/sprints/Phase*-Sprint*-issues.md`).
+5. **CI:** PR on `game/development` must pass listed `acceptance_gate_ids` before QA closes issue.
+
+### Definition of done (sprint issue)
+
+- [ ] Gate IDs PASS on PR commit  
+- [ ] `bash tools/run_ci_checks.sh` green (game branch)  
+- [ ] `L3_gdai_built` if scenes touched  
+- [ ] Evidence paths in PR / issue  
+- [ ] Board status `done` + GitHub issue closed  
+
+**Full policy:** `docs/SPRINT_ORCHESTRATION.md` · `docs/PM_AGENT_RUNBOOK.md` · `docs/AGILE_WITHIN_PHASES.md`
 
 ---
 
@@ -212,6 +276,9 @@ python3 tools/validate_story_data.py     # L0_story_data
 | `docs/MCP_STACK.md` | Full toolchain, install, troubleshooting |
 | `docs/MULTI_AGENT_TEAM.md` | Handoffs, parallel patterns, definition of done |
 | `docs/AGILE_WITHIN_PHASES.md` | Sprint facilitator, AI-native cadence |
+| **`docs/SPRINT_ORCHESTRATION.md`** | **Enforced dispatch** — no self-assign |
+| **`docs/PM_AGENT_RUNBOOK.md`** | PM session steps, stale escalation |
+| `docs/sprints/Phase1-Sprint1-issues.md` | Active sprint issue bodies |
 | `docs/ACCEPTANCE_CRITERIA.md` | Gate thresholds |
 | `docs/CI.md` | GitHub Actions gate matrix |
 | `docs/GITHUB_SETUP.md` | PAT + `setup_github_project.sh` |
