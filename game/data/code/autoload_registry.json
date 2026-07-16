@@ -76,6 +76,30 @@
       ]
     },
     {
+      "id": "FontThemeManager",
+      "script_path": "res://scripts/ui/font_theme_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/technical/LOCALIZATION.md §9"],
+      "responsibility": "Locale-aware Noto font swap for UI + dialogue",
+      "public_api": [
+        { "name": "apply_dialogue_fonts", "args": ["locale: String"], "returns": "void" },
+        { "name": "apply_ui_fonts", "args": ["locale: String"], "returns": "void" }
+      ]
+    },
+    {
+      "id": "DialogueUiManager",
+      "script_path": "res://scripts/ui/dialogue_ui_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/technical/LOCALIZATION.md §9", "game/scenes/ui/dialogue_box.tscn"],
+      "responsibility": "Attach dialogue overlay; emit dialogue_started/line/finished",
+      "public_api": [
+        { "name": "show_line", "args": ["speaker: String", "text: String"], "returns": "void" },
+        { "name": "hide", "args": [], "returns": "void" }
+      ]
+    },
+    {
       "id": "AudioManager",
       "script_path": "res://scripts/audio/audio_manager.gd",
       "phase": 2,

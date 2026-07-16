@@ -66,7 +66,7 @@
 | 0–3 min | None |
 | 3 min | Quest log: *"The tide remembers two heights."* |
 | 5 min | Switch glow pulse + audio chime |
-| 8 min | Roku bark (if joined): *"Raise the water. The lock floats."* |
+| 8 min | Quest log + Urashima thought: *"Raise the water. The lock floats."* (optional ghost subtitle if `met_roku`) |
 
 Requires `hints_enabled` in settings (default on).
 

@@ -160,7 +160,7 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 
 | Shader | Purpose | Reference |
 |--------|---------|-----------|
-| **Water** | Gentle vertex displacement, foam edge, zone tint | `water_material.gd` on Godot branches |
+| **Water** | Gentle vertex displacement, foam edge, zone tint | `water_stylized.gdshader` |
 | **Spirit alpha** | Additive / alpha on Yuzu lower body | `CHARACTER_BIBLE.md` |
 | **Lacquer box glow** | 3 emission states by story flag | `CHARACTER_BIBLE.md` §2 |
 | **Mirror chamber** | Mirror shader SC-13 | `STORYBOARD.md` |
@@ -298,4 +298,4 @@ When evaluating generic “make Godot look professional” tips:
 | `docs/ui/SETTINGS_ACCESSIBILITY.md` | Graphics quality presets (§10) |
 | `game/scripts/exploration/zone_visuals.gd` | Runtime zone environment (Godot branches) |
 | `game/assets/shaders/toon_base.gdshader` | NPR ramp family (GLB post-import + zones) |
-| `game/scripts/shaders/water_material.gdshader` | Stylized water (Godot branches) |
+| `game/shaders/water_stylized.gdshader` | Stylized water (foam + displacement) |

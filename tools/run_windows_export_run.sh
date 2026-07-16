@@ -18,6 +18,13 @@ if [[ ! -f "${ROOT}/game/project.godot" ]]; then
   exit 2
 fi
 
+# shellcheck source=gate_lib.sh
+source "${ROOT}/tools/gate_lib.sh"
+if gate_is_phase1_bootstrap; then
+  echo "[SKIP] phase 1 bootstrap — export deferred until main_scene set"
+  exit 2
+fi
+
 if ! is_windows_host; then
   echo "[SKIP] not a Windows host — run on GitHub Actions windows-latest or reference_pc_gtx1060"
   echo "       Linux CI uses: bash tools/run_windows_cross_export.sh (build only)"
