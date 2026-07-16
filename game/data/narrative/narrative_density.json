@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "design_ref": "docs/NARRATIVE_DENSITY.md",
+  "description": "Ship budgets for §12 narrative patterns — prevents over-writing in a 2–3 h game.",
+  "budgets": {
+    "combat_barks": {
+      "require_for_tiers": ["boss", "elite"],
+      "forbid_battle_start_tiers": ["normal"],
+      "battle_start_allowlist_enemy_ids": ["tide_wraith"],
+      "max_enemies_with_barks": 6,
+      "max_skill_barks_per_enemy": 4,
+      "tutorial_enemy_ids": ["salt_crab"]
+    },
+    "quiet_beats": {
+      "speaker": "narrator",
+      "emotion": "quiet",
+      "exclude_scene_types": ["inspect", "choice", "cinematic"],
+      "max_per_act": {
+        "prologue": 0,
+        "I": 2,
+        "II": 4,
+        "III": 2,
+        "end": 0
+      },
+      "max_total": 6
+    },
+    "flag_callbacks": {
+      "max_lines_per_scene": 2,
+      "max_reuse_per_flag": 3
+    },
+    "inspect_scenes": {
+      "min_narrator_lines_before_pc": 2,
+      "max_total_lines": 6
+    },
+    "choice_flavor": {
+      "subtext_warm_allowed_scenes": ["SC-16"],
+      "max_subtext_warm_per_scene": 2
+    },
+    "zones": {
+      "beach_shore": { "max_inspect_scenes": 2, "max_quiet_beats": 2 },
+      "ruined_village": { "max_inspect_scenes": 4, "max_quiet_beats": 1 },
+      "tidal_caves": { "max_inspect_scenes": 1, "max_quiet_beats": 4 },
+      "dragon_palace_gate": { "max_inspect_scenes": 0, "max_quiet_beats": 2 }
+    }
+  }
+}

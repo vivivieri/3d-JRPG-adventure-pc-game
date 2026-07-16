@@ -74,6 +74,7 @@
 | [GDD.md](GDD.md) | Master game design — scope, pillars, audience |
 | [STORYBOARD.md](STORYBOARD.md) | 20-scene narrative bible (SC-00…SC-17a/b/c; 18 experienced per run) |
 | [NARRATIVE_WRITING_GUIDE.md](NARRATIVE_WRITING_GUIDE.md) | Voice, silence, selective VO, i18n prose, §12 reference steals |
+| [NARRATIVE_DENSITY.md](NARRATIVE_DENSITY.md) | Optimized §12 budgets — decision tree + L0 gate |
 | [VO_HIT_LIST.md](VO_HIT_LIST.md) | 12 ElevenLabs clips — not full dialogue |
 | [ENDING_DESIGN.md](ENDING_DESIGN.md) | Three endings, choice UI, replay |
 | [LORE_AND_ENVIRONMENTAL_STORY.md](LORE_AND_ENVIRONMENTAL_STORY.md) | 8 lore entries, environmental storytelling |
