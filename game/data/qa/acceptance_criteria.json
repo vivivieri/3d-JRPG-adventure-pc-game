@@ -114,6 +114,15 @@
       "evidence": [],
       "design_ref": "docs/SPEC_FIRST_DEVELOPMENT.md, docs/BRANCHING.md"
     },
+    "L0_spec_refinement_scope": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "bash tools/check_spec_refinement_scope.sh",
+      "description": "main branch game/ tree is spec/data only — no scripts, scenes, assets, shaders",
+      "pass": { "exit_code": 0 },
+      "evidence": [],
+      "design_ref": "docs/SPEC_FIRST_DEVELOPMENT.md §10"
+    },
     "L0_acceptance_catalog": {
       "layer": "L0",
       "domain": "data",
@@ -649,13 +658,11 @@
     "required_gates": [
       "L0_story_data",
       "L0_narrative_density",
-<<<<<<< HEAD
-=======
       "L0_spec_registry",
       "L0_helpers_registry",
       "L0_reference_libs",
       "L0_main_no_ship_code",
->>>>>>> main
+      "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
       "L0_environments_catalog",
       "L0_sprint_phases",

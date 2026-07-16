@@ -81,7 +81,14 @@ bash tools/check_rr_compliance.sh      # All roles touching game/
 **PM-only (`main` docs/issues):**
 ```bash
 bash tools/run_pm_orchestrator.sh      # Sprint Master — required
-bash tools/run_docs_ci_checks.sh
+bash tools/run_docs_ci_checks.sh       # includes L0_spec_refinement_scope
+```
+
+**Spec refinement (`main` — no implementation):**
+```bash
+# Allowed: docs/, game/data/, game/locale/, tools/*_lib.py
+# Forbidden: game/scripts/, game/scenes/, project.godot
+bash tools/check_spec_refinement_scope.sh
 ```
 
 **Architect / Builder / QA (before sprint issue work):**
@@ -228,6 +235,7 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 | Zone wood/stone texture | ComfyUI/Material Maker → **GDAI** assign |
 | UI ink frame / icons | GameLab → **GDAI** assign |
 | Balance / dialogue / flags | **`game/data/`** PR to `main` |
+| Spec refinement (design time) | **`main` only** — docs + data + `tools/*_lib.py`; **never** `.gd`/`.tscn` (`SPEC_FIRST_DEVELOPMENT.md` §10) |
 | Core helper spec / Python ref | **Architect** PR to `main` — `docs/GDSCRIPT_REGENERATION.md` |
 | Core helper `.gd` port | **Architect** on `game/development` — PM dispatch by phase |
 | EventBus autoload registration | **Builder** (GDAI MCP) — after Architect `event_bus.gd` |
