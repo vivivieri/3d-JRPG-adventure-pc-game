@@ -76,6 +76,18 @@ Must include:
 - **Base class** to extend — never new `CharacterBody3D` controller (`CODE_BASE_CLASS_RULES.md`)
 - **Generation brief** for art assets — `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`); brief is plan input only — not ship approval
 
+**Core helpers** (`docs/GDSCRIPT_REGENERATION.md`): Architect delivers ported `.gd` + unit tests; Builder registers **EventBus** autoload only — does not author helper logic.
+
+### Core helper R&R (summary)
+
+| Step | Owner | Deliverable |
+|------|-------|-------------|
+| Spec + `tools/*_lib.py` on `main` | Architect | `helpers_registry.json`, reference tests PASS |
+| `.gd` port on `game/development` | Architect | `game/scripts/core/*.gd`, `game/tests/unit/` |
+| `project.godot` autoload | Builder | GDAI MCP — EventBus at minimum in P1-00 |
+| Gate verification | QA | `L0_reference_libs`, `L1_unit_tests` |
+| When to port | PM | `dispatch_by_phase` in `helpers_registry.json` |
+
 ### Builder → QA
 
 Must include:

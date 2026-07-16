@@ -74,9 +74,10 @@ Coding on `game/development` may begin when:
 
 ```text
 1. Read spec on main (docs + game/data/code/* + game/data/story/*)
-2. GodotPrompter — implement .gd / .gdshader to match public_api in registries
-3. GDAI MCP — instance scene_registry nodes + component scenes; F5 verify
-4. Commit only on game/development; never merge implementation to main until M6
+2. PM dispatches port work per helpers_registry.json → dispatch_by_phase
+3. GodotPrompter (Architect) — implement .gd / .gdshader to match public_api; core helpers per GDSCRIPT_REGENERATION.md
+4. GDAI MCP (Builder) — autoload wire-up + scene_registry nodes; F5 verify
+5. Commit only on game/development; never merge implementation to main until M6
 ```
 
 **Order:** Spec change on `main` → PR → then implementation PR on `game/development`.  

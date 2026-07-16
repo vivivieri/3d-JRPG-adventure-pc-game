@@ -46,6 +46,9 @@
 | Hero 3D | **Meshy/Tripo/Rodin + Blender** | GLB import | Scene placement (→ GDAI) |
 | Audio | **ACE-Step / ElevenLabs** + `audio_qa_catalog.json` | BGM hero jury + P0 VO jury (`docs/AUDIO_QA.md`) | — |
 | Design data | **`docs/` + `game/data/`** | Story, flags, skills, gates | — |
+| Core helper spec + Python ref | **Architect** (`main`) | `helpers_registry.json`, `tools/*_lib.py` | Ship `.gd` on `main` |
+| Core helper GDScript port | **Architect** (`game/development`) | `game/scripts/core/*.gd`, unit tests | Autoload registration |
+| Core helper autoload wire-up | **Builder** (GDAI MCP) | `project.godot` autoloads | Author helper `.gd` logic |
 
 ---
 
@@ -225,6 +228,9 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 | Zone wood/stone texture | ComfyUI/Material Maker → **GDAI** assign |
 | UI ink frame / icons | GameLab → **GDAI** assign |
 | Balance / dialogue / flags | **`game/data/`** PR to `main` |
+| Core helper spec / Python ref | **Architect** PR to `main` — `docs/GDSCRIPT_REGENERATION.md` |
+| Core helper `.gd` port | **Architect** on `game/development` — PM dispatch by phase |
+| EventBus autoload registration | **Builder** (GDAI MCP) — after Architect `event_bus.gd` |
 | RC / beta / prod tag | **Release Agent** + `run_cd_gates.sh` |
 
 ---
@@ -232,6 +238,8 @@ SHIP  → commit; gates PASS; check_asset_compliance.sh
 ## Handoff minimums
 
 **Architect → Builder:** design doc row, node tree, shader/uniform list, inspector targets, gate IDs, **component scene** to instance (`LEVEL_DESIGN.md` §1b); for art assets, link or attach `docs/generation_briefs/<id>.md` when present (`GENERATION_READINESS.md`). On-direction = bible + brief; feel polish = human L6 feedback loop (`MODEL_QA.md` §9).
+
+**Architect → Builder (core helpers):** `helpers_registry.json` entry + Python reference path; GDScript file at `gdscript_path` committed on `game/development`; for **EventBus** only — Builder registers autoload in `project.godot` via GDAI MCP (`docs/GDSCRIPT_REGENERATION.md` §2).
 
 **Builder → QA:** commit SHA, `game/scenes/.gdai_built` (`verified_f5=true`), scenes touched, screenshots if visual.
 

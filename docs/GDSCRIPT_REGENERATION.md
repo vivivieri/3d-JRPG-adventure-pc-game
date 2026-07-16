@@ -18,7 +18,42 @@
 
 ---
 
-## 2. Prerequisites
+## 2. Roles & responsibilities (R&R)
+
+**Authority:** `game/data/code/helpers_registry.json` → `roles_and_responsibilities` · `docs/RR_CHEATSHEET.md`
+
+| Work | Owner | Agent | Branch | Must NOT |
+|------|-------|-------|--------|----------|
+| **Spec + Python reference** | Architect | GodotPrompter | `main` | Ship `.gd` / `.tscn` on `main` |
+| **GDScript port** | Architect | GodotPrompter | `game/development` | Register autoloads; invent behavior |
+| **Autoload wire-up** (`EventBus`, etc.) | Builder | GDAI Builder | `game/development` | Author helper logic in `.gd` |
+| **Parity verification** | QA | QA Agent | both | Port code or mark ship without gates |
+| **Dispatch** (when to port) | PM | PM Agent | — | Self-assign; skip `main` spec PR |
+
+### Dispatch by phase (PM assigns issue; Architect executes port)
+
+| Phase | Sprint ref | Helpers to port | Handoff |
+|-------|------------|-----------------|---------|
+| **0** | **P1-00** bootstrap | `EventBus` | Architect → `.gd` · Builder → `project.godot` autoload |
+| **2** | Save/settings shell | `SettingsStore`, `SaveIntegrity` | Architect → `.gd` + unit tests · Builder → F5 boot |
+| **4** | Combat | `DifficultyService` | Architect → `.gd` before encounter tuning |
+| **6** | Achievements | `AchievementEvaluator` | Architect → `.gd` before Steam hooks |
+
+**No agent other than Architect** may author `game/scripts/core/*.gd` for these helpers.  
+**No agent other than Builder** may register autoloads in `project.godot` (GDAI MCP only).
+
+### Gates per owner
+
+| Owner | Gates |
+|-------|-------|
+| Architect (`main` spec PR) | `L0_helpers_registry`, `L0_reference_libs` |
+| Architect (`game/development` port PR) | `L1_unit_tests`, `L1_gdscript_lint` |
+| Builder (autoload PR) | `L3_gdai_built`, `L2_boot_headless` |
+| QA (verify) | All of the above on the PR under review |
+
+---
+
+## 3. Prerequisites
 
 ```bash
 git checkout game/development
@@ -29,7 +64,7 @@ bash tools/ensure_mcp_stack.sh    # before wiring autoloads in editor
 
 ---
 
-## 3. Regeneration order (mandatory)
+## 4. Regeneration order (mandatory)
 
 From `helpers_registry.json` → `regeneration_order`:
 
@@ -43,7 +78,7 @@ From `helpers_registry.json` → `regeneration_order`:
 
 ---
 
-## 4. Per-helper steps
+## 5. Per-helper steps
 
 ### Step A — Read spec
 
@@ -83,7 +118,7 @@ signal vo_dialect_changed(dialect_code: String)
 # ... all signals from helpers_registry.json — no methods
 ```
 
-Register in `project.godot` autoload section as `/root/EventBus`.
+Register in `project.godot` autoload section as `/root/EventBus` — **Builder (GDAI MCP) only**, after Architect commits `event_bus.gd`.
 
 ### Step D — Verify reference libs (main parity)
 
@@ -105,7 +140,7 @@ bash tools/run_ci_checks.sh
 
 ---
 
-## 5. One-command checklist
+## 6. One-command checklist
 
 ```bash
 bash tools/regenerate_core_helpers.sh          # print checklist + run reference tests
@@ -115,7 +150,7 @@ bash tools/regenerate_core_helpers.sh --test   # reference lib tests only
 
 ---
 
-## 6. Recovering the previous GDScript ports
+## 7. Recovering the previous GDScript ports
 
 If you need the exact earlier ports (before spec-first cleanup):
 
@@ -131,7 +166,7 @@ Use these as **diff hints** only — registry + Python reference win on conflict
 
 ---
 
-## 7. Adding a new helper
+## 8. Adding a new helper
 
 1. Add Python reference under `tools/` + tests in `tools/test_reference_libs.py`
 2. Add entry to `helpers_registry.json` with full `public_api`
@@ -141,7 +176,7 @@ Use these as **diff hints** only — registry + Python reference win on conflict
 
 ---
 
-## 8. Reference map
+## 9. Reference map
 
 | GDScript (`game/development`) | Python (`main`) | Data |
 |--------------------------------|-----------------|------|
