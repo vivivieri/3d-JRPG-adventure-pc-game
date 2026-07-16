@@ -61,8 +61,8 @@ All items ❌ until `game/development` phases land.
 | 2.6 | GodotSteam **4.20+** installed | ❌ | `bash tools/install_godotsteam.sh` — v4.15 stale |
 | 2.7 | `SteamManager.gd` runtime | ❌ | Documented only; not implemented |
 | 2.8 | `AchievementManager` + flag hooks | ❌ | JSON exists; no runtime unlock code |
-| 2.9 | GDAI / MCP plugins removed from export | 🟡 | Script strips autoload; verify editor_plugins empty |
-| 2.10 | Godotiq / MCP Pro removed from ship build | ❌ | `with_ci_godot.sh` dev-only; export must strip all dev plugins |
+| 2.9 | GDAI / MCP plugins removed from export | ✅ | `godot_strip_dev_plugins.py` + `L0_ship_build_security` |
+| 2.10 | Godotiq / MCP Pro removed from ship build | ✅ | Same strip list — verify on export smoke |
 | 2.11 | Windows smoke on real hardware | ❌ | M6 — GTX 1060 class target |
 | 2.12 | CD pipeline | 🟡 | `cd-artifact.yml` draft; Steam CD manual |
 | 2.13 | `tools/run_cd_gates.sh` | ✅ | RC / beta / prod channel gates |

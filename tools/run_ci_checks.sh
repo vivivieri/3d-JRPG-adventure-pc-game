@@ -30,6 +30,12 @@ echo "    Policy: docs/CI.md, .cursorrules §0, docs/AI_DEV_WORKFLOW.md §2"
 run_tri_gate "L0_rr_compliance" "R&R — no hand-built ship .tscn" \
   bash tools/check_rr_compliance.sh
 
+run_tri_gate "L0_no_secrets" "No secrets in tracked files" \
+  bash tools/check_no_secrets.sh
+
+run_tri_gate "L0_ship_build_security" "Ship export strips dev MCP/GDAI" \
+  bash tools/check_ship_build_security.sh
+
 run_tri_gate "L0_story_data" "Story JSON cross-references" \
   python3 tools/validate_story_data.py
 

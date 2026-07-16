@@ -45,6 +45,8 @@ run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py
 run_gate "L0_pm_orchestrator" python3 tools/validate_pm_orchestrator_steps.py
 run_gate "L0_rr_compliance" bash tools/check_rr_compliance.sh
+run_gate "L0_no_secrets" bash tools/check_no_secrets.sh
+run_gate "L0_ship_build_security" bash tools/check_ship_build_security.sh
 run_gate "L0_doc_sync" python3 tools/check_doc_sync.py
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 

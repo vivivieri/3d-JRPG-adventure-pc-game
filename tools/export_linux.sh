@@ -29,8 +29,8 @@ export_ensure_presets "$GAME"
 export_pre_checks
 mkdir -p "$OUT_DIR"
 
-export_strip_gdai_begin "$PROJECT" "$BACKUP"
-trap 'export_strip_gdai_restore "$PROJECT" "$BACKUP"' EXIT
+export_strip_dev_plugins_begin "$PROJECT" "$BACKUP"
+trap 'export_strip_dev_plugins_restore "$PROJECT" "$BACKUP"' EXIT
 
 echo "==> Exporting $PRESET -> $OUT_BIN"
 godot4 --headless --path "$GAME" --export-release "$PRESET" "$OUT_BIN"

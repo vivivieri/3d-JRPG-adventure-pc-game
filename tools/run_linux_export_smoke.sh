@@ -44,6 +44,8 @@ RC=$?
 set -e
 
 if [[ "$RC" -eq 0 ]]; then
+  echo "==> Post-export ship security scan..."
+  bash "${ROOT}/tools/check_ship_build_security.sh" || exit 1
   echo "[PASS] Linux export smoke — binary ran headless"
   exit 0
 fi

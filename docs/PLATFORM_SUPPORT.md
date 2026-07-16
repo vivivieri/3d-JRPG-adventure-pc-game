@@ -88,6 +88,7 @@ See `docs/CLOUD_SNAPSHOT_LAUNCH.md`.
 | 8.3 | Store page — Linux + Windows requirements | PM |
 | 8.4 | `L3_perf_review` per zone — **Linux** (cloud) + **Windows** (before prod) | Builder + QA |
 | 8.5 | GodotSteam — `linux64` + `windows` libs | Architect |
+| 8.6 | `L0_no_secrets` + `L0_ship_build_security` in CI | QA | ✅ |
 
 **macOS:** backlog — not a blocker for cloud factory.
 
@@ -125,4 +126,5 @@ No. Cloud is Linux. macOS is a separate local/CI target for a future release.
 | `docs/GDD.md` §Platform | Linux + Windows |
 | `docs/PERFORMANCE_BASELINE.md` | `reference_linux_cloud` |
 | `docs/STEAM_RELEASE_CHECKLIST.md` | Linux depot rows |
+| `docs/SECURITY.md` | Secrets + ship strip policy |
 | `steam/STORE_PAGE.md` | Linux system requirements (Phase 8) |
