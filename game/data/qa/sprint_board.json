@@ -121,7 +121,7 @@
       "generation_readiness_id": null,
       "github_issue": null,
       "last_agent_session": "2026-07-16T17:28:00+00:00",
-      "last_commit_sha": null,
+      "last_commit_sha": "87a5ace",
       "escalation_level": 0,
       "carry_over_from": null,
       "done_requires": "pr_merged",
