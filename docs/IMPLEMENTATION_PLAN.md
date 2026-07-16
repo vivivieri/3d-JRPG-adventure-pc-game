@@ -2,8 +2,8 @@
 
 **Version:** 1.2 (Fresh rebuild)  
 **Branch:** `main` (documentation + `game/data/` only) · **`game/development`** (Godot implementation)  
-**Source of truth:** `main` design docs + `game/data/` JSON  
-**Branch policy:** `docs/BRANCHING.md`  
+**Source of truth:** `main` design docs + `game/data/` JSON + `game/data/code/*_registry.json`  
+**Spec-first:** See `docs/SPEC_FIRST_DEVELOPMENT.md` — no ship `.gd`/`.tscn` on `main`; build on `game/development` after `SPEC_DEV_START`.  
 **Workflow:** GodotPrompter + full MCP toolchain — see `docs/MCP_STACK.md`.  
 **Milestone checklist:** `docs/MILESTONES.md` (M5 art → M6 Steam).
 
@@ -37,7 +37,8 @@ Previous full implementation on `main` was **stripped** (boot shell + data only)
 | `tools/check_dev_environment.sh` | Done |
 | `.cursor/mcp.json.example` (GDAI MCP) | Done |
 | `game/addons/README.md` | Done |
-| Boot / data validation (`GameBootstrap` autoload) | Done — **no `.tscn` committed**; scenes via GDAI MCP only |
+| Boot / data validation (`GameBootstrap` autoload) | **Specified** on `main` (`autoload_registry.json`) — **built** Phase 2 on `game/development` |
+| `game/project.godot` | **Not on `main`** — created Phase 1 on `game/development` |
 | Cloud install (`tools/install_cloud_dev.sh`, `.cursor/environment.json`) | Done |
 | Story data validator (`tools/validate_story_data.py`) | Done |
 | GDAI MCP workflow rules (`.cursorrules`, `tools/ensure_gdai_mcp.sh`) | Done |

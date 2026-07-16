@@ -61,9 +61,12 @@ flowchart TB
 
 ### Autoload registry (target — Phase 2+)
 
+**Specification:** `game/data/code/autoload_registry.json` (on `main`).  
+**Implementation:** `game/development` only after `SPEC_DEV_START`.
+
 | Autoload | Script | Responsibility |
 |----------|--------|----------------|
-| `GameBootstrap` | `scripts/core/game_bootstrap.gd` | Startup JSON path checks ✅ exists |
+| `GameBootstrap` | `scripts/core/game_bootstrap.gd` | Startup JSON path checks |
 | `GameManager` | `scripts/core/game_manager.gd` | Flag state, scene progression, `load_json()` API |
 | `EventBus` | `scripts/core/event_bus.gd` | Global signals (locale, combat, story) |
 | `SaveSystem` | `scripts/core/save_system.gd` | Serialize/deserialize save slot |
@@ -71,9 +74,9 @@ flowchart TB
 | `AudioManager` | `scripts/audio/audio_manager.gd` | BGM crossfade, SFX, bus ducking |
 | `DialogueRunner` | `scripts/narrative/dialogue_runner.gd` | Line playback, choices, `voice_id` → `VoiceLinePlayer` |
 | `CombatManager` | `scripts/combat/combat_manager.gd` | Battle lifecycle, links UI + turn system |
-| `CinematicDirector` | `scripts/story/cinematic_director.gd` | Hook registry, gating, `then` chain ✅ partial |
+| `CinematicDirector` | `scripts/story/cinematic_director.gd` | Hook registry, gating, `then` chain |
 
-**Today:** `GameBootstrap`, `CinematicDirector` registered; scenes and runtime UI via **GDAI MCP only** (Phase 2+).
+**Build:** Register autoloads in `project.godot` on `game/development` as each phase lands. Scenes via **GDAI MCP only** (Phase 1+).
 
 ### 2.1 Code base classes (extend-only)
 
@@ -117,22 +120,7 @@ stateDiagram-v2
 | Field → dialogue | `Interactable` | `DialogueRunner.start(scene_id)` |
 | Cinematic | `CinematicDirector` | `play_hook(hook_id)` → camera markers → `then` steps |
 
-**Scene paths (canonical):**
-
-```
-res://scenes/boot.tscn
-res://scenes/ui/main_menu.tscn
-res://scenes/world/beach_shore.tscn
-res://scenes/world/ruined_village.tscn
-res://scenes/world/tidal_caves.tscn
-res://scenes/world/dragon_palace_gate.tscn
-res://scenes/world/ending_rewind.tscn
-res://scenes/world/ending_anchor.tscn
-res://scenes/world/ending_drift.tscn
-res://scenes/combat/combat_instance.tscn
-res://scenes/ui/dialogue_box.tscn
-res://scenes/ui/combat_ui.tscn
-```
+**Scene paths (canonical):** see `game/data/code/scene_registry.json` + `docs/LEVEL_DESIGN.md`.
 
 ---
 

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "design_ref": "docs/TECHNICAL_DESIGN.md §2, docs/SAVE_AND_FAIL_STATES.md",
+  "note": "Specification only — implementations live on game/development after SPEC_DEV_START gate.",
+  "autoloads": [
+    {
+      "id": "GameBootstrap",
+      "script_path": "res://scripts/core/game_bootstrap.gd",
+      "phase": 0,
+      "spec_status": "specified",
+      "design_ref": ["docs/TECHNICAL_DESIGN.md", "docs/IMPLEMENTATION_PLAN.md Phase 0"],
+      "responsibility": "Startup validation — JSON paths exist, validators callable from editor boot",
+      "public_api": [
+        { "name": "validate_data_paths", "returns": "bool", "description": "Check required game/data files exist" },
+        { "name": "get_boot_errors", "returns": "PackedStringArray", "description": "Human-readable missing path list" }
+      ]
+    },
+    {
+      "id": "GameManager",
+      "script_path": "res://scripts/core/game_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/TECHNICAL_DESIGN.md §4", "docs/QUEST_AND_FLAGS.md"],
+      "responsibility": "Flag state, zone progression, JSON load API",
+      "public_api": [
+        { "name": "load_json", "args": ["path: String"], "returns": "Variant", "description": "Load game/data JSON" },
+        { "name": "get_flag", "args": ["name: String"], "returns": "Variant", "description": "Read story flag" },
+        { "name": "set_flag", "args": ["name: String", "value: Variant"], "returns": "void", "description": "Write flag; emits EventBus.flag_changed" },
+        { "name": "change_zone", "args": ["zone_id: String", "spawn_marker: String"], "returns": "void", "description": "Load zone scene per scene_registry" },
+        { "name": "apply_new_game", "args": [], "returns": "void", "description": "Load starting/new_game.json party and flags" }
+      ]
+    },
+    {
+      "id": "EventBus",
+      "script_path": "res://scripts/core/event_bus.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/TECHNICAL_DESIGN.md §2", "docs/CODE_STYLE.md"],
+      "responsibility": "Global typed signals",
+      "signals": [
+        "flag_changed(name: String, value: Variant)",
+        "locale_changed(locale: String)",
+        "combat_started(encounter_id: String)",
+        "combat_ended(victory: bool)",
+        "dialogue_started(scene_id: String)",
+        "dialogue_finished(scene_id: String)",
+        "zone_changed(zone_id: String)"
+      ]
+    },
+    {
+      "id": "SaveSystem",
+      "script_path": "res://scripts/core/save_system.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/SAVE_AND_FAIL_STATES.md", "docs/SECURITY.md"],
+      "responsibility": "Single slot serialize/deserialize with optional HMAC",
+      "public_api": [
+        { "name": "save_slot", "args": ["slot: int"], "returns": "bool", "description": "Write user://save_slot_{n}.json" },
+        { "name": "load_slot", "args": ["slot: int"], "returns": "bool", "description": "Restore flags, zone, party" },
+        { "name": "has_save", "args": ["slot: int"], "returns": "bool", "description": "Slot file exists and validates" }
+      ]
+    },
+    {
+      "id": "LocalizationManager",
+      "script_path": "res://scripts/core/localization_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/LOCALIZATION.md", "docs/DATA_ARCHITECTURE.md §12"],
+      "responsibility": "Locale selection, translations.csv, inline JSON i18n helper",
+      "public_api": [
+        { "name": "set_locale", "args": ["locale: String"], "returns": "void", "description": "en | ja | zh | zh-Hant" },
+        { "name": "tr", "args": ["key: String"], "returns": "String", "description": "CSV key lookup" },
+        { "name": "resolve_inline", "args": ["obj: Dictionary"], "returns": "String", "description": "Pick current locale from inline text object" }
+      ]
+    },
+    {
+      "id": "AudioManager",
+      "script_path": "res://scripts/audio/audio_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/AUDIO_PRODUCTION_GUIDE.md", "game/data/audio/scene_audio_map.json"],
+      "responsibility": "BGM crossfade, SFX, bus ducking per scene map",
+      "public_api": [
+        { "name": "play_bgm", "args": ["stream_id: String", "crossfade_s: float"], "returns": "void" },
+        { "name": "play_sfx", "args": ["stream_id: String"], "returns": "void" },
+        { "name": "duck_music", "args": ["db: float", "duration_s: float"], "returns": "void" },
+        { "name": "apply_scene_audio", "args": ["scene_id: String"], "returns": "void", "description": "Read scene_audio_map.json" }
+      ]
+    },
+    {
+      "id": "DialogueRunner",
+      "script_path": "res://scripts/narrative/dialogue_runner.gd",
+      "phase": 3,
+      "spec_status": "specified",
+      "design_ref": ["docs/DATA_ARCHITECTURE.md §7", "game/data/dialogue/chapter_01.json"],
+      "responsibility": "Line playback, choices, on_complete flags, voice_id routing",
+      "public_api": [
+        { "name": "start", "args": ["scene_id: String"], "returns": "void" },
+        { "name": "advance", "args": [], "returns": "void" },
+        { "name": "choose", "args": ["choice_id: String"], "returns": "void", "description": "SC-16 uses choice_confirm two-step" },
+        { "name": "is_active", "args": [], "returns": "bool" }
+      ]
+    },
+    {
+      "id": "CombatManager",
+      "script_path": "res://scripts/autoload/combat_manager.gd",
+      "phase": 4,
+      "spec_status": "specified",
+      "design_ref": ["docs/COMBAT_SYSTEMS.md", "game/data/encounters/story_encounters.json"],
+      "responsibility": "Battle lifecycle, intent UI, combat_barks display",
+      "public_api": [
+        { "name": "start_encounter", "args": ["encounter_id: String"], "returns": "void" },
+        { "name": "end_combat", "args": ["victory: bool"], "returns": "void" },
+        { "name": "show_combat_bark", "args": ["enemy_id: String", "trigger: String", "skill_id: String"], "returns": "void" }
+      ]
+    },
+    {
+      "id": "CinematicDirector",
+      "script_path": "res://scripts/story/cinematic_director.gd",
+      "phase": 3,
+      "spec_status": "specified",
+      "design_ref": ["docs/CINEMATICS.md", "game/data/story/cinematic_hooks.json"],
+      "responsibility": "Hook registry, camera markers, then-chain (dialogue/encounter)",
+      "public_api": [
+        { "name": "play_hook", "args": ["hook_id: String"], "returns": "void" },
+        { "name": "skip_if_seen", "args": ["hook_id: String"], "returns": "bool" }
+      ]
+    },
+    {
+      "id": "DifficultyService",
+      "script_path": "res://scripts/core/difficulty_service.gd",
+      "phase": 4,
+      "spec_status": "specified",
+      "design_ref": ["docs/COMBAT_SYSTEMS.md §10", "game/data/combat/difficulty.json"],
+      "responsibility": "Normal/Hard multipliers — RefCounted helper, not autoload",
+      "autoload": false,
+      "public_api": [
+        { "name": "get_multiplier", "args": ["stat: String"], "returns": "float" },
+        { "name": "is_hard_mode", "args": [], "returns": "bool" }
+      ]
+    },
+    {
+      "id": "SaveIntegrity",
+      "script_path": "res://scripts/core/save_integrity.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/SECURITY.md", "docs/SAVE_AND_FAIL_STATES.md"],
+      "responsibility": "Save HMAC verify/sign",
+      "autoload": false,
+      "public_api": [
+        { "name": "sign", "args": ["payload: String"], "returns": "String" },
+        { "name": "verify", "args": ["payload: String", "sig: String"], "returns": "bool" }
+      ]
+    }
+  ]
+}

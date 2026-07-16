@@ -73,6 +73,24 @@
       "evidence": ["game/data/narrative/narrative_density.json"],
       "design_ref": "docs/NARRATIVE_DENSITY.md"
     },
+    "L0_spec_registry": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_spec_registry.py",
+      "description": "Spec-first registries complete; SPEC_DEV_START gate pass",
+      "pass": { "exit_code": 0, "error_count": 0 },
+      "evidence": ["game/data/code/spec_registry.json"],
+      "design_ref": "docs/SPEC_FIRST_DEVELOPMENT.md"
+    },
+    "L0_main_no_ship_code": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "bash tools/check_main_no_ship_code.sh",
+      "description": "main branch has no project.godot, ship .gd, or ship .tscn",
+      "pass": { "exit_code": 0 },
+      "evidence": [],
+      "design_ref": "docs/SPEC_FIRST_DEVELOPMENT.md, docs/BRANCHING.md"
+    },
     "L0_acceptance_catalog": {
       "layer": "L0",
       "domain": "data",
@@ -608,6 +626,8 @@
     "required_gates": [
       "L0_story_data",
       "L0_narrative_density",
+      "L0_spec_registry",
+      "L0_main_no_ship_code",
       "L0_acceptance_catalog",
       "L0_environments_catalog",
       "L0_sprint_phases",
