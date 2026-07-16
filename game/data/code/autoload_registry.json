@@ -38,14 +38,16 @@
       "design_ref": ["docs/TECHNICAL_DESIGN.md §2", "docs/CODE_STYLE.md"],
       "responsibility": "Global typed signals",
       "signals": [
-        "flag_changed(name: String, value: Variant)",
-        "locale_changed(locale: String)",
+        "locale_changed(locale_code: String)",
+        "vo_dialect_changed(dialect_code: String)",
+        "hard_mode_changed(enabled: bool)",
         "combat_started(encounter_id: String)",
-        "combat_ended(victory: bool)",
-        "dialogue_started(scene_id: String)",
-        "dialogue_finished(scene_id: String)",
-        "zone_changed(zone_id: String)"
-      ]
+        "combat_ended(encounter_id: String, victory: bool)",
+        "flag_changed(flag_id: String, value: Variant)",
+        "save_slot_written(slot: int)",
+        "achievement_unlocked(achievement_id: String)"
+      ],
+      "helpers_ref": "game/data/code/helpers_registry.json"
     },
     {
       "id": "SaveSystem",

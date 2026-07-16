@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "policy_ref": "docs/GDSCRIPT_REGENERATION.md",
+  "description": "RefCounted helpers and EventBus — spec + Python reference on main; GDScript ports on game/development.",
+  "regeneration_order": [
+    "EventBus",
+    "SettingsStore",
+    "SaveIntegrity",
+    "DifficultyService",
+    "AchievementEvaluator"
+  ],
+  "helpers": [
+    {
+      "id": "EventBus",
+      "kind": "autoload",
+      "phase": 2,
+      "gdscript_path": "res://scripts/core/event_bus.gd",
+      "extends": "Node",
+      "python_reference": null,
+      "design_ref": ["docs/TECHNICAL_DESIGN.md §2", "game/data/code/autoload_registry.json"],
+      "note": "Signals only — port signal list exactly; no gameplay logic in script body",
+      "signals": [
+        { "name": "locale_changed", "args": ["locale_code: String"] },
+        { "name": "vo_dialect_changed", "args": ["dialect_code: String"] },
+        { "name": "hard_mode_changed", "args": ["enabled: bool"] },
+        { "name": "combat_started", "args": ["encounter_id: String"] },
+        { "name": "combat_ended", "args": ["encounter_id: String", "victory: bool"] },
+        { "name": "flag_changed", "args": ["flag_id: String", "value: Variant"] },
+        { "name": "save_slot_written", "args": ["slot: int"] },
+        { "name": "achievement_unlocked", "args": ["achievement_id: String"] }
+      ]
+    },
+    {
+      "id": "SettingsStore",
+      "kind": "refcounted",
+      "class_name": "SettingsStore",
+      "phase": 2,
+      "gdscript_path": "res://scripts/core/settings_store.gd",
+      "python_reference": "tools/settings_store_lib.py",
+      "data_ref": ["game/data/settings/settings_defaults.json", "game/data/settings/settings_schema.json"],
+      "design_ref": ["docs/SETTINGS_ACCESSIBILITY.md"],
+      "runtime_paths": {
+        "defaults": "res://data/settings/settings_defaults.json",
+        "user_save": "user://settings.json"
+      },
+      "public_api": [
+        { "name": "defaults", "returns": "Dictionary", "static": true },
+        { "name": "load_settings", "returns": "Dictionary", "static": true },
+        { "name": "save_settings", "args": ["settings: Dictionary"], "returns": "void", "static": true },
+        { "name": "get_value", "args": ["key: String", "fallback: Variant"], "returns": "Variant", "static": true },
+        { "name": "set_value", "args": ["key: String", "value: Variant"], "returns": "void", "static": true, "emits": "EventBus.hard_mode_changed when key==hard_mode" },
+        { "name": "is_hard_mode", "returns": "bool", "static": true },
+        { "name": "set_hard_mode", "args": ["enabled: bool"], "returns": "void", "static": true }
+      ]
+    },
+    {
+      "id": "SaveIntegrity",
+      "kind": "refcounted",
+      "class_name": "SaveIntegrity",
+      "phase": 2,
+      "gdscript_path": "res://scripts/core/save_integrity.gd",
+      "python_reference": "tools/save_integrity_lib.py",
+      "data_ref": ["game/data/qa/save_integrity.json"],
+      "design_ref": ["docs/SECURITY.md §9", "docs/SAVE_AND_FAIL_STATES.md"],
+      "public_api": [
+        { "name": "pepper", "returns": "String", "static": true },
+        { "name": "canonical_json", "args": ["save: Dictionary"], "returns": "String", "static": true },
+        { "name": "sign", "args": ["save: Dictionary", "pepper_override: String"], "returns": "String", "static": true },
+        { "name": "attach", "args": ["save: Dictionary", "pepper_override: String"], "returns": "Dictionary", "static": true },
+        { "name": "verify", "args": ["save: Dictionary", "pepper_override: String"], "returns": "bool", "static": true }
+      ]
+    },
+    {
+      "id": "DifficultyService",
+      "kind": "refcounted",
+      "class_name": "DifficultyService",
+      "phase": 4,
+      "gdscript_path": "res://scripts/core/difficulty_service.gd",
+      "python_reference": "tools/difficulty_lib.py",
+      "data_ref": ["game/data/combat/difficulty.json"],
+      "design_ref": ["docs/COMBAT_SYSTEMS.md §10"],
+      "public_api": [
+        { "name": "load_catalog", "returns": "Dictionary", "static": true },
+        { "name": "active_mode_id", "args": ["settings: Dictionary"], "returns": "String", "static": true },
+        { "name": "mode_config", "args": ["settings: Dictionary"], "returns": "Dictionary", "static": true },
+        { "name": "scale_enemy_hp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "scale_enemy_atk", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "scale_xp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "boss_shows_intent_preview", "args": ["phase: int", "is_boss: bool", "settings: Dictionary"], "returns": "bool", "static": true },
+        { "name": "tide_keeper_choice_gate_hp_percent", "args": ["settings: Dictionary"], "returns": "float", "static": true },
+        { "name": "is_hard_mode", "args": ["settings: Dictionary"], "returns": "bool", "static": true },
+        { "name": "suggest_hard_after_clear", "args": ["profile_meta: Dictionary"], "returns": "bool", "static": true }
+      ]
+    },
+    {
+      "id": "AchievementEvaluator",
+      "kind": "refcounted",
+      "class_name": "AchievementEvaluator",
+      "phase": 6,
+      "gdscript_path": "res://scripts/core/achievement_evaluator.gd",
+      "python_reference": "tools/achievement_evaluator_lib.py",
+      "data_ref": ["game/data/achievements/achievements.json"],
+      "design_ref": ["docs/ACHIEVEMENTS.md"],
+      "public_api": [
+        { "name": "trigger_met", "args": ["trigger: Dictionary", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "bool", "static": true },
+        { "name": "evaluate_catalog", "args": ["achievements: Array", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "Array[String]", "static": true }
+      ],
+      "trigger_types": ["flag", "all_flags", "flag_equals", "meta_endings_count", "lore_count"]
+    }
+  ]
+}

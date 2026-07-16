@@ -26,7 +26,8 @@ A feature is **specified** when an agent can implement it **without inventing be
 |------------|----------|---------|
 | **Design prose** | `docs/*.md` | `COMBAT_SYSTEMS.md`, `LEVEL_DESIGN.md` |
 | **Machine data** | `game/data/**/*.json` | `enemies.json`, `chapter_01.json` |
-| **Code contracts** | `game/data/code/*.json` | `base_classes.json`, `autoload_registry.json`, `scene_registry.json` |
+| **Code contracts** | `game/data/code/*.json` | `base_classes.json`, `autoload_registry.json`, `scene_registry.json`, `helpers_registry.json` |
+| **Reference libs** | `tools/*_lib.py` | Python behavior truth for core helpers — port to GDScript on `game/development` |
 | **QA / gates** | `game/data/qa/acceptance_criteria.json` | Measurable pass/fail |
 
 **Not sufficient alone:** a one-line class name in a table, or “TODO in Phase 2” without API/node detail.
@@ -41,10 +42,15 @@ A feature is **specified** when an agent can implement it **without inventing be
 | `game/data/code/autoload_registry.json` | Autoload singletons — responsibilities + public API |
 | `game/data/code/scene_registry.json` | Canonical `.tscn` paths + required nodes per zone |
 | `game/data/code/base_classes.json` | GDScript base classes + component scene catalog |
+| `game/data/code/helpers_registry.json` | Core RefCounted helpers + EventBus signals + regeneration order |
+| `docs/GDSCRIPT_REGENERATION.md` | Step-by-step port workflow for deleted `game/scripts/core/*.gd` |
 
 ```bash
-python3 tools/validate_spec_registry.py   # L0_spec_registry
-bash tools/check_main_no_ship_code.sh      # L0_main_no_ship_code (main branch only)
+python3 tools/validate_spec_registry.py      # L0_spec_registry
+python3 tools/validate_helpers_registry.py   # L0_helpers_registry
+python3 tools/test_reference_libs.py         # L0_reference_libs
+bash tools/regenerate_core_helpers.sh        # checklist + both checks
+bash tools/check_main_no_ship_code.sh        # L0_main_no_ship_code (main branch only)
 ```
 
 ---
@@ -99,6 +105,7 @@ Never implement behavior on `game/development` that is not yet specified on `mai
 | Combat data | **Specified** | `enemies.json`, `skills.json`, encounters |
 | Narrative density | **Specified** | `narrative_density.json` |
 | Autoload APIs | **Specified** | `autoload_registry.json` |
+| Core helpers | **Specified** | `helpers_registry.json` + `tools/*_lib.py` on `main` |
 | Base classes | **Specified** | `base_classes.json` + TDD §2 |
 | Zone scene graphs | **Specified** | `scene_registry.json` + `LEVEL_DESIGN.md` |
 | Shader source files | **Partial** | Behavior in `ART_DIRECTION` / `RENDERING_GUIDE`; `.gdshader` files land Phase 1 on dev |
@@ -122,6 +129,7 @@ Run `python3 tools/validate_spec_registry.py` for the live gate result.
 ## 9. Cross-refs
 
 - `docs/BRANCHING.md` — branch merge policy  
+- `docs/GDSCRIPT_REGENERATION.md` — rebuild core helpers on `game/development`  
 - `docs/TECHNICAL_DESIGN.md` — runtime architecture (prose + diagrams)  
 - `docs/CODE_BASE_CLASS_RULES.md` — who writes bases vs instances  
 - `docs/IMPLEMENTATION_PLAN.md` — phase task list (execution on `game/development`)

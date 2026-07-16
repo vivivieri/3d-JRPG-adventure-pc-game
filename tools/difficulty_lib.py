@@ -43,3 +43,26 @@ def boss_shows_intent_preview(phase: int, is_boss: bool, settings: dict[str, Any
 def tide_keeper_gate_hp_percent(settings: dict[str, Any], catalog: dict[str, Any] | None = None) -> float:
     cfg = mode_config(active_mode_id(settings, catalog), catalog)
     return float(cfg["tide_keeper_choice_gate_hp_percent"])
+
+
+def is_hard_mode(settings: dict[str, Any], catalog: dict[str, Any] | None = None) -> bool:
+    return active_mode_id(settings, catalog) == "hard"
+
+
+def suggest_hard_after_clear(profile_meta: dict[str, Any], catalog: dict[str, Any] | None = None) -> bool:
+    catalog = catalog or load_catalog()
+    if not bool(catalog.get("policy", {}).get("suggest_hard_after_game_completed", True)):
+        return False
+    return bool(profile_meta.get("game_completed_once", False))
+
+
+def scale_enemy_hp(base: int, settings: dict[str, Any], catalog: dict[str, Any] | None = None) -> int:
+    return int(round(scale_stat(base, "hp", settings, catalog)))
+
+
+def scale_enemy_atk(base: int, settings: dict[str, Any], catalog: dict[str, Any] | None = None) -> int:
+    return int(round(scale_stat(base, "atk", settings, catalog)))
+
+
+def scale_xp(base: int, settings: dict[str, Any], catalog: dict[str, Any] | None = None) -> int:
+    return int(round(scale_stat(base, "xp", settings, catalog)))

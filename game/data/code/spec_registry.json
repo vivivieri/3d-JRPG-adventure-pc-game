@@ -11,6 +11,7 @@
       "registry_autoloads",
       "registry_scenes_phase1_2",
       "registry_base_classes",
+      "registry_helpers",
       "doc_technical_design",
       "doc_level_design"
     ]
@@ -60,6 +61,22 @@
       "spec_status": "specified",
       "paths": ["game/data/code/base_classes.json"],
       "validator": "tools/validate_base_classes.py",
+      "phase": 2
+    },
+    {
+      "id": "registry_helpers",
+      "kind": "registry",
+      "spec_status": "specified",
+      "paths": [
+        "game/data/code/helpers_registry.json",
+        "docs/GDSCRIPT_REGENERATION.md",
+        "tools/difficulty_lib.py",
+        "tools/save_integrity_lib.py",
+        "tools/settings_store_lib.py",
+        "tools/achievement_evaluator_lib.py"
+      ],
+      "validator": "tools/validate_helpers_registry.py",
+      "note": "Python reference libs on main; GDScript ports on game/development",
       "phase": 2
     },
     {

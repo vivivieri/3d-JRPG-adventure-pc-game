@@ -33,6 +33,7 @@ game/data/
     base_classes.json          # Architect-owned base classes + component scenes (docs/CODE_BASE_CLASS_RULES.md)
     spec_registry.json         # Spec-first gate + artifact index (docs/SPEC_FIRST_DEVELOPMENT.md)
     autoload_registry.json     # Autoload public API contracts
+    helpers_registry.json      # Core helpers + EventBus signals + regen order (docs/GDSCRIPT_REGENERATION.md)
     scene_registry.json        # Canonical .tscn paths + required nodes per zone
   quests/
     main_quests.json         # 5 main quests
