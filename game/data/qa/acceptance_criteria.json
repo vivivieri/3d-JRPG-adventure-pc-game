@@ -221,6 +221,19 @@
       ],
       "design_ref": "docs/SECURITY.md §9"
     },
+    "L0_difficulty_data": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_difficulty_data.py",
+      "description": "Normal + Hard difficulty catalog aligns with settings schema and COMBAT_SYSTEMS §10",
+      "pass": { "exit_code": 0 },
+      "evidence": [
+        "game/data/combat/difficulty.json",
+        "game/data/settings/settings_schema.json",
+        "game/scripts/core/difficulty_service.gd"
+      ],
+      "design_ref": "docs/COMBAT_SYSTEMS.md §10, docs/SETTINGS_ACCESSIBILITY.md §4"
+    },
     "L0_base_class_compliance": {
       "layer": "L0",
       "domain": "flow",
@@ -605,6 +618,7 @@
       "L0_no_secrets",
       "L0_ship_build_security",
       "L0_player_build_protection",
+      "L0_difficulty_data",
       "L0_doc_sync",
       "M5_asset_compliance"
     ],
@@ -619,6 +633,7 @@
       "L0_no_secrets",
       "L0_ship_build_security",
       "L0_player_build_protection",
+      "L0_difficulty_data",
       "L0_story_data",
       "L0_acceptance_catalog",
       "L0_base_classes",

@@ -226,8 +226,15 @@ def main() -> int:
 
     # Achievements: trigger flags exist
     achievements = load("achievements/achievements.json")["achievements"]
+    settings_schema = load("settings/settings_schema.json")
+    allowed_settings = set(settings_schema.get("achievement_settings_keys", []))
     for ach in achievements:
         trig = ach.get("trigger") or {}
+        setting_key = trig.get("setting")
+        if setting_key and setting_key not in allowed_settings:
+            errors.append(f"Achievement {ach['id']} unknown setting key: {setting_key}")
+        if setting_key and setting_key not in settings_schema.get("fields", {}):
+            errors.append(f"Achievement {ach['id']} setting not in schema: {setting_key}")
         for fl in [trig.get("flag")] if trig.get("flag") else []:
             if fl not in flags:
                 errors.append(f"Achievement {ach['id']} unknown flag: {fl}")
