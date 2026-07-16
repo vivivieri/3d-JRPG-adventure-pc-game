@@ -1,7 +1,15 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "engine": "elevenlabs",
   "model_id": "eleven_multilingual_v2",
+  "vo_locale_policy": {
+    "ship_rule": "All four written locales ship selective VO for every voice_id clip",
+    "primary_vo_locales": ["en", "ja", "zh"],
+    "zh_hant_dialect_vo": ["cant", "cmn"],
+    "clips_per_locale": 12,
+    "total_ogg_files": 60,
+    "design_ref": "docs/vision/VO_HIT_LIST.md"
+  },
   "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
   "output_pattern_dialect": "game/assets/audio/voice/{locale}/{dialect}/{voice_id}.ogg",
   "text_locales": ["en", "ja", "zh", "zh-Hant"],

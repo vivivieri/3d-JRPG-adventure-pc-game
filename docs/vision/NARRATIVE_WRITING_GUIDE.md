@@ -13,7 +13,7 @@
 | Layer | v1 ship |
 |-------|---------|
 | **Dialogue** | Written text — dialogue box + portraits (canonical en / ja / zh / zh-Hant) |
-| **Voice acting** | **Selective short VO** — 12 emotional hit clips only (`docs/vision/VO_HIT_LIST.md`); P0 clips pass `docs/audio/AUDIO_QA.md` §A4–A5 |
+| **Voice acting** | **Selective short VO** — 12 emotional hit clips in **en, ja, zh, and zh-Hant** (`docs/vision/VO_HIT_LIST.md`); P0 clips pass `docs/audio/AUDIO_QA.md` §A4–A5 |
 | **VO engine** | ElevenLabs AI (`tools/generate_ai_vo.py`) — not full script |
 | **Music** | BGM per zone / boss (`docs/audio/AUDIO_PRODUCTION_GUIDE.md`) |
 | **Sound** | SFX + ambient beds; SC-08 crowd = whisper bed, not voiced |
@@ -276,7 +276,7 @@ If playtest fails, add lore or one Roku line — **not** SC-07 dialogue (preserv
 3. Act II horror + boss (SC-08–SC-11)
 4. Act III revelation + choice copy (SC-13–SC-16)
 5. Three ending scripts (SC-17a/b/c)
-6. Localization pass en → ja → zh → zh-Hant (VO: cant + cmn)
+6. Localization pass en → ja → zh → zh-Hant — **VO for all four**: `en`/`ja`/`zh` clips + zh-Hant `cant` + `cmn`
 
 ---
 

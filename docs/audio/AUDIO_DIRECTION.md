@@ -15,7 +15,7 @@
 | Reference | *NieR* restraint, *Ghost of Tsushima* wind/shore, traditional koto/shamisen accents |
 | Replace | Procedural placeholder audio (`tools/generate_game_audio.py`) before ship |
 | Languages | Music is non-vocal or JP lyrics buried in mix; SFX universal |
-| Voice acting | **Selective** — 12 short AI clips at peaks only (`docs/vision/VO_HIT_LIST.md`); all other dialogue text-only |
+| Voice acting | **Selective** — 12 short AI clips at peaks in **en, ja, zh, and zh-Hant** (`docs/vision/VO_HIT_LIST.md`); all other dialogue text-only |
 
 ---
 
@@ -76,7 +76,7 @@
 |-----|----------|
 | Music | -12 dBFS peak |
 | SFX | -6 dBFS peak |
-| Voice / dialogue | Selective VO clips only — see `docs/vision/VO_HIT_LIST.md` |
+| Voice / dialogue | Selective VO in **en, ja, zh, zh-Hant** (12 clips) — see `docs/vision/VO_HIT_LIST.md` |
 | Ambient | -18 dBFS under music |
 
 ---

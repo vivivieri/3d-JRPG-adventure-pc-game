@@ -11,9 +11,11 @@
 
 | Rule | Detail |
 |------|--------|
+| **All written locales have VO** | **en**, **ja**, **zh**, and **zh-Hant** each ship audio for every hit-list clip — 60 OGG files total |
 | One VO clip per scene max | Remaining lines in scene stay text-only |
 | Length | ~1–6 seconds spoken |
 | Subtitles | Always on (en / ja / zh / zh-Hant text canonical) |
+| Voice follows locale | `en`/`ja`/`zh` → `voice/{locale}/`; `zh-Hant` → `voice/zh-Hant/{cant\|cmn}/` |
 | Crowds | SC-08 whispers = SFX bed, not voiced |
 | Endings SC-17 | Music + cinematic hero BGM, no narrator VO |
 | Mix | Duck music −6 dB (SC-16: −18 dB effective) |
@@ -37,7 +39,8 @@
 | **P2** | `sc04_roku_01` | SC-04 | Roku | That box isn't a gift. Don't open it. | 4s |
 | **P2** | `sc14_narrator_01` | SC-14 | Narrator | No mortal leaves with stolen time. | 3s |
 
-**Totals:** 12 clips × 3 locales (`en`, `ja`, `zh`) + 12 clips × 2 zh-Hant dialects (`cant`, `cmn`) = **60 OGG files**  
+**Totals:** 12 clips × **3 primary VO locales** (`en`, `ja`, `zh`) + 12 clips × **2 zh-Hant dialects** (`cant`, `cmn`) = **60 OGG files**  
+**Not optional:** English, Japanese, and Simplified Chinese each require a full clip set — same 12 `voice_id` lines as zh-Hant.  
 **Text-only by design:** SC-02 inspectables, SC-05–07, SC-12 gate (music), SC-17 endings, choice UI
 
 ---
@@ -101,7 +104,7 @@ python3 tools/review_vo_vision.py --clip sc00_urashima_01 --locale en --min-pass
 ## Ship checklist
 
 - [ ] Replace all `PLACEHOLDER_*` voice IDs
-- [ ] P0 clips: `L2_vo_technical` PASS all locales; `L2_vo_jury` PASS on `en` gate per clip
+- [ ] P0 clips: `L2_vo_technical` PASS **all locales** (`en`, `ja`, `zh`, `zh-Hant` `cant` + `cmn`); `L2_vo_jury` PASS on `en` gate per clip
 - [ ] Generation briefs satisfied — `docs/generation_briefs/vo/*.md`
 - [ ] No VO on tutorial / inspectable / puzzle scenes
 - [ ] `python3 tools/validate_story_data.py` passes
