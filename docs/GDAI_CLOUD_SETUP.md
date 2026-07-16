@@ -151,6 +151,8 @@ Cloud agents run in a remote VM. You need **both** VM bootstrap **and** Cursor d
 
 ### 4.1 Environment bootstrap (VM)
 
+**Snapshot ID + launch checklist:** `docs/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8`, boot verification, and `main` vs `game/development` pitfalls.
+
 Cloud agents install dependencies via `.cursor/environment.json`:
 
 ```bash
