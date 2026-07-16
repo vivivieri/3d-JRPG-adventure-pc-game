@@ -1,6 +1,6 @@
 # R&R Cheat Sheet — Roles & Responsibilities
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Print this:** One-page reference for every agent session  
 **Companion:** `docs/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)  
 **Authority:** `.cursorrules` §0–§1 · `docs/MCP_STACK.md` · `docs/MULTI_AGENT_TEAM.md` · `docs/AGILE_WITHIN_PHASES.md` §11
@@ -220,6 +220,42 @@ Only the arbiter (Architect/SA) or the Product Owner may change a requirement �
 
 **Policy:** WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS.
 
+### Evidence by test layer (L0–L6)
+
+**Rule:** `acceptance_criteria.json` → `evidence_required_for_pass: true`. Cite paths in PR gate report and sprint bundle.
+
+| Layer | Who defines cases | Who runs | Evidence required? | Screenshot | Video | Typical paths |
+|-------|-------------------|----------|--------------------|------------|-------|---------------|
+| **L0** | Design data / policy | Dev / CI | JSON + CI log | No | No | `game/data/`, `game/scenes/.gdai_built` |
+| **L1** | **Architect** (`game/tests/unit/`) | Dev / CI | CI log (optional export) | No | No | `artifacts/test-reports/` (optional) |
+| **L2** | QA policy + catalogs | QA / CI | Gate output; screenshot when assets exist | **Yes** (visual/audio/model smokes) | No | `artifacts/screenshots/`, `artifacts/visual_reviews/*.jury.json`, `artifacts/model_reviews/`, `artifacts/audio_reviews/` |
+| **L3** | `AI_TESTING_SPEC.md` §5 + sprint issue | Builder + QA | **Yes** — F5 + screenshot for scene/visual work | **Yes — required** | No | `artifacts/screenshots/<phase>_<scene>_<view>.png` |
+| **L4** | **Architect** (`integration_scenarios.json`) | Flow / QA | Scenario pass/fail; screenshots for UI flows | Optional | No | `artifacts/flow_reviews/`, CI log |
+| **L5** | **Architect** (`AI_TESTING_SPEC.md` §7 E2E matrix) | Flow / QA | E2E pass/fail on same commit | Optional | **Optional** | `artifacts/videos/e2e_<ending>_<date>.mp4` |
+| **L6** | `PLAYTEST_SCRIPT.md` | Human | Bug report + repro steps | Recommended (S0–S1) | Recommended (S0–S1) | GitHub issue; `artifacts/qa_reports/L6_human_playtest.json` |
+
+**Invalid PASS:** F5 with 0 errors but no screenshot · visual PASS without `artifacts/screenshots/` · issue `done` without evidence bundle.
+
+**Who stores evidence:**
+
+| Role | Responsibility |
+|------|----------------|
+| **Architect** | Writes unit/integration/E2E test cases; does not claim visual PASS |
+| **Builder** | F5 + captures screenshots to `artifacts/screenshots/` on visual tasks |
+| **QA** | Runs gates, vision jury, pastes gate report in PR, bundles per issue |
+| **PM** | Verifies `pm_check_done_criteria` before closing sprint issue |
+
+**Bundle per sprint issue:**
+
+```bash
+python3 tools/pm_bundle_evidence.py <issue_id> \
+  --gate <gate_id> \
+  --artifact artifacts/screenshots/phase1_ruined_village_gameplay.png
+# → artifacts/sprint_evidence/<issue_id>/manifest.json
+```
+
+**Full spec:** `docs/AI_TESTING_SPEC.md` · `docs/VISUAL_QA.md` · `docs/QA_AND_BUG_PROCESS.md` §3
+
 ---
 
 ## Branch & environment
@@ -280,6 +316,8 @@ python3 tools/validate_story_data.py     # L0_story_data
 | **`docs/PM_AGENT_RUNBOOK.md`** | PM session steps, stale escalation |
 | `docs/sprints/Phase1-Sprint1-issues.md` | Active sprint issue bodies |
 | `docs/ACCEPTANCE_CRITERIA.md` | Gate thresholds |
+| **`docs/AI_TESTING_SPEC.md`** | **L0–L6 test layers, screenshots, E2E video** |
+| **`docs/VISUAL_QA.md`** | **Screenshot + vision jury procedure** |
 | `docs/CI.md` | GitHub Actions gate matrix |
 | `docs/GITHUB_SETUP.md` | PAT + `setup_github_project.sh` |
 | `docs/AI_DEV_WORKFLOW.md` | Extended command reference |
