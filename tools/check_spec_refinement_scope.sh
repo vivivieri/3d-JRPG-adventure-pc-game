@@ -19,7 +19,6 @@ if [[ "$BRANCH" != "main" && "${CI_FORCE_SPEC_SCOPE:-0}" != "1" ]]; then
   exit 0
 fi
 
-# Paths allowed under game/ on main (spec + data only)
 is_allowed_game_path() {
   local rel="$1"
   [[ "$rel" == "game/README.md" ]] && return 0
@@ -28,45 +27,52 @@ is_allowed_game_path() {
   return 1
 }
 
-# Scan tracked files under game/ — anything outside allowlist is a violation
-while IFS= read -r -d '' f; do
-  rel="${f#${ROOT}/}"
+is_allowed_tools_gd() {
+  local rel="$1"
+  [[ "$rel" == tools/godot_templates/* ]] && return 0
+  return 1
+}
+
+FORBIDDEN_GAME_PREFIXES=(
+  "game/project.godot"
+  "game/scripts/"
+  "game/scenes/"
+  "game/shaders/"
+  "game/assets/"
+  "game/tests/"
+  "game/addons/"
+)
+
+while IFS= read -r rel; do
+  [[ -z "$rel" ]] && continue
   if is_allowed_game_path "$rel"; then
     continue
   fi
-  fail "main spec refinement: forbidden path $rel (ship implementation belongs on game/development)"
-done < <(find "${ROOT}/game" -type f ! -path '*/.git/*' -print0 2>/dev/null)
-
-# Explicit forbidden roots even if empty
-for forbidden in \
-  "${ROOT}/game/project.godot" \
-  "${ROOT}/game/scripts" \
-  "${ROOT}/game/scenes" \
-  "${ROOT}/game/shaders" \
-  "${ROOT}/game/assets" \
-  "${ROOT}/game/tests" \
-  "${ROOT}/game/addons"
-do
-  if [[ -e "$forbidden" ]]; then
-    rel="${forbidden#${ROOT}/}"
-    fail "main spec refinement: $rel must not exist on main"
+  for prefix in "${FORBIDDEN_GAME_PREFIXES[@]}"; do
+    if [[ "$rel" == "$prefix" || "$rel" == ${prefix}* ]]; then
+      fail "main spec refinement: forbidden tracked path $rel"
+      continue 2
+    fi
+  done
+  if [[ "$rel" == game/* ]]; then
+    fail "main spec refinement: forbidden path $rel (ship implementation belongs on game/development)"
   fi
-done
+done < <(git ls-files 'game/')
 
 if [[ "$FAIL" -eq 0 ]]; then
-  ok "game/ contains only spec/data paths (data/, locale/, README)"
+  ok "tracked game/ paths are spec/data only (data/, locale/, README)"
 fi
 
-# tools/ — allow validators + reference libs; forbid ship GDScript
-while IFS= read -r -d '' f; do
-  rel="${f#${ROOT}/}"
-  if [[ "$rel" == *.gd ]]; then
-    fail "main spec refinement: GDScript in tools/ not allowed ($rel)"
+while IFS= read -r rel; do
+  [[ -z "$rel" ]] && continue
+  if is_allowed_tools_gd "$rel"; then
+    continue
   fi
-done < <(find "${ROOT}/tools" -name '*.gd' -print0 2>/dev/null)
+  fail "main spec refinement: GDScript in tools/ not allowed ($rel)"
+done < <(git ls-files 'tools/*.gd' 'tools/**/*.gd')
 
 if [[ "$FAIL" -eq 0 ]]; then
-  ok "tools/ has no .gd files"
+  ok "tools/ GDScript limited to godot_templates/ reference"
 fi
 
 echo ""
