@@ -725,13 +725,31 @@
       },
       {
         "gate_id": "L2_linux_export_smoke",
-        "skip_when": "no game/project.godot",
+        "skip_when": "no game/project.godot OR phase_1 bootstrap (no main_scene)",
         "skip_is_not_ship_pass": true
       },
       {
         "gate_id": "L2_windows_cross_export",
-        "skip_when": "no game/project.godot",
+        "skip_when": "no game/project.godot OR phase_1 bootstrap (no main_scene)",
         "skip_is_not_ship_pass": true
+      },
+      {
+        "gate_id": "L1_gdscript_lint",
+        "skip_when": "phase_1 bootstrap and no .gd files in diff",
+        "skip_is_not_ship_pass": true,
+        "bootstrap_only": true
+      },
+      {
+        "gate_id": "L2_glb_import",
+        "skip_when": "phase_1 bootstrap — no hero GLBs until M5",
+        "skip_is_not_ship_pass": true,
+        "bootstrap_only": true
+      },
+      {
+        "gate_id": "L2_animation_whitelist",
+        "skip_when": "phase_1 bootstrap — phase 1 catalog, no rigged GLBs on disk",
+        "skip_is_not_ship_pass": true,
+        "bootstrap_only": true
       }
     ],
     "excluded_gates": [
@@ -747,7 +765,32 @@
       "L6_human_playtest"
     ],
     "design_ref": "docs/ci-cd/CI.md, .cursorrules §0, docs/workflow/AI_DEV_WORKFLOW.md §2",
-    "merge_policy": "game/development PRs require CI green — fails until project.godot + tests bootstrap; not deferrable"
+    "merge_policy": "game/development PRs require CI green. P1-00 may use bash tools/run_bootstrap_ci_checks.sh until main_scene is set; full run_ci_checks.sh required after P1-02."
+  },
+  "issue_bootstrap": {
+    "P1-00": {
+      "title": "Bootstrap game/development — project.godot + CI baseline",
+      "runner": "bash tools/run_bootstrap_ci_checks.sh",
+      "required_gate_ids": [
+        "L0_rr_compliance",
+        "L0_story_data",
+        "L0_narrative_density",
+        "L0_acceptance_catalog",
+        "L0_base_classes",
+        "L1_unit_tests"
+      ],
+      "deferred_gate_ids": [
+        "L1_gdscript_lint",
+        "L2_glb_import",
+        "L2_animation_whitelist",
+        "L2_linux_export_smoke",
+        "L2_windows_cross_export",
+        "L2_boot_headless",
+        "L4_integration"
+      ],
+      "deferred_until": "P1-02 merged (main_scene + GDAI ruined_village) or phase_1 exit",
+      "design_ref": "docs/sprints/Phase1-Sprint1-issues.md §P1-00"
+    }
   },
   "toolchain_requirements": {
     "required_not_optional": [

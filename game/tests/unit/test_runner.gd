@@ -12,11 +12,20 @@ var _failures: PackedStringArray = []
 
 func _initialize() -> void:
 	print("==> Godot unit tests")
-	_run_test("story_data_paths.required_boot_paths_exist", TestStoryDataPaths.test_required_boot_paths_exist)
-	_run_test("story_data_paths.core_data_catalog_exists", TestStoryDataPaths.test_core_data_catalog_exists)
+	_run_test(
+		"story_data_paths.required_boot_paths_exist",
+		TestStoryDataPaths.test_required_boot_paths_exist,
+	)
+	_run_test(
+		"story_data_paths.core_data_catalog_exists",
+		TestStoryDataPaths.test_core_data_catalog_exists,
+	)
 	_run_test("story_data_json.scenes_json_parses", TestStoryDataJson.test_scenes_json_parses)
 	_run_test("story_data_json.flags_json_parses", TestStoryDataJson.test_flags_json_parses)
-	_run_test("story_data_json.chapter_01_dialogue_parses", TestStoryDataJson.test_chapter_01_dialogue_parses)
+	_run_test(
+		"story_data_json.chapter_01_dialogue_parses",
+		TestStoryDataJson.test_chapter_01_dialogue_parses,
+	)
 	print("")
 	print("Passed: %d | Failed: %d" % [_passed, _failed])
 	if _failed > 0:

@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
+CRITERIA_PATH = ROOT / "game/data/qa/acceptance_criteria.json"
 
 sys.path.insert(0, str(ROOT / "tools"))
 from pm_orchestrator_lib import load_board  # noqa: E402
@@ -33,10 +34,21 @@ def gh_pr_merged_for_branch(branch: str) -> tuple[bool, str]:
         return False, "gh not available"
 
 
+def bootstrap_runner(issue_id: str) -> str | None:
+    if not CRITERIA_PATH.is_file():
+        return None
+    data = json.loads(CRITERIA_PATH.read_text(encoding="utf-8"))
+    profile = data.get("issue_bootstrap", {}).get(issue_id)
+    if not profile:
+        return None
+    return profile.get("runner", "bash tools/run_bootstrap_ci_checks.sh")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check issue definition-of-done criteria")
     parser.add_argument("issue_id")
     parser.add_argument("--commit", default="", help="Commit SHA to verify CI against")
+    parser.add_argument("--skip-ci", action="store_true", help="Skip CI runner (commit + evidence only)")
     args = parser.parse_args()
 
     board = load_board()
@@ -48,34 +60,59 @@ def main() -> int:
     done_req = issue.get("done_requires", "pr_merged")
     branch_pattern = issue.get("branch_name_pattern", "cursor/{issue_id}-a091")
     branch = branch_pattern.replace("{issue_id}", args.issue_id)
+    commit = args.commit or issue.get("last_commit_sha") or ""
 
     if done_req == "push_only":
-        if issue.get("last_commit_sha") or args.commit:
-            print(f"OK — push_only satisfied (commit recorded)")
+        if commit:
+            print("OK — push_only satisfied (commit recorded)")
             return 0
         print("[FAIL] push_only requires last_commit_sha or --commit", file=sys.stderr)
         return 1
 
     if done_req == "ci_green_on_branch":
-        # Without game CI on main, check commit recorded + evidence manifest exists
-        evidence = ROOT / "artifacts/sprint_evidence" / args.issue_id / "manifest.json"
-        if args.commit or issue.get("last_commit_sha"):
-            if evidence.is_file():
-                print(f"OK — ci_green_on_branch (commit + evidence bundle)")
-                return 0
-            print("[WARN] commit set but no evidence bundle — run pm_bundle_evidence.py", file=sys.stderr)
+        if not commit:
+            print("[FAIL] ci_green_on_branch requires commit SHA", file=sys.stderr)
             return 1
-        print("[FAIL] ci_green_on_branch requires commit SHA", file=sys.stderr)
-        return 1
+
+        evidence = ROOT / "artifacts/sprint_evidence" / args.issue_id / "manifest.json"
+        if not evidence.is_file():
+            print(
+                "[WARN] commit set but no evidence bundle — run pm_bundle_evidence.py",
+                file=sys.stderr,
+            )
+            return 1
+
+        if args.skip_ci:
+            print("OK — ci_green_on_branch (commit + evidence bundle; CI skipped)")
+            return 0
+
+        runner = bootstrap_runner(args.issue_id) or "bash tools/run_ci_checks.sh"
+        print(f"==> Running CI profile: {runner}")
+        r = subprocess.run(runner, shell=True, cwd=ROOT)
+        if r.returncode != 0:
+            print(f"[FAIL] {runner} exit {r.returncode}", file=sys.stderr)
+            if bootstrap_runner(args.issue_id):
+                print(
+                    "Hint: P1-00 uses bootstrap profile — "
+                    "see acceptance_criteria.json → issue_bootstrap.P1-00",
+                    file=sys.stderr,
+                )
+            return 1
+
+        required = issue.get("acceptance_gate_ids", [])
+        print(f"OK — ci_green_on_branch ({runner} exit 0; gates: {', '.join(required)})")
+        return 0
 
     if done_req == "pr_merged":
         merged, msg = gh_pr_merged_for_branch(branch)
         if merged:
             print(f"OK — pr_merged: {msg}")
             return 0
-        # Fallback: allow if github_issue closed and commit set (no gh)
-        if issue.get("last_commit_sha") and not subprocess.run(["which", "gh"], capture_output=True).returncode == 0:
-            print("[WARN] gh unavailable — accepting last_commit_sha only (set done_requires explicitly)", file=sys.stderr)
+        if commit and subprocess.run(["which", "gh"], capture_output=True).returncode != 0:
+            print(
+                "[WARN] gh unavailable — accepting last_commit_sha only (set done_requires explicitly)",
+                file=sys.stderr,
+            )
             return 0
         print(f"[FAIL] pr_merged not satisfied: {msg}", file=sys.stderr)
         return 1

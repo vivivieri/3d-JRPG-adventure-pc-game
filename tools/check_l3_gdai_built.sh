@@ -94,8 +94,11 @@ while IFS= read -r path; do
     continue
   fi
   if [[ "$path" == "game/project.godot" ]]; then
-    if git diff "$DIFF_BASE" "$DIFF_HEAD" -- "$path" | grep -qE '^[+-].*run/main_scene='; then
-      MAIN_SCENE_CHANGED=1
+    if git diff "$DIFF_BASE" "$DIFF_HEAD" -- "$path" | grep -qE '^\+.*run/main_scene='; then
+      MAIN_SCENE_NOW="$(grep -E '^run/main_scene=' game/project.godot 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' || true)"
+      if [[ -n "$MAIN_SCENE_NOW" ]]; then
+        MAIN_SCENE_CHANGED=1
+      fi
     fi
     continue
   fi

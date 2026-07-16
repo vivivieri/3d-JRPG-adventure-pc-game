@@ -102,7 +102,8 @@ fi
 
 echo ""
 echo "Next:"
-echo "  1. bash tools/run_ci_checks.sh   (on ${BRANCH})"
+echo "  1. bash tools/run_bootstrap_ci_checks.sh   (P1-00 — on ${BRANCH})"
+echo "  2. bash tools/run_ci_checks.sh              (full game CI after P1-02)"
 echo "  2. git add game/project.godot && git commit -m 'feat(P1-00): bootstrap Godot project shell'"
 echo "  3. git push -u origin ${BRANCH}"
 echo "  4. python3 tools/pm_update_issue.py P1-00 --status done --commit \$(git rev-parse HEAD)"
