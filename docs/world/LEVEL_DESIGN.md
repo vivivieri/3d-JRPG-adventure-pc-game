@@ -123,7 +123,7 @@ Wide establishing → follow cam (`CINEMATICS.md` SC-01). No authored pan v1.
 
 | Node | Scene ID | Sets flag | Requirement |
 |------|----------|-----------|-------------|
-| `CinematicTrigger_hub_pan` | SC-02 | `village_arrival_seen` | First enter only |
+| `CinematicTrigger_hub_pan` | hook `sc02_hub_pan` | `sc02_hub_pan_seen` | First enter only; SC-02 dialogue sets `village_arrival_seen` |
 | `Interactable_SC-02-BANNER` | SC-02-BANNER | `inspected_banner` | — |
 | `Interactable_SC-02-SANDAL` | SC-02-SANDAL | `inspected_sandal` | — |
 | `SavePoint_well` | SC-02-WELL | `inspected_well` | Manual save + first heal |
@@ -189,7 +189,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 | `CinematicTrigger_sc08_deep_pool_vignette` | hook | `deep_pool_vignette_seen` | After pool enter |
 | `EncounterTrigger_enc_sc09_shore_wraith` | SC-09 | `shore_wraith_defeated` | Boss |
 | `Interactable_SC-10` | SC-10 | `yuzu_joined` | Post-boss |
-| `CinematicTrigger_SC-11` | SC-11 | `saw_palace_vision` | Letterbox flashback |
+| `CinematicTrigger_sc11_palace_flashback` | hook `sc11_palace_flashback` | `saw_palace_vision` (dialogue) | Letterbox flashback; requires `yuzu_joined` |
 | `ZoneTransition_dragon_palace_gate` | SC-12 | `gate_reached` | `yuzu_joined`, `wraith_pearl` |
 
 ### Encounters
@@ -240,9 +240,11 @@ Full spec: [PUZZLE_DESIGN.md](PUZZLE_DESIGN.md). Water plane Y toggles LOW/HIGH;
 | `SavePoint_gate` | — | — | Manual save |
 | `EncounterTrigger_enc_sc12_palace_wraiths` | SC-12 | `roku_combat_active` | Gate approach |
 | `Interactable_SC-13` | SC-13 | `knows_box_truth` | Mirror |
+| `CinematicTrigger_sc14_sentinel_breather` | hook `sc14_sentinel_breather` | `sc14_breather_seen` | Requires `knows_box_truth`; breather before sentinel boss |
 | `EncounterTrigger_enc_sc14_sentinel` | SC-14 | `sentinel_defeated` | Boss |
 | `EncounterTrigger_enc_sc15_tide_keeper` | SC-15 | — | Requires `sentinel_defeated`; sets `tide_keeper_defeated` via `sc16_last_mercy_resolution` after SC-16 |
 | `Interactable_SC-16` | SC-16 | `ending_chosen` | Three-way choice UI |
+| `CinematicTrigger_sc16_last_mercy` | hook `sc16_last_mercy_resolution` | `sc16_last_mercy_seen`, `tide_keeper_defeated` | After ending choice; `load_ending` per `ending_chosen` |
 
 ### Camera markers (SC-12)
 

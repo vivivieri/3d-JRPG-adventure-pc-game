@@ -18,7 +18,7 @@
 | **Summary** | Urashima saves wounded spirit-turtle. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
 | **Gameplay** | Non-interactive; skippable after 3s (hold Confirm after first play) |
 | **Mood** | Mythic, fateful |
-| **Assets** | Kappa-turtle spirit silhouette, box, palace gold flash |
+| **Assets** | Spirit-turtle silhouette, box, palace gold flash |
 | **Flag** | `prologue_seen` |
 
 ### SC-01 — Arrival at the Shore

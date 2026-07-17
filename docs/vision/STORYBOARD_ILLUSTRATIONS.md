@@ -87,7 +87,7 @@ docs/pitch/illustrations/
 
 | ID | Scene | Key visual |
 |----|-------|------------|
-| SC-00 | Prologue | Kappa-turtle rescue, palace silhouette, lacquer box |
+| SC-00 | Prologue | Spirit-turtle rescue, palace silhouette, lacquer box |
 | SC-01 | Shore arrival | Urashima on grey beach, box, ruined gate distant |
 | SC-03 | Cracked torii | Low angle torii, spirit particles, no Yuzu body |
 | SC-04 | Roku shack | Interior two-shot, map handoff |
