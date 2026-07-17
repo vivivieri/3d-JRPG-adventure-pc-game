@@ -146,7 +146,24 @@ def parity_checks() -> dict[str, Any]:
     }
 
 
-def stale_string_scan(catalog: dict[str, Any]) -> list[dict[str, Any]]:
+def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
+    """True when a helper is ported ahead of PM dispatch (EventBus allowed on game/development after P1-00)."""
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return bool(re.search(r'"port_status"\s*:\s*"ported"', text, re.IGNORECASE))
+    allowed_off_main = {"EventBus"}  # P1-00 dispatch on game/development (+ feature branches)
+    for helper in data.get("helpers", []):
+        if helper.get("port_status") != "ported":
+            continue
+        hid = helper.get("id", "")
+        if branch != "main" and hid in allowed_off_main:
+            continue
+        return True
+    return False
+
+
+def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[dict[str, Any]]:
     hits: list[dict[str, Any]] = []
     search_roots = [ROOT / "docs", ROOT / "game/data", ROOT / "tools"]
     patterns = catalog.get("stale_string_patterns", [])
@@ -167,6 +184,17 @@ def stale_string_scan(catalog: dict[str, Any]) -> list[dict[str, Any]]:
             if rel in skip_files:
                 continue
             for row in patterns:
+                if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
+                    if _helpers_registry_has_premature_port(text, branch):
+                        hits.append(
+                            {
+                                "id": row["id"],
+                                "severity": row["severity"],
+                                "message": row["message"],
+                                "path": rel,
+                            }
+                        )
+                    continue
                 if re.search(row["pattern"], text, re.IGNORECASE):
                     hits.append(
                         {
@@ -301,6 +329,7 @@ def build_recommendations(
     stale: list[dict[str, Any]],
     domain_scores: dict[str, float],
     branch: str,
+    report_visuals: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     recs: list[dict[str, Any]] = []
     stale_blocking = [h for h in stale if h["severity"] == "blocking"]
@@ -324,6 +353,16 @@ def build_recommendations(
         elif when == "domain_score_lt":
             dom = rule.get("domain", "")
             include = domain_scores.get(dom, 10.0) < float(rule.get("value", 10.0))
+        elif when == "domain_score_lt_on_branch":
+            if branch != rule.get("branch"):
+                include = False
+            else:
+                dom = rule.get("domain", "")
+                include = domain_scores.get(dom, 10.0) < float(rule.get("value", 10.0))
+        elif when == "visuals_missing":
+            min_present = int(rule.get("min_present", 1))
+            present = sum(1 for v in (report_visuals or []) if v.get("present"))
+            include = present < min_present
 
         if not include:
             continue
@@ -402,6 +441,34 @@ def compute_verdict(
     return "FAIL"
 
 
+def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Check which catalogued visuals exist on disk (no copy)."""
+    manifest: list[dict[str, Any]] = []
+    for pack in catalog.get("visual_packs", []):
+        for asset in pack.get("assets", []):
+            fname = asset["filename"]
+            src: Path | None = None
+            if source_dir:
+                candidate = source_dir / fname
+                if not candidate.is_absolute():
+                    candidate = ROOT / candidate
+                if candidate.is_file():
+                    src = candidate
+            elif (ROOT / "docs/compliance/alignment_audit_visuals" / fname).is_file():
+                src = ROOT / "docs/compliance/alignment_audit_visuals" / fname
+            manifest.append(
+                {
+                    "pack_id": pack["id"],
+                    "asset_id": asset["id"],
+                    "label": asset["label"],
+                    "filename": fname,
+                    "present": src is not None,
+                    "path": str(src.relative_to(ROOT)) if src else None,
+                }
+            )
+    return manifest
+
+
 def bundle_visuals(
     audit_dir: Path,
     catalog: dict[str, Any],
@@ -451,9 +518,10 @@ def build_report(
     if not skip_ci:
         ci = run_ci(branch)
     parity = parity_checks()
-    stale = stale_string_scan(catalog)
+    stale = stale_string_scan(catalog, branch=branch)
     ctx = {"ci": ci, "parity": parity, "branch": branch}
     domain_scores = compute_domain_scores(catalog, ctx)
+    visual_inventory = scan_visual_inventory(catalog, visuals_from)
     recommendations = build_recommendations(
         catalog,
         ci=ci,
@@ -461,6 +529,7 @@ def build_report(
         stale=stale,
         domain_scores=domain_scores,
         branch=branch,
+        report_visuals=visual_inventory,
     )
     checklist = build_checklist(recommendations, catalog)
     verdict = compute_verdict(catalog, ci=ci, domain_scores=domain_scores, checklist=checklist)
