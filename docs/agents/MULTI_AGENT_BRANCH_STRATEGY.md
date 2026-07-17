@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Authority:** One issue → one feature branch → one PR → merge → cycle event.  
-**Cross-refs:** `docs/workflow/BRANCHING.md`, `docs/agents/SPRINT_ORCHESTRATION.md`, `artifacts/pm_dispatch_packet.json`
+**Cross-refs:** `docs/workflow/DEVELOPMENT_LIFECYCLE.md`, `docs/workflow/BRANCHING.md`, `docs/workflow/BRANCHING_DECISION_RECORD.md`, `docs/agents/SPRINT_ORCHESTRATION.md`, `artifacts/pm_dispatch_packet.json`
 
 ---
 

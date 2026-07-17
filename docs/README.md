@@ -40,7 +40,9 @@
 | Priority | Document | Answers |
 |----------|----------|---------|
 | 1 | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
-| 1b | [BRANCHING.md](workflow/BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
+| 1b | [DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) | **End-to-end** spec → sprint → dev → qa → uat → ship |
+| 1b1 | [BRANCHING.md](workflow/BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
+| 1b1a | [BRANCHING_DECISION_RECORD.md](workflow/BRANCHING_DECISION_RECORD.md) | ADR: trunk + tags (not env branches / forks) |
 | 1b2 | [SPEC_FIRST_DEVELOPMENT.md](technical/SPEC_FIRST_DEVELOPMENT.md) | Complete specs on `main`; code after `SPEC_DEV_START` |
 | 1b3 | [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Rebuild core helpers + Phase 1 visuals from specs |
 | 1c | [ENVIRONMENTS.md](ci-cd/ENVIRONMENTS.md) | dev · qa · uat · preprod · prod promotion |
@@ -59,6 +61,7 @@
 | I need to… | Read |
 |------------|------|
 | Understand the game | [GDD.md](vision/GDD.md) → [STORYBOARD.md](vision/STORYBOARD.md) |
+| **Full dev lifecycle** | [DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) · [BRANCHING_DECISION_RECORD.md](workflow/BRANCHING_DECISION_RECORD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) · branch: `game/development` |
 | Sprint planning | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
 | **Sprint orchestration** | [SPRINT_ORCHESTRATION.md](agents/SPRINT_ORCHESTRATION.md) · [PM_AGENT_RUNBOOK.md](agents/PM_AGENT_RUNBOOK.md) |
@@ -208,7 +211,9 @@
 | Doc | Purpose |
 |-----|---------|
 | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | Rebuild phases 0–8 |
+| [DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) | **End-to-end** spec → sprint → dev → qa → uat → ship |
 | [BRANCHING.md](workflow/BRANCHING.md) | `main` vs `game/development` |
+| [BRANCHING_DECISION_RECORD.md](workflow/BRANCHING_DECISION_RECORD.md) | ADR: trunk + tags vs env branches / forks |
 | [MILESTONES.md](workflow/MILESTONES.md) | M5 art → M6 Steam checklist |
 | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) | Phase-gated Agile |
 | [AI_DEV_WORKFLOW.md](workflow/AI_DEV_WORKFLOW.md) | Build policy, phase acceptance |

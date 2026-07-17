@@ -1,7 +1,8 @@
 # Branching policy — documentation vs game development
 
-**Version:** 1.1  
-**Authority:** This document defines which branches hold what, and when code may land on `main`.  
+**Version:** 1.2  
+**Authority:** Branch contents and merge policy. For the **full dev → ship lifecycle**, start at `docs/workflow/DEVELOPMENT_LIFECYCLE.md`.  
+**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — why we reject GitLab env branches and per-agent forks.  
 **Spec-first policy:** `docs/technical/SPEC_FIRST_DEVELOPMENT.md` — **complete specs on `main`; zero ship code until `SPEC_DEV_START` gate.**
 
 ---
@@ -102,7 +103,11 @@ git checkout main               # for docs/data only
 
 ## 6. Cross-refs
 
+- `docs/workflow/DEVELOPMENT_LIFECYCLE.md` — **end-to-end lifecycle hub** (phases, sprints, env promotion, agents)
+- `docs/workflow/BRANCHING_DECISION_RECORD.md` — ADR: trunk + tags vs env branches + forks
 - `docs/workflow/IMPLEMENTATION_PLAN.md` — build phases (executed on `game/development`)
+- `docs/agents/MULTI_AGENT_BRANCH_STRATEGY.md` — per-issue `cursor/*` branches
+- `docs/ci-cd/ENVIRONMENTS.md` — dev · qa · uat · preprod · prod (logical stages, not git branches)
 - `docs/ci-cd/CI.md` — full game CI gate catalog
 - `AGENTS.md` — agent bootstrap; design source on `main`, build on `game/development`
 - `.cursorrules` §0 — GDAI MCP scene policy (applies on `game/development`)

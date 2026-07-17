@@ -1,7 +1,9 @@
 # Deployment Environments — Dev · QA · UAT · Preprod · Prod
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Machine-readable:** `game/data/qa/environments.json`  
+**Lifecycle hub:** `docs/workflow/DEVELOPMENT_LIFECYCLE.md` — full dev → ship flow (this doc = per-stage detail)  
+**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — stages are **not** long-lived git branches  
 **Cross-refs:** `docs/workflow/BRANCHING.md`, `docs/ci-cd/CD.md`, `docs/ci-cd/CI.md`, `docs/agents/MULTI_AGENT_TEAM.md`
 
 ---
@@ -146,6 +148,8 @@ Example: `[UAT][S1][L5] Drift ending soft-lock at SC-16`
 
 ## 7. Cross-refs
 
+- `docs/workflow/DEVELOPMENT_LIFECYCLE.md` — end-to-end lifecycle and promotion checklist
+- `docs/workflow/BRANCHING_DECISION_RECORD.md` — why env stages use tags + CI, not env branches
 - `docs/agents/PROJECT_MANAGEMENT.md` — issues, labels, MCP PM tools
 - `docs/agents/MULTI_AGENT_TEAM.md` — which agent owns each environment
 - `docs/ci-cd/CD.md` — artifact and Steam deploy

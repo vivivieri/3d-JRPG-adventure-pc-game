@@ -78,5 +78,5 @@
   "multi_agent_roles": [
     "pm", "architect", "builder", "qa", "flow", "debugger", "release", "visual", "human"
   ],
-  "design_ref": "docs/ci-cd/ENVIRONMENTS.md, docs/agents/MULTI_AGENT_TEAM.md, docs/agents/PROJECT_MANAGEMENT.md"
+  "design_ref": "docs/workflow/DEVELOPMENT_LIFECYCLE.md, docs/ci-cd/ENVIRONMENTS.md, docs/workflow/BRANCHING_DECISION_RECORD.md, docs/agents/MULTI_AGENT_TEAM.md, docs/agents/PROJECT_MANAGEMENT.md"
 }
