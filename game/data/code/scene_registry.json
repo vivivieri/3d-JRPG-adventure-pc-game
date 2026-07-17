@@ -30,10 +30,12 @@
       "spec_status": "specified",
       "required_nodes": [
         { "name": "SpawnMarker_SC-01", "type": "Marker3D" },
-        { "name": "Interactable_SC-01-DRIFTWOOD", "type": "Interactable", "export": { "scene_id": "SC-01-DRIFTWOOD" } },
-        { "name": "ZoneTransition_ruined_village", "type": "ZoneTransition", "export": { "target_zone": "ruined_village" } },
+        { "name": "GameplayCamera", "type": "Camera3D" },
         { "name": "WorldEnvironment", "type": "WorldEnvironment" },
-        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" }
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "beach_shore" } },
+        { "name": "Interactable_SC-01-DRIFTWOOD", "type": "Interactable", "export": { "scene_id": "SC-01-DRIFTWOOD" } },
+        { "name": "ZoneTransition_ruined_village", "type": "ZoneTransition", "export": { "target_zone": "ruined_village" } }
       ]
     },
     {
@@ -44,8 +46,10 @@
       "spec_status": "specified",
       "required_nodes": [
         { "name": "SpawnMarker_hub", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
         { "name": "WorldEnvironment", "type": "WorldEnvironment" },
         { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "LanternFill_hub", "type": "lantern_fill", "group": "zone_fill_light" },
         { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "ruined_village" } },
         { "name": "Interactable_SC-02-BANNER", "type": "Interactable", "export": { "scene_id": "SC-02-BANNER" } },
         { "name": "Interactable_SC-02-SANDAL", "type": "Interactable", "export": { "scene_id": "SC-02-SANDAL" } },
@@ -65,6 +69,10 @@
       "spec_status": "specified",
       "required_nodes": [
         { "name": "SpawnMarker_cave_entrance", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "tidal_caves" } },
         { "name": "EncounterTrigger_enc_sc06_cave_crab", "type": "EncounterTrigger" },
         { "name": "WaterPuzzle", "type": "Node3D", "description": "SC-07 puzzle FSM — see PUZZLE_DESIGN.md" },
         { "name": "EncounterTrigger_enc_sc08_deep_pool", "type": "EncounterTrigger" },
@@ -81,6 +89,10 @@
       "spec_status": "specified",
       "required_nodes": [
         { "name": "SpawnMarker_gate", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "dragon_palace_gate" } },
         { "name": "SavePoint_gate", "type": "SavePoint" },
         { "name": "EncounterTrigger_enc_sc12_palace_wraiths", "type": "EncounterTrigger" },
         { "name": "Interactable_SC-13", "type": "Interactable", "export": { "scene_id": "SC-13" } },

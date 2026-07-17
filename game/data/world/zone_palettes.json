@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "design_ref": "docs/art/RENDERING_GUIDE.md §4–§6",
+  "schema_version": 3,
+  "design_ref": "docs/art/RENDERING_GUIDE.md §4–§6, §11",
   "runtime_path": "res://data/world/zone_palettes.json",
   "defaults": {
     "tonemap_mode": "filmic",
@@ -28,7 +28,11 @@
       "fill_color": "#F0E8D0",
       "fog_color": "#9AB8C8",
       "fog_density": 0.01,
-      "glow_intensity": 0.3
+      "fog_start_m": 25.0,
+      "aerial_perspective": 0.74,
+      "glow_enabled": false,
+      "glow_intensity": 0.0,
+      "glow_use_case": "none"
     },
     "ruined_village": {
       "sky_top": "#4A7A9A",
@@ -39,7 +43,11 @@
       "fill_color": "#D4A880",
       "fog_color": "#8B9DAF",
       "fog_density": 0.008,
+      "fog_start_m": 20.0,
+      "aerial_perspective": 0.75,
+      "glow_enabled": true,
       "glow_intensity": 0.35,
+      "glow_use_case": "emissive_only",
       "volumetric_fog_enabled": true
     },
     "tidal_caves": {
@@ -51,7 +59,11 @@
       "fill_color": "#4AE8D8",
       "fog_color": "#0A141C",
       "fog_density": 0.028,
-      "glow_intensity": 0.4
+      "fog_start_m": 12.0,
+      "aerial_perspective": 0.72,
+      "glow_enabled": true,
+      "glow_intensity": 0.4,
+      "glow_use_case": "emissive_algae"
     },
     "dragon_palace_gate": {
       "sky_top": "#080818",
@@ -62,7 +74,57 @@
       "fill_color": "#FFD890",
       "fog_color": "#1A1A3A",
       "fog_density": 0.012,
-      "glow_intensity": 0.4
+      "fog_start_m": 30.0,
+      "aerial_perspective": 0.78,
+      "glow_enabled": true,
+      "glow_intensity": 0.4,
+      "glow_use_case": "palace_trim"
+    },
+    "ending_rewind": {
+      "sky_top": "#C8A878",
+      "sky_horizon": "#F0D8B0",
+      "ground_horizon": "#8A7058",
+      "directional_color": "#FFD890",
+      "directional_rotation_deg": [-35, 40, 0],
+      "fill_color": "#E8C8A0",
+      "fog_color": "#D8C0A0",
+      "fog_density": 0.002,
+      "fog_start_m": 80.0,
+      "aerial_perspective": 0.85,
+      "glow_enabled": true,
+      "glow_intensity": 0.25,
+      "glow_use_case": "festival_warmth",
+      "fog_cleared": true
+    },
+    "ending_anchor": {
+      "sky_top": "#6A8A9A",
+      "sky_horizon": "#B8D0E0",
+      "ground_horizon": "#5C4A3A",
+      "directional_color": "#B8C8D8",
+      "directional_rotation_deg": [25, -30, 0],
+      "fill_color": "#D4A880",
+      "fog_color": "#8B9DAF",
+      "fog_density": 0.006,
+      "fog_start_m": 35.0,
+      "aerial_perspective": 0.76,
+      "glow_enabled": true,
+      "glow_intensity": 0.3,
+      "glow_use_case": "sapling_emissive"
+    },
+    "ending_drift": {
+      "sky_top": "#1A2848",
+      "sky_horizon": "#3A5088",
+      "ground_horizon": "#0A1420",
+      "directional_color": "#6EC8C0",
+      "directional_rotation_deg": [-20, 10, 0],
+      "fill_color": "#4AE8D8",
+      "fog_color": "#0A1828",
+      "fog_density": 0.015,
+      "fog_start_m": 40.0,
+      "aerial_perspective": 0.8,
+      "glow_enabled": true,
+      "glow_intensity": 0.45,
+      "glow_use_case": "palace_underwater"
     }
   }
 }

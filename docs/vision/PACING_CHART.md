@@ -9,7 +9,7 @@
 
 | Time | Scene | Emotion | Combat | Notes |
 |------|-------|---------|--------|-------|
-| 0:00 | SC-00 | Mystery, duty | — | Prologue — kappa-turtle |
+| 0:00 | SC-00 | Mystery, duty | — | Prologue — spirit-turtle |
 | 0:02 | SC-01 | Disorientation | — | Movement teach |
 | 0:08 | SC-02 | Dread, emptiness | — | Environmental storytelling |
 | 0:12 | SC-03 | Guilt, accusation | — | Yuzu voice |

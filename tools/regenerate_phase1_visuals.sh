@@ -57,6 +57,7 @@ print_checklist() {
 run_check() {
   echo "==> Phase 1 visual spec validation"
   python3 tools/validate_base_classes.py
+  python3 tools/validate_zone_visuals_contract.py
   python3 - <<'PY'
 import json
 from pathlib import Path

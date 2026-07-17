@@ -43,6 +43,7 @@ run_gate "L0_acceptance_catalog" python3 tools/validate_acceptance_criteria.py
 run_gate "L0_environments_catalog" python3 tools/validate_environments.py
 run_gate "L0_sprint_phases" python3 tools/validate_sprint_phases.py
 run_gate "L0_base_classes" python3 tools/validate_base_classes.py
+run_gate "L0_zone_visuals_contract" python3 tools/validate_zone_visuals_contract.py
 run_gate "L0_zone_composition" python3 tools/validate_zone_composition.py
 run_gate "L0_qa_catalog" python3 tools/validate_qa_catalog.py
 run_gate "L0_audio_qa_catalog" python3 tools/validate_audio_qa_catalog.py

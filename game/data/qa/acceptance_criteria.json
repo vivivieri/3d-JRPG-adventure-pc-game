@@ -141,6 +141,15 @@
       "evidence": ["game/data/code/base_classes.json"],
       "design_ref": "docs/technical/CODE_BASE_CLASS_RULES.md"
     },
+    "L0_zone_visuals_contract": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_zone_visuals_contract.py",
+      "description": "ZoneVisuals public_api ↔ zone_visuals_lib.py parity",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/code/base_classes.json", "tools/zone_visuals_lib.py"],
+      "design_ref": "docs/technical/GDSCRIPT_REGENERATION.md §10"
+    },
     "L0_zone_composition": {
       "layer": "L0",
       "domain": "data",
@@ -667,6 +676,7 @@
       "L0_environments_catalog",
       "L0_sprint_phases",
       "L0_base_classes",
+      "L0_zone_visuals_contract",
       "L0_zone_composition",
       "L0_qa_catalog",
       "L0_audio_qa_catalog",
@@ -840,10 +850,13 @@
         "L0_rr_compliance",
         "L0_story_data",
         "L0_narrative_density",
+        "L0_base_classes",
+        "L0_zone_visuals_contract",
         "L1_unit_tests",
         "L2_boot_headless",
         "L2_scene_primitives"
       ],
+      "exit_criteria_ref": "docs/sprints/Phase1-Sprint1-issues.md §P1-05",
       "conditional_gates": [
         "L2_visual_palette",
         "L2_visual_jury",

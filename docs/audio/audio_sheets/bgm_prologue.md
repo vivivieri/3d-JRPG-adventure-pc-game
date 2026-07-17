@@ -12,7 +12,7 @@
 
 ## Prompt
 
-cinematic opening movie score, dark Urashima folklore, kappa turtle rescue myth, low strings and distant wordless choir pad, single temple bell, mythic and fateful 60 BPM, instrumental hero theme, no vocals, fade ending not loop
+cinematic opening movie score, dark Urashima folklore, spirit turtle rescue myth, low strings and distant wordless choir pad, single temple bell, mythic and fateful 60 BPM, instrumental hero theme, no vocals, fade ending not loop
 
 ## Negative
 

@@ -119,7 +119,7 @@ Briefs align with `STORYBOARD.md`. Use as ComfyUI/GameLab prompt body.
 
 ### SC-00 — Prologue
 - **Mood:** Mythic, fateful  
-- **Elements:** Wounded kappa-turtle spirit in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box  
+- **Elements:** Wounded spirit-turtle in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box  
 - **Palette:** Deep sea teal, gold flash, black vignette  
 
 ### SC-01 — Arrival

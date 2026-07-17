@@ -27,7 +27,6 @@ Defines **moment-to-moment juice** — how the game responds to player actions. 
 | Player attack hit | Target white flash 0.12 s | `sfx_combat_hit_light` | On damage apply |
 | Player heavy / skill | Flash + small forward lunge | Element SFX | 0.15 s |
 | Enemy attack hit | Party member flash red | `sfx_combat_hit_heavy` if boss | 0.12 s |
-| Miss / evade | Brief dodge sway | `sfx_combat_miss` | — |
 | Defend | Blue tint on actor | `sfx_combat_defend` | Until turn end |
 | KO | Collapse anim + desaturate portrait | — | 0.4 s |
 

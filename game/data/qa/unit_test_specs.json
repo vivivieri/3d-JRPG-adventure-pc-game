@@ -27,6 +27,16 @@
           "id": "build_environment_fog_enabled",
           "function": "test_build_environment_fog_enabled",
           "assert": "fog_enabled, tonemap_mode == TONE_MAPPER_FILMIC, glow_enabled"
+        },
+        {
+          "id": "directional_settings_ruined_village",
+          "function": "test_directional_settings_ruined_village",
+          "assert": "directional_settings rotation_degrees[0] == 35.0"
+        },
+        {
+          "id": "apply_to_scene_bundle_keys",
+          "function": "test_apply_to_scene_ruined_village",
+          "assert": "bundle keys environment, directional, fill_light, node_names"
         }
       ]
     }

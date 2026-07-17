@@ -8,6 +8,7 @@
       "data_story_spine",
       "data_combat",
       "data_narrative_density",
+      "data_zone_visuals",
       "registry_autoloads",
       "registry_scenes_phase1_2",
       "registry_base_classes",
@@ -76,7 +77,7 @@
         "tools/regenerate_phase1_visuals.sh",
         "docs/technical/GDSCRIPT_REGENERATION.md"
       ],
-      "validator": "tools/validate_base_classes.py",
+      "validator": "tools/validate_zone_visuals_contract.py",
       "phase": 1
     },
     {
@@ -129,10 +130,11 @@
     {
       "id": "impl_shaders",
       "kind": "implementation",
-      "spec_status": "specified",
+      "spec_status": "partial",
       "branch": "game/development",
       "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7", "docs/art/SHADER_SPECS.md"],
       "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
+      "note": "toon_base specified; water_stylized template partial — foam/displacement polish in P1-04",
       "phase": 1
     }
   ]

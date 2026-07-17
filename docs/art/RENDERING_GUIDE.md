@@ -219,9 +219,9 @@ Apply at runtime by updating `WorldEnvironment.environment` and `DirectionalLigh
 
 | Scene | `zone_id` | WorldEnvironment | Sky | Glow | Special |
 |-------|-----------|-------------------|-----|------|---------|
-| `beach_shore.tscn` | `beach_shore` | ✅ | ProceduralSky | Off | Coastal haze |
-| `ruined_village.tscn` | `ruined_village` | ✅ | Overcast | Off | Vertical slice gate |
-| `tidal_caves.tscn` | `tidal_caves` | ✅ | Dark | On (algae) | No sky; emissive primary |
+| `beach_shore.tscn` | `beach_shore` | ✅ | ProceduralSky | Off (`glow_enabled: false`) | Coastal haze |
+| `ruined_village.tscn` | `ruined_village` | ✅ | Overcast | On emissive (`glow_use_case: emissive_only`) | Vertical slice gate |
+| `tidal_caves.tscn` | `tidal_caves` | ✅ | Dark | On (`glow_use_case: emissive_algae`) | No sky; emissive primary |
 | `dragon_palace_gate.tscn` | `dragon_palace_gate` | ✅ | Void | On | Gold directional |
 | `ending_*.tscn` | per ending | ✅ | Custom | Per scene | Fog cleared on Rewind |
 
@@ -265,7 +265,7 @@ Before marking an M5 art-pass zone complete, verify:
 - `WorldEnvironment` with Filmic tonemap (`defaults.tonemap_mode`)
 - `ProceduralSkyMaterial` per zone palette row
 - Zone fog density + aerial perspective (`defaults.fog_sky_affect`)
-- Glow enabled per zone `glow_intensity` (all Phase 1 zones)
+- Glow per zone `glow_enabled` + `glow_use_case` in `zone_palettes.json` (beach off; village/caves/palace on for emissives)
 - Volumetric fog when zone row sets `volumetric_fog_enabled` (village hub)
 - Colored `DirectionalLight3D` + `OmniLight3D` fill (`zone_fill_light` group)
 

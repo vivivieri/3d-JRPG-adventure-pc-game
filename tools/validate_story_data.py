@@ -38,6 +38,17 @@ def main() -> int:
     vo_clip_ids = set(vo_catalog.get("clips", {}).keys())
     dialogue_voice_ids: set[str] = set()
 
+    # scene_registry hook_id exports must exist in cinematic_hooks
+    scene_registry = load("code/scene_registry.json")
+    for sc in scene_registry.get("scenes", []):
+        for node in sc.get("required_nodes", []) or []:
+            export = node.get("export") or {}
+            hook = export.get("hook_id")
+            if hook and hook not in hook_ids:
+                errors.append(
+                    f"scene_registry unknown hook_id: {hook} ({sc.get('id')}/{node.get('name')})"
+                )
+
     # Dialogue scenes referenced in story spine
     for s in scenes:
         d = s.get("dialogue")

@@ -42,7 +42,25 @@
       "extends": "Area3D",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Inspectables, NPC dialogue hooks — scene instances only"
+      "description": "Inspectables, NPC dialogue hooks — scene instances only",
+      "exports": [
+        { "name": "scene_id", "type": "String", "default": "" },
+        { "name": "interaction_prompt", "type": "String", "default": "Interact" }
+      ],
+      "public_api": [
+        {
+          "name": "interact",
+          "args": ["player: PlayerController"],
+          "returns": "void",
+          "note": "Calls DialogueRunner.start(scene_id) when scene_id set; else inspect flow"
+        },
+        {
+          "name": "can_interact",
+          "args": [],
+          "returns": "bool",
+          "note": "False when requires_flags/requires_items not met"
+        }
+      ]
     },
     {
       "id": "SavePoint",
@@ -58,7 +76,20 @@
       "extends": "Area3D",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Zone loads with spawn marker"
+      "description": "Zone loads with spawn marker",
+      "exports": [
+        { "name": "target_zone", "type": "String", "default": "" },
+        { "name": "spawn_marker", "type": "String", "default": "SpawnMarker_default" },
+        { "name": "requires_flags", "type": "Array[String]", "default": [] }
+      ],
+      "public_api": [
+        {
+          "name": "try_transition",
+          "args": ["body: Node3D"],
+          "returns": "void",
+          "note": "When player enters and flags pass, GameManager.change_zone(target_zone, spawn_marker)"
+        }
+      ]
     },
     {
       "id": "EncounterTrigger",
@@ -66,7 +97,47 @@
       "extends": "Area3D",
       "phase": 4,
       "agent_rule": "extend_only",
-      "description": "Starts encounter from story_encounters.json"
+      "description": "Starts encounter from story_encounters.json",
+      "exports": [
+        { "name": "encounter_id", "type": "String", "default": "" },
+        { "name": "one_shot", "type": "bool", "default": true }
+      ],
+      "public_api": [
+        {
+          "name": "try_encounter",
+          "args": ["body: Node3D"],
+          "returns": "void",
+          "note": "CombatManager.start_encounter(encounter_id) when conditions met"
+        },
+        {
+          "name": "can_trigger",
+          "args": [],
+          "returns": "bool",
+          "note": "Checks story_encounters.json requires_flags and one_shot state"
+        }
+      ]
+    },
+    {
+      "id": "BootLoader",
+      "path": "res://scripts/core/boot_loader.gd",
+      "extends": "Node",
+      "phase": 2,
+      "agent_rule": "architect_only",
+      "description": "Boot scene entry — validate data paths then load main_menu",
+      "public_api": [
+        {
+          "name": "run_boot",
+          "args": [],
+          "returns": "void",
+          "note": "GameBootstrap.validate_data_paths(); change_scene_to_file(main_menu) on success"
+        },
+        {
+          "name": "get_boot_errors",
+          "args": [],
+          "returns": "PackedStringArray",
+          "note": "Delegates to GameBootstrap.get_boot_errors()"
+        }
+      ]
     },
     {
       "id": "CombatManager",
@@ -109,10 +180,24 @@
       "public_api": [
         {
           "name": "apply_to_scene",
-          "args": ["root: Node", "zone_id: String"],
-          "returns": "void",
+          "args": ["zone_id: String"],
+          "returns": "Dictionary",
           "static": true,
-          "note": "Canonical zone entry (TECHNICAL_DESIGN.md §8) — finds WorldEnvironment, DirectionalLight3D, zone_fill_light group"
+          "note": "Canonical zone entry — returns environment, directional, fill_light, node_names bundle for Builder wiring"
+        },
+        {
+          "name": "directional_settings",
+          "args": ["zone_key: String"],
+          "returns": "Dictionary",
+          "static": true,
+          "note": "DirectionalLight3D color, shadow, rotation from palette row"
+        },
+        {
+          "name": "fill_light_settings",
+          "args": ["zone_key: String"],
+          "returns": "Dictionary",
+          "static": true,
+          "note": "OmniLight3D fill color, energy, range from palette row + defaults"
         },
         {
           "name": "apply_zone_visuals",
@@ -122,6 +207,7 @@
             "fill_lights: Array[OmniLight3D] = []"
           ],
           "returns": "void",
+          "static": false,
           "note": "Instance method; uses export zone_id and res://data/world/zone_palettes.json"
         },
         {

@@ -27,7 +27,8 @@
         { "name": "get_flag", "args": ["name: String"], "returns": "Variant", "description": "Read story flag" },
         { "name": "set_flag", "args": ["name: String", "value: Variant"], "returns": "void", "description": "Write flag; emits EventBus.flag_changed" },
         { "name": "change_zone", "args": ["zone_id: String", "spawn_marker: String"], "returns": "void", "description": "Load zone scene per scene_registry" },
-        { "name": "apply_new_game", "args": [], "returns": "void", "description": "Load starting/new_game.json party and flags" }
+        { "name": "apply_new_game", "args": [], "returns": "void", "description": "Load starting/new_game.json party and flags" },
+        { "name": "load_ending", "args": ["ending_id: String"], "returns": "void", "description": "Load ending zone scene per scene_registry + ending_chosen flag" }
       ]
     },
     {

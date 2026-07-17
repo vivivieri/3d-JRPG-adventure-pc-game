@@ -78,7 +78,7 @@
 
 | Node | Scene ID | Sets flag | Notes |
 |------|----------|-----------|-------|
-| `SpawnMarker_default` | — | — | Post-prologue or continue spawn |
+| `SpawnMarker_SC-01` | — | — | New game / prologue exit spawn (`starting/new_game.json`) |
 | `ZoneTransition_ruined_village` | — | `tutorial_movement_done` | After SC-01 dialogue |
 | `Interactable_SC-01` | SC-01 | `tutorial_movement_done`, `game_started` | Optional auto on enter |
 
@@ -241,7 +241,7 @@ Full spec: [PUZZLE_DESIGN.md](PUZZLE_DESIGN.md). Water plane Y toggles LOW/HIGH;
 | `EncounterTrigger_enc_sc12_palace_wraiths` | SC-12 | `roku_combat_active` | Gate approach |
 | `Interactable_SC-13` | SC-13 | `knows_box_truth` | Mirror |
 | `EncounterTrigger_enc_sc14_sentinel` | SC-14 | `sentinel_defeated` | Boss |
-| `EncounterTrigger_enc_sc15_tide_keeper` | SC-15 | `tide_keeper_defeated` | Boss |
+| `EncounterTrigger_enc_sc15_tide_keeper` | SC-15 | — | Requires `sentinel_defeated`; sets `tide_keeper_defeated` via `sc16_last_mercy_resolution` after SC-16 |
 | `Interactable_SC-16` | SC-16 | `ending_chosen` | Three-way choice UI |
 
 ### Camera markers (SC-12)

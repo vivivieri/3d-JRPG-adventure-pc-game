@@ -47,6 +47,11 @@
     { "id": "ending_chosen", "storage": "run", "type": "enum", "values": ["rewind", "anchor", "drift"], "set_by": "SC-16", "used_by": ["endings", "achievements"] },
     { "id": "sc16_last_mercy_seen", "storage": "run", "type": "bool", "set_by": "sc16_last_mercy_resolution", "used_by": ["cinematic", "skip"] },
     { "id": "game_completed", "storage": "run", "type": "bool", "set_by": "SC-17a|SC-17b|SC-17c", "used_by": ["achievements", "quest_the_tide_answer"] },
-    { "id": "game_completed_once", "storage": "profile", "type": "bool", "set_by": "credits_end", "used_by": ["gallery", "continue", "tutorial_skip", "hard_mode_suggest"] }
+    { "id": "game_completed_once", "storage": "profile", "type": "bool", "set_by": "credits_end", "used_by": ["gallery", "continue", "tutorial_skip", "hard_mode_suggest"] },
+    { "id": "sc02_hub_pan_seen", "storage": "run", "type": "bool", "set_by": "sc02_hub_pan", "used_by": ["cinematic", "skip"] },
+    { "id": "sc14_breather_seen", "storage": "run", "type": "bool", "set_by": "sc14_sentinel_breather", "used_by": ["cinematic", "skip"] },
+    { "id": "bark_roku_after_shore_wraith", "storage": "run", "type": "bool", "set_by": "field_bark", "used_by": ["narrative_density"] },
+    { "id": "bark_roku_palace_approach", "storage": "run", "type": "bool", "set_by": "field_bark", "used_by": ["narrative_density"] },
+    { "id": "bark_yuzu_hub_after_wraith", "storage": "run", "type": "bool", "set_by": "field_bark", "used_by": ["narrative_density"] }
   ]
 }

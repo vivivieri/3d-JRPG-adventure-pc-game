@@ -72,6 +72,7 @@
 | Write GDScript | [CODE_STYLE.md](technical/CODE_STYLE.md) + [TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) |
 | Place zones | [LEVEL_DESIGN.md](world/LEVEL_DESIGN.md) |
 | Tune combat | [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](gameplay/PROGRESSION_TUNING.md) |
+| Combat presentation | [COMBAT_PRESENTATION.md](art/COMBAT_PRESENTATION.md) + [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) |
 | Lighting / materials | [RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](world/ENVIRONMENT_KITS.md) |
 | Generate art | [ART_AUTOMATION_PIPELINE.md](art/ART_AUTOMATION_PIPELINE.md) · [GENERATION_READINESS.md](art/GENERATION_READINESS.md) |
 | Run agents / MCP | [MCP_STACK.md](agents/MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
@@ -158,6 +159,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [ART_DIRECTION.md](art/ART_DIRECTION.md) | Palette, silhouettes, muted-coastal look |
+| [COMBAT_PRESENTATION.md](art/COMBAT_PRESENTATION.md) | Arena layout, ink overlay, combat VFX tiers |
 | [RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) | Tonemap, fog, glow, zone presets |
 | [SHADER_SPECS.md](art/SHADER_SPECS.md) | Spirit, box, mirror, water shader specs |
 | [CHARACTER_BIBLE.md](art/CHARACTER_BIBLE.md) | Models, portraits, rig |

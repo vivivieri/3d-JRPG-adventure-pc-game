@@ -3,6 +3,51 @@
   "description": "Cinematic beat hooks — vignettes and reveals before dialogue/encounters. See docs/ui/CINEMATICS.md §7.",
   "hooks": [
     {
+      "id": "sc02_hub_pan",
+      "scene_id": "SC-02",
+      "zone": "ruined_village",
+      "trigger": "HubEntryPan",
+      "sequence_id": "sc02_hub_pan",
+      "duration_sec": 4,
+      "skip_after_sec": 2,
+      "skip_if_flag": "sc02_hub_pan_seen",
+      "sets_flags": ["sc02_hub_pan_seen"],
+      "then": [
+        { "type": "dialogue", "id": "SC-02" }
+      ],
+      "audio": {
+        "duck_bgm": 0.6,
+        "sfx": ["sfx_ambient_wind_low"]
+      },
+      "markers": [
+        "CameraMarker_sc02_hub_wide",
+        "CameraMarker_sc02_torii"
+      ]
+    },
+    {
+      "id": "sc14_sentinel_breather",
+      "scene_id": "SC-14",
+      "zone": "dragon_palace_gate",
+      "trigger": "SentinelHallApproach",
+      "sequence_id": "sc14_sentinel_breather",
+      "duration_sec": 3,
+      "skip_after_sec": 1,
+      "skip_if_flag": "sc14_breather_seen",
+      "sets_flags": ["sc14_breather_seen"],
+      "requires_flags": {
+        "knows_box_truth": true
+      },
+      "then": [
+        { "type": "encounter", "id": "enc_sc14_sentinel" }
+      ],
+      "audio": {
+        "duck_bgm": 0.5
+      },
+      "markers": [
+        "CameraMarker_sc14_hall_hold"
+      ]
+    },
+    {
       "id": "sc08_deep_pool_vignette",
       "scene_id": "SC-08",
       "zone": "tidal_caves",

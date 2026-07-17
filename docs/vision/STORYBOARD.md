@@ -15,7 +15,7 @@
 |-------|--------|
 | **Location** | Black / montage — sea, palace silhouette |
 | **Camera** | Slow fades; letterbox optional |
-| **Summary** | Urashima saves wounded kappa-turtle spirit. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
+| **Summary** | Urashima saves wounded spirit-turtle. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
 | **Gameplay** | Non-interactive; skippable after 3s (hold Confirm after first play) |
 | **Mood** | Mythic, fateful |
 | **Assets** | Kappa-turtle spirit silhouette, box, palace gold flash |

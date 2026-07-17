@@ -75,7 +75,9 @@
 | 9 | SC-14 | Sentinel hall | **Palace Sentinel** | Miniboss | Full party | 100 | 7 |
 | 10 | SC-15 | Throne arena | **Tide Keeper** | Final boss | Full party | 250 | 8–10 |
 
-**Gate:** SC-13 mirror dialogue (`knows_box_truth`) must complete before SC-14 encounter (`sentinel_dialogue_done` gate).
+**Gate:** SC-13 mirror dialogue sets `knows_box_truth` — required before SC-14 encounter (`enc_sc14_sentinel` `requires_flags`). `sentinel_dialogue_done` is set **after** SC-14 pre-fight dialogue, not as a gate.
+
+**Flee policy:** `escape_allowed: true` only on optional/avoidable encounters (SC-06, SC-07, SC-10). Bosses and story-forced fights block flee (`COMBAT_SYSTEMS.md` §2).
 
 **No fights after choice gate (SC-16).**
 

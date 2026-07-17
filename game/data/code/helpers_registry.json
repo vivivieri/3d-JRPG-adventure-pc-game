@@ -96,7 +96,7 @@
       "id": "EventBus",
       "kind": "autoload",
       "phase": 1,
-      "port_status": "ported",
+      "port_status": "pending",
       "gdscript_path": "res://scripts/core/event_bus.gd",
       "extends": "Node",
       "python_reference": null,
