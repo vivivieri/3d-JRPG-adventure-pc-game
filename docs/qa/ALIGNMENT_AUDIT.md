@@ -15,8 +15,9 @@ Produces a **repeatable alignment audit** with:
 | JSON report (latest) | `artifacts/alignment_audits/latest.json` |
 | Markdown report | `artifacts/alignment_audits/latest.md` |
 | HTML stakeholder dashboard | `artifacts/alignment_dashboard.html` |
-| Timestamped audit folder | `artifacts/alignment_audits/<audit_id>/` |
-| Committed history index | `docs/compliance/alignment_audit_history.json` |
+| **Committed history (GitHub)** | `docs/compliance/alignment_audit_reports/<audit_id>/` |
+| History index | `docs/compliance/alignment_audit_history.json` |
+| Timestamped artifact folder | `artifacts/alignment_audits/<audit_id>/` |
 
 Each audit includes:
 
@@ -128,13 +129,32 @@ Agent-generated review images can be copied into that folder before running the 
 
 ---
 
-## 8. History
+## 8. History (committed on GitHub)
 
-Committed index: `docs/compliance/alignment_audit_history.json`
+**Index:** `docs/compliance/alignment_audit_history.json`
 
-Each entry records: `audit_id`, `commit`, `verdict`, `overall_score`, CI counts, blocking checklist count, path to stamped JSON.
+**Per-audit folder:** `docs/compliance/alignment_audit_reports/<audit_id>/`
 
-Full stamped reports live under `artifacts/alignment_audits/<audit_id>/` (git-ignored; regenerate locally).
+| File | Purpose |
+|------|---------|
+| `report.json` | Full audit — scores, CI, recommendations, visual manifest |
+| `report.md` | Human-readable report with embedded image links |
+| `dashboard.html` | Stakeholder dashboard (open locally or download) |
+| `recommendations.json` | Checklist + recommendations only (easy `git diff`) |
+| `visuals/` | Optional PNG snapshot (`--archive-visual-snapshots`) |
+
+Each entry in the history index records: `audit_id`, `commit`, `verdict`, `overall_score`, CI counts, checklist counts, paths to committed reports.
+
+Ephemeral copies (regenerate locally): `artifacts/alignment_audits/<audit_id>/` (git-ignored).
+
+**Commit after each audit on `main`:**
+
+```bash
+bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N" \
+  --visuals-from docs/compliance/alignment_audit_visuals
+git add docs/compliance/alignment_audit_reports/ docs/compliance/alignment_audit_history.json
+git commit -m "chore(audit): record alignment audit <audit_id>"
+```
 
 ---
 
@@ -152,10 +172,10 @@ Run **both** at phase exit: stakeholder report for schedule; alignment audit for
 ## 10. Agent workflow (mandatory after alignment work)
 
 ```
-1. bash tools/run_alignment_audit.sh --trigger post_merge --note "<PR or commit summary>"
-2. Read artifacts/alignment_audits/latest.md — cite verdict + P0 items in PR/agent summary
-3. If visuals generated this session → copy to docs/compliance/alignment_audit_visuals/ → re-run with --visuals-from
-4. Commit docs/compliance/alignment_audit_history.json when audit lands on main
+1. bash tools/run_alignment_audit.sh --trigger post_merge --note "<PR or commit summary>" \
+     --visuals-from docs/compliance/alignment_audit_visuals
+2. Read docs/compliance/alignment_audit_reports/<audit_id>/report.md — cite verdict + P0 items
+3. Commit docs/compliance/alignment_audit_reports/<audit_id>/ and alignment_audit_history.json on main
 ```
 
 ---

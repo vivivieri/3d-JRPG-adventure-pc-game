@@ -4,12 +4,16 @@
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
     "artifacts_dir": "artifacts/alignment_audits",
+    "committed_reports_dir": "docs/compliance/alignment_audit_reports",
+    "shared_visuals_dir": "docs/compliance/alignment_audit_visuals",
     "history_index": "docs/compliance/alignment_audit_history.json",
     "latest_json": "artifacts/alignment_audits/latest.json",
     "latest_markdown": "artifacts/alignment_audits/latest.md",
     "latest_html": "artifacts/alignment_dashboard.html",
     "visuals_subdir": "visuals",
-    "history_keep": 100
+    "history_keep": 100,
+    "committed_history_keep": 50,
+    "archive_visual_snapshots": false
   },
   "verdict_thresholds": {
     "aligned_min_overall": 8.0,

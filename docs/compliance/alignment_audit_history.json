@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "authority": "docs/qa/ALIGNMENT_AUDIT.md",
-  "note": "Committed index of alignment audits. Full reports under artifacts/alignment_audits/<audit_id>/ (regenerate locally).",
+  "note": "Committed reports under docs/compliance/alignment_audit_reports/<audit_id>/ (report.json, report.md, dashboard.html, visuals/). Ephemeral copies: artifacts/alignment_audits/.",
   "audits": [
     {
       "audit_id": "20260717T010000Z_session_pass1",
@@ -124,19 +124,68 @@
       "blocking_open": 0,
       "recommendation_count": 0,
       "report_json": "artifacts/alignment_audits/20260717T065724Z_manual/report.json"
+    },
+    {
+      "audit_id": "20260717T101818Z_manual",
+      "generated_at": "2026-07-17T10:18:18Z",
+      "branch": "game/development",
+      "commit": "86ce1cd",
+      "verdict": "FAIL",
+      "overall_score": 6.71,
+      "ci_pass": 21,
+      "ci_fail": 2,
+      "blocking_open": 1,
+      "recommendation_count": 3,
+      "report_json": "artifacts/alignment_audits/20260717T101818Z_manual/report.json"
+    },
+    {
+      "audit_id": "20260717T101849Z_manual",
+      "generated_at": "2026-07-17T10:18:49Z",
+      "branch": "main",
+      "commit": "86ce1cd",
+      "verdict": "ALIGNED",
+      "overall_score": 8.51,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 1,
+      "report_json": "artifacts/alignment_audits/20260717T101849Z_manual/report.json"
+    },
+    {
+      "audit_id": "20260717T102357Z_committed_history",
+      "generated_at": "2026-07-17T10:23:57Z",
+      "branch": "main",
+      "commit": "86ce1cd",
+      "verdict": "ALIGNED",
+      "overall_score": 8.51,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 1,
+      "checklist_open": 1,
+      "visuals_present": 33,
+      "report_json": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.json",
+      "report_markdown": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.md",
+      "report_html": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/dashboard.html",
+      "note": "First GitHub-committed audit archive"
     }
   ],
   "latest": {
-    "audit_id": "20260717T065724Z_manual",
-    "generated_at": "2026-07-17T06:57:24Z",
-    "branch": "cursor/checklist-fixes-ec08",
-    "commit": "8dfb33f",
+    "audit_id": "20260717T102357Z_committed_history",
+    "generated_at": "2026-07-17T10:23:57Z",
+    "branch": "main",
+    "commit": "86ce1cd",
     "verdict": "ALIGNED",
-    "overall_score": 8.68,
+    "overall_score": 8.51,
     "ci_pass": 33,
     "ci_fail": 0,
     "blocking_open": 0,
-    "recommendation_count": 0,
-    "report_json": "artifacts/alignment_audits/20260717T065724Z_manual/report.json"
+    "recommendation_count": 1,
+    "checklist_open": 1,
+    "visuals_present": 33,
+    "report_json": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/dashboard.html",
+    "note": "First GitHub-committed audit archive"
   }
 }

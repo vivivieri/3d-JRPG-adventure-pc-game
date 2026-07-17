@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -564,7 +565,41 @@ def build_report(
     return report
 
 
-def report_to_markdown(report: dict[str, Any]) -> str:
+def _shared_visual_href(committed_audit_dir: Path, filename: str, catalog: dict[str, Any]) -> str:
+    """Relative href from a committed audit folder to the shared visuals pack."""
+    shared = ROOT / catalog.get("outputs", {}).get(
+        "shared_visuals_dir", "docs/compliance/alignment_audit_visuals"
+    )
+    return Path(
+        os_path_relpath(shared / filename, committed_audit_dir)
+    ).as_posix()
+
+
+def os_path_relpath(target: Path, start: Path) -> str:
+    try:
+        return str(target.resolve().relative_to(start.resolve()))
+    except ValueError:
+        return os.path.relpath(target, start)
+
+
+def apply_committed_visual_hrefs(
+    report: dict[str, Any], committed_audit_dir: Path, catalog: dict[str, Any]
+) -> None:
+    """Point manifest entries at shared pack paths for GitHub-committed reports."""
+    for entry in report.get("visual_manifest", []):
+        fname = entry.get("filename")
+        if not fname:
+            continue
+        if entry.get("present"):
+            entry["gallery_href"] = _shared_visual_href(committed_audit_dir, fname, catalog)
+        entry["committed_visual"] = (
+            str((committed_audit_dir / catalog.get("outputs", {}).get("visuals_subdir", "visuals") / fname).relative_to(ROOT))
+            if entry.get("present")
+            else None
+        )
+
+
+def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -> str:
     lines = [
         "# Tides of Urashima — Alignment Audit Report",
         "",
@@ -626,7 +661,12 @@ def report_to_markdown(report: dict[str, Any]) -> str:
     if visuals:
         lines.append("## Stakeholder visuals")
         for v in visuals:
-            lines.append(f"- {v['label']}: `{v.get('path')}`")
+            href = v.get("gallery_href") or v.get("path")
+            if embed_visuals and href:
+                lines.append(f"![{v['label']}]({href})")
+                lines.append(f"*{v['label']}*")
+            else:
+                lines.append(f"- {v['label']}: `{href}`")
         lines.append("")
 
     lines.append("---")
@@ -634,7 +674,7 @@ def report_to_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def render_html_dashboard(report: dict[str, Any]) -> str:
+def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path") -> str:
     esc = html.escape
     scores = report.get("domain_scores", {})
     max_score = 10.0
@@ -663,9 +703,10 @@ def render_html_dashboard(report: dict[str, Any]) -> str:
 
     gallery = []
     for v in report.get("visual_manifest", []):
-        if v.get("present") and v.get("path"):
+        href = v.get(image_href_key) or v.get("path")
+        if v.get("present") and href:
             gallery.append(
-                f'<figure><img src="{esc(v["path"])}" alt="{esc(v["label"])}"/>'
+                f'<figure><img src="{esc(href)}" alt="{esc(v["label"])}"/>'
                 f'<figcaption>{esc(v["label"])}</figcaption></figure>'
             )
         else:
@@ -734,7 +775,9 @@ def render_html_dashboard(report: dict[str, Any]) -> str:
 """
 
 
-def update_history_index(report: dict[str, Any], catalog: dict[str, Any], stamped_path: str) -> None:
+def update_history_index(
+    report: dict[str, Any], catalog: dict[str, Any], committed_paths: dict[str, str]
+) -> None:
     hist_path = ROOT / catalog.get("outputs", {}).get(
         "history_index", "docs/compliance/alignment_audit_history.json"
     )
@@ -756,7 +799,12 @@ def update_history_index(report: dict[str, Any], catalog: dict[str, Any], stampe
         "ci_fail": report["ci_summary"]["fail_count"],
         "blocking_open": report["checklist"]["blocking_open"],
         "recommendation_count": len(report["recommendations"]),
-        "report_json": stamped_path,
+        "checklist_open": report["checklist"].get("total_open", 0),
+        "visuals_present": sum(1 for v in report.get("visual_manifest", []) if v.get("present")),
+        "report_json": committed_paths.get("report_json"),
+        "report_markdown": committed_paths.get("report_markdown"),
+        "report_html": committed_paths.get("report_html"),
+        "note": report.get("note"),
     }
     history["audits"] = [a for a in history.get("audits", []) if a.get("audit_id") != entry["audit_id"]]
     history["audits"].append(entry)
@@ -764,7 +812,80 @@ def update_history_index(report: dict[str, Any], catalog: dict[str, Any], stampe
     keep = int(catalog.get("outputs", {}).get("history_keep", 100))
     history["audits"] = history["audits"][-keep:]
     history["latest"] = entry
+    history["note"] = (
+        "Committed reports under docs/compliance/alignment_audit_reports/<audit_id>/ "
+        "(report.json, report.md, dashboard.html, visuals/). "
+        "Ephemeral copies: artifacts/alignment_audits/."
+    )
     save_json(hist_path, history)
+
+
+def write_committed_archive(
+    report: dict[str, Any],
+    catalog: dict[str, Any],
+    *,
+    visuals_from: Path | None = None,
+) -> dict[str, str]:
+    """Write timestamped audit snapshot for GitHub (recommendations + visual manifest)."""
+    outputs = catalog.get("outputs", {})
+    base = ROOT / outputs.get("committed_reports_dir", "docs/compliance/alignment_audit_reports")
+    audit_dir = base / report["audit_id"]
+    audit_dir.mkdir(parents=True, exist_ok=True)
+
+    apply_committed_visual_hrefs(report, audit_dir, catalog)
+
+    visuals_dir = audit_dir / outputs.get("visuals_subdir", "visuals")
+    if outputs.get("archive_visual_snapshots", True):
+        visuals_dir.mkdir(parents=True, exist_ok=True)
+        for entry in report.get("visual_manifest", []):
+            if not entry.get("present"):
+                continue
+            fname = entry["filename"]
+            src: Path | None = None
+            if visuals_from and (visuals_from / fname).is_file():
+                src = visuals_from / fname
+            elif (ROOT / outputs.get("shared_visuals_dir", "docs/compliance/alignment_audit_visuals") / fname).is_file():
+                src = ROOT / outputs["shared_visuals_dir"] / fname
+            elif entry.get("path"):
+                candidate = ROOT / entry["path"]
+                if candidate.is_file():
+                    src = candidate
+            if src:
+                shutil.copy2(src, visuals_dir / fname)
+                entry["gallery_href"] = f"{outputs.get('visuals_subdir', 'visuals')}/{fname}"
+                entry["committed_visual"] = str((visuals_dir / fname).relative_to(ROOT))
+
+    recommendations_path = audit_dir / "recommendations.json"
+    save_json(
+        recommendations_path,
+        {
+            "audit_id": report["audit_id"],
+            "generated_at": report["generated_at"],
+            "recommendations": report.get("recommendations", []),
+            "checklist": report.get("checklist", {}),
+        },
+    )
+
+    report_json = audit_dir / "report.json"
+    report_md = audit_dir / "report.md"
+    report_html = audit_dir / "dashboard.html"
+    save_json(report_json, report)
+    report_md.write_text(report_to_markdown(report, embed_visuals=True), encoding="utf-8")
+    report_html.write_text(render_html_dashboard(report, image_href_key="gallery_href"), encoding="utf-8")
+
+    # Trim old committed audit folders (newest audit_id sorts lexicographically by UTC timestamp)
+    keep = int(outputs.get("committed_history_keep", 50))
+    dirs = sorted([d for d in base.iterdir() if d.is_dir()], key=lambda p: p.name)
+    for old in dirs[:-keep]:
+        shutil.rmtree(old, ignore_errors=True)
+
+    return {
+        "report_json": str(report_json.relative_to(ROOT)),
+        "report_markdown": str(report_md.relative_to(ROOT)),
+        "report_html": str(report_html.relative_to(ROOT)),
+        "recommendations_json": str(recommendations_path.relative_to(ROOT)),
+        "committed_dir": str(audit_dir.relative_to(ROOT)),
+    }
 
 
 def write_outputs(
@@ -796,7 +917,8 @@ def write_outputs(
     (audit_dir / "dashboard.html").write_text(render_html_dashboard(report), encoding="utf-8")
 
     stamped_rel = str(stamped_json.relative_to(ROOT))
-    update_history_index(report, catalog, stamped_rel)
+    committed_paths = write_committed_archive(report, catalog, visuals_from=visuals_from)
+    update_history_index(report, catalog, committed_paths)
 
     # Trim artifact history folders
     keep = int(outputs.get("history_keep", 100))
@@ -810,6 +932,7 @@ def write_outputs(
         "html": str(latest_html.relative_to(ROOT)),
         "stamped": stamped_rel,
         "audit_dir": str(audit_dir.relative_to(ROOT)),
+        **committed_paths,
     }
 
 
@@ -835,22 +958,27 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--note", default=None, help="Optional note in report")
     parser.add_argument("--visuals-from", default=None, help="Directory of PNG visuals to bundle")
     parser.add_argument("--skip-ci", action="store_true", help="Skip CI run (faster; scores approximate)")
+    parser.add_argument(
+        "--archive-visual-snapshots",
+        action="store_true",
+        help="Copy PNGs into committed report folder (large; default uses shared pack + manifest)",
+    )
     args = parser.parse_args(argv)
 
-    result = emit_audit(
-        trigger=args.trigger,
-        note=args.note,
-        visuals_from=args.visuals_from,
-        skip_ci=args.skip_ci,
-    )
-    report = result["report"]
-    paths = result["paths"]
+    catalog = load_catalog()
+    if args.archive_visual_snapshots:
+        catalog.setdefault("outputs", {})["archive_visual_snapshots"] = True
+
+    vdir = Path(args.visuals_from) if args.visuals_from else None
+    report = build_report(trigger=args.trigger, note=args.note, visuals_from=vdir, skip_ci=args.skip_ci)
+    paths = write_outputs(report, catalog, visuals_from=vdir)
     print(f"OK — verdict={report['verdict']} overall={report['domain_scores'].get('overall_production')}")
     print(f"  CI: PASS={report['ci_summary']['pass_count']} FAIL={report['ci_summary']['fail_count']}")
     print(f"  Checklist: {report['checklist']['total_open']} open ({report['checklist']['blocking_open']} blocking)")
     print(f"  JSON: {paths['json']}")
     print(f"  Markdown: {paths['markdown']}")
     print(f"  HTML: {paths['html']}")
+    print(f"  Committed: {paths.get('committed_dir', 'n/a')}")
     print(f"  History: docs/compliance/alignment_audit_history.json")
     return 0 if report["verdict"] != "FAIL" else 1
 
