@@ -168,13 +168,31 @@
       "report_markdown": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.md",
       "report_html": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/dashboard.html",
       "note": "First GitHub-committed audit archive"
+    },
+    {
+      "audit_id": "20260717T142915Z_manual",
+      "generated_at": "2026-07-17T14:29:15Z",
+      "branch": "main",
+      "commit": "87962f5",
+      "verdict": "ALIGNED",
+      "overall_score": 8.51,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 1,
+      "checklist_open": 1,
+      "visuals_present": 33,
+      "report_json": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/report.json",
+      "report_markdown": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/report.md",
+      "report_html": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/dashboard.html",
+      "note": "Stakeholder audit request 2026-07-17"
     }
   ],
   "latest": {
-    "audit_id": "20260717T102357Z_committed_history",
-    "generated_at": "2026-07-17T10:23:57Z",
+    "audit_id": "20260717T142915Z_manual",
+    "generated_at": "2026-07-17T14:29:15Z",
     "branch": "main",
-    "commit": "86ce1cd",
+    "commit": "87962f5",
     "verdict": "ALIGNED",
     "overall_score": 8.51,
     "ci_pass": 33,
@@ -183,9 +201,9 @@
     "recommendation_count": 1,
     "checklist_open": 1,
     "visuals_present": 33,
-    "report_json": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.json",
-    "report_markdown": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/report.md",
-    "report_html": "docs/compliance/alignment_audit_reports/20260717T102357Z_committed_history/dashboard.html",
-    "note": "First GitHub-committed audit archive"
+    "report_json": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260717T142915Z_manual/dashboard.html",
+    "note": "Stakeholder audit request 2026-07-17"
   }
 }
