@@ -166,8 +166,9 @@
       "id": "REC_RUNTIME_LOW",
       "priority": "P1",
       "category": "implementation",
-      "when": "domain_score_lt",
+      "when": "domain_score_lt_on_branch",
       "domain": "runtime_proof",
+      "branch": "game/development",
       "value": 5.0,
       "title": "Raise Runtime Proof via P1-00 bootstrap",
       "action": "GDAI MCP: project.godot, boot_loader.gd, F5 smoke; target L2_boot_headless PASS on game/development."
@@ -195,9 +196,10 @@
       "id": "REC_STAKEHOLDER_VISUALS",
       "priority": "P2",
       "category": "stakeholder",
-      "when": "always",
+      "when": "visuals_missing",
+      "min_present": 30,
       "title": "Refresh stakeholder visual pack",
-      "action": "bash tools/run_alignment_audit.sh --bundle-visuals <dir>; open artifacts/alignment_dashboard.html for product owner."
+      "action": "Copy PNGs to docs/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals"
     },
     {
       "id": "REC_DOC_NITS",
