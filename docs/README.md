@@ -61,6 +61,7 @@
 | I need to… | Read |
 |------------|------|
 | Understand the game | [GDD.md](vision/GDD.md) → [STORYBOARD.md](vision/STORYBOARD.md) |
+| **Project journey & story constraints** | [PROJECT_JOURNEY.md](vision/PROJECT_JOURNEY.md) |
 | **Full dev lifecycle** | [DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) · [BRANCHING_DECISION_RECORD.md](workflow/BRANCHING_DECISION_RECORD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) · branch: `game/development` |
 | Sprint planning | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
@@ -89,6 +90,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [GDD.md](vision/GDD.md) | Master game design — scope, pillars, audience |
+| [PROJECT_JOURNEY.md](vision/PROJECT_JOURNEY.md) | **Scope history, dev journey, story consideration checklist** |
 | [STORYBOARD.md](vision/STORYBOARD.md) | 20-scene narrative bible |
 | [NARRATIVE_WRITING_GUIDE.md](vision/NARRATIVE_WRITING_GUIDE.md) | Voice, silence, selective VO, i18n prose |
 | [NARRATIVE_DENSITY.md](vision/NARRATIVE_DENSITY.md) | §12 budgets — decision tree + L0 gate |
