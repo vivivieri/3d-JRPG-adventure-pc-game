@@ -111,19 +111,32 @@
       "blocking_open": 0,
       "recommendation_count": 0,
       "report_json": "artifacts/alignment_audits/20260717T064352Z_manual/report.json"
+    },
+    {
+      "audit_id": "20260717T065724Z_manual",
+      "generated_at": "2026-07-17T06:57:24Z",
+      "branch": "cursor/checklist-fixes-ec08",
+      "commit": "8dfb33f",
+      "verdict": "ALIGNED",
+      "overall_score": 8.68,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 0,
+      "report_json": "artifacts/alignment_audits/20260717T065724Z_manual/report.json"
     }
   ],
   "latest": {
-    "audit_id": "20260717T064352Z_manual",
-    "generated_at": "2026-07-17T06:43:52Z",
+    "audit_id": "20260717T065724Z_manual",
+    "generated_at": "2026-07-17T06:57:24Z",
     "branch": "cursor/checklist-fixes-ec08",
-    "commit": "7976c54",
+    "commit": "8dfb33f",
     "verdict": "ALIGNED",
     "overall_score": 8.68,
     "ci_pass": 33,
     "ci_fail": 0,
     "blocking_open": 0,
     "recommendation_count": 0,
-    "report_json": "artifacts/alignment_audits/20260717T064352Z_manual/report.json"
+    "report_json": "artifacts/alignment_audits/20260717T065724Z_manual/report.json"
   }
 }

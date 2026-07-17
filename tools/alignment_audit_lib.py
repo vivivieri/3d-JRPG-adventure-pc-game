@@ -146,7 +146,24 @@ def parity_checks() -> dict[str, Any]:
     }
 
 
-def stale_string_scan(catalog: dict[str, Any]) -> list[dict[str, Any]]:
+def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
+    """True when a helper is ported ahead of PM dispatch (EventBus allowed on game/development after P1-00)."""
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return bool(re.search(r'"port_status"\s*:\s*"ported"', text, re.IGNORECASE))
+    allowed_off_main = {"EventBus"}  # P1-00 dispatch on game/development (+ feature branches)
+    for helper in data.get("helpers", []):
+        if helper.get("port_status") != "ported":
+            continue
+        hid = helper.get("id", "")
+        if branch != "main" and hid in allowed_off_main:
+            continue
+        return True
+    return False
+
+
+def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[dict[str, Any]]:
     hits: list[dict[str, Any]] = []
     search_roots = [ROOT / "docs", ROOT / "game/data", ROOT / "tools"]
     patterns = catalog.get("stale_string_patterns", [])
@@ -167,6 +184,17 @@ def stale_string_scan(catalog: dict[str, Any]) -> list[dict[str, Any]]:
             if rel in skip_files:
                 continue
             for row in patterns:
+                if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
+                    if _helpers_registry_has_premature_port(text, branch):
+                        hits.append(
+                            {
+                                "id": row["id"],
+                                "severity": row["severity"],
+                                "message": row["message"],
+                                "path": rel,
+                            }
+                        )
+                    continue
                 if re.search(row["pattern"], text, re.IGNORECASE):
                     hits.append(
                         {
@@ -490,7 +518,7 @@ def build_report(
     if not skip_ci:
         ci = run_ci(branch)
     parity = parity_checks()
-    stale = stale_string_scan(catalog)
+    stale = stale_string_scan(catalog, branch=branch)
     ctx = {"ci": ci, "parity": parity, "branch": branch}
     domain_scores = compute_domain_scores(catalog, ctx)
     visual_inventory = scan_visual_inventory(catalog, visuals_from)
