@@ -72,6 +72,7 @@ def build_environment(
         "fog_light_color": hex_to_color(str(preset.get("fog_color", "#8B9DAF"))),
         "fog_density": float(preset.get("fog_density", 0.008)),
         "fog_sky_affect": float(cfg.get("fog_sky_affect", 0.85)),
+        "aerial_perspective": float(preset.get("aerial_perspective", cfg.get("fog_sky_affect", 0.85))),
         "glow_enabled": bool(preset.get("glow_enabled", True)),
         "glow_intensity": float(preset.get("glow_intensity", 0.35)),
         "glow_blend_mode": str(cfg.get("glow_blend_mode", "softlight")),

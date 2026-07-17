@@ -125,10 +125,10 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 
 | Zone | Fog color | Density | Aerial perspective | Notes |
 |------|-----------|---------|-------------------|-------|
-| `beach_shore` | `#9AB8C8` | 0.010 | 0.78 | Light coastal haze |
-| `ruined_village` | `#8B9DAF` | 0.008 | 0.72 | **Always on** — draw-distance mask |
-| `tidal_caves` | `#0A141C` | 0.028 | 0.48 | Heavier — depth in tunnels |
-| `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.68 | Void atmosphere |
+| `beach_shore` | `#9AB8C8` | 0.010 | 0.74 | Light coastal haze |
+| `ruined_village` | `#8B9DAF` | 0.008 | 0.75 | **Always on** — draw-distance mask |
+| `tidal_caves` | `#0A141C` | 0.028 | 0.72 | Heavier — depth in tunnels |
+| `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.78 | Void atmosphere |
 
 **Hub rule:** Fog always on in ruined village (`ART_DIRECTION.md` §3.5).  
 **Fog start:** ~20 m in village per `ENVIRONMENT_KITS.md` §4.
@@ -264,7 +264,7 @@ Before marking an M5 art-pass zone complete, verify:
 
 - `WorldEnvironment` with Filmic tonemap (`defaults.tonemap_mode`)
 - `ProceduralSkyMaterial` per zone palette row
-- Zone fog density + aerial perspective (`defaults.fog_sky_affect`)
+- Zone fog density + per-zone `aerial_perspective` from palette row (`fog_sky_affect` from defaults)
 - Glow per zone `glow_enabled` + `glow_use_case` in `zone_palettes.json` (beach off; village/caves/palace on for emissives)
 - Volumetric fog when zone row sets `volumetric_fog_enabled` (village hub)
 - Colored `DirectionalLight3D` + `OmniLight3D` fill (`zone_fill_light` group)

@@ -185,7 +185,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 |------|-----------------|-----------|-------------|
 | `EncounterTrigger_enc_sc06_cave_crab` | SC-06 | — | Optional trash mob |
 | `PuzzleRoom_sc07` | SC-07 | `water_puzzle_solved` | Silent — no dialogue |
-| `EncounterTrigger_enc_sc08_deep_pool` | SC-08 | `deep_pool_seen` | `water_puzzle_solved` |
+| `EncounterTrigger_enc_sc08_deep_pool` | SC-08 | `deep_pool_seen` | `water_puzzle_solved`, `deep_pool_dialogue_done` (vignette → dialogue → combat) |
 | `CinematicTrigger_sc08_deep_pool_vignette` | hook | `deep_pool_vignette_seen` | After pool enter |
 | `EncounterTrigger_enc_sc09_shore_wraith` | SC-09 | `shore_wraith_defeated` | Boss |
 | `Interactable_SC-10` | SC-10 | `yuzu_joined` | Post-boss |

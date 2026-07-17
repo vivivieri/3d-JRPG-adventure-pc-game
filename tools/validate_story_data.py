@@ -163,10 +163,53 @@ def main() -> int:
             if item not in items:
                 errors.append(f"cinematic_hooks requires unknown item: {item} ({hid})")
         for step in hook.get("then", []) or []:
-            if step.get("type") == "dialogue" and step.get("id") not in dialogue_ids:
+            stype = step.get("type")
+            if stype == "dialogue" and step.get("id") not in dialogue_ids:
                 errors.append(f"cinematic_hooks then dialogue missing: {step.get('id')} ({hid})")
-            if step.get("type") == "encounter" and step.get("id") not in enc_ids:
+            if stype == "encounter" and step.get("id") not in enc_ids:
                 errors.append(f"cinematic_hooks then encounter missing: {step.get('id')} ({hid})")
+            if stype == "load_ending":
+                branch = step.get("branch_flag")
+                if branch not in flags:
+                    errors.append(f"cinematic_hooks load_ending unknown branch_flag: {branch} ({hid})")
+                router = load("code/scene_registry.json").get("ending_router", {})
+                if router.get("branch_flag") != branch:
+                    errors.append(f"cinematic_hooks load_ending branch_flag mismatch with scene_registry ({hid})")
+
+    # scenes.json encounter field ↔ story_encounters.json
+    for s in scenes:
+        enc_ref = s.get("encounter")
+        if enc_ref and enc_ref not in enc_ids:
+            errors.append(f"scenes.json unknown encounter: {enc_ref} ({s['scene_id']})")
+        if enc_ref:
+            enc_row = next((e for e in encounters if e["id"] == enc_ref), None)
+            if enc_row and enc_row.get("scene_id") != s["scene_id"]:
+                errors.append(
+                    f"scenes.json encounter scene mismatch: {s['scene_id']} -> {enc_ref} "
+                    f"(encounter scene_id {enc_row.get('scene_id')})"
+                )
+
+    # Tutorial flags declared in flags.json must be set somewhere in data
+    tutorial_flags = {
+        f["id"]
+        for f in flag_defs.values()
+        if f["id"].startswith("tutorial_") and f.get("type") == "bool"
+    }
+    emitted_tutorial: set[str] = set()
+    for block in dialogue["scenes"]:
+        for fl in block.get("on_complete", {}).get("set_flags", []) or []:
+            if fl in tutorial_flags:
+                emitted_tutorial.add(fl)
+    for enc in encounters:
+        for fl in enc.get("on_win", {}).get("set_flags", []) or []:
+            if fl in tutorial_flags:
+                emitted_tutorial.add(fl)
+    for s in scenes:
+        for fl in s.get("sets_flags", []) or []:
+            if fl in tutorial_flags:
+                emitted_tutorial.add(fl)
+    for missing in sorted(tutorial_flags - emitted_tutorial):
+        errors.append(f"tutorial flag never emitted in story data: {missing}")
 
     # Encounters reference valid scenes and enemies
     enemies_data = load("enemies/enemies.json")["enemies"]

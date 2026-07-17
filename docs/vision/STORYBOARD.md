@@ -115,7 +115,7 @@
 |-------|--------|
 | **Location** | Tidal Caves — boss arena |
 | **Camera** | Low dramatic angle; boss intro pan |
-| **Summary** | Colossal wraith forms from pooled regret. "You chose her over us." |
+| **Summary** | Colossal wraith forms from pooled regret. "You chose the palace over us." |
 | **Gameplay** | Boss fight; teaches intent UI and phase change at 50% HP |
 | **Mood** | Confrontational, tragic |
 | **Assets** | Shore Wraith boss model, arena (`cave_boss_arena_ring`), boss HP bar |

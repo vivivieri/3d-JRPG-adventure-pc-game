@@ -150,6 +150,15 @@
       "evidence": ["game/data/code/base_classes.json", "tools/zone_visuals_lib.py"],
       "design_ref": "docs/technical/GDSCRIPT_REGENERATION.md §10"
     },
+    "L0_scene_registry": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_scene_registry.py",
+      "description": "Scene registry ↔ encounters, hooks, zones, ending router",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/code/scene_registry.json"],
+      "design_ref": "docs/world/LEVEL_DESIGN.md"
+    },
     "L0_zone_composition": {
       "layer": "L0",
       "domain": "data",
@@ -677,6 +686,7 @@
       "L0_sprint_phases",
       "L0_base_classes",
       "L0_zone_visuals_contract",
+      "L0_scene_registry",
       "L0_zone_composition",
       "L0_qa_catalog",
       "L0_audio_qa_catalog",

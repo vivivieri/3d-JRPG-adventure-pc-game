@@ -1,7 +1,16 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "design_ref": "docs/world/LEVEL_DESIGN.md, docs/technical/TECHNICAL_DESIGN.md §3",
   "note": "Node catalog is spec — transforms and meshes are built via GDAI MCP on game/development.",
+  "ending_router": {
+    "branch_flag": "ending_chosen",
+    "map": {
+      "rewind": { "zone_id": "ending_rewind", "scene_id": "SC-17a", "spawn_marker": "SpawnMarker_ending" },
+      "anchor": { "zone_id": "ending_anchor", "scene_id": "SC-17b", "spawn_marker": "SpawnMarker_ending" },
+      "drift": { "zone_id": "ending_drift", "scene_id": "SC-17c", "spawn_marker": "SpawnMarker_ending" }
+    },
+    "api": "GameManager.load_ending(ending_id) — see autoload_registry.json"
+  },
   "scenes": [
     {
       "id": "boot",
@@ -35,7 +44,15 @@
         { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
         { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "beach_shore" } },
         { "name": "Interactable_SC-01-DRIFTWOOD", "type": "Interactable", "export": { "scene_id": "SC-01-DRIFTWOOD" } },
-        { "name": "ZoneTransition_ruined_village", "type": "ZoneTransition", "export": { "target_zone": "ruined_village" } }
+        {
+          "name": "ZoneTransition_ruined_village",
+          "type": "ZoneTransition",
+          "export": {
+            "target_zone": "ruined_village",
+            "spawn_marker": "SpawnMarker_hub",
+            "requires_flags": ["tutorial_movement_done"]
+          }
+        }
       ]
     },
     {
@@ -56,8 +73,20 @@
         { "name": "SavePoint_well", "type": "SavePoint", "export": { "scene_id": "SC-02-WELL" } },
         { "name": "Interactable_SC-03", "type": "Interactable", "export": { "scene_id": "SC-03" } },
         { "name": "Interactable_SC-04", "type": "Interactable", "export": { "scene_id": "SC-04" } },
-        { "name": "EncounterTrigger_enc_sc05_tutorial_crab", "type": "EncounterTrigger", "export": { "encounter_id": "enc_sc05_tutorial_crab" } },
-        { "name": "ZoneTransition_tidal_caves", "type": "ZoneTransition", "export": { "target_zone": "tidal_caves", "requires_flags": ["cave_entrance_unlocked"] } },
+        {
+          "name": "EncounterTrigger_enc_sc05_tutorial_crab",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc05_tutorial_crab" }
+        },
+        {
+          "name": "ZoneTransition_tidal_caves",
+          "type": "ZoneTransition",
+          "export": {
+            "target_zone": "tidal_caves",
+            "spawn_marker": "SpawnMarker_cave_entrance",
+            "requires_flags": ["cave_entrance_unlocked"]
+          }
+        },
         { "name": "CinematicTrigger_hub_pan", "type": "Area3D", "export": { "hook_id": "sc02_hub_pan" } }
       ]
     },
@@ -73,12 +102,56 @@
         { "name": "WorldEnvironment", "type": "WorldEnvironment" },
         { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
         { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "tidal_caves" } },
-        { "name": "EncounterTrigger_enc_sc06_cave_crab", "type": "EncounterTrigger" },
+        {
+          "name": "EncounterTrigger_enc_sc06_cave_crab",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc06_cave_crab" }
+        },
         { "name": "WaterPuzzle", "type": "Node3D", "description": "SC-07 puzzle FSM — see PUZZLE_DESIGN.md" },
-        { "name": "EncounterTrigger_enc_sc08_deep_pool", "type": "EncounterTrigger" },
-        { "name": "EncounterTrigger_enc_sc09_shore_wraith", "type": "EncounterTrigger" },
+        {
+          "name": "EncounterTrigger_enc_sc07_optional_crabs",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc07_optional_crabs", "optional": true }
+        },
+        {
+          "name": "CinematicTrigger_sc08_deep_pool_vignette",
+          "type": "Area3D",
+          "export": { "hook_id": "sc08_deep_pool_vignette" }
+        },
+        {
+          "name": "EncounterTrigger_enc_sc08_deep_pool",
+          "type": "EncounterTrigger",
+          "export": {
+            "encounter_id": "enc_sc08_deep_pool",
+            "requires_flags": ["water_puzzle_solved", "deep_pool_dialogue_done"]
+          }
+        },
+        {
+          "name": "EncounterTrigger_enc_sc09_shore_wraith",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc09_shore_wraith" }
+        },
         { "name": "Interactable_SC-10", "type": "Interactable", "export": { "scene_id": "SC-10" } },
-        { "name": "ZoneTransition_dragon_palace_gate", "type": "ZoneTransition" }
+        {
+          "name": "EncounterTrigger_enc_sc10_optional_wraith",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc10_optional_wraith", "optional": true }
+        },
+        {
+          "name": "CinematicTrigger_sc11_palace_flashback",
+          "type": "Area3D",
+          "export": { "hook_id": "sc11_palace_flashback" }
+        },
+        {
+          "name": "ZoneTransition_dragon_palace_gate",
+          "type": "ZoneTransition",
+          "export": {
+            "target_zone": "dragon_palace_gate",
+            "spawn_marker": "SpawnMarker_gate",
+            "requires_flags": ["yuzu_joined"],
+            "requires_items": ["wraith_pearl"]
+          }
+        }
       ]
     },
     {
@@ -94,11 +167,68 @@
         { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
         { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "dragon_palace_gate" } },
         { "name": "SavePoint_gate", "type": "SavePoint" },
-        { "name": "EncounterTrigger_enc_sc12_palace_wraiths", "type": "EncounterTrigger" },
+        { "name": "CinematicTrigger_sc12_gate_reveal", "type": "Area3D", "export": { "hook_id": "sc12_gate_reveal" } },
+        {
+          "name": "EncounterTrigger_enc_sc12_palace_wraiths",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc12_palace_wraiths" }
+        },
         { "name": "Interactable_SC-13", "type": "Interactable", "export": { "scene_id": "SC-13" } },
-        { "name": "EncounterTrigger_enc_sc14_sentinel", "type": "EncounterTrigger" },
-        { "name": "EncounterTrigger_enc_sc15_tide_keeper", "type": "EncounterTrigger" },
-        { "name": "Interactable_SC-16", "type": "Interactable", "export": { "scene_id": "SC-16" } }
+        { "name": "CinematicTrigger_sc14_sentinel_breather", "type": "Area3D", "export": { "hook_id": "sc14_sentinel_breather" } },
+        {
+          "name": "EncounterTrigger_enc_sc14_sentinel",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc14_sentinel" }
+        },
+        {
+          "name": "EncounterTrigger_enc_sc15_tide_keeper",
+          "type": "EncounterTrigger",
+          "export": { "encounter_id": "enc_sc15_tide_keeper", "requires_flags": ["sentinel_defeated"] }
+        },
+        { "name": "Interactable_SC-16", "type": "Interactable", "export": { "scene_id": "SC-16" } },
+        { "name": "CinematicTrigger_sc16_last_mercy", "type": "Area3D", "export": { "hook_id": "sc16_last_mercy_resolution" } }
+      ]
+    },
+    {
+      "id": "ending_rewind",
+      "path": "res://scenes/world/endings/ending_rewind.tscn",
+      "phase": 6,
+      "zone_id": "ending_rewind",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_ending", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "ending_rewind" } }
+      ]
+    },
+    {
+      "id": "ending_anchor",
+      "path": "res://scenes/world/endings/ending_anchor.tscn",
+      "phase": 6,
+      "zone_id": "ending_anchor",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_ending", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "ending_anchor" } }
+      ]
+    },
+    {
+      "id": "ending_drift",
+      "path": "res://scenes/world/endings/ending_drift.tscn",
+      "phase": 6,
+      "zone_id": "ending_drift",
+      "spec_status": "specified",
+      "required_nodes": [
+        { "name": "SpawnMarker_ending", "type": "Marker3D" },
+        { "name": "GameplayCamera", "type": "Camera3D" },
+        { "name": "WorldEnvironment", "type": "WorldEnvironment" },
+        { "name": "DirectionalLight3D", "type": "DirectionalLight3D" },
+        { "name": "ZoneVisuals", "type": "ZoneVisuals", "export": { "zone_id": "ending_drift" } }
       ]
     },
     {

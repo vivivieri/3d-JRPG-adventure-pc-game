@@ -114,7 +114,7 @@ From `GDD.md` §2 and `STORYBOARD.md`:
 | Enemy | Voice |
 |-------|-------|
 | Salt Crab | One line pre-fight (`SC-05`); no mid-combat chatter v1 |
-| Shore Wraith | Accusatory collective: *"You chose her over us."* |
+| Shore Wraith | Accusatory collective: *"You chose the palace over us."* |
 | Palace Sentinel | Formal guardian: duty, stolen time |
 | Tide Keeper | See above |
 

@@ -114,6 +114,11 @@ class ZoneVisualsLibTests(unittest.TestCase):
         self.assertTrue(env["glow_enabled"])
         self.assertTrue(env["volumetric_fog_enabled"])
 
+    def test_aerial_perspective_from_palette(self) -> None:
+        catalog = load_zone_palettes(str(ROOT / "game/data/world/zone_palettes.json"))
+        env = build_environment("tidal_caves", catalog)
+        self.assertAlmostEqual(env["aerial_perspective"], 0.72, places=2)
+
     def test_apply_to_scene_unknown_zone(self) -> None:
         catalog = load_zone_palettes(str(ROOT / "game/data/world/zone_palettes.json"))
         with self.assertRaises(KeyError):

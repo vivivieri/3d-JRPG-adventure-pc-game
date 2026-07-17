@@ -50,9 +50,10 @@
 
 ### Ink combat VFX (UI overlay)
 
-- **Type:** CanvasItem shader on combat log / damage numbers
-- **Effect:** Brief ink splatter alpha on hit flash; not on world meshes
-- **Duration:** &lt;0.4s per pulse
+- **Type:** CanvasItem shader on full-screen `ColorRect` parented under `CombatUI` (`COMBAT_PRESENTATION.md`)
+- **Shader:** `ink_combat_overlay.gdshader` — uniforms `ink_strength` (0.8), `pulse_duration` (0.35s)
+- **Effect:** Brief ink-wash pulse on skill/limit resolve; not on world meshes
+- **Duration:** &lt;0.4s per pulse; skipped when `reduced_motion` is on
 
 ---
 

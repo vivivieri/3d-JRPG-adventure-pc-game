@@ -29,6 +29,11 @@
           "assert": "fog_enabled, tonemap_mode == TONE_MAPPER_FILMIC, glow_enabled"
         },
         {
+          "id": "aerial_perspective_from_palette",
+          "function": "test_aerial_perspective_from_palette",
+          "assert": "tidal_caves aerial_perspective == 0.72"
+        },
+        {
           "id": "directional_settings_ruined_village",
           "function": "test_directional_settings_ruined_village",
           "assert": "directional_settings rotation_degrees[0] == 35.0"

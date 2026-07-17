@@ -71,6 +71,30 @@
       "markers": []
     },
     {
+      "id": "sc11_palace_flashback",
+      "scene_id": "SC-11",
+      "zone": "tidal_caves",
+      "trigger": "PalaceFlashbackApproach",
+      "sequence_id": "sc11_palace_flashback",
+      "duration_sec": 12,
+      "skip_after_sec": 3,
+      "skip_if_flag": "saw_palace_vision",
+      "letterbox": true,
+      "requires_flags": {
+        "yuzu_joined": true
+      },
+      "then": [
+        { "type": "dialogue", "id": "SC-11" }
+      ],
+      "audio": {
+        "duck_bgm": 0.5,
+        "bgm": "bgm_palace"
+      },
+      "markers": [
+        "CameraMarker_sc11_flashback_wide"
+      ]
+    },
+    {
       "id": "sc12_gate_reveal",
       "scene_id": "SC-12",
       "zone": "dragon_palace_gate",
@@ -114,7 +138,7 @@
       "then": [
         { "type": "combat_script", "id": "last_mercy_cosmetic" },
         { "type": "cinematic", "id": "keeper_dissolve" },
-        { "type": "scene_transition", "id": "SC-17" }
+        { "type": "load_ending", "branch_flag": "ending_chosen" }
       ],
       "audio": {
         "duck_bgm": 0.1,

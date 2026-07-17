@@ -208,7 +208,9 @@
       ],
       "on_complete": {
         "set_flags": [
-          "inspected_banner"
+          "inspected_banner",
+          "tutorial_interact_done",
+          "tutorial_lore_done"
         ]
       }
     },
@@ -294,7 +296,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "inspected_well"
+          "inspected_well",
+          "tutorial_save_done"
         ]
       }
     },
@@ -339,7 +342,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "met_yuzu_spirit"
+          "met_yuzu_spirit",
+          "tutorial_dialogue_done"
         ],
         "start_quest": "echoes_at_torii"
       }
@@ -384,14 +388,25 @@
           "speaker": "roku",
           "portrait": "roku_grim",
           "text": {
-            "en": "That box isn't a gift. Don't open it. The caves below — start there.",
-            "ja": "あの箱は贈り物じゃない。開くな。下の潮穴からだ。",
-            "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。",
-            "zh-Hant": "那盒子不是禮物。別開啟。從下面的潮穴開始。"
+            "en": "That box isn't a gift. Don't open it.",
+            "ja": "あの箱は贈り物じゃない。開くな。",
+            "zh": "那盒子不是礼物。别打开。",
+            "zh-Hant": "那盒子不是禮物。別開啟。"
           },
           "emotion": "urgent",
           "voice_id": "sc04_roku_01",
           "vo_tier": "p0"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_grim",
+          "text": {
+            "en": "The caves below — start there.",
+            "ja": "下の潮穴からだ。",
+            "zh": "从下面的潮穴开始。",
+            "zh-Hant": "從下面的潮穴開始。"
+          },
+          "emotion": "urgent"
         },
         {
           "speaker": "roku",
@@ -408,7 +423,10 @@
       "on_complete": {
         "set_flags": [
           "met_roku",
-          "cave_entrance_unlocked"
+          "cave_entrance_unlocked",
+          "tutorial_shop_done",
+          "tutorial_menu_done",
+          "tutorial_equip_done"
         ],
         "grant_key_items": [
           "cave_map"
@@ -619,14 +637,25 @@
           "speaker": "yuzu",
           "portrait": "yuzu_resolved",
           "text": {
-            "en": "I can't rest until the tide is answered. Let me walk with you, Urashima.",
-            "ja": "潮に答えが出るまで休めない。一緒に歩かせて、浦島。",
-            "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。",
-            "zh-Hant": "在潮水得到回應之前我無法安息。讓我與你同行，浦島。"
+            "en": "I can't rest until the tide is answered.",
+            "ja": "潮に答えが出るまで休めない。",
+            "zh": "在潮水得到回应之前我无法安息。",
+            "zh-Hant": "在潮水得到回應之前我無法安息。"
           },
           "emotion": "resolve",
           "voice_id": "sc10_yuzu_01",
           "vo_tier": "p1"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "text": {
+            "en": "Let me walk with you, Urashima.",
+            "ja": "一緒に歩かせて、浦島。",
+            "zh": "让我与你同行，浦岛。",
+            "zh-Hant": "讓我與你同行，浦島。"
+          },
+          "emotion": "resolve"
         },
         {
           "speaker": "urashima",

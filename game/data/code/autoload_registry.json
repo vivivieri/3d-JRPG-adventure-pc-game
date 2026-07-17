@@ -161,9 +161,14 @@
       "design_ref": ["docs/gameplay/COMBAT_SYSTEMS.md §10", "game/data/combat/difficulty.json"],
       "responsibility": "Normal/Hard multipliers — RefCounted helper, not autoload",
       "autoload": false,
+      "helpers_ref": "DifficultyService in helpers_registry.json",
       "public_api": [
-        { "name": "get_multiplier", "args": ["stat: String"], "returns": "float" },
-        { "name": "is_hard_mode", "args": [], "returns": "bool" }
+        { "name": "load_catalog", "returns": "Dictionary", "static": true },
+        { "name": "active_mode_id", "args": ["settings: Dictionary"], "returns": "String", "static": true },
+        { "name": "scale_enemy_hp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "scale_enemy_atk", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "is_hard_mode", "args": ["settings: Dictionary"], "returns": "bool", "static": true },
+        { "name": "boss_shows_intent_preview", "args": ["phase: int", "is_boss: bool", "settings: Dictionary"], "returns": "bool", "static": true }
       ]
     },
     {
@@ -174,9 +179,12 @@
       "design_ref": ["docs/qa/SECURITY.md", "docs/technical/SAVE_AND_FAIL_STATES.md"],
       "responsibility": "Save HMAC verify/sign",
       "autoload": false,
+      "helpers_ref": "SaveIntegrity in helpers_registry.json",
       "public_api": [
-        { "name": "sign", "args": ["payload: String"], "returns": "String" },
-        { "name": "verify", "args": ["payload: String", "sig: String"], "returns": "bool" }
+        { "name": "canonical_json", "args": ["save: Dictionary"], "returns": "String", "static": true },
+        { "name": "sign", "args": ["save: Dictionary", "pepper_override: String"], "returns": "String", "static": true },
+        { "name": "attach", "args": ["save: Dictionary", "pepper_override: String"], "returns": "Dictionary", "static": true },
+        { "name": "verify", "args": ["save: Dictionary", "pepper_override: String"], "returns": "bool", "static": true }
       ]
     }
   ]

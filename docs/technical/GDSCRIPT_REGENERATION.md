@@ -34,7 +34,7 @@
 
 | Phase | Sprint ref | Helpers to port | Handoff |
 |-------|------------|-----------------|---------|
-| **1** | **P1-00** bootstrap | `EventBus` (`port_status: ported`) | Architect → `.gd` · Builder → `project.godot` autoload via GDAI |
+| **1** | **P1-00** bootstrap | `EventBus` (`port_status: pending`) | Architect → `.gd` · Builder → `project.godot` autoload via GDAI |
 | **2** | Save/settings shell | `SettingsStore`, `SaveIntegrity` (`port_status: pending`) | Architect → `.gd` + unit tests · Builder → F5 boot |
 | **4** | Combat | `DifficultyService` (`port_status: pending`) | Architect → `.gd` before encounter tuning |
 | **6** | Achievements | `AchievementEvaluator` (`port_status: pending`) | Architect → `.gd` before Steam hooks |

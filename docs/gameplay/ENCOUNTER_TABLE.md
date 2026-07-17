@@ -53,7 +53,7 @@
 | # | Scene | Zone | Encounter | Type | Party | XP | Level after |
 |---|-------|------|-----------|------|-------|-----|-------------|
 | 2 | SC-06 | Cave entrance | Salt Crab ×1 | Scripted (avoidable) | Urashima | 30 | 2–3 |
-| 3 | SC-07 area | Flooded chamber | Salt Crab ×2 | Optional | Urashima | 60 | 3 |
+| 3 | SC-07 area | Flooded chamber (`enc_sc07_optional_crabs`) | Salt Crab ×2 | Optional | Urashima | 60 | 3 |
 | 4 | SC-08 | Deep pool | Tide Wraith ×2 | Forced | Urashima | 70 | 4 |
 | 5 | SC-09 | Boss arena | **Shore Wraith** | Boss | Urashima solo | 120 | 4–5 |
 | — | SC-10 | Shrine alcove | — | Yuzu joins | +party | — | 5 |

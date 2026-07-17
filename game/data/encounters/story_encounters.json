@@ -31,6 +31,7 @@
       "enemies": ["salt_crab", "salt_crab"],
       "party": ["urashima"],
       "optional": true,
+      "escape_allowed": true,
       "on_win": { "set_flags": [] }
     },
     {
@@ -52,7 +53,7 @@
       "enemies": ["shore_wraith"],
       "party": ["urashima"],
       "boss": true,
-      "on_win": { "set_flags": ["shore_wraith_defeated"], "grant_items": ["wraith_pearl"] }
+      "on_win": { "set_flags": ["shore_wraith_defeated", "tutorial_intent_done", "tutorial_limit_done"], "grant_items": ["wraith_pearl"] }
     },
     {
       "id": "enc_sc10_optional_wraith",
@@ -63,6 +64,7 @@
       "party": ["urashima", "yuzu"],
       "optional": true,
       "requires_flags": ["yuzu_joined"],
+      "escape_allowed": true,
       "on_win": { "set_flags": [] }
     },
     {
