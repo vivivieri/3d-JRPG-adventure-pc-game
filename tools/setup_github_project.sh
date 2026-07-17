@@ -117,15 +117,84 @@ done
 
 ENVIRONMENTS=(qa uat steam-beta steam-production)
 
+# env_name|min_approvals|description
+ENVIRONMENT_SPECS=(
+  "qa|0|Automated nightly gate sweep — no approval gate"
+  "uat|1|RC artifact tags (v*-rc*) — human playtest gate"
+  "steam-beta|1|Steam beta CD — manual workflow_dispatch"
+  "steam-production|2|Steam production CD — requires two approvers when configured"
+)
+
+resolve_user_id() {
+  local login="$1"
+  gh api "users/${login}" --jq .id 2>/dev/null || echo ""
+}
+
+configure_environment() {
+  local env_name="$1"
+  local min_approvals="$2"
+  local desc="$3"
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    echo "  [DRY] ${env_name} (min approvals: ${min_approvals})"
+    return 0
+  fi
+
+  local owner_login
+  owner_login="$(gh repo view --json owner -q .owner.login)"
+  local primary="${GITHUB_ENV_REVIEWER_LOGIN:-$owner_login}"
+  local secondary="${GITHUB_ENV_REVIEWER_LOGIN_2:-}"
+
+  local reviewers_json="[]"
+  if [[ "$min_approvals" -gt 0 ]]; then
+    local ids=()
+    local pid
+    pid="$(resolve_user_id "$primary")"
+    if [[ -z "$pid" ]]; then
+      echo "  [WARN] ${env_name} — could not resolve reviewer login '${primary}'"
+    else
+      ids+=("$pid")
+    fi
+    if [[ "$min_approvals" -ge 2 ]]; then
+      if [[ -n "$secondary" ]]; then
+        local sid
+        sid="$(resolve_user_id "$secondary")"
+        if [[ -n "$sid" ]]; then
+          ids+=("$sid")
+        else
+          echo "  [WARN] ${env_name} — GITHUB_ENV_REVIEWER_LOGIN_2 '${secondary}' not found"
+        fi
+      else
+        echo "  [WARN] ${env_name} — wants 2 approvers; set GITHUB_ENV_REVIEWER_LOGIN_2 for second reviewer"
+      fi
+    fi
+    if [[ ${#ids[@]} -gt 0 ]]; then
+      reviewers_json="$(IDS="${ids[*]}" python3 -c "
+import json, os
+ids = [int(x) for x in os.environ.get('IDS', '').split() if x]
+print(json.dumps([{'type': 'User', 'id': i} for i in ids]))
+")"
+    fi
+  fi
+
+  if gh api -X PUT "repos/${REPO}/environments/${env_name}" --input - <<JSON
+{
+  "wait_timer": 0,
+  "prevent_self_review": false,
+  "reviewers": ${reviewers_json}
+}
+JSON
+  then
+    echo "  [OK] ${env_name} — ${desc}"
+  else
+    echo "  [WARN] ${env_name} — could not configure (needs admin PAT)"
+  fi
+}
+
 echo ""
 echo "==> GitHub Environments"
-for env in "${ENVIRONMENTS[@]}"; do
-  if [[ "$DRY_RUN" -eq 1 ]]; then
-    echo "  [DRY] ${env}"
-    continue
-  fi
-  gh api -X PUT "repos/${REPO}/environments/${env}" -f wait_timer=0 >/dev/null 2>&1 || true
-  echo "  [OK] ${env}"
+for spec in "${ENVIRONMENT_SPECS[@]}"; do
+  IFS='|' read -r env_name min_approvals desc <<< "$spec"
+  configure_environment "$env_name" "$min_approvals" "$desc"
 done
 
 protect_branch() {

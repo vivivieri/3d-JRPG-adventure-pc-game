@@ -221,7 +221,8 @@
 | [CI.md](ci-cd/CI.md) | GitHub Actions gates |
 | [CD.md](ci-cd/CD.md) | Artifact + Steam deploy |
 | [ENVIRONMENTS.md](ci-cd/ENVIRONMENTS.md) | dev → prod promotion |
-| [GITHUB_SETUP.md](ci-cd/GITHUB_SETUP.md) | Labels, branch protection |
+| [GITHUB_SETUP.md](ci-cd/GITHUB_SETUP.md) | Labels, branch protection, environment reviewers |
+| [GIT_LFS.md](ci-cd/GIT_LFS.md) | Large binary asset tracking |
 | [STEAM_RELEASE_CHECKLIST.md](ci-cd/STEAM_RELEASE_CHECKLIST.md) | Ship gaps |
 
 ---

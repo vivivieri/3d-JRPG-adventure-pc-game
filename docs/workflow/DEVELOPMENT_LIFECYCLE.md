@@ -247,37 +247,59 @@ GitHub = **what + proof** · Linear = **which batch + cycle progress**
 
 ---
 
-## 10. Lifecycle enhancements (v1.0+)
+## 10. Lifecycle enhancements
 
-These strengthen the model without adopting environment branches or per-agent forks.
+| # | Enhancement | Status | How |
+|---|-------------|--------|-----|
+| 1 | PR-only trunk protection | **Shipped** | `bash tools/setup_github_project.sh` — requires admin `GH_TOKEN` |
+| 2 | GitHub Environments on CD | **Shipped** | `cd-artifact.yml`, `cd-steam.yml`, `qa-nightly.yml` |
+| 3 | Environment reviewers | **Shipped** | Same setup script; optional `GITHUB_ENV_REVIEWER_LOGIN_2` for prod |
+| 4 | Git LFS for large assets | **Shipped** | `.gitattributes`, `tools/install_git_lfs.sh`, `docs/ci-cd/GIT_LFS.md` |
+| 5 | Per-sprint cloud snapshots | **Pending** | Manual snapshot rebuild per sprint — see `CLOUD_SNAPSHOT_LAUNCH.md` |
 
-### 10.1 Enforced trunk protection (recommended)
+### 10.1 Trunk protection (enhancement 1)
 
-| Control | Purpose |
-|---------|---------|
-| Require PR to merge into `game/development` | No direct agent push to trunk |
-| Required status check: `game-ci.yml` | QA stage always runs |
-| CODEOWNERS on `game/data/` | Spec changes need review |
+```bash
+export GH_TOKEN=github_pat_...   # Administration: read/write
+bash tools/setup_github_project.sh
+```
 
-### 10.2 GitHub Environments on CD (documented, enforce in Actions)
+| Control | Value |
+|---------|-------|
+| Branches | `main`, `game/development` |
+| Required check | `Docs + design data gates` / `L0–L2 headless gates` |
+| PR reviews | 1 required |
 
-| Environment | Used when |
-|-------------|-----------|
-| `uat` | Optional reviewer before RC promote |
-| `steam-beta` | `cd-steam.yml` channel=beta |
-| `steam-production` | Prod upload — 2 reviewers |
+### 10.2 GitHub Environments on CD (enhancement 2–3)
 
-### 10.3 Per-sprint cloud snapshots (optional)
+| Workflow | Environment | Trigger |
+|----------|-------------|---------|
+| `qa-nightly.yml` | `qa` | Schedule / manual |
+| `cd-artifact.yml` | `uat` | Tag `v*-rc*` |
+| `cd-artifact.yml` | `steam-beta` | Tag `v*-beta*` |
+| `cd-artifact.yml` | `steam-production` | Tag `v*.*.*` (semver ship) |
+| `cd-steam.yml` | `steam-beta` / `steam-production` | `workflow_dispatch` |
 
-One snapshot per active sprint batch on `game/development` — cheaper than per-agent forks, gives reproducible MCP stack state.
+Reviewer setup (enhancement 3):
 
-### 10.4 Asset bloat controls (orthogonal to branching)
+```bash
+export GH_TOKEN=...
+export GITHUB_ENV_REVIEWER_LOGIN=your-github-login        # default: repo owner
+export GITHUB_ENV_REVIEWER_LOGIN_2=second-reviewer-login  # optional; steam-production
+bash tools/setup_github_project.sh
+```
 
-| Practice | Tool |
-|----------|------|
-| GLB lint + turntable | `check_glb_import_scripts.py`, MODEL_QA |
-| Manifest registration | `register_asset.py` |
-| Git LFS for large binaries | When hero asset volume grows |
+### 10.3 Per-sprint cloud snapshots (enhancement 5 — pending)
+
+One snapshot per active sprint batch on `game/development` — cheaper than per-agent forks, gives reproducible MCP stack state. **Not automated yet** — rebuild manually at sprint boundaries (`docs/agents/CLOUD_SNAPSHOT_LAUNCH.md`).
+
+### 10.4 Git LFS (enhancement 4)
+
+| Item | Location |
+|------|----------|
+| Patterns | `.gitattributes` |
+| Install | `bash tools/install_git_lfs.sh` (also in CI + cloud dev) |
+| Policy | `docs/ci-cd/GIT_LFS.md` |
 
 ### 10.5 Explicit carry-over protocol
 
@@ -328,3 +350,4 @@ bash tools/run_cd_gates.sh --channel beta   # or --channel prod
 | `AI_DEV_WORKFLOW.md` | Build + test policy |
 | `PROJECT_MANAGEMENT.md` | Issue labels and templates |
 | `CI.md` / `CD.md` | Automation detail |
+| `GIT_LFS.md` | Large asset tracking (`.gitattributes`) |

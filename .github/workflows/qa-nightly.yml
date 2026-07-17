@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: game/development
+          lfs: true
 
       - name: Guard — game project
         run: test -f game/project.godot || (echo "::error::game/development must have project.godot" && exit 1)

@@ -196,3 +196,5 @@ echo "  Verify: bash tools/check_day_one_secrets.sh"
 echo "Register in Cursor: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp (all required)"
 echo "Blender: required for M5 turntable QA — bash tools/install_extended_toolchain.sh"
 echo "See: docs/agents/MCP_STACK.md"
+
+bash "${ROOT}/tools/install_git_lfs.sh" 2>/dev/null || true

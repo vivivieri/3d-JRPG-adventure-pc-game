@@ -16,12 +16,16 @@ jobs:
     name: Export Windows + GitHub Release
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    environment:
+      name: ${{ contains(github.ref_name, '-rc') && 'uat' || (contains(github.ref_name, '-beta') && 'steam-beta' || 'steam-production') }}
     permissions:
       contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Guard — game project required
         run: |

@@ -73,4 +73,6 @@ fi
 
 bash "${ROOT}/tools/setup_dev_environment.sh" >/dev/null 2>&1 || true
 
+bash "${ROOT}/tools/install_git_lfs.sh" >/dev/null 2>&1 || true
+
 echo "==> CI deps ready"

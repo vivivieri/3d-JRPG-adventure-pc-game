@@ -43,10 +43,19 @@ bash tools/setup_github_project.sh --dry-run
 |------|----------------|
 | **Labels** | 23 — `env/*`, `severity/S*`, `gate/*`, `domain/*`, `agent/*`, `status/*` |
 | **Milestones** | M1-core, M5-art, M6-steam |
-| **Environments** | `qa`, `uat`, `steam-beta`, `steam-production` |
+| **Environments** | `qa`, `uat`, `steam-beta`, `steam-production` — with optional reviewers via API |
 | **Branch protection** | `main` + `game/development` — CI status + **1 PR review** (when `GH_TOKEN` admin) |
+| **Git LFS** | `.gitattributes` + `tools/install_git_lfs.sh` — see `docs/ci-cd/GIT_LFS.md` |
 
-**Already in repo (no script needed):** issue templates, PR templates, CI/CD/QA workflows.
+**Environment reviewers (optional second approver for prod):**
+
+```bash
+export GITHUB_ENV_REVIEWER_LOGIN=your-login          # default: repo owner
+export GITHUB_ENV_REVIEWER_LOGIN_2=co-owner-login    # recommended for steam-production
+bash tools/setup_github_project.sh
+```
+
+**Already in repo (no script needed):** issue templates, PR templates, CI/CD/QA workflows with GitHub Environment gates.
 
 ---
 
@@ -76,7 +85,7 @@ status/in-progress   status/done
 | `steam-beta` | Required reviewers: 1 |
 | `steam-production` | Required reviewers: 2 |
 
-Used by: `qa-nightly.yml`, `cd-steam.yml`
+Used by: `qa-nightly.yml`, `cd-artifact.yml`, `cd-steam.yml`
 
 ### Branch protection
 
