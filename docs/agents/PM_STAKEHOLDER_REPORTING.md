@@ -143,7 +143,21 @@ Skipping stakeholder report = incomplete PM handoff (cite `invalid_pass_patterns
 
 ---
 
-## 9. Cross-refs
+## 9. Alignment audit (technical complement)
+
+For **spec alignment** and **dispatch readiness** (not sprint schedule), run the standard alignment audit:
+
+```bash
+bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
+```
+
+Outputs: `artifacts/alignment_audits/latest.md`, `artifacts/alignment_dashboard.html`, history in `docs/compliance/alignment_audit_history.json`.
+
+See `docs/qa/ALIGNMENT_AUDIT.md` — run alongside stakeholder report at phase exit.
+
+---
+
+## 10. Cross-refs
 
 - `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` — Automation secrets
 - `docs/agents/FACTORY_WATCHDOG.md` — factory health section in report

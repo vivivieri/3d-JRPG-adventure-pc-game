@@ -62,6 +62,7 @@ run_gate "L0_no_secrets" bash tools/check_no_secrets.sh
 run_gate "L0_ship_build_security" bash tools/check_ship_build_security.sh
 run_gate "L0_player_build_protection" bash tools/check_player_build_protection.sh
 run_gate "L0_doc_sync" python3 tools/check_doc_sync.py
+run_gate "L0_alignment_audit_catalog" python3 tools/validate_alignment_audit_catalog.py
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 
 echo ""

@@ -1,0 +1,298 @@
+{
+  "version": "1.0",
+  "authority": "docs/qa/ALIGNMENT_AUDIT.md",
+  "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
+  "outputs": {
+    "artifacts_dir": "artifacts/alignment_audits",
+    "history_index": "docs/compliance/alignment_audit_history.json",
+    "latest_json": "artifacts/alignment_audits/latest.json",
+    "latest_markdown": "artifacts/alignment_audits/latest.md",
+    "latest_html": "artifacts/alignment_dashboard.html",
+    "visuals_subdir": "visuals",
+    "history_keep": 100
+  },
+  "verdict_thresholds": {
+    "aligned_min_overall": 8.0,
+    "aligned_max_blocking": 0,
+    "at_risk_min_overall": 6.5,
+    "fail_any_ci": true
+  },
+  "domains": [
+    {
+      "id": "overall_production",
+      "label": "Overall Production",
+      "weight": 1.0,
+      "derive": "mean_siblings",
+      "icon": "overall"
+    },
+    {
+      "id": "data_alignment",
+      "label": "Data Alignment",
+      "weight": 1.0,
+      "signals": [
+        { "id": "scene_registry_parity", "weight": 0.25, "kind": "parity" },
+        { "id": "hooks_parity", "weight": 0.2, "kind": "parity" },
+        { "id": "tutorial_flags", "weight": 0.15, "kind": "parity" },
+        { "id": "L0_scene_registry", "weight": 0.2, "kind": "gate" },
+        { "id": "L0_story_data", "weight": 0.2, "kind": "gate" }
+      ],
+      "icon": "data"
+    },
+    {
+      "id": "narrative",
+      "label": "Narrative",
+      "weight": 1.0,
+      "signals": [
+        { "id": "L0_story_data", "weight": 0.35, "kind": "gate" },
+        { "id": "L0_narrative_density", "weight": 0.25, "kind": "gate" },
+        { "id": "vo_hit_list", "weight": 0.2, "kind": "metric", "target": 12 },
+        { "id": "cinematic_hooks", "weight": 0.2, "kind": "metric", "target": 6 }
+      ],
+      "icon": "narrative"
+    },
+    {
+      "id": "gameplay",
+      "label": "Gameplay",
+      "weight": 1.0,
+      "signals": [
+        { "id": "L0_spec_registry", "weight": 0.3, "kind": "gate" },
+        { "id": "encounters_catalogued", "weight": 0.25, "kind": "metric", "target": 9 },
+        { "id": "L0_difficulty_data", "weight": 0.2, "kind": "gate" },
+        { "id": "L0_base_classes", "weight": 0.25, "kind": "gate" }
+      ],
+      "icon": "gameplay"
+    },
+    {
+      "id": "visual_spec",
+      "label": "Visual Spec",
+      "weight": 1.0,
+      "signals": [
+        { "id": "L0_zone_visuals_contract", "weight": 0.35, "kind": "gate" },
+        { "id": "L0_zone_composition", "weight": 0.25, "kind": "gate" },
+        { "id": "zone_palette_rows", "weight": 0.2, "kind": "metric", "target": 7 },
+        { "id": "impl_shaders_partial", "weight": 0.2, "kind": "spec_status_cap", "cap": 8.5 }
+      ],
+      "icon": "visual"
+    },
+    {
+      "id": "ux_controls",
+      "label": "UX & Controls",
+      "weight": 1.0,
+      "signals": [
+        { "id": "settings_accessibility_doc", "weight": 0.4, "kind": "file_exists", "path": "docs/ui/SETTINGS_ACCESSIBILITY.md" },
+        { "id": "combat_presentation_doc", "weight": 0.3, "kind": "file_exists", "path": "docs/art/COMBAT_PRESENTATION.md" },
+        { "id": "impl_scenes_not_started", "weight": 0.3, "kind": "spec_status_cap", "cap": 6.5 }
+      ],
+      "icon": "ux"
+    },
+    {
+      "id": "pm_workflow",
+      "label": "PM Workflow",
+      "weight": 1.0,
+      "signals": [
+        { "id": "ci_pass_rate", "weight": 0.4, "kind": "ci_rate" },
+        { "id": "L0_doc_sync", "weight": 0.2, "kind": "gate" },
+        { "id": "L0_pm_orchestrator", "weight": 0.2, "kind": "gate" },
+        { "id": "L0_stakeholder_report", "weight": 0.2, "kind": "gate" }
+      ],
+      "icon": "pm"
+    },
+    {
+      "id": "runtime_proof",
+      "label": "Runtime Proof",
+      "weight": 1.0,
+      "signals": [
+        { "id": "has_project_godot", "weight": 0.25, "kind": "branch_impl" },
+        { "id": "L2_boot_headless", "weight": 0.35, "kind": "gate_optional" },
+        { "id": "L4_integration", "weight": 0.2, "kind": "gate_optional" },
+        { "id": "L5_e2e_three_endings", "weight": 0.2, "kind": "gate_optional" }
+      ],
+      "icon": "runtime"
+    },
+    {
+      "id": "steam_ship",
+      "label": "Steam Ship (M6)",
+      "weight": 1.0,
+      "signals": [
+        { "id": "L0_ship_build_security", "weight": 0.25, "kind": "gate" },
+        { "id": "L0_player_build_protection", "weight": 0.25, "kind": "gate" },
+        { "id": "M5_asset_compliance", "weight": 0.2, "kind": "gate" },
+        { "id": "runtime_proof", "weight": 0.3, "kind": "domain_ref" }
+      ],
+      "icon": "steam"
+    }
+  ],
+  "stale_string_patterns": [
+    { "id": "kappa_naming", "pattern": "Kappa-turtle|kappa-turtle", "severity": "doc_nit", "message": "Use spirit-turtle in player-facing copy" },
+    { "id": "you_chose_her", "pattern": "You chose her", "severity": "blocking", "message": "Remove invalid emotional beat from dialogue" },
+    { "id": "premature_ported", "pattern": "\"port_status\":\\s*\"ported\"", "severity": "blocking", "message": "Helpers must stay pending until PM dispatch" }
+  ],
+  "recommendation_rules": [
+    {
+      "id": "REC_CI_FAIL",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "ci_fail_count_gt",
+      "value": 0,
+      "title": "Fix failing CI gates",
+      "action": "Run bash tools/run_docs_ci_checks.sh (main) or bash tools/run_ci_checks.sh (game/development); fix each FAIL gate before merge."
+    },
+    {
+      "id": "REC_PARITY",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "parity_fail",
+      "title": "Repair registry ↔ data parity",
+      "action": "Align scene_registry.json, story_encounters.json, cinematic_hooks.json; re-run python3 tools/validate_scene_registry.py."
+    },
+    {
+      "id": "REC_STALE_BLOCKING",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "stale_blocking",
+      "title": "Remove blocking stale strings",
+      "action": "Grep repo for patterns in alignment_audit_catalog stale_string_patterns; fix data and docs."
+    },
+    {
+      "id": "REC_SPEC_DEV_START",
+      "priority": "P1",
+      "category": "before_dispatch",
+      "when": "branch_is",
+      "value": "main",
+      "title": "SPEC_DEV_START ready — dispatch P1-00 when approved",
+      "action": "All blocking spec artifacts specified; next: Architect ports EventBus on game/development per GDSCRIPT_REGENERATION.md §1."
+    },
+    {
+      "id": "REC_RUNTIME_LOW",
+      "priority": "P1",
+      "category": "implementation",
+      "when": "domain_score_lt",
+      "domain": "runtime_proof",
+      "value": 5.0,
+      "title": "Raise Runtime Proof via P1-00 bootstrap",
+      "action": "GDAI MCP: project.godot, boot_loader.gd, F5 smoke; target L2_boot_headless PASS on game/development."
+    },
+    {
+      "id": "REC_VISUAL_SLICE",
+      "priority": "P1",
+      "category": "implementation",
+      "when": "branch_is",
+      "value": "game/development",
+      "title": "Ruined village vertical slice",
+      "action": "GDAI MCP build ruined_village.tscn; run bash tools/run_visual_smoke_checks.sh; cite L2_visual_palette."
+    },
+    {
+      "id": "REC_L5_E2E",
+      "priority": "P2",
+      "category": "ship_path",
+      "when": "domain_score_lt",
+      "domain": "steam_ship",
+      "value": 6.0,
+      "title": "L5 three-endings E2E before human QA",
+      "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS."
+    },
+    {
+      "id": "REC_STAKEHOLDER_VISUALS",
+      "priority": "P2",
+      "category": "stakeholder",
+      "when": "always",
+      "title": "Refresh stakeholder visual pack",
+      "action": "bash tools/run_alignment_audit.sh --bundle-visuals <dir>; open artifacts/alignment_dashboard.html for product owner."
+    },
+    {
+      "id": "REC_DOC_NITS",
+      "priority": "P3",
+      "category": "doc_nit",
+      "when": "stale_doc_nit",
+      "title": "Sweep cosmetic doc drift",
+      "action": "Fix stale_string_patterns doc_nit hits; keep LEVEL_DESIGN.md in sync with scene_registry.json."
+    }
+  ],
+  "visual_packs": [
+    {
+      "id": "batch_01_foundation",
+      "title": "Foundation review",
+      "batch": 1,
+      "assets": [
+        { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
+        { "id": "audit_radar_6axis", "label": "6-axis production radar", "filename": "audit_radar_6axis.png", "kind": "radar" },
+        { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
+      ]
+    },
+    {
+      "id": "batch_02_zones",
+      "title": "Zones & alignment",
+      "batch": 2,
+      "assets": [
+        { "id": "concept_beach_shore", "label": "Beach shore SC-01", "filename": "tides_concept_beach_shore.png", "kind": "concept" },
+        { "id": "concept_palace_gate", "label": "Palace gate SC-12", "filename": "tides_concept_palace_gate.png", "kind": "concept" },
+        { "id": "audit_radar_updated", "label": "Post-alignment radar", "filename": "tides_audit_radar_updated.png", "kind": "radar" },
+        { "id": "audit_alignment_radar", "label": "Data alignment radar", "filename": "tides_audit_alignment_radar.png", "kind": "radar" },
+        { "id": "roadmap_12phase", "label": "12-phase roadmap", "filename": "tides_roadmap_12phase.png", "kind": "roadmap" },
+        { "id": "roadmap_zone_slice", "label": "Zone vertical slice path", "filename": "tides_roadmap_zone_slice.png", "kind": "roadmap" }
+      ]
+    },
+    {
+      "id": "batch_03_endings_dispatch",
+      "title": "Endings & P1-00 dispatch",
+      "batch": 3,
+      "assets": [
+        { "id": "concept_tidal_caves", "label": "Tidal caves SC-08", "filename": "tides_concept_tidal_caves.png", "kind": "concept" },
+        { "id": "concept_three_endings", "label": "Three endings triptych", "filename": "tides_concept_three_endings.png", "kind": "concept" },
+        { "id": "audit_post_p1", "label": "Post P1-00 dispatch radar", "filename": "tides_audit_post_p1_dispatch.png", "kind": "radar" },
+        { "id": "audit_mcp_stack", "label": "MCP stack readiness", "filename": "tides_audit_mcp_stack.png", "kind": "radar" },
+        { "id": "roadmap_p1_dispatch", "label": "P1-00 dispatch path", "filename": "tides_roadmap_p1_dispatch.png", "kind": "roadmap" },
+        { "id": "roadmap_three_endings", "label": "Three endings branch", "filename": "tides_roadmap_three_endings.png", "kind": "roadmap" }
+      ]
+    },
+    {
+      "id": "batch_04_combat_audio",
+      "title": "Combat & audio QA",
+      "batch": 4,
+      "assets": [
+        { "id": "combat_boss_arena", "label": "Boss arena combat", "filename": "tides_combat_boss_arena.png", "kind": "concept" },
+        { "id": "combat_ink_overlay", "label": "Ink overlay VFX", "filename": "tides_combat_ink_overlay.png", "kind": "concept" },
+        { "id": "audit_combat", "label": "Combat presentation radar", "filename": "tides_audit_combat_presentation.png", "kind": "radar" },
+        { "id": "audit_audio", "label": "Audio QA radar", "filename": "tides_audit_audio_qa.png", "kind": "radar" },
+        { "id": "roadmap_combat", "label": "Combat presentation path", "filename": "tides_roadmap_combat_presentation.png", "kind": "roadmap" },
+        { "id": "roadmap_audio", "label": "Audio zones & VO", "filename": "tides_roadmap_audio_zones_vo.png", "kind": "roadmap" }
+      ]
+    },
+    {
+      "id": "batch_05_qa_flow",
+      "title": "Visual / model / flow QA",
+      "batch": 5,
+      "assets": [
+        { "id": "visualqa_village", "label": "Visual QA village palette", "filename": "tides_visualqa_village_palette.png", "kind": "concept" },
+        { "id": "modelqa_turntable", "label": "Model QA turntable", "filename": "tides_modelqa_turntable.png", "kind": "concept" },
+        { "id": "audit_visual_qa", "label": "Visual QA radar", "filename": "tides_audit_visual_qa.png", "kind": "radar" },
+        { "id": "audit_flow_model", "label": "Flow & model QA radar", "filename": "tides_audit_flow_model_qa.png", "kind": "radar" },
+        { "id": "roadmap_visual_qa", "label": "Visual QA pipeline", "filename": "tides_roadmap_visual_qa.png", "kind": "roadmap" },
+        { "id": "roadmap_flow_e2e", "label": "Flow QA E2E path", "filename": "tides_roadmap_flow_qa_e2e.png", "kind": "roadmap" }
+      ]
+    },
+    {
+      "id": "batch_06_steam_mega",
+      "title": "Steam ship & mega dashboard",
+      "batch": 6,
+      "assets": [
+        { "id": "steam_capsule", "label": "Steam capsule key art", "filename": "tides_steam_capsule_keyart.png", "kind": "concept" },
+        { "id": "steam_rc_build", "label": "RC ship build", "filename": "tides_steam_rc_ship_build.png", "kind": "concept" },
+        { "id": "audit_steam_ship", "label": "Steam ship readiness", "filename": "tides_audit_steam_ship.png", "kind": "radar" },
+        { "id": "audit_m6_gates", "label": "M6 milestone gates", "filename": "tides_audit_m6_gates.png", "kind": "radar" },
+        { "id": "roadmap_steam", "label": "Steam ship M6 path", "filename": "tides_roadmap_steam_ship.png", "kind": "roadmap" },
+        { "id": "mega_dashboard", "label": "Mega dashboard (all radars)", "filename": "tides_mega_dashboard_all_radars.png", "kind": "dashboard" }
+      ]
+    }
+  ],
+  "checklist_template": {
+    "sections": [
+      { "id": "blocking", "label": "Blocking (P0)", "must_clear_before_dispatch": true },
+      { "id": "before_dispatch", "label": "Before P1-00 dispatch (P1)", "must_clear_before_dispatch": false },
+      { "id": "implementation", "label": "Implementation (P1)", "must_clear_before_dispatch": false },
+      { "id": "ship_path", "label": "Ship path M6 (P2)", "must_clear_before_dispatch": false },
+      { "id": "stakeholder", "label": "Stakeholder comms (P2)", "must_clear_before_dispatch": false },
+      { "id": "doc_nit", "label": "Doc nits (P3)", "must_clear_before_dispatch": false }
+    ]
+  }
+}

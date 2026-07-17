@@ -193,6 +193,7 @@
 | [QA_AND_BUG_PROCESS.md](qa/QA_AND_BUG_PROCESS.md) | Severity, triage |
 | [QA_REMEDIATION_LOOP.md](qa/QA_REMEDIATION_LOOP.md) | FAIL iteration policy |
 | [FLOW_QA.md](qa/FLOW_QA.md) | Game flow QA |
+| [ALIGNMENT_AUDIT.md](qa/ALIGNMENT_AUDIT.md) | Standard alignment audit + stakeholder checklist |
 | [PLAYTEST_SCRIPT.md](qa/PLAYTEST_SCRIPT.md) | 2–3h human playthrough |
 | [PLAYTEST_TELEMETRY.md](qa/PLAYTEST_TELEMETRY.md) | Telemetry tuning loop |
 | [PERFORMANCE_BASELINE.md](qa/PERFORMANCE_BASELINE.md) | FPS hardware baseline |

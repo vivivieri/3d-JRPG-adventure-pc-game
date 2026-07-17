@@ -65,6 +65,9 @@ artifacts/linear_sync_manifest.json
 artifacts/stakeholder_dashboard.html
 artifacts/stakeholder_reports/*
 !artifacts/stakeholder_reports/.gitkeep
+artifacts/alignment_audits/*
+!artifacts/alignment_audits/.gitkeep
+artifacts/alignment_dashboard.html
 artifacts/telemetry_reports/*
 !artifacts/telemetry_reports/.gitkeep
 artifacts/delivery_audit/*

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "authority": "docs/qa/ALIGNMENT_AUDIT.md",
+  "note": "Committed index of alignment audits. Full reports under artifacts/alignment_audits/<audit_id>/ (regenerate locally).",
+  "audits": [
+    {
+      "audit_id": "20260717T010000Z_session_pass1",
+      "generated_at": "2026-07-17T01:00:00Z",
+      "branch": "main",
+      "commit": "fc6b492",
+      "verdict": "AT_RISK",
+      "overall_score": 7.8,
+      "ci_pass": 30,
+      "ci_fail": 2,
+      "blocking_open": 2,
+      "recommendation_count": 8,
+      "report_json": null,
+      "note": "Session pass 1 — remediation bundle; scene_registry incomplete, zone visuals partial"
+    },
+    {
+      "audit_id": "20260717T013000Z_session_pass2",
+      "generated_at": "2026-07-17T01:30:00Z",
+      "branch": "main",
+      "commit": "97ab872",
+      "verdict": "ALIGNED",
+      "overall_score": 8.6,
+      "ci_pass": 32,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 5,
+      "report_json": null,
+      "note": "Session pass 2 — full alignment pass; 32/32 CI, registry parity OK"
+    },
+    {
+      "audit_id": "20260717T014500Z_post_pr89",
+      "generated_at": "2026-07-17T01:45:00Z",
+      "branch": "main",
+      "commit": "2b48fda",
+      "verdict": "ALIGNED",
+      "overall_score": 8.7,
+      "ci_pass": 32,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 3,
+      "report_json": null,
+      "note": "PR #89 doc nits — spirit-turtle, SC-15 flags, level triggers"
+    },
+    {
+      "audit_id": "20260717T050000Z_post_pr90",
+      "generated_at": "2026-07-17T05:00:00Z",
+      "branch": "main",
+      "commit": "9c88046",
+      "verdict": "ALIGNED",
+      "overall_score": 8.8,
+      "ci_pass": 32,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 2,
+      "report_json": null,
+      "note": "PR #90 LEVEL_DESIGN micro-nits; fourth-pass clean"
+    },
+    {
+      "audit_id": "20260717T053955Z_process_bootstrap",
+      "generated_at": "2026-07-17T05:39:55Z",
+      "branch": "main",
+      "commit": "9c88046",
+      "verdict": "ALIGNED",
+      "overall_score": 8.68,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 2,
+      "report_json": "artifacts/alignment_audits/20260717T053955Z_process_bootstrap/report.json",
+      "note": "Automated tooling bootstrap — standard audit pipeline live"
+    }
+  ],
+  "latest": {
+    "audit_id": "20260717T053955Z_process_bootstrap",
+    "generated_at": "2026-07-17T05:39:55Z",
+    "branch": "main",
+    "commit": "9c88046",
+    "verdict": "ALIGNED",
+    "overall_score": 8.68,
+    "ci_pass": 33,
+    "ci_fail": 0,
+    "blocking_open": 0,
+    "recommendation_count": 2,
+    "report_json": "artifacts/alignment_audits/20260717T053955Z_process_bootstrap/report.json",
+    "note": "Automated tooling bootstrap — standard audit pipeline live"
+  }
+}
