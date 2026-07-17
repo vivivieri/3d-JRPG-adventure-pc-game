@@ -185,10 +185,12 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 |------|-----------------|-----------|-------------|
 | `EncounterTrigger_enc_sc06_cave_crab` | SC-06 | — | Optional trash mob |
 | `PuzzleRoom_sc07` | SC-07 | `water_puzzle_solved` | Silent — no dialogue |
+| `EncounterTrigger_enc_sc07_optional_crabs` | SC-07 | — | Optional trash mob (puzzle zone) |
 | `EncounterTrigger_enc_sc08_deep_pool` | SC-08 | `deep_pool_seen` | `water_puzzle_solved`, `deep_pool_dialogue_done` (vignette → dialogue → combat) |
 | `CinematicTrigger_sc08_deep_pool_vignette` | hook | `deep_pool_vignette_seen` | After pool enter |
 | `EncounterTrigger_enc_sc09_shore_wraith` | SC-09 | `shore_wraith_defeated` | Boss |
 | `Interactable_SC-10` | SC-10 | `yuzu_joined` | Post-boss |
+| `EncounterTrigger_enc_sc10_optional_wraith` | SC-10 | — | Optional trash mob; requires `yuzu_joined` |
 | `CinematicTrigger_sc11_palace_flashback` | hook `sc11_palace_flashback` | `saw_palace_vision` (dialogue) | Letterbox flashback; requires `yuzu_joined` |
 | `ZoneTransition_dragon_palace_gate` | SC-12 | `gate_reached` | `yuzu_joined`, `wraith_pearl` |
 
@@ -200,6 +202,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 | `enc_sc07_optional_crabs` | SC-07 | Optional trash (puzzle zone) |
 | `enc_sc08_deep_pool` | SC-08 | Mob |
 | `enc_sc09_shore_wraith` | SC-09 | Boss |
+| `enc_sc10_optional_wraith` | SC-10 | Optional trash |
 
 ### Puzzle SC-07
 
@@ -236,7 +239,7 @@ Full spec: [PUZZLE_DESIGN.md](PUZZLE_DESIGN.md). Water plane Y toggles LOW/HIGH;
 
 | Node | Scene ID / hook | Sets flag | Requirement |
 |------|-----------------|-----------|-------------|
-| `CinematicTrigger_sc12_gate_reveal` | hook | — | First visit; markers `CameraMarker_sc12_*` |
+| `CinematicTrigger_sc12_gate_reveal` | hook `sc12_gate_reveal` | `sc12_gate_reveal_seen` | First visit; markers `CameraMarker_sc12_*` |
 | `SavePoint_gate` | — | — | Manual save |
 | `EncounterTrigger_enc_sc12_palace_wraiths` | SC-12 | `roku_combat_active` | Gate approach |
 | `Interactable_SC-13` | SC-13 | `knows_box_truth` | Mirror |
