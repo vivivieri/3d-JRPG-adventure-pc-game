@@ -72,20 +72,45 @@
       "recommendation_count": 2,
       "report_json": "artifacts/alignment_audits/20260717T053955Z_process_bootstrap/report.json",
       "note": "Automated tooling bootstrap — standard audit pipeline live"
+    },
+    {
+      "audit_id": "20260717T062936Z_manual",
+      "generated_at": "2026-07-17T06:29:36Z",
+      "branch": "main",
+      "commit": "5d6f642",
+      "verdict": "FAIL",
+      "overall_score": 3.45,
+      "ci_pass": 0,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 4,
+      "report_json": "artifacts/alignment_audits/20260717T062936Z_manual/report.json"
+    },
+    {
+      "audit_id": "20260717T063907Z_checklist_fix",
+      "generated_at": "2026-07-17T06:39:07Z",
+      "branch": "cursor/checklist-fixes-ec08",
+      "commit": "f14f2f0",
+      "verdict": "ALIGNED",
+      "overall_score": 8.68,
+      "ci_pass": 33,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 0,
+      "report_json": "artifacts/alignment_audits/20260717T063907Z_checklist_fix/report.json"
     }
   ],
   "latest": {
-    "audit_id": "20260717T053955Z_process_bootstrap",
-    "generated_at": "2026-07-17T05:39:55Z",
-    "branch": "main",
-    "commit": "9c88046",
+    "audit_id": "20260717T063907Z_checklist_fix",
+    "generated_at": "2026-07-17T06:39:07Z",
+    "branch": "cursor/checklist-fixes-ec08",
+    "commit": "f14f2f0",
     "verdict": "ALIGNED",
     "overall_score": 8.68,
     "ci_pass": 33,
     "ci_fail": 0,
     "blocking_open": 0,
-    "recommendation_count": 2,
-    "report_json": "artifacts/alignment_audits/20260717T053955Z_process_bootstrap/report.json",
-    "note": "Automated tooling bootstrap — standard audit pipeline live"
+    "recommendation_count": 0,
+    "report_json": "artifacts/alignment_audits/20260717T063907Z_checklist_fix/report.json"
   }
 }

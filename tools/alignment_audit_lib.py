@@ -419,9 +419,13 @@ def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = Non
     for pack in catalog.get("visual_packs", []):
         for asset in pack.get("assets", []):
             fname = asset["filename"]
-            src = None
-            if source_dir and (source_dir / fname).is_file():
-                src = source_dir / fname
+            src: Path | None = None
+            if source_dir:
+                candidate = source_dir / fname
+                if not candidate.is_absolute():
+                    candidate = ROOT / candidate
+                if candidate.is_file():
+                    src = candidate
             elif (ROOT / "docs/compliance/alignment_audit_visuals" / fname).is_file():
                 src = ROOT / "docs/compliance/alignment_audit_visuals" / fname
             manifest.append(
