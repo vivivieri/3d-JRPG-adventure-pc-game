@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "policy_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md §6",
+  "design_ref": "docs/art/RENDERING_GUIDE.md §5–§13",
+  "note": "Editor .tres presets are optional; runtime builds Environment from zone_palettes.json via ZoneVisuals.build_environment().",
+  "presets": [
+    {
+      "id": "ruined_village",
+      "zone_id": "ruined_village",
+      "path": "res://environments/ruined_village.tres",
+      "phase": 1,
+      "spec_status": "specified",
+      "source": "derived_from_palette",
+      "palette_zone_key": "ruined_village",
+      "properties": {
+        "background_mode": "sky",
+        "tonemap_mode": "filmic",
+        "ambient_light_source": "color",
+        "ambient_light_color_hex": "#B8D0E0",
+        "ambient_light_energy": 0.4,
+        "fog_enabled": true,
+        "fog_light_color_hex": "#8B9DAF",
+        "fog_density": 0.008,
+        "fog_sky_affect": 0.85,
+        "glow_enabled": true,
+        "glow_intensity": 0.35,
+        "glow_blend_mode": "softlight",
+        "volumetric_fog_enabled": true,
+        "volumetric_fog_density": 0.02,
+        "procedural_sky": {
+          "sky_top_hex": "#4A7A9A",
+          "sky_horizon_hex": "#B8D0E0",
+          "ground_horizon_hex": "#6A8A9A",
+          "ground_bottom_darken": 0.2,
+          "sun_angle_max": 28.0
+        }
+      }
+    }
+  ]
+}

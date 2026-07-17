@@ -30,13 +30,13 @@
 | **P0** | `sc03_yuzu_01` | SC-03 | Yuzu | You left. We waited. | 3s |
 | **P0** | `sc11_otohime_01` | SC-11 | Otohime | Stay, Urashima. In the palace, the world will not touch you. | 5s |
 | **P0** | `sc13_roku_01` | SC-13 | Roku | The box holds their years. Open it, they live — you won't. | 5s |
+| **P0** | `sc04_roku_01` | SC-04 | Roku | That box isn't a gift. Don't open it. | 4s |
 | **P0** | `sc16_tide_keeper_01` | SC-16 | Tide Keeper | The tide waits. So did they. | 3s |
-| **P1** | `sc01_urashima_01` | SC-01 | Urashima | Three days... it was only three days... | 3s |
+| **P1** | `sc01_urashima_01` | SC-01 / SC-17c | Urashima | Three days... (shore echo / drift ending) | 3s |
 | **P1** | `sc08_urashima_01` | SC-08 | Urashima | I know you. I left you all behind. | 3s |
-| **P1** | `sc09_shore_wraith_01` | SC-09 | Shore Wraith | You chose her over us. | 2s |
+| **P1** | `sc09_shore_wraith_01` | SC-09 | Shore Wraith | You chose the palace over us. | 2s |
 | **P1** | `sc10_yuzu_01` | SC-10 | Yuzu | I can't rest until the tide is answered. | 4s |
 | **P1** | `sc15_tide_keeper_01` | SC-15 | Tide Keeper | Paradise is mercy. You fled pain — I offered peace. | 5s |
-| **P2** | `sc04_roku_01` | SC-04 | Roku | That box isn't a gift. Don't open it. | 4s |
 | **P2** | `sc14_narrator_01` | SC-14 | Narrator | No mortal leaves with stolen time. | 3s |
 
 **Totals:** 12 clips × **3 primary VO locales** (`en`, `ja`, `zh`) + 12 clips × **2 zh-Hant dialects** (`cant`, `cmn`) = **60 OGG files**  

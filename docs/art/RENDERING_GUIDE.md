@@ -125,10 +125,10 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 
 | Zone | Fog color | Density | Aerial perspective | Notes |
 |------|-----------|---------|-------------------|-------|
-| `beach_shore` | `#9AB8C8` | 0.010 | 0.78 | Light coastal haze |
-| `ruined_village` | `#8B9DAF` | 0.008 | 0.72 | **Always on** — draw-distance mask |
-| `tidal_caves` | `#0A141C` | 0.028 | 0.48 | Heavier — depth in tunnels |
-| `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.68 | Void atmosphere |
+| `beach_shore` | `#9AB8C8` | 0.010 | 0.74 | Light coastal haze |
+| `ruined_village` | `#8B9DAF` | 0.008 | 0.75 | **Always on** — draw-distance mask |
+| `tidal_caves` | `#0A141C` | 0.028 | 0.72 | Heavier — depth in tunnels |
+| `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.78 | Void atmosphere |
 
 **Hub rule:** Fog always on in ruined village (`ART_DIRECTION.md` §3.5).  
 **Fog start:** ~20 m in village per `ENVIRONMENT_KITS.md` §4.
@@ -160,7 +160,7 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 
 | Shader | Purpose | Reference |
 |--------|---------|-----------|
-| **Water** | Gentle vertex displacement, foam edge, zone tint | `water_material.gd` on Godot branches |
+| **Water** | Gentle vertex displacement, foam edge, zone tint | `water_stylized.gdshader` |
 | **Spirit alpha** | Additive / alpha on Yuzu lower body | `CHARACTER_BIBLE.md` |
 | **Lacquer box glow** | 3 emission states by story flag | `CHARACTER_BIBLE.md` §2 |
 | **Mirror chamber** | Mirror shader SC-13 | `STORYBOARD.md` |
@@ -219,9 +219,9 @@ Apply at runtime by updating `WorldEnvironment.environment` and `DirectionalLigh
 
 | Scene | `zone_id` | WorldEnvironment | Sky | Glow | Special |
 |-------|-----------|-------------------|-----|------|---------|
-| `beach_shore.tscn` | `beach_shore` | ✅ | ProceduralSky | Off | Coastal haze |
-| `ruined_village.tscn` | `ruined_village` | ✅ | Overcast | Off | Vertical slice gate |
-| `tidal_caves.tscn` | `tidal_caves` | ✅ | Dark | On (algae) | No sky; emissive primary |
+| `beach_shore.tscn` | `beach_shore` | ✅ | ProceduralSky | Off (`glow_enabled: false`) | Coastal haze |
+| `ruined_village.tscn` | `ruined_village` | ✅ | Overcast | On emissive (`glow_use_case: emissive_only`) | Vertical slice gate |
+| `tidal_caves.tscn` | `tidal_caves` | ✅ | Dark | On (`glow_use_case: emissive_algae`) | No sky; emissive primary |
 | `dragon_palace_gate.tscn` | `dragon_palace_gate` | ✅ | Void | On | Gold directional |
 | `ending_*.tscn` | per ending | ✅ | Custom | Per scene | Fog cleared on Rewind |
 
@@ -248,15 +248,28 @@ Before marking an M5 art-pass zone complete, verify:
 
 ---
 
-## 13. Reference: current prototype (`zone_visuals.gd`)
+## 13. Reference: `zone_visuals.gd` contract
 
-On Godot implementation branches, `game/scripts/exploration/zone_visuals.gd` applies:
+**Authority:** `game/data/code/base_classes.json` (`ZoneVisuals`) · `tools/zone_visuals_lib.py` · `game/data/world/zone_palettes.json`
 
-- `WorldEnvironment` with Filmic tonemap
-- `ProceduralSkyMaterial` per zone palette
-- Zone fog density + aerial perspective
-- Glow in `dragon_palace_gate` only
-- Colored `DirectionalLight3D` per zone
+### Canonical entry (zone load)
+
+`ZoneVisuals.apply_to_scene(root, zone_id)` — static; finds `WorldEnvironment`, `DirectionalLight3D`, and nodes in group `zone_fill_light`, then applies palette data.
+
+### Instance node (in-scene)
+
+`ZoneVisuals` node with `@export zone_id` — on `_ready` calls `apply_zone_visuals()` when `apply_on_ready` is true.
+
+### Runtime behavior
+
+- `WorldEnvironment` with Filmic tonemap (`defaults.tonemap_mode`)
+- `ProceduralSkyMaterial` per zone palette row
+- Zone fog density + per-zone `aerial_perspective` from palette row (`fog_sky_affect` from defaults)
+- Glow per zone `glow_enabled` + `glow_use_case` in `zone_palettes.json` (beach off; village/caves/palace on for emissives)
+- Volumetric fog when zone row sets `volumetric_fog_enabled` (village hub)
+- Colored `DirectionalLight3D` + `OmniLight3D` fill (`zone_fill_light` group)
+
+Optional editor preset: `game/environments/ruined_village.tres` — see `environment_registry.json` (derived from palette; runtime may build via `build_environment()` instead).
 
 **Gaps to close in M5 (art rebuild):**
 
@@ -298,4 +311,4 @@ When evaluating generic “make Godot look professional” tips:
 | `docs/ui/SETTINGS_ACCESSIBILITY.md` | Graphics quality presets (§10) |
 | `game/scripts/exploration/zone_visuals.gd` | Runtime zone environment (Godot branches) |
 | `game/assets/shaders/toon_base.gdshader` | NPR ramp family (GLB post-import + zones) |
-| `game/scripts/shaders/water_material.gdshader` | Stylized water (Godot branches) |
+| `game/shaders/water_stylized.gdshader` | Stylized water (foam + displacement) |

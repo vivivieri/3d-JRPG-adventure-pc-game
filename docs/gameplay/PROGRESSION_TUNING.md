@@ -113,7 +113,7 @@ Formula: `base + growth × (level − 1)` from `party.json`.
 
 **Affordance rule:** Main path grants **≈220–280 coins** before the final boss (mandatory fights
 + Q2 reward + optional fights/material sales — computed from `enemies.json` / `main_quests.json`).
-Player can buy several salves + one charm, OR save for one 200-coin scroll — not both.
+Player can buy several salves + one charm, OR save for **0–1** skill scroll (200 coins) before the final boss — not both a full consumable stock and a scroll.
 
 ---
 

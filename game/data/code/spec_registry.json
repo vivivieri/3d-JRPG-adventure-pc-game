@@ -8,6 +8,7 @@
       "data_story_spine",
       "data_combat",
       "data_narrative_density",
+      "data_zone_visuals",
       "registry_autoloads",
       "registry_scenes_phase1_2",
       "registry_base_classes",
@@ -64,6 +65,22 @@
       "phase": 2
     },
     {
+      "id": "data_zone_visuals",
+      "kind": "data",
+      "spec_status": "specified",
+      "paths": [
+        "game/data/world/zone_palettes.json",
+        "game/data/code/environment_registry.json",
+        "game/data/code/shader_registry.json",
+        "game/data/qa/unit_test_specs.json",
+        "tools/zone_visuals_lib.py",
+        "tools/regenerate_phase1_visuals.sh",
+        "docs/technical/GDSCRIPT_REGENERATION.md"
+      ],
+      "validator": "tools/validate_zone_visuals_contract.py",
+      "phase": 1
+    },
+    {
       "id": "registry_helpers",
       "kind": "registry",
       "spec_status": "specified",
@@ -73,7 +90,8 @@
         "tools/difficulty_lib.py",
         "tools/save_integrity_lib.py",
         "tools/settings_store_lib.py",
-        "tools/achievement_evaluator_lib.py"
+        "tools/achievement_evaluator_lib.py",
+        "tools/zone_visuals_lib.py"
       ],
       "validator": "tools/validate_helpers_registry.py",
       "note": "Python reference libs on main; GDScript ports on game/development",
@@ -114,8 +132,9 @@
       "kind": "implementation",
       "spec_status": "partial",
       "branch": "game/development",
-      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7"],
+      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7", "docs/art/SHADER_SPECS.md"],
       "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
+      "note": "toon_base specified; water_stylized template partial — foam/displacement polish in P1-04",
       "phase": 1
     }
   ]

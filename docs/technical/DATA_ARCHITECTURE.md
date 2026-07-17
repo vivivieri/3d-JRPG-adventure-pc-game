@@ -87,7 +87,7 @@ One row per storyboard beat. Engine loads this for QA tools and progression vali
 | SC-12 | II | dragon_palace_gate | field | gate_reached, roku_combat_active | — |
 | SC-13 | III | dragon_palace_gate | dialogue | knows_box_truth, mirror_choice | — |
 | SC-14 | III | dragon_palace_gate | boss | sentinel_defeated | — |
-| SC-15 | III | dragon_palace_gate | boss | tide_keeper_defeated (on win); tide_keeper_phase3 (combat @ 10% HP via `on_phase_trigger`) | — |
+| SC-15 | III | dragon_palace_gate | boss | `keeper_dialogue_done` (dialogue); `tide_keeper_phase3` (combat @ 10% HP via `on_phase_trigger`); `tide_keeper_defeated` via `sc16_last_mercy_resolution` after SC-16 | — |
 | SC-16 | III | dragon_palace_gate | choice | ending_chosen | ending_* |
 | SC-17a/b/c | end | ending_* | cinematic | game_completed | — |
 

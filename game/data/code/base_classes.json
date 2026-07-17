@@ -8,7 +8,8 @@
     "res://scripts/exploration/player_controller.gd",
     "res://scripts/exploration/interactable.gd",
     "res://scripts/exploration/zone_transition.gd",
-    "res://scripts/exploration/encounter_trigger.gd"
+    "res://scripts/exploration/encounter_trigger.gd",
+    "res://scripts/exploration/zone_visuals.gd"
   ],
   "bases": [
     {
@@ -18,6 +19,14 @@
       "phase": 1,
       "agent_rule": "architect_only",
       "description": "Autoload — global typed signals only (helpers_registry.json)"
+    },
+    {
+      "id": "GameBootstrap",
+      "path": "res://scripts/core/game_bootstrap.gd",
+      "extends": "Node",
+      "phase": 0,
+      "agent_rule": "architect_only",
+      "description": "Autoload — startup JSON path validation (autoload_registry.json)"
     },
     {
       "id": "PlayerController",
@@ -41,7 +50,25 @@
       "extends": "Area3D",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Inspectables, NPC dialogue hooks — scene instances only"
+      "description": "Inspectables, NPC dialogue hooks — scene instances only",
+      "exports": [
+        { "name": "scene_id", "type": "String", "default": "" },
+        { "name": "interaction_prompt", "type": "String", "default": "Interact" }
+      ],
+      "public_api": [
+        {
+          "name": "interact",
+          "args": ["player: PlayerController"],
+          "returns": "void",
+          "note": "Calls DialogueRunner.start(scene_id) when scene_id set; else inspect flow"
+        },
+        {
+          "name": "can_interact",
+          "args": [],
+          "returns": "bool",
+          "note": "False when requires_flags/requires_items not met"
+        }
+      ]
     },
     {
       "id": "SavePoint",
@@ -57,7 +84,20 @@
       "extends": "Area3D",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Zone loads with spawn marker"
+      "description": "Zone loads with spawn marker",
+      "exports": [
+        { "name": "target_zone", "type": "String", "default": "" },
+        { "name": "spawn_marker", "type": "String", "default": "SpawnMarker_default" },
+        { "name": "requires_flags", "type": "Array[String]", "default": [] }
+      ],
+      "public_api": [
+        {
+          "name": "try_transition",
+          "args": ["body: Node3D"],
+          "returns": "void",
+          "note": "When player enters and flags pass, GameManager.change_zone(target_zone, spawn_marker)"
+        }
+      ]
     },
     {
       "id": "EncounterTrigger",
@@ -65,7 +105,47 @@
       "extends": "Area3D",
       "phase": 4,
       "agent_rule": "extend_only",
-      "description": "Starts encounter from story_encounters.json"
+      "description": "Starts encounter from story_encounters.json",
+      "exports": [
+        { "name": "encounter_id", "type": "String", "default": "" },
+        { "name": "one_shot", "type": "bool", "default": true }
+      ],
+      "public_api": [
+        {
+          "name": "try_encounter",
+          "args": ["body: Node3D"],
+          "returns": "void",
+          "note": "CombatManager.start_encounter(encounter_id) when conditions met"
+        },
+        {
+          "name": "can_trigger",
+          "args": [],
+          "returns": "bool",
+          "note": "Checks story_encounters.json requires_flags and one_shot state"
+        }
+      ]
+    },
+    {
+      "id": "BootLoader",
+      "path": "res://scripts/core/boot_loader.gd",
+      "extends": "Node",
+      "phase": 2,
+      "agent_rule": "architect_only",
+      "description": "Boot scene entry — validate data paths then load main_menu",
+      "public_api": [
+        {
+          "name": "run_boot",
+          "args": [],
+          "returns": "void",
+          "note": "GameBootstrap.validate_data_paths(); change_scene_to_file(main_menu) on success"
+        },
+        {
+          "name": "get_boot_errors",
+          "args": [],
+          "returns": "PackedStringArray",
+          "note": "Delegates to GameBootstrap.get_boot_errors()"
+        }
+      ]
     },
     {
       "id": "CombatManager",
@@ -82,6 +162,87 @@
       "phase": 4,
       "agent_rule": "architect_only",
       "description": "SPD sort, round tick — state machine owned by Architect"
+    },
+    {
+      "id": "ZoneVisuals",
+      "path": "res://scripts/exploration/zone_visuals.gd",
+      "extends": "Node3D",
+      "phase": 1,
+      "agent_rule": "architect_only",
+      "class_name": "ZoneVisuals",
+      "description": "Per-zone palette, sky, fog, and WorldEnvironment preset application",
+      "python_reference": "tools/zone_visuals_lib.py",
+      "data_ref": [
+        "game/data/world/zone_palettes.json",
+        "game/data/code/environment_registry.json"
+      ],
+      "design_ref": [
+        "docs/art/RENDERING_GUIDE.md §13",
+        "docs/art/SHADER_SPECS.md",
+        "docs/sprints/Phase1-Sprint1-issues.md §P1-01"
+      ],
+      "exports": [
+        { "name": "zone_id", "type": "String", "default": "ruined_village" },
+        { "name": "apply_on_ready", "type": "bool", "default": true }
+      ],
+      "public_api": [
+        {
+          "name": "apply_to_scene",
+          "args": ["zone_id: String"],
+          "returns": "Dictionary",
+          "static": true,
+          "note": "Canonical zone entry — returns environment, directional, fill_light, node_names bundle for Builder wiring"
+        },
+        {
+          "name": "directional_settings",
+          "args": ["zone_key: String"],
+          "returns": "Dictionary",
+          "static": true,
+          "note": "DirectionalLight3D color, shadow, rotation from palette row"
+        },
+        {
+          "name": "fill_light_settings",
+          "args": ["zone_key: String"],
+          "returns": "Dictionary",
+          "static": true,
+          "note": "OmniLight3D fill color, energy, range from palette row + defaults"
+        },
+        {
+          "name": "apply_zone_visuals",
+          "args": [
+            "world_environment: WorldEnvironment = null",
+            "directional: DirectionalLight3D = null",
+            "fill_lights: Array[OmniLight3D] = []"
+          ],
+          "returns": "void",
+          "static": false,
+          "note": "Instance method; uses export zone_id and res://data/world/zone_palettes.json"
+        },
+        {
+          "name": "build_environment",
+          "args": ["preset: Dictionary"],
+          "returns": "Environment",
+          "note": "Builds Environment from palette row + catalog defaults"
+        },
+        {
+          "name": "hex_to_color",
+          "args": ["hex: String"],
+          "returns": "Color",
+          "static": true
+        },
+        {
+          "name": "get_preset",
+          "args": ["zone_key: String", "presets: Dictionary"],
+          "returns": "Dictionary",
+          "static": true
+        }
+      ],
+      "lifecycle": [
+        { "signal": "_ready", "when": "apply_on_ready", "calls": "apply_zone_visuals()" }
+      ],
+      "constants": [
+        { "name": "PALETTE_PATH", "value": "res://data/world/zone_palettes.json" }
+      ]
     }
   ],
   "component_scenes": [

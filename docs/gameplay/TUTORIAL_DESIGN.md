@@ -26,7 +26,7 @@
 | Beat | Visual | Teach |
 |------|--------|-------|
 | 1 | Black + surf SFX | Tone |
-| 2 | Urashima nets wounded kappa-turtle spirit | Story setup (GDD §2) |
+| 2 | Urashima nets wounded spirit-turtle | Story setup (GDD §2) |
 | 3 | Brief palace montage (silhouette) | Dragon Palace exists |
 | 4 | Otohime hands lacquer box | Box origin |
 | 5 | Cut to SC-01 shore | "I thought it was three days." |
@@ -51,7 +51,7 @@
 | **Defend** | SC-05 | Combat turn 3 | "Defend — reduce damage this turn" | `tutorial_combat_done` |
 | **Intent UI** | SC-09 | Boss turn 2 | "Enemy intent — plan around telegraphed attacks" | `tutorial_intent_done` |
 | **Phase change** | SC-09 | Boss 50% HP | "Boss phase — pattern may change" | — |
-| **Party heal** | SC-10 | Post-join optional fight or SC-12 | "Yuzu — Spirit Light heals allies" | `tutorial_heal_done` |
+| **Party heal** | SC-10 | Post-join dialogue (mandatory) | "Yuzu — Spirit Light heals allies" | `tutorial_heal_done` |
 | **Limit gauge** | SC-09 or SC-15 | Gauge full | "Limit ready — devastating once-per-fight skill" | `tutorial_limit_done` |
 | **Equipment** | SC-07 chest or SC-04 | First item obtained | "Tab → Equipment — arm yourself" | `tutorial_equip_done` |
 | **Lore journal** | SC-02 | First lore read | "Tab → Lore — collected memories" | `tutorial_lore_done` |
@@ -100,9 +100,9 @@ Urashima cannot die; HP floor at 1.
 - Solo Urashima — no party menu swap
 - See `BOSS_DESIGNS.md` solo HP tune (~320)
 
-### SC-10 — Heal tutorial
-- Optional micro-fight vs 1 Tide Wraith OR scripted heal prompt in dialogue
-- Yuzu demonstrates `spirit_light` on Urashima
+### SC-10 — Heal tutorial (mandatory)
+- **Required path:** SC-10 dialogue always runs after SC-09; Yuzu demonstrates `spirit_light` in dialogue (sets `tutorial_heal_done`)
+- Optional micro-fight vs 1 Tide Wraith (`enc_sc10_optional_wraith`) reinforces heal UI for players who skip prompts
 
 ### SC-12 — Full party
 - If 3 members: prompt "Protect Yuzu — Spirit beats the Sentinel's lacquer"

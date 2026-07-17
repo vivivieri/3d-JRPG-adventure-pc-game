@@ -43,6 +43,8 @@ run_gate "L0_acceptance_catalog" python3 tools/validate_acceptance_criteria.py
 run_gate "L0_environments_catalog" python3 tools/validate_environments.py
 run_gate "L0_sprint_phases" python3 tools/validate_sprint_phases.py
 run_gate "L0_base_classes" python3 tools/validate_base_classes.py
+run_gate "L0_zone_visuals_contract" python3 tools/validate_zone_visuals_contract.py
+run_gate "L0_scene_registry" python3 tools/validate_scene_registry.py
 run_gate "L0_zone_composition" python3 tools/validate_zone_composition.py
 run_gate "L0_qa_catalog" python3 tools/validate_qa_catalog.py
 run_gate "L0_audio_qa_catalog" python3 tools/validate_audio_qa_catalog.py
@@ -60,6 +62,7 @@ run_gate "L0_no_secrets" bash tools/check_no_secrets.sh
 run_gate "L0_ship_build_security" bash tools/check_ship_build_security.sh
 run_gate "L0_player_build_protection" bash tools/check_player_build_protection.sh
 run_gate "L0_doc_sync" python3 tools/check_doc_sync.py
+run_gate "L0_alignment_audit_catalog" python3 tools/validate_alignment_audit_catalog.py
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 
 echo ""

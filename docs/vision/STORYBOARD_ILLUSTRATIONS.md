@@ -87,7 +87,7 @@ docs/pitch/illustrations/
 
 | ID | Scene | Key visual |
 |----|-------|------------|
-| SC-00 | Prologue | Kappa-turtle rescue, palace silhouette, lacquer box |
+| SC-00 | Prologue | Spirit-turtle rescue, palace silhouette, lacquer box |
 | SC-01 | Shore arrival | Urashima on grey beach, box, ruined gate distant |
 | SC-03 | Cracked torii | Low angle torii, spirit particles, no Yuzu body |
 | SC-04 | Roku shack | Interior two-shot, map handoff |
@@ -119,7 +119,7 @@ Briefs align with `STORYBOARD.md`. Use as ComfyUI/GameLab prompt body.
 
 ### SC-00 — Prologue
 - **Mood:** Mythic, fateful  
-- **Elements:** Wounded kappa-turtle spirit in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box  
+- **Elements:** Wounded spirit-turtle in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box  
 - **Palette:** Deep sea teal, gold flash, black vignette  
 
 ### SC-01 — Arrival

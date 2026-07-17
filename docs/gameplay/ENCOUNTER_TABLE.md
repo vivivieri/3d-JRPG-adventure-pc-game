@@ -53,7 +53,7 @@
 | # | Scene | Zone | Encounter | Type | Party | XP | Level after |
 |---|-------|------|-----------|------|-------|-----|-------------|
 | 2 | SC-06 | Cave entrance | Salt Crab ×1 | Scripted (avoidable) | Urashima | 30 | 2–3 |
-| 3 | SC-07 area | Flooded chamber | Salt Crab ×2 | Optional | Urashima | 60 | 3 |
+| 3 | SC-07 area | Flooded chamber (`enc_sc07_optional_crabs`) | Salt Crab ×2 | Optional | Urashima | 60 | 3 |
 | 4 | SC-08 | Deep pool | Tide Wraith ×2 | Forced | Urashima | 70 | 4 |
 | 5 | SC-09 | Boss arena | **Shore Wraith** | Boss | Urashima solo | 120 | 4–5 |
 | — | SC-10 | Shrine alcove | — | Yuzu joins | +party | — | 5 |
@@ -71,9 +71,13 @@
 | # | Scene | Zone | Encounter | Type | Party | XP | Level after |
 |---|-------|------|-----------|------|-------|-----|-------------|
 | 7 | SC-12 approach | Palace exterior | Tide Wraith ×2 | Scripted | Full party | 70 | 6 |
-| 8 | SC-14 | Sentinel hall | **Palace Sentinel** | Miniboss | Full party | 100 | 7 |
-| — | SC-13 | Mirror chamber | — | Dialogue only | — | — | — |
-| 9 | SC-15 | Throne arena | **Tide Keeper** | Final boss | Full party | 250 | 8–10 |
+| 8 | SC-13 | Mirror chamber | — | Dialogue only | — | — | — |
+| 9 | SC-14 | Sentinel hall | **Palace Sentinel** | Miniboss | Full party | 100 | 7 |
+| 10 | SC-15 | Throne arena | **Tide Keeper** | Final boss | Full party | 250 | 8–10 |
+
+**Gate:** SC-13 mirror dialogue sets `knows_box_truth` — required before SC-14 encounter (`enc_sc14_sentinel` `requires_flags`). `sentinel_dialogue_done` is set **after** SC-14 pre-fight dialogue, not as a gate.
+
+**Flee policy:** `escape_allowed: true` only on optional/avoidable encounters (SC-06, SC-07, SC-10). Bosses and story-forced fights block flee (`COMBAT_SYSTEMS.md` §2).
 
 **No fights after choice gate (SC-16).**
 

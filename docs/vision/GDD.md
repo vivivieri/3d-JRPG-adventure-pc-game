@@ -27,7 +27,7 @@ You explore a stylized coastal world, reunite with echoes of the past, and fight
 A fisherman saves a turtle, visits the Dragon Palace beneath the sea, spends what feels like days with Princess Otohime, then returns home with a forbidden box. His village is gone; centuries have passed. He opens the box and ages instantly.
 
 ### Our dark adaptation
-- **Opening:** Urashima saves a wounded sea spirit (not a cartoon turtle — a sacred kappa-turtle hybrid).
+- **Opening:** Urashima saves a wounded sea spirit (not a cartoon turtle — a sacred spirit-turtle of the coast).
 - **Dragon Palace:** Beauty with unease — perfect, sterile, no children, no seasons.
 - **Return:** Not just aged — the village is a **ruin overtaken by the sea**. Survivors are spirits bound to objects.
 - **The box:** Contains not age, but **the village's stolen years** — fuel for a final choice.
@@ -184,7 +184,7 @@ Roku reveals box truth. Assault palace gate. Final choice + boss.
 | Confirm | Enter / Space |
 | Cancel | Esc |
 
-Full controller support planned for polish milestone.
+**Gamepad:** Full main-path playable on Xbox-layout controller (M5 polish). See `docs/gameplay/PLAYER_CONTROLS.md` and `docs/ui/UI_UX_FLOW.md` §11. No remapping v1.
 
 ---
 

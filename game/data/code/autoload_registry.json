@@ -27,7 +27,8 @@
         { "name": "get_flag", "args": ["name: String"], "returns": "Variant", "description": "Read story flag" },
         { "name": "set_flag", "args": ["name: String", "value: Variant"], "returns": "void", "description": "Write flag; emits EventBus.flag_changed" },
         { "name": "change_zone", "args": ["zone_id: String", "spawn_marker: String"], "returns": "void", "description": "Load zone scene per scene_registry" },
-        { "name": "apply_new_game", "args": [], "returns": "void", "description": "Load starting/new_game.json party and flags" }
+        { "name": "apply_new_game", "args": [], "returns": "void", "description": "Load starting/new_game.json party and flags" },
+        { "name": "load_ending", "args": ["ending_id: String"], "returns": "void", "description": "Load ending zone scene per scene_registry + ending_chosen flag" }
       ]
     },
     {
@@ -73,6 +74,30 @@
         { "name": "set_locale", "args": ["locale: String"], "returns": "void", "description": "en | ja | zh | zh-Hant" },
         { "name": "tr", "args": ["key: String"], "returns": "String", "description": "CSV key lookup" },
         { "name": "resolve_inline", "args": ["obj: Dictionary"], "returns": "String", "description": "Pick current locale from inline text object" }
+      ]
+    },
+    {
+      "id": "FontThemeManager",
+      "script_path": "res://scripts/ui/font_theme_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/technical/LOCALIZATION.md §9"],
+      "responsibility": "Locale-aware Noto font swap for UI + dialogue",
+      "public_api": [
+        { "name": "apply_dialogue_fonts", "args": ["locale: String"], "returns": "void" },
+        { "name": "apply_ui_fonts", "args": ["locale: String"], "returns": "void" }
+      ]
+    },
+    {
+      "id": "DialogueUiManager",
+      "script_path": "res://scripts/ui/dialogue_ui_manager.gd",
+      "phase": 2,
+      "spec_status": "specified",
+      "design_ref": ["docs/technical/LOCALIZATION.md §9", "game/scenes/ui/dialogue_box.tscn"],
+      "responsibility": "Attach dialogue overlay; emit dialogue_started/line/finished",
+      "public_api": [
+        { "name": "show_line", "args": ["speaker: String", "text: String"], "returns": "void" },
+        { "name": "hide", "args": [], "returns": "void" }
       ]
     },
     {
@@ -136,9 +161,14 @@
       "design_ref": ["docs/gameplay/COMBAT_SYSTEMS.md §10", "game/data/combat/difficulty.json"],
       "responsibility": "Normal/Hard multipliers — RefCounted helper, not autoload",
       "autoload": false,
+      "helpers_ref": "DifficultyService in helpers_registry.json",
       "public_api": [
-        { "name": "get_multiplier", "args": ["stat: String"], "returns": "float" },
-        { "name": "is_hard_mode", "args": [], "returns": "bool" }
+        { "name": "load_catalog", "returns": "Dictionary", "static": true },
+        { "name": "active_mode_id", "args": ["settings: Dictionary"], "returns": "String", "static": true },
+        { "name": "scale_enemy_hp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "scale_enemy_atk", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
+        { "name": "is_hard_mode", "args": ["settings: Dictionary"], "returns": "bool", "static": true },
+        { "name": "boss_shows_intent_preview", "args": ["phase: int", "is_boss: bool", "settings: Dictionary"], "returns": "bool", "static": true }
       ]
     },
     {
@@ -149,9 +179,12 @@
       "design_ref": ["docs/qa/SECURITY.md", "docs/technical/SAVE_AND_FAIL_STATES.md"],
       "responsibility": "Save HMAC verify/sign",
       "autoload": false,
+      "helpers_ref": "SaveIntegrity in helpers_registry.json",
       "public_api": [
-        { "name": "sign", "args": ["payload: String"], "returns": "String" },
-        { "name": "verify", "args": ["payload: String", "sig: String"], "returns": "bool" }
+        { "name": "canonical_json", "args": ["save: Dictionary"], "returns": "String", "static": true },
+        { "name": "sign", "args": ["save: Dictionary", "pepper_override: String"], "returns": "String", "static": true },
+        { "name": "attach", "args": ["save: Dictionary", "pepper_override: String"], "returns": "Dictionary", "static": true },
+        { "name": "verify", "args": ["save: Dictionary", "pepper_override: String"], "returns": "bool", "static": true }
       ]
     }
   ]

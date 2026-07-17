@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "design_ref": "docs/art/SHADER_SPECS.md",
+  "note": "Shader source files ship on game/development; this registry is the regeneration contract.",
+  "shaders": [
+    {
+      "id": "toon_base",
+      "path": "res://shaders/toon_base.gdshader",
+      "template_path": "tools/godot_templates/shaders/toon_base.gdshader",
+      "phase": 1,
+      "spec_status": "specified",
+      "render_mode": ["diffuse_toon", "specular_toon"],
+      "uniforms": [
+        {
+          "name": "base_color",
+          "type": "vec4",
+          "default": [1.0, 1.0, 1.0, 1.0],
+          "hint": "source_color"
+        },
+        {
+          "name": "albedo_texture",
+          "type": "sampler2D",
+          "hint": "source_color, filter_linear_mipmap, repeat_enable"
+        },
+        {
+          "name": "emission_color",
+          "type": "vec4",
+          "default": [0.0, 0.0, 0.0, 0.0],
+          "hint": "source_color"
+        },
+        {
+          "name": "emission_energy",
+          "type": "float",
+          "default": 0.0,
+          "range": [0.0, 4.0, 0.01]
+        }
+      ],
+      "fragment_behavior": {
+        "albedo": "texture(albedo_texture, UV).rgb * base_color.rgb",
+        "roughness": 1.0,
+        "metallic": 0.0,
+        "emission": "emission_color.rgb * emission_energy when emission_energy > 0"
+      }
+    },
+    {
+      "id": "water_stylized",
+      "path": "res://shaders/water_stylized.gdshader",
+      "template_path": "tools/godot_templates/shaders/water_stylized.gdshader",
+      "phase": 1,
+      "spec_status": "partial",
+      "uniforms": [
+        { "name": "zone_tint", "type": "vec4", "source": "ENVIRONMENT_KITS.md per zone" },
+        { "name": "foam_edge_width", "type": "float", "default": 0.08 },
+        { "name": "wave_height", "type": "float", "default": 0.1 },
+        { "name": "wave_speed", "type": "float", "default": 0.3 }
+      ]
+    },
+    {
+      "id": "spirit_lower_body",
+      "path": "res://shaders/spirit_lower_body.gdshader",
+      "phase": 5,
+      "spec_status": "specified",
+      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/CHARACTER_BIBLE.md",
+      "render_mode": ["blend_mix"],
+      "uniforms": [
+        { "name": "emissive_color", "type": "vec4", "default": [0.29, 0.91, 0.85, 1.0] },
+        { "name": "fade_height", "type": "float", "default": 0.45 },
+        { "name": "noise_scroll", "type": "vec2", "default": [0.02, 0.01] }
+      ]
+    },
+    {
+      "id": "lacquer_box",
+      "path": "res://shaders/lacquer_box.gdshader",
+      "phase": 5,
+      "spec_status": "specified",
+      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/CHARACTER_BIBLE.md",
+      "extends": "toon_base",
+      "uniforms": [
+        { "name": "box_glow_state", "type": "int", "default": 0, "range": [0, 2] }
+      ]
+    },
+    {
+      "id": "mirror_chamber",
+      "path": "res://shaders/mirror_chamber.gdshader",
+      "phase": 6,
+      "spec_status": "specified",
+      "design_ref": "docs/art/SHADER_SPECS.md §3",
+      "uniforms": [
+        { "name": "distortion_strength", "type": "float", "default": 0.12 },
+        { "name": "fog_tint", "type": "vec4", "default": [0.29, 0.91, 0.85, 1.0] }
+      ]
+    },
+    {
+      "id": "ink_combat_overlay",
+      "path": "res://shaders/ink_combat_overlay.gdshader",
+      "phase": 4,
+      "spec_status": "specified",
+      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/COMBAT_PRESENTATION.md",
+      "shader_type": "canvas_item",
+      "uniforms": [
+        { "name": "ink_strength", "type": "float", "default": 0.8 },
+        { "name": "pulse_duration", "type": "float", "default": 0.35 }
+      ]
+    }
+  ]
+}

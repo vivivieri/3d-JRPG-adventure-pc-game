@@ -50,6 +50,7 @@ python3 tools/validate_spec_registry.py      # L0_spec_registry
 python3 tools/validate_helpers_registry.py   # L0_helpers_registry
 python3 tools/test_reference_libs.py         # L0_reference_libs
 bash tools/regenerate_core_helpers.sh        # checklist + both checks
+bash tools/regenerate_phase1_visuals.sh      # P1-01 zone visuals + toon shader checklist
 bash tools/check_main_no_ship_code.sh        # L0_main_no_ship_code (main branch only)
 ```
 
@@ -109,8 +110,9 @@ Never implement behavior on `game/development` that is not yet specified on `mai
 | Core helpers | **Specified** | `helpers_registry.json` + `tools/*_lib.py` on `main` |
 | Base classes | **Specified** | `base_classes.json` + TDD §2 |
 | Zone scene graphs | **Specified** | `scene_registry.json` + `LEVEL_DESIGN.md` |
-| Shader source files | **Partial** | Behavior in `ART_DIRECTION` / `RENDERING_GUIDE`; `.gdshader` files land Phase 1 on dev |
-| Unit test `.gd` | **Partial** | `AI_TESTING_SPEC.md`; test files land with implementation |
+| Shader source files | **Specified** | `shader_registry.json` + `SHADER_SPECS.md`; `.gdshader` on dev |
+| Zone visuals | **Specified** | `zone_palettes.json`, `environment_registry.json`, `zone_visuals_lib.py` |
+| Unit test `.gd` | **Specified** | `unit_test_specs.json` mirrors `test_reference_libs.py` cases |
 
 Run `python3 tools/validate_spec_registry.py` for the live gate result.
 
@@ -168,6 +170,7 @@ Changing behavior or APIs?
        → PM: run_pm_orchestrator.sh
        → Worker: run_agent_session_gate.sh <role> <issue_id>
        → Architect: .gd / tests OR Builder: GDAI scenes
+       → Phase 1 visuals: docs/technical/GDSCRIPT_REGENERATION.md §10
        → QA: gate report on PR
 ```
 
@@ -203,7 +206,7 @@ bash tools/run_agent_session_gate.sh ...    # dispatch (game/development workers
 ## 11. Cross-refs
 
 - `docs/workflow/BRANCHING.md` — branch merge policy  
-- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers on `game/development`  
+- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers + Phase 1 visuals on `game/development`  
 - `docs/technical/TECHNICAL_DESIGN.md` — runtime architecture (prose + diagrams)  
 - `docs/technical/CODE_BASE_CLASS_RULES.md` — who writes bases vs instances  
 - `docs/workflow/IMPLEMENTATION_PLAN.md` — phase task list (execution on `game/development`)

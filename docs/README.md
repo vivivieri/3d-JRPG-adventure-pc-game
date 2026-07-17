@@ -42,7 +42,7 @@
 | 1 | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | What to build, in what order (Phases 0–8) |
 | 1b | [BRANCHING.md](workflow/BRANCHING.md) | `main` = docs/data · `game/development` = implementation |
 | 1b2 | [SPEC_FIRST_DEVELOPMENT.md](technical/SPEC_FIRST_DEVELOPMENT.md) | Complete specs on `main`; code after `SPEC_DEV_START` |
-| 1b3 | [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Rebuild core helpers from Python refs |
+| 1b3 | [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Rebuild core helpers + Phase 1 visuals from specs |
 | 1c | [ENVIRONMENTS.md](ci-cd/ENVIRONMENTS.md) | dev · qa · uat · preprod · prod promotion |
 | 1d | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) | Phase-gated Agile + sprint map |
 | 2 | [MILESTONES.md](workflow/MILESTONES.md) | Deliverable checklist |
@@ -72,6 +72,7 @@
 | Write GDScript | [CODE_STYLE.md](technical/CODE_STYLE.md) + [TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) |
 | Place zones | [LEVEL_DESIGN.md](world/LEVEL_DESIGN.md) |
 | Tune combat | [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](gameplay/PROGRESSION_TUNING.md) |
+| Combat presentation | [COMBAT_PRESENTATION.md](art/COMBAT_PRESENTATION.md) + [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) |
 | Lighting / materials | [RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) + [ENVIRONMENT_KITS.md](world/ENVIRONMENT_KITS.md) |
 | Generate art | [ART_AUTOMATION_PIPELINE.md](art/ART_AUTOMATION_PIPELINE.md) · [GENERATION_READINESS.md](art/GENERATION_READINESS.md) |
 | Run agents / MCP | [MCP_STACK.md](agents/MCP_STACK.md) + [AGENTS.md](../AGENTS.md) |
@@ -114,6 +115,7 @@
 | Doc | Purpose |
 |-----|---------|
 | [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) | Turn order, elements, intent UI |
+| [PLAYER_CONTROLS.md](gameplay/PLAYER_CONTROLS.md) | Keyboard, mouse, gamepad map |
 | [SKILLS_BIBLE.md](gameplay/SKILLS_BIBLE.md) | Player + enemy skills |
 | [BOSS_DESIGNS.md](gameplay/BOSS_DESIGNS.md) | Boss fights, emotional facets |
 | [ENCOUNTER_TABLE.md](gameplay/ENCOUNTER_TABLE.md) | Pacing, XP, drops |
@@ -138,7 +140,7 @@
 | [TECH_STACK.md](technical/TECH_STACK.md) | Godot 4.7, plugin versions |
 | [PLUGIN_COMPATIBILITY.md](technical/PLUGIN_COMPATIBILITY.md) | GDAI, Godotiq, MCP Pro |
 | [SPEC_FIRST_DEVELOPMENT.md](technical/SPEC_FIRST_DEVELOPMENT.md) | Spec on `main`; code after gate |
-| [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Core helper port workflow |
+| [GDSCRIPT_REGENERATION.md](technical/GDSCRIPT_REGENERATION.md) | Core helper + Phase 1 visuals port workflow |
 
 ---
 
@@ -157,7 +159,9 @@
 | Doc | Purpose |
 |-----|---------|
 | [ART_DIRECTION.md](art/ART_DIRECTION.md) | Palette, silhouettes, muted-coastal look |
+| [COMBAT_PRESENTATION.md](art/COMBAT_PRESENTATION.md) | Arena layout, ink overlay, combat VFX tiers |
 | [RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) | Tonemap, fog, glow, zone presets |
+| [SHADER_SPECS.md](art/SHADER_SPECS.md) | Spirit, box, mirror, water shader specs |
 | [CHARACTER_BIBLE.md](art/CHARACTER_BIBLE.md) | Models, portraits, rig |
 | [ITEMS_3D_MODEL_GUIDE.md](art/ITEMS_3D_MODEL_GUIDE.md) | Props, weapons, pickups |
 | [ART_AUTOMATION_PIPELINE.md](art/ART_AUTOMATION_PIPELINE.md) | Automated art/audio tiers |
@@ -189,6 +193,7 @@
 | [QA_AND_BUG_PROCESS.md](qa/QA_AND_BUG_PROCESS.md) | Severity, triage |
 | [QA_REMEDIATION_LOOP.md](qa/QA_REMEDIATION_LOOP.md) | FAIL iteration policy |
 | [FLOW_QA.md](qa/FLOW_QA.md) | Game flow QA |
+| [ALIGNMENT_AUDIT.md](qa/ALIGNMENT_AUDIT.md) | Standard alignment audit + stakeholder checklist |
 | [PLAYTEST_SCRIPT.md](qa/PLAYTEST_SCRIPT.md) | 2–3h human playthrough |
 | [PLAYTEST_TELEMETRY.md](qa/PLAYTEST_TELEMETRY.md) | Telemetry tuning loop |
 | [PERFORMANCE_BASELINE.md](qa/PERFORMANCE_BASELINE.md) | FPS hardware baseline |

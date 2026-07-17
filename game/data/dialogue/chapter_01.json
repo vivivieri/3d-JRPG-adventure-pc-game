@@ -208,7 +208,9 @@
       ],
       "on_complete": {
         "set_flags": [
-          "inspected_banner"
+          "inspected_banner",
+          "tutorial_interact_done",
+          "tutorial_lore_done"
         ]
       }
     },
@@ -294,7 +296,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "inspected_well"
+          "inspected_well",
+          "tutorial_save_done"
         ]
       }
     },
@@ -339,7 +342,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "met_yuzu_spirit"
+          "met_yuzu_spirit",
+          "tutorial_dialogue_done"
         ],
         "start_quest": "echoes_at_torii"
       }
@@ -384,20 +388,45 @@
           "speaker": "roku",
           "portrait": "roku_grim",
           "text": {
-            "en": "That box isn't a gift. Don't open it. The caves below — start there.",
-            "ja": "あの箱は贈り物じゃない。開くな。下の潮穴からだ。",
-            "zh": "那盒子不是礼物。别打开。从下面的潮穴开始。",
-            "zh-Hant": "那盒子不是禮物。別開啟。從下面的潮穴開始。"
+            "en": "That box isn't a gift. Don't open it.",
+            "ja": "あの箱は贈り物じゃない。開くな。",
+            "zh": "那盒子不是礼物。别打开。",
+            "zh-Hant": "那盒子不是禮物。別開啟。"
           },
           "emotion": "urgent",
           "voice_id": "sc04_roku_01",
-          "vo_tier": "p2"
+          "vo_tier": "p0"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_grim",
+          "text": {
+            "en": "The caves below — start there.",
+            "ja": "下の潮穴からだ。",
+            "zh": "从下面的潮穴开始。",
+            "zh-Hant": "從下面的潮穴開始。"
+          },
+          "emotion": "urgent"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_grim",
+          "text": {
+            "en": "When the tide turns wrong, I dive. You may have to do the same.",
+            "ja": "潮が狂うとき、俺は潜る。お前もそうするかもしれない。",
+            "zh": "潮水反常时，我会下水。你也许也得如此。",
+            "zh-Hant": "潮水反常時，我會下水。你也許也得如此。"
+          },
+          "emotion": "grim"
         }
       ],
       "on_complete": {
         "set_flags": [
           "met_roku",
-          "cave_entrance_unlocked"
+          "cave_entrance_unlocked",
+          "tutorial_shop_done",
+          "tutorial_menu_done",
+          "tutorial_equip_done"
         ],
         "grant_key_items": [
           "cave_map"
@@ -543,10 +572,10 @@
           "speaker": "shore_wraith",
           "portrait": "",
           "text": {
-            "en": "You chose her over us.",
-            "ja": "お前は私たちより彼女を選んだ。",
-            "zh": "你选择了她，而不是我们。",
-            "zh-Hant": "你選擇了她，而不是我們。"
+            "en": "You chose the palace over us.",
+            "ja": "お前は私たちより宮殿を選んだ。",
+            "zh": "你选择了宫殿，而不是我们。",
+            "zh-Hant": "你選擇了宮殿，而不是我們。"
           },
           "emotion": "neutral",
           "voice_id": "sc09_shore_wraith_01",
@@ -573,6 +602,17 @@
       "lines": [
         {
           "speaker": "yuzu",
+          "portrait": "yuzu_wounded",
+          "text": {
+            "en": "The wraith's tide cut me when I tried to hold you back. It still burns.",
+            "ja": "霊の潮が、あなたを引き留めようとした私を切った。まだ焼けている。",
+            "zh": "我试图拉住你时，亡魂的潮水割伤了我。伤口仍在灼痛。",
+            "zh-Hant": "我試圖拉住你時，亡魂的潮水割傷了我。傷口仍在灼痛。"
+          },
+          "emotion": "pain"
+        },
+        {
+          "speaker": "yuzu",
           "portrait": "yuzu_resolved",
           "text": {
             "en": "The wraith was our sorrow given shape. It cannot rest — and neither can I.",
@@ -597,14 +637,25 @@
           "speaker": "yuzu",
           "portrait": "yuzu_resolved",
           "text": {
-            "en": "I can't rest until the tide is answered. Let me walk with you, Urashima.",
-            "ja": "潮に答えが出るまで休めない。一緒に歩かせて、浦島。",
-            "zh": "在潮水得到回应之前我无法安息。让我与你同行，浦岛。",
-            "zh-Hant": "在潮水得到回應之前我無法安息。讓我與你同行，浦島。"
+            "en": "I can't rest until the tide is answered.",
+            "ja": "潮に答えが出るまで休めない。",
+            "zh": "在潮水得到回应之前我无法安息。",
+            "zh-Hant": "在潮水得到回應之前我無法安息。"
           },
           "emotion": "resolve",
           "voice_id": "sc10_yuzu_01",
           "vo_tier": "p1"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_resolved",
+          "text": {
+            "en": "Let me walk with you, Urashima.",
+            "ja": "一緒に歩かせて、浦島。",
+            "zh": "让我与你同行，浦岛。",
+            "zh-Hant": "讓我與你同行，浦島。"
+          },
+          "emotion": "resolve"
         },
         {
           "speaker": "urashima",
@@ -620,7 +671,8 @@
       ],
       "on_complete": {
         "set_flags": [
-          "yuzu_joined"
+          "yuzu_joined",
+          "tutorial_heal_done"
         ],
         "add_party": [
           "yuzu"
@@ -737,6 +789,17 @@
     {
       "scene_id": "SC-13",
       "lines": [
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "The mirror shows what the folk tale never said: the palace keeps years like shells from the shore.",
+            "ja": "鏡は民話が語らなかったことを映す——宮は岸の貝のように年を奪う。",
+            "zh": "镜子映出民间传说未曾言明之事：龙宫像拾贝壳一样取走岁月。",
+            "zh-Hant": "鏡子映出民間傳說未曾言明之事：龍宮像拾貝殼一樣取走歲月。"
+          },
+          "emotion": "revelation"
+        },
         {
           "speaker": "roku",
           "portrait": "roku_serious",
@@ -1055,6 +1118,15 @@
             "zh": "拒绝交易。让大海守住秘密。",
             "zh-Hant": "拒絕交易。讓大海守住秘密。"
           },
+          "subtext_warm": {
+            "en": "You couldn't choose in the mirror. Walk — let the tide decide what you owe.",
+            "ja": "鏡では選べなかった。歩め——潮に借りを決めさせよ。",
+            "zh": "你在镜前未能抉择。走吧——让潮水判定你所欠。",
+            "zh-Hant": "你在鏡前未能抉擇。走吧——讓潮水判定你所欠。"
+          },
+          "subtext_warm_requires_flags": {
+            "mirror_choice": "unknown"
+          },
           "set_flags": {
             "ending_chosen": "drift"
           }
@@ -1076,6 +1148,17 @@
             "zh-Hant": "村莊重獲生機。在節慶邊緣，浦島如泡沫消散。"
           },
           "emotion": "neutral"
+        },
+        {
+          "speaker": "yuzu",
+          "portrait": "yuzu_gentle",
+          "text": {
+            "en": "The breeze knows your name. It always did.",
+            "ja": "風はあなたの名を知っている。ずっと、知っていた。",
+            "zh": "风知道你的名字。它一直都知道。",
+            "zh-Hant": "風知道你的名字。它一直都知道。"
+          },
+          "emotion": "gentle"
         }
       ],
       "on_complete": {
@@ -1097,6 +1180,17 @@
             "zh-Hant": "靈魂沉入土地。六種下新苗。浦島老去，卻仍在。"
           },
           "emotion": "neutral"
+        },
+        {
+          "speaker": "roku",
+          "portrait": "roku_quiet",
+          "text": {
+            "en": "Slow growth. Honest tide.",
+            "ja": "ゆっくり育て。正直な潮だ。",
+            "zh": "慢慢长。诚实的潮汐。",
+            "zh-Hant": "慢慢長。誠實的潮汐。"
+          },
+          "emotion": "quiet"
         }
       ],
       "on_complete": {
@@ -1118,6 +1212,30 @@
             "zh-Hant": "小船漸小。海浪之下宮殿閃爍——仍在等待。"
           },
           "emotion": "neutral"
+        },
+        {
+          "speaker": "narrator",
+          "portrait": "",
+          "text": {
+            "en": "Far below, a silhouette moves behind gold lattice — Otohime, watching the tide carry him away.",
+            "ja": "遥か下で、金の格子の向こうに影が動く——乙姫が、潮に運ばれる彼を見送っている。",
+            "zh": "深处金格之后人影微动——乙姬目送潮水将他带走。",
+            "zh-Hant": "深處金格之後人影微動——乙姬目送潮水將他帶走。"
+          },
+          "emotion": "melancholy"
+        },
+        {
+          "speaker": "urashima",
+          "portrait": "urashima_weary",
+          "text": {
+            "en": "Three days... I thought it was three days.",
+            "ja": "三日……三日だと思っていた。",
+            "zh": "三天……我以为只是三天。",
+            "zh-Hant": "三天……我以為只是三天。"
+          },
+          "emotion": "whisper",
+          "voice_id": "sc01_urashima_01",
+          "vo_tier": "p1"
         }
       ],
       "on_complete": {

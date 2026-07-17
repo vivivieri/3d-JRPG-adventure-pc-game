@@ -17,7 +17,12 @@
     "hard_mode": { "type": "bool", "default": false, "design_ref": "docs/gameplay/COMBAT_SYSTEMS.md §10" },
     "hints_enabled": { "type": "bool", "default": true },
     "intent_contrast": { "type": "enum", "values": ["standard", "high_contrast"], "default": "standard" },
-    "graphics_quality": { "type": "enum", "values": ["low", "medium", "high"], "default": "medium" }
+    "graphics_quality": { "type": "enum", "values": ["low", "medium", "high"], "default": "medium" },
+    "shadows_enabled": { "type": "bool", "default": true, "design_ref": "docs/art/RENDERING_GUIDE.md §10" },
+    "msaa": { "type": "enum", "values": ["off", "2x", "4x"], "default": "2x" },
+    "glow_enabled": { "type": "bool", "default": true, "design_ref": "docs/art/RENDERING_GUIDE.md §9–§11" },
+    "fog_density_scale": { "type": "float", "min": 0.5, "max": 1.5, "default": 1.0 },
+    "reduced_motion": { "type": "bool", "default": false, "design_ref": "docs/ui/SETTINGS_ACCESSIBILITY.md" }
   },
   "achievement_settings_keys": ["hard_mode"]
 }

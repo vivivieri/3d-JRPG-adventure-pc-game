@@ -15,10 +15,10 @@
 |-------|--------|
 | **Location** | Black / montage — sea, palace silhouette |
 | **Camera** | Slow fades; letterbox optional |
-| **Summary** | Urashima saves wounded kappa-turtle spirit. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
+| **Summary** | Urashima saves wounded spirit-turtle. Brief Dragon Palace visit. Otohime gives lacquer box. "Three days." |
 | **Gameplay** | Non-interactive; skippable after 3s (hold Confirm after first play) |
 | **Mood** | Mythic, fateful |
-| **Assets** | Kappa-turtle spirit silhouette, box, palace gold flash |
+| **Assets** | Spirit-turtle silhouette, box, palace gold flash |
 | **Flag** | `prologue_seen` |
 
 ### SC-01 — Arrival at the Shore
@@ -115,7 +115,7 @@
 |-------|--------|
 | **Location** | Tidal Caves — boss arena |
 | **Camera** | Low dramatic angle; boss intro pan |
-| **Summary** | Colossal wraith forms from pooled regret. "You chose her over us." |
+| **Summary** | Colossal wraith forms from pooled regret. "You chose the palace over us." |
 | **Gameplay** | Boss fight; teaches intent UI and phase change at 50% HP |
 | **Mood** | Confrontational, tragic |
 | **Assets** | Shore Wraith boss model, arena (`cave_boss_arena_ring`), boss HP bar |

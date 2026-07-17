@@ -46,7 +46,7 @@ From `GDD.md` §2 and `STORYBOARD.md`:
 | No villain princess | Otohime seductive, not cruel |
 | Bittersweet endings | No ending labeled “good” or “bad” |
 
-**Folklore anchor:** Public-domain *Urashima Tarō* — kappa-turtle rescue, Dragon Palace, forbidden box, centuries passed. We darken: spirits bound to objects, box holds **village years**, not personal age alone.
+**Folklore anchor:** Public-domain *Urashima Tarō* — spirit-turtle rescue, Dragon Palace, forbidden box, centuries passed. We darken: spirits bound to objects, box holds **village years**, not personal age alone.
 
 ---
 
@@ -114,7 +114,7 @@ From `GDD.md` §2 and `STORYBOARD.md`:
 | Enemy | Voice |
 |-------|-------|
 | Salt Crab | One line pre-fight (`SC-05`); no mid-combat chatter v1 |
-| Shore Wraith | Accusatory collective: *"You chose her over us."* |
+| Shore Wraith | Accusatory collective: *"You chose the palace over us."* |
 | Palace Sentinel | Formal guardian: duty, stolen time |
 | Tide Keeper | See above |
 

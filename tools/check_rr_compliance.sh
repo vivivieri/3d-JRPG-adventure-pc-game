@@ -40,8 +40,8 @@ echo ""
 BRANCH="$(git -C "$ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
 
 if [[ ! -d "$SCENES_DIR" ]]; then
-  if [[ "$BRANCH" == "main" ]]; then
-    ok "main branch — no game/scenes tree (spec-first baseline)"
+  if [[ "$BRANCH" == "main" ]] || [[ ! -f "$PROJECT_GODOT" ]]; then
+    ok "spec-first baseline — no game/scenes tree (branch=$BRANCH)"
     echo ""
     echo "R&R compliance: PASS"
     exit 0

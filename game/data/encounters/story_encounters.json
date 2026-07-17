@@ -19,6 +19,8 @@
       "trigger": "CaveEntranceCrab",
       "enemies": ["salt_crab"],
       "party": ["urashima"],
+      "optional": true,
+      "escape_allowed": true,
       "on_win": { "set_flags": [] }
     },
     {
@@ -29,6 +31,7 @@
       "enemies": ["salt_crab", "salt_crab"],
       "party": ["urashima"],
       "optional": true,
+      "escape_allowed": true,
       "on_win": { "set_flags": [] }
     },
     {
@@ -50,7 +53,7 @@
       "enemies": ["shore_wraith"],
       "party": ["urashima"],
       "boss": true,
-      "on_win": { "set_flags": ["shore_wraith_defeated"], "grant_items": ["wraith_pearl"] }
+      "on_win": { "set_flags": ["shore_wraith_defeated", "tutorial_intent_done", "tutorial_limit_done"], "grant_items": ["wraith_pearl"] }
     },
     {
       "id": "enc_sc10_optional_wraith",
@@ -61,6 +64,7 @@
       "party": ["urashima", "yuzu"],
       "optional": true,
       "requires_flags": ["yuzu_joined"],
+      "escape_allowed": true,
       "on_win": { "set_flags": [] }
     },
     {
@@ -82,6 +86,9 @@
       "enemies": ["palace_sentinel"],
       "party": ["urashima", "yuzu", "roku"],
       "boss": true,
+      "requires_flags": ["knows_box_truth"],
+      "cinematic_hook": "sc14_sentinel_breather",
+      "escape_allowed": false,
       "on_win": { "set_flags": ["sentinel_defeated"], "grant_items": ["palace_edge"] }
     },
     {
@@ -92,8 +99,11 @@
       "enemies": ["tide_keeper"],
       "party": ["urashima", "yuzu", "roku"],
       "boss": true,
+      "requires_flags": ["sentinel_defeated"],
+      "escape_allowed": false,
       "on_phase_trigger": { "set_flags": ["tide_keeper_phase3"] },
-      "on_win": { "set_flags": ["tide_keeper_defeated"] }
+      "on_win": { "set_flags": [] },
+      "note": "tide_keeper_defeated set by sc16_last_mercy_resolution hook after SC-16 choice + Last Mercy cosmetic"
     }
   ]
 }

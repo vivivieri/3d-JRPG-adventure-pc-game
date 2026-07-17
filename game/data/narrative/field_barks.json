@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "design_ref": "docs/vision/NARRATIVE_WRITING_GUIDE.md §11.D",
+  "note": "One bark per flag per zone max — ambient field VO/text, not full scenes.",
+  "barks": [
+    {
+      "id": "roku_after_shore_wraith",
+      "zone": "tidal_caves",
+      "speaker": "roku",
+      "requires_flags": ["shore_wraith_defeated"],
+      "once": true,
+      "sets_flags": ["bark_roku_after_shore_wraith"],
+      "text": {
+        "en": "They forgave you enough to let go. Don't waste that.",
+        "ja": "彼らは手放すだけの許しをくれた。無駄にするな。",
+        "zh": "他们宽恕你，才肯放手。别辜负。",
+        "zh-Hant": "他們寬恕你，才肯放手。別辜負。"
+      }
+    },
+    {
+      "id": "roku_palace_approach",
+      "zone": "dragon_palace_gate",
+      "speaker": "roku",
+      "requires_flags": ["knows_box_truth"],
+      "once": true,
+      "sets_flags": ["bark_roku_palace_approach"],
+      "text": {
+        "en": "The mirror showed you the price. My net knots are ready.",
+        "ja": "鏡は代償を見せた。網の結び目は用意してある。",
+        "zh": "镜子让你看见了代价。我的网结已经系好。",
+        "zh-Hant": "鏡子讓你看見了代價。我的網結已經繫好。"
+      }
+    },
+    {
+      "id": "yuzu_hub_after_wraith",
+      "zone": "ruined_village",
+      "speaker": "yuzu",
+      "requires_flags": ["shore_wraith_defeated", "yuzu_joined"],
+      "once": true,
+      "sets_flags": ["bark_yuzu_hub_after_wraith"],
+      "text": {
+        "en": "The torii still remembers your name. So do I.",
+        "ja": "鳥居はまだあなたの名を覚えている。私も。",
+        "zh": "鸟居还记得你的名字。我也是。",
+        "zh-Hant": "鳥居還記得你的名字。我也是。"
+      }
+    }
+  ]
+}

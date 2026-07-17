@@ -34,7 +34,7 @@
     },
     "choice_flavor": {
       "subtext_warm_allowed_scenes": ["SC-16"],
-      "max_subtext_warm_per_scene": 2
+      "max_subtext_warm_per_scene": 3
     },
     "zones": {
       "beach_shore": { "max_inspect_scenes": 2, "max_quiet_beats": 2 },

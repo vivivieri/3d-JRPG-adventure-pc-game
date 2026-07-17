@@ -66,6 +66,12 @@ def main() -> int:
             disk = res_to_disk(b["path"])
             if not disk.is_file():
                 errors.append(f"base class path missing on disk: {b['path']}")
+        if b.get("python_reference"):
+            if not b.get("public_api"):
+                errors.append(f"{b.get('id')}: public_api required when python_reference is set")
+            py_path = ROOT / b["python_reference"]
+            if not py_path.is_file():
+                errors.append(f"{b.get('id')}: missing python_reference {b['python_reference']}")
 
     for own in data.get("architect_owns", []):
         if not own.startswith("res://"):

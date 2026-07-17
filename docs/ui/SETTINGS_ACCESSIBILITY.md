@@ -26,6 +26,11 @@ Accessible from: Main menu, Pause menu (field + combat)
 | **Hints** | On / Off | On | `hints_enabled` |
 | **Intent icon style** | Standard / High contrast | Standard | `intent_contrast` |
 | **Graphics quality** | Low / Medium / High | Medium | `graphics_quality` |
+| **Shadows** | On / Off | On | `shadows_enabled` |
+| **MSAA** | Off / 2× / 4× | 2× | `msaa` |
+| **Glow (bloom)** | On / Off | On | `glow_enabled` |
+| **Fog density scale** | 50%–150% | 100% | `fog_density_scale` |
+| **Reduced motion** | Off / On | Off | `reduced_motion` |
 
 **VO behavior:** Selective story VO (12 hit clips) plays in the player's **language** — English, Japanese, or Simplified Chinese audio when `locale` is `en`/`ja`/`zh`; Traditional Chinese text with Cantonese or Mandarin audio when `locale` is `zh-Hant`. Subtitles always match written locale. See `docs/technical/LOCALIZATION.md`, `docs/vision/VO_HIT_LIST.md`.
 
@@ -52,7 +57,7 @@ Accessible from: Main menu, Pause menu (field + combat)
 | **Colorblind-safe intents** | Shape + icon differ per type (sword vs skull vs waves) |
 | **No quick-time events** | None in game |
 | **Pause anytime** | Field + combat pause (not during SC-16 choice overlay) |
-| **Reduced motion** | `screen_shake=off` disables boss camera orbit shake |
+| **Reduced motion** | `reduced_motion=on` disables boss camera orbit shake **and** ink combat overlay pulse (`COMBAT_PRESENTATION.md`) |
 | **Font** | Noto Sans / JP / SC — readable 16px min body |
 
 **Not in v1:** Remap controls, dyslexia font, TTS

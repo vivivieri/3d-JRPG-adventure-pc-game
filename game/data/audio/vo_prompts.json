@@ -157,7 +157,7 @@
     "sc04_roku_01": {
       "scene_id": "SC-04",
       "speaker": "roku",
-      "tier": "p2",
+      "tier": "p0",
       "max_duration_sec": 4,
       "direction": "Urgent warning about the box only",
       "duck_bgm_db": -6,
