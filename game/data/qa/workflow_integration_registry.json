@@ -370,6 +370,21 @@
           "path": "tools/run_post_agent_cycle.sh",
           "contains": "run_alignment_audit.sh",
           "purpose": "optional PM alignment audit after cycle"
+        },
+        {
+          "path": "tools/run_alignment_audit.sh",
+          "contains": "alignment_audit_lib.py",
+          "purpose": "audit runner delegates to lib"
+        },
+        {
+          "path": "tools/alignment_audit_lib.py",
+          "contains": "generate_audit_radars",
+          "purpose": "auto-generate stream radar PNGs on write_outputs"
+        },
+        {
+          "path": "tools/generate_audit_radar_images.py",
+          "contains": "generate_audit_radars",
+          "purpose": "matplotlib spec/build radar renderer"
         }
       ],
       "orchestrator_steps": [
@@ -414,6 +429,42 @@
         {
           "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "audit_radar_spec.png"
+        },
+        {
+          "doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+          "must_mention": "audit_radar_spec.png"
         }
       ],
       "acceptance_gate": "L0_alignment_audit_catalog"

@@ -123,6 +123,7 @@ bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram
 **Alignment audit (post-merge / phase exit):**
 ```bash
 bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
+# Management status: audit_radar_spec.png + audit_radar_build.png (auto-generated). Ignore mega dashboard.
 ```
 
 **Long sessions — heartbeat (feeds telemetry + watchdog):**

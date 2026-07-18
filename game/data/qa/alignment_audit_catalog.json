@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "authority": "docs/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
@@ -14,6 +14,15 @@
     "history_keep": 100,
     "committed_history_keep": 50,
     "archive_visual_snapshots": false
+  },
+  "visual_policy": {
+    "generator_script": "tools/generate_audit_radar_images.py",
+    "auto_generated_filenames": ["audit_radar_spec.png", "audit_radar_build.png"],
+    "management_status_filenames": ["audit_radar_spec.png", "audit_radar_build.png"],
+    "deprecated_for_management_filenames": [
+      "audit_radar_6axis.png",
+      "tides_mega_dashboard_all_radars.png"
+    ]
   },
   "verdict_thresholds": {
     "aligned_min_overall": 8.0,
@@ -288,9 +297,9 @@
       "batch": 1,
       "assets": [
         { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
-        { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar" },
-        { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar" },
-        { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar" },
+        { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar", "deprecated_for_management": true },
         { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
       ]
     },
@@ -356,7 +365,7 @@
         { "id": "audit_steam_ship", "label": "Steam ship readiness", "filename": "tides_audit_steam_ship.png", "kind": "radar" },
         { "id": "audit_m6_gates", "label": "M6 milestone gates", "filename": "tides_audit_m6_gates.png", "kind": "radar" },
         { "id": "roadmap_steam", "label": "Steam ship M6 path", "filename": "tides_roadmap_steam_ship.png", "kind": "roadmap" },
-        { "id": "mega_dashboard", "label": "Mega dashboard (all radars)", "filename": "tides_mega_dashboard_all_radars.png", "kind": "dashboard" }
+        { "id": "mega_dashboard", "label": "Mega dashboard (legacy — do not use for status)", "filename": "tides_mega_dashboard_all_radars.png", "kind": "dashboard", "deprecated_for_management": true }
       ]
     }
   ],

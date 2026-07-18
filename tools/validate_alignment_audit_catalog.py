@@ -19,9 +19,48 @@ def main() -> int:
     data = json.loads(CATALOG.read_text(encoding="utf-8"))
     errors: list[str] = []
 
-    for key in ("version", "authority", "domains", "streams", "recommendation_rules", "visual_packs", "outputs"):
+    for key in ("version", "authority", "domains", "streams", "recommendation_rules", "visual_packs", "outputs", "visual_policy"):
         if key not in data:
             errors.append(f"missing key: {key}")
+
+    policy = data.get("visual_policy", {})
+    gen_script = policy.get("generator_script", "")
+    if gen_script:
+        gen_path = ROOT / gen_script
+        if not gen_path.is_file():
+            errors.append(f"visual_policy.generator_script missing: {gen_script}")
+    else:
+        errors.append("visual_policy missing generator_script")
+
+    mgmt_files = set(policy.get("management_status_filenames", []))
+    auto_files = set(policy.get("auto_generated_filenames", []))
+    deprecated_files = set(policy.get("deprecated_for_management_filenames", []))
+    if not mgmt_files:
+        errors.append("visual_policy.management_status_filenames must be non-empty")
+    if auto_files and not auto_files.issubset(mgmt_files):
+        errors.append("visual_policy.auto_generated_filenames must be subset of management_status_filenames")
+    if mgmt_files & deprecated_files:
+        errors.append("visual_policy: file cannot be both management and deprecated_for_management")
+
+    pack_filenames: set[str] = set()
+    for pack in data.get("visual_packs", []):
+        for asset in pack.get("assets", []):
+            fname = asset.get("filename", "")
+            if fname:
+                pack_filenames.add(fname)
+
+    for fname in mgmt_files | deprecated_files:
+        if fname not in pack_filenames:
+            errors.append(f"visual_policy references {fname} not found in visual_packs assets")
+
+    lib = ROOT / "tools/alignment_audit_lib.py"
+    if lib.is_file():
+        lib_text = lib.read_text(encoding="utf-8")
+        for needle in ("visual_policy", "enrich_visual_manifest", "generate_audit_radars"):
+            if needle not in lib_text:
+                errors.append(f"alignment_audit_lib.py missing hook '{needle}'")
+    else:
+        errors.append("missing tools/alignment_audit_lib.py")
 
     domain_ids = {d["id"] for d in data.get("domains", [])}
     if "overall_production" not in domain_ids:
@@ -77,10 +116,6 @@ def main() -> int:
         gate_id = rule.get("gate", "")
         if known_gates and gate_id not in known_gates:
             errors.append(f"recommendation {rule.get('id')}: unknown gate '{gate_id}'")
-
-    lib = ROOT / "tools/alignment_audit_lib.py"
-    if not lib.is_file():
-        errors.append("missing tools/alignment_audit_lib.py")
 
     runner = ROOT / "tools/run_alignment_audit.sh"
     if not runner.is_file():

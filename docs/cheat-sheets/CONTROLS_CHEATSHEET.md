@@ -55,7 +55,7 @@
 | `L0_agent_session_telemetry` | Agent session JSONL + token backfill schema |
 | `L0_factory_watchdog` | Factory stall/hang recovery config |
 | `L0_stakeholder_report` | Product owner report + Telegram config |
-| `L0_alignment_audit_catalog` | Stakeholder alignment audit catalog |
+| `L0_alignment_audit_catalog` | Stakeholder alignment audit catalog — management visuals: `audit_radar_spec.png`, `audit_radar_build.png` |
 | `L0_candidate_tournament` | Champion/challenger config schema (`golden_harness.json`) |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |

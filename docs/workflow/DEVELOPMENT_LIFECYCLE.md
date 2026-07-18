@@ -239,7 +239,7 @@ GitHub = **what + proof** · Linear = **which batch + cycle progress**
 
 **Stakeholder reporting:** `bash tools/pm_emit_stakeholder_report.sh` — auto on cycle events; manual at phase exit (`docs/agents/PM_STAKEHOLDER_REPORTING.md`).
 
-**Alignment audit:** `bash tools/run_alignment_audit.sh` — post-merge spec/data parity (`docs/qa/ALIGNMENT_AUDIT.md`).
+**Alignment audit:** `bash tools/run_alignment_audit.sh` — post-merge spec/data parity (`docs/qa/ALIGNMENT_AUDIT.md`). **Management status:** `audit_radar_spec.png` + `audit_radar_build.png` (ignore mega dashboard).
 
 ---
 

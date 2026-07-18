@@ -197,7 +197,7 @@ If your task adds or changes anything that touches **PM dispatch, agent sessions
 |-----------|---------|
 | Stall recovery | `bash tools/run_factory_watchdog.sh --recover` — `docs/agents/FACTORY_WATCHDOG.md` |
 | Stakeholder report | `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |
-| Alignment audit | `bash tools/run_alignment_audit.sh --trigger post_merge` — `docs/qa/ALIGNMENT_AUDIT.md` |
+| Alignment audit | `bash tools/run_alignment_audit.sh --trigger post_merge` — `docs/qa/ALIGNMENT_AUDIT.md` · **Management visuals:** `audit_radar_spec.png` + `audit_radar_build.png` only (not mega dashboard) |
 
 ### L2.5 candidate tournament (optional pre-merge)
 

@@ -207,7 +207,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 - Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
 - Watchdog: `run_factory_watchdog.sh` — stall recovery (`docs/agents/FACTORY_WATCHDOG.md`).
 - Stakeholder: `pm_emit_stakeholder_report.sh` on every cycle event (`docs/agents/PM_STAKEHOLDER_REPORTING.md`).
-- Alignment: `run_alignment_audit.sh` at post-merge / phase exit (`docs/qa/ALIGNMENT_AUDIT.md`).
+- Alignment: `run_alignment_audit.sh` at post-merge / phase exit (`docs/qa/ALIGNMENT_AUDIT.md`). **Management visuals:** `audit_radar_spec.png` + `audit_radar_build.png` — not legacy mega dashboard.
 
 **Cross-cutting factory features (agents MUST register before merge):**
 - Registry: `game/data/qa/workflow_integration_registry.json` — every PM hook, secret, telemetry, watchdog, or tournament feature.

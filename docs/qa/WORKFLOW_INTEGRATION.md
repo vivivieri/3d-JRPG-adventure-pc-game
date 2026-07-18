@@ -121,6 +121,10 @@ PM should run alignment audit after any registry change:
 bash tools/run_alignment_audit.sh --trigger post_merge --note "workflow integration update"
 ```
 
+**Management visuals:** reports split **Management visuals** (status) from **Legacy visuals** (archive). Use only `audit_radar_spec.png` + `audit_radar_build.png` for executive readiness — not `tides_mega_dashboard_all_radars.png`. Auto-generated on every audit run via `generate_audit_radar_images.py`.
+
+**Full-surface example:** `alignment_audit` is the reference registry entry — script hooks (`alignment_audit_lib.py`, `generate_audit_radar_images.py`), `visual_policy` in catalog, all `standard_agent_surfaces`, and report/HTML management sections must ship together.
+
 ---
 
 ## 6. Related gates

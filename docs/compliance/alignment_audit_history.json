@@ -345,13 +345,34 @@
       "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152522Z_post_merge/report.md",
       "report_html": "docs/compliance/alignment_audit_reports/20260718T152522Z_post_merge/dashboard.html",
       "note": "regenerate spec/build radar PNGs"
+    },
+    {
+      "audit_id": "20260718T152810Z_post_merge",
+      "generated_at": "2026-07-18T15:28:10Z",
+      "branch": "cursor/audit-full-alignment-68f4",
+      "commit": "482ea65",
+      "verdict": "ALIGNED",
+      "overall_score": 9.65,
+      "spec_score": 9.65,
+      "build_score": null,
+      "build_status": "not_applicable",
+      "ci_pass": 36,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 0,
+      "checklist_open": 0,
+      "visuals_present": 35,
+      "report_json": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.json",
+      "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.md",
+      "report_html": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/dashboard.html",
+      "note": "audit-full-alignment management visuals"
     }
   ],
   "latest": {
-    "audit_id": "20260718T152522Z_post_merge",
-    "generated_at": "2026-07-18T15:25:22Z",
-    "branch": "cursor/audit-radar-gen-68f4",
-    "commit": "c61c00d",
+    "audit_id": "20260718T152810Z_post_merge",
+    "generated_at": "2026-07-18T15:28:10Z",
+    "branch": "cursor/audit-full-alignment-68f4",
+    "commit": "482ea65",
     "verdict": "ALIGNED",
     "overall_score": 9.65,
     "spec_score": 9.65,
@@ -363,9 +384,9 @@
     "recommendation_count": 0,
     "checklist_open": 0,
     "visuals_present": 35,
-    "report_json": "docs/compliance/alignment_audit_reports/20260718T152522Z_post_merge/report.json",
-    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152522Z_post_merge/report.md",
-    "report_html": "docs/compliance/alignment_audit_reports/20260718T152522Z_post_merge/dashboard.html",
-    "note": "regenerate spec/build radar PNGs"
+    "report_json": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/dashboard.html",
+    "note": "audit-full-alignment management visuals"
   }
 }

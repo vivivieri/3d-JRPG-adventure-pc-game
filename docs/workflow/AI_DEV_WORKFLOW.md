@@ -73,7 +73,7 @@ bash tools/check_feature_integration.sh --remind   # docs/qa/WORKFLOW_INTEGRATIO
 |--------|------|
 | `run_factory_watchdog.sh` | Stall detection + PM recovery |
 | `pm_emit_stakeholder_report.sh` | Product owner status on cycle events |
-| `run_alignment_audit.sh` | Spec/data alignment audit at post-merge |
+| `run_alignment_audit.sh` | Spec/data alignment audit at post-merge — management visuals: `audit_radar_spec.png`, `audit_radar_build.png` |
 
 All must be true before implementation (`.cursorrules` §0 / `MCP_STACK.md`):
 
