@@ -52,6 +52,10 @@
 | `L0_generation_readiness_backlog` | GR-* backlog traceability |
 | `L0_sprint_board` | Sprint board + PM orchestrator state |
 | `L0_workflow_integration` | Factory feature registry — hooks + doc parity |
+| `L0_agent_session_telemetry` | Agent session JSONL + token backfill schema |
+| `L0_factory_watchdog` | Factory stall/hang recovery config |
+| `L0_stakeholder_report` | Product owner report + Telegram config |
+| `L0_alignment_audit_catalog` | Stakeholder alignment audit catalog |
 | `L0_candidate_tournament` | Champion/challenger config schema (`golden_harness.json`) |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |

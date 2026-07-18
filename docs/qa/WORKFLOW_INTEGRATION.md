@@ -32,6 +32,7 @@ CI gate **`L0_workflow_integration`** verifies:
 
 | Check | What fails |
 |-------|------------|
+| Standard agent surfaces | Feature missing any doc in `standard_agent_surfaces` |
 | Script hooks | Required `contains` strings missing from wired tools |
 | Doc cross-refs | Authority docs must mention key terms |
 | Secrets | `required_secrets` present in `check_day_one_secrets.sh` |
@@ -55,6 +56,8 @@ Two gates sound similar but enforce **different** things:
 
 So a new feature can pass **36/36 docs CI** with only 3 doc refs registered — while `AGENTS.md`, `.cursorrules`, and PM runbook stay silent until someone expands the registry.
 
+**Structural fix (v1.2):** `workflow_integration_registry.json` → `standard_agent_surfaces` lists the 8 docs every feature must include in `required_doc_refs`. The validator fails if any surface is missing — you cannot register a minimal 3-doc entry and pass CI.
+
 **Rule:** When adding a factory feature, copy the **full agent surface list** from §3 checklist (not just the authority doc). Same lesson as `post_agent_cycle` and `agent_session_telemetry` — minimal registry entries cause silent drift.
 
 ---
@@ -66,7 +69,7 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
 1. **Authority doc** — create or extend (e.g. `docs/qa/MY_FEATURE.md`)
 2. **Registry entry** — add to `workflow_integration_registry.json`:
    - `script_hooks` — every script that must call your feature
-   - `required_doc_refs` — every workflow doc that must mention it
+   - `required_doc_refs` — **all** `standard_agent_surfaces` plus feature-specific docs
    - `required_secrets` — if any
    - `orchestrator_steps` — if PM orchestrator invokes it
    - `acceptance_gate` — if new L0 schema/gate

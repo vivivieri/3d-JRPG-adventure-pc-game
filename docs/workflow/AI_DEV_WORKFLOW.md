@@ -67,6 +67,14 @@ Factory telemetry policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9. One-time sec
 bash tools/check_feature_integration.sh --remind   # docs/qa/WORKFLOW_INTEGRATION.md
 ```
 
+**Factory stack scripts** (event-driven PM):
+
+| Script | Role |
+|--------|------|
+| `run_factory_watchdog.sh` | Stall detection + PM recovery |
+| `pm_emit_stakeholder_report.sh` | Product owner status on cycle events |
+| `run_alignment_audit.sh` | Spec/data alignment audit at post-merge |
+
 All must be true before implementation (`.cursorrules` §0 / `MCP_STACK.md`):
 
 | Check | How |

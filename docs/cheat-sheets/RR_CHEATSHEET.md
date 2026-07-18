@@ -115,6 +115,16 @@ bash tools/run_factory_watchdog.sh              # health check
 bash tools/run_factory_watchdog.sh --recover    # trigger PM via watchdog_recovery
 ```
 
+**Stakeholder status (auto on cycle close; manual):**
+```bash
+bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram
+```
+
+**Alignment audit (post-merge / phase exit):**
+```bash
+bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
+```
+
 **Long sessions — heartbeat (feeds telemetry + watchdog):**
 ```bash
 bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "progress note"

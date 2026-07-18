@@ -1,8 +1,18 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "authority": "docs/qa/WORKFLOW_INTEGRATION.md",
   "policy": "Every new factory feature MUST register here before merge. L0_workflow_integration CI fails when hooks, docs, or secrets drift.",
-  "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Run python3 tools/validate_workflow_integration.py",
+  "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Register all standard_agent_surfaces 5) Run python3 tools/validate_workflow_integration.py",
+  "standard_agent_surfaces": [
+    "AGENTS.md",
+    ".cursorrules",
+    "docs/cheat-sheets/RR_CHEATSHEET.md",
+    "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+    "docs/agents/PM_AGENT_RUNBOOK.md",
+    "docs/agents/SPRINT_ORCHESTRATION.md",
+    "docs/workflow/AI_DEV_WORKFLOW.md",
+    "docs/workflow/DEVELOPMENT_LIFECYCLE.md"
+  ],
   "features": [
     {
       "id": "post_agent_cycle",
@@ -98,6 +108,10 @@
         },
         {
           "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "run_post_agent_cycle.sh"
         }
       ]
@@ -204,6 +218,10 @@
         {
           "doc": "docs/agents/CURSOR_SECRETS_SETUP.md",
           "must_mention": "CURSOR_API_KEY"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_agent_session_telemetry"
         }
       ],
       "cycle_events": {
@@ -256,6 +274,30 @@
         {
           "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_factory_watchdog.sh"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "run_factory_watchdog.sh"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "FACTORY_WATCHDOG"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_factory_watchdog"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "FACTORY_WATCHDOG"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "run_factory_watchdog.sh"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "run_factory_watchdog.sh"
         }
       ],
       "acceptance_gate": "L0_factory_watchdog"
@@ -290,7 +332,31 @@
         },
         {
           "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
-          "must_mention": "stakeholder"
+          "must_mention": "PM_STAKEHOLDER_REPORTING"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "pm_emit_stakeholder_report.sh"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "pm_emit_stakeholder_report.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "pm_emit_stakeholder_report.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_stakeholder_report"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "pm_emit_stakeholder_report.sh"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "pm_emit_stakeholder_report.sh"
         }
       ],
       "acceptance_gate": "L0_stakeholder_report"
@@ -315,10 +381,38 @@
       "required_doc_refs": [
         {
           "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
-          "must_mention": "alignment"
+          "must_mention": "run_alignment_audit.sh"
         },
         {
           "doc": "docs/qa/WORKFLOW_INTEGRATION.md",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_alignment_audit_catalog"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "run_alignment_audit.sh"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_alignment_audit.sh"
         }
       ],

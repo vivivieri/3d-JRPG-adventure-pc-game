@@ -191,6 +191,14 @@ If your task adds or changes anything that touches **PM dispatch, agent sessions
 
 **Do not** ship a cross-cutting feature in one script only — CI will fail and PM dispatch docs will drift.
 
+### Factory operations (PM stack)
+
+| Operation | Command |
+|-----------|---------|
+| Stall recovery | `bash tools/run_factory_watchdog.sh --recover` — `docs/agents/FACTORY_WATCHDOG.md` |
+| Stakeholder report | `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |
+| Alignment audit | `bash tools/run_alignment_audit.sh --trigger post_merge` — `docs/qa/ALIGNMENT_AUDIT.md` |
+
 ### L2.5 candidate tournament (optional pre-merge)
 
 Champion/challenger zone picks use `bash tools/run_candidate_tournament.sh` before merge when policy requires — **non-ship**, sits above L0–L6. Authority: `docs/qa/CANDIDATE_TOURNAMENT.md` · gate evidence: `L2_candidate_select`.

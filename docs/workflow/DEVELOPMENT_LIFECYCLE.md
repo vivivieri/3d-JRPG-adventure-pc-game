@@ -235,6 +235,12 @@ GitHub = **what + proof** · Linear = **which batch + cycle progress**
 
 **Workflow integration registry** (drift prevention): `docs/qa/WORKFLOW_INTEGRATION.md` — agents register cross-cutting factory features before merge; `L0_workflow_integration` CI + `bash tools/check_feature_integration.sh --remind`.
 
+**Factory watchdog:** `bash tools/run_factory_watchdog.sh` — stall recovery when PM dispatch stalls (`docs/agents/FACTORY_WATCHDOG.md`).
+
+**Stakeholder reporting:** `bash tools/pm_emit_stakeholder_report.sh` — auto on cycle events; manual at phase exit (`docs/agents/PM_STAKEHOLDER_REPORTING.md`).
+
+**Alignment audit:** `bash tools/run_alignment_audit.sh` — post-merge spec/data parity (`docs/qa/ALIGNMENT_AUDIT.md`).
+
 ---
 
 ## 9. Promotion checklist
