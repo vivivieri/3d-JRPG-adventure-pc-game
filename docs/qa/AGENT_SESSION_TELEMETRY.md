@@ -74,7 +74,9 @@ Committed schema + sample only (no raw telemetry in git):
 | `run_agent_session_gate.sh` | `session_start` |
 | `pm_record_heartbeat.sh` | `session_progress` |
 | `pm_emit_cycle_event.sh` (complete/fail) | `session_end` / `session_failed` |
-| `run_pm_orchestrator.sh` | PM `session_start` |
+| `run_pm_orchestrator.sh` | PM `session_start` + end refresh |
+| `pm_refresh_agent_telemetry.sh` | Token backfill + CSV/JSON/Markdown reports |
+| `run_factory_watchdog.sh` | Non-blocking telemetry refresh on every run |
 
 Manual CLI:
 
@@ -100,7 +102,17 @@ GET https://api.cursor.com/v1/agents/{bcId}/usage
 | Session start baseline | Yes | API call at `session_start` |
 | Session end tokens | Yes | API call with 3 retries at `session_end` |
 | Delta per session | Yes | end usage − start baseline |
-| Backfill if API lags | Yes | `pm_sync_agent_session_tokens.py` on cycle complete |
+| Backfill if API lags | Yes | `pm_refresh_agent_telemetry.sh` on cycle complete, orchestrator, watchdog |
+
+### One-time setup (you)
+
+Add **one** secret in Cursor Cloud Agents → Environment → Secrets:
+
+| Secret | Where to get it | Scope |
+|--------|-----------------|-------|
+| `CURSOR_API_KEY` | [cursor.com/dashboard](https://cursor.com/dashboard) → Settings → API Keys | Personal + Runtime Secret |
+
+Everything else is automatic — `CURSOR_CONVERSATION_ID` is injected on every cloud agent; no per-session config.
 
 Verify setup:
 
@@ -169,6 +181,7 @@ Feed findings back into:
 | `bootstrap` | pm/architect | P1-00 setup |
 | `docs_data` | any | Main-branch docs/data |
 | `remediation` | any | QA FAIL retries |
+| `factory_analytics` | analyst | Token/duration rollups, efficiency studies |
 | `other` | fallback | Unclassified |
 
 Categories are inferred from `agent_role`, issue title, and `implementation_plan_tasks`.

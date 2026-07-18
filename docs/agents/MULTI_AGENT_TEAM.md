@@ -24,6 +24,7 @@ One agent doing plan + build + test + deploy violates R&R and skips gates. This 
 | **Debugger** | Analyze Agent | `godotiq` | Signals, `trace_flow`, debug console | Scene mutations |
 | **Release Engineer** | Release Agent | `run_cd_gates.sh`, tags, CD workflows | RC/beta/prod tags, export | Feature implementation |
 | **Art Reviewer** | Visual Agent | `docs/art/ART_DIRECTION.md`, palette/jury tools | L2 visual/model/audio/vo jury evidence | Bypass jury with "looks fine" |
+| **Factory Analyst** | Analyst Agent | `analyze_agent_session_telemetry.py`, `pm_refresh_agent_telemetry.sh` | Token/duration rollups, sprint efficiency reports (`artifacts/agent_session_reports/`) | Write game code or scenes |
 | **Human QA Lead** | Human | `docs/qa/PLAYTEST_SCRIPT.md` | L6 UAT sign-off | Before L0–L5 pass |
 
 ---

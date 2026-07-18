@@ -83,7 +83,10 @@ print(f"[OK] Agent session gate PASS — {agent} cleared for {issue_id}")
 print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
-# Agent session telemetry — session start
+# Agent session telemetry — session start (warn once if API key missing)
+if [[ -z "${CURSOR_API_KEY:-}" && -z "${CURSOR_API_TOKEN:-}" ]]; then
+  echo "[WARN] CURSOR_API_KEY not set — tokens will not auto-log (docs/agents/CURSOR_SECRETS_SETUP.md §8)"
+fi
 bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID" 2>/dev/null || true
 
 # Heartbeat — worker session start

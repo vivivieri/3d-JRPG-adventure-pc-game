@@ -151,3 +151,6 @@ if rc != 0:
 print("\n[WATCHDOG] Recovery dispatched — PM Automation should start orchestrator")
 sys.exit(0)
 PY
+
+# Non-blocking: backfill token usage + refresh efficiency reports
+bash tools/pm_refresh_agent_telemetry.sh 2>/dev/null || true

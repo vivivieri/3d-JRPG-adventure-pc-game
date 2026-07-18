@@ -49,6 +49,7 @@ ROLE_CATEGORIES: dict[str, str] = {
     "visual": "visual_jury",
     "release": "release_cd",
     "debugger": "remediation",
+    "analyst": "factory_analytics",
 }
 
 

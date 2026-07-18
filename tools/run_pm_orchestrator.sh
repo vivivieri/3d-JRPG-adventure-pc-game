@@ -90,6 +90,6 @@ print("After agent session: python3 tools/pm_update_issue.py <id> --status done 
 print("Then re-run: bash tools/run_pm_orchestrator.sh")
 PY
 
-# Close PM telemetry session + backfill tokens
+# Close PM telemetry session + backfill tokens + refresh reports
 bash tools/pm_record_agent_session.sh end --agent pm --outcome complete --note "orchestrator_pass" 2>/dev/null || true
-python3 tools/pm_sync_agent_session_tokens.py 2>/dev/null || true
+bash tools/pm_refresh_agent_telemetry.sh 2>/dev/null || true

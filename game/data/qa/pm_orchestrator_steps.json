@@ -82,6 +82,13 @@
       "description": "Write status dashboard for product owner (artifacts; Telegram on cycle events)",
       "command": "bash tools/pm_emit_stakeholder_report.sh --trigger pm_session --no-telegram",
       "block_on_fail": false
+    },
+    {
+      "step": 11,
+      "id": "agent_telemetry_refresh",
+      "description": "Backfill token usage + regenerate efficiency reports (non-blocking)",
+      "command": "bash tools/pm_refresh_agent_telemetry.sh",
+      "block_on_fail": false
     }
   ],
   "post_agent_steps": [
