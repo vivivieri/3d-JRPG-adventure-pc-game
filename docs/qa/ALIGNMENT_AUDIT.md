@@ -179,7 +179,7 @@ Six visual packs (33 assets) are catalogued for executive updates:
 
 Each spec domain score rolls up **signals** (gates, parity checks, metrics). Sub-radars show those signals on a 0–10 axis; see `report.md` § Spec domain signal breakdown.
 
-Reports embed **stream radars only** — legacy and supplemental art are excluded from `report.md` and `dashboard.html`.
+**Visual theme:** Radars use the game palette (`docs/art/ART_DIRECTION.md`) — void sky `#1A1A3A`, biolume `#4AE8D8`, fog `#8B9DAF`, lantern gold `#D4A880`, per-domain accents. Renderer: `tools/audit_radar_theme.py`.
 
 Regenerate manually: `python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json`
 

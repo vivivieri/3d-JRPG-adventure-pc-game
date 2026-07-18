@@ -32,6 +32,10 @@ def main() -> int:
     else:
         errors.append("visual_policy missing generator_script")
 
+    theme_path = ROOT / "tools/audit_radar_theme.py"
+    if not theme_path.is_file():
+        errors.append("missing tools/audit_radar_theme.py")
+
     mgmt_files = set(policy.get("management_status_filenames", []))
     auto_files = set(policy.get("auto_generated_filenames", []))
     deprecated_files = set(policy.get("deprecated_for_management_filenames", []))
@@ -56,10 +60,21 @@ def main() -> int:
         if fname not in pack_filenames:
             errors.append(f"visual_policy references {fname} not found in visual_packs assets")
 
+    gen_script_path = ROOT / policy.get("generator_script", "tools/generate_audit_radar_images.py")
+    if gen_script_path.is_file():
+        gen_text = gen_script_path.read_text(encoding="utf-8")
+        if "audit_radar_theme" not in gen_text:
+            errors.append(f"{gen_script_path.name} must import audit_radar_theme")
+
     lib = ROOT / "tools/alignment_audit_lib.py"
     if lib.is_file():
         lib_text = lib.read_text(encoding="utf-8")
-        for needle in ("visual_policy", "enrich_visual_manifest", "generate_audit_radars", "signal_scores"):
+        for needle in (
+            "visual_policy",
+            "enrich_visual_manifest",
+            "generate_audit_radars",
+            "signal_scores",
+        ):
             if needle not in lib_text:
                 errors.append(f"alignment_audit_lib.py missing hook '{needle}'")
     else:

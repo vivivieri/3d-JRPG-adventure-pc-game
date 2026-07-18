@@ -408,13 +408,34 @@
       "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154027Z_post_merge/report.md",
       "report_html": "docs/compliance/alignment_audit_reports/20260718T154027Z_post_merge/dashboard.html",
       "note": "spec subdomain sub-radars"
+    },
+    {
+      "audit_id": "20260718T154322Z_post_merge",
+      "generated_at": "2026-07-18T15:43:22Z",
+      "branch": "cursor/audit-radar-theme-68f4",
+      "commit": "1e333ee",
+      "verdict": "ALIGNED",
+      "overall_score": 9.65,
+      "spec_score": 9.65,
+      "build_score": null,
+      "build_status": "not_applicable",
+      "ci_pass": 36,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 1,
+      "checklist_open": 1,
+      "visuals_present": 10,
+      "report_json": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.json",
+      "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.md",
+      "report_html": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/dashboard.html",
+      "note": "themed coastal radar visuals"
     }
   ],
   "latest": {
-    "audit_id": "20260718T154027Z_post_merge",
-    "generated_at": "2026-07-18T15:40:27Z",
-    "branch": "cursor/spec-subdomain-radars-68f4",
-    "commit": "7a8d5ec",
+    "audit_id": "20260718T154322Z_post_merge",
+    "generated_at": "2026-07-18T15:43:22Z",
+    "branch": "cursor/audit-radar-theme-68f4",
+    "commit": "1e333ee",
     "verdict": "ALIGNED",
     "overall_score": 9.65,
     "spec_score": 9.65,
@@ -426,9 +447,9 @@
     "recommendation_count": 1,
     "checklist_open": 1,
     "visuals_present": 10,
-    "report_json": "docs/compliance/alignment_audit_reports/20260718T154027Z_post_merge/report.json",
-    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154027Z_post_merge/report.md",
-    "report_html": "docs/compliance/alignment_audit_reports/20260718T154027Z_post_merge/dashboard.html",
-    "note": "spec subdomain sub-radars"
+    "report_json": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/dashboard.html",
+    "note": "themed coastal radar visuals"
   }
 }
