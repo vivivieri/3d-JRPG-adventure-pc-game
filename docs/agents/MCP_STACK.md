@@ -381,6 +381,7 @@ See `docs/qa/AI_TESTING_SPEC.md` §11 and `docs/qa/ACCEPTANCE_CRITERIA.md` (meas
 python3 tools/validate_story_data.py          # L0_story_data
 python3 tools/validate_acceptance_criteria.py
 bash tools/run_playtest_smoke.sh              # L2 bundle
+bash tools/run_candidate_tournament.sh      # L2_candidate_select — pre-merge when policy requires
 bash tools/run_model_smoke_checks.sh          # when urashima.glb exists
 bash tools/run_visual_smoke_checks.sh         # when zone screenshot exists
 bash tools/run_audio_smoke_checks.sh          # when bgm_village.ogg and/or P0 VO gate clip exist
@@ -393,6 +394,7 @@ bash tools/run_e2e_playthrough.sh             # L5 — not SKIP
 | Thresholds | `ACCEPTANCE_CRITERIA.md` | Cite gate id + measured value |
 | 3D | `MODEL_QA.md` | `qa_emit_remediation.sh model-*` |
 | Visual | `VISUAL_QA.md` | `qa_emit_remediation.sh visual-*` |
+| Tournament | `CANDIDATE_TOURNAMENT.md` | `L2_candidate_select` comparison artifact; one winner per scope |
 | Audio (BGM) | `AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
 | Audio (P0 VO) | `AUDIO_QA.md` §A4–A5 | `qa_emit_remediation.sh vo-tech\|vo-jury` |
 | Flow | `FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario` |

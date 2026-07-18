@@ -107,6 +107,14 @@ bash tools/run_docs_ci_checks.sh   # L0_workflow_integration must PASS
 
 PM **rejects** PRs that touch factory workflow without registry update.
 
+### L2.5 candidate tournament (when policy applies)
+
+For M5 art / zone vertical slices with tournament policy (`docs/qa/CANDIDATE_TOURNAMENT.md`):
+
+- Builder runs `bash tools/run_candidate_tournament.sh` before PR merge
+- PR must include `L2_candidate_select` comparison artifact (`artifacts/candidates/<issue>/comparison_*.json`)
+- PM rejects PRs that promote a challenger without comparison evidence when tournament is required
+
 ---
 
 ## 4. When an agent is stale or unresponsive

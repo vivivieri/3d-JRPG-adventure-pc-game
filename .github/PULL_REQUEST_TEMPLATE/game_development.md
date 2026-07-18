@@ -7,6 +7,7 @@ Link the GitHub issue. Check every box that applies to this PR.
 - [ ] Scope matches current phase in `game/data/qa/sprint_phases.json` (no phase skip)
 - [ ] Worker ended with `run_post_agent_cycle.sh` (factory stall if skipped)
 - [ ] Cross-cutting factory changes registered in `workflow_integration_registry.json` (`docs/qa/WORKFLOW_INTEGRATION.md`)
+- [ ] Zone tournament (when M5 policy): `L2_candidate_select` comparison artifact attached (`docs/qa/CANDIDATE_TOURNAMENT.md`)
 
 ### Architect (GodotPrompter)
 - [ ] Handoff in issue/PR: design doc row, node tree outline, target **gate IDs**

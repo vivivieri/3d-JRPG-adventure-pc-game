@@ -186,6 +186,7 @@ sequenceDiagram
   W->>W: Architect plan OR Builder GDAI build
   W->>CI: PR → game/development
   CI-->>W: L0–L2 (L4/L5 if required)
+  opt W->>W: run_candidate_tournament.sh (L2.5 — when M5 tournament policy)
   W->>PM: run_post_agent_cycle.sh --issue … --agent …
   Note over PM,Rel: At milestone
   PM->>Rel: tag v*-rc*

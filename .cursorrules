@@ -207,9 +207,10 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 - Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
 
 **Cross-cutting factory features (agents MUST register before merge):**
-- Registry: `game/data/qa/workflow_integration_registry.json` — every PM hook, secret, telemetry, or watchdog feature.
+- Registry: `game/data/qa/workflow_integration_registry.json` — every PM hook, secret, telemetry, watchdog, or tournament feature.
 - Before merge: `bash tools/check_feature_integration.sh --remind` → `L0_workflow_integration` PASS.
 - Authority: `docs/qa/WORKFLOW_INTEGRATION.md`.
+- **L2.5 candidate tournament:** optional champion/challenger before merge — `run_candidate_tournament.sh`; policy `docs/qa/CANDIDATE_TOURNAMENT.md` (non-ship).
 
 **Example task split:**
 

@@ -191,6 +191,10 @@ If your task adds or changes anything that touches **PM dispatch, agent sessions
 
 **Do not** ship a cross-cutting feature in one script only — CI will fail and PM dispatch docs will drift.
 
+### L2.5 candidate tournament (optional pre-merge)
+
+Champion/challenger zone picks use `bash tools/run_candidate_tournament.sh` before merge when policy requires — **non-ship**, sits above L0–L6. Authority: `docs/qa/CANDIDATE_TOURNAMENT.md` · gate evidence: `L2_candidate_select`.
+
 ### Rendering & environment (Phase 1)
 
 Before building zones, read:

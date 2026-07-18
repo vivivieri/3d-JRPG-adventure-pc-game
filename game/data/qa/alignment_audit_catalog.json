@@ -94,11 +94,12 @@
       "label": "PM Workflow",
       "weight": 1.0,
       "signals": [
-        { "id": "ci_pass_rate", "weight": 0.4, "kind": "ci_rate" },
-        { "id": "L0_doc_sync", "weight": 0.2, "kind": "gate" },
-        { "id": "L0_pm_orchestrator", "weight": 0.2, "kind": "gate" },
-        { "id": "L0_stakeholder_report", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_workflow_integration", "weight": 0.15, "kind": "gate" }
+        { "id": "ci_pass_rate", "weight": 0.35, "kind": "ci_rate" },
+        { "id": "L0_doc_sync", "weight": 0.15, "kind": "gate" },
+        { "id": "L0_pm_orchestrator", "weight": 0.15, "kind": "gate" },
+        { "id": "L0_stakeholder_report", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_workflow_integration", "weight": 0.15, "kind": "gate" },
+        { "id": "L0_candidate_tournament", "weight": 0.1, "kind": "gate" }
       ],
       "icon": "pm"
     },

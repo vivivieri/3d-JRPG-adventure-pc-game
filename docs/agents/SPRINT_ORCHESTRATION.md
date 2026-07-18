@@ -53,6 +53,7 @@ PM: bash tools/run_pm_orchestrator.sh          → PASS required
 PM: assign next_dispatch[0] to agent
 Agent: bash tools/run_agent_session_gate.sh <role> <issue_id>  → PASS required
 Agent: execute work + PR + gates
+Optional (M5 / tournament policy): bash tools/run_candidate_tournament.sh  → L2.5 champion/challenger (docs/qa/CANDIDATE_TOURNAMENT.md)
 PM or Agent: bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>  → enforced close + stakeholder report + PM webhook
 PM: (new Automation run) run_pm_orchestrator.sh → next dispatch or sprint close
 ```

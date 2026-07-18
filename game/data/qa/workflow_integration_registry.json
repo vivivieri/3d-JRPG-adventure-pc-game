@@ -357,6 +357,46 @@
         {
           "doc": "docs/qa/ACCEPTANCE_CRITERIA.md",
           "must_mention": "L2_candidate_select"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L2_candidate_select"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "CANDIDATE_TOURNAMENT"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "CANDIDATE_TOURNAMENT"
+        },
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "L2_candidate_select"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "CANDIDATE_TOURNAMENT"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "CANDIDATE_TOURNAMENT"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "run_candidate_tournament.sh"
+        },
+        {
+          "doc": "docs/art/VISUAL_QA.md",
+          "must_mention": "golden_harness"
+        },
+        {
+          "doc": "docs/agents/MCP_STACK.md",
+          "must_mention": "L2_candidate_select"
+        },
+        {
+          "doc": ".github/PULL_REQUEST_TEMPLATE/game_development.md",
+          "must_mention": "L2_candidate_select"
         }
       ],
       "acceptance_gate": "L0_candidate_tournament"

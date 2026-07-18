@@ -52,6 +52,7 @@
 | `L0_generation_readiness_backlog` | GR-* backlog traceability |
 | `L0_sprint_board` | Sprint board + PM orchestrator state |
 | `L0_workflow_integration` | Factory feature registry — hooks + doc parity |
+| `L0_candidate_tournament` | Champion/challenger config schema (`golden_harness.json`) |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -63,6 +64,7 @@
 | `L0_story_data` | **Architect** / data |
 | `L0_acceptance_catalog` | **QA** catalog |
 | `L0_workflow_integration` | **PM** — factory feature registry parity |
+| `L0_candidate_tournament` | **PM** — golden harness + tournament policy schema |
 | `L0_base_classes` | **Architect** — base class registry |
 | `L1_unit_tests` | **Architect** |
 | `L2_scene_primitives` | **Builder** / **Visual** |
@@ -72,6 +74,7 @@
 | `L2_feel_smoke` | **Architect** — `GAME_FEEL.md` constants |
 | `L2_perf_catalog` | **QA** / **Builder** — `perf_thresholds.json` catalog |
 | `L2_glb_import` | **Builder** / **Visual** — post-import toon pipeline |
+| `L2_candidate_select` | **Builder** / **Visual** — champion/challenger evidence (pre-merge, non-ship) |
 | `L1_gdscript_lint` | **Architect** — changed `.gd` files (`gdtoolkit` required) |
 | `L0_base_class_compliance` | **Architect** — no rogue native extends |
 | `L4_integration` | **Flow** |

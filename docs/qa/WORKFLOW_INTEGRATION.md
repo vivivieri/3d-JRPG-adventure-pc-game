@@ -44,6 +44,19 @@ python3 tools/validate_workflow_integration.py
 bash tools/run_docs_ci_checks.sh   # includes L0_workflow_integration
 ```
 
+### Why gaps can still appear (read this)
+
+Two gates sound similar but enforce **different** things:
+
+| Gate | What it checks | What it does **not** check |
+|------|----------------|----------------------------|
+| **`L0_doc_sync`** | Every indexed doc is in `docs/README.md`; runner gate ids match `acceptance_criteria.json` | That agent runbooks mention your new feature |
+| **`L0_workflow_integration`** | Only docs listed in **`required_doc_refs`** for each registry feature | Docs you forgot to add to `required_doc_refs` |
+
+So a new feature can pass **36/36 docs CI** with only 3 doc refs registered — while `AGENTS.md`, `.cursorrules`, and PM runbook stay silent until someone expands the registry.
+
+**Rule:** When adding a factory feature, copy the **full agent surface list** from §3 checklist (not just the authority doc). Same lesson as `post_agent_cycle` and `agent_session_telemetry` — minimal registry entries cause silent drift.
+
 ---
 
 ## 3. Checklist — adding a new factory feature
@@ -58,10 +71,11 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
    - `orchestrator_steps` — if PM orchestrator invokes it
    - `acceptance_gate` — if new L0 schema/gate
 3. **Wire hooks** — implement in scripts (do not rely on docs alone)
-4. **Update docs** — PM runbook, RR cheatsheet, lifecycle, `.cursorrules`, `AGENTS.md`
-5. **Agent verify (before commit):** `bash tools/check_feature_integration.sh --remind`
-6. **CI verify:** `bash tools/run_docs_ci_checks.sh` — `L0_workflow_integration` must PASS
-7. **Alignment audit** — `bash tools/run_alignment_audit.sh --trigger post_merge`
+4. **Register all agent surfaces** — `required_doc_refs` must include `AGENTS.md`, `.cursorrules`, RR + Controls cheatsheets, PM runbook, sprint orchestration, AI dev workflow, PR templates (not authority doc only)
+5. **Update docs** — PM runbook, RR cheatsheet, lifecycle, `.cursorrules`, `AGENTS.md`
+6. **Agent verify (before commit):** `bash tools/check_feature_integration.sh --remind`
+7. **CI verify:** `bash tools/run_docs_ci_checks.sh` — `L0_workflow_integration` must PASS
+8. **Alignment audit** — `bash tools/run_alignment_audit.sh --trigger post_merge`
 
 ### Where agents see this rule
 
@@ -74,6 +88,8 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
 | `PM_AGENT_RUNBOOK.md` §3b | PM rejects PRs without registry |
 | `pm_orchestrator_steps.json` | `post_agent_steps.check_feature_integration` |
 | `acceptance_criteria.json` | `invalid_pass_patterns` |
+| `CANDIDATE_TOURNAMENT.md` | L2.5 champion/challenger when M5 tournament policy applies |
+| `CONTROLS_CHEATSHEET.md` | Gate tables include `L0_candidate_tournament` / `L2_candidate_select` |
 
 ---
 

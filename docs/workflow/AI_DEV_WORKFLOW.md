@@ -106,11 +106,14 @@ Testing is **layered**. Higher layers run after lower layers pass.
 
 **Golden rule:** **Human QA (L6) runs only after all AI playthrough layers (L0–L5) pass** on the same release-candidate commit. See `docs/qa/AI_TESTING_SPEC.md` §0.
 
+**L2.5 (optional):** Champion/challenger zone tournaments run **before merge** when policy requires — `docs/qa/CANDIDATE_TOURNAMENT.md`. Non-ship; does not replace L0–L5.
+
 | Layer | Runner | Who runs it | Purpose |
 |-------|--------|-------------|---------|
 | **L0 — Data validation** | `python3 tools/validate_story_data.py` + base-class validators | AI agent (every commit) | JSON schema, cross-refs, scene IDs, `base_classes.json` |
 | **L1 — Unit tests + lint** | `bash tools/run_unit_tests.sh` + `check_gdscript_changed.sh` | AI agent (every commit) | Pure logic, parsers, calculators, flags; `gdlint` on changed `.gd` |
 | **L2 — Smoke tests** | `bash tools/run_playtest_smoke.sh` | AI agent (every commit) | Boot, lint; primitives, animation whitelist, feel smoke, GLB import, visual/audio/model smoke when assets exist |
+| **L2.5 — Candidate tournament** | `bash tools/run_candidate_tournament.sh` | Builder / Visual (when policy requires) | Champion/challenger golden harness compare — pre-merge only (`CANDIDATE_TOURNAMENT.md`) |
 | **L3 — GDAI editor verify** | GDAI MCP F5 + viewport | AI agent (per scene task) | Visual layout, materials, runtime errors in editor |
 | **L4 — AI integration tests** | `bash tools/run_integration_tests.sh` | AI agent (phase gate) | Multi-scene flows, combat round, save/load |
 | **L5 — AI E2E playthrough** | `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |

@@ -27,6 +27,7 @@
 
 ```
 L1  check_scene_visuals.sh     → block BoxMesh/primitives in ship .tscn
+L2.5 run_candidate_tournament.sh → champion/challenger (`golden_harness.json` — CANDIDATE_TOURNAMENT.md)
 L3  GDAI screenshot            → artifacts/screenshots/<zone>_<camera>.png
 L3b Vision checklist           → agent reads image vs ART_DIRECTION §10
 L3c check_screenshot_palette   → muted palette / no candy-bright failure
