@@ -43,7 +43,9 @@
     "FPS ship sign-off from cloud_agent_jit or ci_headless baseline",
     "Windows-only ship claim while primary dev runs on Linux cloud (see PLATFORM_SUPPORT.md)",
     "Ship export without export_strip_dev_plugins_begin (dev MCP/GDAI in build)",
-    "Tracked file contains live API key or webhook URL (L0_no_secrets FAIL)"
+    "Tracked file contains live API key or webhook URL (L0_no_secrets FAIL)",
+    "Cross-cutting factory feature merged without workflow_integration_registry.json entry",
+    "Factory feature registry drift — L0_workflow_integration FAIL after hook or doc change"
   ],
   "gates": {
     "L0_rr_compliance": {

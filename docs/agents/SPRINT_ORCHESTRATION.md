@@ -118,6 +118,7 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`:
 - Agent work without `run_agent_session_gate.sh` PASS
 - Issue closed in GitHub but `sprint_board` status not `done`
 - Sprint pack / board ID mismatch
+- Cross-cutting factory feature without `workflow_integration_registry.json` entry (`docs/qa/WORKFLOW_INTEGRATION.md`)
 
 ---
 

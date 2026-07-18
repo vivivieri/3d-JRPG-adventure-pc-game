@@ -1,6 +1,6 @@
 # Asset Compliance Report
 
-**Generated:** 2026-07-17 06:57:23 UTC  
+**Generated:** 2026-07-18 09:12:18 UTC  
 **Status:** PASSED  
 **Policy:** [docs/art/ASSET_COMPLIANCE.md](../ASSET_COMPLIANCE.md)  
 **Manifest:** `docs/asset_manifest.license.json`

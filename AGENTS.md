@@ -178,6 +178,18 @@ GDAI MCP F5 = **L3**; Godotiq = debug/trace; Godot MCP Pro = L4/L5 scenarios (`d
 
 **Human QA:** Only after L0–L5 pass — `docs/qa/PLAYTEST_SCRIPT.md` (`docs/qa/AI_TESTING_SPEC.md` §8).
 
+### Cross-cutting factory features (agents MUST register)
+
+If your task adds or changes anything that touches **PM dispatch, agent sessions, secrets, cycle events, orchestrator steps, watchdog, or stakeholder reports**:
+
+1. Read `docs/qa/WORKFLOW_INTEGRATION.md`
+2. Register the feature in `game/data/qa/workflow_integration_registry.json` (hooks + doc refs + secrets)
+3. Wire all script hooks before updating docs alone
+4. **Before commit/PR:** `bash tools/check_feature_integration.sh --remind` — must PASS
+5. Run `bash tools/run_docs_ci_checks.sh` (includes `L0_workflow_integration`)
+
+**Do not** ship a cross-cutting feature in one script only — CI will fail and PM dispatch docs will drift.
+
 ### Rendering & environment (Phase 1)
 
 Before building zones, read:

@@ -29,6 +29,7 @@ Full toolchain: `docs/agents/MCP_STACK.md` + `docs/art/ART_AUTOMATION_PIPELINE.m
 
 - Hand-editing `.tscn` scene trees, node placement, or inspector values in Cursor (GDAI MCP must do this)
 - Implementing gameplay/visual features when GDAI MCP is not connected
+- **Shipping a cross-cutting factory feature without registering it in `game/data/qa/workflow_integration_registry.json`** — run `bash tools/check_feature_integration.sh --remind` before merge; `L0_workflow_integration` must PASS (`docs/qa/WORKFLOW_INTEGRATION.md`)
 - Importing copyrighted or unknown-license art, audio, fonts, or models from the web
 - Using Kenney packs, random Google images, CC-BY-NC, or franchise IP traces
 - Creating new `CharacterBody3D` player stacks outside `PlayerController` (`docs/technical/CODE_BASE_CLASS_RULES.md`)
@@ -204,6 +205,11 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 **Sprint factory telemetry (event-driven PM):**
 - Workers: `run_agent_session_gate.sh` opens session → `pm_emit_cycle_event.sh agent_cycle_complete` closes it + auto-fetches tokens (`CURSOR_API_KEY`).
 - Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
+
+**Cross-cutting factory features (agents MUST register before merge):**
+- Registry: `game/data/qa/workflow_integration_registry.json` — every PM hook, secret, telemetry, or watchdog feature.
+- Before merge: `bash tools/check_feature_integration.sh --remind` → `L0_workflow_integration` PASS.
+- Authority: `docs/qa/WORKFLOW_INTEGRATION.md`.
 
 **Example task split:**
 

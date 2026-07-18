@@ -117,6 +117,12 @@
       "required": true
     },
     {
+      "id": "check_feature_integration",
+      "description": "Verify factory workflow integration registry parity (cross-cutting features)",
+      "command": "bash tools/check_feature_integration.sh",
+      "required": true
+    },
+    {
       "id": "re_run_orchestrator",
       "description": "Re-run dispatch before assigning next agent",
       "command": "bash tools/run_pm_orchestrator.sh",

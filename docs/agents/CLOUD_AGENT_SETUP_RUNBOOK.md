@@ -190,6 +190,11 @@ AFTER orchestrator PASS, read artifacts/pm_orchestrator_report.json → next_dis
 
 NEVER: skip orchestrator, mark gates PASS without QA evidence, use cron logic.
 
+Cross-cutting factory features (PM hooks, telemetry, secrets, watchdog):
+  Register in game/data/qa/workflow_integration_registry.json BEFORE merge.
+  Run: bash tools/check_feature_integration.sh --remind
+  Authority: docs/qa/WORKFLOW_INTEGRATION.md
+
 Worker agents MUST end every session with:
   bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
 This closes agent session telemetry (tokens auto-fetched when CURSOR_API_KEY set).

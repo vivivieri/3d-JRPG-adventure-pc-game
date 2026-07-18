@@ -91,3 +91,8 @@ bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID"
 
 # Heartbeat — worker session start
 bash tools/pm_record_heartbeat.sh --agent "$AGENT" --issue "$ISSUE_ID" --phase start 2>/dev/null || true
+
+echo ""
+echo "[RULE] Cross-cutting factory features → register in workflow_integration_registry.json"
+echo "       Before merge: bash tools/check_feature_integration.sh --remind"
+echo "       Authority: docs/qa/WORKFLOW_INTEGRATION.md"

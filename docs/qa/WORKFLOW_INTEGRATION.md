@@ -59,8 +59,21 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
    - `acceptance_gate` — if new L0 schema/gate
 3. **Wire hooks** — implement in scripts (do not rely on docs alone)
 4. **Update docs** — PM runbook, RR cheatsheet, lifecycle, `.cursorrules`, `AGENTS.md`
-5. **Validate** — `python3 tools/validate_workflow_integration.py` must PASS
-6. **Alignment audit** — `bash tools/run_alignment_audit.sh --trigger post_merge`
+5. **Agent verify (before commit):** `bash tools/check_feature_integration.sh --remind`
+6. **CI verify:** `bash tools/run_docs_ci_checks.sh` — `L0_workflow_integration` must PASS
+7. **Alignment audit** — `bash tools/run_alignment_audit.sh --trigger post_merge`
+
+### Where agents see this rule
+
+| Surface | What reminds them |
+|---------|-------------------|
+| `.cursorrules` §0 | Forbidden without registry |
+| `AGENTS.md` | Cloud agent mandatory section |
+| `run_agent_session_gate.sh` | Printed every worker session start |
+| `RR_CHEATSHEET.md` | Golden rule #8 + forbidden list |
+| `PM_AGENT_RUNBOOK.md` §3b | PM rejects PRs without registry |
+| `pm_orchestrator_steps.json` | `post_agent_steps.check_feature_integration` |
+| `acceptance_criteria.json` | `invalid_pass_patterns` |
 
 ---
 

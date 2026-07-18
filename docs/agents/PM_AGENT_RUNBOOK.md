@@ -85,6 +85,23 @@ Do **not** call `pm_emit_cycle_event` when PM only assigns work to another agent
 
 ---
 
+## 3b. Cross-cutting factory features (all agents)
+
+When **any** agent adds or changes PM hooks, telemetry, secrets, cycle events, orchestrator steps, or watchdog behavior:
+
+```bash
+# Read checklist
+cat docs/qa/WORKFLOW_INTEGRATION.md
+
+# Register + verify before merge
+bash tools/check_feature_integration.sh --remind
+bash tools/run_docs_ci_checks.sh   # L0_workflow_integration must PASS
+```
+
+PM **rejects** PRs that touch factory workflow without registry update.
+
+---
+
 ## 4. When an agent is stale or unresponsive
 
 Orchestrator FAIL on `stale_issues` or blocked deps.

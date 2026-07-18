@@ -16,8 +16,9 @@
 5. **P0 MCP required:** `godot-mcp`, `godotiq`, `godot-mcp-pro` — if missing, **STOP and notify user**.
 6. **One writer per `.tscn`** — never parallel two agents on the same scene file.
 7. **`docs/` + `game/data/`** are design truth — not sprint backlog reprioritization.
-8. **Open PRs with the role template** — `game_development` or `docs_main` checklist (`docs/cheat-sheets/CONTROLS_CHEATSHEET.md`).
-9. **Extend base classes only** — no new `CharacterBody3D` stacks (`docs/technical/CODE_BASE_CLASS_RULES.md`).
+8. **Cross-cutting factory features** — register in `workflow_integration_registry.json`; run `bash tools/check_feature_integration.sh --remind` before merge (`docs/qa/WORKFLOW_INTEGRATION.md`).
+9. **Open PRs with the role template** — `game_development` or `docs_main` checklist (`docs/cheat-sheets/CONTROLS_CHEATSHEET.md`).
+10. **Extend base classes only** — no new `CharacterBody3D` stacks (`docs/technical/CODE_BASE_CLASS_RULES.md`).
 
 ---
 
@@ -369,6 +370,7 @@ python3 tools/pm_bundle_evidence.py <issue_id> \
 - Kenney kits, unknown-license web assets  
 - Summer Engine, Fennara (fourth scene editor)  
 - Skipping phase gates via sprint reprioritization  
+- **Cross-cutting factory feature merged without `workflow_integration_registry.json` entry** — run `bash tools/check_feature_integration.sh --remind`  
 
 ---
 
