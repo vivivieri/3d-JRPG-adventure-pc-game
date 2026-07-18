@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "authority": "docs/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
@@ -19,15 +19,49 @@
     "aligned_min_overall": 8.0,
     "aligned_max_blocking": 0,
     "at_risk_min_overall": 6.5,
-    "fail_any_ci": true
+    "fail_any_ci": true,
+    "build_aligned_min": 6.0,
+    "build_at_risk_min": 4.0
+  },
+  "streams": {
+    "spec_readiness": {
+      "id": "spec_readiness",
+      "label": "Design & Preparation",
+      "short_label": "Spec",
+      "question": "Can we dispatch builders? Is design truth complete?",
+      "domains": [
+        "data_alignment",
+        "narrative",
+        "gameplay",
+        "visual_spec",
+        "ux_controls",
+        "pm_workflow"
+      ],
+      "primary_on_branches": ["main"],
+      "not_applicable_on_branches": [],
+      "na_reason": null
+    },
+    "build_readiness": {
+      "id": "build_readiness",
+      "label": "Development & Shipping",
+      "short_label": "Build",
+      "question": "Does the game run, pass gates, and approach Steam?",
+      "domains": ["runtime_proof", "steam_ship"],
+      "primary_on_branches": ["game/development"],
+      "applicable_on_branches": ["game/development"],
+      "not_applicable_on_branches": ["main"],
+      "na_reason": "Build stream applies only on game/development — main holds specs until P1-00 bootstrap"
+    }
   },
   "domains": [
     {
       "id": "overall_production",
-      "label": "Overall Production",
+      "label": "Overall Spec (legacy alias)",
       "weight": 1.0,
-      "derive": "mean_siblings",
-      "icon": "overall"
+      "derive": "mean_stream",
+      "stream": "spec_readiness",
+      "icon": "overall",
+      "hidden_from_dashboard": true
     },
     {
       "id": "data_alignment",
@@ -254,7 +288,9 @@
       "batch": 1,
       "assets": [
         { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
-        { "id": "audit_radar_6axis", "label": "9-domain production radar", "filename": "audit_radar_6axis.png", "kind": "radar" },
+        { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar" },
+        { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar" },
+        { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar" },
         { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
       ]
     },

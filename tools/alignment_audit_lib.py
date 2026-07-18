@@ -336,7 +336,7 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
 def compute_domain_scores(catalog: dict[str, Any], ctx: dict[str, Any]) -> dict[str, float]:
     scores: dict[str, float] = {}
     for domain in catalog.get("domains", []):
-        if domain.get("derive") == "mean_siblings":
+        if domain.get("derive"):
             continue
         total_w = 0.0
         acc = 0.0
@@ -345,11 +345,107 @@ def compute_domain_scores(catalog: dict[str, Any], ctx: dict[str, Any]) -> dict[
             total_w += w
             acc += w * _signal_score(sig, {**ctx, "domain_scores": scores})
         scores[domain["id"]] = round(acc / max(total_w, 1e-9), 2)
-
-    siblings = [d["id"] for d in catalog.get("domains", []) if d.get("derive") != "mean_siblings"]
-    if siblings:
-        scores["overall_production"] = round(sum(scores[s] for s in siblings) / len(siblings), 2)
     return scores
+
+
+def _stream_verdict(score: float, catalog: dict[str, Any], stream_id: str) -> str:
+    th = catalog.get("verdict_thresholds", {})
+    if stream_id == "build_readiness":
+        aligned_min = float(th.get("build_aligned_min", 6.0))
+        at_risk_min = float(th.get("build_at_risk_min", 4.0))
+    else:
+        aligned_min = float(th.get("aligned_min_overall", 8.0))
+        at_risk_min = float(th.get("at_risk_min_overall", 6.5))
+    if score >= aligned_min:
+        return "ALIGNED"
+    if score >= at_risk_min:
+        return "AT_RISK"
+    return "FAIL"
+
+
+def compute_stream_scores(
+    catalog: dict[str, Any], domain_scores: dict[str, float], branch: str
+) -> dict[str, dict[str, Any]]:
+    streams_cfg = catalog.get("streams", {})
+    result: dict[str, dict[str, Any]] = {}
+    for stream_id, cfg in streams_cfg.items():
+        label = cfg.get("label", stream_id)
+        domain_ids = cfg.get("domains", [])
+        domain_detail = {did: domain_scores.get(did) for did in domain_ids if did in domain_scores}
+
+        applicable_on = cfg.get("applicable_on_branches")
+        if applicable_on is not None and branch not in applicable_on:
+            result[stream_id] = {
+                "id": stream_id,
+                "label": label,
+                "short_label": cfg.get("short_label", label),
+                "question": cfg.get("question", ""),
+                "score": None,
+                "status": "not_applicable",
+                "verdict": "N/A",
+                "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+                "domains": domain_detail,
+                "na_reason": cfg.get("na_reason", "Not applicable on this branch"),
+            }
+            continue
+
+        if branch in cfg.get("not_applicable_on_branches", []):
+            result[stream_id] = {
+                "id": stream_id,
+                "label": label,
+                "short_label": cfg.get("short_label", label),
+                "question": cfg.get("question", ""),
+                "score": None,
+                "status": "not_applicable",
+                "verdict": "N/A",
+                "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+                "domains": domain_detail,
+                "na_reason": cfg.get("na_reason", "Not applicable on this branch"),
+            }
+            continue
+
+        values = [float(domain_scores[d]) for d in domain_ids if d in domain_scores]
+        score = round(sum(values) / len(values), 2) if values else 0.0
+        verdict = _stream_verdict(score, catalog, stream_id)
+        result[stream_id] = {
+            "id": stream_id,
+            "label": label,
+            "short_label": cfg.get("short_label", label),
+            "question": cfg.get("question", ""),
+            "score": score,
+            "status": verdict.lower().replace("_", "-"),
+            "verdict": verdict,
+            "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+            "domains": domain_detail,
+            "na_reason": None,
+        }
+    return result
+
+
+def apply_derived_domain_scores(
+    catalog: dict[str, Any],
+    domain_scores: dict[str, float],
+    stream_scores: dict[str, dict[str, Any]],
+) -> None:
+    for domain in catalog.get("domains", []):
+        derive = domain.get("derive")
+        if derive == "mean_stream":
+            sid = domain.get("stream", "")
+            stream = stream_scores.get(sid, {})
+            score = stream.get("score")
+            if score is not None:
+                domain_scores[domain["id"]] = float(score)
+        elif derive == "mean_siblings":
+            siblings = [
+                d["id"]
+                for d in catalog.get("domains", [])
+                if not d.get("derive") and d["id"] != domain["id"]
+            ]
+            if siblings:
+                domain_scores[domain["id"]] = round(
+                    sum(domain_scores[s] for s in siblings if s in domain_scores) / len(siblings),
+                    2,
+                )
 
 
 def build_recommendations(
@@ -459,7 +555,7 @@ def compute_verdict(
     catalog: dict[str, Any],
     *,
     ci: dict[str, Any],
-    domain_scores: dict[str, float],
+    stream_scores: dict[str, dict[str, Any]],
     checklist: dict[str, Any],
 ) -> str:
     th = catalog.get("verdict_thresholds", {})
@@ -467,12 +563,19 @@ def compute_verdict(
         return "FAIL"
     if checklist.get("blocking_open", 0) > int(th.get("aligned_max_blocking", 0)):
         return "AT_RISK"
-    overall = domain_scores.get("overall_production", 0.0)
-    if overall >= float(th.get("aligned_min_overall", 8.0)):
-        return "ALIGNED"
-    if overall >= float(th.get("at_risk_min_overall", 6.5)):
+
+    applicable = [
+        s.get("verdict", "FAIL")
+        for s in stream_scores.values()
+        if s.get("status") != "not_applicable" and s.get("verdict") != "N/A"
+    ]
+    if not applicable:
+        return "FAIL"
+    if "FAIL" in applicable:
+        return "FAIL"
+    if "AT_RISK" in applicable:
         return "AT_RISK"
-    return "FAIL"
+    return "ALIGNED"
 
 
 def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = None) -> list[dict[str, Any]]:
@@ -555,6 +658,8 @@ def build_report(
     stale = stale_string_scan(catalog, branch=branch)
     ctx = {"ci": ci, "parity": parity, "branch": branch}
     domain_scores = compute_domain_scores(catalog, ctx)
+    stream_scores = compute_stream_scores(catalog, domain_scores, branch)
+    apply_derived_domain_scores(catalog, domain_scores, stream_scores)
     visual_inventory = scan_visual_inventory(catalog, visuals_from)
     recommendations = build_recommendations(
         catalog,
@@ -566,13 +671,24 @@ def build_report(
         report_visuals=visual_inventory,
     )
     checklist = build_checklist(recommendations, catalog)
-    verdict = compute_verdict(catalog, ci=ci, domain_scores=domain_scores, checklist=checklist)
+    verdict = compute_verdict(
+        catalog, ci=ci, stream_scores=stream_scores, checklist=checklist
+    )
+
+    spec = stream_scores.get("spec_readiness", {})
+    build = stream_scores.get("build_readiness", {})
+    spec_label = spec.get("score", "N/A")
+    build_label = build.get("score") if build.get("score") is not None else "N/A"
+    headline = (
+        f"Alignment audit — {verdict} ({branch} @ {commit}) · "
+        f"Spec {spec_label}/10 · Build {build_label}/10"
+    )
 
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     audit_id = f"{ts}_{trigger}"
 
     report: dict[str, Any] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "audit_id": audit_id,
         "generated_at": _utcnow(),
         "trigger": trigger,
@@ -580,7 +696,8 @@ def build_report(
         "branch": branch,
         "commit": commit,
         "verdict": verdict,
-        "headline": f"Alignment audit — {verdict} ({branch} @ {commit})",
+        "headline": headline,
+        "streams": stream_scores,
         "domain_scores": domain_scores,
         "ci_summary": {
             "script": ci.get("script"),
@@ -632,7 +749,13 @@ def apply_committed_visual_hrefs(
         )
 
 
+def _hidden_domain_ids(catalog: dict[str, Any]) -> set[str]:
+    return {d["id"] for d in catalog.get("domains", []) if d.get("hidden_from_dashboard")}
+
+
 def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -> str:
+    catalog = load_catalog()
+    hidden = _hidden_domain_ids(catalog)
     lines = [
         "# Tides of Urashima — Alignment Audit Report",
         "",
@@ -642,12 +765,49 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
         "",
         f"## Verdict: **{report.get('verdict')}**",
         "",
-        "## Domain scores (0–10)",
+        "## Streams (management view)",
         "",
-        "| Domain | Score |",
-        "|--------|-------|",
+        "| Stream | Score | Status | Question |",
+        "|--------|-------|--------|----------|",
     ]
+    for stream in report.get("streams", {}).values():
+        score = stream.get("score")
+        score_txt = "N/A" if score is None else f"{score}/10"
+        status = stream.get("status", "").replace("-", " ").title()
+        if stream.get("status") == "not_applicable":
+            status = f"N/A — {stream.get('na_reason', '')}"
+        lines.append(
+            f"| {stream.get('label')} | {score_txt} | {status} | {stream.get('question', '')} |"
+        )
+    lines.extend(["", "> **Do not merge spec + build into one radar for management.** Each stream answers a different question.", ""])
+
+    for stream in report.get("streams", {}).values():
+        if stream.get("status") == "not_applicable":
+            continue
+        lines.extend(
+            [
+                f"### {stream.get('label')} domains",
+                "",
+                "| Domain | Score |",
+                "|--------|-------|",
+            ]
+        )
+        for dom_id, score in sorted(stream.get("domains", {}).items(), key=lambda x: -float(x[1] or 0)):
+            label = dom_id.replace("_", " ").title()
+            lines.append(f"| {label} | {score} |")
+        lines.append("")
+
+    lines.extend(
+        [
+            "## All domain scores (0–10)",
+            "",
+            "| Domain | Score |",
+            "|--------|-------|",
+        ]
+    )
     for dom_id, score in sorted(report.get("domain_scores", {}).items(), key=lambda x: -x[1]):
+        if dom_id in hidden:
+            continue
         label = dom_id.replace("_", " ").title()
         lines.append(f"| {label} | {score} |")
 
@@ -714,12 +874,36 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
 
 def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path") -> str:
     esc = html.escape
-    scores = report.get("domain_scores", {})
-    max_score = 10.0
+    catalog = load_catalog()
+    hidden = _hidden_domain_ids(catalog)
+
+    stream_cards = []
+    for stream in report.get("streams", {}).values():
+        score = stream.get("score")
+        if score is None:
+            pct = 0
+            val = "N/A"
+            sub = esc(stream.get("na_reason", "Not applicable on this branch"))
+        else:
+            pct = min(100, int(100 * float(score) / 10.0))
+            val = f"{score}/10"
+            sub = esc(stream.get("question", ""))
+        stream_cards.append(
+            f'<div class="card stream-card">'
+            f'<h2>{esc(stream.get("label", ""))}</h2>'
+            f'<div class="stream-score">{val}</div>'
+            f'<div class="bar"><div style="width:{pct}%"></div></div>'
+            f'<p class="stream-sub">{sub}</p>'
+            f'<p class="stream-verdict"><span class="verdict {esc(stream.get("status", ""))}">'
+            f'{esc(stream.get("verdict", ""))}</span></p></div>'
+        )
+
     bars = []
-    for dom_id, score in sorted(scores.items(), key=lambda x: -x[1]):
+    for dom_id, score in sorted(report.get("domain_scores", {}).items(), key=lambda x: -x[1]):
+        if dom_id in hidden:
+            continue
         label = dom_id.replace("_", " ").title()
-        pct = min(100, int(100 * float(score) / max_score))
+        pct = min(100, int(100 * float(score) / 10.0))
         bars.append(
             f'<div class="score-row"><span class="label">{esc(label)}</span>'
             f'<div class="bar"><div style="width:{pct}%"></div></div>'
@@ -771,6 +955,10 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
     .verdict.aligned {{ background: #1e4d3a; color: #7dcea0; }}
     .verdict.at-risk {{ background: #4d3a1e; color: #d4a880; }}
     .verdict.fail {{ background: #4d1e1e; color: #e88; }}
+    .verdict.not-applicable {{ background: #2a3344; color: #8b9daf; }}
+    .stream-card .stream-score {{ font-size: 2rem; font-weight: 700; color: #4ae8d8; margin: 0.25rem 0; }}
+    .stream-sub {{ font-size: 0.85rem; color: #8b9daf; margin: 0.35rem 0; }}
+    .stream-verdict {{ margin-top: 0.5rem; }}
     .score-row {{ display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; margin: 0.35rem 0; }}
     .bar {{ background: #2a3344; border-radius: 4px; height: 10px; overflow: hidden; }}
     .bar > div {{ background: linear-gradient(90deg, #4ae8d8, #d4a880); height: 100%; }}
@@ -792,6 +980,10 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
   <p>{esc(report.get("headline", ""))}</p>
   <p><span class="verdict {verdict_class}">{esc(verdict)}</span>
      <small> · {esc(report.get("generated_at", ""))} · {esc(report.get("branch", ""))} @ {esc(report.get("commit", ""))}</small></p>
+
+  <h2>Streams</h2>
+  <p><small>Spec = design &amp; preparation (<code>main</code>). Build = runtime &amp; ship (<code>game/development</code>). Do not merge for management.</small></p>
+  <div class="grid">{"".join(stream_cards)}</div>
 
   <h2>Domain scores</h2>
   {"".join(bars)}
@@ -832,7 +1024,10 @@ def update_history_index(
         "branch": report["branch"],
         "commit": report["commit"],
         "verdict": report["verdict"],
-        "overall_score": report["domain_scores"].get("overall_production"),
+        "overall_score": report.get("streams", {}).get("spec_readiness", {}).get("score"),
+        "spec_score": report.get("streams", {}).get("spec_readiness", {}).get("score"),
+        "build_score": report.get("streams", {}).get("build_readiness", {}).get("score"),
+        "build_status": report.get("streams", {}).get("build_readiness", {}).get("status"),
         "ci_pass": report["ci_summary"]["pass_count"],
         "ci_fail": report["ci_summary"]["fail_count"],
         "blocking_open": report["checklist"]["blocking_open"],
@@ -1010,7 +1205,13 @@ def main(argv: list[str] | None = None) -> int:
     vdir = Path(args.visuals_from) if args.visuals_from else None
     report = build_report(trigger=args.trigger, note=args.note, visuals_from=vdir, skip_ci=args.skip_ci)
     paths = write_outputs(report, catalog, visuals_from=vdir)
-    print(f"OK — verdict={report['verdict']} overall={report['domain_scores'].get('overall_production')}")
+    spec = report.get("streams", {}).get("spec_readiness", {})
+    build = report.get("streams", {}).get("build_readiness", {})
+    build_disp = build.get("score") if build.get("score") is not None else "N/A"
+    print(
+        f"OK — verdict={report['verdict']} "
+        f"spec={spec.get('score')} build={build_disp}"
+    )
     print(f"  CI: PASS={report['ci_summary']['pass_count']} FAIL={report['ci_summary']['fail_count']}")
     print(f"  Checklist: {report['checklist']['total_open']} open ({report['checklist']['blocking_open']} blocking)")
     print(f"  JSON: {paths['json']}")

@@ -1,6 +1,6 @@
 # Alignment Audit — Standard Process & Stakeholder Reporting
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Authority:** Run after every spec alignment pass, PR merge to `main`, or phase exit on `game/development`.  
 **Cross-refs:** `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/agents/PM_STAKEHOLDER_REPORTING.md`, `game/data/qa/alignment_audit_catalog.json`
 
@@ -21,12 +21,28 @@ Produces a **repeatable alignment audit** with:
 
 Each audit includes:
 
-1. **Verdict** — `ALIGNED` · `AT_RISK` · `FAIL`
-2. **Domain radar scores** (0–10) — nine domains + overall
-3. **CI summary** — gate PASS/FAIL counts
-4. **Data parity** — encounters, hooks, tutorial flags, sprint board ↔ sprint pack IDs
-5. **Full recommendation checklist** — P0–P3 by category
-6. **Visual manifest** — stakeholder PNG packs (when bundled)
+1. **Verdict** — `ALIGNED` · `AT_RISK` · `FAIL` (CI + applicable streams)
+2. **Two streams** — **Spec readiness** (design & prep) and **Build readiness** (dev & ship)
+3. **Domain radar scores** (0–10) — grouped by stream, not one merged mega-radar
+4. **CI summary** — gate PASS/FAIL counts
+5. **Data parity** — encounters, hooks, tutorial flags, sprint board ↔ sprint pack IDs
+6. **Full recommendation checklist** — P0–P3 by category
+7. **Visual manifest** — stakeholder PNG packs (when bundled)
+
+### 1b. Two streams (management view)
+
+**Do not show one merged radar to management** — it makes spec work look incomplete when build has not started.
+
+| Stream | ID | Primary branch | Question |
+|--------|-----|----------------|----------|
+| **Design & preparation** | `spec_readiness` | `main` | Can we dispatch builders? Is design truth complete? |
+| **Development & shipping** | `build_readiness` | `game/development` | Does the game run, pass gates, and approach Steam? |
+
+On **`main`**, build stream is **N/A** (no `project.godot` by design). Headline: `Spec 9.8/10 · Build N/A`.
+
+On **`game/development`**, both streams score independently. Verdict = worst applicable stream after CI pass.
+
+**GitHub:** `report.md` § Streams. **Local:** `dashboard.html` — two stream cards at top.
 
 ---
 
@@ -75,32 +91,49 @@ open artifacts/alignment_dashboard.html       # macOS
 | Layer | Authority | Misread risk |
 |-------|-----------|--------------|
 | **Verdict** | Any CI gate FAIL → `FAIL` (when `fail_any_ci` is true) | None — this is the ship/dispatch gate |
-| **Radar** | Weighted subset of signals in `alignment_audit_catalog.json` | `--skip-ci` audits score ~0 on gate signals; do not use for PASS/FAIL |
+| **Streams** | Worst applicable stream (`spec_readiness` / `build_readiness`) | Build N/A on `main` is expected, not failure |
+| **Radar** | Weighted subset of signals per domain, grouped by stream | `--skip-ci` audits score ~0 on gate signals |
 | **Parity** | Encounters, hooks, tutorial flags, sprint board ↔ pack | Catches data drift CI schema gates may miss |
 
 Configured in `alignment_audit_catalog.json` → `verdict_thresholds`:
 
 | Verdict | Condition |
 |---------|-----------|
-| **FAIL** | Any CI gate FAIL |
-| **AT_RISK** | Blocking checklist items open, or overall &lt; 8.0 |
-| **ALIGNED** | CI all PASS, no blocking checklist, overall ≥ 8.0 |
+| **FAIL** | Any CI gate FAIL, or any applicable stream &lt; 6.5 (build) / &lt; 6.5 (spec) |
+| **AT_RISK** | Blocking checklist items open, or any applicable stream in AT_RISK band |
+| **ALIGNED** | CI all PASS, no blocking checklist, all applicable streams ≥ aligned threshold |
+
+Stream thresholds in `alignment_audit_catalog.json` → `verdict_thresholds`: spec uses `aligned_min_overall` (8.0); build uses `build_aligned_min` (6.0) on `game/development`.
 
 ---
 
 ## 5. Domain scores (radar axes)
 
+Domains are grouped into streams in `alignment_audit_catalog.json` → `streams`:
+
+### Spec stream (`spec_readiness`)
+
 | ID | Label | Main signals |
 |----|-------|----------------|
-| `overall_production` | Overall | Mean of sibling domains |
 | `data_alignment` | Data Alignment | Registry parity + L0 scene/story gates + sprint board ↔ pack |
 | `narrative` | Narrative | Story spine, density, VO/hooks count |
 | `gameplay` | Gameplay | Spec registry, encounters, combat data |
 | `visual_spec` | Visual Spec | Zone visuals contract, palettes |
-| `ux_controls` | UX & Controls | Settings/combat docs; impl scenes cap on main |
-| `pm_workflow` | PM Workflow | CI pass rate, doc sync, orchestrator, stakeholder, workflow integration, telemetry, watchdog, tournament |
-| `runtime_proof` | Runtime Proof | project.godot, L2/L4/L5 gates (low on `main` by design) |
+| `ux_controls` | UX & Controls | Settings/combat docs |
+| `pm_workflow` | PM Workflow | CI pass rate, doc sync, factory gates |
+
+### Build stream (`build_readiness`)
+
+| ID | Label | Main signals |
+|----|-------|----------------|
+| `runtime_proof` | Runtime Proof | project.godot, L2/L4/L5 gates |
 | `steam_ship` | Steam Ship M6 | Ship security, asset compliance, runtime ref |
+
+### Legacy alias
+
+| ID | Label | Notes |
+|----|-------|-------|
+| `overall_production` | Overall Spec (legacy) | Equals `spec_readiness` score — hidden from dashboard; do not use for management |
 
 ---
 

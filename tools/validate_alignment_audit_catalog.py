@@ -19,13 +19,26 @@ def main() -> int:
     data = json.loads(CATALOG.read_text(encoding="utf-8"))
     errors: list[str] = []
 
-    for key in ("version", "authority", "domains", "recommendation_rules", "visual_packs", "outputs"):
+    for key in ("version", "authority", "domains", "streams", "recommendation_rules", "visual_packs", "outputs"):
         if key not in data:
             errors.append(f"missing key: {key}")
 
     domain_ids = {d["id"] for d in data.get("domains", [])}
     if "overall_production" not in domain_ids:
-        errors.append("domains must include overall_production")
+        errors.append("domains must include overall_production (legacy alias)")
+
+    streams = data.get("streams", {})
+    if "spec_readiness" not in streams or "build_readiness" not in streams:
+        errors.append("streams must include spec_readiness and build_readiness")
+
+    for stream_id, stream in streams.items():
+        for dom_id in stream.get("domains", []):
+            if dom_id not in domain_ids:
+                errors.append(f"stream {stream_id}: unknown domain '{dom_id}'")
+        primary = stream.get("primary_on_branches", [])
+        na = stream.get("not_applicable_on_branches", [])
+        if set(primary) & set(na):
+            errors.append(f"stream {stream_id}: branch in both primary and not_applicable")
 
     rule_ids = [r["id"] for r in data.get("recommendation_rules", [])]
     if len(rule_ids) != len(set(rule_ids)):
@@ -42,7 +55,7 @@ def main() -> int:
         known_gates.update({"L0_acceptance_catalog", "L0_environments_catalog", "L0_sprint_phases"})
 
     for domain in data.get("domains", []):
-        if domain.get("derive") == "mean_siblings":
+        if domain.get("derive"):
             continue
         signals = domain.get("signals", [])
         total_w = sum(float(s.get("weight", 0)) for s in signals)
