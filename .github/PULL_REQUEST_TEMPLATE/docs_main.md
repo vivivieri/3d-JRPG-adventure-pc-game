@@ -10,6 +10,8 @@
 ### PM Agent
 - [ ] Spec authority preserved — design truth stays in `docs/` + `game/data/`
 - [ ] No gameplay implementation smuggled onto `main`
+- [ ] Cross-cutting factory feature registered in `workflow_integration_registry.json` (`docs/qa/WORKFLOW_INTEGRATION.md`)
+- [ ] `bash tools/check_feature_integration.sh --remind` PASS before merge
 
 ---
 
@@ -20,3 +22,4 @@
 ## Test plan
 
 - [ ] `bash tools/run_docs_ci_checks.sh`
+- [ ] `bash tools/check_feature_integration.sh --remind` (if PM hooks, telemetry, secrets, or watchdog touched)

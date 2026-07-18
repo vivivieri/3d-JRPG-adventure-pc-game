@@ -61,6 +61,12 @@ bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <rol
 
 Factory telemetry policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9. One-time secret: `CURSOR_API_KEY` (`docs/agents/CURSOR_SECRETS_SETUP.md` §8).
 
+**Cross-cutting factory features (register before merge):**
+
+```bash
+bash tools/check_feature_integration.sh --remind   # docs/qa/WORKFLOW_INTEGRATION.md
+```
+
 All must be true before implementation (`.cursorrules` §0 / `MCP_STACK.md`):
 
 | Check | How |

@@ -232,6 +232,8 @@ GitHub = **what + proof** · Linear = **which batch + cycle progress**
 
 **Agent session telemetry** (efficiency studies): `docs/qa/AGENT_SESSION_TELEMETRY.md` — JSONL log of role, task, duration, tokens per issue. Wired into session gate, cycle events, PM orchestrator, watchdog, and stakeholder reports (`tools/analyze_agent_session_telemetry.py`). Requires one-time `CURSOR_API_KEY` secret.
 
+**Workflow integration registry** (drift prevention): `docs/qa/WORKFLOW_INTEGRATION.md` — agents register cross-cutting factory features before merge; `L0_workflow_integration` CI + `bash tools/check_feature_integration.sh --remind`.
+
 ---
 
 ## 9. Promotion checklist

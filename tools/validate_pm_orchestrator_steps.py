@@ -70,6 +70,17 @@ def main() -> int:
     if session and not any(s.get("id") == "dispatch_orchestrator" for s in session):
         errors.append("session_steps missing required 'dispatch_orchestrator' step")
 
+    REQUIRED_POST_AGENT_IDS = (
+        "check_done_criteria",
+        "bundle_evidence",
+        "check_feature_integration",
+        "re_run_orchestrator",
+    )
+    post_ids = {p.get("id") for p in data.get("post_agent_steps", [])}
+    for rid in REQUIRED_POST_AGENT_IDS:
+        if rid not in post_ids:
+            errors.append(f"post_agent_steps missing required step: {rid}")
+
     post = data.get("post_agent_steps", [])
     if not post:
         errors.append("post_agent_steps must be non-empty")

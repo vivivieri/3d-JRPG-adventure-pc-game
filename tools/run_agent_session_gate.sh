@@ -93,6 +93,8 @@ bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID"
 bash tools/pm_record_heartbeat.sh --agent "$AGENT" --issue "$ISSUE_ID" --phase start 2>/dev/null || true
 
 echo ""
+echo "[RULE] End every worker session (mandatory):"
+echo "       bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue $ISSUE_ID --agent $AGENT --commit \$(git rev-parse HEAD)"
 echo "[RULE] Cross-cutting factory features → register in workflow_integration_registry.json"
 echo "       Before merge: bash tools/check_feature_integration.sh --remind"
 echo "       Authority: docs/qa/WORKFLOW_INTEGRATION.md"

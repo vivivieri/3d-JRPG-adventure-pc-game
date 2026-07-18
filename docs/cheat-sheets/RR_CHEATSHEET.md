@@ -1,6 +1,6 @@
 # R&R Cheat Sheet — Roles & Responsibilities
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Print this:** One-page reference for every agent session  
 **Companion:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)  
 **Authority:** `.cursorrules` §0–§1 · `docs/agents/MCP_STACK.md` · `docs/agents/MULTI_AGENT_TEAM.md` · `docs/workflow/AGILE_WITHIN_PHASES.md` §11

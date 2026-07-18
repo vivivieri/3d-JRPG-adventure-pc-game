@@ -87,6 +87,10 @@ write_health_snapshot(
 print()
 print("Next: assign agent per artifacts/pm_orchestrator_report.json → next_dispatch")
 print("After agent session: python3 tools/pm_update_issue.py <id> --status done --commit <sha>")
+print("Then: bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>")
+print("Post-agent (pm_orchestrator_steps.json post_agent_steps):")
+print("  - pm_check_done_criteria.py → pm_bundle_evidence.py → pm_emit_cycle_event.sh")
+print("  - bash tools/check_feature_integration.sh (cross-cutting factory changes)")
 print("Then re-run: bash tools/run_pm_orchestrator.sh")
 PY
 

@@ -1,6 +1,6 @@
 # Controls Cheat Sheet — How We Enforce Roles
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Print this:** One-page reference for automated + process controls  
 **Companion:** `docs/cheat-sheets/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)  
 **Authority:** `docs/ci-cd/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/agents/PROJECT_MANAGEMENT.md`
@@ -14,6 +14,7 @@
 3. **WARN ≠ PASS · SKIP ≠ PASS** — on `game/development`, CI maps SKIP → FAIL via `tools/gate_lib.sh`.
 4. **Builder proof** — scene changes require `.gdai_built` in the same PR (`L3_gdai_built`).
 5. **Human L6** — only after L0–L5 pass.
+6. **Cross-cutting factory features** — register in `workflow_integration_registry.json`; `bash tools/check_feature_integration.sh --remind` before merge (`docs/qa/WORKFLOW_INTEGRATION.md`).
 
 ---
 
@@ -50,6 +51,7 @@
 | `L0_scene_audio_map` | Scene/zone audio map |
 | `L0_generation_readiness_backlog` | GR-* backlog traceability |
 | `L0_sprint_board` | Sprint board + PM orchestrator state |
+| `L0_workflow_integration` | Factory feature registry — hooks + doc parity |
 | `L0_rr_compliance` | No ship scenes on main |
 | `M5_asset_compliance` | License manifest |
 
@@ -60,6 +62,7 @@
 | `L0_rr_compliance` | **Builder** — GDAI-verified ship `.tscn` only (`.gdai_built`) |
 | `L0_story_data` | **Architect** / data |
 | `L0_acceptance_catalog` | **QA** catalog |
+| `L0_workflow_integration` | **PM** — factory feature registry parity |
 | `L0_base_classes` | **Architect** — base class registry |
 | `L1_unit_tests` | **Architect** |
 | `L2_scene_primitives` | **Builder** / **Visual** |

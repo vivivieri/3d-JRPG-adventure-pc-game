@@ -58,6 +58,9 @@ run_tri_gate "L0_difficulty_data" "Normal + Hard difficulty catalog" \
 run_tri_gate "L0_acceptance_catalog" "Acceptance criteria catalog" \
   python3 tools/validate_acceptance_criteria.py
 
+run_tri_gate "L0_workflow_integration" "Factory workflow integration registry" \
+  python3 tools/validate_workflow_integration.py
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 

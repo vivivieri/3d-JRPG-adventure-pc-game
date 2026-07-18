@@ -5,6 +5,8 @@ Link the GitHub issue. Check every box that applies to this PR.
 ### PM Agent
 - [ ] Linked issue has **phase**, **acceptance gate IDs**, and **`agent/*`** label
 - [ ] Scope matches current phase in `game/data/qa/sprint_phases.json` (no phase skip)
+- [ ] Worker ended with `pm_emit_cycle_event.sh agent_cycle_complete` (factory stall if skipped)
+- [ ] Cross-cutting factory changes registered in `workflow_integration_registry.json` (`docs/qa/WORKFLOW_INTEGRATION.md`)
 
 ### Architect (GodotPrompter)
 - [ ] Handoff in issue/PR: design doc row, node tree outline, target **gate IDs**
@@ -69,6 +71,7 @@ Evidence paths:
 ## Test plan
 
 - [ ] `bash tools/run_ci_checks.sh`
+- [ ] `bash tools/check_feature_integration.sh --remind` (if PM hooks, telemetry, secrets, or watchdog touched)
 - [ ] `bash tools/check_no_secrets.sh`
 - [ ] `bash tools/check_ship_build_security.sh`
 - [ ] `bash tools/check_rr_compliance.sh`
