@@ -14,7 +14,7 @@ CD automates **release builds** after CI passes. It does **not** replace human Q
 
 | Channel | Trigger | Deploy target | L5 E2E required |
 |---------|---------|---------------|-----------------|
-| **RC** | Tag `v*-rc*` | GitHub Release zip | No |
+| **RC** | Tag `v*-rc*` or `v*-uat*` | GitHub Release zip | No |
 | **Beta** | Tag `v*-beta*` or manual | Steam beta depot | Yes |
 | **Production** | Tag `v*.*.*` + approval | Steam default depot | Yes + L6 sign-off |
 
@@ -39,7 +39,7 @@ Before first CD run:
 
 ### 3.1 Artifact CD (`cd-artifact.yml`)
 
-**Triggers:** push tags matching `v*-rc*`, `v*-beta*`, `v*.*.*`
+**Triggers:** push tags matching `v*-rc*`, `v*-uat*`, `v*-beta*`, `v*.*.*`
 
 ```
 checkout → guard project.godot → install_ci_deps.sh

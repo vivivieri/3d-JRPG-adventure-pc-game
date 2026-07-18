@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*-rc*'
+      - 'v*-uat*'
       - 'v*-beta*'
       - 'v*.*.*'
 
@@ -17,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment:
-      name: ${{ contains(github.ref_name, '-rc') && 'uat' || (contains(github.ref_name, '-beta') && 'steam-beta' || 'steam-production') }}
+      name: ${{ (contains(github.ref_name, '-rc') || contains(github.ref_name, '-uat')) && 'uat' || (contains(github.ref_name, '-beta') && 'steam-beta' || 'steam-production') }}
     permissions:
       contents: write
 
@@ -39,7 +40,7 @@ jobs:
         id: channel
         run: |
           TAG="${GITHUB_REF_NAME}"
-          if [[ "$TAG" == *-rc* ]]; then
+          if [[ "$TAG" == *-rc* ]] || [[ "$TAG" == *-uat* ]]; then
             CHANNEL=rc
           elif [[ "$TAG" == *-beta* ]]; then
             CHANNEL=beta
