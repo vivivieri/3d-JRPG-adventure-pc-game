@@ -70,6 +70,7 @@
 | `agent/architect` | Needs GodotPrompter |
 | `agent/builder` | Needs GDAI MCP |
 | `agent/qa` | Needs gate run |
+| `agent/analyst` | Factory efficiency rollup (telemetry) |
 | `agent/release` | Needs tag/CD |
 | `status/blocked` | Waiting on MCP/secrets/human |
 | `status/in-progress` | Active agent |

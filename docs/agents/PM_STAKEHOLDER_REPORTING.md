@@ -97,9 +97,10 @@ bash tools/pm_emit_stakeholder_report.sh --trigger agent_cycle_complete --issue 
 
 - Sprint progress (% done, issue table)
 - Active phase + exit gates
-- Last cycle (issue, agent, commit)
+- Last cycle (issue, agent, commit, **session duration + tokens** when `CURSOR_API_KEY` set)
 - Next dispatch from orchestrator
 - Factory health (watchdog, halt, session budget)
+- Agent session telemetry summary (`cycle.session_telemetry` in JSON)
 - Blockers / stale issues
 - GitHub links
 
@@ -124,7 +125,7 @@ Dark-themed single page — progress bar, issue table, full JSON for audit.
 After every worker cycle:
 
 1. `pm_update_issue.py` → done
-2. `pm_emit_cycle_event.sh agent_cycle_complete` → **includes stakeholder report + Telegram**
+2. `pm_emit_cycle_event.sh agent_cycle_complete` → **closes session telemetry + stakeholder report + Telegram**
 3. On sprint close: ensure `sprint_cycle_complete` event (Telegram sprint summary)
 4. On phase review issue done: `pm_emit_stakeholder_report.sh --trigger phase_exit --telegram`
 

@@ -47,6 +47,20 @@ Gameplay controllers and interactables **extend Architect-owned base classes** �
 bash tools/ensure_mcp_stack.sh   # full stack — wraps ensure_gdai_mcp.sh
 ```
 
+**Sprint workers** (after PM dispatch) also run:
+
+```bash
+bash tools/run_agent_session_gate.sh <role> <issue_id>   # opens session telemetry
+```
+
+**End every worker session** (closes telemetry + triggers PM):
+
+```bash
+bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+```
+
+Factory telemetry policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9. One-time secret: `CURSOR_API_KEY` (`docs/agents/CURSOR_SECRETS_SETUP.md` §8).
+
 All must be true before implementation (`.cursorrules` §0 / `MCP_STACK.md`):
 
 | Check | How |

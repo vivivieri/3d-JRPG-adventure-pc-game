@@ -64,6 +64,7 @@
 | **Debugger** | Analyze Agent | Godotiq diagnosis | Scene mutations | Policy only (read-only tools) |
 | **Release** | Release Agent | Tags, `run_cd_gates.sh`, export | Features | `run_cd_gates.sh`; CD workflows |
 | **Visual** | Visual Agent | L2 jury evidence (palette/model/audio/vo) | Bypass jury | L2 jury scripts + thresholds |
+| **Factory Analyst** | Analyst Agent | Token/duration rollups, sprint efficiency reports | Write game code or scenes | `analyze_agent_session_telemetry.py` |
 | **Human QA** | Human | L6 UAT sign-off | Before L0–L5 pass | `STEAM_RELEASE_CHECKLIST`; CD prod |
 
 **Sprint Master:** none — **PM Agent** facilitates; **QA Agent** owns sprint review evidence.
@@ -93,8 +94,25 @@ bash tools/check_spec_refinement_scope.sh
 
 **Architect / Builder / QA (before sprint issue work):**
 ```bash
-bash tools/run_agent_session_gate.sh <role> <issue_id>
+bash tools/run_agent_session_gate.sh <role> <issue_id>   # opens session telemetry automatically
 ```
+
+**End every worker session (mandatory — closes telemetry + triggers PM):**
+```bash
+bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+```
+
+**Long sessions — heartbeat (feeds telemetry + watchdog):**
+```bash
+bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "progress note"
+```
+
+**Factory Analyst — sprint efficiency rollup:**
+```bash
+python3 tools/analyze_agent_session_telemetry.py   # → artifacts/agent_session_reports/
+```
+
+**One-time:** `CURSOR_API_KEY` in Cursor Secrets for auto token logging — `docs/agents/CURSOR_SECRETS_SETUP.md` §8
 
 ---
 
@@ -146,7 +164,7 @@ P1-00 (pm)     bootstrap project.godot + CI
 
 1. **Board:** QA issues list `depends_on` (e.g. P1-04 depends on P1-02).
 2. **Status:** Upstream issue set to `done` via `python3 tools/pm_update_issue.py`.
-3. **Event:** `bash tools/pm_emit_cycle_event.sh agent_cycle_complete` → PM re-runs orchestrator → dispatches QA.
+3. **Event:** `bash tools/pm_emit_cycle_event.sh agent_cycle_complete` → closes session telemetry + PM re-runs orchestrator → dispatches QA.
 4. **Handoff:** Builder posts **Builder → QA** block in PR/issue (`docs/sprints/Phase*-Sprint*-issues.md`).
 5. **CI:** PR on `game/development` must pass listed `acceptance_gate_ids` before QA closes issue.
 
@@ -381,6 +399,7 @@ python3 tools/validate_story_data.py     # L0_story_data
 | `docs/workflow/AGILE_WITHIN_PHASES.md` | Sprint facilitator, AI-native cadence |
 | **`docs/agents/SPRINT_ORCHESTRATION.md`** | **Enforced dispatch** — no self-assign |
 | **`docs/agents/PM_AGENT_RUNBOOK.md`** | PM session steps, stale escalation |
+| **`docs/qa/AGENT_SESSION_TELEMETRY.md`** | **Auto token/duration logging** — factory integration §9 |
 | `docs/sprints/Phase1-Sprint1-issues.md` | Active sprint issue bodies |
 | `docs/qa/ACCEPTANCE_CRITERIA.md` | Gate thresholds |
 | **`docs/qa/PERFORMANCE_BASELINE.md`** | **Hardware + environment baseline for perf evidence** |

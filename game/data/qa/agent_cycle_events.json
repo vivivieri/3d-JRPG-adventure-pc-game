@@ -54,9 +54,16 @@
     }
   },
   "cycle_definition": {
-    "micro_cycle": "One sprint issue: dispatch → session gate → work → PR → board done → agent_cycle_complete event",
+    "micro_cycle": "One sprint issue: dispatch → session gate → work → PR → board done → agent_cycle_complete event (closes session telemetry)",
     "sprint_cycle": "All issues in sprint_board → sprint_cycle_complete → PM opens next sprint pack",
     "phase_cycle": "phase exit gates PASS → optional RC tag → uat_ready when L5 included"
+  },
+  "telemetry_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+  "telemetry_side_effects": {
+    "session_start": "run_agent_session_gate.sh → pm_record_agent_session.sh start",
+    "session_progress": "pm_record_heartbeat.sh → pm_record_agent_session.sh progress",
+    "session_end": "pm_emit_cycle_event.sh agent_cycle_complete|failed → pm_record_agent_session.sh end + pm_refresh_agent_telemetry.sh",
+    "pm_orchestrator": "run_pm_orchestrator.sh step 11 → pm_refresh_agent_telemetry.sh"
   },
   "forbidden_triggers": [
     "cron schedule for PM dispatch (wastes wall-clock; agents do not sleep)",

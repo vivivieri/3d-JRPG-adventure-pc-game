@@ -23,6 +23,20 @@
     "bc_id_env": "CURSOR_CONVERSATION_ID (injected by Cursor Cloud Agents runtime)",
     "analysis_exports": ["json", "csv", "markdown", "parquet"]
   },
+  "workflow_integration": {
+    "authority": "docs/qa/AGENT_SESSION_TELEMETRY.md §9",
+    "hooks": [
+      "run_agent_session_gate.sh",
+      "pm_record_heartbeat.sh",
+      "pm_emit_cycle_event.sh",
+      "run_pm_orchestrator.sh",
+      "run_factory_watchdog.sh",
+      "run_sprint_preflight.sh",
+      "pm_bundle_evidence.py",
+      "pm_emit_stakeholder_report.sh"
+    ],
+    "required_secret": "CURSOR_API_KEY"
+  },
   "log_format": {
     "common_fields": {
       "schema_version": "string — matches this file version",
@@ -31,7 +45,7 @@
       "ts": "string — ISO-8601 UTC wall clock",
       "t": "number — seconds since session_start (0 on start)",
       "issue_id": "string — sprint issue id (P1-02) or null for PM-only",
-      "agent_role": "string — pm | architect | builder | qa | flow | release | visual | debugger",
+      "agent_role": "string — pm | architect | builder | qa | flow | release | visual | debugger | analyst",
       "sprint_id": "string — active sprint id",
       "phase": "number — implementation phase 0-8",
       "task_category": "string — taxonomy for efficiency grouping",

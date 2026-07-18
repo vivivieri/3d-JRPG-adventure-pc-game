@@ -90,7 +90,7 @@ See `docs/agents/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 
 ### 3.2 Secrets (Cursor Cloud Agents → Secrets)
 
-**Day-one compulsory (all 7):** see **`docs/agents/CURSOR_SECRETS_SETUP.md`** — how to obtain each key, step by step. Verify: `bash tools/check_day_one_secrets.sh`.
+**Day-one compulsory (all 8):** see **`docs/agents/CURSOR_SECRETS_SETUP.md`** — how to obtain each key, step by step. Verify: `bash tools/check_day_one_secrets.sh`.
 
 | Secret | Day one | Purpose |
 |--------|---------|---------|
@@ -101,6 +101,7 @@ See `docs/agents/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 | `TELEGRAM_BOT_TOKEN` | **Yes** | Stakeholder Telegram bot |
 | `TELEGRAM_CHAT_ID` | **Yes** | Product owner chat id |
 | `ELEVENLABS_API_KEY` | **Yes** | Selective VO (12 clips) |
+| `CURSOR_API_KEY` | **Yes** | **Auto agent token telemetry** (Cloud Agents usage API) |
 | GDAI license / plugin | Phase 1+ | Commercial plugin — separate install |
 | `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ | Vision/audio jury scripts |
 
@@ -188,6 +189,11 @@ AFTER orchestrator PASS, read artifacts/pm_orchestrator_report.json → next_dis
    STOP — notify human for docs/qa/PLAYTEST_SCRIPT.md (L6). Do not start new workers.
 
 NEVER: skip orchestrator, mark gates PASS without QA evidence, use cron logic.
+
+Worker agents MUST end every session with:
+  bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+This closes agent session telemetry (tokens auto-fetched when CURSOR_API_KEY set).
+See docs/qa/AGENT_SESSION_TELEMETRY.md §9.
 ```
 
 ### Automation B — **CI failure triage** (required)

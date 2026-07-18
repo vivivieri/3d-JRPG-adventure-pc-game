@@ -28,10 +28,13 @@ This runs all steps in `game/data/qa/pm_orchestrator_steps.json`:
 | 3 | `pm_sync_sprint_pack.py` — no missing IDs; carry_over_queue empty |
 | 4 | `run_docs_ci_checks.sh` — docs/data baseline green |
 | 5 | `pm_orchestrator_lib.py --dispatch` — next agent + stale/WIP checks |
+| 6 | `pm_refresh_agent_telemetry.sh` — token backfill + efficiency reports (non-blocking) |
 
 **If exit ≠ 0:** STOP. Fix failures. Do not assign agents.
 
 **On PASS:** read `artifacts/pm_orchestrator_report.json` → `next_dispatch`.
+
+**Telemetry:** Step 11 auto-refreshes `artifacts/agent_session_reports/` — see `docs/qa/AGENT_SESSION_TELEMETRY.md` §9.
 
 ---
 
@@ -70,7 +73,13 @@ python3 tools/pm_update_issue.py P1-01 --status done --commit abc1234 --github-i
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-01 --agent architect --commit abc1234
 ```
 
-This **immediately triggers** the PM Automation webhook (no cron). PM re-runs orchestrator in a new Cloud Agent session.
+This **immediately triggers** the PM Automation webhook (no cron). It also:
+- Closes the agent session telemetry record (`session_end`)
+- Auto-fetches token usage from Cursor API (when `CURSOR_API_KEY` set)
+- Enriches the webhook payload with `tokens_total`, `duration_seconds`, `model_name`
+- Refreshes `artifacts/agent_session_reports/`
+
+PM re-runs orchestrator in a new Cloud Agent session.
 
 Do **not** call `pm_emit_cycle_event` when PM only assigns work to another agent (worker emits when done).
 

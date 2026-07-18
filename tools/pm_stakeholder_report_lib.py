@@ -131,6 +131,28 @@ def build_report(
     if orch.get("stale_issues"):
         blockers.extend({"id": s["id"], "level": "stale", "title": s.get("reason")} for s in orch["stale_issues"])
 
+    session_telemetry: dict[str, Any] = {}
+    if issue_id:
+        try:
+            from agent_session_telemetry_lib import read_events
+
+            for ev in reversed(read_events()):
+                if ev.get("issue_id") != issue_id:
+                    continue
+                if ev.get("event") not in ("session_end", "session_failed", "session_token_backfill"):
+                    continue
+                session_telemetry = {
+                    "session_id": ev.get("session_id"),
+                    "duration_seconds": ev.get("duration_seconds"),
+                    "task_category": ev.get("task_category"),
+                    "tokens_total": ev.get("tokens_total"),
+                    "model_name": ev.get("model_name"),
+                    "tokens_source": ev.get("tokens_source"),
+                }
+                break
+        except Exception:
+            pass
+
     report = {
         "version": "1.0",
         "generated_at": _utcnow(),
@@ -152,6 +174,7 @@ def build_report(
             "commit_sha": commit_sha,
             "note": note,
             "event": event_payload,
+            "session_telemetry": session_telemetry or None,
         },
         "orchestrator": {
             "pass": orch.get("orchestrator_pass"),
@@ -226,9 +249,17 @@ def report_to_markdown(report: dict[str, Any]) -> str:
                 "## Last cycle",
                 f"- Issue: **{cycle['issue_id']}** · Agent: `{cycle.get('agent_role')}`",
                 f"- Commit: `{cycle.get('commit_sha') or '—'}`",
-                "",
             ]
         )
+        st = cycle.get("session_telemetry") or {}
+        if st.get("duration_seconds") is not None or st.get("tokens_total") is not None:
+            dur = st.get("duration_seconds")
+            tok = st.get("tokens_total")
+            model = st.get("model_name") or "—"
+            lines.append(
+                f"- Session: {dur}s · tokens: {tok if tok is not None else 'pending'} · model: `{model}`"
+            )
+        lines.append("")
 
     nd = report.get("orchestrator", {}).get("next_dispatch") or []
     if nd:

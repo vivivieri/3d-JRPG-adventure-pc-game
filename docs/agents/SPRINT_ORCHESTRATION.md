@@ -40,6 +40,7 @@
 |------|-------------------|
 | **PM Agent** (Sprint Master) | Runs `run_pm_orchestrator.sh` every session; updates board; escalates stale agents |
 | **Architect / Builder / QA / …** | Runs `run_agent_session_gate.sh` before work; never self-assign |
+| **Factory Analyst** | Reviews `artifacts/agent_session_reports/` after sprint cycles; does not block dispatch |
 | **QA Agent** | Sprint review evidence; does not close issues without gate report |
 | **Human** | L6 + escalation level `human` only |
 
@@ -53,9 +54,11 @@ PM: assign next_dispatch[0] to agent
 Agent: bash tools/run_agent_session_gate.sh <role> <issue_id>  → PASS required
 Agent: execute work + PR + gates
 PM or Agent: python3 tools/pm_update_issue.py <id> --status done --commit <sha>
-Agent or PM: bash tools/pm_emit_cycle_event.sh agent_cycle_complete ...  → triggers PM webhook
+Agent or PM: bash tools/pm_emit_cycle_event.sh agent_cycle_complete ...  → closes telemetry + triggers PM webhook
 PM: (new Automation run) run_pm_orchestrator.sh → next dispatch or sprint close
 ```
+
+**Telemetry:** Session gate opens logging; cycle event closes session and auto-fetches tokens. See `docs/qa/AGENT_SESSION_TELEMETRY.md` §9.
 
 **No hourly/daily PM schedule.** Next PM run is triggered only by `agent_cycle_complete`, `sprint_cycle_complete`, `watchdog_recovery`, or guarded CI events. See `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` and `docs/agents/FACTORY_WATCHDOG.md` (stall exception layer).
 
@@ -123,3 +126,4 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`:
 - `docs/agents/PM_AGENT_RUNBOOK.md` — step-by-step PM commands
 - `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — CI enforcement
 - `docs/agents/PROJECT_MANAGEMENT.md` — GitHub labels
+- `docs/qa/AGENT_SESSION_TELEMETRY.md` — auto token/duration logging + workflow cooperation §9

@@ -72,6 +72,21 @@ def main() -> int:
 
     manifest["updated_at"] = now
     manifest["required_gates"] = issue.get("acceptance_gate_ids", [])
+
+    # Auto-link agent session telemetry rollups (written by pm_emit_cycle_event.sh)
+    for session_file in sorted(issue_dir.glob("session_*.json")):
+        rel = str(session_file.relative_to(ROOT))
+        if any(e.get("path") == rel for e in manifest["entries"]):
+            continue
+        manifest["entries"].append(
+            {
+                "at": now,
+                "gates": ["agent_session_telemetry"],
+                "path": rel,
+                "note": "Auto-linked session telemetry rollup",
+            }
+        )
+
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"OK — evidence bundle: {manifest_path.relative_to(ROOT)} ({len(manifest['entries'])} entries)")
     return 0

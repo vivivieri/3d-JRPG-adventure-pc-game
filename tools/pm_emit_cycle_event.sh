@@ -120,6 +120,57 @@ if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "agent_cycle_failed" ]];
   bash tools/pm_record_agent_session.sh "${END_ARGS[@]}" 2>/dev/null || true
   # Backfill tokens + refresh analysis reports (non-blocking)
   bash tools/pm_refresh_agent_telemetry.sh 2>/dev/null || true
+  # Enrich webhook payload with session telemetry (PM + stakeholder reports)
+  python3 - <<'TELEMETRY_ENRICH'
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "tools")
+from agent_session_telemetry_lib import read_events
+
+event_path = Path("artifacts/agent_cycle_event.json")
+if not event_path.is_file():
+    sys.exit(0)
+
+payload = json.loads(event_path.read_text(encoding="utf-8"))
+issue_id = payload.get("issue_id")
+agent_role = payload.get("agent_role")
+if not issue_id and not agent_role:
+    sys.exit(0)
+
+terminal = None
+for ev in reversed(read_events()):
+    if ev.get("event") not in ("session_end", "session_failed", "session_token_backfill"):
+        continue
+    if issue_id and ev.get("issue_id") != issue_id:
+        continue
+    if agent_role and ev.get("agent_role") != agent_role:
+        continue
+    terminal = ev
+    break
+
+if not terminal:
+    sys.exit(0)
+
+for key in (
+    "session_id",
+    "duration_seconds",
+    "task_category",
+    "tokens_total",
+    "tokens_input",
+    "tokens_output",
+    "model_name",
+    "cursor_bc_id",
+    "tokens_source",
+    "tokens_fetch_status",
+):
+    if terminal.get(key) is not None:
+        payload[key] = terminal[key]
+
+event_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+print("==> Cycle event enriched with agent session telemetry")
+TELEMETRY_ENRICH
 fi
 
 # mcp_blocked / factory_halt → stop automatic recovery

@@ -35,6 +35,7 @@ The watchdog is **not** a replacement for event-driven PM. It is insurance again
 | Agent heartbeat | `artifacts/factory_heartbeat.json` | 6h gap → **no_heartbeat** |
 | Orchestrator result | `artifacts/factory_state.json` | last run **fail** |
 | Factory halt flag | `artifacts/factory_state.json` | `halted: true` → stop all recovery |
+| Token backfill | `artifacts/agent_session_telemetry/events.jsonl` | Sessions missing `tokens_total` → refreshed by watchdog |
 
 Config: `game/data/qa/factory_watchdog.json`
 
@@ -66,6 +67,8 @@ bash tools/pm_record_heartbeat.sh --agent builder --issue P1-02 --phase progress
 ```
 
 Session gate and PM orchestrator record **start** heartbeats automatically.
+
+On every run, the watchdog also calls `pm_refresh_agent_telemetry.sh` (non-blocking) to backfill token usage when the Cursor API lagged. See `docs/qa/AGENT_SESSION_TELEMETRY.md` §9.
 
 ---
 

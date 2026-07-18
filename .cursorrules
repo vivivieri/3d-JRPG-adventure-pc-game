@@ -201,6 +201,10 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 - Never configure complex shaders purely by hand in the inspector without GodotPrompter drafting the `.gdshader` first.
 - If GDAI reports script errors → loop back to GodotPrompter for the fix, then GDAI MCP to re-test.
 
+**Sprint factory telemetry (event-driven PM):**
+- Workers: `run_agent_session_gate.sh` opens session → `pm_emit_cycle_event.sh agent_cycle_complete` closes it + auto-fetches tokens (`CURSOR_API_KEY`).
+- Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
+
 **Example task split:**
 
 | Task | GodotPrompter | GDAI MCP |
