@@ -57,6 +57,10 @@ bash tools/check_day_one_secrets.sh
 ### Test
 
 ```bash
+# Full enforced cycle (production workers):
+bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD) --note "webhook test"
+
+# Webhook-only smoke test (low-level — skips done criteria / evidence):
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm --note "webhook test"
 ```
 

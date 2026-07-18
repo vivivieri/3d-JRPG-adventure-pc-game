@@ -176,13 +176,12 @@ AFTER orchestrator PASS, read artifacts/pm_orchestrator_report.json → next_dis
      with: bash tools/run_agent_session_gate.sh <role> <issue_id>
 
 2. If you complete PM-owned work (e.g. P1-00 bootstrap) in this session:
-   python3 tools/pm_update_issue.py <id> --status done --commit $(git rev-parse HEAD)
-   bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent pm --commit $(git rev-parse HEAD)
+   bash tools/run_post_agent_cycle.sh --issue <id> --agent pm --commit $(git rev-parse HEAD) --run-orchestrator --alignment-audit
 
 3. If sprint_complete and event sprint_cycle_complete:
    python3 tools/pm_close_sprint.py --next-sprint-number <N>  (dry-run first if unsure)
    Update docs/sprints/ + sprint_board.json; clear carry_over_queue
-   bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <first-issue-new-sprint> --agent pm
+   bash tools/run_post_agent_cycle.sh --issue <first-issue-new-sprint> --agent pm --commit $(git rev-parse HEAD)
 
 4. If phase exit + L5 PASS on RC commit:
    bash tools/pm_emit_cycle_event.sh uat_ready --tag <tag> --commit <sha>
@@ -238,14 +237,9 @@ Every **non-PM** agent session **must** end with:
 # 1. Gates on PR commit
 bash tools/run_ci_checks.sh          # or confirm CI green on PR
 
-# 2. Board update (PM may do this if same session — otherwise worker requests PM)
-python3 tools/pm_update_issue.py P1-02 --status done --commit "$(git rev-parse HEAD)"
-
-# 3. EVENT — triggers PM immediately (no waiting for tomorrow)
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete \
-  --issue P1-02 \
-  --agent builder \
-  --commit "$(git rev-parse HEAD)"
+# 2–4. Enforced cycle close (board + event + evidence + registry check)
+bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --commit "$(git rev-parse HEAD)"
+# QA with gate evidence: add --gate L2_scene_primitives --artifact artifacts/...
 ```
 
 If step 3 is skipped, **the factory stalls** — there is no hourly PM to pick it up.
@@ -341,7 +335,7 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 - [ ] **Automation A** + **Automation D** — webhook only (no schedule)  
 - [ ] GitHub repo secrets: both webhook URLs  
 - [ ] `game/development` bootstrapped (P1-00)  
-- [ ] First event: `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm`  
+- [ ] First cycle close: `bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD)`  
 - [ ] Confirm PM Automation starts within seconds, not next day  
 
 ---

@@ -102,7 +102,7 @@ Read artifacts/factory_health_report.json for findings.
 2. Diagnose: missing cycle event? stale agent? webhook failure?
 3. Re-dispatch or mark issue blocked with pm_update_issue.py
 4. If unrecoverable: bash tools/run_factory_watchdog.sh --halt "reason"
-5. On fix: bash tools/pm_emit_cycle_event.sh agent_cycle_complete ...
+5. On fix: bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>
 ```
 
 ### Automation D — Factory alert (optional)

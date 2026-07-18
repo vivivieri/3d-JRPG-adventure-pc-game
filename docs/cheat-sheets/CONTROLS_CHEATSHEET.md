@@ -85,7 +85,7 @@
 
 | Role | Hard (automated) | Soft (process) |
 |------|------------------|----------------|
-| **PM** | `L0_sprint_board`; **`run_pm_orchestrator.sh` PASS** | Dispatch + escalation via `pm_emit_escalation.sh` |
+| **PM** | `L0_sprint_board`; **`run_pm_orchestrator.sh` PASS** | Dispatch + `run_post_agent_cycle.sh` enforcement |
 | **Architect** | `L1_unit_tests`, `L1_gdscript_lint`, `L0_base_class_compliance` | Handoff + **base class** registry |
 | **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, `L2_glb_import`, component scenes | `.gdai_built`; F5 in editor; `install_glb_import_pipeline.sh` |
 | **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |

@@ -186,7 +186,7 @@ sequenceDiagram
   W->>W: Architect plan OR Builder GDAI build
   W->>CI: PR → game/development
   CI-->>W: L0–L2 (L4/L5 if required)
-  W->>PM: pm_update_issue.py --status done
+  W->>PM: run_post_agent_cycle.sh --issue … --agent …
   Note over PM,Rel: At milestone
   PM->>Rel: tag v*-rc*
   Rel->>Rel: cd-artifact.yml → UAT zip

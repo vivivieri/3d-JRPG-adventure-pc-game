@@ -70,13 +70,20 @@ When `parallel_with` is set and WIP caps allow, orchestrator may dispatch two st
 
 ## 6. Evidence
 
-Before marking done:
+Before marking done (or use the enforced single command):
 
 ```bash
-python3 tools/pm_bundle_evidence.py P1-02 --gate L2_scene_primitives --artifact artifacts/qa_reports/...
+bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --commit <sha> \
+  --gate L2_scene_primitives --artifact artifacts/qa_reports/...
+```
+
+Manual steps (same order as `run_post_agent_cycle.sh`):
+
+```bash
 python3 tools/pm_check_done_criteria.py P1-02 --commit <sha>
 python3 tools/pm_update_issue.py P1-02 --status done --commit <sha>
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-02 --agent builder --commit <sha>
+python3 tools/pm_bundle_evidence.py P1-02 --gate L2_scene_primitives --artifact artifacts/qa_reports/...
 ```
 
 ---
@@ -84,7 +91,7 @@ bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-02 --agent bui
 ## 7. Failure path
 
 ```bash
-bash tools/pm_emit_cycle_event.sh agent_cycle_failed --issue P1-02 --agent builder --note "L2_scene_primitives FAIL"
+bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --outcome failed --failed-check L2_scene_primitives
 ```
 
 PM re-dispatches **same issue** for remediation — does not skip to next issue.

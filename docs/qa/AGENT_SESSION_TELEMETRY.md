@@ -17,7 +17,7 @@ Every agent session produces **append-only JSONL** events:
 |-------|------|---------|
 | `session_start` | `run_agent_session_gate.sh` PASS (or PM orchestrator) | Open session, capture dispatch context |
 | `session_progress` | `pm_record_heartbeat.sh` | Heartbeats + optional notes |
-| `session_end` | `pm_emit_cycle_event.sh agent_cycle_complete` | Success rollup |
+| `session_end` | `run_post_agent_cycle.sh` → `pm_emit_cycle_event.sh` | Success rollup |
 | `session_failed` | `pm_emit_cycle_event.sh agent_cycle_failed` | Failure rollup |
 
 ### Captured attributes (raw data)
@@ -230,7 +230,7 @@ Every specialist agent session **must**:
 
 1. **Start:** `bash tools/run_agent_session_gate.sh <role> <issue_id>` (telemetry opens automatically)
 2. **During long work:** `bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "..."` 
-3. **End:** `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>`
+3. **End:** `bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>`
 
 Skipping step 3 leaves the session open and **no token data** — watchdog may fire `no_heartbeat`.
 

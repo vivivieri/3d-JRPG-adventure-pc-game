@@ -79,6 +79,26 @@
         {
           "doc": "game/data/qa/pm_orchestrator_steps.json",
           "must_mention": "post_agent_cycle"
+        },
+        {
+          "doc": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/agents/FACTORY_WATCHDOG.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/agents/MULTI_AGENT_BRANCH_STRATEGY.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "run_post_agent_cycle.sh"
         }
       ]
     },

@@ -203,7 +203,7 @@ Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godoti
 - If GDAI reports script errors → loop back to GodotPrompter for the fix, then GDAI MCP to re-test.
 
 **Sprint factory telemetry (event-driven PM):**
-- Workers: `run_agent_session_gate.sh` opens session → `pm_emit_cycle_event.sh agent_cycle_complete` closes it + auto-fetches tokens (`CURSOR_API_KEY`).
+- Workers: `run_agent_session_gate.sh` opens session → `run_post_agent_cycle.sh` closes it (done criteria, board, cycle event, evidence) + auto-fetches tokens (`CURSOR_API_KEY`).
 - Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
 
 **Cross-cutting factory features (agents MUST register before merge):**
