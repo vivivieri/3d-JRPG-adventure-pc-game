@@ -245,3 +245,5 @@ python3 tools/analyze_agent_session_telemetry.py
 ### Not a ship gate
 
 `L0_agent_session_telemetry` validates the **schema only** — missing tokens do not block merge. Efficiency data is for post-ship factory tuning.
+
+**Drift prevention:** Feature is registered in `game/data/qa/workflow_integration_registry.json` — CI gate `L0_workflow_integration` fails if hooks or doc cross-refs drift. See `docs/qa/WORKFLOW_INTEGRATION.md`.

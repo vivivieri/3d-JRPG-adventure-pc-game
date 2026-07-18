@@ -72,3 +72,4 @@
     "Using factory-watchdog.yml schedule as primary dispatch (watchdog is exception-only)"
   ],
   "watchdog_ref": "docs/agents/FACTORY_WATCHDOG.md"
+}

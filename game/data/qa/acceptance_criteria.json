@@ -599,6 +599,15 @@
       "evidence": ["game/data/qa/alignment_audit_catalog.json", "docs/qa/ALIGNMENT_AUDIT.md"],
       "design_ref": "docs/qa/ALIGNMENT_AUDIT.md"
     },
+    "L0_workflow_integration": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_workflow_integration.py",
+      "description": "Factory workflow integration registry — script hooks, doc cross-refs, secrets parity for cross-cutting features",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/workflow_integration_registry.json", "docs/qa/WORKFLOW_INTEGRATION.md"],
+      "design_ref": "docs/qa/WORKFLOW_INTEGRATION.md"
+    },
     "M5_asset_compliance": {
       "layer": "ship",
       "domain": "compliance",
@@ -725,6 +734,7 @@
       "L0_difficulty_data",
       "L0_doc_sync",
       "L0_alignment_audit_catalog",
+      "L0_workflow_integration",
       "M5_asset_compliance"
     ],
     "design_ref": "docs/workflow/BRANCHING.md"

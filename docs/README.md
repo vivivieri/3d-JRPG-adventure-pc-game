@@ -197,6 +197,7 @@
 | [QA_REMEDIATION_LOOP.md](qa/QA_REMEDIATION_LOOP.md) | FAIL iteration policy |
 | [FLOW_QA.md](qa/FLOW_QA.md) | Game flow QA |
 | [ALIGNMENT_AUDIT.md](qa/ALIGNMENT_AUDIT.md) | Standard alignment audit + stakeholder checklist |
+| [WORKFLOW_INTEGRATION.md](qa/WORKFLOW_INTEGRATION.md) | Factory feature registry — prevents hook/doc drift (L0 gate) |
 | [PLAYTEST_SCRIPT.md](qa/PLAYTEST_SCRIPT.md) | 2–3h human playthrough |
 | [PLAYTEST_TELEMETRY.md](qa/PLAYTEST_TELEMETRY.md) | Telemetry tuning loop |
 | [AGENT_SESSION_TELEMETRY.md](qa/AGENT_SESSION_TELEMETRY.md) | AI agent session stats — role, task, tokens, duration |

@@ -364,6 +364,9 @@ def build_recommendations(
             min_present = int(rule.get("min_present", 1))
             present = sum(1 for v in (report_visuals or []) if v.get("present"))
             include = present < min_present
+        elif when == "gate_fail":
+            gate_id = rule.get("gate", "")
+            include = gate_id in ci.get("failed_gate_ids", [])
 
         if not include:
             continue

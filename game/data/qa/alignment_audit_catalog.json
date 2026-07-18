@@ -97,7 +97,8 @@
         { "id": "ci_pass_rate", "weight": 0.4, "kind": "ci_rate" },
         { "id": "L0_doc_sync", "weight": 0.2, "kind": "gate" },
         { "id": "L0_pm_orchestrator", "weight": 0.2, "kind": "gate" },
-        { "id": "L0_stakeholder_report", "weight": 0.2, "kind": "gate" }
+        { "id": "L0_stakeholder_report", "weight": 0.15, "kind": "gate" },
+        { "id": "L0_workflow_integration", "weight": 0.15, "kind": "gate" }
       ],
       "icon": "pm"
     },
@@ -204,6 +205,15 @@
       "min_present": 30,
       "title": "Refresh stakeholder visual pack",
       "action": "Copy PNGs to docs/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals"
+    },
+    {
+      "id": "REC_WORKFLOW_DRIFT",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "gate_fail",
+      "gate": "L0_workflow_integration",
+      "title": "Factory workflow integration drift",
+      "action": "Run python3 tools/validate_workflow_integration.py; update game/data/qa/workflow_integration_registry.json and wire missing hooks/docs per docs/qa/WORKFLOW_INTEGRATION.md."
     },
     {
       "id": "REC_DOC_NITS",

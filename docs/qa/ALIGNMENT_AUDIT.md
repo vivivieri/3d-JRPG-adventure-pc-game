@@ -42,6 +42,8 @@ Each audit includes:
 
 **PM orchestrator:** add as optional post-step alongside stakeholder report when alignment work lands.
 
+**Workflow integration:** After adding cross-cutting factory features, register in `game/data/qa/workflow_integration_registry.json` and verify `L0_workflow_integration` PASS — see `docs/qa/WORKFLOW_INTEGRATION.md`.
+
 ---
 
 ## 3. How to run

@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "authority": "docs/qa/WORKFLOW_INTEGRATION.md",
+  "policy": "Every new factory feature MUST register here before merge. L0_workflow_integration CI fails when hooks, docs, or secrets drift.",
+  "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Run python3 tools/validate_workflow_integration.py",
+  "features": [
+    {
+      "id": "agent_session_telemetry",
+      "label": "Agent session telemetry (auto token logging)",
+      "authority_doc": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+      "schema": "game/data/qa/agent_session_telemetry_schema.json",
+      "required_secrets": ["CURSOR_API_KEY"],
+      "script_hooks": [
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "pm_record_agent_session.sh start",
+          "purpose": "session_start on dispatch"
+        },
+        {
+          "path": "tools/pm_record_heartbeat.sh",
+          "contains": "pm_record_agent_session.sh progress",
+          "purpose": "session_progress on heartbeat"
+        },
+        {
+          "path": "tools/pm_emit_cycle_event.sh",
+          "contains": "pm_refresh_agent_telemetry.sh",
+          "purpose": "session_end + token backfill on cycle complete"
+        },
+        {
+          "path": "tools/run_pm_orchestrator.sh",
+          "contains": "pm_refresh_agent_telemetry.sh",
+          "purpose": "PM session telemetry refresh"
+        },
+        {
+          "path": "tools/run_factory_watchdog.sh",
+          "contains": "pm_refresh_agent_telemetry.sh",
+          "purpose": "watchdog token backfill"
+        },
+        {
+          "path": "tools/run_sprint_preflight.sh",
+          "contains": "check_agent_telemetry_ready.sh",
+          "purpose": "preflight readiness warn"
+        },
+        {
+          "path": "tools/pm_bundle_evidence.py",
+          "contains": "session_*.json",
+          "purpose": "auto-link session rollups to evidence"
+        }
+      ],
+      "orchestrator_steps": [
+        {
+          "id": "agent_telemetry_refresh",
+          "command_contains": "pm_refresh_agent_telemetry.sh"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "AGENT_SESSION_TELEMETRY"
+        },
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "telemetry"
+        },
+        {
+          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "must_mention": "CURSOR_API_KEY"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "pm_emit_cycle_event.sh agent_cycle_complete"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "AGENT_SESSION_TELEMETRY"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "AGENT_SESSION_TELEMETRY"
+        },
+        {
+          "doc": "docs/agents/FACTORY_WATCHDOG.md",
+          "must_mention": "pm_refresh_agent_telemetry"
+        },
+        {
+          "doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+          "must_mention": "session_telemetry"
+        },
+        {
+          "doc": "docs/agents/MULTI_AGENT_TEAM.md",
+          "must_mention": "Factory Analyst"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "AGENT_SESSION_TELEMETRY"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "CURSOR_API_KEY"
+        },
+        {
+          "doc": "docs/agents/CURSOR_SECRETS_SETUP.md",
+          "must_mention": "CURSOR_API_KEY"
+        }
+      ],
+      "cycle_events": {
+        "telemetry_side_effects_key": "telemetry_side_effects",
+        "must_mention_hooks": ["pm_refresh_agent_telemetry.sh", "pm_record_agent_session.sh"]
+      },
+      "acceptance_gate": "L0_agent_session_telemetry"
+    }
+  ]
+}
