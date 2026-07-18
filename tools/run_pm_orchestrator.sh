@@ -86,12 +86,11 @@ write_health_snapshot(
 )
 print()
 print("Next: assign agent per artifacts/pm_orchestrator_report.json → next_dispatch")
-print("After agent session: python3 tools/pm_update_issue.py <id> --status done --commit <sha>")
-print("Then: bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>")
-print("Post-agent (pm_orchestrator_steps.json post_agent_steps):")
-print("  - pm_check_done_criteria.py → pm_bundle_evidence.py → pm_emit_cycle_event.sh")
-print("  - bash tools/check_feature_integration.sh (cross-cutting factory changes)")
-print("Then re-run: bash tools/run_pm_orchestrator.sh")
+print("After agent session (mandatory — enforced, not honor system):")
+print("  bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>")
+print("  QA with evidence: add --gate <gate_id> --artifact <path>")
+print("  PM same session: add --run-orchestrator --alignment-audit")
+print("Post-agent steps run inside run_post_agent_cycle.sh (see pm_orchestrator_steps.json)")
 PY
 
 # Close PM telemetry session + backfill tokens + refresh reports

@@ -101,9 +101,10 @@ Authority: `docs/agents/PM_AGENT_RUNBOOK.md`, `docs/agents/SPRINT_ORCHESTRATION.
 **End every completed issue with** (triggers PM via webhook — not cron):
 
 ```bash
-python3 tools/pm_update_issue.py <issue_id> --status done --commit "$(git rev-parse HEAD)"
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <issue_id> --agent <role> --commit "$(git rev-parse HEAD)"
+bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit "$(git rev-parse HEAD)"
 ```
+
+QA with gate evidence: add `--gate <gate_id> --artifact <path>`. PM same session: add `--run-orchestrator --alignment-audit`.
 
 See `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`.
 

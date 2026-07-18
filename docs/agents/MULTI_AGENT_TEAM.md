@@ -165,9 +165,9 @@ bash tools/run_pm_orchestrator.sh      # FAIL = do not dispatch agents
 bash tools/run_agent_session_gate.sh <agent_role> <issue_id>
 ```
 
-**End every worker session (mandatory — triggers PM + closes telemetry):**
+**End every worker session (mandatory — enforced cycle close):**
 ```bash
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit $(git rev-parse HEAD)
 ```
 
 **Cross-cutting factory features (before merge):**
@@ -202,7 +202,7 @@ Resume agents only for **same role continuation** (e.g. Builder session 2 on sam
 - [ ] No `WARN` or `SKIP` counted as pass for milestone gates
 - [ ] Issue labels updated: `status/done`, env label retained for audit
 - [ ] PR merged to correct branch (`main` = docs only; `game/development` = code)
-- [ ] Worker emitted `pm_emit_cycle_event.sh agent_cycle_complete` (no factory stall)
+- [ ] Worker ran `bash tools/run_post_agent_cycle.sh` (no factory stall)
 - [ ] Cross-cutting factory changes registered in `workflow_integration_registry.json` when applicable
 
 ---

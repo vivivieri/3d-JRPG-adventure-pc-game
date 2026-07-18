@@ -69,19 +69,26 @@ python3 tools/pm_update_issue.py P1-01 --status in_progress --agent architect
 Agent must deliver: commit SHA, PR URL, gate evidence paths.
 
 ```bash
-python3 tools/pm_update_issue.py P1-01 --status done --commit abc1234 --github-issue 42
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-01 --agent architect --commit abc1234
+bash tools/run_post_agent_cycle.sh --issue P1-01 --agent architect --commit abc1234
 ```
 
-This **immediately triggers** the PM Automation webhook (no cron). It also:
-- Closes the agent session telemetry record (`session_end`)
-- Auto-fetches token usage from Cursor API (when `CURSOR_API_KEY` set)
-- Enriches the webhook payload with `tokens_total`, `duration_seconds`, `model_name`
-- Refreshes `artifacts/agent_session_reports/`
+QA with gate evidence:
 
-PM re-runs orchestrator in a new Cloud Agent session.
+```bash
+bash tools/run_post_agent_cycle.sh --issue P1-04 --agent qa --commit abc1234 \
+  --gate L2_scene_primitives --artifact artifacts/...
+```
 
-Do **not** call `pm_emit_cycle_event` when PM only assigns work to another agent (worker emits when done).
+This **immediately triggers** the PM Automation webhook (no cron). `run_post_agent_cycle.sh` runs, in order:
+
+1. Factory halt guard (`check_factory_halt.sh`)
+2. Done criteria check (`pm_check_done_criteria.py`)
+3. Board update (`pm_update_issue.py --status done`)
+4. Cycle event (`pm_emit_cycle_event.sh`) — closes telemetry, stakeholder report, PM webhook
+5. Evidence bundle (`pm_bundle_evidence.py`) — auto-links `session_*.json` rollup
+6. Workflow registry check (`check_feature_integration.sh`)
+
+Do **not** call `pm_emit_cycle_event.sh` directly for normal worker close — use `run_post_agent_cycle.sh`. Do **not** call cycle events when PM only assigns work to another agent.
 
 ---
 
@@ -198,7 +205,7 @@ See `docs/agents/FACTORY_WATCHDOG.md`.
 | Agent clearance | `bash tools/run_agent_session_gate.sh <role> <issue_id>` |
 | Update issue state | `python3 tools/pm_update_issue.py <id> --status done --commit <sha>` |
 | Escalate | `bash tools/pm_emit_escalation.sh <id> <level>` |
-| **End cycle → trigger PM** | `bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit <sha>` |
+| **End cycle → trigger PM** | `bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>` |
 | Factory health | `bash tools/run_factory_watchdog.sh` |
 | Stall recovery | `bash tools/run_factory_watchdog.sh --recover` |
 | **Stakeholder report** | Auto on `pm_emit_cycle_event.sh`; manual: `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |

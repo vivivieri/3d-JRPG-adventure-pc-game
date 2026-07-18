@@ -53,12 +53,11 @@ PM: bash tools/run_pm_orchestrator.sh          → PASS required
 PM: assign next_dispatch[0] to agent
 Agent: bash tools/run_agent_session_gate.sh <role> <issue_id>  → PASS required
 Agent: execute work + PR + gates
-PM or Agent: python3 tools/pm_update_issue.py <id> --status done --commit <sha>
-Agent or PM: bash tools/pm_emit_cycle_event.sh agent_cycle_complete ...  → closes telemetry + triggers PM webhook
+PM or Agent: bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>  → enforced close + stakeholder report + PM webhook
 PM: (new Automation run) run_pm_orchestrator.sh → next dispatch or sprint close
 ```
 
-**Telemetry:** Session gate opens logging; cycle event closes session and auto-fetches tokens. See `docs/qa/AGENT_SESSION_TELEMETRY.md` §9.
+**Telemetry:** Session gate opens logging; `run_post_agent_cycle.sh` closes session and auto-fetches tokens. Stakeholder status reports emit on every cycle event. See `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 and `docs/agents/PM_STAKEHOLDER_REPORTING.md`.
 
 **No hourly/daily PM schedule.** Next PM run is triggered only by `agent_cycle_complete`, `sprint_cycle_complete`, `watchdog_recovery`, or guarded CI events. See `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` and `docs/agents/FACTORY_WATCHDOG.md` (stall exception layer).
 

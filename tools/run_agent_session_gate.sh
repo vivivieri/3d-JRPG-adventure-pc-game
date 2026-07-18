@@ -20,6 +20,11 @@ fi
 # Normalize agent/ prefix
 AGENT="${AGENT#agent/}"
 
+# Factory halt — block all worker sessions
+if ! bash tools/check_factory_halt.sh; then
+  exit 2
+fi
+
 if [[ ! -f "$REPORT" ]]; then
   echo "[FAIL] No orchestrator report — PM must run: bash tools/run_pm_orchestrator.sh"
   exit 1
@@ -93,8 +98,7 @@ bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID"
 bash tools/pm_record_heartbeat.sh --agent "$AGENT" --issue "$ISSUE_ID" --phase start 2>/dev/null || true
 
 echo ""
-echo "[RULE] End every worker session (mandatory):"
-echo "       bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue $ISSUE_ID --agent $AGENT --commit \$(git rev-parse HEAD)"
-echo "[RULE] Cross-cutting factory features → register in workflow_integration_registry.json"
-echo "       Before merge: bash tools/check_feature_integration.sh --remind"
-echo "       Authority: docs/qa/WORKFLOW_INTEGRATION.md"
+echo "[RULE] End every worker session (mandatory — enforced script):"
+echo "       bash tools/run_post_agent_cycle.sh --issue $ISSUE_ID --agent $AGENT --commit \$(git rev-parse HEAD)"
+echo "[RULE] Cross-cutting factory features → workflow_integration_registry.json"
+echo "       bash tools/check_feature_integration.sh --remind · docs/qa/WORKFLOW_INTEGRATION.md"

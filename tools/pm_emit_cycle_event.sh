@@ -258,4 +258,5 @@ if [[ "$DISPATCHED" -eq 0 ]]; then
 fi
 
 echo "==> PM cycle event dispatched — expect PM Automation to start next orchestrator run"
+echo "[HINT] Prefer bash tools/run_post_agent_cycle.sh for full enforced cycle close (done criteria + evidence + board + event)"
 exit 0

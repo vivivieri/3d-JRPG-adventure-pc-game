@@ -56,7 +56,7 @@ bash tools/run_agent_session_gate.sh <role> <issue_id>   # opens session telemet
 **End every worker session** (closes telemetry + triggers PM):
 
 ```bash
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit $(git rev-parse HEAD)
 ```
 
 Factory telemetry policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9. One-time secret: `CURSOR_API_KEY` (`docs/agents/CURSOR_SECRETS_SETUP.md` §8).

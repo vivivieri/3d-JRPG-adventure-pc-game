@@ -1,9 +1,87 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "docs/qa/WORKFLOW_INTEGRATION.md",
   "policy": "Every new factory feature MUST register here before merge. L0_workflow_integration CI fails when hooks, docs, or secrets drift.",
   "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Run python3 tools/validate_workflow_integration.py",
   "features": [
+    {
+      "id": "post_agent_cycle",
+      "label": "Enforced post-agent cycle close",
+      "authority_doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+      "script_hooks": [
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "check_factory_halt.sh",
+          "purpose": "halt guard before cycle close"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_check_done_criteria.py",
+          "purpose": "done criteria before board update"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_emit_cycle_event.sh",
+          "purpose": "cycle event + telemetry close"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_bundle_evidence.py",
+          "purpose": "evidence bundle after session rollup"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "check_feature_integration.sh",
+          "purpose": "registry parity at cycle end"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "run_post_agent_cycle.sh",
+          "purpose": "session gate end-of-session rule"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "check_factory_halt.sh",
+          "purpose": "halt guard at session start"
+        }
+      ],
+      "orchestrator_steps": [
+        {
+          "id": "alignment_audit",
+          "command_contains": "run_alignment_audit.sh"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "run_post_agent_cycle.sh"
+        },
+        {
+          "doc": "game/data/qa/pm_orchestrator_steps.json",
+          "must_mention": "post_agent_cycle"
+        }
+      ]
+    },
     {
       "id": "agent_session_telemetry",
       "label": "Agent session telemetry (auto token logging)",
@@ -25,6 +103,11 @@
           "path": "tools/pm_emit_cycle_event.sh",
           "contains": "pm_refresh_agent_telemetry.sh",
           "purpose": "session_end + token backfill on cycle complete"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_emit_cycle_event.sh",
+          "purpose": "session_end via enforced post-agent cycle"
         },
         {
           "path": "tools/run_pm_orchestrator.sh",
@@ -68,7 +151,7 @@
         },
         {
           "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
-          "must_mention": "pm_emit_cycle_event.sh agent_cycle_complete"
+          "must_mention": "run_post_agent_cycle.sh"
         },
         {
           "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
@@ -108,6 +191,118 @@
         "must_mention_hooks": ["pm_refresh_agent_telemetry.sh", "pm_record_agent_session.sh"]
       },
       "acceptance_gate": "L0_agent_session_telemetry"
+    },
+    {
+      "id": "factory_watchdog",
+      "label": "Factory watchdog — stall/hang recovery",
+      "authority_doc": "docs/agents/FACTORY_WATCHDOG.md",
+      "required_secrets": ["CURSOR_FACTORY_ALERT_WEBHOOK_URL"],
+      "script_hooks": [
+        {
+          "path": "tools/run_factory_watchdog.sh",
+          "contains": "pm_emit_cycle_event.sh",
+          "purpose": "watchdog_recovery cycle event"
+        },
+        {
+          "path": "tools/run_factory_watchdog.sh",
+          "contains": "pm_refresh_agent_telemetry.sh",
+          "purpose": "token backfill on watchdog run"
+        },
+        {
+          "path": "tools/check_factory_halt.sh",
+          "contains": "halted",
+          "purpose": "halt flag guard"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "check_factory_halt.sh",
+          "purpose": "halt guard at cycle close"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "check_factory_halt.sh",
+          "purpose": "halt guard at session start"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "run_factory_watchdog.sh"
+        },
+        {
+          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "must_mention": "run_factory_watchdog.sh"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "run_factory_watchdog.sh"
+        }
+      ],
+      "acceptance_gate": "L0_factory_watchdog"
+    },
+    {
+      "id": "stakeholder_reporting",
+      "label": "PM stakeholder status reporting",
+      "authority_doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+      "required_secrets": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+      "script_hooks": [
+        {
+          "path": "tools/pm_emit_cycle_event.sh",
+          "contains": "pm_emit_stakeholder_report.sh",
+          "purpose": "auto report on every cycle event"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_emit_cycle_event.sh",
+          "purpose": "stakeholder report via enforced cycle close"
+        }
+      ],
+      "orchestrator_steps": [
+        {
+          "id": "stakeholder_report",
+          "command_contains": "pm_emit_stakeholder_report.sh"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "pm_emit_stakeholder_report.sh"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "stakeholder"
+        }
+      ],
+      "acceptance_gate": "L0_stakeholder_report"
+    },
+    {
+      "id": "alignment_audit",
+      "label": "Stakeholder alignment audit",
+      "authority_doc": "docs/qa/ALIGNMENT_AUDIT.md",
+      "script_hooks": [
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "run_alignment_audit.sh",
+          "purpose": "optional PM alignment audit after cycle"
+        }
+      ],
+      "orchestrator_steps": [
+        {
+          "id": "alignment_audit",
+          "command_contains": "run_alignment_audit.sh"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "alignment"
+        },
+        {
+          "doc": "docs/qa/WORKFLOW_INTEGRATION.md",
+          "must_mention": "run_alignment_audit.sh"
+        }
+      ],
+      "acceptance_gate": "L0_alignment_audit_catalog"
     }
   ]
 }

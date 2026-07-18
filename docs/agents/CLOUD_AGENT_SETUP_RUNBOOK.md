@@ -196,9 +196,9 @@ Cross-cutting factory features (PM hooks, telemetry, secrets, watchdog):
   Authority: docs/qa/WORKFLOW_INTEGRATION.md
 
 Worker agents MUST end every session with:
-  bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
-This closes agent session telemetry (tokens auto-fetched when CURSOR_API_KEY set).
-See docs/qa/AGENT_SESSION_TELEMETRY.md §9.
+  bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+This runs done criteria, board update, cycle event (telemetry + stakeholder report), and evidence bundle.
+See docs/qa/AGENT_SESSION_TELEMETRY.md §9 and docs/agents/PM_AGENT_RUNBOOK.md §3.
 ```
 
 ### Automation B — **CI failure triage** (required)
@@ -266,7 +266,7 @@ python3 tools/pm_update_issue.py P1-01 --status in_progress --agent architect
 
 | Event | When to emit | Command |
 |-------|--------------|---------|
-| `agent_cycle_complete` | Worker or PM finished one issue | `pm_emit_cycle_event.sh agent_cycle_complete --issue … --agent …` |
+| `agent_cycle_complete` | Worker or PM finished one issue | `bash tools/run_post_agent_cycle.sh --issue … --agent … --commit …` |
 | `sprint_cycle_complete` | Orchestrator `sprint_complete: true` | `pm_emit_cycle_event.sh sprint_cycle_complete --sprint … --next-sprint N` |
 | `ci_cycle_complete` | Optional; CI workflow after merge | Automatic via `agent-cycle-pm.yml` if `.cycle_pending` marker exists |
 | `uat_ready` | L5 PASS + RC tagged | `pm_emit_cycle_event.sh uat_ready --tag v0.1.0-rc1` |

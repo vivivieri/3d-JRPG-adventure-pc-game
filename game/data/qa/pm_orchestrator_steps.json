@@ -1,10 +1,17 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "agent_role": "pm",
   "aliases": ["sprint master", "sprint facilitator"],
   "authority": "docs/agents/PM_AGENT_RUNBOOK.md",
   "design_ref": "docs/agents/SPRINT_ORCHESTRATION.md",
   "rule": "PM Agent MUST run bash tools/run_pm_orchestrator.sh at the start of every session. Exit non-zero blocks sprint work. Honor system is forbidden.",
+  "post_agent_cycle": {
+    "command": "bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit <sha>",
+    "rule": "Workers and PM MUST use run_post_agent_cycle.sh — honor-system post_agent_steps forbidden.",
+    "worker_example": "bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --commit $(git rev-parse HEAD) --gate L2_scene_primitives --artifact artifacts/...",
+    "pm_example": "bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD) --run-orchestrator --alignment-audit",
+    "failed_example": "bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --outcome failed --failed-check L1_unit_tests"
+  },
   "session_steps": [
     {
       "step": 0,
@@ -89,44 +96,71 @@
       "description": "Backfill token usage + regenerate efficiency reports (non-blocking)",
       "command": "bash tools/pm_refresh_agent_telemetry.sh",
       "block_on_fail": false
+    },
+    {
+      "step": 12,
+      "id": "alignment_audit",
+      "description": "Stakeholder alignment snapshot after PM session (non-blocking)",
+      "command": "bash tools/run_alignment_audit.sh --trigger pm_session --note orchestrator_pass",
+      "block_on_fail": false
     }
   ],
   "post_agent_steps": [
     {
+      "id": "run_post_agent_cycle",
+      "description": "Enforced cycle close — replaces honor-system individual steps",
+      "command": "bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit <sha>",
+      "required": true,
+      "audience": "worker"
+    },
+    {
       "id": "check_done_criteria",
-      "description": "Verify pr_merged / ci_green before marking done",
+      "description": "Inside run_post_agent_cycle — verify pr_merged / ci_green before marking done",
       "command": "python3 tools/pm_check_done_criteria.py <issue_id> --commit <sha>",
-      "required": true
+      "required": true,
+      "audience": "worker"
     },
     {
       "id": "bundle_evidence",
-      "description": "Attach gate evidence to sprint bundle",
+      "description": "Inside run_post_agent_cycle — attach gate evidence + session telemetry rollup",
       "command": "python3 tools/pm_bundle_evidence.py <issue_id> --gate <gate_id> --artifact <path>",
-      "required": true
+      "required": true,
+      "audience": "worker"
     },
     {
       "id": "update_board",
-      "description": "PM updates issue status after every agent session",
-      "command": "python3 tools/pm_update_issue.py --help",
-      "required": true
+      "description": "Inside run_post_agent_cycle — PM updates issue status after every agent session",
+      "command": "python3 tools/pm_update_issue.py <issue_id> --status done --commit <sha>",
+      "required": true,
+      "audience": "worker"
     },
     {
-      "id": "stakeholder_report",
-      "description": "Stakeholder status to product owner (auto on pm_emit_cycle_event)",
-      "command": "bash tools/pm_emit_stakeholder_report.sh --trigger agent_cycle_complete --issue <id> --agent <role>",
-      "required": true
+      "id": "emit_cycle_event",
+      "description": "Inside run_post_agent_cycle — stakeholder report + PM webhook (do not call directly)",
+      "command": "bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <issue_id> --agent <role> --commit <sha>",
+      "required": true,
+      "audience": "internal"
     },
     {
       "id": "check_feature_integration",
-      "description": "Verify factory workflow integration registry parity (cross-cutting features)",
+      "description": "Inside run_post_agent_cycle — verify factory workflow integration registry parity",
       "command": "bash tools/check_feature_integration.sh",
-      "required": true
+      "required": true,
+      "audience": "worker"
+    },
+    {
+      "id": "alignment_audit",
+      "description": "PM optional — stakeholder alignment after registry or phase changes",
+      "command": "bash tools/run_alignment_audit.sh --trigger post_merge --note post_agent_cycle",
+      "required": false,
+      "audience": "pm"
     },
     {
       "id": "re_run_orchestrator",
-      "description": "Re-run dispatch before assigning next agent",
+      "description": "PM optional — re-run dispatch when PM closes own issue in same session",
       "command": "bash tools/run_pm_orchestrator.sh",
-      "required": true
+      "required": false,
+      "audience": "pm"
     }
   ],
   "other_agent_session_gate": {

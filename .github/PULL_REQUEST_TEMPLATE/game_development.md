@@ -5,7 +5,7 @@ Link the GitHub issue. Check every box that applies to this PR.
 ### PM Agent
 - [ ] Linked issue has **phase**, **acceptance gate IDs**, and **`agent/*`** label
 - [ ] Scope matches current phase in `game/data/qa/sprint_phases.json` (no phase skip)
-- [ ] Worker ended with `pm_emit_cycle_event.sh agent_cycle_complete` (factory stall if skipped)
+- [ ] Worker ended with `run_post_agent_cycle.sh` (factory stall if skipped)
 - [ ] Cross-cutting factory changes registered in `workflow_integration_registry.json` (`docs/qa/WORKFLOW_INTEGRATION.md`)
 
 ### Architect (GodotPrompter)

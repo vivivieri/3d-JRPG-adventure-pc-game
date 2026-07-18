@@ -81,7 +81,11 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
 
 | ID | Label | Authority |
 |----|-------|-----------|
+| `post_agent_cycle` | Enforced post-agent cycle close | `docs/agents/PM_AGENT_RUNBOOK.md` |
 | `agent_session_telemetry` | Auto token/duration logging | `docs/qa/AGENT_SESSION_TELEMETRY.md` |
+| `factory_watchdog` | Stall/hang recovery | `docs/agents/FACTORY_WATCHDOG.md` |
+| `stakeholder_reporting` | PM status dashboard | `docs/agents/PM_STAKEHOLDER_REPORTING.md` |
+| `alignment_audit` | Stakeholder alignment audit | `docs/qa/ALIGNMENT_AUDIT.md` |
 
 Add new rows here when registering features.
 

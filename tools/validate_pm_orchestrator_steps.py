@@ -17,7 +17,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "game/data/qa/pm_orchestrator_steps.json"
 
-REQUIRED_TOP = ("version", "agent_role", "authority", "session_steps", "post_agent_steps")
+REQUIRED_TOP = (
+    "version",
+    "agent_role",
+    "authority",
+    "session_steps",
+    "post_agent_steps",
+    "post_agent_cycle",
+)
 TOOL_RE = re.compile(r"tools/[\w./-]+\.(?:py|sh)")
 
 
@@ -70,11 +77,18 @@ def main() -> int:
     if session and not any(s.get("id") == "dispatch_orchestrator" for s in session):
         errors.append("session_steps missing required 'dispatch_orchestrator' step")
 
+    pac = data.get("post_agent_cycle", {})
+    pac_cmd = pac.get("command", "")
+    if "run_post_agent_cycle.sh" not in pac_cmd:
+        errors.append("post_agent_cycle.command must reference run_post_agent_cycle.sh")
+    for miss in _tool_refs_exist(pac_cmd):
+        errors.append(f"post_agent_cycle.command references missing tool '{miss}'")
+
     REQUIRED_POST_AGENT_IDS = (
+        "run_post_agent_cycle",
         "check_done_criteria",
         "bundle_evidence",
         "check_feature_integration",
-        "re_run_orchestrator",
     )
     post_ids = {p.get("id") for p in data.get("post_agent_steps", [])}
     for rid in REQUIRED_POST_AGENT_IDS:

@@ -98,9 +98,21 @@ bash tools/check_spec_refinement_scope.sh
 bash tools/run_agent_session_gate.sh <role> <issue_id>   # opens session telemetry automatically
 ```
 
-**End every worker session (mandatory — closes telemetry + triggers PM):**
+**End every worker session (mandatory — enforced cycle close):**
 ```bash
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit $(git rev-parse HEAD)
+```
+
+**QA with gate evidence:**
+```bash
+bash tools/run_post_agent_cycle.sh --issue <id> --agent qa --commit $(git rev-parse HEAD) \
+  --gate <gate_id> --artifact <path>
+```
+
+**Factory watchdog (stall recovery):**
+```bash
+bash tools/run_factory_watchdog.sh              # health check
+bash tools/run_factory_watchdog.sh --recover    # trigger PM via watchdog_recovery
 ```
 
 **Long sessions — heartbeat (feeds telemetry + watchdog):**
@@ -165,7 +177,7 @@ P1-00 (pm)     bootstrap project.godot + CI
 
 1. **Board:** QA issues list `depends_on` (e.g. P1-04 depends on P1-02).
 2. **Status:** Upstream issue set to `done` via `python3 tools/pm_update_issue.py`.
-3. **Event:** `bash tools/pm_emit_cycle_event.sh agent_cycle_complete` → closes session telemetry + PM re-runs orchestrator → dispatches QA.
+3. **Event:** `bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>` → closes session telemetry + PM re-runs orchestrator → dispatches QA.
 4. **Handoff:** Builder posts **Builder → QA** block in PR/issue (`docs/sprints/Phase*-Sprint*-issues.md`).
 5. **CI:** PR on `game/development` must pass listed `acceptance_gate_ids` before QA closes issue.
 
