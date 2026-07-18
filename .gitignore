@@ -70,6 +70,12 @@ artifacts/alignment_audits/*
 artifacts/alignment_dashboard.html
 artifacts/telemetry_reports/*
 !artifacts/telemetry_reports/.gitkeep
+artifacts/agent_session_telemetry/*
+!artifacts/agent_session_telemetry/.gitkeep
+artifacts/agent_session_reports/*
+!artifacts/agent_session_reports/.gitkeep
+artifacts/sprint_evidence/*
+!artifacts/sprint_evidence/.gitkeep
 artifacts/delivery_audit/*
 !artifacts/delivery_audit/.gitkeep
 artifacts/escalations/*

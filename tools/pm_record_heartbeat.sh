@@ -51,4 +51,9 @@ path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(payload))
 PY
 
+# Append to agent session telemetry JSONL (analysis-friendly history)
+if [[ -n "${ISSUE_ID}" ]]; then
+  bash tools/pm_record_agent_session.sh progress --agent "$AGENT" --issue "$ISSUE_ID" --note "${NOTE:-heartbeat}" 2>/dev/null || true
+fi
+
 echo "==> Heartbeat recorded: ${HB_FILE}"

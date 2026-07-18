@@ -109,6 +109,17 @@ if payload_path.is_file():
     print("==> Health snapshot: game/data/qa/factory_health_snapshot.json")
 SNAPPY
 
+# Agent session telemetry — close session on cycle complete/fail
+if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "agent_cycle_failed" ]]; then
+  OUTCOME="complete"
+  [[ "$EVENT" == "agent_cycle_failed" ]] && OUTCOME="failed"
+  END_ARGS=(end --agent "$AGENT_ROLE" --outcome "$OUTCOME")
+  [[ -n "$ISSUE_ID" ]] && END_ARGS+=(--issue "$ISSUE_ID")
+  [[ -n "$FAILED_CHECK" ]] && END_ARGS+=(--check "$FAILED_CHECK")
+  [[ -n "$NOTES" ]] && END_ARGS+=(--note "$NOTES")
+  bash tools/pm_record_agent_session.sh "${END_ARGS[@]}" 2>/dev/null || true
+fi
+
 # mcp_blocked / factory_halt → stop automatic recovery
 if [[ "$EVENT" == "mcp_blocked" || "$EVENT" == "factory_halt" ]]; then
   bash tools/run_factory_watchdog.sh --halt "${NOTES:-$EVENT}" 2>/dev/null || true

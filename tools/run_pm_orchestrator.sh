@@ -11,6 +11,7 @@ export ROOT
 
 # Heartbeat — PM session start (watchdog hang detection)
 bash tools/pm_record_heartbeat.sh --agent pm --phase start --note "orchestrator" 2>/dev/null || true
+bash tools/pm_record_agent_session.sh start --agent pm --note "orchestrator" 2>/dev/null || true
 
 python3 <<'PY'
 import json

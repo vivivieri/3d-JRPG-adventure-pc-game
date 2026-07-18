@@ -199,6 +199,7 @@
 | [ALIGNMENT_AUDIT.md](qa/ALIGNMENT_AUDIT.md) | Standard alignment audit + stakeholder checklist |
 | [PLAYTEST_SCRIPT.md](qa/PLAYTEST_SCRIPT.md) | 2–3h human playthrough |
 | [PLAYTEST_TELEMETRY.md](qa/PLAYTEST_TELEMETRY.md) | Telemetry tuning loop |
+| [AGENT_SESSION_TELEMETRY.md](qa/AGENT_SESSION_TELEMETRY.md) | AI agent session stats — role, task, tokens, duration |
 | [PERFORMANCE_BASELINE.md](qa/PERFORMANCE_BASELINE.md) | FPS hardware baseline |
 | [PLATFORM_SUPPORT.md](qa/PLATFORM_SUPPORT.md) | Linux + Windows ship |
 | [SECURITY.md](qa/SECURITY.md) | Secrets, ship build strip |

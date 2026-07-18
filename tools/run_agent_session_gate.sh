@@ -83,5 +83,8 @@ print(f"[OK] Agent session gate PASS — {agent} cleared for {issue_id}")
 print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
+# Agent session telemetry — session start
+bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID" 2>/dev/null || true
+
 # Heartbeat — worker session start
 bash tools/pm_record_heartbeat.sh --agent "$AGENT" --issue "$ISSUE_ID" --phase start 2>/dev/null || true

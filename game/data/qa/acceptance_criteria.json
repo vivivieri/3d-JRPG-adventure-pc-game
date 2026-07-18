@@ -258,6 +258,15 @@
       "evidence": ["game/data/qa/playtest_telemetry_schema.json"],
       "design_ref": "docs/qa/PLAYTEST_TELEMETRY.md, docs/qa/FLOW_QA.md"
     },
+    "L0_agent_session_telemetry": {
+      "layer": "L0",
+      "domain": "data",
+      "command": "python3 tools/validate_agent_session_telemetry_schema.py",
+      "description": "Agent session telemetry schema for AI factory efficiency studies (analyzer: tools/analyze_agent_session_telemetry.py)",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/agent_session_telemetry_schema.json"],
+      "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md, docs/agents/SPRINT_ORCHESTRATION.md"
+    },
     "L0_delivery_control": {
       "layer": "L0",
       "domain": "flow",
@@ -701,6 +710,7 @@
       "L0_audio_qa_catalog",
       "L0_scene_audio_map",
       "L0_playtest_telemetry",
+      "L0_agent_session_telemetry",
       "L0_delivery_control",
       "L0_generation_readiness_backlog",
       "L0_sprint_board",

@@ -230,6 +230,8 @@ Templates: `.github/ISSUE_TEMPLATE/` · sprint pack: `docs/sprints/Phase1-Sprint
 
 GitHub = **what + proof** · Linear = **which batch + cycle progress**
 
+**Agent session telemetry** (efficiency studies): `docs/qa/AGENT_SESSION_TELEMETRY.md` — JSONL log of role, task, duration, tokens per issue (`tools/analyze_agent_session_telemetry.py`).
+
 ---
 
 ## 9. Promotion checklist

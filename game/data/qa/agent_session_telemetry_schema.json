@@ -1,0 +1,124 @@
+{
+  "version": "1.0",
+  "authority": "Dev-time AI agent session telemetry for factory efficiency studies. Analyzer: tools/analyze_agent_session_telemetry.py. Informational — NOT a ship gate.",
+  "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md, docs/agents/SPRINT_ORCHESTRATION.md, docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+  "privacy": {
+    "local_only_by_default": true,
+    "pii_forbidden": true,
+    "forbidden_fields": ["email", "ip", "api_key", "pat", "password", "webhook_url"],
+    "session_id_rule": "opaque UUID per agent session — groups start/progress/end events",
+    "upload_requires_consent": true,
+    "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md#privacy"
+  },
+  "storage": {
+    "primary_log": "artifacts/agent_session_telemetry/events.jsonl",
+    "active_sessions": "artifacts/agent_session_telemetry/active_sessions.json",
+    "per_issue_evidence": "artifacts/sprint_evidence/{issue_id}/session_{session_id}.json",
+    "analysis_output": "artifacts/agent_session_reports/",
+    "committed_rollups_optional": "game/data/qa/agent_session_stats.json",
+    "encoding": "jsonl",
+    "one_object_per_line": true,
+    "analysis_exports": ["json", "csv", "markdown", "parquet"]
+  },
+  "log_format": {
+    "common_fields": {
+      "schema_version": "string — matches this file version",
+      "session_id": "string — UUID grouping one agent run",
+      "event": "string — session_start | session_progress | session_end | session_failed",
+      "ts": "string — ISO-8601 UTC wall clock",
+      "t": "number — seconds since session_start (0 on start)",
+      "issue_id": "string — sprint issue id (P1-02) or null for PM-only",
+      "agent_role": "string — pm | architect | builder | qa | flow | release | visual | debugger",
+      "sprint_id": "string — active sprint id",
+      "phase": "number — implementation phase 0-8",
+      "task_category": "string — taxonomy for efficiency grouping",
+      "task_tags": "array — free-form labels for future pivots"
+    }
+  },
+  "event_types": [
+    {
+      "name": "session_start",
+      "required": ["schema_version", "session_id", "event", "ts", "t", "agent_role"],
+      "optional": [
+        "issue_id", "sprint_id", "phase", "task_category", "task_tags",
+        "acceptance_gate_ids", "done_requires", "branch_name", "sprint_branch",
+        "dispatch_action", "handoff_refs", "github_issue", "co_agent",
+        "implementation_plan_tasks", "generation_readiness_id",
+        "commit_sha_start", "git_branch", "repo",
+        "cursor_bc_id", "cursor_agent_url", "model_name", "model_provider",
+        "cloud_environment", "cloud_snapshot_id", "mcp_stack_required",
+        "session_gate_command", "orchestrator_generated_at"
+      ]
+    },
+    {
+      "name": "session_progress",
+      "required": ["schema_version", "session_id", "event", "ts", "t", "agent_role"],
+      "optional": ["issue_id", "note", "heartbeat_seq", "phase_marker"]
+    },
+    {
+      "name": "session_end",
+      "required": ["schema_version", "session_id", "event", "ts", "t", "agent_role", "outcome"],
+      "optional": [
+        "issue_id", "duration_seconds", "commit_sha_end", "commit_sha_start",
+        "pr_url", "pr_number", "files_changed", "lines_added", "lines_removed",
+        "gates_passed", "gates_failed", "ci_pass_count", "ci_fail_count",
+        "heartbeat_count", "tokens_input", "tokens_output", "tokens_total",
+        "tokens_cache_read", "tokens_cache_write", "tokens_source",
+        "tool_calls_reported", "model_name", "cursor_bc_id",
+        "task_category", "task_tags", "efficiency_notes", "note"
+      ],
+      "enums": { "outcome": ["complete", "failed", "aborted"] }
+    },
+    {
+      "name": "session_failed",
+      "required": ["schema_version", "session_id", "event", "ts", "t", "agent_role", "outcome"],
+      "optional": ["issue_id", "duration_seconds", "failed_check", "error_message", "note", "tokens_input", "tokens_output", "tokens_total", "tokens_source"],
+      "enums": { "outcome": ["failed"] }
+    }
+  ],
+  "task_categories": [
+    { "id": "pm_orchestration", "agent_roles": ["pm"], "description": "Sprint orchestration, board updates, dispatch" },
+    { "id": "spec_architecture", "agent_roles": ["architect"], "keywords": ["shader", "spec", "plan", "gdscript", "registry"], "description": "Plans, shaders, typed GDScript, tests" },
+    { "id": "scene_build", "agent_roles": ["builder"], "keywords": ["scene", "tscn", "zone", "material", "light", "gdai"], "description": "GDAI MCP scene/material/light work" },
+    { "id": "qa_verification", "agent_roles": ["qa"], "keywords": ["gate", "smoke", "ci", "jury"], "description": "L0-L2 verification and evidence" },
+    { "id": "flow_integration", "agent_roles": ["flow"], "keywords": ["integration", "e2e", "scenario"], "description": "L4/L5 flow scenarios" },
+    { "id": "visual_jury", "agent_roles": ["visual"], "keywords": ["visual", "model", "palette", "turntable"], "description": "Art/model/visual jury passes" },
+    { "id": "release_cd", "agent_roles": ["release"], "keywords": ["tag", "steam", "cd", "export"], "description": "RC/beta/prod promotion" },
+    { "id": "bootstrap", "keywords": ["bootstrap", "P1-00", "project.godot"], "description": "Branch/bootstrap setup" },
+    { "id": "docs_data", "keywords": ["docs", "json", "validator", "main"], "description": "Docs and game/data edits on main" },
+    { "id": "remediation", "keywords": ["remediation", "fix", "fail"], "description": "QA FAIL loop retries" },
+    { "id": "other", "description": "Fallback when no rule matches" }
+  ],
+  "efficiency_thresholds": {
+    "note": "Informational study thresholds — tune after collecting data",
+    "session_duration_warn_minutes": { "value": 90, "op": ">", "description": "Flag long sessions for process review" },
+    "tokens_per_issue_warn": { "value": 500000, "op": ">", "description": "Flag high token sessions when reported" },
+    "heartbeats_per_hour_min": { "value": 2, "op": "<", "description": "Very low heartbeat rate may indicate hang or missing progress logs" },
+    "remediation_retry_warn": { "value": 2, "op": ">=", "description": "Same issue+role failed sessions before pass" }
+  },
+  "analysis_dimensions": [
+    "agent_role",
+    "task_category",
+    "task_tags",
+    "issue_id",
+    "sprint_id",
+    "phase",
+    "model_name",
+    "outcome",
+    "done_requires",
+    "generation_readiness_id"
+  ],
+  "rollup_metrics": [
+    "session_count",
+    "total_duration_seconds",
+    "median_duration_seconds",
+    "tokens_total_sum",
+    "tokens_total_median",
+    "complete_rate",
+    "failed_rate",
+    "ci_fail_rate",
+    "remediation_rate",
+    "files_changed_median",
+    "gates_per_session_median"
+  ]
+}

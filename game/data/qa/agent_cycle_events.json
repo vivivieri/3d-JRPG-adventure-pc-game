@@ -8,7 +8,7 @@
       "description": "Specialist agent finished one sprint issue (PR merged or pushed, board updated)",
       "emits": ["tools/pm_emit_cycle_event.sh"],
       "triggers": "PM Agent Automation (webhook)",
-      "payload_fields": ["event", "issue_id", "agent_role", "commit_sha", "sprint_id", "branch"]
+      "payload_fields": ["event", "issue_id", "agent_role", "commit_sha", "sprint_id", "branch", "session_id", "duration_seconds", "task_category", "tokens_total", "model_name"]
     },
     "sprint_cycle_complete": {
       "description": "All issues in active_sprint are done or carry_over resolved; PM may close sprint",

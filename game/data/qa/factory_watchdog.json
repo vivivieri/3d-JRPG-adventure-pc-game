@@ -27,6 +27,8 @@
   "halt_flag_path": "artifacts/factory_state.json",
   "heartbeat_path": "artifacts/factory_heartbeat.json",
   "cycle_log_path": "artifacts/factory_cycle_log.jsonl",
+  "agent_session_telemetry_path": "artifacts/agent_session_telemetry/events.jsonl",
+  "agent_session_reports_path": "artifacts/agent_session_reports/",
   "health_report_path": "artifacts/factory_health_report.json",
   "webhook_secrets": {
     "recovery": "CURSOR_PM_CYCLE_WEBHOOK_URL",
