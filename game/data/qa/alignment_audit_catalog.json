@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "docs/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
@@ -34,11 +34,12 @@
       "label": "Data Alignment",
       "weight": 1.0,
       "signals": [
-        { "id": "scene_registry_parity", "weight": 0.25, "kind": "parity" },
-        { "id": "hooks_parity", "weight": 0.2, "kind": "parity" },
-        { "id": "tutorial_flags", "weight": 0.15, "kind": "parity" },
-        { "id": "L0_scene_registry", "weight": 0.2, "kind": "gate" },
-        { "id": "L0_story_data", "weight": 0.2, "kind": "gate" }
+        { "id": "scene_registry_parity", "weight": 0.22, "kind": "parity" },
+        { "id": "hooks_parity", "weight": 0.18, "kind": "parity" },
+        { "id": "tutorial_flags", "weight": 0.13, "kind": "parity" },
+        { "id": "sprint_board_parity", "weight": 0.15, "kind": "parity" },
+        { "id": "L0_scene_registry", "weight": 0.17, "kind": "gate" },
+        { "id": "L0_story_data", "weight": 0.15, "kind": "gate" }
       ],
       "icon": "data"
     },
@@ -94,12 +95,15 @@
       "label": "PM Workflow",
       "weight": 1.0,
       "signals": [
-        { "id": "ci_pass_rate", "weight": 0.35, "kind": "ci_rate" },
-        { "id": "L0_doc_sync", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_pm_orchestrator", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_stakeholder_report", "weight": 0.1, "kind": "gate" },
-        { "id": "L0_workflow_integration", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_candidate_tournament", "weight": 0.1, "kind": "gate" }
+        { "id": "ci_pass_rate", "weight": 0.25, "kind": "ci_rate" },
+        { "id": "L0_doc_sync", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_pm_orchestrator", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_stakeholder_report", "weight": 0.08, "kind": "gate" },
+        { "id": "L0_workflow_integration", "weight": 0.12, "kind": "gate" },
+        { "id": "L0_candidate_tournament", "weight": 0.08, "kind": "gate" },
+        { "id": "L0_agent_session_telemetry", "weight": 0.12, "kind": "gate" },
+        { "id": "L0_factory_watchdog", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_sprint_board", "weight": 0.05, "kind": "gate" }
       ],
       "icon": "pm"
     },
@@ -149,7 +153,7 @@
       "category": "blocking",
       "when": "parity_fail",
       "title": "Repair registry ↔ data parity",
-      "action": "Align scene_registry.json, story_encounters.json, cinematic_hooks.json; re-run python3 tools/validate_scene_registry.py."
+      "action": "Align scene_registry.json, story_encounters.json, cinematic_hooks.json, and sprint_board.json ↔ sprint pack IDs; re-run python3 tools/validate_scene_registry.py and python3 tools/validate_sprint_board.py --strict."
     },
     {
       "id": "REC_STALE_BLOCKING",
@@ -217,6 +221,24 @@
       "action": "Run python3 tools/validate_workflow_integration.py; update game/data/qa/workflow_integration_registry.json and wire missing hooks/docs per docs/qa/WORKFLOW_INTEGRATION.md."
     },
     {
+      "id": "REC_AGENT_TELEMETRY",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "gate_fail",
+      "gate": "L0_agent_session_telemetry",
+      "title": "Agent session telemetry schema drift",
+      "action": "Run python3 tools/validate_agent_session_telemetry.py; wire hooks in session gate, cycle events, orchestrator, and watchdog per docs/qa/AGENT_SESSION_TELEMETRY.md. Requires CURSOR_API_KEY secret."
+    },
+    {
+      "id": "REC_FACTORY_WATCHDOG",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "gate_fail",
+      "gate": "L0_factory_watchdog",
+      "title": "Factory watchdog config drift",
+      "action": "Run python3 tools/validate_factory_watchdog.py; verify tools/run_factory_watchdog.sh hooks and docs/agents/FACTORY_WATCHDOG.md. Requires CURSOR_FACTORY_ALERT_WEBHOOK_URL secret."
+    },
+    {
       "id": "REC_DOC_NITS",
       "priority": "P3",
       "category": "doc_nit",
@@ -232,7 +254,7 @@
       "batch": 1,
       "assets": [
         { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
-        { "id": "audit_radar_6axis", "label": "6-axis production radar", "filename": "audit_radar_6axis.png", "kind": "radar" },
+        { "id": "audit_radar_6axis", "label": "9-domain production radar", "filename": "audit_radar_6axis.png", "kind": "radar" },
         { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
       ]
     },

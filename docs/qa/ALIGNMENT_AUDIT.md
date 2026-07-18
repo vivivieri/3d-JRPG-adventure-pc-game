@@ -24,7 +24,7 @@ Each audit includes:
 1. **Verdict** — `ALIGNED` · `AT_RISK` · `FAIL`
 2. **Domain radar scores** (0–10) — nine domains + overall
 3. **CI summary** — gate PASS/FAIL counts
-4. **Data parity** — encounters, hooks, tutorial flags
+4. **Data parity** — encounters, hooks, tutorial flags, sprint board ↔ sprint pack IDs
 5. **Full recommendation checklist** — P0–P3 by category
 6. **Visual manifest** — stakeholder PNG packs (when bundled)
 
@@ -70,6 +70,14 @@ open artifacts/alignment_dashboard.html       # macOS
 
 ## 4. Verdict rules
 
+**Radar vs CI (read this):** Domain scores (0–10) are **indicative** — they sample weighted signals per domain, not every CI gate. The **verdict** follows CI only:
+
+| Layer | Authority | Misread risk |
+|-------|-----------|--------------|
+| **Verdict** | Any CI gate FAIL → `FAIL` (when `fail_any_ci` is true) | None — this is the ship/dispatch gate |
+| **Radar** | Weighted subset of signals in `alignment_audit_catalog.json` | `--skip-ci` audits score ~0 on gate signals; do not use for PASS/FAIL |
+| **Parity** | Encounters, hooks, tutorial flags, sprint board ↔ pack | Catches data drift CI schema gates may miss |
+
 Configured in `alignment_audit_catalog.json` → `verdict_thresholds`:
 
 | Verdict | Condition |
@@ -85,12 +93,12 @@ Configured in `alignment_audit_catalog.json` → `verdict_thresholds`:
 | ID | Label | Main signals |
 |----|-------|----------------|
 | `overall_production` | Overall | Mean of sibling domains |
-| `data_alignment` | Data Alignment | Registry parity + L0 scene/story gates |
+| `data_alignment` | Data Alignment | Registry parity + L0 scene/story gates + sprint board ↔ pack |
 | `narrative` | Narrative | Story spine, density, VO/hooks count |
 | `gameplay` | Gameplay | Spec registry, encounters, combat data |
 | `visual_spec` | Visual Spec | Zone visuals contract, palettes |
 | `ux_controls` | UX & Controls | Settings/combat docs; impl scenes cap on main |
-| `pm_workflow` | PM Workflow | CI pass rate, doc sync, PM orchestrator |
+| `pm_workflow` | PM Workflow | CI pass rate, doc sync, orchestrator, stakeholder, workflow integration, telemetry, watchdog, tournament |
 | `runtime_proof` | Runtime Proof | project.godot, L2/L4/L5 gates (low on `main` by design) |
 | `steam_ship` | Steam Ship M6 | Ship security, asset compliance, runtime ref |
 

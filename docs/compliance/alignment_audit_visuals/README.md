@@ -17,7 +17,7 @@ bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit
 
 | Batch | Prefix / files |
 |-------|----------------|
-| 1 Foundation | `concept_ruined_village.png`, `audit_radar_6axis.png`, `roadmap_6phase.png` |
+| 1 Foundation | `concept_ruined_village.png`, `audit_radar_6axis.png` (9-domain radar label), `roadmap_6phase.png` |
 | 2 Zones | `tides_concept_beach_shore.png`, `tides_concept_palace_gate.png`, … |
 | 3 Endings | `tides_concept_tidal_caves.png`, `tides_concept_three_endings.png`, … |
 | 4 Combat/audio | `tides_combat_*.png`, `tides_audit_combat_*.png`, … |

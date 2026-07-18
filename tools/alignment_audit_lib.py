@@ -19,6 +19,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
 
+sys.path.insert(0, str(ROOT / "tools"))
+from pm_orchestrator_lib import parse_issue_pack  # noqa: E402
+
 
 def load_json(path: Path) -> dict[str, Any]:
     if not path.is_file():
@@ -132,6 +135,16 @@ def parity_checks() -> dict[str, Any]:
     enc_ok = enc_reg == enc_data
     hooks_ok = hook_reg == hooks_data
     tutorials_ok = not missing_tutorials
+
+    board = load_json(ROOT / "game/data/qa/sprint_board.json")
+    board_ids = {i["id"] for i in board.get("issues", []) if i.get("id")}
+    pack_ref = board.get("active_sprint", {}).get("issue_pack_ref", "")
+    pack_path = ROOT / pack_ref if pack_ref else None
+    pack_ids = set(parse_issue_pack(pack_path)) if pack_path and pack_path.is_file() else set()
+    sprint_pack_missing = sorted(pack_ids - board_ids)
+    sprint_board_ok = not sprint_pack_missing and bool(pack_ids or not pack_ref)
+
+    parity_ok = enc_ok and hooks_ok and tutorials_ok and sprint_board_ok
     return {
         "encounters_registry": sorted(enc_reg),
         "encounters_data": sorted(enc_data),
@@ -143,7 +156,11 @@ def parity_checks() -> dict[str, Any]:
         "tutorial_flags_emitted": len(emitted),
         "tutorial_flags_missing": missing_tutorials,
         "tutorials_ok": tutorials_ok,
-        "parity_ok": enc_ok and hooks_ok and tutorials_ok,
+        "sprint_board_ids": sorted(board_ids),
+        "sprint_pack_ids": sorted(pack_ids),
+        "sprint_pack_missing_on_board": sprint_pack_missing,
+        "sprint_board_ok": sprint_board_ok,
+        "parity_ok": parity_ok,
     }
 
 
@@ -167,36 +184,23 @@ def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
 def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[dict[str, Any]]:
     hits: list[dict[str, Any]] = []
     search_roots = [ROOT / "docs", ROOT / "game/data", ROOT / "tools"]
+    agent_surface_files = [ROOT / "AGENTS.md", ROOT / ".cursorrules"]
     patterns = catalog.get("stale_string_patterns", [])
     skip_files = {"game/data/qa/alignment_audit_catalog.json"}
-    for root in search_roots:
-        if not root.is_dir():
-            continue
-        for path in root.rglob("*"):
-            if not path.is_file():
-                continue
-            if path.suffix not in {".md", ".json", ".py", ".gd", ".tscn"}:
-                continue
-            try:
-                text = path.read_text(encoding="utf-8", errors="ignore")
-            except OSError:
-                continue
-            rel = str(path.relative_to(ROOT))
-            if rel in skip_files:
-                continue
-            for row in patterns:
-                if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
-                    if _helpers_registry_has_premature_port(text, branch):
-                        hits.append(
-                            {
-                                "id": row["id"],
-                                "severity": row["severity"],
-                                "message": row["message"],
-                                "path": rel,
-                            }
-                        )
-                    continue
-                if re.search(row["pattern"], text, re.IGNORECASE):
+
+    def _scan_file(path: Path) -> None:
+        if not path.is_file():
+            return
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            return
+        rel = str(path.relative_to(ROOT))
+        if rel in skip_files:
+            return
+        for row in patterns:
+            if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
+                if _helpers_registry_has_premature_port(text, branch):
                     hits.append(
                         {
                             "id": row["id"],
@@ -205,6 +209,30 @@ def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[
                             "path": rel,
                         }
                     )
+                continue
+            if re.search(row["pattern"], text, re.IGNORECASE):
+                hits.append(
+                    {
+                        "id": row["id"],
+                        "severity": row["severity"],
+                        "message": row["message"],
+                        "path": rel,
+                    }
+                )
+
+    for root in search_roots:
+        if not root.is_dir():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            if path.suffix not in {".md", ".json", ".py", ".gd", ".tscn"}:
+                continue
+            _scan_file(path)
+
+    for path in agent_surface_files:
+        _scan_file(path)
+
     return hits
 
 
@@ -242,6 +270,8 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
             return 10.0 if parity["hooks_ok"] else 0.0
         if sid == "tutorial_flags":
             return 10.0 if parity["tutorials_ok"] else 3.0
+        if sid == "sprint_board_parity":
+            return 10.0 if parity.get("sprint_board_ok", False) else 0.0
         return 5.0
 
     if kind == "gate":
@@ -641,8 +671,13 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             f"- Encounters: {'OK' if parity.get('encounters_ok') else 'FAIL'}",
             f"- Hooks: {'OK' if parity.get('hooks_ok') else 'FAIL'}",
             f"- Tutorial flags: {'OK' if parity.get('tutorials_ok') else 'FAIL'}",
+            f"- Sprint board ↔ pack: {'OK' if parity.get('sprint_board_ok') else 'FAIL'}",
         ]
     )
+    if parity.get("sprint_pack_missing_on_board"):
+        lines.append(
+            f"- Pack IDs missing on board: `{', '.join(parity['sprint_pack_missing_on_board'])}`"
+        )
 
     lines.extend(["", "## Recommendation checklist", ""])
     for sec in report.get("checklist", {}).get("sections", []):

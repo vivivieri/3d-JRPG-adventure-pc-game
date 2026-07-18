@@ -8,6 +8,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "game/data/qa/alignment_audit_catalog.json"
+CRITERIA = ROOT / "game/data/qa/acceptance_criteria.json"
+WEIGHT_TOLERANCE = 0.02
 
 
 def main() -> int:
@@ -32,6 +34,36 @@ def main() -> int:
     pack_ids = [p["id"] for p in data.get("visual_packs", [])]
     if len(pack_ids) != len(set(pack_ids)):
         errors.append("duplicate visual_packs id")
+
+    known_gates: set[str] = set()
+    if CRITERIA.is_file():
+        crit = json.loads(CRITERIA.read_text(encoding="utf-8"))
+        known_gates = set(crit.get("gates", {}))
+        known_gates.update({"L0_acceptance_catalog", "L0_environments_catalog", "L0_sprint_phases"})
+
+    for domain in data.get("domains", []):
+        if domain.get("derive") == "mean_siblings":
+            continue
+        signals = domain.get("signals", [])
+        total_w = sum(float(s.get("weight", 0)) for s in signals)
+        if abs(total_w - 1.0) > WEIGHT_TOLERANCE:
+            errors.append(
+                f"domain {domain.get('id')}: signal weights sum to {total_w:.3f} (expected ~1.0)"
+            )
+        for sig in signals:
+            kind = sig.get("kind", "")
+            if kind not in {"gate", "gate_optional"}:
+                continue
+            gate_id = sig.get("id", "")
+            if known_gates and gate_id not in known_gates:
+                errors.append(f"domain {domain.get('id')}: unknown gate signal '{gate_id}'")
+
+    for rule in data.get("recommendation_rules", []):
+        if rule.get("when") != "gate_fail":
+            continue
+        gate_id = rule.get("gate", "")
+        if known_gates and gate_id not in known_gates:
+            errors.append(f"recommendation {rule.get('id')}: unknown gate '{gate_id}'")
 
     lib = ROOT / "tools/alignment_audit_lib.py"
     if not lib.is_file():
