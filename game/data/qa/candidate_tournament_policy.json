@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
+  "layer": "L2.5",
+  "ship_blocking": false,
+  "prerequisite_layers": ["L0", "L1", "L2"],
+  "successor_layers": ["L3", "L4", "L5", "L6"],
+  "rules": {
+    "max_candidates_per_issue": 3,
+    "max_candidates_per_scope_active": 5,
+    "one_winner_per_scope": true,
+    "forbid_merge_multiple_challengers": true,
+    "challenger_must_pass_all_hard_gates": true,
+    "soft_score_only_breaks_ties_among_pass": true,
+    "promote_requires_comparison_artifact": true,
+    "registry_path": "artifacts/candidates/champion_registry.json",
+    "comparison_output_dir": "artifacts/candidates"
+  },
+  "commands": {
+    "compare": "python3 tools/compare_champion_challenger.py",
+    "promote": "python3 tools/promote_champion_candidate.py",
+    "run": "bash tools/run_candidate_tournament.sh"
+  },
+  "gate_id": "L2_candidate_select",
+  "validator_gate_id": "L0_candidate_tournament"
+}

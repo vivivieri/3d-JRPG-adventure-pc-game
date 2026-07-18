@@ -1,0 +1,59 @@
+{
+  "version": "1.0",
+  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
+  "design_ref": "docs/art/VISUAL_QA.md",
+  "resolution": [1920, 1080],
+  "palette_thresholds": {
+    "max_avg_anchor_dist": 85.0,
+    "max_bright_ratio": 0.35
+  },
+  "scopes": {
+    "ruined_village": {
+      "zone_composition_id": "ruined_village",
+      "palette_zone_key": "ruined_village",
+      "emotional_mood": "dread_decay",
+      "phase": 1,
+      "captures": [
+        {
+          "id": "gameplay",
+          "label": "Gameplay camera — hub path",
+          "path_key": "golden_screenshot",
+          "camera": "default_follow",
+          "required_for_promotion": true
+        },
+        {
+          "id": "establishing",
+          "label": "Wide establishing — torii silhouette",
+          "path": "artifacts/golden/ruined_village_establishing.png",
+          "camera": "wide_establishing",
+          "required_for_promotion": false
+        }
+      ],
+      "hard_gates": [
+        "L2_scene_primitives",
+        "L2_visual_palette",
+        "L2_visual_jury"
+      ],
+      "integration_flow_ids": ["INT-01-village-explore"],
+      "perf_baseline_zone": "ruined_village"
+    },
+    "beach_shore": {
+      "zone_composition_id": "beach_shore",
+      "palette_zone_key": "beach",
+      "emotional_mood": "lonely_arrival",
+      "phase": 2,
+      "captures": [
+        {
+          "id": "gameplay",
+          "label": "Gameplay camera — shore arrival",
+          "path_key": "golden_screenshot",
+          "camera": "default_follow",
+          "required_for_promotion": true
+        }
+      ],
+      "hard_gates": ["L2_scene_primitives", "L2_visual_palette"],
+      "integration_flow_ids": [],
+      "perf_baseline_zone": "beach_shore"
+    }
+  }
+}

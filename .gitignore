@@ -76,6 +76,8 @@ artifacts/agent_session_reports/*
 !artifacts/agent_session_reports/.gitkeep
 artifacts/sprint_evidence/*
 !artifacts/sprint_evidence/.gitkeep
+artifacts/candidates/*
+!artifacts/candidates/.gitkeep
 artifacts/delivery_audit/*
 !artifacts/delivery_audit/.gitkeep
 artifacts/escalations/*

@@ -125,6 +125,12 @@ bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "progress n
 python3 tools/analyze_agent_session_telemetry.py   # → artifacts/agent_session_reports/
 ```
 
+**Zone tournament (L2.5 pre-merge — champion/challenger, non-ship):**
+```bash
+bash tools/run_candidate_tournament.sh --challenger artifacts/candidates/<issue>/challenger_runN.json
+# Policy: docs/qa/CANDIDATE_TOURNAMENT.md
+```
+
 **One-time:** `CURSOR_API_KEY` in Cursor Secrets for auto token logging — `docs/agents/CURSOR_SECRETS_SETUP.md` §8
 
 ---

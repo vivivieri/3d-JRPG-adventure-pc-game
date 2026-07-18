@@ -12,10 +12,12 @@ This document is the **detailed spec** for AI agent testing. It defines **how** 
 ## 0. Golden rule — human QA comes last
 
 ```
-L0 → L1 → L2 → L3 → L4 → L5  (all AI — must pass)
+L2.5 (optional) → L0 → L1 → L2 → L3 → L4 → L5  (all AI — must pass for ship)
          ↓
 L6 Human QA  (only after L0–L5 green on release candidate)
 ```
+
+**L2.5 candidate tournament** (`docs/qa/CANDIDATE_TOURNAMENT.md`) is **pre-merge only** — champion/challenger picker above L0–L6. It does **not** replace or block ship gates.
 
 | Rule | Detail |
 |------|--------|
@@ -35,6 +37,7 @@ Human QA (`docs/qa/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **a
 | **L0** | `validate_story_data.py`, `validate_base_classes.py`, `validate_audio_qa_catalog.py`, `validate_scene_audio_map.py`, `check_base_class_compliance.sh`, `check_rr_compliance.sh` | Every commit | — |
 | **L1** | `run_unit_tests.sh`, `check_gdscript_changed.sh` | Every commit | — |
 | **L2** | `run_playtest_smoke.sh`, `check_animation_whitelist.py`, `run_feel_smoke_checks.sh`, `check_glb_import_scripts.py` | Every commit | — |
+| **L2.5** | `run_candidate_tournament.sh` (optional pre-merge) | Zone/asset tournaments when policy requires | — |
 | **L3** | GDAI MCP (see §3) | Every scene/visual task | — |
 | **L4** | `bash tools/run_integration_tests.sh` | Phase gates 2–6 | Phase advance |
 | **L5** | `bash tools/run_e2e_playthrough.sh` | Phase 6 complete + release candidate | **Human QA** |

@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
+  "design_ref": "docs/art/VISUAL_QA.md",
+  "note": "Soft rubric axes for champion/challenger tie-break only. Hard gates always veto promotion.",
+  "axes": [
+    {
+      "id": "readability",
+      "label": "Silhouette and layout readability at gameplay distance",
+      "weight": 0.2,
+      "jury_criteria": {
+        "visual": ["v5_silhouette_readable"],
+        "model": ["m4_silhouette_readable"]
+      },
+      "min_score": 0.0,
+      "max_score": 1.0
+    },
+    {
+      "id": "mood_match",
+      "label": "Emotional mood matches zone brief",
+      "weight": 0.25,
+      "jury_criteria": {
+        "visual": ["v7_emotional_mood_matches"],
+        "model": ["m7_emotional_mood_matches"]
+      },
+      "min_score": 0.0,
+      "max_score": 1.0
+    },
+    {
+      "id": "palette_discipline",
+      "label": "Muted coastal palette discipline",
+      "weight": 0.2,
+      "jury_criteria": {
+        "visual": ["v2_muted_palette", "v8_no_forbidden_tone"]
+      },
+      "min_score": 0.0,
+      "max_score": 1.0
+    },
+    {
+      "id": "style_cohesion",
+      "label": "NPR style cohesion — not PBR / wrong genre",
+      "weight": 0.2,
+      "jury_criteria": {
+        "visual": ["v3_npr_not_pbr", "v4_japanese_coastal"]
+      },
+      "min_score": 0.0,
+      "max_score": 1.0
+    },
+    {
+      "id": "jury_confidence",
+      "label": "Mean vision jury confidence (calibrated panel)",
+      "weight": 0.15,
+      "source": "jury_confidence_mean",
+      "min_score": 0.0,
+      "max_score": 1.0
+    }
+  ],
+  "anchor_regression": {
+    "enabled": true,
+    "note": "Future: require ranking good > acceptable > bad anchor builds before tournament counts",
+    "anchors": []
+  }
+}

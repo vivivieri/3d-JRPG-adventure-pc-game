@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "scope_id": "ruined_village",
+  "issue_id": "P1-02",
+  "commit_sha": "def5678",
+  "label": "builder_run2",
+  "agent_role": "builder",
+  "model_name": "composer-2.5",
+  "captures": {
+    "gameplay": "artifacts/screenshots/phase1_ruined_village_gameplay.png",
+    "establishing": "artifacts/golden/ruined_village_establishing.png"
+  },
+  "jury": {
+    "visual": "artifacts/visual_reviews/phase1_ruined_village_gameplay.jury.json"
+  },
+  "gates": {
+    "L2_scene_primitives": "PASS",
+    "L2_visual_palette": "PASS",
+    "L2_visual_jury": "PASS"
+  },
+  "notes": "Challenger manifest — written by Builder before compare_champion_challenger.py"
+}

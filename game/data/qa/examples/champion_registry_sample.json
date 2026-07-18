@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-07-18T10:00:00Z",
+  "champions": {
+    "ruined_village": {
+      "scope_id": "ruined_village",
+      "issue_id": "P1-02",
+      "commit_sha": "abc1234",
+      "promoted_at": "2026-07-18T10:00:00Z",
+      "comparison_artifact": "artifacts/candidates/P1-02/comparison_20260718T100000Z.json",
+      "challenger_label": "builder_run1",
+      "captures": {
+        "gameplay": "artifacts/screenshots/phase1_ruined_village_gameplay.png"
+      },
+      "gates": {
+        "L2_scene_primitives": "PASS",
+        "L2_visual_palette": "PASS",
+        "L2_visual_jury": "PASS"
+      },
+      "soft_score": 0.91
+    }
+  }
+}

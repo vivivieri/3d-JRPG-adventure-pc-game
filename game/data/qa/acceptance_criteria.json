@@ -46,7 +46,10 @@
     "Ship export without export_strip_dev_plugins_begin (dev MCP/GDAI in build)",
     "Tracked file contains live API key or webhook URL (L0_no_secrets FAIL)",
     "Cross-cutting factory feature merged without workflow_integration_registry.json entry",
-    "Factory feature registry drift — L0_workflow_integration FAIL after hook or doc change"
+    "Factory feature registry drift — L0_workflow_integration FAIL after hook or doc change",
+    "Promoting challenger without L2_candidate_select comparison artifact",
+    "Challenger promoted when hard gate FAIL (tournament veto)",
+    "Merging assets from multiple challengers into one scene (Frankenstein build)"
   ],
   "gates": {
     "L0_rr_compliance": {
@@ -611,6 +614,31 @@
       "evidence": ["game/data/qa/workflow_integration_registry.json", "docs/qa/WORKFLOW_INTEGRATION.md"],
       "design_ref": "docs/qa/WORKFLOW_INTEGRATION.md"
     },
+    "L0_candidate_tournament": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_candidate_tournament.py",
+      "description": "Champion/challenger tournament config — golden harness, rubrics, policy schema (non-ship)",
+      "pass": { "exit_code": 0 },
+      "evidence": [
+        "game/data/qa/golden_harness.json",
+        "game/data/qa/evaluation_rubrics.json",
+        "game/data/qa/candidate_tournament_policy.json",
+        "docs/qa/CANDIDATE_TOURNAMENT.md"
+      ],
+      "design_ref": "docs/qa/CANDIDATE_TOURNAMENT.md"
+    },
+    "L2_candidate_select": {
+      "layer": "L2.5",
+      "domain": "visual",
+      "command": "bash tools/run_candidate_tournament.sh",
+      "description": "Champion/challenger golden harness compare — pre-merge evidence only; does not block ship",
+      "pass": { "verdict": "promote_challenger", "comparison_artifact_required": true },
+      "ship_blocking": false,
+      "prerequisite": ["L0", "L1", "L2"],
+      "evidence": ["artifacts/candidates/*/comparison_*.json"],
+      "design_ref": "docs/qa/CANDIDATE_TOURNAMENT.md"
+    },
     "M5_asset_compliance": {
       "layer": "ship",
       "domain": "compliance",
@@ -738,6 +766,7 @@
       "L0_doc_sync",
       "L0_alignment_audit_catalog",
       "L0_workflow_integration",
+      "L0_candidate_tournament",
       "M5_asset_compliance"
     ],
     "design_ref": "docs/workflow/BRANCHING.md"

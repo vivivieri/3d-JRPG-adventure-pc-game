@@ -86,6 +86,14 @@ Listed in `acceptance_criteria.json` → `invalid_pass_patterns`. Agents must no
 | `L2_vo_technical` | P0 VO duration ≤ catalog max, voice loudness, locale paths vs dialogue |
 | `L2_vo_jury` | ≥2 models, V1–V7 met, confidence ≥ 0.65 (P0 clips, gate locale `en`) |
 
+### L2.5 — Candidate tournament (pre-merge, non-ship)
+
+| Gate ID | Pass when |
+|---------|-----------|
+| `L2_candidate_select` | `run_candidate_tournament.sh` verdict `promote_challenger` + `comparison_*.json` artifact — **does not block ship**; required when M5 tournament policy applies |
+
+See `docs/qa/CANDIDATE_TOURNAMENT.md`.
+
 ### L3 — GDAI Builder handoff
 
 | Gate ID | Pass when |

@@ -323,6 +323,43 @@
         }
       ],
       "acceptance_gate": "L0_alignment_audit_catalog"
+    },
+    {
+      "id": "candidate_tournament",
+      "label": "Champion/challenger golden harness (L2.5 pre-merge)",
+      "authority_doc": "docs/qa/CANDIDATE_TOURNAMENT.md",
+      "script_hooks": [
+        {
+          "path": "tools/run_candidate_tournament.sh",
+          "contains": "compare_champion_challenger.py",
+          "purpose": "tournament compare runner"
+        },
+        {
+          "path": "tools/compare_champion_challenger.py",
+          "contains": "candidate_tournament_lib",
+          "purpose": "harness + rubric compare"
+        },
+        {
+          "path": "tools/promote_champion_candidate.py",
+          "contains": "champion_registry.json",
+          "purpose": "single winner per scope"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/qa/AI_TESTING_SPEC.md",
+          "must_mention": "CANDIDATE_TOURNAMENT"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "run_candidate_tournament.sh"
+        },
+        {
+          "doc": "docs/qa/ACCEPTANCE_CRITERIA.md",
+          "must_mention": "L2_candidate_select"
+        }
+      ],
+      "acceptance_gate": "L0_candidate_tournament"
     }
   ]
 }
