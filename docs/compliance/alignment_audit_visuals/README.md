@@ -4,14 +4,29 @@ PNG assets referenced by `game/data/qa/alignment_audit_catalog.json` visual pack
 
 ## Usage
 
-1. Copy review / agent-generated PNGs into this directory using the filenames in the catalog.
-2. Run:
+1. Run alignment audit (auto-generates `audit_radar_spec.png` + `audit_radar_build.png` from live scores):
 
 ```bash
 bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals
 ```
 
+Or regenerate radars only from the latest report:
+
+```bash
+python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json
+```
+
+2. Copy other review / agent-generated PNGs into this directory using the filenames in the catalog.
 3. Open `artifacts/alignment_dashboard.html` for the stakeholder gallery.
+
+## Auto-generated (each audit)
+
+| File | Source |
+|------|--------|
+| `audit_radar_spec.png` | Live spec stream domain scores |
+| `audit_radar_build.png` | Build stream radar or N/A card on `main` |
+
+**Do not use** legacy merged radars (`audit_radar_6axis.png`, mega dashboard) for management status — they are static art from an earlier phase.
 
 ## Packs (6 batches, 33 assets)
 

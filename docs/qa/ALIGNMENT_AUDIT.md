@@ -165,8 +165,18 @@ Six visual packs (33 assets) are catalogued for executive updates:
 | `batch_05_qa_flow` | Visual/model/flow QA | 6 |
 | `batch_06_steam_mega` | Steam ship & mega dashboard | 6 |
 
-**Store PNGs** under `docs/compliance/alignment_audit_visuals/` (committed) or pass `--visuals-from <dir>` at audit time.  
-See `docs/compliance/alignment_audit_visuals/README.md`.
+**Store PNGs** under `docs/compliance/alignment_audit_visuals/` (committed) or pass `--visuals-from <dir>` at audit time.
+
+**Auto-generated each audit run** (from live `report.json` scores — do not hand-edit):
+
+| File | Content |
+|------|---------|
+| `audit_radar_spec.png` | Spec stream radar (6 domains) |
+| `audit_radar_build.png` | Build stream radar on `game/development`, or **N/A card** on `main` |
+
+Regenerate manually: `python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json`
+
+Legacy merged radars (`audit_radar_6axis.png`, `tides_mega_dashboard_all_radars.png`) are **not** updated automatically — use the two-stream PNGs for management.
 
 Agent-generated review images can be copied into that folder before running the audit so the HTML dashboard embeds them.
 

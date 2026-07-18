@@ -1128,6 +1128,16 @@ def write_outputs(
     visuals_from: Path | None = None,
 ) -> dict[str, str]:
     outputs = catalog.get("outputs", {})
+    shared_visuals = ROOT / outputs.get(
+        "shared_visuals_dir", "docs/compliance/alignment_audit_visuals"
+    )
+    try:
+        from generate_audit_radar_images import generate_audit_radars  # noqa: E402
+
+        generate_audit_radars(report, shared_visuals)
+    except Exception as exc:  # pragma: no cover — matplotlib optional at runtime
+        print(f"WARN: audit radar image generation failed: {exc}", file=sys.stderr)
+
     out_dir = ROOT / outputs.get("artifacts_dir", "artifacts/alignment_audits")
     audit_dir = out_dir / report["audit_id"]
     audit_dir.mkdir(parents=True, exist_ok=True)
