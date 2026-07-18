@@ -429,34 +429,13 @@
       "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.md",
       "report_html": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/dashboard.html",
       "note": "themed coastal radar visuals"
-    },
-    {
-      "audit_id": "20260718T160418Z_post_merge",
-      "generated_at": "2026-07-18T16:04:18Z",
-      "branch": "cursor/audit-radar-legacy-style-68f4",
-      "commit": "cd87984",
-      "verdict": "ALIGNED",
-      "overall_score": 9.65,
-      "spec_score": 9.65,
-      "build_score": null,
-      "build_status": "not_applicable",
-      "ci_pass": 36,
-      "ci_fail": 0,
-      "blocking_open": 0,
-      "recommendation_count": 1,
-      "checklist_open": 1,
-      "visuals_present": 10,
-      "report_json": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/report.json",
-      "report_markdown": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/report.md",
-      "report_html": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/dashboard.html",
-      "note": "legacy-style radar compositing"
     }
   ],
   "latest": {
-    "audit_id": "20260718T160418Z_post_merge",
-    "generated_at": "2026-07-18T16:04:18Z",
-    "branch": "cursor/audit-radar-legacy-style-68f4",
-    "commit": "cd87984",
+    "audit_id": "20260718T154322Z_post_merge",
+    "generated_at": "2026-07-18T15:43:22Z",
+    "branch": "cursor/audit-radar-theme-68f4",
+    "commit": "1e333ee",
     "verdict": "ALIGNED",
     "overall_score": 9.65,
     "spec_score": 9.65,
@@ -468,9 +447,9 @@
     "recommendation_count": 1,
     "checklist_open": 1,
     "visuals_present": 10,
-    "report_json": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/report.json",
-    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/report.md",
-    "report_html": "docs/compliance/alignment_audit_reports/20260718T160418Z_post_merge/dashboard.html",
-    "note": "legacy-style radar compositing"
+    "report_json": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260718T154322Z_post_merge/dashboard.html",
+    "note": "themed coastal radar visuals"
   }
 }
