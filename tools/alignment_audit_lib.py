@@ -380,6 +380,24 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
     return 5.0
 
 
+def compute_signal_scores(
+    catalog: dict[str, Any], ctx: dict[str, Any], domain_scores: dict[str, float]
+) -> dict[str, dict[str, float]]:
+    """Per-domain signal scores (0–10) for sub-radar breakdown."""
+    result: dict[str, dict[str, float]] = {}
+    for domain in catalog.get("domains", []):
+        if domain.get("derive"):
+            continue
+        dom_id = domain["id"]
+        result[dom_id] = {}
+        for sig in domain.get("signals", []):
+            sid = sig["id"]
+            result[dom_id][sid] = round(
+                _signal_score(sig, {**ctx, "domain_scores": domain_scores}), 2
+            )
+    return result
+
+
 def compute_domain_scores(catalog: dict[str, Any], ctx: dict[str, Any]) -> dict[str, float]:
     scores: dict[str, float] = {}
     for domain in catalog.get("domains", []):
@@ -716,6 +734,7 @@ def build_report(
     stale = stale_string_scan(catalog, branch=branch)
     ctx = {"ci": ci, "parity": parity, "branch": branch}
     domain_scores = compute_domain_scores(catalog, ctx)
+    signal_scores = compute_signal_scores(catalog, ctx, domain_scores)
     stream_scores = compute_stream_scores(catalog, domain_scores, branch)
     apply_derived_domain_scores(catalog, domain_scores, stream_scores)
     visual_inventory = filter_report_visuals(
@@ -759,6 +778,7 @@ def build_report(
         "headline": headline,
         "streams": stream_scores,
         "domain_scores": domain_scores,
+        "signal_scores": signal_scores,
         "ci_summary": {
             "script": ci.get("script"),
             "pass_count": ci.get("pass_count"),
@@ -816,26 +836,51 @@ def _hidden_domain_ids(catalog: dict[str, Any]) -> set[str]:
 def _visual_sections_markdown(
     manifest: list[dict[str, Any]], *, embed_visuals: bool = False
 ) -> list[str]:
-    """Stream radar visuals only — no legacy or supplemental art."""
+    """Stream radar visuals — overview + spec sub-domain breakdown."""
     present = [v for v in manifest if v.get("present")]
     if not present:
         return []
 
+    overview_names = {"audit_radar_report.png", "audit_radar_spec.png", "audit_radar_build.png"}
+    overview = [v for v in present if v["filename"] in overview_names]
+    breakdown_grid = [v for v in present if v["filename"] == "audit_radar_spec_breakdown.png"]
+    subdomains = [
+        v
+        for v in present
+        if v["filename"].startswith("audit_radar_spec_")
+        and v["filename"] not in {"audit_radar_spec.png", "audit_radar_spec_breakdown.png"}
+    ]
+
     lines: list[str] = []
-    lines.append("## Stream radars")
+
+    def _rows(items: list[dict[str, Any]]) -> None:
+        for v in items:
+            href = v.get("gallery_href") or v.get("path")
+            suffix = " (auto-generated)" if v.get("auto_generated") else ""
+            if embed_visuals and href:
+                lines.append(f"![{v['label']}]({href})")
+                lines.append(f"*{v['label']}{suffix}*")
+            else:
+                lines.append(f"- {v['label']}{suffix}: `{href}`")
+
+    lines.append("## Stream radars (overview)")
     lines.append("")
-    lines.append("Auto-generated from live audit scores. Spec on `main`; build on `game/development`.")
+    _rows(overview)
     lines.append("")
 
-    for v in present:
-        href = v.get("gallery_href") or v.get("path")
-        suffix = " (auto-generated)" if v.get("auto_generated") else ""
-        if embed_visuals and href:
-            lines.append(f"![{v['label']}]({href})")
-            lines.append(f"*{v['label']}{suffix}*")
-        else:
-            lines.append(f"- {v['label']}{suffix}: `{href}`")
-    lines.append("")
+    if breakdown_grid:
+        lines.append("## Spec sub-radar breakdown (6 domains)")
+        lines.append("")
+        lines.append("Each panel shows signal-level scores within one spec domain.")
+        lines.append("")
+        _rows(breakdown_grid)
+        lines.append("")
+
+    if subdomains:
+        lines.append("## Spec domain sub-radars (detail)")
+        lines.append("")
+        _rows(subdomains)
+        lines.append("")
 
     return lines
 
@@ -908,6 +953,36 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             label = dom_id.replace("_", " ").title()
             lines.append(f"| {label} | {score} |")
         lines.append("")
+
+    spec_stream = report.get("streams", {}).get("spec_readiness", {})
+    spec_domain_ids = list((spec_stream.get("domains") or {}).keys())
+    signal_scores = report.get("signal_scores", {})
+    if spec_domain_ids and signal_scores:
+        lines.extend(
+            [
+                "## Spec domain signal breakdown",
+                "",
+                "Each of the 6 spec domains has its own sub-radar (signals behind the axis score).",
+                "",
+            ]
+        )
+        for dom_id in spec_domain_ids:
+            signals = signal_scores.get(dom_id, {})
+            if not signals:
+                continue
+            domain_score = report.get("domain_scores", {}).get(dom_id, "?")
+            label = dom_id.replace("_", " ").title()
+            lines.extend(
+                [
+                    f"### {label} ({domain_score}/10)",
+                    "",
+                    "| Signal | Score |",
+                    "|--------|-------|",
+                ]
+            )
+            for sid, score in sorted(signals.items(), key=lambda x: -x[1]):
+                lines.append(f"| `{sid}` | {score} |")
+            lines.append("")
 
     lines.extend(
         [

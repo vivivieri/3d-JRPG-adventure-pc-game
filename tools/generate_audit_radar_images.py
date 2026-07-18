@@ -20,6 +20,16 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_VISUALS_DIR = ROOT / "docs/compliance/alignment_audit_visuals"
+CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
+
+SPEC_DOMAIN_ORDER = [
+    "data_alignment",
+    "narrative",
+    "gameplay",
+    "visual_spec",
+    "ux_controls",
+    "pm_workflow",
+]
 
 STYLE = {
     "bg": "#1a1f2e",
@@ -32,6 +42,117 @@ STYLE = {
 
 
 def _domain_label(dom_id: str) -> str:
+    return dom_id.replace("_", " ").title()
+
+
+def _signal_label(sig_id: str) -> str:
+    return sig_id.replace("_", " ").title()
+
+
+def _load_catalog() -> dict[str, Any]:
+    return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+
+
+def _domain_title(catalog: dict[str, Any], dom_id: str) -> str:
+    for row in catalog.get("domains", []):
+        if row.get("id") == dom_id:
+            return str(row.get("label", dom_id))
+    return _domain_label(dom_id)
+
+
+def _mini_radar_on_axis(
+    ax: Any,
+    *,
+    labels: list[str],
+    values: list[float],
+    title: str,
+    domain_score: float,
+) -> None:
+    n = len(labels)
+    if n < 3:
+        ax.axis("off")
+        ax.text(0.5, 0.5, f"{title}\n(insufficient signals)", ha="center", va="center", color=STYLE["muted"])
+        return
+    angles = np.linspace(0, 2 * np.pi, n, endpoint=False).tolist()
+    values_loop = values + values[:1]
+    angles_loop = angles + angles[:1]
+    ax.plot(angles_loop, values_loop, color=STYLE["cyan"], linewidth=1.8)
+    ax.fill(angles_loop, values_loop, color=STYLE["cyan"], alpha=0.2)
+    target_loop = [10.0] * (n + 1)
+    ax.plot(angles_loop, target_loop, color=STYLE["gold"], linewidth=0.9, linestyle="--", alpha=0.5)
+    ax.set_xticks(angles)
+    ax.set_xticklabels(labels, color=STYLE["fg"], fontsize=6)
+    ax.set_ylim(0, 10)
+    ax.set_yticks([2, 4, 6, 8, 10])
+    ax.set_yticklabels(["2", "4", "6", "8", "10"], color=STYLE["muted"], fontsize=5)
+    ax.grid(color=STYLE["grid"], alpha=0.4)
+    ax.spines["polar"].set_color(STYLE["grid"])
+    ax.set_title(f"{title}\n{domain_score:.2f}/10", color=STYLE["fg"], fontsize=9, pad=10)
+
+
+def generate_spec_subdomain_radars(
+    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+) -> dict[str, str]:
+    """Generate per-domain signal sub-radars + 2×3 breakdown grid for spec stream."""
+    cat = catalog or _load_catalog()
+    out_dir = output_dir
+    signal_scores = report.get("signal_scores", {})
+    domain_scores = report.get("domain_scores", {})
+    written: dict[str, str] = {}
+
+    for dom_id in SPEC_DOMAIN_ORDER:
+        signals = signal_scores.get(dom_id, {})
+        if not signals:
+            continue
+        labels = [_signal_label(sid) for sid in signals]
+        values = [float(v) for v in signals.values()]
+        fname = f"audit_radar_spec_{dom_id}.png"
+        out_path = out_dir / fname
+        _radar_chart(
+            labels=labels,
+            values=values,
+            title=_domain_title(cat, dom_id),
+            subtitle="Signal breakdown",
+            stream_score=float(domain_scores.get(dom_id, 0)),
+            verdict="",
+            out_path=out_path,
+        )
+        written[fname] = str(out_path)
+
+    fig, axes = plt.subplots(2, 3, figsize=(16, 10), subplot_kw={"projection": "polar"})
+    fig.patch.set_facecolor(STYLE["bg"])
+    spec = report.get("streams", {}).get("spec_readiness", {})
+    fig.suptitle(
+        f"Spec Sub-Radar Breakdown — {spec.get('score', '?')}/10 · {spec.get('verdict', '')}",
+        color=STYLE["fg"],
+        fontsize=14,
+        fontweight="bold",
+        y=0.98,
+    )
+    for idx, dom_id in enumerate(SPEC_DOMAIN_ORDER):
+        ax = axes.flat[idx]
+        ax.set_facecolor(STYLE["bg"])
+        signals = signal_scores.get(dom_id, {})
+        if signals:
+            labels = [_signal_label(sid) for sid in signals]
+            values = [float(v) for v in signals.values()]
+            _mini_radar_on_axis(
+                ax,
+                labels=labels,
+                values=values,
+                title=_domain_title(cat, dom_id),
+                domain_score=float(domain_scores.get(dom_id, 0)),
+            )
+        else:
+            ax.axis("off")
+    breakdown_path = out_dir / "audit_radar_spec_breakdown.png"
+    breakdown_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(breakdown_path, dpi=150, facecolor=STYLE["bg"], bbox_inches="tight")
+    plt.close(fig)
+    written["audit_radar_spec_breakdown.png"] = str(breakdown_path)
+    return written
+
+
     return dom_id.replace("_", " ").title()
 
 def _draw_radar_on_axis(
@@ -197,12 +318,13 @@ def _radar_chart(
 
     fig.suptitle(title, color=STYLE["fg"], fontsize=15, fontweight="bold", y=0.98)
     ax.set_title(
-        f"{stream_score:.2f}/10 · {verdict}\n{subtitle}",
+        f"{stream_score:.2f}/10{f' · {verdict}' if verdict else ''}\n{subtitle}",
         color=STYLE["muted"],
         fontsize=10,
         pad=24,
     )
-    ax.legend(loc="upper right", bbox_to_anchor=(1.15, 1.12), fontsize=8, framealpha=0.2)
+    if verdict:
+        ax.legend(loc="upper right", bbox_to_anchor=(1.15, 1.12), fontsize=8, framealpha=0.2)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=150, facecolor=STYLE["bg"], bbox_inches="tight")
@@ -326,6 +448,8 @@ def generate_audit_radars(
     report_path = out_dir / "audit_radar_report.png"
     _combined_radar_report(report, report_path)
     written["audit_radar_report.png"] = str(report_path)
+
+    written.update(generate_spec_subdomain_radars(report, out_dir))
 
     return written
 

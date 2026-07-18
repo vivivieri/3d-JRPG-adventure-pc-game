@@ -173,7 +173,11 @@ Six visual packs (33 assets) are catalogued for executive updates:
 |------|---------|
 | `audit_radar_report.png` | **Primary** — side-by-side spec + build radar report |
 | `audit_radar_spec.png` | Spec stream radar (6 domains) |
+| `audit_radar_spec_breakdown.png` | **6-panel grid** — one sub-radar per spec domain (signal breakdown) |
+| `audit_radar_spec_<domain>.png` | Individual sub-radar per domain (e.g. `data_alignment`, `narrative`, …) |
 | `audit_radar_build.png` | Build stream radar on `game/development`, or **N/A card** on `main` |
+
+Each spec domain score rolls up **signals** (gates, parity checks, metrics). Sub-radars show those signals on a 0–10 axis; see `report.md` § Spec domain signal breakdown.
 
 Reports embed **stream radars only** — legacy and supplemental art are excluded from `report.md` and `dashboard.html`.
 

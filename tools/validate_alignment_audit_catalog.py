@@ -59,7 +59,7 @@ def main() -> int:
     lib = ROOT / "tools/alignment_audit_lib.py"
     if lib.is_file():
         lib_text = lib.read_text(encoding="utf-8")
-        for needle in ("visual_policy", "enrich_visual_manifest", "generate_audit_radars"):
+        for needle in ("visual_policy", "enrich_visual_manifest", "generate_audit_radars", "signal_scores"):
             if needle not in lib_text:
                 errors.append(f"alignment_audit_lib.py missing hook '{needle}'")
     else:

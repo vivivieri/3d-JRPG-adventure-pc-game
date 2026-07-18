@@ -20,16 +20,37 @@
     "auto_generated_filenames": [
       "audit_radar_spec.png",
       "audit_radar_build.png",
-      "audit_radar_report.png"
+      "audit_radar_report.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png"
     ],
     "management_status_filenames": [
       "audit_radar_spec.png",
       "audit_radar_build.png",
-      "audit_radar_report.png"
+      "audit_radar_report.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png"
     ],
     "report_only_filenames": [
       "audit_radar_report.png",
       "audit_radar_spec.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png",
       "audit_radar_build.png"
     ],
     "deprecated_for_management_filenames": [
@@ -313,6 +334,13 @@
         { "id": "audit_radar_report", "label": "Two-stream radar report", "filename": "audit_radar_report.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_breakdown", "label": "Spec sub-radar breakdown (6 domains)", "filename": "audit_radar_spec_breakdown.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_data_alignment", "label": "Data Alignment sub-radar", "filename": "audit_radar_spec_data_alignment.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_narrative", "label": "Narrative sub-radar", "filename": "audit_radar_spec_narrative.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_gameplay", "label": "Gameplay sub-radar", "filename": "audit_radar_spec_gameplay.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_visual_spec", "label": "Visual Spec sub-radar", "filename": "audit_radar_spec_visual_spec.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_ux_controls", "label": "UX & Controls sub-radar", "filename": "audit_radar_spec_ux_controls.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_pm_workflow", "label": "PM Workflow sub-radar", "filename": "audit_radar_spec_pm_workflow.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar", "deprecated_for_management": true },
         { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
       ]
