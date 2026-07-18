@@ -86,36 +86,36 @@ bash tools/pm_record_agent_session.sh end --agent builder --issue P1-02 --outcom
 
 ---
 
-## 4. Token reporting
+## 4. Token reporting (automatic)
 
-Cursor does not yet expose per-session token counts to repo scripts automatically. Three paths:
+When `CURSOR_API_KEY` is set in Cursor Secrets (one-time setup — `docs/agents/CURSOR_SECRETS_SETUP.md` §8), tokens are fetched **automatically** from the Cursor Cloud Agents API:
 
-### A. Environment variables (recommended at session end)
+```
+GET https://api.cursor.com/v1/agents/{bcId}/usage
+```
+
+| Step | Auto? | Mechanism |
+|------|-------|-----------|
+| Detect cloud agent id | Yes | `CURSOR_CONVERSATION_ID` env (injected on every cloud agent) |
+| Session start baseline | Yes | API call at `session_start` |
+| Session end tokens | Yes | API call with 3 retries at `session_end` |
+| Delta per session | Yes | end usage − start baseline |
+| Backfill if API lags | Yes | `pm_sync_agent_session_tokens.py` on cycle complete |
+
+Verify setup:
 
 ```bash
-export AGENT_TOKENS_INPUT=180000
-export AGENT_TOKENS_OUTPUT=45000
-export AGENT_TOKENS_TOTAL=225000
-export AGENT_TOKENS_SOURCE=cursor_dashboard
-bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-02 --agent builder --commit <sha>
+bash tools/check_agent_telemetry_ready.sh
+bash tools/check_day_one_secrets.sh   # includes CURSOR_API_KEY
 ```
 
-### B. Enrichment file
+### Manual fallback (only if API unavailable)
 
-Write `artifacts/agent_session_telemetry/session_enrichment.json` before `session_end`:
-
-```json
-{
-  "tokens_input": 180000,
-  "tokens_output": 45000,
-  "tokens_total": 225000,
-  "tool_calls_reported": 42
-}
+```bash
+export AGENT_TOKENS_TOTAL=225000 AGENT_TOKENS_SOURCE=manual
 ```
 
-### C. Cursor dashboard (post-hoc)
-
-Export usage from [cursor.com/agents](https://cursor.com/agents) and join on `cursor_bc_id` + `started_at` in your analysis tool.
+Or write `artifacts/agent_session_telemetry/session_enrichment.json` before session end.
 
 ---
 

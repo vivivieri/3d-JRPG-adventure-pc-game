@@ -118,6 +118,8 @@ if [[ "$EVENT" == "agent_cycle_complete" || "$EVENT" == "agent_cycle_failed" ]];
   [[ -n "$FAILED_CHECK" ]] && END_ARGS+=(--check "$FAILED_CHECK")
   [[ -n "$NOTES" ]] && END_ARGS+=(--note "$NOTES")
   bash tools/pm_record_agent_session.sh "${END_ARGS[@]}" 2>/dev/null || true
+  # Backfill any sessions where usage API lagged
+  python3 tools/pm_sync_agent_session_tokens.py 2>/dev/null || true
 fi
 
 # mcp_blocked / factory_halt → stop automatic recovery

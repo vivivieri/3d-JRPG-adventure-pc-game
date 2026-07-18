@@ -1,7 +1,7 @@
 # Cursor Secrets — Day-One Setup (How to Get Every Key)
 
 **Version:** 1.0  
-**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development`.  
+**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (8 runtime secrets including `CURSOR_API_KEY` for auto token telemetry).  
 **Where to add:** Cursor **Cloud Agents → your environment → Secrets** — scope **Personal + Runtime Secret** for each.  
 **Cross-refs:** `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`, `docs/agents/PM_STAKEHOLDER_REPORTING.md`, `docs/ci-cd/GITHUB_SETUP.md`, `docs/agents/MCP_STACK.md`, `docs/vision/VO_HIT_LIST.md`
 
@@ -18,6 +18,7 @@
 | `TELEGRAM_BOT_TOKEN` | Stakeholder status → product owner | [§6](#6-telegram_bot_token--telegram_chat_id) |
 | `TELEGRAM_CHAT_ID` | Your Telegram chat id | [§6](#6-telegram_bot_token--telegram_chat_id) |
 | `ELEVENLABS_API_KEY` | Selective VO generation (12 clips) | [§7](#7-elevenlabs_api_key) |
+| `CURSOR_API_KEY` | **Auto agent token telemetry** (Cloud Agents usage API) | [§8](#8-cursor_api_key) |
 
 **Also add to GitHub repo Secrets** (Settings → Secrets and variables → Actions):
 
@@ -230,19 +231,52 @@ Remove `--dry-run` when ready to generate. Log commercial terms in `docs/art/LIC
 
 ---
 
-## 8. Secret scope and placement
+## 8. `CURSOR_API_KEY`
+
+**What it is:** User API key for the **Cursor Cloud Agents API** — enables **fully automatic** token usage logging in agent session telemetry (`docs/qa/AGENT_SESSION_TELEMETRY.md`). Without this key, sessions log duration/role/task but `tokens_total` stays empty.
+
+### Steps (one-time setup)
+
+1. Open [cursor.com/dashboard](https://cursor.com/dashboard) → **Settings** → **API Keys** (or **Integrations** → API)
+2. **Create API key** — user API key or service account key (not Team Admin key)
+3. Copy key (`crsr_...` or similar)
+4. Cursor **Cloud Agents → Environment → Secrets** → add `CURSOR_API_KEY`
+5. Scope: **Personal + Runtime Secret**
+6. Verify:
+
+```bash
+bash tools/check_agent_telemetry_ready.sh
+# Optional live test (on a cloud agent with CURSOR_CONVERSATION_ID set):
+python3 tools/collect_cursor_agent_usage.py --retries 3
+```
+
+### How auto token logging works
+
+| Step | What happens |
+|------|----------------|
+| Session start | `run_agent_session_gate.sh` records `CURSOR_CONVERSATION_ID` as `cursor_bc_id` + usage baseline |
+| Session end | `pm_emit_cycle_event.sh` calls `GET /v1/agents/{bcId}/usage` with retries |
+| Backfill | `pm_sync_agent_session_tokens.py` fills any sessions where usage lagged |
+
+No manual `export AGENT_TOKENS_*` needed when this key is set.
+
+**API docs:** [Cloud Agents API — Get Agent Usage](https://cursor.com/docs/cloud-agent/api/endpoints#get-agent-usage)
+
+---
+
+## 9. Secret scope and placement
 
 | Setting | Value |
 |---------|--------|
 | **Scope** | Personal + Runtime Secret *(each secret)* |
-| **Cursor environment** | All 7 secrets above |
+| **Cursor environment** | All 8 secrets above |
 | **GitHub Actions** | At minimum both webhook URLs; Telegram if CI sends reports |
 
 Do **not** commit secrets to git. Do **not** paste tokens in issues, PRs, or agent prompts.
 
 ---
 
-## 9. What is *not* day one (later phases)
+## 10. What is *not* day one (later phases)
 
 | Secret | When |
 |--------|------|
@@ -262,7 +296,7 @@ See `docs/qa/SECURITY.md` §9 for custom template build + `SHIP_RELEASE=1` expor
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
@@ -273,10 +307,12 @@ See `docs/qa/SECURITY.md` §9 for custom template build + `SHIP_RELEASE=1` expor
 | GameLab MCP missing | `GAMELAB_API_KEY` + Integrations & MCP + `write_mcp_config.sh` |
 | Telegram silent | Message bot first; verify chat id via `getUpdates` |
 | ElevenLabs 401 | Regenerate key; check account credits |
+| Tokens not in telemetry | Set `CURSOR_API_KEY`; run `bash tools/check_agent_telemetry_ready.sh` |
+| `tokens_fetch_status: pending` | Run `python3 tools/pm_sync_agent_session_tokens.py` after a few minutes |
 
 ---
 
-## 11. Cross-refs
+## 12. Cross-refs
 
 - `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` — automations + factory architecture
 - `docs/agents/FACTORY_WATCHDOG.md` — alert vs PM webhooks

@@ -15,11 +15,29 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from collect_cursor_agent_usage import (
+        fetch_agent_usage,
+        fetch_with_retry,
+        resolve_api_key,
+        resolve_bc_id,
+        usage_delta,
+        usage_to_telemetry_fields,
+    )
+except ImportError:
+    fetch_agent_usage = None  # type: ignore
+    fetch_with_retry = None  # type: ignore
+    resolve_api_key = None  # type: ignore
+    resolve_bc_id = None  # type: ignore
+    usage_delta = None  # type: ignore
+    usage_to_telemetry_fields = None  # type: ignore
+
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "game/data/qa/agent_session_telemetry_schema.json"
 TELEMETRY_DIR = ROOT / "artifacts/agent_session_telemetry"
 EVENTS_PATH = TELEMETRY_DIR / "events.jsonl"
 ACTIVE_PATH = TELEMETRY_DIR / "active_sessions.json"
+PENDING_TOKEN_SYNC_PATH = TELEMETRY_DIR / "pending_token_sync.jsonl"
 SCHEMA_VERSION = "1.0"
 
 ROLE_CATEGORIES: dict[str, str] = {
@@ -165,6 +183,7 @@ def collect_cursor_metadata() -> dict[str, Any]:
     meta: dict[str, Any] = {}
     env_map = {
         "cursor_bc_id": [
+            "CURSOR_CONVERSATION_ID",
             "CURSOR_AGENT_BC_ID",
             "CURSOR_CLOUD_AGENT_BC_ID",
             "CURSOR_BC_ID",
@@ -203,6 +222,48 @@ def collect_cursor_metadata() -> dict[str, Any]:
             pass
 
     return meta
+
+
+def _fetch_cursor_usage_snapshot(bc_id: str | None) -> dict[str, Any] | None:
+    """Fetch current usage from Cursor API (baseline or terminal)."""
+    if not bc_id or fetch_agent_usage is None or resolve_api_key is None:
+        return None
+    if not resolve_api_key():
+        return None
+    try:
+        return fetch_agent_usage(bc_id)
+    except Exception:
+        return None
+
+
+def _auto_token_fields(
+    bc_id: str | None,
+    baseline: dict[str, Any] | None,
+    *,
+    session_id: str | None = None,
+    retries: int = 3,
+) -> dict[str, Any]:
+    """Auto-fetch token usage from Cursor API with retries and delta from baseline."""
+    if not bc_id or fetch_with_retry is None or usage_delta is None:
+        return {}
+    if not resolve_api_key():
+        return {}
+
+    payload = fetch_with_retry(bc_id, retries=retries, min_total_tokens=0)
+    if not payload:
+        _queue_pending_token_sync(bc_id, session_id=session_id)
+        return {"tokens_fetch_status": "pending", "tokens_source": None}
+
+    if baseline:
+        return usage_delta(payload, baseline)
+    return usage_to_telemetry_fields(payload)
+
+
+def _queue_pending_token_sync(bc_id: str, session_id: str | None = None) -> None:
+    TELEMETRY_DIR.mkdir(parents=True, exist_ok=True)
+    row = {"ts": _utcnow(), "cursor_bc_id": bc_id, "session_id": session_id}
+    with PENDING_TOKEN_SYNC_PATH.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
 def load_issue_context(issue_id: str | None) -> dict[str, Any]:
@@ -352,6 +413,8 @@ def start_session(
 
     active = load_active_sessions()
     key = _session_key(agent_role, issue_id)
+    bc_id = event.get("cursor_bc_id") or resolve_bc_id() if resolve_bc_id else None
+    usage_baseline = _fetch_cursor_usage_snapshot(bc_id)
     active[key] = {
         "session_id": session_id,
         "started_at": start_ts,
@@ -362,7 +425,8 @@ def start_session(
         "task_category": event.get("task_category"),
         "task_tags": event.get("task_tags"),
         "model_name": event.get("model_name"),
-        "cursor_bc_id": event.get("cursor_bc_id"),
+        "cursor_bc_id": bc_id or event.get("cursor_bc_id"),
+        "cursor_usage_baseline": usage_baseline,
     }
     save_active_sessions(active)
     return event
@@ -495,7 +559,23 @@ def end_session(
     if note:
         event["note"] = note
 
-    # Token fields — env override for agent self-report at end
+    # Auto token fetch from Cursor API (primary — fully automatic when CURSOR_API_KEY set)
+    bc_id = (
+        (sess or {}).get("cursor_bc_id")
+        or event.get("cursor_bc_id")
+        or (resolve_bc_id() if resolve_bc_id else None)
+    )
+    auto_tokens = _auto_token_fields(
+        bc_id,
+        (sess or {}).get("cursor_usage_baseline"),
+        session_id=session_id,
+        retries=3,
+    )
+    for k, v in auto_tokens.items():
+        if v is not None and k not in event:
+            event[k] = v
+
+    # Manual env override only when API did not return tokens
     token_env = {
         "tokens_input": ["AGENT_TOKENS_INPUT", "CURSOR_TOKENS_INPUT"],
         "tokens_output": ["AGENT_TOKENS_OUTPUT", "CURSOR_TOKENS_OUTPUT"],
@@ -504,6 +584,8 @@ def end_session(
         "tokens_cache_write": ["AGENT_TOKENS_CACHE_WRITE"],
     }
     for field, keys in token_env.items():
+        if event.get(field) is not None:
+            continue
         val = locals().get(field)
         if val is None:
             for k in keys:
@@ -514,7 +596,7 @@ def end_session(
         if val is not None:
             event[field] = val
 
-    if any(event.get(f) is not None for f in token_env):
+    if event.get("tokens_total") is not None and not event.get("tokens_source"):
         event["tokens_source"] = tokens_source or os.environ.get("AGENT_TOKENS_SOURCE", "agent_report")
     if tool_calls_reported is not None:
         event["tool_calls_reported"] = tool_calls_reported

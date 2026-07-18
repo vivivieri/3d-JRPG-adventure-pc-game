@@ -89,3 +89,7 @@ print("Next: assign agent per artifacts/pm_orchestrator_report.json → next_dis
 print("After agent session: python3 tools/pm_update_issue.py <id> --status done --commit <sha>")
 print("Then re-run: bash tools/run_pm_orchestrator.sh")
 PY
+
+# Close PM telemetry session + backfill tokens
+bash tools/pm_record_agent_session.sh end --agent pm --outcome complete --note "orchestrator_pass" 2>/dev/null || true
+python3 tools/pm_sync_agent_session_tokens.py 2>/dev/null || true

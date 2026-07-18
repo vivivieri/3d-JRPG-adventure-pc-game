@@ -46,6 +46,7 @@ def build_sessions(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Collapse JSONL events into one record per session_id (terminal event wins)."""
     by_id: dict[str, dict[str, Any]] = {}
     progress_counts: dict[str, int] = defaultdict(int)
+    backfills: dict[str, dict[str, Any]] = {}
 
     for ev in events:
         sid = ev.get("session_id")
@@ -57,6 +58,8 @@ def build_sessions(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
             by_id[sid]["_started"] = ev
         elif et == "session_progress":
             progress_counts[sid] += 1
+        elif et == "session_token_backfill":
+            backfills[sid] = ev
         elif et in ("session_end", "session_failed"):
             by_id.setdefault(sid, {}).update(ev)
             by_id[sid]["_terminal"] = ev
@@ -65,6 +68,7 @@ def build_sessions(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for sid, rec in by_id.items():
         terminal = rec.get("_terminal") or rec
         start = rec.get("_started") or rec
+        bf = backfills.get(sid) or {}
         sessions.append(
             {
                 "session_id": sid,
@@ -79,10 +83,10 @@ def build_sessions(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "duration_seconds": terminal.get("duration_seconds"),
                 "started_at": start.get("ts"),
                 "ended_at": terminal.get("ts"),
-                "tokens_total": terminal.get("tokens_total"),
-                "tokens_input": terminal.get("tokens_input"),
-                "tokens_output": terminal.get("tokens_output"),
-                "tokens_source": terminal.get("tokens_source"),
+                "tokens_total": bf.get("tokens_total") or terminal.get("tokens_total"),
+                "tokens_input": bf.get("tokens_input") or terminal.get("tokens_input"),
+                "tokens_output": bf.get("tokens_output") or terminal.get("tokens_output"),
+                "tokens_source": bf.get("tokens_source") or terminal.get("tokens_source"),
                 "pr_url": terminal.get("pr_url"),
                 "pr_number": terminal.get("pr_number"),
                 "files_changed": terminal.get("files_changed"),
@@ -93,6 +97,7 @@ def build_sessions(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "failed_check": terminal.get("failed_check"),
                 "heartbeat_count": terminal.get("heartbeat_count", progress_counts.get(sid, 0)),
                 "cursor_bc_id": terminal.get("cursor_bc_id") or start.get("cursor_bc_id"),
+                "token_backfilled": bool(bf),
             }
         )
     return sessions

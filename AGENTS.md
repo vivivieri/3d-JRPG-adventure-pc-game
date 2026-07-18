@@ -200,6 +200,7 @@ All scene work via **GDAI MCP** after GodotPrompter plans.
 | `GH_TOKEN` | `gh` CLI, issue sync, GitHub dispatch |
 | `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Stakeholder status |
 | `ELEVENLABS_API_KEY` | Selective VO |
+| `CURSOR_API_KEY` | Auto agent token telemetry (Cloud Agents usage API) |
 
 Also in GitHub repo Secrets: both webhook URLs (Actions workflows). Scope: **Personal + Runtime Secret**.
 

@@ -36,7 +36,7 @@ def main() -> int:
             errors.append(f"missing top-level key: {key}")
 
     event_names = {et.get("name") for et in data.get("event_types", [])}
-    for required in ("session_start", "session_progress", "session_end", "session_failed"):
+    for required in ("session_start", "session_progress", "session_end", "session_failed", "session_token_backfill"):
         if required not in event_names:
             errors.append(f"missing event type: {required}")
 

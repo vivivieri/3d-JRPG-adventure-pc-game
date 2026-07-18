@@ -18,13 +18,16 @@
     "committed_rollups_optional": "game/data/qa/agent_session_stats.json",
     "encoding": "jsonl",
     "one_object_per_line": true,
+    "tokens_source": "cursor_api | cursor_api_delta | agent_report | manual | null",
+    "cursor_api": "GET /v1/agents/{bcId}/usage with CURSOR_API_KEY — automatic on cloud agents",
+    "bc_id_env": "CURSOR_CONVERSATION_ID (injected by Cursor Cloud Agents runtime)",
     "analysis_exports": ["json", "csv", "markdown", "parquet"]
   },
   "log_format": {
     "common_fields": {
       "schema_version": "string — matches this file version",
       "session_id": "string — UUID grouping one agent run",
-      "event": "string — session_start | session_progress | session_end | session_failed",
+      "event": "string — session_start | session_progress | session_end | session_failed | session_token_backfill",
       "ts": "string — ISO-8601 UTC wall clock",
       "t": "number — seconds since session_start (0 on start)",
       "issue_id": "string — sprint issue id (P1-02) or null for PM-only",
@@ -72,8 +75,14 @@
     {
       "name": "session_failed",
       "required": ["schema_version", "session_id", "event", "ts", "t", "agent_role", "outcome"],
-      "optional": ["issue_id", "duration_seconds", "failed_check", "error_message", "note", "tokens_input", "tokens_output", "tokens_total", "tokens_source"],
+      "optional": ["issue_id", "duration_seconds", "failed_check", "error_message", "note", "tokens_input", "tokens_output", "tokens_total", "tokens_source", "cursor_bc_id", "cursor_usage_raw"],
       "enums": { "outcome": ["failed"] }
+    },
+    {
+      "name": "session_token_backfill",
+      "required": ["schema_version", "session_id", "event", "ts", "agent_role"],
+      "optional": ["issue_id", "tokens_input", "tokens_output", "tokens_total", "tokens_cache_read", "tokens_cache_write", "tokens_source", "cursor_bc_id", "cursor_usage_raw", "backfill_note"],
+      "note": "Appended by pm_sync_agent_session_tokens.py when usage API lagged at session_end"
     }
   ],
   "task_categories": [
