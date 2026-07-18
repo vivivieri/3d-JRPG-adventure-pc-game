@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Generate spec/build radar PNGs from alignment audit report data.
+"""Generate spec/build audit radar PNGs — legacy GameLab-style presentation.
 
-Themed for Tides of Urashima — muted coastal palette (docs/art/ART_DIRECTION.md).
+Composites live scores onto layouts referenced from committed legacy art:
+  tides_audit_radar_updated.png, audit_radar_6axis.png, tides_audit_alignment_radar.png
 
 Authority: docs/qa/ALIGNMENT_AUDIT.md
 """
@@ -13,22 +14,18 @@ import sys
 from pathlib import Path
 from typing import Any
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-from audit_radar_theme import (
-    DOMAIN_ACCENT,
-    GAME_SUBTITLE,
-    PALETTE,
-    apply_void_gradient,
-    configure_matplotlib,
-    draw_brand_header,
-    draw_na_panel,
-    draw_panel_frame,
-    style_polar_axis,
-    verdict_color,
-    wrap_label,
+from audit_radar_legacy_style import (
+    LEGACY_REFERENCES,
+    apply_legacy_watermark,
+    draw_gold_frame,
+    draw_legacy_title_block,
+    draw_scale_legend,
+    render_legacy_breakdown_grid,
+    render_legacy_combined_report,
+    render_legacy_hero_radar,
+    render_legacy_subdomain_radar,
 )
+from audit_radar_theme import PALETTE, configure_matplotlib
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_VISUALS_DIR = ROOT / "docs/compliance/alignment_audit_visuals"
@@ -43,16 +40,6 @@ SPEC_DOMAIN_ORDER = [
     "pm_workflow",
 ]
 
-DPI = 180
-
-
-def _domain_label(dom_id: str) -> str:
-    return dom_id.replace("_", " ").title()
-
-
-def _signal_label(sig_id: str) -> str:
-    return sig_id.replace("_", " ").replace("L0 ", "L0·").title()
-
 
 def _load_catalog() -> dict[str, Any]:
     return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
@@ -62,165 +49,41 @@ def _domain_title(catalog: dict[str, Any], dom_id: str) -> str:
     for row in catalog.get("domains", []):
         if row.get("id") == dom_id:
             return str(row.get("label", dom_id))
-    return _domain_label(dom_id)
-
-
-def _save_fig(fig: plt.Figure, out_path: Path) -> None:
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_path, dpi=DPI, facecolor=PALETTE["void"], bbox_inches="tight", pad_inches=0.35)
-    plt.close(fig)
-
-
-def _radar_figure(
-    *,
-    labels: list[str],
-    values: list[float],
-    title: str,
-    subtitle: str,
-    stream_score: float,
-    verdict: str,
-    accent: str,
-    figsize: tuple[float, float] = (9, 9),
-    label_fs: float = 9,
-) -> plt.Figure:
-    configure_matplotlib()
-    fig = plt.figure(figsize=figsize)
-    apply_void_gradient(fig, alpha_top=0.42)
-    draw_brand_header(
-        fig,
-        title=title,
-        subtitle=subtitle or GAME_SUBTITLE,
-        verdict=verdict,
-        meta=f"Score {stream_score:.2f} / 10",
-        y=0.97,
-    )
-    ax = fig.add_subplot(111, projection="polar")
-    draw_panel_frame(ax, accent=accent)
-    style_polar_axis(
-        ax,
-        labels=labels,
-        values=values,
-        accent=accent,
-        title="",
-        score_line=f"{stream_score:.1f}",
-        label_fs=label_fs,
-    )
-    fig.subplots_adjust(top=0.82, bottom=0.08, left=0.06, right=0.94)
-    return fig
-
-
-def _radar_chart(
-    *,
-    labels: list[str],
-    values: list[float],
-    title: str,
-    subtitle: str,
-    stream_score: float,
-    verdict: str,
-    out_path: Path,
-    accent: str | None = None,
-) -> None:
-    accent = accent or PALETTE["biolume"]
-    fig = _radar_figure(
-        labels=labels,
-        values=values,
-        title=title,
-        subtitle=subtitle,
-        stream_score=stream_score,
-        verdict=verdict,
-        accent=accent,
-    )
-    _save_fig(fig, out_path)
+    return dom_id.replace("_", " ").title()
 
 
 def _na_card(*, title: str, reason: str, branch: str, out_path: Path) -> None:
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import FancyBboxPatch
+
     configure_matplotlib()
-    fig = plt.figure(figsize=(9, 9))
-    apply_void_gradient(fig, alpha_top=0.38)
-    draw_brand_header(
-        fig,
-        title=title,
-        subtitle="Development & shipping stream",
-        verdict="N/A",
-        meta=f"Branch · {branch}",
-        y=0.97,
+    fig = plt.figure(figsize=(10, 10))
+    fig.patch.set_facecolor(PALETTE["void"])
+    apply_legacy_watermark(fig, LEGACY_REFERENCES["hero_bg"], alpha=0.12)
+    draw_gold_frame(fig)
+    draw_legacy_title_block(fig, title=title.upper(), subtitle="Development & shipping", meta=f"Branch · {branch}", verdict="N/A")
+    draw_scale_legend(fig)
+    ax = fig.add_axes([0.1, 0.14, 0.8, 0.68])
+    ax.axis("off")
+    frame = FancyBboxPatch(
+        (0.08, 0.1),
+        0.84,
+        0.8,
+        boxstyle="round,pad=0.02",
+        transform=ax.transAxes,
+        facecolor=(0.08, 0.1, 0.16, 0.8),
+        edgecolor=PALETTE["coral_gold"],
+        linewidth=2,
     )
-    ax = fig.add_axes([0.08, 0.12, 0.84, 0.68])
-    draw_na_panel(ax, title=title, reason=reason, branch=branch, accent=PALETTE["fog"])
-    _save_fig(fig, out_path)
-
-
-def _combined_radar_report(report: dict[str, Any], out_path: Path) -> None:
-    configure_matplotlib()
-    streams = report.get("streams", {})
-    branch = report.get("branch", "?")
-    verdict = str(report.get("verdict", "?"))
-    spec = streams.get("spec_readiness", {})
-    build = streams.get("build_readiness", {})
-
-    fig = plt.figure(figsize=(15, 8))
-    apply_void_gradient(fig, alpha_top=0.4)
-    draw_brand_header(
-        fig,
-        title="Alignment Radar Report",
-        subtitle=GAME_SUBTITLE,
-        verdict=verdict,
-        meta=f"{branch} · {report.get('generated_at', '')}",
-        y=0.97,
-    )
-
-    ax_spec = fig.add_axes([0.06, 0.12, 0.4, 0.72], projection="polar")
-    draw_panel_frame(ax_spec, accent=PALETTE["biolume"])
-    spec_domains = spec.get("domains") or {}
-    if spec_domains:
-        labels = [wrap_label(_domain_label(k), 10) for k in spec_domains]
-        values = [float(v) for v in spec_domains.values()]
-        style_polar_axis(
-            ax_spec,
-            labels=labels,
-            values=values,
-            accent=PALETTE["biolume"],
-            title="Design & Preparation",
-            score_line=f"{float(spec.get('score') or 0):.1f}",
-            label_fs=8,
-        )
-    fig.text(
-        0.26,
-        0.08,
-        spec.get("question", ""),
-        ha="center",
-        fontsize=8,
-        color=PALETTE["muted"],
-        wrap=True,
-    )
-
-    if build.get("status") == "not_applicable" or build.get("score") is None:
-        ax_build = fig.add_axes([0.56, 0.12, 0.38, 0.72])
-        draw_na_panel(
-            ax_build,
-            title="Development & Shipping",
-            reason=str(build.get("na_reason") or "Not applicable on this branch"),
-            branch=branch,
-            accent=PALETTE["lantern"],
-        )
-    else:
-        ax_build = fig.add_axes([0.56, 0.12, 0.4, 0.72], projection="polar")
-        draw_panel_frame(ax_build, accent=PALETTE["coral_gold"])
-        build_domains = build.get("domains") or {}
-        if build_domains:
-            labels = [wrap_label(_domain_label(k), 10) for k in build_domains]
-            values = [float(v) for v in build_domains.values()]
-            style_polar_axis(
-                ax_build,
-                labels=labels,
-                values=values,
-                accent=PALETTE["coral_gold"],
-                title="Development & Shipping",
-                score_line=f"{float(build.get('score') or 0):.1f}",
-                label_fs=8,
-            )
-
-    _save_fig(fig, out_path)
+    ax.add_patch(frame)
+    ax.plot([0.2, 0.8], [0.78, 0.78], color=PALETTE["wood"], linewidth=3, transform=ax.transAxes)
+    ax.plot([0.28, 0.28], [0.68, 0.78], color=PALETTE["wood"], linewidth=2.5, transform=ax.transAxes)
+    ax.plot([0.72, 0.72], [0.68, 0.78], color=PALETTE["wood"], linewidth=2.5, transform=ax.transAxes)
+    ax.text(0.5, 0.58, "AWAITING TIDE", ha="center", fontsize=22, color=PALETTE["muted"], transform=ax.transAxes, fontstyle="italic")
+    ax.text(0.5, 0.42, reason[:100], ha="center", fontsize=9, color=PALETTE["sand"], transform=ax.transAxes, wrap=True)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, dpi=200, facecolor=PALETTE["void"], bbox_inches="tight", pad_inches=0.18)
+    plt.close(fig)
 
 
 def generate_spec_subdomain_radars(
@@ -231,65 +94,26 @@ def generate_spec_subdomain_radars(
     domain_scores = report.get("domain_scores", {})
     written: dict[str, str] = {}
 
+    domain_titles = {d["id"]: d.get("label", d["id"]) for d in cat.get("domains", [])}
+
     for dom_id in SPEC_DOMAIN_ORDER:
         signals = signal_scores.get(dom_id, {})
         if not signals:
             continue
-        labels = [_signal_label(sid) for sid in signals]
-        values = [float(v) for v in signals.values()]
-        accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
         fname = f"audit_radar_spec_{dom_id}.png"
-        _radar_chart(
-            labels=labels,
-            values=values,
+        out_path = output_dir / fname
+        render_legacy_subdomain_radar(
+            domain_id=dom_id,
+            signal_ids=list(signals.keys()),
+            values=[float(v) for v in signals.values()],
+            domain_score=float(domain_scores.get(dom_id, 0)),
             title=_domain_title(cat, dom_id),
-            subtitle="Signal breakdown · design stream",
-            stream_score=float(domain_scores.get(dom_id, 0)),
-            verdict="",
-            out_path=output_dir / fname,
-            accent=accent,
+            out_path=out_path,
         )
-        written[fname] = str(output_dir / fname)
-
-    configure_matplotlib()
-    spec = report.get("streams", {}).get("spec_readiness", {})
-    fig = plt.figure(figsize=(17, 11))
-    apply_void_gradient(fig, alpha_top=0.38)
-    draw_brand_header(
-        fig,
-        title="Spec Domain Breakdown",
-        subtitle="Six design axes · signal-level sub-radars",
-        verdict=str(spec.get("verdict", "")),
-        meta=f"Stream score {spec.get('score', '?')} / 10",
-        y=0.97,
-    )
-
-    for idx, dom_id in enumerate(SPEC_DOMAIN_ORDER):
-        row, col = divmod(idx, 3)
-        left = 0.05 + col * 0.31
-        bottom = 0.52 - row * 0.44
-        ax = fig.add_axes([left, bottom, 0.28, 0.38], projection="polar")
-        accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
-        draw_panel_frame(ax, accent=accent)
-        signals = signal_scores.get(dom_id, {})
-        if signals:
-            labels = [_signal_label(sid) for sid in signals]
-            values = [float(v) for v in signals.values()]
-            style_polar_axis(
-                ax,
-                labels=labels,
-                values=values,
-                accent=accent,
-                title=_domain_title(cat, dom_id),
-                score_line=f"{float(domain_scores.get(dom_id, 0)):.1f}",
-                label_fs=6.5,
-                tick_fs=5.5,
-            )
-        else:
-            ax.axis("off")
+        written[fname] = str(out_path)
 
     breakdown_path = output_dir / "audit_radar_spec_breakdown.png"
-    _save_fig(fig, breakdown_path)
+    render_legacy_breakdown_grid(report, domain_titles, SPEC_DOMAIN_ORDER, breakdown_path)
     written["audit_radar_spec_breakdown.png"] = str(breakdown_path)
     return written
 
@@ -305,18 +129,19 @@ def generate_audit_radars(
     spec = streams.get("spec_readiness", {})
     spec_domains = spec.get("domains") or {}
     if spec_domains:
-        labels = [_domain_label(k) for k in spec_domains]
-        values = [float(v) for v in spec_domains.values()]
+        dom_ids = list(spec_domains.keys())
+        vals = [float(v) for v in spec_domains.values()]
         spec_path = out_dir / "audit_radar_spec.png"
-        _radar_chart(
-            labels=labels,
-            values=values,
-            title="Design & Preparation",
-            subtitle=spec.get("question", GAME_SUBTITLE),
+        render_legacy_hero_radar(
+            domain_ids=dom_ids,
+            values=vals,
+            title="PROJECT AUDIT",
+            subtitle="Design & preparation · spec readiness",
             stream_score=float(spec.get("score") or 0),
             verdict=str(spec.get("verdict", "?")),
+            meta=spec.get("question", ""),
             out_path=spec_path,
-            accent=PALETTE["biolume"],
+            background=LEGACY_REFERENCES["hero_bg"],
         )
         written["audit_radar_spec.png"] = str(spec_path)
 
@@ -332,22 +157,23 @@ def generate_audit_radars(
     else:
         build_domains = build.get("domains") or {}
         if build_domains:
-            labels = [_domain_label(k) for k in build_domains]
-            values = [float(v) for v in build_domains.values()]
-            _radar_chart(
-                labels=labels,
-                values=values,
-                title="Development & Shipping",
-                subtitle=build.get("question", ""),
+            dom_ids = list(build_domains.keys())
+            vals = [float(v) for v in build_domains.values()]
+            render_legacy_hero_radar(
+                domain_ids=dom_ids,
+                values=vals,
+                title="BUILD AUDIT",
+                subtitle="Development & shipping",
                 stream_score=float(build.get("score") or 0),
                 verdict=str(build.get("verdict", "?")),
+                meta=build.get("question", ""),
                 out_path=build_path,
-                accent=PALETTE["coral_gold"],
+                background=LEGACY_REFERENCES["six_axis_bg"],
             )
     written["audit_radar_build.png"] = str(build_path)
 
     report_path = out_dir / "audit_radar_report.png"
-    _combined_radar_report(report, report_path)
+    render_legacy_combined_report(report, report_path)
     written["audit_radar_report.png"] = str(report_path)
 
     written.update(generate_spec_subdomain_radars(report, out_dir))
@@ -355,7 +181,7 @@ def generate_audit_radars(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Generate themed Urashima audit radar PNGs")
+    parser = argparse.ArgumentParser(description="Generate legacy-style Urashima audit radar PNGs")
     parser.add_argument(
         "--report",
         default=str(ROOT / "artifacts/alignment_audits/latest.json"),

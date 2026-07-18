@@ -33,8 +33,11 @@ def main() -> int:
         errors.append("visual_policy missing generator_script")
 
     theme_path = ROOT / "tools/audit_radar_theme.py"
+    legacy_path = ROOT / "tools/audit_radar_legacy_style.py"
     if not theme_path.is_file():
         errors.append("missing tools/audit_radar_theme.py")
+    if not legacy_path.is_file():
+        errors.append("missing tools/audit_radar_legacy_style.py")
 
     mgmt_files = set(policy.get("management_status_filenames", []))
     auto_files = set(policy.get("auto_generated_filenames", []))
@@ -63,8 +66,8 @@ def main() -> int:
     gen_script_path = ROOT / policy.get("generator_script", "tools/generate_audit_radar_images.py")
     if gen_script_path.is_file():
         gen_text = gen_script_path.read_text(encoding="utf-8")
-        if "audit_radar_theme" not in gen_text:
-            errors.append(f"{gen_script_path.name} must import audit_radar_theme")
+        if "audit_radar_theme" not in gen_text or "audit_radar_legacy_style" not in gen_text:
+            errors.append(f"{gen_script_path.name} must import audit_radar_theme and audit_radar_legacy_style")
 
     lib = ROOT / "tools/alignment_audit_lib.py"
     if lib.is_file():

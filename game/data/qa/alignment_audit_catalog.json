@@ -15,8 +15,14 @@
     "committed_history_keep": 50,
     "archive_visual_snapshots": false
   },
-  "visual_policy": {
+    "visual_policy": {
     "generator_script": "tools/generate_audit_radar_images.py",
+    "legacy_reference_images": {
+      "hero": "tides_audit_radar_updated.png",
+      "six_axis": "audit_radar_6axis.png",
+      "subdomain": "tides_audit_alignment_radar.png",
+      "mega_dashboard": "tides_mega_dashboard_all_radars.png"
+    },
     "auto_generated_filenames": [
       "audit_radar_spec.png",
       "audit_radar_build.png",
