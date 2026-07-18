@@ -61,6 +61,21 @@ def visual_asset_index(catalog: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return index
 
 
+def filter_report_visuals(
+    manifest: list[dict[str, Any]], catalog: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Return only visuals that belong in audit reports (no legacy or supplemental)."""
+    policy = catalog.get("visual_policy", {})
+    report_only = set(policy.get("report_only_filenames", []))
+    if report_only:
+        return [v for v in manifest if v.get("filename") in report_only]
+    return [
+        v
+        for v in manifest
+        if v.get("management") and not v.get("deprecated_for_management")
+    ]
+
+
 def enrich_visual_manifest(manifest: list[dict[str, Any]], catalog: dict[str, Any]) -> None:
     idx = visual_asset_index(catalog)
     for entry in manifest:
@@ -639,7 +654,7 @@ def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = Non
                 }
             )
     enrich_visual_manifest(manifest, catalog)
-    return manifest
+    return filter_report_visuals(manifest, catalog)
 
 
 def bundle_visuals(
@@ -649,10 +664,13 @@ def bundle_visuals(
 ) -> list[dict[str, Any]]:
     visuals_dir = audit_dir / catalog.get("outputs", {}).get("visuals_subdir", "visuals")
     visuals_dir.mkdir(parents=True, exist_ok=True)
+    report_only = set(catalog.get("visual_policy", {}).get("report_only_filenames", []))
     manifest: list[dict[str, Any]] = []
     for pack in catalog.get("visual_packs", []):
         for asset in pack.get("assets", []):
             fname = asset["filename"]
+            if report_only and fname not in report_only:
+                continue
             dest = visuals_dir / fname
             copied = False
             if source_dir and (source_dir / fname).is_file():
@@ -667,7 +685,7 @@ def bundle_visuals(
                     "pack_title": pack["title"],
                     "asset_id": asset["id"],
                     "label": asset["label"],
-                    "kind": asset.get("kind", "concept"),
+                    "kind": asset.get("kind", "radar"),
                     "filename": fname,
                     "path": str(dest.relative_to(ROOT)) if dest.is_file() else None,
                     "present": dest.is_file(),
@@ -700,7 +718,9 @@ def build_report(
     domain_scores = compute_domain_scores(catalog, ctx)
     stream_scores = compute_stream_scores(catalog, domain_scores, branch)
     apply_derived_domain_scores(catalog, domain_scores, stream_scores)
-    visual_inventory = scan_visual_inventory(catalog, visuals_from)
+    visual_inventory = filter_report_visuals(
+        scan_visual_inventory(catalog, visuals_from), catalog
+    )
     recommendations = build_recommendations(
         catalog,
         ci=ci,
@@ -796,58 +816,26 @@ def _hidden_domain_ids(catalog: dict[str, Any]) -> set[str]:
 def _visual_sections_markdown(
     manifest: list[dict[str, Any]], *, embed_visuals: bool = False
 ) -> list[str]:
-    """Split manifest into management / legacy / supplemental sections for report.md."""
+    """Stream radar visuals only — no legacy or supplemental art."""
     present = [v for v in manifest if v.get("present")]
     if not present:
         return []
 
     lines: list[str] = []
-    mgmt = [v for v in present if v.get("management")]
-    legacy = [v for v in present if v.get("deprecated_for_management")]
-    other = [v for v in present if not v.get("management") and not v.get("deprecated_for_management")]
-
-    def _rows(items: list[dict[str, Any]]) -> None:
-        for v in items:
-            href = v.get("gallery_href") or v.get("path")
-            flags = []
-            if v.get("auto_generated"):
-                flags.append("auto-generated")
-            if v.get("deprecated_for_management"):
-                flags.append("legacy — not for management")
-            suffix = f" ({', '.join(flags)})" if flags else ""
-            if embed_visuals and href:
-                lines.append(f"![{v['label']}]({href})")
-                lines.append(f"*{v['label']}{suffix}*")
-            else:
-                lines.append(f"- {v['label']}{suffix}: `{href}`")
-
-    lines.append("## Management visuals (status)")
+    lines.append("## Stream radars")
     lines.append("")
-    lines.append(
-        "Use **only** these for executive readiness — spec on `main`, build on `game/development`."
-    )
-    lines.append("")
-    if mgmt:
-        _rows(mgmt)
-    else:
-        lines.append("- (none — re-run audit to generate stream radars)")
+    lines.append("Auto-generated from live audit scores. Spec on `main`; build on `game/development`.")
     lines.append("")
 
-    if legacy:
-        lines.append("## Legacy visuals (archive — not for management status)")
-        lines.append("")
-        lines.append(
-            "Pre–two-stream static art. Do **not** use `audit_radar_6axis.png` or mega dashboard for status."
-        )
-        lines.append("")
-        _rows(legacy)
-        lines.append("")
-
-    if other:
-        lines.append("## Supplemental visuals")
-        lines.append("")
-        _rows(other)
-        lines.append("")
+    for v in present:
+        href = v.get("gallery_href") or v.get("path")
+        suffix = " (auto-generated)" if v.get("auto_generated") else ""
+        if embed_visuals and href:
+            lines.append(f"![{v['label']}]({href})")
+            lines.append(f"*{v['label']}{suffix}*")
+        else:
+            lines.append(f"- {v['label']}{suffix}: `{href}`")
+    lines.append("")
 
     return lines
 
@@ -979,7 +967,12 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             lines.append(f"- `{h['path']}` — {h['message']} ({h['severity']})")
         lines.append("")
 
-    lines.extend(_visual_sections_markdown(report.get("visual_manifest", []), embed_visuals=embed_visuals))
+    lines.extend(
+        _visual_sections_markdown(
+            filter_report_visuals(report.get("visual_manifest", []), load_catalog()),
+            embed_visuals=embed_visuals,
+        )
+    )
 
     lines.append("---")
     lines.append("Authority: `docs/qa/ALIGNMENT_AUDIT.md` · Re-run: `bash tools/run_alignment_audit.sh`")
@@ -1037,14 +1030,8 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
             f'<div class="card"><h2>{esc(sec["label"])} ({sec["open_count"]})</h2><ul>{items}</ul></div>'
         )
 
-    manifest = report.get("visual_manifest", [])
-    mgmt = [v for v in manifest if v.get("management")]
-    legacy = [v for v in manifest if v.get("deprecated_for_management")]
-    other = [v for v in manifest if not v.get("management") and not v.get("deprecated_for_management")]
-
-    mgmt_gallery = _visual_gallery_html(mgmt, image_href_key=image_href_key)
-    legacy_gallery = _visual_gallery_html(legacy, image_href_key=image_href_key)
-    other_gallery = _visual_gallery_html(other, image_href_key=image_href_key)
+    manifest = filter_report_visuals(report.get("visual_manifest", []), catalog)
+    radar_gallery = _visual_gallery_html(manifest, image_href_key=image_href_key)
 
     verdict = report.get("verdict", "?")
     verdict_class = verdict.lower().replace("_", "-")
@@ -1100,16 +1087,9 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
   <h2>Recommendation checklist</h2>
   <div class="grid">{"".join(checklist_html) or "<p>No open recommendations.</p>"}</div>
 
-  <h2>Management visuals</h2>
-  <p><small>Spec/build stream radars only — use for executive readiness. Legacy mega-dashboard excluded.</small></p>
-  <div class="gallery">{mgmt_gallery}</div>
-
-  <h2>Legacy visuals (archive)</h2>
-  <p><small>Pre–two-stream static art — historical reference only.</small></p>
-  <div class="gallery">{legacy_gallery}</div>
-
-  <h2>Supplemental visuals</h2>
-  <div class="gallery">{other_gallery}</div>
+  <h2>Stream radars</h2>
+  <p><small>Auto-generated spec/build radars from live scores — legacy art excluded.</small></p>
+  <div class="gallery">{radar_gallery}</div>
 
   <h2>Raw JSON</h2>
   <pre id="data"></pre>

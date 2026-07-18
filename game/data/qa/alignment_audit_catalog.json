@@ -17,8 +17,21 @@
   },
   "visual_policy": {
     "generator_script": "tools/generate_audit_radar_images.py",
-    "auto_generated_filenames": ["audit_radar_spec.png", "audit_radar_build.png"],
-    "management_status_filenames": ["audit_radar_spec.png", "audit_radar_build.png"],
+    "auto_generated_filenames": [
+      "audit_radar_spec.png",
+      "audit_radar_build.png",
+      "audit_radar_report.png"
+    ],
+    "management_status_filenames": [
+      "audit_radar_spec.png",
+      "audit_radar_build.png",
+      "audit_radar_report.png"
+    ],
+    "report_only_filenames": [
+      "audit_radar_report.png",
+      "audit_radar_spec.png",
+      "audit_radar_build.png"
+    ],
     "deprecated_for_management_filenames": [
       "audit_radar_6axis.png",
       "tides_mega_dashboard_all_radars.png"
@@ -297,6 +310,7 @@
       "batch": 1,
       "assets": [
         { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
+        { "id": "audit_radar_report", "label": "Two-stream radar report", "filename": "audit_radar_report.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar", "management": true, "auto_generated": true },
         { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar", "deprecated_for_management": true },

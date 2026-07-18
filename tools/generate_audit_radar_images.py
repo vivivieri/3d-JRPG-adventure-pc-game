@@ -34,6 +34,126 @@ STYLE = {
 def _domain_label(dom_id: str) -> str:
     return dom_id.replace("_", " ").title()
 
+def _draw_radar_on_axis(
+    ax: Any,
+    *,
+    labels: list[str],
+    values: list[float],
+    title: str,
+    stream_score: float,
+    verdict: str,
+) -> None:
+    n = len(labels)
+    angles = np.linspace(0, 2 * np.pi, n, endpoint=False).tolist()
+    values_loop = values + values[:1]
+    angles_loop = angles + angles[:1]
+
+    ax.plot(angles_loop, values_loop, color=STYLE["cyan"], linewidth=2.2)
+    ax.fill(angles_loop, values_loop, color=STYLE["cyan"], alpha=0.22)
+    target_loop = [10.0] * (n + 1)
+    ax.plot(
+        angles_loop,
+        target_loop,
+        color=STYLE["gold"],
+        linewidth=1.0,
+        linestyle="--",
+        alpha=0.55,
+    )
+    ax.set_xticks(angles)
+    ax.set_xticklabels(labels, color=STYLE["fg"], fontsize=8)
+    ax.set_ylim(0, 10)
+    ax.set_yticks([2, 4, 6, 8, 10])
+    ax.set_yticklabels(["2", "4", "6", "8", "10"], color=STYLE["muted"], fontsize=6)
+    ax.grid(color=STYLE["grid"], alpha=0.45)
+    ax.spines["polar"].set_color(STYLE["grid"])
+    ax.set_title(
+        f"{title}\n{stream_score:.2f}/10 · {verdict}",
+        color=STYLE["fg"],
+        fontsize=10,
+        pad=16,
+    )
+
+
+def _draw_na_on_axis(ax: Any, *, title: str, reason: str, branch: str) -> None:
+    ax.axis("off")
+    ax.text(0.5, 0.72, title, ha="center", va="center", color=STYLE["fg"], fontsize=12, fontweight="bold")
+    ax.text(0.5, 0.5, "N/A", ha="center", va="center", color=STYLE["muted"], fontsize=36, fontweight="bold")
+    ax.text(0.5, 0.36, f"Branch: {branch}", ha="center", va="center", color=STYLE["cyan"], fontsize=9)
+    wrapped = reason[:90] + ("…" if len(reason) > 90 else "")
+    ax.text(0.5, 0.24, wrapped, ha="center", va="center", color=STYLE["muted"], fontsize=8)
+
+
+def _combined_radar_report(report: dict[str, Any], out_path: Path) -> None:
+    streams = report.get("streams", {})
+    branch = report.get("branch", "?")
+    verdict = report.get("verdict", "?")
+    spec = streams.get("spec_readiness", {})
+    build = streams.get("build_readiness", {})
+
+    fig = plt.figure(figsize=(14, 7))
+    fig.patch.set_facecolor(STYLE["bg"])
+    fig.suptitle(
+        f"Tides of Urashima — Alignment Radar Report · {verdict}",
+        color=STYLE["fg"],
+        fontsize=16,
+        fontweight="bold",
+        y=0.98,
+    )
+    fig.text(
+        0.5,
+        0.93,
+        f"{branch} · {report.get('generated_at', '')} · Spec + Build streams",
+        ha="center",
+        color=STYLE["muted"],
+        fontsize=10,
+    )
+
+    ax_spec = fig.add_subplot(1, 2, 1, projection="polar")
+    ax_spec.set_facecolor(STYLE["bg"])
+    spec_domains = spec.get("domains") or {}
+    if spec_domains:
+        labels = [_domain_label(k) for k in spec_domains]
+        values = [float(v) for v in spec_domains.values()]
+        _draw_radar_on_axis(
+            ax_spec,
+            labels=labels,
+            values=values,
+            title="Spec — Design & Preparation",
+            stream_score=float(spec.get("score") or 0),
+            verdict=str(spec.get("verdict", "?")),
+        )
+    else:
+        ax_spec.axis("off")
+
+    if build.get("status") == "not_applicable" or build.get("score") is None:
+        ax_build = fig.add_subplot(1, 2, 2)
+        ax_build.set_facecolor(STYLE["bg"])
+        _draw_na_on_axis(
+            ax_build,
+            title="Build — Development & Shipping",
+            reason=str(build.get("na_reason") or "Not applicable on this branch"),
+            branch=branch,
+        )
+    else:
+        ax_build = fig.add_subplot(1, 2, 2, projection="polar")
+        ax_build.set_facecolor(STYLE["bg"])
+        build_domains = build.get("domains") or {}
+        if build_domains:
+            labels = [_domain_label(k) for k in build_domains]
+            values = [float(v) for v in build_domains.values()]
+            _draw_radar_on_axis(
+                ax_build,
+                labels=labels,
+                values=values,
+                title="Build — Development & Shipping",
+                stream_score=float(build.get("score") or 0),
+                verdict=str(build.get("verdict", "?")),
+            )
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, dpi=150, facecolor=STYLE["bg"], bbox_inches="tight")
+    plt.close(fig)
+
 
 def _radar_chart(
     *,
@@ -202,6 +322,11 @@ def generate_audit_radars(
                 out_path=build_path,
             )
     written["audit_radar_build.png"] = str(build_path)
+
+    report_path = out_dir / "audit_radar_report.png"
+    _combined_radar_report(report, report_path)
+    written["audit_radar_report.png"] = str(report_path)
+
     return written
 
 

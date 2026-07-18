@@ -39,6 +39,9 @@ def main() -> int:
         errors.append("visual_policy.management_status_filenames must be non-empty")
     if auto_files and not auto_files.issubset(mgmt_files):
         errors.append("visual_policy.auto_generated_filenames must be subset of management_status_filenames")
+    report_only = set(policy.get("report_only_filenames", []))
+    if report_only and not report_only.issubset(mgmt_files):
+        errors.append("visual_policy.report_only_filenames must be subset of management_status_filenames")
     if mgmt_files & deprecated_files:
         errors.append("visual_policy: file cannot be both management and deprecated_for_management")
 

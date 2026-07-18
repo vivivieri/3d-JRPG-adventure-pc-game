@@ -366,13 +366,34 @@
       "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.md",
       "report_html": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/dashboard.html",
       "note": "audit-full-alignment management visuals"
+    },
+    {
+      "audit_id": "20260718T153532Z_post_merge",
+      "generated_at": "2026-07-18T15:35:32Z",
+      "branch": "cursor/audit-radar-report-only-68f4",
+      "commit": "febffb9",
+      "verdict": "ALIGNED",
+      "overall_score": 9.65,
+      "spec_score": 9.65,
+      "build_score": null,
+      "build_status": "not_applicable",
+      "ci_pass": 36,
+      "ci_fail": 0,
+      "blocking_open": 0,
+      "recommendation_count": 1,
+      "checklist_open": 1,
+      "visuals_present": 3,
+      "report_json": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/report.json",
+      "report_markdown": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/report.md",
+      "report_html": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/dashboard.html",
+      "note": "radar-report-only no legacy visuals"
     }
   ],
   "latest": {
-    "audit_id": "20260718T152810Z_post_merge",
-    "generated_at": "2026-07-18T15:28:10Z",
-    "branch": "cursor/audit-full-alignment-68f4",
-    "commit": "482ea65",
+    "audit_id": "20260718T153532Z_post_merge",
+    "generated_at": "2026-07-18T15:35:32Z",
+    "branch": "cursor/audit-radar-report-only-68f4",
+    "commit": "febffb9",
     "verdict": "ALIGNED",
     "overall_score": 9.65,
     "spec_score": 9.65,
@@ -381,12 +402,12 @@
     "ci_pass": 36,
     "ci_fail": 0,
     "blocking_open": 0,
-    "recommendation_count": 0,
-    "checklist_open": 0,
-    "visuals_present": 35,
-    "report_json": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.json",
-    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/report.md",
-    "report_html": "docs/compliance/alignment_audit_reports/20260718T152810Z_post_merge/dashboard.html",
-    "note": "audit-full-alignment management visuals"
+    "recommendation_count": 1,
+    "checklist_open": 1,
+    "visuals_present": 3,
+    "report_json": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/report.json",
+    "report_markdown": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/report.md",
+    "report_html": "docs/compliance/alignment_audit_reports/20260718T153532Z_post_merge/dashboard.html",
+    "note": "radar-report-only no legacy visuals"
   }
 }

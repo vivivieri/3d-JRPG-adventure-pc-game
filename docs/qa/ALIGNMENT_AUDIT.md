@@ -171,12 +171,15 @@ Six visual packs (33 assets) are catalogued for executive updates:
 
 | File | Content |
 |------|---------|
+| `audit_radar_report.png` | **Primary** — side-by-side spec + build radar report |
 | `audit_radar_spec.png` | Spec stream radar (6 domains) |
 | `audit_radar_build.png` | Build stream radar on `game/development`, or **N/A card** on `main` |
 
+Reports embed **stream radars only** — legacy and supplemental art are excluded from `report.md` and `dashboard.html`.
+
 Regenerate manually: `python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json`
 
-Legacy merged radars (`audit_radar_6axis.png`, `tides_mega_dashboard_all_radars.png`) are **not** updated automatically — use the two-stream PNGs for management.
+Legacy merged radars (`audit_radar_6axis.png`, `tides_mega_dashboard_all_radars.png`) remain on disk for archive but are **never shown** in audit reports.
 
 Agent-generated review images can be copied into that folder before running the audit so the HTML dashboard embeds them.
 
