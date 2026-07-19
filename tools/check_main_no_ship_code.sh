@@ -29,7 +29,7 @@ fi
 
 SHIP_GD=()
 while IFS= read -r -d '' f; do
-  rel="${f#${ROOT}/}"
+  rel="${f#"${ROOT}"/}"
   # Third-party addons are gitignored; any tracked .gd under game/scripts is a violation
   SHIP_GD+=("$rel")
 done < <(find "${ROOT}/game/scripts" -name '*.gd' -print0 2>/dev/null)
@@ -44,7 +44,7 @@ fi
 
 SHIP_TSCN=()
 while IFS= read -r -d '' f; do
-  SHIP_TSCN+=("${f#${ROOT}/}")
+  SHIP_TSCN+=("${f#"${ROOT}"/}")
 done < <(find "${ROOT}/game/scenes" -name '*.tscn' -print0 2>/dev/null)
 
 if [[ ${#SHIP_TSCN[@]} -gt 0 ]]; then

@@ -72,7 +72,11 @@ GDAI_DIR="game/addons/gdai-mcp-plugin-godot"
 if [[ -d "$GDAI_DIR" ]]; then
   GDAI_VER="$(plugin_version "$GDAI_DIR/plugin.cfg")"
   ok "GDAI MCP addon present (v${GDAI_VER:-?})"
-  [[ -f "$GDAI_DIR/gdai_mcp_server.py" ]] && ok "GDAI MCP server script present" || fail "gdai_mcp_server.py missing"
+  if [[ -f "$GDAI_DIR/gdai_mcp_server.py" ]]; then
+    ok "GDAI MCP server script present"
+  else
+    fail "gdai_mcp_server.py missing"
+  fi
 
   if grep -q 'gdai-mcp-plugin-godot/plugin.cfg' game/project.godot 2>/dev/null; then
     ok "GDAI MCP enabled in project.godot"

@@ -21,14 +21,14 @@ echo "    Gate track: ${GATE_TRACK}"
 echo ""
 
 if [[ ! -f "$GATE_PATH" ]]; then
-  warn "Audio smoke skipped — ${GATE_PATH#${ROOT}/} not found"
+  warn "Audio smoke skipped — ${GATE_PATH#"${ROOT}"/} not found"
   echo "       Generate via: bash tools/generate_ai_bgm.sh --track ${GATE_TRACK}"
   echo ""
   echo "Audio smoke: ${WARN} warning(s), ${FAIL} failure(s) (skipped)"
   exit 0
 fi
 
-echo "    Gate file: ${GATE_PATH#${ROOT}/}"
+echo "    Gate file: ${GATE_PATH#"${ROOT}"/}"
 echo ""
 
 if python3 "${ROOT}/tools/check_audio_catalog.py" --phase "$PHASE"; then
@@ -88,7 +88,7 @@ echo ""
 echo "==> P0 VO smoke (gate clip: ${VO_CLIP}, locale: ${VO_LOCALE})"
 
 if [[ ! -f "$VO_PATH" ]]; then
-  warn "VO smoke skipped — ${VO_PATH#${ROOT}/} not found"
+  warn "VO smoke skipped — ${VO_PATH#"${ROOT}"/} not found"
   echo "       Generate via: bash tools/generate_ai_vo.sh --clip ${VO_CLIP} --locale ${VO_LOCALE}"
 else
   VO_TECH_LOG="$(mktemp)"

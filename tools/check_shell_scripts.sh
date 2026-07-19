@@ -21,8 +21,7 @@ FAIL=0
 for script in "${SCRIPTS[@]}"; do
   echo "── shellcheck: ${script}"
   # SC1091: source file not found in CI sandbox (gate_lib.sh exists at runtime)
-  # -S warning: info-level style hints (SC2295 etc.) are advisory — fix opportunistically
-  if shellcheck -x -e SC1091 -S warning "$script"; then
+  if shellcheck -x -e SC1091 "$script"; then
     echo "[PASS] ${script}"
   else
     echo "[FAIL] ${script}"

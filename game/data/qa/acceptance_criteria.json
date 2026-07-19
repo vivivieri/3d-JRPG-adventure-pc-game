@@ -378,6 +378,23 @@
       "pass": { "exit_code": 0 },
       "design_ref": "docs/technical/BASH_STYLE.md"
     },
+    "L1_json_style": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "python3 tools/check_json_style.py",
+      "description": "JSON format + naming lint on game/data/**/*.json",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/JSON_DATA_STYLE.md"
+    },
+    "L1_typescript_lint": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_typescript_lint.sh",
+      "description": "ESLint or tsc on tools/godot-mcp-pro-server when installed",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no tools/godot-mcp-pro-server/package.json (vendor not installed)",
+      "design_ref": "docs/technical/TYPESCRIPT_STYLE.md"
+    },
     "L2_boot_headless": {
       "layer": "L2",
       "domain": "flow",
@@ -764,6 +781,8 @@
       "L0_reference_libs",
       "L1_python_lint",
       "L1_shellcheck",
+      "L1_json_style",
+      "L1_typescript_lint",
       "L0_main_no_ship_code",
       "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
@@ -814,6 +833,8 @@
       "L0_base_classes",
       "L1_python_lint",
       "L1_shellcheck",
+      "L1_json_style",
+      "L1_typescript_lint",
       "L1_unit_tests",
       "L1_gdscript_lint",
       "L1_gdscript_lint_all",

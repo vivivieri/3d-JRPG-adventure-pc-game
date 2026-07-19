@@ -263,4 +263,5 @@ Edit upstream before downstream:
 - [ ] `schema_version` / `version` bumped if breaking
 - [ ] Upstream-before-downstream edit order
 - [ ] `python3 tools/validate_story_data.py` (and domain validator)
+- [ ] `python3 tools/check_json_style.py` (`L1_json_style`)
 - [ ] `bash tools/run_docs_ci_checks.sh` green

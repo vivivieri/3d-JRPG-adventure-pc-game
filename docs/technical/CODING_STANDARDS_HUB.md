@@ -1,6 +1,6 @@
 # Coding Standards Hub — Tides of Urashima
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement.  
 **Authority chain:** This hub **indexes** deeper docs — when details conflict, follow the linked authority doc.
 
@@ -392,9 +392,11 @@ Not shipped — stripped before Steam export (`ship_security.json`).
 
 | Change type | Minimum gates | Branch |
 |-------------|---------------|--------|
-| Story / combat JSON | `L0_story_data` | `main` |
+| Story / combat JSON | `L0_story_data`, `L1_json_style` | `main` |
 | Python tooling | `L1_python_lint` | both |
 | Shell scripts | `L1_shellcheck` | both |
+| JSON format / naming | `L1_json_style` | both |
+| TypeScript (MCP Pro) | `L1_typescript_lint` | `game/development` (SKIP when vendor not installed) |
 | New QA catalog | matching `L0_*` + `L0_doc_sync` | `main` |
 | GDScript logic | `L1_unit_tests`, `L1_gdscript_lint`, `L1_gdscript_lint_all` | `game/development` |
 | Base class / extends | `L0_base_class_compliance` | both |

@@ -269,6 +269,7 @@ L4/L5 scenarios: [`AI_TESTING_SPEC.md`](../qa/AI_TESTING_SPEC.md) · `bash tools
 
 - [ ] Change is necessary — vendor update preferred over fork
 - [ ] `npm run build` succeeds; `build/index.js` updated in dev env
+- [ ] `bash tools/check_typescript_lint.sh` (`L1_typescript_lint`) when MCP Pro installed
 - [ ] `--minimal` still default in `write_mcp_config.sh` / `.cursor/mcp.json.example`
 - [ ] No new scene-editing MCP tools
 - [ ] `bash tools/check_mcp_ready.sh` passes on `game/development`

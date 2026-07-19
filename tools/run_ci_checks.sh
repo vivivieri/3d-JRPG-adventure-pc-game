@@ -67,6 +67,12 @@ run_tri_gate "L1_python_lint" "Python ruff lint (tools/)" \
 run_tri_gate "L1_shellcheck" "ShellCheck on tools/*.sh" \
   bash tools/check_shell_scripts.sh
 
+run_tri_gate "L1_json_style" "JSON style lint (game/data)" \
+  python3 tools/check_json_style.py
+
+run_tri_gate "L1_typescript_lint" "TypeScript lint (MCP Pro server)" \
+  bash tools/check_typescript_lint.sh
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 

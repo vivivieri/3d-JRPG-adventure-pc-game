@@ -41,8 +41,8 @@ else
   ok "Branch: game/development"
 fi
 
-GDAI_ZIP="$(ls -1 "${ROOT}/game/addons"/gdai-mcp-plugin-godot*.zip 2>/dev/null | head -1 || true)"
-MCP_PRO_ZIP="$(ls -1 "${ROOT}/game/addons"/godot-mcp-pro*.zip "${ROOT}/game/addons"/godot_mcp_pro*.zip 2>/dev/null | head -1 || true)"
+GDAI_ZIP="$(find "${ROOT}/game/addons" -maxdepth 1 -name 'gdai-mcp-plugin-godot*.zip' -print -quit 2>/dev/null || true)"
+MCP_PRO_ZIP="$(find "${ROOT}/game/addons" -maxdepth 1 \( -name 'godot-mcp-pro*.zip' -o -name 'godot_mcp_pro*.zip' \) -print -quit 2>/dev/null || true)"
 
 if [[ -d "${ROOT}/game/addons/gdai-mcp-plugin-godot/gdai_mcp_server.py" ]]; then
   ok "GDAI plugin already extracted"

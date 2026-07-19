@@ -57,7 +57,7 @@ fi
 mkdir -p "${HOME}/.local/bin"
 ln -sf "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" "${HOME}/.local/bin/godot4"
 ln -sf "${GODOT_INSTALL_DIR}/${GODOT_BIN_NAME}" "${HOME}/.local/bin/godot"
-echo "==> Godot: $(${HOME}/.local/bin/godot4 --version 2>&1 | head -1)"
+echo "==> Godot: $("${HOME}"/.local/bin/godot4 --version 2>&1 | head -1)"
 
 # --- Export templates (headless export / validation) ---
 # Export template folder: 4.7-stable → 4.7.stable
