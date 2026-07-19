@@ -1,0 +1,71 @@
+{
+  "audit_id": "20260719T061021Z_post_merge",
+  "generated_at": "2026-07-19T06:10:21Z",
+  "recommendations": [
+    {
+      "id": "REC_STAKEHOLDER_VISUALS",
+      "priority": "P2",
+      "category": "stakeholder",
+      "title": "Refresh stakeholder visual pack",
+      "action": "Copy PNGs to docs/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals",
+      "status": "open"
+    }
+  ],
+  "checklist": {
+    "sections": [
+      {
+        "id": "blocking",
+        "label": "Blocking (P0)",
+        "must_clear_before_dispatch": true,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "before_dispatch",
+        "label": "Before P1-00 dispatch (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "implementation",
+        "label": "Implementation (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "ship_path",
+        "label": "Ship path M6 (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "stakeholder",
+        "label": "Stakeholder comms (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_STAKEHOLDER_VISUALS",
+            "priority": "P2",
+            "category": "stakeholder",
+            "title": "Refresh stakeholder visual pack",
+            "action": "Copy PNGs to docs/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "doc_nit",
+        "label": "Doc nits (P3)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      }
+    ],
+    "total_open": 1,
+    "blocking_open": 0
+  }
+}

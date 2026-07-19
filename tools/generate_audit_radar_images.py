@@ -43,6 +43,11 @@ SPEC_DOMAIN_ORDER = [
     "pm_workflow",
 ]
 
+BUILD_DOMAIN_ORDER = [
+    "runtime_proof",
+    "steam_ship",
+]
+
 DPI = 180
 
 
@@ -223,27 +228,37 @@ def _combined_radar_report(report: dict[str, Any], out_path: Path) -> None:
     _save_fig(fig, out_path)
 
 
-def generate_spec_subdomain_radars(
-    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+def _generate_subdomain_radars(
+    report: dict[str, Any],
+    output_dir: Path,
+    catalog: dict[str, Any],
+    *,
+    domain_order: list[str],
+    stream_key: str,
+    filename_prefix: str,
+    breakdown_filename: str,
+    breakdown_title: str,
+    breakdown_subtitle: str,
+    detail_subtitle: str,
+    grid_cols: int,
 ) -> dict[str, str]:
-    cat = catalog or _load_catalog()
     signal_scores = report.get("signal_scores", {})
     domain_scores = report.get("domain_scores", {})
     written: dict[str, str] = {}
 
-    for dom_id in SPEC_DOMAIN_ORDER:
+    for dom_id in domain_order:
         signals = signal_scores.get(dom_id, {})
         if not signals:
             continue
         labels = [_signal_label(sid) for sid in signals]
         values = [float(v) for v in signals.values()]
         accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
-        fname = f"audit_radar_spec_{dom_id}.png"
+        fname = f"{filename_prefix}_{dom_id}.png"
         _radar_chart(
             labels=labels,
             values=values,
-            title=_domain_title(cat, dom_id),
-            subtitle="Signal breakdown · design stream",
+            title=_domain_title(catalog, dom_id),
+            subtitle=detail_subtitle,
             stream_score=float(domain_scores.get(dom_id, 0)),
             verdict="",
             out_path=output_dir / fname,
@@ -252,23 +267,32 @@ def generate_spec_subdomain_radars(
         written[fname] = str(output_dir / fname)
 
     configure_matplotlib()
-    spec = report.get("streams", {}).get("spec_readiness", {})
-    fig = plt.figure(figsize=(17, 11))
+    stream = report.get("streams", {}).get(stream_key, {})
+    fig = plt.figure(figsize=(17, 7) if grid_cols == 2 else (17, 11))
     apply_void_gradient(fig, alpha_top=0.38)
+    stream_score = stream.get("score")
+    score_meta = (
+        f"Stream N/A on this branch — domain sub-scores preview"
+        if stream.get("status") == "not_applicable"
+        else f"Stream score {stream_score} / 10"
+    )
     draw_brand_header(
         fig,
-        title="Spec Domain Breakdown",
-        subtitle="Six design axes · signal-level sub-radars",
-        verdict=str(spec.get("verdict", "")),
-        meta=f"Stream score {spec.get('score', '?')} / 10",
+        title=breakdown_title,
+        subtitle=breakdown_subtitle,
+        verdict=str(stream.get("verdict", "")) if stream.get("verdict") != "N/A" else "",
+        meta=score_meta,
         y=0.97,
     )
 
-    for idx, dom_id in enumerate(SPEC_DOMAIN_ORDER):
-        row, col = divmod(idx, 3)
-        left = 0.05 + col * 0.31
-        bottom = 0.52 - row * 0.44
-        ax = fig.add_axes([left, bottom, 0.28, 0.38], projection="polar")
+    n = len(domain_order)
+    for idx, dom_id in enumerate(domain_order):
+        row, col = divmod(idx, grid_cols)
+        panel_w = 0.9 / grid_cols
+        left = 0.05 + col * (panel_w + 0.02)
+        bottom = 0.52 - row * 0.44 if grid_cols == 3 else 0.14
+        height = 0.38 if grid_cols == 3 else 0.62
+        ax = fig.add_axes([left, bottom, panel_w - 0.02, height], projection="polar")
         accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
         draw_panel_frame(ax, accent=accent)
         signals = signal_scores.get(dom_id, {})
@@ -280,18 +304,56 @@ def generate_spec_subdomain_radars(
                 labels=labels,
                 values=values,
                 accent=accent,
-                title=_domain_title(cat, dom_id),
+                title=_domain_title(catalog, dom_id),
                 score_line=f"{float(domain_scores.get(dom_id, 0)):.1f}",
-                label_fs=6.5,
-                tick_fs=5.5,
+                label_fs=6.5 if n > 2 else 8,
+                tick_fs=5.5 if n > 2 else 7,
             )
         else:
             ax.axis("off")
 
-    breakdown_path = output_dir / "audit_radar_spec_breakdown.png"
+    breakdown_path = output_dir / breakdown_filename
     _save_fig(fig, breakdown_path)
-    written["audit_radar_spec_breakdown.png"] = str(breakdown_path)
+    written[breakdown_filename] = str(breakdown_path)
     return written
+
+
+def generate_spec_subdomain_radars(
+    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+) -> dict[str, str]:
+    cat = catalog or _load_catalog()
+    return _generate_subdomain_radars(
+        report,
+        output_dir,
+        cat,
+        domain_order=SPEC_DOMAIN_ORDER,
+        stream_key="spec_readiness",
+        filename_prefix="audit_radar_spec",
+        breakdown_filename="audit_radar_spec_breakdown.png",
+        breakdown_title="Spec Domain Breakdown",
+        breakdown_subtitle="Six design axes · signal-level sub-radars",
+        detail_subtitle="Signal breakdown · design stream",
+        grid_cols=3,
+    )
+
+
+def generate_build_subdomain_radars(
+    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+) -> dict[str, str]:
+    cat = catalog or _load_catalog()
+    return _generate_subdomain_radars(
+        report,
+        output_dir,
+        cat,
+        domain_order=BUILD_DOMAIN_ORDER,
+        stream_key="build_readiness",
+        filename_prefix="audit_radar_build",
+        breakdown_filename="audit_radar_build_breakdown.png",
+        breakdown_title="Build Domain Breakdown",
+        breakdown_subtitle="Runtime proof & Steam ship · signal-level sub-radars",
+        detail_subtitle="Signal breakdown · build stream",
+        grid_cols=2,
+    )
 
 
 def generate_audit_radars(
@@ -351,6 +413,7 @@ def generate_audit_radars(
     written["audit_radar_report.png"] = str(report_path)
 
     written.update(generate_spec_subdomain_radars(report, out_dir))
+    written.update(generate_build_subdomain_radars(report, out_dir))
     return written
 
 

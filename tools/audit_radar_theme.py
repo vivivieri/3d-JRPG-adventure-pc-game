@@ -39,6 +39,8 @@ DOMAIN_ACCENT = {
     "visual_spec": PALETTE["biolume"],
     "ux_controls": PALETTE["sand"],
     "pm_workflow": PALETTE["seaweed"],
+    "runtime_proof": PALETTE["biolume"],
+    "steam_ship": PALETTE["coral_gold"],
 }
 
 VERDICT_COLORS = {

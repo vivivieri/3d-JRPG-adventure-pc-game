@@ -19,6 +19,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
 
+BUILD_DOMAIN_ORDER = [
+    "runtime_proof",
+    "steam_ship",
+]
+
 sys.path.insert(0, str(ROOT / "tools"))
 from pm_orchestrator_lib import parse_issue_pack  # noqa: E402
 
@@ -850,6 +855,13 @@ def _visual_sections_markdown(
         if v["filename"].startswith("audit_radar_spec_")
         and v["filename"] not in {"audit_radar_spec.png", "audit_radar_spec_breakdown.png"}
     ]
+    build_breakdown_grid = [v for v in present if v["filename"] == "audit_radar_build_breakdown.png"]
+    build_subdomains = [
+        v
+        for v in present
+        if v["filename"].startswith("audit_radar_build_")
+        and v["filename"] not in {"audit_radar_build.png", "audit_radar_build_breakdown.png"}
+    ]
 
     lines: list[str] = []
 
@@ -880,6 +892,20 @@ def _visual_sections_markdown(
         lines.append("## Spec domain sub-radars (detail)")
         lines.append("")
         _rows(subdomains)
+        lines.append("")
+
+    if build_breakdown_grid:
+        lines.append("## Build sub-radar breakdown (2 domains)")
+        lines.append("")
+        lines.append("Each panel shows signal-level scores within one build domain.")
+        lines.append("")
+        _rows(build_breakdown_grid)
+        lines.append("")
+
+    if build_subdomains:
+        lines.append("## Build domain sub-radars (detail)")
+        lines.append("")
+        _rows(build_subdomains)
         lines.append("")
 
     return lines
@@ -967,6 +993,36 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             ]
         )
         for dom_id in spec_domain_ids:
+            signals = signal_scores.get(dom_id, {})
+            if not signals:
+                continue
+            domain_score = report.get("domain_scores", {}).get(dom_id, "?")
+            label = dom_id.replace("_", " ").title()
+            lines.extend(
+                [
+                    f"### {label} ({domain_score}/10)",
+                    "",
+                    "| Signal | Score |",
+                    "|--------|-------|",
+                ]
+            )
+            for sid, score in sorted(signals.items(), key=lambda x: -x[1]):
+                lines.append(f"| `{sid}` | {score} |")
+            lines.append("")
+
+    build_stream = report.get("streams", {}).get("build_readiness", {})
+    build_domain_ids = list(BUILD_DOMAIN_ORDER)
+    if build_domain_ids and signal_scores:
+        lines.extend(
+            [
+                "## Build domain signal breakdown",
+                "",
+                "Each build domain has its own sub-radar (signals behind the axis score).",
+                "On `main`, build stream is N/A but domain signal previews still generate.",
+                "",
+            ]
+        )
+        for dom_id in build_domain_ids:
             signals = signal_scores.get(dom_id, {})
             if not signals:
                 continue
