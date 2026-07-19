@@ -50,6 +50,8 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L0_sprint_board` | `python3 tools/validate_sprint_board.py --strict` | Sprint board + issue pack alignment |
 | `L0_factory_watchdog` | `python3 tools/validate_factory_watchdog.py` | Factory stall/hang watchdog config |
 | `L0_stakeholder_report` | `python3 tools/validate_stakeholder_report_config.py` | Product owner report + Telegram config |
+| `L1_python_lint` | `bash tools/check_python_lint.sh` | Exit 0 — ruff on `tools/` |
+| `L1_shellcheck` | `bash tools/check_shell_scripts.sh` | Exit 0 — shellcheck on `tools/*.sh` |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
 | `L0_no_secrets` | `bash tools/check_no_secrets.sh` | Exit 0 — no live keys in tracked files |
 | `L0_ship_build_security` | `bash tools/check_ship_build_security.sh` | Exit 0 — export strip policy + binary scan when present |
@@ -64,7 +66,10 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L0_acceptance_catalog` | `python3 tools/validate_acceptance_criteria.py` | Catalog schema valid |
 | `L0_base_classes` | `python3 tools/validate_base_classes.py` | Registry schema + component script refs |
 | `L1_unit_tests` | `bash tools/run_unit_tests.sh` | All unit tests pass headless |
+| `L1_python_lint` | `bash tools/check_python_lint.sh` | Exit 0 — ruff on `tools/` |
+| `L1_shellcheck` | `bash tools/check_shell_scripts.sh` | Exit 0 — shellcheck on `tools/*.sh` |
 | `L1_gdscript_lint` | `bash tools/check_gdscript_changed.sh` | Exit 0 — exit **2** SKIP when no `.gd` diff (FAIL on game branch) |
+| `L1_gdscript_lint_all` | `bash tools/check_gdscript_all.sh` | Exit 0 — full-tree gdlint; **2** SKIP when no `game/scripts` |
 | `L0_base_class_compliance` | `bash tools/check_base_class_compliance.sh` | Exit 0 — no rogue native `extends` (`CharacterBody3D`/`Area3D`/`Node`) |
 | `L2_scene_primitives` | `bash tools/check_scene_visuals.sh` | 0 banned meshes in ship scenes |
 | `L3_gdai_built` | `bash tools/check_l3_gdai_built.sh` | Exit 0 — **SKIP** when no scene diff; else `.gdai_built` updated + `verified_f5=true` |

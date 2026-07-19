@@ -152,4 +152,4 @@ bash tools/run_docs_ci_checks.sh
 - [ ] Quoted variable expansions
 - [ ] New gate ID registered in `acceptance_criteria.json`
 - [ ] `python3 tools/check_doc_sync.py` if runner changed
-- [ ] `bash tools/run_docs_ci_checks.sh` green
+- [ ] `bash tools/check_shell_scripts.sh` green

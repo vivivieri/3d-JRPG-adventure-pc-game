@@ -68,8 +68,8 @@ def write_prompt_sheet(track_id: str, spec: dict, catalog: dict) -> Path:
     lines = [
         f"# ACE-Step prompt — `{track_id}`",
         "",
-        f"| Field | Value |",
-        f"|-------|-------|",
+        "| Field | Value |",
+        "|-------|-------|",
         f"| Scene | {spec.get('scene', '—')} |",
         f"| Category | {spec.get('category', '—')} |",
         f"| Output | `{spec.get('output', '—')}` |",

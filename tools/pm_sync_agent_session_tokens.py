@@ -25,7 +25,6 @@ from agent_session_telemetry_lib import EVENTS_PATH, read_events  # noqa: E402
 from collect_cursor_agent_usage import (  # noqa: E402
     fetch_with_retry,
     resolve_api_key,
-    usage_delta,
     usage_to_telemetry_fields,
 )
 

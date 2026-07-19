@@ -36,6 +36,8 @@ run_gate "L0_narrative_density" python3 tools/validate_narrative_density.py
 run_gate "L0_spec_registry" python3 tools/validate_spec_registry.py
 run_gate "L0_helpers_registry" python3 tools/validate_helpers_registry.py
 run_gate "L0_reference_libs" python3 tools/test_reference_libs.py
+run_gate "L1_python_lint" bash tools/check_python_lint.sh
+run_gate "L1_shellcheck" bash tools/check_shell_scripts.sh
 run_gate "L0_main_no_ship_code" bash tools/check_main_no_ship_code.sh
 run_gate "L0_spec_refinement_scope" bash tools/check_spec_refinement_scope.sh
 run_gate "L0_difficulty_data" python3 tools/validate_difficulty_data.py

@@ -1,0 +1,29 @@
+[project]
+name = "tides-of-urashima-tools"
+version = "0.0.0"
+description = "CI tooling for Tides of Urashima (validators, generators)"
+requires-python = ">=3.10"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["tools"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line length — soft limit 100, not hard fail on long strings
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tools/alignment_audit_lib.py" = ["E402"]
+"tools/pm_stakeholder_report_lib.py" = ["E402"]
+"tools/test_reference_libs.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = []

@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 from audit_radar_theme import (
     DOMAIN_ACCENT,
@@ -26,7 +25,6 @@ from audit_radar_theme import (
     draw_na_panel,
     draw_panel_frame,
     style_polar_axis,
-    verdict_color,
     wrap_label,
 )
 
@@ -272,7 +270,7 @@ def _generate_subdomain_radars(
     apply_void_gradient(fig, alpha_top=0.38)
     stream_score = stream.get("score")
     score_meta = (
-        f"Stream N/A on this branch — domain sub-scores preview"
+        "Stream N/A on this branch — domain sub-scores preview"
         if stream.get("status") == "not_applicable"
         else f"Stream score {stream_score} / 10"
     )

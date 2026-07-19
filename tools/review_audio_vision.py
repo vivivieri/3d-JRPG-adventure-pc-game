@@ -20,8 +20,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
 from audio_brief_lib import format_emotional_context  # noqa: E402
+from qa_acceptance_lib import evaluate_jury_consensus, normalize_jury_review  # noqa: E402
 
 PROMPTS = ROOT / "game/data/audio/ace_step_prompts.json"
 

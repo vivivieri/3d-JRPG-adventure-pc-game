@@ -61,6 +61,12 @@ run_tri_gate "L0_acceptance_catalog" "Acceptance criteria catalog" \
 run_tri_gate "L0_workflow_integration" "Factory workflow integration registry" \
   python3 tools/validate_workflow_integration.py
 
+run_tri_gate "L1_python_lint" "Python ruff lint (tools/)" \
+  bash tools/check_python_lint.sh
+
+run_tri_gate "L1_shellcheck" "ShellCheck on tools/*.sh" \
+  bash tools/check_shell_scripts.sh
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 
@@ -69,6 +75,9 @@ run_tri_gate "L1_unit_tests" "Godot headless unit tests" \
 
 run_tri_gate "L1_gdscript_lint" "GDScript lint on changed files" \
   bash tools/check_gdscript_changed.sh
+
+run_tri_gate "L1_gdscript_lint_all" "GDScript full-tree gdlint" \
+  bash tools/check_gdscript_all.sh
 
 run_tri_gate "L0_base_class_compliance" "No rogue native extends" \
   bash tools/check_base_class_compliance.sh

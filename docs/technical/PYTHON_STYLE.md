@@ -298,6 +298,7 @@ class SaveIntegrityLibTests(unittest.TestCase):
 - [ ] Module docstring with authority doc link
 - [ ] Public functions typed; `main() -> int`
 - [ ] UTF-8 `encoding=` on all text file I/O
+- [ ] `bash tools/check_python_lint.sh` if `tools/*.py` changed
 - [ ] `python3 tools/test_reference_libs.py` if `*_lib.py` changed
 - [ ] Matching validator run if `game/data/` schema checked
 - [ ] `bash tools/check_no_secrets.sh` if new strings added

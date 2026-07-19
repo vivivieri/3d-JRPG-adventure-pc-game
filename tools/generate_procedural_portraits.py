@@ -46,7 +46,7 @@ def _png_rgb(path: Path, pixels: list[tuple[int, int, int]]) -> None:
     path.write_bytes(png)
 
 
-def generate(pid(pid: str) -> Path:
+def generate_portrait(pid: str) -> Path:
     fg, bg = PALETTES.get(pid, ((100, 120, 140), (50, 60, 70)))
     pixels: list[tuple[int, int, int]] = []
     for y in range(H):
@@ -87,7 +87,7 @@ def main() -> int:
         ap.print_help()
         return 1
     for pid in ids:
-        print(f"Generated {generate_pid(pid)}")
+        print(f"Generated {generate_portrait(pid)}")
     return 0
 
 

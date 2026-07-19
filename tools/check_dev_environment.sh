@@ -5,7 +5,6 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 ERR=0
-WARN=0
 OK=0
 
 check() {

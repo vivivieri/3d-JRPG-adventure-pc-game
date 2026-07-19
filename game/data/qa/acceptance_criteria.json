@@ -351,7 +351,32 @@
       "description": "gdlint on changed .gd files in PR diff",
       "pass": { "exit_code": 0 },
       "skip_when": "no .gd changes or no game/project.godot",
-      "design_ref": "docs/technical/CODE_STYLE.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+      "design_ref": "docs/technical/GDSCRIPT_STYLE.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+    },
+    "L1_gdscript_lint_all": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_gdscript_all.sh",
+      "description": "gdlint on all .gd under game/scripts, game/tests, tools/godot_templates",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot or no .gd files",
+      "design_ref": "docs/technical/GDSCRIPT_STYLE.md"
+    },
+    "L1_python_lint": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_python_lint.sh",
+      "description": "ruff PEP 8 lint on tools/*.py",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/PYTHON_STYLE.md"
+    },
+    "L1_shellcheck": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_shell_scripts.sh",
+      "description": "shellcheck on tools/*.sh",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/BASH_STYLE.md"
     },
     "L2_boot_headless": {
       "layer": "L2",
@@ -737,6 +762,8 @@
       "L0_spec_registry",
       "L0_helpers_registry",
       "L0_reference_libs",
+      "L1_python_lint",
+      "L1_shellcheck",
       "L0_main_no_ship_code",
       "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
@@ -785,8 +812,11 @@
       "L0_narrative_density",
       "L0_acceptance_catalog",
       "L0_base_classes",
+      "L1_python_lint",
+      "L1_shellcheck",
       "L1_unit_tests",
       "L1_gdscript_lint",
+      "L1_gdscript_lint_all",
       "L0_base_class_compliance",
       "L2_scene_primitives",
       "L3_gdai_built",
@@ -818,6 +848,12 @@
       {
         "gate_id": "L1_gdscript_lint",
         "skip_when": "phase_1 bootstrap and no .gd files in diff",
+        "skip_is_not_ship_pass": true,
+        "bootstrap_only": true
+      },
+      {
+        "gate_id": "L1_gdscript_lint_all",
+        "skip_when": "phase_1 bootstrap — no game/scripts tree yet",
         "skip_is_not_ship_pass": true,
         "bootstrap_only": true
       },
@@ -863,6 +899,7 @@
       ],
       "deferred_gate_ids": [
         "L1_gdscript_lint",
+        "L1_gdscript_lint_all",
         "L2_glb_import",
         "L2_animation_whitelist",
         "L2_linux_export_smoke",

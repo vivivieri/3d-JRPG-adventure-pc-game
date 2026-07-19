@@ -393,8 +393,10 @@ Not shipped — stripped before Steam export (`ship_security.json`).
 | Change type | Minimum gates | Branch |
 |-------------|---------------|--------|
 | Story / combat JSON | `L0_story_data` | `main` |
+| Python tooling | `L1_python_lint` | both |
+| Shell scripts | `L1_shellcheck` | both |
 | New QA catalog | matching `L0_*` + `L0_doc_sync` | `main` |
-| GDScript logic | `L1_unit_tests`, `L1_gdscript_lint` | `game/development` |
+| GDScript logic | `L1_unit_tests`, `L1_gdscript_lint`, `L1_gdscript_lint_all` | `game/development` |
 | Base class / extends | `L0_base_class_compliance` | both |
 | Scenes / materials | `L2_boot_headless`, `L3_gdai_built`, perf if applicable | `game/development` |
 | Phase gate | `L4_integration` (INT-*) | `game/development` |
@@ -419,6 +421,7 @@ bash tools/run_ci_checks.sh
 - [ ] [PEP 8](https://peps.python.org/pep-0008/) naming, 4-space indent, quoted UTF-8 I/O
 - [ ] Module docstring + `from __future__ import annotations`
 - [ ] `main() -> int` with correct exit codes
+- [ ] `bash tools/check_python_lint.sh`
 - [ ] `python3 tools/test_reference_libs.py` if `*_lib.py` changed
 - [ ] `bash tools/run_docs_ci_checks.sh` green
 
@@ -437,7 +440,8 @@ bash tools/run_ci_checks.sh
 - [ ] [GDSCRIPT_STYLE.md](GDSCRIPT_STYLE.md) — typed GDScript, declaration order, base classes
 - [ ] No hardcoded story numbers or dialogue strings
 - [ ] Typed signals; no `yield()` or string connects
-- [ ] `bash tools/run_unit_tests.sh` + `bash tools/check_gdscript_changed.sh`
+- [ ] `bash tools/run_unit_tests.sh`
+- [ ] `bash tools/check_gdscript_changed.sh` + `bash tools/check_gdscript_all.sh`
 - [ ] Scenes built via GDAI MCP (not hand-edited `.tscn`)
 
 ### TypeScript / MCP PR (`game/development`)
@@ -489,6 +493,7 @@ bash tools/run_docs_ci_checks.sh
 
 # GDScript lint (game/development)
 bash tools/check_gdscript_changed.sh
+bash tools/check_gdscript_all.sh
 
 # Unit tests
 bash tools/run_unit_tests.sh

@@ -65,7 +65,7 @@ def main() -> int:
         print(f"[FAIL] missing GDScript reference {impl} (SaveIntegrity port_status=ported)")
         return 1
     if port_status == "ported":
-        print(f"[OK]   SaveIntegrity GDScript present")
+        print("[OK]   SaveIntegrity GDScript present")
     else:
         print(f"[SKIP] SaveIntegrity GDScript — port_status={port_status} (Phase 2 dispatch)")
 
@@ -73,7 +73,7 @@ def main() -> int:
         f"[OK]   save_integrity.json — {spec['algorithm']}, "
         f"{len(spec['signed_payload_fields'])} signed field(s)"
     )
-    print(f"[OK]   HMAC round-trip + tamper rejection")
+    print("[OK]   HMAC round-trip + tamper rejection")
     print("[PASS] save integrity spec")
     return 0
 

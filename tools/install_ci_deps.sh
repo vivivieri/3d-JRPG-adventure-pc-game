@@ -25,7 +25,7 @@ echo ""
 if command -v apt-get >/dev/null 2>&1; then
   sudo apt-get update -qq
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
-    curl wget unzip ca-certificates python3 python3-pip ripgrep \
+    curl wget unzip ca-certificates python3 python3-pip ripgrep shellcheck \
     libgl1-mesa-dri libglx-mesa0 libvulkan1 xvfb
 fi
 

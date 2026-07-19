@@ -2,9 +2,7 @@
 """Tests for Python reference libs — parity baseline before GDScript ports."""
 from __future__ import annotations
 
-import json
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -15,18 +13,28 @@ from achievement_evaluator_lib import evaluate_catalog, load_catalog, trigger_me
 from difficulty_lib import (  # noqa: E402
     boss_shows_intent_preview,
     is_hard_mode,
-    load_catalog as load_difficulty,
     scale_enemy_hp,
     suggest_hard_after_clear,
     tide_keeper_gate_hp_percent,
 )
-from save_integrity_lib import attach_integrity, load_spec, sign_save, verify_save  # noqa: E402
-from settings_store_lib import defaults, is_hard_mode as settings_hard, load_settings, set_value  # noqa: E402
+from difficulty_lib import (
+    load_catalog as load_difficulty,
+)
+from save_integrity_lib import attach_integrity, load_spec, verify_save  # noqa: E402
+from settings_store_lib import (  # noqa: E402
+    defaults,
+    set_value,
+)
+from settings_store_lib import (
+    is_hard_mode as settings_hard,
+)
 from zone_visuals_lib import (  # noqa: E402
     apply_to_scene,
     build_environment,
     get_preset,
     hex_to_color,
+)
+from zone_visuals_lib import (
     load_catalog as load_zone_palettes,
 )
 

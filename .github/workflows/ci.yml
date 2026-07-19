@@ -23,7 +23,7 @@ jobs:
       - name: Install Python validators
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3 python3-pip ripgrep
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3 python3-pip ripgrep shellcheck
 
       - name: Run main-branch CI checks
         run: bash tools/run_docs_ci_checks.sh

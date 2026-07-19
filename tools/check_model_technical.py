@@ -14,7 +14,6 @@ from model_qa_lib import (  # noqa: E402
     count_triangles,
     is_greybox_source,
     load_catalog,
-    model_path,
     parse_glb,
 )
 

@@ -75,7 +75,7 @@ def main() -> int:
         print(f"[FAIL] missing {impl} (DifficultyService port_status=ported)")
         return 1
     if port_status == "ported":
-        print(f"[OK]   DifficultyService GDScript present")
+        print("[OK]   DifficultyService GDScript present")
     else:
         print(f"[SKIP] DifficultyService GDScript — port_status={port_status} (Phase 4 dispatch)")
 
@@ -88,7 +88,7 @@ def main() -> int:
     assert boss_shows_intent_preview(2, True, {"hard_mode": False}) is True
     assert tide_keeper_gate_hp_percent({"hard_mode": True}) == 0.15
 
-    print(f"[OK]   difficulty.json — modes normal + hard")
+    print("[OK]   difficulty.json — modes normal + hard")
     print(f"[OK]   settings schema includes {hard_key}")
     print("[OK]   multiplier reference checks")
     print("[PASS] difficulty data")

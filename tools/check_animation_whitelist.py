@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from model_qa_lib import ROOT, animation_durations_ms, load_catalog, model_path, parse_glb  # noqa: E402
+from model_qa_lib import animation_durations_ms, load_catalog, model_path, parse_glb  # noqa: E402
 
 
 def animation_names(gltf: dict) -> list[str]:
@@ -118,7 +118,7 @@ def main() -> int:
         if model_id not in catalog["models"]:
             if args.strict:
                 print(f"\n==> {model_id}")
-                print(f"  FAIL: unknown model id in phase_required")
+                print("  FAIL: unknown model id in phase_required")
                 fail += 1
             continue
         meta = catalog["models"][model_id]

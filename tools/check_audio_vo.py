@@ -13,8 +13,8 @@ from check_audio_technical import check_file  # noqa: E402
 from vo_qa_lib import (  # noqa: E402
     clip_meta,
     expected_line_text,
-    locale_jobs,
     load_catalog,
+    locale_jobs,
     p0_listen_clips,
     resolve_vo_path,
 )

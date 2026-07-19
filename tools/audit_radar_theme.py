@@ -5,14 +5,13 @@ Palette authority: docs/art/ART_DIRECTION.md §1, docs/art/RENDERING_GUIDE.md
 from __future__ import annotations
 
 import textwrap
-from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import patheffects as pe
+from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from matplotlib.patches import FancyBboxPatch, Rectangle
-from matplotlib.axes import Axes
 
 # Hub + caves + palace void — muted coastal JRPG (not bright anime)
 PALETTE = {

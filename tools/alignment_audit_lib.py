@@ -1010,7 +1010,6 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
                 lines.append(f"| `{sid}` | {score} |")
             lines.append("")
 
-    build_stream = report.get("streams", {}).get("build_readiness", {})
     build_domain_ids = list(BUILD_DOMAIN_ORDER)
     if build_domain_ids and signal_scores:
         lines.extend(
@@ -1456,7 +1455,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  Markdown: {paths['markdown']}")
     print(f"  HTML: {paths['html']}")
     print(f"  Committed: {paths.get('committed_dir', 'n/a')}")
-    print(f"  History: docs/compliance/alignment_audit_history.json")
+    print("  History: docs/compliance/alignment_audit_history.json")
     return 0 if report["verdict"] != "FAIL" else 1
 
 

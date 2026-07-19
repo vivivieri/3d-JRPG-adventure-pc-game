@@ -88,7 +88,6 @@ def group_runs(events: list[dict]) -> dict[str, list[dict]]:
 # Metric computation
 # --------------------------------------------------------------------------- #
 def analyze_run(events: list[dict], schema: dict[str, Any]) -> dict[str, Any]:
-    beats = {b["id"]: b for b in schema["scene_beats"]}
     thr = schema["thresholds"]
     stuck_seconds = thr["stuck_seconds"]["value"]
     progress_events = set(schema["progress_events"])

@@ -8,7 +8,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from pm_orchestrator_lib import load_board, parse_issue_pack, save_json, sync_missing_from_pack  # noqa: E402
+from pm_orchestrator_lib import (  # noqa: E402
+    load_board,
+    parse_issue_pack,
+    save_json,
+    sync_missing_from_pack,
+)
 
 BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
 
