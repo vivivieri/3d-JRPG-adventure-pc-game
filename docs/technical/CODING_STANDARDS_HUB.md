@@ -1,6 +1,6 @@
 # Coding Standards Hub — Tides of Urashima
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement.  
 **Authority chain:** This hub **indexes** deeper docs — when details conflict, follow the linked authority doc.
 
@@ -20,7 +20,8 @@
 | **Python 3** | [**PYTHON_STYLE.md**](PYTHON_STYLE.md) | [PEP 8](https://peps.python.org/pep-0008/) · [PEP 257](https://peps.python.org/pep-0257/) · [PEP 484](https://peps.python.org/pep-0484/) |
 | **JSON** | [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md) | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259) · [Google JSON Style](https://google.github.io/styleguide/jsoncstyleguide.xml) |
 | **Bash** | [**BASH_STYLE.md**](BASH_STYLE.md) | [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) |
-| **GDScript 2.0** | [**CODE_STYLE.md**](CODE_STYLE.md) | [Godot GDScript style](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · `gdlint` |
+| **GDScript 2.0** | [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) | [Godot GDScript style](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · `gdlint` |
+| **TypeScript / Node** | [**TYPESCRIPT_STYLE.md**](TYPESCRIPT_STYLE.md) | [TS Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [Google TS style](https://google.github.io/styleguide/tsguide.html) · MCP Pro server |
 | **Shaders** | [`CODE_STYLE.md`](CODE_STYLE.md) §8 | [Godot shader docs](https://docs.godotengine.org/en/stable/tutorials/shaders/index.html) |
 
 ---
@@ -29,14 +30,15 @@
 
 | Language | Role | Location | Authority |
 |----------|------|----------|-----------|
-| **GDScript 2.0** | Game runtime — combat, narrative, UI, world | `game/scripts/` (`game/development`) | [`CODE_STYLE.md`](CODE_STYLE.md) · [`TECHNICAL_DESIGN.md`](TECHNICAL_DESIGN.md) |
+| **GDScript 2.0** | Game runtime — combat, narrative, UI, world | `game/scripts/` (`game/development`) | [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) · [`CODE_STYLE.md`](CODE_STYLE.md) |
 | **Godot Shader** (`.gdshader`) | NPR toon, water, emissive VFX | `game/shaders/` | [`CODE_STYLE.md`](CODE_STYLE.md) §8 · [`RENDERING_GUIDE.md`](../art/RENDERING_GUIDE.md) |
 | **JSON** | Story, combat, registries, QA catalogs | `game/data/` | [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md) · [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) |
 | **Python 3** | Validators, CI, procedural generators, reference libs | `tools/*.py` | [**PYTHON_STYLE.md**](PYTHON_STYLE.md) · [PEP 8](https://peps.python.org/pep-0008/) |
 | **Bash** | CI runners, bootstrap, QA orchestration | `tools/*.sh` | [**BASH_STYLE.md**](BASH_STYLE.md) · [`CI.md`](../ci-cd/CI.md) |
 | **HTML** | Generated stakeholder dashboards | `docs/compliance/` | [`ALIGNMENT_AUDIT.md`](../qa/ALIGNMENT_AUDIT.md) |
+| **TypeScript** | Godot MCP Pro server (dev tooling — **not shipped**) | `tools/godot-mcp-pro-server/` | [**TYPESCRIPT_STYLE.md**](TYPESCRIPT_STYLE.md) |
 
-**Not shipped in the game:** TypeScript/JavaScript (Godot MCP Pro dev server), GitHub Actions YAML.
+**Not shipped in the game:** Godot MCP Pro server + addon, GDAI/Godotiq plugins, GitHub Actions YAML.
 
 **Engine:** Godot **4.7** Forward+ · scene tree + autoload singletons — **not** ECS.
 
@@ -79,8 +81,8 @@ See [`BRANCHING.md`](../workflow/BRANCHING.md) · [`SPEC_FIRST_DEVELOPMENT.md`](
 
 ## 3. GDScript — industrial rules
 
-**Full guide:** [`CODE_STYLE.md`](CODE_STYLE.md)  
-**External:** [Godot GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
+**Full guide:** [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) · [`CODE_STYLE.md`](CODE_STYLE.md) (scenes, autoloads)  
+**External:** [Godot GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · [Static typing](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html)
 
 ### Must enforce (Godot 4)
 
@@ -363,7 +365,30 @@ Authority: [`CI.md`](../ci-cd/CI.md) · [`ACCEPTANCE_CRITERIA.md`](../qa/ACCEPTA
 
 ---
 
-## 8. CI enforcement matrix
+## 8. TypeScript / Node.js — MCP Pro server
+
+**Full guide:** [**TYPESCRIPT_STYLE.md**](TYPESCRIPT_STYLE.md)  
+**External:** [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html)
+
+| Topic | Rule |
+|-------|------|
+| Location | `tools/godot-mcp-pro-server/` (from commercial zip — gitignored) |
+| Node | 18+ · `npm install && npm run build` → `build/index.js` |
+| Cursor mode | **`--minimal`** always — L4/L5 test tools only; no scene editing |
+| Naming | `camelCase` functions · `PascalCase` types · MCP tools `snake_case` |
+| Strict TS | `strict: true` in `tsconfig.json` when patching vendor sources |
+| R&R | Scene mutations = **GDAI MCP** — never fork MCP Pro to add editors |
+
+```bash
+bash tools/install_godot_mcp_pro.sh
+bash tools/check_mcp_ready.sh
+```
+
+Not shipped — stripped before Steam export (`ship_security.json`).
+
+---
+
+## 9. CI enforcement matrix
 
 | Change type | Minimum gates | Branch |
 |-------------|---------------|--------|
@@ -387,7 +412,7 @@ bash tools/run_ci_checks.sh
 
 ---
 
-## 9. PR checklist by change type
+## 10. PR checklist by change type
 
 ### Python PR (`main`)
 
@@ -409,11 +434,18 @@ bash tools/run_ci_checks.sh
 
 ### GDScript PR (`game/development`)
 
-- [ ] Extends registered base class — no raw `CharacterBody3D` stacks
+- [ ] [GDSCRIPT_STYLE.md](GDSCRIPT_STYLE.md) — typed GDScript, declaration order, base classes
 - [ ] No hardcoded story numbers or dialogue strings
 - [ ] Typed signals; no `yield()` or string connects
 - [ ] `bash tools/run_unit_tests.sh` + `bash tools/check_gdscript_changed.sh`
 - [ ] Scenes built via GDAI MCP (not hand-edited `.tscn`)
+
+### TypeScript / MCP PR (`game/development`)
+
+- [ ] [TYPESCRIPT_STYLE.md](TYPESCRIPT_STYLE.md) — strict TS, `--minimal` preserved
+- [ ] `npm run build` in `tools/godot-mcp-pro-server/`
+- [ ] No new scene-editing MCP tools
+- [ ] `bash tools/check_mcp_ready.sh` passes
 
 ### New factory / QA feature
 
@@ -423,7 +455,7 @@ bash tools/run_ci_checks.sh
 
 ---
 
-## 10. Related authority docs
+## 11. Related authority docs
 
 | Topic | Document |
 |-------|----------|
@@ -432,7 +464,8 @@ bash tools/run_ci_checks.sh
 | JSON / data | [`JSON_DATA_STYLE.md`](JSON_DATA_STYLE.md) |
 | Bash / CI scripts | [`BASH_STYLE.md`](BASH_STYLE.md) |
 | Runtime architecture | [`TECHNICAL_DESIGN.md`](TECHNICAL_DESIGN.md) |
-| GDScript detail | [`CODE_STYLE.md`](CODE_STYLE.md) |
+| GDScript detail | [`GDSCRIPT_STYLE.md`](GDSCRIPT_STYLE.md) · [`CODE_STYLE.md`](CODE_STYLE.md) |
+| TypeScript / MCP Pro | [`TYPESCRIPT_STYLE.md`](TYPESCRIPT_STYLE.md) |
 | Data spine & schemas | [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) |
 | Base classes | [`CODE_BASE_CLASS_RULES.md`](CODE_BASE_CLASS_RULES.md) |
 | Helper port workflow | [`GDSCRIPT_REGENERATION.md`](GDSCRIPT_REGENERATION.md) |
@@ -445,7 +478,7 @@ bash tools/run_ci_checks.sh
 
 ---
 
-## 11. Quick commands
+## 12. Quick commands
 
 ```bash
 # Validate story data after any game/data edit
