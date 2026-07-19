@@ -1,6 +1,6 @@
 # Coding Standards Hub — Tides of Urashima
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement.  
 **Authority chain:** This hub **indexes** deeper docs — when details conflict, follow the linked authority doc.
 
@@ -22,7 +22,10 @@
 | **Bash** | [**BASH_STYLE.md**](BASH_STYLE.md) | [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) |
 | **GDScript 2.0** | [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) | [Godot GDScript style](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · `gdlint` |
 | **TypeScript / Node** | [**TYPESCRIPT_STYLE.md**](TYPESCRIPT_STYLE.md) | [TS Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [Google TS style](https://google.github.io/styleguide/tsguide.html) · MCP Pro server |
-| **Shaders** | [`CODE_STYLE.md`](CODE_STYLE.md) §8 | [Godot shader docs](https://docs.godotengine.org/en/stable/tutorials/shaders/index.html) |
+| **Markdown** | [**MARKDOWN_STYLE.md**](MARKDOWN_STYLE.md) | [CommonMark](https://spec.commonmark.org/) · Google developer docs style |
+| **Shaders** | [**SHADER_STYLE.md**](SHADER_STYLE.md) | [Godot shader docs](https://docs.godotengine.org/en/stable/tutorials/shaders/index.html) |
+| **Scenes** | [**SCENE_STYLE.md**](SCENE_STYLE.md) | GDAI MCP build policy · [`CODE_STYLE.md`](CODE_STYLE.md) |
+| **Errors & messages** | [**ERROR_HANDLING.md**](ERROR_HANDLING.md) | Cross-language patterns · tri-state gate messages |
 
 ---
 
@@ -31,7 +34,9 @@
 | Language | Role | Location | Authority |
 |----------|------|----------|-----------|
 | **GDScript 2.0** | Game runtime — combat, narrative, UI, world | `game/scripts/` (`game/development`) | [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) · [`CODE_STYLE.md`](CODE_STYLE.md) |
-| **Godot Shader** (`.gdshader`) | NPR toon, water, emissive VFX | `game/shaders/` | [`CODE_STYLE.md`](CODE_STYLE.md) §8 · [`RENDERING_GUIDE.md`](../art/RENDERING_GUIDE.md) |
+| **Godot Shader** (`.gdshader`) | NPR toon, water, emissive VFX | `game/shaders/` | [**SHADER_STYLE.md**](SHADER_STYLE.md) · [`RENDERING_GUIDE.md`](../art/RENDERING_GUIDE.md) |
+| **Godot Scene** (`.tscn`) | Zones, UI, components — **GDAI built** | `game/scenes/` | [**SCENE_STYLE.md**](SCENE_STYLE.md) · [`MCP_STACK.md`](../agents/MCP_STACK.md) |
+| **Markdown** | Design docs, runbooks, QA policy | `docs/` | [**MARKDOWN_STYLE.md**](MARKDOWN_STYLE.md) |
 | **JSON** | Story, combat, registries, QA catalogs | `game/data/` | [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md) · [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) |
 | **Python 3** | Validators, CI, procedural generators, reference libs | `tools/*.py` | [**PYTHON_STYLE.md**](PYTHON_STYLE.md) · [PEP 8](https://peps.python.org/pep-0008/) |
 | **Bash** | CI runners, bootstrap, QA orchestration | `tools/*.sh` | [**BASH_STYLE.md**](BASH_STYLE.md) · [`CI.md`](../ci-cd/CI.md) |
@@ -396,7 +401,11 @@ Not shipped — stripped before Steam export (`ship_security.json`).
 | Python tooling | `L1_python_lint` | both |
 | Shell scripts | `L1_shellcheck` | both |
 | JSON format / naming | `L1_json_style` | both |
+| Documentation (`.md`) | `L1_markdown_style` | `main` |
+| Shaders (`.gdshader`) | `L1_gdshader_style` | both (templates on `main`) |
+| Scenes (`.tscn`) | `L1_scene_style`, `L2_scene_primitives`, `L3_gdai_built` | `game/development` |
 | TypeScript (MCP Pro) | `L1_typescript_lint` | `game/development` (SKIP when vendor not installed) |
+| Error / exception style | [`ERROR_HANDLING.md`](ERROR_HANDLING.md) | all — enforced via language linters + `L0_*` validators |
 | New QA catalog | matching `L0_*` + `L0_doc_sync` | `main` |
 | GDScript logic | `L1_unit_tests`, `L1_gdscript_lint`, `L1_gdscript_lint_all` | `game/development` |
 | Base class / extends | `L0_base_class_compliance` | both |
@@ -425,6 +434,13 @@ bash tools/run_ci_checks.sh
 - [ ] `main() -> int` with correct exit codes
 - [ ] `bash tools/check_python_lint.sh`
 - [ ] `python3 tools/test_reference_libs.py` if `*_lib.py` changed
+- [ ] `bash tools/run_docs_ci_checks.sh` green
+
+### Documentation PR (`main`)
+
+- [ ] [MARKDOWN_STYLE.md](MARKDOWN_STYLE.md) — ATX headings, no tabs in prose, trailing newline
+- [ ] `python3 tools/check_markdown_style.py` (`L1_markdown_style`)
+- [ ] Relative links resolve from file location
 - [ ] `bash tools/run_docs_ci_checks.sh` green
 
 ### Data-only PR (`main`)

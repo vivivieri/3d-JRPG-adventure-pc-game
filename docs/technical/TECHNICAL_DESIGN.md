@@ -4,7 +4,7 @@
 **Engine:** Godot 4.7 stable, Forward+  
 **Architecture:** Scene-tree JRPG with autoload singletons — **not** ECS  
 **Status:** Pre-build spec — Phase 2+ implementation  
-**Cross-refs:** [CODE_STYLE.md](CODE_STYLE.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md), [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md), [UI_UX_FLOW.md](UI_UX_FLOW.md), [COMBAT_SYSTEMS.md](COMBAT_SYSTEMS.md)
+**Cross-refs:** [CODE_STYLE.md](CODE_STYLE.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md), [SAVE_AND_FAIL_STATES.md](SAVE_AND_FAIL_STATES.md), [UI_UX_FLOW.md](../ui/UI_UX_FLOW.md), [COMBAT_SYSTEMS.md](../gameplay/COMBAT_SYSTEMS.md)
 
 ---
 
@@ -264,7 +264,7 @@ CombatManager.start_encounter("enc_sc09_shore_wraith")
 
 **Zone entry:** `ZoneVisuals.apply_to_scene(root, zone_id)` (static — `base_classes.json` + `zone_visuals_lib.py`) then `AudioManager.play_bgm(zone_bgm)`.
 
-Per-zone interactable tables: [LEVEL_DESIGN.md](LEVEL_DESIGN.md).
+Per-zone interactable tables: [LEVEL_DESIGN.md](../world/LEVEL_DESIGN.md).
 
 ---
 

@@ -73,6 +73,15 @@ run_tri_gate "L1_json_style" "JSON style lint (game/data)" \
 run_tri_gate "L1_typescript_lint" "TypeScript lint (MCP Pro server)" \
   bash tools/check_typescript_lint.sh
 
+run_tri_gate "L1_markdown_style" "Markdown style lint (docs/)" \
+  python3 tools/check_markdown_style.py
+
+run_tri_gate "L1_gdshader_style" "Godot shader style lint" \
+  python3 tools/check_gdshader_style.py
+
+run_tri_gate "L1_scene_style" "Godot scene static style lint" \
+  bash tools/check_scene_style.sh
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 
