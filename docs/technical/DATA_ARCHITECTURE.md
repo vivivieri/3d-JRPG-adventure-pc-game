@@ -1,6 +1,7 @@
 # Tides of Urashima — Story-Driven Data Architecture
 
 **Version:** 1.0  
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) — naming, schema bumps, extension checklists  
 **Principle:** Data follows the story spine — scenes drive flags, flags drive quests, quests drive encounters and rewards.  
 **Runtime wiring:** `docs/technical/TECHNICAL_DESIGN.md` · **Zone placement:** `docs/world/LEVEL_DESIGN.md`
 

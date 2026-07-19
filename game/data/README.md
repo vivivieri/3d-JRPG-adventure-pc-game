@@ -1,6 +1,8 @@
 # Data Schema — Tides of Urashima
 
-**Story-driven JSON database.** Read `docs/technical/DATA_ARCHITECTURE.md` for design rationale.
+**Story-driven JSON database.**  
+**Start here for all coding + data rules:** [`docs/technical/CODING_STANDARDS_HUB.md`](../../docs/technical/CODING_STANDARDS_HUB.md)  
+Design rationale: [`docs/technical/DATA_ARCHITECTURE.md`](../../docs/technical/DATA_ARCHITECTURE.md)
 
 ## File layout
 
@@ -108,7 +110,8 @@ See `docs/technical/DATA_ARCHITECTURE.md` §17. Summary: `chapter_01.json` = `sc
 
 ## Related docs
 
-- `docs/technical/DATA_ARCHITECTURE.md` — full architecture
+- [`docs/technical/CODING_STANDARDS_HUB.md`](../../docs/technical/CODING_STANDARDS_HUB.md) — naming, schema bumps, extension checklists
+- [`docs/technical/DATA_ARCHITECTURE.md`](../../docs/technical/DATA_ARCHITECTURE.md) — full architecture
 - `docs/world/QUEST_AND_FLAGS.md` — quest & flag detail
 - `docs/gameplay/ITEMS_AND_ECONOMY.md` — item catalog
 - `docs/art/ITEMS_3D_MODEL_GUIDE.md` — item 3D mesh specs
