@@ -1,16 +1,27 @@
 # Coding Standards Hub — Tides of Urashima
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement.  
 **Authority chain:** This hub **indexes** deeper docs — when details conflict, follow the linked authority doc.
 
 | Priority | Document | Scope |
 |----------|----------|-------|
 | 1 | **This hub** | Where to start; cross-language conventions |
-| 2 | [`CODE_STYLE.md`](CODE_STYLE.md) | GDScript, shaders, scenes |
-| 3 | [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) | Story JSON spine, save shape, schema versions |
-| 4 | [`CODE_BASE_CLASS_RULES.md`](CODE_BASE_CLASS_RULES.md) | Extend-only architecture |
-| 5 | `game/data/*.json` | **Runtime numbers win** over prose in design docs |
+| 2 | Per-language guides (below) | PEP 8, JSON RFC, shell style, GDScript detail |
+| 3 | [`CODE_STYLE.md`](CODE_STYLE.md) | GDScript scenes, autoloads, tests |
+| 4 | [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) | Story spine, save shape |
+| 5 | [`CODE_BASE_CLASS_RULES.md`](CODE_BASE_CLASS_RULES.md) | Extend-only architecture |
+| 6 | `game/data/*.json` | **Runtime numbers win** over prose in design docs |
+
+### Per-language deep dives
+
+| Language | Detailed guide | External standard |
+|----------|----------------|-------------------|
+| **Python 3** | [**PYTHON_STYLE.md**](PYTHON_STYLE.md) | [PEP 8](https://peps.python.org/pep-0008/) · [PEP 257](https://peps.python.org/pep-0257/) · [PEP 484](https://peps.python.org/pep-0484/) |
+| **JSON** | [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md) | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259) · [Google JSON Style](https://google.github.io/styleguide/jsoncstyleguide.xml) |
+| **Bash** | [**BASH_STYLE.md**](BASH_STYLE.md) | [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) |
+| **GDScript 2.0** | [**CODE_STYLE.md**](CODE_STYLE.md) | [Godot GDScript style](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · `gdlint` |
+| **Shaders** | [`CODE_STYLE.md`](CODE_STYLE.md) §8 | [Godot shader docs](https://docs.godotengine.org/en/stable/tutorials/shaders/index.html) |
 
 ---
 
@@ -20,9 +31,9 @@
 |----------|------|----------|-----------|
 | **GDScript 2.0** | Game runtime — combat, narrative, UI, world | `game/scripts/` (`game/development`) | [`CODE_STYLE.md`](CODE_STYLE.md) · [`TECHNICAL_DESIGN.md`](TECHNICAL_DESIGN.md) |
 | **Godot Shader** (`.gdshader`) | NPR toon, water, emissive VFX | `game/shaders/` | [`CODE_STYLE.md`](CODE_STYLE.md) §8 · [`RENDERING_GUIDE.md`](../art/RENDERING_GUIDE.md) |
-| **JSON** | Story, combat, registries, QA catalogs | `game/data/` | [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) · [`game/data/README.md`](../../game/data/README.md) |
-| **Python 3** | Validators, CI, procedural generators, reference libs | `tools/*.py` | [`GDSCRIPT_REGENERATION.md`](GDSCRIPT_REGENERATION.md) · this hub §6 |
-| **Bash** | CI runners, bootstrap, QA orchestration | `tools/*.sh` | [`CI.md`](../ci-cd/CI.md) |
+| **JSON** | Story, combat, registries, QA catalogs | `game/data/` | [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md) · [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) |
+| **Python 3** | Validators, CI, procedural generators, reference libs | `tools/*.py` | [**PYTHON_STYLE.md**](PYTHON_STYLE.md) · [PEP 8](https://peps.python.org/pep-0008/) |
+| **Bash** | CI runners, bootstrap, QA orchestration | `tools/*.sh` | [**BASH_STYLE.md**](BASH_STYLE.md) · [`CI.md`](../ci-cd/CI.md) |
 | **HTML** | Generated stakeholder dashboards | `docs/compliance/` | [`ALIGNMENT_AUDIT.md`](../qa/ALIGNMENT_AUDIT.md) |
 
 **Not shipped in the game:** TypeScript/JavaScript (Godot MCP Pro dev server), GitHub Actions YAML.
@@ -68,7 +79,8 @@ See [`BRANCHING.md`](../workflow/BRANCHING.md) · [`SPEC_FIRST_DEVELOPMENT.md`](
 
 ## 3. GDScript — industrial rules
 
-Full guide: [`CODE_STYLE.md`](CODE_STYLE.md)
+**Full guide:** [`CODE_STYLE.md`](CODE_STYLE.md)  
+**External:** [Godot GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
 
 ### Must enforce (Godot 4)
 
@@ -102,10 +114,17 @@ player.global_position = ...
 ### Lint & tests
 
 ```bash
-bash tools/check_gdscript_changed.sh    # gdlint on changed .gd (L1_gdscript_lint)
+bash tools/check_gdscript_changed.sh    # gdlint (gdtoolkit) on changed .gd — L1_gdscript_lint
 bash tools/run_unit_tests.sh            # L1_unit_tests
 bash tools/check_base_class_compliance.sh
 ```
+
+| GDScript rule | Standard |
+|---------------|----------|
+| `snake_case` files, functions, variables | Godot style guide |
+| `PascalCase` class names | Godot style guide |
+| Type hints where file already uses them | Godot 4 typed GDScript |
+| `gdlint` clean on changed files | Project CI (`gdtoolkit`) |
 
 ---
 
@@ -122,7 +141,8 @@ Spec detail: [`SHADER_SPECS.md`](../art/SHADER_SPECS.md) · [`RENDERING_GUIDE.md
 
 ## 5. Data structures — conventions & extensions
 
-Full architecture: [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) · file index: [`game/data/README.md`](../../game/data/README.md)
+**Detailed JSON rules:** [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md)  
+**Architecture:** [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) · file index: [`game/data/README.md`](../../game/data/README.md)
 
 ### 5.1 Story spine (gameplay content)
 
@@ -242,23 +262,81 @@ Authoritative field list: [`SAVE_AND_FAIL_STATES.md`](SAVE_AND_FAIL_STATES.md) �
 
 ---
 
-## 6. Python tooling standards
+## 6. Python 3 — industrial rules
+
+**Full guide:** [**PYTHON_STYLE.md**](PYTHON_STYLE.md)  
+**Primary external standard:** [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
+
+Also apply: [PEP 257](https://peps.python.org/pep-0257/) (docstrings) · [PEP 484](https://peps.python.org/pep-0484/) / [PEP 585](https://peps.python.org/pep-0585/) (type hints) · [PEP 20](https://peps.python.org/pep-0020/) (Zen of Python).
 
 Python on `main` is the **behavior reference** for core helpers ported to GDScript on `game/development`.
+
+### PEP 8 quick reference (project profile)
+
+| Topic | Rule |
+|-------|------|
+| Indent | 4 spaces, no tabs |
+| Line length | 100 chars soft limit |
+| Names | `snake_case` functions/vars · `CapWords` classes · `UPPER_SNAKE` constants |
+| Imports | stdlib → third-party → local; one per line |
+| Files | UTF-8 `encoding="utf-8"` on all text I/O |
+| Module header | `from __future__ import annotations` on new files |
+| Docstrings | Every module + public function ([PEP 257](https://peps.python.org/pep-0257/)) |
+| CLI scripts | `def main() -> int:` + `raise SystemExit(main())` |
+
+### Example (validator pattern)
+
+```python
+#!/usr/bin/env python3
+"""Validate story-driven game data integrity.
+
+Authority: docs/technical/DATA_ARCHITECTURE.md
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "game" / "data"
+
+
+def load_json(rel: str) -> dict[str, Any]:
+    return json.loads((DATA / rel).read_text(encoding="utf-8"))
+
+
+def main() -> int:
+    errors: list[str] = []
+    # ... collect errors ...
+    if errors:
+        for msg in errors:
+            print(f"  - {msg}", file=sys.stderr)
+        return 1
+    print("OK — story data valid")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+### Project-specific rules
 
 | Rule | Detail |
 |------|--------|
 | Reference libs | `tools/*_lib.py` — must pass `L0_reference_libs` unit tests |
 | Validators | One `validate_*.py` per catalog; exit `0`=PASS, `1`=FAIL, `2`=SKIP |
-| Paths | Use `pathlib.Path`; repo root via `Path(__file__).resolve().parents[1]` |
-| CLI | `argparse` + `if __name__ == "__main__": sys.exit(main())` |
-| Types | Use `from __future__ import annotations` and typed signatures on public APIs |
+| Paths | `pathlib.Path`; repo root via `Path(__file__).resolve().parents[1]` |
 | No secrets | Never commit API keys — `bash tools/check_no_secrets.sh` |
+| Gameplay numbers | Belong in `game/data/*.json`, not Python constants |
 
 **Port workflow:** [`GDSCRIPT_REGENERATION.md`](GDSCRIPT_REGENERATION.md) — Python reference wins until `main` spec is fixed.
 
 ```bash
 python3 tools/validate_story_data.py      # after any game/data story edit
+python3 tools/test_reference_libs.py    # after *_lib.py changes
 bash tools/run_docs_ci_checks.sh          # full main-branch gate suite
 ```
 
@@ -268,12 +346,18 @@ Dependencies: `tools/requirements-ci.txt` (`gdtoolkit`, `matplotlib`, …).
 
 ## 7. Shell / CI scripts
 
+**Full guide:** [**BASH_STYLE.md**](BASH_STYLE.md)  
+**External:** [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+
 | Rule | Detail |
 |------|--------|
-| Naming | `run_<domain>_<action>.sh`, `check_<domain>.sh`, `validate_<domain>.py` |
-| Gate runner | `tools/run_docs_ci_checks.sh` calls `run_gate "<gate_id>"` — ids must match `acceptance_criteria.json` |
+| Shebang | `#!/usr/bin/env bash` |
+| Safety | `set -euo pipefail` |
+| ROOT | `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` |
+| Naming | `run_<domain>_<action>.sh`, `check_<domain>.sh` |
+| Quoting | Always `"${var}"` — see BASH_STYLE.md |
+| Gate runner | `run_gate "<id>"` in `run_docs_ci_checks.sh` — ids match `acceptance_criteria.json` |
 | Exit codes | `0` PASS · `1` FAIL · `2` SKIP (SKIP ≠ PASS on `game/development`) |
-| Shebang | `#!/usr/bin/env bash` with `set -euo pipefail` where scripts already use it |
 
 Authority: [`CI.md`](../ci-cd/CI.md) · [`ACCEPTANCE_CRITERIA.md`](../qa/ACCEPTANCE_CRITERIA.md).
 
@@ -305,8 +389,17 @@ bash tools/run_ci_checks.sh
 
 ## 9. PR checklist by change type
 
+### Python PR (`main`)
+
+- [ ] [PEP 8](https://peps.python.org/pep-0008/) naming, 4-space indent, quoted UTF-8 I/O
+- [ ] Module docstring + `from __future__ import annotations`
+- [ ] `main() -> int` with correct exit codes
+- [ ] `python3 tools/test_reference_libs.py` if `*_lib.py` changed
+- [ ] `bash tools/run_docs_ci_checks.sh` green
+
 ### Data-only PR (`main`)
 
+- [ ] [JSON_DATA_STYLE.md](JSON_DATA_STYLE.md) — 2-space indent, `snake_case`, RFC 8259 valid
 - [ ] Edited upstream files before downstream references (§5.5)
 - [ ] IDs are `snake_case`; scene IDs match `SC-*` pattern
 - [ ] i18n objects include `en`, `ja`, `zh`, `zh-Hant` where user-facing
@@ -334,6 +427,10 @@ bash tools/run_ci_checks.sh
 
 | Topic | Document |
 |-------|----------|
+| **Hub (this page)** | [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) |
+| Python / PEP 8 | [`PYTHON_STYLE.md`](PYTHON_STYLE.md) |
+| JSON / data | [`JSON_DATA_STYLE.md`](JSON_DATA_STYLE.md) |
+| Bash / CI scripts | [`BASH_STYLE.md`](BASH_STYLE.md) |
 | Runtime architecture | [`TECHNICAL_DESIGN.md`](TECHNICAL_DESIGN.md) |
 | GDScript detail | [`CODE_STYLE.md`](CODE_STYLE.md) |
 | Data spine & schemas | [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) |
