@@ -42,6 +42,7 @@ run_gate "L1_json_style" python3 tools/check_json_style.py
 run_gate "L1_typescript_lint" bash tools/check_typescript_lint.sh
 run_gate "L1_markdown_style" python3 tools/check_markdown_style.py
 run_gate "L1_gdshader_style" python3 tools/check_gdshader_style.py
+run_gate "L1_error_handling" bash tools/check_error_handling.sh
 run_gate "L0_main_no_ship_code" bash tools/check_main_no_ship_code.sh
 run_gate "L0_spec_refinement_scope" bash tools/check_spec_refinement_scope.sh
 run_gate "L0_difficulty_data" python3 tools/validate_difficulty_data.py

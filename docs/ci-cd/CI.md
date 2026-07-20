@@ -56,6 +56,7 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L1_typescript_lint` | `bash tools/check_typescript_lint.sh` | Exit 0 — SKIP when MCP Pro not installed |
 | `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format + links |
 | `L1_gdshader_style` | `python3 tools/check_gdshader_style.py` | Exit 0 — NPR shader structure |
+| `L1_error_handling` | `bash tools/check_error_handling.sh` | Exit 0 — ruff E722/S110/S112 + bash/GDScript patterns |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
 | `L0_no_secrets` | `bash tools/check_no_secrets.sh` | Exit 0 — no live keys in tracked files |
 | `L0_ship_build_security` | `bash tools/check_ship_build_security.sh` | Exit 0 — export strip policy + binary scan when present |
@@ -77,6 +78,7 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format + links |
 | `L1_gdshader_style` | `python3 tools/check_gdshader_style.py` | Exit 0 — shader templates + game/shaders |
 | `L1_scene_style` | `bash tools/check_scene_style.sh` | Exit 0 — static .tscn lint; SKIP when no `game/scenes` |
+| `L1_error_handling` | `bash tools/check_error_handling.sh` | Exit 0 — exception/error message patterns |
 | `L1_gdscript_lint` | `bash tools/check_gdscript_changed.sh` | Exit 0 — exit **2** SKIP when no `.gd` diff (FAIL on game branch) |
 | `L1_gdscript_lint_all` | `bash tools/check_gdscript_all.sh` | Exit 0 — full-tree gdlint; **2** SKIP when no `game/scripts` |
 | `L0_base_class_compliance` | `bash tools/check_base_class_compliance.sh` | Exit 0 — no rogue native `extends` (`CharacterBody3D`/`Area3D`/`Node`) |

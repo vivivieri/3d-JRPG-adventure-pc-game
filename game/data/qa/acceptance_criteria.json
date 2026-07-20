@@ -421,6 +421,14 @@
       "skip_when": "no game/scenes tree",
       "design_ref": "docs/technical/SCENE_STYLE.md"
     },
+    "L1_error_handling": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_error_handling.sh",
+      "description": "Error/exception patterns — ruff E722/S110/S112, bash if/else, GDScript push_error",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/ERROR_HANDLING.md"
+    },
     "L2_boot_headless": {
       "layer": "L2",
       "domain": "flow",
@@ -811,6 +819,7 @@
       "L1_typescript_lint",
       "L1_markdown_style",
       "L1_gdshader_style",
+      "L1_error_handling",
       "L0_main_no_ship_code",
       "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
@@ -866,6 +875,7 @@
       "L1_markdown_style",
       "L1_gdshader_style",
       "L1_scene_style",
+      "L1_error_handling",
       "L1_unit_tests",
       "L1_gdscript_lint",
       "L1_gdscript_lint_all",

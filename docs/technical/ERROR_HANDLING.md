@@ -172,11 +172,18 @@ Do not log: API keys, webhook URLs, save file contents.
 
 | Concern | Gate |
 |---------|------|
-| Python exception style | `L1_python_lint` (ruff — no bare `except`) |
+| Python bare/silent except | `L1_error_handling` — ruff `E722`, `S110`, `S112` |
+| Bash `&& … \|\| fail` | `L1_error_handling` |
+| GDScript `push_error` + boot `return` | `L1_error_handling` (when `game/scripts` exists) |
+| Python style (imports, unused) | `L1_python_lint` (ruff) |
 | Shell failure patterns | `L1_shellcheck` |
 | JSON format | `L1_json_style` |
 | Story cross-refs | `L0_story_data` |
 | Runtime unhandled exceptions | L3 F5 + L4/L5 MCP scenarios (`AI_TESTING_SPEC.md` §5) |
+
+```bash
+bash tools/check_error_handling.sh   # L1_error_handling
+```
 
 ---
 
@@ -187,6 +194,7 @@ Do not log: API keys, webhook URLs, save file contents.
 - [ ] Validators collect all errors before exit
 - [ ] GDScript: `push_error` on boot failures; `is_instance_valid` after `await`
 - [ ] Bash: no `A && B || C` for pass/fail (use `if`/`else`)
+- [ ] `bash tools/check_error_handling.sh` (`L1_error_handling`)
 - [ ] Matching `L0_*` / `L1_*` gate green after change
 
 ---

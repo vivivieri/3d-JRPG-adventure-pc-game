@@ -1,6 +1,6 @@
 # Coding Standards Hub — Tides of Urashima
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement.  
 **Authority chain:** This hub **indexes** deeper docs — when details conflict, follow the linked authority doc.
 
@@ -405,7 +405,7 @@ Not shipped — stripped before Steam export (`ship_security.json`).
 | Shaders (`.gdshader`) | `L1_gdshader_style` | both (templates on `main`) |
 | Scenes (`.tscn`) | `L1_scene_style`, `L2_scene_primitives`, `L3_gdai_built` | `game/development` |
 | TypeScript (MCP Pro) | `L1_typescript_lint` | `game/development` (SKIP when vendor not installed) |
-| Error / exception style | [`ERROR_HANDLING.md`](ERROR_HANDLING.md) | all — enforced via language linters + `L0_*` validators |
+| Error / exception style | [`ERROR_HANDLING.md`](ERROR_HANDLING.md) | `L1_error_handling` — all languages |
 | New QA catalog | matching `L0_*` + `L0_doc_sync` | `main` |
 | GDScript logic | `L1_unit_tests`, `L1_gdscript_lint`, `L1_gdscript_lint_all` | `game/development` |
 | Base class / extends | `L0_base_class_compliance` | both |
@@ -433,6 +433,7 @@ bash tools/run_ci_checks.sh
 - [ ] Module docstring + `from __future__ import annotations`
 - [ ] `main() -> int` with correct exit codes
 - [ ] `bash tools/check_python_lint.sh`
+- [ ] `bash tools/check_error_handling.sh` when error paths change
 - [ ] `python3 tools/test_reference_libs.py` if `*_lib.py` changed
 - [ ] `bash tools/run_docs_ci_checks.sh` green
 

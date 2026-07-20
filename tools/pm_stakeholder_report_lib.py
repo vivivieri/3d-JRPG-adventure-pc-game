@@ -148,8 +148,11 @@ def build_report(
                     "tokens_source": ev.get("tokens_source"),
                 }
                 break
-        except Exception:
-            pass
+        except Exception as exc:
+            print(
+                f"WARN: session telemetry lookup failed for {issue_id}: {exc}",
+                file=sys.stderr,
+            )
 
     report = {
         "version": "1.0",

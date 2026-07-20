@@ -82,6 +82,9 @@ run_tri_gate "L1_gdshader_style" "Godot shader style lint" \
 run_tri_gate "L1_scene_style" "Godot scene static style lint" \
   bash tools/check_scene_style.sh
 
+run_tri_gate "L1_error_handling" "Error-handling pattern lint" \
+  bash tools/check_error_handling.sh
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 
