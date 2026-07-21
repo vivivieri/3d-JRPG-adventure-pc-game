@@ -1,6 +1,6 @@
 # Error Handling & Messages — Tides of Urashima
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Scope:** All languages in the factory — Python CI, Bash gates, GDScript runtime, TypeScript MCP, JSON validators  
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 
@@ -12,7 +12,7 @@
 |-----------|--------|
 | **Fail loud in dev** | Missing boot data, broken cross-refs, and invalid saves must surface immediately — not at ship |
 | **Fail quiet for players** | In-game: no stack traces, no raw file paths, no internal gate IDs |
-| **One message per failure** | Validators collect all errors; runtime paths log once per root cause |
+| **No silent exceptions** | Every `except` must **log**, **raise**, **errors.append**, **return an error tuple/message**, or be an documented optional-import / parse-fallback — **never** `pass` or bare `return None` without logging |
 | **Actionable text** | Every `[FAIL]` / `push_error` includes *what* broke and *how to fix* |
 | **Minimal surface** | Linear single-player JRPG — not a multi-tenant service; avoid over-engineered retry frameworks |
 
@@ -83,7 +83,11 @@ if errors:
     return 1
 ```
 
-**Never:** bare `except:` · silent `except Exception: pass` · secrets in error strings.
+**Never:** bare `except:` · `except Exception: pass` · `return None` without logging · swallowing without `WARN`/`[FAIL]` to stderr.
+
+```bash
+bash tools/check_error_handling.sh   # L1_error_handling — AST scan, no silent handlers
+```
 
 ### 3.2 Bash (`tools/*.sh`)
 
@@ -172,7 +176,7 @@ Do not log: API keys, webhook URLs, save file contents.
 
 | Concern | Gate |
 |---------|------|
-| Python bare/silent except | `L1_error_handling` — ruff `E722`, `S110`, `S112` |
+| Python bare/silent except | `L1_error_handling` — ruff `E722`/`S110`/`S112` + AST (no silent handlers) |
 | Bash `&& … \|\| fail` | `L1_error_handling` |
 | GDScript `push_error` + boot `return` | `L1_error_handling` (when `game/scripts` exists) |
 | Python style (imports, unused) | `L1_python_lint` (ruff) |

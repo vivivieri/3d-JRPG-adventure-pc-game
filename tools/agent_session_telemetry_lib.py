@@ -10,6 +10,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -106,7 +107,8 @@ def _git_short_sha() -> str | None:
             subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True)
             .strip()
         )
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as exc:
+        print(f"WARN: git short sha unavailable: {exc}", file=sys.stderr)
         return None
 
 
@@ -118,7 +120,8 @@ def _git_branch() -> str | None:
             )
             .strip()
         )
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        print(f"WARN: git branch via git_branch_name.sh failed: {exc}", file=sys.stderr)
         try:
             return (
                 subprocess.check_output(
@@ -126,7 +129,8 @@ def _git_branch() -> str | None:
                 )
                 .strip()
             )
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as inner_exc:
+            print(f"WARN: git branch via rev-parse failed: {inner_exc}", file=sys.stderr)
             return None
 
 
@@ -149,8 +153,8 @@ def _git_diff_stats(base_sha: str | None) -> dict[str, int | None]:
             stats["lines_added"] = int(im.group(1))
         if dm:
             stats["lines_removed"] = int(dm.group(1))
-    except subprocess.CalledProcessError:
-        pass
+    except subprocess.CalledProcessError as exc:
+        print(f"WARN: git diff stats unavailable: {exc}", file=sys.stderr)
     return stats
 
 
@@ -168,8 +172,8 @@ def _pr_info() -> dict[str, Any]:
         data = json.loads(out)
         info["pr_url"] = data.get("url")
         info["pr_number"] = data.get("number")
-    except (subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError):
-        pass
+    except (subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError) as exc:
+        print(f"WARN: gh pr info unavailable: {exc}", file=sys.stderr)
     return info
 
 
@@ -219,8 +223,8 @@ def collect_cursor_metadata() -> dict[str, Any]:
             for k, v in extra.items():
                 if v is not None and k not in meta:
                     meta[k] = v
-        except json.JSONDecodeError:
-            pass
+        except json.JSONDecodeError as exc:
+            print(f"WARN: ignoring invalid session_enrichment.json: {exc}", file=sys.stderr)
 
     return meta
 
@@ -233,7 +237,8 @@ def _fetch_cursor_usage_snapshot(bc_id: str | None) -> dict[str, Any] | None:
         return None
     try:
         return fetch_agent_usage(bc_id)
-    except Exception:
+    except Exception as exc:
+        print(f"WARN: Cursor usage snapshot unavailable: {exc}", file=sys.stderr)
         return None
 
 
@@ -624,12 +629,16 @@ def _write_issue_evidence(
     # Collect all events for this session from log
     events: list[dict[str, Any]] = []
     if EVENTS_PATH.is_file():
-        for line in EVENTS_PATH.read_text(encoding="utf-8").splitlines():
+        for line_no, line in enumerate(EVENTS_PATH.read_text(encoding="utf-8").splitlines(), 1):
             if not line.strip():
                 continue
             try:
                 row = json.loads(line)
-            except json.JSONDecodeError:
+            except json.JSONDecodeError as exc:
+                print(
+                    f"WARN: skipping corrupt telemetry line {line_no}: {exc}",
+                    file=sys.stderr,
+                )
                 continue
             if row.get("session_id") == session_id:
                 events.append(row)
@@ -663,10 +672,14 @@ def read_events(path: Path | None = None) -> list[dict[str, Any]]:
     if not log.is_file():
         return []
     rows: list[dict[str, Any]] = []
-    for line in log.read_text(encoding="utf-8").splitlines():
+    for line_no, line in enumerate(log.read_text(encoding="utf-8").splitlines(), 1):
         if line.strip():
             try:
                 rows.append(json.loads(line))
-            except json.JSONDecodeError:
+            except json.JSONDecodeError as exc:
+                print(
+                    f"WARN: skipping corrupt telemetry line {line_no}: {exc}",
+                    file=sys.stderr,
+                )
                 continue
     return rows

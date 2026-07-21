@@ -57,7 +57,8 @@ def main() -> int:
             continue
         try:
             text = path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
+        except OSError as exc:
+            print(f"WARN: cannot read {rel} for secret scan: {exc}", file=sys.stderr)
             continue
         for line_no, line in enumerate(text.splitlines(), start=1):
             for pid, rx in compiled:

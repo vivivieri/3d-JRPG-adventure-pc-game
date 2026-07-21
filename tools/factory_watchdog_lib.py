@@ -7,6 +7,7 @@ Normal PM flow stays event-driven; this module handles exceptions only.
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -33,7 +34,8 @@ def _parse_ts(value: str | None) -> datetime | None:
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt
-    except ValueError:
+    except ValueError as exc:
+        print(f"WARN: invalid watchdog timestamp {value!r}: {exc}", file=sys.stderr)
         return None
 
 
@@ -109,7 +111,8 @@ def last_cycle_event() -> dict[str, Any] | None:
         return None
     try:
         return json.loads(lines[-1])
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as exc:
+        print(f"WARN: invalid cycle log JSON: {exc}", file=sys.stderr)
         return None
 
 

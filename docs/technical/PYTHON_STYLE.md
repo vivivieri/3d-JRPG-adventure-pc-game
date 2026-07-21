@@ -282,7 +282,8 @@ class SaveIntegrityLibTests(unittest.TestCase):
 | Don't | Why |
 |-------|-----|
 | `except:` bare | Always catch specific exceptions — `L1_error_handling` (ruff `E722`) |
-| `except Exception: pass` | Log to stderr or re-raise — `L1_error_handling` (ruff `S110`) |
+| `except Exception: pass` | **Forbidden** — log `WARN` to stderr or re-raise (`L1_error_handling`) |
+| `return None` after failure | Log first — `print(..., file=sys.stderr)` with context |
 | Mutable default args `def f(x=[])` | Use `None` sentinel |
 | `from module import *` | Namespace pollution |
 | Hardcoded absolute paths | Breaks CI and other machines |

@@ -102,7 +102,8 @@ def git_branch() -> str:
             text=True,
         )
         return out.strip() or "unknown"
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        print(f"WARN: git branch lookup failed: {exc}", file=sys.stderr)
         return "unknown"
 
 
@@ -112,7 +113,8 @@ def git_commit() -> str:
             subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True)
             .strip()
         )
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as exc:
+        print(f"WARN: git commit lookup failed: {exc}", file=sys.stderr)
         return "unknown"
 
 
@@ -220,7 +222,8 @@ def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
     """True when a helper is ported ahead of PM dispatch (EventBus allowed on game/development after P1-00)."""
     try:
         data = json.loads(text)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as exc:
+        print(f"WARN: helpers_registry JSON invalid, using regex fallback: {exc}", file=sys.stderr)
         return bool(re.search(r'"port_status"\s*:\s*"ported"', text, re.IGNORECASE))
     allowed_off_main = {"EventBus"}  # P1-00 dispatch on game/development (+ feature branches)
     for helper in data.get("helpers", []):
@@ -245,7 +248,8 @@ def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[
             return
         try:
             text = path.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
+        except OSError as exc:
+            print(f"WARN: cannot read {path}: {exc}", file=sys.stderr)
             return
         rel = str(path.relative_to(ROOT))
         if rel in skip_files:

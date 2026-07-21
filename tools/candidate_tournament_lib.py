@@ -72,7 +72,8 @@ def load_jury_report(path: Path) -> dict[str, Any] | None:
         return None
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as exc:
+        print(f"WARN: invalid jury report JSON in {path}: {exc}", file=sys.stderr)
         return None
 
 

@@ -519,7 +519,11 @@ def deliver_telegram(agg: dict[str, Any], checks: list[dict], chart_paths: list[
     """Send the telemetry summary + charts to the configured Telegram chat."""
     try:
         import pm_stakeholder_report_lib as sr
-    except ImportError:
+    except ImportError as exc:
+        print(
+            f"WARN: pm_stakeholder_report_lib import failed, retrying via sys.path: {exc}",
+            file=sys.stderr,
+        )
         sys.path.insert(0, str(ROOT / "tools"))
         import pm_stakeholder_report_lib as sr
 
@@ -607,7 +611,11 @@ def main() -> int:
         n_warn = sum(1 for c in checks if c["status"] == WARN)
         try:
             import predelivery_gate as pdg
-        except ImportError:
+        except ImportError as exc:
+            print(
+                f"WARN: predelivery_gate import failed, retrying via sys.path: {exc}",
+                file=sys.stderr,
+            )
             sys.path.insert(0, str(ROOT / "tools"))
             import predelivery_gate as pdg
         import os

@@ -77,10 +77,7 @@ def main() -> int:
         rel = str(path.relative_to(ROOT))
         if any(rel in err and "invalid JSON" in err for err in errors):
             continue
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
         check_keys(data, rel, errors)
 
     if errors:
