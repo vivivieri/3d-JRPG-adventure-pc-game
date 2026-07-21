@@ -18,7 +18,7 @@ Committed in `.cursor/environment.json` on branch **`game/development`** (templa
 
 **Dashboard:** [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)
 
-> **Gap (2026-07-21):** `origin/game/development` tip currently has the same pip-only `environment.json` as `main` and **no** `game/project.godot`. Until P1-00 restore lands, launch from the dashboard Environment that pins this snapshot id — do **not** trust repo JIT on the game branch tip. After restore: copy `.cursor/environment.game-development.json.example` → `.cursor/environment.json` on `game/development`, rebuild snapshot if plugins changed, commit + push.
+> **Resolved (2026-07-21):** `origin/game/development` now ships `game/project.godot` **and** the snapshot-pinned `.cursor/environment.json` below (`snapshot` + `install_cloud_dev.sh` + `ensure_mcp_stack.sh`). Verified: a full JIT bootstrap on this branch builds Godot 4.7 + GDAI (`:3571`, 35 tools) + Godotiq (`:6007`) + MCP Pro + Blender, and passes `check_mcp_ready.sh`, `L1_unit_tests`, `L2_boot_headless`, and Linux/Windows export smokes. Still launch from the dashboard Environment (which uses the pinned snapshot) rather than JIT — JIT rebuilds everything from scratch and needs the Godotiq enable step (§4, step 4a). After any plugin change: rebuild the snapshot, update the `snapshot` id below, commit + push.
 
 > **After rebuilding the snapshot:** update the `snapshot` field in `.cursor/environment.json`, commit on `game/development`, and push.
 
@@ -113,6 +113,22 @@ If any FAIL → **STOP** scene work; fix launch path or rebuild snapshot (§4).
    curl -sf http://127.0.0.1:3571/tools | head -c 100
    ```
 
+   **4a. Enable the GodotIQ editor plugin (required — else `:6007` stays down).**
+   A fresh bootstrap does **not** auto-enable it, so `ensure_mcp_stack.sh` above will FAIL on
+   `Godotiq :6007 not listening`. Enable it, then re-run the ensure/check steps:
+
+   ```bash
+   # stop the running editor (use the real PID), enable the plugin, restart via ensure_mcp_stack
+   # add res://addons/godotiq/plugin.cfg to project.godot [editor_plugins] enabled=…
+   #   (equivalently: Project → Plugins → GodotIQ in the editor UI)
+   bash tools/ensure_mcp_stack.sh   # now reports "Godotiq WebSocket OK on :6007"
+   bash tools/check_mcp_ready.sh    # PASS
+   ```
+
+   GDAI `:3571` works without this (it runs from the `GDAIMCPRuntime` autoload); only Godotiq
+   needs the `EditorPlugin` enabled. The enabled state lives on disk and is captured by the snapshot,
+   so it is **not** committed to git — it must be enabled **before** saving the snapshot in step 5.
+
 5. **Save snapshot** in the dashboard
 6. Copy the new snapshot id into `.cursor/environment.json` on `game/development`
 7. Commit and push; register MCP servers in the dashboard
@@ -161,6 +177,7 @@ Store the key in **Cursor Secrets** as `GAMELAB_API_KEY` — never commit it.
 | Problem | Fix |
 |---------|-----|
 | `build: null` | Launch from environment dashboard on `game/development`, not JIT on `main` |
+| `Godotiq :6007 not listening` (GDAI `:3571` up) | GodotIQ editor plugin not enabled after a JIT/fresh boot — enable it (§4 step 4a) and restart the editor |
 | GDAI bridge down | Rebuild snapshot with plugin; run `bash tools/ensure_gdai_mcp.sh` |
 | `gamelab-mcp` 405 error | Use `mcp-remote` config (§5) |
 | Stale snapshot after Godot/MCP upgrade | Re-run §4, save new snapshot, update `snapshot` id in `environment.json` |

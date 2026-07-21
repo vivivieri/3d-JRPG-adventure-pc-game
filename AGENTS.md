@@ -62,6 +62,8 @@ Installed components:
 - **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
 - **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
+> **Gotcha — Godotiq `:6007` after a JIT/fresh bootstrap:** launching from the pinned dashboard snapshot has the **GodotIQ editor plugin pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), the plugin is **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq needs its `EditorPlugin`). Fix: enable it — add `res://addons/godotiq/plugin.cfg` to `project.godot` `[editor_plugins] enabled=…` (or Project → Plugins → GodotIQ in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. This local editor state is captured by the snapshot, so it is **not** committed to git; a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
+
 ### MCP workflow (mandatory — all tools)
 
 **First commands every implementation session (before any `game/scenes/` work):**
