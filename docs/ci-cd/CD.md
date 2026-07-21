@@ -44,11 +44,12 @@ Before first CD run:
 ```
 checkout → guard project.godot → install_ci_deps.sh
 → run_cd_gates.sh --channel <derived from tag>
-→ install_godotsteam.sh → export_windows.sh → prepare_steam_depot.sh
-→ zip build/steam_depot → GitHub Release
+→ install_godotsteam.sh → export_linux.sh → export_windows.sh
+→ prepare_steam_depot.sh --platform all
+→ zip steam_depot_linux + steam_depot_windows → GitHub Release
 ```
 
-**Output:** `TidesOfUrashima-steam-depot-<tag>.zip` attached to GitHub Release.
+**Output:** Linux + Windows binaries and Steam depot zips (v1 requires both — `docs/qa/PLATFORM_SUPPORT.md`).
 
 ### 3.2 Steam CD (`cd-steam.yml`)
 
@@ -57,8 +58,11 @@ checkout → guard project.godot → install_ci_deps.sh
 Requires GitHub Environment **`steam-production`** with required reviewers for prod uploads.
 
 ```
-run_cd_gates.sh → export → prepare_steam_depot.sh → steamcmd upload
+run_cd_gates.sh → export_linux + export_windows → prepare_steam_depot.sh --platform all
+→ materialize app_build.vdf from example + secrets → steamcmd upload
 ```
+
+**Template:** `steam/depot/app_build.vdf.example` (sed `@STEAM_APP_ID@` / `@STEAM_DEPOT_ID@`).
 
 **Not automated by default** — Steam App ID, depot VDF, and credentials must exist first.
 
@@ -74,8 +78,9 @@ git push origin v0.1.0-rc1          # triggers cd-artifact.yml
 # Or locally without pushing:
 bash tools/run_cd_gates.sh --channel rc
 bash tools/install_godotsteam.sh
+bash tools/export_linux.sh
 bash tools/export_windows.sh
-bash tools/prepare_steam_depot.sh
+bash tools/prepare_steam_depot.sh --platform all
 ```
 
 ---

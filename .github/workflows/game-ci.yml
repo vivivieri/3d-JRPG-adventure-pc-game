@@ -57,8 +57,9 @@ jobs:
           rc=$?
           set -e
           if [[ "$rc" -eq 2 ]]; then
-            echo "[SKIP] Windows export/run — no game/project.godot yet"
-            exit 0
+            echo "[FAIL] Windows export/run SKIP (exit 2) — SKIP≠PASS on game/development" >&2
+            echo "       Bootstrap game/project.godot (P1-00) or fix the smoke script" >&2
+            exit 1
           fi
           exit "$rc"
 

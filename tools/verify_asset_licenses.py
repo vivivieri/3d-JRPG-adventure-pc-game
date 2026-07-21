@@ -174,11 +174,15 @@ def main() -> int:
             f"UNLISTED: {rel} — register with tools/register_asset.py and docs/art/LICENSES.md"
         )
 
-    # Warn about manifest entries for files that don't exist yet (informational only)
+    # Manifest entries for files that don't exist yet
     for rel, entry in coverage["exact"].items():
         if not rel.endswith("/") and not (ROOT / rel).exists():
             if not entry.get("glob"):
-                warnings.append(f"Manifest entry file not on disk yet: {rel}")
+                msg = f"Manifest entry file not on disk yet: {rel}"
+                if args.strict:
+                    errors.append(msg)
+                else:
+                    warnings.append(msg)
 
     if errors:
         print("ASSET LICENSE CHECK FAILED", file=sys.stderr)

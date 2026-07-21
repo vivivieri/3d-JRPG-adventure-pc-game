@@ -28,7 +28,7 @@ Track implementation progress against the GDD milestones.
 - [x] Art direction bible (`docs/art/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/art/LICENSES.md`)
 - [x] Asset compliance policy + verification tools (`docs/art/ASSET_COMPLIANCE.md`, `tools/`)
-- [x] Godot 4 project scaffold (boot shell on `main`)
+- [ ] Godot 4 project scaffold on **`game/development`** (`game/project.godot` — P1-00; not on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
 - [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+ via GDAI MCP; VO clips Phase 7
@@ -88,7 +88,7 @@ Track implementation progress against the GDD milestones.
 
 ## M0h — AI dev workflow & testing (main baseline)
 - [x] AI build policy — GodotPrompter + MCP stack (`.cursorrules` §0, `docs/agents/MCP_STACK.md`)
-- [x] Unit test scaffold (`game/tests/unit/`, `tools/run_unit_tests.sh`)
+- [ ] Unit test scaffold on **`game/development`** (`game/tests/unit/`, `tools/run_unit_tests.sh`) — restore with P1-00
 - [x] Smoke tests (`tools/run_playtest_smoke.sh`)
 - [x] Acceptance criteria catalog (`docs/qa/ACCEPTANCE_CRITERIA.md`, `game/data/qa/acceptance_criteria.json`)
 - [x] Domain QA gates (MODEL/VISUAL/AUDIO/FLOW QA + `QA_REMEDIATION_LOOP.md`)
@@ -135,17 +135,17 @@ Track implementation progress against the GDD milestones.
 - [ ] Rendering guide applied per zone (`docs/art/RENDERING_GUIDE.md`)
 - [ ] Fresh implementation on `main` per `docs/workflow/IMPLEMENTATION_PLAN.md` + `docs/workflow/AI_DEV_WORKFLOW.md`
 - [ ] Vertical slice: SC-02 Ruined Village + Urashima model (`docs/art/ART_DIRECTION.md` §10)
-- [ ] **GR-001** Golden gameplay screenshots — all zones per `zone_composition.json` (`VISUAL_SMOKE_STRICT=1`)
-- [ ] **GR-003** Zone composition strict smoke (`ZONE_COMPOSITION_STRICT=1`) at M5 ship
-- [ ] **GR-002** `palace_sentinel` `CHARACTER_BIBLE.md` row at boss standard (close in Phase 6.3b before sentinel GLB)
+- [ ] **GR-001** Golden gameplay screenshots — all zones per `zone_composition.json` (`VISUAL_SMOKE_STRICT=1`) — **pending**
+- [ ] **GR-003** Zone composition strict smoke (`ZONE_COMPOSITION_STRICT=1`) at M5 ship — **pending**
+- [x] **GR-002** `palace_sentinel` `CHARACTER_BIBLE.md` row at boss standard (done on `main`)
 - [ ] Replace all primitive / Kenney greybox art in player-facing builds
 - [ ] Japanese palace gate hero set-piece (`palace_gate_main` — SC-12)
 - [ ] Character models: Urashima, Yuzu, Roku + 5 enemies
 - [ ] Automated stylized portraits (ComfyUI/GameLab — replace procedural silhouettes)
 - [ ] Ending environment variants (Rewind / Anchor / Drift)
-- [ ] **GR-004** Audio QA catalog + hero BGM briefs (`audio_qa_catalog.json`, `docs/generation_briefs/audio/`) — ✅ on `main`
-- [ ] **GR-005** P0 VO generation briefs + `L2_vo_*` gates — ✅ data on `main`; clip files at M5
-- [ ] **GR-006** `scene_audio_map.json` machine-readable scene map — ✅ on `main`
+- [x] **GR-004** Audio QA catalog + hero BGM briefs (`audio_qa_catalog.json`, `docs/generation_briefs/audio/`) — done on `main`
+- [x] **GR-005** P0 VO generation briefs + `L2_vo_*` gates — data on `main`; clip files + casting at M5
+- [x] **GR-006** `scene_audio_map.json` machine-readable scene map — done on `main`
 - [ ] Curated BGM per act (ACE-Step curated prompts — replace dev procedural placeholders)
 - [ ] SFX + ambient beds per `scene_audio_map.json`
 - [ ] ElevenLabs voice casting — replace `PLACEHOLDER_*` in `vo_prompts.json` (incl. zh-Hant `dialect_voices`)

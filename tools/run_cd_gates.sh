@@ -26,8 +26,12 @@ echo "── Full game CI (L0–L2 + L4)"
 bash tools/run_ci_checks.sh
 
 echo ""
-echo "── Asset compliance (ship)"
-bash tools/check_asset_compliance.sh
+echo "── Asset compliance (ship — strict: missing manifest files FAIL)"
+bash tools/check_asset_compliance.sh --strict
+
+echo ""
+echo "── VO casting (ship — no PLACEHOLDER_* voice ids)"
+VO_CASTING_REQUIRED=1 python3 tools/validate_vo_casting.py
 
 case "$CHANNEL" in
   rc)
