@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updated_at": "2026-07-21T01:50:00+00:00",
-  "status": "degraded",
-  "last_event": "bootstrap_gap_detected",
+  "updated_at": "2026-07-21T02:28:57.838696+00:00",
+  "status": "healthy",
+  "last_event": "p1_00_bootstrap_restored",
   "last_issue_id": "P1-00",
   "last_agent_role": "pm",
-  "last_commit_sha": null,
+  "last_commit_sha": "a1d9f7e282e13fb245565030c6efdc907db8f8b4",
   "sprint_id": "Phase1-Sprint1",
-  "note": "P1-00 reopened to blocked — game/development tip missing project.godot; factory idle until bootstrap restored",
+  "note": "P1-00 Godot bootstrap restored on game/development; main+game synced",
   "agent_sessions_this_sprint": 0,
   "factory_halted": false
 }
