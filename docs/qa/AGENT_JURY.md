@@ -40,7 +40,7 @@ For each asset (screenshot / GLB turntable render / audio-spectrogram-or-clip):
    ```
 
    This writes the canonical `artifacts/visual_reviews/<stem>.jury.json` (`mode: agent_jury`) and exits `0` (consensus pass), `1` (fail), or `2` (fewer than 2 distinct models — SKIP).
-5. The smoke gate (`tools/run_visual_smoke_checks.sh`) picks up that `jury.json` as a real PASS/FAIL — no API keys involved.
+5. The matching smoke gate picks up that `jury.json` as a real PASS/FAIL — no API keys involved. All jury smoke scripts prefer an agent verdict directory when present and fall back to the external-API path otherwise: `tools/run_visual_smoke_checks.sh` (`<stem>.agent/`), `tools/run_model_smoke_checks.sh` (`<model>.agent/`), and `tools/run_audio_smoke_checks.sh` for both BGM (`<track>.agent/`) and VO (`<clip>_<locale>.agent/`).
 
 ## 4. Domain checklist fields
 

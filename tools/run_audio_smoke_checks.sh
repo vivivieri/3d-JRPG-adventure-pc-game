@@ -56,11 +56,24 @@ fi
 rm -f "$TECH_LOG"
 
 JURY_LOG="$(mktemp)"
+AGENT_DIR="${ROOT}/artifacts/audio_reviews/${GATE_TRACK}.agent"
 set +e
-python3 "${ROOT}/tools/review_audio_vision.py" \
-  --track "$GATE_TRACK" \
-  --min-pass "${AUDIO_JURY_MIN_PASS:-2}" \
-  >"$JURY_LOG" 2>&1
+if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
+  # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
+  # See docs/qa/AGENT_JURY.md
+  python3 "${ROOT}/tools/ingest_agent_jury.py" \
+    --domain audio \
+    --asset "$GATE_PATH" \
+    --reviews-dir "$AGENT_DIR" \
+    --out "${ROOT}/artifacts/audio_reviews/${GATE_TRACK}.jury.json" \
+    --min-pass "${AUDIO_JURY_MIN_PASS:-2}" \
+    >"$JURY_LOG" 2>&1
+else
+  python3 "${ROOT}/tools/review_audio_vision.py" \
+    --track "$GATE_TRACK" \
+    --min-pass "${AUDIO_JURY_MIN_PASS:-2}" \
+    >"$JURY_LOG" 2>&1
+fi
 JURY_EXIT=$?
 set -e
 cat "$JURY_LOG"
@@ -110,12 +123,25 @@ else
   rm -f "$VO_TECH_LOG"
 
   VO_JURY_LOG="$(mktemp)"
+  VO_AGENT_DIR="${ROOT}/artifacts/vo_reviews/${VO_CLIP}_${VO_LOCALE}.agent"
   set +e
-  python3 "${ROOT}/tools/review_vo_vision.py" \
-    --clip "$VO_CLIP" \
-    --locale "$VO_LOCALE" \
-    --min-pass "${VO_JURY_MIN_PASS:-2}" \
-    >"$VO_JURY_LOG" 2>&1
+  if compgen -G "${VO_AGENT_DIR}/*.json" >/dev/null 2>&1; then
+    # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
+    # See docs/qa/AGENT_JURY.md
+    python3 "${ROOT}/tools/ingest_agent_jury.py" \
+      --domain vo \
+      --asset "$VO_PATH" \
+      --reviews-dir "$VO_AGENT_DIR" \
+      --out "${ROOT}/artifacts/vo_reviews/${VO_CLIP}_${VO_LOCALE}.jury.json" \
+      --min-pass "${VO_JURY_MIN_PASS:-2}" \
+      >"$VO_JURY_LOG" 2>&1
+  else
+    python3 "${ROOT}/tools/review_vo_vision.py" \
+      --clip "$VO_CLIP" \
+      --locale "$VO_LOCALE" \
+      --min-pass "${VO_JURY_MIN_PASS:-2}" \
+      >"$VO_JURY_LOG" 2>&1
+  fi
   VO_JURY_EXIT=$?
   set -e
   cat "$VO_JURY_LOG"
