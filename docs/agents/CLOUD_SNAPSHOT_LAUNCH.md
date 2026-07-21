@@ -11,8 +11,8 @@ Committed in `.cursor/environment.json` on branch **`game/development`** (templa
 
 | Field | Value |
 |-------|-------|
-| **Snapshot ID** | `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8` |
-| **Saved** | 2026-07-14 |
+| **Snapshot ID** | `snapshot-20260721-778b949b-ca77-483c-b94a-b822b7af062e` |
+| **Saved** | 2026-07-21 |
 | **Install** | `bash tools/install_cloud_dev.sh` |
 | **Start** | `bash tools/ensure_mcp_stack.sh` |
 
@@ -50,7 +50,7 @@ Do **not** expect a snapshot boot when launching an ad-hoc web agent on `main`.
 
 - [ ] Open [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) (not a bare “new chat” on `main`)
 - [ ] Branch = **`game/development`**
-- [ ] Snapshot in dashboard matches `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8` (or newer if rebuilt)
+- [ ] Snapshot in dashboard matches `snapshot-20260721-778b949b-ca77-483c-b94a-b822b7af062e` (or newer if rebuilt)
 - [ ] **Cursor Secrets** set — see `docs/agents/CURSOR_SECRETS_SETUP.md` (`GAMELAB_API_KEY`, `GH_TOKEN`, webhooks, etc.)
 - [ ] **Dashboard → Integrations & MCP** — all four servers registered:
 
