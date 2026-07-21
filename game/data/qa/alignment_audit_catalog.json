@@ -255,8 +255,8 @@
       "category": "before_dispatch",
       "when": "branch_is",
       "value": "main",
-      "title": "P1-00 blocked — restore game/development Godot tree",
-      "action": "origin/game/development tip lacks game/project.godot. Restore from commit 9aa5fb5 or bash tools/bootstrap_game_development.sh; copy .cursor/environment.game-development.json.example; do not mark P1-00 done until L0_game_branch_bootstrap PASS."
+      "title": "P1-00 bootstrap restored — dispatch Phase 1 implementation",
+      "action": "game/project.godot + boot + unit tests are on game/development. Next: Architect/Builder pick up P1-01+ (zone palettes, shaders, scenes via GDAI). Keep L0_game_branch_bootstrap green."
     },
     {
       "id": "REC_RUNTIME_LOW",

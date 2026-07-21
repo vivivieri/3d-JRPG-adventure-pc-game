@@ -28,7 +28,7 @@ Track implementation progress against the GDD milestones.
 - [x] Art direction bible (`docs/art/ART_DIRECTION.md`)
 - [x] License tracking template (`docs/art/LICENSES.md`)
 - [x] Asset compliance policy + verification tools (`docs/art/ASSET_COMPLIANCE.md`, `tools/`)
-- [ ] Godot 4 project scaffold on **`game/development`** (`game/project.godot` — P1-00; not on `main`)
+- [x] Godot 4 project scaffold on **`game/development`** (`game/project.godot` — P1-00; not on `main`)
 - [x] Combat JSON schema + sample data (`game/data/`)
 - [ ] Core scripts (GameManager, Combat, Dialogue, Save) — Phase 2+ rebuild
 - [x] **Multi-language support (en / ja / zh / zh-Hant + dialect VO)** — written data in `game/data/` + `translations.csv`; runtime `LocalizationManager` Phase 2+ via GDAI MCP; VO clips Phase 7
@@ -88,7 +88,7 @@ Track implementation progress against the GDD milestones.
 
 ## M0h — AI dev workflow & testing (main baseline)
 - [x] AI build policy — GodotPrompter + MCP stack (`.cursorrules` §0, `docs/agents/MCP_STACK.md`)
-- [ ] Unit test scaffold on **`game/development`** (`game/tests/unit/`, `tools/run_unit_tests.sh`) — restore with P1-00
+- [x] Unit test scaffold on **`game/development`** (`game/tests/unit/`, `tools/run_unit_tests.sh`) — restored with P1-00
 - [x] Smoke tests (`tools/run_playtest_smoke.sh`)
 - [x] Acceptance criteria catalog (`docs/qa/ACCEPTANCE_CRITERIA.md`, `game/data/qa/acceptance_criteria.json`)
 - [x] Domain QA gates (MODEL/VISUAL/AUDIO/FLOW QA + `QA_REMEDIATION_LOOP.md`)
