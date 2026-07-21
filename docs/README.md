@@ -206,6 +206,7 @@
 |-----|---------|
 | [ACCEPTANCE_CRITERIA.md](qa/ACCEPTANCE_CRITERIA.md) | Measurable gates — WARN/SKIP ≠ PASS |
 | [AI_TESTING_SPEC.md](qa/AI_TESTING_SPEC.md) | L0–L6 automated + human QA |
+| [AGENT_JURY.md](qa/AGENT_JURY.md) | Key-free vision/audio jury via Cursor agent subagents |
 | [QA_AND_BUG_PROCESS.md](qa/QA_AND_BUG_PROCESS.md) | Severity, triage |
 | [QA_REMEDIATION_LOOP.md](qa/QA_REMEDIATION_LOOP.md) | FAIL iteration policy |
 | [FLOW_QA.md](qa/FLOW_QA.md) | Game flow QA |
