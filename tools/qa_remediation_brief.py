@@ -354,6 +354,7 @@ def format_brief(
                 f"python3 tools/check_model_technical.py --model {asset_id}",
                 f"python3 tools/render_model_turntable.py --model {asset_id}",
                 f"python3 tools/review_model_vision.py --model {asset_id} --min-pass 2",
+                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain model",
                 "```",
             ]
         )
@@ -364,6 +365,7 @@ def format_brief(
                 "bash tools/check_scene_visuals.sh",
                 "python3 tools/check_screenshot_palette.py --zone <zone> --screenshot <png>",
                 "python3 tools/review_screenshot_vision.py --screenshot <png> --zone <zone> --min-pass 2",
+                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain visual",
                 "```",
             ]
         )
@@ -373,6 +375,7 @@ def format_brief(
                 "```bash",
                 f"python3 tools/check_audio_technical.py --track {asset_id}",
                 f"python3 tools/review_audio_vision.py --track {asset_id} --min-pass 2",
+                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain audio",
                 "```",
             ]
         )
@@ -382,6 +385,7 @@ def format_brief(
                 "```bash",
                 f"python3 tools/check_audio_vo.py --clip {asset_id} --locale en",
                 f"python3 tools/review_vo_vision.py --clip {asset_id} --locale en --min-pass 2",
+                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain vo",
                 "```",
             ]
         )
