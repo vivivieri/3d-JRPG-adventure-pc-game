@@ -50,7 +50,7 @@ def resolve_api_key() -> str | None:
 
 
 def _auth_header(api_key: str) -> str:
-    token = b64encode(f"{api_key}:".encode("utf-8")).decode("ascii")
+    token = b64encode(f"{api_key}:".encode()).decode("ascii")
     return f"Basic {token}"
 
 

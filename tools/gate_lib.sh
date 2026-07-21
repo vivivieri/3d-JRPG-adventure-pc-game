@@ -3,9 +3,9 @@
 # Exit codes for gate commands: 0=PASS, 1=FAIL, 2=SKIP (not applicable).
 set -euo pipefail
 
-GATE_EXIT_PASS=0
-GATE_EXIT_FAIL=1
-GATE_EXIT_SKIP=2
+export GATE_EXIT_PASS=0
+export GATE_EXIT_FAIL=1
+export GATE_EXIT_SKIP=2
 
 gate_root() {
   if [[ -z "${ROOT:-}" ]]; then

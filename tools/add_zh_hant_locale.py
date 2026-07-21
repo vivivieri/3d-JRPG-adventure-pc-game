@@ -57,7 +57,8 @@ def get_converter():
         from opencc import OpenCC  # type: ignore
 
         return OpenCC("s2twp")  # Simplified → Traditional (Taiwan, with phrases)
-    except ImportError:
+    except ImportError as exc:
+        print(f"WARN: OpenCC not installed — zh-Hant conversion disabled: {exc}", file=sys.stderr)
         return None
 
 

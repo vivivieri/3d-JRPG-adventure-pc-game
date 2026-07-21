@@ -37,7 +37,8 @@ def load_events(path: Path) -> list[dict[str, Any]]:
         if line.strip():
             try:
                 rows.append(json.loads(line))
-            except json.JSONDecodeError:
+            except json.JSONDecodeError as exc:
+                print(f"WARN: skipping corrupt telemetry JSONL line: {exc}", file=sys.stderr)
                 continue
     return rows
 

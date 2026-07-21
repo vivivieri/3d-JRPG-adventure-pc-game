@@ -1,9 +1,10 @@
 # Tides of Urashima — Code Style Guide
 
-**Version:** 1.1  
-**Language:** GDScript 2.0 (Godot 4.7)  
-**Architecture:** Scene-tree + autoload singletons — **not** Entity-Component-System  
-**Cross-refs:** [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [`.cursorrules`](../.cursorrules) §5, [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md)
+**Version:** 1.1
+**Language:** GDScript 2.0 (Godot 4.7)
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) · **Deep dive:** [`GDSCRIPT_STYLE.md`](GDSCRIPT_STYLE.md)
+**Architecture:** Scene-tree + autoload singletons — **not** Entity-Component-System
+**Cross-refs:** [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md), [CODE_BASE_CLASS_RULES.md](CODE_BASE_CLASS_RULES.md), [`.cursorrules`](../../.cursorrules) §5, [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md)
 
 ---
 

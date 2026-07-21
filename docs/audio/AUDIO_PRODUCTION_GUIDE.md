@@ -1,7 +1,7 @@
 # Tides of Urashima — Audio Production Guide
 
-**Version:** 1.0 (Pre-build)  
-**Visual / tonal target:** Melancholy coastal JRPG — restrained, not upbeat adventure.  
+**Version:** 1.0 (Pre-build)
+**Visual / tonal target:** Melancholy coastal JRPG — restrained, not upbeat adventure.
 **Cross-refs:** `docs/audio/AUDIO_DIRECTION.md` (creative direction), `docs/vision/STORYBOARD.md`, `docs/gameplay/BOSS_DESIGNS.md`, `game/data/story/scenes.json`, `docs/art/ASSET_COMPLIANCE.md`
 
 **Canonical rule:** Track and SFX IDs in this doc are the **file names** (without extension). Creative mood notes live in `AUDIO_DIRECTION.md`; this doc is the **production spec** (format, loops, scene hooks, file layout).

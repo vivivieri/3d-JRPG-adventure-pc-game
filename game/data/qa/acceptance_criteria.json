@@ -196,10 +196,26 @@
       "layer": "L0",
       "domain": "flow",
       "command": "python3 tools/validate_sprint_board.py --strict",
-      "description": "Active sprint board — issues, deps, pack alignment; PM orchestrator source of truth",
+      "description": "Active sprint board — issues, deps, pack alignment; done SHA must resolve; bootstrap issues need project.godot",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/sprint_board.json", "artifacts/pm_orchestrator_report.json"],
       "design_ref": "docs/agents/SPRINT_ORCHESTRATION.md, docs/agents/PM_AGENT_RUNBOOK.md"
+    },
+    "L0_game_branch_bootstrap": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "bash tools/check_game_branch_bootstrap.sh",
+      "description": "P1-00 truth — game/project.godot required on game/development; advisory WARN on main if remote tip lacks it",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/workflow/BRANCHING.md, tools/bootstrap_game_development.sh"
+    },
+    "L0_vo_casting": {
+      "layer": "L0",
+      "domain": "audio",
+      "command": "python3 tools/validate_vo_casting.py",
+      "description": "ElevenLabs voice ids — PLACEHOLDER_* OK on main (WARN); FAIL when VO_CASTING_REQUIRED=1 (M5 ship)",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/vision/VO_HIT_LIST.md"
     },
     "L0_factory_watchdog": {
       "layer": "L0",
@@ -351,7 +367,99 @@
       "description": "gdlint on changed .gd files in PR diff",
       "pass": { "exit_code": 0 },
       "skip_when": "no .gd changes or no game/project.godot",
-      "design_ref": "docs/technical/CODE_STYLE.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+      "design_ref": "docs/technical/GDSCRIPT_STYLE.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+    },
+    "L1_gdscript_lint_all": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_gdscript_all.sh",
+      "description": "gdlint on all .gd under game/scripts, game/tests, tools/godot_templates",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/project.godot or no .gd files",
+      "design_ref": "docs/technical/GDSCRIPT_STYLE.md"
+    },
+    "L1_python_lint": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_python_lint.sh",
+      "description": "ruff PEP 8 lint on tools/*.py",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/PYTHON_STYLE.md"
+    },
+    "L1_shellcheck": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_shell_scripts.sh",
+      "description": "shellcheck on tools/*.sh",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/BASH_STYLE.md"
+    },
+    "L1_json_style": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "python3 tools/check_json_style.py",
+      "description": "JSON format + naming lint on game/data/**/*.json and config JSON (.cursor/, steam/)",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/JSON_DATA_STYLE.md"
+    },
+    "L1_typescript_lint": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_typescript_lint.sh",
+      "description": "ESLint or tsc on tools/godot-mcp-pro-server when installed",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no tools/godot-mcp-pro-server/package.json (vendor not installed)",
+      "design_ref": "docs/technical/TYPESCRIPT_STYLE.md"
+    },
+    "L1_markdown_style": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "python3 tools/check_markdown_style.py",
+      "description": "Markdown format, trailing whitespace, heading levels, and link lint on docs/",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/MARKDOWN_STYLE.md"
+    },
+    "L1_gdshader_style": {
+      "layer": "L1",
+      "domain": "visual",
+      "command": "python3 tools/check_gdshader_style.py",
+      "description": "NPR shader structure lint on .gdshader templates and game/shaders",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no .gdshader files",
+      "design_ref": "docs/technical/SHADER_STYLE.md"
+    },
+    "L1_scene_style": {
+      "layer": "L1",
+      "domain": "visual",
+      "command": "bash tools/check_scene_style.sh",
+      "description": "Static .tscn naming and format lint under game/scenes",
+      "pass": { "exit_code": 0 },
+      "skip_when": "no game/scenes tree",
+      "design_ref": "docs/technical/SCENE_STYLE.md"
+    },
+    "L1_error_handling": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_error_handling.sh",
+      "description": "Error/exception patterns — ruff E722/S110/S112, bash swallow lint, GDScript/tests push_error, TS catch, [FAIL]→stderr",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/ERROR_HANDLING.md"
+    },
+    "L1_workflow_yaml": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_workflow_yaml.sh",
+      "description": "actionlint on .github/workflows/*.yml",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/ci-cd/CI.md"
+    },
+    "L1_mypy_libs": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_mypy_libs.sh",
+      "description": "mypy static typing on tools/*_lib.py reference libraries",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/PYTHON_STYLE.md"
     },
     "L2_boot_headless": {
       "layer": "L2",
@@ -737,6 +845,15 @@
       "L0_spec_registry",
       "L0_helpers_registry",
       "L0_reference_libs",
+      "L1_python_lint",
+      "L1_shellcheck",
+      "L1_json_style",
+      "L1_typescript_lint",
+      "L1_markdown_style",
+      "L1_gdshader_style",
+      "L1_error_handling",
+      "L1_workflow_yaml",
+      "L1_mypy_libs",
       "L0_main_no_ship_code",
       "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
@@ -754,6 +871,8 @@
       "L0_delivery_control",
       "L0_generation_readiness_backlog",
       "L0_sprint_board",
+      "L0_game_branch_bootstrap",
+      "L0_vo_casting",
       "L0_factory_watchdog",
       "L0_escalation_policy",
       "L0_stakeholder_report",
@@ -785,8 +904,21 @@
       "L0_narrative_density",
       "L0_acceptance_catalog",
       "L0_base_classes",
+      "L0_game_branch_bootstrap",
+      "L0_vo_casting",
+      "L1_python_lint",
+      "L1_shellcheck",
+      "L1_json_style",
+      "L1_typescript_lint",
+      "L1_markdown_style",
+      "L1_gdshader_style",
+      "L1_scene_style",
+      "L1_error_handling",
+      "L1_workflow_yaml",
+      "L1_mypy_libs",
       "L1_unit_tests",
       "L1_gdscript_lint",
+      "L1_gdscript_lint_all",
       "L0_base_class_compliance",
       "L2_scene_primitives",
       "L3_gdai_built",
@@ -818,6 +950,12 @@
       {
         "gate_id": "L1_gdscript_lint",
         "skip_when": "phase_1 bootstrap and no .gd files in diff",
+        "skip_is_not_ship_pass": true,
+        "bootstrap_only": true
+      },
+      {
+        "gate_id": "L1_gdscript_lint_all",
+        "skip_when": "phase_1 bootstrap — no game/scripts tree yet",
         "skip_is_not_ship_pass": true,
         "bootstrap_only": true
       },
@@ -863,6 +1001,7 @@
       ],
       "deferred_gate_ids": [
         "L1_gdscript_lint",
+        "L1_gdscript_lint_all",
         "L2_glb_import",
         "L2_animation_whitelist",
         "L2_linux_export_smoke",

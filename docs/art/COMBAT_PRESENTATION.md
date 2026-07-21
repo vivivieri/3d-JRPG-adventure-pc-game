@@ -1,6 +1,6 @@
 # Tides of Urashima — Combat Presentation
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/gameplay/COMBAT_SYSTEMS.md`, `docs/ui/UI_UX_FLOW.md`, `docs/art/SHADER_SPECS.md`, `game/data/code/shader_registry.json` (`ink_combat_overlay`)
 
 ---

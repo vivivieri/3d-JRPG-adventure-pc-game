@@ -15,14 +15,14 @@ from save_integrity_lib import attach_integrity, load_spec, verify_save  # noqa:
 def main() -> int:
     spec_path = ROOT / "game/data/qa/save_integrity.json"
     if not spec_path.is_file():
-        print(f"[FAIL] missing {spec_path}")
+        print(f"[FAIL] missing {spec_path}", file=sys.stderr)
         return 1
 
     spec = load_spec(str(spec_path))
     required = ("algorithm", "integrity_field", "signed_payload_fields", "pepper_source")
     for key in required:
         if key not in spec:
-            print(f"[FAIL] save_integrity.json missing {key}")
+            print(f"[FAIL] save_integrity.json missing {key}", file=sys.stderr)
             return 1
 
     sample = {
@@ -43,13 +43,13 @@ def main() -> int:
     pepper = "unit-test-pepper"
     signed = attach_integrity(sample, pepper, spec)
     if not verify_save(signed, pepper, spec):
-        print("[FAIL] save integrity round-trip failed")
+        print("[FAIL] save integrity round-trip failed", file=sys.stderr)
         return 1
 
     tampered = dict(signed)
     tampered["inventory"] = {"gold": 99999}
     if verify_save(tampered, pepper, spec):
-        print("[FAIL] tampered save incorrectly verified")
+        print("[FAIL] tampered save incorrectly verified", file=sys.stderr)
         return 1
 
     impl = ROOT / spec["implementation"]["gdscript"]
@@ -62,10 +62,10 @@ def main() -> int:
                 port_status = h.get("port_status", "pending")
                 break
     if port_status == "ported" and not impl.is_file():
-        print(f"[FAIL] missing GDScript reference {impl} (SaveIntegrity port_status=ported)")
+        print(f"[FAIL] missing GDScript reference {impl} (SaveIntegrity port_status=ported)", file=sys.stderr)
         return 1
     if port_status == "ported":
-        print(f"[OK]   SaveIntegrity GDScript present")
+        print("[OK]   SaveIntegrity GDScript present")
     else:
         print(f"[SKIP] SaveIntegrity GDScript — port_status={port_status} (Phase 2 dispatch)")
 
@@ -73,7 +73,7 @@ def main() -> int:
         f"[OK]   save_integrity.json — {spec['algorithm']}, "
         f"{len(spec['signed_payload_fields'])} signed field(s)"
     )
-    print(f"[OK]   HMAC round-trip + tamper rejection")
+    print("[OK]   HMAC round-trip + tamper rejection")
     print("[PASS] save integrity spec")
     return 0
 

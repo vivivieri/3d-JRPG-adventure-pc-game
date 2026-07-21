@@ -38,7 +38,7 @@ def main() -> int:
         checked += 1
         if not import_path.is_file():
             if args.strict:
-                print(f"[FAIL] {rel} — missing .import sidecar (reimport in Godot)")
+                print(f"[FAIL] {rel} — missing .import sidecar (reimport in Godot)", file=sys.stderr)
                 fail += 1
             else:
                 print(f"[WARN] {rel} — no .import sidecar yet")
@@ -50,7 +50,7 @@ def main() -> int:
                 print(msg)
                 fail += 1
             else:
-                print(msg.replace("[FAIL]", "[WARN]"))
+                print(msg.replace("[FAIL]", "[WARN]"), file=sys.stderr)
         else:
             print(f"[OK]   {rel}")
 

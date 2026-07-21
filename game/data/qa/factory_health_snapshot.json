@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updated_at": "2026-07-16T17:31:26.878183+00:00",
-  "status": "healthy",
-  "last_event": "orchestrator_pass",
-  "last_issue_id": null,
-  "last_agent_role": null,
+  "updated_at": "2026-07-21T01:50:00+00:00",
+  "status": "degraded",
+  "last_event": "bootstrap_gap_detected",
+  "last_issue_id": "P1-00",
+  "last_agent_role": "pm",
   "last_commit_sha": null,
   "sprint_id": "Phase1-Sprint1",
-  "note": "PM orchestrator PASS",
+  "note": "P1-00 reopened to blocked — game/development tip missing project.godot; factory idle until bootstrap restored",
   "agent_sessions_this_sprint": 0,
   "factory_halted": false
 }

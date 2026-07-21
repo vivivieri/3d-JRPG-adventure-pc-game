@@ -1,6 +1,6 @@
 # Tides of Urashima — Game Feel & Feedback
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/gameplay/COMBAT_SYSTEMS.md`, `docs/ui/UI_UX_FLOW.md`, `docs/ui/CINEMATICS.md`, `docs/vision/PACING_CHART.md`
 
 Defines **moment-to-moment juice** — how the game responds to player actions. Complements systems docs with timing, VFX, and UI feedback rules.

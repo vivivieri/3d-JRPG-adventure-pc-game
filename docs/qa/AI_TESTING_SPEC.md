@@ -1,8 +1,8 @@
 # AI Testing Specification
 
-**Version:** 1.4  
-**Applies to:** All implementation on `main` (Phases 1–8)  
-**Parent doc:** `docs/workflow/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)  
+**Version:** 1.4
+**Applies to:** All implementation on `main` (Phases 1–8)
+**Parent doc:** `docs/workflow/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)
 **Cross-refs:** `AGENTS.md`, `docs/technical/CODE_BASE_CLASS_RULES.md`, `docs/qa/PLAYTEST_SCRIPT.md`, `docs/qa/QA_AND_BUG_PROCESS.md`, `docs/qa/FLOW_QA.md`, `docs/qa/QA_REMEDIATION_LOOP.md`
 
 This document is the **detailed spec** for AI agent testing. It defines **how** to run each layer (L0–L5) and when humans may begin QA.
@@ -47,19 +47,19 @@ Human QA (`docs/qa/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **a
 
 ## 2. L0 — Data validation
 
-**Runner:** `python3 tools/validate_story_data.py`  
-**Owner:** AI agent  
+**Runner:** `python3 tools/validate_story_data.py`
+**Owner:** AI agent
 **Exit:** 0 = pass
 
 ### Checks (automated)
 
-- Scene IDs in `scenes.json` match dialogue / encounter / cinematic-hook references  
-- Flag names (set/required by scenes, dialogue on_complete + choices, encounters incl. `on_phase_trigger`, quests, achievements) exist in `flags.json`; enum values validated  
-- Item IDs in shop / encounters / enemy drops / quest rewards exist in `items.json`  
-- Enemy skill kits + AI weight tables reference `skills.json`; party starting skills / unlocks / limits exist  
-- Shop scroll `skill_id` / `character_id` resolve  
-- Every enum flag (`mirror_choice`, `ending_chosen`) is written by at least one dialogue choice  
-- VO `voice_id`s exist in `vo_prompts.json` with matching tier  
+- Scene IDs in `scenes.json` match dialogue / encounter / cinematic-hook references
+- Flag names (set/required by scenes, dialogue on_complete + choices, encounters incl. `on_phase_trigger`, quests, achievements) exist in `flags.json`; enum values validated
+- Item IDs in shop / encounters / enemy drops / quest rewards exist in `items.json`
+- Enemy skill kits + AI weight tables reference `skills.json`; party starting skills / unlocks / limits exist
+- Shop scroll `skill_id` / `character_id` resolve
+- Every enum flag (`mirror_choice`, `ending_chosen`) is written by at least one dialogue choice
+- VO `voice_id`s exist in `vo_prompts.json` with matching tier
 
 ### Agent report line
 
@@ -71,36 +71,36 @@ Human QA (`docs/qa/PLAYTEST_SCRIPT.md`) is **Phase 8 / ship gate only**, and **a
 
 ### L0b — Base class registry
 
-**Runner:** `python3 tools/validate_base_classes.py`  
-**Owner:** Architect (GodotPrompter)  
+**Runner:** `python3 tools/validate_base_classes.py`
+**Owner:** Architect (GodotPrompter)
 **Exit:** 0 = pass
 
 ### Checks (automated)
 
-- `game/data/code/base_classes.json` schema valid  
-- All `architect_owns` paths documented  
-- `component_scenes` entries reference valid base ids; paths exist on game branch  
+- `game/data/code/base_classes.json` schema valid
+- All `architect_owns` paths documented
+- `component_scenes` entries reference valid base ids; paths exist on game branch
 
 **On FAIL:** Fix `base_classes.json` per `docs/technical/CODE_BASE_CLASS_RULES.md`.
 
 ### L0c — Base class compliance (game branch)
 
-**Runner:** `bash tools/check_base_class_compliance.sh` (→ `check_base_class_compliance.py`)  
-**Owner:** Architect  
+**Runner:** `bash tools/check_base_class_compliance.sh` (→ `check_base_class_compliance.py`)
+**Owner:** Architect
 **Skip when:** `game/scripts/` not present (exit 2 — docs-only `main`)
 
 Blocks rogue native `extends CharacterBody3D` / `Area3D` / `Node` outside files listed in `base_classes.json`. Only registered base class files may extend Godot native types directly.
 
 ### L0d — Audio QA catalog (`main` docs CI)
 
-**Runners:** `python3 tools/validate_audio_qa_catalog.py`, `python3 tools/validate_scene_audio_map.py`  
-**Owner:** Architect  
+**Runners:** `python3 tools/validate_audio_qa_catalog.py`, `python3 tools/validate_scene_audio_map.py`
+**Owner:** Architect
 **Exit:** 0 = pass
 
 ### Checks (automated)
 
-- `audio_qa_catalog.json` tracks ↔ `ace_step_prompts.json`; P0 VO ↔ `vo_prompts.json` + generation briefs  
-- `scene_audio_map.json` BGM/sting/voice refs resolve to catalog  
+- `audio_qa_catalog.json` tracks ↔ `ace_step_prompts.json`; P0 VO ↔ `vo_prompts.json` + generation briefs
+- `scene_audio_map.json` BGM/sting/voice refs resolve to catalog
 - P0 clips have `hero_listen_review` + `docs/generation_briefs/vo/*.md`
 
 **On FAIL:** Fix `game/data/audio/` or brief paths; see `docs/audio/AUDIO_QA.md`.
@@ -109,8 +109,8 @@ Blocks rogue native `extends CharacterBody3D` / `Area3D` / `Node` outside files 
 
 ## 3. L1 — Unit tests
 
-**Runner:** `bash tools/run_unit_tests.sh`  
-**Owner:** GodotPrompter writes tests; AI agent runs them  
+**Runner:** `bash tools/run_unit_tests.sh`
+**Owner:** GodotPrompter writes tests; AI agent runs them
 **Location:** `game/tests/unit/`
 
 ### Current tests (Phase 0)
@@ -144,8 +144,8 @@ Blocks rogue native `extends CharacterBody3D` / `Area3D` / `Node` outside files 
 
 ### L1b — GDScript lint (changed files)
 
-**Runner:** `bash tools/check_gdscript_changed.sh`  
-**Owner:** Architect  
+**Runner:** `bash tools/check_gdscript_changed.sh`
+**Owner:** Architect
 **Skip when:** No `.gd` changes in diff, or no `game/project.godot`
 
 Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools/install_ci_deps.sh`.
@@ -158,8 +158,8 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 
 ## 4. L2 — Smoke tests
 
-**Runner:** `bash tools/run_playtest_smoke.sh`  
-**Owner:** AI agent  
+**Runner:** `bash tools/run_playtest_smoke.sh`
+**Owner:** AI agent
 **Includes:** L0 + L1 + dev environment + boot headless load
 
 ### Checks
@@ -178,22 +178,22 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 
 ### L2b — Animation whitelist
 
-**Runner:** `python3 tools/check_animation_whitelist.py --phase m5 --strict` (game branch) · `--phase 1` (early dev)  
-**Owner:** Builder / Visual  
-**Authority:** `game/data/models/qa_catalog.json` → `allowed_animations` + `required_animations` · `docs/art/CHARACTER_BIBLE.md` §8  
+**Runner:** `python3 tools/check_animation_whitelist.py --phase m5 --strict` (game branch) · `--phase 1` (early dev)
+**Owner:** Builder / Visual
+**Authority:** `game/data/models/qa_catalog.json` → `allowed_animations` + `required_animations` · `docs/art/CHARACTER_BIBLE.md` §8
 **Skip when:** No rigged GLB on disk (exit 2 — FAIL on game branch when `--strict`)
 
 ### L2c — Feel smoke
 
-**Runner:** `bash tools/run_feel_smoke_checks.sh`  
-**Authority:** `game/data/qa/feel_thresholds.json` · `docs/gameplay/GAME_FEEL.md`  
+**Runner:** `bash tools/run_feel_smoke_checks.sh`
+**Authority:** `game/data/qa/feel_thresholds.json` · `docs/gameplay/GAME_FEEL.md`
 **Skip when:** No `game/project.godot` (exit 2)
 
 ### L2d — Audio smoke (BGM + P0 VO)
 
-**Runner:** `bash tools/run_audio_smoke_checks.sh` (included in `run_playtest_smoke.sh` when assets exist)  
-**Authority:** `docs/audio/AUDIO_QA.md` · `game/data/audio/audio_qa_catalog.json`  
-**Gate tracks:** `bgm_village` (BGM); `sc00_urashima_01` / `en` (VO) — override via env vars in script  
+**Runner:** `bash tools/run_audio_smoke_checks.sh` (included in `run_playtest_smoke.sh` when assets exist)
+**Authority:** `docs/audio/AUDIO_QA.md` · `game/data/audio/audio_qa_catalog.json`
+**Gate tracks:** `bgm_village` (BGM); `sc00_urashima_01` / `en` (VO) — override via env vars in script
 **Skip when:** Gate `.ogg` missing (WARN, exit 0 on dev)
 
 | Gate | Technical | Jury |
@@ -203,8 +203,8 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 
 ### L2d — GLB import pipeline
 
-**Runner:** `python3 tools/check_glb_import_scripts.py --strict`  
-**Setup:** `bash tools/install_glb_import_pipeline.sh` once per dev env  
+**Runner:** `python3 tools/check_glb_import_scripts.py --strict`
+**Setup:** `bash tools/install_glb_import_pipeline.sh` once per dev env
 **Skip when:** No GLB assets on disk (exit 2)
 
 ### Agent report line
@@ -217,8 +217,8 @@ Runs `gdlint` (gdtoolkit) on changed `.gd` files only. Install deps: `bash tools
 
 ## 5. L3 — GDAI editor verify
 
-**Runner:** GDAI MCP (no shell script — procedural)  
-**Owner:** AI agent  
+**Runner:** GDAI MCP (no shell script — procedural)
+**Owner:** AI agent
 **When:** Every task that touches scenes, materials, lights, or runtime behavior
 
 ### 5.1 Prerequisites
@@ -246,37 +246,37 @@ bash tools/ensure_gdai_mcp.sh
 
 #### Zone / environment (Phase 1)
 
-- [ ] Ground uses `toon_base.gdshader` (not default grey StandardMaterial3D)  
-- [ ] `DirectionalLight3D` rotation and energy match `ENVIRONMENT_KITS.md` zone table  
-- [ ] Fog enabled with zone density/color  
-- [ ] ProceduralSky (no HDRI import)  
-- [ ] Screenshot matches muted coastal palette (`ART_DIRECTION.md` §10 for ruined_village)  
+- [ ] Ground uses `toon_base.gdshader` (not default grey StandardMaterial3D)
+- [ ] `DirectionalLight3D` rotation and energy match `ENVIRONMENT_KITS.md` zone table
+- [ ] Fog enabled with zone density/color
+- [ ] ProceduralSky (no HDRI import)
+- [ ] Screenshot matches muted coastal palette (`ART_DIRECTION.md` §10 for ruined_village)
 
 #### UI scene (Phase 2–3)
 
-- [ ] Control anchors correct at 1920×1080  
-- [ ] No pink missing-font boxes  
-- [ ] Focus navigation works (keyboard)  
+- [ ] Control anchors correct at 1920×1080
+- [ ] No pink missing-font boxes
+- [ ] Focus navigation works (keyboard)
 
 #### Combat scene (Phase 4)
 
-- [ ] Combat UI visible; HP/MP bars update on damage  
-- [ ] **GDAI UI discovery** finds BattleMenu / action list nodes  
-- [ ] **Action sequence:** `ui_down` × N → `ui_accept` opens Skills; screenshot shows no text overlap  
-- [ ] Action menu opens; skill selection does not soft-lock  
-- [ ] Battle log shows last action  
-- [ ] **Edge case (runtime inject):** set player HP to 1 mid-fight → game over screen triggers on death (§11.3)  
+- [ ] Combat UI visible; HP/MP bars update on damage
+- [ ] **GDAI UI discovery** finds BattleMenu / action list nodes
+- [ ] **Action sequence:** `ui_down` × N → `ui_accept` opens Skills; screenshot shows no text overlap
+- [ ] Action menu opens; skill selection does not soft-lock
+- [ ] Battle log shows last action
+- [ ] **Edge case (runtime inject):** set player HP to 1 mid-fight → game over screen triggers on death (§11.3)
 
 #### Boss / ending (Phase 5–6)
 
-- [ ] Phase banner appears on boss phase change  
-- [ ] SC-16 choice UI blocks attack input (`ENDING_DESIGN.md`)  
+- [ ] Phase banner appears on boss phase change
+- [ ] SC-16 choice UI blocks attack input (`ENDING_DESIGN.md`)
 
 ### 5.4 Failure handling
 
-1. Copy exact Output/Debugger text into session notes  
-2. GodotPrompter fixes `.gd` / `.gdshader`  
-3. GDAI MCP reapplies and re-runs steps 1–7  
+1. Copy exact Output/Debugger text into session notes
+2. GodotPrompter fixes `.gd` / `.gdshader`
+3. GDAI MCP reapplies and re-runs steps 1–7
 4. Do not mark task done until L3 pass **and** `docs/art/VISUAL_QA.md` report template filled
 
 ### Agent report line
@@ -289,8 +289,8 @@ bash tools/ensure_gdai_mcp.sh
 
 ## 6. L4 — AI integration tests
 
-**Runner:** `bash tools/run_integration_tests.sh`  
-**Owner:** GodotPrompter writes `game/tests/integration/*.gd`; AI agent runs at phase gates  
+**Runner:** `bash tools/run_integration_tests.sh`
+**Owner:** GodotPrompter writes `game/tests/integration/*.gd`; AI agent runs at phase gates
 **When:** End of Phases 2, 3, 4, 5, 6 (and after any regression fix to flows)
 
 ### 6.1 Machine-readable catalog
@@ -345,11 +345,11 @@ bash tools/ensure_gdai_mcp.sh
 
 ### 6.3 Implementation notes
 
-- **Hybrid model:** L4 uses **headless GDScript** for deterministic flag/math checks **plus** **GDAI MCP** for UI menus the headless runner cannot see (inventory, combat menus, dialogue).  
-- Headless Godot with scripted `Input` simulation **or** GDAI batched keypresses + timed waits  
-- JRPG sub-menus (Equipment, Skills, Items, Save): always **discover UI tree first**, then simulate navigation (§11)  
-- Each scenario returns pass/fail; runner exits non-zero on any fail  
-- Wire new scenarios in `tools/run_integration_tests.sh` as they land  
+- **Hybrid model:** L4 uses **headless GDScript** for deterministic flag/math checks **plus** **GDAI MCP** for UI menus the headless runner cannot see (inventory, combat menus, dialogue).
+- Headless Godot with scripted `Input` simulation **or** GDAI batched keypresses + timed waits
+- JRPG sub-menus (Equipment, Skills, Items, Save): always **discover UI tree first**, then simulate navigation (§11)
+- Each scenario returns pass/fail; runner exits non-zero on any fail
+- Wire new scenarios in `tools/run_integration_tests.sh` as they land
 
 ### Agent report line
 
@@ -363,19 +363,19 @@ bash tools/ensure_gdai_mcp.sh
 
 ## 7. L5 — AI E2E playthrough
 
-**Runner:** `bash tools/run_e2e_playthrough.sh`  
-**Owner:** GodotPrompter + AI agent  
-**When:** Phase 6 gate complete; **required again** on every release candidate before human QA  
+**Runner:** `bash tools/run_e2e_playthrough.sh`
+**Owner:** GodotPrompter + AI agent
+**When:** Phase 6 gate complete; **required again** on every release candidate before human QA
 **Blocks:** L6 human QA
 
 ### 7.1 Scope
 
 Full story automation per `game/data/story/scenes.json`:
 
-- Acts I–III playable without soft-lock  
-- All three endings: **Rewind**, **Anchor**, **Drift**  
-- Credits after each ending  
-- **GDAI MCP** drives field movement, dialogue advance, combat menus, and shop where headless scripts are brittle  
+- Acts I–III playable without soft-lock
+- All three endings: **Rewind**, **Anchor**, **Drift**
+- Credits after each ending
+- **GDAI MCP** drives field movement, dialogue advance, combat menus, and shop where headless scripts are brittle
 - Optional: record video to `artifacts/videos/e2e_<ending>_<date>.mp4`
 
 ### 7.2 E2E matrix (implement in `game/tests/e2e/`)
@@ -427,19 +427,19 @@ Full story automation per `game/data/story/scenes.json`:
 
 ## 8. L6 — Human QA (required ship gate — after all AI playthrough)
 
-**Runner:** Human tester + `docs/qa/PLAYTEST_SCRIPT.md`  
-**Owner:** Human (not AI)  
-**Prerequisite:** L0–L5 all PASS on release candidate commit  
+**Runner:** Human tester + `docs/qa/PLAYTEST_SCRIPT.md`
+**Owner:** Human (not AI)
+**Prerequisite:** L0–L5 all PASS on release candidate commit
 **Policy:** L6 is **required for ship** (Phase 8 prod CD). It is human-only and runs after L0–L5 — not optional.
 
 ### 8.1 Entry checklist (before human starts)
 
-- [ ] `git rev-parse HEAD` recorded  
-- [ ] `bash tools/run_playtest_smoke.sh` → PASS  
-- [ ] `bash tools/run_integration_tests.sh` → PASS  
-- [ ] `bash tools/run_e2e_playthrough.sh` → PASS (not SKIP)  
-- [ ] Windows build exists (Phase 8) OR Godot F5 build for PC tester  
-- [ ] GDAI MCP disabled for player build  
+- [ ] `git rev-parse HEAD` recorded
+- [ ] `bash tools/run_playtest_smoke.sh` → PASS
+- [ ] `bash tools/run_integration_tests.sh` → PASS
+- [ ] `bash tools/run_e2e_playthrough.sh` → PASS (not SKIP)
+- [ ] Windows build exists (Phase 8) OR Godot F5 build for PC tester
+- [ ] GDAI MCP disabled for player build
 
 ### 8.2 What humans test (AI cannot replace)
 
@@ -541,9 +541,9 @@ These techniques come from live-runtime MCP testing (recommended for JRPG UI-hea
 
 **Procedure:**
 
-1. GDAI MCP: run game to target state (F5 or run scene).  
-2. **Discover UI elements** — walk live scene tree; collect `Control` text, name, position, `visible`, focus.  
-3. Plan key sequence from discovered nodes (do not hard-code stale node paths from `.tscn` files).  
+1. GDAI MCP: run game to target state (F5 or run scene).
+2. **Discover UI elements** — walk live scene tree; collect `Control` text, name, position, `visible`, focus.
+3. Plan key sequence from discovered nodes (do not hard-code stale node paths from `.tscn` files).
 4. Execute batched input, e.g.:
 
 ```
@@ -576,8 +576,8 @@ Use GDAI MCP to execute **short** runtime scripts for states hard to reach organ
 
 **Rules:**
 
-- GodotPrompter writes inject snippets; GDAI MCP runs them in live session.  
-- Log inject script in test report.  
+- GodotPrompter writes inject snippets; GDAI MCP runs them in live session.
+- Log inject script in test report.
 - Prefer **unit tests** for pure math; use inject only for **UI / state integration**.
 
 ### 11.4 Example agent prompts (copy-paste)
@@ -630,9 +630,9 @@ See `docs/agents/MCP_STACK.md` for conflict rules and install.
 
 If `game/tests/unit/` becomes crowded, adopt **[GUT](https://github.com/bitwes/Gut)** (Godot Unit Test):
 
-- GodotPrompter writes GUT test scripts per `COMBAT_SYSTEMS.md` worked examples.  
-- Run headless: `godot4 --headless -s addons/gut/gut_cmdln.gd` (after plugin install).  
-- Wire into `tools/run_unit_tests.sh`.  
+- GodotPrompter writes GUT test scripts per `COMBAT_SYSTEMS.md` worked examples.
+- Run headless: `godot4 --headless -s addons/gut/gut_cmdln.gd` (after plugin install).
+- Wire into `tools/run_unit_tests.sh`.
 
 **Until then:** keep the lightweight `test_runner.gd` scaffold on `main`.
 

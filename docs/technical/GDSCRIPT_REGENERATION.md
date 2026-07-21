@@ -1,7 +1,7 @@
 # GDScript regeneration — core helpers & Phase 1 visuals
 
-**Version:** 1.1  
-**Authority:** How to rebuild deleted `game/scripts/core/*.gd` and Phase 1 visual scripts on `game/development` from `main` specs.  
+**Version:** 1.1
+**Authority:** How to rebuild deleted `game/scripts/core/*.gd` and Phase 1 visual scripts on `game/development` from `main` specs.
 **Cross-refs:** `docs/technical/SPEC_FIRST_DEVELOPMENT.md`, `game/data/code/helpers_registry.json`, `game/data/code/base_classes.json`
 
 ---
@@ -42,7 +42,7 @@
 
 `port_status` in `helpers_registry.json`: `pending` | `ported` | `wired`. Do **not** port ahead of PM dispatch — early ports are reverted to keep phase handoffs clean.
 
-**No agent other than Architect** may author `game/scripts/core/*.gd` for these helpers.  
+**No agent other than Architect** may author `game/scripts/core/*.gd` for these helpers.
 **No agent other than Builder** may register autoloads in `project.godot` (GDAI MCP only).
 
 ### Gates per owner
@@ -194,8 +194,8 @@ Use these as **diff hints** only — registry + Python reference win on conflict
 
 ## 10. Phase 1 visuals — `ZoneVisuals` + `toon_base` (P1-01)
 
-**Sprint:** `docs/sprints/Phase1-Sprint1-issues.md` §P1-01  
-**Checklist command:** `bash tools/regenerate_phase1_visuals.sh`  
+**Sprint:** `docs/sprints/Phase1-Sprint1-issues.md` §P1-01
+**Checklist command:** `bash tools/regenerate_phase1_visuals.sh`
 **Unblocks:** P1-02 Builder (`ruined_village.tscn` via GDAI MCP)
 
 | On `main` | On `game/development` |

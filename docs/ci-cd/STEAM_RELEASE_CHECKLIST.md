@@ -1,8 +1,8 @@
 # Steam Release Checklist — Technical & Non-Technical
 
-**Version:** 1.0  
-**Milestone:** M6 (Phase 8)  
-**Authority:** Complete every **Blocker** before production Steam release.  
+**Version:** 1.0
+**Milestone:** M6 (Phase 8)
+**Authority:** Complete every **Blocker** before production Steam release.
 **Cross-refs:** `docs/workflow/MILESTONES.md` §M6, `steam/STORE_PAGE.md`, `steam/GODOTSTEAM_SETUP.md`, `docs/art/ASSET_COMPLIANCE.md`
 
 **Status key:** ✅ Done · 🟡 Partial · ❌ Missing · ⏳ Blocked on earlier phase

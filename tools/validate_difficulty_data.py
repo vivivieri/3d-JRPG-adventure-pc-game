@@ -25,7 +25,7 @@ def main() -> int:
 
     for path in (diff_path, settings_schema, settings_defaults):
         if not path.is_file():
-            print(f"[FAIL] missing {path}")
+            print(f"[FAIL] missing {path}", file=sys.stderr)
             return 1
 
     catalog = load_catalog(diff_path)
@@ -34,13 +34,13 @@ def main() -> int:
 
     hard_key = catalog["policy"]["hard_mode_setting"]
     if hard_key not in schema["fields"]:
-        print(f"[FAIL] difficulty policy key {hard_key} missing from settings_schema.json")
+        print(f"[FAIL] difficulty policy key {hard_key} missing from settings_schema.json", file=sys.stderr)
         return 1
     if hard_key not in defaults["defaults"]:
-        print(f"[FAIL] {hard_key} missing from settings_defaults.json")
+        print(f"[FAIL] {hard_key} missing from settings_defaults.json", file=sys.stderr)
         return 1
     if hard_key not in schema.get("achievement_settings_keys", []):
-        print(f"[FAIL] {hard_key} must be in achievement_settings_keys")
+        print(f"[FAIL] {hard_key} must be in achievement_settings_keys", file=sys.stderr)
         return 1
 
     normal = catalog["modes"]["normal"]
@@ -52,14 +52,14 @@ def main() -> int:
         "tide_keeper_choice_gate_hp_percent",
     ):
         if field not in normal or field not in hard:
-            print(f"[FAIL] modes missing {field}")
+            print(f"[FAIL] modes missing {field}", file=sys.stderr)
             return 1
 
     if hard["enemy_hp_multiplier"] <= normal["enemy_hp_multiplier"]:
-        print("[FAIL] hard HP multiplier must exceed normal")
+        print("[FAIL] hard HP multiplier must exceed normal", file=sys.stderr)
         return 1
     if hard["boss_intent_preview_in_phase_2_plus"]:
-        print("[FAIL] hard mode must hide intents in boss phase 2+")
+        print("[FAIL] hard mode must hide intents in boss phase 2+", file=sys.stderr)
         return 1
 
     impl = ROOT / "game/scripts/core/difficulty_service.gd"
@@ -72,10 +72,10 @@ def main() -> int:
                 port_status = h.get("port_status", "pending")
                 break
     if port_status == "ported" and not impl.is_file():
-        print(f"[FAIL] missing {impl} (DifficultyService port_status=ported)")
+        print(f"[FAIL] missing {impl} (DifficultyService port_status=ported)", file=sys.stderr)
         return 1
     if port_status == "ported":
-        print(f"[OK]   DifficultyService GDScript present")
+        print("[OK]   DifficultyService GDScript present")
     else:
         print(f"[SKIP] DifficultyService GDScript — port_status={port_status} (Phase 4 dispatch)")
 
@@ -88,7 +88,7 @@ def main() -> int:
     assert boss_shows_intent_preview(2, True, {"hard_mode": False}) is True
     assert tide_keeper_gate_hp_percent({"hard_mode": True}) == 0.15
 
-    print(f"[OK]   difficulty.json — modes normal + hard")
+    print("[OK]   difficulty.json — modes normal + hard")
     print(f"[OK]   settings schema includes {hard_key}")
     print("[OK]   multiplier reference checks")
     print("[PASS] difficulty data")

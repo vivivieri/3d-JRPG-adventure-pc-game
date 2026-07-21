@@ -4,8 +4,8 @@ Track every third-party asset, story source, and engine dependency.
 
 **Policy:** All shipped art and audio must be **copyright-safe for commercial release** — no unlicensed or all-rights-reserved material. See **`docs/art/ASSET_COMPLIANCE.md`** for the full allow/deny list.
 
-**Machine manifest:** `docs/asset_manifest.license.json`  
-**Verify before ship:** `bash tools/check_asset_compliance.sh`  
+**Machine manifest:** `docs/asset_manifest.license.json`
+**Verify before ship:** `bash tools/check_asset_compliance.sh`
 **Register new assets:** `python3 tools/register_asset.py add --help`
 
 ---

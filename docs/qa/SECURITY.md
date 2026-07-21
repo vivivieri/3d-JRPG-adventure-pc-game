@@ -1,7 +1,7 @@
 # Security — Ship Build, Secrets & Supply Chain
 
-**Version:** 1.1  
-**Machine-readable:** `game/data/qa/ship_security.json`  
+**Version:** 1.1
+**Machine-readable:** `game/data/qa/ship_security.json`
 **Cross-refs:** `docs/qa/PLATFORM_SUPPORT.md`, `docs/agents/CURSOR_SECRETS_SETUP.md`, `docs/workflow/DELIVERY_CONTROL.md`, `docs/art/ASSET_COMPLIANCE.md`, `docs/technical/PLUGIN_COMPATIBILITY.md`
 
 Security for *Tides of Urashima* focuses on **not shipping the dev factory**, **not leaking secrets**, **verifying release binaries**, and **raising the bar against casual ripping/tampering** — not kernel anti-cheat (offline single-player JRPG).

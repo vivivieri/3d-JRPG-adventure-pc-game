@@ -39,7 +39,7 @@ def run_verify() -> tuple[int, str]:
 
 def scan_media_counts(manifest: dict) -> dict:
   sys.path.insert(0, str(ROOT / "tools"))
-  from verify_asset_licenses import iter_media_files, load_manifest, lookup_entry, build_coverage
+  from verify_asset_licenses import build_coverage, iter_media_files, load_manifest, lookup_entry
 
   m = load_manifest()
   coverage, allowed, banned = build_coverage(m)
@@ -160,8 +160,8 @@ def main() -> int:
         "",
         "## Statistics",
         "",
-        f"| Metric | Value |",
-        f"|--------|-------|",
+        "| Metric | Value |",
+        "|--------|-------|",
         f"| Media files on disk | {stats['total_media_files']} |",
         f"| Unlisted files | {stats['unlisted']} |",
         f"| Manifest entries | {report['manifest_entry_count']} |",

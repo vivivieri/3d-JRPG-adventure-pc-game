@@ -1,6 +1,6 @@
 # Tides of Urashima — Items & Economy
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/gameplay/ENCOUNTER_TABLE.md`, `game/data/items/items.json`, `docs/world/QUEST_AND_FLAGS.md`, `docs/art/ITEMS_3D_MODEL_GUIDE.md`
 
 **Canonical rule:** Item IDs in this doc match `items.json`. Display names shown for UI. **3D mesh specs:** `docs/art/ITEMS_3D_MODEL_GUIDE.md`.
@@ -13,7 +13,7 @@
 |----|--------------|--------|-------|
 | `shell_coin` | Shell Coin | 環貝 | Only currency; integer, no decimals |
 
-**Sources:** Combat drops, quest rewards, sell materials *(lore-entry coin bonus cut for v1 — `lore_entries.json` has no reward field)*  
+**Sources:** Combat drops, quest rewards, sell materials *(lore-entry coin bonus cut for v1 — `lore_entries.json` has no reward field)*
 **Sinks:** Roku's shop, no other vendors v1
 
 ---
@@ -26,8 +26,8 @@
 | `spirit_tonic` | Spirit Tonic | Restore 25 MP | 50 | 25 | ✓ ∞ |
 | `coral_antidote` | Coral Antidote | Cure poison | 30 | 15 | ✓ ∞ |
 
-**Field use:** Allowed out of combat (except antidote if not poisoned — greyed)  
-**Battle use:** All three  
+**Field use:** Allowed out of combat (except antidote if not poisoned — greyed)
+**Battle use:** All three
 **Stack limit:** 99 per slot type in inventory
 
 *ENCOUNTER_TABLE "Potion/Antidote/Ether" names deprecated — use IDs above.*
@@ -62,7 +62,7 @@
 | `spirit_bell` | Spirit Bell | charm | MAG +4, SPD +1 | Lore `sailor_charm` (read grant) | all |
 | `shell_charm` | Shell Charm | charm | DEF +2 | Shop 80 | all |
 
-**Slots:** weapon + armor + charm (3 per character)  
+**Slots:** weapon + armor + charm (3 per character)
 **Swap:** Tab → Equipment; instant in field; not mid-combat
 
 ---
@@ -105,7 +105,7 @@ No crafting v1. Sell at shop interface (future) or auto — **v1: no sell UI; ma
 
 ## 7. Roku's shop (`roku_shack`)
 
-**Open:** `met_roku` (SC-04)  
+**Open:** `met_roku` (SC-04)
 **Restock:** After `shore_wraith_defeated` — +1 skill scroll each
 
 | Item | Price | Stock |

@@ -42,7 +42,23 @@ def secrets_from_check_script() -> set[str]:
     return set(re.findall(r"^\s*([A-Z][A-Z0-9_]*)\s*$", block, re.MULTILINE))
 
 
-def validate_feature(feature: dict, errors: list[str]) -> None:
+def validate_standard_surfaces(
+    registry: dict, feature: dict, errors: list[str]
+) -> None:
+    fid = feature.get("id", "?")
+    standard = registry.get("standard_agent_surfaces", [])
+    if not standard:
+        errors.append("registry missing standard_agent_surfaces list")
+        return
+    refs = {ref.get("doc", "") for ref in feature.get("required_doc_refs", [])}
+    for surface in standard:
+        if surface not in refs:
+            errors.append(
+                f"{fid}: missing standard agent surface in required_doc_refs: {surface}"
+            )
+
+
+def validate_feature(feature: dict, registry: dict, errors: list[str]) -> None:
     fid = feature.get("id", "?")
 
     authority = feature.get("authority_doc")
@@ -86,6 +102,8 @@ def validate_feature(feature: dict, errors: list[str]) -> None:
         cmd = row.get("command", "")
         if needle and needle not in cmd:
             errors.append(f"{fid}: orchestrator step {sid} command missing '{needle}'")
+
+    validate_standard_surfaces(registry, feature, errors)
 
     for ref in feature.get("required_doc_refs", []):
         doc = ref.get("doc", "")
@@ -134,16 +152,20 @@ def main() -> int:
     registry = load_json(REGISTRY_PATH)
     errors: list[str] = []
 
-    for key in ("version", "authority", "policy", "features"):
+    for key in ("version", "authority", "policy", "features", "standard_agent_surfaces"):
         if key not in registry:
             errors.append(f"registry missing key: {key}")
+
+    for surface in registry.get("standard_agent_surfaces", []):
+        if not (ROOT / surface).is_file():
+            errors.append(f"standard_agent_surfaces path missing: {surface}")
 
     feature_ids = [f.get("id") for f in registry.get("features", [])]
     if len(feature_ids) != len(set(feature_ids)):
         errors.append("duplicate feature id in registry")
 
     for feature in registry.get("features", []):
-        validate_feature(feature, errors)
+        validate_feature(feature, registry, errors)
 
     if errors:
         print("workflow integration FAILED:")

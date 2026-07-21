@@ -1,11 +1,11 @@
 # Tides of Urashima — Game Design Document
 
-**Version:** 0.3 (Pre-build)  
-**Engine:** Godot 4.7 (Forward+)  
-**Platform:** PC (Steam) — **Linux + Windows** v1 (macOS v1.1+). Linux required because primary dev runs on Cursor Cloud (Linux). See `docs/qa/PLATFORM_SUPPORT.md`.  
-**Target audience:** Men 20–30  
-**Playtime target:** 2–3 hours (main story)  
-**Genre:** 3D adventure JRPG, turn-based combat  
+**Version:** 0.3 (Pre-build)
+**Engine:** Godot 4.7 (Forward+)
+**Platform:** PC (Steam) — **Linux + Windows** v1 (macOS v1.1+). Linux required because primary dev runs on Cursor Cloud (Linux). See `docs/qa/PLATFORM_SUPPORT.md`.
+**Target audience:** Men 20–30
+**Playtime target:** 2–3 hours (main story)
+**Genre:** 3D adventure JRPG, turn-based combat
 
 **Related docs:** `docs/art/CHARACTER_BIBLE.md`, `docs/world/ENVIRONMENT_KITS.md`, `docs/gameplay/BOSS_DESIGNS.md`, `docs/gameplay/ENCOUNTER_TABLE.md`, `docs/ui/CINEMATICS.md`, `docs/audio/AUDIO_DIRECTION.md`, `docs/audio/AUDIO_PRODUCTION_GUIDE.md`, `docs/qa/QA_AND_BUG_PROCESS.md`, `docs/vision/NARRATIVE_WRITING_GUIDE.md`, `docs/gameplay/PROGRESSION_TUNING.md`, `docs/gameplay/GAME_FEEL.md`, `docs/vision/LORE_AND_ENVIRONMENTAL_STORY.md`, `docs/world/WORLD_MAP_AND_FLOW.md`, `docs/vision/REPLAY_DESIGN.md`, `docs/world/QUEST_AND_FLAGS.md`, `docs/gameplay/TUTORIAL_DESIGN.md`, `docs/vision/ENDING_DESIGN.md`, `docs/gameplay/ITEMS_AND_ECONOMY.md`, `docs/art/ITEMS_3D_MODEL_GUIDE.md`, `docs/gameplay/COMBAT_SYSTEMS.md`, `docs/gameplay/SKILLS_BIBLE.md`, `docs/ui/UI_UX_FLOW.md`, `docs/technical/SAVE_AND_FAIL_STATES.md`
 

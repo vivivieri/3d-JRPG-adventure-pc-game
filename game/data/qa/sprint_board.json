@@ -70,7 +70,7 @@
         "L0_base_classes",
         "L1_unit_tests"
       ],
-      "status": "done",
+      "status": "blocked",
       "depends_on": [],
       "blocks": [
         "P1-01",
@@ -81,9 +81,10 @@
       ],
       "generation_readiness_id": null,
       "github_issue": null,
-      "last_agent_session": "2026-07-16T17:20:00+00:00",
-      "last_commit_sha": "4d02731",
-      "escalation_level": 0,
+      "last_agent_session": "2026-07-21T01:50:00+00:00",
+      "last_commit_sha": null,
+      "escalation_level": 2,
+      "blocked_reason": "game/development tip has no game/project.godot — prior done status used invalid SHA 4d02731; restore bootstrap from 9aa5fb5 (see tools/bootstrap_game_development.sh)",
       "carry_over_from": null,
       "done_requires": "ci_green_on_branch",
       "branch_name_pattern": "cursor/{issue_id}-a091",
@@ -91,7 +92,8 @@
         "docs/workflow/BRANCHING.md",
         "AGENTS.md",
         "tools/bootstrap_game_development.sh",
-        "tools/run_bootstrap_ci_checks.sh"
+        "tools/run_bootstrap_ci_checks.sh",
+        "docs/agents/CLOUD_SNAPSHOT_LAUNCH.md"
       ],
       "linear_issue": null
     },

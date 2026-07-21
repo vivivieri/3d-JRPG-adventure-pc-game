@@ -1,10 +1,10 @@
 # Tides of Urashima — Implementation Plan
 
-**Version:** 1.2 (Fresh rebuild)  
-**Branch:** `main` (documentation + `game/data/` only) · **`game/development`** (Godot implementation)  
-**Source of truth:** `main` design docs + `game/data/` JSON + `game/data/code/*_registry.json`  
-**Spec-first:** See `docs/technical/SPEC_FIRST_DEVELOPMENT.md` — no ship `.gd`/`.tscn` on `main`; build on `game/development` after `SPEC_DEV_START`.  
-**Workflow:** GodotPrompter + full MCP toolchain — see `docs/agents/MCP_STACK.md`.  
+**Version:** 1.2 (Fresh rebuild)
+**Branch:** `main` (documentation + `game/data/` only) · **`game/development`** (Godot implementation)
+**Source of truth:** `main` design docs + `game/data/` JSON + `game/data/code/*_registry.json`
+**Spec-first:** See `docs/technical/SPEC_FIRST_DEVELOPMENT.md` — no ship `.gd`/`.tscn` on `main`; build on `game/development` after `SPEC_DEV_START`.
+**Workflow:** GodotPrompter + full MCP toolchain — see `docs/agents/MCP_STACK.md`.
 **Milestone checklist:** `docs/workflow/MILESTONES.md` (M5 art → M6 Steam).
 
 Previous full implementation on `main` was **stripped** (boot shell + data only). Phases 1–6 rebuild from documentation via GDAI MCP on **`game/development`**.

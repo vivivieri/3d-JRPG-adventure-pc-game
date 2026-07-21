@@ -1,7 +1,7 @@
 # Multi-Agent Team — Simulated Small Studio
 
-**Version:** 1.0  
-**Applies to:** `game/development` implementation on Cursor Cloud Agents  
+**Version:** 1.0
+**Applies to:** `game/development` implementation on Cursor Cloud Agents
 **Cross-refs:** `.cursorrules` §0, `docs/agents/MCP_STACK.md`, `docs/ci-cd/ENVIRONMENTS.md`, `docs/agents/PROJECT_MANAGEMENT.md`, `docs/workflow/AGILE_WITHIN_PHASES.md`, `docs/workflow/AI_DEV_WORKFLOW.md`
 
 ---
@@ -117,7 +117,7 @@ Must include:
 
 ### QA → Architect (fail)
 
-Run: `bash tools/qa_emit_remediation.sh <brief-id>`  
+Run: `bash tools/qa_emit_remediation.sh <brief-id>`
 Post remediation JSON + gate ID in issue.
 
 ---

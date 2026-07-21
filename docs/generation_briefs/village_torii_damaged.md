@@ -1,7 +1,7 @@
 # Generation brief — `village_torii_damaged`
 
-**Status:** Phase 1 set-piece (hero jury)  
-**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`  
+**Status:** Phase 1 set-piece (hero jury)
+**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`
 **Phase:** SC-03 spirit shrine
 
 ## Intent

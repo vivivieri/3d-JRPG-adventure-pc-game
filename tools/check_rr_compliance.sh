@@ -55,7 +55,7 @@ fi
 # --- 1. Ship .tscn require valid GDAI marker ---
 SHIP_TSCN=()
 while IFS= read -r -d '' tscn; do
-  rel="${tscn#${ROOT}/}"
+  rel="${tscn#"${ROOT}"/}"
   if is_allowed_scene_path "$rel"; then
     echo "[SKIP] greybox/dev: $rel"
     continue
@@ -66,7 +66,7 @@ done < <(find "$SCENES_DIR" -name '*.tscn' -print0 2>/dev/null)
 if [[ ${#SHIP_TSCN[@]} -gt 0 ]]; then
   if ! marker_verified; then
     for rel in "${SHIP_TSCN[@]}"; do
-      fail "Ship scene without GDAI verification: $rel (missing or incomplete ${GDAI_MARKER#${ROOT}/})"
+      fail "Ship scene without GDAI verification: $rel (missing or incomplete ${GDAI_MARKER#"${ROOT}"/})"
     done
   else
     for rel in "${SHIP_TSCN[@]}"; do
@@ -83,11 +83,11 @@ fi
 
 if [[ -n "$MAIN_SCENE" ]]; then
   if ! marker_verified; then
-    fail "project.godot sets run/main_scene=$MAIN_SCENE but ${GDAI_MARKER#${ROOT}/} is missing or unverified"
+    fail "project.godot sets run/main_scene=$MAIN_SCENE but ${GDAI_MARKER#"${ROOT}"/} is missing or unverified"
   else
     MARKED_SCENE="$(grep -E '^main_scene=' "$GDAI_MARKER" 2>/dev/null | head -1 | cut -d= -f2- || true)"
     if [[ -z "$MARKED_SCENE" ]]; then
-      fail "${GDAI_MARKER#${ROOT}/} missing main_scene= line"
+      fail "${GDAI_MARKER#"${ROOT}"/} missing main_scene= line"
     elif [[ "$MARKED_SCENE" != "$MAIN_SCENE" ]]; then
       fail "main_scene mismatch: project.godot=$MAIN_SCENE vs .gdai_built=$MARKED_SCENE"
     else

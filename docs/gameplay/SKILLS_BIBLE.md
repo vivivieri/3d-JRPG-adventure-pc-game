@@ -1,9 +1,9 @@
 # Tides of Urashima — Skills Bible
 
-**Version:** 1.1 (Pre-build — reconciled with data)  
+**Version:** 1.1 (Pre-build — reconciled with data)
 **Cross-refs:** `docs/gameplay/COMBAT_SYSTEMS.md`, `game/data/skills/skills.json`, `game/data/characters/party.json`
 
-**Player skills:** **14 unique IDs** (5 per character; `strike` is shared by Urashima and Roku)  
+**Player skills:** **14 unique IDs** (5 per character; `strike` is shared by Urashima and Roku)
 **Enemy skills:** 6 (documented in `BOSS_DESIGNS.md` / `enemies.json`)
 
 > **Canonical numbers:** every row below mirrors `game/data/skills/skills.json`

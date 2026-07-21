@@ -1,7 +1,7 @@
 # MCP Stack — Full Toolchain (Godot 4.7)
 
-**Version:** 2.0  
-**Applies to:** `main` rebuild workflow — **Godot 4.7 stable**  
+**Version:** 2.0
+**Applies to:** `main` rebuild workflow — **Godot 4.7 stable**
 **Cross-refs:** `.cursorrules` §0–§1, `docs/art/ART_AUTOMATION_PIPELINE.md`, `docs/agents/GDAI_CLOUD_SETUP.md`, `docs/agents/PLUGIN_INSTALL_GUIDE.md`, `docs/workflow/AI_DEV_WORKFLOW.md`, `docs/qa/AI_TESTING_SPEC.md`, `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/qa/QA_REMEDIATION_LOOP.md`, `docs/art/ART_DIRECTION.md`, `docs/art/ASSET_COMPLIANCE.md`
 
 **Tiered requirements:** All MCP servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) are **required** — if missing, **STOP and notify the user**. **Blender** is **required** for M5 turntable QA (`docs/art/MODEL_QA.md`). Procedural UI placeholders are OK for **asset output** until GameLab gen ships — the MCP server itself is still required. Offline generators (ComfyUI, ACE-Step) use quality-first fallbacks per `docs/art/ART_AUTOMATION_PIPELINE.md`. Do not fall back to manual `.tscn` edits or undocumented web assets.
@@ -186,7 +186,7 @@ Template: `.cursor/mcp.json.example`
 
 ### ComfyUI / Material Maker — zone NPR albedos
 
-**Role:** Stylized tileable wood, stone, ground, hero texture sheets.  
+**Role:** Stylized tileable wood, stone, ground, hero texture sheets.
 **Does NOT:** Edit `.tscn` — hand off to GDAI after export.
 
 **Workflow:**
@@ -206,7 +206,7 @@ Template: `.cursor/mcp.json.example`
 
 ### GameLab Studio MCP — UI & 2D sheets (required)
 
-**Role:** Ink-wash UI frames, combat icon sheets, menu borders, VFX sprite sheets.  
+**Role:** Ink-wash UI frames, combat icon sheets, menu borders, VFX sprite sheets.
 **Does NOT:** Default path for zone tileables (use ComfyUI/Material Maker) or `.tscn` edits.
 
 **Workflow:**
@@ -226,7 +226,7 @@ Setup: [gamelabstudio.co](https://gamelabstudio.co/) API key → register `gamel
 
 ### AI 3D + Blender — offline hero pipeline (required for turntable QA)
 
-**Role:** Automated stylized meshes and albedos for Japanese coastal heroes and set-pieces.  
+**Role:** Automated stylized meshes and albedos for Japanese coastal heroes and set-pieces.
 **Not MCP** — offline batch before Godot import.
 
 ```
@@ -243,8 +243,8 @@ External cel-shading preset packs are **reference only** — GodotPrompter autho
 
 ### ACE-Step 1.5 — audio prototype (replaces Suno/Udio)
 
-**Role:** Zone loops, opening movie, boss fight, boss intro cinematics, ending hero scores.  
-**License:** MIT — commercial indie use; register in `docs/art/LICENSES.md`.  
+**Role:** Zone loops, opening movie, boss fight, boss intro cinematics, ending hero scores.
+**License:** MIT — commercial indie use; register in `docs/art/LICENSES.md`.
 **Also required:** `python3 tools/generate_game_audio.py` for instant procedural fallback.
 
 **Install:**
@@ -272,7 +272,7 @@ Prompt catalog: `game/data/audio/ace_step_prompts.json` · QA targets: `game/dat
 
 ### ElevenLabs — selective VO (12 clips, not full dialogue)
 
-**Role:** Short emotional punches at peaks (SC-03, SC-13, SC-16, etc.) — see `docs/vision/VO_HIT_LIST.md`.  
+**Role:** Short emotional punches at peaks (SC-03, SC-13, SC-16, etc.) — see `docs/vision/VO_HIT_LIST.md`.
 **Not for:** Full script, tutorials, inspectables, SC-08 crowd (SFX bed), SC-17 endings (music only).
 
 ```bash

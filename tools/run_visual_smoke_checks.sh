@@ -50,7 +50,7 @@ if ! SCREENSHOT="$(find_gameplay_screenshot)"; then
   exit 0
 fi
 
-echo "    Screenshot: ${SCREENSHOT#${ROOT}/}"
+echo "    Screenshot: ${SCREENSHOT#"${ROOT}"/}"
 echo ""
 
 if python3 "${ROOT}/tools/check_screenshot_palette.py" \

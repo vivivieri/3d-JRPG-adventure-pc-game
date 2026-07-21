@@ -1,6 +1,6 @@
 # Tides of Urashima — Replay Design
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/ENDING_DESIGN.md` §7, `docs/gameplay/ACHIEVEMENTS.md`, `docs/ui/UI_UX_FLOW.md`, `docs/gameplay/PROGRESSION_TUNING.md`
 
 Expands replay, gallery, and second-run value. **No NG+ stat carry in v1.**

@@ -1,7 +1,7 @@
 # Tides of Urashima — Lore & Environmental Storytelling
 
-**Version:** 1.0 (Pre-build)  
-**Story reference:** `docs/vision/STORYBOARD.md`, `game/data/lore/lore_entries.json`, `game/data/lore/lore_placements.json`  
+**Version:** 1.0 (Pre-build)
+**Story reference:** `docs/vision/STORYBOARD.md`, `game/data/lore/lore_entries.json`, `game/data/lore/lore_placements.json`
 **Cross-refs:** `docs/vision/NARRATIVE_WRITING_GUIDE.md`, `docs/world/QUEST_AND_FLAGS.md`, `docs/gameplay/ACHIEVEMENTS.md`
 
 ---

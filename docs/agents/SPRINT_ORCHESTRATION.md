@@ -1,7 +1,7 @@
 # Sprint Orchestration — Enforced Multi-Agent Workflow
 
-**Version:** 1.0  
-**Authority:** Replaces honor-system sprint planning. If orchestrator FAILs, **no agent may proceed**.  
+**Version:** 1.0
+**Authority:** Replaces honor-system sprint planning. If orchestrator FAILs, **no agent may proceed**.
 **Cross-refs:** `docs/agents/PM_AGENT_RUNBOOK.md`, `docs/agents/MULTI_AGENT_TEAM.md`, `docs/workflow/AGILE_WITHIN_PHASES.md`, `game/data/qa/sprint_board.json`, `game/data/qa/pm_orchestrator_steps.json`
 
 ---
@@ -59,6 +59,8 @@ PM: (new Automation run) run_pm_orchestrator.sh → next dispatch or sprint clos
 ```
 
 **Telemetry:** Session gate opens logging; `run_post_agent_cycle.sh` closes session and auto-fetches tokens. Stakeholder status reports emit on every cycle event. See `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 and `docs/agents/PM_STAKEHOLDER_REPORTING.md`.
+
+**Alignment audit:** PM or agent may run `bash tools/run_alignment_audit.sh --trigger post_merge` after registry or spec changes — `docs/qa/ALIGNMENT_AUDIT.md`. **Management visuals:** `audit_radar_spec.png` + `audit_radar_build.png` only.
 
 **No hourly/daily PM schedule.** Next PM run is triggered only by `agent_cycle_complete`, `sprint_cycle_complete`, `watchdog_recovery`, or guarded CI events. See `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` and `docs/agents/FACTORY_WATCHDOG.md` (stall exception layer).
 

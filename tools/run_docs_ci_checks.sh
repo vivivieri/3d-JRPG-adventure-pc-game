@@ -36,6 +36,15 @@ run_gate "L0_narrative_density" python3 tools/validate_narrative_density.py
 run_gate "L0_spec_registry" python3 tools/validate_spec_registry.py
 run_gate "L0_helpers_registry" python3 tools/validate_helpers_registry.py
 run_gate "L0_reference_libs" python3 tools/test_reference_libs.py
+run_gate "L1_python_lint" bash tools/check_python_lint.sh
+run_gate "L1_shellcheck" bash tools/check_shell_scripts.sh
+run_gate "L1_json_style" python3 tools/check_json_style.py
+run_gate "L1_typescript_lint" bash tools/check_typescript_lint.sh
+run_gate "L1_markdown_style" python3 tools/check_markdown_style.py
+run_gate "L1_gdshader_style" python3 tools/check_gdshader_style.py
+run_gate "L1_error_handling" bash tools/check_error_handling.sh
+run_gate "L1_workflow_yaml" bash tools/check_workflow_yaml.sh
+run_gate "L1_mypy_libs" bash tools/check_mypy_libs.sh
 run_gate "L0_main_no_ship_code" bash tools/check_main_no_ship_code.sh
 run_gate "L0_spec_refinement_scope" bash tools/check_spec_refinement_scope.sh
 run_gate "L0_difficulty_data" python3 tools/validate_difficulty_data.py
@@ -54,6 +63,8 @@ run_gate "L0_agent_session_telemetry" python3 tools/validate_agent_session_telem
 run_gate "L0_delivery_control" python3 tools/validate_delivery_control.py
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
+run_gate "L0_game_branch_bootstrap" bash tools/check_game_branch_bootstrap.sh
+run_gate "L0_vo_casting" python3 tools/validate_vo_casting.py
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
 run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py

@@ -1,13 +1,13 @@
 # Cloud Snapshot ID & Launch Checklist
 
-**Authority:** How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`.  
+**Authority:** How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`.
 **Cross-refs:** `docs/agents/GDAI_CLOUD_SETUP.md` · `docs/agents/MCP_STACK.md` · `docs/qa/PLATFORM_SUPPORT.md` · `.cursor/environment.json`
 
 ---
 
 ## 1. Active snapshot (game/development)
 
-Committed in `.cursor/environment.json` on branch **`game/development`**:
+Committed in `.cursor/environment.json` on branch **`game/development`** (template on `main`: `.cursor/environment.game-development.json.example`):
 
 | Field | Value |
 |-------|-------|
@@ -17,6 +17,8 @@ Committed in `.cursor/environment.json` on branch **`game/development`**:
 | **Start** | `bash tools/ensure_mcp_stack.sh` |
 
 **Dashboard:** [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)
+
+> **Gap (2026-07-21):** `origin/game/development` tip currently has the same pip-only `environment.json` as `main` and **no** `game/project.godot`. Until P1-00 restore lands, launch from the dashboard Environment that pins this snapshot id — do **not** trust repo JIT on the game branch tip. After restore: copy `.cursor/environment.game-development.json.example` → `.cursor/environment.json` on `game/development`, rebuild snapshot if plugins changed, commit + push.
 
 > **After rebuilding the snapshot:** update the `snapshot` field in `.cursor/environment.json`, commit on `game/development`, and push.
 

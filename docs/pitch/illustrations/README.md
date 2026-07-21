@@ -2,7 +2,7 @@
 
 **Purpose:** Presentation art for pitches and storyboard alignment. **Not** final in-game 3D assets.
 
-**Full spec:** [`docs/vision/STORYBOARD_ILLUSTRATIONS.md`](../../STORYBOARD_ILLUSTRATIONS.md)
+**Full spec:** [`docs/vision/STORYBOARD_ILLUSTRATIONS.md`](../../vision/STORYBOARD_ILLUSTRATIONS.md)
 
 ## Complete set (P0 + P1 + P2)
 

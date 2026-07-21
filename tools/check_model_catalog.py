@@ -30,7 +30,7 @@ def main() -> int:
             print(f"  [OK]   {model_id} → {path.relative_to(ROOT)}")
         else:
             rel = catalog["models"][model_id]["path"]
-            print(f"  [FAIL] {model_id} missing ({rel})")
+            print(f"  [FAIL] {model_id} missing ({rel})", file=sys.stderr)
             missing.append(model_id)
 
     if missing:

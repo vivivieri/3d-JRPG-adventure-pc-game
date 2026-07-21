@@ -1,7 +1,7 @@
 # Code Base Classes — Agent R&R (Not 3D Meshes)
 
-**Version:** 1.1  
-**Machine-readable:** `game/data/code/base_classes.json`  
+**Version:** 1.1
+**Machine-readable:** `game/data/code/base_classes.json`
 **Cross-refs:** `docs/technical/TECHNICAL_DESIGN.md`, `docs/cheat-sheets/RR_CHEATSHEET.md`, `docs/art/ASSET_COMPLIANCE.md`, `docs/art/ART_AUTOMATION_PIPELINE.md`
 
 ---
@@ -89,6 +89,6 @@ On `game/development` CI: `L0_base_classes`, `L0_base_class_compliance`, `L2_ani
 
 ## 6. Cross-refs
 
-- `docs/art/CHARACTER_BIBLE.md` — rig + animation names  
-- `docs/art/MODEL_QA.md` — GLB import + post-import  
-- `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — gate enforcement  
+- `docs/art/CHARACTER_BIBLE.md` — rig + animation names
+- `docs/art/MODEL_QA.md` — GLB import + post-import
+- `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — gate enforcement

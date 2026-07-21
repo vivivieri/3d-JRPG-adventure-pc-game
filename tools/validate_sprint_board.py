@@ -80,6 +80,52 @@ def main() -> int:
             if missing:
                 errors.append(f"issue pack ids missing from board: {', '.join(missing)}")
 
+    # Done-issue truth: SHA must resolve; bootstrap issues require project.godot.
+    import subprocess
+
+    project_godot = ROOT / "game" / "project.godot"
+    for issue in board.get("issues", []):
+        iid = issue.get("id", "?")
+        if issue.get("status") != "done":
+            continue
+        sha = issue.get("last_commit_sha")
+        if not sha:
+            errors.append(f"{iid}: status=done requires last_commit_sha")
+            continue
+        probe = subprocess.run(
+            ["git", "cat-file", "-t", sha],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if probe.returncode != 0:
+            errors.append(
+                f"{iid}: last_commit_sha {sha!r} does not resolve in git — "
+                "do not mark done with an invalid SHA"
+            )
+        title = (issue.get("title") or "").lower()
+        handoffs = " ".join(issue.get("handoff_refs") or [])
+        is_bootstrap = (
+            iid == "P1-00"
+            or "bootstrap" in title
+            or "bootstrap_game_development.sh" in handoffs
+        )
+        if is_bootstrap and not project_godot.is_file():
+            # Also allow remote tip probe for docs-only checkouts
+            remote_ok = (
+                subprocess.run(
+                    ["git", "cat-file", "-e", "origin/game/development:game/project.godot"],
+                    cwd=ROOT,
+                    capture_output=True,
+                ).returncode
+                == 0
+            )
+            if not remote_ok:
+                errors.append(
+                    f"{iid}: status=done but game/project.godot missing on this tree "
+                    "and on origin/game/development — reopen as blocked"
+                )
+
     if errors:
         print("SPRINT BOARD VALIDATION FAILED", file=sys.stderr)
         for e in errors:

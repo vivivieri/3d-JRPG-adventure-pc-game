@@ -1,7 +1,7 @@
 # Cloud Agent Setup Runbook — Event-Driven Multi-Agent Factory
 
-**Version:** 1.0  
-**Authority:** How to run Tides of Urashima on **Cursor Cloud Agents** until automated gates pass, then **notify human for UAT**.  
+**Version:** 1.0
+**Authority:** How to run Tides of Urashima on **Cursor Cloud Agents** until automated gates pass, then **notify human for UAT**.
 **Cross-refs:** `docs/agents/PM_AGENT_RUNBOOK.md`, `docs/agents/SPRINT_ORCHESTRATION.md`, `docs/agents/GDAI_CLOUD_SETUP.md`, `game/data/qa/agent_cycle_events.json`, `.cursor/environment.json`
 
 ---
@@ -328,22 +328,22 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 
 ## 11. Quick start checklist
 
-- [ ] Environment snapshot with GDAI + MCP PASS  
-- [ ] **Day-one secrets (all 7)** — `docs/agents/CURSOR_SECRETS_SETUP.md` · `bash tools/check_day_one_secrets.sh`  
-- [ ] GDAI plugin in snapshot (Phase 1+ scene work)  
-- [ ] MCP servers in Cloud dashboard  
-- [ ] **Automation A** + **Automation D** — webhook only (no schedule)  
-- [ ] GitHub repo secrets: both webhook URLs  
-- [ ] `game/development` bootstrapped (P1-00)  
-- [ ] First cycle close: `bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD)`  
-- [ ] Confirm PM Automation starts within seconds, not next day  
+- [ ] Environment snapshot with GDAI + MCP PASS
+- [ ] **Day-one secrets (all 7)** — `docs/agents/CURSOR_SECRETS_SETUP.md` · `bash tools/check_day_one_secrets.sh`
+- [ ] GDAI plugin in snapshot (Phase 1+ scene work)
+- [ ] MCP servers in Cloud dashboard
+- [ ] **Automation A** + **Automation D** — webhook only (no schedule)
+- [ ] GitHub repo secrets: both webhook URLs
+- [ ] `game/development` bootstrapped (P1-00)
+- [ ] First cycle close: `bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD)`
+- [ ] Confirm PM Automation starts within seconds, not next day
 
 ---
 
 ## 12. Cross-refs
 
-- `docs/agents/PM_AGENT_RUNBOOK.md` — PM step list inside each triggered run  
-- `docs/agents/SPRINT_ORCHESTRATION.md` — board + gates  
-- `docs/ci-cd/ENVIRONMENTS.md` — dev → qa → **uat** promotion  
-- `AGENTS.md` — cloud bootstrap  
+- `docs/agents/PM_AGENT_RUNBOOK.md` — PM step list inside each triggered run
+- `docs/agents/SPRINT_ORCHESTRATION.md` — board + gates
+- `docs/ci-cd/ENVIRONMENTS.md` — dev → qa → **uat** promotion
+- `AGENTS.md` — cloud bootstrap
 - `docs/agents/GDAI_CLOUD_SETUP.md` — editor + HTTP :3571

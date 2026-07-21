@@ -25,7 +25,6 @@ from agent_session_telemetry_lib import EVENTS_PATH, read_events  # noqa: E402
 from collect_cursor_agent_usage import (  # noqa: E402
     fetch_with_retry,
     resolve_api_key,
-    usage_delta,
     usage_to_telemetry_fields,
 )
 
@@ -53,7 +52,7 @@ def main() -> int:
     args = ap.parse_args()
 
     if not resolve_api_key():
-        print("[FAIL] CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8")
+        print("[FAIL] CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8", file=sys.stderr)
         return 1
 
     events = read_events()

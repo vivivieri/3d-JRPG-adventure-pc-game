@@ -1,8 +1,8 @@
 # GitHub Repository Setup
 
-**Script:** `bash tools/setup_github_project.sh`  
-**Requires:** `GH_TOKEN` with **Issues**, **Pull requests**, **Actions**, and **Administration** (for branch protection)  
-**How to create token:** `docs/agents/CURSOR_SECRETS_SETUP.md` §5 (day-one compulsory)  
+**Script:** `bash tools/setup_github_project.sh`
+**Requires:** `GH_TOKEN` with **Issues**, **Pull requests**, **Actions**, and **Administration** (for branch protection)
+**How to create token:** `docs/agents/CURSOR_SECRETS_SETUP.md` §5 (day-one compulsory)
 **Cross-refs:** `docs/agents/PROJECT_MANAGEMENT.md`, `docs/ci-cd/ENVIRONMENTS.md`
 
 ---

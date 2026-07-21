@@ -1,7 +1,7 @@
 # Narrative Density — Optimized Application Guide
 
-**Version:** 1.0  
-**Audience:** Writers, combat designers, data authors  
+**Version:** 1.0
+**Audience:** Writers, combat designers, data authors
 **Cross-refs:** `docs/vision/NARRATIVE_WRITING_GUIDE.md` §12, `game/data/narrative/narrative_density.json`, `tools/validate_narrative_density.py`
 
 **Goal:** Apply JRPG narrative steals **once per zone / once per act** — not on every node. Ship gate enforces caps automatically.

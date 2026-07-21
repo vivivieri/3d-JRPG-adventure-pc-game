@@ -1,7 +1,7 @@
 # Tides of Urashima — Cinematics & Camera Spec
 
-**Version:** 1.1 (Pre-build)  
-**Engine:** Godot 4 — `Camera3D`, `AnimationPlayer`, optional `Tween`  
+**Version:** 1.1 (Pre-build)
+**Engine:** Godot 4 — `Camera3D`, `AnimationPlayer`, optional `Tween`
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/art/CHARACTER_BIBLE.md`
 
 ---
@@ -171,10 +171,10 @@ See `docs/gameplay/TUTORIAL_DESIGN.md` §2.
 | 2–6s | `cave_face_decal_set` (4 faces) fade in under water; slow push-in |
 | 6–8s | Cut to dialogue UI → 2× Tide Wraith encounter |
 
-**Audio:** `sfx_story_whisper_bed` + BGM duck 40% (`AUDIO_PRODUCTION_GUIDE.md` SC-08 row)  
-**Letterbox:** No  
-**Skippable:** After 3s  
-**Assets:** `cave_deep_pool` (2k), face decals — see `ENVIRONMENT_KITS.md` §5  
+**Audio:** `sfx_story_whisper_bed` + BGM duck 40% (`AUDIO_PRODUCTION_GUIDE.md` SC-08 row)
+**Letterbox:** No
+**Skippable:** After 3s
+**Assets:** `cave_deep_pool` (2k), face decals — see `ENVIRONMENT_KITS.md` §5
 **Flag:** `deep_pool_vignette_seen` (set by `sc08_deep_pool_vignette` hook; encounter win sets separate `deep_pool_seen`)
 
 ### SC-12 — Palace gate reveal (mid-game hero cinematic)
@@ -188,10 +188,10 @@ See `docs/gameplay/TUTORIAL_DESIGN.md` §2.
 | 10–13s | Hold on gate; gold trim catches directional `#FFD890` |
 | 13–15s | Ease to gameplay follow cam; `sfx_story_pearl_insert` chime |
 
-**Dialogue:** Roku line *after* cinematic handoff — not inside the 15s block  
-**Audio:** `bgm_palace` fade in at 3s; `amb_palace_hum` bed  
-**Letterbox:** No (reserve 2.39:1 for SC-11 + SC-17)  
-**Skippable:** After 3s on replay; first play — full shot  
+**Dialogue:** Roku line *after* cinematic handoff — not inside the 15s block
+**Audio:** `bgm_palace` fade in at 3s; `amb_palace_hum` bed
+**Letterbox:** No (reserve 2.39:1 for SC-11 + SC-17)
+**Skippable:** After 3s on replay; first play — full shot
 **Out of scope v1:** FMV, Roku walk-in animation inside shot, reverse-gravity rooms
 
 **Camera markers (author in `dragon_palace_gate.tscn`):**

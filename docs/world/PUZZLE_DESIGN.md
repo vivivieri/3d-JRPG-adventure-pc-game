@@ -1,7 +1,7 @@
 # Tides of Urashima — Puzzle Design (SC-07)
 
-**Version:** 1.0 (Pre-build)  
-**Scene:** SC-07 — Water Level Puzzle  
+**Version:** 1.0 (Pre-build)
+**Scene:** SC-07 — Water Level Puzzle
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/world/QUEST_AND_FLAGS.md`, `docs/vision/NARRATIVE_WRITING_GUIDE.md` §4
 
 ---

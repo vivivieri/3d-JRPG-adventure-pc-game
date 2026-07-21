@@ -1,6 +1,6 @@
 # 3D Model QA — Technical Gates + Turntable Vision Jury
 
-**Version:** 1.2  
+**Version:** 1.2
 **Problem:** An agent can import a **low-poly blockout**, **Kenney greybox**, or **chibi AI mesh** and call it “Urashima done” — then reuse that quality bar everywhere.
 
 **Rule:** Models pass **catalog + GLB technical lint + turntable vision jury** (hero/set-pieces) before ship. In-game screenshot QA (`docs/art/VISUAL_QA.md`) catches placement; this doc catches **the asset itself**.

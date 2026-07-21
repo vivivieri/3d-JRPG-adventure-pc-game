@@ -1,7 +1,7 @@
 # Spec-first development policy
 
-**Version:** 1.0  
-**Authority:** Defines what lives on `main` vs `game/development` and when coding may start.  
+**Version:** 1.0
+**Authority:** Defines what lives on `main` vs `game/development` and when coding may start.
 **Cross-refs:** `docs/workflow/BRANCHING.md`, `docs/workflow/IMPLEMENTATION_PLAN.md`, `game/data/code/spec_registry.json`
 
 ---
@@ -13,7 +13,7 @@
 | **`main`** | **Complete specifications** — docs, `game/data/` JSON, spec registries, validators, locale | Ship GDScript, `.tscn`, `project.godot`, ship assets |
 | **`game/development`** | Implementation **built from** `main` specs | Design changes without a `main` PR first |
 
-**No ship gameplay code before development start.**  
+**No ship gameplay code before development start.**
 Specifications on `main` are the contract. `game/development` is the factory output.
 
 ---
@@ -81,7 +81,7 @@ Coding on `game/development` may begin when:
 5. Commit only on game/development; never merge implementation to main until M6
 ```
 
-**Order:** Spec change on `main` → PR → then implementation PR on `game/development`.  
+**Order:** Spec change on `main` → PR → then implementation PR on `game/development`.
 Never implement behavior on `game/development` that is not yet specified on `main`.
 
 ---
@@ -205,8 +205,8 @@ bash tools/run_agent_session_gate.sh ...    # dispatch (game/development workers
 
 ## 11. Cross-refs
 
-- `docs/workflow/BRANCHING.md` — branch merge policy  
-- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers + Phase 1 visuals on `game/development`  
-- `docs/technical/TECHNICAL_DESIGN.md` — runtime architecture (prose + diagrams)  
-- `docs/technical/CODE_BASE_CLASS_RULES.md` — who writes bases vs instances  
+- `docs/workflow/BRANCHING.md` — branch merge policy
+- `docs/technical/GDSCRIPT_REGENERATION.md` — rebuild core helpers + Phase 1 visuals on `game/development`
+- `docs/technical/TECHNICAL_DESIGN.md` — runtime architecture (prose + diagrams)
+- `docs/technical/CODE_BASE_CLASS_RULES.md` — who writes bases vs instances
 - `docs/workflow/IMPLEMENTATION_PLAN.md` — phase task list (execution on `game/development`)

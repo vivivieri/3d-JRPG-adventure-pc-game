@@ -58,8 +58,44 @@ run_tri_gate "L0_difficulty_data" "Normal + Hard difficulty catalog" \
 run_tri_gate "L0_acceptance_catalog" "Acceptance criteria catalog" \
   python3 tools/validate_acceptance_criteria.py
 
+run_tri_gate "L0_game_branch_bootstrap" "P1-00 Godot project.godot present" \
+  bash tools/check_game_branch_bootstrap.sh
+
+run_tri_gate "L0_vo_casting" "VO casting placeholders (strict on M5)" \
+  python3 tools/validate_vo_casting.py
+
 run_tri_gate "L0_workflow_integration" "Factory workflow integration registry" \
   python3 tools/validate_workflow_integration.py
+
+run_tri_gate "L1_python_lint" "Python ruff lint (tools/)" \
+  bash tools/check_python_lint.sh
+
+run_tri_gate "L1_shellcheck" "ShellCheck on tools/*.sh" \
+  bash tools/check_shell_scripts.sh
+
+run_tri_gate "L1_json_style" "JSON style lint (game/data)" \
+  python3 tools/check_json_style.py
+
+run_tri_gate "L1_typescript_lint" "TypeScript lint (MCP Pro server)" \
+  bash tools/check_typescript_lint.sh
+
+run_tri_gate "L1_markdown_style" "Markdown style lint (docs/)" \
+  python3 tools/check_markdown_style.py
+
+run_tri_gate "L1_gdshader_style" "Godot shader style lint" \
+  python3 tools/check_gdshader_style.py
+
+run_tri_gate "L1_scene_style" "Godot scene static style lint" \
+  bash tools/check_scene_style.sh
+
+run_tri_gate "L1_error_handling" "Error-handling pattern lint" \
+  bash tools/check_error_handling.sh
+
+run_tri_gate "L1_workflow_yaml" "GitHub Actions workflow lint" \
+  bash tools/check_workflow_yaml.sh
+
+run_tri_gate "L1_mypy_libs" "mypy on tools/*_lib.py" \
+  bash tools/check_mypy_libs.sh
 
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
@@ -69,6 +105,9 @@ run_tri_gate "L1_unit_tests" "Godot headless unit tests" \
 
 run_tri_gate "L1_gdscript_lint" "GDScript lint on changed files" \
   bash tools/check_gdscript_changed.sh
+
+run_tri_gate "L1_gdscript_lint_all" "GDScript full-tree gdlint" \
+  bash tools/check_gdscript_all.sh
 
 run_tri_gate "L0_base_class_compliance" "No rogue native extends" \
   bash tools/check_base_class_compliance.sh

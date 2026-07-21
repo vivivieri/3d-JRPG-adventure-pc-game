@@ -21,7 +21,7 @@ fi
 
 ZIP="${GDAI_PLUGIN_ZIP:-}"
 if [[ -z "$ZIP" ]]; then
-  ZIP="$(ls -1 "${ADDONS}"/gdai-mcp-plugin-godot*.zip 2>/dev/null | head -1 || true)"
+  ZIP="$(find "${ADDONS}" -maxdepth 1 -name 'gdai-mcp-plugin-godot*.zip' -print -quit 2>/dev/null || true)"
 fi
 
 if [[ -z "$ZIP" ]] || [[ ! -f "$ZIP" ]]; then
@@ -57,4 +57,5 @@ if [[ ! -f "${DEST}/gdai_mcp_server.py" ]]; then
 fi
 
 echo "[install_gdai_plugin] OK → $DEST"
+# shellcheck disable=SC2012
 ls -la "$DEST" | head -5

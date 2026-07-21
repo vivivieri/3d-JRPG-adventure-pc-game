@@ -1,14 +1,14 @@
 # Phase1-Sprint1 — GitHub Issue Pack
 
-**Cycle:** `Phase1-Sprint1`  
-**Branch:** `game/development`  
-**Phase exit ref:** `acceptance_criteria.json` → `phase_gates.phase_1`  
-**Implementation ref:** `docs/workflow/IMPLEMENTATION_PLAN.md` §Phase 1 (tasks 1.1–1.11)  
-**Sprint master:** PM Agent — run `bash tools/run_pm_orchestrator.sh` before dispatch  
-**Board:** `game/data/qa/sprint_board.json`  
+**Cycle:** `Phase1-Sprint1`
+**Branch:** `game/development`
+**Phase exit ref:** `acceptance_criteria.json` → `phase_gates.phase_1`
+**Implementation ref:** `docs/workflow/IMPLEMENTATION_PLAN.md` §Phase 1 (tasks 1.1–1.11)
+**Sprint master:** PM Agent — run `bash tools/run_pm_orchestrator.sh` before dispatch
+**Board:** `game/data/qa/sprint_board.json`
 **Runbook:** `docs/agents/PM_AGENT_RUNBOOK.md`
 
-**WIP limit:** 7 issues · close when gate IDs PASS on merged PRs  
+**WIP limit:** 7 issues · close when gate IDs PASS on merged PRs
 
 **Dependency order:** `P1-00` → `P1-01` → `P1-02` → `P1-04` / `P1-03` (parallel) → `P1-05` → `P1-06`
 

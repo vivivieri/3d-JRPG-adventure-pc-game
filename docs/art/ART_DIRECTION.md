@@ -1,6 +1,6 @@
 # Tides of Urashima — Art Direction Bible
 
-**Version:** 1.1 (Pre-build pivot)  
+**Version:** 1.1 (Pre-build pivot)
 **Visual target:** **High-detail stylized Japanese 3D** — automated stylized albedo, readable silhouettes, authored environments. Not anime-realistic or photoreal PBR — closer to *Ni no Kuni* environmental richness and *Eastward* clarity with Japanese coastal motifs.
 
 **Production policy:** Quality-first **automated** pipeline — no human artists in art/audio production. See `docs/art/ART_AUTOMATION_PIPELINE.md`.

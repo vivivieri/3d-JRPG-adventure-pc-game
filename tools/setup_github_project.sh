@@ -115,8 +115,6 @@ for spec in "${MILESTONES[@]}"; do
   fi
 done
 
-ENVIRONMENTS=(qa uat steam-beta steam-production)
-
 # env_name|min_approvals|description
 ENVIRONMENT_SPECS=(
   "qa|0|Automated nightly gate sweep — no approval gate"

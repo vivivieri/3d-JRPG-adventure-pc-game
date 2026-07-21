@@ -1,7 +1,7 @@
 # Tides of Urashima — Boss Design Sheets
 
-**Version:** 1.2 (Pre-build — reconciled with data)  
-**Combat type:** Turn-based, speed-initiative, telegraphed intent UI  
+**Version:** 1.2 (Pre-build — reconciled with data)
+**Combat type:** Turn-based, speed-initiative, telegraphed intent UI
 **Cross-refs:** `docs/vision/GDD.md` §7, `docs/gameplay/ENCOUNTER_TABLE.md`, `game/data/enemies/enemies.json`, `docs/art/CHARACTER_BIBLE.md` §6 (3D specs)
 
 > **Canonical numbers:** All stats, skill IDs, phase thresholds, and drops below mirror
@@ -32,7 +32,7 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 | **Palace Sentinel** | **Duty frozen** | Oath of stillness — paradise that forbids change | Minimal dialogue; armor speaks; Yuzu's Spirit pierces rigidity |
 | **Tide Keeper** | **Temptation to erase pain** | Time offers paradise at cost of the living world | Speaks in tides/clock motifs, not essays; phase 3 shrinks — tragic, not monstrous |
 
-**Combat UI:** Intent label + one bark line should reinforce the facet (see intent table above).  
+**Combat UI:** Intent label + one bark line should reinforce the facet (see intent table above).
 **Defeat lines:** Tragic, not *"You win!"* — `NARRATIVE_WRITING_GUIDE.md` §11.E.
 
 **Do not add:** Mid-fight lore dumps, moral scoring, or a fourth “secret” boss ending.
@@ -52,10 +52,10 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ## 2. Shore Wraith (`shore_wraith`)
 
-**Storyboard:** SC-09  
-**Location:** Tidal Caves — boss arena  
-**Role:** First boss; teaches intent UI + phase change  
-**Element:** Spirit  
+**Storyboard:** SC-09
+**Location:** Tidal Caves — boss arena
+**Role:** First boss; teaches intent UI + phase change
+**Element:** Spirit
 **Recommended party level:** 4
 
 ### Visual
@@ -86,7 +86,7 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ### Phase 1 — Accusation (100% → 50% HP)
 
-**Behavior:** Slow, heavy hits; punishes idle healing.  
+**Behavior:** Slow, heavy hits; punishes idle healing.
 **AI weights (data):** `drown_touch` 70 / `regret_surge` 30.
 
 **Player teach moment:** Use Defend when Skull intent shows; cure Poison with `coral_antidote`.
@@ -124,10 +124,10 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ## 3. Palace Sentinel (`palace_sentinel`)
 
-**Storyboard:** SC-14  
-**Location:** Dragon Palace Gate — sentinel hall  
-**Role:** Miniboss; teaches Spirit weakness (Yuzu)  
-**Element:** Physical (armor); weak to Spirit  
+**Storyboard:** SC-14
+**Location:** Dragon Palace Gate — sentinel hall
+**Role:** Miniboss; teaches Spirit weakness (Yuzu)
+**Element:** Physical (armor); weak to Spirit
 **Recommended party level:** 6–7
 
 ### Visual
@@ -158,7 +158,7 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ### Phase 1 — Guardian (100% → 0% HP, single phase)
 
-**Behavior:** Heavy single-target pressure; hardens when low.  
+**Behavior:** Heavy single-target pressure; hardens when low.
 **AI weights (data):** `sentinel_cleave` 75 / `shell_harden` 25 (only below 40% HP).
 
 **Spirit weakness:** `spirit_weakness: 1.5` in data — Spirit-element damage (Yuzu `purify`, Urashima `box_unbound`) deals **×1.5**. UI hint after first `shell_harden`: *"Spirit arts pierce the lacquer."*
@@ -180,10 +180,10 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ## 4. Tide Keeper (`tide_keeper`)
 
-**Storyboard:** SC-15, SC-16  
-**Location:** Throne of tides  
-**Role:** Final boss; 3 phases + choice gate at 10% HP  
-**Element:** Water / Time  
+**Storyboard:** SC-15, SC-16
+**Location:** Throne of tides
+**Role:** Final boss; 3 phases + choice gate at 10% HP
+**Element:** Water / Time
 **Recommended party level:** 8–10
 
 ### Visual
@@ -215,18 +215,18 @@ Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt exp
 
 ### Phase 1 — Calm (100% → 66% HP)
 
-**Tone:** "Paradise is mercy."  
+**Tone:** "Paradise is mercy."
 **AI weights (data):** `drown_touch` 50 / `tide_lament` 50.
 
 ### Phase 2 — Surge (66% → 33% HP)
 
-**Trigger:** Banner "The tide rises..." (`phases[0].hp_threshold: 0.66`)  
-**Camera:** Slow orbit during phase (see `CINEMATICS.md`)  
+**Trigger:** Banner "The tide rises..." (`phases[0].hp_threshold: 0.66`)
+**Camera:** Slow orbit during phase (see `CINEMATICS.md`)
 **AI weights (data):** `regret_surge` 40 / `tide_lament` 60 — AoE pressure peaks.
 
 ### Phase 3 — Ebb (33% → 10% HP)
 
-**Trigger:** Banner "Time fractures." (`phases[1].hp_threshold: 0.33`)  
+**Trigger:** Banner "Time fractures." (`phases[1].hp_threshold: 0.33`)
 **AI weights (data):** `tide_lament` 100. Dialogue barks shorter; more pauses.
 
 ### Choice gate (10% HP)
@@ -264,7 +264,7 @@ scripted `Last Mercy` beat (cosmetic 1 turn, cinematic — not a data skill) →
 
 ## 5. Tutorial enemy — Salt Crab (`salt_crab`)
 
-**Storyboard:** SC-05  
+**Storyboard:** SC-05
 **Not a boss** but combat template.
 
 | Stat | HP 40 | ATK 7 | DEF 5 | SPD 6 |

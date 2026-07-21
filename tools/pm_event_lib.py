@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -65,8 +66,8 @@ def should_skip_duplicate_event(payload: dict[str, Any], cooldown_minutes: int =
         age_min = (datetime.now(timezone.utc) - prev).total_seconds() / 60.0
         if age_min < cooldown_minutes:
             return True, f"duplicate within {age_min:.0f}m (cooldown {cooldown_minutes}m)"
-    except ValueError:
-        pass
+    except ValueError as exc:
+        print(f"WARN: invalid factory event timestamp {last_at!r}: {exc}", file=sys.stderr)
     return False, "cooldown expired"
 
 

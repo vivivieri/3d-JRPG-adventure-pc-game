@@ -44,8 +44,8 @@ else
   check_fail "palette_remap.py missing — post-gen palette enforcement unavailable"
 fi
 
-if [[ -f "$ROOT/game/assets/audio/bgm/menu_theme.ogg" ]] 2>/dev/null || \
-   ls "$ROOT/game/assets/audio/bgm/"*.ogg >/dev/null 2>&1; then
+if [[ -f "$ROOT/game/assets/audio/bgm/menu_theme.ogg" ]] || \
+   ls "$ROOT/game/assets/audio/bgm/"*.ogg >/dev/null 2>&1; then  # swallow-ok: glob may fail when no audio yet
   check_ok "Procedural audio placeholders present"
 else
   check_fail "Audio placeholders missing — python3 tools/generate_game_audio.py --all"

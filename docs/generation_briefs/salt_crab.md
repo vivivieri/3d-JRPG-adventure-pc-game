@@ -1,7 +1,7 @@
 # Generation brief — `salt_crab`
 
-**Status:** M5 · Phase 4 tutorial enemy  
-**Authority:** `CHARACTER_BIBLE.md` §6, `qa_catalog.json`  
+**Status:** M5 · Phase 4 tutorial enemy
+**Authority:** `CHARACTER_BIBLE.md` §6, `qa_catalog.json`
 **Phase:** SC-05 pier tutorial (`ruined_village`)
 
 ## Intent

@@ -116,7 +116,7 @@ def cmd_check(path: Path) -> int:
     errors = find_violations(path.read_text(encoding="utf-8"), cfg)
     if errors:
         for err in errors:
-            print(f"[FAIL] {err}")
+            print(f"[FAIL] {err}", file=sys.stderr)
         return 1
     print(f"[OK]   {path} has no forbidden dev autoloads/plugins")
     return 0
@@ -129,7 +129,7 @@ def cmd_check_after_strip(path: Path) -> int:
     errors = find_violations(cleaned, cfg)
     if errors:
         for err in errors:
-            print(f"[FAIL] strip incomplete: {err}")
+            print(f"[FAIL] strip incomplete: {err}", file=sys.stderr)
         return 1
     print("[OK]   strip logic removes all forbidden dev entries")
     return 0
@@ -146,7 +146,7 @@ def main() -> int:
     args = parser.parse_args()
     path = args.project_godot
     if not path.is_file():
-        print(f"[FAIL] missing {path}")
+        print(f"[FAIL] missing {path}", file=sys.stderr)
         return 1
 
     if args.command == "strip":

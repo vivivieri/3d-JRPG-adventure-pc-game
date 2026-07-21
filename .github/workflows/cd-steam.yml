@@ -70,18 +70,37 @@ jobs:
       - name: Install GodotSteam and export
         run: |
           GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh
+          bash tools/export_linux.sh
           bash tools/export_windows.sh
-          bash tools/prepare_steam_depot.sh
+          bash tools/prepare_steam_depot.sh --platform all
 
       - name: Stage content for depot
         run: |
           CONTENT="build/steam_content"
           rm -rf "$CONTENT"
           mkdir -p "$CONTENT"
-          cp -a build/steam_depot/* "$CONTENT/"
-          rm -f "$CONTENT/steam_appid.txt"
+          # Default Steam upload stages Windows depot; copy Linux beside it for multi-depot setups.
+          cp -a build/steam_depot_windows/. "$CONTENT/"
+          if [[ -d build/steam_depot_linux ]]; then
+            mkdir -p "$CONTENT/linux"
+            cp -a build/steam_depot_linux/. "$CONTENT/linux/"
+          fi
+          rm -f "$CONTENT/steam_appid.txt" "$CONTENT/linux/steam_appid.txt"
           echo "Staged:"
-          ls -la "$CONTENT"
+          find "$CONTENT" -maxdepth 2 -type f | head -40
+
+      - name: Materialize app_build.vdf from example
+        env:
+          STEAM_APP_ID: ${{ secrets.STEAM_APP_ID }}
+          STEAM_DEPOT_ID: ${{ secrets.STEAM_DEPOT_ID }}
+        run: |
+          if [[ ! -f steam/depot/app_build.vdf ]]; then
+            sed -e "s/@STEAM_APP_ID@/${STEAM_APP_ID}/g" \
+                -e "s/@STEAM_DEPOT_ID@/${STEAM_DEPOT_ID}/g" \
+                steam/depot/app_build.vdf.example > steam/depot/app_build.vdf
+            echo "[OK] Wrote steam/depot/app_build.vdf from example"
+          fi
+          test -f steam/depot/app_build.vdf
 
       - name: Upload via steamcmd
         env:

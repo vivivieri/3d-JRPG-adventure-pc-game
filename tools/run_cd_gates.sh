@@ -26,8 +26,12 @@ echo "── Full game CI (L0–L2 + L4)"
 bash tools/run_ci_checks.sh
 
 echo ""
-echo "── Asset compliance (ship)"
-bash tools/check_asset_compliance.sh
+echo "── Asset compliance (ship — strict: missing manifest files FAIL)"
+bash tools/check_asset_compliance.sh --strict
+
+echo ""
+echo "── VO casting (ship — no PLACEHOLDER_* voice ids)"
+VO_CASTING_REQUIRED=1 python3 tools/validate_vo_casting.py
 
 case "$CHANNEL" in
   rc)
@@ -50,7 +54,7 @@ if [[ "$CHANNEL" == "prod" ]]; then
   echo "── L6 human playtest sign-off (required for prod)"
   L6_REPORT="${ROOT}/artifacts/qa_reports/L6_human_playtest.json"
   if [[ ! -f "$L6_REPORT" ]]; then
-    echo "[FAIL] Missing ${L6_REPORT#${ROOT}/}"
+    echo "[FAIL] Missing ${L6_REPORT#"${ROOT}"/}"
     echo "       Run docs/qa/PLAYTEST_SCRIPT.md with min 5 testers; write gate result:"
     echo "       python3 tools/qa_write_gate_result.py --gate L6_human_playtest --status pass \\"
     echo "         --metric completion_percent=80 --metric testers=5 --evidence artifacts/qa_reports/L6_human_playtest.json"

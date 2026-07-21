@@ -13,8 +13,8 @@ from check_audio_technical import check_file  # noqa: E402
 from vo_qa_lib import (  # noqa: E402
     clip_meta,
     expected_line_text,
-    locale_jobs,
     load_catalog,
+    locale_jobs,
     p0_listen_clips,
     resolve_vo_path,
 )
@@ -129,7 +129,7 @@ def main() -> int:
             for line in issues:
                 print(f"    {line}")
             if has_fail or not ok:
-                print("    [FAIL] technical")
+                print("    [FAIL] technical", file=sys.stderr)
                 fail += 1
             elif any(i.startswith("WARN") for i in issues):
                 print("    [WARN] technical")

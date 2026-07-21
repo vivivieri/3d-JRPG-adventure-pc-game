@@ -1,7 +1,7 @@
 # Generation brief — `palace_sentinel`
 
-**Status:** M5 miniboss  
-**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §3, `qa_catalog.json`  
+**Status:** M5 miniboss
+**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §3, `qa_catalog.json`
 **Phase:** SC-14 `palace_sentinel_hall`
 
 ## Intent

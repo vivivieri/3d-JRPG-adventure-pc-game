@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import subprocess
 import sys
@@ -33,7 +32,8 @@ def gh_available() -> bool:
     try:
         r = subprocess.run(["gh", "auth", "status"], capture_output=True, text=True)
         return r.returncode == 0
-    except FileNotFoundError:
+    except FileNotFoundError as exc:
+        print(f"WARN: gh CLI not found: {exc}", file=sys.stderr)
         return False
 
 

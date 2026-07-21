@@ -60,6 +60,7 @@
 
 | I need to… | Read |
 |------------|------|
+| **Coding standards (all languages + data)** | [**CODING_STANDARDS_HUB.md**](technical/CODING_STANDARDS_HUB.md) → [ERROR_HANDLING.md](technical/ERROR_HANDLING.md) · [PYTHON_STYLE.md](technical/PYTHON_STYLE.md) · [GDSCRIPT_STYLE.md](technical/GDSCRIPT_STYLE.md) |
 | Understand the game | [GDD.md](vision/GDD.md) → [STORYBOARD.md](vision/STORYBOARD.md) |
 | **Full dev lifecycle** | [DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) · [BRANCHING_DECISION_RECORD.md](workflow/BRANCHING_DECISION_RECORD.md) |
 | Build the next phase | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) · branch: `game/development` |
@@ -72,7 +73,8 @@
 | Multi-agent roles | [MULTI_AGENT_TEAM.md](agents/MULTI_AGENT_TEAM.md) · [RR_CHEATSHEET.md](cheat-sheets/RR_CHEATSHEET.md) |
 | Role enforcement / CI | [CONTROLS_CHEATSHEET.md](cheat-sheets/CONTROLS_CHEATSHEET.md) · [CI.md](ci-cd/CI.md) |
 | Issues / GitHub / Linear | [PROJECT_MANAGEMENT.md](agents/PROJECT_MANAGEMENT.md) |
-| Write GDScript | [CODE_STYLE.md](technical/CODE_STYLE.md) + [TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) |
+| Write GDScript | [CODING_STANDARDS_HUB.md](technical/CODING_STANDARDS_HUB.md) → [CODE_STYLE.md](technical/CODE_STYLE.md) + [TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) |
+| Extend JSON / data | [CODING_STANDARDS_HUB.md](technical/CODING_STANDARDS_HUB.md) → [DATA_ARCHITECTURE.md](technical/DATA_ARCHITECTURE.md) + `game/data/` |
 | Place zones | [LEVEL_DESIGN.md](world/LEVEL_DESIGN.md) |
 | Tune combat | [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) + [PROGRESSION_TUNING.md](gameplay/PROGRESSION_TUNING.md) |
 | Combat presentation | [COMBAT_PRESENTATION.md](art/COMBAT_PRESENTATION.md) + [COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) |
@@ -134,6 +136,17 @@
 
 | Doc | Purpose |
 |-----|---------|
+| [**CODING_STANDARDS_HUB.md**](technical/CODING_STANDARDS_HUB.md) | **Start here** — languages, naming, data extensions, CI gates |
+| [PYTHON_STYLE.md](technical/PYTHON_STYLE.md) | Python 3 — PEP 8, PEP 257, type hints, validators |
+| [GDSCRIPT_STYLE.md](technical/GDSCRIPT_STYLE.md) | GDScript 2.0 — Godot style guide, static typing, gdlint |
+| [TYPESCRIPT_STYLE.md](technical/TYPESCRIPT_STYLE.md) | TypeScript — MCP Pro server, strict TS, `--minimal` |
+| [CODE_STYLE.md](technical/CODE_STYLE.md) | GDScript scenes, autoloads, shaders (companion) |
+| [JSON_DATA_STYLE.md](technical/JSON_DATA_STYLE.md) | JSON data — RFC 8259, naming, schema bumps |
+| [BASH_STYLE.md](technical/BASH_STYLE.md) | Shell scripts — CI runners, `set -euo pipefail` |
+| [MARKDOWN_STYLE.md](technical/MARKDOWN_STYLE.md) | Documentation — CommonMark, links, ATX headings |
+| [SHADER_STYLE.md](technical/SHADER_STYLE.md) | `.gdshader` — NPR toon family, water, emission |
+| [SCENE_STYLE.md](technical/SCENE_STYLE.md) | `.tscn` — GDAI-built scenes, naming, static lint |
+| [ERROR_HANDLING.md](technical/ERROR_HANDLING.md) | Errors, exceptions, messages — all languages |
 | [TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) | TDD — autoloads, combat stack, save |
 | [DATA_ARCHITECTURE.md](technical/DATA_ARCHITECTURE.md) | Story-first JSON layout |
 | [CODE_BASE_CLASS_RULES.md](technical/CODE_BASE_CLASS_RULES.md) | Extend-only base classes |
@@ -285,6 +298,11 @@ python3 tools/validate_story_data.py
 
 | Studio artifact | Our doc |
 |-----------------|---------|
+| Coding standards hub | `technical/CODING_STANDARDS_HUB.md` |
+| Python style (PEP 8) | `technical/PYTHON_STYLE.md` |
+| GDScript style | `technical/GDSCRIPT_STYLE.md` |
+| TypeScript / MCP Pro | `technical/TYPESCRIPT_STYLE.md` |
+| JSON data style | `technical/JSON_DATA_STYLE.md` |
 | GDD | `vision/GDD.md` |
 | Level design | `world/LEVEL_DESIGN.md` |
 | TDD | `technical/TECHNICAL_DESIGN.md` |

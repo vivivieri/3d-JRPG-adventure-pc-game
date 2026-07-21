@@ -1,6 +1,6 @@
 # Plugin install guide — Godotiq & Godot MCP Pro
 
-**Applies to:** Godot **4.7 stable**, Cursor desktop + Cloud Agents  
+**Applies to:** Godot **4.7 stable**, Cursor desktop + Cloud Agents
 **Cross-refs:** `docs/agents/MCP_STACK.md` (roles), `docs/technical/PLUGIN_COMPATIBILITY.md` (4.7 matrix), `docs/agents/GDAI_CLOUD_SETUP.md` (GDAI)
 
 Step-by-step instructions for providing and installing the **analyze** and **test** MCP plugins. GDAI MCP (build) is covered in `docs/agents/GDAI_CLOUD_SETUP.md`.

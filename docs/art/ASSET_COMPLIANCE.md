@@ -1,6 +1,6 @@
 # Asset Compliance Policy — No Copyright Violations
 
-**Project:** Tides of Urashima  
+**Project:** Tides of Urashima
 **Applies to:** All art, audio, fonts, 3D models, textures, plugins, and marketing media shipped with the game or on Steam.
 
 ---

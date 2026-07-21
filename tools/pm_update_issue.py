@@ -11,7 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
 
 sys.path.insert(0, str(ROOT / "tools"))
-from pm_orchestrator_lib import VALID_STATUS, load_board, save_json, validate_board_schema  # noqa: E402
+from pm_orchestrator_lib import (  # noqa: E402
+    VALID_STATUS,
+    load_board,
+    save_json,
+    validate_board_schema,
+)
 
 
 def main() -> int:

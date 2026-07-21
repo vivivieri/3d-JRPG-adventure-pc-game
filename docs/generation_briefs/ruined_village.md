@@ -1,7 +1,7 @@
 # Generation brief — `ruined_village`
 
-**Status:** P0 · Phase 1 vertical slice (SC-02 hub gate)  
-**Authority:** `docs/world/ENVIRONMENT_KITS.md` §4, `docs/world/LEVEL_DESIGN.md` §3, `docs/art/RENDERING_GUIDE.md`  
+**Status:** P0 · Phase 1 vertical slice (SC-02 hub gate)
+**Authority:** `docs/world/ENVIRONMENT_KITS.md` §4, `docs/world/LEVEL_DESIGN.md` §3, `docs/art/RENDERING_GUIDE.md`
 **Cross-refs:** `docs/art/GENERATION_READINESS.md`, `docs/art/ART_AUTOMATION_PIPELINE.md` §4–5
 
 ---
@@ -36,7 +36,7 @@ Muted overcast **submerged Edo fishing hamlet** hub (~120×120 m) — dread and 
 | 6 | **GDAI MCP** | Assemble `ruined_village.tscn`, lights, fog, markers |
 | 7 | **GodotPrompter** | `zone_visuals.gd` preset — do not hand-tune fog in inspector without doc values |
 
-**Scene path:** `res://scenes/world/ruined_village.tscn`  
+**Scene path:** `res://scenes/world/ruined_village.tscn`
 **Texture path:** `game/assets/textures/environment/ruined_village/`
 
 ---
@@ -202,12 +202,12 @@ generic suburban, blockout cubes visible to player
 
 Build **in this order** (per `CHARACTER_BIBLE.md` §11 + `ENVIRONMENT_KITS.md` §4):
 
-1. Ground + main path + fog/sky/lighting preset  
-2. `village_well_stone` + `VillageWell` marker  
-3. `village_torii_damaged` + `village_shrine_pad` + `ToriiShrine`  
-4. `village_shack_roku` + `RokuShack`  
-5. Urashima placed — walk cycle + interact at well  
-6. Gameplay + establishing screenshots → visual jury  
+1. Ground + main path + fog/sky/lighting preset
+2. `village_well_stone` + `VillageWell` marker
+3. `village_torii_damaged` + `village_shrine_pad` + `ToriiShrine`
+4. `village_shack_roku` + `RokuShack`
+5. Urashima placed — walk cycle + interact at well
+6. Gameplay + establishing screenshots → visual jury
 
 Defer to M5: full modular kit scatter, banner/sandal inspect props, pier combat arena polish, cave entrance cliff dressing.
 
@@ -215,8 +215,8 @@ Defer to M5: full modular kit scatter, banner/sandal inspect props, pier combat 
 
 ## Forbidden
 
-- Kenney / European medieval kits  
-- Sunny gold sky or PhysicalSky HDRI  
-- Pure white point lights  
-- Hand-edited `.tscn` without GDAI MCP (R&R policy)  
+- Kenney / European medieval kits
+- Sunny gold sky or PhysicalSky HDRI
+- Pure white point lights
+- Hand-edited `.tscn` without GDAI MCP (R&R policy)
 - Ship without golden screenshot when `VISUAL_SMOKE_STRICT=1`

@@ -1,8 +1,8 @@
 # Candidate Tournament — Champion/Challenger + Golden Harness
 
-**Version:** 1.0  
-**Layer:** **L2.5** (pre-merge, **non-ship**)  
-**Authority:** `game/data/qa/candidate_tournament_policy.json`  
+**Version:** 1.0
+**Layer:** **L2.5** (pre-merge, **non-ship**)
+**Authority:** `game/data/qa/candidate_tournament_policy.json`
 **Cross-refs:** `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/qa/AI_TESTING_SPEC.md`, `docs/art/VISUAL_QA.md`
 
 ---

@@ -1,7 +1,7 @@
 # Generation brief — `yuzu`
 
-**Status:** M5 · Phase 4 party gate  
-**Authority:** `CHARACTER_BIBLE.md` §3, `qa_catalog.json`  
+**Status:** M5 · Phase 4 party gate
+**Authority:** `CHARACTER_BIBLE.md` §3, `qa_catalog.json`
 **Phase:** Unlocks SC-10 (after Shore Wraith)
 
 ## Intent

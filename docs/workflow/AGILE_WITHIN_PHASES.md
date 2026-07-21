@@ -1,8 +1,8 @@
 # Agile Within Phases — Hybrid Delivery Model
 
-**Version:** 1.0  
-**Model name:** **Phase-gated Agile** (waterfall roadmap · agile execution)  
-**Machine-readable:** `game/data/qa/sprint_phases.json`  
+**Version:** 1.0
+**Model name:** **Phase-gated Agile** (waterfall roadmap · agile execution)
+**Machine-readable:** `game/data/qa/sprint_phases.json`
 **Cross-refs:** `docs/workflow/IMPLEMENTATION_PLAN.md`, `docs/agents/PROJECT_MANAGEMENT.md`, `docs/agents/MULTI_AGENT_TEAM.md`, `docs/ci-cd/ENVIRONMENTS.md`
 
 ---
@@ -26,17 +26,17 @@
 
 ### Full waterfall would mean
 
-- No CI until phase end  
-- No playtest until ship  
-- No iteration within a zone  
+- No CI until phase end
+- No playtest until ship
+- No iteration within a zone
 
 **We reject that** — CI runs every push; vertical slice (SC-02) comes first; remediation loops exist.
 
 ### Full Agile would mean
 
-- Emergent story design in sprints  
-- Ship MVP with one ending, discover the rest  
-- Art and gameplay co-evolve from sprint 1  
+- Emergent story design in sprints
+- Ship MVP with one ending, discover the rest
+- Art and gameplay co-evolve from sprint 1
 
 **We reject that for this project** — 3 endings, fixed scene IDs, and M5 art rebuild are planned upfront (`GDD.md`, `story/scenes.json`).
 
@@ -123,17 +123,17 @@ IMPLEMENTATION_PLAN task row
 
 **Definition of done (sprint issue):**
 
-- [ ] Acceptance gate IDs in issue body  
-- [ ] `bash tools/run_ci_checks.sh` PASS on PR commit  
-- [ ] L3 F5 + `.gdai_built` if scenes touched  
-- [ ] Evidence paths listed  
-- [ ] Linear status = Done **and** GitHub issue closed  
+- [ ] Acceptance gate IDs in issue body
+- [ ] `bash tools/run_ci_checks.sh` PASS on PR commit
+- [ ] L3 F5 + `.gdai_built` if scenes touched
+- [ ] Evidence paths listed
+- [ ] Linear status = Done **and** GitHub issue closed
 
 ---
 
 ## 6. Example: Phase 1 sprint breakdown
 
-**Live board:** `game/data/qa/sprint_board.json` → `Phase1-Sprint1` (7 issues).  
+**Live board:** `game/data/qa/sprint_board.json` → `Phase1-Sprint1` (7 issues).
 **Issue pack:** `docs/sprints/Phase1-Sprint1-issues.md`
 
 ### Phase1-Sprint1 (current — ruined_village vertical slice)
@@ -196,11 +196,11 @@ After authenticating Linear in Cursor:
 
 **PM Agent sprint start checklist:**
 
-1. Read `game/data/qa/sprint_phases.json` → `active_phase`  
-2. Read `IMPLEMENTATION_PLAN.md` §Phase N task table  
-3. Create Linear cycle `Phase{N}-Sprint{K}`  
-4. Create issues (≤10) with gate IDs + agent labels  
-5. Mirror critical issues to GitHub for CI linkage  
+1. Read `game/data/qa/sprint_phases.json` → `active_phase`
+2. Read `IMPLEMENTATION_PLAN.md` §Phase N task table
+3. Create Linear cycle `Phase{N}-Sprint{K}`
+4. Create issues (≤10) with gate IDs + agent labels
+5. Mirror critical issues to GitHub for CI linkage
 
 ---
 
@@ -219,11 +219,11 @@ Do not use velocity to skip phase gates.
 
 ## 10. Cross-refs
 
-- `docs/agents/PROJECT_MANAGEMENT.md` — labels, GitHub setup  
-- `docs/ci-cd/GITHUB_SETUP.md` — labels/milestones script  
-- `docs/agents/MULTI_AGENT_TEAM.md` — role handoffs  
-- `docs/ci-cd/ENVIRONMENTS.md` — dev → qa → uat promotion  
-- `game/data/qa/sprint_phases.json` — phase ↔ Linear ↔ gates catalog  
+- `docs/agents/PROJECT_MANAGEMENT.md` — labels, GitHub setup
+- `docs/ci-cd/GITHUB_SETUP.md` — labels/milestones script
+- `docs/agents/MULTI_AGENT_TEAM.md` — role handoffs
+- `docs/ci-cd/ENVIRONMENTS.md` — dev → qa → uat promotion
+- `game/data/qa/sprint_phases.json` — phase ↔ Linear ↔ gates catalog
 
 ---
 
@@ -253,9 +253,9 @@ Do not use velocity to skip phase gates.
 
 ### What PM Agent must not do (even as facilitator)
 
-- Write `.gd` / `.tscn` / shaders (R&R — Architect + Builder)  
-- Mark gates PASS without QA evidence  
-- Extend a phase deadline by reprioritizing waterfall milestones  
+- Write `.gd` / `.tscn` / shaders (R&R — Architect + Builder)
+- Mark gates PASS without QA evidence
+- Extend a phase deadline by reprioritizing waterfall milestones
 
 ---
 
@@ -284,20 +284,20 @@ Machine-readable targets: `game/data/qa/sprint_phases.json` → `ai_native_targe
 
 ### When to use a 1-week ceiling (default)
 
-- Every implementation batch on `game/development` unless a row below applies  
-- Phase 1 greybox, hotfix after `env/uat`, single-gate remediation (≤3 issues)  
+- Every implementation batch on `game/development` unless a row below applies
+- Phase 1 greybox, hotfix after `env/uat`, single-gate remediation (≤3 issues)
 
 ### When to extend the ceiling (2–3 weeks)
 
-- Phase 6 or 8 integration batch waiting on **L5 / L6**  
-- Phase 7 jury cycle (model + audio + visual evidence)  
-- First batch after phase kickoff with >8 issues — **split into two batches** instead of one long cycle  
+- Phase 6 or 8 integration batch waiting on **L5 / L6**
+- Phase 7 jury cycle (model + audio + visual evidence)
+- First batch after phase kickoff with >8 issues — **split into two batches** instead of one long cycle
 
 ### Linear configuration
 
-1. Set team **default cycle length** = **1 week** (ceiling only).  
-2. End cycles early when all batch issues have gate evidence — do not wait for the week to expire.  
-3. Name cycles `Phase{N}-Sprint{K}`; description = phase task IDs from `IMPLEMENTATION_PLAN.md`.  
+1. Set team **default cycle length** = **1 week** (ceiling only).
+2. End cycles early when all batch issues have gate evidence — do not wait for the week to expire.
+3. Name cycles `Phase{N}-Sprint{K}`; description = phase task IDs from `IMPLEMENTATION_PLAN.md`.
 
 **Do not** use velocity or burndown to skip **phase exit gates** — cadence only affects issue batching inside a phase.
 
@@ -330,12 +330,12 @@ For a **pure AI agent team**, sprints are **outcome batches**, not human capacit
 
 **Enforced by:** `bash tools/run_pm_orchestrator.sh` — see `docs/agents/PM_AGENT_RUNBOOK.md`
 
-1. Pull ≤10 issues from current phase (`sprint_phases.json` → `active_phase`) into `sprint_board.json`.  
-2. Label each with gate IDs + `agent/*`; sync `docs/sprints/` issue pack.  
-3. Run **micro-cycles** for isolated shaders/scenes (1–2 sessions).  
-4. Dispatch via orchestrator; agents pass `run_agent_session_gate.sh`.  
-5. When batch gates PASS → **close Linear cycle immediately** (even mid-week).  
-6. Open next `Phase{N}-Sprint{K+1}`; carry-over via `pm_close_sprint.py` if needed.  
+1. Pull ≤10 issues from current phase (`sprint_phases.json` → `active_phase`) into `sprint_board.json`.
+2. Label each with gate IDs + `agent/*`; sync `docs/sprints/` issue pack.
+3. Run **micro-cycles** for isolated shaders/scenes (1–2 sessions).
+4. Dispatch via orchestrator; agents pass `run_agent_session_gate.sh`.
+5. When batch gates PASS → **close Linear cycle immediately** (even mid-week).
+6. Open next `Phase{N}-Sprint{K+1}`; carry-over via `pm_close_sprint.py` if needed.
 
 ### Example: Phase 1 at AI speed
 

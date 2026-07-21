@@ -38,7 +38,7 @@ if [[ ! -d "$SCENES_DIR" ]]; then
 fi
 
 while IFS= read -r -d '' tscn; do
-  rel="${tscn#${ROOT}/}"
+  rel="${tscn#"${ROOT}"/}"
   if is_greybox_path "$rel"; then
     echo "[SKIP] greybox: $rel"
     continue

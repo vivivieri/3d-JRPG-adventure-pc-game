@@ -20,14 +20,14 @@ echo ""
 
 GATE_PATH="${ROOT}/game/assets/models/characters/${GATE_MODEL}/${GATE_MODEL}.glb"
 if [[ ! -f "$GATE_PATH" ]]; then
-  warn "Model smoke skipped — ${GATE_PATH#${ROOT}/} not found"
+  warn "Model smoke skipped — ${GATE_PATH#"${ROOT}"/} not found"
   echo "       Generate via Meshy/Blender pipeline per docs/art/ART_AUTOMATION_PIPELINE.md §5"
   echo ""
   echo "Model smoke: ${WARN} warning(s), ${FAIL} failure(s) (skipped)"
   exit 0
 fi
 
-echo "    Gate file: ${GATE_PATH#${ROOT}/}"
+echo "    Gate file: ${GATE_PATH#"${ROOT}"/}"
 echo ""
 
 if python3 "${ROOT}/tools/check_model_catalog.py" --phase "$PHASE"; then

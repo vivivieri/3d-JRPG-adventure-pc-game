@@ -1,6 +1,6 @@
 # Generation brief — `ending_drift`
 
-**Status:** Phase 6 ending (SC-17c)  
+**Status:** Phase 6 ending (SC-17c)
 **Authority:** `ENVIRONMENT_KITS.md` §7 SC-17c, `ENDING_DESIGN.md`
 
 ## Intent

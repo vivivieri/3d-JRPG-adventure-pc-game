@@ -8,7 +8,7 @@ from __future__ import annotations
 import html
 import json
 import os
-import re
+import sys
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -25,8 +25,6 @@ HEALTH_SNAPSHOT_PATH = ROOT / "game/data/qa/factory_health_snapshot.json"
 HEALTH_REPORT_PATH = ROOT / "artifacts/factory_health_report.json"
 
 sys_path = str(ROOT / "tools")
-import sys
-
 if sys_path not in sys.path:
     sys.path.insert(0, sys_path)
 
@@ -82,7 +80,9 @@ def sprint_progress(board: dict[str, Any]) -> dict[str, Any]:
 def phase_context(phases: dict[str, Any], board: dict[str, Any]) -> dict[str, Any]:
     active = board.get("active_sprint", {})
     phase_num = active.get("phase")
-    row = next((p for p in phases.get("phases", []) if p.get("phase") == phase_num), {})
+    row: dict[str, Any] = next(
+        (p for p in phases.get("phases", []) if p.get("phase") == phase_num), {}
+    )
     return {
         "phase": phase_num,
         "name": row.get("name"),
@@ -150,8 +150,11 @@ def build_report(
                     "tokens_source": ev.get("tokens_source"),
                 }
                 break
-        except Exception:
-            pass
+        except Exception as exc:
+            print(
+                f"WARN: session telemetry lookup failed for {issue_id}: {exc}",
+                file=sys.stderr,
+            )
 
     report = {
         "version": "1.0",
@@ -224,7 +227,7 @@ def _headline(
 
 def report_to_markdown(report: dict[str, Any]) -> str:
     lines = [
-        f"# Tides of Urashima — Stakeholder Report",
+        "# Tides of Urashima — Stakeholder Report",
         "",
         f"**{report.get('headline')}**",
         f"Generated: {report.get('generated_at')}",
@@ -507,7 +510,7 @@ def send_telegram_photo(photo_path: str, caption: str, config: dict[str, Any]) -
     def _field(name: str, value: str) -> bytes:
         return (
             f"--{boundary}\r\nContent-Disposition: form-data; name=\"{name}\"\r\n\r\n{value}\r\n"
-        ).encode("utf-8")
+        ).encode()
 
     body = bytearray()
     body += _field("chat_id", str(chat_id))
@@ -517,9 +520,9 @@ def send_telegram_photo(photo_path: str, caption: str, config: dict[str, Any]) -
     body += (
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"photo\"; "
         f"filename=\"{path.name}\"\r\nContent-Type: image/png\r\n\r\n"
-    ).encode("utf-8")
+    ).encode()
     body += path.read_bytes()
-    body += f"\r\n--{boundary}--\r\n".encode("utf-8")
+    body += f"\r\n--{boundary}--\r\n".encode()
 
     url = f"https://api.telegram.org/bot{token}/sendPhoto"
     req = urllib.request.Request(

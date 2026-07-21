@@ -30,7 +30,11 @@ else
   warn "Not a cloud agent session — bcId must be passed explicitly for token fetch"
 fi
 
-python3 tools/validate_agent_session_telemetry_schema.py >/dev/null && ok "telemetry schema valid" || fail "schema validation failed"
+if python3 tools/validate_agent_session_telemetry_schema.py >/dev/null; then
+  ok "telemetry schema valid"
+else
+  fail "schema validation failed"
+fi
 
 if [[ -f artifacts/agent_session_telemetry/events.jsonl ]]; then
   lines=$(wc -l < artifacts/agent_session_telemetry/events.jsonl | tr -d ' ')

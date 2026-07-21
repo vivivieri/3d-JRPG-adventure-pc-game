@@ -1,8 +1,8 @@
 # PM Agent Runbook — Mandatory Sprint Master Workflow
 
-**Version:** 1.0  
-**Role:** PM Agent / Sprint Master (same role — `sprint_phases.json` → `sprint_master.role = "pm"`)  
-**Rule:** Execute **every step below in order**. Skip = orchestrator FAIL = project blocked.  
+**Version:** 1.0
+**Role:** PM Agent / Sprint Master (same role — `sprint_phases.json` → `sprint_master.role = "pm"`)
+**Rule:** Execute **every step below in order**. Skip = orchestrator FAIL = project blocked.
 **Authority:** `docs/agents/SPRINT_ORCHESTRATION.md`
 
 ---
@@ -217,6 +217,7 @@ See `docs/agents/FACTORY_WATCHDOG.md`.
 | Factory health | `bash tools/run_factory_watchdog.sh` |
 | Stall recovery | `bash tools/run_factory_watchdog.sh --recover` |
 | **Stakeholder report** | Auto on `pm_emit_cycle_event.sh`; manual: `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |
+| **Alignment audit** | `bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"` · management: `audit_radar_spec.png` + `audit_radar_build.png` |
 | Emergency stop | `bash tools/run_factory_watchdog.sh --halt "reason"` |
 | Close sprint | `python3 tools/pm_close_sprint.py --next-sprint-number N` |
 | Validate board | `python3 tools/validate_sprint_board.py --strict` |

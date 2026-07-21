@@ -19,6 +19,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
 
+BUILD_DOMAIN_ORDER = [
+    "runtime_proof",
+    "steam_ship",
+]
+
+sys.path.insert(0, str(ROOT / "tools"))
+from pm_orchestrator_lib import parse_issue_pack  # noqa: E402
+
 
 def load_json(path: Path) -> dict[str, Any]:
     if not path.is_file():
@@ -35,6 +43,53 @@ def load_catalog() -> dict[str, Any]:
     return load_json(CATALOG_PATH)
 
 
+def visual_asset_index(catalog: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Map filename -> catalog asset row (management / deprecated flags)."""
+    index: dict[str, dict[str, Any]] = {}
+    policy = catalog.get("visual_policy", {})
+    for fname in policy.get("management_status_filenames", []):
+        index.setdefault(fname, {})["management"] = True
+    for fname in policy.get("auto_generated_filenames", []):
+        index.setdefault(fname, {})["auto_generated"] = True
+    for fname in policy.get("deprecated_for_management_filenames", []):
+        index.setdefault(fname, {})["deprecated_for_management"] = True
+    for pack in catalog.get("visual_packs", []):
+        for asset in pack.get("assets", []):
+            fname = asset.get("filename", "")
+            if not fname:
+                continue
+            row = index.setdefault(fname, {})
+            for key in ("management", "auto_generated", "deprecated_for_management"):
+                if key in asset:
+                    row[key] = bool(asset[key])
+            row.setdefault("label", asset.get("label", fname))
+    return index
+
+
+def filter_report_visuals(
+    manifest: list[dict[str, Any]], catalog: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Return only visuals that belong in audit reports (no legacy or supplemental)."""
+    policy = catalog.get("visual_policy", {})
+    report_only = set(policy.get("report_only_filenames", []))
+    if report_only:
+        return [v for v in manifest if v.get("filename") in report_only]
+    return [
+        v
+        for v in manifest
+        if v.get("management") and not v.get("deprecated_for_management")
+    ]
+
+
+def enrich_visual_manifest(manifest: list[dict[str, Any]], catalog: dict[str, Any]) -> None:
+    idx = visual_asset_index(catalog)
+    for entry in manifest:
+        meta = idx.get(entry.get("filename", ""), {})
+        entry["management"] = bool(meta.get("management"))
+        entry["auto_generated"] = bool(meta.get("auto_generated"))
+        entry["deprecated_for_management"] = bool(meta.get("deprecated_for_management"))
+
+
 def _utcnow() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -47,7 +102,8 @@ def git_branch() -> str:
             text=True,
         )
         return out.strip() or "unknown"
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        print(f"WARN: git branch lookup failed: {exc}", file=sys.stderr)
         return "unknown"
 
 
@@ -57,7 +113,8 @@ def git_commit() -> str:
             subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True)
             .strip()
         )
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as exc:
+        print(f"WARN: git commit lookup failed: {exc}", file=sys.stderr)
         return "unknown"
 
 
@@ -132,6 +189,16 @@ def parity_checks() -> dict[str, Any]:
     enc_ok = enc_reg == enc_data
     hooks_ok = hook_reg == hooks_data
     tutorials_ok = not missing_tutorials
+
+    board = load_json(ROOT / "game/data/qa/sprint_board.json")
+    board_ids = {i["id"] for i in board.get("issues", []) if i.get("id")}
+    pack_ref = board.get("active_sprint", {}).get("issue_pack_ref", "")
+    pack_path = ROOT / pack_ref if pack_ref else None
+    pack_ids = set(parse_issue_pack(pack_path)) if pack_path and pack_path.is_file() else set()
+    sprint_pack_missing = sorted(pack_ids - board_ids)
+    sprint_board_ok = not sprint_pack_missing and bool(pack_ids or not pack_ref)
+
+    parity_ok = enc_ok and hooks_ok and tutorials_ok and sprint_board_ok
     return {
         "encounters_registry": sorted(enc_reg),
         "encounters_data": sorted(enc_data),
@@ -143,7 +210,11 @@ def parity_checks() -> dict[str, Any]:
         "tutorial_flags_emitted": len(emitted),
         "tutorial_flags_missing": missing_tutorials,
         "tutorials_ok": tutorials_ok,
-        "parity_ok": enc_ok and hooks_ok and tutorials_ok,
+        "sprint_board_ids": sorted(board_ids),
+        "sprint_pack_ids": sorted(pack_ids),
+        "sprint_pack_missing_on_board": sprint_pack_missing,
+        "sprint_board_ok": sprint_board_ok,
+        "parity_ok": parity_ok,
     }
 
 
@@ -151,7 +222,8 @@ def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
     """True when a helper is ported ahead of PM dispatch (EventBus allowed on game/development after P1-00)."""
     try:
         data = json.loads(text)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as exc:
+        print(f"WARN: helpers_registry JSON invalid, using regex fallback: {exc}", file=sys.stderr)
         return bool(re.search(r'"port_status"\s*:\s*"ported"', text, re.IGNORECASE))
     allowed_off_main = {"EventBus"}  # P1-00 dispatch on game/development (+ feature branches)
     for helper in data.get("helpers", []):
@@ -167,36 +239,24 @@ def _helpers_registry_has_premature_port(text: str, branch: str) -> bool:
 def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[dict[str, Any]]:
     hits: list[dict[str, Any]] = []
     search_roots = [ROOT / "docs", ROOT / "game/data", ROOT / "tools"]
+    agent_surface_files = [ROOT / "AGENTS.md", ROOT / ".cursorrules"]
     patterns = catalog.get("stale_string_patterns", [])
     skip_files = {"game/data/qa/alignment_audit_catalog.json"}
-    for root in search_roots:
-        if not root.is_dir():
-            continue
-        for path in root.rglob("*"):
-            if not path.is_file():
-                continue
-            if path.suffix not in {".md", ".json", ".py", ".gd", ".tscn"}:
-                continue
-            try:
-                text = path.read_text(encoding="utf-8", errors="ignore")
-            except OSError:
-                continue
-            rel = str(path.relative_to(ROOT))
-            if rel in skip_files:
-                continue
-            for row in patterns:
-                if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
-                    if _helpers_registry_has_premature_port(text, branch):
-                        hits.append(
-                            {
-                                "id": row["id"],
-                                "severity": row["severity"],
-                                "message": row["message"],
-                                "path": rel,
-                            }
-                        )
-                    continue
-                if re.search(row["pattern"], text, re.IGNORECASE):
+
+    def _scan_file(path: Path) -> None:
+        if not path.is_file():
+            return
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError as exc:
+            print(f"WARN: cannot read {path}: {exc}", file=sys.stderr)
+            return
+        rel = str(path.relative_to(ROOT))
+        if rel in skip_files:
+            return
+        for row in patterns:
+            if row.get("id") == "premature_ported" and rel == "game/data/code/helpers_registry.json":
+                if _helpers_registry_has_premature_port(text, branch):
                     hits.append(
                         {
                             "id": row["id"],
@@ -205,6 +265,30 @@ def stale_string_scan(catalog: dict[str, Any], *, branch: str = "main") -> list[
                             "path": rel,
                         }
                     )
+                continue
+            if re.search(row["pattern"], text, re.IGNORECASE):
+                hits.append(
+                    {
+                        "id": row["id"],
+                        "severity": row["severity"],
+                        "message": row["message"],
+                        "path": rel,
+                    }
+                )
+
+    for root in search_roots:
+        if not root.is_dir():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            if path.suffix not in {".md", ".json", ".py", ".gd", ".tscn"}:
+                continue
+            _scan_file(path)
+
+    for path in agent_surface_files:
+        _scan_file(path)
+
     return hits
 
 
@@ -242,6 +326,8 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
             return 10.0 if parity["hooks_ok"] else 0.0
         if sid == "tutorial_flags":
             return 10.0 if parity["tutorials_ok"] else 3.0
+        if sid == "sprint_board_parity":
+            return 10.0 if parity.get("sprint_board_ok", False) else 0.0
         return 5.0
 
     if kind == "gate":
@@ -271,8 +357,10 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
     if kind == "spec_status_cap":
         spec = load_json(ROOT / "game/data/code/spec_registry.json")
         if signal["id"] == "impl_shaders_partial":
-            row = next((a for a in spec.get("artifacts", []) if a.get("id") == "impl_shaders"), {})
-            status = row.get("spec_status", "not_started")
+            row: dict[str, Any] = next(
+                (a for a in spec.get("artifacts", []) if a.get("id") == "impl_shaders"), {}
+            )
+            status: str = str(row.get("spec_status", "not_started"))
             if status == "specified":
                 return 10.0
             if status == "partial":
@@ -282,7 +370,7 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
             if branch == "main":
                 return float(signal.get("cap", 6.5))
             row = next((a for a in spec.get("artifacts", []) if a.get("id") == "impl_scenes"), {})
-            st = row.get("spec_status", "not_started")
+            st: str = str(row.get("spec_status", "not_started"))
             if st == "specified":
                 return 8.0
             if st == "partial":
@@ -303,10 +391,28 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
     return 5.0
 
 
+def compute_signal_scores(
+    catalog: dict[str, Any], ctx: dict[str, Any], domain_scores: dict[str, float]
+) -> dict[str, dict[str, float]]:
+    """Per-domain signal scores (0–10) for sub-radar breakdown."""
+    result: dict[str, dict[str, float]] = {}
+    for domain in catalog.get("domains", []):
+        if domain.get("derive"):
+            continue
+        dom_id = domain["id"]
+        result[dom_id] = {}
+        for sig in domain.get("signals", []):
+            sid = sig["id"]
+            result[dom_id][sid] = round(
+                _signal_score(sig, {**ctx, "domain_scores": domain_scores}), 2
+            )
+    return result
+
+
 def compute_domain_scores(catalog: dict[str, Any], ctx: dict[str, Any]) -> dict[str, float]:
     scores: dict[str, float] = {}
     for domain in catalog.get("domains", []):
-        if domain.get("derive") == "mean_siblings":
+        if domain.get("derive"):
             continue
         total_w = 0.0
         acc = 0.0
@@ -315,11 +421,107 @@ def compute_domain_scores(catalog: dict[str, Any], ctx: dict[str, Any]) -> dict[
             total_w += w
             acc += w * _signal_score(sig, {**ctx, "domain_scores": scores})
         scores[domain["id"]] = round(acc / max(total_w, 1e-9), 2)
-
-    siblings = [d["id"] for d in catalog.get("domains", []) if d.get("derive") != "mean_siblings"]
-    if siblings:
-        scores["overall_production"] = round(sum(scores[s] for s in siblings) / len(siblings), 2)
     return scores
+
+
+def _stream_verdict(score: float, catalog: dict[str, Any], stream_id: str) -> str:
+    th = catalog.get("verdict_thresholds", {})
+    if stream_id == "build_readiness":
+        aligned_min = float(th.get("build_aligned_min", 6.0))
+        at_risk_min = float(th.get("build_at_risk_min", 4.0))
+    else:
+        aligned_min = float(th.get("aligned_min_overall", 8.0))
+        at_risk_min = float(th.get("at_risk_min_overall", 6.5))
+    if score >= aligned_min:
+        return "ALIGNED"
+    if score >= at_risk_min:
+        return "AT_RISK"
+    return "FAIL"
+
+
+def compute_stream_scores(
+    catalog: dict[str, Any], domain_scores: dict[str, float], branch: str
+) -> dict[str, dict[str, Any]]:
+    streams_cfg = catalog.get("streams", {})
+    result: dict[str, dict[str, Any]] = {}
+    for stream_id, cfg in streams_cfg.items():
+        label = cfg.get("label", stream_id)
+        domain_ids = cfg.get("domains", [])
+        domain_detail = {did: domain_scores.get(did) for did in domain_ids if did in domain_scores}
+
+        applicable_on = cfg.get("applicable_on_branches")
+        if applicable_on is not None and branch not in applicable_on:
+            result[stream_id] = {
+                "id": stream_id,
+                "label": label,
+                "short_label": cfg.get("short_label", label),
+                "question": cfg.get("question", ""),
+                "score": None,
+                "status": "not_applicable",
+                "verdict": "N/A",
+                "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+                "domains": domain_detail,
+                "na_reason": cfg.get("na_reason", "Not applicable on this branch"),
+            }
+            continue
+
+        if branch in cfg.get("not_applicable_on_branches", []):
+            result[stream_id] = {
+                "id": stream_id,
+                "label": label,
+                "short_label": cfg.get("short_label", label),
+                "question": cfg.get("question", ""),
+                "score": None,
+                "status": "not_applicable",
+                "verdict": "N/A",
+                "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+                "domains": domain_detail,
+                "na_reason": cfg.get("na_reason", "Not applicable on this branch"),
+            }
+            continue
+
+        values = [float(domain_scores[d]) for d in domain_ids if d in domain_scores]
+        score = round(sum(values) / len(values), 2) if values else 0.0
+        verdict = _stream_verdict(score, catalog, stream_id)
+        result[stream_id] = {
+            "id": stream_id,
+            "label": label,
+            "short_label": cfg.get("short_label", label),
+            "question": cfg.get("question", ""),
+            "score": score,
+            "status": verdict.lower().replace("_", "-"),
+            "verdict": verdict,
+            "primary_on_branch": branch in cfg.get("primary_on_branches", []),
+            "domains": domain_detail,
+            "na_reason": None,
+        }
+    return result
+
+
+def apply_derived_domain_scores(
+    catalog: dict[str, Any],
+    domain_scores: dict[str, float],
+    stream_scores: dict[str, dict[str, Any]],
+) -> None:
+    for domain in catalog.get("domains", []):
+        derive = domain.get("derive")
+        if derive == "mean_stream":
+            sid = domain.get("stream", "")
+            stream = stream_scores.get(sid, {})
+            score = stream.get("score")
+            if score is not None:
+                domain_scores[domain["id"]] = float(score)
+        elif derive == "mean_siblings":
+            siblings = [
+                d["id"]
+                for d in catalog.get("domains", [])
+                if not d.get("derive") and d["id"] != domain["id"]
+            ]
+            if siblings:
+                domain_scores[domain["id"]] = round(
+                    sum(domain_scores[s] for s in siblings if s in domain_scores) / len(siblings),
+                    2,
+                )
 
 
 def build_recommendations(
@@ -429,7 +631,7 @@ def compute_verdict(
     catalog: dict[str, Any],
     *,
     ci: dict[str, Any],
-    domain_scores: dict[str, float],
+    stream_scores: dict[str, dict[str, Any]],
     checklist: dict[str, Any],
 ) -> str:
     th = catalog.get("verdict_thresholds", {})
@@ -437,12 +639,19 @@ def compute_verdict(
         return "FAIL"
     if checklist.get("blocking_open", 0) > int(th.get("aligned_max_blocking", 0)):
         return "AT_RISK"
-    overall = domain_scores.get("overall_production", 0.0)
-    if overall >= float(th.get("aligned_min_overall", 8.0)):
-        return "ALIGNED"
-    if overall >= float(th.get("at_risk_min_overall", 6.5)):
+
+    applicable = [
+        s.get("verdict", "FAIL")
+        for s in stream_scores.values()
+        if s.get("status") != "not_applicable" and s.get("verdict") != "N/A"
+    ]
+    if not applicable:
+        return "FAIL"
+    if "FAIL" in applicable:
+        return "FAIL"
+    if "AT_RISK" in applicable:
         return "AT_RISK"
-    return "FAIL"
+    return "ALIGNED"
 
 
 def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = None) -> list[dict[str, Any]]:
@@ -468,9 +677,13 @@ def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = Non
                     "filename": fname,
                     "present": src is not None,
                     "path": str(src.relative_to(ROOT)) if src else None,
+                    "management": bool(asset.get("management")),
+                    "auto_generated": bool(asset.get("auto_generated")),
+                    "deprecated_for_management": bool(asset.get("deprecated_for_management")),
                 }
             )
-    return manifest
+    enrich_visual_manifest(manifest, catalog)
+    return filter_report_visuals(manifest, catalog)
 
 
 def bundle_visuals(
@@ -480,10 +693,13 @@ def bundle_visuals(
 ) -> list[dict[str, Any]]:
     visuals_dir = audit_dir / catalog.get("outputs", {}).get("visuals_subdir", "visuals")
     visuals_dir.mkdir(parents=True, exist_ok=True)
+    report_only = set(catalog.get("visual_policy", {}).get("report_only_filenames", []))
     manifest: list[dict[str, Any]] = []
     for pack in catalog.get("visual_packs", []):
         for asset in pack.get("assets", []):
             fname = asset["filename"]
+            if report_only and fname not in report_only:
+                continue
             dest = visuals_dir / fname
             copied = False
             if source_dir and (source_dir / fname).is_file():
@@ -498,13 +714,17 @@ def bundle_visuals(
                     "pack_title": pack["title"],
                     "asset_id": asset["id"],
                     "label": asset["label"],
-                    "kind": asset.get("kind", "concept"),
+                    "kind": asset.get("kind", "radar"),
                     "filename": fname,
                     "path": str(dest.relative_to(ROOT)) if dest.is_file() else None,
                     "present": dest.is_file(),
                     "copied": copied,
+                    "management": bool(asset.get("management")),
+                    "auto_generated": bool(asset.get("auto_generated")),
+                    "deprecated_for_management": bool(asset.get("deprecated_for_management")),
                 }
             )
+    enrich_visual_manifest(manifest, catalog)
     return manifest
 
 
@@ -525,7 +745,12 @@ def build_report(
     stale = stale_string_scan(catalog, branch=branch)
     ctx = {"ci": ci, "parity": parity, "branch": branch}
     domain_scores = compute_domain_scores(catalog, ctx)
-    visual_inventory = scan_visual_inventory(catalog, visuals_from)
+    signal_scores = compute_signal_scores(catalog, ctx, domain_scores)
+    stream_scores = compute_stream_scores(catalog, domain_scores, branch)
+    apply_derived_domain_scores(catalog, domain_scores, stream_scores)
+    visual_inventory = filter_report_visuals(
+        scan_visual_inventory(catalog, visuals_from), catalog
+    )
     recommendations = build_recommendations(
         catalog,
         ci=ci,
@@ -536,13 +761,24 @@ def build_report(
         report_visuals=visual_inventory,
     )
     checklist = build_checklist(recommendations, catalog)
-    verdict = compute_verdict(catalog, ci=ci, domain_scores=domain_scores, checklist=checklist)
+    verdict = compute_verdict(
+        catalog, ci=ci, stream_scores=stream_scores, checklist=checklist
+    )
+
+    spec = stream_scores.get("spec_readiness", {})
+    build = stream_scores.get("build_readiness", {})
+    spec_label = spec.get("score", "N/A")
+    build_label = build.get("score") if build.get("score") is not None else "N/A"
+    headline = (
+        f"Alignment audit — {verdict} ({branch} @ {commit}) · "
+        f"Spec {spec_label}/10 · Build {build_label}/10"
+    )
 
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     audit_id = f"{ts}_{trigger}"
 
     report: dict[str, Any] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "audit_id": audit_id,
         "generated_at": _utcnow(),
         "trigger": trigger,
@@ -550,8 +786,10 @@ def build_report(
         "branch": branch,
         "commit": commit,
         "verdict": verdict,
-        "headline": f"Alignment audit — {verdict} ({branch} @ {commit})",
+        "headline": headline,
+        "streams": stream_scores,
         "domain_scores": domain_scores,
+        "signal_scores": signal_scores,
         "ci_summary": {
             "script": ci.get("script"),
             "pass_count": ci.get("pass_count"),
@@ -602,7 +840,111 @@ def apply_committed_visual_hrefs(
         )
 
 
+def _hidden_domain_ids(catalog: dict[str, Any]) -> set[str]:
+    return {d["id"] for d in catalog.get("domains", []) if d.get("hidden_from_dashboard")}
+
+
+def _visual_sections_markdown(
+    manifest: list[dict[str, Any]], *, embed_visuals: bool = False
+) -> list[str]:
+    """Stream radar visuals — overview + spec sub-domain breakdown."""
+    present = [v for v in manifest if v.get("present")]
+    if not present:
+        return []
+
+    overview_names = {"audit_radar_report.png", "audit_radar_spec.png", "audit_radar_build.png"}
+    overview = [v for v in present if v["filename"] in overview_names]
+    breakdown_grid = [v for v in present if v["filename"] == "audit_radar_spec_breakdown.png"]
+    subdomains = [
+        v
+        for v in present
+        if v["filename"].startswith("audit_radar_spec_")
+        and v["filename"] not in {"audit_radar_spec.png", "audit_radar_spec_breakdown.png"}
+    ]
+    build_breakdown_grid = [v for v in present if v["filename"] == "audit_radar_build_breakdown.png"]
+    build_subdomains = [
+        v
+        for v in present
+        if v["filename"].startswith("audit_radar_build_")
+        and v["filename"] not in {"audit_radar_build.png", "audit_radar_build_breakdown.png"}
+    ]
+
+    lines: list[str] = []
+
+    def _rows(items: list[dict[str, Any]]) -> None:
+        for v in items:
+            href = v.get("gallery_href") or v.get("path")
+            suffix = " (auto-generated)" if v.get("auto_generated") else ""
+            if embed_visuals and href:
+                lines.append(f"![{v['label']}]({href})")
+                lines.append(f"*{v['label']}{suffix}*")
+            else:
+                lines.append(f"- {v['label']}{suffix}: `{href}`")
+
+    lines.append("## Stream radars (overview)")
+    lines.append("")
+    _rows(overview)
+    lines.append("")
+
+    if breakdown_grid:
+        lines.append("## Spec sub-radar breakdown (6 domains)")
+        lines.append("")
+        lines.append("Each panel shows signal-level scores within one spec domain.")
+        lines.append("")
+        _rows(breakdown_grid)
+        lines.append("")
+
+    if subdomains:
+        lines.append("## Spec domain sub-radars (detail)")
+        lines.append("")
+        _rows(subdomains)
+        lines.append("")
+
+    if build_breakdown_grid:
+        lines.append("## Build sub-radar breakdown (2 domains)")
+        lines.append("")
+        lines.append("Each panel shows signal-level scores within one build domain.")
+        lines.append("")
+        _rows(build_breakdown_grid)
+        lines.append("")
+
+    if build_subdomains:
+        lines.append("## Build domain sub-radars (detail)")
+        lines.append("")
+        _rows(build_subdomains)
+        lines.append("")
+
+    return lines
+
+
+def _visual_gallery_html(
+    manifest: list[dict[str, Any]], *, image_href_key: str = "path"
+) -> str:
+    figures = []
+    for v in manifest:
+        href = v.get(image_href_key) or v.get("path")
+        flags = []
+        if v.get("auto_generated"):
+            flags.append("auto-generated")
+        if v.get("deprecated_for_management"):
+            flags.append("legacy")
+        flag_txt = f" · {' · '.join(flags)}" if flags else ""
+        if v.get("present") and href:
+            figures.append(
+                f'<figure><img src="{html.escape(href)}" alt="{html.escape(v["label"])}"/>'
+                f'<figcaption>{html.escape(v["label"])}{html.escape(flag_txt)}</figcaption></figure>'
+            )
+        elif manifest:
+            figures.append(
+                f'<figure class="missing"><div class="ph">{html.escape(v["label"])}</div>'
+                f'<figcaption>missing — bundle with --visuals-from</figcaption></figure>'
+            )
+    return "".join(figures) or "<p>No visuals bundled.</p>"
+
+
 def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -> str:
+    catalog = load_catalog()
+    hidden = _hidden_domain_ids(catalog)
     lines = [
         "# Tides of Urashima — Alignment Audit Report",
         "",
@@ -612,12 +954,108 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
         "",
         f"## Verdict: **{report.get('verdict')}**",
         "",
-        "## Domain scores (0–10)",
+        "## Streams (management view)",
         "",
-        "| Domain | Score |",
-        "|--------|-------|",
+        "| Stream | Score | Status | Question |",
+        "|--------|-------|--------|----------|",
     ]
+    for stream in report.get("streams", {}).values():
+        score = stream.get("score")
+        score_txt = "N/A" if score is None else f"{score}/10"
+        status = stream.get("status", "").replace("-", " ").title()
+        if stream.get("status") == "not_applicable":
+            status = f"N/A — {stream.get('na_reason', '')}"
+        lines.append(
+            f"| {stream.get('label')} | {score_txt} | {status} | {stream.get('question', '')} |"
+        )
+    lines.extend(["", "> **Do not merge spec + build into one radar for management.** Each stream answers a different question.", ""])
+
+    for stream in report.get("streams", {}).values():
+        if stream.get("status") == "not_applicable":
+            continue
+        lines.extend(
+            [
+                f"### {stream.get('label')} domains",
+                "",
+                "| Domain | Score |",
+                "|--------|-------|",
+            ]
+        )
+        for dom_id, score in sorted(stream.get("domains", {}).items(), key=lambda x: -float(x[1] or 0)):
+            label = dom_id.replace("_", " ").title()
+            lines.append(f"| {label} | {score} |")
+        lines.append("")
+
+    spec_stream = report.get("streams", {}).get("spec_readiness", {})
+    spec_domain_ids = list((spec_stream.get("domains") or {}).keys())
+    signal_scores = report.get("signal_scores", {})
+    if spec_domain_ids and signal_scores:
+        lines.extend(
+            [
+                "## Spec domain signal breakdown",
+                "",
+                "Each of the 6 spec domains has its own sub-radar (signals behind the axis score).",
+                "",
+            ]
+        )
+        for dom_id in spec_domain_ids:
+            signals = signal_scores.get(dom_id, {})
+            if not signals:
+                continue
+            domain_score = report.get("domain_scores", {}).get(dom_id, "?")
+            label = dom_id.replace("_", " ").title()
+            lines.extend(
+                [
+                    f"### {label} ({domain_score}/10)",
+                    "",
+                    "| Signal | Score |",
+                    "|--------|-------|",
+                ]
+            )
+            for sid, score in sorted(signals.items(), key=lambda x: -x[1]):
+                lines.append(f"| `{sid}` | {score} |")
+            lines.append("")
+
+    build_domain_ids = list(BUILD_DOMAIN_ORDER)
+    if build_domain_ids and signal_scores:
+        lines.extend(
+            [
+                "## Build domain signal breakdown",
+                "",
+                "Each build domain has its own sub-radar (signals behind the axis score).",
+                "On `main`, build stream is N/A but domain signal previews still generate.",
+                "",
+            ]
+        )
+        for dom_id in build_domain_ids:
+            signals = signal_scores.get(dom_id, {})
+            if not signals:
+                continue
+            domain_score = report.get("domain_scores", {}).get(dom_id, "?")
+            label = dom_id.replace("_", " ").title()
+            lines.extend(
+                [
+                    f"### {label} ({domain_score}/10)",
+                    "",
+                    "| Signal | Score |",
+                    "|--------|-------|",
+                ]
+            )
+            for sid, score in sorted(signals.items(), key=lambda x: -x[1]):
+                lines.append(f"| `{sid}` | {score} |")
+            lines.append("")
+
+    lines.extend(
+        [
+            "## All domain scores (0–10)",
+            "",
+            "| Domain | Score |",
+            "|--------|-------|",
+        ]
+    )
     for dom_id, score in sorted(report.get("domain_scores", {}).items(), key=lambda x: -x[1]):
+        if dom_id in hidden:
+            continue
         label = dom_id.replace("_", " ").title()
         lines.append(f"| {label} | {score} |")
 
@@ -641,8 +1079,13 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             f"- Encounters: {'OK' if parity.get('encounters_ok') else 'FAIL'}",
             f"- Hooks: {'OK' if parity.get('hooks_ok') else 'FAIL'}",
             f"- Tutorial flags: {'OK' if parity.get('tutorials_ok') else 'FAIL'}",
+            f"- Sprint board ↔ pack: {'OK' if parity.get('sprint_board_ok') else 'FAIL'}",
         ]
     )
+    if parity.get("sprint_pack_missing_on_board"):
+        lines.append(
+            f"- Pack IDs missing on board: `{', '.join(parity['sprint_pack_missing_on_board'])}`"
+        )
 
     lines.extend(["", "## Recommendation checklist", ""])
     for sec in report.get("checklist", {}).get("sections", []):
@@ -660,17 +1103,12 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
             lines.append(f"- `{h['path']}` — {h['message']} ({h['severity']})")
         lines.append("")
 
-    visuals = [v for v in report.get("visual_manifest", []) if v.get("present")]
-    if visuals:
-        lines.append("## Stakeholder visuals")
-        for v in visuals:
-            href = v.get("gallery_href") or v.get("path")
-            if embed_visuals and href:
-                lines.append(f"![{v['label']}]({href})")
-                lines.append(f"*{v['label']}*")
-            else:
-                lines.append(f"- {v['label']}: `{href}`")
-        lines.append("")
+    lines.extend(
+        _visual_sections_markdown(
+            filter_report_visuals(report.get("visual_manifest", []), load_catalog()),
+            embed_visuals=embed_visuals,
+        )
+    )
 
     lines.append("---")
     lines.append("Authority: `docs/qa/ALIGNMENT_AUDIT.md` · Re-run: `bash tools/run_alignment_audit.sh`")
@@ -679,12 +1117,36 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
 
 def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path") -> str:
     esc = html.escape
-    scores = report.get("domain_scores", {})
-    max_score = 10.0
+    catalog = load_catalog()
+    hidden = _hidden_domain_ids(catalog)
+
+    stream_cards = []
+    for stream in report.get("streams", {}).values():
+        score = stream.get("score")
+        if score is None:
+            pct = 0
+            val = "N/A"
+            sub = esc(stream.get("na_reason", "Not applicable on this branch"))
+        else:
+            pct = min(100, int(100 * float(score) / 10.0))
+            val = f"{score}/10"
+            sub = esc(stream.get("question", ""))
+        stream_cards.append(
+            f'<div class="card stream-card">'
+            f'<h2>{esc(stream.get("label", ""))}</h2>'
+            f'<div class="stream-score">{val}</div>'
+            f'<div class="bar"><div style="width:{pct}%"></div></div>'
+            f'<p class="stream-sub">{sub}</p>'
+            f'<p class="stream-verdict"><span class="verdict {esc(stream.get("status", ""))}">'
+            f'{esc(stream.get("verdict", ""))}</span></p></div>'
+        )
+
     bars = []
-    for dom_id, score in sorted(scores.items(), key=lambda x: -x[1]):
+    for dom_id, score in sorted(report.get("domain_scores", {}).items(), key=lambda x: -x[1]):
+        if dom_id in hidden:
+            continue
         label = dom_id.replace("_", " ").title()
-        pct = min(100, int(100 * float(score) / max_score))
+        pct = min(100, int(100 * float(score) / 10.0))
         bars.append(
             f'<div class="score-row"><span class="label">{esc(label)}</span>'
             f'<div class="bar"><div style="width:{pct}%"></div></div>'
@@ -704,19 +1166,8 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
             f'<div class="card"><h2>{esc(sec["label"])} ({sec["open_count"]})</h2><ul>{items}</ul></div>'
         )
 
-    gallery = []
-    for v in report.get("visual_manifest", []):
-        href = v.get(image_href_key) or v.get("path")
-        if v.get("present") and href:
-            gallery.append(
-                f'<figure><img src="{esc(href)}" alt="{esc(v["label"])}"/>'
-                f'<figcaption>{esc(v["label"])}</figcaption></figure>'
-            )
-        else:
-            gallery.append(
-                f'<figure class="missing"><div class="ph">{esc(v["label"])}</div>'
-                f'<figcaption>missing — bundle with --visuals-from</figcaption></figure>'
-            )
+    manifest = filter_report_visuals(report.get("visual_manifest", []), catalog)
+    radar_gallery = _visual_gallery_html(manifest, image_href_key=image_href_key)
 
     verdict = report.get("verdict", "?")
     verdict_class = verdict.lower().replace("_", "-")
@@ -736,6 +1187,10 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
     .verdict.aligned {{ background: #1e4d3a; color: #7dcea0; }}
     .verdict.at-risk {{ background: #4d3a1e; color: #d4a880; }}
     .verdict.fail {{ background: #4d1e1e; color: #e88; }}
+    .verdict.not-applicable {{ background: #2a3344; color: #8b9daf; }}
+    .stream-card .stream-score {{ font-size: 2rem; font-weight: 700; color: #4ae8d8; margin: 0.25rem 0; }}
+    .stream-sub {{ font-size: 0.85rem; color: #8b9daf; margin: 0.35rem 0; }}
+    .stream-verdict {{ margin-top: 0.5rem; }}
     .score-row {{ display: grid; grid-template-columns: 140px 1fr 40px; gap: 0.5rem; align-items: center; margin: 0.35rem 0; }}
     .bar {{ background: #2a3344; border-radius: 4px; height: 10px; overflow: hidden; }}
     .bar > div {{ background: linear-gradient(90deg, #4ae8d8, #d4a880); height: 100%; }}
@@ -758,14 +1213,19 @@ def render_html_dashboard(report: dict[str, Any], *, image_href_key: str = "path
   <p><span class="verdict {verdict_class}">{esc(verdict)}</span>
      <small> · {esc(report.get("generated_at", ""))} · {esc(report.get("branch", ""))} @ {esc(report.get("commit", ""))}</small></p>
 
+  <h2>Streams</h2>
+  <p><small>Spec = design &amp; preparation (<code>main</code>). Build = runtime &amp; ship (<code>game/development</code>). Do not merge for management.</small></p>
+  <div class="grid">{"".join(stream_cards)}</div>
+
   <h2>Domain scores</h2>
   {"".join(bars)}
 
   <h2>Recommendation checklist</h2>
   <div class="grid">{"".join(checklist_html) or "<p>No open recommendations.</p>"}</div>
 
-  <h2>Stakeholder visuals</h2>
-  <div class="gallery">{"".join(gallery) or "<p>No visuals bundled.</p>"}</div>
+  <h2>Stream radars</h2>
+  <p><small>Auto-generated spec/build radars from live scores — legacy art excluded.</small></p>
+  <div class="gallery">{radar_gallery}</div>
 
   <h2>Raw JSON</h2>
   <pre id="data"></pre>
@@ -797,7 +1257,10 @@ def update_history_index(
         "branch": report["branch"],
         "commit": report["commit"],
         "verdict": report["verdict"],
-        "overall_score": report["domain_scores"].get("overall_production"),
+        "overall_score": report.get("streams", {}).get("spec_readiness", {}).get("score"),
+        "spec_score": report.get("streams", {}).get("spec_readiness", {}).get("score"),
+        "build_score": report.get("streams", {}).get("build_readiness", {}).get("score"),
+        "build_status": report.get("streams", {}).get("build_readiness", {}).get("status"),
         "ci_pass": report["ci_summary"]["pass_count"],
         "ci_fail": report["ci_summary"]["fail_count"],
         "blocking_open": report["checklist"]["blocking_open"],
@@ -898,6 +1361,16 @@ def write_outputs(
     visuals_from: Path | None = None,
 ) -> dict[str, str]:
     outputs = catalog.get("outputs", {})
+    shared_visuals = ROOT / outputs.get(
+        "shared_visuals_dir", "docs/compliance/alignment_audit_visuals"
+    )
+    try:
+        from generate_audit_radar_images import generate_audit_radars  # noqa: E402
+
+        generate_audit_radars(report, shared_visuals)
+    except Exception as exc:  # pragma: no cover — matplotlib optional at runtime
+        print(f"WARN: audit radar image generation failed: {exc}", file=sys.stderr)
+
     out_dir = ROOT / outputs.get("artifacts_dir", "artifacts/alignment_audits")
     audit_dir = out_dir / report["audit_id"]
     audit_dir.mkdir(parents=True, exist_ok=True)
@@ -975,14 +1448,20 @@ def main(argv: list[str] | None = None) -> int:
     vdir = Path(args.visuals_from) if args.visuals_from else None
     report = build_report(trigger=args.trigger, note=args.note, visuals_from=vdir, skip_ci=args.skip_ci)
     paths = write_outputs(report, catalog, visuals_from=vdir)
-    print(f"OK — verdict={report['verdict']} overall={report['domain_scores'].get('overall_production')}")
+    spec = report.get("streams", {}).get("spec_readiness", {})
+    build = report.get("streams", {}).get("build_readiness", {})
+    build_disp = build.get("score") if build.get("score") is not None else "N/A"
+    print(
+        f"OK — verdict={report['verdict']} "
+        f"spec={spec.get('score')} build={build_disp}"
+    )
     print(f"  CI: PASS={report['ci_summary']['pass_count']} FAIL={report['ci_summary']['fail_count']}")
     print(f"  Checklist: {report['checklist']['total_open']} open ({report['checklist']['blocking_open']} blocking)")
     print(f"  JSON: {paths['json']}")
     print(f"  Markdown: {paths['markdown']}")
     print(f"  HTML: {paths['html']}")
     print(f"  Committed: {paths.get('committed_dir', 'n/a')}")
-    print(f"  History: docs/compliance/alignment_audit_history.json")
+    print("  History: docs/compliance/alignment_audit_history.json")
     return 0 if report["verdict"] != "FAIL" else 1
 
 

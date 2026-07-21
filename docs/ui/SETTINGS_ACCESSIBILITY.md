@@ -1,6 +1,6 @@
 # Tides of Urashima — Settings & Accessibility
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/ui/UI_UX_FLOW.md`, `user://settings.json`
 
 ---

@@ -1,2 +1,4 @@
 gdtoolkit>=4.3.0
 matplotlib>=3.8
+mypy>=1.13.0
+ruff>=0.8.0

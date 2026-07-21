@@ -89,7 +89,7 @@ fi
 
 # 2. Update board (before cycle event so PM webhook sees done status)
 if [[ "$OUTCOME" == "complete" && "$SKIP_DONE" -eq 0 ]]; then
-  UPDATE_ARGS=(python3 tools/pm_update_issue.py "$ISSUE_ID" --status done --commit "$COMMIT_SHA" --agent "$AGENT_ROLE")
+  UPDATE_ARGS=(python3 tools/pm_update_issue.py "$ISSUE_ID" --status 'done' --commit "$COMMIT_SHA" --agent "$AGENT_ROLE")
   run_step "update_board" "mark issue done on sprint board" \
     "${UPDATE_ARGS[@]}" || exit 1
 fi

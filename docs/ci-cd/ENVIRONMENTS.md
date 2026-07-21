@@ -1,9 +1,9 @@
 # Deployment Environments — Dev · QA · UAT · Preprod · Prod
 
-**Version:** 1.1  
-**Machine-readable:** `game/data/qa/environments.json`  
-**Lifecycle hub:** `docs/workflow/DEVELOPMENT_LIFECYCLE.md` — full dev → ship flow (this doc = per-stage detail)  
-**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — stages are **not** long-lived git branches  
+**Version:** 1.1
+**Machine-readable:** `game/data/qa/environments.json`
+**Lifecycle hub:** `docs/workflow/DEVELOPMENT_LIFECYCLE.md` — full dev → ship flow (this doc = per-stage detail)
+**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — stages are **not** long-lived git branches
 **Cross-refs:** `docs/workflow/BRANCHING.md`, `docs/ci-cd/CD.md`, `docs/ci-cd/CI.md`, `docs/agents/MULTI_AGENT_TEAM.md`
 
 ---
@@ -141,7 +141,7 @@ Every environment run should be traceable:
 | Artifacts | `artifacts/screenshots/`, `artifacts/test-reports/`, Actions logs |
 | Remediation | `bash tools/qa_emit_remediation.sh <brief-id>` |
 
-Issue title format: `[ENV][S1][L4] Short description`  
+Issue title format: `[ENV][S1][L4] Short description`
 Example: `[UAT][S1][L5] Drift ending soft-lock at SC-16`
 
 ---

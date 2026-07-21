@@ -71,7 +71,7 @@ def main() -> int:
 
     if errors:
         for e in errors:
-            print(f"[FAIL] {e}")
+            print(f"[FAIL] {e}", file=sys.stderr)
         return 1
 
     print("[OK]   no forbidden native extends outside registered base classes")

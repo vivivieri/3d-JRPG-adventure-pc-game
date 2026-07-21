@@ -1,7 +1,7 @@
 # Generation brief — `village_well_stone`
 
-**Status:** Phase 1 prop  
-**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`  
+**Status:** Phase 1 prop
+**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`
 **Phase:** SC-02 save point
 
 ## Intent

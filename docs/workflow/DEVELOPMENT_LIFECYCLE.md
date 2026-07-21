@@ -1,8 +1,8 @@
 # Development Lifecycle — End-to-End
 
-**Version:** 1.0  
-**Authority:** Single hub for how work flows from spec → ship.  
-**Machine-readable:** `game/data/qa/environments.json`, `game/data/qa/sprint_phases.json`, `game/data/qa/sprint_board.json`  
+**Version:** 1.0
+**Authority:** Single hub for how work flows from spec → ship.
+**Machine-readable:** `game/data/qa/environments.json`, `game/data/qa/sprint_phases.json`, `game/data/qa/sprint_board.json`
 **Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md`
 
 ---
@@ -217,7 +217,7 @@ Templates: `.github/ISSUE_TEMPLATE/` · sprint pack: `docs/sprints/Phase1-Sprint
 | **L5** | Phase 6+ | `run_e2e_playthrough.sh` | Three endings |
 | **L6** | UAT only | Human `PLAYTEST_SCRIPT.md` | Ship sign-off |
 
-**QA stage** = L0–L2 (and L4/L5 when phase requires) automated on trunk.  
+**QA stage** = L0–L2 (and L4/L5 when phase requires) automated on trunk.
 **UAT stage** = tagged RC + human L6 — never before L0–L5 on the same commit.
 
 ---
@@ -234,6 +234,12 @@ GitHub = **what + proof** · Linear = **which batch + cycle progress**
 **Agent session telemetry** (efficiency studies): `docs/qa/AGENT_SESSION_TELEMETRY.md` — JSONL log of role, task, duration, tokens per issue. Wired into session gate, cycle events, PM orchestrator, watchdog, and stakeholder reports (`tools/analyze_agent_session_telemetry.py`). Requires one-time `CURSOR_API_KEY` secret.
 
 **Workflow integration registry** (drift prevention): `docs/qa/WORKFLOW_INTEGRATION.md` — agents register cross-cutting factory features before merge; `L0_workflow_integration` CI + `bash tools/check_feature_integration.sh --remind`.
+
+**Factory watchdog:** `bash tools/run_factory_watchdog.sh` — stall recovery when PM dispatch stalls (`docs/agents/FACTORY_WATCHDOG.md`).
+
+**Stakeholder reporting:** `bash tools/pm_emit_stakeholder_report.sh` — auto on cycle events; manual at phase exit (`docs/agents/PM_STAKEHOLDER_REPORTING.md`).
+
+**Alignment audit:** `bash tools/run_alignment_audit.sh` — post-merge spec/data parity (`docs/qa/ALIGNMENT_AUDIT.md`). **Management status:** `audit_radar_spec.png` + `audit_radar_build.png` (ignore mega dashboard).
 
 ---
 

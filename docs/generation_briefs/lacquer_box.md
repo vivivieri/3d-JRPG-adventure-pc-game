@@ -1,6 +1,6 @@
 # Generation brief — `lacquer_box`
 
-**Status:** P0 hero prop (also on Urashima hip)  
+**Status:** P0 hero prop (also on Urashima hip)
 **Authority:** `ITEMS_3D_MODEL_GUIDE.md` §8, `CHARACTER_BIBLE.md` §2, `qa_catalog.json`
 
 ## Intent

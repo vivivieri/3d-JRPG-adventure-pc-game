@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.3",
   "authority": "docs/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
@@ -15,30 +15,117 @@
     "committed_history_keep": 50,
     "archive_visual_snapshots": false
   },
+  "visual_policy": {
+    "generator_script": "tools/generate_audit_radar_images.py",
+    "auto_generated_filenames": [
+      "audit_radar_spec.png",
+      "audit_radar_build.png",
+      "audit_radar_report.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png",
+      "audit_radar_build_breakdown.png",
+      "audit_radar_build_runtime_proof.png",
+      "audit_radar_build_steam_ship.png"
+    ],
+    "management_status_filenames": [
+      "audit_radar_spec.png",
+      "audit_radar_build.png",
+      "audit_radar_report.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png",
+      "audit_radar_build_breakdown.png",
+      "audit_radar_build_runtime_proof.png",
+      "audit_radar_build_steam_ship.png"
+    ],
+    "report_only_filenames": [
+      "audit_radar_report.png",
+      "audit_radar_spec.png",
+      "audit_radar_spec_breakdown.png",
+      "audit_radar_spec_data_alignment.png",
+      "audit_radar_spec_narrative.png",
+      "audit_radar_spec_gameplay.png",
+      "audit_radar_spec_visual_spec.png",
+      "audit_radar_spec_ux_controls.png",
+      "audit_radar_spec_pm_workflow.png",
+      "audit_radar_build.png",
+      "audit_radar_build_breakdown.png",
+      "audit_radar_build_runtime_proof.png",
+      "audit_radar_build_steam_ship.png"
+    ],
+    "deprecated_for_management_filenames": [
+      "audit_radar_6axis.png",
+      "tides_mega_dashboard_all_radars.png"
+    ]
+  },
   "verdict_thresholds": {
     "aligned_min_overall": 8.0,
     "aligned_max_blocking": 0,
     "at_risk_min_overall": 6.5,
-    "fail_any_ci": true
+    "fail_any_ci": true,
+    "build_aligned_min": 6.0,
+    "build_at_risk_min": 4.0
+  },
+  "streams": {
+    "spec_readiness": {
+      "id": "spec_readiness",
+      "label": "Design & Preparation",
+      "short_label": "Spec",
+      "question": "Can we dispatch builders? Is design truth complete?",
+      "domains": [
+        "data_alignment",
+        "narrative",
+        "gameplay",
+        "visual_spec",
+        "ux_controls",
+        "pm_workflow"
+      ],
+      "primary_on_branches": ["main"],
+      "not_applicable_on_branches": [],
+      "na_reason": null
+    },
+    "build_readiness": {
+      "id": "build_readiness",
+      "label": "Development & Shipping",
+      "short_label": "Build",
+      "question": "Does the game run, pass gates, and approach Steam?",
+      "domains": ["runtime_proof", "steam_ship"],
+      "primary_on_branches": ["game/development"],
+      "applicable_on_branches": ["game/development"],
+      "not_applicable_on_branches": ["main"],
+      "na_reason": "Build stream applies only on game/development — main holds specs until P1-00 bootstrap"
+    }
   },
   "domains": [
     {
       "id": "overall_production",
-      "label": "Overall Production",
+      "label": "Overall Spec (legacy alias)",
       "weight": 1.0,
-      "derive": "mean_siblings",
-      "icon": "overall"
+      "derive": "mean_stream",
+      "stream": "spec_readiness",
+      "icon": "overall",
+      "hidden_from_dashboard": true
     },
     {
       "id": "data_alignment",
       "label": "Data Alignment",
       "weight": 1.0,
       "signals": [
-        { "id": "scene_registry_parity", "weight": 0.25, "kind": "parity" },
-        { "id": "hooks_parity", "weight": 0.2, "kind": "parity" },
-        { "id": "tutorial_flags", "weight": 0.15, "kind": "parity" },
-        { "id": "L0_scene_registry", "weight": 0.2, "kind": "gate" },
-        { "id": "L0_story_data", "weight": 0.2, "kind": "gate" }
+        { "id": "scene_registry_parity", "weight": 0.22, "kind": "parity" },
+        { "id": "hooks_parity", "weight": 0.18, "kind": "parity" },
+        { "id": "tutorial_flags", "weight": 0.13, "kind": "parity" },
+        { "id": "sprint_board_parity", "weight": 0.15, "kind": "parity" },
+        { "id": "L0_scene_registry", "weight": 0.17, "kind": "gate" },
+        { "id": "L0_story_data", "weight": 0.15, "kind": "gate" }
       ],
       "icon": "data"
     },
@@ -94,12 +181,15 @@
       "label": "PM Workflow",
       "weight": 1.0,
       "signals": [
-        { "id": "ci_pass_rate", "weight": 0.35, "kind": "ci_rate" },
-        { "id": "L0_doc_sync", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_pm_orchestrator", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_stakeholder_report", "weight": 0.1, "kind": "gate" },
-        { "id": "L0_workflow_integration", "weight": 0.15, "kind": "gate" },
-        { "id": "L0_candidate_tournament", "weight": 0.1, "kind": "gate" }
+        { "id": "ci_pass_rate", "weight": 0.25, "kind": "ci_rate" },
+        { "id": "L0_doc_sync", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_pm_orchestrator", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_stakeholder_report", "weight": 0.08, "kind": "gate" },
+        { "id": "L0_workflow_integration", "weight": 0.12, "kind": "gate" },
+        { "id": "L0_candidate_tournament", "weight": 0.08, "kind": "gate" },
+        { "id": "L0_agent_session_telemetry", "weight": 0.12, "kind": "gate" },
+        { "id": "L0_factory_watchdog", "weight": 0.1, "kind": "gate" },
+        { "id": "L0_sprint_board", "weight": 0.05, "kind": "gate" }
       ],
       "icon": "pm"
     },
@@ -149,7 +239,7 @@
       "category": "blocking",
       "when": "parity_fail",
       "title": "Repair registry ↔ data parity",
-      "action": "Align scene_registry.json, story_encounters.json, cinematic_hooks.json; re-run python3 tools/validate_scene_registry.py."
+      "action": "Align scene_registry.json, story_encounters.json, cinematic_hooks.json, and sprint_board.json ↔ sprint pack IDs; re-run python3 tools/validate_scene_registry.py and python3 tools/validate_sprint_board.py --strict."
     },
     {
       "id": "REC_STALE_BLOCKING",
@@ -165,8 +255,8 @@
       "category": "before_dispatch",
       "when": "branch_is",
       "value": "main",
-      "title": "SPEC_DEV_START ready — dispatch P1-00 when approved",
-      "action": "All blocking spec artifacts specified; next: Architect ports EventBus on game/development per GDSCRIPT_REGENERATION.md §1."
+      "title": "P1-00 blocked — restore game/development Godot tree",
+      "action": "origin/game/development tip lacks game/project.godot. Restore from commit 9aa5fb5 or bash tools/bootstrap_game_development.sh; copy .cursor/environment.game-development.json.example; do not mark P1-00 done until L0_game_branch_bootstrap PASS."
     },
     {
       "id": "REC_RUNTIME_LOW",
@@ -217,6 +307,24 @@
       "action": "Run python3 tools/validate_workflow_integration.py; update game/data/qa/workflow_integration_registry.json and wire missing hooks/docs per docs/qa/WORKFLOW_INTEGRATION.md."
     },
     {
+      "id": "REC_AGENT_TELEMETRY",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "gate_fail",
+      "gate": "L0_agent_session_telemetry",
+      "title": "Agent session telemetry schema drift",
+      "action": "Run python3 tools/validate_agent_session_telemetry.py; wire hooks in session gate, cycle events, orchestrator, and watchdog per docs/qa/AGENT_SESSION_TELEMETRY.md. Requires CURSOR_API_KEY secret."
+    },
+    {
+      "id": "REC_FACTORY_WATCHDOG",
+      "priority": "P0",
+      "category": "blocking",
+      "when": "gate_fail",
+      "gate": "L0_factory_watchdog",
+      "title": "Factory watchdog config drift",
+      "action": "Run python3 tools/validate_factory_watchdog.py; verify tools/run_factory_watchdog.sh hooks and docs/agents/FACTORY_WATCHDOG.md. Requires CURSOR_FACTORY_ALERT_WEBHOOK_URL secret."
+    },
+    {
       "id": "REC_DOC_NITS",
       "priority": "P3",
       "category": "doc_nit",
@@ -232,7 +340,20 @@
       "batch": 1,
       "assets": [
         { "id": "concept_ruined_village", "label": "Ruined village key art", "filename": "concept_ruined_village.png", "kind": "concept" },
-        { "id": "audit_radar_6axis", "label": "6-axis production radar", "filename": "audit_radar_6axis.png", "kind": "radar" },
+        { "id": "audit_radar_report", "label": "Two-stream radar report", "filename": "audit_radar_report.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec", "label": "Spec readiness radar", "filename": "audit_radar_spec.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_build", "label": "Build readiness radar", "filename": "audit_radar_build.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_breakdown", "label": "Spec sub-radar breakdown (6 domains)", "filename": "audit_radar_spec_breakdown.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_data_alignment", "label": "Data Alignment sub-radar", "filename": "audit_radar_spec_data_alignment.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_narrative", "label": "Narrative sub-radar", "filename": "audit_radar_spec_narrative.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_gameplay", "label": "Gameplay sub-radar", "filename": "audit_radar_spec_gameplay.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_visual_spec", "label": "Visual Spec sub-radar", "filename": "audit_radar_spec_visual_spec.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_ux_controls", "label": "UX & Controls sub-radar", "filename": "audit_radar_spec_ux_controls.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_spec_pm_workflow", "label": "PM Workflow sub-radar", "filename": "audit_radar_spec_pm_workflow.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_build_breakdown", "label": "Build sub-radar breakdown (2 domains)", "filename": "audit_radar_build_breakdown.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_build_runtime_proof", "label": "Runtime Proof sub-radar", "filename": "audit_radar_build_runtime_proof.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_build_steam_ship", "label": "Steam Ship sub-radar", "filename": "audit_radar_build_steam_ship.png", "kind": "radar", "management": true, "auto_generated": true },
+        { "id": "audit_radar_6axis", "label": "9-domain production radar (legacy)", "filename": "audit_radar_6axis.png", "kind": "radar", "deprecated_for_management": true },
         { "id": "roadmap_6phase", "label": "6-phase production roadmap", "filename": "roadmap_6phase.png", "kind": "roadmap" }
       ]
     },
@@ -298,7 +419,7 @@
         { "id": "audit_steam_ship", "label": "Steam ship readiness", "filename": "tides_audit_steam_ship.png", "kind": "radar" },
         { "id": "audit_m6_gates", "label": "M6 milestone gates", "filename": "tides_audit_m6_gates.png", "kind": "radar" },
         { "id": "roadmap_steam", "label": "Steam ship M6 path", "filename": "tides_roadmap_steam_ship.png", "kind": "roadmap" },
-        { "id": "mega_dashboard", "label": "Mega dashboard (all radars)", "filename": "tides_mega_dashboard_all_radars.png", "kind": "dashboard" }
+        { "id": "mega_dashboard", "label": "Mega dashboard (legacy — do not use for status)", "filename": "tides_mega_dashboard_all_radars.png", "kind": "dashboard", "deprecated_for_management": true }
       ]
     }
   ],

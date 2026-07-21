@@ -1,6 +1,6 @@
 # Tides of Urashima — Combat Systems Bible
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/GDD.md` §7, `docs/gameplay/SKILLS_BIBLE.md`, `docs/gameplay/BOSS_DESIGNS.md`
 
 ---
@@ -13,7 +13,7 @@ Round start → Sort by SPD (desc) → ties random
 Round end → Status tick (poison, regen, duration -1)
 ```
 
-**Actions:** Attack, Skill, Item, Defend, Escape (non-boss)  
+**Actions:** Attack, Skill, Item, Defend, Escape (non-boss)
 **Flee chance:** `50% + (party_avg_spd - enemy_spd) × 5%`, clamp 20–80%
 
 ---
@@ -53,13 +53,13 @@ deal ×1.5 vs Palace Sentinel (tutorial moment for Yuzu). Per-enemy overrides al
 | RES | Magic damage reduction |
 | SPD | Turn order |
 
-**Physical damage:** `power × ATK × (100 / (100 + DEF))` — DEF is the target's current DEF including equipment and Def Up/Down  
-**Magic damage:** `power × MAG × (100 / (100 + RES))` — skills with `power_stat: "mag"` use this, regardless of element  
-**Pierce:** skills with `pierce_def: X` (e.g. `harpoon_drive` 0.5) use `DEF × (1 − X)` in the formula  
-**Element multiplier:** applied after mitigation (see §2 matrix / per-enemy overrides)  
-**Defend:** Incoming damage ×0.5 this turn (applied last)  
-**Attack (basic):** the physical formula with `power = 1.0` — i.e. `1.0 × ATK × (100 / (100 + DEF))`, element physical  
-**Rounding:** final damage `floor()`, minimum 1 on any successful hit  
+**Physical damage:** `power × ATK × (100 / (100 + DEF))` — DEF is the target's current DEF including equipment and Def Up/Down
+**Magic damage:** `power × MAG × (100 / (100 + RES))` — skills with `power_stat: "mag"` use this, regardless of element
+**Pierce:** skills with `pierce_def: X` (e.g. `harpoon_drive` 0.5) use `DEF × (1 − X)` in the formula
+**Element multiplier:** applied after mitigation (see §2 matrix / per-enemy overrides)
+**Defend:** Incoming damage ×0.5 this turn (applied last)
+**Attack (basic):** the physical formula with `power = 1.0` — i.e. `1.0 × ATK × (100 / (100 + DEF))`, element physical
+**Rounding:** final damage `floor()`, minimum 1 on any successful hit
 **Hit/crit:** no accuracy, evasion, or critical-hit system in v1 — all actions hit; "miss" never occurs
 
 ### Worked examples (unit-test fixtures — `test_damage_calculator.gd`)
@@ -95,7 +95,7 @@ Order of operations: `power × stat × mitigation` → `× element multiplier` �
 (e.g. Def Up potency 4 → +4 DEF). Regen/heal `potency` is **flat HP** (e.g. regen 8 → 8 HP/turn);
 `heal potency 999` = full heal. Poison is the exception: 5% max HP per round-end tick.
 
-**Tick order:** Poison → Regen → Duration decrement  
+**Tick order:** Poison → Regen → Duration decrement
 **UI:** Icons under HP bar; turns remaining as pips
 
 ---

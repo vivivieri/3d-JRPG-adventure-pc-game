@@ -1,7 +1,7 @@
 # Tides of Urashima — World Map & Zone Flow
 
-**Version:** 1.0 (Pre-build)  
-**Story reference:** `docs/vision/STORYBOARD.md`, `game/data/story/scenes.json`  
+**Version:** 1.0 (Pre-build)
+**Story reference:** `docs/vision/STORYBOARD.md`, `game/data/story/scenes.json`
 **Cross-refs:** `docs/world/LEVEL_DESIGN.md` (per-zone interactables & triggers), `docs/world/ENVIRONMENT_KITS.md`, `docs/world/QUEST_AND_FLAGS.md`, `docs/technical/SAVE_AND_FAIL_STATES.md`
 
 > **Level designers / GDAI:** Use [`LEVEL_DESIGN.md`](LEVEL_DESIGN.md) for node names, encounter triggers, and blockout tables. This doc is the **zone graph summary**.

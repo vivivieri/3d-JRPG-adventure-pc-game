@@ -1,6 +1,6 @@
 # Generation brief — `tidal_caves`
 
-**Status:** Phase 5 dungeon (SC-06–10)  
+**Status:** Phase 5 dungeon (SC-06–10)
 **Authority:** `ENVIRONMENT_KITS.md` §5, `LEVEL_DESIGN.md` §4, `RENDERING_GUIDE.md`
 
 ## Intent

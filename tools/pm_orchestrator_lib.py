@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -192,7 +193,9 @@ def session_budget_exceeded(board: dict[str, Any], phases: dict[str, Any]) -> tu
 def phase_exit_summary(board: dict[str, Any], phases: dict[str, Any]) -> dict[str, Any]:
     active = board.get("active_sprint", {})
     phase_num = active.get("phase")
-    phase_row = next((p for p in phases.get("phases", []) if p.get("phase") == phase_num), {})
+    phase_row: dict[str, Any] = next(
+        (p for p in phases.get("phases", []) if p.get("phase") == phase_num), {}
+    )
     required = active.get("phase_exit_gate_ids") or phase_row.get("exit_gates_required", [])
     conditional = phase_row.get("exit_gates_conditional", [])
     sprint_issues_done = all(
@@ -421,13 +424,13 @@ def main() -> int:
         print(f"    Sprint complete: {report.get('sprint_complete')}")
         print(f"    Orchestrator pass: {report.get('orchestrator_pass')}")
         if report.get("session_budget_exceeded"):
-            print(f"\n[FAIL] Session budget: {report.get('session_budget_message')}")
+            print(f"\n[FAIL] Session budget: {report.get('session_budget_message')}", file=sys.stderr)
         if report.get("stale_issues"):
-            print("\n[FAIL] Stale issues:")
+            print("\n[FAIL] Stale issues:", file=sys.stderr)
             for s in report["stale_issues"]:
                 print(f"  - {s['id']}: {s['reason']}")
         if report.get("wip_violations"):
-            print("\n[FAIL] WIP violations:")
+            print("\n[FAIL] WIP violations:", file=sys.stderr)
             for v in report["wip_violations"]:
                 print(f"  - {v['agent']}: {v['count']} > max {v['max']}")
         if report.get("blocked_issues"):

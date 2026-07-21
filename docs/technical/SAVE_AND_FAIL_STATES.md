@@ -1,6 +1,6 @@
 # Tides of Urashima — Save & Fail States
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/ui/UI_UX_FLOW.md`, `docs/world/QUEST_AND_FLAGS.md`, `docs/vision/ENDING_DESIGN.md`
 
 ---

@@ -1,10 +1,10 @@
 # Tides of Urashima — Playtest Script
 
-**Version:** 1.2  
-**Target duration:** 2–3 hours  
-**Build:** Release candidate on `game/development`  
-**Prerequisite:** **All AI tests L0–L5 must pass** on the same commit before any human runs this script. See `docs/qa/AI_TESTING_SPEC.md` §8.  
-**Minimum cohort:** 5 testers (diverse language rotation) — recorded in `artifacts/qa_reports/L6_human_playtest.json`  
+**Version:** 1.2
+**Target duration:** 2–3 hours
+**Build:** Release candidate on `game/development`
+**Prerequisite:** **All AI tests L0–L5 must pass** on the same commit before any human runs this script. See `docs/qa/AI_TESTING_SPEC.md` §8.
+**Minimum cohort:** 5 testers (diverse language rotation) — recorded in `artifacts/qa_reports/L6_human_playtest.json`
 **Cross-refs:** `docs/qa/AI_TESTING_SPEC.md`, `docs/qa/QA_AND_BUG_PROCESS.md` (severity, triage, bug template)
 
 > **Human QA is last.** AI agents run data validation, unit tests, smoke, GDAI editor verify, integration tests, and full E2E (3 endings) first. Humans start only when `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` exits 0.
@@ -28,9 +28,9 @@
 
 **Before starting — verify AI suite (or ask agent for report):**
 
-- [ ] `bash tools/run_playtest_smoke.sh` → PASS  
-- [ ] `bash tools/run_integration_tests.sh` → PASS  
-- [ ] `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` → PASS  
+- [ ] `bash tools/run_playtest_smoke.sh` → PASS
+- [ ] `bash tools/run_integration_tests.sh` → PASS
+- [ ] `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` → PASS
 - [ ] Record commit SHA: `git rev-parse HEAD`
 
 **Human session:**

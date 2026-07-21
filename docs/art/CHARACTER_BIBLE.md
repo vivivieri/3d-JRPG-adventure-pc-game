@@ -1,7 +1,7 @@
 # Tides of Urashima — Character Bible
 
-**Version:** 1.2 (Pre-build)  
-**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds.  
+**Version:** 1.2 (Pre-build)
+**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds.
 **Cross-refs:** `docs/art/ART_DIRECTION.md`, `docs/vision/STORYBOARD.md`, `docs/gameplay/BOSS_DESIGNS.md`, `docs/art/ITEMS_3D_MODEL_GUIDE.md`
 
 ---
@@ -54,9 +54,9 @@ Combat uses full-detail mesh. Field exploration may swap LODs for performance.
 
 ## 2. Urashima Tarō (protagonist)
 
-**ID:** `urashima`  
-**Role:** Balanced fighter / party leader  
-**Element:** Water  
+**ID:** `urashima`
+**Role:** Balanced fighter / party leader
+**Element:** Water
 **Arc:** Escapist → accountable (posture straightens across acts)
 
 ### Silhouette
@@ -115,9 +115,9 @@ Quiet guilt; short sentences in Act I; firm declarations in Act III.
 
 ## 3. Yuzu (shrine maiden spirit)
 
-**ID:** `yuzu`  
-**Role:** Healer / buffer  
-**Element:** Spirit  
+**ID:** `yuzu`
+**Role:** Healer / buffer
+**Element:** Spirit
 **Unlock:** SC-10 (after Shore Wraith)
 
 ### Silhouette
@@ -156,9 +156,9 @@ Small, upright; heal cast = hands raised, light pillar; purify = bell shake + wa
 
 ## 4. Roku (old diver)
 
-**ID:** `roku`  
-**Role:** Tank / debuffer  
-**Element:** Physical  
+**ID:** `roku`
+**Role:** Tank / debuffer
+**Element:** Physical
 **Unlock:** SC-04 (shack); confirms party SC-12 if missed
 
 ### Silhouette
@@ -191,8 +191,8 @@ Taunt = harpoon planted, roar anim; Shell Guard = crouch behind folded arms
 
 ## 5. Otohime (NPC — flashback / glimpse)
 
-**ID:** `otohime`  
-**Role:** Moral mirror; not playable  
+**ID:** `otohime`
+**Role:** Moral mirror; not playable
 **Appearances:** SC-11 (flashback), SC-17c (underwater glimpse — no dialogue)
 
 **Cross-refs:** `docs/vision/NARRATIVE_WRITING_GUIDE.md` §Otohime, `docs/ui/CINEMATICS.md` SC-11, `docs/generation_briefs/otohime.md`
@@ -333,7 +333,7 @@ Seductive stillness; short lines; no villain monologue. See `VO_HIT_LIST.md` `sc
 
 ### Villager spirit (`villager_spirit`) — ending crowd
 
-**Usage:** SC-17a (`ending_rewind`) — restored village festival; crane-up crowd shot.  
+**Usage:** SC-17a (`ending_rewind`) — restored village festival; crane-up crowd shot.
 **Kit hook:** `village_crowd_silhouettes` in `ENVIRONMENT_KITS.md` §7.
 
 | Spec | Detail |
@@ -354,7 +354,7 @@ Seductive stillness; short lines; no villain monologue. See `VO_HIT_LIST.md` `sc
 
 ### Rebuilder (`rebuilder`) — ending shore
 
-**Usage:** SC-17b (`ending_anchor`) — dawn shore; three figures rebuild with Roku sapling beat.  
+**Usage:** SC-17b (`ending_anchor`) — dawn shore; three figures rebuild with Roku sapling beat.
 **Kit hook:** `rebuilder_figures` in `ENVIRONMENT_KITS.md` §7.
 
 | Spec | Detail |

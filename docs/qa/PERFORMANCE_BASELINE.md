@@ -1,9 +1,9 @@
 # Performance Baseline — Hardware, Environment & Evidence
 
-**Version:** 1.1  
-**Machine-readable:** `game/data/qa/perf_baseline.json`  
-**Platform policy:** `docs/qa/PLATFORM_SUPPORT.md` — **Linux ship required** (cloud dev OS)  
-**Thresholds:** `game/data/qa/perf_thresholds.json`  
+**Version:** 1.1
+**Machine-readable:** `game/data/qa/perf_baseline.json`
+**Platform policy:** `docs/qa/PLATFORM_SUPPORT.md` — **Linux ship required** (cloud dev OS)
+**Thresholds:** `game/data/qa/perf_thresholds.json`
 **Cross-refs:** `docs/art/RENDERING_GUIDE.md`, `docs/world/ENVIRONMENT_KITS.md` §9, `docs/cheat-sheets/RR_CHEATSHEET.md` §Performance review, `docs/qa/ACCEPTANCE_CRITERIA.md`, `steam/STORE_PAGE.md`
 
 This document defines **what machine and runtime profile** performance numbers mean. Without a baseline, “60 FPS” is not comparable across cloud VMs, editor play, and player hardware.
@@ -106,9 +106,9 @@ From `game/data/qa/perf_thresholds.json`:
 
 Mirrors `steam/STORE_PAGE.md` **minimum** row. Used for:
 
-- Store page accuracy  
-- Optional M6 spot-check (720p Low, 30 FPS playable)  
-- **Not** used to PASS `L3_perf_review` on ship art  
+- Store page accuracy
+- Optional M6 spot-check (720p Low, 30 FPS playable)
+- **Not** used to PASS `L3_perf_review` on ship art
 
 | Component | Spec |
 |-----------|------|
@@ -143,13 +143,13 @@ See `docs/cheat-sheets/RR_CHEATSHEET.md` §Performance review — scene/shader/m
 
 ### 7.2 Steps
 
-1. **Machine:** `reference_linux_cloud` (cloud snapshot) **or** `reference_pc_gtx1060` (Windows PC).  
-2. **Build:** same commit SHA as PR; Linux native export from M6; editor F5 allowed Phase 1–5.  
-3. **Settings:** Medium quality, 1080p fullscreen, VSync off.  
-4. **Zone:** load zone from `perf_thresholds.json` → `zones[]` (e.g. `ruined_village`).  
-5. **Path:** gameplay camera — walk hub path **30s** (`test_duration_s`).  
-6. **Capture:** Godotiq `godotiq_perf_snapshot(detail="normal")` with game running.  
-7. **Record:** write JSON to `artifacts/perf_reviews/{zone}_{short_sha}.json` (schema §7).  
+1. **Machine:** `reference_linux_cloud` (cloud snapshot) **or** `reference_pc_gtx1060` (Windows PC).
+2. **Build:** same commit SHA as PR; Linux native export from M6; editor F5 allowed Phase 1–5.
+3. **Settings:** Medium quality, 1080p fullscreen, VSync off.
+4. **Zone:** load zone from `perf_thresholds.json` → `zones[]` (e.g. `ruined_village`).
+5. **Path:** gameplay camera — walk hub path **30s** (`test_duration_s`).
+6. **Capture:** Godotiq `godotiq_perf_snapshot(detail="normal")` with game running.
+7. **Record:** write JSON to `artifacts/perf_reviews/{zone}_{short_sha}.json` (schema §7).
 8. **PR:** paste path in gate report; cite `baseline_id` (`reference_linux_cloud` or `reference_pc_gtx1060`).
 
 ### 7.3 Post-fix regression

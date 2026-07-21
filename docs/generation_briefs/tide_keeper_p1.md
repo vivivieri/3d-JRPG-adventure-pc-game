@@ -1,7 +1,7 @@
 # Generation brief — `tide_keeper_p1`
 
-**Status:** M5 final boss (hero jury)  
-**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §4, `qa_catalog.json`  
+**Status:** M5 final boss (hero jury)
+**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §4, `qa_catalog.json`
 **Phase:** SC-15–16 `palace_throne_tides`
 
 ## Intent
