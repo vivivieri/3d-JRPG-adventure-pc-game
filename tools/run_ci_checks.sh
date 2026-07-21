@@ -24,6 +24,10 @@ if gate_is_game_branch; then
     ANIM_PHASE="1"
     ANIM_STRICT=""
     echo "    Mode: phase 1 bootstrap (art/export gates deferred)"
+  elif gate_is_phase1_pre_art; then
+    ANIM_PHASE="1"
+    ANIM_STRICT=""
+    echo "    Mode: phase 1 pre-art (animation floor; strict deferred until hero GLBs land)"
   else
     ANIM_PHASE="m5"
     ANIM_STRICT="--strict"
@@ -146,6 +150,8 @@ fi
 if gate_is_game_branch; then
   if gate_is_phase1_bootstrap; then
     skip_gate "L2_glb_import" "phase 1 bootstrap — no hero GLBs until M5 / P1-02+"
+  elif gate_is_phase1_pre_art; then
+    skip_gate "L2_glb_import" "phase 1 pre-art — no hero GLBs under game/assets/models yet"
   else
     run_tri_gate "L2_glb_import" "GLB post-import toon pipeline" \
       python3 tools/check_glb_import_scripts.py --strict

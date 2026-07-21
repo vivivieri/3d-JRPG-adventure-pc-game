@@ -44,6 +44,26 @@ gate_main_scene_set() {
   [[ -n "$ms" ]]
 }
 
+# Hero GLB art assets present yet? The M5 art pipeline lands character/prop GLBs
+# under game/assets/models/. Strict GLB-import + animation-whitelist gates only
+# make sense once those exist; before then they SKIP (acceptance_criteria.issue_bootstrap).
+gate_hero_glbs_present() {
+  local root
+  root="$(gate_root)"
+  [[ -d "${root}/game/assets/models" ]] || return 1
+  [[ -n "$(find "${root}/game/assets/models" -type f -name '*.glb' 2>/dev/null | head -1)" ]]
+}
+
+# Phase 1 before M5 art: project.godot exists (P1-00 boot shell) but no hero GLBs
+# yet, so art/animation gates cannot pass. Distinct from gate_is_phase1_bootstrap,
+# which flips off once any run/main_scene (even the boot placeholder) is set.
+gate_is_phase1_pre_art() {
+  gate_is_game_branch || return 1
+  [[ "$(gate_active_phase)" == "1" ]] || return 1
+  gate_hero_glbs_present && return 1
+  return 0
+}
+
 # Phase 1 bootstrap: project.godot exists but no playable main_scene yet (P1-00 / pre-P1-02).
 # Set PHASE1_BOOTSTRAP_CI=1 to force bootstrap skip policy (tools/run_bootstrap_ci_checks.sh).
 gate_is_phase1_bootstrap() {
@@ -67,6 +87,18 @@ gate_skip_is_fail() {
   if gate_is_phase1_bootstrap; then
     case "$gate_id" in
       L1_gdscript_lint|L2_glb_import|L2_animation_whitelist|L2_linux_export_smoke|L2_windows_cross_export|L2_boot_headless|L4_integration)
+        return 1
+        ;;
+    esac
+  fi
+
+  # Phase 1 with a boot main_scene but no hero GLBs yet: the changed-files
+  # gdscript lint is fully covered by the required L1_gdscript_lint_all gate, and
+  # the GLB import / animation-whitelist gates need art that has not landed. Allow
+  # these to SKIP until M5 art arrives, then they enforce automatically.
+  if gate_is_phase1_pre_art; then
+    case "$gate_id" in
+      L1_gdscript_lint|L2_glb_import|L2_animation_whitelist)
         return 1
         ;;
     esac
