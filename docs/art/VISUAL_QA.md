@@ -133,6 +133,8 @@ Output: `artifacts/visual_reviews/<screenshot>.jury.json` with per-model JSON vo
 
 **No API keys:** script writes `*.manual.json` — paste the embedded prompt into **2+ different** Cursor models manually; same 2-of-N pass rule.
 
+**Key-free automated path (recommended in the agent factory):** a QA agent dispatches ≥2 subagents pinned to distinct Cursor models, then `tools/ingest_agent_jury.py --domain visual` scores consensus — no provider keys. See [`AGENT_JURY.md`](../qa/AGENT_JURY.md).
+
 **Do not** use the same model/session that built the scene as the only judge.
 
 ---
