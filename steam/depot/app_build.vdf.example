@@ -1,0 +1,22 @@
+"AppBuild"
+{
+	"AppID" "@STEAM_APP_ID@"
+	"Desc" "Tides of Urashima — automated depot build"
+	"Preview" "0"
+	"Local" ""
+	"SetLive" ""
+	"ContentRoot" "../../build/steam_content/"
+	"BuildOutput" "../../build/steam_build_output/"
+	"Depots"
+	{
+		"@STEAM_DEPOT_ID@"
+		{
+			"FileMapping"
+			{
+				"LocalPath" "*"
+				"DepotPath" "."
+				"recursive" "1"
+			}
+		}
+	}
+}

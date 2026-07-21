@@ -14,9 +14,9 @@ concurrency:
 
 jobs:
   build-and-release:
-    name: Export Windows + GitHub Release
+    name: Export Linux + Windows + GitHub Release
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     environment:
       name: ${{ (contains(github.ref_name, '-rc') || contains(github.ref_name, '-uat')) && 'uat' || (contains(github.ref_name, '-beta') && 'steam-beta' || 'steam-production') }}
     permissions:
@@ -59,17 +59,21 @@ jobs:
       - name: Install GodotSteam
         run: GODOTSTEAM_VERSION=4.20 bash tools/install_godotsteam.sh
 
+      - name: Export Linux build
+        run: bash tools/export_linux.sh
+
       - name: Export Windows build
         run: bash tools/export_windows.sh
 
-      - name: Prepare Steam depot layout
-        run: bash tools/prepare_steam_depot.sh
+      - name: Prepare Steam depot layout (Linux + Windows)
+        run: bash tools/prepare_steam_depot.sh --platform all
 
-      - name: Package depot zip
+      - name: Package depot zips
         run: |
           cd build
-          zip -r "TidesOfUrashima-steam-depot-${GITHUB_REF_NAME}.zip" steam_depot TidesOfUrashima.exe
-          ls -lh *.zip
+          zip -r "TidesOfUrashima-steam-depot-windows-${GITHUB_REF_NAME}.zip" steam_depot_windows
+          zip -r "TidesOfUrashima-steam-depot-linux-${GITHUB_REF_NAME}.zip" steam_depot_linux
+          ls -lh ./*.zip ./*.exe ./*.x86_64 2>/dev/null || ls -lh
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -80,16 +84,22 @@ jobs:
             Automated CD artifact from commit ${{ github.sha }}.
 
             **Channel:** ${{ steps.channel.outputs.channel }}
-            **Contents:** `TidesOfUrashima.exe` + Steam depot folder (exe + Steam API DLLs)
+            **Platforms (v1):** Linux + Windows — see `docs/qa/PLATFORM_SUPPORT.md`
 
-            ### Verify locally (Windows)
-            1. Extract zip
-            2. Run `steam_depot/TidesOfUrashima.exe` with Steam client running
-            3. Replace `steam_appid.txt` with your real App ID before Steam upload
+            **Contents:**
+            - `TidesOfUrashima.x86_64` (Linux)
+            - `TidesOfUrashima.exe` (Windows)
+            - Steam depot zips for both platforms
+
+            ### Verify locally
+            - **Linux:** extract linux zip → run `steam_depot_linux/TidesOfUrashima.x86_64`
+            - **Windows:** extract windows zip → run `steam_depot_windows/TidesOfUrashima.exe` with Steam client
 
             See `docs/ci-cd/CD.md` and `docs/ci-cd/STEAM_RELEASE_CHECKLIST.md`.
           files: |
-            build/TidesOfUrashima-steam-depot-${{ github.ref_name }}.zip
+            build/TidesOfUrashima-steam-depot-windows-${{ github.ref_name }}.zip
+            build/TidesOfUrashima-steam-depot-linux-${{ github.ref_name }}.zip
             build/TidesOfUrashima.exe
+            build/TidesOfUrashima.x86_64
           draft: ${{ steps.channel.outputs.channel != 'prod' }}
           prerelease: ${{ steps.channel.outputs.channel != 'prod' }}

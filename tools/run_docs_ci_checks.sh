@@ -61,6 +61,8 @@ run_gate "L0_agent_session_telemetry" python3 tools/validate_agent_session_telem
 run_gate "L0_delivery_control" python3 tools/validate_delivery_control.py
 run_gate "L0_generation_readiness_backlog" python3 tools/validate_generation_readiness_backlog.py
 run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
+run_gate "L0_game_branch_bootstrap" bash tools/check_game_branch_bootstrap.sh
+run_gate "L0_vo_casting" python3 tools/validate_vo_casting.py
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
 run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py

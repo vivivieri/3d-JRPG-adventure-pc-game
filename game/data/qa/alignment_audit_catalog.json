@@ -255,8 +255,8 @@
       "category": "before_dispatch",
       "when": "branch_is",
       "value": "main",
-      "title": "SPEC_DEV_START ready — dispatch P1-00 when approved",
-      "action": "All blocking spec artifacts specified; next: Architect ports EventBus on game/development per GDSCRIPT_REGENERATION.md §1."
+      "title": "P1-00 blocked — restore game/development Godot tree",
+      "action": "origin/game/development tip lacks game/project.godot. Restore from commit 9aa5fb5 or bash tools/bootstrap_game_development.sh; copy .cursor/environment.game-development.json.example; do not mark P1-00 done until L0_game_branch_bootstrap PASS."
     },
     {
       "id": "REC_RUNTIME_LOW",

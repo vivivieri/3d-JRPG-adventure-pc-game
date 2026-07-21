@@ -1,7 +1,7 @@
 # Art Automation Pipeline — Quality-First, Zero Human Artists
 
 **Version:** 1.1  
-**Applies to:** M5 art rebuild and all player-facing assets on `main`  
+**Applies to:** M5 art rebuild and all player-facing assets on **`game/development`** (design docs + catalogs stay on `main`)  
 **Authority:** When this doc conflicts with older “hand-painted / commission” language elsewhere, **this doc wins** for production tooling.
 
 **Principle:** Ship **high-detail stylized Japanese 3D** using the **best automated tool per job**. Quality over cost — paid tools are fine when no free option matches output. **No human artists** in the art or audio production path (modeling, texturing, painting, mixing, VO performance). **Human playtest** (L6) is separate — see `docs/qa/PLAYTEST_SCRIPT.md`.

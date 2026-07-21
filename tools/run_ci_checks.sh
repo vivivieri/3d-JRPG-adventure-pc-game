@@ -58,6 +58,12 @@ run_tri_gate "L0_difficulty_data" "Normal + Hard difficulty catalog" \
 run_tri_gate "L0_acceptance_catalog" "Acceptance criteria catalog" \
   python3 tools/validate_acceptance_criteria.py
 
+run_tri_gate "L0_game_branch_bootstrap" "P1-00 Godot project.godot present" \
+  bash tools/check_game_branch_bootstrap.sh
+
+run_tri_gate "L0_vo_casting" "VO casting placeholders (strict on M5)" \
+  python3 tools/validate_vo_casting.py
+
 run_tri_gate "L0_workflow_integration" "Factory workflow integration registry" \
   python3 tools/validate_workflow_integration.py
 
