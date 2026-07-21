@@ -1,0 +1,5 @@
+verified_f5=true
+main_scene=res://scenes/boot.tscn
+scenes_touched=res://scenes/boot.tscn
+verified_at=2026-07-17T06:30:00Z
+agent=gdai-mcp

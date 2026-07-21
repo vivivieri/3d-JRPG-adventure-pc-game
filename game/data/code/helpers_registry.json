@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "policy_ref": "docs/technical/GDSCRIPT_REGENERATION.md",
-  "description": "RefCounted helpers and EventBus — spec + Python reference on main; GDScript ports on game/development.",
+  "description": "RefCounted helpers and EventBus \u2014 spec + Python reference on main; GDScript ports on game/development.",
   "roles_and_responsibilities": {
-    "authority": "docs/technical/GDSCRIPT_REGENERATION.md §2, docs/cheat-sheets/RR_CHEATSHEET.md",
+    "authority": "docs/technical/GDSCRIPT_REGENERATION.md \u00a72, docs/cheat-sheets/RR_CHEATSHEET.md",
     "workflows": [
       {
         "id": "spec_and_python_reference",
@@ -16,8 +16,14 @@
           "tools/test_reference_libs.py",
           "docs/technical/GDSCRIPT_REGENERATION.md"
         ],
-        "gates": ["L0_helpers_registry", "L0_reference_libs"],
-        "must_not": ["Ship GDScript on main", "Hand-edit .tscn"]
+        "gates": [
+          "L0_helpers_registry",
+          "L0_reference_libs"
+        ],
+        "must_not": [
+          "Ship GDScript on main",
+          "Hand-edit .tscn"
+        ]
       },
       {
         "id": "gdscript_port",
@@ -28,58 +34,95 @@
           "game/scripts/core/<helper>.gd per helpers_registry.gdscript_path",
           "game/tests/unit/test_<helper>_*.gd mirroring tools/test_reference_libs.py"
         ],
-        "gates": ["L1_unit_tests", "L1_gdscript_lint"],
-        "must_not": ["Invent behavior not in registry + Python reference", "Register autoloads in project.godot"]
+        "gates": [
+          "L1_unit_tests",
+          "L1_gdscript_lint"
+        ],
+        "must_not": [
+          "Invent behavior not in registry + Python reference",
+          "Register autoloads in project.godot"
+        ]
       },
       {
         "id": "autoload_wireup",
         "owner_role": "builder",
         "owner_agent": "GDAI Builder",
         "branch": "game/development",
-        "deliverables": ["project.godot autoload entries for EventBus and future autoloads"],
-        "gates": ["L3_gdai_built", "L2_boot_headless"],
-        "must_not": ["Author helper logic in .gd", "Hand-edit project.godot in Cursor"]
+        "deliverables": [
+          "project.godot autoload entries for EventBus and future autoloads"
+        ],
+        "gates": [
+          "L3_gdai_built",
+          "L2_boot_headless"
+        ],
+        "must_not": [
+          "Author helper logic in .gd",
+          "Hand-edit project.godot in Cursor"
+        ]
       },
       {
         "id": "parity_verification",
         "owner_role": "qa",
         "owner_agent": "QA Agent",
         "branch": "main and game/development",
-        "deliverables": ["Gate report citing L0_reference_libs and L1_unit_tests"],
-        "gates": ["L0_helpers_registry", "L0_reference_libs", "L1_unit_tests"],
-        "must_not": ["Port GDScript", "Mark ship without gates"]
+        "deliverables": [
+          "Gate report citing L0_reference_libs and L1_unit_tests"
+        ],
+        "gates": [
+          "L0_helpers_registry",
+          "L0_reference_libs",
+          "L1_unit_tests"
+        ],
+        "must_not": [
+          "Port GDScript",
+          "Mark ship without gates"
+        ]
       },
       {
         "id": "dispatch",
         "owner_role": "pm",
         "owner_agent": "PM Agent",
-        "deliverables": ["Sprint issue assignment per dispatch_by_phase below"],
-        "must_not": ["Self-assign without orchestrator", "Skip spec PR to main"]
+        "deliverables": [
+          "Sprint issue assignment per dispatch_by_phase below"
+        ],
+        "must_not": [
+          "Self-assign without orchestrator",
+          "Skip spec PR to main"
+        ]
       }
     ],
     "dispatch_by_phase": [
       {
         "phase": 1,
         "issue_ref": "P1-00",
-        "helpers": ["EventBus"],
-        "note": "Bootstrap — Architect ports event_bus.gd; Builder registers autoload (GDAI MCP)"
+        "helpers": [
+          "EventBus"
+        ],
+        "note": "Bootstrap \u2014 Architect ports event_bus.gd; Builder registers autoload (GDAI MCP)"
       },
       {
         "phase": 2,
         "issue_ref": "Phase 2 shell (SaveSystem / settings)",
-        "helpers": ["SettingsStore", "SaveIntegrity"],
-        "note": "When SaveSystem autoload is built — Architect ports; Builder F5 verify"
+        "helpers": [
+          "SettingsStore",
+          "SaveIntegrity"
+        ],
+        "note": "When SaveSystem autoload is built \u2014 Architect ports; Builder F5 verify"
       },
       {
         "phase": 4,
         "issue_ref": "Phase 4 combat",
-        "helpers": ["DifficultyService"],
+        "helpers": [
+          "DifficultyService"
+        ],
         "note": "Before first story encounter combat tuning"
       },
       {
         "phase": 6,
         "issue_ref": "Phase 6 achievements",
-        "helpers": ["AchievementEvaluator"],
+        "helpers": [
+          "AchievementEvaluator"
+        ],
         "note": "Before Steam achievement integration"
       }
     ]
@@ -96,26 +139,71 @@
       "id": "EventBus",
       "kind": "autoload",
       "phase": 1,
-      "port_status": "pending",
+      "port_status": "ported",
       "gdscript_path": "res://scripts/core/event_bus.gd",
       "extends": "Node",
       "python_reference": null,
-      "design_ref": ["docs/technical/TECHNICAL_DESIGN.md §2", "game/data/code/autoload_registry.json"],
-      "note": "Signals only — port signal list exactly; no gameplay logic in script body",
+      "design_ref": [
+        "docs/technical/TECHNICAL_DESIGN.md \u00a72",
+        "game/data/code/autoload_registry.json"
+      ],
+      "note": "Signals only \u2014 port signal list exactly; no gameplay logic in script body",
       "owners": {
         "spec": "architect",
         "gdscript": "architect",
         "autoload_registration": "builder"
       },
       "signals": [
-        { "name": "locale_changed", "args": ["locale_code: String"] },
-        { "name": "vo_dialect_changed", "args": ["dialect_code: String"] },
-        { "name": "hard_mode_changed", "args": ["enabled: bool"] },
-        { "name": "combat_started", "args": ["encounter_id: String"] },
-        { "name": "combat_ended", "args": ["encounter_id: String", "victory: bool"] },
-        { "name": "flag_changed", "args": ["flag_id: String", "value: Variant"] },
-        { "name": "save_slot_written", "args": ["slot: int"] },
-        { "name": "achievement_unlocked", "args": ["achievement_id: String"] }
+        {
+          "name": "locale_changed",
+          "args": [
+            "locale_code: String"
+          ]
+        },
+        {
+          "name": "vo_dialect_changed",
+          "args": [
+            "dialect_code: String"
+          ]
+        },
+        {
+          "name": "hard_mode_changed",
+          "args": [
+            "enabled: bool"
+          ]
+        },
+        {
+          "name": "combat_started",
+          "args": [
+            "encounter_id: String"
+          ]
+        },
+        {
+          "name": "combat_ended",
+          "args": [
+            "encounter_id: String",
+            "victory: bool"
+          ]
+        },
+        {
+          "name": "flag_changed",
+          "args": [
+            "flag_id: String",
+            "value: Variant"
+          ]
+        },
+        {
+          "name": "save_slot_written",
+          "args": [
+            "slot: int"
+          ]
+        },
+        {
+          "name": "achievement_unlocked",
+          "args": [
+            "achievement_id: String"
+          ]
+        }
       ]
     },
     {
@@ -126,8 +214,13 @@
       "port_status": "pending",
       "gdscript_path": "res://scripts/core/settings_store.gd",
       "python_reference": "tools/settings_store_lib.py",
-      "data_ref": ["game/data/settings/settings_defaults.json", "game/data/settings/settings_schema.json"],
-      "design_ref": ["docs/ui/SETTINGS_ACCESSIBILITY.md"],
+      "data_ref": [
+        "game/data/settings/settings_defaults.json",
+        "game/data/settings/settings_schema.json"
+      ],
+      "design_ref": [
+        "docs/ui/SETTINGS_ACCESSIBILITY.md"
+      ],
       "runtime_paths": {
         "defaults": "res://data/settings/settings_defaults.json",
         "user_save": "user://settings.json"
@@ -137,13 +230,56 @@
         "gdscript": "architect"
       },
       "public_api": [
-        { "name": "defaults", "returns": "Dictionary", "static": true },
-        { "name": "load_settings", "returns": "Dictionary", "static": true },
-        { "name": "save_settings", "args": ["settings: Dictionary"], "returns": "void", "static": true },
-        { "name": "get_value", "args": ["key: String", "fallback: Variant"], "returns": "Variant", "static": true },
-        { "name": "set_value", "args": ["key: String", "value: Variant"], "returns": "void", "static": true, "emits": "EventBus.hard_mode_changed when key==hard_mode" },
-        { "name": "is_hard_mode", "returns": "bool", "static": true },
-        { "name": "set_hard_mode", "args": ["enabled: bool"], "returns": "void", "static": true }
+        {
+          "name": "defaults",
+          "returns": "Dictionary",
+          "static": true
+        },
+        {
+          "name": "load_settings",
+          "returns": "Dictionary",
+          "static": true
+        },
+        {
+          "name": "save_settings",
+          "args": [
+            "settings: Dictionary"
+          ],
+          "returns": "void",
+          "static": true
+        },
+        {
+          "name": "get_value",
+          "args": [
+            "key: String",
+            "fallback: Variant"
+          ],
+          "returns": "Variant",
+          "static": true
+        },
+        {
+          "name": "set_value",
+          "args": [
+            "key: String",
+            "value: Variant"
+          ],
+          "returns": "void",
+          "static": true,
+          "emits": "EventBus.hard_mode_changed when key==hard_mode"
+        },
+        {
+          "name": "is_hard_mode",
+          "returns": "bool",
+          "static": true
+        },
+        {
+          "name": "set_hard_mode",
+          "args": [
+            "enabled: bool"
+          ],
+          "returns": "void",
+          "static": true
+        }
       ]
     },
     {
@@ -154,18 +290,58 @@
       "port_status": "pending",
       "gdscript_path": "res://scripts/core/save_integrity.gd",
       "python_reference": "tools/save_integrity_lib.py",
-      "data_ref": ["game/data/qa/save_integrity.json"],
-      "design_ref": ["docs/qa/SECURITY.md §9", "docs/technical/SAVE_AND_FAIL_STATES.md"],
+      "data_ref": [
+        "game/data/qa/save_integrity.json"
+      ],
+      "design_ref": [
+        "docs/qa/SECURITY.md \u00a79",
+        "docs/technical/SAVE_AND_FAIL_STATES.md"
+      ],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
       },
       "public_api": [
-        { "name": "pepper", "returns": "String", "static": true },
-        { "name": "canonical_json", "args": ["save: Dictionary"], "returns": "String", "static": true },
-        { "name": "sign", "args": ["save: Dictionary", "pepper_override: String"], "returns": "String", "static": true },
-        { "name": "attach", "args": ["save: Dictionary", "pepper_override: String"], "returns": "Dictionary", "static": true },
-        { "name": "verify", "args": ["save: Dictionary", "pepper_override: String"], "returns": "bool", "static": true }
+        {
+          "name": "pepper",
+          "returns": "String",
+          "static": true
+        },
+        {
+          "name": "canonical_json",
+          "args": [
+            "save: Dictionary"
+          ],
+          "returns": "String",
+          "static": true
+        },
+        {
+          "name": "sign",
+          "args": [
+            "save: Dictionary",
+            "pepper_override: String"
+          ],
+          "returns": "String",
+          "static": true
+        },
+        {
+          "name": "attach",
+          "args": [
+            "save: Dictionary",
+            "pepper_override: String"
+          ],
+          "returns": "Dictionary",
+          "static": true
+        },
+        {
+          "name": "verify",
+          "args": [
+            "save: Dictionary",
+            "pepper_override: String"
+          ],
+          "returns": "bool",
+          "static": true
+        }
       ]
     },
     {
@@ -176,23 +352,99 @@
       "port_status": "pending",
       "gdscript_path": "res://scripts/core/difficulty_service.gd",
       "python_reference": "tools/difficulty_lib.py",
-      "data_ref": ["game/data/combat/difficulty.json"],
-      "design_ref": ["docs/gameplay/COMBAT_SYSTEMS.md §10"],
+      "data_ref": [
+        "game/data/combat/difficulty.json"
+      ],
+      "design_ref": [
+        "docs/gameplay/COMBAT_SYSTEMS.md \u00a710"
+      ],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
       },
       "public_api": [
-        { "name": "load_catalog", "returns": "Dictionary", "static": true },
-        { "name": "active_mode_id", "args": ["settings: Dictionary"], "returns": "String", "static": true },
-        { "name": "mode_config", "args": ["settings: Dictionary"], "returns": "Dictionary", "static": true },
-        { "name": "scale_enemy_hp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
-        { "name": "scale_enemy_atk", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
-        { "name": "scale_xp", "args": ["base: int", "settings: Dictionary"], "returns": "int", "static": true },
-        { "name": "boss_shows_intent_preview", "args": ["phase: int", "is_boss: bool", "settings: Dictionary"], "returns": "bool", "static": true },
-        { "name": "tide_keeper_choice_gate_hp_percent", "args": ["settings: Dictionary"], "returns": "float", "static": true },
-        { "name": "is_hard_mode", "args": ["settings: Dictionary"], "returns": "bool", "static": true },
-        { "name": "suggest_hard_after_clear", "args": ["profile_meta: Dictionary"], "returns": "bool", "static": true }
+        {
+          "name": "load_catalog",
+          "returns": "Dictionary",
+          "static": true
+        },
+        {
+          "name": "active_mode_id",
+          "args": [
+            "settings: Dictionary"
+          ],
+          "returns": "String",
+          "static": true
+        },
+        {
+          "name": "mode_config",
+          "args": [
+            "settings: Dictionary"
+          ],
+          "returns": "Dictionary",
+          "static": true
+        },
+        {
+          "name": "scale_enemy_hp",
+          "args": [
+            "base: int",
+            "settings: Dictionary"
+          ],
+          "returns": "int",
+          "static": true
+        },
+        {
+          "name": "scale_enemy_atk",
+          "args": [
+            "base: int",
+            "settings: Dictionary"
+          ],
+          "returns": "int",
+          "static": true
+        },
+        {
+          "name": "scale_xp",
+          "args": [
+            "base: int",
+            "settings: Dictionary"
+          ],
+          "returns": "int",
+          "static": true
+        },
+        {
+          "name": "boss_shows_intent_preview",
+          "args": [
+            "phase: int",
+            "is_boss: bool",
+            "settings: Dictionary"
+          ],
+          "returns": "bool",
+          "static": true
+        },
+        {
+          "name": "tide_keeper_choice_gate_hp_percent",
+          "args": [
+            "settings: Dictionary"
+          ],
+          "returns": "float",
+          "static": true
+        },
+        {
+          "name": "is_hard_mode",
+          "args": [
+            "settings: Dictionary"
+          ],
+          "returns": "bool",
+          "static": true
+        },
+        {
+          "name": "suggest_hard_after_clear",
+          "args": [
+            "profile_meta: Dictionary"
+          ],
+          "returns": "bool",
+          "static": true
+        }
       ]
     },
     {
@@ -203,17 +455,47 @@
       "port_status": "pending",
       "gdscript_path": "res://scripts/core/achievement_evaluator.gd",
       "python_reference": "tools/achievement_evaluator_lib.py",
-      "data_ref": ["game/data/achievements/achievements.json"],
-      "design_ref": ["docs/gameplay/ACHIEVEMENTS.md"],
+      "data_ref": [
+        "game/data/achievements/achievements.json"
+      ],
+      "design_ref": [
+        "docs/gameplay/ACHIEVEMENTS.md"
+      ],
       "owners": {
         "spec": "architect",
         "gdscript": "architect"
       },
       "public_api": [
-        { "name": "trigger_met", "args": ["trigger: Dictionary", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "bool", "static": true },
-        { "name": "evaluate_catalog", "args": ["achievements: Array", "flags: Dictionary", "settings: Dictionary", "profile_meta: Dictionary"], "returns": "Array[String]", "static": true }
+        {
+          "name": "trigger_met",
+          "args": [
+            "trigger: Dictionary",
+            "flags: Dictionary",
+            "settings: Dictionary",
+            "profile_meta: Dictionary"
+          ],
+          "returns": "bool",
+          "static": true
+        },
+        {
+          "name": "evaluate_catalog",
+          "args": [
+            "achievements: Array",
+            "flags: Dictionary",
+            "settings: Dictionary",
+            "profile_meta: Dictionary"
+          ],
+          "returns": "Array[String]",
+          "static": true
+        }
       ],
-      "trigger_types": ["flag", "all_flags", "flag_equals", "meta_endings_count", "lore_count"]
+      "trigger_types": [
+        "flag",
+        "all_flags",
+        "flag_equals",
+        "meta_endings_count",
+        "lore_count"
+      ]
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": "1.1",
-  "authority": "docs/technical/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
-  "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See §3 in CODE_BASE_CLASS_RULES.md for asset licenses.",
+  "authority": "docs/technical/CODE_BASE_CLASS_RULES.md \u2014 agents extend these GDScript bases; they do not rewrite core stacks",
+  "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See \u00a73 in CODE_BASE_CLASS_RULES.md for asset licenses.",
   "architect_owns": [
     "res://scripts/autoload/",
     "res://scripts/combat/",
@@ -18,7 +18,7 @@
       "extends": "Node",
       "phase": 1,
       "agent_rule": "architect_only",
-      "description": "Autoload — global typed signals only (helpers_registry.json)"
+      "description": "Autoload \u2014 global typed signals only (helpers_registry.json)"
     },
     {
       "id": "PlayerController",
@@ -26,7 +26,7 @@
       "extends": "CharacterBody3D",
       "phase": 2,
       "agent_rule": "extend_only",
-      "description": "Field movement, interaction ray — single player implementation"
+      "description": "Field movement, interaction ray \u2014 single player implementation"
     },
     {
       "id": "Combatant",
@@ -34,7 +34,7 @@
       "extends": "Node",
       "phase": 4,
       "agent_rule": "extend_only",
-      "description": "Battle actor HP/MP/status — PlayerCombatant / EnemyCombatant subclasses"
+      "description": "Battle actor HP/MP/status \u2014 PlayerCombatant / EnemyCombatant subclasses"
     },
     {
       "id": "Interactable",
@@ -42,15 +42,25 @@
       "extends": "Area3D",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Inspectables, NPC dialogue hooks — scene instances only",
+      "description": "Inspectables, NPC dialogue hooks \u2014 scene instances only",
       "exports": [
-        { "name": "scene_id", "type": "String", "default": "" },
-        { "name": "interaction_prompt", "type": "String", "default": "Interact" }
+        {
+          "name": "scene_id",
+          "type": "String",
+          "default": ""
+        },
+        {
+          "name": "interaction_prompt",
+          "type": "String",
+          "default": "Interact"
+        }
       ],
       "public_api": [
         {
           "name": "interact",
-          "args": ["player: PlayerController"],
+          "args": [
+            "player: PlayerController"
+          ],
           "returns": "void",
           "note": "Calls DialogueRunner.start(scene_id) when scene_id set; else inspect flow"
         },
@@ -68,7 +78,7 @@
       "extends": "Interactable",
       "phase": 3,
       "agent_rule": "extend_only",
-      "description": "Well / save shrine — extends Interactable with autosave hook"
+      "description": "Well / save shrine \u2014 extends Interactable with autosave hook"
     },
     {
       "id": "ZoneTransition",
@@ -78,14 +88,28 @@
       "agent_rule": "extend_only",
       "description": "Zone loads with spawn marker",
       "exports": [
-        { "name": "target_zone", "type": "String", "default": "" },
-        { "name": "spawn_marker", "type": "String", "default": "SpawnMarker_default" },
-        { "name": "requires_flags", "type": "Array[String]", "default": [] }
+        {
+          "name": "target_zone",
+          "type": "String",
+          "default": ""
+        },
+        {
+          "name": "spawn_marker",
+          "type": "String",
+          "default": "SpawnMarker_default"
+        },
+        {
+          "name": "requires_flags",
+          "type": "Array[String]",
+          "default": []
+        }
       ],
       "public_api": [
         {
           "name": "try_transition",
-          "args": ["body: Node3D"],
+          "args": [
+            "body: Node3D"
+          ],
           "returns": "void",
           "note": "When player enters and flags pass, GameManager.change_zone(target_zone, spawn_marker)"
         }
@@ -99,13 +123,23 @@
       "agent_rule": "extend_only",
       "description": "Starts encounter from story_encounters.json",
       "exports": [
-        { "name": "encounter_id", "type": "String", "default": "" },
-        { "name": "one_shot", "type": "bool", "default": true }
+        {
+          "name": "encounter_id",
+          "type": "String",
+          "default": ""
+        },
+        {
+          "name": "one_shot",
+          "type": "bool",
+          "default": true
+        }
       ],
       "public_api": [
         {
           "name": "try_encounter",
-          "args": ["body: Node3D"],
+          "args": [
+            "body: Node3D"
+          ],
           "returns": "void",
           "note": "CombatManager.start_encounter(encounter_id) when conditions met"
         },
@@ -123,7 +157,7 @@
       "extends": "Node",
       "phase": 2,
       "agent_rule": "architect_only",
-      "description": "Boot scene entry — validate data paths then load main_menu",
+      "description": "Boot scene entry \u2014 validate data paths then load main_menu",
       "public_api": [
         {
           "name": "run_boot",
@@ -145,7 +179,7 @@
       "extends": "Node",
       "phase": 4,
       "agent_rule": "architect_only",
-      "description": "Autoload — agents wire scenes; do not fork combat math"
+      "description": "Autoload \u2014 agents wire scenes; do not fork combat math"
     },
     {
       "id": "TurnManager",
@@ -153,7 +187,7 @@
       "extends": "Node",
       "phase": 4,
       "agent_rule": "architect_only",
-      "description": "SPD sort, round tick — state machine owned by Architect"
+      "description": "SPD sort, round tick \u2014 state machine owned by Architect"
     },
     {
       "id": "ZoneVisuals",
@@ -169,32 +203,46 @@
         "game/data/code/environment_registry.json"
       ],
       "design_ref": [
-        "docs/art/RENDERING_GUIDE.md §13",
+        "docs/art/RENDERING_GUIDE.md \u00a713",
         "docs/art/SHADER_SPECS.md",
-        "docs/sprints/Phase1-Sprint1-issues.md §P1-01"
+        "docs/sprints/Phase1-Sprint1-issues.md \u00a7P1-01"
       ],
       "exports": [
-        { "name": "zone_id", "type": "String", "default": "ruined_village" },
-        { "name": "apply_on_ready", "type": "bool", "default": true }
+        {
+          "name": "zone_id",
+          "type": "String",
+          "default": "ruined_village"
+        },
+        {
+          "name": "apply_on_ready",
+          "type": "bool",
+          "default": true
+        }
       ],
       "public_api": [
         {
           "name": "apply_to_scene",
-          "args": ["zone_id: String"],
+          "args": [
+            "zone_id: String"
+          ],
           "returns": "Dictionary",
           "static": true,
-          "note": "Canonical zone entry — returns environment, directional, fill_light, node_names bundle for Builder wiring"
+          "note": "Canonical zone entry \u2014 returns environment, directional, fill_light, node_names bundle for Builder wiring"
         },
         {
           "name": "directional_settings",
-          "args": ["zone_key: String"],
+          "args": [
+            "zone_key: String"
+          ],
           "returns": "Dictionary",
           "static": true,
           "note": "DirectionalLight3D color, shadow, rotation from palette row"
         },
         {
           "name": "fill_light_settings",
-          "args": ["zone_key: String"],
+          "args": [
+            "zone_key: String"
+          ],
           "returns": "Dictionary",
           "static": true,
           "note": "OmniLight3D fill color, energy, range from palette row + defaults"
@@ -212,29 +260,51 @@
         },
         {
           "name": "build_environment",
-          "args": ["preset: Dictionary"],
+          "args": [
+            "preset: Dictionary"
+          ],
           "returns": "Environment",
           "note": "Builds Environment from palette row + catalog defaults"
         },
         {
           "name": "hex_to_color",
-          "args": ["hex: String"],
+          "args": [
+            "hex: String"
+          ],
           "returns": "Color",
           "static": true
         },
         {
           "name": "get_preset",
-          "args": ["zone_key: String", "presets: Dictionary"],
+          "args": [
+            "zone_key: String",
+            "presets: Dictionary"
+          ],
           "returns": "Dictionary",
           "static": true
         }
       ],
       "lifecycle": [
-        { "signal": "_ready", "when": "apply_on_ready", "calls": "apply_zone_visuals()" }
+        {
+          "signal": "_ready",
+          "when": "apply_on_ready",
+          "calls": "apply_zone_visuals()"
+        }
       ],
       "constants": [
-        { "name": "PALETTE_PATH", "value": "res://data/world/zone_palettes.json" }
+        {
+          "name": "PALETTE_PATH",
+          "value": "res://data/world/zone_palettes.json"
+        }
       ]
+    },
+    {
+      "id": "GameBootstrap",
+      "path": "res://scripts/core/game_bootstrap.gd",
+      "extends": "Node",
+      "phase": 0,
+      "agent_rule": "architect_only",
+      "description": "Autoload \u2014 startup JSON path validation (autoload_registry.json)"
     }
   ],
   "component_scenes": [
@@ -267,7 +337,7 @@
       "path": "res://scenes/components/lantern_fill.tscn",
       "script": null,
       "phase": 1,
-      "note": "OmniLight3D + mesh instance — palette from ENVIRONMENT_KITS"
+      "note": "OmniLight3D + mesh instance \u2014 palette from ENVIRONMENT_KITS"
     }
   ],
   "forbidden": [
