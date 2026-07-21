@@ -1,0 +1,88 @@
+{
+  "audit_id": "20260718T113143Z_quick_check",
+  "generated_at": "2026-07-18T11:31:43Z",
+  "recommendations": [
+    {
+      "id": "REC_SPEC_DEV_START",
+      "priority": "P1",
+      "category": "before_dispatch",
+      "title": "SPEC_DEV_START ready — dispatch P1-00 when approved",
+      "action": "All blocking spec artifacts specified; next: Architect ports EventBus on game/development per GDSCRIPT_REGENERATION.md §1.",
+      "status": "open"
+    },
+    {
+      "id": "REC_L5_E2E",
+      "priority": "P2",
+      "category": "ship_path",
+      "title": "L5 three-endings E2E before human QA",
+      "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+      "status": "open"
+    }
+  ],
+  "checklist": {
+    "sections": [
+      {
+        "id": "blocking",
+        "label": "Blocking (P0)",
+        "must_clear_before_dispatch": true,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "before_dispatch",
+        "label": "Before P1-00 dispatch (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_SPEC_DEV_START",
+            "priority": "P1",
+            "category": "before_dispatch",
+            "title": "SPEC_DEV_START ready — dispatch P1-00 when approved",
+            "action": "All blocking spec artifacts specified; next: Architect ports EventBus on game/development per GDSCRIPT_REGENERATION.md §1.",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "implementation",
+        "label": "Implementation (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "ship_path",
+        "label": "Ship path M6 (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_L5_E2E",
+            "priority": "P2",
+            "category": "ship_path",
+            "title": "L5 three-endings E2E before human QA",
+            "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "stakeholder",
+        "label": "Stakeholder comms (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "doc_nit",
+        "label": "Doc nits (P3)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      }
+    ],
+    "total_open": 2,
+    "blocking_open": 0
+  }
+}

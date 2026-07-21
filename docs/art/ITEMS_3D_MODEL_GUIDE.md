@@ -1,7 +1,7 @@
 # Tides of Urashima — Items & Props 3D Model Guide
 
-**Version:** 1.0 (Pre-build)  
-**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes at inventory icon size and field pickup distance.  
+**Version:** 1.0 (Pre-build)
+**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes at inventory icon size and field pickup distance.
 **Cross-refs:** `docs/gameplay/ITEMS_AND_ECONOMY.md`, `docs/art/CHARACTER_BIBLE.md`, `docs/art/ART_DIRECTION.md`, `game/data/items/items.json`
 
 **Canonical rule:** Item IDs in this doc match `items.json`. Every shippable item has a **3D mesh** (field/combat), a **UI icon** (inventory/shop), or both as specified below.

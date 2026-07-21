@@ -47,7 +47,7 @@ if [[ -z "$DIFF_BASE" ]]; then
   exit 2
 fi
 
-mapfile -t FILES < <(git diff --name-only "$DIFF_BASE" "$DIFF_HEAD" 2>/dev/null | grep '\.gd$' || true)
+mapfile -t FILES < <(git diff --name-only "$DIFF_BASE" "$DIFF_HEAD" 2>/dev/null | grep '\.gd$' || true)  # swallow-ok: empty diff when no .gd changes
 if [[ ${#FILES[@]} -eq 0 ]]; then
   echo "[SKIP] no .gd changes in diff ${DIFF_BASE}..${DIFF_HEAD}"
   exit 2

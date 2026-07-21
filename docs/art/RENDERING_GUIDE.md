@@ -1,8 +1,8 @@
 # Tides of Urashima — Rendering Guide
 
-**Version:** 1.0 (Pre-build)  
-**Engine:** Godot 4.7 Forward+  
-**Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.  
+**Version:** 1.0 (Pre-build)
+**Engine:** Godot 4.7 Forward+
+**Visual target:** High-detail **stylized Japanese 3D** — not photoreal PBR.
 **Cross-refs:** `docs/art/ART_DIRECTION.md`, `docs/world/ENVIRONMENT_KITS.md`, `docs/ui/CINEMATICS.md`, `docs/ui/SETTINGS_ACCESSIBILITY.md`
 
 This document is the single checklist for the M5 art rebuild (Phase 7) and Godot scene polish. It adapts generic “professional 3D” advice to our art bible: automated stylized albedo, toon ramp shaders, muted coastal palette, 60 FPS @ 1080p on GTX 1060.
@@ -130,7 +130,7 @@ Use **ProceduralSkyMaterial**, not PhysicalSky + HDRI. Our mood is grey overcast
 | `tidal_caves` | `#0A141C` | 0.028 | 0.72 | Heavier — depth in tunnels |
 | `dragon_palace_gate` | `#1A1A3A` | 0.012 | 0.78 | Void atmosphere |
 
-**Hub rule:** Fog always on in ruined village (`ART_DIRECTION.md` §3.5).  
+**Hub rule:** Fog always on in ruined village (`ART_DIRECTION.md` §3.5).
 **Fog start:** ~20 m in village per `ENVIRONMENT_KITS.md` §4.
 
 ---

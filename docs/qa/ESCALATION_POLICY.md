@@ -29,7 +29,7 @@ Tier 3  Product Owner (human, Telegram)   final authority — can change scope/r
   - `requirement_ambiguous` → amend the design doc / `game/data/` to disambiguate, reset acceptance, re-dispatch
   - `requirement_conflict` → amend design/data to remove the conflict; if it's a business trade-off → **escalate to Product Owner**
   - `infeasible` → descope, or **escalate to Product Owner** for a scope/priority call
-  
+
   The arbiter can change the **requirement** (the thing dev/QA cannot) — that is what actually breaks the loop.
 - **Tier 3 — Product Owner:** if arbitration can't resolve it or a **business/scope decision** is required, it goes to the Product Owner over **Telegram**. Only the PO can `amend_requirement | descope | wont_fix | approve_as_is | reprioritize`. The decision is recorded and the issue re-dispatched against the corrected spec (or closed).
 

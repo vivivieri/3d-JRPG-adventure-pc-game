@@ -1,6 +1,6 @@
 # Tides of Urashima — QA & Bug Process
 
-**Version:** 1.3 (Pre-build)  
+**Version:** 1.3 (Pre-build)
 **Cross-refs:** `docs/qa/PLAYTEST_SCRIPT.md`, `docs/workflow/MILESTONES.md`, `docs/workflow/AI_DEV_WORKFLOW.md`, `docs/qa/AI_TESTING_SPEC.md`, `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/qa/QA_REMEDIATION_LOOP.md`, `docs/qa/FLOW_QA.md`, `tools/validate_story_data.py`, `tools/check_asset_compliance.sh`
 
 This doc defines **how to find, report, triage, and verify bugs** for *Tides of Urashima*. Playtest scripts live in `PLAYTEST_SCRIPT.md`; this doc is the **process and templates**.
@@ -67,7 +67,7 @@ This doc defines **how to find, report, triage, and verify bugs** for *Tides of 
 
 ## 3. Bug report template
 
-Copy into GitHub issue (**template: Gate failure / Bug report**), Discord, or playtest spreadsheet.  
+Copy into GitHub issue (**template: Gate failure / Bug report**), Discord, or playtest spreadsheet.
 See `docs/agents/PROJECT_MANAGEMENT.md` for labels and `bash tools/report_gate_failure.sh` for gate failures.
 
 ```markdown

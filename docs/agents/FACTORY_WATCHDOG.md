@@ -1,7 +1,7 @@
 # Factory Watchdog — Stall & Hang Exception Handling
 
-**Version:** 1.0  
-**Authority:** Exception layer on top of event-driven PM dispatch.  
+**Version:** 1.0
+**Authority:** Exception layer on top of event-driven PM dispatch.
 **Cross-refs:** `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`, `docs/agents/SPRINT_ORCHESTRATION.md`, `game/data/qa/factory_watchdog.json`
 
 ---

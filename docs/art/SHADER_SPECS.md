@@ -1,7 +1,7 @@
 # Shader Specifications — Tides of Urashima
 
-**Version:** 1.0  
-**Authority:** `docs/art/ART_DIRECTION.md` · `docs/art/RENDERING_GUIDE.md`  
+**Version:** 1.0
+**Authority:** `docs/art/ART_DIRECTION.md` · `docs/art/RENDERING_GUIDE.md`
 **Implementation:** GodotPrompter drafts `.gdshader`; GDAI MCP assigns materials in scenes
 
 ---

@@ -1,8 +1,8 @@
 # Godot Scene Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Build policy:** Scenes are **GDAI MCP built** — see `.cursorrules` §0, [`MCP_STACK.md`](../agents/MCP_STACK.md)
 
 ---

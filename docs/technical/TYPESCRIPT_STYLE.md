@@ -1,8 +1,8 @@
 # TypeScript / Node.js Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `tools/godot-mcp-pro-server/` (Godot MCP Pro Node server) · future project-owned TS tooling  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `tools/godot-mcp-pro-server/` (Godot MCP Pro Node server) · future project-owned TS tooling
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Not shipped:** MCP server and `game/addons/godot_mcp/` are **dev-only** — stripped before Steam export.
 
 ---

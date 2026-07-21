@@ -1,8 +1,8 @@
 # Data Schema — Tides of Urashima
 
-**Story-driven JSON database.**  
-**Start here for all coding + data rules:** [`docs/technical/CODING_STANDARDS_HUB.md`](../../docs/technical/CODING_STANDARDS_HUB.md)  
-**JSON detail:** [`docs/technical/JSON_DATA_STYLE.md`](../../docs/technical/JSON_DATA_STYLE.md)  
+**Story-driven JSON database.**
+**Start here for all coding + data rules:** [`docs/technical/CODING_STANDARDS_HUB.md`](../../docs/technical/CODING_STANDARDS_HUB.md)
+**JSON detail:** [`docs/technical/JSON_DATA_STYLE.md`](../../docs/technical/JSON_DATA_STYLE.md)
 Design rationale: [`docs/technical/DATA_ARCHITECTURE.md`](../../docs/technical/DATA_ARCHITECTURE.md)
 
 ## File layout

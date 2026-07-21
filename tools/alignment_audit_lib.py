@@ -357,8 +357,10 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
     if kind == "spec_status_cap":
         spec = load_json(ROOT / "game/data/code/spec_registry.json")
         if signal["id"] == "impl_shaders_partial":
-            row = next((a for a in spec.get("artifacts", []) if a.get("id") == "impl_shaders"), {})
-            status = row.get("spec_status", "not_started")
+            row: dict[str, Any] = next(
+                (a for a in spec.get("artifacts", []) if a.get("id") == "impl_shaders"), {}
+            )
+            status: str = str(row.get("spec_status", "not_started"))
             if status == "specified":
                 return 10.0
             if status == "partial":
@@ -368,7 +370,7 @@ def _signal_score(signal: dict[str, Any], ctx: dict[str, Any]) -> float:
             if branch == "main":
                 return float(signal.get("cap", 6.5))
             row = next((a for a in spec.get("artifacts", []) if a.get("id") == "impl_scenes"), {})
-            st = row.get("spec_status", "not_started")
+            st: str = str(row.get("spec_status", "not_started"))
             if st == "specified":
                 return 8.0
             if st == "partial":

@@ -1,7 +1,7 @@
 # Generation brief — `palace_gate_main`
 
-**Status:** M5 hero set-piece (hero jury)  
-**Authority:** `ENVIRONMENT_KITS.md` §6, `qa_catalog.json`  
+**Status:** M5 hero set-piece (hero jury)
+**Authority:** `ENVIRONMENT_KITS.md` §6, `qa_catalog.json`
 **Phase:** SC-12 vertigo shot
 
 ## Intent

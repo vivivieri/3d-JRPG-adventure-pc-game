@@ -1,8 +1,8 @@
 # Generation Readiness — Human-Expectation Gaps for AI 3D Pipelines
 
-**Version:** 1.0  
-**Authority:** Extends (does not replace) `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `ART_AUTOMATION_PIPELINE.md`, `GAME_FEEL.md`, and `game/data/models/qa_catalog.json`.  
-**Audience:** GodotPrompter, GDAI MCP, offline mesh/texture generators (Meshy, ComfyUI, Material Maker), QA agents  
+**Version:** 1.0
+**Authority:** Extends (does not replace) `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `ART_AUTOMATION_PIPELINE.md`, `GAME_FEEL.md`, and `game/data/models/qa_catalog.json`.
+**Audience:** GodotPrompter, GDAI MCP, offline mesh/texture generators (Meshy, ComfyUI, Material Maker), QA agents
 **Cross-refs:** `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/art/MODEL_QA.md`, `docs/art/VISUAL_QA.md`, `docs/qa/PLAYTEST_SCRIPT.md` §7b
 
 ---

@@ -1,7 +1,7 @@
 # Tides of Urashima — Narrative & Writing Guide
 
-**Version:** 1.1 (Pre-build)  
-**Story reference:** `docs/vision/STORYBOARD.md` (canonical scene bible), `game/data/dialogue/chapter_01.json`, `docs/vision/GDD.md` §2  
+**Version:** 1.1 (Pre-build)
+**Story reference:** `docs/vision/STORYBOARD.md` (canonical scene bible), `game/data/dialogue/chapter_01.json`, `docs/vision/GDD.md` §2
 **Cross-refs:** `docs/vision/ENDING_DESIGN.md`, `docs/technical/LOCALIZATION.md`, `docs/vision/PACING_CHART.md`, `docs/art/CHARACTER_BIBLE.md`
 
 **Canonical rule:** All story beats trace to `STORYBOARD.md`. Dialogue data lives in `game/data/dialogue/chapter_01.json`. This doc defines **how** we write — voice, limits, silence, and localization.
@@ -333,9 +333,9 @@ One callback per act is enough. Avoid winking at the player.
 
 Combat is not filler between movies. Each fight should **change the emotional temperature**:
 
-- SC-05 tutorial: agency after dread  
-- SC-08 wraiths: guilt made physical — before SC-09 catharsis  
-- SC-14 sentinel: discipline / Yuzu shines — before final act  
+- SC-05 tutorial: agency after dread
+- SC-08 wraiths: guilt made physical — before SC-09 catharsis
+- SC-14 sentinel: discipline / Yuzu shines — before final act
 - SC-15 Tide Keeper: phases map to ebb → surge → stillness (choice gate)
 
 Boss defeat lines: tragic, not triumphant. No *"You win!"* anime cadence.
@@ -356,25 +356,25 @@ No morality labels in UI copy (`ENDING_DESIGN.md`).
 
 Second run value (`REPLAY_DESIGN.md`):
 
-- Skip SC-00 / SC-11 / SC-12 after 3s — respect player time  
-- Gallery unlocks ending stills — emotional recap, not lore wiki  
-- Hard mode: mechanical mastery, **not** secret fourth ending v1  
+- Skip SC-00 / SC-11 / SC-12 after 3s — respect player time
+- Gallery unlocks ending stills — emotional recap, not lore wiki
+- Hard mode: mechanical mastery, **not** secret fourth ending v1
 
 ### H. What to avoid (audience 20–30)
 
-- Bright Ghibli banter or chibi reactions  
-- Long villain monologues — Tide Keeper speaks in tides, not essays  
-- Moral scoring (*"Anchor ending 78% good"*)  
-- VO assumptions — prose must read on screen (`§1`)  
+- Bright Ghibli banter or chibi reactions
+- Long villain monologues — Tide Keeper speaks in tides, not essays
+- Moral scoring (*"Anchor ending 78% good"*)
+- VO assumptions — prose must read on screen (`§1`)
 - Extra mid-game movies beyond SC-12 — dilutes pacing (`PACING_CHART.md`)
 
 ### I. Writer smoke test
 
 Before shipping a scene, ask:
 
-1. What does the player **feel** without reading dialogue?  
-2. Does this scene **change** a flag, relationship, or world read?  
-3. Could this be 30% shorter and hit harder?  
+1. What does the player **feel** without reading dialogue?
+2. Does this scene **change** a flag, relationship, or world read?
+3. Could this be 30% shorter and hit harder?
 4. Does music/SFX carry emotion when text is removed?
 
 If (1) fails, add environment or camera — not more lines.
@@ -383,8 +383,8 @@ If (1) fails, add environment or camera — not more lines.
 
 ## 12. Narrative reference steals (external JRPGs)
 
-**Purpose:** Actionable patterns from acclaimed JRPG stories — adapted to a **2–3 hour** scope.  
-**Source note:** Curated from comparative JRPG storytelling discourse (e.g. Ni no Kuni, Trails, Xenoblade 3, FFX, Expedition 33, FF Tactics, Persona, 13 Sentinels, Metaphor, Star Ocean 2).  
+**Purpose:** Actionable patterns from acclaimed JRPG stories — adapted to a **2–3 hour** scope.
+**Source note:** Curated from comparative JRPG storytelling discourse (e.g. Ni no Kuni, Trails, Xenoblade 3, FFX, Expedition 33, FF Tactics, Persona, 13 Sentinels, Metaphor, Star Ocean 2).
 **Scope rule:** Steal **emotion and structure**, not runtime length, school sims, or bright Ghibli banter (`ART_DIRECTION.md`).
 
 ### What we borrow
@@ -413,10 +413,10 @@ If (1) fails, add environment or camera — not more lines.
 
 ### Five ship checklist items (writers + combat)
 
-1. **Boss bark** ties intent to emotional facet (Wraith = guilt, Sentinel = frozen duty, Keeper = erase-pain temptation).  
-2. **Hub inspectable** has one line of life before Urashima speaks (Trails-style).  
-3. **One non-combat quiet beat** per act — bonds under time pressure (no quest log pop).  
-4. **SC-11 / box truth** changes read of at least one earlier line (13 Sentinels lite).  
+1. **Boss bark** ties intent to emotional facet (Wraith = guilt, Sentinel = frozen duty, Keeper = erase-pain temptation).
+2. **Hub inspectable** has one line of life before Urashima speaks (Trails-style).
+3. **One non-combat quiet beat** per act — bonds under time pressure (no quest log pop).
+4. **SC-11 / box truth** changes read of at least one earlier line (13 Sentinels lite).
 5. **Ending gallery** copy presents three philosophies — no "best" ending badge.
 
 ### Companion coping (one line each, optional barks)

@@ -1,8 +1,8 @@
 # Tides of Urashima — Selective VO Hit List (AI generation)
 
-**Version:** 1.1  
-**Policy:** Short VO at emotional peaks only — **not** full dialogue.  
-**Engine:** ElevenLabs (`eleven_multilingual_v2`) via `tools/generate_ai_vo.py`  
+**Version:** 1.1
+**Policy:** Short VO at emotional peaks only — **not** full dialogue.
+**Engine:** ElevenLabs (`eleven_multilingual_v2`) via `tools/generate_ai_vo.py`
 **Cross-refs:** `docs/vision/NARRATIVE_WRITING_GUIDE.md` §1, `game/data/audio/vo_prompts.json`, `game/data/audio/audio_qa_catalog.json`, `docs/generation_briefs/vo/`, `docs/audio/AUDIO_QA.md` §A4–A5, `game/data/dialogue/chapter_01.json`
 
 ---
@@ -39,8 +39,8 @@
 | **P1** | `sc15_tide_keeper_01` | SC-15 | Tide Keeper | Paradise is mercy. You fled pain — I offered peace. | 5s |
 | **P2** | `sc14_narrator_01` | SC-14 | Narrator | No mortal leaves with stolen time. | 3s |
 
-**Totals:** 12 clips × **3 primary VO locales** (`en`, `ja`, `zh`) + 12 clips × **2 zh-Hant dialects** (`cant`, `cmn`) = **60 OGG files**  
-**Not optional:** English, Japanese, and Simplified Chinese each require a full clip set — same 12 `voice_id` lines as zh-Hant.  
+**Totals:** 12 clips × **3 primary VO locales** (`en`, `ja`, `zh`) + 12 clips × **2 zh-Hant dialects** (`cant`, `cmn`) = **60 OGG files**
+**Not optional:** English, Japanese, and Simplified Chinese each require a full clip set — same 12 `voice_id` lines as zh-Hant.
 **Text-only by design:** SC-02 inspectables, SC-05–07, SC-12 gate (music), SC-17 endings, choice UI
 
 ---

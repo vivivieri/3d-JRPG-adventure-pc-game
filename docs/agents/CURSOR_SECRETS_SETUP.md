@@ -1,8 +1,8 @@
 # Cursor Secrets — Day-One Setup (How to Get Every Key)
 
-**Version:** 1.0  
-**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (8 runtime secrets including `CURSOR_API_KEY` for auto token telemetry).  
-**Where to add:** Cursor **Cloud Agents → your environment → Secrets** — scope **Personal + Runtime Secret** for each.  
+**Version:** 1.0
+**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (8 runtime secrets including `CURSOR_API_KEY` for auto token telemetry).
+**Where to add:** Cursor **Cloud Agents → your environment → Secrets** — scope **Personal + Runtime Secret** for each.
 **Cross-refs:** `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`, `docs/agents/PM_STAKEHOLDER_REPORTING.md`, `docs/ci-cd/GITHUB_SETUP.md`, `docs/agents/MCP_STACK.md`, `docs/vision/VO_HIT_LIST.md`
 
 ---

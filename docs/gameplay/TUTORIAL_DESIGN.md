@@ -1,6 +1,6 @@
 # Tides of Urashima — Tutorial & Onboarding Design
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/ui/UI_UX_FLOW.md`, `docs/world/QUEST_AND_FLAGS.md`
 
 **Design goal:** Teach every system within the first 45 minutes. No manual required. Prompts dismiss permanently once flag set.

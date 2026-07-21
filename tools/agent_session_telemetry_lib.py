@@ -17,21 +17,16 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from collect_cursor_agent_usage import (
-        fetch_agent_usage,
-        fetch_with_retry,
-        resolve_api_key,
-        resolve_bc_id,
-        usage_delta,
-        usage_to_telemetry_fields,
-    )
+    import collect_cursor_agent_usage as _cursor_usage
 except ImportError:
-    fetch_agent_usage = None  # type: ignore
-    fetch_with_retry = None  # type: ignore
-    resolve_api_key = None  # type: ignore
-    resolve_bc_id = None  # type: ignore
-    usage_delta = None  # type: ignore
-    usage_to_telemetry_fields = None  # type: ignore
+    _cursor_usage = None
+
+fetch_agent_usage: Any = getattr(_cursor_usage, "fetch_agent_usage", None)
+fetch_with_retry: Any = getattr(_cursor_usage, "fetch_with_retry", None)
+resolve_api_key: Any = getattr(_cursor_usage, "resolve_api_key", None)
+resolve_bc_id: Any = getattr(_cursor_usage, "resolve_bc_id", None)
+usage_delta: Any = getattr(_cursor_usage, "usage_delta", None)
+usage_to_telemetry_fields: Any = getattr(_cursor_usage, "usage_to_telemetry_fields", None)
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "game/data/qa/agent_session_telemetry_schema.json"
@@ -135,7 +130,11 @@ def _git_branch() -> str | None:
 
 
 def _git_diff_stats(base_sha: str | None) -> dict[str, int | None]:
-    stats = {"files_changed": None, "lines_added": None, "lines_removed": None}
+    stats: dict[str, int | None] = {
+        "files_changed": None,
+        "lines_added": None,
+        "lines_removed": None,
+    }
     if not base_sha:
         return stats
     try:

@@ -1,8 +1,8 @@
 # Platform Support — Windows + Linux (Cloud Dev Parity)
 
-**Version:** 1.0  
-**Authority:** Resolves cloud-dev vs ship-platform mismatch  
-**Machine-readable:** `game/data/qa/perf_baseline.json`  
+**Version:** 1.0
+**Authority:** Resolves cloud-dev vs ship-platform mismatch
+**Machine-readable:** `game/data/qa/perf_baseline.json`
 **Cross-refs:** `docs/qa/PERFORMANCE_BASELINE.md`, `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md`, `AGENTS.md`, `docs/workflow/IMPLEMENTATION_PLAN.md` Phase 8
 
 ---
@@ -108,13 +108,13 @@ Same FPS targets (60 @ 1080p Medium) on both — see `docs/qa/PERFORMANCE_BASELI
 
 ## 6. FAQ
 
-**Can we dev on Linux but ship Windows only?**  
+**Can we dev on Linux but ship Windows only?**
 No — that makes cloud the factory but invalidates its runtime QA. Either support Linux ship or move implementation off cloud (not planned).
 
-**Does Linux ship mean Steam Deck?**  
+**Does Linux ship mean Steam Deck?**
 Best-effort via Proton; no separate Deck verification in v1 unless added to QA matrix later.
 
-**Is macOS required for cloud?**  
+**Is macOS required for cloud?**
 No. Cloud is Linux. macOS is a separate local/CI target for a future release.
 
 ---

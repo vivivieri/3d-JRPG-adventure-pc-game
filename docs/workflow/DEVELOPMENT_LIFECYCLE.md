@@ -1,8 +1,8 @@
 # Development Lifecycle — End-to-End
 
-**Version:** 1.0  
-**Authority:** Single hub for how work flows from spec → ship.  
-**Machine-readable:** `game/data/qa/environments.json`, `game/data/qa/sprint_phases.json`, `game/data/qa/sprint_board.json`  
+**Version:** 1.0
+**Authority:** Single hub for how work flows from spec → ship.
+**Machine-readable:** `game/data/qa/environments.json`, `game/data/qa/sprint_phases.json`, `game/data/qa/sprint_board.json`
 **Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md`
 
 ---
@@ -217,7 +217,7 @@ Templates: `.github/ISSUE_TEMPLATE/` · sprint pack: `docs/sprints/Phase1-Sprint
 | **L5** | Phase 6+ | `run_e2e_playthrough.sh` | Three endings |
 | **L6** | UAT only | Human `PLAYTEST_SCRIPT.md` | Ship sign-off |
 
-**QA stage** = L0–L2 (and L4/L5 when phase requires) automated on trunk.  
+**QA stage** = L0–L2 (and L4/L5 when phase requires) automated on trunk.
 **UAT stage** = tagged RC + human L6 — never before L0–L5 on the same commit.
 
 ---

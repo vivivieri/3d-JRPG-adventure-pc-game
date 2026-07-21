@@ -1,14 +1,14 @@
 # AI Dev Workflow — Build, Test & Acceptance Criteria
 
-**Version:** 1.3  
-**Applies to:** `main` clean baseline → Phases 1–8 rebuild  
+**Version:** 1.3
+**Applies to:** `main` clean baseline → Phases 1–8 rebuild
 **Cross-refs:** `.cursorrules` §0, `AGENTS.md`, `docs/technical/CODE_BASE_CLASS_RULES.md`, `docs/agents/GDAI_CLOUD_SETUP.md`, `docs/qa/AI_TESTING_SPEC.md`, `docs/workflow/IMPLEMENTATION_PLAN.md`, `docs/qa/QA_AND_BUG_PROCESS.md`
 
 This document is the **single source of truth** for:
 
-1. **AI build policy** — how Cursor agents implement the game  
-2. **AI testing policy** — what agents must verify automatically vs manually (`docs/qa/AI_TESTING_SPEC.md` for L3–L5 detail)  
-3. **Unit tests** — headless GDScript tests for logic and data  
+1. **AI build policy** — how Cursor agents implement the game
+2. **AI testing policy** — what agents must verify automatically vs manually (`docs/qa/AI_TESTING_SPEC.md` for L3–L5 detail)
+3. **Unit tests** — headless GDScript tests for logic and data
 4. **Acceptance criteria** — measurable phase gates (`docs/qa/ACCEPTANCE_CRITERIA.md`, `game/data/qa/acceptance_criteria.json`)
 
 ---
@@ -100,10 +100,10 @@ others block their respective roles — see `MCP_STACK.md`).
 
 ### 1.4 What AI agents must not do
 
-- Import unknown-license art, audio, or models from the web  
-- Hand-edit `.tscn` when GDAI MCP is available  
-- Ship with GDAI MCP plugin enabled (dev-only; remove before export)  
-- Mark a phase complete without passing its acceptance criteria  
+- Import unknown-license art, audio, or models from the web
+- Hand-edit `.tscn` when GDAI MCP is available
+- Ship with GDAI MCP plugin enabled (dev-only; remove before export)
+- Mark a phase complete without passing its acceptance criteria
 - Add new `CharacterBody3D` / `Area3D` interaction stacks outside `base_classes.json` registry
 
 ---
@@ -127,21 +127,21 @@ Testing is **layered**. Higher layers run after lower layers pass.
 | **L5 — AI E2E playthrough** | `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` | AI agent (Phase 6 gate + every RC) | Full story + 3 endings (headless or recorded) |
 | **L6 — Human QA** | `docs/qa/PLAYTEST_SCRIPT.md` | Human (**after L0–L5 pass**) | Feel, pacing, localization — **ship gate only** |
 
-**GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_docs_ci_checks.sh` on `main`.  
-**Game CI** (`game-ci.yml` on `game/development`): `bash tools/run_ci_checks.sh`.  
+**GitHub CI** (`.github/workflows/ci.yml`): runs headless subset via `bash tools/run_docs_ci_checks.sh` on `main`.
+**Game CI** (`game-ci.yml` on `game/development`): `bash tools/run_ci_checks.sh`.
 **Environments & multi-agent:** `docs/ci-cd/ENVIRONMENTS.md`, `docs/agents/MULTI_AGENT_TEAM.md`, `docs/agents/PROJECT_MANAGEMENT.md`.
 
 ### 2.1 AI agent obligations
 
 Before marking **any** implementation task done, the agent must:
 
-1. Run L0 + L1 + L2 (always)  
-2. Run L3 for any scene/visual change  
-3. Run L4 when the phase acceptance criteria require it  
-4. Run L5 when Phase 6 is complete and on every release candidate  
-5. **Do not request human QA until L0–L5 all pass**  
-6. Report pass/fail counts in the PR or session summary (template: `docs/qa/AI_TESTING_SPEC.md` §10)  
-7. **Never** claim “tested” based only on code review  
+1. Run L0 + L1 + L2 (always)
+2. Run L3 for any scene/visual change
+3. Run L4 when the phase acceptance criteria require it
+4. Run L5 when Phase 6 is complete and on every release candidate
+5. **Do not request human QA until L0–L5 all pass**
+6. Report pass/fail counts in the PR or session summary (template: `docs/qa/AI_TESTING_SPEC.md` §10)
+7. **Never** claim “tested” based only on code review
 
 ### 2.2 Headless vs editor
 

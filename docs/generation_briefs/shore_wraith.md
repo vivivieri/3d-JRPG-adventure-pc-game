@@ -1,7 +1,7 @@
 # Generation brief — `shore_wraith`
 
-**Status:** M5 · first boss (hero jury)  
-**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §2, `qa_catalog.json`  
+**Status:** M5 · first boss (hero jury)
+**Authority:** `CHARACTER_BIBLE.md` §6, `BOSS_DESIGNS.md` §2, `qa_catalog.json`
 **Phase:** SC-09 `cave_boss_arena_ring`
 
 ## Intent
@@ -47,10 +47,10 @@ European reaper, skeleton, anime villain, cloth simulation runtime, chibi, reada
 
 ### Mesh breakdown
 
-1. Outer drape ~18k  
-2. Face cluster ~6k  
-3. Arm tendrils ~4k  
-4. Base mist cards ~4k  
+1. Outer drape ~18k
+2. Face cluster ~6k
+3. Arm tendrils ~4k
+4. Base mist cards ~4k
 
 ### Required animations
 

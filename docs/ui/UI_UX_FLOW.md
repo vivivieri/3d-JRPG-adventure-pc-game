@@ -1,6 +1,6 @@
 # Tides of Urashima — UI / UX Flow
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/gameplay/TUTORIAL_DESIGN.md`, `docs/ui/CINEMATICS.md`, `docs/art/ART_DIRECTION.md` §4
 
 ---

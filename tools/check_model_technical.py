@@ -103,7 +103,7 @@ def main() -> int:
             if line.startswith("FAIL"):
                 has_fail = True
         if has_fail or not ok:
-            print("  [FAIL] technical")
+            print("  [FAIL] technical", file=sys.stderr)
             fail += 1
         elif any(line.startswith("WARN") for line in issues):
             print("  [WARN] technical")

@@ -1,8 +1,8 @@
 # PM Agent Runbook — Mandatory Sprint Master Workflow
 
-**Version:** 1.0  
-**Role:** PM Agent / Sprint Master (same role — `sprint_phases.json` → `sprint_master.role = "pm"`)  
-**Rule:** Execute **every step below in order**. Skip = orchestrator FAIL = project blocked.  
+**Version:** 1.0
+**Role:** PM Agent / Sprint Master (same role — `sprint_phases.json` → `sprint_master.role = "pm"`)
+**Rule:** Execute **every step below in order**. Skip = orchestrator FAIL = project blocked.
 **Authority:** `docs/agents/SPRINT_ORCHESTRATION.md`
 
 ---

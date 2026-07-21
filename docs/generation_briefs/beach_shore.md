@@ -1,6 +1,6 @@
 # Generation brief — `beach_shore`
 
-**Status:** Phase 2 zone (SC-01 prologue)  
+**Status:** Phase 2 zone (SC-01 prologue)
 **Authority:** `ENVIRONMENT_KITS.md` §3, `LEVEL_DESIGN.md` §2, `RENDERING_GUIDE.md`
 
 ## Intent

@@ -1,8 +1,8 @@
 # Branching policy — documentation vs game development
 
-**Version:** 1.2  
-**Authority:** Branch contents and merge policy. For the **full dev → ship lifecycle**, start at `docs/workflow/DEVELOPMENT_LIFECYCLE.md`.  
-**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — why we reject GitLab env branches and per-agent forks.  
+**Version:** 1.2
+**Authority:** Branch contents and merge policy. For the **full dev → ship lifecycle**, start at `docs/workflow/DEVELOPMENT_LIFECYCLE.md`.
+**Branching ADR:** `docs/workflow/BRANCHING_DECISION_RECORD.md` — why we reject GitLab env branches and per-agent forks.
 **Spec-first policy:** `docs/technical/SPEC_FIRST_DEVELOPMENT.md` — **complete specs on `main`; zero ship code until `SPEC_DEV_START` gate.**
 
 ---

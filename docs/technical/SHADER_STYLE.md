@@ -1,8 +1,8 @@
 # Godot Shader Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `game/shaders/` (`game/development`) · reference templates in `tools/godot_templates/shaders/`  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `game/shaders/` (`game/development`) · reference templates in `tools/godot_templates/shaders/`
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Rendering:** [`RENDERING_GUIDE.md`](../art/RENDERING_GUIDE.md) · [`ART_DIRECTION.md`](../art/ART_DIRECTION.md)
 
 ---
@@ -58,9 +58,9 @@ void fragment() {
 
 ## 4. Authoring workflow
 
-1. GodotPrompter drafts `.gdshader` in Cursor  
-2. GDAI MCP assigns material on mesh in zone `.tscn`  
-3. F5 viewport + `run_visual_smoke_checks.sh` when assets exist  
+1. GodotPrompter drafts `.gdshader` in Cursor
+2. GDAI MCP assigns material on mesh in zone `.tscn`
+3. F5 viewport + `run_visual_smoke_checks.sh` when assets exist
 
 Templates ship in `tools/godot_templates/shaders/` for porting to `game/shaders/` on `game/development`.
 

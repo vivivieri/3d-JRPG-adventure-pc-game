@@ -1,7 +1,7 @@
 # Error Handling & Messages — Tides of Urashima
 
-**Version:** 1.1  
-**Scope:** All languages in the factory — Python CI, Bash gates, GDScript runtime, TypeScript MCP, JSON validators  
+**Version:** 1.1
+**Scope:** All languages in the factory — Python CI, Bash gates, GDScript runtime, TypeScript MCP, JSON validators
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 
 ---
@@ -97,13 +97,14 @@ Authority: [`BASH_STYLE.md`](BASH_STYLE.md)
 |-----------|---------|
 | Gate script | `set -euo pipefail`; `fail()` sets `FAIL=1`; exit `1` at end |
 | Optional step | Explicit `if` — not `cmd && ok || fail` (SC2015) |
+| Best-effort swallow | `# swallow-ok` comment when `|| true` or `2>/dev/null` is intentional |
 | Missing dependency | `[FAIL] <tool> not installed — <install command>` |
 
 ```bash
 fail() { echo "[FAIL] $*"; FAIL=1; }
 ```
 
-### 3.3 GDScript (`game/scripts/`)
+### 3.3 GDScript (`game/scripts/`, `game/tests/`)
 
 Authority: [`GDSCRIPT_STYLE.md`](GDSCRIPT_STYLE.md) §12 · [`CODE_STYLE.md`](CODE_STYLE.md) §9
 
@@ -126,7 +127,7 @@ if data.is_empty():
 
 Authority: [`JSON_DATA_STYLE.md`](JSON_DATA_STYLE.md)
 
-Format errors → `L1_json_style` (`check_json_style.py`).  
+Format errors → `L1_json_style` (`check_json_style.py`).
 Cross-ref / schema errors → matching `L0_*` validator (`validate_story_data.py`, etc.).
 
 ### 3.5 TypeScript MCP tools

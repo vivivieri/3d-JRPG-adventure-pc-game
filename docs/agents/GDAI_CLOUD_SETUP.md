@@ -2,10 +2,10 @@
 
 **GDAI MCP** is a **dev-only** Godot 4 plugin that lets Cursor (and other MCP clients) control the **Godot Editor** — create scenes, move nodes, read script errors, etc.
 
-> **Full MCP stack:** This project also supports **Godotiq** (analyze/debug) and **Godot MCP Pro** (automated testing). See **`docs/agents/MCP_STACK.md`** for roles, install, and conflict rules.  
+> **Full MCP stack:** This project also supports **Godotiq** (analyze/debug) and **Godot MCP Pro** (automated testing). See **`docs/agents/MCP_STACK.md`** for roles, install, and conflict rules.
 > **Plugin install steps:** `docs/agents/PLUGIN_INSTALL_GUIDE.md`
 
-Official docs: https://gdaimcp.com/docs/installation  
+Official docs: https://gdaimcp.com/docs/installation
 Cursor MCP docs: https://cursor.com/help/customization/mcp
 
 This repo does **not** commit the plugin. It is gitignored so Steam/release builds stay clean. Only **GodotSteam** ships under `game/addons/`.
@@ -130,7 +130,7 @@ Create or edit `.cursor/mcp.json` in the project root:
 }
 ```
 
-Replace the path with your machine’s absolute path (or use the path from the GDAI panel).  
+Replace the path with your machine’s absolute path (or use the path from the GDAI panel).
 Template: `.cursor/mcp.json.example`
 
 ### 3.3 Verify (desktop)
@@ -146,7 +146,7 @@ Template: `.cursor/mcp.json.example`
 
 Cloud agents run in a remote VM. You need **both** VM bootstrap **and** Cursor dashboard MCP registration.
 
-> **Latest Cursor guidance (2026):** Cloud Agents support MCP servers configured in the **Cloud Agents dashboard** ([cursor.com/agents](https://cursor.com/agents)). Team plans: **Dashboard → Integrations & MCP**.  
+> **Latest Cursor guidance (2026):** Cloud Agents support MCP servers configured in the **Cloud Agents dashboard** ([cursor.com/agents](https://cursor.com/agents)). Team plans: **Dashboard → Integrations & MCP**.
 > A workspace `.cursor/mcp.json` helps the VM but **does not by itself** expose `godot-mcp` tools to the agent — you must register the server in the dashboard and restart the agent.
 
 ### 4.1 Environment bootstrap (VM)
@@ -205,8 +205,8 @@ If `game/addons/gdai-mcp-plugin-godot*.zip` exists, `install_cloud_dev.sh` auto-
 
 ### 4.3 Register MCP in Cursor dashboard (required for agent tools)
 
-1. Open your cloud environment dashboard, e.g.  
-   [cursor.com/dashboard/cloud-agents/environments](https://cursor.com/dashboard/cloud-agents/environments)  
+1. Open your cloud environment dashboard, e.g.
+   [cursor.com/dashboard/cloud-agents/environments](https://cursor.com/dashboard/cloud-agents/environments)
    → select this repo’s environment.
 2. Or go to [cursor.com/agents](https://cursor.com/agents) → MCP / integrations.
 3. **Add custom MCP server** named `godot-mcp`:
@@ -239,7 +239,7 @@ curl -sf http://127.0.0.1:3571/tools | head -c 200   # should return JSON with m
 pgrep -af 'godot4.*--editor'                          # editor running
 ```
 
-In the agent session, MCP catalog must include **`godot-mcp`**.  
+In the agent session, MCP catalog must include **`godot-mcp`**.
 **Agents must not implement editor/scene work until both checks pass.**
 
 ### 4.5 Workflow (mandatory — no manual fallback)

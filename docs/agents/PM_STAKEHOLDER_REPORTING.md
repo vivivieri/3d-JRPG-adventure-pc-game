@@ -1,8 +1,8 @@
 # PM Stakeholder Reporting — Product Owner Status Dashboard
 
-**Version:** 1.0  
-**Audience:** Product Owner (stakeholder)  
-**Authority:** Mandatory PM duty after each cycle, sprint close, and phase exit.  
+**Version:** 1.0
+**Audience:** Product Owner (stakeholder)
+**Authority:** Mandatory PM duty after each cycle, sprint close, and phase exit.
 **Cross-refs:** `docs/agents/PM_AGENT_RUNBOOK.md`, `game/data/qa/stakeholder_report_config.json`
 
 ---

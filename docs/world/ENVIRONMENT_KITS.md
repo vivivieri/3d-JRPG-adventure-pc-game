@@ -1,7 +1,7 @@
 # Tides of Urashima — Environment Kits
 
-**Version:** 1.0 (Pre-build)  
-**Visual target:** High-detail stylized Japanese coastal environments — authored modular kits, no greybox boxes in ship builds.  
+**Version:** 1.0 (Pre-build)
+**Visual target:** High-detail stylized Japanese coastal environments — authored modular kits, no greybox boxes in ship builds.
 **Cross-refs:** `docs/art/ART_DIRECTION.md`, `docs/vision/STORYBOARD.md`, `docs/art/CHARACTER_BIBLE.md`, `docs/art/RENDERING_GUIDE.md`
 
 ---
@@ -52,8 +52,8 @@ game/assets/textures/environment/
 
 ## 3. Zone: Beach Shore (`beach_shore`)
 
-**Storyboard:** SC-01  
-**Mood:** Lonely arrival; grey sky; distant thunder  
+**Storyboard:** SC-01
+**Mood:** Lonely arrival; grey sky; distant thunder
 **Palette:** Pale sand `#C9B89A`, surf teal `#1A6A62`, fog `#8B9DAF`
 
 ### Modular kit
@@ -91,8 +91,8 @@ game/assets/textures/environment/
 
 ## 4. Zone: Ruined Fishing Village (`ruined_village`) — HUB
 
-**Storyboard:** SC-02 – SC-05  
-**Mood:** Dread, decay, submerged Edo fishing hamlet  
+**Storyboard:** SC-02 – SC-05
+**Mood:** Dread, decay, submerged Edo fishing hamlet
 **Palette:** Weathered wood `#5C4A3A`, moss `#3D5C4A`, rust `#8B3A2A`
 
 ### Modular kit — architecture
@@ -168,8 +168,8 @@ game/assets/textures/environment/
 
 ## 5. Zone: Tidal Caves (`tidal_caves`)
 
-**Storyboard:** SC-06 – SC-10  
-**Mood:** Wonder + wrongness; bioluminescent guilt  
+**Storyboard:** SC-06 – SC-10
+**Mood:** Wonder + wrongness; bioluminescent guilt
 **Palette:** Deep teal `#1A4A5A`, biolume `#4AE8D8`, wet stone `#3A3A45`
 
 ### Modular kit
@@ -215,8 +215,8 @@ game/assets/textures/environment/
 
 ## 6. Zone: Dragon Palace Gate (`dragon_palace_gate`)
 
-**Storyboard:** SC-12 – SC-16  
-**Mood:** Awe, scale, sterile perfection vs living world  
+**Storyboard:** SC-12 – SC-16
+**Mood:** Awe, scale, sterile perfection vs living world
 **Palette:** Coral gold `#D4A55A`, crimson `#8B2A3A`, void `#1A1A3A`
 
 **Critical:** Replace all European castle geometry with **ryūgū-jō** language.

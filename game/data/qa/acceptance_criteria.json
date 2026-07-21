@@ -382,7 +382,7 @@
       "layer": "L1",
       "domain": "flow",
       "command": "python3 tools/check_json_style.py",
-      "description": "JSON format + naming lint on game/data/**/*.json",
+      "description": "JSON format + naming lint on game/data/**/*.json and config JSON (.cursor/, steam/)",
       "pass": { "exit_code": 0 },
       "design_ref": "docs/technical/JSON_DATA_STYLE.md"
     },
@@ -399,7 +399,7 @@
       "layer": "L1",
       "domain": "flow",
       "command": "python3 tools/check_markdown_style.py",
-      "description": "Markdown format + link lint on docs/",
+      "description": "Markdown format, trailing whitespace, heading levels, and link lint on docs/",
       "pass": { "exit_code": 0 },
       "design_ref": "docs/technical/MARKDOWN_STYLE.md"
     },
@@ -425,9 +425,25 @@
       "layer": "L1",
       "domain": "flow",
       "command": "bash tools/check_error_handling.sh",
-      "description": "Error/exception patterns — ruff E722/S110/S112, bash if/else, GDScript push_error",
+      "description": "Error/exception patterns — ruff E722/S110/S112, bash swallow lint, GDScript/tests push_error, TS catch, [FAIL]→stderr",
       "pass": { "exit_code": 0 },
       "design_ref": "docs/technical/ERROR_HANDLING.md"
+    },
+    "L1_workflow_yaml": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_workflow_yaml.sh",
+      "description": "actionlint on .github/workflows/*.yml",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/ci-cd/CI.md"
+    },
+    "L1_mypy_libs": {
+      "layer": "L1",
+      "domain": "flow",
+      "command": "bash tools/check_mypy_libs.sh",
+      "description": "mypy static typing on tools/*_lib.py reference libraries",
+      "pass": { "exit_code": 0 },
+      "design_ref": "docs/technical/PYTHON_STYLE.md"
     },
     "L2_boot_headless": {
       "layer": "L2",
@@ -820,6 +836,8 @@
       "L1_markdown_style",
       "L1_gdshader_style",
       "L1_error_handling",
+      "L1_workflow_yaml",
+      "L1_mypy_libs",
       "L0_main_no_ship_code",
       "L0_spec_refinement_scope",
       "L0_acceptance_catalog",
@@ -876,6 +894,8 @@
       "L1_gdshader_style",
       "L1_scene_style",
       "L1_error_handling",
+      "L1_workflow_yaml",
+      "L1_mypy_libs",
       "L1_unit_tests",
       "L1_gdscript_lint",
       "L1_gdscript_lint_all",

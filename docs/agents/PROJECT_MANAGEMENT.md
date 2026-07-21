@@ -1,8 +1,8 @@
 # Project Management — Issues, Logs & MCP Integrations
 
-**Version:** 1.0  
-**Primary tracker:** **GitHub Issues** (repo-native, PR-linked, Actions-aware)  
-**Optional MCP:** Linear (sprints) · Notion (docs/tasks)  
+**Version:** 1.0
+**Primary tracker:** **GitHub Issues** (repo-native, PR-linked, Actions-aware)
+**Optional MCP:** Linear (sprints) · Notion (docs/tasks)
 **Cross-refs:** `docs/qa/QA_AND_BUG_PROCESS.md`, `docs/ci-cd/ENVIRONMENTS.md`, `docs/agents/MULTI_AGENT_TEAM.md`
 
 ---

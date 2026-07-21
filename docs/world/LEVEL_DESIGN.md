@@ -1,7 +1,7 @@
 # Tides of Urashima — Level Design Breakdown
 
-**Version:** 1.0  
-**Scope:** Blockouts, pathways, interactables, encounters, camera beats per zone  
+**Version:** 1.0
+**Scope:** Blockouts, pathways, interactables, encounters, camera beats per zone
 **Cross-refs:** [WORLD_MAP_AND_FLOW.md](WORLD_MAP_AND_FLOW.md) (zone graph), [ENVIRONMENT_KITS.md](ENVIRONMENT_KITS.md) (art modules), [QUEST_AND_FLAGS.md](QUEST_AND_FLAGS.md) (flags), `game/data/story/scenes.json`
 
 **Use this doc when:** Placing nodes in Godot, wiring triggers, or validating player path.
@@ -34,7 +34,7 @@
 
 ### 1b. Reusable component scenes (GDAI Builder catalog)
 
-**Policy:** Instance these `.tscn` components in zones — do not rebuild trigger logic per zone.  
+**Policy:** Instance these `.tscn` components in zones — do not rebuild trigger logic per zone.
 **Authority:** `game/data/code/base_classes.json` → `component_scenes` · `docs/technical/CODE_BASE_CLASS_RULES.md`
 
 | Component scene | Path | Script base | Phase |
@@ -51,7 +51,7 @@
 
 ## 2. Zone: `beach_shore` (SC-01)
 
-**Scene:** `res://scenes/world/beach_shore.tscn`  
+**Scene:** `res://scenes/world/beach_shore.tscn`
 **Act:** I · **BGM:** `bgm_village` · **Fog:** light coastal
 
 ### Blockout
@@ -94,7 +94,7 @@ Wide establishing → follow cam (`CINEMATICS.md` SC-01). No authored pan v1.
 
 ## 3. Zone: `ruined_village` (SC-02–05 hub)
 
-**Scene:** `res://scenes/world/ruined_village.tscn`  
+**Scene:** `res://scenes/world/ruined_village.tscn`
 **Act:** I · **BGM:** `bgm_village` · **Fog:** heavy `#8B9DAF`
 
 ### Blockout
@@ -150,7 +150,7 @@ See `game/data/lore/lore_placements.json` — banner, well, pier.
 
 ## 4. Zone: `tidal_caves` (SC-06–11)
 
-**Scene:** `res://scenes/world/tidal_caves.tscn`  
+**Scene:** `res://scenes/world/tidal_caves.tscn`
 **Act:** II · **BGM:** `bgm_caves` · **Fog:** distance fog per `RENDERING_GUIDE.md` §6 (density 0.028); **no volumetric fog** (interior)
 
 ### Blockout
@@ -212,7 +212,7 @@ Full spec: [PUZZLE_DESIGN.md](PUZZLE_DESIGN.md). Water plane Y toggles LOW/HIGH;
 
 ## 5. Zone: `dragon_palace_gate` (SC-12–16)
 
-**Scene:** `res://scenes/world/dragon_palace_gate.tscn`  
+**Scene:** `res://scenes/world/dragon_palace_gate.tscn`
 **Act:** II–III · **BGM:** `bgm_palace` · **Sky:** void `#1A1A3A`
 
 ### Blockout

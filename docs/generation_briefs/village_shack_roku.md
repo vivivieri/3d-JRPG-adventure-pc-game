@@ -1,7 +1,7 @@
 # Generation brief — `village_shack_roku`
 
-**Status:** Phase 1 set-piece  
-**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`  
+**Status:** Phase 1 set-piece
+**Authority:** `ENVIRONMENT_KITS.md` §4, `ruined_village.md`, `qa_catalog.json`
 **Phase:** SC-04 Roku shop
 
 ## Intent

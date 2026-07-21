@@ -69,7 +69,7 @@ jobs:
         run: |
           cd build
           zip -r "TidesOfUrashima-steam-depot-${GITHUB_REF_NAME}.zip" steam_depot TidesOfUrashima.exe
-          ls -lh *.zip
+          ls -lh ./*.zip
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

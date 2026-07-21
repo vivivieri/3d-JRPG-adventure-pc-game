@@ -1,6 +1,6 @@
 # Tides of Urashima — Audio Direction
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/gameplay/BOSS_DESIGNS.md`, `docs/audio/AUDIO_PRODUCTION_GUIDE.md` (production specs), `game/assets/audio/`
 
 **Creative direction** is in this doc. **Per-track BPM, loops, SFX file list, scene map** → `docs/audio/AUDIO_PRODUCTION_GUIDE.md`.

@@ -1,8 +1,8 @@
 # Agent Session Telemetry — AI Factory Efficiency Studies
 
-**Discipline:** Dev-time factory analytics — measure agent performance by role, task category, and issue  
-**Status:** Active on `main` + `game/development` — hooks wired into session gate, heartbeat, and cycle events  
-**Authority:** `game/data/qa/agent_session_telemetry_schema.json`  
+**Discipline:** Dev-time factory analytics — measure agent performance by role, task category, and issue
+**Status:** Active on `main` + `game/development` — hooks wired into session gate, heartbeat, and cycle events
+**Authority:** `game/data/qa/agent_session_telemetry_schema.json`
 **Analyzer:** `python3 tools/analyze_agent_session_telemetry.py`
 
 This is **not** a ship gate. It exists so you can study which task types cost the most time/tokens and tune dispatch, prompts, and issue sizing after the game ships.
@@ -229,7 +229,7 @@ Agent session telemetry is **wired into the factory** — not a standalone tool.
 Every specialist agent session **must**:
 
 1. **Start:** `bash tools/run_agent_session_gate.sh <role> <issue_id>` (telemetry opens automatically)
-2. **During long work:** `bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "..."` 
+2. **During long work:** `bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "..."`
 3. **End:** `bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>`
 
 Skipping step 3 leaves the session open and **no token data** — watchdog may fire `no_heartbeat`.

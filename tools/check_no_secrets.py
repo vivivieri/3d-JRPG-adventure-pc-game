@@ -40,7 +40,7 @@ def allowed(path: str, allowlist: list[str]) -> bool:
 
 def main() -> int:
     if not CONFIG_PATH.is_file():
-        print(f"[FAIL] missing {CONFIG_PATH}")
+        print(f"[FAIL] missing {CONFIG_PATH}", file=sys.stderr)
         return 1
 
     cfg = load_config()
@@ -67,7 +67,7 @@ def main() -> int:
                     break
 
     if hits:
-        print("[FAIL] possible secrets in tracked files:")
+        print("[FAIL] possible secrets in tracked files:", file=sys.stderr)
         for h in hits[:30]:
             print(f"  - {h}")
         if len(hits) > 30:

@@ -1,6 +1,6 @@
 # Audio QA — Technical Gates + Optional LLM Jury
 
-**Version:** 1.1  
+**Version:** 1.1
 **Problem:** An agent can register `bgm_village.ogg` or `sc00_urashima_01.ogg` without listening — often a **procedural sine placeholder**, wrong loudness, or off-direction VO that ships everywhere.
 
 **Rule:** Audio tasks pass **catalog + technical checks** first. **Hero BGM** and **P0 VO** use optional **multi-LLM listen jury** (scoped — not every SFX). Human **L6** still owns in-game mix feel.

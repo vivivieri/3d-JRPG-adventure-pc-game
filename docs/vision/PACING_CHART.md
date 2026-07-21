@@ -1,6 +1,6 @@
 # Tides of Urashima — Emotional Pacing Chart
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/vision/GDD.md` §9
 
 ---

@@ -1,7 +1,7 @@
 # Generation brief — `otohime`
 
-**Status:** M5 cinematic NPC bust  
-**Authority:** `CHARACTER_BIBLE.md` §5, `docs/vision/NARRATIVE_WRITING_GUIDE.md`  
+**Status:** M5 cinematic NPC bust
+**Authority:** `CHARACTER_BIBLE.md` §5, `docs/vision/NARRATIVE_WRITING_GUIDE.md`
 **Phase:** SC-11 flashback, SC-17c underwater glimpse
 
 ## Intent
@@ -24,7 +24,7 @@
 
 Meshy (bust) → Blender (kimono folds, shadow split on face) → GLB static or optional `idle_still`.
 
-**Export:** `game/assets/models/npcs/otohime/otohime_bust.glb`  
+**Export:** `game/assets/models/npcs/otohime/otohime_bust.glb`
 **Portrait:** `game/assets/ui/portraits/otohime.png` (512×512 shadowed half-face)
 
 ## Positive prompts

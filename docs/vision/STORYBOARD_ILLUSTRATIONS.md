@@ -1,7 +1,7 @@
 # Tides of Urashima — Storyboard Illustrations (Pitch Package)
 
-**Version:** 1.0  
-**Purpose:** Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless regenerated as 3D via `ART_AUTOMATION_PIPELINE.md`.  
+**Version:** 1.0
+**Purpose:** Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless regenerated as 3D via `ART_AUTOMATION_PIPELINE.md`.
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/art/ART_DIRECTION.md`, `docs/art/CHARACTER_BIBLE.md`, `docs/ui/CINEMATICS.md`
 
 ---
@@ -118,44 +118,44 @@ docs/pitch/illustrations/
 Briefs align with `STORYBOARD.md`. Use as ComfyUI/GameLab prompt body.
 
 ### SC-00 — Prologue
-- **Mood:** Mythic, fateful  
-- **Elements:** Wounded spirit-turtle in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box  
-- **Palette:** Deep sea teal, gold flash, black vignette  
+- **Mood:** Mythic, fateful
+- **Elements:** Wounded spirit-turtle in nets, Urashima cutting free, distant Dragon Palace gold under waves, red lacquer box
+- **Palette:** Deep sea teal, gold flash, black vignette
 
 ### SC-01 — Arrival
-- **Mood:** Lonely, grey sky  
-- **Elements:** Urashima kneeling on pale sand `#C9B89A`, clutching box `#6B1A1A`, driftwood, distant collapsed torii fragment, fog `#8B9DAF`  
-- **Camera:** Wide establishing  
+- **Mood:** Lonely, grey sky
+- **Elements:** Urashima kneeling on pale sand `#C9B89A`, clutching box `#6B1A1A`, driftwood, distant collapsed torii fragment, fog `#8B9DAF`
+- **Camera:** Wide establishing
 
 ### SC-02 — Empty Village
-- **Mood:** Dread, silence  
-- **Elements:** Submerged houses, rotting festival banner `#8B3A2A`, child sandal in puddle, moss `#3D5C4A`, no living people  
-- **Camera:** Slow pan feel — wide hub shot  
+- **Mood:** Dread, silence
+- **Elements:** Submerged houses, rotting festival banner `#8B3A2A`, child sandal in puddle, moss `#3D5C4A`, no living people
+- **Camera:** Slow pan feel — wide hub shot
 
 ### SC-03 — Cracked Torii
-- **Mood:** Accusatory, spiritual  
-- **Elements:** Broken torii hero prop, cyan spirit motes `#4AE8D8`, low angle up, Yuzu as voice only (particles, not full body)  
+- **Mood:** Accusatory, spiritual
+- **Elements:** Broken torii hero prop, cyan spirit motes `#4AE8D8`, low angle up, Yuzu as voice only (particles, not full body)
 
 ### SC-07 — Water Puzzle (**no dialogue**)
-- **Mood:** Quiet problem-solving  
-- **Elements:** Flooded chamber, stone switch, water at HIGH state, ancient latch platform — **no text, no speech bubbles**  
-- **Note:** Illustration matches intentional silence (`NARRATIVE_WRITING_GUIDE.md` §4)  
+- **Mood:** Quiet problem-solving
+- **Elements:** Flooded chamber, stone switch, water at HIGH state, ancient latch platform — **no text, no speech bubbles**
+- **Note:** Illustration matches intentional silence (`NARRATIVE_WRITING_GUIDE.md` §4)
 
 ### SC-09 — Shore Wraith
-- **Mood:** Confrontational, tragic  
-- **Elements:** Colossal draped wraith ~4m, villager faces in cloth folds, Urashima small in foreground, cave pool, teal drip highlights  
+- **Mood:** Confrontational, tragic
+- **Elements:** Colossal draped wraith ~4m, villager faces in cloth folds, Urashima small in foreground, cave pool, teal drip highlights
 
 ### SC-11 — Otohime Flashback
-- **Mood:** Seductive, too perfect  
-- **Elements:** Porcelain court dress, coral gold trim `#D4A55A`, cave wall overlay, letterbox crop  
+- **Mood:** Seductive, too perfect
+- **Elements:** Porcelain court dress, coral gold trim `#D4A55A`, cave wall overlay, letterbox crop
 
 ### SC-12 — Palace Gate
-- **Mood:** Awe, scale  
-- **Elements:** Ryūgū-jō gate floating over void sea, lacquer pillars `#8B2A3A`, vertigo tilt, pearl glow  
+- **Mood:** Awe, scale
+- **Elements:** Ryūgū-jō gate floating over void sea, lacquer pillars `#8B2A3A`, vertigo tilt, pearl glow
 
 ### SC-16 — Choice
-- **Mood:** Stillness  
-- **Elements:** Urashima close-up, box full bloom `#8B2A3A` glow, three abstract light paths (rewind / anchor / drift) — no UI chrome required  
+- **Mood:** Stillness
+- **Elements:** Urashima close-up, box full bloom `#8B2A3A` glow, three abstract light paths (rewind / anchor / drift) — no UI chrome required
 
 ### SC-17a / b / c — Endings
 | Ending | Key visual |
@@ -205,15 +205,15 @@ stylized NPR game concept art, melancholy, no people, no text
 
 Suggested slide order for a 10-minute presentation:
 
-1. Title — `party_lineup.png`  
-2. Elevator pitch (text)  
-3. SC-00 → SC-01 — prologue + arrival  
-4. SC-02 hub — exploration loop  
-5. SC-05 / SC-09 — combat + boss  
-6. SC-12 palace — Act III scale  
-7. SC-16 + three ending thumbs  
-8. Scope slide (2–3 h, 3 endings, en/ja/zh)  
-9. Vertical slice gate — SC-02 3D target  
+1. Title — `party_lineup.png`
+2. Elevator pitch (text)
+3. SC-00 → SC-01 — prologue + arrival
+4. SC-02 hub — exploration loop
+5. SC-05 / SC-09 — combat + boss
+6. SC-12 palace — Act III scale
+7. SC-16 + three ending thumbs
+8. Scope slide (2–3 h, 3 endings, en/ja/zh)
+9. Vertical slice gate — SC-02 3D target
 
 ---
 

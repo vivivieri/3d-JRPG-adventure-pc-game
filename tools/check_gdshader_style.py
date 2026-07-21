@@ -57,7 +57,7 @@ def main() -> int:
         check_shader(path, errors)
 
     if errors:
-        print(f"[FAIL] L1_gdshader_style — {len(errors)} issue(s):")
+        print(f"[FAIL] L1_gdshader_style — {len(errors)} issue(s):", file=sys.stderr)
         for err in errors:
             print(f"  - {err}")
         return 1

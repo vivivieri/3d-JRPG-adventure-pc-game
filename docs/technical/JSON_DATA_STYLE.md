@@ -1,8 +1,8 @@
 # JSON Data Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `game/data/**/*.json` — story, combat, registries, QA catalogs  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `game/data/**/*.json` — story, combat, registries, QA catalogs
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Architecture:** [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md)
 
 ---

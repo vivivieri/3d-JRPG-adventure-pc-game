@@ -1,6 +1,6 @@
 # Visual QA — How AI Reviews Look & Feel
 
-**Version:** 1.0  
+**Version:** 1.0
 **Problem:** An agent can “succeed” at placing a `BoxMesh`, decide it looks fine in the abstract, and replicate that placeholder across every zone. **Policy text alone does not prevent this.**
 
 **Rule:** AI does **not** pass visual work on log output or node counts alone. It must pass **automated visual gates** + **screenshot review** against `docs/art/ART_DIRECTION.md`.

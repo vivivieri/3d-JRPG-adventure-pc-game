@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -100,17 +101,17 @@ def cmd_apply(args: argparse.Namespace) -> int:
     project = game_dir / "project.godot"
 
     if not presets.is_file():
-        print(f"[FAIL] missing {presets}")
+        print(f"[FAIL] missing {presets}", file=sys.stderr)
         return 1
     if not project.is_file():
-        print(f"[FAIL] missing {project}")
+        print(f"[FAIL] missing {project}", file=sys.stderr)
         return 1
 
     enc_key = os.environ.get(cfg["pck_encryption"]["env_key"], "").strip()
     if enc_key:
         enc_key = validate_hex_key(enc_key, cfg["pck_encryption"]["env_key"])
     elif args.require:
-        print(f"[FAIL] {cfg['pck_encryption']['env_key']} required for ship export (SHIP_RELEASE=1)")
+        print(f"[FAIL] {cfg['pck_encryption']['env_key']} required for ship export (SHIP_RELEASE=1)", file=sys.stderr)
         return 1
     else:
         print(f"[WARN] {cfg['pck_encryption']['env_key']} unset — PCK encryption skipped")
@@ -125,7 +126,7 @@ def cmd_apply(args: argparse.Namespace) -> int:
             "Build with tools/build_godot_export_templates_encrypted.sh first."
         )
         if args.require:
-            print(f"[FAIL] {msg}")
+            print(f"[FAIL] {msg}", file=sys.stderr)
             return 1
         print(f"[WARN] {msg}")
         return 0
@@ -145,7 +146,7 @@ def cmd_apply(args: argparse.Namespace) -> int:
         inject_save_pepper(project, save_key)
         print("[OK]   save_hmac_pepper injected into project.godot for export")
     elif args.require:
-        print(f"[FAIL] {cfg['save_integrity']['env_hmac_key']} required for ship export")
+        print(f"[FAIL] {cfg['save_integrity']['env_hmac_key']} required for ship export", file=sys.stderr)
         return 1
     else:
         print(f"[WARN] {cfg['save_integrity']['env_hmac_key']} unset — save pepper not injected")

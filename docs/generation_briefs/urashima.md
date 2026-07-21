@@ -1,7 +1,7 @@
 # Generation brief — `urashima`
 
-**Status:** P0 · Phase 1 vertical slice  
-**Authority:** `docs/art/CHARACTER_BIBLE.md` §2, `game/data/models/qa_catalog.json`  
+**Status:** P0 · Phase 1 vertical slice
+**Authority:** `docs/art/CHARACTER_BIBLE.md` §2, `game/data/models/qa_catalog.json`
 **Cross-refs:** `docs/art/GENERATION_READINESS.md`, `docs/art/ART_AUTOMATION_PIPELINE.md` §5
 
 ---
@@ -140,11 +140,11 @@ floating accessories, symmetrical perfect clean clothes
 
 ## Costume layers (model order)
 
-1. Body + face  
-2. Tunic + trousers  
-3. Coat (open front)  
-4. Obi + rope belt  
-5. Sandals  
+1. Body + face
+2. Tunic + trousers
+3. Coat (open front)
+4. Obi + rope belt
+5. Sandals
 6. Lacquer box (separate mesh)
 
 ---

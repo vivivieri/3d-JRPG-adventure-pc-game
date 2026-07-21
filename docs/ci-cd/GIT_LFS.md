@@ -1,8 +1,8 @@
 # Git LFS — Large Asset Tracking
 
-**Version:** 1.0  
-**Applies to:** `game/development` — hero meshes, textures, audio (M5+)  
-**Patterns:** `.gitattributes` at repo root  
+**Version:** 1.0
+**Applies to:** `game/development` — hero meshes, textures, audio (M5+)
+**Patterns:** `.gitattributes` at repo root
 **Cross-refs:** `docs/art/ASSET_COMPLIANCE.md`, `docs/workflow/DEVELOPMENT_LIFECYCLE.md` §10.4
 
 ---
@@ -70,5 +70,5 @@ git lfs status
 
 ## 6. Cross-refs
 
-- `tools/register_asset.py` — manifest after adding assets  
+- `tools/register_asset.py` — manifest after adding assets
 - `bash tools/check_asset_compliance.sh` — license gate before ship

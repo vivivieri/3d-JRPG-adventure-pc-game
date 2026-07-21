@@ -88,7 +88,7 @@ if [[ -d "$GDAI_DIR" ]]; then
     TOOL_COUNT="$(curl -sf "http://127.0.0.1:${GDAI_PORT}/tools" | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('mcp_tools',[])))")"
     ok "GDAI HTTP bridge :${GDAI_PORT} (${TOOL_COUNT} tools)"
   elif [[ $WITH_EDITOR -eq 1 ]]; then
-    bash tools/ensure_gdai_mcp.sh --wait 90 >/dev/null 2>&1 || true
+    bash tools/ensure_gdai_mcp.sh --wait 90 >/dev/null 2>&1 || true  # swallow-ok: best-effort bridge boot
     if curl -sf "http://127.0.0.1:${GDAI_PORT}/tools" >/dev/null 2>&1; then
       ok "GDAI HTTP bridge :${GDAI_PORT} (after ensure_gdai_mcp)"
     else
@@ -120,7 +120,7 @@ if [[ -d "$GODOTIQ_DIR" ]]; then
     fail "GodotIQ not enabled — Project → Plugins → GodotIQ"
   fi
 
-  if ss -tln 2>/dev/null | grep -q ":${GODOTIQ_PORT} " || netstat -tln 2>/dev/null | grep -q ":${GODOTIQ_PORT} "; then
+  if ss -tln 2>/dev/null | grep -q ":${GODOTIQ_PORT} " || netstat -tln 2>/dev/null | grep -q ":${GODOTIQ_PORT} "; then  # swallow-ok: ss or netstat
     ok "Godotiq WebSocket bridge :${GODOTIQ_PORT}"
   elif [[ $WITH_EDITOR -eq 1 ]]; then
   warn "Godotiq WebSocket :${GODOTIQ_PORT} not listening — enable GodotIQ plugin and wait ~5s"
@@ -133,7 +133,7 @@ fi
 
 # --- Godot MCP Pro ---
 if [[ -f tools/godot-mcp-pro-server/build/index.js ]]; then
-  MCP_VER="$(plugin_version game/addons/godot_mcp/plugin.cfg 2>/dev/null || true)"
+  MCP_VER="$(plugin_version game/addons/godot_mcp/plugin.cfg 2>/dev/null || true)"  # swallow-ok: addon optional on main
   ok "Godot MCP Pro server built (addon v${MCP_VER:-?})"
   if command -v node >/dev/null 2>&1; then
     NODE_VER="$(node --version)"

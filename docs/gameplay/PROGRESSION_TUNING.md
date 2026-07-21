@@ -1,6 +1,6 @@
 # Tides of Urashima — Progression & Tuning Sheet
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/gameplay/ENCOUNTER_TABLE.md`, `docs/gameplay/COMBAT_SYSTEMS.md`, `game/data/characters/party.json`, `game/data/shop/roku_shop.json`, `docs/gameplay/ITEMS_AND_ECONOMY.md`
 
 **Single source of truth** for level curve, party stats at milestones, economy affordances, and difficulty modes.

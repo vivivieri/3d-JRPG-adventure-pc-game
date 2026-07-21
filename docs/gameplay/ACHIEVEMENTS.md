@@ -1,6 +1,6 @@
 # Tides of Urashima — Steam Achievements
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/ENDING_DESIGN.md`, `docs/world/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`
 
 **Total:** 13 achievements (easy distribution for short game) — matches `game/data/achievements/achievements.json`

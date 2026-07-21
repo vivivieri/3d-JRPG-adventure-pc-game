@@ -1,7 +1,7 @@
 # Generation brief — `tide_wraith`
 
-**Status:** M5 standard enemy  
-**Authority:** `CHARACTER_BIBLE.md` §6, `qa_catalog.json`  
+**Status:** M5 standard enemy
+**Authority:** `CHARACTER_BIBLE.md` §6, `qa_catalog.json`
 **Phase:** Caves + palace trash mobs
 
 ## Intent

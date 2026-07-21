@@ -1,8 +1,8 @@
 # GDScript 2.0 Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `game/scripts/**/*.gd`, `game/tests/**/*.gd`, editor tools on `game/development`  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `game/scripts/**/*.gd`, `game/tests/**/*.gd`, editor tools on `game/development`
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Engine:** Godot **4.7** · Forward+
 
 ---

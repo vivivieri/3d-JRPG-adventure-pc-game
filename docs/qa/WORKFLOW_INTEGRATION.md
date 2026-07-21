@@ -1,8 +1,8 @@
 # Workflow Integration Registry — Avoid Feature Drift
 
-**Version:** 1.0  
-**Authority:** `game/data/qa/workflow_integration_registry.json`  
-**Gate:** `python3 tools/validate_workflow_integration.py` (`L0_workflow_integration`)  
+**Version:** 1.0
+**Authority:** `game/data/qa/workflow_integration_registry.json`
+**Gate:** `python3 tools/validate_workflow_integration.py` (`L0_workflow_integration`)
 **Cross-refs:** `docs/qa/ALIGNMENT_AUDIT.md`, `docs/qa/AGENT_SESSION_TELEMETRY.md`
 
 ---

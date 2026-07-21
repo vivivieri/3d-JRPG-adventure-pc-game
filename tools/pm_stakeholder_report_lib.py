@@ -80,7 +80,9 @@ def sprint_progress(board: dict[str, Any]) -> dict[str, Any]:
 def phase_context(phases: dict[str, Any], board: dict[str, Any]) -> dict[str, Any]:
     active = board.get("active_sprint", {})
     phase_num = active.get("phase")
-    row = next((p for p in phases.get("phases", []) if p.get("phase") == phase_num), {})
+    row: dict[str, Any] = next(
+        (p for p in phases.get("phases", []) if p.get("phase") == phase_num), {}
+    )
     return {
         "phase": phase_num,
         "name": row.get("name"),

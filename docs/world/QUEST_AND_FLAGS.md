@@ -1,6 +1,6 @@
 # Tides of Urashima — Quest & Story Flag Map
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/STORYBOARD.md`, `docs/vision/GDD.md`, `game/data/quests/main_quests.json`
 
 ---
@@ -25,7 +25,7 @@
 
 ### Q1 — The Return (`the_return`)
 
-**Unlock:** Game start (SC-01)  
+**Unlock:** Game start (SC-01)
 **Log text:** *Explore the ruined village and learn what became of home.*
 
 | Stage | ID | Objective | Completion flag |
@@ -33,14 +33,14 @@
 | 1 | `explore_village` | Investigate banner, sandal, and well | `inspected_banner` AND `inspected_sandal` AND `inspected_well` |
 | 2 | `meet_roku` | Speak with Roku at his shack | `met_roku` |
 
-**Rewards:** 30 XP  
+**Rewards:** 30 XP
 **Unblocks:** Cave entrance (`cave_entrance_unlocked` set in SC-04)
 
 ---
 
 ### Q2 — Echoes at the Torii (`echoes_at_torii`)
 
-**Unlock:** SC-03 (`met_yuzu_spirit`)  
+**Unlock:** SC-03 (`met_yuzu_spirit`)
 **Log text:** *Follow the spirit's voice into the Tidal Caves.*
 
 | Stage | ID | Objective | Completion flag |
@@ -56,7 +56,7 @@
 
 ### Q3 — Depths of Guilt (`depths_of_guilt`)
 
-**Unlock:** SC-09 complete  
+**Unlock:** SC-09 complete
 **Log text:** *Yuzu joins the journey. Learn what the palace took.*
 
 | Stage | ID | Objective | Completion flag |
@@ -65,14 +65,14 @@
 | 2 | `palace_vision` | Witness Otohime's flashback | `saw_palace_vision` |
 | 3 | `reach_gate` | Arrive at Dragon Palace Gate | `gate_reached` |
 
-**Rewards:** 50 XP  
+**Rewards:** 50 XP
 **Party:** Yuzu playable in combat from `yuzu_joined` onward
 
 ---
 
 ### Q4 — The Palace Gate (`palace_gate`)
 
-**Unlock:** SC-12 (`gate_reached`)  
+**Unlock:** SC-12 (`gate_reached`)
 **Log text:** *Enter the stolen-time palace and face its guardian.*
 
 | Stage | ID | Objective | Completion flag |
@@ -80,14 +80,14 @@
 | 1 | `learn_box_truth` | Hear Roku in the mirror chamber | `knows_box_truth` |
 | 2 | `defeat_sentinel` | Defeat Palace Sentinel | `sentinel_defeated` |
 
-**Rewards:** 100 XP; `palace_edge` granted by `enc_sc14_sentinel` on win (not quest JSON)  
+**Rewards:** 100 XP; `palace_edge` granted by `enc_sc14_sentinel` on win (not quest JSON)
 **Blocker:** `wraith_pearl` required to open gate interior (dropped by Shore Wraith at SC-09)
 
 ---
 
 ### Q5 — The Tide's Answer (`the_tide_answer`)
 
-**Unlock:** SC-14 complete  
+**Unlock:** SC-14 complete
 **Log text:** *Face the Tide Keeper and decide the village's fate.*
 
 | Stage | ID | Objective | Completion flag |

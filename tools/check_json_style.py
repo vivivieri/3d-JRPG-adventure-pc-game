@@ -10,6 +10,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "game" / "data"
 
+# Config JSON outside game/data — format-only (no key naming rules).
+EXTRA_JSON_GLOBS = (
+    ".cursor/environment.json",
+    ".cursor/mcp.json.example",
+    "steam/trailer_locales.json",
+)
+
 LOCALE_KEYS = frozenset({"en", "ja", "zh", "zh-Hant", "_comment"})
 KEY_OK = re.compile(
     r"^("
@@ -61,34 +68,45 @@ def check_format(path: Path, errors: list[str]) -> None:
         errors.append(f"{path}: invalid JSON — {exc}")
 
 
-def main() -> int:
-    if not DATA.is_dir():
-        print("[SKIP] no game/data tree")
-        return 0
+def collect_json_files() -> tuple[list[Path], list[Path]]:
+    """Return (game/data files, extra config files)."""
+    data_files: list[Path] = []
+    if DATA.is_dir():
+        data_files = sorted(DATA.rglob("*.json"))
+    extra_files: list[Path] = []
+    for rel in EXTRA_JSON_GLOBS:
+        path = ROOT / rel
+        if path.is_file():
+            extra_files.append(path)
+    return data_files, extra_files
 
-    files = sorted(DATA.rglob("*.json"))
-    if not files:
-        print("[SKIP] no JSON files under game/data")
+
+def main() -> int:
+    data_files, extra_files = collect_json_files()
+    if not data_files and not extra_files:
+        print("[SKIP] no JSON files to lint")
         return 0
 
     errors: list[str] = []
-    for path in files:
+    for path in data_files + extra_files:
         check_format(path, errors)
         rel = str(path.relative_to(ROOT))
         if any(rel in err and "invalid JSON" in err for err in errors):
             continue
-        data = json.loads(path.read_text(encoding="utf-8"))
-        check_keys(data, rel, errors)
+        if path in data_files:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            check_keys(data, rel, errors)
 
     if errors:
-        print(f"[FAIL] L1_json_style — {len(errors)} issue(s):")
+        print(f"[FAIL] L1_json_style — {len(errors)} issue(s):", file=sys.stderr)
         for err in errors[:40]:
-            print(f"  - {err}")
+            print(f"  - {err}", file=sys.stderr)
         if len(errors) > 40:
-            print(f"  … and {len(errors) - 40} more")
+            print(f"  … and {len(errors) - 40} more", file=sys.stderr)
         return 1
 
-    print(f"[PASS] L1_json_style — {len(files)} file(s)")
+    detail = f"{len(data_files)} game/data + {len(extra_files)} config" if extra_files else f"{len(data_files)}"
+    print(f"[PASS] L1_json_style — {detail} file(s)")
     return 0
 
 

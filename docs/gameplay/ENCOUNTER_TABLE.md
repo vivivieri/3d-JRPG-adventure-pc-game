@@ -1,6 +1,6 @@
 # Tides of Urashima — Encounter & Pacing Table
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/GDD.md` §4–8, `docs/gameplay/BOSS_DESIGNS.md`, `game/data/enemies/enemies.json`
 
 ---

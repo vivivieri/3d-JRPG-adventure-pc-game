@@ -1,8 +1,8 @@
 # R&R Cheat Sheet — Roles & Responsibilities
 
-**Version:** 1.5  
-**Print this:** One-page reference for every agent session  
-**Companion:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)  
+**Version:** 1.5
+**Print this:** One-page reference for every agent session
+**Companion:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` — how each role is **enforced** (CI, PR, branch protection)
 **Authority:** `.cursorrules` §0–§1 · `docs/agents/MCP_STACK.md` · `docs/agents/MULTI_AGENT_TEAM.md` · `docs/workflow/AGILE_WITHIN_PHASES.md` §11
 
 ---
@@ -200,12 +200,12 @@ P1-00 (pm)     bootstrap project.godot + CI
 
 ### Definition of done (sprint issue)
 
-- [ ] Gate IDs PASS on PR commit  
-- [ ] `bash tools/run_ci_checks.sh` green (game branch)  
-- [ ] `L3_gdai_built` if scenes touched  
-- [ ] **`L3_perf_review`** if scenes, shaders, materials, meshes, lights, or fog changed  
-- [ ] Evidence paths in PR / issue  
-- [ ] Board status `done` + GitHub issue closed  
+- [ ] Gate IDs PASS on PR commit
+- [ ] `bash tools/run_ci_checks.sh` green (game branch)
+- [ ] `L3_gdai_built` if scenes touched
+- [ ] **`L3_perf_review`** if scenes, shaders, materials, meshes, lights, or fog changed
+- [ ] Evidence paths in PR / issue
+- [ ] Board status `done` + GitHub issue closed
 
 **Full policy:** `docs/agents/SPRINT_ORCHESTRATION.md` · `docs/agents/PM_AGENT_RUNBOOK.md` · `docs/workflow/AGILE_WITHIN_PHASES.md`
 
@@ -250,10 +250,10 @@ godotiq_perf_snapshot(detail="normal")
 
 When fixing a bug, re-run per `docs/qa/QA_AND_BUG_PROCESS.md` §6:
 
-1. Original repro steps  
-2. One scene before and after the affected scene  
-3. **`L3_perf_review`** if fix touched scenes/shaders/materials  
-4. Affected **`INT-*`** integration scenario when flows changed  
+1. Original repro steps
+2. One scene before and after the affected scene
+3. **`L3_perf_review`** if fix touched scenes/shaders/materials
+4. Affected **`INT-*`** integration scenario when flows changed
 
 **Invalid PASS:** F5 clean but no perf snapshot on a scene PR · FPS below target with no remediation brief · merging without re-running affected `INT-*` after a fix.
 
@@ -393,13 +393,13 @@ python3 tools/pm_bundle_evidence.py <issue_id> \
 
 ## Forbidden without user override
 
-- Hand-editing ship `.tscn` in Cursor  
-- Gameplay/visual work with GDAI disconnected  
-- MCP Pro / Godotiq for scene mutations  
-- Kenney kits, unknown-license web assets  
-- Summer Engine, Fennara (fourth scene editor)  
-- Skipping phase gates via sprint reprioritization  
-- **Cross-cutting factory feature merged without `workflow_integration_registry.json` entry** — run `bash tools/check_feature_integration.sh --remind`  
+- Hand-editing ship `.tscn` in Cursor
+- Gameplay/visual work with GDAI disconnected
+- MCP Pro / Godotiq for scene mutations
+- Kenney kits, unknown-license web assets
+- Summer Engine, Fennara (fourth scene editor)
+- Skipping phase gates via sprint reprioritization
+- **Cross-cutting factory feature merged without `workflow_integration_registry.json` entry** — run `bash tools/check_feature_integration.sh --remind`
 
 ---
 

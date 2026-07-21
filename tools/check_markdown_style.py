@@ -19,6 +19,7 @@ SKIP_FILES = {
 LINK_RE = re.compile(r"\]\(([^)]+)\)")
 SKIP_LINK_PREFIXES = ("http://", "https://", "#", "mailto:")
 SETEXT_RE = re.compile(r"^(=+|-+)\s*$")
+HEADING_RE = re.compile(r"^(#{1,6})\s+\S")
 
 
 def collect_markdown_files() -> list[Path]:
@@ -49,6 +50,27 @@ def strip_fenced_code(raw: str) -> str:
     return "\n".join(parts)
 
 
+def check_heading_levels(rel: str, lines: list[str], errors: list[str]) -> None:
+    last_line = 0
+    prev_level = 0
+    for index, line in enumerate(lines, 1):
+        match = HEADING_RE.match(line)
+        if not match:
+            continue
+        level = len(match.group(1))
+        if prev_level and level > prev_level + 1:
+            gap = index - last_line - 1
+            # Common doc scaffold: H1 title → version blurb → ### first section.
+            allow_h1_h3 = prev_level == 1 and level == 3 and gap >= 2
+            if not allow_h1_h3:
+                errors.append(
+                    f"{rel}:{index}: heading level jumps from H{prev_level} to H{level} — "
+                    "increment by one (MARKDOWN_STYLE.md §3)"
+                )
+        last_line = index
+        prev_level = 1 if level == 1 else level
+
+
 def check_file(path: Path, errors: list[str]) -> None:
     rel = path.relative_to(ROOT).as_posix()
     raw = path.read_text(encoding="utf-8")
@@ -62,9 +84,13 @@ def check_file(path: Path, errors: list[str]) -> None:
 
     lines = raw.splitlines()
     for index, line in enumerate(lines, 1):
+        if line != line.rstrip():
+            errors.append(f"{rel}:{index}: trailing whitespace")
         if SETEXT_RE.match(line) and index >= 2 and lines[index - 2].strip():
             errors.append(f"{rel}:{index}: setext heading underline — use ATX # headings")
             break
+
+    check_heading_levels(rel, lines, errors)
 
     for match in LINK_RE.finditer(raw):
         target = match.group(1).split("#")[0].strip()
@@ -86,11 +112,11 @@ def main() -> int:
         check_file(path, errors)
 
     if errors:
-        print(f"[FAIL] L1_markdown_style — {len(errors)} issue(s):")
+        print(f"[FAIL] L1_markdown_style — {len(errors)} issue(s):", file=sys.stderr)
         for err in errors[:40]:
-            print(f"  - {err}")
+            print(f"  - {err}", file=sys.stderr)
         if len(errors) > 40:
-            print(f"  … and {len(errors) - 40} more")
+            print(f"  … and {len(errors) - 40} more", file=sys.stderr)
         return 1
 
     print(f"[PASS] L1_markdown_style — {len(files)} file(s)")

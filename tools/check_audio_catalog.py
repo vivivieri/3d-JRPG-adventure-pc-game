@@ -49,7 +49,7 @@ def main() -> int:
         if path.is_file():
             print(f"  [OK]   {track_id} → {path.relative_to(ROOT)}")
         else:
-            print(f"  [FAIL] {track_id} missing ({path.relative_to(ROOT)})")
+            print(f"  [FAIL] {track_id} missing ({path.relative_to(ROOT)})", file=sys.stderr)
             missing.append(track_id)
 
     if missing:

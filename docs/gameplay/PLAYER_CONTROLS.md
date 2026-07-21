@@ -1,7 +1,7 @@
 # Player Controls — Tides of Urashima
 
-**Version:** 1.0  
-**Authority:** `docs/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`  
+**Version:** 1.0
+**Authority:** `docs/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`
 **Ship target:** Keyboard + mouse + Xbox-layout gamepad on main path (M5 polish)
 
 ---

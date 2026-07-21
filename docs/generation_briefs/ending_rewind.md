@@ -1,6 +1,6 @@
 # Generation brief — `ending_rewind`
 
-**Status:** Phase 6 ending (SC-17a)  
+**Status:** Phase 6 ending (SC-17a)
 **Authority:** `ENVIRONMENT_KITS.md` §7 SC-17a, `ENDING_DESIGN.md`, `CINEMATICS.md`
 
 ## Intent

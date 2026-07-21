@@ -1,9 +1,9 @@
 # Acceptance Criteria — Measurable QA Pass/Fail
 
-**Version:** 1.3  
+**Version:** 1.3
 **Authority:** If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA.
 
-**Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`  
+**Machine-readable catalog:** `game/data/qa/acceptance_criteria.json`
 **Cross-refs:** `docs/workflow/AI_DEV_WORKFLOW.md` §4, `docs/technical/CODE_BASE_CLASS_RULES.md`, `docs/qa/QA_REMEDIATION_LOOP.md`, `docs/qa/FLOW_QA.md`, `docs/art/MODEL_QA.md`, `docs/art/VISUAL_QA.md`, `docs/audio/AUDIO_QA.md`, `docs/qa/PERFORMANCE_BASELINE.md`
 
 ---
@@ -135,9 +135,9 @@ Full thresholds: `game/data/qa/acceptance_criteria.json`.
 
 Jury scripts (`review_*_vision.py`) **recompute** pass after each model response:
 
-1. Every criterion boolean must match `expect` in catalog  
-2. `confidence ≥ 0.65`  
-3. On fail: `issues[]` must be non-empty  
+1. Every criterion boolean must match `expect` in catalog
+2. `confidence ≥ 0.65`
+3. On fail: `issues[]` must be non-empty
 4. Consensus: ≥2 active models with `acceptance.valid_pass`
 
 Jury JSON includes:
@@ -210,7 +210,7 @@ python3 tools/qa_write_gate_result.py --gate L2_visual_palette --status pass \
 
 ## 8. Relationship to remediation
 
-FAIL without acceptance criteria = noise.  
+FAIL without acceptance criteria = noise.
 FAIL **with** gate id + measured values + evidence = actionable input to `QA_REMEDIATION_LOOP.md`.
 
 Always chain: **measure → compare to catalog → brief → one lever → re-measure**.

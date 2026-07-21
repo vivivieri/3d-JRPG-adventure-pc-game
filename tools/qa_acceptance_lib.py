@@ -32,7 +32,12 @@ def _criterion_ok(parsed: dict, key: str, expect: Any) -> bool:
 def normalize_jury_review(parsed: dict, domain: str, criteria: dict | None = None) -> dict:
     """Recompute overall_pass from measurable criteria — do not trust model self-report alone."""
     rules = jury_rules(domain, criteria)
-    conf_min = float(rules.get("min_confidence", criteria["global_rules"]["jury_min_confidence"]))
+    fallback_conf = 0.5
+    if criteria:
+        fallback_conf = float(
+            criteria.get("global_rules", {}).get("jury_min_confidence", fallback_conf)
+        )
+    conf_min = float(rules.get("min_confidence", fallback_conf))
     conf = float(parsed.get("confidence", 0) or 0)
 
     criteria_results: dict[str, bool] = {}

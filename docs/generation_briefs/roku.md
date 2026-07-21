@@ -1,7 +1,7 @@
 # Generation brief — `roku`
 
-**Status:** M5 · Phase 4 party gate  
-**Authority:** `CHARACTER_BIBLE.md` §4, `qa_catalog.json`  
+**Status:** M5 · Phase 4 party gate
+**Authority:** `CHARACTER_BIBLE.md` §4, `qa_catalog.json`
 **Phase:** SC-04 shack; field follower SC-12+
 
 ## Intent

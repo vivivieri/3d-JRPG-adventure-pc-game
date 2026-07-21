@@ -1,7 +1,7 @@
 # Plugin compatibility matrix (Godot 4.7)
 
-**Engine pin:** `GODOT_VERSION=4.7-stable` (`tools/install_cloud_dev.sh`)  
-**Audit date:** July 2026  
+**Engine pin:** `GODOT_VERSION=4.7-stable` (`tools/install_cloud_dev.sh`)
+**Audit date:** July 2026
 **Check script:** `bash tools/check_plugin_compatibility.sh [--with-editor]`
 
 Run this audit **before Phase 1 build** and after any engine or plugin upgrade.

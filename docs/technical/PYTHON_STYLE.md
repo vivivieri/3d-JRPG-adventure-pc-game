@@ -1,7 +1,7 @@
 # Python 3 Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `tools/*.py` on `main` — validators, CI, procedural generators, reference libs  
+**Version:** 1.0
+**Scope:** `tools/*.py` on `main` — validators, CI, procedural generators, reference libs
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 
 ---

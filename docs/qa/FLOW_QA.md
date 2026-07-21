@@ -1,6 +1,6 @@
 # Game Flow QA — Progression Gates + Iterative Fix Loop
 
-**Version:** 1.0  
+**Version:** 1.0
 **Problem:** An agent can wire a scene “done” while the **main story soft-locks**, a **quest never advances**, or **combat hangs** — then patch the same trigger logic repeatedly without fixing root cause.
 
 **Rule:** Flow tasks pass **data validation (L0) → integration scenarios (L4) → E2E spine (L5)** before human playtest. Every FAIL produces a **flow remediation brief** with one changed lever — same as art/audio (`docs/qa/QA_REMEDIATION_LOOP.md`).

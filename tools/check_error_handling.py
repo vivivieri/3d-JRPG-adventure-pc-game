@@ -10,12 +10,40 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "tools"
-GAME_SCRIPTS = ROOT / "game" / "scripts"
+GAME_GD_DIRS = (ROOT / "game" / "scripts", ROOT / "game" / "tests")
+MCP_TS_DIR = ROOT / "tools" / "godot-mcp-pro-server"
 
 BASH_FORBIDDEN_RE = re.compile(r"&&\s+.+\s+\|\|\s+fail\b|&&\s+ok\b.+\|\|\s+fail\b")
+BASH_SWALLOW_TRUE_RE = re.compile(r"\|\|\s*true\b")
+BASH_SWALLOW_STDERR_RE = re.compile(r"2>/dev/null")
+BASH_SWALLOW_OK_LINE_RE = re.compile(r"#\s*swallow-ok\b")
+BASH_SWALLOW_OK_SCRIPT_PREFIXES = (
+    "install_",
+    "ensure_",
+    "setup_",
+    "run_post_",
+    "run_alignment_",
+    "run_visual_",
+    "run_model_",
+    "run_audio_",
+    "rebuild_",
+    "qa_emit_",
+)
+BASH_SWALLOW_OK_INLINE_RE = re.compile(
+    r"merge-base|rev-list|echo unknown|head -1|print -quit|is_file\(\)|--if-present"
+)
+
 GD_EMPTY_PUSH_ERROR_RE = re.compile(r'push_error\s*\(\s*["\'][\s]*["\']\s*\)')
 GD_BARE_PUSH_ERROR_RE = re.compile(r"push_error\s*\(\s*\)")
 GD_RES_PATH_IN_PRINT_RE = re.compile(r'print\s*\([^)]*res://')
+
+TS_SILENT_CATCH_RE = re.compile(
+    r"catch\s*(?:\([^)]*\))?\s*\{([^}]*)\}",
+    re.MULTILINE | re.DOTALL,
+)
+TS_AUDIBLE_CATCH_RE = re.compile(
+    r"console\.(error|warn)|throw\s|return\s+\{[^}]*error",
+)
 
 
 def _exc_type_name(handler: ast.ExceptHandler) -> str:
@@ -163,6 +191,31 @@ class SilentExceptVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
+class FailPrintVisitor(ast.NodeVisitor):
+    """[FAIL] lines must go to stderr — ERROR_HANDLING.md §2.1."""
+
+    def __init__(self, rel: str, errors: list[str]) -> None:
+        self.rel = rel
+        self.errors = errors
+
+    def visit_Call(self, node: ast.Call) -> None:
+        if _is_print_call(node) and node.args:
+            first = node.args[0]
+            if isinstance(first, ast.Constant) and isinstance(first.value, str):
+                if "[FAIL]" in first.value:
+                    uses_stderr = any(
+                        kw.arg == "file"
+                        and isinstance(kw.value, ast.Attribute)
+                        and kw.value.attr == "stderr"
+                        for kw in node.keywords
+                    )
+                    if not uses_stderr:
+                        self.errors.append(
+                            f"{self.rel}:{node.lineno}: [FAIL] must use print(..., file=sys.stderr)"
+                        )
+        self.generic_visit(node)
+
+
 def run_ruff_error_rules() -> list[str]:
     proc = subprocess.run(
         ["ruff", "check", str(TOOLS), "--select", "E722,S110,S112"],
@@ -186,6 +239,15 @@ def check_python_files(errors: list[str]) -> None:
             errors.append(f"{rel}:{exc.lineno}: syntax error — {exc.msg}")
             continue
         SilentExceptVisitor(rel, errors).visit(tree)
+        FailPrintVisitor(rel, errors).visit(tree)
+
+
+def _bash_swallow_allowed(script_name: str, line: str) -> bool:
+    if BASH_SWALLOW_OK_LINE_RE.search(line):
+        return True
+    if any(script_name.startswith(prefix) for prefix in BASH_SWALLOW_OK_SCRIPT_PREFIXES):
+        return True
+    return bool(BASH_SWALLOW_OK_INLINE_RE.search(line))
 
 
 def check_bash_scripts(errors: list[str]) -> None:
@@ -200,40 +262,80 @@ def check_bash_scripts(errors: list[str]) -> None:
                 errors.append(
                     f"{rel}:{line_no}: use if/else instead of && … || fail (ERROR_HANDLING.md §3.2)"
                 )
+            if not path.name.startswith(("check_", "validate_")):
+                continue
+            if _bash_swallow_allowed(path.name, line):
+                continue
+            if BASH_SWALLOW_TRUE_RE.search(line):
+                errors.append(
+                    f"{rel}:{line_no}: avoid `|| true` in gate scripts — use explicit if or "
+                    "# swallow-ok (ERROR_HANDLING.md §3.2)"
+                )
+            if BASH_SWALLOW_STDERR_RE.search(line) and "||" in line:
+                errors.append(
+                    f"{rel}:{line_no}: avoid suppressing stderr with 2>/dev/null on failure paths — "
+                    "use explicit if or # swallow-ok"
+                )
 
 
 def check_gdscript_files(errors: list[str]) -> int:
-    if not GAME_SCRIPTS.is_dir():
-        return 0
-
     checked = 0
-    for path in sorted(GAME_SCRIPTS.rglob("*.gd")):
+    for base in GAME_GD_DIRS:
+        if not base.is_dir():
+            continue
+        for path in sorted(base.rglob("*.gd")):
+            rel = path.relative_to(ROOT).as_posix()
+            raw = path.read_text(encoding="utf-8")
+            checked += 1
+            if GD_EMPTY_PUSH_ERROR_RE.search(raw) or GD_BARE_PUSH_ERROR_RE.search(raw):
+                errors.append(f"{rel}: push_error requires a non-empty actionable message")
+            if GD_RES_PATH_IN_PRINT_RE.search(raw):
+                errors.append(f"{rel}: do not print res:// paths — player-facing leak risk")
+            for match in re.finditer(r"push_error\s*\([^)]+\)", raw):
+                start = match.end()
+                window = raw[start : start + 240]
+                lines = [
+                    ln.strip()
+                    for ln in window.splitlines()[:6]
+                    if ln.strip() and not ln.strip().startswith("#")
+                ]
+                if not lines:
+                    continue
+                first = lines[0]
+                if first.startswith(("return", "assert", "await ")):
+                    continue
+                context_start = max(0, raw.rfind("\nfunc ", 0, match.start()))
+                context = raw[context_start:match.start()]
+                if re.search(r"\nfunc\s+(_ready|load_|boot_|_load)\b", context):
+                    errors.append(
+                        f"{rel}: push_error in boot/load path should be followed by return "
+                        f"(near: {match.group(0)[:60]})"
+                    )
+    return checked
+
+
+def check_typescript_files(errors: list[str]) -> int:
+    if not MCP_TS_DIR.is_dir():
+        return 0
+    checked = 0
+    for path in sorted(MCP_TS_DIR.rglob("*.ts")):
+        if "node_modules" in path.parts:
+            continue
         rel = path.relative_to(ROOT).as_posix()
         raw = path.read_text(encoding="utf-8")
         checked += 1
-        if GD_EMPTY_PUSH_ERROR_RE.search(raw) or GD_BARE_PUSH_ERROR_RE.search(raw):
-            errors.append(f"{rel}: push_error requires a non-empty actionable message")
-        if GD_RES_PATH_IN_PRINT_RE.search(raw):
-            errors.append(f"{rel}: do not print res:// paths — player-facing leak risk")
-        for match in re.finditer(r"push_error\s*\([^)]+\)", raw):
-            start = match.end()
-            window = raw[start : start + 240]
-            lines = [
-                ln.strip()
-                for ln in window.splitlines()[:6]
-                if ln.strip() and not ln.strip().startswith("#")
-            ]
-            if not lines:
-                continue
-            first = lines[0]
-            if first.startswith(("return", "assert", "await ")):
-                continue
-            context_start = max(0, raw.rfind("\nfunc ", 0, match.start()))
-            context = raw[context_start:match.start()]
-            if re.search(r"\nfunc\s+(_ready|load_|boot_|_load)\b", context):
+        for match in TS_SILENT_CATCH_RE.finditer(raw):
+            body = match.group(1).strip()
+            if not body or body in {"// noop", "/* noop */"}:
+                lineno = raw[: match.start()].count("\n") + 1
                 errors.append(
-                    f"{rel}: push_error in boot/load path should be followed by return "
-                    f"(near: {match.group(0)[:60]})"
+                    f"{rel}:{lineno}: silent catch block — use console.error or return MCP error"
+                )
+                continue
+            if not TS_AUDIBLE_CATCH_RE.search(body):
+                lineno = raw[: match.start()].count("\n") + 1
+                errors.append(
+                    f"{rel}:{lineno}: catch must log (console.error) or return structured error"
                 )
     return checked
 
@@ -244,18 +346,21 @@ def main() -> int:
     check_python_files(errors)
     check_bash_scripts(errors)
     gd_count = check_gdscript_files(errors)
+    ts_count = check_typescript_files(errors)
 
     if errors:
-        print(f"[FAIL] L1_error_handling — {len(errors)} issue(s):")
+        print(f"[FAIL] L1_error_handling — {len(errors)} issue(s):", file=sys.stderr)
         for err in errors[:50]:
-            print(f"  - {err}")
+            print(f"  - {err}", file=sys.stderr)
         if len(errors) > 50:
-            print(f"  … and {len(errors) - 50} more")
+            print(f"  … and {len(errors) - 50} more", file=sys.stderr)
         return 1
 
     parts = ["tools/**/*.py", "tools/*.sh"]
     if gd_count:
         parts.append(f"{gd_count} GDScript file(s)")
+    if ts_count:
+        parts.append(f"{ts_count} TypeScript file(s)")
     print(f"[PASS] L1_error_handling — {', '.join(parts)}")
     return 0
 

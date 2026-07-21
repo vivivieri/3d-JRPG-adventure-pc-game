@@ -24,6 +24,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3 python3-pip ripgrep shellcheck
+          pip3 install --user -q -r tools/requirements-ci.txt
 
       - name: Run main-branch CI checks
         run: bash tools/run_docs_ci_checks.sh

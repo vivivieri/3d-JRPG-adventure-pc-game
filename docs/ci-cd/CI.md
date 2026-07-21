@@ -1,9 +1,9 @@
 # Continuous Integration — GitHub Actions
 
-**Version:** 1.3  
-**Workflow:** `.github/workflows/ci.yml` (main) · `.github/workflows/game-ci.yml` (`game/development`)  
-**Runner scripts:** `bash tools/run_docs_ci_checks.sh` (main) · `bash tools/run_ci_checks.sh` (game)  
-**Authority:** `game/data/qa/acceptance_criteria.json` → `ci_gates` / `docs_ci_gates`  
+**Version:** 1.3
+**Workflow:** `.github/workflows/ci.yml` (main) · `.github/workflows/game-ci.yml` (`game/development`)
+**Runner scripts:** `bash tools/run_docs_ci_checks.sh` (main) · `bash tools/run_ci_checks.sh` (game)
+**Authority:** `game/data/qa/acceptance_criteria.json` → `ci_gates` / `docs_ci_gates`
 **Branch policy:** `docs/workflow/BRANCHING.md`
 
 ---
@@ -54,9 +54,11 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L1_shellcheck` | `bash tools/check_shell_scripts.sh` | Exit 0 — shellcheck on `tools/*.sh` |
 | `L1_json_style` | `python3 tools/check_json_style.py` | Exit 0 — format + naming on `game/data/**/*.json` |
 | `L1_typescript_lint` | `bash tools/check_typescript_lint.sh` | Exit 0 — SKIP when MCP Pro not installed |
-| `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format + links |
+| `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format, whitespace, headings, links |
 | `L1_gdshader_style` | `python3 tools/check_gdshader_style.py` | Exit 0 — NPR shader structure |
-| `L1_error_handling` | `bash tools/check_error_handling.sh` | Exit 0 — ruff E722/S110/S112 + bash/GDScript patterns |
+| `L1_error_handling` | `bash tools/check_error_handling.sh` | Exit 0 — ruff + bash/GDScript/TS patterns; `[FAIL]`→stderr |
+| `L1_workflow_yaml` | `bash tools/check_workflow_yaml.sh` | Exit 0 — actionlint on `.github/workflows/` |
+| `L1_mypy_libs` | `bash tools/check_mypy_libs.sh` | Exit 0 — mypy on `tools/*_lib.py` |
 | `L0_rr_compliance` | `bash tools/check_rr_compliance.sh` | Exit 0 — no ship `.tscn` on `main` |
 | `L0_no_secrets` | `bash tools/check_no_secrets.sh` | Exit 0 — no live keys in tracked files |
 | `L0_ship_build_security` | `bash tools/check_ship_build_security.sh` | Exit 0 — export strip policy + binary scan when present |
@@ -75,10 +77,12 @@ CI is **not** a substitute for GDAI MCP editor verification (L3 F5) or human QA 
 | `L1_shellcheck` | `bash tools/check_shell_scripts.sh` | Exit 0 — shellcheck on `tools/*.sh` |
 | `L1_json_style` | `python3 tools/check_json_style.py` | Exit 0 — JSON format + naming on `game/data/` |
 | `L1_typescript_lint` | `bash tools/check_typescript_lint.sh` | Exit 0 — ESLint/tsc when MCP Pro installed |
-| `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format + links |
+| `L1_markdown_style` | `python3 tools/check_markdown_style.py` | Exit 0 — docs format, whitespace, headings, links |
 | `L1_gdshader_style` | `python3 tools/check_gdshader_style.py` | Exit 0 — shader templates + game/shaders |
 | `L1_scene_style` | `bash tools/check_scene_style.sh` | Exit 0 — static .tscn lint; SKIP when no `game/scenes` |
 | `L1_error_handling` | `bash tools/check_error_handling.sh` | Exit 0 — exception/error message patterns |
+| `L1_workflow_yaml` | `bash tools/check_workflow_yaml.sh` | Exit 0 — actionlint on workflow YAML |
+| `L1_mypy_libs` | `bash tools/check_mypy_libs.sh` | Exit 0 — mypy on reference `*_lib.py` modules |
 | `L1_gdscript_lint` | `bash tools/check_gdscript_changed.sh` | Exit 0 — exit **2** SKIP when no `.gd` diff (FAIL on game branch) |
 | `L1_gdscript_lint_all` | `bash tools/check_gdscript_all.sh` | Exit 0 — full-tree gdlint; **2** SKIP when no `game/scripts` |
 | `L0_base_class_compliance` | `bash tools/check_base_class_compliance.sh` | Exit 0 — no rogue native `extends` (`CharacterBody3D`/`Area3D`/`Node`) |

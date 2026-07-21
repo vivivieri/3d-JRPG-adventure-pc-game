@@ -52,7 +52,7 @@ def main() -> int:
     args = ap.parse_args()
 
     if not resolve_api_key():
-        print("[FAIL] CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8")
+        print("[FAIL] CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8", file=sys.stderr)
         return 1
 
     events = read_events()

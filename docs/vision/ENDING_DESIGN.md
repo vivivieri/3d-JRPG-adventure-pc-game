@@ -1,6 +1,6 @@
 # Tides of Urashima — Ending Design
 
-**Version:** 1.0 (Pre-build)  
+**Version:** 1.0 (Pre-build)
 **Cross-refs:** `docs/vision/GDD.md` §10, `docs/vision/STORYBOARD.md` SC-16–17, `docs/ui/CINEMATICS.md`, `docs/vision/REPLAY_DESIGN.md`
 
 ---
@@ -15,9 +15,9 @@ The three endings are **equally valid**. No "true" ending. No achievement for "b
 
 ## 2. Choice gate (SC-16)
 
-**Trigger:** Tide Keeper at ≤10% HP → combat freeze → `tide_keeper_phase3` flag  
-**Timer:** None  
-**Music:** Fade to near-silence  
+**Trigger:** Tide Keeper at ≤10% HP → combat freeze → `tide_keeper_phase3` flag
+**Timer:** None
+**Music:** Fade to near-silence
 **Input lock:** Only choice UI active
 
 ### Choice UI copy
@@ -77,7 +77,7 @@ The three endings are **equally valid**. No "true" ending. No achievement for "b
 
 ## 4. SC-13 mirror choice (recorded, low branch)
 
-**Scene:** Roku reveals box truth  
+**Scene:** Roku reveals box truth
 **Dialogue choice:** "I would open it" / "I would break it" / "I don't know yet"
 
 | Choice | Flag | Effect |

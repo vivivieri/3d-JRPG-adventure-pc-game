@@ -1,8 +1,8 @@
 # Controls Cheat Sheet — How We Enforce Roles
 
-**Version:** 1.4  
-**Print this:** One-page reference for automated + process controls  
-**Companion:** `docs/cheat-sheets/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)  
+**Version:** 1.5
+**Print this:** One-page reference for automated + process controls
+**Companion:** `docs/cheat-sheets/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)
 **Authority:** `docs/ci-cd/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/agents/PROJECT_MANAGEMENT.md`
 
 ---
@@ -58,6 +58,15 @@
 | `L0_alignment_audit_catalog` | Stakeholder alignment audit catalog — management visuals: `audit_radar_spec.png`, `audit_radar_build.png` |
 | `L0_candidate_tournament` | Champion/challenger config schema (`golden_harness.json`) |
 | `L0_rr_compliance` | No ship scenes on main |
+| `L1_python_lint` | ruff PEP 8 on `tools/*.py` |
+| `L1_shellcheck` | shellcheck on `tools/*.sh` |
+| `L1_json_style` | JSON format + naming (`game/data/` + config JSON) |
+| `L1_typescript_lint` | ESLint/tsc on MCP Pro (SKIP when not installed) |
+| `L1_markdown_style` | Docs whitespace, headings, links |
+| `L1_gdshader_style` | NPR shader structure lint |
+| `L1_error_handling` | No silent exceptions; `[FAIL]`→stderr |
+| `L1_workflow_yaml` | actionlint on GitHub Actions YAML |
+| `L1_mypy_libs` | mypy on `tools/*_lib.py` |
 | `M5_asset_compliance` | License manifest |
 
 ### `game/development` — `game-ci.yml` → `run_ci_checks.sh`
@@ -80,6 +89,15 @@
 | `L2_glb_import` | **Builder** / **Visual** — post-import toon pipeline |
 | `L2_candidate_select` | **Builder** / **Visual** — champion/challenger evidence (pre-merge, non-ship) |
 | `L1_gdscript_lint` | **Architect** — changed `.gd` files (`gdtoolkit` required) |
+| `L1_python_lint` | **Architect** / **QA** — ruff on `tools/` |
+| `L1_shellcheck` | **Architect** — shellcheck on gate scripts |
+| `L1_json_style` | **Architect** — JSON format + naming |
+| `L1_markdown_style` | **Architect** — docs format + links |
+| `L1_gdshader_style` | **Visual** — shader templates |
+| `L1_scene_style` | **Builder** — static `.tscn` lint |
+| `L1_error_handling` | **QA** — cross-language error patterns |
+| `L1_workflow_yaml` | **Release** — GitHub Actions YAML lint |
+| `L1_mypy_libs` | **Architect** — typed reference libraries |
 | `L0_base_class_compliance` | **Architect** — no rogue native extends |
 | `L4_integration` | **Flow** |
 | `M5_asset_compliance` | **Release** / compliance |

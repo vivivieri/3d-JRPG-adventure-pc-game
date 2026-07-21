@@ -27,6 +27,7 @@ if command -v apt-get >/dev/null 2>&1; then
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
     curl wget unzip ca-certificates python3 python3-pip ripgrep shellcheck \
     libgl1-mesa-dri libglx-mesa0 libvulkan1 xvfb
+  # actionlint: install via check_workflow_yaml.sh bootstrap (not in all apt repos)
 fi
 
 sudo mkdir -p "$GODOT_INSTALL_DIR"

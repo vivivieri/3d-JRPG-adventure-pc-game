@@ -1,8 +1,8 @@
 # Markdown Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates  
-**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)  
+**Version:** 1.0
+**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates
+**Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 **Generated docs:** `docs/compliance/COMPLIANCE_REPORT.md` and `alignment_audit_reports/**` are auto-generated — do not hand-edit.
 
 ---
@@ -81,7 +81,7 @@ Avoid engagement bait, vague "should consider", and duplicate indexes (Notion re
 python3 tools/check_markdown_style.py   # L1_markdown_style
 ```
 
-Checks: trailing newline, no tabs, ATX headings, resolvable relative links.
+Checks: trailing newline, no tabs, no trailing whitespace, ATX headings (level jumps), resolvable relative links.
 
 ---
 

@@ -1,6 +1,6 @@
 # Cloud Snapshot ID & Launch Checklist
 
-**Authority:** How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`.  
+**Authority:** How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`.
 **Cross-refs:** `docs/agents/GDAI_CLOUD_SETUP.md` · `docs/agents/MCP_STACK.md` · `docs/qa/PLATFORM_SUPPORT.md` · `.cursor/environment.json`
 
 ---

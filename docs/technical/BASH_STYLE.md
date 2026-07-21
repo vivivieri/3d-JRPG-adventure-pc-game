@@ -1,7 +1,7 @@
 # Bash / Shell Style Guide — Tides of Urashima
 
-**Version:** 1.0  
-**Scope:** `tools/*.sh` — CI runners, bootstrap, QA orchestration  
+**Version:** 1.0
+**Scope:** `tools/*.sh` — CI runners, bootstrap, QA orchestration
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
 
 ---

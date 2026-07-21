@@ -2,17 +2,17 @@
 
 ## Cursor Cloud specific instructions
 
-**Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)  
-**Platforms (v1):** **Linux + Windows** (Steam) — Linux required because Cursor Cloud Agents run Linux; see `docs/qa/PLATFORM_SUPPORT.md`. macOS v1.1+.  
-**Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/workflow/BRANCHING.md`  
-**Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ci-cd/ENVIRONMENTS.md`  
-**Delivery model:** Phase-gated Agile — see `docs/workflow/AGILE_WITHIN_PHASES.md`  
-**Multi-agent team:** `docs/agents/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/cheat-sheets/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/agents/PROJECT_MANAGEMENT.md` (GitHub Issues P0)  
-**Design source of truth:** `docs/` on `main` + `game/data/` JSON  
-**Code base classes:** `docs/technical/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json`  
-**Documentation index:** `docs/README.md`  
-**Build order:** `docs/workflow/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/workflow/MILESTONES.md`  
-**Implementation plan:** `docs/workflow/IMPLEMENTATION_PLAN.md`  
+**Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)
+**Platforms (v1):** **Linux + Windows** (Steam) — Linux required because Cursor Cloud Agents run Linux; see `docs/qa/PLATFORM_SUPPORT.md`. macOS v1.1+.
+**Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/workflow/BRANCHING.md`
+**Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ci-cd/ENVIRONMENTS.md`
+**Delivery model:** Phase-gated Agile — see `docs/workflow/AGILE_WITHIN_PHASES.md`
+**Multi-agent team:** `docs/agents/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/cheat-sheets/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/agents/PROJECT_MANAGEMENT.md` (GitHub Issues P0)
+**Design source of truth:** `docs/` on `main` + `game/data/` JSON
+**Code base classes:** `docs/technical/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json`
+**Documentation index:** `docs/README.md`
+**Build order:** `docs/workflow/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/workflow/MILESTONES.md`
+**Implementation plan:** `docs/workflow/IMPLEMENTATION_PLAN.md`
 **Workflow:** **GodotPrompter + full MCP toolchain** — see `.cursorrules` §0, `docs/agents/MCP_STACK.md`, `docs/workflow/AI_DEV_WORKFLOW.md`
 
 | Tool / MCP server | Role |
@@ -73,7 +73,7 @@ bash tools/check_rr_compliance.sh
 bash tools/check_extended_toolchain.sh
 ```
 
-If `ensure_mcp_stack.sh`, `check_mcp_ready.sh`, or `check_extended_toolchain.sh` fails → **STOP scene/editor work** and notify the user.  
+If `ensure_mcp_stack.sh`, `check_mcp_ready.sh`, or `check_extended_toolchain.sh` fails → **STOP scene/editor work** and notify the user.
 Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
 
 ```
@@ -210,7 +210,7 @@ Before building zones, read:
 - `docs/world/ENVIRONMENT_KITS.md`
 - `docs/art/ART_DIRECTION.md`
 
-Build order: **ruined_village** vertical slice → beach → caves → palace.  
+Build order: **ruined_village** vertical slice → beach → caves → palace.
 All scene work via **GDAI MCP** after GodotPrompter plans.
 
 ### Secrets (day one — all compulsory)

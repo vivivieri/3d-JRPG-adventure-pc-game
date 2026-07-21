@@ -1,7 +1,7 @@
 # Alignment Audit — Standard Process & Stakeholder Reporting
 
-**Version:** 1.1  
-**Authority:** Run after every spec alignment pass, PR merge to `main`, or phase exit on `game/development`.  
+**Version:** 1.1
+**Authority:** Run after every spec alignment pass, PR merge to `main`, or phase exit on `game/development`.
 **Cross-refs:** `docs/qa/ACCEPTANCE_CRITERIA.md`, `docs/agents/PM_STAKEHOLDER_REPORTING.md`, `game/data/qa/alignment_audit_catalog.json`
 
 ---

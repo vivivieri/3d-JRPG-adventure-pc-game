@@ -1,7 +1,7 @@
 # Sprint Orchestration — Enforced Multi-Agent Workflow
 
-**Version:** 1.0  
-**Authority:** Replaces honor-system sprint planning. If orchestrator FAILs, **no agent may proceed**.  
+**Version:** 1.0
+**Authority:** Replaces honor-system sprint planning. If orchestrator FAILs, **no agent may proceed**.
 **Cross-refs:** `docs/agents/PM_AGENT_RUNBOOK.md`, `docs/agents/MULTI_AGENT_TEAM.md`, `docs/workflow/AGILE_WITHIN_PHASES.md`, `game/data/qa/sprint_board.json`, `game/data/qa/pm_orchestrator_steps.json`
 
 ---

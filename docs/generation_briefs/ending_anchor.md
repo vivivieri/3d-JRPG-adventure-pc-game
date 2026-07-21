@@ -1,6 +1,6 @@
 # Generation brief — `ending_anchor`
 
-**Status:** Phase 6 ending (SC-17b)  
+**Status:** Phase 6 ending (SC-17b)
 **Authority:** `ENVIRONMENT_KITS.md` §7 SC-17b, `ENDING_DESIGN.md`
 
 ## Intent

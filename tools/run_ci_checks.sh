@@ -85,6 +85,12 @@ run_tri_gate "L1_scene_style" "Godot scene static style lint" \
 run_tri_gate "L1_error_handling" "Error-handling pattern lint" \
   bash tools/check_error_handling.sh
 
+run_tri_gate "L1_workflow_yaml" "GitHub Actions workflow lint" \
+  bash tools/check_workflow_yaml.sh
+
+run_tri_gate "L1_mypy_libs" "mypy on tools/*_lib.py" \
+  bash tools/check_mypy_libs.sh
+
 run_tri_gate "L0_base_classes" "Code base class registry" \
   python3 tools/validate_base_classes.py
 

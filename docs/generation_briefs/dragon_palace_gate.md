@@ -1,6 +1,6 @@
 # Generation brief — `dragon_palace_gate`
 
-**Status:** Phase 6 finale zone (SC-12–16)  
+**Status:** Phase 6 finale zone (SC-12–16)
 **Authority:** `ENVIRONMENT_KITS.md` §6, `LEVEL_DESIGN.md`, `RENDERING_GUIDE.md`
 
 ## Intent
@@ -46,11 +46,11 @@ ComfyUI marble/lacquer → modular palace kit → hero gates/halls → GDAI + gl
 
 ## Hero set-pieces (build order)
 
-1. `palace_gate_main` — SC-12 vertigo  
-2. `palace_mirror_chamber` — SC-13 dual rim lights  
-3. `palace_sentinel_hall` — SC-14 scale for 12 m sentinel read  
-4. `palace_throne_tides` — SC-15–16 arena  
-5. `palace_void_sea` — void plane below walkways  
+1. `palace_gate_main` — SC-12 vertigo
+2. `palace_mirror_chamber` — SC-13 dual rim lights
+3. `palace_sentinel_hall` — SC-14 scale for 12 m sentinel read
+4. `palace_throne_tides` — SC-15–16 arena
+5. `palace_void_sea` — void plane below walkways
 
 ## Critical rules
 

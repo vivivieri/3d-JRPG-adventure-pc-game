@@ -1,9 +1,9 @@
 # Continuous Deployment — Artifact & Steam
 
-**Version:** 1.1  
-**Workflows:** `.github/workflows/cd-artifact.yml` · `.github/workflows/cd-steam.yml`  
-**Gate script:** `bash tools/run_cd_gates.sh`  
-**Steam checklist:** `docs/ci-cd/STEAM_RELEASE_CHECKLIST.md`  
+**Version:** 1.1
+**Workflows:** `.github/workflows/cd-artifact.yml` · `.github/workflows/cd-steam.yml`
+**Gate script:** `bash tools/run_cd_gates.sh`
+**Steam checklist:** `docs/ci-cd/STEAM_RELEASE_CHECKLIST.md`
 **Branch policy:** `docs/workflow/BRANCHING.md`
 
 ---

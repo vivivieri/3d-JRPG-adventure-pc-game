@@ -1,6 +1,6 @@
 # QA Remediation Loop — Industry Polish + Anti-Infinite-Retry
 
-**Version:** 1.0  
+**Version:** 1.0
 **Problem:** QA gates catch bad assets, but agents often **re-run the same generator with the same prompt** and expect a different result. That loop never ends.
 
 **Rule:** Every FAIL produces a **structured remediation brief** with a **changed lever** before the next build. Same pipeline + same prompt = **blocked** after 2 attempts.
