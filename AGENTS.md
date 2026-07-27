@@ -62,7 +62,7 @@ Installed components:
 - **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
 - **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
-> **Gotcha — Godotiq `:6007` after a JIT/fresh bootstrap:** launching from the pinned dashboard snapshot has the **GodotIQ editor plugin pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), the plugin is **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq needs its `EditorPlugin`). Fix: enable it — add `res://addons/godotiq/plugin.cfg` to `project.godot` `[editor_plugins] enabled=…` (or Project → Plugins → GodotIQ in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. This local editor state is captured by the snapshot, so it is **not** committed to git; a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
+> **Gotcha — Godotiq `:6007` after a JIT/fresh bootstrap:** launching from the pinned dashboard snapshot has the **GodotIQ editor plugin pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), the plugin is **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq needs its `EditorPlugin`). Fix: enable it — add `res://addons/godotiq/plugin.cfg` to `project.godot` `[editor_plugins] enabled=…` (or Project → Plugins → GodotIQ in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. Enable the **Godot MCP Pro** editor plugin (`res://addons/godot_mcp/plugin.cfg`) in the same list so its `:6505` bridge and Cursor client connection come up too; enabling the plugins makes the editor auto-add their runtime autoloads (`GodotIQRuntime`, `MCPScreenshot`, `MCPInputService`, `MCPGameInspector`) to `project.godot`. This local editor state is captured by the snapshot, so it is **not** committed to git (it references gitignored dev-only addons; committing it would break clean checkouts + the ship-security strip); a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
 
 ### MCP workflow (mandatory — all tools)
 
@@ -144,6 +144,8 @@ See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
 | `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
+
+> **Benign local-only `L1_error_handling` FAIL:** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
