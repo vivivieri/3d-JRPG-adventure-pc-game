@@ -284,7 +284,7 @@ Do **not** commit secrets to git. Do **not** paste tokens in issues, PRs, or age
 
 | Secret | When |
 |--------|------|
-| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` | M5+ visual/model/audio jury scripts |
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` | M5+ visual/model/audio jury scripts — **optional** if you run the agent-driven jury (`docs/qa/AGENT_JURY.md`), which uses Cursor's own LLMs via subagents and needs no provider keys |
 | GDAI license / plugin zip | Phase 1+ scene work (commercial — separate from this list) |
 | `GODOT_SCRIPT_ENCRYPTION_KEY` | M6 RC ship export — PCK encryption (GitHub `steam-production` only) |
 | `GODOT_SAVE_HMAC_KEY` | M6 RC ship export — save-slot HMAC pepper (same environment) |

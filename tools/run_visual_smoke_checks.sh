@@ -67,14 +67,26 @@ fi
 JURY_LOG="$(mktemp)"
 SCREENSHOT_STEM="$(basename "$SCREENSHOT" .png)"
 JURY_JSON="${ROOT}/artifacts/visual_reviews/${SCREENSHOT_STEM}.jury.json"
+AGENT_DIR="${ROOT}/artifacts/visual_reviews/${SCREENSHOT_STEM}.agent"
 set +e
-python3 "${ROOT}/tools/review_screenshot_vision.py" \
-  --zone "$ZONE" \
-  --scene ruined_village.tscn \
-  --view gameplay \
-  --screenshot "$SCREENSHOT" \
-  --min-pass "${VISUAL_JURY_MIN_PASS:-2}" \
-  >"$JURY_LOG" 2>&1
+if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
+  # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
+  # See docs/qa/AGENT_JURY.md
+  python3 "${ROOT}/tools/ingest_agent_jury.py" \
+    --domain visual \
+    --asset "$SCREENSHOT" \
+    --reviews-dir "$AGENT_DIR" \
+    --min-pass "${VISUAL_JURY_MIN_PASS:-2}" \
+    >"$JURY_LOG" 2>&1
+else
+  python3 "${ROOT}/tools/review_screenshot_vision.py" \
+    --zone "$ZONE" \
+    --scene ruined_village.tscn \
+    --view gameplay \
+    --screenshot "$SCREENSHOT" \
+    --min-pass "${VISUAL_JURY_MIN_PASS:-2}" \
+    >"$JURY_LOG" 2>&1
+fi
 JURY_EXIT=$?
 set -e
 cat "$JURY_LOG"

@@ -19,6 +19,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history for all branches so L0_sprint_board's done-issue SHA
+          # validation (git cat-file) can resolve implementation commits that
+          # live on game/development (e.g. P1-00). Default depth-1 shallow
+          # checkout has only main's tip and fails those cross-branch SHAs.
+          fetch-depth: 0
 
       - name: Install Python validators
         run: |
