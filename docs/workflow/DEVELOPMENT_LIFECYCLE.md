@@ -181,7 +181,7 @@ sequenceDiagram
 
   PM->>PM: run_pm_orchestrator.sh
   PM->>GH: Issue from sprint pack (gate IDs, agent/*)
-  PM->>W: pm_dispatch_packet.json
+  PM->>W: pm_dispatch_packet.json + pm_dispatch_workers.py → dispatch/ready label
   W->>W: branch cursor/p1-02-a091
   W->>W: Architect plan OR Builder GDAI build
   W->>CI: PR → game/development

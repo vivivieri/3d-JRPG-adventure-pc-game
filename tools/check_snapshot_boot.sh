@@ -22,7 +22,11 @@ fi
 
 EXPECTED_SNAPSHOT=""
 if [[ -f .cursor/environment.json ]]; then
-  EXPECTED_SNAPSHOT="$(python3 -c "import json; print(json.load(open('.cursor/environment.json')).get('snapshot',''))" 2>/dev/null || true)"
+  if EXPECTED_SNAPSHOT="$(python3 -c "import json; print(json.load(open('.cursor/environment.json')).get('snapshot',''))")"; then
+    :
+  else
+    EXPECTED_SNAPSHOT=""
+  fi
 fi
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"

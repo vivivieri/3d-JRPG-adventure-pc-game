@@ -66,6 +66,7 @@ run_gate "L0_sprint_board" python3 tools/validate_sprint_board.py --strict
 run_gate "L0_game_branch_bootstrap" bash tools/check_game_branch_bootstrap.sh
 run_gate "L0_vo_casting" python3 tools/validate_vo_casting.py
 run_gate "L0_factory_watchdog" python3 tools/validate_factory_watchdog.py
+run_gate "L0_factory_automations" python3 tools/validate_factory_automations.py
 run_gate "L0_escalation_policy" python3 tools/validate_escalation_policy.py
 run_gate "L0_stakeholder_report" python3 tools/validate_stakeholder_report_config.py
 run_gate "L0_pm_orchestrator" python3 tools/validate_pm_orchestrator_steps.py

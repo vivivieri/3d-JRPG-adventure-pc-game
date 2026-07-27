@@ -303,6 +303,82 @@
       "acceptance_gate": "L0_factory_watchdog"
     },
     {
+      "id": "factory_automation_catalog",
+      "label": "Factory automation catalog + worker dispatch",
+      "authority_doc": "docs/agents/FACTORY_SETUP_GUIDE.md",
+      "schema": "game/data/qa/factory_automations.json",
+      "script_hooks": [
+        {
+          "path": "tools/pm_dispatch_workers.py",
+          "contains": "worker_dispatch_manifest.json",
+          "purpose": "worker GitHub label dispatch manifest"
+        },
+        {
+          "path": "tools/run_sprint_preflight.sh",
+          "contains": "check_snapshot_boot.sh",
+          "purpose": "snapshot boot gate before MCP preflight"
+        },
+        {
+          "path": "tools/check_factory_automation_setup.sh",
+          "contains": "validate_factory_automations.py",
+          "purpose": "repo-side automation catalog validation"
+        }
+      ],
+      "orchestrator_steps": [
+        {
+          "id": "dispatch_workers",
+          "command_contains": "pm_dispatch_workers.py"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "docs/agents/FACTORY_SETUP_GUIDE.md",
+          "must_mention": "pm_dispatch_workers.py"
+        },
+        {
+          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "must_mention": "FACTORY_SETUP_GUIDE"
+        },
+        {
+          "doc": "docs/agents/CLOUD_SNAPSHOT_LAUNCH.md",
+          "must_mention": "check_snapshot_boot.sh"
+        },
+        {
+          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "dispatch_workers"
+        },
+        {
+          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "pm_dispatch_workers"
+        },
+        {
+          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "FACTORY_SETUP_GUIDE"
+        },
+        {
+          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_factory_automations"
+        },
+        {
+          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "FACTORY_SETUP_GUIDE"
+        },
+        {
+          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "pm_dispatch_workers"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "FACTORY_SETUP_GUIDE"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "FACTORY_SETUP_GUIDE"
+        }
+      ],
+      "acceptance_gate": "L0_factory_automations"
+    },
+    {
       "id": "stakeholder_reporting",
       "label": "PM stakeholder status reporting",
       "authority_doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",

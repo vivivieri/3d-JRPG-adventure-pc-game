@@ -164,7 +164,9 @@ bash tools/run_candidate_tournament.sh --challenger artifacts/candidates/<issue>
 
 | Role | Action |
 |------|--------|
-| **PM Agent** | `bash tools/run_pm_orchestrator.sh` → read `artifacts/pm_orchestrator_report.json` → `next_dispatch` |
+| **PM Agent** | `bash tools/run_pm_orchestrator.sh` → `python3 tools/pm_dispatch_workers.py` → read `artifacts/pm_orchestrator_report.json` → `next_dispatch` |
+
+**Full factory setup:** `docs/agents/FACTORY_SETUP_GUIDE.md`
 | **Dev / QA** | Wait for dispatch → `bash tools/run_agent_session_gate.sh <role> <issue_id>` → read issue section in sprint pack |
 
 ### Phase 1 dependency chain (current sprint)

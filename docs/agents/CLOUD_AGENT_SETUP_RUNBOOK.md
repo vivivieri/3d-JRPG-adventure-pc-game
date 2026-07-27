@@ -139,6 +139,9 @@ Until P1-00 is done, orchestrator dispatches PM only.
 
 ## 4. Cursor Automations (event-driven — NOT cron)
 
+**Full setup (snapshot + worker dispatch):** `docs/agents/FACTORY_SETUP_GUIDE.md`
+**Catalog:** `game/data/qa/factory_automations.json` · **Prompts:** `docs/agents/automation_prompts/`
+
 Create at [cursor.com/automations](https://cursor.com/automations).
 
 ### Automation A — **PM Sprint Master** (primary)
@@ -172,8 +175,9 @@ AFTER orchestrator PASS, read artifacts/pm_orchestrator_report.json → next_dis
 1. If event was agent_cycle_complete or ci_cycle_complete:
    - Verify previous issue is done on sprint_board.json
    - If next_dispatch empty and sprint_complete: emit sprint_cycle_complete (see below)
-   - Else: start the NEXT worker agent work OR post clear dispatch comment on GitHub issue
-     with: bash tools/run_agent_session_gate.sh <role> <issue_id>
+   - Else: `python3 tools/pm_dispatch_workers.py --head-only` labels GitHub issues → **Automation E** starts Worker snapshot VMs
+
+   Prompt source: `docs/agents/automation_prompts/pm_cycle_dispatch.md` (see `docs/agents/FACTORY_SETUP_GUIDE.md`)
 
 2. If you complete PM-owned work (e.g. P1-00 bootstrap) in this session:
    bash tools/run_post_agent_cycle.sh --issue <id> --agent pm --commit $(git rev-parse HEAD) --run-orchestrator --alignment-audit

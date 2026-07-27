@@ -226,6 +226,18 @@
       "evidence": ["game/data/qa/factory_watchdog.json"],
       "design_ref": "docs/agents/FACTORY_WATCHDOG.md"
     },
+    "L0_factory_automations": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_factory_automations.py",
+      "description": "Factory automation catalog, worker dispatch wiring, snapshot boot gates",
+      "pass": { "exit_code": 0 },
+      "evidence": [
+        "game/data/qa/factory_automations.json",
+        "docs/agents/FACTORY_SETUP_GUIDE.md"
+      ],
+      "design_ref": "docs/agents/FACTORY_SETUP_GUIDE.md"
+    },
     "L0_escalation_policy": {
       "layer": "L0",
       "domain": "flow",
@@ -874,6 +886,7 @@
       "L0_game_branch_bootstrap",
       "L0_vo_casting",
       "L0_factory_watchdog",
+      "L0_factory_automations",
       "L0_escalation_policy",
       "L0_stakeholder_report",
       "L0_pm_orchestrator",

@@ -23,12 +23,12 @@ This runs all steps in `game/data/qa/pm_orchestrator_steps.json`:
 
 | Step | What it enforces |
 |------|------------------|
-| 1 | `validate_sprint_phases.py` — active phase valid |
-| 2 | `validate_sprint_board.py --strict` — board schema + pack alignment |
-| 3 | `pm_sync_sprint_pack.py` — no missing IDs; carry_over_queue empty |
-| 4 | `run_docs_ci_checks.sh` — docs/data baseline green |
-| 5 | `pm_orchestrator_lib.py --dispatch` — next agent + stale/WIP checks |
-| 6 | `pm_refresh_agent_telemetry.sh` — token backfill + efficiency reports (non-blocking) |
+| 0–5 | Idempotency, sprint board, GitHub/Linear sync, preflight |
+| 6 | `run_sprint_preflight.sh` — snapshot boot + MCP gates |
+| 7 | `run_docs_ci_checks.sh` — docs/data baseline |
+| 8 | `pm_orchestrator_lib.py --dispatch` — next agent + stale/WIP checks |
+| 9 | `dispatch_workers` — `pm_dispatch_workers.py` labels GitHub → Worker automation |
+| 10–13 | Event handled, stakeholder report, telemetry, alignment audit |
 
 **If exit ≠ 0:** STOP. Fix failures. Do not assign agents.
 
