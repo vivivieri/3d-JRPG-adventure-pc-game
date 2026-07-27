@@ -51,10 +51,14 @@ def main() -> int:
     env_json = ROOT / ".cursor/environment.json"
     if env_json.is_file():
         env = load_json(env_json)
-        if not env.get("snapshot"):
-            errors.append(".cursor/environment.json missing snapshot field on game/development")
-        if "install_cloud_dev.sh" not in str(env.get("install", "")):
-            errors.append(".cursor/environment.json install should reference install_cloud_dev.sh")
+        ship_branch = (ROOT / "game/project.godot").is_file()
+        if ship_branch:
+            if not env.get("snapshot"):
+                errors.append(".cursor/environment.json missing snapshot field on game/development")
+            if "install_cloud_dev.sh" not in str(env.get("install", "")):
+                errors.append(".cursor/environment.json install should reference install_cloud_dev.sh")
+        elif "install_main_ci.sh" not in str(env.get("install", "")):
+            errors.append(".cursor/environment.json on main should reference install_main_ci.sh")
     else:
         errors.append("missing .cursor/environment.json")
 
