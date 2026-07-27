@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "agent_role": "pm",
   "aliases": ["sprint master", "sprint facilitator"],
   "authority": "docs/agents/PM_AGENT_RUNBOOK.md",
@@ -78,27 +78,34 @@
     },
     {
       "step": 9,
+      "id": "dispatch_workers",
+      "description": "Label GitHub issues dispatch/ready — triggers Worker automation snapshot VMs",
+      "command": "python3 tools/pm_dispatch_workers.py --head-only",
+      "block_on_fail": false
+    },
+    {
+      "step": 10,
       "id": "mark_event_handled",
       "description": "Record cycle event handled after orchestrator PASS",
       "command": "python3 tools/pm_check_event_idempotency.py --mark-handled",
       "block_on_fail": false
     },
     {
-      "step": 10,
+      "step": 11,
       "id": "stakeholder_report",
       "description": "Write status dashboard for product owner (artifacts; Telegram on cycle events)",
       "command": "bash tools/pm_emit_stakeholder_report.sh --trigger pm_session --no-telegram",
       "block_on_fail": false
     },
     {
-      "step": 11,
+      "step": 12,
       "id": "agent_telemetry_refresh",
       "description": "Backfill token usage + regenerate efficiency reports (non-blocking)",
       "command": "bash tools/pm_refresh_agent_telemetry.sh",
       "block_on_fail": false
     },
     {
-      "step": 12,
+      "step": 13,
       "id": "alignment_audit",
       "description": "Stakeholder alignment snapshot after PM session (non-blocking)",
       "command": "bash tools/run_alignment_audit.sh --trigger pm_session --note orchestrator_pass",

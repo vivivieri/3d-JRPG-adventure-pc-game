@@ -72,7 +72,7 @@ bash tools/check_extended_toolchain.sh
 
 ### Verify snapshot boot (agent or Setup Agent)
 
-Ask the agent to run **cursor-cloud `environment-info`**, or check boot metadata:
+Ask the agent to run **cursor-cloud `environment-info`**, or check boot metadata with `bash tools/check_snapshot_boot.sh`:
 
 | Check | Snapshot boot PASS | JIT boot FAIL |
 |-------|-------------------|---------------|

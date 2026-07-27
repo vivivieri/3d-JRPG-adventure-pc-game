@@ -50,7 +50,7 @@
 
 ```
 PM: bash tools/run_pm_orchestrator.sh          → PASS required
-PM: assign next_dispatch[0] to agent
+PM: python3 tools/pm_dispatch_workers.py        → labels dispatch/ready (Automation E)
 Agent: bash tools/run_agent_session_gate.sh <role> <issue_id>  → PASS required
 Agent: execute work + PR + gates
 Optional (M5 / tournament policy): bash tools/run_candidate_tournament.sh  → L2.5 champion/challenger (docs/qa/CANDIDATE_TOURNAMENT.md)

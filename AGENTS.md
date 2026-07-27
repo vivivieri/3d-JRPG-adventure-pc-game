@@ -41,7 +41,7 @@ The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-
 
 ### Cloud snapshot launch (`game/development` only)
 
-**Before implementation work:** read `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`. **Linux ship is required** for cloud dev parity — `docs/qa/PLATFORM_SUPPORT.md`.
+**Before implementation work:** read `docs/agents/FACTORY_SETUP_GUIDE.md` (full multi-agent factory) and `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`. **Linux ship is required** for cloud dev parity — `docs/qa/PLATFORM_SUPPORT.md`.
 
 ### Environment bootstrap
 

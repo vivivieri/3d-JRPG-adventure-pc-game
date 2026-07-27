@@ -69,6 +69,8 @@ bash tools/check_feature_integration.sh --remind   # docs/qa/WORKFLOW_INTEGRATIO
 
 **Factory stack scripts** (event-driven PM):
 
+Authority: `docs/agents/FACTORY_SETUP_GUIDE.md`
+
 | Script | Role |
 |--------|------|
 | `run_factory_watchdog.sh` | Stall detection + PM recovery |

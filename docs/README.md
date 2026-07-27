@@ -66,7 +66,7 @@
 | Build the next phase | [IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) · branch: `game/development` |
 | Sprint planning | [AGILE_WITHIN_PHASES.md](workflow/AGILE_WITHIN_PHASES.md) · `game/data/qa/sprint_phases.json` |
 | **Sprint orchestration** | [SPRINT_ORCHESTRATION.md](agents/SPRINT_ORCHESTRATION.md) · [PM_AGENT_RUNBOOK.md](agents/PM_AGENT_RUNBOOK.md) |
-| **Cloud Agent factory** | [CLOUD_AGENT_SETUP_RUNBOOK.md](agents/CLOUD_AGENT_SETUP_RUNBOOK.md) |
+| **Cloud Agent factory** | [FACTORY_SETUP_GUIDE.md](agents/FACTORY_SETUP_GUIDE.md) · [CLOUD_AGENT_SETUP_RUNBOOK.md](agents/CLOUD_AGENT_SETUP_RUNBOOK.md) |
 | **Secrets setup** | [CURSOR_SECRETS_SETUP.md](agents/CURSOR_SECRETS_SETUP.md) |
 | **Factory watchdog** | [FACTORY_WATCHDOG.md](agents/FACTORY_WATCHDOG.md) |
 | **Branch strategy** | [MULTI_AGENT_BRANCH_STRATEGY.md](agents/MULTI_AGENT_BRANCH_STRATEGY.md) |
@@ -259,6 +259,12 @@
 | [GDAI_CLOUD_SETUP.md](agents/GDAI_CLOUD_SETUP.md) | Cloud agent bootstrap |
 | [PLUGIN_INSTALL_GUIDE.md](agents/PLUGIN_INSTALL_GUIDE.md) | MCP plugin install |
 | [CLOUD_AGENT_SETUP_RUNBOOK.md](agents/CLOUD_AGENT_SETUP_RUNBOOK.md) | Event-driven factory |
+| [FACTORY_SETUP_GUIDE.md](agents/FACTORY_SETUP_GUIDE.md) | 100% AI factory + snapshot boot + worker automations |
+| [automation_prompts/pm_cycle_dispatch.md](agents/automation_prompts/pm_cycle_dispatch.md) | Automation A prompt |
+| [automation_prompts/worker_sprint_issue.md](agents/automation_prompts/worker_sprint_issue.md) | Automation E prompt |
+| [automation_prompts/ci_failure_triage.md](agents/automation_prompts/ci_failure_triage.md) | Automation B prompt |
+| [automation_prompts/factory_alert.md](agents/automation_prompts/factory_alert.md) | Automation D prompt |
+| [automation_prompts/uat_notify.md](agents/automation_prompts/uat_notify.md) | Automation C prompt |
 | [CLOUD_SNAPSHOT_LAUNCH.md](agents/CLOUD_SNAPSHOT_LAUNCH.md) | Snapshot boot |
 | [CURSOR_SECRETS_SETUP.md](agents/CURSOR_SECRETS_SETUP.md) | Day-one secrets |
 
