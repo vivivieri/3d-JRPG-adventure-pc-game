@@ -149,10 +149,12 @@ bash tools/run_model_smoke_checks.sh
 | State | Behavior |
 |-------|----------|
 | No `urashima.glb` | **WARN** skip |
-| GLB exists | catalog + technical; turntable + jury if Blender + API keys |
+| GLB exists | catalog + technical; turntable + jury if Blender + API keys (or key-free agent jury) |
 | Jury fail | **FAIL** → run `qa_remediation_brief.py` before rebuild |
 
 Wired into `run_playtest_smoke.sh`.
+
+**Key-free jury:** instead of provider API keys, a QA agent can run the jury with Cursor's own LLMs via subagents — `tools/ingest_agent_jury.py --domain model`. See [`AGENT_JURY.md`](../qa/AGENT_JURY.md).
 
 ---
 

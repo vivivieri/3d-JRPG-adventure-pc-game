@@ -60,11 +60,24 @@ if command -v blender >/dev/null 2>&1; then
   if python3 "${ROOT}/tools/render_model_turntable.py" --model "$GATE_MODEL"; then
     pass "Turntable render (${GATE_MODEL})"
     JURY_LOG="$(mktemp)"
+    AGENT_DIR="${ROOT}/artifacts/model_reviews/${GATE_MODEL}.agent"
     set +e
-    python3 "${ROOT}/tools/review_model_vision.py" \
-      --model "$GATE_MODEL" \
-      --min-pass "${MODEL_JURY_MIN_PASS:-2}" \
-      >"$JURY_LOG" 2>&1
+    if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
+      # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
+      # See docs/qa/AGENT_JURY.md
+      python3 "${ROOT}/tools/ingest_agent_jury.py" \
+        --domain model \
+        --asset "$GATE_PATH" \
+        --reviews-dir "$AGENT_DIR" \
+        --out "${ROOT}/artifacts/model_reviews/${GATE_MODEL}.model_jury.json" \
+        --min-pass "${MODEL_JURY_MIN_PASS:-2}" \
+        >"$JURY_LOG" 2>&1
+    else
+      python3 "${ROOT}/tools/review_model_vision.py" \
+        --model "$GATE_MODEL" \
+        --min-pass "${MODEL_JURY_MIN_PASS:-2}" \
+        >"$JURY_LOG" 2>&1
+    fi
     JURY_EXIT=$?
     set -e
     cat "$JURY_LOG"

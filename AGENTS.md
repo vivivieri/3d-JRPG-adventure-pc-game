@@ -33,10 +33,10 @@
 
 The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) and the commercial GDAI plugin only exist / matter on `game/development`. **On `main` they are neither present nor needed** — `main` has no `project.godot`, no `.gd` gameplay code, and no `game/addons/`.
 
-- **`main` (default cloud checkout):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here only runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat` into `~/.local/bin`; `python3`/`numpy` ship in the base image). Do **not** boot the MCP/Godot stack on `main`.
+- **`main` (default cloud checkout):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat`, plus `ruff`/`mypy`/`matplotlib` into `~/.local/bin`; `python3` ships in the base image) and best-effort apt-installs `shellcheck` (needed by the `L1_shellcheck` lint gate, matching `.github/workflows/ci.yml`; the apt step is `|| true` so pod startup never fails on network hiccups). Do **not** boot the MCP/Godot stack on `main`.
   - **Tests:** `bash tools/run_docs_ci_checks.sh` (L0 docs+data gates, pure `python3`).
   - **Lint:** `bash tools/check_gdscript_changed.sh` (SKIPs on `main` — no `.gd`); `gdlint <file>` directly for any `.gd` (project scripts add `~/.local/bin` to PATH themselves).
-  - **Run the content pipeline (the runnable "app" on `main`):** e.g. `python3 tools/generate_game_audio.py --track bgm_village` writes a real `.ogg` under `game/assets/audio/bgm/` (untracked — do not commit demo output). `tools/generate_procedural_portraits.py` currently has a syntax error and is not runnable.
+  - **Run the content pipeline (the runnable "app" on `main`):** e.g. `python3 tools/generate_game_audio.py --track bgm_village` writes a real `.ogg` under `game/assets/audio/bgm/`, and `python3 tools/generate_procedural_portraits.py --all` writes real `.png` portraits under `game/assets/ui/portraits/`. Both outputs are untracked demo output — do not commit them. Note: `generate_procedural_portraits.py` auto-registers generated files in `docs/asset_manifest.license.json` (tracked); `git checkout -- docs/asset_manifest.license.json` after a demo run to keep the tree clean.
 - **`game/development`:** run the full bootstrap below. That heavy stack (Godot download, commercial plugins, MCP bridges) is intentionally **not** wired into `main`'s `environment.json`.
 
 ### Cloud snapshot launch (`game/development` only)
@@ -62,7 +62,7 @@ Installed components:
 - **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
 - **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
-> **Gotcha — Godotiq `:6007` after a JIT/fresh bootstrap:** launching from the pinned dashboard snapshot has the **GodotIQ editor plugin pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), the plugin is **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq needs its `EditorPlugin`). Fix: enable it — add `res://addons/godotiq/plugin.cfg` to `project.godot` `[editor_plugins] enabled=…` (or Project → Plugins → GodotIQ in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. This local editor state is captured by the snapshot, so it is **not** committed to git; a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
+> **Gotcha — MCP editor plugins after a JIT/fresh bootstrap (`game/development`):** launching from the pinned dashboard snapshot has the dev **editor plugins pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), they are **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq + MCP Pro need their `EditorPlugin`s). Fix: enable all three in `project.godot` `[editor_plugins] enabled=…` — `res://addons/gdai-mcp-plugin-godot/plugin.cfg`, `res://addons/godotiq/plugin.cfg`, `res://addons/godot_mcp/plugin.cfg` (or Project → Plugins in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. Enabling them makes the editor auto-add the runtime autoloads (`GodotIQRuntime`, `MCPScreenshot`, `MCPInputService`, `MCPGameInspector`) to `project.godot`. This local editor state is captured by the snapshot, so it is **not** committed to git (it references gitignored dev-only addons; committing it would break clean checkouts + the ship-security strip); a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
 
 ### MCP workflow (mandatory — all tools)
 
@@ -144,6 +144,8 @@ See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
 | `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
+
+> **Benign local-only `L1_error_handling` FAIL (`game/development`):** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
