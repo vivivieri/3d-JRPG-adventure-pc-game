@@ -8,6 +8,12 @@ cd "$ROOT"
 
 echo "==> Sprint preflight (MCP + extended toolchain)"
 
+echo "── bash tools/check_snapshot_boot.sh"
+if ! bash tools/check_snapshot_boot.sh; then
+  echo "[FAIL] Snapshot boot check"
+  FAIL=1
+fi
+
 if [[ ! -f game/project.godot ]] && [[ "${SPRINT_PREFLIGHT_MODE:-auto}" == "auto" ]]; then
   echo "[SKIP] MCP preflight — game/project.godot absent (bootstrap / docs-only sprint)"
   echo "[PASS] Sprint preflight (bootstrap mode)"
