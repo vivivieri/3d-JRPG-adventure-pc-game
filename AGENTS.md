@@ -62,6 +62,8 @@ Installed components:
 - **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
 - **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
 
+> **Gotcha — MCP editor plugins after a JIT/fresh bootstrap (`game/development`):** launching from the pinned dashboard snapshot has the dev **editor plugins pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), they are **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq + MCP Pro need their `EditorPlugin`s). Fix: enable all three in `project.godot` `[editor_plugins] enabled=…` — `res://addons/gdai-mcp-plugin-godot/plugin.cfg`, `res://addons/godotiq/plugin.cfg`, `res://addons/godot_mcp/plugin.cfg` (or Project → Plugins in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. Enabling them makes the editor auto-add the runtime autoloads (`GodotIQRuntime`, `MCPScreenshot`, `MCPInputService`, `MCPGameInspector`) to `project.godot`. This local editor state is captured by the snapshot, so it is **not** committed to git (it references gitignored dev-only addons; committing it would break clean checkouts + the ship-security strip); a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
+
 ### MCP workflow (mandatory — all tools)
 
 **First commands every implementation session (before any `game/scenes/` work):**
@@ -142,6 +144,8 @@ See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
 | `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
+
+> **Benign local-only `L1_error_handling` FAIL (`game/development`):** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
