@@ -156,13 +156,21 @@ Webhook on `uat_ready` only. Prompt: `docs/agents/automation_prompts/uat_notify.
 
 This closes the **worker spawn gap**.
 
+> **Cursor UI note:** Many accounts only show **PR label** triggers, not **issue label** triggers. Use the **webhook + GitHub Actions** bridge below instead of a GitHub label trigger in Cursor.
+
 | Field | Value |
 |-------|--------|
 | Name | `Worker — sprint issue` |
-| Trigger | **GitHub issue labeled** `dispatch/ready` |
+| Trigger | **Webhook** → `CURSOR_WORKER_WEBHOOK_URL` |
 | Repo / branch | `3d-JRPG-adventure-pc-game` / `game/development` |
 | Tools | MCP **on** (all Godot MCPs + gamelab) |
 | Prompt | Paste `docs/agents/automation_prompts/worker_sprint_issue.md` |
+
+**GitHub Actions bridge** (repo workflow `.github/workflows/worker-dispatch.yml`):
+
+1. Save Automation E with **Webhook** trigger → copy URL
+2. GitHub → **Settings → Secrets and variables → Actions** → `CURSOR_WORKER_WEBHOOK_URL` = same URL
+3. Merge `worker-dispatch.yml` to `game/development` (fires on `issues.labeled` → `dispatch/ready`)
 
 **How PM triggers it:** orchestrator step `dispatch_workers` runs:
 
