@@ -91,9 +91,10 @@
       "role": "worker",
       "required": true,
       "trigger": {
-        "type": "github_issue_labeled",
-        "labels_all": ["dispatch/ready"],
-        "branch": "game/development"
+        "type": "webhook",
+        "secret": "CURSOR_WORKER_WEBHOOK_URL",
+        "fallback_github_workflow": ".github/workflows/worker-dispatch.yml",
+        "note": "Cursor UI may only expose PR label triggers; use webhook + GitHub Actions issues.labeled bridge"
       },
       "repo": "3d-JRPG-adventure-pc-game",
       "branch": "game/development",

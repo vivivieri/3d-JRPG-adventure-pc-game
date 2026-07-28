@@ -45,7 +45,12 @@ def main() -> int:
         trigger = auto.get("trigger", {})
         if trigger.get("type") == "webhook" and auto.get("required"):
             secret = trigger.get("secret")
-            if secret and secret not in ("CURSOR_PM_CYCLE_WEBHOOK_URL", "CURSOR_FACTORY_ALERT_WEBHOOK_URL"):
+            allowed = (
+                "CURSOR_PM_CYCLE_WEBHOOK_URL",
+                "CURSOR_FACTORY_ALERT_WEBHOOK_URL",
+                "CURSOR_WORKER_WEBHOOK_URL",
+            )
+            if secret and secret not in allowed:
                 errors.append(f"{aid}: unexpected webhook secret {secret}")
 
     env_json = ROOT / ".cursor/environment.json"
@@ -78,6 +83,7 @@ def main() -> int:
         ".github/workflows/agent-cycle-pm.yml",
         ".github/workflows/game-ci-failure-triage.yml",
         ".github/workflows/factory-watchdog.yml",
+        ".github/workflows/worker-dispatch.yml",
     ]
     for wf in workflows:
         if not (ROOT / wf).is_file():
