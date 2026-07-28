@@ -62,10 +62,9 @@ jobs:
         if: env.CURSOR_WORKER_WEBHOOK_URL != ''
         env:
           CURSOR_WORKER_WEBHOOK_URL: ${{ secrets.CURSOR_WORKER_WEBHOOK_URL }}
+          CURSOR_WORKER_WEBHOOK_AUTH: ${{ secrets.CURSOR_WORKER_WEBHOOK_AUTH }}
         run: |
-          curl -sf -X POST "$CURSOR_WORKER_WEBHOOK_URL" \
-            -H "Content-Type: application/json" \
-            -d @artifacts/worker_dispatch_event.json
+          bash tools/curl_cursor_webhook.sh worker @artifacts/worker_dispatch_event.json
           echo "Worker webhook sent for issue #${{ github.event.issue.number }}"
 
       - name: Upload dispatch event

@@ -61,10 +61,9 @@ jobs:
         if: steps.guard.outputs.skip != 'true' && env.CURSOR_PM_CYCLE_WEBHOOK_URL != ''
         env:
           CURSOR_PM_CYCLE_WEBHOOK_URL: ${{ secrets.CURSOR_PM_CYCLE_WEBHOOK_URL }}
+          CURSOR_PM_WEBHOOK_AUTH: ${{ secrets.CURSOR_PM_WEBHOOK_AUTH }}
         run: |
-          curl -sf -X POST "$CURSOR_PM_CYCLE_WEBHOOK_URL" \
-            -H "Content-Type: application/json" \
-            -d @artifacts/agent_cycle_event.json
+          bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json
           echo "Cursor PM webhook OK"
 
       - name: Clear cycle pending marker

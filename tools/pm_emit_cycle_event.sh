@@ -178,7 +178,7 @@ if [[ "$EVENT" == "mcp_blocked" || "$EVENT" == "factory_halt" ]]; then
   bash tools/run_factory_watchdog.sh --halt "${NOTES:-$EVENT}" 2>/dev/null || true
   ALERT_URL="${CURSOR_FACTORY_ALERT_WEBHOOK_URL:-}"
   if [[ -n "$ALERT_URL" ]]; then
-    curl -sf -X POST "$ALERT_URL" -H "Content-Type: application/json" -d @"${EVENT_FILE}" || true
+    bash tools/curl_cursor_webhook.sh alert @"${EVENT_FILE}" || true
   fi
 fi
 
@@ -223,16 +223,9 @@ DISPATCHED=0
 
 if [[ -n "${CURSOR_PM_CYCLE_WEBHOOK_URL:-}" ]]; then
   echo "==> POST Cursor PM cycle webhook"
-  HTTP_CODE="$(curl -sS -o /tmp/cursor_webhook_resp.txt -w '%{http_code}' \
-    -X POST "${CURSOR_PM_CYCLE_WEBHOOK_URL}" \
-    -H "Content-Type: application/json" \
-    -d @"${EVENT_FILE}")"
-  if [[ "$HTTP_CODE" =~ ^2 ]]; then
-    echo "[OK]   Cursor webhook HTTP ${HTTP_CODE}"
+  if bash tools/curl_cursor_webhook.sh pm @"${EVENT_FILE}"; then
     DISPATCHED=1
   else
-    echo "[FAIL] Cursor webhook HTTP ${HTTP_CODE}" >&2
-    cat /tmp/cursor_webhook_resp.txt >&2 || true
     exit 1
   fi
 fi
