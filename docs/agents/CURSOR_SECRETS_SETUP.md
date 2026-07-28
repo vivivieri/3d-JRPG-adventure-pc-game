@@ -26,8 +26,15 @@
 |--------|-----|
 | `CURSOR_PM_CYCLE_WEBHOOK_URL` | `.github/workflows/agent-cycle-pm.yml`, `factory-watchdog.yml`, CI triage |
 | `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | `factory-watchdog.yml` when recovery exhausted |
+| `CURSOR_WORKER_WEBHOOK_URL` | `.github/workflows/worker-dispatch.yml` (Automation E bridge) |
 | `TELEGRAM_BOT_TOKEN` | CI stakeholder reports (if workflow sends Telegram) |
 | `TELEGRAM_CHAT_ID` | Same |
+
+After Cursor Secrets are set, sync into GitHub Actions (needs `GH_TOKEN` with **Secrets: Read and write**):
+
+```bash
+bash tools/setup_github_actions_secrets.sh
+```
 
 Verify after setup:
 
@@ -154,6 +161,7 @@ Automation **Builder** agents: **Tools → MCP ON → + Add Tool or MCP → game
 | Issues | Read and write |
 | Pull requests | Read and write |
 | Actions | Read |
+| Secrets | Read and write *(GitHub Actions repo secrets via `setup_github_actions_secrets.sh`)* |
 | Contents | Read (and write if agents push via `gh`) |
 | Administration | Read and write *(branch protection via setup script)* |
 

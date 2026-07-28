@@ -104,7 +104,13 @@ All 8 day-one secrets — see `docs/agents/CURSOR_SECRETS_SETUP.md`.
 bash tools/check_day_one_secrets.sh
 ```
 
-Mirror webhook URLs in **GitHub repo Secrets** for Actions.
+Mirror webhook URLs in **GitHub repo Secrets** for Actions:
+
+```bash
+bash tools/setup_github_actions_secrets.sh
+```
+
+Requires `GH_TOKEN` with **Secrets: Read and write** — see `docs/agents/CURSOR_SECRETS_SETUP.md` §5.
 
 ---
 
@@ -189,6 +195,7 @@ That adds labels `dispatch/ready`, `status/in-progress`, `agent/<role>` on the l
 ```bash
 export GH_TOKEN=…
 bash tools/setup_github_project.sh
+bash tools/setup_github_actions_secrets.sh   # needs GH_TOKEN Secrets write
 ```
 
 Creates `dispatch/ready`, `agent/*`, `status/*` labels.
