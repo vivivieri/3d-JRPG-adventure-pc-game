@@ -1,0 +1,77 @@
+# Worker dispatch — bridge for Automation E when Cursor UI lacks issue-label triggers.
+#
+# PM adds dispatch/ready on a GitHub issue (pm_dispatch_workers.py).
+# This workflow POSTs to the Automation E webhook (CURSOR_WORKER_WEBHOOK_URL).
+#
+# See docs/agents/FACTORY_SETUP_GUIDE.md §6 (Automation E webhook fallback)
+
+name: Worker dispatch
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  trigger-worker:
+    name: POST Automation E webhook
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'dispatch/ready'
+    concurrency:
+      group: worker-dispatch-${{ github.repository }}-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout game/development
+        uses: actions/checkout@v4
+        with:
+          ref: game/development
+
+      - name: Build worker dispatch payload
+        run: |
+          mkdir -p artifacts
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          issue = json.loads(os.environ["ISSUE_JSON"])
+          labels = [lb["name"] for lb in issue.get("labels", [])]
+          agent = next((lb.split("/", 1)[1] for lb in labels if lb.startswith("agent/")), "")
+          payload = {
+              "event": "worker_dispatch",
+              "source": "github_actions_worker_dispatch",
+              "branch": "game/development",
+              "issue_number": issue.get("number"),
+              "issue_title": issue.get("title", ""),
+              "issue_url": issue.get("html_url", ""),
+              "labels": labels,
+              "agent_role": agent,
+              "note": (
+                  "Read the GitHub issue body and labels for dispatch details. "
+                  "If present locally, also read artifacts/worker_dispatch_manifest.json "
+                  "and artifacts/pm_dispatch_packet.json."
+              ),
+          }
+          path = Path("artifacts/worker_dispatch_event.json")
+          path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+          print(path.read_text())
+          PY
+        env:
+          ISSUE_JSON: ${{ toJson(github.event.issue) }}
+
+      - name: POST Cursor Worker webhook
+        if: env.CURSOR_WORKER_WEBHOOK_URL != ''
+        env:
+          CURSOR_WORKER_WEBHOOK_URL: ${{ secrets.CURSOR_WORKER_WEBHOOK_URL }}
+        run: |
+          curl -sf -X POST "$CURSOR_WORKER_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d @artifacts/worker_dispatch_event.json
+          echo "Worker webhook sent for issue #${{ github.event.issue.number }}"
+
+      - name: Upload dispatch event
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker-dispatch-${{ github.event.issue.number }}
+          path: artifacts/worker_dispatch_event.json
+          if-no-files-found: ignore
