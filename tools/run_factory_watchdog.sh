@@ -111,8 +111,12 @@ if not report.get("can_recover"):
             "reason": reason,
             "report": report,
         }
+        event_path = root / "artifacts" / "factory_halt_event.json"
+        event_path.parent.mkdir(parents=True, exist_ok=True)
+        event_path.write_text(json.dumps(payload) + "\n", encoding="utf-8")
         subprocess.run(
-            ["curl", "-sf", "-X", "POST", alert_url, "-H", "Content-Type: application/json", "-d", json.dumps(payload)],
+            ["bash", "tools/curl_cursor_webhook.sh", "alert", f"@{event_path}"],
+            cwd=root,
             check=False,
         )
     sys.exit(2)
