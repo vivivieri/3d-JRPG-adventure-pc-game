@@ -11,7 +11,6 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
-ENV_URL="https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game"
 
 if [[ "$BRANCH" == "game/development" ]]; then
   if [[ ! -f game/project.godot ]]; then
@@ -29,8 +28,8 @@ cat <<EOF
 The Cloud dev Environment must use branch game/development, not main.
 
 Why you are here:
-  - main's .cursor/environment.json only runs install_main_ci.sh (docs CI deps)
-  - game/development's .cursor/environment.json has snapshot + install_cloud_dev.sh + ensure_mcp_stack.sh
+  - Pod started on '${BRANCH}' without game/project.godot
+  - bootstrap_cloud_environment.sh should auto-checkout game/development on install
 
 Agent fix (run now):
   git fetch origin game/development
@@ -38,10 +37,11 @@ Agent fix (run now):
   bash tools/install_cloud_dev.sh
   bash tools/ensure_mcp_stack.sh
 
-Human fix (dashboard — required for "Update dev environment" / Setup Agent):
-  1. Open: ${ENV_URL}
-  2. Edit the environment → set Repository branch to game/development (not main)
-  3. Save, then Start Setup Agent again
+Human fix (no dashboard branch picker — use Setup Agent chat or re-run install):
+  1. Re-run environment install (bootstrap should auto-checkout game/development)
+  2. Or paste in Setup Agent:
+       git fetch origin game/development && git checkout game/development
+       bash tools/install_cloud_dev.sh && bash tools/ensure_mcp_stack.sh
 
 Docs: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md §0
 EOF
