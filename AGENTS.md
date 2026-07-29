@@ -1,5 +1,24 @@
 # AGENTS.md — Cloud Agent instructions
 
+## Development environment setup (Setup Agent — read first)
+
+If your task is **"Development environment setup"**, **update dev environment**, or **snapshot rebuild** — you are on the **wrong branch** when `git branch --show-current` is `main`.
+
+**Stop. Do not run `install_main_ci.sh` or docs-only CI.** Run this first:
+
+```bash
+bash tools/ensure_dev_environment_branch.sh   # fails fast on main with remediation
+git fetch origin game/development
+git checkout game/development
+bash tools/install_cloud_dev.sh
+bash tools/ensure_mcp_stack.sh
+bash tools/rebuild_cloud_snapshot.sh          # when rebuilding snapshot
+```
+
+**Human (dashboard):** [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) → edit environment → **Repository branch = `game/development`** (not `main`) → Save → Start Setup Agent again. Until the dashboard branch is `game/development`, Cursor reads `main`'s `.cursor/environment.json` (`install_main_ci.sh` only) — see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0.
+
+---
+
 ## Cursor Cloud specific instructions
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)
@@ -154,7 +173,7 @@ See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.
 | Branch | CI script |
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
-| `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
+| `game/development` | `bash tools/run_docs_ci_checks.sh` **+** `bash tools/run_ci_checks.sh` — **both required** (GitHub: `ci.yml` + `game-ci.yml`) |
 
 > **Benign local-only `L1_error_handling` FAIL (`game/development`):** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
 

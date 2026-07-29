@@ -848,7 +848,7 @@
     }
   },
   "docs_ci_gates": {
-    "branch": "main",
+    "branch": "main, game/development",
     "workflow": ".github/workflows/ci.yml",
     "runner": "bash tools/run_docs_ci_checks.sh",
     "required_gates": [

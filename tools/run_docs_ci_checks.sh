@@ -25,10 +25,14 @@ run_gate() {
 }
 
 BRANCH="$(bash "$(dirname "$0")/git_branch_name.sh")"
-echo "==> Main branch CI (docs + design data)"
-echo "    Policy: docs/workflow/BRANCHING.md"
+echo "==> Docs + design data CI"
+echo "    Policy: docs/workflow/BRANCHING.md · docs/ci-cd/CI.md"
 if [[ "$BRANCH" == "game/development" ]]; then
-  echo "    Note: checked out ${BRANCH} — ship-code gates skip via branch-aware scripts"
+  echo "    Branch: ${BRANCH} — docs gates run here too (ci.yml + game-ci.yml)"
+elif [[ "$BRANCH" == "main" ]]; then
+  echo "    Branch: main — docs/data only (no Godot runtime)"
+else
+  echo "    Branch: ${BRANCH}"
 fi
 
 run_gate "L0_story_data" python3 tools/validate_story_data.py
@@ -81,6 +85,8 @@ run_gate "L0_candidate_tournament" python3 tools/validate_candidate_tournament.p
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 
 echo ""
-echo "==> Main CI summary: PASS=${PASS} FAIL=${FAIL}"
-echo "Game implementation CI runs on branch game/development only."
+echo "==> Docs CI summary: PASS=${PASS} FAIL=${FAIL}"
+if [[ "$BRANCH" == "game/development" ]]; then
+  echo "Also run game CI: bash tools/run_ci_checks.sh (game-ci.yml)"
+fi
 exit "$FAIL"

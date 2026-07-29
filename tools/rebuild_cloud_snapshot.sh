@@ -36,7 +36,7 @@ step "Phase 0 — Preflight"
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
 if [[ "$BRANCH" != "game/development" ]]; then
-  warn "Branch is '$BRANCH' (expected game/development for snapshot save)"
+  fail "Branch is '$BRANCH' — run: bash tools/ensure_dev_environment_branch.sh (dashboard branch must be game/development)"
 else
   ok "Branch: game/development"
 fi
