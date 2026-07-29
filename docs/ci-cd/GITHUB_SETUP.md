@@ -45,15 +45,13 @@ bash tools/setup_github_project.sh --dry-run
 |------|----------------|
 | **Labels** | 23 — `env/*`, `severity/S*`, `gate/*`, `domain/*`, `agent/*`, `status/*` |
 | **Milestones** | M1-core, M5-art, M6-steam |
-| **Environments** | `qa`, `uat`, `steam-beta`, `steam-production` — with optional reviewers via API |
-| **Branch protection** | `main` + `game/development` — CI status + **1 PR review** (when `GH_TOKEN` admin) |
+| **Environments** | `qa`, `uat`, `steam-beta`, `steam-production` — no required reviewers |
+| **Branch protection** | `main` + `game/development` — CI status only (**no PR review required**) |
 | **Git LFS** | `.gitattributes` + `tools/install_git_lfs.sh` — see `docs/ci-cd/GIT_LFS.md` |
 
-**Environment reviewers (optional second approver for prod):**
+**GitHub Environments:** `qa`, `uat`, `steam-beta`, `steam-production` — **no required reviewers** (CI gates only). Re-apply with:
 
 ```bash
-export GITHUB_ENV_REVIEWER_LOGIN=your-login          # default: repo owner
-export GITHUB_ENV_REVIEWER_LOGIN_2=co-owner-login    # recommended for steam-production
 bash tools/setup_github_project.sh
 ```
 
@@ -83,9 +81,9 @@ status/in-progress   status/done
 | Name | Protection |
 |------|------------|
 | `qa` | None |
-| `uat` | Optional: 1 reviewer |
-| `steam-beta` | Required reviewers: 1 |
-| `steam-production` | Required reviewers: 2 |
+| `uat` | None (CI gates on RC tags) |
+| `steam-beta` | None (CI gates on beta CD) |
+| `steam-production` | None (CI gates on prod CD) |
 
 Used by: `qa-nightly.yml`, `cd-artifact.yml`, `cd-steam.yml`
 
@@ -97,13 +95,13 @@ Used by: `qa-nightly.yml`, `cd-artifact.yml`, `cd-steam.yml`
 
 - Require status check: **Docs + design data gates**
 - Require pull request before merging
-- Require **1 approving review**
+- **Do not** require approving reviews (CI-only merge)
 
 **`game/development`:**
 
 - Require status check: **L0–L2 headless gates**
 - Require pull request before merging
-- Require **1 approving review**
+- **Do not** require approving reviews (CI-only merge)
 - Do not require merge to main (long-lived dev branch)
 
 ### GitHub Projects board
