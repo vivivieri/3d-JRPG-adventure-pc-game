@@ -27,6 +27,7 @@
 
 ```bash
 bash tools/setup_github_project.sh
+bash tools/setup_github_actions_secrets.sh   # webhook URL + auth → GitHub Actions
 ```
 
 **Local:**
