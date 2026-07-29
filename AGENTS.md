@@ -5,6 +5,7 @@
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)
 **Platforms (v1):** **Linux + Windows** (Steam) — Linux required because Cursor Cloud Agents run Linux; see `docs/qa/PLATFORM_SUPPORT.md`. macOS v1.1+.
 **Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/workflow/BRANCHING.md`
+**Doc & prep flow:** All docs, `game/data/`, and tooling changes merge to **`main` first** (`bash tools/run_docs_ci_checks.sh`), then **sync `main` → `game/development`** in a follow-up merge PR. Do not land docs-only work directly on `game/development`.
 **Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ci-cd/ENVIRONMENTS.md`
 **Delivery model:** Phase-gated Agile — see `docs/workflow/AGILE_WITHIN_PHASES.md`
 **Multi-agent team:** `docs/agents/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/cheat-sheets/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/agents/PROJECT_MANAGEMENT.md` (GitHub Issues P0)
