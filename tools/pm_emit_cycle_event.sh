@@ -6,7 +6,7 @@
 #   bash tools/pm_emit_cycle_event.sh uat_ready --tag v0.9.0-rc1 --commit <sha>
 #
 # Requires (one of):
-#   CURSOR_PM_CYCLE_WEBHOOK_URL — Cursor Automation webhook URL (Secrets)
+#   CURSOR_PM_CYCLE_WEBHOOK_URL + CURSOR_PM_WEBHOOK_AUTH — Cursor Automation A (via tools/curl_cursor_webhook.sh)
 #   GH workflow: gh workflow run agent-cycle-pm.yml (uses repository_dispatch)
 set -euo pipefail
 

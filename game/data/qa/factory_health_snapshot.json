@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updated_at": "2026-07-21T02:28:57.838696+00:00",
-  "status": "healthy",
-  "last_event": "p1_00_bootstrap_restored",
-  "last_issue_id": "P1-00",
-  "last_agent_role": "pm",
-  "last_commit_sha": "a1d9f7e282e13fb245565030c6efdc907db8f8b4",
+  "updated_at": "2026-07-28T23:33:32.887644+00:00",
+  "status": "halted",
+  "last_event": "factory_halt",
+  "last_issue_id": null,
+  "last_agent_role": null,
+  "last_commit_sha": "c30ae3f9bfa67aef76d1615ca44ec9bf2a4bcf22",
   "sprint_id": "Phase1-Sprint1",
-  "note": "P1-00 Godot bootstrap restored on game/development; main+game synced",
-  "agent_sessions_this_sprint": 0,
+  "note": "smoke-test-D",
+  "agent_sessions_this_sprint": 1,
   "factory_halted": false
 }
