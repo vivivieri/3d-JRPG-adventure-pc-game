@@ -23,23 +23,36 @@ if ! command -v gh >/dev/null 2>&1; then
   exit 1
 fi
 
-TOKEN="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
-if [[ -z "$TOKEN" && "$DRY_RUN" -eq 0 ]]; then
-  echo "[FAIL] GH_TOKEN or GITHUB_TOKEN not set."
-  echo "       Create a fine-grained PAT — see docs/ci-cd/GITHUB_SETUP.md §1"
-  echo "       Add to Cursor Secrets as GH_TOKEN, then re-run this script."
-  exit 1
-fi
-
-if [[ -z "$TOKEN" && "$DRY_RUN" -eq 1 ]]; then
-  REPO="OWNER/REPO (dry-run)"
-else
-  export GH_TOKEN="$TOKEN"
-  if ! gh auth status >/dev/null 2>&1; then
-    echo "==> Authenticating gh with GH_TOKEN..."
-    echo "$TOKEN" | gh auth login --with-token
+resolve_gh_auth() {
+  local token="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
+  if [[ -n "$token" ]]; then
+    export GH_TOKEN="$token"
+    if gh auth status >/dev/null 2>&1; then
+      return 0
+    fi
+    echo "[WARN] GH_TOKEN/GITHUB_TOKEN is set but invalid — trying gh stored credentials..."
+    unset GH_TOKEN
   fi
+  if gh auth status >/dev/null 2>&1; then
+    return 0
+  fi
+  if [[ -n "$token" ]]; then
+    echo "==> Authenticating gh with GH_TOKEN..."
+    echo "$token" | gh auth login --with-token
+    return 0
+  fi
+  return 1
+}
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+  REPO="OWNER/REPO (dry-run)"
+elif resolve_gh_auth; then
   REPO="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
+else
+  echo "[FAIL] No valid GitHub credentials."
+  echo "       export GH_TOKEN=<fine-grained PAT with admin:repo> — see docs/ci-cd/GITHUB_SETUP.md §1"
+  echo "       Or run \`gh auth login\` locally, then re-run this script."
+  exit 1
 fi
 echo "==> GitHub setup for ${REPO}"
 echo ""
@@ -145,9 +158,9 @@ done
 # env_name|min_approvals|description
 ENVIRONMENT_SPECS=(
   "qa|0|Automated nightly gate sweep — no approval gate"
-  "uat|1|RC artifact tags (v*-rc*) — human playtest gate"
-  "steam-beta|1|Steam beta CD — manual workflow_dispatch"
-  "steam-production|2|Steam production CD — requires two approvers when configured"
+  "uat|0|RC artifact tags (v*-rc*) — CI gates only"
+  "steam-beta|0|Steam beta CD — CI gates only"
+  "steam-production|0|Steam production CD — CI gates only (no human approval)"
 )
 
 resolve_user_id() {
@@ -225,7 +238,7 @@ done
 protect_branch() {
   local branch="$1"
   local check_name="$2"
-  local review_count="${3:-1}"
+  local review_count="${3:-0}"
   local enc_branch
   enc_branch="$(urlencode "$branch")"
   if [[ "$DRY_RUN" -eq 1 ]]; then
@@ -259,8 +272,8 @@ JSON
 
 echo ""
 echo "==> Branch protection"
-protect_branch "main" "Docs + design data gates" 1
-protect_branch "game/development" "L0–L2 headless gates" 1
+protect_branch "main" "Docs + design data gates" 0
+protect_branch "game/development" "L0–L2 headless gates" 0
 
 echo ""
 echo "==> GitHub Projects (manual)"
