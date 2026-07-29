@@ -94,8 +94,12 @@ See `docs/agents/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 
 | Secret | Day one | Purpose |
 |--------|---------|---------|
-| `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Yes** | Automation A webhook — event-driven PM |
-| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Yes** | Automation D webhook — factory halt alert |
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | **Yes** | Automation A webhook URL |
+| `CURSOR_PM_WEBHOOK_AUTH` | **Yes** | Automation A auth (`Generate auth header`) |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | **Yes** | Automation D webhook URL |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | **Yes** | Automation D auth |
+| `CURSOR_WORKER_WEBHOOK_URL` | **Yes** | Automation E webhook URL |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | **Yes** | Automation E auth |
 | `GAMELAB_API_KEY` | **Yes** | GameLab MCP — UI art |
 | `GH_TOKEN` | **Yes** | `gh` CLI, issue sync, GitHub dispatch |
 | `TELEGRAM_BOT_TOKEN` | **Yes** | Stakeholder Telegram bot |
@@ -105,7 +109,9 @@ See `docs/agents/GDAI_CLOUD_SETUP.md` for plugin + panel **Start**.
 | GDAI license / plugin | Phase 1+ | Commercial plugin — separate install |
 | `OPENAI_API_KEY` / `GEMINI_API_KEY` | M5+ | Vision/audio jury scripts |
 
-**Scope:** Personal + Runtime Secret for each. Also add webhook URLs (+ Telegram if CI reports) to **GitHub repo Secrets** for Actions workflows.
+**Scope:** Personal + Runtime Secret for each. Sync webhook URL + auth to **GitHub repo Secrets**: `bash tools/setup_github_actions_secrets.sh`.
+
+**Agent rule:** POST automations with `bash tools/curl_cursor_webhook.sh {pm|alert|worker} @<json>` — never raw `curl` to `api2.cursor.sh` without auth.
 
 ### 3.3 MCP (Cloud dashboard — required)
 
@@ -323,7 +329,7 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 | Factory stalled after PR merge | Worker forgot `pm_emit_cycle_event.sh` — run manually or `bash tools/run_factory_watchdog.sh --recover` |
 | Agent hung mid-session | Heartbeat stale — watchdog emits `watchdog_recovery`; or `pm_record_heartbeat.sh` during long work |
 | Runaway recovery | Auto `factory_halt` at max attempts — `--clear-halt` after human fix |
-| Webhook 401/404 | Re-copy Automation webhook URL to Secrets |
+| Webhook 401/404 | Re-copy URL + **Generate auth header** → `CURSOR_*_WEBHOOK_AUTH`; sync via `bash tools/setup_github_actions_secrets.sh`; test `bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json` |
 | PM runs but MCP FAIL | Fix snapshot; emit `mcp_blocked`; human fixes secrets |
 | CI→PM loop | Ensure `.cycle_pending` cleared; use guarded workflow only |
 | Orchestrator dispatch empty, sprint not done | Check `depends_on` / issue status on `sprint_board.json` |
@@ -333,11 +339,11 @@ Add repo secret: `CURSOR_PM_CYCLE_WEBHOOK_URL` (same URL as Cursor Automation we
 ## 11. Quick start checklist
 
 - [ ] Environment snapshot with GDAI + MCP PASS
-- [ ] **Day-one secrets (all 7)** — `docs/agents/CURSOR_SECRETS_SETUP.md` · `bash tools/check_day_one_secrets.sh`
+- [ ] **Day-one secrets (all 11 incl. webhook auth)** — `docs/agents/CURSOR_SECRETS_SETUP.md` · `bash tools/check_day_one_secrets.sh`
 - [ ] GDAI plugin in snapshot (Phase 1+ scene work)
 - [ ] MCP servers in Cloud dashboard
-- [ ] **Automation A** + **Automation D** — webhook only (no schedule)
-- [ ] GitHub repo secrets: both webhook URLs
+- [ ] **Automation A** + **Automation D** + **Automation E** — webhook + auth header each
+- [ ] GitHub repo secrets: `bash tools/setup_github_actions_secrets.sh` (6 webhook URL + auth)
 - [ ] `game/development` bootstrapped (P1-00)
 - [ ] First cycle close: `bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD)`
 - [ ] Confirm PM Automation starts within seconds, not next day

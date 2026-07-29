@@ -98,13 +98,19 @@ python3 tools/validate_factory_automations.py   # L0_factory_automations
 
 ## 4. Phase 2 — Secrets (Environment → Secrets)
 
-All 8 day-one secrets — see `docs/agents/CURSOR_SECRETS_SETUP.md`.
+All day-one secrets (11, incl. webhook auth) — see `docs/agents/CURSOR_SECRETS_SETUP.md`.
 
 ```bash
 bash tools/check_day_one_secrets.sh
 ```
 
-Mirror webhook URLs in **GitHub repo Secrets** for Actions.
+Mirror webhook **URL + auth** pairs in **GitHub repo Secrets** for Actions:
+
+```bash
+bash tools/setup_github_actions_secrets.sh
+```
+
+Agents must POST webhooks only via `tools/curl_cursor_webhook.sh` (`pm` | `alert` | `worker`) — see `game/data/qa/factory_automations.json` → `webhook_dispatch`.
 
 ---
 
@@ -189,6 +195,7 @@ That adds labels `dispatch/ready`, `status/in-progress`, `agent/<role>` on the l
 ```bash
 export GH_TOKEN=…
 bash tools/setup_github_project.sh
+bash tools/setup_github_actions_secrets.sh   # needs GH_TOKEN Secrets write
 ```
 
 Creates `dispatch/ready`, `agent/*`, `status/*` labels.
@@ -256,8 +263,9 @@ Or ask agent to run **cursor-cloud `environment-info`** — need `build.snapshot
 ### Dashboard checklist (human)
 
 - [ ] Snapshot id in dashboard matches `.cursor/environment.json`
-- [ ] Automation A active, webhook URL in Secrets + GitHub
-- [ ] Automation D active, separate alert webhook
+- [ ] Automation A active — URL + `CURSOR_PM_WEBHOOK_AUTH` in Secrets + GitHub
+- [ ] Automation D active — URL + `CURSOR_ALERT_WEBHOOK_AUTH`
+- [ ] Automation E active — URL + `CURSOR_WORKER_WEBHOOK_AUTH`
 - [ ] Automation E triggers on label `dispatch/ready`
 - [ ] All automations use `game/development`, not `main`
 - [ ] MCP servers registered (4)
@@ -269,7 +277,7 @@ Or ask agent to run **cursor-cloud `environment-info`** — need `build.snapshot
 |---------|-----|
 | `build: null` | Launch from Environment dashboard, not web/GitHub ad-hoc agent |
 | Worker never starts | `github_issue` null → `pm_sync_github_issues.py --create`; check Automation E trigger |
-| PM never wakes | `CURSOR_PM_CYCLE_WEBHOOK_URL` wrong or Automation A inactive |
+| PM never wakes | Wrong URL/auth or Automation A inactive — `bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json` |
 | MCP FAIL on worker | Rebuild snapshot (`rebuild_cloud_snapshot.sh`) |
 | Factory stall | Worker skipped `run_post_agent_cycle.sh` → `run_factory_watchdog.sh --recover` |
 
