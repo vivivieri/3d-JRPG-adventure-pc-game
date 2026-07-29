@@ -70,8 +70,10 @@ def main() -> int:
                 errors.append(".cursor/environment.json missing snapshot field on game/development")
             if "install_cloud_dev.sh" not in str(env.get("install", "")):
                 errors.append(".cursor/environment.json install should reference install_cloud_dev.sh")
-        elif "install_main_ci.sh" not in str(env.get("install", "")):
-            errors.append(".cursor/environment.json on main should reference install_main_ci.sh")
+        elif "install_main_ci.sh" not in str(env.get("install", "")) and "bootstrap_cloud_environment.sh" not in str(
+            env.get("install", "")
+        ):
+            errors.append(".cursor/environment.json on main should reference install_main_ci.sh or bootstrap_cloud_environment.sh")
     else:
         errors.append("missing .cursor/environment.json")
 
