@@ -277,7 +277,7 @@ Or ask agent to run **cursor-cloud `environment-info`** — need `build.snapshot
 |---------|-----|
 | `build: null` | Launch from Environment dashboard, not web/GitHub ad-hoc agent |
 | Worker never starts | `github_issue` null → `pm_sync_github_issues.py --create`; check Automation E trigger |
-| PM never wakes | `CURSOR_PM_CYCLE_WEBHOOK_URL` wrong or Automation A inactive |
+| PM never wakes | Wrong URL/auth or Automation A inactive — `bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json` |
 | MCP FAIL on worker | Rebuild snapshot (`rebuild_cloud_snapshot.sh`) |
 | Factory stall | Worker skipped `run_post_agent_cycle.sh` → `run_factory_watchdog.sh --recover` |
 
