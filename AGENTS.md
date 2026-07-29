@@ -173,7 +173,7 @@ See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.
 | Branch | CI script |
 |--------|-----------|
 | `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
-| `game/development` | `bash tools/run_ci_checks.sh` — **required** full L0–L4 game gates (green before PR merge) |
+| `game/development` | `bash tools/run_docs_ci_checks.sh` **+** `bash tools/run_ci_checks.sh` — **both required** (GitHub: `ci.yml` + `game-ci.yml`) |
 
 > **Benign local-only `L1_error_handling` FAIL (`game/development`):** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
 
