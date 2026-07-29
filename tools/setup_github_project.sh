@@ -145,9 +145,9 @@ done
 # env_name|min_approvals|description
 ENVIRONMENT_SPECS=(
   "qa|0|Automated nightly gate sweep — no approval gate"
-  "uat|1|RC artifact tags (v*-rc*) — human playtest gate"
-  "steam-beta|1|Steam beta CD — manual workflow_dispatch"
-  "steam-production|2|Steam production CD — requires two approvers when configured"
+  "uat|0|RC artifact tags (v*-rc*) — CI gates only"
+  "steam-beta|0|Steam beta CD — CI gates only"
+  "steam-production|0|Steam production CD — CI gates only (no human approval)"
 )
 
 resolve_user_id() {
@@ -225,7 +225,7 @@ done
 protect_branch() {
   local branch="$1"
   local check_name="$2"
-  local review_count="${3:-1}"
+  local review_count="${3:-0}"
   local enc_branch
   enc_branch="$(urlencode "$branch")"
   if [[ "$DRY_RUN" -eq 1 ]]; then
@@ -259,8 +259,8 @@ JSON
 
 echo ""
 echo "==> Branch protection"
-protect_branch "main" "Docs + design data gates" 1
-protect_branch "game/development" "L0–L2 headless gates" 1
+protect_branch "main" "Docs + design data gates" 0
+protect_branch "game/development" "L0–L2 headless gates" 0
 
 echo ""
 echo "==> GitHub Projects (manual)"

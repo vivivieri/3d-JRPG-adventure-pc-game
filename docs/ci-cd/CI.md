@@ -187,10 +187,15 @@ bash tools/setup_github_project.sh
 
 | Branch | Required status check | PR reviews |
 |--------|----------------------|------------|
-| `main` | **Docs + design data gates** | 1 approval |
-| `game/development` | **L0–L2 headless gates** | 1 approval |
+| `main` | **Docs + design data gates** | **None** (CI-only merge) |
+| `game/development` | **L0–L2 headless gates** | **None** (CI-only merge) |
 
-Manual fallback: `docs/ci-cd/GITHUB_SETUP.md` §2.
+Apply to GitHub after merge:
+
+```bash
+export GH_TOKEN=github_pat_...   # admin PAT in Cursor Secrets
+bash tools/setup_github_project.sh
+```
 
 ---
 

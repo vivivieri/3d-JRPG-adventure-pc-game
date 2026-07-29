@@ -16,7 +16,7 @@ CD automates **release builds** after CI passes. It does **not** replace human Q
 |---------|---------|---------------|-----------------|
 | **RC** | Tag `v*-rc*` or `v*-uat*` | GitHub Release zip | No |
 | **Beta** | Tag `v*-beta*` or manual | Steam beta depot | Yes |
-| **Production** | Tag `v*.*.*` + approval | Steam default depot | Yes + L6 sign-off |
+| **Production** | Tag `v*.*.*` | Steam default depot | CI gates + L6 sign-off (automated where configured) |
 
 **Tag from `game/development` only** — `main` has no `game/project.godot`.
 
@@ -55,7 +55,7 @@ checkout → guard project.godot → install_ci_deps.sh
 
 **Triggers:** `workflow_dispatch` only (manual) until Steamworks secrets are configured.
 
-Requires GitHub Environment **`steam-production`** with required reviewers for prod uploads.
+Requires GitHub Environment **`steam-production`** (no required reviewers — CI gates only).
 
 ```
 run_cd_gates.sh → export_linux + export_windows → prepare_steam_depot.sh --platform all

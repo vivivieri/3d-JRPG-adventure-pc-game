@@ -635,11 +635,7 @@ def main() -> int:
             pdg.mark_delivered(record["request_id"], pdg.load_config())
         else:
             print("-" * 68)
-            print("Delivery HELD by pre-delivery control — a reviewer must approve first.")
-            print(f"Reviewer (QA): {record['review_command']}")
-            print(f"Then approve:  python3 tools/predelivery_gate.py approve --request {record['request_id']} --actor qa"
-                  + (" --allow-metric-fail" if n_fail else ""))
-            print("Once approved, re-run this same command to deliver.")
+            print(f"Delivery HELD by pre-delivery control — {record['reason']}")
 
     if parse_errors:
         print("-" * 68)

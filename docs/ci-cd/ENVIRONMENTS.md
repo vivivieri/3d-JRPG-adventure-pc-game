@@ -17,7 +17,7 @@
 | **QA** | Automated test gates | `game/development` @ CI green | — | — | QA Agent |
 | **UAT** | Stakeholder / playtest builds | Tag `v*-rc*` or `v*-uat*` | `cd-artifact.yml` → GitHub Release (draft) | L6 playtest script | QA Lead + Human |
 | **Preproduction** | Steam beta / near-final | Tag `v*-beta*` | `cd-steam.yml` → Steam **beta** depot | Beta testers | Release Agent |
-| **Production** | Steam public | Tag `v*.*.*` | `cd-steam.yml` → Steam **default** depot | Manual approval | Release + PM |
+| **Production** | Steam public | Tag `v*.*.*` | `cd-steam.yml` → Steam **default** depot | CI gates only | Release + PM |
 
 ```
 main (design)
@@ -28,7 +28,7 @@ game/development ──CI──► QA (automated)
   │
   ├── tag v0.9.0-beta1 ──CD steam──► Preprod (Steam beta)
   │
-  └── tag v1.0.0 ──CD steam + approval──► Production
+  └── tag v1.0.0 ──CD steam (CI gates)──► Production
 ```
 
 ---
@@ -96,7 +96,7 @@ Preprod is **not** a duplicate of QA. QA is automated gates on every push; prepr
 
 | Item | Requirement |
 |------|-------------|
-| Trigger | Tag `v*.*.*` + `cd-steam.yml` + **required approvers** |
+| Trigger | Tag `v*.*.*` + `cd-steam.yml` |
 | Gates | L5 + L6 sign-off + `check_asset_compliance.sh` |
 | GitHub Environment | `steam-production` |
 | Merge | `game/development` → `main` after ship (per `BRANCHING.md`) |
@@ -110,9 +110,9 @@ Configure in **Settings → Environments**:
 | Environment | Protection | Used by |
 |-------------|------------|---------|
 | `qa` | None | Future: scheduled QA workflow |
-| `uat` | Optional: require reviewer for prod-like RC | Manual promote |
-| `steam-beta` | 1 reviewer | `cd-steam.yml` channel=beta |
-| `steam-production` | 2 reviewers | `cd-steam.yml` channel=prod |
+| `uat` | None | Manual promote |
+| `steam-beta` | None | `cd-steam.yml` channel=beta |
+| `steam-production` | None | `cd-steam.yml` channel=prod |
 
 ---
 
