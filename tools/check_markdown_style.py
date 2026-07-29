@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Markdown style lint — docs/technical/MARKDOWN_STYLE.md."""
+"""Markdown style lint — docs/engineering/technical/MARKDOWN_STYLE.md."""
 from __future__ import annotations
 
 import re
@@ -11,9 +11,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIR_PARTS = (
     "alignment_audit_reports",
     "artifacts",
+    "archive",
+    "_meta",
 )
 SKIP_FILES = {
-    "docs/compliance/COMPLIANCE_REPORT.md",
+    "docs/archive/compliance/COMPLIANCE_REPORT.md",
 }
 
 LINK_RE = re.compile(r"\]\(([^)]+)\)")

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Cinematic beat hooks — vignettes and reveals before dialogue/encounters. See docs/ui/CINEMATICS.md §7.",
+  "description": "Cinematic beat hooks — vignettes and reveals before dialogue/encounters. See docs/design/ui/CINEMATICS.md §7.",
   "hooks": [
     {
       "id": "sc02_hub_pan",

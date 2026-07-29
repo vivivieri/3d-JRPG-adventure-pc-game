@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
-  "design_ref": "docs/art/VISUAL_QA.md",
+  "authority": "docs/ops/qa/CANDIDATE_TOURNAMENT.md",
+  "design_ref": "docs/design/art/VISUAL_QA.md",
   "note": "Soft rubric axes for champion/challenger tie-break only. Hard gates always veto promotion.",
   "axes": [
     {

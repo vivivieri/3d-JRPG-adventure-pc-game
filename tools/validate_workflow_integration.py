@@ -4,7 +4,7 @@
 Ensures registered features have required script hooks, doc cross-refs, secrets,
 and orchestrator steps wired. Prevents new features from landing out of sync.
 
-Authority: docs/qa/WORKFLOW_INTEGRATION.md
+Authority: docs/ops/qa/WORKFLOW_INTEGRATION.md
 Registry: game/data/qa/workflow_integration_registry.json
 """
 from __future__ import annotations
@@ -172,7 +172,7 @@ def main() -> int:
         for err in errors:
             print(f"  - {err}")
         print()
-        print("Fix: docs/qa/WORKFLOW_INTEGRATION.md — register hooks + doc refs before merge.")
+        print("Fix: docs/ops/qa/WORKFLOW_INTEGRATION.md — register hooks + doc refs before merge.")
         return 1
 
     n = len(registry.get("features", []))

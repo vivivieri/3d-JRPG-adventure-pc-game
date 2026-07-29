@@ -6,7 +6,7 @@ After PM orchestrator computes next_dispatch, this script:
   2. Marks board issues in_progress
   3. Adds dispatch/ready + agent/* labels on linked GitHub issues (triggers Worker automation)
 
-Authority: docs/agents/FACTORY_SETUP_GUIDE.md
+Authority: docs/ops/agents/FACTORY_SETUP_GUIDE.md
 Catalog: game/data/qa/factory_automations.json
 """
 from __future__ import annotations
@@ -112,7 +112,7 @@ def build_manifest(dispatch_packets: list[dict], report: dict) -> dict:
                 "acceptance_gate_ids": pkt.get("acceptance_gate_ids", []),
                 "github_issue": pkt.get("github_issue"),
                 "handoff_refs": pkt.get("handoff_refs", []),
-                "worker_prompt": "docs/agents/automation_prompts/worker_sprint_issue.md",
+                "worker_prompt": "docs/ops/agents/automation_prompts/worker_sprint_issue.md",
                 "boot_commands": [
                     "bash tools/ensure_mcp_stack.sh",
                     "bash tools/check_snapshot_boot.sh",

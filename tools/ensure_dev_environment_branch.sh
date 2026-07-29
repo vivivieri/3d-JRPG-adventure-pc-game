@@ -4,7 +4,7 @@
 # Usage (first command in Setup Agent or snapshot rebuild):
 #   bash tools/ensure_dev_environment_branch.sh
 #
-# Authority: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md
+# Authority: docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -43,6 +43,6 @@ Human fix (no dashboard branch picker — use Setup Agent chat or re-run install
        git fetch origin game/development && git checkout game/development
        bash tools/install_cloud_dev.sh && bash tools/ensure_mcp_stack.sh
 
-Docs: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md §0
+Docs: docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md §0
 EOF
 exit 1

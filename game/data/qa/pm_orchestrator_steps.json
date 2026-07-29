@@ -2,8 +2,8 @@
   "version": "1.3",
   "agent_role": "pm",
   "aliases": ["sprint master", "sprint facilitator"],
-  "authority": "docs/agents/PM_AGENT_RUNBOOK.md",
-  "design_ref": "docs/agents/SPRINT_ORCHESTRATION.md",
+  "authority": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
+  "design_ref": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
   "rule": "PM Agent MUST run bash tools/run_pm_orchestrator.sh at the start of every session. Exit non-zero blocks sprint work. Honor system is forbidden.",
   "post_agent_cycle": {
     "command": "bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit <sha>",

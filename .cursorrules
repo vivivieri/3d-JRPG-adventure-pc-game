@@ -2,39 +2,39 @@
 
 You are a Godot 4 3D developer for **Tides of Urashima**: a 2–3 hour stylized Japanese coastal JRPG (dark Urashima Tarō folklore).
 
+**Docs router (progressive disclosure):** [`docs/ops/BOOT.md`](docs/ops/BOOT.md) · [`docs/INDEX.yaml`](docs/INDEX.yaml) · [`docs/llms.txt`](docs/llms.txt)  
+**Do not preload the full `docs/` tree.** Resolve packs: `python3 tools/resolve_docs.py <role>`.
+
 ---
 
 ## 0. HARD RULES — GodotPrompter + MCP stack
 
-**The AI agent implements this project using GodotPrompter plus the MCP servers below.**
-
 | Tool / Server | Cursor name | Role |
 |---------------|-------------|------|
-| **GodotPrompter** | (Cursor) | Plan, architect, write GDScript (`.gd`), shaders (`.gdshader`), tests |
-| **GDAI MCP** | `godot-mcp` | **Build** — scenes (`.tscn`), nodes, materials, lights, F5 playtest |
-| **Godotiq** | `godotiq` | **Analyze** — signal_map, trace_flow, validate, ui_map, debug console |
-| **Godot MCP Pro** | `godot-mcp-pro` | **Test** — run_test_scenario, assert_screen_text, input replay (`--minimal` mode) |
-| **GameLab Studio MCP** | `gamelab-mcp` | **UI art generate** — ink frames, icon sheets, VFX sheets **(required)** |
+| **GodotPrompter** | (Cursor) | Plan, GDScript (`.gd`), shaders (`.gdshader`), tests |
+| **GDAI MCP** | `godot-mcp` | **Build** scenes / materials / F5 |
+| **Godotiq** | `godotiq` | **Analyze** signals / debug |
+| **Godot MCP Pro** | `godot-mcp-pro` | **Test** scenarios (`--minimal`) |
+| **GameLab Studio MCP** | `gamelab-mcp` | **UI art** frames / icons **(required)** |
 
-Full toolchain: `docs/agents/MCP_STACK.md` + `docs/art/ART_AUTOMATION_PIPELINE.md` (all MCP servers required; procedural UI fallbacks OK for asset output only)
+Detail: [`docs/ops/agents/MCP_STACK.md`](docs/ops/agents/MCP_STACK.md) · Art tiers: [`docs/design/art/ART_AUTOMATION_PIPELINE.md`](docs/design/art/ART_AUTOMATION_PIPELINE.md)
 
-### Role rules (avoid MCP conflicts)
+### Role rules
 
-- **Scene/node edits:** GDAI MCP only — do not use Godot MCP Pro or Godotiq for `.tscn` mutations  
-- **Debug “why did combat hang?”:** Godotiq `godotiq_signal_map`, `godotiq_trace_flow`  
-- **Automated test scenarios with assertions:** Godot MCP Pro testing tools  
-- **Hand-editing `.tscn` in Cursor:** forbidden when GDAI is available  
+- **Scene/node edits:** GDAI MCP only — never Godot MCP Pro / Godotiq for `.tscn` mutations
+- **Debug hangs:** Godotiq `signal_map` / `trace_flow`
+- **L4/L5 asserts:** Godot MCP Pro only
+- **Hand-edit `.tscn`:** forbidden when GDAI is available
 
 ### Forbidden without explicit user override
 
-- Hand-editing `.tscn` scene trees, node placement, or inspector values in Cursor (GDAI MCP must do this)
-- Implementing gameplay/visual features when GDAI MCP is not connected
-- **Shipping a cross-cutting factory feature without registering it in `game/data/qa/workflow_integration_registry.json`** — run `bash tools/check_feature_integration.sh --remind` before merge; `L0_workflow_integration` must PASS (`docs/qa/WORKFLOW_INTEGRATION.md`)
-- Importing copyrighted or unknown-license art, audio, fonts, or models from the web
-- Using Kenney packs, random Google images, CC-BY-NC, or franchise IP traces
-- Creating new `CharacterBody3D` player stacks outside `PlayerController` (`docs/technical/CODE_BASE_CLASS_RULES.md`)
+- Hand-editing `.tscn` / inspector values in Cursor when GDAI is up
+- Gameplay/visual features when GDAI MCP is not connected
+- Shipping cross-cutting factory features without `game/data/qa/workflow_integration_registry.json` (`L0_workflow_integration`)
+- Importing unknown-license / Kenney / franchise art or audio
+- New `CharacterBody3D` player stacks outside `PlayerController` ([`CODE_BASE_CLASS_RULES.md`](docs/engineering/technical/CODE_BASE_CLASS_RULES.md))
 
-### Session startup (every agent run)
+### Session startup
 
 ```bash
 bash tools/ensure_mcp_stack.sh
@@ -43,316 +43,83 @@ bash tools/check_rr_compliance.sh
 bash tools/check_extended_toolchain.sh
 ```
 
-1. If **GDAI HTTP bridge** is not up → run `ensure_gdai_mcp.sh`; if still failing, **STOP and notify the user** with the script output.
-2. If **Cursor MCP** does not list required servers (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) → **STOP and notify the user**. See `docs/agents/MCP_STACK.md`. Procedural UI placeholders are OK for **asset output** until GameLab gen ships — the MCP server itself is still required.
-3. Only after all checks pass → proceed with GodotPrompter plan → GDAI MCP execute → GDAI MCP verify.
+If GDAI `:3571` or required MCP servers fail → **STOP and notify the user.** No silent manual `.tscn` fallback.
 
-### Notify the user when unavailable
+### Procedural assets (copyright-safe)
 
-Always report clearly if any of these are missing:
+| Type | Tool |
+|------|------|
+| BGM/SFX placeholder | `python3 tools/generate_game_audio.py --all` |
+| Zone BGM prototype | `bash tools/generate_ai_bgm.sh` (ACE-Step) |
+| Selective VO | `bash tools/generate_ai_vo.sh` |
+| Portraits | `python3 tools/generate_procedural_portraits.py --all` |
+| UI frames | GameLab MCP → `palette_remap.py` |
 
-- `godot-mcp`, `godotiq`, `godot-mcp-pro`, or `gamelab-mcp` not in Cursor MCP server list
-- `GAMELAB_API_KEY` not set in Cursor Secrets
-- Blender not installed (`bash tools/install_extended_toolchain.sh`) — required for M5 turntable QA
-- GDAI HTTP `:3571` not responding (`curl http://127.0.0.1:3571/tools`)
-- Godot Editor not running
-- GDAI plugin folder missing (`game/addons/gdai-mcp-plugin-godot/`)
+Register: `python3 tools/register_asset.py` · `bash tools/check_asset_compliance.sh`
 
-**Do not silently fall back to manual file edits.**
-
-### Copyright-safe procedural assets (allowed)
-
-Generate ship-safe placeholders with project tools — register in manifest:
-
-| Asset type | Tool | License |
-|------------|------|---------|
-| BGM / SFX placeholder | `python3 tools/generate_game_audio.py --all` | ORIGINAL |
-| BGM zone prototype | **ACE-Step 1.5** (`bash tools/generate_ai_bgm.sh`) | MIT (ACE-Step) |
-| Selective VO (12 clips) | **ElevenLabs** (`bash tools/generate_ai_vo.sh`) | Commercial AI — log in `LICENSES.md` |
-| Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` | ORIGINAL |
-| Zone NPR albedos | **ComfyUI** or **Material Maker** → `palette_remap.py` | Document workflow |
-| UI frames / icon sheets | **GameLab MCP** → `game/assets/` | Per GameLab ToS |
-| Hero 3D meshes | **Meshy/Tripo/Rodin** + Blender → GLB | Service ToS + register |
-| Scene placement | GodotPrompter shaders + **GDAI MCP** | ORIGINAL |
-
-After generation: `python3 tools/register_asset.py add --help` + `bash tools/check_asset_compliance.sh`
-
-**Default toolchain (always work together):**
-- **GodotPrompter** — plan, architect, generate GDScript & shaders
-- **GDAI MCP** — execute in the live Godot Editor, configure scenes, verify & iterate
-
-**Authoritative design docs (read before visual work):**
-- `docs/README.md` — documentation index
-- `docs/technical/TECHNICAL_DESIGN.md` — runtime architecture (TDD)
-- `docs/technical/CODE_STYLE.md` — GDScript conventions
-- `docs/world/LEVEL_DESIGN.md` — zones, interactables, triggers
-- `docs/art/ART_DIRECTION.md` — palette, silhouettes, what to avoid
-- `docs/art/RENDERING_GUIDE.md` — tonemap, fog, glow, shadows, zone presets
-- `docs/world/ENVIRONMENT_KITS.md` — per-zone lighting & modular kits
-- `docs/art/CHARACTER_BIBLE.md` — models, box glow states, spirit materials
-- `docs/art/ART_AUTOMATION_PIPELINE.md` — quality-first automated art/audio policy
-- `docs/art/VISUAL_QA.md` — screenshot + vision gates (look & feel)
-- `docs/art/MODEL_QA.md` — GLB lint + turntable vision jury (asset quality)
-- `docs/art/ASSET_COMPLIANCE.md` — license-safe assets only
-- `docs/audio/AUDIO_PRODUCTION_GUIDE.md` — audio layout; ACE-Step ship path
-- `docs/audio/AUDIO_QA.md` — technical + LLM listen gates for BGM
-- `docs/qa/QA_REMEDIATION_LOOP.md` — industry polish refs + FAIL iteration (anti infinite retry)
-- `docs/qa/FLOW_QA.md` — game flow QA + progression remediation loop
-- `docs/qa/ACCEPTANCE_CRITERIA.md` — measurable QA pass/fail (gates, jury, evidence)
-
-**Visual target:** High-detail **stylized Japanese 3D** (*Ni no Kuni* environmental richness, *Eastward* clarity) — **not** bright Ghibli fantasy, not photoreal PBR, not chibi anime. Muted palette, emotional weight, beauty with decay. Audience: men 20–30.
-
----
-
-## 1. Roles & responsibilities (R&R) — GodotPrompter + MCP stack
-
-Core tools are **complementary, not alternatives**. P0 MCP (`godot-mcp`, `godotiq`, `godot-mcp-pro`) is **required**; art generators are tiered per `docs/art/ART_AUTOMATION_PIPELINE.md`.
-
-### Tool A: GodotPrompter — *Architect & code generator*
-| | |
-|---|---|
-| **Role** | Structural planner, GDScript author, custom spatial shader architect |
-| **Owns** | Shader code (`.gdshader`), GDScript logic (`.gd`), math, class design, signal wiring patterns, refactor plans, procedural generator scripts |
-| **Responsibility** | Godot 4 syntax; NPR/toon pipelines; stepped diffuse ramps; vertex shaders (water, wind sway); typed GDScript |
-| **When to use** | **First** — before GDAI touches scenes: plan approach, draft shaders/scripts, define node structure |
-| **Does NOT** | Replace the editor for placing meshes, tuning light angles, or reading live editor errors |
-
-### Tool B: GDAI MCP — *Scene mutator & runtime verifier*
-| | |
-|---|---|
-| **Role** | Editor integration layer — creates/configures nodes, scenes, materials, lights, `WorldEnvironment` |
-| **Owns** | `.tscn` graph changes, inspector properties, in-editor playtest, output-panel error inspection |
-| **Responsibility** | Apply zone palettes from art docs; parent nodes; assign materials; audit FPS in editor |
-| **When to use** | **After** GodotPrompter planning — implement the plan in the open Godot Editor |
-| **Prerequisite** | `bash tools/ensure_gdai_mcp.sh` passes; `godot-mcp` connected in Cursor MCP |
-
-### Tool C: Godotiq — *Analyze & debug*
-| | |
-|---|---|
-| **Role** | Signal tracing, dependency graphs, debug console, `ui_map`, `verify_project_runs` |
-| **Owns** | Read-only diagnosis — why combat hung, orphan signals, runtime errors |
-| **When to use** | After a failure or before refactoring systems with many signals |
-| **Does NOT** | Edit `.tscn` or mutate scenes |
-
-### Tool D: Godot MCP Pro — *Automated testing*
-| | |
-|---|---|
-| **Role** | L4/L5 scenarios — `run_test_scenario`, `assert_screen_text`, input replay, screenshot compare |
-| **Owns** | Test assertions and scripted playthroughs (`--minimal` mode — no scene editing) |
-| **When to use** | Phase gates, combat/menu E2E, regression after narrative changes |
-| **Does NOT** | Build or edit scenes (GDAI only) |
-
-### Tool E: GameLab Studio MCP — *UI art generate* (required)
-| | |
-|---|---|
-| **Role** | Ink-wash UI frames, combat icon sheets, VFX sprite sheets via MCP |
-| **Owns** | Exported PNG/WebP under `game/assets/textures/ui/` |
-| **When to use** | UI borders, menu frames, icon sheets — **not** default zone tileables |
-| **Does NOT** | Place nodes, assign materials, or edit `.tscn` — hand off to GDAI MCP |
-| **Prerequisite** | `gamelab-mcp` + API key; `palette_remap.py` after every gen |
-
-### Tool F: ComfyUI / Material Maker — *Zone NPR albedos* (offline)
-| | |
-|---|---|
-| **Role** | Stylized tileable wood, stone, ground; hero texture sheets |
-| **When to use** | Zone albedos per `docs/art/ART_AUTOMATION_PIPELINE.md` §3 |
-| **Handoff** | `palette_remap.py` → register → GDAI material assign |
-
-### Tool G: AI 3D + Blender — *Hero pipeline + turntable QA* (required offline)
-| | |
-|---|---|
-| **Role** | Automated stylized meshes (Meshy/Tripo/Rodin) + GLB export |
-| **When to use** | Characters, torii, lacquer box, palace trim per `CHARACTER_BIBLE.md` |
-| **Handoff** | Mixamo rig → Godot import → GDAI MCP placement |
-
-### Tool H: ACE-Step 1.5 — *Audio prototype*
-| | |
-|---|---|
-| **Role** | Zone BGM, opening movie, boss loops, boss intro cinematics, ending hero scores |
-| **When to use** | Every audio pass; pair with `generate_game_audio.py` for instant fallback |
-| **Install** | `bash tools/install_ace_step.sh` → Gradio or REST API |
-| **Generate** | `bash tools/generate_ai_bgm.sh --category opening\|boss_cinematic\|ending\|zone` |
-| **Ship rule** | Curated ACE-Step exports + loudness normalize — `docs/audio/AUDIO_PRODUCTION_GUIDE.md` |
-
-### Rejected for v1 (do not adopt)
-- **Summer Engine** — replaces Godot editor; breaks GDAI stack
-- **Fennara** — fourth scene editor; overlaps GDAI/Godotiq/MCP Pro
-- **Ink narrative rewrite** — JSON spine already defined
-- **Notion MCP** — `docs/` + `game/data/` are authoritative; no duplicate index
-- **Kenney town kits** — wrong visual read for Japanese coastal JRPG
-
-### Combined workflow (default — use every session)
+### Workflow (every session)
 
 ```
-0. BOOT     → bash tools/ensure_gdai_mcp.sh (block if GDAI MCP unavailable — notify user)
-1. READ     → docs/art/RENDERING_GUIDE.md + zone row in ENVIRONMENT_KITS.md
-2. PLAN     → GodotPrompter: shader design, script structure, node tree, property values
-3. EXECUTE  → GDAI MCP: create/edit scenes, apply materials, configure lights & WorldEnvironment
-4. VERIFY   → GDAI MCP: run scene (F5), read editor errors/output, check visuals in viewport
-5. REFINE   → GodotPrompter: fix script/shader bugs GDAI surfaced → GDAI MCP applies fixes in editor
-6. ASSETS   → Procedural audio/art via project tools; GDAI MCP assigns in editor
-7. QA       → L0–L2 every commit; art/flow QA per task (see §0 QA stack below)
-8. SHIP     → commit; acceptance gates + bash tools/check_asset_compliance.sh
+0. BOOT → ensure_mcp_stack / BOOT.md
+1. READ → resolve_docs.py <role> (not the whole library)
+2. PLAN → GodotPrompter
+3. EXECUTE → GDAI MCP
+4. VERIFY → F5 / Godotiq / MCP Pro as appropriate
+5. QA → L0–L2; domain smokes per task
+6. CLOSE → run_post_agent_cycle.sh
 ```
 
-**Handoff rules:**
-- GodotPrompter **writes** code; GDAI MCP **applies** it to the project and **confirms** it runs.
-- **Never** stop after GodotPrompter output alone — always hand off to GDAI MCP for editor integration.
-- **Never** hand-edit `.tscn` or inspector values in Cursor when GDAI MCP is available.
-- Never configure complex shaders purely by hand in the inspector without GodotPrompter drafting the `.gdshader` first.
-- If GDAI reports script errors → loop back to GodotPrompter for the fix, then GDAI MCP to re-test.
+---
 
-**Sprint factory telemetry (event-driven PM):**
-- Workers: `run_agent_session_gate.sh` opens session → `run_post_agent_cycle.sh` closes it (done criteria, board, cycle event, evidence) + auto-fetches tokens (`CURSOR_API_KEY`).
-- Policy: `docs/qa/AGENT_SESSION_TELEMETRY.md` §9 — wired into orchestrator, watchdog, stakeholder reports.
-- Watchdog: `run_factory_watchdog.sh` — stall recovery (`docs/agents/FACTORY_WATCHDOG.md`).
-- Stakeholder: `pm_emit_stakeholder_report.sh` on every cycle event (`docs/agents/PM_STAKEHOLDER_REPORTING.md`).
-- Alignment: `run_alignment_audit.sh` at post-merge / phase exit (`docs/qa/ALIGNMENT_AUDIT.md`). **Management visuals:** `audit_radar_spec.png` + `audit_radar_build.png` — not legacy mega dashboard.
+## 1. Stylized rendering (project-specific)
 
-**Cross-cutting factory features (agents MUST register before merge):**
-- Registry: `game/data/qa/workflow_integration_registry.json` — every PM hook, secret, telemetry, watchdog, or tournament feature.
-- Before merge: `bash tools/check_feature_integration.sh --remind` → `L0_workflow_integration` PASS.
-- Authority: `docs/qa/WORKFLOW_INTEGRATION.md`.
-- **L2.5 candidate tournament:** optional champion/challenger before merge — `run_candidate_tournament.sh`; policy `docs/qa/CANDIDATE_TOURNAMENT.md` (non-ship).
-
-**Example task split:**
-
-| Task | GodotPrompter | GDAI MCP |
-|------|---------------|----------|
-| Zone lighting pass | Draft `zone_visuals.gd` fog/sky values; toon shader | Add `WorldEnvironment`, `DirectionalLight3D`, assign palette in `ruined_village.tscn` |
-| Water stylization | Write `water_material.gdshader` with foam + displacement | Create water mesh, assign shader, tune uniform in editor |
-| Combat UI hookup | Plan `combat_ui.gd` signal connections | Create `combat_ui.tscn` nodes, wire signals in editor |
-| Tab menu / shop UI | Plan `tab_menu.gd` logic | Build `tab_menu.tscn` node tree, connect signals, verify in viewport |
-| Lacquer box glow | Shader with 3 emission states by uniform | Place box mesh on Urashima, swap material states via story flags |
-| BGM / SFX | Run `generate_game_audio.py`; wire `audio_manager.gd` | Assign streams in editor, test F5 with audio bus |
-| Zone wood/stone albedo | ComfyUI/Material Maker + `palette_remap.py` per `ART_DIRECTION.md` | Assign `toon_base` in zone `.tscn` |
-| UI ink-wash frames | GameLab MCP + `palette_remap.py` | Assign in UI `.tscn` |
-| Combat balance pass | `docs/gameplay/COMBAT_SYSTEMS.md` + `game/data/skills.json` | F5 combat scene via GDAI after data change |
-| Hero prop (torii, box) | Meshy/Blender → GLB import | Place mesh, assign NPR material, tune emission |
-
-**Startup order:** `ensure_mcp_stack.sh` → Godot Editor + MCP bridges → `check_extended_toolchain.sh` (Blender + GameLab required) → plan in GodotPrompter.
-
-**Full toolchain:** `docs/agents/MCP_STACK.md`
-
-### QA stack (mandatory — measurable acceptance)
-
-**Authority:** `docs/qa/ACCEPTANCE_CRITERIA.md` + `game/data/qa/acceptance_criteria.json`  
-**Policy:** WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS · re-run jury without rebuild = invalid
-
-| Layer | Command | Gate ids (examples) |
-|-------|---------|---------------------|
-| L0 data | `python3 tools/validate_story_data.py` | `L0_story_data` |
-| L1 unit | `bash tools/run_unit_tests.sh` | `L1_unit_tests` |
-| L2 smoke | `bash tools/run_playtest_smoke.sh` | boot, primitives, art smokes when assets exist |
-| L2 model | `bash tools/run_model_smoke_checks.sh` | `L2_model_technical`, `L2_model_jury` |
-| L2 visual | `bash tools/run_visual_smoke_checks.sh` | `L2_visual_palette`, `L2_visual_jury` |
-| L2 audio | `bash tools/run_audio_smoke_checks.sh` | `L2_audio_technical`, `L2_audio_jury` |
-| L4 flow | `bash tools/run_integration_tests.sh` | `L4_integration`, `INT-*` |
-| L5 E2E | `bash tools/run_e2e_playthrough.sh` | `L5_e2e_three_endings` (not SKIP) |
-| L6 human | `docs/qa/PLAYTEST_SCRIPT.md` | `L6_human_playtest` — **required ship gate** (Phase 8, after L0–L5) |
-| `game/development` CI | `bash tools/run_ci_checks.sh` | **Required merge gate** — green before PR merge |
-| PM orchestrator | `bash tools/run_pm_orchestrator.sh` | **Required** every PM session — dispatches agents (`docs/agents/FACTORY_SETUP_GUIDE.md`) |
-
-**On FAIL:** `bash tools/qa_emit_remediation.sh <kind>` → change **one** lever → re-measure (`docs/qa/QA_REMEDIATION_LOOP.md`).
-
-| Domain | Policy doc |
-|--------|------------|
-| Acceptance thresholds | `docs/qa/ACCEPTANCE_CRITERIA.md` |
-| 3D assets | `docs/art/MODEL_QA.md` |
-| In-scene visuals | `docs/art/VISUAL_QA.md` |
-| Audio | `docs/audio/AUDIO_QA.md` |
-| Game flow | `docs/qa/FLOW_QA.md` |
-| FAIL iteration | `docs/qa/QA_REMEDIATION_LOOP.md` |
-
-**Vision jury API keys (Cursor Secrets):** `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`
+- Shadows ON; colored lights — never pure white (zone palettes in [`RENDERING_GUIDE.md`](docs/design/art/RENDERING_GUIDE.md))
+- Tonemap Filmic/ACES; distance fog; restrained glow on emissives
+- ProceduralSkyMaterial per zone — no sunny HDRI
+- Toon ramp family; no full PBR ship look; no primitive placeholders in player-facing scenes
+- Audio: procedural placeholders OK; ship via ACE-Step curated path
 
 ---
 
-## 2. Stylized rendering rules (project-specific)
+## 2. Performance & ship
 
-When configuring nodes, environments, or materials, enforce **Tides of Urashima** standards — not generic bright anime defaults.
-
-### A. Lighting & shadows
-- **Shadows ON:** Use `DirectionalLight3D` with `shadow_enabled = true` and soft shadow filter. Tune max distance per zone.
-- **Colored lights — never pure white:** One dominant directional + one colored fill per zone (`docs/art/RENDERING_GUIDE.md` §5).
-  - Village: cool overcast `#B8C8D8` + warm lantern `#D4A880`
-  - Caves: cyan emissive `#4AE8D8` fill; no sky
-  - Palace: gold `#FFD890` from above; void sky `#1A1A3A`
-- **Muted, not pastel-bright:** Fog grey `#8B9DAF`, weathered wood `#5C4A3A`, biolume `#4AE8D8`. Avoid candy colors and sunny anime gold skies in the hub.
-- **No heavy SSIL/SSAO:** Disable in v1 — muddies toon ramps (`docs/art/RENDERING_GUIDE.md` §3.2).
-
-### B. WorldEnvironment & post-processing
-- **Tonemap:** `TONE_MAPPER_FILMIC` or `TONE_MAPPER_ACES` — **not** Linear (washed out). Tune exposure so fog and emissives do not clip to white.
-- **Fog:** Distance fog **always on** in ruined village hub. Zone-specific density; fog color matches sky palette.
-- **Volumetric fog:** Subtle in village only — not caves or palace void.
-- **Glow (bloom):** Enable on emissive content — lacquer box, cave algae, palace gold trim, spirit VFX. Mode `Softlight`; intensity restrained (~0.3–0.4). **Not** blanket dreamy bloom on every scene.
-- **Skip:** SDFGI, VoxelGI (v1), HDR reflections, lens flare.
-
-### C. Sky
-- Use **ProceduralSkyMaterial** per zone — grey overcast coast, dark caves, void palace. **No** sunny PhysicalSky HDRI or photographic skies.
-
-### D. NPR materials & textures
-- **Toon ramp shader family** across the scene — single cohesive look (`ART_DIRECTION.md` §7).
-- **Automated stylized albedo** on all hero assets (ComfyUI/Material Maker + `palette_remap.py`); light normal maps OK for wood/stone detail.
-- **No full PBR workflow:** Avoid metallic/glossy skin, ORM packs, StandardMaterial3D realism in player-facing scenes.
-- **Emission:** Lacquer box (3 glow states), algae, palace trim, spirit lower body (alpha/additive).
-- **Outlines:** **Optional / subtle only** — not required. Prefer readable silhouettes and value contrast over heavy inverted-hull outlines unless art review approves.
-- **Water:** Stylized planes + foam decals + custom shader — not fluid simulation.
-
-### E. Environment & foliage
-- Wind-sway vertex shaders OK for coastal grass/reeds.
-- Japanese coastal / ryūgū motifs only — **no** European castle kits, medieval props, or Kenney placeholders in ship builds.
-- **No primitive placeholders** (`BoxMesh`, `CapsuleMesh`) in player-facing scenes — build via GDAI MCP + NPR meshes/shaders or licensed art.
-
-### F. Audio
-- **Procedural placeholders:** `python3 tools/generate_game_audio.py --all` (ORIGINAL, copyright-safe).
-- **Ship target:** Curated authored tracks per `docs/audio/AUDIO_PRODUCTION_GUIDE.md` — all registered in manifest.
-- **Never** import random web SFX/BGM without documented license.
+- 60 FPS @ 1080p (GTX 1060) on ruined_village slice
+- ≤ 8 materials visible per zone at gameplay camera
+- `bash tools/check_asset_compliance.sh` before commit
 
 ---
 
-## 3. Performance & ship rules
-- **60 FPS @ 1080p** on GTX 1060 — test SC-02 Ruined Village vertical slice first.
-- **≤ 8 materials** visible per zone at gameplay camera.
-- Log third-party assets in `docs/art/LICENSES.md`; run `bash tools/check_asset_compliance.sh` before commit.
-- Godot scenes/scripts for **Phases 1–6 gameplay** may land on `main` per `docs/workflow/IMPLEMENTATION_PLAN.md` or on feature branches — either is OK if PR-reviewed
-- `main` always holds: design docs, `game/data/` JSON, boot shell, validators, and story stubs (`CinematicDirector`, `VoiceLinePlayer`)
+## 3. Godot 4 syntax
+
+- Signals: `signal_name.connect(_on_callback)` — no string connects
+- Coroutines: `await` — never `yield()`
+- Typed GDScript where the file already uses types
 
 ---
 
-## 4. Custom toon shader reference (Godot 4)
-```gdshader
-shader_type spatial;
-render_mode diffuse_toon, specular_toon;
+## 4. QA stack (cite gate ids)
 
-uniform vec4 base_color : source_color;
-uniform sampler2D albedo_texture : source_color, filter_linear_mipmap;
+Authority: [`ACCEPTANCE_CRITERIA.md`](docs/ops/qa/ACCEPTANCE_CRITERIA.md)
 
-void fragment() {
-    vec4 tex = texture(albedo_texture, UV);
-    ALBEDO = tex.rgb * base_color.rgb;
-    ROUGHNESS = 1.0;
-    METALLIC = 0.0;
-}
-```
-Extend with emission for interactables; keep one ramp family project-wide.
+| Layer | Command |
+|-------|---------|
+| L0 | `python3 tools/validate_story_data.py` |
+| L1 | `bash tools/run_unit_tests.sh` |
+| L2 | `bash tools/run_playtest_smoke.sh` |
+| L4 | `bash tools/run_integration_tests.sh` |
+| L5 | `REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh` |
 
----
+On FAIL: `bash tools/qa_emit_remediation.sh <kind>` — one lever per attempt.
 
-## 5. Strict Godot 4 syntax
-- **Signals:** `signal_name.connect(_on_callback)` — no string-based connections.
-- **Coroutines:** `await object.signal` — never `yield()`.
-- **3D:** Access `velocity`, `transform`, `global_position` on `Node3D` / `CharacterBody3D` directly.
-- **Typed GDScript** where the surrounding file already uses types.
+### Factory ops (cross-cutting — keep names for L0_workflow_integration)
 
----
+| Op | Command / doc |
+|----|----------------|
+| Session telemetry | `docs/ops/qa/AGENT_SESSION_TELEMETRY.md` · `CURSOR_API_KEY` |
+| Watchdog | `bash tools/run_factory_watchdog.sh` · `FACTORY_WATCHDOG` |
+| Factory setup | `docs/ops/agents/FACTORY_SETUP_GUIDE.md` |
+| Stakeholder | `bash tools/pm_emit_stakeholder_report.sh` |
+| Alignment | `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png` |
+| Tournament | `docs/ops/qa/CANDIDATE_TOURNAMENT.md` |
 
-## 6. Workflow checklist (M5 art rebuild)
-1. **Boot** — `bash tools/ensure_gdai_mcp.sh`; notify user if GDAI MCP unavailable.
-2. **Read** zone row in `docs/art/RENDERING_GUIDE.md` + `docs/world/ENVIRONMENT_KITS.md`.
-3. **Plan** with GodotPrompter — shaders, scripts, node tree, property values.
-4. **Execute** with GDAI MCP — apply plan in editor (scenes, materials, lights).
-5. **Verify** with GDAI MCP — F5 playtest, fix errors (loop GodotPrompter ↔ GDAI until clean).
-6. **QA** — `bash tools/run_playtest_smoke.sh`; domain smokes + jury when assets exist; cite gate ids in report (`docs/qa/ACCEPTANCE_CRITERIA.md`).
-7. **Assets** — procedural audio/portraits; GDAI assigns in editor; MODEL/VISUAL/AUDIO QA before ship art.
-8. **Ship check** — acceptance criteria for phase; palette hex; 60 FPS @ 1080p; `check_asset_compliance.sh`.
+Full runbooks stay under `docs/ops/` and `docs/design/` — load via `INDEX.yaml`, not this file.

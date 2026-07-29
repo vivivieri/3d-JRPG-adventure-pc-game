@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Record agent session telemetry event (start / progress / end).
-# Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+# Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 #
 # Usage:
 #   bash tools/pm_record_agent_session.sh start  --agent builder --issue P1-02

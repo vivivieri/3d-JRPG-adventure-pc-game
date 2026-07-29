@@ -1,0 +1,366 @@
+# Cursor Secrets — Day-One Setup (How to Get Every Key)
+
+**Version:** 1.0
+**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (11 runtime secrets including webhook auth + `CURSOR_API_KEY` for auto token telemetry).
+**Where to add:** Cursor **Cloud Agents → your environment → Secrets** — scope **Personal + Runtime Secret** for each.
+**Cross-refs:** `docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`, `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md`, `docs/ops/ci-cd/GITHUB_SETUP.md`, `docs/ops/agents/MCP_STACK.md`, `docs/design/vision/VO_HIT_LIST.md`
+
+---
+
+## 1. Day-one checklist (all compulsory)
+
+| Secret | Purpose | How to get (section) |
+|--------|---------|----------------------|
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | Event-driven PM dispatch | [§2](#2-cursor_pm_cycle_webhook_url) |
+| `CURSOR_PM_WEBHOOK_AUTH` | Auth header for Automation A webhook | [§2](#2-cursor_pm_cycle_webhook_url) |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Factory halt / human alert | [§3](#3-cursor_factory_alert_webhook_url) |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | Auth header for Automation D webhook | [§3](#3-cursor_factory_alert_webhook_url) |
+| `CURSOR_WORKER_WEBHOOK_URL` | Worker dispatch (Automation E) | [§3b](#3b-cursor_worker_webhook) |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | Auth header for Automation E webhook | [§3b](#3b-cursor_worker_webhook) |
+| `GAMELAB_API_KEY` | GameLab MCP — UI art generation | [§4](#4-gamelab_api_key) |
+| `GH_TOKEN` | `gh` CLI, issue sync, GitHub Actions dispatch | [§5](#5-gh_token) |
+| `TELEGRAM_BOT_TOKEN` | Stakeholder status → product owner | [§6](#6-telegram_bot_token--telegram_chat_id) |
+| `TELEGRAM_CHAT_ID` | Your Telegram chat id | [§6](#6-telegram_bot_token--telegram_chat_id) |
+| `ELEVENLABS_API_KEY` | Selective VO generation (12 clips) | [§7](#7-elevenlabs_api_key) |
+| `CURSOR_API_KEY` | **Auto agent token telemetry** (Cloud Agents usage API) | [§8](#8-cursor_api_key) |
+
+**Also add to GitHub repo Secrets** (Settings → Secrets and variables → Actions):
+
+| Secret | Why |
+|--------|-----|
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | `.github/workflows/agent-cycle-pm.yml`, `factory-watchdog.yml`, CI triage |
+| `CURSOR_PM_WEBHOOK_AUTH` | Same workflows + `tools/curl_cursor_webhook.sh pm` |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | `factory-watchdog.yml` when recovery exhausted |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | `tools/curl_cursor_webhook.sh alert` |
+| `CURSOR_WORKER_WEBHOOK_URL` | `.github/workflows/worker-dispatch.yml` (Automation E bridge) |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | `tools/curl_cursor_webhook.sh worker` |
+| `TELEGRAM_BOT_TOKEN` | CI stakeholder reports (if workflow sends Telegram) |
+| `TELEGRAM_CHAT_ID` | Same |
+
+After Cursor Secrets are set, sync into GitHub Actions (needs `GH_TOKEN` with **Secrets: Read and write**):
+
+```bash
+bash tools/setup_github_actions_secrets.sh
+```
+
+Verify after setup:
+
+```bash
+bash tools/check_day_one_secrets.sh
+```
+
+---
+
+## 2. `CURSOR_PM_CYCLE_WEBHOOK_URL`
+
+**What it is:** The inbound webhook URL for **Automation A — PM cycle dispatch**. Workers and `pm_emit_cycle_event.sh` POST here when a cycle completes; PM wakes in seconds.
+
+### Steps
+
+1. Open [cursor.com/automations](https://cursor.com/automations) → **New automation**
+2. **Name:** `PM — cycle dispatch`
+3. **Repo:** `3d-JRPG-adventure-pc-game` · **Branch:** `game/development`
+4. **Trigger:** **Webhook** only — **no schedule**
+5. **Agent instructions:** paste from `docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` §4 Automation A (includes watchdog recovery branch)
+6. **Tools:** remove Memories; Godot MCPs not needed for PM
+7. **Save** → set **Active**
+8. **Triggers** → copy the webhook URL (`https://api2.cursor.sh/auto...`)
+9. **Triggers** → **Generate auth header** → copy value → Cursor secret `CURSOR_PM_WEBHOOK_AUTH` (format: `Bearer …`)
+10. Cursor environment **Secrets** → `CURSOR_PM_CYCLE_WEBHOOK_URL` → paste URL
+11. GitHub repo **Secrets** → same names/values for URL + auth
+
+### Test
+
+```bash
+bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json
+```
+
+Or full cycle:
+
+```bash
+# Full enforced cycle (production workers):
+bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-parse HEAD) --note "webhook test"
+
+# Webhook-only smoke test (low-level — skips done criteria / evidence):
+bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm --note "webhook test"
+```
+
+Expect PM Automation to start within seconds. If HTTP 401, re-copy URL + **Generate auth header** from automation settings.
+
+**Full prompt + watchdog branch:** `docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` §4 · `docs/ops/agents/FACTORY_WATCHDOG.md` §5
+
+---
+
+## 3. `CURSOR_FACTORY_ALERT_WEBHOOK_URL`
+
+**What it is:** Separate webhook for **Automation D — Factory human alert**. Fires on `factory_halt`, `mcp_blocked`, recovery exhausted — **not** normal cycle dispatch.
+
+### Steps
+
+1. [cursor.com/automations](https://cursor.com/automations) → **New automation** (second automation — different from PM)
+2. **Name:** `Factory — human alert`
+3. **Repo / branch:** same as PM automation
+4. **Trigger:** **Webhook** only — **no schedule**
+5. **Agent instructions:**
+
+```text
+You are the Factory Alert agent for Tides of Urashima.
+
+You were triggered because the automated factory STOPPED or recovery was exhausted.
+Read artifacts/agent_cycle_event.json and artifacts/factory_health_report.json if present.
+
+YOUR JOB: notify the human product owner — do NOT start worker agents or run PM dispatch.
+
+1. Summarize: event type, halt reason, last issue in progress, factory health status.
+2. Link artifacts/factory_health_report.json and sprint_board blockers.
+3. Tell the human: fix root cause → bash tools/run_factory_watchdog.sh --clear-halt → restart PM manually.
+
+NEVER: run_pm_orchestrator.sh to dispatch builders or clear halt without human confirmation.
+```
+
+6. **Tools:** no MCP required
+7. **Save** → **Active**
+8. Copy webhook URL → `CURSOR_FACTORY_ALERT_WEBHOOK_URL`
+9. **Generate auth header** → `CURSOR_ALERT_WEBHOOK_AUTH`
+10. GitHub repo **Secrets** → same URL + auth names
+
+### Test (optional)
+
+```bash
+bash tools/run_factory_watchdog.sh --halt "test alert — ignore"
+bash tools/run_factory_watchdog.sh --clear-halt
+```
+
+**Cross-ref:** `docs/ops/agents/FACTORY_WATCHDOG.md` §5 Automation D
+
+---
+
+## 3b. `CURSOR_WORKER_WEBHOOK_URL` + `CURSOR_WORKER_WEBHOOK_AUTH`
+
+**What it is:** Webhook for **Automation E — Worker**. GitHub Actions `worker-dispatch.yml` POSTs here when issue labeled `dispatch/ready`.
+
+1. Automation E → **Triggers** → copy webhook URL → `CURSOR_WORKER_WEBHOOK_URL`
+2. **Generate auth header** → `CURSOR_WORKER_WEBHOOK_AUTH`
+3. Mirror both in GitHub Actions secrets (`bash tools/setup_github_actions_secrets.sh`)
+
+Test:
+
+```bash
+gh issue edit 129 --add-label dispatch/ready
+# or
+bash tools/curl_cursor_webhook.sh worker @artifacts/worker_dispatch_event.json
+```
+
+---
+
+## 4. `GAMELAB_API_KEY`
+
+**What it is:** API key for **GameLab Studio MCP** (`gamelab-mcp`) — ink-wash UI frames, combat icon sheets, menu borders.
+
+### Steps
+
+1. Sign up at [gamelabstudio.co](https://gamelabstudio.co/)
+2. Dashboard / account → **API key** (or developer settings)
+3. Copy the key
+4. Cursor **Secrets** → `GAMELAB_API_KEY` → paste key
+5. **Dashboard → Integrations & MCP** → register **gamelab-mcp** (SSE) if not already listed
+6. Re-run on environment:
+
+```bash
+bash tools/install_extended_toolchain.sh
+bash tools/check_extended_toolchain.sh
+```
+
+Automation **Builder** agents: **Tools → MCP ON → + Add Tool or MCP → gamelab-mcp**.
+
+**Cross-ref:** `docs/ops/agents/MCP_STACK.md` § GameLab Studio MCP · `docs/design/art/ART_AUTOMATION_PIPELINE.md`
+
+---
+
+## 5. `GH_TOKEN`
+
+**What it is:** GitHub fine-grained personal access token for shell `gh`, `pm_sync_github_issues.py`, `repository_dispatch`, and `setup_github_project.sh` (labels, branch protection).
+
+> Cursor’s built-in GitHub integration ≠ `gh` in the Cloud Agent VM. **`GH_TOKEN` is required day one** for factory scripts.
+
+### Steps
+
+1. GitHub → **Settings** → **Developer settings** → **Fine-grained personal access tokens** → **Generate**
+2. **Repository access:** Only `vivivieri/3d-JRPG-adventure-pc-game` (or your fork)
+3. **Permissions:**
+
+| Permission | Access |
+|------------|--------|
+| Issues | Read and write |
+| Pull requests | Read and write |
+| Actions | Read |
+| Secrets | Read and write *(GitHub Actions repo secrets via `setup_github_actions_secrets.sh`)* |
+| Contents | Read (and write if agents push via `gh`) |
+| Administration | Read and write *(branch protection via setup script)* |
+
+4. Generate → copy token (`github_pat_...` or classic `ghp_...`)
+5. Cursor **Secrets** → `GH_TOKEN` → paste token
+6. Verify:
+
+```bash
+export GH_TOKEN="your_token"
+gh auth status
+bash tools/setup_github_project.sh --dry-run
+```
+
+**Cross-ref:** `docs/ops/ci-cd/GITHUB_SETUP.md` §1
+
+---
+
+## 6. `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`
+
+**What it is:** Sends compact HTML status to the product owner after each cycle, sprint close, watchdog recovery, and MCP block.
+
+### `TELEGRAM_BOT_TOKEN`
+
+1. Open Telegram → message [@BotFather](https://t.me/BotFather)
+2. Send `/newbot`
+3. Follow prompts (bot display name + username ending in `bot`)
+4. Copy the **HTTP API token** BotFather returns (`123456789:ABCdef...`)
+5. Cursor **Secrets** → `TELEGRAM_BOT_TOKEN`
+
+### `TELEGRAM_CHAT_ID`
+
+1. Message your new bot once (any text)
+2. Open in browser (replace `<TOKEN>`):
+
+```
+https://api.telegram.org/bot<TOKEN>/getUpdates
+```
+
+3. Find `"chat":{"id":123456789}` → that number is **`TELEGRAM_CHAT_ID`**
+
+Alternative: message [@userinfobot](https://t.me/userinfobot) for your user id (private chat with bot).
+
+4. Cursor **Secrets** → `TELEGRAM_CHAT_ID` → paste numeric id (no quotes in UI)
+5. Optional: GitHub repo Secrets for CI workflows
+
+### Test
+
+```bash
+export TELEGRAM_BOT_TOKEN="..."
+export TELEGRAM_CHAT_ID="..."
+bash tools/pm_emit_stakeholder_report.sh --trigger agent_cycle_complete --issue P1-00 --agent pm --telegram
+```
+
+**Cross-ref:** `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md` §2
+
+---
+
+## 7. `ELEVENLABS_API_KEY`
+
+**What it is:** API key for **selective VO** — 12 emotional clips only (`docs/design/vision/VO_HIT_LIST.md`), not full dialogue.
+
+### Steps
+
+1. Create account at [elevenlabs.io](https://elevenlabs.io)
+2. **Profile** → **API keys** (or Settings → API) → **Create API key**
+3. Copy key
+4. Cursor **Secrets** → `ELEVENLABS_API_KEY`
+5. (Before first generate) Update voice IDs in `game/data/audio/vo_prompts.json` per casting notes
+6. Verify:
+
+```bash
+bash tools/generate_ai_vo.sh --list
+bash tools/generate_ai_vo.sh --tier p0 --locale en --dry-run
+```
+
+Remove `--dry-run` when ready to generate. Log commercial terms in `docs/design/art/LICENSES.md` before ship.
+
+**Cross-ref:** `docs/design/vision/VO_HIT_LIST.md` § AI VO setup · `docs/design/audio/AUDIO_PRODUCTION_GUIDE.md`
+
+---
+
+## 8. `CURSOR_API_KEY`
+
+**What it is:** User API key for the **Cursor Cloud Agents API** — enables **fully automatic** token usage logging in agent session telemetry (`docs/ops/qa/AGENT_SESSION_TELEMETRY.md`). Without this key, sessions log duration/role/task but `tokens_total` stays empty.
+
+### Steps (one-time setup)
+
+1. Open [cursor.com/dashboard](https://cursor.com/dashboard) → **Settings** → **API Keys** (or **Integrations** → API)
+2. **Create API key** — user API key or service account key (not Team Admin key)
+3. Copy key (`crsr_...` or similar)
+4. Cursor **Cloud Agents → Environment → Secrets** → add `CURSOR_API_KEY`
+5. Scope: **Personal + Runtime Secret**
+6. Verify:
+
+```bash
+bash tools/check_agent_telemetry_ready.sh
+# Optional live test (on a cloud agent with CURSOR_CONVERSATION_ID set):
+python3 tools/collect_cursor_agent_usage.py --retries 3
+```
+
+### How auto token logging works
+
+| Step | What happens |
+|------|----------------|
+| Session start | `run_agent_session_gate.sh` records `CURSOR_CONVERSATION_ID` as `cursor_bc_id` + usage baseline |
+| Session end | `pm_emit_cycle_event.sh` calls `GET /v1/agents/{bcId}/usage` with retries |
+| Backfill | `pm_sync_agent_session_tokens.py` fills any sessions where usage lagged |
+
+No manual `export AGENT_TOKENS_*` needed when this key is set.
+
+**API docs:** [Cloud Agents API — Get Agent Usage](https://cursor.com/docs/cloud-agent/api/endpoints#get-agent-usage)
+
+---
+
+## 9. Secret scope and placement
+
+| Setting | Value |
+|---------|--------|
+| **Scope** | Personal + Runtime Secret *(each secret)* |
+| **Cursor environment** | All 8 secrets above |
+| **GitHub Actions** | At minimum both webhook URLs; Telegram if CI sends reports |
+
+Do **not** commit secrets to git. Do **not** paste tokens in issues, PRs, or agent prompts.
+
+---
+
+## 10. What is *not* day one (later phases)
+
+| Secret | When |
+|--------|------|
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` | M5+ visual/model/audio jury scripts — **optional** if you run the agent-driven jury (`docs/ops/qa/AGENT_JURY.md`), which uses Cursor's own LLMs via subagents and needs no provider keys |
+| GDAI license / plugin zip | Phase 1+ scene work (commercial — separate from this list) |
+| `GODOT_SCRIPT_ENCRYPTION_KEY` | M6 RC ship export — PCK encryption (GitHub `steam-production` only) |
+| `GODOT_SAVE_HMAC_KEY` | M6 RC ship export — save-slot HMAC pepper (same environment) |
+| Steam API keys | Phase 8 only |
+
+Generate ship keys (store output in GitHub Secrets — never commit):
+
+```bash
+bash tools/generate_ship_protection_keys.sh
+```
+
+See `docs/ops/qa/SECURITY.md` §9 for custom template build + `SHIP_RELEASE=1` export flow.
+
+---
+
+## 11. Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| `check_day_one_secrets.sh` FAIL | Re-read section for missing secret; confirm Runtime Secret scope |
+| PM never wakes after cycle | `CURSOR_PM_CYCLE_WEBHOOK_URL` wrong or automation Inactive |
+| No halt alert | `CURSOR_FACTORY_ALERT_WEBHOOK_URL` missing or Factory automation Inactive |
+| `gh: not authenticated` | Set `GH_TOKEN`; run `gh auth status` |
+| GameLab MCP missing | `GAMELAB_API_KEY` + Integrations & MCP + `write_mcp_config.sh` |
+| Telegram silent | Message bot first; verify chat id via `getUpdates` |
+| ElevenLabs 401 | Regenerate key; check account credits |
+| Tokens not in telemetry | Set `CURSOR_API_KEY`; run `bash tools/check_agent_telemetry_ready.sh` |
+| `tokens_fetch_status: pending` | Run `python3 tools/pm_sync_agent_session_tokens.py` after a few minutes |
+
+---
+
+## 12. Cross-refs
+
+- `docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` — automations + factory architecture
+- `docs/ops/agents/FACTORY_WATCHDOG.md` — alert vs PM webhooks
+- `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md` — Telegram report content
+- `docs/ops/ci-cd/GITHUB_SETUP.md` — labels, environments, branch protection
+- `AGENTS.md` — cloud bootstrap order

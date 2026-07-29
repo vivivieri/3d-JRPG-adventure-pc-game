@@ -6,7 +6,7 @@
 #   bash tools/setup_github_actions_secrets.sh
 #   bash tools/setup_github_actions_secrets.sh --dry-run
 #
-# Authority: docs/agents/CURSOR_SECRETS_SETUP.md · docs/ci-cd/GITHUB_SETUP.md
+# Authority: docs/ops/agents/CURSOR_SECRETS_SETUP.md · docs/ops/ci-cd/GITHUB_SETUP.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -24,7 +24,7 @@ fi
 
 TOKEN="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
 if [[ -z "$TOKEN" ]]; then
-  echo "[FAIL] GH_TOKEN or GITHUB_TOKEN not set — see docs/agents/CURSOR_SECRETS_SETUP.md §5"
+  echo "[FAIL] GH_TOKEN or GITHUB_TOKEN not set — see docs/ops/agents/CURSOR_SECRETS_SETUP.md §5"
   exit 1
 fi
 
@@ -36,7 +36,7 @@ fi
 
 REPO="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
 echo "==> GitHub Actions secrets for ${REPO}"
-echo "    Authority: docs/agents/CURSOR_SECRETS_SETUP.md"
+echo "    Authority: docs/ops/agents/CURSOR_SECRETS_SETUP.md"
 echo ""
 
 if [[ "$DRY_RUN" -eq 0 ]]; then

@@ -23,7 +23,7 @@
       "do_not_repeat": "Only lowering exposure while albedo stays saturated",
       "actions": [
         "python3 tools/palette_remap.py --zone <zone> on albedo sources",
-        "Tune WorldEnvironment fog + sky per docs/art/RENDERING_GUIDE.md zone row",
+        "Tune WorldEnvironment fog + sky per docs/design/art/RENDERING_GUIDE.md zone row",
         "python3 tools/check_screenshot_palette.py --zone <zone>"
       ],
       "escalate": "Regenerate zone albedos via ComfyUI locked NPR workflow"
@@ -44,7 +44,7 @@
       "root_cause": "European castle kit, generic fantasy, wrong environment kit",
       "do_not_repeat": "Recoloring Kenney castle assets; same Meshy prompt with 'Japanese' added once",
       "actions": [
-        "Swap mesh per docs/world/ENVIRONMENT_KITS.md zone module list",
+        "Swap mesh per docs/design/world/ENVIRONMENT_KITS.md zone module list",
         "Regenerate set-piece with Japanese coastal / ryūgū prompt from bible",
         "Remove models/nature/ or models/castle/ greybox paths"
       ],
@@ -77,7 +77,7 @@
       "root_cause": "Zone mood contradicts generation brief (wrong emotional register)",
       "do_not_repeat": "Bloom-only mood fix without fog/sky/prop staging",
       "actions": [
-        "Re-read docs/generation_briefs/<zone>.md Emotional intent",
+        "Re-read docs/briefs/<zone>.md Emotional intent",
         "Tune fog, sky, lantern warmth per RENDERING_GUIDE.md zone row",
         "Adjust prop staging (lanterns, decay, vista anchor) via GDAI"
       ],
@@ -167,7 +167,7 @@
       "root_cause": "Static read contradicts generation brief emotional intent",
       "do_not_repeat": "Adding bloom/emission to fake mood without mesh/pose change",
       "actions": [
-        "Re-read docs/generation_briefs/<id>.md Emotional intent table",
+        "Re-read docs/briefs/<id>.md Emotional intent table",
         "Adjust Meshy prompt: posture, wear, staging per primary mood",
         "Regenerate or sculpt pose/silhouette before texture polish"
       ],
@@ -271,7 +271,7 @@
       "do_not_repeat": "Only changing stability without direction keywords",
       "actions": [
         "Edit direction in vo_prompts.json — one variable (pace OR breath OR weight)",
-        "Read docs/generation_briefs/vo/<clip>.md emotional intent",
+        "Read docs/briefs/vo/<clip>.md emotional intent",
         "A/B two ElevenLabs exports; jury en gate locale"
       ],
       "escalate": "Human direction pass in ElevenLabs"
@@ -292,7 +292,7 @@
       "root_cause": "Emotional register off vs generation brief",
       "do_not_repeat": "Same export with 'more emotional' note only",
       "actions": [
-        "Edit one field in docs/generation_briefs/vo/<clip>.md Must avoid row",
+        "Edit one field in docs/briefs/vo/<clip>.md Must avoid row",
         "Align direction with Primary mood in brief",
         "review_vo_vision.py --clip <id> --locale en"
       ],

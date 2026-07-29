@@ -4,7 +4,7 @@
 **Target length:** ~75 seconds  
 **Outputs:** `steam/trailer.mp4` (EN), `steam/trailer_ja.mp4`, `steam/trailer_zh.mp4`, `steam/trailer_zh-Hant.mp4`  
 **BGM:** `steam/trailer_bgm.ogg` (shared procedural score)  
-**Source art:** `docs/pitch/illustrations/`  
+**Source art:** `docs/archive/pitch/illustrations/`  
 **Locale data:** `steam/trailer_locales.json`  
 **Generator:** `python3 tools/generate_marketing_trailer.py`
 
@@ -92,6 +92,6 @@ python3 tools/generate_marketing_trailer.py --all-locales
 python3 tools/generate_marketing_trailer.py --all-locales --regen-bgm
 ```
 
-Requires: `ffmpeg`, `numpy`, illustrations in `docs/pitch/illustrations/`
+Requires: `ffmpeg`, `numpy`, illustrations in `docs/archive/pitch/illustrations/`
 
 **After M5 art rebuild:** re-run `--all-locales` if pitch illustrations change.

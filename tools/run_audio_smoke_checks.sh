@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # L2 audio smoke: catalog + technical + optional LLM jury when bgm_village.ogg exists.
-# WARN (exit 0) when gate track missing or dev placeholders — docs/audio/AUDIO_QA.md.
+# WARN (exit 0) when gate track missing or dev placeholders — docs/design/audio/AUDIO_QA.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -16,7 +16,7 @@ warn() { echo "[WARN] $1"; WARN=$((WARN + 1)); }
 fail() { echo "[FAIL] $1"; FAIL=$((FAIL + 1)); }
 pass() { echo "[PASS] $1"; }
 
-echo "==> Audio smoke checks (docs/audio/AUDIO_QA.md)"
+echo "==> Audio smoke checks (docs/design/audio/AUDIO_QA.md)"
 echo "    Gate track: ${GATE_TRACK}"
 echo ""
 
@@ -60,7 +60,7 @@ AGENT_DIR="${ROOT}/artifacts/audio_reviews/${GATE_TRACK}.agent"
 set +e
 if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
   # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
-  # See docs/qa/AGENT_JURY.md
+  # See docs/ops/qa/AGENT_JURY.md
   python3 "${ROOT}/tools/ingest_agent_jury.py" \
     --domain audio \
     --asset "$GATE_PATH" \
@@ -127,7 +127,7 @@ else
   set +e
   if compgen -G "${VO_AGENT_DIR}/*.json" >/dev/null 2>&1; then
     # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
-    # See docs/qa/AGENT_JURY.md
+    # See docs/ops/qa/AGENT_JURY.md
     python3 "${ROOT}/tools/ingest_agent_jury.py" \
       --domain vo \
       --asset "$VO_PATH" \

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Agent session telemetry — append-only JSONL logging for AI factory efficiency studies.
 
-Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 Schema: game/data/qa/agent_session_telemetry_schema.json
 """
 from __future__ import annotations

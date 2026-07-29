@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
+  "authority": "docs/ops/qa/CANDIDATE_TOURNAMENT.md",
   "layer": "L2.5",
   "ship_blocking": false,
   "prerequisite_layers": ["L0", "L1", "L2"],

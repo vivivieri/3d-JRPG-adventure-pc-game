@@ -9,7 +9,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 echo "==> Factory automation setup check"
-echo "    Authority: docs/agents/FACTORY_SETUP_GUIDE.md"
+echo "    Authority: docs/ops/agents/FACTORY_SETUP_GUIDE.md"
 echo ""
 
 FAIL=0
@@ -23,9 +23,9 @@ fi
 echo "── Repo files"
 for f in \
   game/data/qa/factory_automations.json \
-  docs/agents/FACTORY_SETUP_GUIDE.md \
-  docs/agents/automation_prompts/pm_cycle_dispatch.md \
-  docs/agents/automation_prompts/worker_sprint_issue.md \
+  docs/ops/agents/FACTORY_SETUP_GUIDE.md \
+  docs/ops/agents/automation_prompts/pm_cycle_dispatch.md \
+  docs/ops/agents/automation_prompts/worker_sprint_issue.md \
   tools/curl_cursor_webhook.sh; do
   if [[ -f "$f" ]]; then
     echo "[OK]   $f"

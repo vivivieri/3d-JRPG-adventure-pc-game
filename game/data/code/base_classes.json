@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "authority": "docs/technical/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
+  "authority": "docs/engineering/technical/CODE_BASE_CLASS_RULES.md — agents extend these GDScript bases; they do not rewrite core stacks",
   "note": "This is CODE inheritance (GDScript classes), not 3D mesh 'base models'. See §3 in CODE_BASE_CLASS_RULES.md for asset licenses.",
   "architect_owns": [
     "res://scripts/autoload/",
@@ -169,9 +169,9 @@
         "game/data/code/environment_registry.json"
       ],
       "design_ref": [
-        "docs/art/RENDERING_GUIDE.md §13",
-        "docs/art/SHADER_SPECS.md",
-        "docs/sprints/Phase1-Sprint1-issues.md §P1-01"
+        "docs/design/art/RENDERING_GUIDE.md §13",
+        "docs/design/art/SHADER_SPECS.md",
+        "docs/ops/sprints/Phase1-Sprint1-issues.md §P1-01"
       ],
       "exports": [
         { "name": "zone_id", "type": "String", "default": "ruined_village" },
@@ -276,5 +276,5 @@
     "duplicate InputMap actions (UI_UX_FLOW.md canonical names only)",
     "free-form AI state machine replacing TurnManager without Architect PR"
   ],
-  "design_ref": "docs/technical/TECHNICAL_DESIGN.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+  "design_ref": "docs/engineering/technical/TECHNICAL_DESIGN.md, docs/engineering/technical/CODE_BASE_CLASS_RULES.md"
 }

@@ -1,0 +1,41 @@
+# Tides of Urashima — llms.txt
+# https://llmstxt.org/ — curated map for AI agents (progressive disclosure)
+# Full router: docs/INDEX.yaml · Humans: docs/README.md · Boot: docs/ops/BOOT.md
+
+> Stylized Japanese coastal JRPG (Godot 4.7). Docs on `main`; implementation on `game/development`.
+
+## Boot (always)
+
+- [Agent boot card](ops/BOOT.md): MCP stack commands, STOP conditions, authority chain
+- [AGENTS.md](../AGENTS.md): Cloud bootstrap + branch rules
+- [Index router](INDEX.yaml): role → must_read paths
+
+## Design (product truth)
+
+- [GDD](design/vision/GDD.md)
+- [Storyboard](design/vision/STORYBOARD.md)
+- [Level design](design/world/LEVEL_DESIGN.md)
+- [Combat systems](design/gameplay/COMBAT_SYSTEMS.md)
+- [Art direction](design/art/ART_DIRECTION.md)
+- [Rendering guide](design/art/RENDERING_GUIDE.md)
+- [Audio production](design/audio/AUDIO_PRODUCTION_GUIDE.md)
+
+## Engineering
+
+- [Technical design](engineering/technical/TECHNICAL_DESIGN.md)
+- [Coding standards hub](engineering/technical/CODING_STANDARDS_HUB.md)
+- [Data architecture](engineering/technical/DATA_ARCHITECTURE.md)
+
+## Ops (factory / QA / ship)
+
+- [MCP stack](ops/agents/MCP_STACK.md)
+- [Implementation plan](ops/workflow/IMPLEMENTATION_PLAN.md)
+- [Acceptance criteria](ops/qa/ACCEPTANCE_CRITERIA.md)
+- [CI](ops/ci-cd/CI.md)
+- [R&R cheat sheet](ops/cheat-sheets/RR_CHEATSHEET.md)
+
+## Optional (task-scoped only)
+
+- Generation briefs: `briefs/`
+- Audio sheets: `design/audio/audio_sheets/`
+- Archive (never autoload): `archive/`

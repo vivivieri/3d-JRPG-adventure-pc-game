@@ -7,7 +7,7 @@
 #   bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit <sha> --run-orchestrator --alignment-audit
 #   bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --outcome failed --failed-check L1_unit_tests
 #
-# Authority: docs/agents/PM_AGENT_RUNBOOK.md · game/data/qa/pm_orchestrator_steps.json
+# Authority: docs/ops/agents/PM_AGENT_RUNBOOK.md · game/data/qa/pm_orchestrator_steps.json
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -55,7 +55,7 @@ fi
 
 COMMIT_SHA="${COMMIT_SHA:-$(git rev-parse HEAD 2>/dev/null || echo unknown)}"
 
-echo "==> Post-agent cycle (enforced — docs/qa/WORKFLOW_INTEGRATION.md)"
+echo "==> Post-agent cycle (enforced — docs/ops/qa/WORKFLOW_INTEGRATION.md)"
 echo "    Issue: $ISSUE_ID · Agent: $AGENT_ROLE · Outcome: $OUTCOME · Commit: $COMMIT_SHA"
 echo
 

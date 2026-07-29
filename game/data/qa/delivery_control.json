@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/workflow/DELIVERY_CONTROL.md — pre-delivery gate for outbound reports/artifacts. Reusable across delivery activities (telemetry reports, stakeholder reports). Gate: tools/predelivery_gate.py.",
+  "authority": "docs/ops/workflow/DELIVERY_CONTROL.md — pre-delivery gate for outbound reports/artifacts. Reusable across delivery activities (telemetry reports, stakeholder reports). Gate: tools/predelivery_gate.py.",
   "policy": {
     "require_confirmation": false,
     "block_on_fail": true,

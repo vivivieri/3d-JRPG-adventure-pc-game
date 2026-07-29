@@ -6,7 +6,7 @@
 #   bash tools/check_feature_integration.sh          # verify only
 #   bash tools/check_feature_integration.sh --remind # print rules + verify
 #
-# Authority: docs/qa/WORKFLOW_INTEGRATION.md
+# Authority: docs/ops/qa/WORKFLOW_INTEGRATION.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -17,7 +17,7 @@ REMIND=0
 
 if [[ "$REMIND" -eq 1 ]]; then
   echo "==> Factory feature integration rule (agents MUST follow before merge)"
-  echo "    Authority: docs/qa/WORKFLOW_INTEGRATION.md"
+  echo "    Authority: docs/ops/qa/WORKFLOW_INTEGRATION.md"
   echo
   echo "  When adding or changing a cross-cutting factory feature:"
   echo "  1. Register in game/data/qa/workflow_integration_registry.json"

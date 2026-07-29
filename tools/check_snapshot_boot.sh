@@ -7,7 +7,7 @@
 #   bash tools/check_snapshot_boot.sh --pm        # warn only (PM docs/orchestrator sessions)
 #   bash tools/check_snapshot_boot.sh --report    # print diagnostics, exit 0
 #
-# Authority: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md
+# Authority: docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -101,7 +101,7 @@ if [[ ${#FAILURES[@]} -gt 0 ]]; then
   echo "  1. Team owner: launch from Cloud Agents → Environments (game/development), not ad-hoc web/GitHub agent"
   echo "  2. Setup Agent: bash tools/rebuild_cloud_snapshot.sh → save snapshot → update .cursor/environment.json"
   echo "  3. JIT workaround: upload GDAI zip to game/addons/ → bash tools/install_gdai_plugin.sh"
-  echo "Docs: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md"
+  echo "Docs: docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md"
   if [[ "$MODE" == "pm" ]]; then
     echo ""
     echo "[WARN] PM mode — continuing, but do NOT dispatch Builder/Architect until snapshot PASS"
