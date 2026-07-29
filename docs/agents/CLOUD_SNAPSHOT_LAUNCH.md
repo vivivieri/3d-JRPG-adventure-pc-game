@@ -17,9 +17,12 @@ Cursor reads `.cursor/environment.json` from the **repository branch configured 
 **Fix (human — one-time per environment):**
 
 1. Open [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)
-2. Edit the environment → set **Repository branch** to **`game/development`** (not `main`)
-3. **Save**
-4. **Start Setup Agent** again (or launch a new agent from that Environment)
+2. Open your environment → click the **Git** tab (not **Environment** — branch is not on the Secrets/install tab)
+3. Set **Repository branch** to **`game/development`** (not `main`)
+4. **Save**
+5. **Start Setup Agent** again (or **New Setup Run** / **Update with Agent**)
+
+> **Cannot find branch?** Some dashboards only show repo at create time. Workaround: in the Setup Agent chat, send: `git fetch origin game/development && git checkout game/development && bash tools/install_cloud_dev.sh && bash tools/ensure_mcp_stack.sh`
 
 **Fix (agent — every Setup Agent session):**
 
