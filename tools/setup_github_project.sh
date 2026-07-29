@@ -23,23 +23,36 @@ if ! command -v gh >/dev/null 2>&1; then
   exit 1
 fi
 
-TOKEN="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
-if [[ -z "$TOKEN" && "$DRY_RUN" -eq 0 ]]; then
-  echo "[FAIL] GH_TOKEN or GITHUB_TOKEN not set."
-  echo "       Create a fine-grained PAT — see docs/ci-cd/GITHUB_SETUP.md §1"
-  echo "       Add to Cursor Secrets as GH_TOKEN, then re-run this script."
-  exit 1
-fi
-
-if [[ -z "$TOKEN" && "$DRY_RUN" -eq 1 ]]; then
-  REPO="OWNER/REPO (dry-run)"
-else
-  export GH_TOKEN="$TOKEN"
-  if ! gh auth status >/dev/null 2>&1; then
-    echo "==> Authenticating gh with GH_TOKEN..."
-    echo "$TOKEN" | gh auth login --with-token
+resolve_gh_auth() {
+  local token="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
+  if [[ -n "$token" ]]; then
+    export GH_TOKEN="$token"
+    if gh auth status >/dev/null 2>&1; then
+      return 0
+    fi
+    echo "[WARN] GH_TOKEN/GITHUB_TOKEN is set but invalid — trying gh stored credentials..."
+    unset GH_TOKEN
   fi
+  if gh auth status >/dev/null 2>&1; then
+    return 0
+  fi
+  if [[ -n "$token" ]]; then
+    echo "==> Authenticating gh with GH_TOKEN..."
+    echo "$token" | gh auth login --with-token
+    return 0
+  fi
+  return 1
+}
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+  REPO="OWNER/REPO (dry-run)"
+elif resolve_gh_auth; then
   REPO="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
+else
+  echo "[FAIL] No valid GitHub credentials."
+  echo "       export GH_TOKEN=<fine-grained PAT with admin:repo> — see docs/ci-cd/GITHUB_SETUP.md §1"
+  echo "       Or run \`gh auth login\` locally, then re-run this script."
+  exit 1
 fi
 echo "==> GitHub setup for ${REPO}"
 echo ""
