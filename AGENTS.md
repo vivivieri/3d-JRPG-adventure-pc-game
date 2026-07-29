@@ -33,7 +33,7 @@
 
 The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) and the commercial GDAI plugin only exist / matter on `game/development`. **On `main` they are neither present nor needed** — `main` has no `project.godot`, no `.gd` gameplay code, and no `game/addons/`.
 
-- **`main` (default cloud checkout):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat`, plus `ruff`/`mypy`/`matplotlib` into `~/.local/bin`; `python3` ships in the base image) and best-effort apt-installs `shellcheck` (needed by the `L1_shellcheck` lint gate, matching `.github/workflows/ci.yml`; the apt step is `|| true` so pod startup never fails on network hiccups). Do **not** boot the MCP/Godot stack on `main`.
+- **`main` (ad-hoc cloud checkout only — not snapshot):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat`, plus `ruff`/`mypy`/`matplotlib` into `~/.local/bin`; `python3` ships in the base image) and best-effort apt-installs `shellcheck` (needed by the `L1_shellcheck` lint gate, matching `.github/workflows/ci.yml`; the apt step is `|| true` so pod startup never fails on network hiccups). Do **not** boot the MCP/Godot stack on `main`.
   - **Tests:** `bash tools/run_docs_ci_checks.sh` (L0 docs+data gates, pure `python3`).
   - **Lint:** `bash tools/check_gdscript_changed.sh` (SKIPs on `main` — no `.gd`); `gdlint <file>` directly for any `.gd` (project scripts add `~/.local/bin` to PATH themselves).
   - **Run the content pipeline (the runnable "app" on `main`):** e.g. `python3 tools/generate_game_audio.py --track bgm_village` writes a real `.ogg` under `game/assets/audio/bgm/`, and `python3 tools/generate_procedural_portraits.py --all` writes real `.png` portraits under `game/assets/ui/portraits/`. Both outputs are untracked demo output — do not commit them. Note: `generate_procedural_portraits.py` auto-registers generated files in `docs/asset_manifest.license.json` (tracked); `git checkout -- docs/asset_manifest.license.json` after a demo run to keep the tree clean.
@@ -43,9 +43,19 @@ The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-
 
 **Before implementation work:** read `docs/agents/FACTORY_SETUP_GUIDE.md` (full multi-agent factory) and `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`. **Linux ship is required** for cloud dev parity — `docs/qa/PLATFORM_SUPPORT.md`.
 
+**First step on every snapshot boot** (dashboard Environment or worker VM — not ad-hoc `main`):
+
+```bash
+git fetch origin game/development
+git checkout game/development
+bash tools/check_snapshot_boot.sh --report
+```
+
+The saved snapshot carries the Godot editor + MCP stack on disk, but the **git branch is still chosen at launch**. If you land on `main` (or detached HEAD), you get the wrong tree — no `game/project.godot`, no `.gd` gameplay code, and docs-only `environment.json`. Always verify `git branch --show-current` is `game/development` before scene or MCP work.
+
 ### Environment bootstrap
 
-On every cloud agent start:
+On every **`game/development`** cloud agent start (snapshot or JIT):
 
 ```bash
 bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, MCP Pro, Blender
