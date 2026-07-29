@@ -6,8 +6,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIO_BRIEF_DIR = ROOT / "docs" / "generation_briefs" / "audio"
-VO_BRIEF_DIR = ROOT / "docs" / "generation_briefs" / "vo"
+AUDIO_BRIEF_DIR = ROOT / "docs" / "briefs" / "audio"
+VO_BRIEF_DIR = ROOT / "docs" / "briefs" / "vo"
 
 
 def _extract_section(markdown: str, heading: str) -> str:
