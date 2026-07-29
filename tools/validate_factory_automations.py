@@ -45,13 +45,21 @@ def main() -> int:
         trigger = auto.get("trigger", {})
         if trigger.get("type") == "webhook" and auto.get("required"):
             secret = trigger.get("secret")
+            auth_secret = trigger.get("auth_secret")
             allowed = (
                 "CURSOR_PM_CYCLE_WEBHOOK_URL",
+                "CURSOR_PM_WEBHOOK_AUTH",
                 "CURSOR_FACTORY_ALERT_WEBHOOK_URL",
+                "CURSOR_ALERT_WEBHOOK_AUTH",
                 "CURSOR_WORKER_WEBHOOK_URL",
+                "CURSOR_WORKER_WEBHOOK_AUTH",
             )
             if secret and secret not in allowed:
                 errors.append(f"{aid}: unexpected webhook secret {secret}")
+            if secret and not auth_secret:
+                errors.append(f"{aid}: webhook missing auth_secret (Generate auth header in dashboard)")
+            if auth_secret and auth_secret not in allowed:
+                errors.append(f"{aid}: unexpected auth_secret {auth_secret}")
 
     env_json = ROOT / ".cursor/environment.json"
     if env_json.is_file():
@@ -94,6 +102,8 @@ def main() -> int:
         "tools/check_snapshot_boot.sh",
         "tools/run_pm_orchestrator.sh",
         "tools/run_post_agent_cycle.sh",
+        "tools/curl_cursor_webhook.sh",
+        "tools/setup_github_actions_secrets.sh",
     ]
     for sp in script_paths:
         if not (ROOT / sp).is_file():

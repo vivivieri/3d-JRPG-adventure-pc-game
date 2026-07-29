@@ -2,6 +2,29 @@
   "version": "1.0",
   "authority": "docs/agents/FACTORY_SETUP_GUIDE.md",
   "policy": "Every Cloud Agent factory automation is defined here. Dashboard setup must match this catalog.",
+  "webhook_dispatch": {
+    "helper": "tools/curl_cursor_webhook.sh",
+    "authority": "docs/agents/CURSOR_SECRETS_SETUP.md",
+    "kinds": {
+      "pm": {
+        "url_secret": "CURSOR_PM_CYCLE_WEBHOOK_URL",
+        "auth_secret": "CURSOR_PM_WEBHOOK_AUTH",
+        "automation_id": "automation_a_pm"
+      },
+      "alert": {
+        "url_secret": "CURSOR_FACTORY_ALERT_WEBHOOK_URL",
+        "auth_secret": "CURSOR_ALERT_WEBHOOK_AUTH",
+        "automation_id": "automation_d_factory_alert"
+      },
+      "worker": {
+        "url_secret": "CURSOR_WORKER_WEBHOOK_URL",
+        "auth_secret": "CURSOR_WORKER_WEBHOOK_AUTH",
+        "automation_id": "automation_e_worker"
+      }
+    },
+    "github_sync": "bash tools/setup_github_actions_secrets.sh",
+    "verify_secrets": "bash tools/check_day_one_secrets.sh"
+  },
   "environment": {
     "dashboard_url": "https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game",
     "branch": "game/development",
@@ -35,6 +58,7 @@
       "trigger": {
         "type": "webhook",
         "secret": "CURSOR_PM_CYCLE_WEBHOOK_URL",
+        "auth_secret": "CURSOR_PM_WEBHOOK_AUTH",
         "schedule_allowed": false
       },
       "repo": "3d-JRPG-adventure-pc-game",
@@ -80,6 +104,7 @@
       "trigger": {
         "type": "webhook",
         "secret": "CURSOR_FACTORY_ALERT_WEBHOOK_URL",
+        "auth_secret": "CURSOR_ALERT_WEBHOOK_AUTH",
         "events": ["factory_halt", "mcp_blocked"]
       },
       "prompt_file": "docs/agents/automation_prompts/factory_alert.md",
@@ -93,6 +118,7 @@
       "trigger": {
         "type": "webhook",
         "secret": "CURSOR_WORKER_WEBHOOK_URL",
+        "auth_secret": "CURSOR_WORKER_WEBHOOK_AUTH",
         "fallback_github_workflow": ".github/workflows/worker-dispatch.yml",
         "note": "Cursor UI may only expose PR label triggers; use webhook + GitHub Actions issues.labeled bridge"
       },

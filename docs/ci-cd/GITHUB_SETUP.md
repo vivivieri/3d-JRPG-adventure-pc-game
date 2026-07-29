@@ -1,7 +1,7 @@
 # GitHub Repository Setup
 
 **Script:** `bash tools/setup_github_project.sh`
-**Requires:** `GH_TOKEN` with **Issues**, **Pull requests**, **Actions**, and **Administration** (for branch protection)
+**Requires:** `GH_TOKEN` with **Issues**, **Pull requests**, **Actions**, **Secrets** (read/write for Actions repo secrets), and **Administration** (for branch protection)
 **How to create token:** `docs/agents/CURSOR_SECRETS_SETUP.md` §5 (day-one compulsory)
 **Cross-refs:** `docs/agents/PROJECT_MANAGEMENT.md`, `docs/ci-cd/ENVIRONMENTS.md`
 
@@ -17,6 +17,7 @@
    - Issues: Read and write
    - Pull requests: Read and write
    - Actions: Read
+   - Secrets: Read and write *(repo Actions secrets — `bash tools/setup_github_actions_secrets.sh`)*
    - Administration: Read and write *(branch protection)*
 4. Copy the token (`github_pat_...` or classic `ghp_...`)
 
@@ -26,6 +27,7 @@
 
 ```bash
 bash tools/setup_github_project.sh
+bash tools/setup_github_actions_secrets.sh   # webhook URL + auth → GitHub Actions
 ```
 
 **Local:**

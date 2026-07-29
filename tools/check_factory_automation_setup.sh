@@ -25,7 +25,8 @@ for f in \
   game/data/qa/factory_automations.json \
   docs/agents/FACTORY_SETUP_GUIDE.md \
   docs/agents/automation_prompts/pm_cycle_dispatch.md \
-  docs/agents/automation_prompts/worker_sprint_issue.md; do
+  docs/agents/automation_prompts/worker_sprint_issue.md \
+  tools/curl_cursor_webhook.sh; do
   if [[ -f "$f" ]]; then
     echo "[OK]   $f"
   else
@@ -51,12 +52,14 @@ fi
 echo ""
 echo "── Cursor dashboard (manual — cannot verify from repo)"
 echo "  [ ] Environment snapshot saved; id matches .cursor/environment.json"
-echo "  [ ] Automation A: webhook → CURSOR_PM_CYCLE_WEBHOOK_URL"
-echo "  [ ] Automation D: webhook → CURSOR_FACTORY_ALERT_WEBHOOK_URL"
-echo "  [ ] Automation E: GitHub issue labeled dispatch/ready → Worker prompt"
+echo "  [ ] Automation A: URL → CURSOR_PM_CYCLE_WEBHOOK_URL + auth → CURSOR_PM_WEBHOOK_AUTH"
+echo "  [ ] Automation D: URL → CURSOR_FACTORY_ALERT_WEBHOOK_URL + auth → CURSOR_ALERT_WEBHOOK_AUTH"
+echo "  [ ] Automation E: URL → CURSOR_WORKER_WEBHOOK_URL + auth → CURSOR_WORKER_WEBHOOK_AUTH"
+echo "  [ ] GitHub Actions secrets synced: bash tools/setup_github_actions_secrets.sh"
 echo "  [ ] All automations: repo 3d-JRPG-adventure-pc-game branch game/development"
 echo "  [ ] MCP: godot-mcp, godotiq, godot-mcp-pro, gamelab-mcp registered"
 echo "  [ ] Test: bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm --note test"
+echo "  [ ] Low-level POST: bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json"
 echo ""
 echo "  Dashboard: https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game"
 echo "  Automations: https://cursor.com/automations"

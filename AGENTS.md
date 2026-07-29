@@ -223,15 +223,21 @@ All scene work via **GDAI MCP** after GodotPrompter plans.
 
 | Secret | Purpose |
 |--------|---------|
-| `CURSOR_PM_CYCLE_WEBHOOK_URL` | PM Automation A webhook |
-| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Factory alert Automation D webhook |
+| `CURSOR_PM_CYCLE_WEBHOOK_URL` | Automation A webhook URL |
+| `CURSOR_PM_WEBHOOK_AUTH` | Automation A auth header (`Bearer …` from **Generate auth header**) |
+| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Automation D webhook URL |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | Automation D auth header |
+| `CURSOR_WORKER_WEBHOOK_URL` | Automation E webhook URL |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | Automation E auth header |
 | `GAMELAB_API_KEY` | GameLab MCP |
 | `GH_TOKEN` | `gh` CLI, issue sync, GitHub dispatch |
 | `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Stakeholder status |
 | `ELEVENLABS_API_KEY` | Selective VO |
 | `CURSOR_API_KEY` | Auto agent token telemetry (Cloud Agents usage API) |
 
-Also in GitHub repo Secrets: both webhook URLs (Actions workflows). Scope: **Personal + Runtime Secret**.
+**Webhook POST rule (agents):** never `curl` automation URLs directly — use `tools/curl_cursor_webhook.sh {pm|alert|worker}` (reads URL + auth from env). Sync to GitHub Actions: `bash tools/setup_github_actions_secrets.sh`.
+
+Also in GitHub repo Secrets: all six webhook URL + auth secrets (Actions workflows). Scope: **Personal + Runtime Secret**.
 
 **Later phases:** GDAI license, `OPENAI_API_KEY` / `GEMINI_API_KEY` (M5+ jury), Steam keys (Phase 8).
 

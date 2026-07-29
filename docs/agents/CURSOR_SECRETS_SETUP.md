@@ -1,7 +1,7 @@
 # Cursor Secrets — Day-One Setup (How to Get Every Key)
 
 **Version:** 1.0
-**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (8 runtime secrets including `CURSOR_API_KEY` for auto token telemetry).
+**Authority:** All secrets below are **compulsory on day one** before starting the Cloud Agent factory on `game/development` (11 runtime secrets including webhook auth + `CURSOR_API_KEY` for auto token telemetry).
 **Where to add:** Cursor **Cloud Agents → your environment → Secrets** — scope **Personal + Runtime Secret** for each.
 **Cross-refs:** `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`, `docs/agents/PM_STAKEHOLDER_REPORTING.md`, `docs/ci-cd/GITHUB_SETUP.md`, `docs/agents/MCP_STACK.md`, `docs/vision/VO_HIT_LIST.md`
 
@@ -12,7 +12,11 @@
 | Secret | Purpose | How to get (section) |
 |--------|---------|----------------------|
 | `CURSOR_PM_CYCLE_WEBHOOK_URL` | Event-driven PM dispatch | [§2](#2-cursor_pm_cycle_webhook_url) |
+| `CURSOR_PM_WEBHOOK_AUTH` | Auth header for Automation A webhook | [§2](#2-cursor_pm_cycle_webhook_url) |
 | `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Factory halt / human alert | [§3](#3-cursor_factory_alert_webhook_url) |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | Auth header for Automation D webhook | [§3](#3-cursor_factory_alert_webhook_url) |
+| `CURSOR_WORKER_WEBHOOK_URL` | Worker dispatch (Automation E) | [§3b](#3b-cursor_worker_webhook) |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | Auth header for Automation E webhook | [§3b](#3b-cursor_worker_webhook) |
 | `GAMELAB_API_KEY` | GameLab MCP — UI art generation | [§4](#4-gamelab_api_key) |
 | `GH_TOKEN` | `gh` CLI, issue sync, GitHub Actions dispatch | [§5](#5-gh_token) |
 | `TELEGRAM_BOT_TOKEN` | Stakeholder status → product owner | [§6](#6-telegram_bot_token--telegram_chat_id) |
@@ -25,9 +29,19 @@
 | Secret | Why |
 |--------|-----|
 | `CURSOR_PM_CYCLE_WEBHOOK_URL` | `.github/workflows/agent-cycle-pm.yml`, `factory-watchdog.yml`, CI triage |
+| `CURSOR_PM_WEBHOOK_AUTH` | Same workflows + `tools/curl_cursor_webhook.sh pm` |
 | `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | `factory-watchdog.yml` when recovery exhausted |
+| `CURSOR_ALERT_WEBHOOK_AUTH` | `tools/curl_cursor_webhook.sh alert` |
+| `CURSOR_WORKER_WEBHOOK_URL` | `.github/workflows/worker-dispatch.yml` (Automation E bridge) |
+| `CURSOR_WORKER_WEBHOOK_AUTH` | `tools/curl_cursor_webhook.sh worker` |
 | `TELEGRAM_BOT_TOKEN` | CI stakeholder reports (if workflow sends Telegram) |
 | `TELEGRAM_CHAT_ID` | Same |
+
+After Cursor Secrets are set, sync into GitHub Actions (needs `GH_TOKEN` with **Secrets: Read and write**):
+
+```bash
+bash tools/setup_github_actions_secrets.sh
+```
 
 Verify after setup:
 
@@ -51,10 +65,17 @@ bash tools/check_day_one_secrets.sh
 6. **Tools:** remove Memories; Godot MCPs not needed for PM
 7. **Save** → set **Active**
 8. **Triggers** → copy the webhook URL (`https://api2.cursor.sh/auto...`)
-9. Cursor environment **Secrets** → name `CURSOR_PM_CYCLE_WEBHOOK_URL` → paste URL
-10. GitHub repo **Secrets** → same name, same URL
+9. **Triggers** → **Generate auth header** → copy value → Cursor secret `CURSOR_PM_WEBHOOK_AUTH` (format: `Bearer …`)
+10. Cursor environment **Secrets** → `CURSOR_PM_CYCLE_WEBHOOK_URL` → paste URL
+11. GitHub repo **Secrets** → same names/values for URL + auth
 
 ### Test
+
+```bash
+bash tools/curl_cursor_webhook.sh pm @artifacts/agent_cycle_event.json
+```
+
+Or full cycle:
 
 ```bash
 # Full enforced cycle (production workers):
@@ -64,7 +85,7 @@ bash tools/run_post_agent_cycle.sh --issue P1-00 --agent pm --commit $(git rev-p
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-00 --agent pm --note "webhook test"
 ```
 
-Expect PM Automation to start within seconds. If HTTP 401, re-copy URL from automation settings (webhook may have rotated).
+Expect PM Automation to start within seconds. If HTTP 401, re-copy URL + **Generate auth header** from automation settings.
 
 **Full prompt + watchdog branch:** `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md` §4 · `docs/agents/FACTORY_WATCHDOG.md` §5
 
@@ -99,8 +120,9 @@ NEVER: run_pm_orchestrator.sh to dispatch builders or clear halt without human c
 
 6. **Tools:** no MCP required
 7. **Save** → **Active**
-8. Copy webhook URL → Cursor secret `CURSOR_FACTORY_ALERT_WEBHOOK_URL`
-9. GitHub repo **Secrets** → same name, same URL
+8. Copy webhook URL → `CURSOR_FACTORY_ALERT_WEBHOOK_URL`
+9. **Generate auth header** → `CURSOR_ALERT_WEBHOOK_AUTH`
+10. GitHub repo **Secrets** → same URL + auth names
 
 ### Test (optional)
 
@@ -110,6 +132,24 @@ bash tools/run_factory_watchdog.sh --clear-halt
 ```
 
 **Cross-ref:** `docs/agents/FACTORY_WATCHDOG.md` §5 Automation D
+
+---
+
+## 3b. `CURSOR_WORKER_WEBHOOK_URL` + `CURSOR_WORKER_WEBHOOK_AUTH`
+
+**What it is:** Webhook for **Automation E — Worker**. GitHub Actions `worker-dispatch.yml` POSTs here when issue labeled `dispatch/ready`.
+
+1. Automation E → **Triggers** → copy webhook URL → `CURSOR_WORKER_WEBHOOK_URL`
+2. **Generate auth header** → `CURSOR_WORKER_WEBHOOK_AUTH`
+3. Mirror both in GitHub Actions secrets (`bash tools/setup_github_actions_secrets.sh`)
+
+Test:
+
+```bash
+gh issue edit 129 --add-label dispatch/ready
+# or
+bash tools/curl_cursor_webhook.sh worker @artifacts/worker_dispatch_event.json
+```
 
 ---
 
@@ -154,6 +194,7 @@ Automation **Builder** agents: **Tools → MCP ON → + Add Tool or MCP → game
 | Issues | Read and write |
 | Pull requests | Read and write |
 | Actions | Read |
+| Secrets | Read and write *(GitHub Actions repo secrets via `setup_github_actions_secrets.sh`)* |
 | Contents | Read (and write if agents push via `gh`) |
 | Administration | Read and write *(branch protection via setup script)* |
 
