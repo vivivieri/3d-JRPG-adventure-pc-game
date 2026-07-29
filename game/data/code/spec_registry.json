@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "policy_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md",
+  "policy_ref": "docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md",
   "development_start": {
     "gate_id": "SPEC_DEV_START",
     "description": "All blocking artifacts must be spec_status=specified before ship code on game/development",
@@ -75,7 +75,7 @@
         "game/data/qa/unit_test_specs.json",
         "tools/zone_visuals_lib.py",
         "tools/regenerate_phase1_visuals.sh",
-        "docs/technical/GDSCRIPT_REGENERATION.md"
+        "docs/engineering/technical/GDSCRIPT_REGENERATION.md"
       ],
       "validator": "tools/validate_zone_visuals_contract.py",
       "phase": 1
@@ -86,7 +86,7 @@
       "spec_status": "specified",
       "paths": [
         "game/data/code/helpers_registry.json",
-        "docs/technical/GDSCRIPT_REGENERATION.md",
+        "docs/engineering/technical/GDSCRIPT_REGENERATION.md",
         "tools/difficulty_lib.py",
         "tools/save_integrity_lib.py",
         "tools/settings_store_lib.py",
@@ -101,14 +101,14 @@
       "id": "doc_technical_design",
       "kind": "doc",
       "spec_status": "specified",
-      "paths": ["docs/technical/TECHNICAL_DESIGN.md"],
+      "paths": ["docs/engineering/technical/TECHNICAL_DESIGN.md"],
       "phase": 0
     },
     {
       "id": "doc_level_design",
       "kind": "doc",
       "spec_status": "specified",
-      "paths": ["docs/world/LEVEL_DESIGN.md"],
+      "paths": ["docs/design/world/LEVEL_DESIGN.md"],
       "phase": 1
     },
     {
@@ -132,7 +132,7 @@
       "kind": "implementation",
       "spec_status": "partial",
       "branch": "game/development",
-      "design_ref": ["docs/art/RENDERING_GUIDE.md", "docs/art/ART_DIRECTION.md §7", "docs/art/SHADER_SPECS.md"],
+      "design_ref": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/art/ART_DIRECTION.md §7", "docs/design/art/SHADER_SPECS.md"],
       "paths": ["game/shaders/toon_base.gdshader", "game/shaders/water_stylized.gdshader"],
       "note": "toon_base specified; water_stylized template partial — foam/displacement polish in P1-04",
       "phase": 1

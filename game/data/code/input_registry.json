@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "design_ref": "docs/ui/UI_UX_FLOW.md §10–11, docs/gameplay/PLAYER_CONTROLS.md",
+  "design_ref": "docs/design/ui/UI_UX_FLOW.md §10–11, docs/design/gameplay/PLAYER_CONTROLS.md",
   "note": "Machine-readable InputMap contract — GDAI MCP applies to project.godot at P1-02+.",
   "actions": [
     {

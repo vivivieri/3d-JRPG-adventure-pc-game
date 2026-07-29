@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "authority": "docs/agents/FACTORY_SETUP_GUIDE.md",
+  "authority": "docs/ops/agents/FACTORY_SETUP_GUIDE.md",
   "policy": "Every Cloud Agent factory automation is defined here. Dashboard setup must match this catalog.",
   "webhook_dispatch": {
     "helper": "tools/curl_cursor_webhook.sh",
-    "authority": "docs/agents/CURSOR_SECRETS_SETUP.md",
+    "authority": "docs/ops/agents/CURSOR_SECRETS_SETUP.md",
     "kinds": {
       "pm": {
         "url_secret": "CURSOR_PM_CYCLE_WEBHOOK_URL",
@@ -63,7 +63,7 @@
       },
       "repo": "3d-JRPG-adventure-pc-game",
       "branch": "game/development",
-      "prompt_file": "docs/agents/automation_prompts/pm_cycle_dispatch.md",
+      "prompt_file": "docs/ops/agents/automation_prompts/pm_cycle_dispatch.md",
       "first_command": "bash tools/run_pm_orchestrator.sh",
       "post_orchestrator_command": "python3 tools/pm_dispatch_workers.py",
       "mcp_required": false,
@@ -81,7 +81,7 @@
         "branch": "game/development"
       },
       "github_workflow": ".github/workflows/game-ci-failure-triage.yml",
-      "prompt_file": "docs/agents/automation_prompts/ci_failure_triage.md",
+      "prompt_file": "docs/ops/agents/automation_prompts/ci_failure_triage.md",
       "mcp_required": false
     },
     {
@@ -93,7 +93,7 @@
         "type": "webhook",
         "event": "uat_ready"
       },
-      "prompt_file": "docs/agents/automation_prompts/uat_notify.md",
+      "prompt_file": "docs/ops/agents/automation_prompts/uat_notify.md",
       "mcp_required": false
     },
     {
@@ -107,7 +107,7 @@
         "auth_secret": "CURSOR_ALERT_WEBHOOK_AUTH",
         "events": ["factory_halt", "mcp_blocked"]
       },
-      "prompt_file": "docs/agents/automation_prompts/factory_alert.md",
+      "prompt_file": "docs/ops/agents/automation_prompts/factory_alert.md",
       "mcp_required": false
     },
     {
@@ -124,7 +124,7 @@
       },
       "repo": "3d-JRPG-adventure-pc-game",
       "branch": "game/development",
-      "prompt_file": "docs/agents/automation_prompts/worker_sprint_issue.md",
+      "prompt_file": "docs/ops/agents/automation_prompts/worker_sprint_issue.md",
       "mcp_required": true,
       "snapshot_mode": "required"
     }

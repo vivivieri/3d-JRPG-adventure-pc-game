@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Full-tree gdlint on game/scripts + game/tests — docs/technical/GDSCRIPT_STYLE.md.
+# Full-tree gdlint on game/scripts + game/tests — docs/engineering/technical/GDSCRIPT_STYLE.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

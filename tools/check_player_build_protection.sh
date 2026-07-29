@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-echo "==> Player build protection (docs/qa/SECURITY.md §9)"
+echo "==> Player build protection (docs/ops/qa/SECURITY.md §9)"
 echo ""
 
 python3 - <<'PY' || exit 1

@@ -5,7 +5,7 @@
 #   bash tools/run_candidate_tournament.sh --challenger artifacts/candidates/P1-02/challenger_run2.json
 #   bash tools/run_candidate_tournament.sh --challenger ... --promote
 #
-# Authority: docs/qa/CANDIDATE_TOURNAMENT.md
+# Authority: docs/ops/qa/CANDIDATE_TOURNAMENT.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -36,7 +36,7 @@ if [[ -z "$CHALLENGER" ]]; then
 fi
 
 echo "==> Candidate tournament (L2.5 — pre-merge, non-ship)"
-echo "    Authority: docs/qa/CANDIDATE_TOURNAMENT.md"
+echo "    Authority: docs/ops/qa/CANDIDATE_TOURNAMENT.md"
 echo "    Challenger: $CHALLENGER"
 echo
 

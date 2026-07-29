@@ -41,7 +41,7 @@ fi
 
 # Non-blocking — token telemetry is optional on docs-only sprints but required for full auto
 if ! bash tools/check_agent_telemetry_ready.sh 2>/dev/null; then
-  echo "[WARN] Agent token telemetry not ready — add CURSOR_API_KEY (docs/agents/CURSOR_SECRETS_SETUP.md §8)"
+  echo "[WARN] Agent token telemetry not ready — add CURSOR_API_KEY (docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)"
 fi
 
 echo ""

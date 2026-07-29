@@ -1,0 +1,250 @@
+# Controls Cheat Sheet — How We Enforce Roles
+
+**Version:** 1.5
+**Print this:** One-page reference for automated + process controls
+**Companion:** `docs/ops/cheat-sheets/RR_CHEATSHEET.md` v1.1 (who does what — includes per-role **control hook** column)
+**Authority:** `docs/ops/ci-cd/CI.md` · `game/data/qa/acceptance_criteria.json` · `docs/ops/agents/PROJECT_MANAGEMENT.md`
+
+---
+
+## Golden rules
+
+1. **Enforce outputs, not intentions** — gates PASS with evidence, or merge/tag is blocked.
+2. **CI is the hard floor** — agent honor system fills gaps CI cannot see.
+3. **WARN ≠ PASS · SKIP ≠ PASS** — on `game/development`, CI maps SKIP → FAIL via `tools/gate_lib.sh`.
+4. **Builder proof** — scene changes require `.gdai_built` in the same PR (`L3_gdai_built`).
+5. **Human L6** — only after L0–L5 pass.
+6. **Cross-cutting factory features** — register in `workflow_integration_registry.json`; `bash tools/check_feature_integration.sh --remind` before merge (`docs/ops/qa/WORKFLOW_INTEGRATION.md`).
+
+---
+
+## Control stack (strong → weak)
+
+| # | Control | Blocks merge? | Blocks ship/tag? |
+|---|---------|---------------|------------------|
+| 1 | **GitHub Actions CI** | ✅ PR/push fail | ✅ via `run_cd_gates.sh` |
+| 2 | **Branch protection** | ✅ when configured | — |
+| 3 | **PR role checklist** | ⚠️ Review discipline | — |
+| 4 | **Issue templates** | ⚠️ Required fields | — |
+| 5 | **R&R scripts** | ✅ in CI | ✅ |
+| 6 | **Remediation loop** | ⚠️ Process | ✅ anti-infinite-retry |
+| 7 | **Phase exit gates** | — | ✅ phase promotion |
+| 8 | **Pre-delivery control** | — | ✅ blocks outbound delivery until automated checks pass (`docs/ops/workflow/DELIVERY_CONTROL.md`) |
+| 9 | **Agent rules** | — | — |
+
+---
+
+## Automated gates by branch
+
+### `main` — `ci.yml` → `run_docs_ci_checks.sh`
+
+**Full list:** `docs_ci_gates.required_gates` in `acceptance_criteria.json` (kept in sync by `L0_doc_sync`). Highlights:
+
+| Gate | Enforces |
+|------|----------|
+| `L0_story_data` | Data JSON valid |
+| `L0_acceptance_catalog` | Gate catalog schema |
+| `L0_sprint_board` | Sprint board + done-SHA truth |
+| `L0_game_branch_bootstrap` | P1-00 — warns if `game/development` tip lacks `project.godot` |
+| `L0_vo_casting` | PLACEHOLDER_* voice ids (advisory on main) |
+| `L0_environments_catalog` | Env catalog |
+| `L0_sprint_phases` | Sprint config |
+| `L0_base_classes` | Code base class registry schema |
+| `L0_zone_composition` | Zone composition contract |
+| `L0_qa_catalog` | 3D model QA catalog |
+| `L0_audio_qa_catalog` | BGM/VO QA catalog |
+| `L0_scene_audio_map` | Scene/zone audio map |
+| `L0_generation_readiness_backlog` | GR-* backlog traceability |
+| `L0_workflow_integration` | Factory feature registry — hooks + doc parity |
+| `L0_agent_session_telemetry` | Agent session JSONL + token backfill schema |
+| `L0_factory_watchdog` | Factory stall/hang recovery config |
+| `L0_factory_automations` | Automation catalog + worker dispatch wiring |
+| `L0_stakeholder_report` | Product owner report + Telegram config |
+| `L0_alignment_audit_catalog` | Stakeholder alignment audit catalog — management visuals: `audit_radar_spec.png`, `audit_radar_build.png` |
+| `L0_candidate_tournament` | Champion/challenger config schema |
+| `L0_rr_compliance` | No ship scenes on main |
+| `L0_no_secrets` / `L0_ship_build_security` / `L0_player_build_protection` | Security scanners |
+| `L1_python_lint` | ruff PEP 8 on `tools/*.py` |
+| `L1_shellcheck` | shellcheck on `tools/*.sh` |
+| `L1_json_style` | JSON format + naming (`game/data/` + config JSON) |
+| `L1_typescript_lint` | ESLint/tsc on MCP Pro (SKIP when not installed) |
+| `L1_markdown_style` | Docs whitespace, headings, links |
+| `L1_gdshader_style` | NPR shader structure lint |
+| `L1_error_handling` | No silent exceptions; `[FAIL]`→stderr |
+| `L1_workflow_yaml` | actionlint on GitHub Actions YAML |
+| `L1_mypy_libs` | mypy on `tools/*_lib.py` |
+| `M5_asset_compliance` | License manifest |
+
+**Not in merge CI (by design):** visual/model/audio jury, L5 E2E, L6 human — see `docs/ops/ci-cd/CI.md` §3.
+
+### `game/development` — `game-ci.yml` → `run_ci_checks.sh`
+
+| Gate | Role mainly enforced |
+|------|----------------------|
+| `L0_rr_compliance` | **Builder** — GDAI-verified ship `.tscn` only (`.gdai_built`) |
+| `L0_game_branch_bootstrap` | **PM** — `project.godot` required |
+| `L0_vo_casting` | **Visual** / audio — no PLACEHOLDER_* at M5/CD |
+| `L0_story_data` | **Architect** / data |
+| `L0_acceptance_catalog` | **QA** catalog |
+| `L0_workflow_integration` | **PM** — factory feature registry parity |
+| `L0_candidate_tournament` | **PM** — golden harness + tournament policy schema |
+| `L0_base_classes` | **Architect** — base class registry |
+| `L1_unit_tests` | **Architect** |
+| `L2_scene_primitives` | **Builder** / **Visual** |
+| `L2_boot_headless` | **Builder** (when `main_scene` set) |
+| `L3_gdai_built` | **Builder** — marker updated with scene diff |
+| `L2_animation_whitelist` | **Builder** / **Visual** — required ⊆ Mixamo clips ⊆ whitelist |
+| `L2_feel_smoke` | **Architect** — `GAME_FEEL.md` constants |
+| `L2_perf_catalog` | **QA** / **Builder** — `perf_thresholds.json` catalog |
+| `L2_glb_import` | **Builder** / **Visual** — post-import toon pipeline |
+| `L2_candidate_select` | **Builder** / **Visual** — champion/challenger evidence (pre-merge, non-ship) |
+| `L1_gdscript_lint` | **Architect** — changed `.gd` files (`gdtoolkit` required) |
+| `L1_python_lint` | **Architect** / **QA** — ruff on `tools/` |
+| `L1_shellcheck` | **Architect** — shellcheck on gate scripts |
+| `L1_json_style` | **Architect** — JSON format + naming |
+| `L1_markdown_style` | **Architect** — docs format + links |
+| `L1_gdshader_style` | **Visual** — shader templates |
+| `L1_scene_style` | **Builder** — static `.tscn` lint |
+| `L1_error_handling` | **QA** — cross-language error patterns |
+| `L1_workflow_yaml` | **Release** — GitHub Actions YAML lint |
+| `L1_mypy_libs` | **Architect** — typed reference libraries |
+| `L0_base_class_compliance` | **Architect** — no rogue native extends |
+| `L4_integration` | **Flow** |
+| `M5_asset_compliance` | **Release** / compliance |
+
+**Not in CI (agent-local):** `check_mcp_ready.sh`, full **L3 F5 viewport**, L2 jury, **L5 E2E**, **L6 human**.
+
+---
+
+## Per-role controls
+
+| Role | Hard (automated) | Soft (process) |
+|------|------------------|----------------|
+| **PM** | `L0_sprint_board`; **`run_pm_orchestrator.sh` PASS** | Dispatch + `run_post_agent_cycle.sh` enforcement |
+| **Architect** | `L1_unit_tests`, `L1_gdscript_lint`, `L0_base_class_compliance` | Handoff + **base class** registry |
+| **Builder** | `L0_rr_compliance`, `L2_*`, `L3_gdai_built`, `L2_animation_whitelist`, `L2_glb_import`, component scenes | `.gdai_built`; F5 in editor; `install_glb_import_pipeline.sh` |
+| **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |
+| **Flow** | `L4_integration`; L5 in `run_cd_gates.sh` for beta/prod | MCP Pro `--minimal` only |
+| **Debugger** | Godotiq read-only by policy | — |
+| **Release** | `run_cd_gates.sh`; CD workflows; tag patterns | Steam secrets; CI gates only |
+| **Visual** | L2 palette/model/audio/vo scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
+| **Human** | L6 in ship checklist / CD prod (`min_testers: 5`, feel checklist §7b) | Playtest script + gate JSON |
+
+---
+
+## L3 split (important)
+
+| Check | Script | Where |
+|-------|--------|-------|
+| **L3_gdai_built** (CI) | `check_l3_gdai_built.sh` | GitHub Actions — marker updated when scenes change |
+| **L3_gdai_f5** (full) | GDAI F5 + editor | Agent session — viewport verify |
+| **L3_perf_review** | Godotiq `perf_snapshot` | Agent session — FPS / draw calls / materials |
+
+CI cannot run the editor; `L3_gdai_built` is the **merge blocker** for Builder handoffs.
+
+---
+
+## PR + GitHub controls
+
+### PR templates (`.github/PULL_REQUEST_TEMPLATE/`)
+
+| Template | Branch | Requires |
+|----------|--------|----------|
+| **game_development.md** | `game/development` | PM / Architect / Builder / QA checkboxes + gate report |
+| **docs_main.md** | `main` | Docs-only checklist + `run_docs_ci_checks.sh` |
+
+### Branch protection (`tools/setup_github_project.sh`)
+
+| Branch | Status check | PR review |
+|--------|--------------|-----------|
+| `main` | Docs + design data gates | **None** (CI-only) |
+| `game/development` | L0–L2 headless gates | **None** (CI-only) |
+
+```bash
+export GH_TOKEN=github_pat_...   # Cursor Secrets
+bash tools/setup_github_project.sh
+```
+
+Manual fallback: `docs/ops/ci-cd/GITHUB_SETUP.md` §2.
+
+### Issue templates
+
+| Template | Enforces |
+|----------|----------|
+| `feature_task.yml` | Phase, gate IDs, `agent_owner` |
+| `gate_failure.yml` | Gate ID, SHA, remediation |
+| `bug_report.yml` | Severity, env, repro |
+
+Labels: `agent/*`, `gate/*`, `env/*` — see `docs/ops/agents/PROJECT_MANAGEMENT.md` §2.
+
+---
+
+## Session startup (before scene work)
+
+```bash
+bash tools/ensure_mcp_stack.sh
+bash tools/check_mcp_ready.sh       # blocks Builder without P0 MCP
+bash tools/check_rr_compliance.sh
+```
+
+---
+
+## Ship / CD controls
+
+```bash
+bash tools/run_cd_gates.sh --channel rc      # CI + assets
+bash tools/run_cd_gates.sh --channel beta    # + L5 E2E required
+bash tools/run_cd_gates.sh --channel prod    # + L6 policy
+```
+
+Tags on `game/development` only until M6 (`docs/ops/ci-cd/CD.md`).
+
+---
+
+## Remediation (QA FAIL loop)
+
+1. `bash tools/qa_emit_remediation.sh <brief-id>`
+2. Change **one lever** (mesh / albedo / lighting / prompt — not all at once)
+3. Re-run failing gate; paste evidence in issue
+4. Same prompt twice → **blocked** after 2 attempts (`docs/ops/qa/QA_REMEDIATION_LOOP.md`)
+
+---
+
+## Definition of done (merge)
+
+- [ ] PR template checkboxes satisfied for touched roles
+- [ ] All listed **gate IDs PASS** on PR commit (CI green)
+- [ ] QA gate report in PR body with evidence paths
+- [ ] Builder: `.gdai_built` updated if scenes changed
+- [ ] Correct branch (`main` = docs/data; `game/development` = code)
+
+---
+
+## Quick verify commands
+
+```bash
+# game/development
+bash tools/run_ci_checks.sh
+bash tools/check_rr_compliance.sh
+bash tools/check_l3_gdai_built.sh
+
+# main
+bash tools/run_docs_ci_checks.sh
+
+# pre-tag
+bash tools/run_cd_gates.sh --channel rc
+```
+
+---
+
+## Related docs
+
+| Doc | Contents |
+|-----|----------|
+| `docs/ops/cheat-sheets/RR_CHEATSHEET.md` | Role ownership |
+| `docs/ops/ci-cd/CI.md` | Full CI matrix |
+| `docs/ops/qa/ACCEPTANCE_CRITERIA.md` | Gate thresholds |
+| `docs/ops/agents/PROJECT_MANAGEMENT.md` | Issues, labels, traceability |
+| `docs/ops/ci-cd/GITHUB_SETUP.md` | PAT + branch protection |
+| `docs/ops/qa/QA_REMEDIATION_LOOP.md` | FAIL iteration |
+| `game/data/qa/acceptance_criteria.json` | Machine-readable gates |

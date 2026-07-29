@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Load audio generation brief emotional intent (docs/generation_briefs/audio|vo/)."""
+"""Load audio generation brief emotional intent (docs/briefs/audio|vo/)."""
 from __future__ import annotations
 
 import re

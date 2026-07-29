@@ -13,5 +13,5 @@
 #        +run_app_build "$(pwd)/steam/depot/app_build.vdf" \
 #        +quit
 #
-# v1 ships **Linux + Windows** — see docs/qa/PLATFORM_SUPPORT.md
-# See docs/ci-cd/CD.md and docs/ci-cd/STEAM_RELEASE_CHECKLIST.md §3.4
+# v1 ships **Linux + Windows** — see docs/ops/qa/PLATFORM_SUPPORT.md
+# See docs/ops/ci-cd/CD.md and docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md §3.4

@@ -11,10 +11,10 @@
 
 ### Quick links
 
-- R&R: `docs/cheat-sheets/RR_CHEATSHEET.md`
-- Controls: `docs/cheat-sheets/CONTROLS_CHEATSHEET.md`
-- CI: `docs/ci-cd/CI.md`
-- Branch policy: `docs/workflow/BRANCHING.md`
+- R&R: `docs/ops/cheat-sheets/RR_CHEATSHEET.md`
+- Controls: `docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md`
+- CI: `docs/ops/ci-cd/CI.md`
+- Branch policy: `docs/ops/workflow/BRANCHING.md`
 
 ---
 

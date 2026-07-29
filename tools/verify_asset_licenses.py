@@ -171,7 +171,7 @@ def main() -> int:
 
     for rel in uncovered:
         errors.append(
-            f"UNLISTED: {rel} — register with tools/register_asset.py and docs/art/LICENSES.md"
+            f"UNLISTED: {rel} — register with tools/register_asset.py and docs/design/art/LICENSES.md"
         )
 
     # Manifest entries for files that don't exist yet
@@ -186,7 +186,7 @@ def main() -> int:
 
     if errors:
         print("ASSET LICENSE CHECK FAILED", file=sys.stderr)
-        print(f"Policy: {manifest.get('policy', 'docs/art/ASSET_COMPLIANCE.md')}", file=sys.stderr)
+        print(f"Policy: {manifest.get('policy', 'docs/design/art/ASSET_COMPLIANCE.md')}", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         if warnings:

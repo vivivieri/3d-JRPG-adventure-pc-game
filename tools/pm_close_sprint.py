@@ -70,7 +70,7 @@ def main() -> int:
 
     save_json(BOARD_PATH, board)
     print(f"OK — closed {old_id}; opened {new_id} with {len(carry)} carry-over items")
-    print("PM MUST: update docs/sprints/ issue pack + clear carry_over_queue after filing issues")
+    print("PM MUST: update docs/ops/sprints/ issue pack + clear carry_over_queue after filing issues")
     return 0
 
 

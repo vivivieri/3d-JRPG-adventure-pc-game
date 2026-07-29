@@ -14,14 +14,14 @@ warn() { echo "[WARN] $1"; WARN=$((WARN + 1)); }
 fail() { echo "[FAIL] $1"; FAIL=$((FAIL + 1)); }
 pass() { echo "[PASS] $1"; }
 
-echo "==> Model smoke checks (docs/art/MODEL_QA.md)"
+echo "==> Model smoke checks (docs/design/art/MODEL_QA.md)"
 echo "    Gate model: ${GATE_MODEL}"
 echo ""
 
 GATE_PATH="${ROOT}/game/assets/models/characters/${GATE_MODEL}/${GATE_MODEL}.glb"
 if [[ ! -f "$GATE_PATH" ]]; then
   warn "Model smoke skipped — ${GATE_PATH#"${ROOT}"/} not found"
-  echo "       Generate via Meshy/Blender pipeline per docs/art/ART_AUTOMATION_PIPELINE.md §5"
+  echo "       Generate via Meshy/Blender pipeline per docs/design/art/ART_AUTOMATION_PIPELINE.md §5"
   echo ""
   echo "Model smoke: ${WARN} warning(s), ${FAIL} failure(s) (skipped)"
   exit 0
@@ -64,7 +64,7 @@ if command -v blender >/dev/null 2>&1; then
     set +e
     if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
       # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
-      # See docs/qa/AGENT_JURY.md
+      # See docs/ops/qa/AGENT_JURY.md
       python3 "${ROOT}/tools/ingest_agent_jury.py" \
         --domain model \
         --asset "$GATE_PATH" \

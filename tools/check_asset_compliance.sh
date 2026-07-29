@@ -7,7 +7,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 echo "==> Tides of Urashima — Asset Compliance Check"
-echo "    Policy: docs/art/ASSET_COMPLIANCE.md"
+echo "    Policy: docs/design/art/ASSET_COMPLIANCE.md"
 echo ""
 
 echo "==> Step 1/2: Verify licenses..."
@@ -18,4 +18,4 @@ echo "==> Step 2/2: Generate compliance report..."
 python3 tools/generate_compliance_report.py
 
 echo ""
-echo "==> Done. Proof: docs/compliance/COMPLIANCE_REPORT.md"
+echo "==> Done. Proof: docs/archive/compliance/COMPLIANCE_REPORT.md"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate game/data/qa/zone_composition.json (docs/art/GENERATION_READINESS.md §5)."""
+"""Validate game/data/qa/zone_composition.json (docs/design/art/GENERATION_READINESS.md §5)."""
 from __future__ import annotations
 
 import json
@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ZONE_PATH = ROOT / "game/data/qa/zone_composition.json"
-BRIEF_DIR = ROOT / "docs/generation_briefs"
+BRIEF_DIR = ROOT / "docs/briefs"
 
 REQUIRED_ZONE_KEYS = (
     "phase",

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Generate spec/build radar PNGs from alignment audit report data.
 
-Themed for Tides of Urashima — muted coastal palette (docs/art/ART_DIRECTION.md).
+Themed for Tides of Urashima — muted coastal palette (docs/design/art/ART_DIRECTION.md).
 
-Authority: docs/qa/ALIGNMENT_AUDIT.md
+Authority: docs/ops/qa/ALIGNMENT_AUDIT.md
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ from audit_radar_theme import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_VISUALS_DIR = ROOT / "docs/compliance/alignment_audit_visuals"
+DEFAULT_VISUALS_DIR = ROOT / "docs/archive/compliance/alignment_audit_visuals"
 CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
 
 SPEC_DOMAIN_ORDER = [

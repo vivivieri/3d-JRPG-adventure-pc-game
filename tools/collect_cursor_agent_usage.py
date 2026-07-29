@@ -6,7 +6,7 @@ GET https://api.cursor.com/v1/agents/{bcId}/usage
 Auth: HTTP Basic with CURSOR_API_KEY as username (empty password).
 Docs: https://cursor.com/docs/cloud-agent/api/endpoints#get-agent-usage
 
-Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 """
 from __future__ import annotations
 
@@ -64,7 +64,7 @@ def fetch_agent_usage(
     """Call Cursor usage API. Raises on HTTP error."""
     key = api_key or resolve_api_key()
     if not key:
-        raise RuntimeError("CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8")
+        raise RuntimeError("CURSOR_API_KEY not set — see docs/ops/agents/CURSOR_SECRETS_SETUP.md §8")
 
     url = f"{API_BASE}/{bc_id}/usage"
     if run_id:

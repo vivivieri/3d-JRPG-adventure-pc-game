@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Gate for non-PM agents — must be dispatched by PM orchestrator before work.
 # Usage: bash tools/run_agent_session_gate.sh <agent_role> <issue_id>
-# Authority: docs/agents/SPRINT_ORCHESTRATION.md
+# Authority: docs/ops/agents/SPRINT_ORCHESTRATION.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -70,7 +70,7 @@ if strict and issue_row:
     co = issue_row.get("co_agent")
     if agent not in (owner, co):
         print(f"[FAIL] Strict role — {agent} cannot run issue owned by {owner}")
-        print("Policy: one agent role per session (docs/agents/MULTI_AGENT_BRANCH_STRATEGY.md)")
+        print("Policy: one agent role per session (docs/ops/agents/MULTI_AGENT_BRANCH_STRATEGY.md)")
         sys.exit(1)
 
 # Mark in_progress on board if still pending
@@ -90,7 +90,7 @@ PY
 
 # Agent session telemetry — session start (warn once if API key missing)
 if [[ -z "${CURSOR_API_KEY:-}" && -z "${CURSOR_API_TOKEN:-}" ]]; then
-  echo "[WARN] CURSOR_API_KEY not set — tokens will not auto-log (docs/agents/CURSOR_SECRETS_SETUP.md §8)"
+  echo "[WARN] CURSOR_API_KEY not set — tokens will not auto-log (docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)"
 fi
 bash tools/pm_record_agent_session.sh start --agent "$AGENT" --issue "$ISSUE_ID" 2>/dev/null || true
 
@@ -101,4 +101,4 @@ echo ""
 echo "[RULE] End every worker session (mandatory — enforced script):"
 echo "       bash tools/run_post_agent_cycle.sh --issue $ISSUE_ID --agent $AGENT --commit \$(git rev-parse HEAD)"
 echo "[RULE] Cross-cutting factory features → workflow_integration_registry.json"
-echo "       bash tools/check_feature_integration.sh --remind · docs/qa/WORKFLOW_INTEGRATION.md"
+echo "       bash tools/check_feature_integration.sh --remind · docs/ops/qa/WORKFLOW_INTEGRATION.md"

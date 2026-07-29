@@ -1,13 +1,13 @@
 {
   "version": "1.1",
-  "authority": "Unified audio QA catalog — BGM + selective VO. See docs/audio/AUDIO_PRODUCTION_GUIDE.md, docs/audio/AUDIO_QA.md",
-  "design_ref": "docs/audio/AUDIO_PRODUCTION_GUIDE.md",
+  "authority": "Unified audio QA catalog — BGM + selective VO. See docs/design/audio/AUDIO_PRODUCTION_GUIDE.md, docs/design/audio/AUDIO_QA.md",
+  "design_ref": "docs/design/audio/AUDIO_PRODUCTION_GUIDE.md",
   "vo_locale_policy": {
     "primary_vo_locales": ["en", "ja", "zh"],
     "zh_hant_dialects": ["cant", "cmn"],
     "clips": 12,
     "total_ogg_files": 60,
-    "policy_ref": "docs/vision/VO_HIT_LIST.md"
+    "policy_ref": "docs/design/vision/VO_HIT_LIST.md"
   },
   "phase_required": {
     "1": [
@@ -106,7 +106,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "cine_opening_hero",
-      "generation_brief": "docs/generation_briefs/audio/cine_opening_hero.md"
+      "generation_brief": "docs/briefs/audio/cine_opening_hero.md"
     },
     "bgm_village": {
       "path": "game/assets/audio/bgm/bgm_village.ogg",
@@ -123,7 +123,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "bgm_village",
-      "generation_brief": "docs/generation_briefs/audio/bgm_village.md"
+      "generation_brief": "docs/briefs/audio/bgm_village.md"
     },
     "bgm_caves": {
       "path": "game/assets/audio/bgm/bgm_caves.ogg",
@@ -140,7 +140,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "bgm_caves",
-      "generation_brief": "docs/generation_briefs/audio/bgm_caves.md"
+      "generation_brief": "docs/briefs/audio/bgm_caves.md"
     },
     "bgm_palace": {
       "path": "game/assets/audio/bgm/bgm_palace.ogg",
@@ -157,7 +157,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "bgm_palace",
-      "generation_brief": "docs/generation_briefs/audio/bgm_palace.md"
+      "generation_brief": "docs/briefs/audio/bgm_palace.md"
     },
     "bgm_combat": {
       "path": "game/assets/audio/bgm/bgm_combat.ogg",
@@ -191,7 +191,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "bgm_boss",
-      "generation_brief": "docs/generation_briefs/audio/bgm_boss.md"
+      "generation_brief": "docs/briefs/audio/bgm_boss.md"
     },
     "bgm_boss_tide_keeper_p2": {
       "path": "game/assets/audio/bgm/bgm_boss_tide_keeper_p2.ogg",
@@ -310,7 +310,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "cine_ending_rewind_hero",
-      "generation_brief": "docs/generation_briefs/audio/cine_ending_rewind_hero.md"
+      "generation_brief": "docs/briefs/audio/cine_ending_rewind_hero.md"
     },
     "bgm_ending_anchor": {
       "path": "game/assets/audio/bgm/bgm_ending_anchor.ogg",
@@ -344,7 +344,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "cine_ending_anchor_hero",
-      "generation_brief": "docs/generation_briefs/audio/cine_ending_anchor_hero.md"
+      "generation_brief": "docs/briefs/audio/cine_ending_anchor_hero.md"
     },
     "bgm_ending_drift": {
       "path": "game/assets/audio/bgm/bgm_ending_drift.ogg",
@@ -378,7 +378,7 @@
       "lufs_tolerance": 4,
       "peak_dbtp_max": -1.0,
       "ace_step_ref": "cine_ending_drift_hero",
-      "generation_brief": "docs/generation_briefs/audio/cine_ending_drift_hero.md"
+      "generation_brief": "docs/briefs/audio/cine_ending_drift_hero.md"
     },
     "sting_boss_intro": {
       "path": "game/assets/audio/stings/sting_boss_intro.ogg",
@@ -470,7 +470,7 @@
       ],
       "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
       "hero_listen_review": true,
-      "generation_brief": "docs/generation_briefs/vo/sc00_urashima_01.md",
+      "generation_brief": "docs/briefs/vo/sc00_urashima_01.md",
       "loudness_lufs_target": -18,
       "lufs_tolerance": 4,
       "peak_dbtp_max": -3.0
@@ -520,7 +520,7 @@
       ],
       "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
       "hero_listen_review": true,
-      "generation_brief": "docs/generation_briefs/vo/sc03_yuzu_01.md",
+      "generation_brief": "docs/briefs/vo/sc03_yuzu_01.md",
       "loudness_lufs_target": -18,
       "lufs_tolerance": 4,
       "peak_dbtp_max": -3.0
@@ -645,7 +645,7 @@
       ],
       "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
       "hero_listen_review": true,
-      "generation_brief": "docs/generation_briefs/vo/sc11_otohime_01.md",
+      "generation_brief": "docs/briefs/vo/sc11_otohime_01.md",
       "loudness_lufs_target": -18,
       "lufs_tolerance": 4,
       "peak_dbtp_max": -3.0
@@ -670,7 +670,7 @@
       ],
       "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
       "hero_listen_review": true,
-      "generation_brief": "docs/generation_briefs/vo/sc13_roku_01.md",
+      "generation_brief": "docs/briefs/vo/sc13_roku_01.md",
       "loudness_lufs_target": -18,
       "lufs_tolerance": 4,
       "peak_dbtp_max": -3.0
@@ -745,7 +745,7 @@
       ],
       "output_pattern": "game/assets/audio/voice/{locale}/{voice_id}.ogg",
       "hero_listen_review": true,
-      "generation_brief": "docs/generation_briefs/vo/sc16_tide_keeper_01.md",
+      "generation_brief": "docs/briefs/vo/sc16_tide_keeper_01.md",
       "loudness_lufs_target": -18,
       "lufs_tolerance": 4,
       "peak_dbtp_max": -3.0

@@ -119,7 +119,7 @@ def build_replacements() -> None:
             old = f"docs/{name}.md"
             new = f"docs/{folder}/{name}.md"
             REPLACEMENTS.append((old, new))
-    REPLACEMENTS.append(("docs/audio_sheets/", "docs/audio/audio_sheets/"))
+    REPLACEMENTS.append(("docs/audio_sheets/", "docs/design/audio/audio_sheets/"))
     REPLACEMENTS.sort(key=lambda x: len(x[0]), reverse=True)
 
 

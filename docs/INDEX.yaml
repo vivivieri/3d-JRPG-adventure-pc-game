@@ -1,0 +1,149 @@
+# docs/INDEX.yaml — machine router for AI agents
+# Authority: docs/_meta/DOC_LIBRARY_ADR.md
+# Humans: docs/README.md · Discovery: docs/llms.txt
+#
+# Agents MUST load only `boot` + role `must_read` (then task-specific optional).
+# Do not preload the full library. Archive paths are never auto-loaded.
+
+version: 2
+schema: tides-docs-index/v1
+
+boot:
+  - docs/ops/BOOT.md
+  - AGENTS.md
+
+authority_chain:
+  - docs/ops/workflow/IMPLEMENTATION_PLAN.md
+  - docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md
+  - docs/ops/workflow/BRANCHING.md
+  - docs/engineering/technical/TECHNICAL_DESIGN.md
+  - game/data/
+
+never_autoload:
+  - docs/archive/
+  - docs/briefs/
+  - docs/design/audio/audio_sheets/
+  - docs/ops/sprints/
+  - docs/_meta/redirects.yaml
+
+folders:
+  design: Product truth — vision, world, gameplay, art, audio, ui
+  engineering: Runtime architecture + coding standards
+  ops: Factory, CI/CD, QA process, workflow, agent runbooks
+  briefs: AI generation briefs (load per asset task only)
+  archive: Deprecated + compliance reports + pitch (never boot)
+
+roles:
+  pm:
+    must_read:
+      - docs/ops/cheat-sheets/RR_CHEATSHEET.md
+      - docs/ops/agents/PM_AGENT_RUNBOOK.md
+      - docs/ops/agents/SPRINT_ORCHESTRATION.md
+    optional:
+      - docs/ops/workflow/AGILE_WITHIN_PHASES.md
+      - docs/ops/qa/WORKFLOW_INTEGRATION.md
+
+  architect:
+    must_read:
+      - docs/engineering/technical/TECHNICAL_DESIGN.md
+      - docs/engineering/technical/DATA_ARCHITECTURE.md
+      - docs/engineering/technical/CODING_STANDARDS_HUB.md
+    optional:
+      - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
+      - docs/ops/workflow/IMPLEMENTATION_PLAN.md
+
+  builder:
+    must_read:
+      - docs/ops/BOOT.md
+      - docs/ops/agents/MCP_STACK.md
+      - docs/engineering/technical/CODE_STYLE.md
+    optional:
+      - docs/engineering/technical/GDSCRIPT_STYLE.md
+      - docs/ops/workflow/AI_DEV_WORKFLOW.md
+
+  builder_zone:
+    must_read:
+      - docs/design/art/RENDERING_GUIDE.md
+      - docs/design/world/ENVIRONMENT_KITS.md
+      - docs/design/art/ART_DIRECTION.md
+    optional:
+      - docs/design/art/SHADER_SPECS.md
+      - docs/design/world/LEVEL_DESIGN.md
+
+  builder_combat:
+    must_read:
+      - docs/design/gameplay/COMBAT_SYSTEMS.md
+      - docs/design/art/COMBAT_PRESENTATION.md
+    optional:
+      - docs/design/gameplay/SKILLS_BIBLE.md
+      - docs/design/gameplay/PROGRESSION_TUNING.md
+
+  visual:
+    must_read:
+      - docs/design/art/ART_DIRECTION.md
+      - docs/design/art/ART_AUTOMATION_PIPELINE.md
+      - docs/design/art/VISUAL_QA.md
+    optional:
+      - docs/design/art/MODEL_QA.md
+      - docs/design/art/CHARACTER_BIBLE.md
+
+  qa:
+    must_read:
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+      - docs/ops/qa/QA_REMEDIATION_LOOP.md
+    optional:
+      - docs/ops/qa/AI_TESTING_SPEC.md
+      - docs/ops/qa/FLOW_QA.md
+
+  flow:
+    must_read:
+      - docs/ops/qa/FLOW_QA.md
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+    optional:
+      - docs/design/vision/STORYBOARD.md
+      - docs/design/world/WORLD_MAP_AND_FLOW.md
+
+  release:
+    must_read:
+      - docs/ops/ci-cd/CI.md
+      - docs/ops/workflow/MILESTONES.md
+      - docs/ops/qa/SECURITY.md
+    optional:
+      - docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md
+      - docs/ops/ci-cd/CD.md
+
+  narrative:
+    must_read:
+      - docs/design/vision/GDD.md
+      - docs/design/vision/STORYBOARD.md
+      - docs/design/vision/NARRATIVE_WRITING_GUIDE.md
+    optional:
+      - docs/design/vision/ENDING_DESIGN.md
+      - docs/design/vision/VO_HIT_LIST.md
+
+  audio:
+    must_read:
+      - docs/design/audio/AUDIO_DIRECTION.md
+      - docs/design/audio/AUDIO_PRODUCTION_GUIDE.md
+    optional:
+      - docs/design/audio/AUDIO_QA.md
+
+diataxis:
+  tutorial:
+    - docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md
+    - docs/ops/agents/CURSOR_SECRETS_SETUP.md
+    - docs/ops/agents/FACTORY_SETUP_GUIDE.md
+  how-to:
+    - docs/ops/qa/QA_REMEDIATION_LOOP.md
+    - docs/ops/agents/PM_AGENT_RUNBOOK.md
+    - docs/design/art/ART_AUTOMATION_PIPELINE.md
+  reference:
+    - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+    - docs/design/art/RENDERING_GUIDE.md
+    - docs/engineering/technical/CODING_STANDARDS_HUB.md
+    - docs/ops/cheat-sheets/RR_CHEATSHEET.md
+    - docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md
+  explanation:
+    - docs/ops/workflow/BRANCHING_DECISION_RECORD.md
+    - docs/design/vision/GDD.md
+    - docs/_meta/DOC_LIBRARY_ADR.md

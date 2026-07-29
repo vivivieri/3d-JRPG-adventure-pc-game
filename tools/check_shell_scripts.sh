@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ShellCheck on tools/*.sh — docs/technical/BASH_STYLE.md.
+# ShellCheck on tools/*.sh — docs/engineering/technical/BASH_STYLE.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

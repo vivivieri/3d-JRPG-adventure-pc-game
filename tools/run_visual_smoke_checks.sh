@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # L2 visual smoke: palette + multi-LLM jury when ruined_village screenshots exist.
-# WARN (exit 0) when screenshots or API keys missing — see docs/art/VISUAL_QA.md §2G.
+# WARN (exit 0) when screenshots or API keys missing — see docs/design/art/VISUAL_QA.md §2G.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -30,7 +30,7 @@ find_gameplay_screenshot() {
   return 1
 }
 
-echo "==> Visual smoke checks (docs/art/VISUAL_QA.md)"
+echo "==> Visual smoke checks (docs/design/art/VISUAL_QA.md)"
 echo "    Zone: ${ZONE}"
 echo ""
 
@@ -71,7 +71,7 @@ AGENT_DIR="${ROOT}/artifacts/visual_reviews/${SCREENSHOT_STEM}.agent"
 set +e
 if compgen -G "${AGENT_DIR}/*.json" >/dev/null 2>&1; then
   # Agent-driven jury: verdicts from Cursor LLM subagents, no external API keys.
-  # See docs/qa/AGENT_JURY.md
+  # See docs/ops/qa/AGENT_JURY.md
   python3 "${ROOT}/tools/ingest_agent_jury.py" \
     --domain visual \
     --asset "$SCREENSHOT" \

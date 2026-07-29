@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Godot shader style lint — docs/technical/SHADER_STYLE.md."""
+"""Godot shader style lint — docs/engineering/technical/SHADER_STYLE.md."""
 from __future__ import annotations
 
 import re

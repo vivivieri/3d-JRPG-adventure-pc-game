@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "design_ref": "docs/art/SHADER_SPECS.md",
+  "design_ref": "docs/design/art/SHADER_SPECS.md",
   "note": "Shader source files ship on game/development; this registry is the regeneration contract.",
   "shaders": [
     {
@@ -60,7 +60,7 @@
       "path": "res://shaders/spirit_lower_body.gdshader",
       "phase": 5,
       "spec_status": "specified",
-      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/CHARACTER_BIBLE.md",
+      "design_ref": "docs/design/art/SHADER_SPECS.md §3, docs/design/art/CHARACTER_BIBLE.md",
       "render_mode": ["blend_mix"],
       "uniforms": [
         { "name": "emissive_color", "type": "vec4", "default": [0.29, 0.91, 0.85, 1.0] },
@@ -73,7 +73,7 @@
       "path": "res://shaders/lacquer_box.gdshader",
       "phase": 5,
       "spec_status": "specified",
-      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/CHARACTER_BIBLE.md",
+      "design_ref": "docs/design/art/SHADER_SPECS.md §3, docs/design/art/CHARACTER_BIBLE.md",
       "extends": "toon_base",
       "uniforms": [
         { "name": "box_glow_state", "type": "int", "default": 0, "range": [0, 2] }
@@ -84,7 +84,7 @@
       "path": "res://shaders/mirror_chamber.gdshader",
       "phase": 6,
       "spec_status": "specified",
-      "design_ref": "docs/art/SHADER_SPECS.md §3",
+      "design_ref": "docs/design/art/SHADER_SPECS.md §3",
       "uniforms": [
         { "name": "distortion_strength", "type": "float", "default": 0.12 },
         { "name": "fog_tint", "type": "vec4", "default": [0.29, 0.91, 0.85, 1.0] }
@@ -95,7 +95,7 @@
       "path": "res://shaders/ink_combat_overlay.gdshader",
       "phase": 4,
       "spec_status": "specified",
-      "design_ref": "docs/art/SHADER_SPECS.md §3, docs/art/COMBAT_PRESENTATION.md",
+      "design_ref": "docs/design/art/SHADER_SPECS.md §3, docs/design/art/COMBAT_PRESENTATION.md",
       "shader_type": "canvas_item",
       "uniforms": [
         { "name": "ink_strength", "type": "float", "default": 0.8 },

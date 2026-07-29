@@ -1,12 +1,12 @@
 {
   "version": "1.3",
-  "authority": "docs/qa/ALIGNMENT_AUDIT.md",
+  "authority": "docs/ops/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
     "artifacts_dir": "artifacts/alignment_audits",
-    "committed_reports_dir": "docs/compliance/alignment_audit_reports",
-    "shared_visuals_dir": "docs/compliance/alignment_audit_visuals",
-    "history_index": "docs/compliance/alignment_audit_history.json",
+    "committed_reports_dir": "docs/archive/compliance/alignment_audit_reports",
+    "shared_visuals_dir": "docs/archive/compliance/alignment_audit_visuals",
+    "history_index": "docs/archive/compliance/alignment_audit_history.json",
     "latest_json": "artifacts/alignment_audits/latest.json",
     "latest_markdown": "artifacts/alignment_audits/latest.md",
     "latest_html": "artifacts/alignment_dashboard.html",
@@ -170,8 +170,8 @@
       "label": "UX & Controls",
       "weight": 1.0,
       "signals": [
-        { "id": "settings_accessibility_doc", "weight": 0.4, "kind": "file_exists", "path": "docs/ui/SETTINGS_ACCESSIBILITY.md" },
-        { "id": "combat_presentation_doc", "weight": 0.3, "kind": "file_exists", "path": "docs/art/COMBAT_PRESENTATION.md" },
+        { "id": "settings_accessibility_doc", "weight": 0.4, "kind": "file_exists", "path": "docs/design/ui/SETTINGS_ACCESSIBILITY.md" },
+        { "id": "combat_presentation_doc", "weight": 0.3, "kind": "file_exists", "path": "docs/design/art/COMBAT_PRESENTATION.md" },
         { "id": "impl_scenes_not_started", "weight": 0.3, "kind": "spec_status_cap", "cap": 6.5 }
       ],
       "icon": "ux"
@@ -295,7 +295,7 @@
       "when": "visuals_missing",
       "min_present": 30,
       "title": "Refresh stakeholder visual pack",
-      "action": "Copy PNGs to docs/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/compliance/alignment_audit_visuals"
+      "action": "Copy PNGs to docs/archive/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals"
     },
     {
       "id": "REC_WORKFLOW_DRIFT",
@@ -304,7 +304,7 @@
       "when": "gate_fail",
       "gate": "L0_workflow_integration",
       "title": "Factory workflow integration drift",
-      "action": "Run python3 tools/validate_workflow_integration.py; update game/data/qa/workflow_integration_registry.json and wire missing hooks/docs per docs/qa/WORKFLOW_INTEGRATION.md."
+      "action": "Run python3 tools/validate_workflow_integration.py; update game/data/qa/workflow_integration_registry.json and wire missing hooks/docs per docs/ops/qa/WORKFLOW_INTEGRATION.md."
     },
     {
       "id": "REC_AGENT_TELEMETRY",
@@ -313,7 +313,7 @@
       "when": "gate_fail",
       "gate": "L0_agent_session_telemetry",
       "title": "Agent session telemetry schema drift",
-      "action": "Run python3 tools/validate_agent_session_telemetry.py; wire hooks in session gate, cycle events, orchestrator, and watchdog per docs/qa/AGENT_SESSION_TELEMETRY.md. Requires CURSOR_API_KEY secret."
+      "action": "Run python3 tools/validate_agent_session_telemetry.py; wire hooks in session gate, cycle events, orchestrator, and watchdog per docs/ops/qa/AGENT_SESSION_TELEMETRY.md. Requires CURSOR_API_KEY secret."
     },
     {
       "id": "REC_FACTORY_WATCHDOG",
@@ -322,7 +322,7 @@
       "when": "gate_fail",
       "gate": "L0_factory_watchdog",
       "title": "Factory watchdog config drift",
-      "action": "Run python3 tools/validate_factory_watchdog.py; verify tools/run_factory_watchdog.sh hooks and docs/agents/FACTORY_WATCHDOG.md. Requires CURSOR_FACTORY_ALERT_WEBHOOK_URL secret."
+      "action": "Run python3 tools/validate_factory_watchdog.py; verify tools/run_factory_watchdog.sh hooks and docs/ops/agents/FACTORY_WATCHDOG.md. Requires CURSOR_FACTORY_ALERT_WEBHOOK_URL secret."
     },
     {
       "id": "REC_DOC_NITS",
