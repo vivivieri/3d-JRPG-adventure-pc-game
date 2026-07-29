@@ -73,10 +73,10 @@ git commit && git push                  # to game/development only
 
 ## 4. CI per branch
 
-| Branch | CI workflow | CD workflow | Environment |
-|--------|-------------|-------------|-------------|
+| Branch | CI workflow(s) | CD workflow | Environment |
+|--------|----------------|-------------|-------------|
 | `main` | `ci.yml` | — | **design** |
-| `game/development` | `game-ci.yml` + `qa-nightly.yml` | `cd-artifact.yml` · `cd-steam.yml` | **dev** / **qa** / **uat** / **preprod** / **prod** |
+| `game/development` | `ci.yml` + `game-ci.yml` + `qa-nightly.yml` | `cd-artifact.yml` · `cd-steam.yml` | **dev** / **qa** / **uat** / **preprod** / **prod** |
 
 See `docs/ci-cd/ENVIRONMENTS.md` for promotion rules (dev → qa → uat → preprod → prod).
 
