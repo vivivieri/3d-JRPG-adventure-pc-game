@@ -5,6 +5,32 @@
 
 ---
 
+## 0. Dashboard branch (fix "Update dev environment uses main")
+
+Cursor reads `.cursor/environment.json` from the **repository branch configured on the Environment** (`recordedVia: REPO_FILE_OBSERVED`). If the dashboard branch is `main`, Setup Agent runs `install_main_ci.sh` (pip + shellcheck only) — **not** the Godot/MCP stack.
+
+| Dashboard branch | `.cursor/environment.json` install | Result |
+|------------------|-----------------------------------|--------|
+| **`main`** (wrong for dev env) | `bash tools/install_main_ci.sh` | Docs CI only — no Godot, no GDAI |
+| **`game/development`** (required) | `snapshot` + `install_cloud_dev.sh` + `ensure_mcp_stack.sh` | Full dev stack |
+
+**Fix (human — one-time per environment):**
+
+1. Open [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)
+2. Edit the environment → set **Repository branch** to **`game/development`** (not `main`)
+3. **Save**
+4. **Start Setup Agent** again (or launch a new agent from that Environment)
+
+**Fix (agent — every Setup Agent session):**
+
+```bash
+bash tools/ensure_dev_environment_branch.sh
+```
+
+If FAIL → checkout `game/development` before any install or snapshot work.
+
+---
+
 ## 1. Active snapshot (game/development)
 
 Committed in `.cursor/environment.json` on branch **`game/development`** (template on `main`: `.cursor/environment.game-development.json.example`):
