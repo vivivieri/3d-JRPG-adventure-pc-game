@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
-  "design_ref": "docs/agents/SPRINT_ORCHESTRATION.md",
+  "authority": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+  "design_ref": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
   "policy": "Event-driven only — no cron schedules for PM dispatch. AI agents do not need daily rest.",
   "events": {
     "agent_cycle_complete": {
@@ -58,7 +58,7 @@
     "sprint_cycle": "All issues in sprint_board → sprint_cycle_complete → PM opens next sprint pack",
     "phase_cycle": "phase exit gates PASS → optional RC tag → uat_ready when L5 included"
   },
-  "telemetry_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+  "telemetry_ref": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md",
   "telemetry_side_effects": {
     "session_start": "run_agent_session_gate.sh → pm_record_agent_session.sh start",
     "session_progress": "pm_record_heartbeat.sh → pm_record_agent_session.sh progress",
@@ -71,5 +71,5 @@
     "Worker agent start without run_agent_session_gate.sh PASS",
     "Using factory-watchdog.yml schedule as primary dispatch (watchdog is exception-only)"
   ],
-  "watchdog_ref": "docs/agents/FACTORY_WATCHDOG.md"
+  "watchdog_ref": "docs/ops/agents/FACTORY_WATCHDOG.md"
 }

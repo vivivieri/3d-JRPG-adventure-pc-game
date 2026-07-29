@@ -114,7 +114,7 @@ Suggested: **$4.99 – $7.99 USD** (short narrative game)
 - Memory: 8 GB RAM
 - Graphics: Dedicated GPU with 2 GB VRAM (GTX 1060 class or equivalent)
 
-**Note:** Linux is a **required ship platform** alongside Windows — see `docs/qa/PLATFORM_SUPPORT.md`. Cloud dev agents build and perf-test on Linux; Windows depot cross-exported from CI.
+**Note:** Linux is a **required ship platform** alongside Windows — see `docs/ops/qa/PLATFORM_SUPPORT.md`. Cloud dev agents build and perf-test on Linux; Windows depot cross-exported from CI.
 
 ---
 

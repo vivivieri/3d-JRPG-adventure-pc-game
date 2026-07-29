@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Optional static typing on tools/*_lib.py — docs/technical/PYTHON_STYLE.md
+# Optional static typing on tools/*_lib.py — docs/engineering/technical/PYTHON_STYLE.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

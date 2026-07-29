@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""GLB helpers for model QA (docs/art/MODEL_QA.md)."""
+"""GLB helpers for model QA (docs/design/art/MODEL_QA.md)."""
 from __future__ import annotations
 
 import json

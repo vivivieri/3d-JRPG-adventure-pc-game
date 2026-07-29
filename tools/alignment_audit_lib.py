@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Alignment audit engine — standard report, checklist, history, stakeholder dashboard.
 
-Authority: docs/qa/ALIGNMENT_AUDIT.md
+Authority: docs/ops/qa/ALIGNMENT_AUDIT.md
 """
 from __future__ import annotations
 
@@ -667,8 +667,8 @@ def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = Non
                     candidate = ROOT / candidate
                 if candidate.is_file():
                     src = candidate
-            elif (ROOT / "docs/compliance/alignment_audit_visuals" / fname).is_file():
-                src = ROOT / "docs/compliance/alignment_audit_visuals" / fname
+            elif (ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname).is_file():
+                src = ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname
             manifest.append(
                 {
                     "pack_id": pack["id"],
@@ -705,8 +705,8 @@ def bundle_visuals(
             if source_dir and (source_dir / fname).is_file():
                 shutil.copy2(source_dir / fname, dest)
                 copied = True
-            elif (ROOT / "docs/compliance/alignment_audit_visuals" / fname).is_file():
-                shutil.copy2(ROOT / "docs/compliance/alignment_audit_visuals" / fname, dest)
+            elif (ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname).is_file():
+                shutil.copy2(ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname, dest)
                 copied = True
             manifest.append(
                 {
@@ -809,7 +809,7 @@ def build_report(
 def _shared_visual_href(committed_audit_dir: Path, filename: str, catalog: dict[str, Any]) -> str:
     """Relative href from a committed audit folder to the shared visuals pack."""
     shared = ROOT / catalog.get("outputs", {}).get(
-        "shared_visuals_dir", "docs/compliance/alignment_audit_visuals"
+        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals"
     )
     return Path(
         os_path_relpath(shared / filename, committed_audit_dir)
@@ -1111,7 +1111,7 @@ def report_to_markdown(report: dict[str, Any], *, embed_visuals: bool = False) -
     )
 
     lines.append("---")
-    lines.append("Authority: `docs/qa/ALIGNMENT_AUDIT.md` · Re-run: `bash tools/run_alignment_audit.sh`")
+    lines.append("Authority: `docs/ops/qa/ALIGNMENT_AUDIT.md` · Re-run: `bash tools/run_alignment_audit.sh`")
     return "\n".join(lines) + "\n"
 
 
@@ -1242,13 +1242,13 @@ def update_history_index(
     report: dict[str, Any], catalog: dict[str, Any], committed_paths: dict[str, str]
 ) -> None:
     hist_path = ROOT / catalog.get("outputs", {}).get(
-        "history_index", "docs/compliance/alignment_audit_history.json"
+        "history_index", "docs/archive/compliance/alignment_audit_history.json"
     )
     history = load_json(hist_path)
     if "audits" not in history:
         history = {
             "schema_version": 1,
-            "authority": "docs/qa/ALIGNMENT_AUDIT.md",
+            "authority": "docs/ops/qa/ALIGNMENT_AUDIT.md",
             "audits": [],
         }
     entry = {
@@ -1279,7 +1279,7 @@ def update_history_index(
     history["audits"] = history["audits"][-keep:]
     history["latest"] = entry
     history["note"] = (
-        "Committed reports under docs/compliance/alignment_audit_reports/<audit_id>/ "
+        "Committed reports under docs/archive/compliance/alignment_audit_reports/<audit_id>/ "
         "(report.json, report.md, dashboard.html, visuals/). "
         "Ephemeral copies: artifacts/alignment_audits/."
     )
@@ -1294,7 +1294,7 @@ def write_committed_archive(
 ) -> dict[str, str]:
     """Write timestamped audit snapshot for GitHub (recommendations + visual manifest)."""
     outputs = catalog.get("outputs", {})
-    base = ROOT / outputs.get("committed_reports_dir", "docs/compliance/alignment_audit_reports")
+    base = ROOT / outputs.get("committed_reports_dir", "docs/archive/compliance/alignment_audit_reports")
     audit_dir = base / report["audit_id"]
     audit_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1310,7 +1310,7 @@ def write_committed_archive(
             src: Path | None = None
             if visuals_from and (visuals_from / fname).is_file():
                 src = visuals_from / fname
-            elif (ROOT / outputs.get("shared_visuals_dir", "docs/compliance/alignment_audit_visuals") / fname).is_file():
+            elif (ROOT / outputs.get("shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals") / fname).is_file():
                 src = ROOT / outputs["shared_visuals_dir"] / fname
             elif entry.get("path"):
                 candidate = ROOT / entry["path"]
@@ -1362,7 +1362,7 @@ def write_outputs(
 ) -> dict[str, str]:
     outputs = catalog.get("outputs", {})
     shared_visuals = ROOT / outputs.get(
-        "shared_visuals_dir", "docs/compliance/alignment_audit_visuals"
+        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals"
     )
     try:
         from generate_audit_radar_images import generate_audit_radars  # noqa: E402
@@ -1461,7 +1461,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  Markdown: {paths['markdown']}")
     print(f"  HTML: {paths['html']}")
     print(f"  Committed: {paths.get('committed_dir', 'n/a')}")
-    print("  History: docs/compliance/alignment_audit_history.json")
+    print("  History: docs/archive/compliance/alignment_audit_history.json")
     return 0 if report["verdict"] != "FAIL" else 1
 
 

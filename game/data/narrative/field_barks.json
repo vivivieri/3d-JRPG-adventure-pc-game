@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "design_ref": "docs/vision/NARRATIVE_WRITING_GUIDE.md §11.D",
+  "design_ref": "docs/design/vision/NARRATIVE_WRITING_GUIDE.md §11.D",
   "note": "One bark per flag per zone max — ambient field VO/text, not full scenes.",
   "barks": [
     {

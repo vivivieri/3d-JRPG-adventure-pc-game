@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""L0_docs_index — validate docs/INDEX.yaml paths + redirects consistency."""
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
+INDEX = DOCS / "INDEX.yaml"
+REDIRECTS = DOCS / "_meta" / "redirects.json"
+BOOT = DOCS / "ops" / "BOOT.md"
+LLMS = DOCS / "llms.txt"
+
+
+def _collect_quoted_paths(text: str) -> list[str]:
+    """Collect docs/… and AGENTS.md path tokens from INDEX.yaml."""
+    found: list[str] = []
+    for match in re.finditer(r"- (docs/[\w./-]+|AGENTS\.md)", text):
+        found.append(match.group(1))
+    return found
+
+
+def main() -> int:
+    errors: list[str] = []
+    warnings: list[str] = []
+
+    if not INDEX.is_file():
+        print("L0_docs_index FAIL: docs/INDEX.yaml missing")
+        return 1
+    if not BOOT.is_file():
+        errors.append("docs/ops/BOOT.md missing")
+    if not LLMS.is_file():
+        errors.append("docs/llms.txt missing")
+    if not (DOCS / "_meta" / "DOC_LIBRARY_ADR.md").is_file():
+        errors.append("docs/_meta/DOC_LIBRARY_ADR.md missing")
+
+    index_text = INDEX.read_text(encoding="utf-8")
+    paths = _collect_quoted_paths(index_text)
+    if len(paths) < 10:
+        errors.append(f"INDEX.yaml yielded too few paths ({len(paths)})")
+
+    seen: set[str] = set()
+    for p in paths:
+        if p in seen:
+            continue
+        seen.add(p)
+        # never_autoload entries may be directories
+        target = ROOT / p
+        if p.endswith("/"):
+            if not target.is_dir():
+                errors.append(f"INDEX never_autoload dir missing: {p}")
+            continue
+        if not target.is_file():
+            # allow directory prefixes listed without trailing slash
+            if target.is_dir():
+                continue
+            errors.append(f"INDEX path missing: {p}")
+
+    # Required top-level buckets
+    for folder in ("design", "engineering", "ops", "briefs", "archive", "_meta"):
+        if not (DOCS / folder).is_dir():
+            errors.append(f"missing docs/{folder}/")
+
+    # Redirects: old paths must not still exist as dirs (except intentional)
+    if REDIRECTS.is_file():
+        redirects = json.loads(REDIRECTS.read_text(encoding="utf-8"))
+        legacy_tops = (
+            "vision",
+            "world",
+            "gameplay",
+            "art",
+            "audio",
+            "ui",
+            "technical",
+            "agents",
+            "workflow",
+            "ci-cd",
+            "qa",
+            "cheat-sheets",
+            "sprints",
+            "generation_briefs",
+            "deprecated",
+            "compliance",
+            "pitch",
+        )
+        for name in legacy_tops:
+            legacy = DOCS / name
+            if legacy.exists():
+                errors.append(f"legacy docs/{name} still present — expected move to new bucket")
+        if len(redirects) < 50:
+            warnings.append(f"redirects.json looks thin ({len(redirects)} entries)")
+    else:
+        errors.append("docs/_meta/redirects.json missing")
+
+    # Stale path greps in always-on boot files
+    for boot_file in (ROOT / ".cursorrules", ROOT / "AGENTS.md", BOOT):
+        if not boot_file.is_file():
+            continue
+        text = boot_file.read_text(encoding="utf-8")
+        for stale in (
+            "docs/art/",
+            "docs/qa/",
+            "docs/agents/",
+            "docs/technical/",
+            "docs/workflow/",
+            "docs/ci-cd/",
+            "docs/vision/",
+        ):
+            if stale in text:
+                errors.append(f"{boot_file.relative_to(ROOT)} still references {stale}")
+
+    # Tool Path constants that must exist after the library reorg
+    tool_dirs = (
+        ROOT / "docs" / "briefs",
+        ROOT / "docs" / "briefs" / "audio",
+        ROOT / "docs" / "briefs" / "vo",
+        ROOT / "docs" / "archive" / "pitch" / "illustrations",
+        ROOT / "docs" / "archive" / "compliance",
+    )
+    for path in tool_dirs:
+        if not path.is_dir():
+            errors.append(f"tool-required docs path missing: {path.relative_to(ROOT)}")
+
+    # Stale Path constructors still pointing at pre-reorg folders
+    stale_path_snippets = (
+        'ROOT / "docs" / "generation_briefs"',
+        'ROOT / "docs" / "pitch" /',
+        'ROOT / "docs" / "compliance"',
+    )
+    for py in (ROOT / "tools").glob("*.py"):
+        if py.name.startswith("reorganize_docs") or py.name == "validate_docs_index.py":
+            continue
+        text = py.read_text(encoding="utf-8")
+        for snippet in stale_path_snippets:
+            if snippet in text:
+                errors.append(f"{py.relative_to(ROOT)} still constructs {snippet}")
+
+    if warnings:
+        for w in warnings:
+            print(f"WARN: {w}")
+
+    if errors:
+        print("L0_docs_index FAIL:")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+
+    print(
+        f"L0_docs_index PASS — {len(seen)} INDEX paths ok, "
+        f"buckets present, boot card + llms.txt ok"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

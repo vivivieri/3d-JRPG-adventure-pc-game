@@ -4,7 +4,7 @@
 Usage:
   python3 tools/promote_champion_candidate.py --comparison artifacts/candidates/P1-02/comparison_*.json
 
-Authority: docs/qa/CANDIDATE_TOURNAMENT.md
+Authority: docs/ops/qa/CANDIDATE_TOURNAMENT.md
 """
 from __future__ import annotations
 

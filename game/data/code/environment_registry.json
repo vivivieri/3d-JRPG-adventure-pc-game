@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "policy_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md §6",
-  "design_ref": "docs/art/RENDERING_GUIDE.md §5–§13",
+  "policy_ref": "docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md §6",
+  "design_ref": "docs/design/art/RENDERING_GUIDE.md §5–§13",
   "note": "Editor .tres presets are optional; runtime builds Environment from zone_palettes.json via ZoneVisuals.build_environment().",
   "presets": [
     {

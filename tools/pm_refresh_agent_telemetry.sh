@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Backfill pending token usage and regenerate analysis reports (non-blocking).
-# Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+# Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -12,7 +12,7 @@ EVENTS="${ROOT}/artifacts/agent_session_telemetry/events.jsonl"
 echo "==> Agent telemetry refresh"
 
 if [[ -z "${CURSOR_API_KEY:-}" && -z "${CURSOR_API_TOKEN:-}" ]]; then
-  echo "[WARN] CURSOR_API_KEY not set — token backfill skipped (docs/agents/CURSOR_SECRETS_SETUP.md §8)"
+  echo "[WARN] CURSOR_API_KEY not set — token backfill skipped (docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)"
 else
   python3 tools/pm_sync_agent_session_tokens.py 2>/dev/null || echo "[WARN] token sync incomplete (API may lag)"
 fi

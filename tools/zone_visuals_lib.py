@@ -1,4 +1,4 @@
-"""Zone environment presets — reference for ZoneVisuals (docs/art/RENDERING_GUIDE.md §13)."""
+"""Zone environment presets — reference for ZoneVisuals (docs/design/art/RENDERING_GUIDE.md §13)."""
 from __future__ import annotations
 
 import json

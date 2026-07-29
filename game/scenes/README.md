@@ -13,6 +13,6 @@
 
 ## Docs
 
-- `docs/agents/MCP_STACK.md`
+- `docs/ops/agents/MCP_STACK.md`
 - `.cursorrules` §0
 - `tools/check_rr_compliance.sh`

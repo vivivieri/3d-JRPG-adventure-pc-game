@@ -10,7 +10,7 @@ Usage:
   python3 tools/analyze_agent_session_telemetry.py --json report.json --csv report.csv
   python3 tools/analyze_agent_session_telemetry.py --parquet out.parquet  # requires pandas+pyarrow
 
-Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 """
 from __future__ import annotations
 
@@ -222,7 +222,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "- Long `median_duration_seconds` without heartbeats → hang risk or missing progress logs.",
         "- Export CSV/Parquet for pandas/BI tools after ship.",
         "",
-        "_Authority: docs/qa/AGENT_SESSION_TELEMETRY.md_",
+        "_Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md_",
     ]
     return "\n".join(lines) + "\n"
 

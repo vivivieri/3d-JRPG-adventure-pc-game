@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Load generation brief sections for jury prompts (docs/generation_briefs/)."""
+"""Load generation brief sections for jury prompts (docs/briefs/)."""
 from __future__ import annotations
 
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BRIEF_DIR = ROOT / "docs" / "generation_briefs"
+BRIEF_DIR = ROOT / "docs" / "briefs"
 
 # Visual jury --zone values → brief filename stem
 ZONE_BRIEF_IDS: dict[str, str] = {
@@ -40,7 +40,7 @@ def load_brief_markdown(asset_id: str) -> str:
 
 
 def load_emotional_intent(asset_id: str) -> str:
-    """Emotional intent block from docs/generation_briefs/<id>.md."""
+    """Emotional intent block from docs/briefs/<id>.md."""
     body = load_brief_markdown(asset_id)
     if not body:
         return ""

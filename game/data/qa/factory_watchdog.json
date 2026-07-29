@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/agents/FACTORY_WATCHDOG.md",
-  "design_ref": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+  "authority": "docs/ops/agents/FACTORY_WATCHDOG.md",
+  "design_ref": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
   "policy": "Exception layer only — normal PM dispatch remains event-driven on cycle complete. Watchdog fires when factory is stalled, hung, or unhealthy.",
   "thresholds": {
     "stall_hours_idle": 4,

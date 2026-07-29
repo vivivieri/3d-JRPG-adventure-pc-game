@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate factory automation catalog — L0_factory_automations gate.
 
-Authority: docs/agents/FACTORY_SETUP_GUIDE.md
+Authority: docs/ops/agents/FACTORY_SETUP_GUIDE.md
 Catalog: game/data/qa/factory_automations.json
 """
 from __future__ import annotations

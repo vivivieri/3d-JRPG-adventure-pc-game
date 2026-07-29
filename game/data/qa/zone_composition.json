@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "design_ref": "docs/generation_briefs/*.md § Spatial/Composition contract",
+  "design_ref": "docs/briefs/*.md § Spatial/Composition contract",
   "zones": {
     "beach_shore": {
       "phase": 2,
@@ -13,7 +13,7 @@
       "vista_anchor": "beach_ruined_gate_silhouette",
       "gameplay_cam_height_m": 1.6,
       "golden_screenshot": "artifacts/screenshots/phase1_beach_shore_gameplay.png",
-      "generation_brief": "docs/generation_briefs/beach_shore.md",
+      "generation_brief": "docs/briefs/beach_shore.md",
       "markers": []
     },
     "ruined_village": {
@@ -32,7 +32,7 @@
       "well_visible_from_path": true,
       "golden_screenshot": "artifacts/screenshots/phase1_ruined_village_gameplay.png",
       "golden_establishing": "artifacts/golden/ruined_village_establishing.png",
-      "generation_brief": "docs/generation_briefs/ruined_village.md",
+      "generation_brief": "docs/briefs/ruined_village.md",
       "markers": [
         "ToriiShrine",
         "RokuShack",
@@ -54,7 +54,7 @@
       "vista_anchor": "cave_shrine_alcove",
       "gameplay_cam_height_m": 1.6,
       "golden_screenshot": "artifacts/screenshots/phase5_tidal_caves_gameplay.png",
-      "generation_brief": "docs/generation_briefs/tidal_caves.md",
+      "generation_brief": "docs/briefs/tidal_caves.md",
       "markers": ["WaterPuzzle", "DeepPoolEncounter", "ShoreWraithBoss"],
       "water_puzzle_y_m": { "low": -0.5, "high": 0.8 }
     },
@@ -71,7 +71,7 @@
       "gameplay_cam_height_m": 1.6,
       "max_emissive_intensity": 0.4,
       "golden_screenshot": "artifacts/screenshots/phase6_dragon_palace_gate_gameplay.png",
-      "generation_brief": "docs/generation_briefs/dragon_palace_gate.md",
+      "generation_brief": "docs/briefs/dragon_palace_gate.md",
       "markers": []
     },
     "ending_rewind": {
@@ -83,7 +83,7 @@
       "vista_anchor": "village_festival_lantern_row",
       "gameplay_cam_height_m": 1.6,
       "golden_screenshot": "artifacts/screenshots/phase6_ending_rewind.png",
-      "generation_brief": "docs/generation_briefs/ending_rewind.md",
+      "generation_brief": "docs/briefs/ending_rewind.md",
       "markers": ["FestivalEdge", "UrashimaDissolvePoint"]
     },
     "ending_anchor": {
@@ -95,7 +95,7 @@
       "vista_anchor": "shore_dawn_skybox",
       "gameplay_cam_height_m": 1.6,
       "golden_screenshot": "artifacts/screenshots/phase6_ending_anchor.png",
-      "generation_brief": "docs/generation_briefs/ending_anchor.md",
+      "generation_brief": "docs/briefs/ending_anchor.md",
       "markers": ["SaplingPlant", "DawnShore"]
     },
     "ending_drift": {
@@ -107,7 +107,7 @@
       "vista_anchor": "palace_underwater_glimpse",
       "gameplay_cam_height_m": 1.6,
       "golden_screenshot": "artifacts/screenshots/phase6_ending_drift.png",
-      "generation_brief": "docs/generation_briefs/ending_drift.md",
+      "generation_brief": "docs/briefs/ending_drift.md",
       "markers": ["BoatDepart", "PalaceGlimpse"]
     }
   }

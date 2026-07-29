@@ -7,7 +7,7 @@
 #   bash tools/setup_github_project.sh
 #   bash tools/setup_github_project.sh --dry-run
 #
-# See docs/ci-cd/GITHUB_SETUP.md
+# See docs/ops/ci-cd/GITHUB_SETUP.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -50,7 +50,7 @@ elif resolve_gh_auth; then
   REPO="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
 else
   echo "[FAIL] No valid GitHub credentials."
-  echo "       export GH_TOKEN=<fine-grained PAT with admin:repo> — see docs/ci-cd/GITHUB_SETUP.md §1"
+  echo "       export GH_TOKEN=<fine-grained PAT with admin:repo> — see docs/ops/ci-cd/GITHUB_SETUP.md §1"
   echo "       Or run \`gh auth login\` locally, then re-run this script."
   exit 1
 fi
@@ -266,7 +266,7 @@ JSON
   then
     echo "  [OK] ${branch} — status: ${check_name}; PR reviews: ${review_count}"
   else
-    echo "  [WARN] Could not protect ${branch} — needs admin PAT. See docs/ci-cd/GITHUB_SETUP.md §2"
+    echo "  [WARN] Could not protect ${branch} — needs admin PAT. See docs/ops/ci-cd/GITHUB_SETUP.md §2"
   fi
 }
 

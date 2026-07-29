@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared sprint board logic — docs/agents/SPRINT_ORCHESTRATION.md."""
+"""Shared sprint board logic — docs/ops/agents/SPRINT_ORCHESTRATION.md."""
 from __future__ import annotations
 
 import json
@@ -33,10 +33,10 @@ VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
 
 DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
-    "architect": ["docs/art/RENDERING_GUIDE.md", "docs/world/ENVIRONMENT_KITS.md", "docs/technical/CODE_STYLE.md"],
-    "builder": ["docs/agents/MCP_STACK.md", "docs/art/RENDERING_GUIDE.md", ".cursorrules §0"],
-    "qa": ["docs/qa/ACCEPTANCE_CRITERIA.md", "docs/qa/AI_TESTING_SPEC.md"],
-    "pm": ["docs/agents/PM_AGENT_RUNBOOK.md", "docs/agents/SPRINT_ORCHESTRATION.md"],
+    "architect": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/world/ENVIRONMENT_KITS.md", "docs/engineering/technical/CODE_STYLE.md"],
+    "builder": ["docs/ops/agents/MCP_STACK.md", "docs/design/art/RENDERING_GUIDE.md", ".cursorrules §0"],
+    "qa": ["docs/ops/qa/ACCEPTANCE_CRITERIA.md", "docs/ops/qa/AI_TESTING_SPEC.md"],
+    "pm": ["docs/ops/agents/PM_AGENT_RUNBOOK.md", "docs/ops/agents/SPRINT_ORCHESTRATION.md"],
 }
 
 

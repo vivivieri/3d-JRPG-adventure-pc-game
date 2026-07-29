@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Error-handling lint — docs/technical/ERROR_HANDLING.md (no silent exceptions)."""
+"""Error-handling lint — docs/engineering/technical/ERROR_HANDLING.md (no silent exceptions)."""
 from __future__ import annotations
 
 import ast

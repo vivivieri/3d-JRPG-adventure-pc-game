@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Static Godot scene style lint — docs/technical/SCENE_STYLE.md.
+# Static Godot scene style lint — docs/engineering/technical/SCENE_STYLE.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -26,7 +26,7 @@ is_greybox_path() {
   return 1
 }
 
-echo "==> Scene style lint (docs/technical/SCENE_STYLE.md)"
+echo "==> Scene style lint (docs/engineering/technical/SCENE_STYLE.md)"
 echo "    Scanning: ${SCENES_DIR}"
 echo ""
 

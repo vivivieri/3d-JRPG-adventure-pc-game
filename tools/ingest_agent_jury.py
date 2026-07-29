@@ -12,7 +12,7 @@ Integrity is identical to the API path: overall_pass is recomputed from the
 measurable criteria (not the model's self-report), confidence floor is enforced,
 and consensus still requires >= jury_min_pass_models distinct models to pass.
 
-See docs/qa/AGENT_JURY.md and docs/qa/ACCEPTANCE_CRITERIA.md.
+See docs/ops/qa/AGENT_JURY.md and docs/ops/qa/ACCEPTANCE_CRITERIA.md.
 
 Exit codes: 0=CONSENSUS PASS, 1=CONSENSUS FAIL, 2=insufficient reviews (SKIP).
 """
@@ -64,7 +64,7 @@ def _collect_reviews(reviews_dir: Path | None, review_files: list[Path]) -> list
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Ingest agent-produced jury verdicts (docs/qa/AGENT_JURY.md)")
+    parser = argparse.ArgumentParser(description="Ingest agent-produced jury verdicts (docs/ops/qa/AGENT_JURY.md)")
     parser.add_argument("--domain", required=True, choices=sorted(DEFAULT_OUT_DIR))
     parser.add_argument("--asset", required=True, type=Path, help="Reviewed asset path (for stem + metadata)")
     parser.add_argument("--reviews-dir", type=Path, help="Directory of per-model verdict JSON files")
@@ -76,7 +76,7 @@ def main() -> int:
     rules = jury_rules(args.domain)
     reviews_raw = _collect_reviews(args.reviews_dir, args.review)
     if not reviews_raw:
-        print("[SKIP] no agent verdict files provided — see docs/qa/AGENT_JURY.md", file=sys.stderr)
+        print("[SKIP] no agent verdict files provided — see docs/ops/qa/AGENT_JURY.md", file=sys.stderr)
         return 2
 
     seen_models: set[str] = set()
@@ -120,7 +120,7 @@ def main() -> int:
     if consensus["active_models"] < consensus["min_active_models"]:
         print(
             f"[SKIP] only {consensus['active_models']} distinct model(s) — "
-            f"need >= {consensus['min_active_models']} (docs/qa/ACCEPTANCE_CRITERIA.md)",
+            f"need >= {consensus['min_active_models']} (docs/ops/qa/ACCEPTANCE_CRITERIA.md)",
             file=sys.stderr,
         )
         return 2

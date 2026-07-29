@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "design_ref": "docs/art/RENDERING_GUIDE.md §4–§6, §11",
+  "design_ref": "docs/design/art/RENDERING_GUIDE.md §4–§6, §11",
   "runtime_path": "res://data/world/zone_palettes.json",
   "defaults": {
     "tonemap_mode": "filmic",

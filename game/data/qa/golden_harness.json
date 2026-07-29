@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "authority": "docs/qa/CANDIDATE_TOURNAMENT.md",
-  "design_ref": "docs/art/VISUAL_QA.md",
+  "authority": "docs/ops/qa/CANDIDATE_TOURNAMENT.md",
+  "design_ref": "docs/design/art/VISUAL_QA.md",
   "resolution": [1920, 1080],
   "palette_thresholds": {
     "max_avg_anchor_dist": 85.0,
