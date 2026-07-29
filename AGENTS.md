@@ -1,5 +1,24 @@
 # AGENTS.md — Cloud Agent instructions
 
+## Development environment setup (Setup Agent — read first)
+
+If your task is **"Development environment setup"**, **update dev environment**, or **snapshot rebuild** — you are on the **wrong branch** when `git branch --show-current` is `main`.
+
+**Stop. Do not run `install_main_ci.sh` or docs-only CI.** Run this first:
+
+```bash
+bash tools/ensure_dev_environment_branch.sh   # fails fast on main with remediation
+git fetch origin game/development
+git checkout game/development
+bash tools/install_cloud_dev.sh
+bash tools/ensure_mcp_stack.sh
+bash tools/rebuild_cloud_snapshot.sh          # when rebuilding snapshot
+```
+
+**Human (dashboard):** [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) → edit environment → **Repository branch = `game/development`** (not `main`) → Save → Start Setup Agent again. Until the dashboard branch is `game/development`, Cursor reads `main`'s `.cursor/environment.json` (`install_main_ci.sh` only) — see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0.
+
+---
+
 ## Cursor Cloud specific instructions
 
 **Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)
