@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
   "snapshot": "snapshot-20260727-ef4f5cd6-2064-4f9f-935f-8a2626c57bd7",
   "install": "bash tools/install_cloud_dev.sh",
   "start": "bash tools/ensure_mcp_stack.sh",
   "terminals": []
-=======
-  "install": "bash tools/bootstrap_cloud_environment.sh",
-  "start": "bash tools/bootstrap_cloud_start.sh"
->>>>>>> origin/main
 }
