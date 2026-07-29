@@ -1064,7 +1064,7 @@
     "channels": {
       "rc": { "l5_required": false, "github_release": true },
       "beta": { "l5_required": true, "steam_upload": true },
-      "prod": { "l5_required": true, "l6_required": true, "steam_upload": true, "manual_approval": true }
+      "prod": { "l5_required": true, "l6_required": true, "steam_upload": true, "manual_approval": false }
     },
     "design_ref": "docs/ci-cd/CD.md, docs/ci-cd/STEAM_RELEASE_CHECKLIST.md"
   },

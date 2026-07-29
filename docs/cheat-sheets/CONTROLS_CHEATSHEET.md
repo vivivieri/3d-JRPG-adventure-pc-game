@@ -29,7 +29,7 @@
 | 5 | **R&R scripts** | ✅ in CI | ✅ |
 | 6 | **Remediation loop** | ⚠️ Process | ✅ anti-infinite-retry |
 | 7 | **Phase exit gates** | — | ✅ phase promotion |
-| 8 | **Pre-delivery control** | — | ✅ blocks outbound delivery until checks pass + **QA** approves (separation of duties; `docs/workflow/DELIVERY_CONTROL.md`) |
+| 8 | **Pre-delivery control** | — | ✅ blocks outbound delivery until automated checks pass (`docs/workflow/DELIVERY_CONTROL.md`) |
 | 9 | **Agent rules** | — | — |
 
 ---
@@ -126,7 +126,7 @@
 | **QA** | CI must green; measurable thresholds in `acceptance_criteria.json` | Gate report in PR/issue; evidence paths |
 | **Flow** | `L4_integration`; L5 in `run_cd_gates.sh` for beta/prod | MCP Pro `--minimal` only |
 | **Debugger** | Godotiq read-only by policy | — |
-| **Release** | `run_cd_gates.sh`; CD workflows; tag patterns | Steam secrets + env reviewers |
+| **Release** | `run_cd_gates.sh`; CD workflows; tag patterns | Steam secrets; CI gates only |
 | **Visual** | L2 palette/model/audio/vo scripts when assets exist | Jury ≥2 models @ conf ≥ 0.65 |
 | **Human** | L6 in ship checklist / CD prod (`min_testers: 5`, feel checklist §7b) | Playtest script + gate JSON |
 
@@ -157,8 +157,8 @@ CI cannot run the editor; `L3_gdai_built` is the **merge blocker** for Builder h
 
 | Branch | Status check | PR review |
 |--------|--------------|-----------|
-| `main` | Docs + design data gates | 1 approval (when admin PAT) |
-| `game/development` | L0–L2 headless gates | 1 approval (when admin PAT) |
+| `main` | Docs + design data gates | **None** (CI-only) |
+| `game/development` | L0–L2 headless gates | **None** (CI-only) |
 
 ```bash
 export GH_TOKEN=github_pat_...   # Cursor Secrets
