@@ -203,5 +203,5 @@ Wired into `bash tools/run_playtest_smoke.sh`.
 |--|--------|-----|-------|
 | Cheap lint | `check_scene_visuals.sh` | `check_audio_technical.py` | `check_audio_vo.py` |
 | LLM jury scope | Zone screenshots | 8 hero tracks | 5 P0 clips (`en` gate) |
-| Brief-driven mood | `generation_briefs/*.md` M7/M8 | A6/A7 | V6/V7 |
+| Brief-driven mood | `briefs/*.md` M7/M8 | A6/A7 | V6/V7 |
 | Human gate | L6 playtest | Loop + crossfade | Duck + subtitle timing |

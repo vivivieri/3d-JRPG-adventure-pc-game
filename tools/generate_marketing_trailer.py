@@ -26,7 +26,7 @@ from typing import Any
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-ILLUSTRATIONS = ROOT / "docs" / "pitch" / "illustrations"
+ILLUSTRATIONS = ROOT / "docs" / "archive" / "pitch" / "illustrations"
 LOCALES_FILE = ROOT / "steam" / "trailer_locales.json"
 BGM_PATH = ROOT / "steam" / "trailer_bgm.ogg"
 

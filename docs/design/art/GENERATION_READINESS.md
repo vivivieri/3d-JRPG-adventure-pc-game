@@ -127,7 +127,7 @@ Legend: ✅ / ⚠️ / ❌ as above.
 
 | ID | Spec location | Ship scope |
 |----|---------------|------------|
-| `otohime` | `CHARACTER_BIBLE.md` §5 + `generation_briefs/otohime.md` | Bust + portrait; SC-11, SC-17c |
+| `otohime` | `CHARACTER_BIBLE.md` §5 + `briefs/otohime.md` | Bust + portrait; SC-11, SC-17c |
 | `villager_spirit` | `CHARACTER_BIBLE.md` §7 | 2 variants × 8–12 instances; SC-17a |
 | `rebuilder` | `CHARACTER_BIBLE.md` §7 | 3 tool poses; SC-17b |
 
@@ -208,7 +208,7 @@ For each new hero mesh or zone slice:
 | What to build | `IMPLEMENTATION_PLAN.md` |
 | How assets are generated | `ART_AUTOMATION_PIPELINE.md` |
 | Character look | `CHARACTER_BIBLE.md` |
-| Generation briefs | `generation_briefs/` |
+| Generation briefs | `briefs/` |
 | Zone modules | `ENVIRONMENT_KITS.md` |
 | Measurable pass/fail | `ACCEPTANCE_CRITERIA.md` |
 | Audio QA (BGM + P0 VO) | `AUDIO_QA.md`, `game/data/audio/audio_qa_catalog.json` |

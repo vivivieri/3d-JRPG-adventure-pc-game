@@ -112,6 +112,32 @@ def main() -> int:
             if stale in text:
                 errors.append(f"{boot_file.relative_to(ROOT)} still references {stale}")
 
+    # Tool Path constants that must exist after the library reorg
+    tool_dirs = (
+        ROOT / "docs" / "briefs",
+        ROOT / "docs" / "briefs" / "audio",
+        ROOT / "docs" / "briefs" / "vo",
+        ROOT / "docs" / "archive" / "pitch" / "illustrations",
+        ROOT / "docs" / "archive" / "compliance",
+    )
+    for path in tool_dirs:
+        if not path.is_dir():
+            errors.append(f"tool-required docs path missing: {path.relative_to(ROOT)}")
+
+    # Stale Path constructors still pointing at pre-reorg folders
+    stale_path_snippets = (
+        'ROOT / "docs" / "generation_briefs"',
+        'ROOT / "docs" / "pitch" /',
+        'ROOT / "docs" / "compliance"',
+    )
+    for py in (ROOT / "tools").glob("*.py"):
+        if py.name.startswith("reorganize_docs") or py.name == "validate_docs_index.py":
+            continue
+        text = py.read_text(encoding="utf-8")
+        for snippet in stale_path_snippets:
+            if snippet in text:
+                errors.append(f"{py.relative_to(ROOT)} still constructs {snippet}")
+
     if warnings:
         for w in warnings:
             print(f"WARN: {w}")

@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BRIEF_DIR = ROOT / "docs" / "generation_briefs"
+BRIEF_DIR = ROOT / "docs" / "briefs"
 
 # Visual jury --zone values → brief filename stem
 ZONE_BRIEF_IDS: dict[str, str] = {
