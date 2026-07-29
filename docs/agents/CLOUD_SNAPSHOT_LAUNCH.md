@@ -5,24 +5,28 @@
 
 ---
 
-## 0. Dashboard branch (fix "Update dev environment uses main")
+## 0. Dashboard branch (no branch picker — bootstrap workaround)
 
-Cursor reads `.cursor/environment.json` from the **repository branch configured on the Environment** (`recordedVia: REPO_FILE_OBSERVED`). If the dashboard branch is `main`, Setup Agent runs `install_main_ci.sh` (pip + shellcheck only) — **not** the Godot/MCP stack.
+Cursor reads `.cursor/environment.json` from the **checked-out branch** (`recordedVia: REPO_FILE_OBSERVED`). The Cloud Environment editor **does not expose a repository branch picker** (Environment tab = Secrets/install; Git tab = Diff/Review/Commits only).
 
-| Dashboard branch | `.cursor/environment.json` install | Result |
-|------------------|-----------------------------------|--------|
-| **`main`** (wrong for dev env) | `bash tools/install_main_ci.sh` | Docs CI only — no Godot, no GDAI |
-| **`game/development`** (required) | `snapshot` + `install_cloud_dev.sh` + `ensure_mcp_stack.sh` | Full dev stack |
+| Observed branch | `.cursor/environment.json` install | Result |
+|-----------------|-----------------------------------|--------|
+| **`main`** (default) | `bootstrap_cloud_environment.sh` | Auto-checkouts `game/development`, then `install_cloud_dev.sh` |
+| **`game/development`** | `snapshot` + `install_cloud_dev.sh` + `ensure_mcp_stack.sh` | Full dev stack + pinned snapshot |
 
-**Fix (human — one-time per environment):**
+**Setup Agent / Update dev environment (no dashboard branch picker):**
 
-1. Open [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)
-2. Open your environment → click the **Git** tab (not **Environment** — branch is not on the Secrets/install tab)
-3. Set **Repository branch** to **`game/development`** (not `main`)
-4. **Save**
-5. **Start Setup Agent** again (or **New Setup Run** / **Update with Agent**)
+1. Let the install script run — `bootstrap_cloud_environment.sh` on `main` will `git checkout game/development` automatically.
+2. Or paste in the Setup Agent chat:
 
-> **Cannot find branch?** Some dashboards only show repo at create time. Workaround: in the Setup Agent chat, send: `git fetch origin game/development && git checkout game/development && bash tools/install_cloud_dev.sh && bash tools/ensure_mcp_stack.sh`
+   ```bash
+   git fetch origin game/development
+   git checkout game/development
+   bash tools/install_cloud_dev.sh
+   bash tools/ensure_mcp_stack.sh
+   ```
+
+**Ad-hoc docs-only cloud agent on `main`** (not dev Environment): set secret or env `CLOUD_DOCS_ONLY=1` so bootstrap runs `install_main_ci.sh` only.
 
 **Fix (agent — every Setup Agent session):**
 

@@ -17,7 +17,7 @@ bash tools/ensure_mcp_stack.sh
 bash tools/rebuild_cloud_snapshot.sh          # when rebuilding snapshot
 ```
 
-**Human (dashboard):** [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) → open environment → **Git** tab → **Repository branch = `game/development`** → Save → Start Setup Agent again. (Branch is on the **Git** tab, not the Environment/Secrets tab.)
+**Human (dashboard):** There is **no repository branch picker** in the Environment or Git tabs. The install script `bootstrap_cloud_environment.sh` auto-checkouts `game/development` when the pod starts on `main`. If Setup Agent still runs docs-only install, paste the commands above into the agent chat. See `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0.
 
 ---
 
