@@ -10,10 +10,10 @@
 
 ## 0. Branch split
 
-| Branch | CI workflow | What runs |
-|--------|-------------|-----------|
+| Branch | CI workflows | What runs |
+|--------|--------------|-----------|
 | **`main`** | `ci.yml` | Docs + design data validation only — **no Godot runtime** |
-| **`game/development`** | `game-ci.yml` | Full headless L0–L4 + game gates — **required green before PR merge** |
+| **`game/development`** | `ci.yml` **+** `game-ci.yml` | **All** docs/data gates (`run_docs_ci_checks.sh`) **plus** full headless L0–L4 game gates (`run_ci_checks.sh`) — **required green before PR merge** |
 
 Game implementation does **not** merge to `main` until ship-ready (M6). **`game/development` CI is a required merge gate** — it will fail until `game/project.godot` and tests are bootstrapped; that is expected, not a reason to treat CI as optional. See `docs/workflow/BRANCHING.md`.
 
