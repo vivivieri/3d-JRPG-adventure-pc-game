@@ -1,3 +1,4 @@
 {
-  "install": "bash tools/install_main_ci.sh"
+  "install": "bash tools/bootstrap_cloud_environment.sh",
+  "start": "bash tools/bootstrap_cloud_start.sh"
 }
