@@ -6,7 +6,7 @@ Schemas:
   game/data/qa/evaluation_rubrics.json
   game/data/qa/candidate_tournament_policy.json
 
-Authority: docs/qa/CANDIDATE_TOURNAMENT.md
+Authority: docs/ops/qa/CANDIDATE_TOURNAMENT.md
 """
 from __future__ import annotations
 

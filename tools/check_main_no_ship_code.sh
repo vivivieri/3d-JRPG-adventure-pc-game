@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # main branch must not contain ship Godot implementation (spec-first policy).
-# See docs/technical/SPEC_FIRST_DEVELOPMENT.md, docs/workflow/BRANCHING.md
+# See docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md, docs/ops/workflow/BRANCHING.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

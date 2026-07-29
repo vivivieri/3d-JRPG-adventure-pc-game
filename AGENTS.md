@@ -1,279 +1,110 @@
 # AGENTS.md — Cloud Agent instructions
 
-## Development environment setup (Setup Agent — read first)
+**Boot card:** [`docs/ops/BOOT.md`](docs/ops/BOOT.md) · **Router:** [`docs/INDEX.yaml`](docs/INDEX.yaml) · **Rules:** [`.cursorrules`](.cursorrules)
 
-If your task is **"Development environment setup"**, **update dev environment**, or **snapshot rebuild** — you are on the **wrong branch** when `git branch --show-current` is `main`.
+---
 
-**Override:** You **must** `git checkout game/development` for this task — even if other cloud instructions say to stay on `main`. `main` is docs-only; dev environment setup always uses `game/development`.
+## Development environment setup (Setup Agent)
 
-**Stop. Do not run `install_main_ci.sh` or docs-only CI.** Run this first:
+If the task is **Development environment setup**, **update dev environment**, or **snapshot rebuild** and `git branch --show-current` is `main`, you are on the **wrong branch**.
 
 ```bash
-bash tools/ensure_dev_environment_branch.sh   # fails fast on main with remediation
+bash tools/ensure_dev_environment_branch.sh
 git fetch origin game/development
 git checkout game/development
 bash tools/install_cloud_dev.sh
 bash tools/ensure_mcp_stack.sh
-bash tools/rebuild_cloud_snapshot.sh          # when rebuilding snapshot
+bash tools/rebuild_cloud_snapshot.sh   # when rebuilding snapshot
 ```
 
-**Human (dashboard):** There is **no repository branch picker** in the Environment or Git tabs. The install script `bootstrap_cloud_environment.sh` auto-checkouts `game/development` when the pod starts on `main`. If Setup Agent still runs docs-only install, paste the commands above into the agent chat. See `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0.
+Do **not** run docs-only `install_main_ci.sh` for this task. Detail: [`CLOUD_SNAPSHOT_LAUNCH.md`](docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md).
 
 ---
 
-## Cursor Cloud specific instructions
+## Branches
 
-**Repo:** Tides of Urashima — stylized 3D JRPG (Godot 4.7 Forward+)
-**Platforms (v1):** **Linux + Windows** (Steam) — Linux required because Cursor Cloud Agents run Linux; see `docs/qa/PLATFORM_SUPPORT.md`. macOS v1.1+.
-**Branches:** `main` = **docs + design data only** · `game/development` = **full Godot implementation** (no merge to `main` until M6 ship) — see `docs/workflow/BRANCHING.md`
-**Doc & prep flow:** All docs, `game/data/`, and tooling changes merge to **`main` first** (`bash tools/run_docs_ci_checks.sh`), then **sync `main` → `game/development`** in a follow-up merge PR. Do not land docs-only work directly on `game/development`.
-**Environments:** dev → qa → uat → preprod (optional) → prod — see `docs/ci-cd/ENVIRONMENTS.md`
-**Delivery model:** Phase-gated Agile — see `docs/workflow/AGILE_WITHIN_PHASES.md`
-**Multi-agent team:** `docs/agents/MULTI_AGENT_TEAM.md` · **R&R cheat sheet:** `docs/cheat-sheets/RR_CHEATSHEET.md` · **Controls cheat sheet:** `docs/cheat-sheets/CONTROLS_CHEATSHEET.md` · **Issues:** `docs/agents/PROJECT_MANAGEMENT.md` (GitHub Issues P0)
-**Design source of truth:** `docs/` on `main` + `game/data/` JSON
-**Code base classes:** `docs/technical/CODE_BASE_CLASS_RULES.md` · `game/data/code/base_classes.json`
-**Documentation index:** `docs/README.md`
-**Build order:** `docs/workflow/IMPLEMENTATION_PLAN.md` (M5 art → M6 Steam) — checklist in `docs/workflow/MILESTONES.md`
-**Implementation plan:** `docs/workflow/IMPLEMENTATION_PLAN.md`
-**Workflow:** **GodotPrompter + full MCP toolchain** — see `.cursorrules` §0, `docs/agents/MCP_STACK.md`, `docs/workflow/AI_DEV_WORKFLOW.md`
+| Branch | Contents |
+|--------|----------|
+| `main` | docs + `game/data/` only — `bash tools/run_docs_ci_checks.sh` |
+| `game/development` | full Godot + MCP — docs CI **and** `bash tools/run_ci_checks.sh` |
 
-| Tool / MCP server | Role |
-|-------------------|------|
-| GodotPrompter | Plan, GDScript, shaders, tests |
-| `godot-mcp` (GDAI) | **Build** scenes |
-| `godotiq` | **Analyze** signals/debug |
-| `godot-mcp-pro` | **Test** scenarios/asserts (L4/L5) |
-| `gamelab-mcp` | **UI art** — frames, icon sheets **(required)** |
-| ComfyUI / Material Maker | **Zone NPR albedos** — offline |
-| Meshy / Tripo / Rodin + **Blender** | **3D hero pipeline + M5 turntable QA** — required offline |
-| `generate_game_audio.py` + ACE-Step 1.5 | **Audio** placeholders + zone/opening/boss/ending hero BGM |
-| `generate_ai_vo.py` + ElevenLabs | **Selective VO** — 12 emotional clips only (`docs/vision/VO_HIT_LIST.md`) |
+Docs land on **`main` first**, then sync `main` → `game/development`.
+Authority: [`BRANCHING.md`](docs/ops/workflow/BRANCHING.md).
 
-**All MCP servers required** (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`). **Blender** required for M5 turntable QA. Procedural UI fallbacks OK for asset output only — see `docs/art/ART_AUTOMATION_PIPELINE.md`. If any required piece missing → STOP and notify user.
+---
 
-### Cloud environment: which branch you are on matters
-
-The Godot editor + MCP stack (`godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`) and the commercial GDAI plugin only exist / matter on `game/development`. **On `main` they are neither present nor needed** — `main` has no `project.godot`, no `.gd` gameplay code, and no `game/addons/`.
-
-- **`main` (ad-hoc cloud checkout only — not snapshot):** docs + design data + Python tooling only. The committed `.cursor/environment.json` `install` here runs `pip3 install --user -r tools/requirements-ci.txt numpy` (installs `gdtoolkit` → `gdlint`/`gdformat`, plus `ruff`/`mypy`/`matplotlib` into `~/.local/bin`; `python3` ships in the base image) and best-effort apt-installs `shellcheck` (needed by the `L1_shellcheck` lint gate, matching `.github/workflows/ci.yml`; the apt step is `|| true` so pod startup never fails on network hiccups). Do **not** boot the MCP/Godot stack on `main`.
-  - **Tests:** `bash tools/run_docs_ci_checks.sh` (L0 docs+data gates, pure `python3`).
-  - **Lint:** `bash tools/check_gdscript_changed.sh` (SKIPs on `main` — no `.gd`); `gdlint <file>` directly for any `.gd` (project scripts add `~/.local/bin` to PATH themselves).
-  - **Run the content pipeline (the runnable "app" on `main`):** e.g. `python3 tools/generate_game_audio.py --track bgm_village` writes a real `.ogg` under `game/assets/audio/bgm/`, and `python3 tools/generate_procedural_portraits.py --all` writes real `.png` portraits under `game/assets/ui/portraits/`. Both outputs are untracked demo output — do not commit them. Note: `generate_procedural_portraits.py` auto-registers generated files in `docs/asset_manifest.license.json` (tracked); `git checkout -- docs/asset_manifest.license.json` after a demo run to keep the tree clean.
-- **`game/development`:** run the full bootstrap below. That heavy stack (Godot download, commercial plugins, MCP bridges) is intentionally **not** wired into `main`'s `environment.json`.
-
-### Cloud snapshot launch (`game/development` only)
-
-**Before implementation work:** read `docs/agents/FACTORY_SETUP_GUIDE.md` (full multi-agent factory) and `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot id, launch checklist, and JIT-vs-snapshot troubleshooting. Launch from [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) on branch **`game/development`**, not ad-hoc on `main`. **Linux ship is required** for cloud dev parity — `docs/qa/PLATFORM_SUPPORT.md`.
-
-**First step on every snapshot boot** (dashboard Environment or worker VM — not ad-hoc `main`):
+## Snapshot / MCP boot (`game/development`)
 
 ```bash
 git fetch origin game/development
 git checkout game/development
 bash tools/check_snapshot_boot.sh --report
-```
-
-The saved snapshot carries the Godot editor + MCP stack on disk, but the **git branch is still chosen at launch**. If you land on `main` (or detached HEAD), you get the wrong tree — no `game/project.godot`, no `.gd` gameplay code, and docs-only `environment.json`. Always verify `git branch --show-current` is `game/development` before scene or MCP work.
-
-### Environment bootstrap
-
-On every **`game/development`** cloud agent start (snapshot or JIT):
-
-```bash
-bash tools/install_cloud_dev.sh      # Godot, uv, Godotiq, MCP Pro, Blender
-bash tools/ensure_mcp_stack.sh       # Editor + MCP bridges — REQUIRED
-bash tools/install_extended_toolchain.sh  # Blender, audio placeholders, GameLab config
-bash tools/check_extended_toolchain.sh    # Full toolchain status
-```
-
-Installed components:
-- **Godot 4.7** editor → `godot4` in `~/.local/bin`
-- **uv / uvx** → GDAI + Godotiq MCP bridges
-- **Node.js** → Godot MCP Pro server (if installed)
-- **GDAI MCP** → `game/addons/gdai-mcp-plugin-godot/` (commercial)
-- **Godotiq** → `game/addons/godotiq/` (`bash tools/install_godotiq.sh`)
-- **Godot MCP Pro** → `game/addons/godot_mcp/` + `tools/godot-mcp-pro-server/` (commercial)
-
-> **Gotcha — MCP editor plugins after a JIT/fresh bootstrap (`game/development`):** launching from the pinned dashboard snapshot has the dev **editor plugins pre-enabled**. But when you bootstrap fresh (JIT boot, or a Setup Agent rebuild), they are **not** auto-enabled, so `ensure_mcp_stack.sh` FAILs on `Godotiq :6007 not listening` even though GDAI `:3571` is up (GDAI runs from the `GDAIMCPRuntime` autoload; Godotiq + MCP Pro need their `EditorPlugin`s). Fix: enable all three in `project.godot` `[editor_plugins] enabled=…` — `res://addons/gdai-mcp-plugin-godot/plugin.cfg`, `res://addons/godotiq/plugin.cfg`, `res://addons/godot_mcp/plugin.cfg` (or Project → Plugins in the editor) — then restart the editor and re-run `ensure_mcp_stack.sh`. Enabling them makes the editor auto-add the runtime autoloads (`GodotIQRuntime`, `MCPScreenshot`, `MCPInputService`, `MCPGameInspector`) to `project.godot`. This local editor state is captured by the snapshot, so it is **not** committed to git (it references gitignored dev-only addons; committing it would break clean checkouts + the ship-security strip); a snapshot rebuild must enable it before saving (see `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §4).
-
-### MCP workflow (mandatory — all tools)
-
-**First commands every implementation session (before any `game/scenes/` work):**
-
-```bash
+bash tools/install_cloud_dev.sh
 bash tools/ensure_mcp_stack.sh
-bash tools/check_mcp_ready.sh
-bash tools/check_rr_compliance.sh
+bash tools/install_extended_toolchain.sh
 bash tools/check_extended_toolchain.sh
 ```
 
-If `ensure_mcp_stack.sh`, `check_mcp_ready.sh`, or `check_extended_toolchain.sh` fails → **STOP scene/editor work** and notify the user.
-Docs/data/JSON tasks may continue. **Do not** hand-edit `.tscn` as a fallback.
+Required MCP: `godot-mcp`, `godotiq`, `godot-mcp-pro`, `gamelab-mcp`. Blender required for M5 turntable.
+If stack fails → **STOP and notify** — do not hand-edit `.tscn`.
 
-```
-0. bash tools/ensure_mcp_stack.sh
-1. GodotPrompter — plan GDScript, shaders, tests
-2. docs/ + game/data/ — design context before data/combat edits
-3. ComfyUI/Material Maker or gamelab-mcp — art gen → palette_remap.py → game/assets/
-4. godot-mcp (GDAI) — build scenes, materials, F5 verify
-5. godotiq — trace_flow / signal_map when debugging systems
-6. godot-mcp-pro — run_test_scenario for L4/L5 playthrough asserts
-7. Meshy/Blender offline — hero GLB meshes when 3D art task requires it
-```
+Editor plugins (JIT): enable GDAI + Godotiq + MCP Pro in `project.godot` `[editor_plugins]` then restart. See [`MCP_STACK.md`](docs/ops/agents/MCP_STACK.md).
 
-**Scene edits:** GDAI only. Do not hand-edit `.tscn`.
+---
 
-### Sprint orchestration (mandatory — no honor system)
+## Sprint orchestration
 
-| Role | First command every session |
-|------|----------------------------|
-| **PM / Sprint Master** | `bash tools/run_pm_orchestrator.sh` — FAIL blocks all dispatch |
-| **Architect, Builder, QA, Flow, Release, Visual** | `bash tools/run_agent_session_gate.sh <role> <issue_id>` before work |
+| Role | First command |
+|------|----------------|
+| PM | `bash tools/run_pm_orchestrator.sh` |
+| Worker | `bash tools/run_agent_session_gate.sh <role> <issue_id>` |
 
-Authority: `docs/agents/PM_AGENT_RUNBOOK.md`, `docs/agents/SPRINT_ORCHESTRATION.md`, `game/data/qa/sprint_board.json`
-
-**End every completed issue with** (triggers PM via webhook — not cron):
+Close:
 
 ```bash
-bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit "$(git rev-parse HEAD)"
+bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit "$(git rev-parse HEAD)"
 ```
 
-QA with gate evidence: add `--gate <gate_id> --artifact <path>`. PM same session: add `--run-orchestrator --alignment-audit`.
+Docs pack for a role: `python3 tools/resolve_docs.py <role>`.
 
-See `docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md`.
+---
 
-### If MCP unavailable — NOTIFY USER, DO NOT FALL BACK
+## Secrets (day one)
 
-| Server | Check |
-|--------|-------|
-| GDAI | `curl -sf http://127.0.0.1:3571/tools`; plugin + `godot-mcp` in Cursor |
-| Godotiq | `game/addons/godotiq/`; `godotiq` in Cursor MCP |
-| MCP Pro | `tools/godot-mcp-pro-server/build/index.js`; `godot-mcp-pro` in Cursor |
-| GameLab | `gamelab-mcp` in Cursor MCP; `GAMELAB_API_KEY` in Secrets **(required)** |
-| Blender | `blender` in PATH — `bash tools/install_extended_toolchain.sh` **(required for M5 turntable)** |
-| ComfyUI / Material Maker | Local install for zone albedos |
+See [`CURSOR_SECRETS_SETUP.md`](docs/ops/agents/CURSOR_SECRETS_SETUP.md) · `bash tools/check_day_one_secrets.sh`
+Webhooks: `tools/curl_cursor_webhook.sh {pm|alert|worker}` — never raw-curl automation URLs.
 
-Register all installed servers in Cursor (desktop Settings or cloud dashboard). See `docs/agents/MCP_STACK.md`.
+---
 
-### Copyright-safe procedural assets
+## QA (every commit)
 
-| Type | Generator |
-|------|-----------|
-| Zone NPR albedos | ComfyUI / Material Maker + `palette_remap.py` |
-| UI art | GameLab MCP (required; procedural placeholders OK until gen ships) |
-| BGM / SFX | `python3 tools/generate_game_audio.py --all` + ACE-Step ship path |
-| Selective VO | `bash tools/generate_ai_vo.sh --tier p0` (needs `ELEVENLABS_API_KEY`) |
-| Portrait placeholders | `python3 tools/generate_procedural_portraits.py --all` |
-| Manifest | `python3 tools/register_asset.py add --help` |
+| Branch | CI |
+|--------|----|
+| `main` | `bash tools/run_docs_ci_checks.sh` |
+| `game/development` | docs CI + `bash tools/run_ci_checks.sh` |
 
-No web-scraped art/audio. See `docs/art/ASSET_COMPLIANCE.md`.
+Acceptance: [`ACCEPTANCE_CRITERIA.md`](docs/ops/qa/ACCEPTANCE_CRITERIA.md).
+Cross-cutting factory features → [`WORKFLOW_INTEGRATION.md`](docs/ops/qa/WORKFLOW_INTEGRATION.md) + registry JSON.
 
-### Automated testing & QA (required every commit)
+---
 
-See `docs/workflow/AI_DEV_WORKFLOW.md` for policy, `docs/qa/ACCEPTANCE_CRITERIA.md` for **measurable** pass/fail, and **`docs/ci-cd/CI.md`** for GitHub Actions gates.
+## Factory ops
 
-| Branch | CI script |
-|--------|-----------|
-| `main` | `bash tools/run_docs_ci_checks.sh` — data + docs only |
-| `game/development` | `bash tools/run_docs_ci_checks.sh` **+** `bash tools/run_ci_checks.sh` — **both required** (GitHub: `ci.yml` + `game-ci.yml`) |
+| Op | Command / doc |
+|----|----------------|
+| Secrets | `CURSOR_API_KEY` + [`CURSOR_SECRETS_SETUP.md`](docs/ops/agents/CURSOR_SECRETS_SETUP.md) |
+| Watchdog | `bash tools/run_factory_watchdog.sh` · [`FACTORY_WATCHDOG`](docs/ops/agents/FACTORY_WATCHDOG.md) |
+| Factory setup | [`FACTORY_SETUP_GUIDE`](docs/ops/agents/FACTORY_SETUP_GUIDE.md) |
+| Stakeholder | `bash tools/pm_emit_stakeholder_report.sh` |
+| Alignment | `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png` |
+| Tournament | [`CANDIDATE_TOURNAMENT`](docs/ops/qa/CANDIDATE_TOURNAMENT.md) |
+| Telemetry | [`AGENT_SESSION_TELEMETRY`](docs/ops/qa/AGENT_SESSION_TELEMETRY.md) |
 
-> **Benign local-only `L1_error_handling` FAIL (`game/development`):** once the commercial Godot MCP Pro zip is installed, `tools/godot-mcp-pro-server/src/**/*.ts` is on disk and `L1_error_handling` reports ~180 vendor `catch`-without-log issues. That path is **gitignored** (never in a clean checkout), so GitHub Actions CI is unaffected — do **not** edit vendor code to satisfy it. Real regressions are in tracked `tools/**` and `game/scripts/**`.
+---
 
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-export XDG_DATA_HOME="/workspace/.cache/godot-data"
-export XDG_CONFIG_HOME="/workspace/.cache/godot-config"
-export XDG_CACHE_HOME="/workspace/.cache/godot-cache"
+## Do not ship
 
-python3 tools/validate_story_data.py          # L0
-python3 tools/validate_acceptance_criteria.py # catalog lint
-python3 tools/validate_base_classes.py        # L0 base class registry
-bash tools/check_rr_compliance.sh             # L0 — GDAI-verified scenes only
-bash tools/check_base_class_compliance.sh     # L0 — native extends audit
-bash tools/run_unit_tests.sh                  # L1
-bash tools/check_gdscript_changed.sh          # L1 — gdlint on changed .gd
-bash tools/run_playtest_smoke.sh              # L2 (incl. animation, feel, art smokes)
-python3 tools/check_animation_whitelist.py --phase m5 --strict  # L2 when GLBs exist
-bash tools/run_feel_smoke_checks.sh           # L2 feel
-python3 tools/check_glb_import_scripts.py --strict  # L2 GLB import
-bash tools/run_integration_tests.sh           # L4 phase gates (Phase 2+)
-REQUIRE_L5=1 bash tools/run_e2e_playthrough.sh  # L5 (Phase 6+; blocks human QA)
-bash tools/check_asset_compliance.sh
-```
-
-| QA domain | Policy doc | On FAIL |
-|-----------|------------|---------|
-| Acceptance thresholds | `docs/qa/ACCEPTANCE_CRITERIA.md` | Fix metric; cite gate id in report |
-| 3D models | `docs/art/MODEL_QA.md` | `qa_emit_remediation.sh model-tech\|model-jury` |
-| Visuals | `docs/art/VISUAL_QA.md` | `qa_emit_remediation.sh visual-palette\|visual-jury` |
-| Audio (BGM) | `docs/audio/AUDIO_QA.md` | `qa_emit_remediation.sh audio-tech\|audio-jury` |
-| Audio (P0 VO) | `docs/audio/AUDIO_QA.md` §A4–A5 | `qa_emit_remediation.sh vo-tech\|vo-jury` |
-| Game flow | `docs/qa/FLOW_QA.md` | `qa_emit_remediation.sh flow-scenario INT-*` |
-| Iteration | `docs/qa/QA_REMEDIATION_LOOP.md` | One lever per attempt; max 3 |
-
-GDAI MCP F5 = **L3**; Godotiq = debug/trace; Godot MCP Pro = L4/L5 scenarios (`docs/qa/AI_TESTING_SPEC.md`, `docs/agents/MCP_STACK.md`).
-
-**Human QA:** Only after L0–L5 pass — `docs/qa/PLAYTEST_SCRIPT.md` (`docs/qa/AI_TESTING_SPEC.md` §8).
-
-### Cross-cutting factory features (agents MUST register)
-
-If your task adds or changes anything that touches **PM dispatch, agent sessions, secrets, cycle events, orchestrator steps, watchdog, or stakeholder reports**:
-
-1. Read `docs/qa/WORKFLOW_INTEGRATION.md`
-2. Register the feature in `game/data/qa/workflow_integration_registry.json` (hooks + doc refs + secrets)
-3. Wire all script hooks before updating docs alone
-4. **Before commit/PR:** `bash tools/check_feature_integration.sh --remind` — must PASS
-5. Run `bash tools/run_docs_ci_checks.sh` (includes `L0_workflow_integration`)
-
-**Do not** ship a cross-cutting feature in one script only — CI will fail and PM dispatch docs will drift.
-
-### Factory operations (PM stack)
-
-| Operation | Command |
-|-----------|---------|
-| Stall recovery | `bash tools/run_factory_watchdog.sh --recover` — `docs/agents/FACTORY_WATCHDOG.md` |
-| Stakeholder report | `bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram` |
-| Alignment audit | `bash tools/run_alignment_audit.sh --trigger post_merge` — `docs/qa/ALIGNMENT_AUDIT.md` · **Management visuals:** `audit_radar_spec.png` + `audit_radar_build.png` only (not mega dashboard) |
-
-### L2.5 candidate tournament (optional pre-merge)
-
-Champion/challenger zone picks use `bash tools/run_candidate_tournament.sh` before merge when policy requires — **non-ship**, sits above L0–L6. Authority: `docs/qa/CANDIDATE_TOURNAMENT.md` · gate evidence: `L2_candidate_select`.
-
-### Rendering & environment (Phase 1)
-
-Before building zones, read:
-- `docs/art/RENDERING_GUIDE.md`
-- `docs/world/ENVIRONMENT_KITS.md`
-- `docs/art/ART_DIRECTION.md`
-
-Build order: **ruined_village** vertical slice → beach → caves → palace.
-All scene work via **GDAI MCP** after GodotPrompter plans.
-
-### Secrets (day one — all compulsory)
-
-**How to obtain each key:** `docs/agents/CURSOR_SECRETS_SETUP.md` · verify: `bash tools/check_day_one_secrets.sh`
-
-| Secret | Purpose |
-|--------|---------|
-| `CURSOR_PM_CYCLE_WEBHOOK_URL` | Automation A webhook URL |
-| `CURSOR_PM_WEBHOOK_AUTH` | Automation A auth header (`Bearer …` from **Generate auth header**) |
-| `CURSOR_FACTORY_ALERT_WEBHOOK_URL` | Automation D webhook URL |
-| `CURSOR_ALERT_WEBHOOK_AUTH` | Automation D auth header |
-| `CURSOR_WORKER_WEBHOOK_URL` | Automation E webhook URL |
-| `CURSOR_WORKER_WEBHOOK_AUTH` | Automation E auth header |
-| `GAMELAB_API_KEY` | GameLab MCP |
-| `GH_TOKEN` | `gh` CLI, issue sync, GitHub dispatch |
-| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Stakeholder status |
-| `ELEVENLABS_API_KEY` | Selective VO |
-| `CURSOR_API_KEY` | Auto agent token telemetry (Cloud Agents usage API) |
-
-**Webhook POST rule (agents):** never `curl` automation URLs directly — use `tools/curl_cursor_webhook.sh {pm|alert|worker}` (reads URL + auth from env). Sync to GitHub Actions: `bash tools/setup_github_actions_secrets.sh`.
-
-Also in GitHub repo Secrets: all six webhook URL + auth secrets (Actions workflows). Scope: **Personal + Runtime Secret**.
-
-**Later phases:** GDAI license, `OPENAI_API_KEY` / `GEMINI_API_KEY` (M5+ jury), Steam keys (Phase 8).
-
-### Do not ship
-
-- Do not ship: `game/addons/gdai-mcp-plugin-godot/`, `game/addons/godotiq/`, `game/addons/godot_mcp/`
+- `game/addons/gdai-mcp-plugin-godot/`, `godotiq/`, `godot_mcp/`
 - Disable GDAI before Steam export
+
+Deep runbooks live under `docs/ops/` and `docs/design/` — use the router, not a full-library preload.

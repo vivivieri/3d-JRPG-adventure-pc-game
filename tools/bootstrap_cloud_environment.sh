@@ -8,7 +8,7 @@
 # Escape hatch for ad-hoc docs-only cloud agents on main:
 #   CLOUD_DOCS_ONLY=1 bash tools/bootstrap_cloud_environment.sh
 #
-# Authority: docs/agents/CLOUD_SNAPSHOT_LAUNCH.md §0
+# Authority: docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md §0
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

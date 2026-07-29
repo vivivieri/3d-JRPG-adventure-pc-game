@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "authority": "docs/qa/AI_TESTING_SPEC.md §6 — L4 integration scenarios",
+  "authority": "docs/ops/qa/AI_TESTING_SPEC.md §6 — L4 integration scenarios",
   "scenarios": [
     {
       "id": "INT-BOOT-01",

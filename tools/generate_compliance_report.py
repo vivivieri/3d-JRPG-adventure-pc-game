@@ -2,8 +2,8 @@
 """Generate a timestamped compliance audit report (proof of license review).
 
 Outputs:
-  docs/compliance/COMPLIANCE_REPORT.md   — human-readable audit
-  docs/compliance/COMPLIANCE_REPORT.json — machine-readable audit
+  docs/archive/compliance/COMPLIANCE_REPORT.md   — human-readable audit
+  docs/archive/compliance/COMPLIANCE_REPORT.json — machine-readable audit
 
 Usage:
   python3 tools/generate_compliance_report.py
@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = ROOT / "docs" / "asset_manifest.license.json"
-OUT_DIR = ROOT / "docs" / "compliance"
+OUT_DIR = ROOT / "docs" / "archive" / "compliance"
 OUT_MD = OUT_DIR / "COMPLIANCE_REPORT.md"
 OUT_JSON = OUT_DIR / "COMPLIANCE_REPORT.json"
 

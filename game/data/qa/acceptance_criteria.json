@@ -59,7 +59,7 @@
       "description": "No hand-built ship .tscn; main_scene requires GDAI .gdai_built marker",
       "pass": { "exit_code": 0 },
       "evidence": ["game/scenes/.gdai_built"],
-      "design_ref": ".cursorrules §0, docs/agents/MCP_STACK.md"
+      "design_ref": ".cursorrules §0, docs/ops/agents/MCP_STACK.md"
     },
     "L0_story_data": {
       "layer": "L0",
@@ -68,7 +68,7 @@
       "description": "Story JSON cross-references are consistent",
       "pass": { "exit_code": 0, "error_count": 0 },
       "evidence": [],
-      "design_ref": "docs/technical/DATA_ARCHITECTURE.md"
+      "design_ref": "docs/engineering/technical/DATA_ARCHITECTURE.md"
     },
     "L0_narrative_density": {
       "layer": "L0",
@@ -77,7 +77,7 @@
       "description": "Narrative pattern density within ship budgets (barks, quiet beats, callbacks)",
       "pass": { "exit_code": 0, "error_count": 0 },
       "evidence": ["game/data/narrative/narrative_density.json"],
-      "design_ref": "docs/vision/NARRATIVE_DENSITY.md"
+      "design_ref": "docs/design/vision/NARRATIVE_DENSITY.md"
     },
     "L0_spec_registry": {
       "layer": "L0",
@@ -86,7 +86,7 @@
       "description": "Spec-first registries complete; SPEC_DEV_START gate pass",
       "pass": { "exit_code": 0, "error_count": 0 },
       "evidence": ["game/data/code/spec_registry.json"],
-      "design_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md"
+      "design_ref": "docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md"
     },
     "L0_helpers_registry": {
       "layer": "L0",
@@ -95,7 +95,7 @@
       "description": "Core helper specs + EventBus signal parity with autoload_registry",
       "pass": { "exit_code": 0, "error_count": 0 },
       "evidence": ["game/data/code/helpers_registry.json"],
-      "design_ref": "docs/technical/GDSCRIPT_REGENERATION.md"
+      "design_ref": "docs/engineering/technical/GDSCRIPT_REGENERATION.md"
     },
     "L0_reference_libs": {
       "layer": "L0",
@@ -109,7 +109,7 @@
         "tools/settings_store_lib.py",
         "tools/achievement_evaluator_lib.py"
       ],
-      "design_ref": "docs/technical/GDSCRIPT_REGENERATION.md"
+      "design_ref": "docs/engineering/technical/GDSCRIPT_REGENERATION.md"
     },
     "L0_main_no_ship_code": {
       "layer": "L0",
@@ -118,7 +118,7 @@
       "description": "main branch has no project.godot, ship .gd, or ship .tscn",
       "pass": { "exit_code": 0 },
       "evidence": [],
-      "design_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md, docs/workflow/BRANCHING.md"
+      "design_ref": "docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md, docs/ops/workflow/BRANCHING.md"
     },
     "L0_spec_refinement_scope": {
       "layer": "L0",
@@ -127,7 +127,7 @@
       "description": "main branch game/ tree is spec/data only — no scripts, scenes, assets, shaders",
       "pass": { "exit_code": 0 },
       "evidence": [],
-      "design_ref": "docs/technical/SPEC_FIRST_DEVELOPMENT.md §10"
+      "design_ref": "docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md §10"
     },
     "L0_acceptance_catalog": {
       "layer": "L0",
@@ -136,7 +136,7 @@
       "description": "Acceptance criteria catalog schema and threshold alignment",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/acceptance_criteria.json"],
-      "design_ref": "docs/qa/ACCEPTANCE_CRITERIA.md"
+      "design_ref": "docs/ops/qa/ACCEPTANCE_CRITERIA.md"
     },
     "L0_base_classes": {
       "layer": "L0",
@@ -145,7 +145,7 @@
       "description": "Code base class registry schema (CODE_BASE_CLASS_RULES)",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/code/base_classes.json"],
-      "design_ref": "docs/technical/CODE_BASE_CLASS_RULES.md"
+      "design_ref": "docs/engineering/technical/CODE_BASE_CLASS_RULES.md"
     },
     "L0_zone_visuals_contract": {
       "layer": "L0",
@@ -154,7 +154,7 @@
       "description": "ZoneVisuals public_api ↔ zone_visuals_lib.py parity",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/code/base_classes.json", "tools/zone_visuals_lib.py"],
-      "design_ref": "docs/technical/GDSCRIPT_REGENERATION.md §10"
+      "design_ref": "docs/engineering/technical/GDSCRIPT_REGENERATION.md §10"
     },
     "L0_scene_registry": {
       "layer": "L0",
@@ -163,7 +163,7 @@
       "description": "Scene registry ↔ encounters, hooks, zones, ending router",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/code/scene_registry.json"],
-      "design_ref": "docs/world/LEVEL_DESIGN.md"
+      "design_ref": "docs/design/world/LEVEL_DESIGN.md"
     },
     "L0_zone_composition": {
       "layer": "L0",
@@ -172,7 +172,7 @@
       "description": "Zone composition contract — path width, vista anchor, golden screenshot paths",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/zone_composition.json"],
-      "design_ref": "docs/art/GENERATION_READINESS.md §5"
+      "design_ref": "docs/design/art/GENERATION_READINESS.md §5"
     },
     "L0_qa_catalog": {
       "layer": "L0",
@@ -181,7 +181,7 @@
       "description": "Model QA catalog schema; animation_timing covers required_animations",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/models/qa_catalog.json"],
-      "design_ref": "docs/art/MODEL_QA.md, docs/art/GENERATION_READINESS.md §X-03"
+      "design_ref": "docs/design/art/MODEL_QA.md, docs/design/art/GENERATION_READINESS.md §X-03"
     },
     "L0_generation_readiness_backlog": {
       "layer": "L0",
@@ -190,7 +190,7 @@
       "description": "GR-* backlog items trace to IMPLEMENTATION_PLAN tasks and gate IDs",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/generation_readiness_backlog.json"],
-      "design_ref": "docs/art/GENERATION_READINESS.md §8, docs/workflow/IMPLEMENTATION_PLAN.md"
+      "design_ref": "docs/design/art/GENERATION_READINESS.md §8, docs/ops/workflow/IMPLEMENTATION_PLAN.md"
     },
     "L0_sprint_board": {
       "layer": "L0",
@@ -199,7 +199,7 @@
       "description": "Active sprint board — issues, deps, pack alignment; done SHA must resolve; bootstrap issues need project.godot",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/sprint_board.json", "artifacts/pm_orchestrator_report.json"],
-      "design_ref": "docs/agents/SPRINT_ORCHESTRATION.md, docs/agents/PM_AGENT_RUNBOOK.md"
+      "design_ref": "docs/ops/agents/SPRINT_ORCHESTRATION.md, docs/ops/agents/PM_AGENT_RUNBOOK.md"
     },
     "L0_game_branch_bootstrap": {
       "layer": "L0",
@@ -207,7 +207,7 @@
       "command": "bash tools/check_game_branch_bootstrap.sh",
       "description": "P1-00 truth — game/project.godot required on game/development; advisory WARN on main if remote tip lacks it",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/workflow/BRANCHING.md, tools/bootstrap_game_development.sh"
+      "design_ref": "docs/ops/workflow/BRANCHING.md, tools/bootstrap_game_development.sh"
     },
     "L0_vo_casting": {
       "layer": "L0",
@@ -215,7 +215,7 @@
       "command": "python3 tools/validate_vo_casting.py",
       "description": "ElevenLabs voice ids — PLACEHOLDER_* OK on main (WARN); FAIL when VO_CASTING_REQUIRED=1 (M5 ship)",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/vision/VO_HIT_LIST.md"
+      "design_ref": "docs/design/vision/VO_HIT_LIST.md"
     },
     "L0_factory_watchdog": {
       "layer": "L0",
@@ -224,7 +224,7 @@
       "description": "Factory watchdog thresholds and exception-recovery config",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/factory_watchdog.json"],
-      "design_ref": "docs/agents/FACTORY_WATCHDOG.md"
+      "design_ref": "docs/ops/agents/FACTORY_WATCHDOG.md"
     },
     "L0_factory_automations": {
       "layer": "L0",
@@ -234,9 +234,9 @@
       "pass": { "exit_code": 0 },
       "evidence": [
         "game/data/qa/factory_automations.json",
-        "docs/agents/FACTORY_SETUP_GUIDE.md"
+        "docs/ops/agents/FACTORY_SETUP_GUIDE.md"
       ],
-      "design_ref": "docs/agents/FACTORY_SETUP_GUIDE.md"
+      "design_ref": "docs/ops/agents/FACTORY_SETUP_GUIDE.md"
     },
     "L0_escalation_policy": {
       "layer": "L0",
@@ -245,7 +245,7 @@
       "description": "Anti-infinite-loop escalation ladder well-formed — dev↔QA (capped) → arbitration (Architect/SA) → Product Owner",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/escalation_policy.json"],
-      "design_ref": "docs/qa/ESCALATION_POLICY.md"
+      "design_ref": "docs/ops/qa/ESCALATION_POLICY.md"
     },
     "L0_stakeholder_report": {
       "layer": "L0",
@@ -254,7 +254,7 @@
       "description": "Stakeholder report + Telegram config for product owner cycle updates",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/stakeholder_report_config.json"],
-      "design_ref": "docs/agents/PM_STAKEHOLDER_REPORTING.md"
+      "design_ref": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md"
     },
     "L0_pm_orchestrator": {
       "layer": "L0",
@@ -263,7 +263,7 @@
       "description": "PM session workflow well-formed — session + post-agent steps present and every step points at an existing tool",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/pm_orchestrator_steps.json"],
-      "design_ref": "docs/agents/PM_AGENT_RUNBOOK.md, docs/agents/SPRINT_ORCHESTRATION.md"
+      "design_ref": "docs/ops/agents/PM_AGENT_RUNBOOK.md, docs/ops/agents/SPRINT_ORCHESTRATION.md"
     },
     "L0_audio_qa_catalog": {
       "layer": "L0",
@@ -272,7 +272,7 @@
       "description": "Audio QA catalog — tracks, VO clips, hero jury briefs, ACE-Step cross-ref",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/audio/audio_qa_catalog.json"],
-      "design_ref": "docs/audio/AUDIO_QA.md, docs/audio/AUDIO_PRODUCTION_GUIDE.md"
+      "design_ref": "docs/design/audio/AUDIO_QA.md, docs/design/audio/AUDIO_PRODUCTION_GUIDE.md"
     },
     "L0_scene_audio_map": {
       "layer": "L0",
@@ -281,7 +281,7 @@
       "description": "Scene/zone → BGM/ambient/sting map vs audio catalog",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/audio/scene_audio_map.json"],
-      "design_ref": "docs/audio/AUDIO_PRODUCTION_GUIDE.md §4"
+      "design_ref": "docs/design/audio/AUDIO_PRODUCTION_GUIDE.md §4"
     },
     "L0_playtest_telemetry": {
       "layer": "L0",
@@ -290,7 +290,7 @@
       "description": "Playtest telemetry schema + thresholds aligned to pacing/feel/endings (analyzer: tools/analyze_playtest_telemetry.py)",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/playtest_telemetry_schema.json"],
-      "design_ref": "docs/qa/PLAYTEST_TELEMETRY.md, docs/qa/FLOW_QA.md"
+      "design_ref": "docs/ops/qa/PLAYTEST_TELEMETRY.md, docs/ops/qa/FLOW_QA.md"
     },
     "L0_agent_session_telemetry": {
       "layer": "L0",
@@ -299,7 +299,7 @@
       "description": "Agent session telemetry schema for AI factory efficiency studies (analyzer: tools/analyze_agent_session_telemetry.py)",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/agent_session_telemetry_schema.json"],
-      "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md, docs/agents/SPRINT_ORCHESTRATION.md"
+      "design_ref": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md, docs/ops/agents/SPRINT_ORCHESTRATION.md"
     },
     "L0_delivery_control": {
       "layer": "L0",
@@ -308,7 +308,7 @@
       "description": "Pre-delivery control config — checks + confirmation policy for outbound reports (gate: tools/predelivery_gate.py)",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/delivery_control.json"],
-      "design_ref": "docs/workflow/DELIVERY_CONTROL.md, docs/cheat-sheets/CONTROLS_CHEATSHEET.md"
+      "design_ref": "docs/ops/workflow/DELIVERY_CONTROL.md, docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md"
     },
     "L0_no_secrets": {
       "layer": "L0",
@@ -317,7 +317,7 @@
       "description": "Tracked files must not contain API keys, PATs, or webhook URLs",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/ship_security.json"],
-      "design_ref": "docs/qa/SECURITY.md"
+      "design_ref": "docs/ops/qa/SECURITY.md"
     },
     "L0_ship_build_security": {
       "layer": "L0",
@@ -326,7 +326,7 @@
       "description": "Export scripts strip dev MCP/GDAI; ship binaries must not contain dev plugin strings",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/ship_security.json", "tools/godot_strip_dev_plugins.py"],
-      "design_ref": "docs/qa/SECURITY.md, docs/ci-cd/STEAM_RELEASE_CHECKLIST.md §2.9–2.10"
+      "design_ref": "docs/ops/qa/SECURITY.md, docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md §2.9–2.10"
     },
     "L0_player_build_protection": {
       "layer": "L0",
@@ -339,7 +339,7 @@
         "game/data/qa/save_integrity.json",
         "tools/export_apply_pck_encryption.py"
       ],
-      "design_ref": "docs/qa/SECURITY.md §9"
+      "design_ref": "docs/ops/qa/SECURITY.md §9"
     },
     "L0_difficulty_data": {
       "layer": "L0",
@@ -352,7 +352,7 @@
         "game/data/settings/settings_schema.json",
         "game/scripts/core/difficulty_service.gd"
       ],
-      "design_ref": "docs/gameplay/COMBAT_SYSTEMS.md §10, docs/ui/SETTINGS_ACCESSIBILITY.md §4"
+      "design_ref": "docs/design/gameplay/COMBAT_SYSTEMS.md §10, docs/design/ui/SETTINGS_ACCESSIBILITY.md §4"
     },
     "L0_base_class_compliance": {
       "layer": "L0",
@@ -361,7 +361,7 @@
       "description": "No rogue native extends outside registered base classes on game/development",
       "pass": { "exit_code": 0 },
       "skip_when": "game/scripts/ not present",
-      "design_ref": "docs/technical/CODE_BASE_CLASS_RULES.md"
+      "design_ref": "docs/engineering/technical/CODE_BASE_CLASS_RULES.md"
     },
     "L1_unit_tests": {
       "layer": "L1",
@@ -370,7 +370,7 @@
       "description": "GDScript unit tests all pass — no failing tests",
       "pass": { "exit_code": 0, "failed_tests": 0 },
       "evidence": [],
-      "design_ref": "docs/workflow/AI_DEV_WORKFLOW.md §3"
+      "design_ref": "docs/ops/workflow/AI_DEV_WORKFLOW.md §3"
     },
     "L1_gdscript_lint": {
       "layer": "L1",
@@ -379,7 +379,7 @@
       "description": "gdlint on changed .gd files in PR diff",
       "pass": { "exit_code": 0 },
       "skip_when": "no .gd changes or no game/project.godot",
-      "design_ref": "docs/technical/GDSCRIPT_STYLE.md, docs/technical/CODE_BASE_CLASS_RULES.md"
+      "design_ref": "docs/engineering/technical/GDSCRIPT_STYLE.md, docs/engineering/technical/CODE_BASE_CLASS_RULES.md"
     },
     "L1_gdscript_lint_all": {
       "layer": "L1",
@@ -388,7 +388,7 @@
       "description": "gdlint on all .gd under game/scripts, game/tests, tools/godot_templates",
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot or no .gd files",
-      "design_ref": "docs/technical/GDSCRIPT_STYLE.md"
+      "design_ref": "docs/engineering/technical/GDSCRIPT_STYLE.md"
     },
     "L1_python_lint": {
       "layer": "L1",
@@ -396,7 +396,7 @@
       "command": "bash tools/check_python_lint.sh",
       "description": "ruff PEP 8 lint on tools/*.py",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/PYTHON_STYLE.md"
+      "design_ref": "docs/engineering/technical/PYTHON_STYLE.md"
     },
     "L1_shellcheck": {
       "layer": "L1",
@@ -404,7 +404,7 @@
       "command": "bash tools/check_shell_scripts.sh",
       "description": "shellcheck on tools/*.sh",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/BASH_STYLE.md"
+      "design_ref": "docs/engineering/technical/BASH_STYLE.md"
     },
     "L1_json_style": {
       "layer": "L1",
@@ -412,7 +412,7 @@
       "command": "python3 tools/check_json_style.py",
       "description": "JSON format + naming lint on game/data/**/*.json and config JSON (.cursor/, steam/)",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/JSON_DATA_STYLE.md"
+      "design_ref": "docs/engineering/technical/JSON_DATA_STYLE.md"
     },
     "L1_typescript_lint": {
       "layer": "L1",
@@ -421,7 +421,7 @@
       "description": "ESLint or tsc on tools/godot-mcp-pro-server when installed",
       "pass": { "exit_code": 0 },
       "skip_when": "no tools/godot-mcp-pro-server/package.json (vendor not installed)",
-      "design_ref": "docs/technical/TYPESCRIPT_STYLE.md"
+      "design_ref": "docs/engineering/technical/TYPESCRIPT_STYLE.md"
     },
     "L1_markdown_style": {
       "layer": "L1",
@@ -429,7 +429,7 @@
       "command": "python3 tools/check_markdown_style.py",
       "description": "Markdown format, trailing whitespace, heading levels, and link lint on docs/",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/MARKDOWN_STYLE.md"
+      "design_ref": "docs/engineering/technical/MARKDOWN_STYLE.md"
     },
     "L1_gdshader_style": {
       "layer": "L1",
@@ -438,7 +438,7 @@
       "description": "NPR shader structure lint on .gdshader templates and game/shaders",
       "pass": { "exit_code": 0 },
       "skip_when": "no .gdshader files",
-      "design_ref": "docs/technical/SHADER_STYLE.md"
+      "design_ref": "docs/engineering/technical/SHADER_STYLE.md"
     },
     "L1_scene_style": {
       "layer": "L1",
@@ -447,7 +447,7 @@
       "description": "Static .tscn naming and format lint under game/scenes",
       "pass": { "exit_code": 0 },
       "skip_when": "no game/scenes tree",
-      "design_ref": "docs/technical/SCENE_STYLE.md"
+      "design_ref": "docs/engineering/technical/SCENE_STYLE.md"
     },
     "L1_error_handling": {
       "layer": "L1",
@@ -455,7 +455,7 @@
       "command": "bash tools/check_error_handling.sh",
       "description": "Error/exception patterns — ruff E722/S110/S112, bash swallow lint, GDScript/tests push_error, TS catch, [FAIL]→stderr",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/ERROR_HANDLING.md"
+      "design_ref": "docs/engineering/technical/ERROR_HANDLING.md"
     },
     "L1_workflow_yaml": {
       "layer": "L1",
@@ -463,7 +463,7 @@
       "command": "bash tools/check_workflow_yaml.sh",
       "description": "actionlint on .github/workflows/*.yml",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/ci-cd/CI.md"
+      "design_ref": "docs/ops/ci-cd/CI.md"
     },
     "L1_mypy_libs": {
       "layer": "L1",
@@ -471,7 +471,7 @@
       "command": "bash tools/check_mypy_libs.sh",
       "description": "mypy static typing on tools/*_lib.py reference libraries",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/technical/PYTHON_STYLE.md"
+      "design_ref": "docs/engineering/technical/PYTHON_STYLE.md"
     },
     "L2_boot_headless": {
       "layer": "L2",
@@ -481,7 +481,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no run/main_scene in project.godot",
       "evidence": [],
-      "design_ref": "docs/technical/TECHNICAL_DESIGN.md"
+      "design_ref": "docs/engineering/technical/TECHNICAL_DESIGN.md"
     },
     "L2_scene_primitives": {
       "layer": "L2",
@@ -490,7 +490,7 @@
       "description": "No banned primitive meshes (BoxMesh/CapsuleMesh) in player-facing scenes",
       "pass": { "exit_code": 0, "banned_mesh_count": 0 },
       "evidence": [],
-      "design_ref": "docs/art/VISUAL_QA.md §L1"
+      "design_ref": "docs/design/art/VISUAL_QA.md §L1"
     },
     "L2_zone_composition": {
       "layer": "L2",
@@ -501,7 +501,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot (main branch data-only)",
       "evidence": ["game/data/qa/zone_composition.json", "game/scenes/world/*.tscn"],
-      "design_ref": "docs/art/GENERATION_READINESS.md §X-04, generation_readiness_backlog.json GR-003"
+      "design_ref": "docs/design/art/GENERATION_READINESS.md §X-04, generation_readiness_backlog.json GR-003"
     },
     "L2_animation_whitelist": {
       "layer": "L2",
@@ -511,7 +511,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no rigged GLB on disk for phase (docs-only baseline)",
       "evidence": ["game/data/models/qa_catalog.json"],
-      "design_ref": "docs/art/MODEL_QA.md §M2c, docs/art/CHARACTER_BIBLE.md §8"
+      "design_ref": "docs/design/art/MODEL_QA.md §M2c, docs/design/art/CHARACTER_BIBLE.md §8"
     },
     "L2_feel_smoke": {
       "layer": "L2",
@@ -521,7 +521,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot",
       "evidence": ["game/data/qa/feel_thresholds.json"],
-      "design_ref": "docs/gameplay/GAME_FEEL.md"
+      "design_ref": "docs/design/gameplay/GAME_FEEL.md"
     },
     "L2_perf_catalog": {
       "layer": "L2",
@@ -530,7 +530,7 @@
       "description": "Performance thresholds + hardware baseline catalogs (perf_thresholds.json, perf_baseline.json)",
       "pass": { "exit_code": 0 },
       "evidence": ["game/data/qa/perf_thresholds.json", "game/data/qa/perf_baseline.json"],
-      "design_ref": "docs/qa/PERFORMANCE_BASELINE.md, docs/art/RENDERING_GUIDE.md"
+      "design_ref": "docs/ops/qa/PERFORMANCE_BASELINE.md, docs/design/art/RENDERING_GUIDE.md"
     },
     "L2_linux_export_smoke": {
       "layer": "L2",
@@ -540,7 +540,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot",
       "evidence": ["build/TidesOfUrashima.x86_64"],
-      "design_ref": "docs/qa/PLATFORM_SUPPORT.md, tools/export_linux.sh"
+      "design_ref": "docs/ops/qa/PLATFORM_SUPPORT.md, tools/export_linux.sh"
     },
     "L2_windows_cross_export": {
       "layer": "L2",
@@ -550,7 +550,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot",
       "evidence": ["build/TidesOfUrashima.exe"],
-      "design_ref": "docs/qa/PLATFORM_SUPPORT.md, tools/export_windows.sh"
+      "design_ref": "docs/ops/qa/PLATFORM_SUPPORT.md, tools/export_windows.sh"
     },
     "L2_windows_export_run": {
       "layer": "L2",
@@ -560,7 +560,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no game/project.godot or non-Windows host",
       "evidence": ["build/TidesOfUrashima.exe"],
-      "design_ref": "docs/qa/PLATFORM_SUPPORT.md, .github/workflows/game-ci.yml"
+      "design_ref": "docs/ops/qa/PLATFORM_SUPPORT.md, .github/workflows/game-ci.yml"
     },
     "L2_glb_import": {
       "layer": "L2",
@@ -570,7 +570,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no GLB assets on disk",
       "evidence": ["game/scripts/editor/glb_toon_post_import.gd"],
-      "design_ref": "docs/art/MODEL_QA.md §M2b"
+      "design_ref": "docs/design/art/MODEL_QA.md §M2b"
     },
     "L2_visual_palette": {
       "layer": "L2",
@@ -582,7 +582,7 @@
         "max_bright_ratio": { "op": "<=", "value": 0.35, "unit": "sample_ratio" }
       },
       "evidence": ["artifacts/screenshots/phase1_{zone}_gameplay.png"],
-      "design_ref": "docs/art/ART_DIRECTION.md §1"
+      "design_ref": "docs/design/art/ART_DIRECTION.md §1"
     },
     "L2_model_catalog": {
       "layer": "L2",
@@ -591,7 +591,7 @@
       "description": "All models required for the phase are present in the model QA catalog",
       "pass": { "missing_models": 0 },
       "evidence": ["game/data/models/qa_catalog.json"],
-      "design_ref": "docs/art/MODEL_QA.md §M1"
+      "design_ref": "docs/design/art/MODEL_QA.md §M1"
     },
     "L2_model_technical": {
       "layer": "L2",
@@ -606,7 +606,7 @@
       },
       "ship_extra": { "greybox_banned": true },
       "evidence": ["game/assets/models/**/*.glb"],
-      "design_ref": "docs/art/MODEL_QA.md §M2"
+      "design_ref": "docs/design/art/MODEL_QA.md §M2"
     },
     "L2_audio_technical": {
       "layer": "L2",
@@ -623,7 +623,7 @@
       },
       "ship_extra": { "procedural_placeholder_banned": true },
       "evidence": ["game/assets/audio/**/*.ogg"],
-      "design_ref": "docs/audio/AUDIO_QA.md §A2"
+      "design_ref": "docs/design/audio/AUDIO_QA.md §A2"
     },
     "L2_vo_technical": {
       "layer": "L2",
@@ -637,7 +637,7 @@
       },
       "ship_extra": { "all_p0_locales_required": true },
       "evidence": ["game/assets/audio/voice/**/*.ogg"],
-      "design_ref": "docs/audio/AUDIO_QA.md §A4"
+      "design_ref": "docs/design/audio/AUDIO_QA.md §A4"
     },
     "L2_audio_catalog": {
       "layer": "L2",
@@ -645,7 +645,7 @@
       "command": "python3 tools/check_audio_catalog.py --phase {phase}",
       "description": "All BGM/SFX tracks required for the phase are present in the audio catalog",
       "pass": { "missing_tracks": 0 },
-      "design_ref": "docs/audio/AUDIO_QA.md §A1"
+      "design_ref": "docs/design/audio/AUDIO_QA.md §A1"
     },
     "L3_gdai_built": {
       "layer": "L3",
@@ -655,7 +655,7 @@
       "pass": { "exit_code": 0 },
       "skip_when": "no ship scene or main_scene changes in diff",
       "evidence": ["game/scenes/.gdai_built"],
-      "design_ref": "docs/ci-cd/CI.md, docs/cheat-sheets/CONTROLS_CHEATSHEET.md, game/scenes/README.md"
+      "design_ref": "docs/ops/ci-cd/CI.md, docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md, game/scenes/README.md"
     },
     "L3_gdai_f5": {
       "layer": "L3",
@@ -664,7 +664,7 @@
       "description": "Full viewport verify — agent-local; not GitHub Actions",
       "pass": { "verified_f5": true, "editor_errors": 0 },
       "evidence": ["game/scenes/.gdai_built"],
-      "design_ref": "docs/agents/MCP_STACK.md, .cursorrules §0"
+      "design_ref": "docs/ops/agents/MCP_STACK.md, .cursorrules §0"
     },
     "L3_perf_review": {
       "layer": "L3",
@@ -678,7 +678,7 @@
       },
       "skip_when": "no game/project.godot or docs/data-only PR",
       "evidence": ["artifacts/perf_reviews/<zone>_<commit>.json"],
-      "design_ref": "docs/qa/PERFORMANCE_BASELINE.md, docs/qa/PLATFORM_SUPPORT.md, game/data/qa/perf_baseline.json, game/data/qa/perf_thresholds.json"
+      "design_ref": "docs/ops/qa/PERFORMANCE_BASELINE.md, docs/ops/qa/PLATFORM_SUPPORT.md, game/data/qa/perf_baseline.json, game/data/qa/perf_thresholds.json"
     },
     "L4_integration": {
       "layer": "L4",
@@ -687,7 +687,7 @@
       "description": "Integration/flow scenarios (INT-*) all pass — no failing scenarios",
       "pass": { "exit_code": 0, "failed_scenarios": 0 },
       "evidence": ["game/tests/integration/"],
-      "design_ref": "docs/qa/AI_TESTING_SPEC.md §6"
+      "design_ref": "docs/ops/qa/AI_TESTING_SPEC.md §6"
     },
     "L5_e2e_three_endings": {
       "layer": "L5",
@@ -696,25 +696,34 @@
       "description": "End-to-end playthrough reaches all three endings (rewind/anchor/drift); SKIP not allowed",
       "pass": { "exit_code": 0, "skip_allowed": false, "endings_passed": ["rewind", "anchor", "drift"] },
       "evidence": ["artifacts/videos/e2e_*.mp4"],
-      "design_ref": "docs/qa/AI_TESTING_SPEC.md §7"
+      "design_ref": "docs/ops/qa/AI_TESTING_SPEC.md §7"
     },
     "L6_human_playtest": {
       "layer": "L6",
       "domain": "flow",
-      "command": "docs/qa/PLAYTEST_SCRIPT.md",
+      "command": "docs/ops/qa/PLAYTEST_SCRIPT.md",
       "description": "Human playtest sign-off — ≥80% completion, zero open S0/S1 bugs, ≥5 testers (only after L0–L5 pass)",
       "pass": { "completion_percent": 80, "s0_s1_open": 0, "min_testers": 5 },
       "prerequisite": ["L0", "L1", "L2", "L3", "L4", "L5"],
-      "design_ref": "docs/qa/PLAYTEST_SCRIPT.md"
+      "design_ref": "docs/ops/qa/PLAYTEST_SCRIPT.md"
     },
     "L0_doc_sync": {
       "layer": "L0",
       "domain": "flow",
       "command": "python3 tools/check_doc_sync.py",
-      "description": "Docs stay in sync — every top-level doc is indexed in README, links resolve, and runner gates match the acceptance catalog",
+      "description": "Docs stay in sync — active docs indexed via README catalogs + INDEX.yaml, hub links resolve, runner gates match acceptance catalog",
       "pass": { "exit_code": 0 },
-      "evidence": ["docs/README.md"],
-      "design_ref": "docs/README.md, docs/workflow/BRANCHING.md"
+      "evidence": ["docs/README.md", "docs/INDEX.yaml"],
+      "design_ref": "docs/README.md, docs/_meta/DOC_LIBRARY_ADR.md, docs/ops/workflow/BRANCHING.md"
+    },
+    "L0_docs_index": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_docs_index.py",
+      "description": "Agent doc router — INDEX.yaml paths exist, top-level buckets present, boot card + llms.txt + redirects, no legacy domain folders",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/INDEX.yaml", "docs/ops/BOOT.md", "docs/llms.txt", "docs/_meta/redirects.json"],
+      "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
     },
     "L0_alignment_audit_catalog": {
       "layer": "L0",
@@ -722,8 +731,8 @@
       "command": "python3 tools/validate_alignment_audit_catalog.py",
       "description": "Alignment audit catalog, runner, and recommendation rules for standard stakeholder audits",
       "pass": { "exit_code": 0 },
-      "evidence": ["game/data/qa/alignment_audit_catalog.json", "docs/qa/ALIGNMENT_AUDIT.md"],
-      "design_ref": "docs/qa/ALIGNMENT_AUDIT.md"
+      "evidence": ["game/data/qa/alignment_audit_catalog.json", "docs/ops/qa/ALIGNMENT_AUDIT.md"],
+      "design_ref": "docs/ops/qa/ALIGNMENT_AUDIT.md"
     },
     "L0_workflow_integration": {
       "layer": "L0",
@@ -731,8 +740,8 @@
       "command": "python3 tools/validate_workflow_integration.py",
       "description": "Factory workflow integration registry — script hooks, doc cross-refs, secrets parity for cross-cutting features",
       "pass": { "exit_code": 0 },
-      "evidence": ["game/data/qa/workflow_integration_registry.json", "docs/qa/WORKFLOW_INTEGRATION.md"],
-      "design_ref": "docs/qa/WORKFLOW_INTEGRATION.md"
+      "evidence": ["game/data/qa/workflow_integration_registry.json", "docs/ops/qa/WORKFLOW_INTEGRATION.md"],
+      "design_ref": "docs/ops/qa/WORKFLOW_INTEGRATION.md"
     },
     "L0_candidate_tournament": {
       "layer": "L0",
@@ -744,9 +753,9 @@
         "game/data/qa/golden_harness.json",
         "game/data/qa/evaluation_rubrics.json",
         "game/data/qa/candidate_tournament_policy.json",
-        "docs/qa/CANDIDATE_TOURNAMENT.md"
+        "docs/ops/qa/CANDIDATE_TOURNAMENT.md"
       ],
-      "design_ref": "docs/qa/CANDIDATE_TOURNAMENT.md"
+      "design_ref": "docs/ops/qa/CANDIDATE_TOURNAMENT.md"
     },
     "L2_candidate_select": {
       "layer": "L2.5",
@@ -757,7 +766,7 @@
       "ship_blocking": false,
       "prerequisite": ["L0", "L1", "L2"],
       "evidence": ["artifacts/candidates/*/comparison_*.json"],
-      "design_ref": "docs/qa/CANDIDATE_TOURNAMENT.md"
+      "design_ref": "docs/ops/qa/CANDIDATE_TOURNAMENT.md"
     },
     "M5_asset_compliance": {
       "layer": "ship",
@@ -765,7 +774,7 @@
       "command": "bash tools/check_asset_compliance.sh",
       "description": "Every shipped media asset is covered by the license manifest (copyright-safe)",
       "pass": { "exit_code": 0 },
-      "design_ref": "docs/art/ASSET_COMPLIANCE.md"
+      "design_ref": "docs/design/art/ASSET_COMPLIANCE.md"
     }
   },
   "jury": {
@@ -786,7 +795,7 @@
         "v8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/screenshots/*.png", "artifacts/visual_reviews/*.jury.json"],
-      "design_ref": "docs/art/VISUAL_QA.md §2G"
+      "design_ref": "docs/design/art/VISUAL_QA.md §2G"
     },
     "model": {
       "gate_id": "L2_model_jury",
@@ -805,7 +814,7 @@
         "m8_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer)" }
       },
       "evidence": ["artifacts/model_reviews/*/front.png", "artifacts/model_reviews/*.model_jury.json"],
-      "design_ref": "docs/art/MODEL_QA.md §M3b"
+      "design_ref": "docs/design/art/MODEL_QA.md §M3b"
     },
     "audio": {
       "gate_id": "L2_audio_jury",
@@ -824,7 +833,7 @@
         "a7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone (comedy/horror gore/bright cheer/EDM)" }
       },
       "evidence": ["artifacts/audio_reviews/*.jury.json"],
-      "design_ref": "docs/audio/AUDIO_QA.md §A3"
+      "design_ref": "docs/design/audio/AUDIO_QA.md §A3"
     },
     "vo": {
       "gate_id": "L2_vo_jury",
@@ -844,7 +853,7 @@
         "v7_no_forbidden_tone": { "expect": true, "label": "No forbidden tone from brief" }
       },
       "evidence": ["artifacts/vo_reviews/*.jury.json"],
-      "design_ref": "docs/audio/AUDIO_QA.md §A5"
+      "design_ref": "docs/design/audio/AUDIO_QA.md §A5"
     }
   },
   "docs_ci_gates": {
@@ -896,12 +905,13 @@
       "L0_player_build_protection",
       "L0_difficulty_data",
       "L0_doc_sync",
+      "L0_docs_index",
       "L0_alignment_audit_catalog",
       "L0_workflow_integration",
       "L0_candidate_tournament",
       "M5_asset_compliance"
     ],
-    "design_ref": "docs/workflow/BRANCHING.md"
+    "design_ref": "docs/ops/workflow/BRANCHING.md"
   },
   "ci_gates": {
     "branch": "game/development",
@@ -997,7 +1007,7 @@
       "L5_e2e_three_endings",
       "L6_human_playtest"
     ],
-    "design_ref": "docs/ci-cd/CI.md, .cursorrules §0, docs/workflow/AI_DEV_WORKFLOW.md §2",
+    "design_ref": "docs/ops/ci-cd/CI.md, .cursorrules §0, docs/ops/workflow/AI_DEV_WORKFLOW.md §2",
     "merge_policy": "game/development PRs require CI green. P1-00 may use bash tools/run_bootstrap_ci_checks.sh until main_scene is set; full run_ci_checks.sh required after P1-02."
   },
   "issue_bootstrap": {
@@ -1024,7 +1034,7 @@
         "L4_integration"
       ],
       "deferred_until": "P1-02 merged (main_scene + GDAI ruined_village) or phase_1 exit",
-      "design_ref": "docs/sprints/Phase1-Sprint1-issues.md §P1-00"
+      "design_ref": "docs/ops/sprints/Phase1-Sprint1-issues.md §P1-00"
     }
   },
   "toolchain_requirements": {
@@ -1038,7 +1048,7 @@
       {
         "id": "blender",
         "check": "blender in PATH",
-        "purpose": "M5 turntable QA — docs/art/MODEL_QA.md M3",
+        "purpose": "M5 turntable QA — docs/design/art/MODEL_QA.md M3",
         "command": "bash tools/check_extended_toolchain.sh"
       },
       {
@@ -1053,7 +1063,7 @@
         "note": "Required ship gate — not optional"
       }
     ],
-    "design_ref": "docs/agents/MCP_STACK.md, docs/art/ART_AUTOMATION_PIPELINE.md §2, docs/ci-cd/CI.md"
+    "design_ref": "docs/ops/agents/MCP_STACK.md, docs/design/art/ART_AUTOMATION_PIPELINE.md §2, docs/ops/ci-cd/CI.md"
   },
   "cd_gates": {
     "branch": "game/development",
@@ -1066,7 +1076,7 @@
       "beta": { "l5_required": true, "steam_upload": true },
       "prod": { "l5_required": true, "l6_required": true, "steam_upload": true, "manual_approval": false }
     },
-    "design_ref": "docs/ci-cd/CD.md, docs/ci-cd/STEAM_RELEASE_CHECKLIST.md"
+    "design_ref": "docs/ops/ci-cd/CD.md, docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md"
   },
   "phase_gates": {
     "phase_1": {
@@ -1080,7 +1090,7 @@
         "L2_boot_headless",
         "L2_scene_primitives"
       ],
-      "exit_criteria_ref": "docs/sprints/Phase1-Sprint1-issues.md §P1-05",
+      "exit_criteria_ref": "docs/ops/sprints/Phase1-Sprint1-issues.md §P1-05",
       "conditional_gates": [
         "L2_visual_palette",
         "L2_visual_jury",
@@ -1093,11 +1103,11 @@
         "L2_vo_jury"
       ],
       "conditional_note": "Art gates apply when gate assets exist; SKIP is not PASS. GR-001 golden screenshots enable L2_visual_*; GR-003 warn mode until M5 strict",
-      "design_ref": "docs/workflow/AI_DEV_WORKFLOW.md §4 Phase 1"
+      "design_ref": "docs/ops/workflow/AI_DEV_WORKFLOW.md §4 Phase 1"
     },
     "phase_6": {
       "required_gates": ["L0_rr_compliance", "L0_story_data", "L1_unit_tests", "L2_boot_headless", "L4_integration", "L5_e2e_three_endings"],
-      "design_ref": "docs/workflow/AI_DEV_WORKFLOW.md §4 Phase 6"
+      "design_ref": "docs/ops/workflow/AI_DEV_WORKFLOW.md §4 Phase 6"
     },
     "m5_ship": {
       "required_gates": [
@@ -1133,7 +1143,7 @@
         "zone_composition_strict": true,
         "visual_smoke_strict": true
       },
-      "design_ref": "docs/workflow/MILESTONES.md M5"
+      "design_ref": "docs/ops/workflow/MILESTONES.md M5"
     }
   }
 }

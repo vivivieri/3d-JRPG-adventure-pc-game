@@ -3,7 +3,7 @@
 # PM adds dispatch/ready on a GitHub issue (pm_dispatch_workers.py).
 # This workflow POSTs to the Automation E webhook (CURSOR_WORKER_WEBHOOK_URL).
 #
-# See docs/agents/FACTORY_SETUP_GUIDE.md §6 (Automation E webhook fallback)
+# See docs/ops/agents/FACTORY_SETUP_GUIDE.md §6 (Automation E webhook fallback)
 
 name: Worker dispatch
 

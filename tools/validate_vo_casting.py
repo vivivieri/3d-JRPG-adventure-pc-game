@@ -3,7 +3,7 @@
 
 On main (docs/data): WARN count only — casting is M5 work.
 When VO_CASTING_REQUIRED=1 or --strict: FAIL if any PLACEHOLDER_* remains.
-Authority: docs/vision/VO_HIT_LIST.md · docs/audio/AUDIO_PRODUCTION_GUIDE.md
+Authority: docs/design/vision/VO_HIT_LIST.md · docs/design/audio/AUDIO_PRODUCTION_GUIDE.md
 """
 from __future__ import annotations
 
@@ -55,7 +55,7 @@ def main() -> int:
         if len(found) > 20:
             print(f"  … and {len(found) - 20} more", file=sys.stderr)
         print(
-            "Replace with real ElevenLabs voice ids — docs/vision/VO_HIT_LIST.md",
+            "Replace with real ElevenLabs voice ids — docs/design/vision/VO_HIT_LIST.md",
             file=sys.stderr,
         )
         return 1

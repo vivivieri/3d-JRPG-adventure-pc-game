@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "policy_ref": "docs/qa/AI_TESTING_SPEC.md",
+  "policy_ref": "docs/ops/qa/AI_TESTING_SPEC.md",
   "note": "GDScript unit tests on game/development must mirror these cases; Python reference in tools/test_reference_libs.py.",
   "suites": [
     {

@@ -1,6 +1,6 @@
 """Tides of Urashima — audit radar visual theme.
 
-Palette authority: docs/art/ART_DIRECTION.md §1, docs/art/RENDERING_GUIDE.md
+Palette authority: docs/design/art/ART_DIRECTION.md §1, docs/design/art/RENDERING_GUIDE.md
 """
 from __future__ import annotations
 

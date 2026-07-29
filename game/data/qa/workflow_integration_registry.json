@@ -1,23 +1,23 @@
 {
   "version": "1.2",
-  "authority": "docs/qa/WORKFLOW_INTEGRATION.md",
+  "authority": "docs/ops/qa/WORKFLOW_INTEGRATION.md",
   "policy": "Every new factory feature MUST register here before merge. L0_workflow_integration CI fails when hooks, docs, or secrets drift.",
   "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Register all standard_agent_surfaces 5) Run python3 tools/validate_workflow_integration.py",
   "standard_agent_surfaces": [
     "AGENTS.md",
     ".cursorrules",
-    "docs/cheat-sheets/RR_CHEATSHEET.md",
-    "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
-    "docs/agents/PM_AGENT_RUNBOOK.md",
-    "docs/agents/SPRINT_ORCHESTRATION.md",
-    "docs/workflow/AI_DEV_WORKFLOW.md",
-    "docs/workflow/DEVELOPMENT_LIFECYCLE.md"
+    "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
+    "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
+    "docs/ops/agents/PM_AGENT_RUNBOOK.md",
+    "docs/ops/agents/SPRINT_ORCHESTRATION.md",
+    "docs/ops/workflow/AI_DEV_WORKFLOW.md",
+    "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md"
   ],
   "features": [
     {
       "id": "post_agent_cycle",
       "label": "Enforced post-agent cycle close",
-      "authority_doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+      "authority_doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
       "script_hooks": [
         {
           "path": "tools/run_post_agent_cycle.sh",
@@ -63,15 +63,15 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
@@ -79,11 +79,11 @@
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "doc": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
@@ -91,15 +91,15 @@
           "must_mention": "post_agent_cycle"
         },
         {
-          "doc": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+          "doc": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/agents/FACTORY_WATCHDOG.md",
+          "doc": "docs/ops/agents/FACTORY_WATCHDOG.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/agents/MULTI_AGENT_BRANCH_STRATEGY.md",
+          "doc": "docs/ops/agents/MULTI_AGENT_BRANCH_STRATEGY.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
@@ -107,11 +107,11 @@
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "run_post_agent_cycle.sh"
         }
       ]
@@ -119,7 +119,7 @@
     {
       "id": "agent_session_telemetry",
       "label": "Agent session telemetry (auto token logging)",
-      "authority_doc": "docs/qa/AGENT_SESSION_TELEMETRY.md",
+      "authority_doc": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md",
       "schema": "game/data/qa/agent_session_telemetry_schema.json",
       "required_secrets": ["CURSOR_API_KEY"],
       "script_hooks": [
@@ -172,39 +172,39 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "AGENT_SESSION_TELEMETRY"
         },
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "telemetry"
         },
         {
-          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "doc": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
           "must_mention": "CURSOR_API_KEY"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_post_agent_cycle.sh"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "AGENT_SESSION_TELEMETRY"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "AGENT_SESSION_TELEMETRY"
         },
         {
-          "doc": "docs/agents/FACTORY_WATCHDOG.md",
+          "doc": "docs/ops/agents/FACTORY_WATCHDOG.md",
           "must_mention": "pm_refresh_agent_telemetry"
         },
         {
-          "doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+          "doc": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md",
           "must_mention": "session_telemetry"
         },
         {
-          "doc": "docs/agents/MULTI_AGENT_TEAM.md",
+          "doc": "docs/ops/agents/MULTI_AGENT_TEAM.md",
           "must_mention": "Factory Analyst"
         },
         {
@@ -216,11 +216,11 @@
           "must_mention": "CURSOR_API_KEY"
         },
         {
-          "doc": "docs/agents/CURSOR_SECRETS_SETUP.md",
+          "doc": "docs/ops/agents/CURSOR_SECRETS_SETUP.md",
           "must_mention": "CURSOR_API_KEY"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L0_agent_session_telemetry"
         }
       ],
@@ -233,7 +233,7 @@
     {
       "id": "factory_watchdog",
       "label": "Factory watchdog — stall/hang recovery",
-      "authority_doc": "docs/agents/FACTORY_WATCHDOG.md",
+      "authority_doc": "docs/ops/agents/FACTORY_WATCHDOG.md",
       "required_secrets": ["CURSOR_FACTORY_ALERT_WEBHOOK_URL"],
       "script_hooks": [
         {
@@ -264,15 +264,15 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "run_factory_watchdog.sh"
         },
         {
-          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "doc": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
           "must_mention": "run_factory_watchdog.sh"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_factory_watchdog.sh"
         },
         {
@@ -284,19 +284,19 @@
           "must_mention": "FACTORY_WATCHDOG"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L0_factory_watchdog"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "FACTORY_WATCHDOG"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "run_factory_watchdog.sh"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_factory_watchdog.sh"
         }
       ],
@@ -305,7 +305,7 @@
     {
       "id": "factory_automation_catalog",
       "label": "Factory automation catalog + worker dispatch",
-      "authority_doc": "docs/agents/FACTORY_SETUP_GUIDE.md",
+      "authority_doc": "docs/ops/agents/FACTORY_SETUP_GUIDE.md",
       "schema": "game/data/qa/factory_automations.json",
       "script_hooks": [
         {
@@ -332,39 +332,39 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/FACTORY_SETUP_GUIDE.md",
+          "doc": "docs/ops/agents/FACTORY_SETUP_GUIDE.md",
           "must_mention": "pm_dispatch_workers.py"
         },
         {
-          "doc": "docs/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
+          "doc": "docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md",
           "must_mention": "FACTORY_SETUP_GUIDE"
         },
         {
-          "doc": "docs/agents/CLOUD_SNAPSHOT_LAUNCH.md",
+          "doc": "docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md",
           "must_mention": "check_snapshot_boot.sh"
         },
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "dispatch_workers"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "pm_dispatch_workers"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "FACTORY_SETUP_GUIDE"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L0_factory_automations"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "FACTORY_SETUP_GUIDE"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "pm_dispatch_workers"
         },
         {
@@ -381,7 +381,7 @@
     {
       "id": "stakeholder_reporting",
       "label": "PM stakeholder status reporting",
-      "authority_doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+      "authority_doc": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md",
       "required_secrets": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
       "script_hooks": [
         {
@@ -403,11 +403,11 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "pm_emit_stakeholder_report.sh"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "PM_STAKEHOLDER_REPORTING"
         },
         {
@@ -419,19 +419,19 @@
           "must_mention": "pm_emit_stakeholder_report.sh"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "pm_emit_stakeholder_report.sh"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L0_stakeholder_report"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "pm_emit_stakeholder_report.sh"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "pm_emit_stakeholder_report.sh"
         }
       ],
@@ -440,7 +440,7 @@
     {
       "id": "alignment_audit",
       "label": "Stakeholder alignment audit",
-      "authority_doc": "docs/qa/ALIGNMENT_AUDIT.md",
+      "authority_doc": "docs/ops/qa/ALIGNMENT_AUDIT.md",
       "script_hooks": [
         {
           "path": "tools/run_post_agent_cycle.sh",
@@ -471,11 +471,11 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
-          "doc": "docs/qa/WORKFLOW_INTEGRATION.md",
+          "doc": "docs/ops/qa/WORKFLOW_INTEGRATION.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
@@ -487,23 +487,23 @@
           "must_mention": "run_alignment_audit.sh"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L0_alignment_audit_catalog"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_alignment_audit.sh"
         },
         {
@@ -515,31 +515,31 @@
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "audit_radar_spec.png"
         },
         {
-          "doc": "docs/agents/PM_STAKEHOLDER_REPORTING.md",
+          "doc": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md",
           "must_mention": "audit_radar_spec.png"
         }
       ],
@@ -548,7 +548,7 @@
     {
       "id": "candidate_tournament",
       "label": "Champion/challenger golden harness (L2.5 pre-merge)",
-      "authority_doc": "docs/qa/CANDIDATE_TOURNAMENT.md",
+      "authority_doc": "docs/ops/qa/CANDIDATE_TOURNAMENT.md",
       "script_hooks": [
         {
           "path": "tools/run_candidate_tournament.sh",
@@ -568,19 +568,19 @@
       ],
       "required_doc_refs": [
         {
-          "doc": "docs/qa/AI_TESTING_SPEC.md",
+          "doc": "docs/ops/qa/AI_TESTING_SPEC.md",
           "must_mention": "CANDIDATE_TOURNAMENT"
         },
         {
-          "doc": "docs/cheat-sheets/RR_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
           "must_mention": "run_candidate_tournament.sh"
         },
         {
-          "doc": "docs/qa/ACCEPTANCE_CRITERIA.md",
+          "doc": "docs/ops/qa/ACCEPTANCE_CRITERIA.md",
           "must_mention": "L2_candidate_select"
         },
         {
-          "doc": "docs/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
           "must_mention": "L2_candidate_select"
         },
         {
@@ -592,27 +592,27 @@
           "must_mention": "CANDIDATE_TOURNAMENT"
         },
         {
-          "doc": "docs/agents/PM_AGENT_RUNBOOK.md",
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
           "must_mention": "L2_candidate_select"
         },
         {
-          "doc": "docs/agents/SPRINT_ORCHESTRATION.md",
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
           "must_mention": "CANDIDATE_TOURNAMENT"
         },
         {
-          "doc": "docs/workflow/AI_DEV_WORKFLOW.md",
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
           "must_mention": "CANDIDATE_TOURNAMENT"
         },
         {
-          "doc": "docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
           "must_mention": "run_candidate_tournament.sh"
         },
         {
-          "doc": "docs/art/VISUAL_QA.md",
+          "doc": "docs/design/art/VISUAL_QA.md",
           "must_mention": "golden_harness"
         },
         {
-          "doc": "docs/agents/MCP_STACK.md",
+          "doc": "docs/ops/agents/MCP_STACK.md",
           "must_mention": "L2_candidate_select"
         },
         {

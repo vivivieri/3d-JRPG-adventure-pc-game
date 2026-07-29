@@ -191,7 +191,7 @@ fi
 echo ""
 echo "=== Summary ==="
 echo "Pass: $PASS | Warn: $WARN | Fail: $FAIL | Skip: $SKIP"
-echo "Matrix: docs/technical/PLUGIN_COMPATIBILITY.md"
+echo "Matrix: docs/engineering/technical/PLUGIN_COMPATIBILITY.md"
 echo ""
 
 if [[ $FAIL -gt 0 ]]; then

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate structured remediation brief from QA jury JSON or technical checks.
 
-docs/qa/QA_REMEDIATION_LOOP.md — prevents infinite retry with same pipeline.
+docs/ops/qa/QA_REMEDIATION_LOOP.md — prevents infinite retry with same pipeline.
 """
 from __future__ import annotations
 
@@ -354,7 +354,7 @@ def format_brief(
                 f"python3 tools/check_model_technical.py --model {asset_id}",
                 f"python3 tools/render_model_turntable.py --model {asset_id}",
                 f"python3 tools/review_model_vision.py --model {asset_id} --min-pass 2",
-                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain model",
+                "# key-free alt (Cursor LLMs via subagents): docs/ops/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain model",
                 "```",
             ]
         )
@@ -365,7 +365,7 @@ def format_brief(
                 "bash tools/check_scene_visuals.sh",
                 "python3 tools/check_screenshot_palette.py --zone <zone> --screenshot <png>",
                 "python3 tools/review_screenshot_vision.py --screenshot <png> --zone <zone> --min-pass 2",
-                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain visual",
+                "# key-free alt (Cursor LLMs via subagents): docs/ops/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain visual",
                 "```",
             ]
         )
@@ -375,7 +375,7 @@ def format_brief(
                 "```bash",
                 f"python3 tools/check_audio_technical.py --track {asset_id}",
                 f"python3 tools/review_audio_vision.py --track {asset_id} --min-pass 2",
-                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain audio",
+                "# key-free alt (Cursor LLMs via subagents): docs/ops/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain audio",
                 "```",
             ]
         )
@@ -385,7 +385,7 @@ def format_brief(
                 "```bash",
                 f"python3 tools/check_audio_vo.py --clip {asset_id} --locale en",
                 f"python3 tools/review_vo_vision.py --clip {asset_id} --locale en --min-pass 2",
-                "# key-free alt (Cursor LLMs via subagents): docs/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain vo",
+                "# key-free alt (Cursor LLMs via subagents): docs/ops/qa/AGENT_JURY.md -> tools/ingest_agent_jury.py --domain vo",
                 "```",
             ]
         )
@@ -409,7 +409,7 @@ def format_brief(
             ]
         )
     lines.append("")
-    doc = "docs/qa/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio", "vo") else "docs/qa/FLOW_QA.md"
+    doc = "docs/ops/qa/QA_REMEDIATION_LOOP.md" if domain in ("visual", "model", "audio", "vo") else "docs/ops/qa/FLOW_QA.md"
     lines.append("---")
     lines.append(f"See `{doc}` for industry refs and stop rules.")
     return "\n".join(lines)

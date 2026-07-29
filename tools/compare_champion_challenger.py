@@ -5,7 +5,7 @@ Usage:
   python3 tools/compare_champion_challenger.py --challenger game/data/qa/examples/challenger_manifest_sample.json
   python3 tools/compare_champion_challenger.py --scope ruined_village --challenger artifacts/candidates/P1-02/challenger_run2.json --write
 
-Authority: docs/qa/CANDIDATE_TOURNAMENT.md
+Authority: docs/ops/qa/CANDIDATE_TOURNAMENT.md
 """
 from __future__ import annotations
 

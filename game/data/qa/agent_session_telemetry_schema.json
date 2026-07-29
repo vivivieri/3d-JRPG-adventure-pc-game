@@ -1,14 +1,14 @@
 {
   "version": "1.0",
   "authority": "Dev-time AI agent session telemetry for factory efficiency studies. Analyzer: tools/analyze_agent_session_telemetry.py. Informational — NOT a ship gate.",
-  "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md, docs/agents/SPRINT_ORCHESTRATION.md, docs/workflow/DEVELOPMENT_LIFECYCLE.md",
+  "design_ref": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md, docs/ops/agents/SPRINT_ORCHESTRATION.md, docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
   "privacy": {
     "local_only_by_default": true,
     "pii_forbidden": true,
     "forbidden_fields": ["email", "ip", "api_key", "pat", "password", "webhook_url"],
     "session_id_rule": "opaque UUID per agent session — groups start/progress/end events",
     "upload_requires_consent": true,
-    "design_ref": "docs/qa/AGENT_SESSION_TELEMETRY.md#privacy"
+    "design_ref": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md#privacy"
   },
   "storage": {
     "primary_log": "artifacts/agent_session_telemetry/events.jsonl",
@@ -24,7 +24,7 @@
     "analysis_exports": ["json", "csv", "markdown", "parquet"]
   },
   "workflow_integration": {
-    "authority": "docs/qa/AGENT_SESSION_TELEMETRY.md §9",
+    "authority": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md §9",
     "hooks": [
       "run_agent_session_gate.sh",
       "pm_record_heartbeat.sh",

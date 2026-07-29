@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Block agent work when factory halt flag is set.
-# Authority: docs/agents/FACTORY_WATCHDOG.md
+# Authority: docs/ops/agents/FACTORY_WATCHDOG.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -19,5 +19,5 @@ REASON="$(python3 -c "import json; print(json.load(open('$STATE')).get('halt_rea
 echo "[FAIL] Factory HALTED — no agent dispatch or cycle close until human clears:"
 echo "       Reason: $REASON"
 echo "       Fix issue, then: bash tools/run_factory_watchdog.sh --clear-halt"
-echo "       Authority: docs/agents/FACTORY_WATCHDOG.md"
+echo "       Authority: docs/ops/agents/FACTORY_WATCHDOG.md"
 exit 2

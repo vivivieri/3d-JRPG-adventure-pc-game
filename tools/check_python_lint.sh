@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PEP 8 / style lint for tools/*.py — ruff (docs/technical/PYTHON_STYLE.md).
+# PEP 8 / style lint for tools/*.py — ruff (docs/engineering/technical/PYTHON_STYLE.md).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

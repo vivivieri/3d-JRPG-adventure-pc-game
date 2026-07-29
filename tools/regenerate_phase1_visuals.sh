@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Checklist + validation for porting Phase 1 visuals from main specs to game/development.
-# See docs/technical/GDSCRIPT_REGENERATION.md §10
+# See docs/engineering/technical/GDSCRIPT_REGENERATION.md §10
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -11,7 +11,7 @@ MODE="${1:---all}"
 print_checklist() {
   echo "==> Phase 1 visuals regeneration checklist (game/development)"
   echo ""
-  echo "Sprint issue: P1-01 (docs/sprints/Phase1-Sprint1-issues.md)"
+  echo "Sprint issue: P1-01 (docs/ops/sprints/Phase1-Sprint1-issues.md)"
   echo "Unblocks: P1-02 Builder — ruined_village.tscn greybox (GDAI MCP)"
   echo ""
   echo "R&R (who does what):"
@@ -20,7 +20,7 @@ print_checklist() {
   echo "  .tscn placement + materials        -> Builder (GDAI MCP) — P1-02"
   echo "  Gate verification                  -> QA Agent"
   echo "  Dispatch timing                    -> PM: run_agent_session_gate.sh architect P1-01"
-  echo "  Full policy: docs/technical/GDSCRIPT_REGENERATION.md §10"
+  echo "  Full policy: docs/engineering/technical/GDSCRIPT_REGENERATION.md §10"
   echo ""
   echo "Prerequisites:"
   echo "  git checkout game/development && git merge main"
@@ -51,7 +51,7 @@ print_checklist() {
   echo "  git show 87a5ace:game/environments/ruined_village.tres"
   echo "  git show 87a5ace:game/tests/unit/test_zone_visuals.gd"
   echo ""
-  echo "Full guide: docs/technical/GDSCRIPT_REGENERATION.md §10"
+  echo "Full guide: docs/engineering/technical/GDSCRIPT_REGENERATION.md §10"
 }
 
 run_check() {

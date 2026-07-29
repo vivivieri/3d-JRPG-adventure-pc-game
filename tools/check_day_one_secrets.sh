@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Verify day-one Cursor / runtime secrets are set (values not printed).
-# Authority: docs/agents/CURSOR_SECRETS_SETUP.md
+# Authority: docs/ops/agents/CURSOR_SECRETS_SETUP.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -31,12 +31,12 @@ check_secret() {
     echo "[OK]   $name set"
     PASS=$((PASS + 1))
   else
-    echo "[FAIL] $name not set — see docs/agents/CURSOR_SECRETS_SETUP.md"
+    echo "[FAIL] $name not set — see docs/ops/agents/CURSOR_SECRETS_SETUP.md"
     FAIL=$((FAIL + 1))
   fi
 }
 
-echo "==> Day-one secrets (docs/agents/CURSOR_SECRETS_SETUP.md)"
+echo "==> Day-one secrets (docs/ops/agents/CURSOR_SECRETS_SETUP.md)"
 for name in "${REQUIRED[@]}"; do
   check_secret "$name"
 done

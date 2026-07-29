@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Main-branch CI — documentation and design data only (no Godot runtime).
 # Full game CI: game/development branch → bash tools/run_ci_checks.sh
-# See docs/workflow/BRANCHING.md
+# See docs/ops/workflow/BRANCHING.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -26,7 +26,7 @@ run_gate() {
 
 BRANCH="$(bash "$(dirname "$0")/git_branch_name.sh")"
 echo "==> Docs + design data CI"
-echo "    Policy: docs/workflow/BRANCHING.md · docs/ci-cd/CI.md"
+echo "    Policy: docs/ops/workflow/BRANCHING.md · docs/ops/ci-cd/CI.md"
 if [[ "$BRANCH" == "game/development" ]]; then
   echo "    Branch: ${BRANCH} — docs gates run here too (ci.yml + game-ci.yml)"
 elif [[ "$BRANCH" == "main" ]]; then
@@ -79,6 +79,7 @@ run_gate "L0_no_secrets" bash tools/check_no_secrets.sh
 run_gate "L0_ship_build_security" bash tools/check_ship_build_security.sh
 run_gate "L0_player_build_protection" bash tools/check_player_build_protection.sh
 run_gate "L0_doc_sync" python3 tools/check_doc_sync.py
+run_gate "L0_docs_index" python3 tools/validate_docs_index.py
 run_gate "L0_alignment_audit_catalog" python3 tools/validate_alignment_audit_catalog.py
 run_gate "L0_workflow_integration" python3 tools/validate_workflow_integration.py
 run_gate "L0_candidate_tournament" python3 tools/validate_candidate_tournament.py

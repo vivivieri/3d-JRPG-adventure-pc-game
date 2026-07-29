@@ -9,7 +9,7 @@ Usage:
   python3 tools/pm_sync_agent_session_tokens.py
   python3 tools/pm_sync_agent_session_tokens.py --dry-run
 
-Requires: CURSOR_API_KEY in Cursor Secrets (see docs/agents/CURSOR_SECRETS_SETUP.md §8)
+Requires: CURSOR_API_KEY in Cursor Secrets (see docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)
 """
 from __future__ import annotations
 
@@ -52,7 +52,7 @@ def main() -> int:
     args = ap.parse_args()
 
     if not resolve_api_key():
-        print("[FAIL] CURSOR_API_KEY not set — see docs/agents/CURSOR_SECRETS_SETUP.md §8", file=sys.stderr)
+        print("[FAIL] CURSOR_API_KEY not set — see docs/ops/agents/CURSOR_SECRETS_SETUP.md §8", file=sys.stderr)
         return 1
 
     events = read_events()

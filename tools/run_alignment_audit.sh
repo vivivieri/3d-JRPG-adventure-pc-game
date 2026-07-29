@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Standard alignment audit — report, checklist, history, stakeholder dashboard.
-# Authority: docs/qa/ALIGNMENT_AUDIT.md
+# Authority: docs/ops/qa/ALIGNMENT_AUDIT.md
 #
 # Usage:
 #   bash tools/run_alignment_audit.sh

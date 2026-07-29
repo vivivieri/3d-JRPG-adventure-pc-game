@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Verify agent session telemetry can auto-fetch tokens from Cursor API.
-# Authority: docs/qa/AGENT_SESSION_TELEMETRY.md
+# Authority: docs/ops/qa/AGENT_SESSION_TELEMETRY.md
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -14,12 +14,12 @@ ok() { echo "[OK]   $1"; PASS=$((PASS + 1)); }
 fail() { echo "[FAIL] $1"; FAIL=$((FAIL + 1)); }
 warn() { echo "[WARN] $1"; WARN=$((WARN + 1)); }
 
-echo "==> Agent session telemetry readiness (docs/qa/AGENT_SESSION_TELEMETRY.md)"
+echo "==> Agent session telemetry readiness (docs/ops/qa/AGENT_SESSION_TELEMETRY.md)"
 
 if [[ -n "${CURSOR_API_KEY:-}" || -n "${CURSOR_API_TOKEN:-}" ]]; then
   ok "CURSOR_API_KEY set (auto token fetch enabled)"
 else
-  fail "CURSOR_API_KEY not set — add to Cursor Secrets (docs/agents/CURSOR_SECRETS_SETUP.md §8)"
+  fail "CURSOR_API_KEY not set — add to Cursor Secrets (docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)"
 fi
 
 if [[ -n "${CURSOR_CONVERSATION_ID:-}" ]]; then

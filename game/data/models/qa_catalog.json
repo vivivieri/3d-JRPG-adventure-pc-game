@@ -218,7 +218,7 @@
         "idle_still": { "loop": true, "duration_ms_min": 3500, "duration_ms_max": 4500, "root_motion": false }
       },
       "bible": "CHARACTER_BIBLE.md §5 Otohime",
-      "generation_brief": "docs/generation_briefs/otohime.md"
+      "generation_brief": "docs/briefs/otohime.md"
     },
     "villager_spirit": {
       "path": "game/assets/models/npcs/crowd/villager_spirit.glb",

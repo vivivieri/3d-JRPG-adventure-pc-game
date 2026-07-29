@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Error-handling lint — docs/technical/ERROR_HANDLING.md.
+# Error-handling lint — docs/engineering/technical/ERROR_HANDLING.md.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

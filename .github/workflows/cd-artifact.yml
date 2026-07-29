@@ -83,7 +83,7 @@ jobs:
             Automated CD artifact from commit ${{ github.sha }}.
 
             **Channel:** ${{ steps.channel.outputs.channel }}
-            **Platforms (v1):** Linux + Windows — see `docs/qa/PLATFORM_SUPPORT.md`
+            **Platforms (v1):** Linux + Windows — see `docs/ops/qa/PLATFORM_SUPPORT.md`
 
             **Contents:**
             - `TidesOfUrashima.x86_64` (Linux)
@@ -94,7 +94,7 @@ jobs:
             - **Linux:** extract linux zip → run `steam_depot_linux/TidesOfUrashima.x86_64`
             - **Windows:** extract windows zip → run `steam_depot_windows/TidesOfUrashima.exe` with Steam client
 
-            See `docs/ci-cd/CD.md` and `docs/ci-cd/STEAM_RELEASE_CHECKLIST.md`.
+            See `docs/ops/ci-cd/CD.md` and `docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md`.
           files: |
             build/TidesOfUrashima-steam-depot-windows-${{ github.ref_name }}.zip
             build/TidesOfUrashima-steam-depot-linux-${{ github.ref_name }}.zip

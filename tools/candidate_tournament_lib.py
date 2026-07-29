@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Champion/challenger tournament library — docs/qa/CANDIDATE_TOURNAMENT.md."""
+"""Champion/challenger tournament library — docs/ops/qa/CANDIDATE_TOURNAMENT.md."""
 from __future__ import annotations
 
 import json

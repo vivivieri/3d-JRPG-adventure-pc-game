@@ -9,4 +9,4 @@
 
 Template for manual copy: `.cursor/environment.game-development.json.example`
 
-Authority: `docs/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0 · `AGENTS.md` (Setup Agent section)
+Authority: `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` §0 · `AGENTS.md` (Setup Agent section)
