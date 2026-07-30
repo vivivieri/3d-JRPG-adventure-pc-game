@@ -1,3 +1,11 @@
+---
+id: model-qa
+type: how-to
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 3812
+---
 # 3D Model QA — Technical Gates + Turntable Vision Jury
 
 **Version:** 1.2

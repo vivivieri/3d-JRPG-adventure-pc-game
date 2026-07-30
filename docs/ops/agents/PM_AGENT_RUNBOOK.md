@@ -1,3 +1,11 @@
+---
+id: pm-agent-runbook
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 2138
+---
 # PM Agent Runbook — Mandatory Sprint Master Workflow
 
 **Version:** 1.0

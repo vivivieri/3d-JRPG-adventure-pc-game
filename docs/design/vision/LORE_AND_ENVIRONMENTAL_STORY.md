@@ -1,3 +1,11 @@
+---
+id: lore-and-environmental-story
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 1349
+---
 # Tides of Urashima — Lore & Environmental Storytelling
 
 **Version:** 1.0 (Pre-build)

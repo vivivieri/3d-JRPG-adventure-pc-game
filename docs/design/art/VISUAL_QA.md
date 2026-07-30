@@ -1,3 +1,11 @@
+---
+id: visual-qa
+type: how-to
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 2534
+---
 # Visual QA — How AI Reviews Look & Feel
 
 **Version:** 1.0

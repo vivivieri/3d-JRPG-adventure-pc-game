@@ -1,3 +1,11 @@
+---
+id: cd
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 1112
+---
 # Continuous Deployment — Artifact & Steam
 
 **Version:** 1.1

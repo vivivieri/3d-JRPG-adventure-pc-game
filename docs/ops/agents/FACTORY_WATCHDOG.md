@@ -1,3 +1,11 @@
+---
+id: factory-watchdog
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 1375
+---
 # Factory Watchdog — Stall & Hang Exception Handling
 
 **Version:** 1.0

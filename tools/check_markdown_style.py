@@ -73,10 +73,21 @@ def check_heading_levels(rel: str, lines: list[str], errors: list[str]) -> None:
         prev_level = 1 if level == 1 else level
 
 
+def strip_yaml_frontmatter(raw: str) -> str:
+    """Remove leading YAML frontmatter so --- delimiters are not flagged as setext."""
+    if not raw.startswith("---\n"):
+        return raw
+    end = raw.find("\n---\n", 4)
+    if end < 0:
+        return raw
+    return raw[end + 5 :]
+
+
 def check_file(path: Path, errors: list[str]) -> None:
     rel = path.relative_to(ROOT).as_posix()
     raw = path.read_text(encoding="utf-8")
-    prose = strip_fenced_code(raw)
+    body = strip_yaml_frontmatter(raw)
+    prose = strip_fenced_code(body)
 
     if not raw.endswith("\n"):
         errors.append(f"{rel}: missing trailing newline")
@@ -84,7 +95,7 @@ def check_file(path: Path, errors: list[str]) -> None:
     if "\t" in prose:
         errors.append(f"{rel}: tab character forbidden in prose — use spaces")
 
-    lines = raw.splitlines()
+    lines = body.splitlines()
     for index, line in enumerate(lines, 1):
         if line != line.rstrip():
             errors.append(f"{rel}:{index}: trailing whitespace")

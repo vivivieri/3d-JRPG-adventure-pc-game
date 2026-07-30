@@ -1,3 +1,11 @@
+---
+id: milestones
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 2980
+---
 # Milestone checklist
 
 Track implementation progress against the GDD milestones.

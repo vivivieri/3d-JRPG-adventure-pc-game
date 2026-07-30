@@ -1,3 +1,11 @@
+---
+id: player-controls
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 479
+---
 # Player Controls — Tides of Urashima
 
 **Version:** 1.0

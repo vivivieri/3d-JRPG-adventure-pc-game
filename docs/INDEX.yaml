@@ -52,14 +52,35 @@ roles:
       - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
       - docs/ops/workflow/IMPLEMENTATION_PLAN.md
 
+  qa:
+    must_read:
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+      - docs/ops/qa/QA_REMEDIATION_LOOP.md
+      - docs/ops/qa/AI_TESTING_SPEC.md
+    optional:
+      - docs/ops/qa/testing/l0.md
+      - docs/ops/qa/testing/l4.md
+      - docs/ops/qa/FLOW_QA.md
+
+  flow:
+    must_read:
+      - docs/ops/qa/FLOW_QA.md
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+    optional:
+      - docs/design/vision/STORYBOARD.md
+      - docs/design/world/WORLD_MAP_AND_FLOW.md
+      - docs/ops/qa/testing/l5.md
+
   builder:
     must_read:
       - docs/ops/BOOT.md
       - docs/ops/agents/MCP_STACK.md
       - docs/engineering/technical/CODE_STYLE.md
     optional:
+      - docs/ops/agents/mcp/install.md
       - docs/engineering/technical/GDSCRIPT_STYLE.md
       - docs/ops/workflow/AI_DEV_WORKFLOW.md
+      - docs/ops/workflow/ai_dev/testing_policy.md
 
   builder_zone:
     must_read:
@@ -86,22 +107,6 @@ roles:
     optional:
       - docs/design/art/MODEL_QA.md
       - docs/design/art/CHARACTER_BIBLE.md
-
-  qa:
-    must_read:
-      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
-      - docs/ops/qa/QA_REMEDIATION_LOOP.md
-    optional:
-      - docs/ops/qa/AI_TESTING_SPEC.md
-      - docs/ops/qa/FLOW_QA.md
-
-  flow:
-    must_read:
-      - docs/ops/qa/FLOW_QA.md
-      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
-    optional:
-      - docs/design/vision/STORYBOARD.md
-      - docs/design/world/WORLD_MAP_AND_FLOW.md
 
   release:
     must_read:

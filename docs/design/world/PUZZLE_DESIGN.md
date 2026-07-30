@@ -1,3 +1,11 @@
+---
+id: puzzle-design
+type: reference
+audience: [builder, architect]
+status: active
+authority: world
+tokens_est: 697
+---
 # Tides of Urashima — Puzzle Design (SC-07)
 
 **Version:** 1.0 (Pre-build)

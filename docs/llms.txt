@@ -9,6 +9,7 @@
 - [Agent boot card](ops/BOOT.md): MCP stack commands, STOP conditions, authority chain
 - [AGENTS.md](../AGENTS.md): Cloud bootstrap + branch rules
 - [Index router](INDEX.yaml): role → must_read paths
+- Session gate prints the pack via `python3 tools/resolve_docs.py <role>`
 
 ## Design (product truth)
 

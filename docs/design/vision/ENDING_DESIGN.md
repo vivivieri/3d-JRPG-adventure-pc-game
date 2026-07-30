@@ -1,3 +1,11 @@
+---
+id: ending-design
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 1344
+---
 # Tides of Urashima — Ending Design
 
 **Version:** 1.0 (Pre-build)

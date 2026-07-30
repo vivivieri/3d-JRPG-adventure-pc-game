@@ -1,3 +1,11 @@
+---
+id: scene-style
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 678
+---
 # Godot Scene Style Guide — Tides of Urashima
 
 **Version:** 1.0

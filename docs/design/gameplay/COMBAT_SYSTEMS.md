@@ -1,3 +1,11 @@
+---
+id: combat-systems
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1998
+---
 # Tides of Urashima — Combat Systems Bible
 
 **Version:** 1.0 (Pre-build)

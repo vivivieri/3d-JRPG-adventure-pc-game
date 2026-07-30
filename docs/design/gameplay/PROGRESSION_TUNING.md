@@ -1,3 +1,11 @@
+---
+id: progression-tuning
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1744
+---
 # Tides of Urashima — Progression & Tuning Sheet
 
 **Version:** 1.0 (Pre-build)

@@ -1,3 +1,11 @@
+---
+id: plugin-install-guide
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 2141
+---
 # Plugin install guide — Godotiq & Godot MCP Pro
 
 **Applies to:** Godot **4.7 stable**, Cursor desktop + Cloud Agents

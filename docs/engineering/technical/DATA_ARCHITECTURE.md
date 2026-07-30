@@ -1,3 +1,11 @@
+---
+id: data-architecture
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 4018
+---
 # Tides of Urashima — Story-Driven Data Architecture
 
 **Version:** 1.0

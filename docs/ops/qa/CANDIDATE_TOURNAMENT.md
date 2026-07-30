@@ -1,3 +1,11 @@
+---
+id: candidate-tournament
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 1436
+---
 # Candidate Tournament — Champion/Challenger + Golden Harness
 
 **Version:** 1.0

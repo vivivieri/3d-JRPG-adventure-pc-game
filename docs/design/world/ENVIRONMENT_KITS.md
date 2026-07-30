@@ -1,3 +1,11 @@
+---
+id: environment-kits
+type: reference
+audience: [builder, architect]
+status: active
+authority: world
+tokens_est: 3069
+---
 # Tides of Urashima — Environment Kits
 
 **Version:** 1.0 (Pre-build)

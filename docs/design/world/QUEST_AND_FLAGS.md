@@ -1,3 +1,11 @@
+---
+id: quest-and-flags
+type: reference
+audience: [builder, architect]
+status: active
+authority: world
+tokens_est: 1972
+---
 # Tides of Urashima — Quest & Story Flag Map
 
 **Version:** 1.0 (Pre-build)

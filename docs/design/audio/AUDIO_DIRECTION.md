@@ -1,3 +1,11 @@
+---
+id: audio-direction
+type: reference
+audience: [audio]
+status: active
+authority: audio
+tokens_est: 991
+---
 # Tides of Urashima — Audio Direction
 
 **Version:** 1.0 (Pre-build)

@@ -1,3 +1,11 @@
+---
+id: agent-session-telemetry
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2543
+---
 # Agent Session Telemetry — AI Factory Efficiency Studies
 
 **Discipline:** Dev-time factory analytics — measure agent performance by role, task category, and issue

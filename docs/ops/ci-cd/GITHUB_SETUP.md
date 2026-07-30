@@ -1,3 +1,11 @@
+---
+id: github-setup
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 1261
+---
 # GitHub Repository Setup
 
 **Script:** `bash tools/setup_github_project.sh`

@@ -1,3 +1,11 @@
+---
+id: pm-stakeholder-reporting
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 1423
+---
 # PM Stakeholder Reporting — Product Owner Status Dashboard
 
 **Version:** 1.0
