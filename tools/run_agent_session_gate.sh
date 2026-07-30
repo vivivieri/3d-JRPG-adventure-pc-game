@@ -88,18 +88,20 @@ print(f"[OK] Agent session gate PASS — {agent} cleared for {issue_id}")
 print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
-# Progressive disclosure — print role doc pack (must_read only)
+# Progressive disclosure — role pack ∪ issue handoff_refs (budgeted)
 DOCS_ROLE="$AGENT"
 case "$AGENT" in
   architect|builder|qa|flow|release|visual|pm|narrative|audio) DOCS_ROLE="$AGENT" ;;
   *) DOCS_ROLE="builder" ;;
 esac
+DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
 echo ""
-echo "[DOCS] Role pack ($DOCS_ROLE) — load these before browsing docs/:"
-if python3 tools/resolve_docs.py "$DOCS_ROLE" --check >/tmp/resolve_docs_check.txt 2>&1; then
-  python3 tools/resolve_docs.py "$DOCS_ROLE" | sed 's/^/       /'
+echo "[DOCS] Role pack ($DOCS_ROLE) + issue $ISSUE_ID handoff_refs (budget≈${DOCS_BUDGET}):"
+if python3 tools/resolve_docs.py "$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --check \
+  >/tmp/resolve_docs_check.txt 2>&1; then
+  python3 tools/resolve_docs.py "$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" | sed 's/^/       /'
 else
-  echo "       [WARN] resolve_docs.py failed for role=$DOCS_ROLE — falling back to BOOT.md"
+  echo "       [WARN] resolve_docs.py failed for role=$DOCS_ROLE issue=$ISSUE_ID — falling back to BOOT.md"
   sed 's/^/       /' /tmp/resolve_docs_check.txt || true
   echo "       docs/ops/BOOT.md"
 fi

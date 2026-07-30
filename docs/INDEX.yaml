@@ -49,6 +49,7 @@ roles:
       - docs/engineering/technical/DATA_ARCHITECTURE.md
       - docs/engineering/technical/CODING_STANDARDS_HUB.md
     optional:
+      - docs/engineering/technical/data/story_spine.md
       - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
       - docs/ops/workflow/IMPLEMENTATION_PLAN.md
 
@@ -107,6 +108,7 @@ roles:
     optional:
       - docs/design/art/MODEL_QA.md
       - docs/design/art/CHARACTER_BIBLE.md
+      - docs/design/art/characters/urashima.md
 
   release:
     must_read:
@@ -132,6 +134,7 @@ roles:
       - docs/design/audio/AUDIO_PRODUCTION_GUIDE.md
     optional:
       - docs/design/audio/AUDIO_QA.md
+      - docs/design/audio/production/bgm_and_scene_map.md
 
 diataxis:
   tutorial:
