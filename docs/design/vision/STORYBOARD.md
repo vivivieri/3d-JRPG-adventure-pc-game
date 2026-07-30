@@ -1,3 +1,11 @@
+---
+id: storyboard
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 3122
+---
 # Tides of Urashima — Storyboard
 
 **Format per scene:** ID, location, camera, dialogue summary, gameplay type, mood, assets needed.

@@ -1,3 +1,11 @@
+---
+id: character-bible
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 4645
+---
 # Tides of Urashima — Character Bible
 
 **Version:** 1.2 (Pre-build)

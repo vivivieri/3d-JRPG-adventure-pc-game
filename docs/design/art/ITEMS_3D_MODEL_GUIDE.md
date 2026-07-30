@@ -1,3 +1,11 @@
+---
+id: items-3d-model-guide
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 3766
+---
 # Tides of Urashima — Items & Props 3D Model Guide
 
 **Version:** 1.0 (Pre-build)

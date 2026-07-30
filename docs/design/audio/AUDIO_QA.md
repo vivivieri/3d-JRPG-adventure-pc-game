@@ -1,3 +1,11 @@
+---
+id: audio-qa
+type: how-to
+audience: [audio]
+status: active
+authority: audio
+tokens_est: 1909
+---
 # Audio QA — Technical Gates + Optional LLM Jury
 
 **Version:** 1.1

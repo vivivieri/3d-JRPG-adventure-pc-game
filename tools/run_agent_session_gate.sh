@@ -88,6 +88,22 @@ print(f"[OK] Agent session gate PASS — {agent} cleared for {issue_id}")
 print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
+# Progressive disclosure — print role doc pack (must_read only)
+DOCS_ROLE="$AGENT"
+case "$AGENT" in
+  architect|builder|qa|flow|release|visual|pm|narrative|audio) DOCS_ROLE="$AGENT" ;;
+  *) DOCS_ROLE="builder" ;;
+esac
+echo ""
+echo "[DOCS] Role pack ($DOCS_ROLE) — load these before browsing docs/:"
+if python3 tools/resolve_docs.py "$DOCS_ROLE" --check >/tmp/resolve_docs_check.txt 2>&1; then
+  python3 tools/resolve_docs.py "$DOCS_ROLE" | sed 's/^/       /'
+else
+  echo "       [WARN] resolve_docs.py failed for role=$DOCS_ROLE — falling back to BOOT.md"
+  sed 's/^/       /' /tmp/resolve_docs_check.txt || true
+  echo "       docs/ops/BOOT.md"
+fi
+
 # Agent session telemetry — session start (warn once if API key missing)
 if [[ -z "${CURSOR_API_KEY:-}" && -z "${CURSOR_API_TOKEN:-}" ]]; then
   echo "[WARN] CURSOR_API_KEY not set — tokens will not auto-log (docs/ops/agents/CURSOR_SECRETS_SETUP.md §8)"

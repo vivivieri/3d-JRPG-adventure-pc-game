@@ -1,3 +1,11 @@
+---
+id: achievements
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 491
+---
 # Tides of Urashima — Steam Achievements
 
 **Version:** 1.0 (Pre-build)

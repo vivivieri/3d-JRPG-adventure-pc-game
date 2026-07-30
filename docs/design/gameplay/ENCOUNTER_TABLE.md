@@ -1,3 +1,11 @@
+---
+id: encounter-table
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1620
+---
 # Tides of Urashima — Encounter & Pacing Table
 
 **Version:** 1.0 (Pre-build)

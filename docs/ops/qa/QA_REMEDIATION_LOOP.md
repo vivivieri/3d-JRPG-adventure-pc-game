@@ -1,3 +1,11 @@
+---
+id: qa-remediation-loop
+type: how-to
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 3098
+---
 # QA Remediation Loop — Industry Polish + Anti-Infinite-Retry
 
 **Version:** 1.0

@@ -1,3 +1,11 @@
+---
+id: items-and-economy
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1488
+---
 # Tides of Urashima — Items & Economy
 
 **Version:** 1.0 (Pre-build)

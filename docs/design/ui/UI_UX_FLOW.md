@@ -1,3 +1,11 @@
+---
+id: ui-ux-flow
+type: reference
+audience: [builder, architect]
+status: active
+authority: ui
+tokens_est: 1532
+---
 # Tides of Urashima — UI / UX Flow
 
 **Version:** 1.0 (Pre-build)

@@ -1,3 +1,11 @@
+---
+id: controls-cheatsheet
+type: reference
+audience: [pm, builder, qa]
+status: active
+authority: ops
+tokens_est: 2724
+---
 # Controls Cheat Sheet — How We Enforce Roles
 
 **Version:** 1.5

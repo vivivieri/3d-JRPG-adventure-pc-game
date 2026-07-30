@@ -1,3 +1,11 @@
+---
+id: code-style
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 2020
+---
 # Tides of Urashima — Code Style Guide
 
 **Version:** 1.1

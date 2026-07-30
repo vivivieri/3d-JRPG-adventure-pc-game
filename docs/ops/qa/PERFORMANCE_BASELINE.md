@@ -1,3 +1,11 @@
+---
+id: performance-baseline
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2704
+---
 # Performance Baseline — Hardware, Environment & Evidence
 
 **Version:** 1.1

@@ -1,3 +1,11 @@
+---
+id: steam-release-checklist
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 2254
+---
 # Steam Release Checklist — Technical & Non-Technical
 
 **Version:** 1.0

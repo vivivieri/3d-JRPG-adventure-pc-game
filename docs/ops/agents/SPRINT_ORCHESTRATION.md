@@ -1,3 +1,11 @@
+---
+id: sprint-orchestration
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 1520
+---
 # Sprint Orchestration — Enforced Multi-Agent Workflow
 
 **Version:** 1.0

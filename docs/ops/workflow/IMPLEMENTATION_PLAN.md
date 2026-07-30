@@ -1,3 +1,11 @@
+---
+id: implementation-plan
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 3849
+---
 # Tides of Urashima — Implementation Plan
 
 **Version:** 1.2 (Fresh rebuild)

@@ -1,3 +1,11 @@
+---
+id: project-management
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 1778
+---
 # Project Management — Issues, Logs & MCP Integrations
 
 **Version:** 1.0

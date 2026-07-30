@@ -1,3 +1,11 @@
+---
+id: gdd
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 2758
+---
 # Tides of Urashima — Game Design Document
 
 **Version:** 0.3 (Pre-build)

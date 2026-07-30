@@ -1,3 +1,11 @@
+---
+id: audio-production-guide
+type: reference
+audience: [audio]
+status: active
+authority: audio
+tokens_est: 4557
+---
 # Tides of Urashima — Audio Production Guide
 
 **Version:** 1.0 (Pre-build)

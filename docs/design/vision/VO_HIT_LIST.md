@@ -1,3 +1,11 @@
+---
+id: vo-hit-list
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 1259
+---
 # Tides of Urashima — Selective VO Hit List (AI generation)
 
 **Version:** 1.1

@@ -1,3 +1,11 @@
+---
+id: workflow-integration
+type: how-to
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 1697
+---
 # Workflow Integration Registry — Avoid Feature Drift
 
 **Version:** 1.0

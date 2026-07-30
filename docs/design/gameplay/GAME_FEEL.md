@@ -1,3 +1,11 @@
+---
+id: game-feel
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1412
+---
 # Tides of Urashima — Game Feel & Feedback
 
 **Version:** 1.0 (Pre-build)

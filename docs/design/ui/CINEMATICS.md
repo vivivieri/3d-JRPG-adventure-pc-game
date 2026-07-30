@@ -1,3 +1,11 @@
+---
+id: cinematics
+type: reference
+audience: [builder, architect]
+status: active
+authority: ui
+tokens_est: 2487
+---
 # Tides of Urashima — Cinematics & Camera Spec
 
 **Version:** 1.1 (Pre-build)

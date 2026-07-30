@@ -1,3 +1,11 @@
+---
+id: storyboard-illustrations
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 2312
+---
 # Tides of Urashima — Storyboard Illustrations (Pitch Package)
 
 **Version:** 1.0

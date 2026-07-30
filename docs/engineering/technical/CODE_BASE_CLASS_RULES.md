@@ -1,3 +1,11 @@
+---
+id: code-base-class-rules
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 1064
+---
 # Code Base Classes — Agent R&R (Not 3D Meshes)
 
 **Version:** 1.1
