@@ -1,3 +1,11 @@
+---
+id: cursor-secrets-setup
+type: tutorial
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 3748
+---
 # Cursor Secrets — Day-One Setup (How to Get Every Key)
 
 **Version:** 1.0

@@ -1,3 +1,11 @@
+---
+id: platform-support
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 1340
+---
 # Platform Support — Windows + Linux (Cloud Dev Parity)
 
 **Version:** 1.0

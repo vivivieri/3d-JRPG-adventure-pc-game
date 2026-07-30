@@ -1,3 +1,11 @@
+---
+id: tutorial-design
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1584
+---
 # Tides of Urashima — Tutorial & Onboarding Design
 
 **Version:** 1.0 (Pre-build)

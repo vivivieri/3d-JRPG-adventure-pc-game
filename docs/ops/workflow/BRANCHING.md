@@ -1,3 +1,11 @@
+---
+id: branching
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 1146
+---
 # Branching policy — documentation vs game development
 
 **Version:** 1.2

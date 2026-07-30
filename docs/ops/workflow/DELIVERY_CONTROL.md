@@ -1,3 +1,11 @@
+---
+id: delivery-control
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 495
+---
 # Delivery Control — pre-delivery automated gate
 
 **Version:** 1.2

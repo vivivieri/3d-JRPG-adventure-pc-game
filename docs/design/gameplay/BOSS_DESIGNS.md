@@ -1,3 +1,11 @@
+---
+id: boss-designs
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 2965
+---
 # Tides of Urashima — Boss Design Sheets
 
 **Version:** 1.2 (Pre-build — reconciled with data)

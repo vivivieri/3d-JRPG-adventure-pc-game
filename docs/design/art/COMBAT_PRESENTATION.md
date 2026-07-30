@@ -1,3 +1,11 @@
+---
+id: combat-presentation
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 658
+---
 # Tides of Urashima — Combat Presentation
 
 **Version:** 1.0 (Pre-build)

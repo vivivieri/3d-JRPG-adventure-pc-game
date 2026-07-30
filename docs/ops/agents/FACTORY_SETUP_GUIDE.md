@@ -1,3 +1,11 @@
+---
+id: factory-setup-guide
+type: tutorial
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 2649
+---
 # Factory Setup Guide — 100% AI Multi-Agent Development (snapshot boot)
 
 **Version:** 1.0

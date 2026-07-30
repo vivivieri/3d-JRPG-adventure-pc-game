@@ -1,3 +1,11 @@
+---
+id: replay-design
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 1060
+---
 # Tides of Urashima — Replay Design
 
 **Version:** 1.0 (Pre-build)

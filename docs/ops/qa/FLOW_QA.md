@@ -1,3 +1,11 @@
+---
+id: flow-qa
+type: how-to
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2076
+---
 # Game Flow QA — Progression Gates + Iterative Fix Loop
 
 **Version:** 1.0

@@ -1,3 +1,11 @@
+---
+id: pacing-chart
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 577
+---
 # Tides of Urashima — Emotional Pacing Chart
 
 **Version:** 1.0 (Pre-build)

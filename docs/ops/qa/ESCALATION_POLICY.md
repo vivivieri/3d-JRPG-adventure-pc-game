@@ -1,3 +1,11 @@
+---
+id: escalation-policy
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 1009
+---
 # Escalation Policy — no infinite dev ↔ QA loops
 
 **Version:** 1.0

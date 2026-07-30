@@ -138,6 +138,56 @@ def main() -> int:
             if snippet in text:
                 errors.append(f"{py.relative_to(ROOT)} still constructs {snippet}")
 
+    # Frontmatter coverage on active docs (type required)
+    skip_fm_names = {"README.md", "BOOT.md"}
+    skip_fm_prefixes = (
+        "archive/",
+        "_meta/",
+        "briefs/",
+        "design/audio/audio_sheets/",
+        "ops/sprints/",
+        "ops/agents/automation_prompts/",
+    )
+    active = 0
+    with_type = 0
+    missing_fm: list[str] = []
+    for md in sorted(DOCS.rglob("*.md")):
+        rel = md.relative_to(DOCS).as_posix()
+        if md.name in skip_fm_names or any(rel.startswith(p) for p in skip_fm_prefixes):
+            continue
+        active += 1
+        text = md.read_text(encoding="utf-8")
+        if not text.startswith("---\n"):
+            missing_fm.append(rel)
+            continue
+        end = text.find("\n---\n", 4)
+        block = text[4:end] if end > 0 else ""
+        if re.search(r"(?m)^type:\s+\S+", block):
+            with_type += 1
+        else:
+            missing_fm.append(f"{rel} (no type:)")
+    coverage = (with_type / active) if active else 1.0
+    if coverage < 0.8:
+        errors.append(
+            f"frontmatter type coverage {coverage:.0%} < 80% "
+            f"({with_type}/{active}); missing e.g. {missing_fm[:5]}"
+        )
+    elif missing_fm:
+        warnings.append(
+            f"frontmatter incomplete on {len(missing_fm)} doc(s) "
+            f"(coverage {coverage:.0%}) e.g. {missing_fm[:3]}"
+        )
+
+    # Hub packs exist after bible splits
+    for rel in (
+        "ops/qa/testing/l0.md",
+        "ops/agents/mcp/install.md",
+        "ops/workflow/ai_dev/testing_policy.md",
+        "ops/cheat-sheets/rr/session.md",
+    ):
+        if not (DOCS / rel).is_file():
+            errors.append(f"expected pack missing: docs/{rel}")
+
     if warnings:
         for w in warnings:
             print(f"WARN: {w}")
@@ -150,6 +200,7 @@ def main() -> int:
 
     print(
         f"L0_docs_index PASS — {len(seen)} INDEX paths ok, "
+        f"frontmatter {with_type}/{active} ({coverage:.0%}), "
         f"buckets present, boot card + llms.txt ok"
     )
     return 0

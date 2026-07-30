@@ -1,3 +1,11 @@
+---
+id: development-lifecycle
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 3540
+---
 # Development Lifecycle — End-to-End
 
 **Version:** 1.0

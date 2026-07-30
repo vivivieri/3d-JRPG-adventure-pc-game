@@ -1,3 +1,11 @@
+---
+id: multi-agent-team
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 2120
+---
 # Multi-Agent Team — Simulated Small Studio
 
 **Version:** 1.0

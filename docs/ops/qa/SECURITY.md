@@ -1,3 +1,11 @@
+---
+id: security
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2427
+---
 # Security — Ship Build, Secrets & Supply Chain
 
 **Version:** 1.1

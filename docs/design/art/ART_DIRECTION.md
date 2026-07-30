@@ -1,3 +1,11 @@
+---
+id: art-direction
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 1939
+---
 # Tides of Urashima — Art Direction Bible
 
 **Version:** 1.1 (Pre-build pivot)

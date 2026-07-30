@@ -1,3 +1,11 @@
+---
+id: world-map-and-flow
+type: reference
+audience: [builder, architect]
+status: active
+authority: world
+tokens_est: 1143
+---
 # Tides of Urashima — World Map & Zone Flow
 
 **Version:** 1.0 (Pre-build)

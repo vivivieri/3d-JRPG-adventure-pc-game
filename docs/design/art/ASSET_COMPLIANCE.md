@@ -1,3 +1,11 @@
+---
+id: asset-compliance
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 1270
+---
 # Asset Compliance Policy — No Copyright Violations
 
 **Project:** Tides of Urashima

@@ -1,3 +1,11 @@
+---
+id: generation-readiness
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 3133
+---
 # Generation Readiness — Human-Expectation Gaps for AI 3D Pipelines
 
 **Version:** 1.0

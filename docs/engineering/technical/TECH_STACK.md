@@ -1,3 +1,11 @@
+---
+id: tech-stack
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 604
+---
 # Technology stack (latest)
 
 **Updated:** July 2026 — pin versions here; install scripts read `GODOT_VERSION` from `tools/install_cloud_dev.sh`.

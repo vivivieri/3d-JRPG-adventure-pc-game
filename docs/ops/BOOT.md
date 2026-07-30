@@ -48,7 +48,11 @@ Resolve packs with:
 
 ```bash
 python3 tools/resolve_docs.py <role>
+python3 tools/resolve_docs.py --list-roles
 ```
+
+Large bibles are split into packs (`ops/qa/testing/`, `ops/agents/mcp/`, `ops/workflow/ai_dev/`) — load the hub + one pack, not the old monolith.
+
 
 | Role | Pack |
 |------|------|

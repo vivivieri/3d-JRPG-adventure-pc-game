@@ -1,3 +1,11 @@
+---
+id: gdscript-regeneration
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 3117
+---
 # GDScript regeneration — core helpers & Phase 1 visuals
 
 **Version:** 1.1

@@ -1,3 +1,11 @@
+---
+id: rendering-guide
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 3560
+---
 # Tides of Urashima — Rendering Guide
 
 **Version:** 1.0 (Pre-build)

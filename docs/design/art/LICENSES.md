@@ -1,3 +1,11 @@
+---
+id: licenses
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 1705
+---
 # License & Attribution Log
 
 Track every third-party asset, story source, and engine dependency.

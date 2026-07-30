@@ -1,3 +1,11 @@
+---
+id: spec-first-development
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 2450
+---
 # Spec-first development policy
 
 **Version:** 1.0

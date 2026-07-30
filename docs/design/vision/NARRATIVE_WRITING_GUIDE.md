@@ -1,3 +1,11 @@
+---
+id: narrative-writing-guide
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 4442
+---
 # Tides of Urashima — Narrative & Writing Guide
 
 **Version:** 1.1 (Pre-build)

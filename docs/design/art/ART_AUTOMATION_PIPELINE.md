@@ -1,3 +1,11 @@
+---
+id: art-automation-pipeline
+type: how-to
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 2512
+---
 # Art Automation Pipeline — Quality-First, Zero Human Artists
 
 **Version:** 1.1

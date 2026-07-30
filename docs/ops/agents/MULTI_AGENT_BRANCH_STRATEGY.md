@@ -1,3 +1,11 @@
+---
+id: multi-agent-branch-strategy
+type: how-to
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 824
+---
 # Multi-Agent Branch Strategy
 
 **Version:** 1.0

@@ -1,3 +1,11 @@
+---
+id: acceptance-criteria
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2458
+---
 # Acceptance Criteria — Measurable QA Pass/Fail
 
 **Version:** 1.3

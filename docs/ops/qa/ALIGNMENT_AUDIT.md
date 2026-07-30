@@ -1,3 +1,11 @@
+---
+id: alignment-audit
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 2728
+---
 # Alignment Audit — Standard Process & Stakeholder Reporting
 
 **Version:** 1.1

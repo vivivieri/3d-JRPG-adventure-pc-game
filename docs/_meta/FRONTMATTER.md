@@ -1,6 +1,6 @@
 # Doc frontmatter schema
 
-Optional YAML frontmatter on `docs/**/*.md` (except `archive/`, auto-generated reports).
+YAML frontmatter is **required** on active `docs/**/*.md` (except hubs/archive listed below).
 
 ```yaml
 ---
@@ -16,14 +16,14 @@ tokens_est: 3500         # optional soft budget
 
 | Field | Required | Notes |
 |-------|----------|-------|
-| `id` | recommended | kebab-case stable id |
-| `type` | recommended | Diátaxis type |
-| `audience` | optional | Matches `docs/INDEX.yaml` roles |
+| `id` | yes | kebab-case stable id |
+| `type` | yes | Diátaxis type |
+| `audience` | recommended | Matches `docs/INDEX.yaml` roles |
 | `phase` | optional | Implementation phases 0–8 |
-| `status` | optional | `deprecated` docs belong under `archive/` |
-| `authority` | optional | Hint when prose conflicts with JSON |
+| `status` | recommended | `deprecated` docs belong under `archive/` |
+| `authority` | recommended | Hint when prose conflicts with JSON |
 | `tokens_est` | optional | Helps pack budgeting |
 
-**Hub files** (`README.md`, `BOOT.md`, `llms.txt`, `INDEX.yaml`) skip frontmatter.
+**Skip frontmatter:** `README.md`, `BOOT.md`, `llms.txt`, `INDEX.yaml`, `archive/**`, `_meta/**`, `briefs/**`, `audio_sheets/**`, `sprints/**`, `automation_prompts/**`.
 
-**CI:** `L0_docs_index` warns on missing `type` for indexed active docs (non-blocking until coverage ≥ 80%).
+**CI:** `L0_docs_index` requires ≥80% of active docs to have `type:` frontmatter.
