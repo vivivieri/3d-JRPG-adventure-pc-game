@@ -1,3 +1,11 @@
+---
+id: screenshots
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 625
+---
 # In-game screenshots
 
 > **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ("do not restore old code") and a `tools/capture_screenshots.sh` script that does not exist in this repo. Kept for historical reference only — do not follow these links or commands. When Phase 1+ produces real screenshots, capture them per `docs/design/art/VISUAL_QA.md` and replace this file's contents.

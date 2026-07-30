@@ -1,3 +1,11 @@
+---
+id: save-and-fail-states
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 1269
+---
 # Tides of Urashima — Save & Fail States
 
 **Version:** 1.0 (Pre-build)

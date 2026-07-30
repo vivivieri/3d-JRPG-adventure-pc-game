@@ -1,3 +1,11 @@
+---
+id: agile-within-phases
+type: how-to
+audience: [pm, architect]
+status: active
+authority: workflow
+tokens_est: 3865
+---
 # Agile Within Phases — Hybrid Delivery Model
 
 **Version:** 1.0

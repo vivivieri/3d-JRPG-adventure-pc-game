@@ -8,7 +8,17 @@
 | [INDEX.yaml](INDEX.yaml) | Role → must_read router |
 | [llms.txt](llms.txt) | LLM discovery map |
 | [_meta/DOC_LIBRARY_ADR.md](_meta/DOC_LIBRARY_ADR.md) | Why this layout |
+| [_meta/FRONTMATTER.md](_meta/FRONTMATTER.md) | Required YAML frontmatter |
 | [_meta/redirects.yaml](_meta/redirects.yaml) | Legacy path → new path |
+
+Large bibles are split into packs (load hub + one pack):
+
+| Hub | Packs |
+|-----|-------|
+| [AI_TESTING_SPEC.md](ops/qa/AI_TESTING_SPEC.md) | [ops/qa/testing/](ops/qa/testing/) |
+| [MCP_STACK.md](ops/agents/MCP_STACK.md) | [ops/agents/mcp/](ops/agents/mcp/) |
+| [AI_DEV_WORKFLOW.md](ops/workflow/AI_DEV_WORKFLOW.md) | [ops/workflow/ai_dev/](ops/workflow/ai_dev/) |
+| [RR_CHEATSHEET.md](ops/cheat-sheets/RR_CHEATSHEET.md) | [ops/cheat-sheets/rr/](ops/cheat-sheets/rr/) |
 
 ```bash
 python3 tools/resolve_docs.py --list-roles

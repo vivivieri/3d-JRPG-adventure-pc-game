@@ -1,3 +1,11 @@
+---
+id: playtest-script
+type: reference
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 1211
+---
 # Tides of Urashima — Playtest Script
 
 **Version:** 1.2

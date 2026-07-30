@@ -1,3 +1,11 @@
+---
+id: json-data-style
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 1915
+---
 # JSON Data Style Guide — Tides of Urashima
 
 **Version:** 1.0

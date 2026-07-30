@@ -1,3 +1,11 @@
+---
+id: skills-bible
+type: reference
+audience: [builder, architect]
+status: active
+authority: gameplay
+tokens_est: 1114
+---
 # Tides of Urashima — Skills Bible
 
 **Version:** 1.1 (Pre-build — reconciled with data)

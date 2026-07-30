@@ -1,3 +1,11 @@
+---
+id: settings-accessibility
+type: reference
+audience: [builder, architect]
+status: active
+authority: ui
+tokens_est: 929
+---
 # Tides of Urashima — Settings & Accessibility
 
 **Version:** 1.0 (Pre-build)

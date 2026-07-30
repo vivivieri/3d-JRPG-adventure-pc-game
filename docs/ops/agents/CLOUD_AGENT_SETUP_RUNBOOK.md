@@ -1,3 +1,11 @@
+---
+id: cloud-agent-setup-runbook
+type: tutorial
+audience: [pm, builder]
+status: active
+authority: agents
+tokens_est: 3835
+---
 # Cloud Agent Setup Runbook — Event-Driven Multi-Agent Factory
 
 **Version:** 1.0

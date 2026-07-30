@@ -1,3 +1,11 @@
+---
+id: technical-design
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 3080
+---
 # Tides of Urashima — Technical Design Document (TDD)
 
 **Version:** 1.1

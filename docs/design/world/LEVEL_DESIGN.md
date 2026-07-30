@@ -1,3 +1,11 @@
+---
+id: level-design
+type: reference
+audience: [builder, architect]
+status: active
+authority: world
+tokens_est: 3100
+---
 # Tides of Urashima — Level Design Breakdown
 
 **Version:** 1.0

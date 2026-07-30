@@ -1,3 +1,11 @@
+---
+id: environments
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 1529
+---
 # Deployment Environments — Dev · QA · UAT · Preprod · Prod
 
 **Version:** 1.1

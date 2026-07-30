@@ -1,3 +1,11 @@
+---
+id: git-lfs
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 401
+---
 # Git LFS — Large Asset Tracking
 
 **Version:** 1.0

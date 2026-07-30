@@ -1,3 +1,11 @@
+---
+id: ci
+type: reference
+audience: [release]
+status: active
+authority: ci-cd
+tokens_est: 3216
+---
 # Continuous Integration — GitHub Actions
 
 **Version:** 1.3

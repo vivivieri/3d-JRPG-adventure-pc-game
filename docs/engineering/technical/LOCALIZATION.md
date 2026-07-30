@@ -1,3 +1,11 @@
+---
+id: localization
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 2021
+---
 # Localization (i18n)
 
 **Tides of Urashima** supports four written languages at launch. **All four ship selective VO** for the 12 emotional hit clips (`docs/design/vision/VO_HIT_LIST.md`) — not Traditional Chinese only.

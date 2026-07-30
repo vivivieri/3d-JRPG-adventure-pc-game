@@ -1,3 +1,11 @@
+---
+id: narrative-density
+type: explanation
+audience: [narrative]
+status: active
+authority: vision
+tokens_est: 1024
+---
 # Narrative Density — Optimized Application Guide
 
 **Version:** 1.0

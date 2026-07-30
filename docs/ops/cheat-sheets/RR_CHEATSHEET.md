@@ -1,3 +1,11 @@
+---
+id: rr-cheatsheet
+type: reference
+audience: [pm, builder, qa]
+status: active
+authority: ops
+tokens_est: 3025
+---
 # R&R Cheat Sheet — Roles & Responsibilities
 
 **Version:** 1.5
@@ -6,7 +14,6 @@
 **Authority:** `.cursorrules` §0–§1 · `docs/ops/agents/MCP_STACK.md` · `docs/ops/agents/MULTI_AGENT_TEAM.md` · `docs/ops/workflow/AGILE_WITHIN_PHASES.md` §11
 
 ---
-
 ## Golden rules
 
 1. **GodotPrompter writes code** → **GDAI MCP builds scenes** → **QA proves gates** — never skip a handoff.
@@ -74,192 +81,15 @@
 
 ## Session startup (every run)
 
-```bash
-bash tools/ensure_mcp_stack.sh
-bash tools/check_mcp_ready.sh          # Builder, Flow, Debugger
-bash tools/check_rr_compliance.sh      # All roles touching game/
-```
-
-**PM-only (`main` docs/issues):**
-```bash
-bash tools/run_pm_orchestrator.sh      # Sprint Master — required
-bash tools/run_docs_ci_checks.sh       # includes L0_spec_refinement_scope
-```
-
-**Spec refinement (`main` — no implementation):**
-```bash
-# Allowed: docs/, game/data/, game/locale/, tools/*_lib.py
-# Forbidden: game/scripts/, game/scenes/, project.godot
-bash tools/check_spec_refinement_scope.sh
-```
-
-**Architect / Builder / QA (before sprint issue work):**
-```bash
-bash tools/run_agent_session_gate.sh <role> <issue_id>   # opens session telemetry automatically
-```
-
-**End every worker session (mandatory — enforced cycle close):**
-```bash
-bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit $(git rev-parse HEAD)
-```
-
-**QA with gate evidence:**
-```bash
-bash tools/run_post_agent_cycle.sh --issue <id> --agent qa --commit $(git rev-parse HEAD) \
-  --gate <gate_id> --artifact <path>
-```
-
-**Factory watchdog (stall recovery):**
-```bash
-bash tools/run_factory_watchdog.sh              # health check
-bash tools/run_factory_watchdog.sh --recover    # trigger PM via watchdog_recovery
-```
-
-**Stakeholder status (auto on cycle close; manual):**
-```bash
-bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram
-```
-
-**Alignment audit (post-merge / phase exit):**
-```bash
-bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
-# Management status: audit_radar_spec.png + audit_radar_build.png (auto-generated). Ignore mega dashboard.
-```
-
-**Long sessions — heartbeat (feeds telemetry + watchdog):**
-```bash
-bash tools/pm_record_heartbeat.sh --agent <role> --issue <id> --note "progress note"
-```
-
-**Factory Analyst — sprint efficiency rollup:**
-```bash
-python3 tools/analyze_agent_session_telemetry.py   # → artifacts/agent_session_reports/
-```
-
-**Zone tournament (L2.5 pre-merge — champion/challenger, non-ship):**
-```bash
-bash tools/run_candidate_tournament.sh --challenger artifacts/candidates/<issue>/challenger_runN.json
-# Policy: docs/ops/qa/CANDIDATE_TOURNAMENT.md
-```
-
-**One-time:** `CURSOR_API_KEY` in Cursor Secrets for auto token logging — `docs/ops/agents/CURSOR_SECRETS_SETUP.md` §8
-
----
+> Full detail: [`rr/session.md`](rr/session.md) — load only when needed.
 
 ## How to pick work (dev & QA)
 
-**Rule:** Do **not** self-pick from the backlog. PM dispatches via orchestrator; workers pass session gate first.
-
-### Where work is defined
-
-| Question | Answer | Source |
-|----------|--------|--------|
-| What phase are we in? | **Phase 1** — ruined_village vertical slice | `game/data/qa/sprint_phases.json` → `active_phase` |
-| What sprint is active? | **Phase1-Sprint1** (7 issues) | `game/data/qa/sprint_board.json` |
-| What are the tasks? | P1-00 … P1-06 bodies + handoffs | `docs/ops/sprints/Phase1-Sprint1-issues.md` |
-| What is the long-term order? | Phases 0→8 (do not reorder) | `docs/ops/workflow/IMPLEMENTATION_PLAN.md` |
-| Story points? | **No** — use `sequence`, `depends_on`, gate IDs, severity | — |
-
-### Who picks the next item?
-
-| Role | Action |
-|------|--------|
-| **PM Agent** | `bash tools/run_pm_orchestrator.sh` → `python3 tools/pm_dispatch_workers.py` → read `artifacts/pm_orchestrator_report.json` → `next_dispatch` |
-
-**Full factory setup:** `docs/ops/agents/FACTORY_SETUP_GUIDE.md`
-| **Dev / QA** | Wait for dispatch → `bash tools/run_agent_session_gate.sh <role> <issue_id>` → read issue section in sprint pack |
-
-### Phase 1 dependency chain (current sprint)
-
-```
-P1-00 (pm)     bootstrap project.godot + CI
-  ├─→ P1-01 (architect)  toon shader + zone_visuals
-  │     └─→ P1-02 (builder)  ruined_village.tscn
-  │           ├─→ P1-04 (qa)  CI + L0–L2 gate report
-  │           │     └─→ P1-06 (pm)  sprint review
-  │           └─→ P1-05 (qa)  golden screenshot + zone composition
-  └─→ P1-03 (architect)  water shader  [parallel with P1-02 after P1-00]
-```
-
-### Priority (no story points)
-
-| Kind | Scale | Use |
-|------|-------|-----|
-| **Phase order** | 0→8 waterfall | PM cannot skip phases via sprint |
-| **Sprint sequence** | `sequence` 1–7 on board | Orchestrator dispatch order |
-| **Blockers** | `depends_on` / `blocks` | QA waits until builder issue `done` |
-| **Bug severity** | S0–S3 | `severity/S0` … in GitHub Issues |
-| **Asset tier** | P0 / P1 | Art/audio docs (e.g. P0 VO clips) |
-| **Gate layers** | L0→L6 | Definition of done per issue |
-
-### How QA knows dev is done
-
-1. **Board:** QA issues list `depends_on` (e.g. P1-04 depends on P1-02).
-2. **Status:** Upstream issue set to `done` via `python3 tools/pm_update_issue.py`.
-3. **Event:** `bash tools/run_post_agent_cycle.sh --issue <id> --agent <role> --commit <sha>` → closes session telemetry + PM re-runs orchestrator → dispatches QA.
-4. **Handoff:** Builder posts **Builder → QA** block in PR/issue (`docs/ops/sprints/Phase*-Sprint*-issues.md`).
-5. **CI:** PR on `game/development` must pass listed `acceptance_gate_ids` before QA closes issue.
-
-### Definition of done (sprint issue)
-
-- [ ] Gate IDs PASS on PR commit
-- [ ] `bash tools/run_ci_checks.sh` green (game branch)
-- [ ] `L3_gdai_built` if scenes touched
-- [ ] **`L3_perf_review`** if scenes, shaders, materials, meshes, lights, or fog changed
-- [ ] Evidence paths in PR / issue
-- [ ] Board status `done` + GitHub issue closed
-
-**Full policy:** `docs/ops/agents/SPRINT_ORCHESTRATION.md` · `docs/ops/agents/PM_AGENT_RUNBOOK.md` · `docs/ops/workflow/AGILE_WITHIN_PHASES.md`
-
----
+> Full detail: [`rr/pick_work.md`](rr/pick_work.md) — load only when needed.
 
 ## Performance review (required — not code review)
 
-**Policy:** Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style.
-
-**Baseline:** Ship perf on **`reference_linux_cloud`** (cloud snapshot / Linux) + **`reference_pc_gtx1060`** (Windows). Linux ship is **required** — cloud dev OS. See **`docs/ops/qa/PLATFORM_SUPPORT.md`**, **`docs/ops/qa/PERFORMANCE_BASELINE.md`**, `game/data/qa/perf_baseline.json`. JIT cloud (`build: null`) is invalid for FPS sign-off.
-
-### When required
-
-| Trigger | Who runs | Gate |
-|---------|----------|------|
-| New/changed zone scene, material, shader, mesh, light, fog | **Builder** after F5 | `L3_perf_review` |
-| Bug fix in gameplay scene or rendering | **Builder** or **QA** on verify | `L3_perf_review` + post-fix regression |
-| Docs/data-only PR | — | Skip |
-
-### What to measure (thresholds in `game/data/qa/perf_thresholds.json`)
-
-| Metric | Target / investigate |
-|--------|----------------------|
-| FPS @ 1080p (gameplay cam) | **≥ 60** target (GTX 1060 ref); **< 30** = investigate |
-| Materials visible per view | **≤ 8** per zone |
-| Draw calls | **> 1000** = investigate batching/instancing |
-| Node count / memory | Steady growth during 30s walk = leak |
-
-### How to run (agent-local)
-
-```bash
-# 1. F5 in affected zone (GDAI MCP or Godot editor)
-# 2. Godotiq — game must be running
-godotiq_perf_snapshot(detail="normal")
-# 3. Save JSON evidence (baseline_id required — see docs/ops/qa/PERFORMANCE_BASELINE.md §7)
-# artifacts/perf_reviews/<zone>_<short_sha>.json
-```
-
-**CI catalog (always):** `bash tools/run_perf_review_checks.sh` → `L2_perf_catalog`
-
-### Post-fix regression (with perf)
-
-When fixing a bug, re-run per `docs/ops/qa/QA_AND_BUG_PROCESS.md` §6:
-
-1. Original repro steps
-2. One scene before and after the affected scene
-3. **`L3_perf_review`** if fix touched scenes/shaders/materials
-4. Affected **`INT-*`** integration scenario when flows changed
-
-**Invalid PASS:** F5 clean but no perf snapshot on a scene PR · FPS below target with no remediation brief · merging without re-running affected `INT-*` after a fix.
-
----
+> Full detail: [`rr/performance_review.md`](rr/performance_review.md) — load only when needed.
 
 ## Default workflow (one feature)
 
@@ -324,55 +154,7 @@ Only the arbiter (Architect/SA) or the Product Owner may change a requirement �
 
 ## QA gate layers
 
-| Layer | Who | Examples |
-|-------|-----|----------|
-| L0 | Shell / QA | `L0_story_data`, `L0_rr_compliance`, `L0_base_classes`, `L0_base_class_compliance` |
-| L1 | QA + Architect | `L1_unit_tests`, `L1_gdscript_lint` |
-| L2 | QA + Visual | `L2_scene_primitives`, `L2_animation_whitelist`, `L2_feel_smoke`, `L2_glb_import`, `L2_visual_palette`, jury |
-| L3 | Builder + QA | **`L3_gdai_built`** (CI — marker in scene diff) · **`L3_gdai_f5`** (editor F5) · **`L3_perf_review`** (FPS / draw calls — agent-local) |
-| L4 | Flow | `L4_integration` |
-| L5 | Flow | `L5_e2e_three_endings` |
-| L6 | Human | Playtest sign-off — **after** L0–L5 |
-
-**Policy:** WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS.
-
-### Evidence by test layer (L0–L6)
-
-**Rule:** `acceptance_criteria.json` → `evidence_required_for_pass: true`. Cite paths in PR gate report and sprint bundle.
-
-| Layer | Who defines cases | Who runs | Evidence required? | Screenshot | Video | Typical paths |
-|-------|-------------------|----------|--------------------|------------|-------|---------------|
-| **L0** | Design data / policy | Dev / CI | JSON + CI log | No | No | `game/data/`, `game/scenes/.gdai_built` |
-| **L1** | **Architect** (`game/tests/unit/`) | Dev / CI | CI log (optional export) | No | No | `artifacts/test-reports/` (optional) |
-| **L2** | QA policy + catalogs | QA / CI | Gate output; screenshot when assets exist | **Yes** (visual/audio/model smokes) | No | `artifacts/screenshots/`, `artifacts/visual_reviews/*.jury.json`, `artifacts/model_reviews/`, `artifacts/audio_reviews/` |
-| **L3** | `AI_TESTING_SPEC.md` §5 + sprint issue | Builder + QA | **Yes** — F5 + screenshot for scene/visual work; **perf JSON** when scenes/shaders change | **Yes — required** | No | `artifacts/screenshots/<phase>_<scene>_<view>.png`, `artifacts/perf_reviews/<zone>_<sha>.json` |
-| **L4** | **Architect** (`integration_scenarios.json`) | Flow / QA | Scenario pass/fail; screenshots for UI flows | Optional | No | `artifacts/flow_reviews/`, CI log |
-| **L5** | **Architect** (`AI_TESTING_SPEC.md` §7 E2E matrix) | Flow / QA | E2E pass/fail on same commit | Optional | **Optional** | `artifacts/videos/e2e_<ending>_<date>.mp4` |
-| **L6** | `PLAYTEST_SCRIPT.md` | Human | Bug report + repro steps | Recommended (S0–S1) | Recommended (S0–S1) | GitHub issue; `artifacts/qa_reports/L6_human_playtest.json` |
-
-**Invalid PASS:** F5 with 0 errors but no screenshot · visual PASS without `artifacts/screenshots/` · issue `done` without evidence bundle.
-
-**Who stores evidence:**
-
-| Role | Responsibility |
-|------|----------------|
-| **Architect** | Writes unit/integration/E2E test cases; does not claim visual PASS |
-| **Builder** | F5 + captures screenshots to `artifacts/screenshots/` on visual tasks |
-| **QA** | Runs gates, vision jury, pastes gate report in PR, bundles per issue |
-| **PM** | Verifies `pm_check_done_criteria` before closing sprint issue |
-
-**Bundle per sprint issue:**
-
-```bash
-python3 tools/pm_bundle_evidence.py <issue_id> \
-  --gate <gate_id> \
-  --artifact artifacts/screenshots/phase1_ruined_village_gameplay.png
-# → artifacts/sprint_evidence/<issue_id>/manifest.json
-```
-
-**Full spec:** `docs/ops/qa/AI_TESTING_SPEC.md` · `docs/design/art/VISUAL_QA.md` · `docs/ops/qa/QA_AND_BUG_PROCESS.md` §3
-
----
+> Full detail: [`rr/qa_gates.md`](rr/qa_gates.md) — load only when needed.
 
 ## Branch & environment
 
@@ -419,6 +201,18 @@ python3 tools/validate_story_data.py     # L0_story_data
 ```
 
 ---
+
+
+## Factory hooks (names for L0_workflow_integration)
+
+| Hook | Command / artifact |
+|------|--------------------|
+| Close session | `bash tools/run_post_agent_cycle.sh` |
+| Watchdog | `bash tools/run_factory_watchdog.sh` |
+| Factory setup | `FACTORY_SETUP_GUIDE` · `docs/ops/agents/FACTORY_SETUP_GUIDE.md` |
+| Stakeholder | `bash tools/pm_emit_stakeholder_report.sh` |
+| Alignment | `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png` |
+| Tournament | `bash tools/run_candidate_tournament.sh` |
 
 ## Related docs (full detail)
 

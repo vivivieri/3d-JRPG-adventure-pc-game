@@ -1,3 +1,11 @@
+---
+id: coding-standards-hub
+type: reference
+audience: [architect, builder]
+status: active
+authority: engineering
+tokens_est: 2988
+---
 # Coding Standards Hub — Tides of Urashima
 
 **Version:** 1.5
@@ -28,7 +36,6 @@
 | **Errors & messages** | [**ERROR_HANDLING.md**](ERROR_HANDLING.md) | Cross-language patterns · tri-state gate messages |
 
 ---
-
 ## 1. Language stack
 
 | Language | Role | Location | Authority |
@@ -84,314 +91,20 @@ See [`BRANCHING.md`](../../ops/workflow/BRANCHING.md) · [`SPEC_FIRST_DEVELOPMEN
 
 ---
 
-## 3. GDScript — industrial rules
-
-**Full guide:** [**GDSCRIPT_STYLE.md**](GDSCRIPT_STYLE.md) · [`CODE_STYLE.md`](CODE_STYLE.md) (scenes, autoloads)
-**External:** [Godot GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html) · [Static typing](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html)
-
-### Must enforce (Godot 4)
-
-```gdscript
-# Signals — typed connect only
-some_signal.connect(_on_some_signal)
-
-# Coroutines
-await object.signal_name
-
-# 3D nodes
-player.velocity = ...
-player.global_position = ...
-```
-
-| Do | Don't |
-|----|-------|
-| `signal_name.connect(_callback)` | `connect("signal", self, "method")` |
-| `await get_tree().create_timer(1.0).timeout` | `yield()` |
-| `GameManager.load_json(path)` | Duplicate JSON parse in every system |
-| `is_instance_valid(node)` before await resume | Hold dangling node refs |
-| Extend `PlayerController` / `Combatant` / `Interactable` | New `CharacterBody3D` controller from scratch |
-
-### Architecture
-
-- **Base classes:** extend only — see [`CODE_BASE_CLASS_RULES.md`](CODE_BASE_CLASS_RULES.md) · `game/data/code/base_classes.json`
-- **Autoloads:** register per `game/data/code/autoload_registry.json` — Builder wires via GDAI MCP
-- **Signals over polling:** `EventBus` for cross-system events
-- **Scenes:** GDAI MCP builds `.tscn` — no hand-editing scene trees when MCP is up
-
-### Lint & tests
-
-```bash
-bash tools/check_gdscript_changed.sh    # gdlint (gdtoolkit) on changed .gd — L1_gdscript_lint
-bash tools/run_unit_tests.sh            # L1_unit_tests
-bash tools/check_base_class_compliance.sh
-```
-
-| GDScript rule | Standard |
-|---------------|----------|
-| `snake_case` files, functions, variables | Godot style guide |
-| `PascalCase` class names | Godot style guide |
-| Type hints where file already uses them | Godot 4 typed GDScript |
-| `gdlint` clean on changed files | Project CI (`gdtoolkit`) |
-
----
-
-## 4. Shaders
-
-- One **toon ramp family** project-wide (`toon_base.gdshader`)
-- Zone variants = material + uniform tweaks, not new shader languages
-- `render_mode diffuse_toon, specular_toon` — no full PBR in player-facing scenes
-- Water: `water_stylized.gdshader` only on water meshes
-
-Spec detail: [`SHADER_SPECS.md`](../../design/art/SHADER_SPECS.md) · [`RENDERING_GUIDE.md`](../../design/art/RENDERING_GUIDE.md).
-
----
-
-## 5. Data structures — conventions & extensions
-
-**Detailed JSON rules:** [**JSON_DATA_STYLE.md**](JSON_DATA_STYLE.md)
-**Architecture:** [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) · file index: [`game/data/README.md`](../../../game/data/README.md)
-
-### 5.1 Story spine (gameplay content)
-
-```
-scenes.json → flags.json → quests → encounters / dialogue → items / shop
-```
-
-| Rule | Detail |
-|------|--------|
-| Every flag traces to a `scene_id` | Register in `story/flags.json` before use |
-| Every quest stage traces to a flag | `quests/main_quests.json` |
-| No orphan references | Encounter `scene_id`, drop `item_id`, skill IDs must resolve |
-| i18n inline | `{ "en": "...", "ja": "...", "zh": "...", "zh-Hant": "..." }` on display strings |
-| Selective VO | `voice_id` on dialogue line → `voice/{locale}/{voice_id}.ogg` |
-
-**Load API (runtime):**
-
-```gdscript
-GameManager.load_json("res://data/story/scenes.json")
-```
-
-### 5.2 Data file categories
-
-| Category | Path pattern | Examples | Validator |
-|----------|--------------|----------|-----------|
-| **Story spine** | `story/`, `dialogue/`, `quests/`, `encounters/` | `scenes.json`, `chapter_01.json` | `validate_story_data.py` |
-| **Gameplay balance** | `enemies/`, `skills/`, `items/`, `combat/` | `enemies.json`, `difficulty.json` | `validate_story_data.py` |
-| **Code registries** | `code/` | `base_classes.json`, `scene_registry.json` | `validate_base_classes.py`, etc. |
-| **QA / factory catalogs** | `qa/` | `acceptance_criteria.json`, `sprint_board.json` | matching `validate_*.py` |
-| **Audio metadata** | `audio/` | `audio_qa_catalog.json`, `scene_audio_map.json` | `validate_audio_qa_catalog.py` |
-| **Art / model QA** | `models/` | `qa_catalog.json` | `validate_qa_catalog.py` |
-
-**Not in JSON:** zone geometry, transforms (except `lore_placements.json`), 3D mesh paths beyond registries.
-
-### 5.3 Schema versioning
-
-Bump version when field names or required shapes change.
-
-| File type | Version key | Current examples |
-|-----------|-------------|------------------|
-| Gameplay JSON | `schema_version` (int) | `chapter_01.json` = **5**, most others = **1** |
-| QA / audio catalogs | `version` (string) | `"1.0"`, `"1.3"` |
-
-**Procedure:**
-
-1. Edit upstream files first (see maintenance order below)
-2. Bump `schema_version` or `version` in the changed file
-3. Update validator if new fields need cross-ref checks
-4. Run the matching `validate_*.py` gate
-5. Document breaking changes in [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) §17
-
-### 5.4 How to extend data (checklist)
-
-Use this whenever you add fields, rows, or new JSON files.
-
-#### A. New story flag
-
-1. Add to `game/data/story/flags.json` with `set_by` / description
-2. Reference only from `scenes.json`, dialogue, encounters, or quests
-3. `python3 tools/validate_story_data.py`
-
-#### B. New scene / dialogue block
-
-1. Add row to `game/data/story/scenes.json`
-2. Add dialogue key in `dialogue/chapter_01.json` (unless silent by design)
-3. Update `docs/design/vision/STORYBOARD.md` if narrative beat is new
-4. `python3 tools/validate_story_data.py`
-
-#### C. New item, enemy, skill, encounter
-
-1. Register ID in authoritative file (`items.json`, `enemies.json`, `skills.json`)
-2. Reference from encounters, shop, or drops — never invent IDs in prose only
-3. `python3 tools/validate_story_data.py`
-
-#### D. New QA / factory catalog
-
-1. Add `game/data/qa/<name>.json` with `version` + `authority` doc path
-2. Add `tools/validate_<name>.py` (follow existing validators)
-3. Register gate in `game/data/qa/acceptance_criteria.json` → `docs_ci_gates` or `ci_gates`
-4. Wire `run_gate` in `tools/run_docs_ci_checks.sh` or `tools/run_ci_checks.sh`
-5. Link from this hub + `docs/README.md` if new doc is added
-
-#### E. New code registry entry
-
-| Registry | When | Also update |
-|----------|------|-------------|
-| `base_classes.json` | New extend-only gameplay class | `CODE_BASE_CLASS_RULES.md`, Architect PR |
-| `autoload_registry.json` | New singleton API contract | `TECHNICAL_DESIGN.md`, `project.godot` on dev branch |
-| `scene_registry.json` | New canonical `.tscn` | `LEVEL_DESIGN.md`, GDAI-built scene |
-| `helpers_registry.json` | New core helper | `GDSCRIPT_REGENERATION.md`, `tools/*_lib.py` reference |
-| `spec_registry.json` | New blocking spec artifact | `SPEC_FIRST_DEVELOPMENT.md` |
-
-#### F. New zone / audio / model row
-
-- Zones: `game/data/qa/zone_composition.json` + `validate_zone_composition.py`
-- Audio: `game/data/audio/scene_audio_map.json` + `validate_scene_audio_map.py`
-- Models: `game/data/models/qa_catalog.json` + `validate_qa_catalog.py`
-
-### 5.5 Maintenance order (dependency-safe edits)
-
-Edit in this order to avoid broken cross-refs:
-
-1. `story/scenes.json` + `story/flags.json`
-2. `quests/main_quests.json`
-3. `items/items.json` + `starting/new_game.json`
-4. `encounters/story_encounters.json`
-5. `dialogue/chapter_01.json`
-6. `shop/roku_shop.json` + `achievements/achievements.json`
-7. Re-run validators
-
-### 5.6 Save game shape
-
-Authoritative field list: [`SAVE_AND_FAIL_STATES.md`](SAVE_AND_FAIL_STATES.md) · example in [`DATA_ARCHITECTURE.md`](DATA_ARCHITECTURE.md) §11.
-
-- Single slot v1: `user://save_slot_0.json`
-- Signed fields via `SaveIntegrity` helper — do not add save fields without Architect review
-
----
-
-## 6. Python 3 — industrial rules
-
-**Full guide:** [**PYTHON_STYLE.md**](PYTHON_STYLE.md)
-**Primary external standard:** [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
-
-Also apply: [PEP 257](https://peps.python.org/pep-0257/) (docstrings) · [PEP 484](https://peps.python.org/pep-0484/) / [PEP 585](https://peps.python.org/pep-0585/) (type hints) · [PEP 20](https://peps.python.org/pep-0020/) (Zen of Python).
-
-Python on `main` is the **behavior reference** for core helpers ported to GDScript on `game/development`.
-
-### PEP 8 quick reference (project profile)
-
-| Topic | Rule |
-|-------|------|
-| Indent | 4 spaces, no tabs |
-| Line length | 100 chars soft limit |
-| Names | `snake_case` functions/vars · `CapWords` classes · `UPPER_SNAKE` constants |
-| Imports | stdlib → third-party → local; one per line |
-| Files | UTF-8 `encoding="utf-8"` on all text I/O |
-| Module header | `from __future__ import annotations` on new files |
-| Docstrings | Every module + public function ([PEP 257](https://peps.python.org/pep-0257/)) |
-| CLI scripts | `def main() -> int:` + `raise SystemExit(main())` |
-
-### Example (validator pattern)
-
-```python
-#!/usr/bin/env python3
-"""Validate story-driven game data integrity.
-
-Authority: docs/engineering/technical/DATA_ARCHITECTURE.md
-"""
-from __future__ import annotations
-
-import json
-import sys
-from pathlib import Path
-from typing import Any
-
-ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "game" / "data"
-
-
-def load_json(rel: str) -> dict[str, Any]:
-    return json.loads((DATA / rel).read_text(encoding="utf-8"))
-
-
-def main() -> int:
-    errors: list[str] = []
-    # ... collect errors ...
-    if errors:
-        for msg in errors:
-            print(f"  - {msg}", file=sys.stderr)
-        return 1
-    print("OK — story data valid")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-```
-
-### Project-specific rules
-
-| Rule | Detail |
-|------|--------|
-| Reference libs | `tools/*_lib.py` — must pass `L0_reference_libs` unit tests |
-| Validators | One `validate_*.py` per catalog; exit `0`=PASS, `1`=FAIL, `2`=SKIP |
-| Paths | `pathlib.Path`; repo root via `Path(__file__).resolve().parents[1]` |
-| No secrets | Never commit API keys — `bash tools/check_no_secrets.sh` |
-| Gameplay numbers | Belong in `game/data/*.json`, not Python constants |
-
-**Port workflow:** [`GDSCRIPT_REGENERATION.md`](GDSCRIPT_REGENERATION.md) — Python reference wins until `main` spec is fixed.
-
-```bash
-python3 tools/validate_story_data.py      # after any game/data story edit
-python3 tools/test_reference_libs.py    # after *_lib.py changes
-bash tools/run_docs_ci_checks.sh          # full main-branch gate suite
-```
-
-Dependencies: `tools/requirements-ci.txt` (`gdtoolkit`, `matplotlib`, …).
-
----
-
-## 7. Shell / CI scripts
-
-**Full guide:** [**BASH_STYLE.md**](BASH_STYLE.md)
-**External:** [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
-
-| Rule | Detail |
-|------|--------|
-| Shebang | `#!/usr/bin/env bash` |
-| Safety | `set -euo pipefail` |
-| ROOT | `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` |
-| Naming | `run_<domain>_<action>.sh`, `check_<domain>.sh` |
-| Quoting | Always `"${var}"` — see BASH_STYLE.md |
-| Gate runner | `run_gate "<id>"` in `run_docs_ci_checks.sh` — ids match `acceptance_criteria.json` |
-| Exit codes | `0` PASS · `1` FAIL · `2` SKIP (SKIP ≠ PASS on `game/development`) |
-
-Authority: [`CI.md`](../../ops/ci-cd/CI.md) · [`ACCEPTANCE_CRITERIA.md`](../../ops/qa/ACCEPTANCE_CRITERIA.md).
-
----
-
-## 8. TypeScript / Node.js — MCP Pro server
-
-**Full guide:** [**TYPESCRIPT_STYLE.md**](TYPESCRIPT_STYLE.md)
-**External:** [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html)
-
-| Topic | Rule |
-|-------|------|
-| Location | `tools/godot-mcp-pro-server/` (from commercial zip — gitignored) |
-| Node | 18+ · `npm install && npm run build` → `build/index.js` |
-| Cursor mode | **`--minimal`** always — L4/L5 test tools only; no scene editing |
-| Naming | `camelCase` functions · `PascalCase` types · MCP tools `snake_case` |
-| Strict TS | `strict: true` in `tsconfig.json` when patching vendor sources |
-| R&R | Scene mutations = **GDAI MCP** — never fork MCP Pro to add editors |
-
-```bash
-bash tools/install_godot_mcp_pro.sh
-bash tools/check_mcp_ready.sh
-```
-
-Not shipped — stripped before Steam export (`ship_security.json`).
-
----
+## 3–8. Language deep dives (packs)
+
+Do not preload language bibles from this hub — open the guide for the file you are editing.
+
+| Topic | Guide |
+|-------|-------|
+| GDScript | [GDSCRIPT_STYLE.md](GDSCRIPT_STYLE.md) · [CODE_STYLE.md](CODE_STYLE.md) |
+| Shaders | [SHADER_STYLE.md](SHADER_STYLE.md) |
+| Data / JSON | [JSON_DATA_STYLE.md](JSON_DATA_STYLE.md) · [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) |
+| Python | [PYTHON_STYLE.md](PYTHON_STYLE.md) |
+| Shell | [BASH_STYLE.md](BASH_STYLE.md) |
+| TypeScript | [TYPESCRIPT_STYLE.md](TYPESCRIPT_STYLE.md) |
+| Scenes | [SCENE_STYLE.md](SCENE_STYLE.md) |
+| Errors | [ERROR_HANDLING.md](ERROR_HANDLING.md) |
 
 ## 9. CI enforcement matrix
 

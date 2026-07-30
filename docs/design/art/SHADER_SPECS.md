@@ -1,3 +1,11 @@
+---
+id: shader-specs
+type: reference
+audience: [visual, builder]
+status: active
+authority: art
+tokens_est: 807
+---
 # Shader Specifications — Tides of Urashima
 
 **Version:** 1.0

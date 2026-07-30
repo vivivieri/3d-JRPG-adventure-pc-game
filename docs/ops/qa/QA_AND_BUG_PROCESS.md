@@ -1,3 +1,11 @@
+---
+id: qa-and-bug-process
+type: how-to
+audience: [qa, flow]
+status: active
+authority: qa
+tokens_est: 3005
+---
 # Tides of Urashima — QA & Bug Process
 
 **Version:** 1.3 (Pre-build)
