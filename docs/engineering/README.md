@@ -26,4 +26,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) | `TECHNICAL_DESIGN` |
 | [technical/TECH_STACK.md](technical/TECH_STACK.md) | `TECH_STACK` |
 | [technical/TYPESCRIPT_STYLE.md](technical/TYPESCRIPT_STYLE.md) | `TYPESCRIPT_STYLE` |
-
+| [technical/data/combat_economy.md](technical/data/combat_economy.md) | `combat_economy` |
+| [technical/data/i18n_validation.md](technical/data/i18n_validation.md) | `i18n_validation` |
+| [technical/data/story_spine.md](technical/data/story_spine.md) | `story_spine` |

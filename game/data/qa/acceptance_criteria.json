@@ -725,6 +725,15 @@
       "evidence": ["docs/INDEX.yaml", "docs/ops/BOOT.md", "docs/llms.txt", "docs/_meta/redirects.json"],
       "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
     },
+    "L0_docs_catalogs": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/refresh_docs_catalogs.py --check",
+      "description": "Bucket README catalogs (design/engineering/ops) match on-disk markdown — run refresh_docs_catalogs.py after adding docs",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/design/README.md", "docs/engineering/README.md", "docs/ops/README.md"],
+      "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
+    },
     "L0_alignment_audit_catalog": {
       "layer": "L0",
       "domain": "flow",
@@ -906,6 +915,7 @@
       "L0_difficulty_data",
       "L0_doc_sync",
       "L0_docs_index",
+      "L0_docs_catalogs",
       "L0_alignment_audit_catalog",
       "L0_workflow_integration",
       "L0_candidate_tournament",
