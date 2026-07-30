@@ -18,9 +18,20 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) | `RENDERING_GUIDE` |
 | [art/SHADER_SPECS.md](art/SHADER_SPECS.md) | `SHADER_SPECS` |
 | [art/VISUAL_QA.md](art/VISUAL_QA.md) | `VISUAL_QA` |
+| [art/characters/animation_portraits.md](art/characters/animation_portraits.md) | `animation_portraits` |
+| [art/characters/enemies.md](art/characters/enemies.md) | `enemies` |
+| [art/characters/export_order.md](art/characters/export_order.md) | `export_order` |
+| [art/characters/npc_ambient.md](art/characters/npc_ambient.md) | `npc_ambient` |
+| [art/characters/otohime.md](art/characters/otohime.md) | `otohime` |
+| [art/characters/roku.md](art/characters/roku.md) | `roku` |
+| [art/characters/urashima.md](art/characters/urashima.md) | `urashima` |
+| [art/characters/yuzu.md](art/characters/yuzu.md) | `yuzu` |
 | [audio/AUDIO_DIRECTION.md](audio/AUDIO_DIRECTION.md) | `AUDIO_DIRECTION` |
 | [audio/AUDIO_PRODUCTION_GUIDE.md](audio/AUDIO_PRODUCTION_GUIDE.md) | `AUDIO_PRODUCTION_GUIDE` |
 | [audio/AUDIO_QA.md](audio/AUDIO_QA.md) | `AUDIO_QA` |
+| [audio/production/bgm_and_scene_map.md](audio/production/bgm_and_scene_map.md) | `bgm_and_scene_map` |
+| [audio/production/combat_sfx.md](audio/production/combat_sfx.md) | `combat_sfx` |
+| [audio/production/mix_impl_qa.md](audio/production/mix_impl_qa.md) | `mix_impl_qa` |
 | [gameplay/ACHIEVEMENTS.md](gameplay/ACHIEVEMENTS.md) | `ACHIEVEMENTS` |
 | [gameplay/BOSS_DESIGNS.md](gameplay/BOSS_DESIGNS.md) | `BOSS_DESIGNS` |
 | [gameplay/COMBAT_SYSTEMS.md](gameplay/COMBAT_SYSTEMS.md) | `COMBAT_SYSTEMS` |
@@ -49,4 +60,3 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [world/PUZZLE_DESIGN.md](world/PUZZLE_DESIGN.md) | `PUZZLE_DESIGN` |
 | [world/QUEST_AND_FLAGS.md](world/QUEST_AND_FLAGS.md) | `QUEST_AND_FLAGS` |
 | [world/WORLD_MAP_AND_FLOW.md](world/WORLD_MAP_AND_FLOW.md) | `WORLD_MAP_AND_FLOW` |
-

@@ -19,10 +19,15 @@ Large bibles are split into packs (load hub + one pack):
 | [MCP_STACK.md](ops/agents/MCP_STACK.md) | [ops/agents/mcp/](ops/agents/mcp/) |
 | [AI_DEV_WORKFLOW.md](ops/workflow/AI_DEV_WORKFLOW.md) | [ops/workflow/ai_dev/](ops/workflow/ai_dev/) |
 | [RR_CHEATSHEET.md](ops/cheat-sheets/RR_CHEATSHEET.md) | [ops/cheat-sheets/rr/](ops/cheat-sheets/rr/) |
+| [CHARACTER_BIBLE.md](design/art/CHARACTER_BIBLE.md) | [design/art/characters/](design/art/characters/) |
+| [AUDIO_PRODUCTION_GUIDE.md](design/audio/AUDIO_PRODUCTION_GUIDE.md) | [design/audio/production/](design/audio/production/) |
+| [DATA_ARCHITECTURE.md](engineering/technical/DATA_ARCHITECTURE.md) | [engineering/technical/data/](engineering/technical/data/) |
 
 ```bash
 python3 tools/resolve_docs.py --list-roles
 python3 tools/resolve_docs.py builder_zone
+python3 tools/resolve_docs.py architect --issue P1-01 --budget 12000
+python3 tools/refresh_docs_catalogs.py   # after adding docs
 ```
 
 ---
