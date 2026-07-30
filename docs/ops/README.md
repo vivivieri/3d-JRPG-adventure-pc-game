@@ -74,4 +74,3 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/ai_dev/commands.md](workflow/ai_dev/commands.md) | `commands` |
 | [workflow/ai_dev/phase_acceptance.md](workflow/ai_dev/phase_acceptance.md) | `phase_acceptance` |
 | [workflow/ai_dev/testing_policy.md](workflow/ai_dev/testing_policy.md) | `testing_policy` |
-

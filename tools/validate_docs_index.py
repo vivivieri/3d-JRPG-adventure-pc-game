@@ -184,6 +184,9 @@ def main() -> int:
         "ops/agents/mcp/install.md",
         "ops/workflow/ai_dev/testing_policy.md",
         "ops/cheat-sheets/rr/session.md",
+        "design/art/characters/urashima.md",
+        "design/audio/production/bgm_and_scene_map.md",
+        "engineering/technical/data/story_spine.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")

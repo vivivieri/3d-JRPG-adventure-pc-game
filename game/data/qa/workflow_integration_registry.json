@@ -57,7 +57,17 @@
         {
           "path": "tools/run_agent_session_gate.sh",
           "contains": "resolve_docs.py",
-          "purpose": "print role doc pack (progressive disclosure)"
+          "purpose": "print role doc pack ∪ issue handoff_refs (budgeted)"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "--issue",
+          "purpose": "union sprint_board handoff_refs docs"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "--budget",
+          "purpose": "cap pack by tokens_est frontmatter"
         },
         {
           "path": "tools/resolve_docs.py",
