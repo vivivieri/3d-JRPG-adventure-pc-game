@@ -1,3 +1,10 @@
+---
+id: automation-e-worker-sprint-issue
+type: reference
+status: active
+summary: "Automation E — Worker (sprint issue) — project reference"
+tokens_est: 548
+---
 # Automation E — Worker (sprint issue)
 
 ## When to read

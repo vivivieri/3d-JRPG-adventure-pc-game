@@ -24,6 +24,7 @@ Use **Game Design Document — Narrative structure + endings** (roles: narrative
 - [Act III — The Tide (30–45 min)](#act-iii-the-tide-3045-min)
 - [10. Endings (3)](#10-endings-3)
 
+
 ## 9. Narrative structure (3 acts)
 
 ### Act I — The Return (30 min)

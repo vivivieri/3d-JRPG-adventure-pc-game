@@ -6,7 +6,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 487
-summary: "Data — Combat & Economy — Enemy combat_barks — Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`, `pala"
+summary: "Data — Combat & Economy — Enemy combat_barks — Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`."
 ---
 # Data — Combat & Economy — Enemy combat_barks
 

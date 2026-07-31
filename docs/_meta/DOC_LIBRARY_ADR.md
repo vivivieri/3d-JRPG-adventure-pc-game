@@ -71,5 +71,6 @@ Also:
 5. **Skim aids on fat leaves** — prefer sharp frontmatter `summary:` (for `resolve_docs` deferred tips) plus in-doc **When to read** / **Jump to** over new pack files. Sweep tool: `python3 tools/apply_docs_skim_aids.py` (idempotent; covers all active leaves by default; skips hubs/archive/briefs).
 6. **Opportunistic only** — further splits happen when already editing that topic, not as dedicated thinning sprints.
 7. **Next effort** — use packs (`resolve_docs` task packs, adherence), not more file splits. Tooling reference: `tools/consolidate_docs_part_ab.py` (defrag), not new `split_docs_roundN.py` by default.
+8. **Pack budget headroom** — keep role/task `optional` lists lean so typical `resolve_docs --budget 12000` packs retain ≥~800 tok headroom. Prefer task packs for deep leaves (L3/L4, playtest act sheets, language style). When a task pack provides optionals, those replace generic role optionals (specialty remaps still merge). Remap CI work: `architect` + `acceptance_ci` → `qa`; skip zone/brief auto-attach on process tasks (`acceptance_ci`, `factory_bootstrap`, …). Re-measure: `python3 tools/audit_docs_read_efficiency.py`.
 
 Authority: this ADR · pointer: [`docs/README.md`](../README.md) § Docs pack enhance.

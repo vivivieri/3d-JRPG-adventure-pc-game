@@ -6,7 +6,7 @@ audience: [pm, architect, release]
 status: active
 authority: workflow
 tokens_est: 1095
-summary: "Development Lifecycle — Branching, agent envs, issue lifecycle — Full policy: `BRANCHING.md` · per-agent rules: `MULTI_AGENT_BRANCH_STRATEGY.md"
+summary: "Development Lifecycle — Branching, agent envs, issue lifecycle — covers 4. Branching mechanism (summary); 5. Agent environments (isolation model); Cloud Agent."
 ---
 # Development Lifecycle — Branching, agent envs, issue lifecycle
 

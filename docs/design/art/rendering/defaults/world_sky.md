@@ -5,7 +5,7 @@ audience: [visual, builder]
 status: active
 authority: art
 tokens_est: 710
-summary: "Rendering — Defaults & Environment — WorldEnvironment + sky — Every world scene needs a `WorldEnvironment` node. Apply via `game/scripts/exploration/zone_visual"
+summary: "Rendering — Defaults & Environment — WorldEnvironment + sky — Every world scene needs a `WorldEnvironment` node. Apply via."
 ---
 # Rendering — Defaults & Environment — WorldEnvironment + sky
 

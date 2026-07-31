@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 300
+tokens_est: 301
 summary: "Audio QA — Tools + vs Visual QA — covers 6. Tools; 7. vs Visual QA"
 ---
 # Audio QA — Tools + vs Visual QA
@@ -20,6 +20,7 @@ Use **Audio QA — Tools + vs Visual QA** (roles: audio, qa) when executing this
 
 - [6. Tools](#6-tools)
 - [7. vs Visual QA](#7-vs-visual-qa)
+
 
 ## 6. Tools
 

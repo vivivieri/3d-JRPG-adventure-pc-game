@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 249
+tokens_est: 250
 summary: "Character Bible — Field Enemies — Combat: Sideways scuttle idle; claw snap attack"
 ---
 # Character Bible — Field Enemies
@@ -20,6 +20,7 @@ Use **Character Bible — Field Enemies** (roles: visual, builder) when you need
 
 - [Salt Crab (`salt_crab`)](#salt-crab-salt_crab)
 - [Tide Wraith (`tide_wraith`)](#tide-wraith-tide_wraith)
+
 
 ### Salt Crab (`salt_crab`)
 

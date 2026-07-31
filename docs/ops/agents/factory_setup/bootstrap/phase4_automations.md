@@ -5,7 +5,7 @@ audience: [pm]
 status: active
 authority: ops
 tokens_est: 885
-summary: "Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations — Machine-readable catalog: `game/data/qa/factory_automations.json"
+summary: "Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations — covers 6. Phase 4 — Cursor Automations (dashboard); Automation A — PM cycle dispatch."
 ---
 # Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations
 

@@ -6,7 +6,7 @@ phase: [6, 8]
 status: active
 authority: ci-cd
 tokens_est: 440
-summary: "CI — What Runs (`main`) — Authority: `game/data/qa/acceptance_criteria.json` → `docs_ci_gates.required_gates` (must match `run_docs_ci_checks.sh` 1:1 via `L0_do"
+summary: "CI — What Runs (`main`) — Authority: `game/data/qa/acceptance_criteria.json` → `docs_ci_gates.required_gates` (must match `run_docs_ci_checks.sh` 1:1 via."
 ---
 # CI — What Runs (`main`)
 

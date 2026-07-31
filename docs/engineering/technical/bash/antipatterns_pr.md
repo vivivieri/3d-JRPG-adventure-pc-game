@@ -6,7 +6,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 276
-summary: "Bash Style — Anti-patterns + PR checklist — - [ ] `#!/usr/bin/env bash` + `set -euo pipefail"
+summary: "Bash Style — Anti-patterns + PR checklist — covers 8. Anti-patterns; 9. PR checklist (shell)"
 ---
 # Bash Style — Anti-patterns + PR checklist
 
@@ -20,6 +20,7 @@ Use **Bash Style — Anti-patterns + PR checklist** (roles: architect, builder) 
 
 - [8. Anti-patterns](#8-anti-patterns)
 - [9. PR checklist (shell)](#9-pr-checklist-shell)
+
 
 ## 8. Anti-patterns
 

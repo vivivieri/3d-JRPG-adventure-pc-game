@@ -41,6 +41,15 @@ CHARACTER_STEMS = (
     "enemies",
     "npc_ambient",
 )
+# Ops/process tasks: title keywords like ruined_village must not burn budget on art packs.
+SKIP_CONTEXT_ATTACH_TASKS = frozenset(
+    {
+        "acceptance_ci",
+        "factory_bootstrap",
+        "secrets_setup",
+        "steam_export",
+    }
+)
 
 sys.path.insert(0, str(ROOT / "tools"))
 try:
@@ -646,6 +655,14 @@ def main() -> int:
     character_packs = (
         [] if getattr(args, "no_character_packs", False) or not row else _match_character_packs(row)
     )
+    if task_id in SKIP_CONTEXT_ATTACH_TASKS:
+        if briefs or zone_packs or character_packs:
+            print(
+                f"# skip_context_attach: task={task_id} "
+                f"(dropped briefs={len(briefs)} zones={len(zone_packs)} "
+                f"chars={len(character_packs)})"
+            )
+        briefs, zone_packs, character_packs = [], [], []
 
     task_must = list(task_pack.get("must_read") or []) if task_pack else []
     task_opt = list(task_pack.get("optional") or []) if task_pack else []
@@ -663,7 +680,17 @@ def main() -> int:
 
     optional: list[str] = []
     if not args.must_only:
-        optional = _dedupe(task_opt + list(pack.get("optional") or []))
+        role_opt = list(pack.get("optional") or [])
+        if task_opt:
+            # BOOT contract: boot + role must_read, then *task-specific* optional.
+            # Specialty remaps (builder_zone / visual / …) still merge role optionals
+            # so domain leaves are not dropped when the task pack is thin.
+            if role != role_requested:
+                optional = _dedupe(task_opt + role_opt)
+            else:
+                optional = list(task_opt)
+        else:
+            optional = role_opt
         optional = [
             p
             for p in optional
