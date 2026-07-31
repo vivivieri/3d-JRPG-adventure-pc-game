@@ -31,6 +31,7 @@ VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual",
 VALID_STATUS = {"pending", "in_progress", "blocked", "done", "carry_over"}
 VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
+PACK_LINK_RE = re.compile(r"\]\(([^)]+\.md)\)")
 
 DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
     "architect": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/world/ENVIRONMENT_KITS.md", "docs/engineering/technical/CODE_STYLE.md"],
@@ -63,11 +64,34 @@ def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {i["id"]: i for i in board.get("issues", [])}
 
 
+def _issue_ids_from_pack_text(text: str) -> set[str]:
+    return set(PACK_ISSUE_RE.findall(text))
+
+
 def parse_issue_pack(pack_path: Path) -> list[str]:
     if not pack_path.is_file():
         return []
-    text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    seen_paths: set[Path] = set()
+    issue_ids: set[str] = set()
+    queue = [pack_path.resolve()]
+
+    while queue:
+        path = queue.pop(0)
+        if path in seen_paths:
+            continue
+        seen_paths.add(path)
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        issue_ids.update(_issue_ids_from_pack_text(text))
+        for rel_link in PACK_LINK_RE.findall(text):
+            if rel_link.startswith("http://") or rel_link.startswith("https://"):
+                continue
+            linked = (path.parent / rel_link).resolve()
+            if linked.suffix == ".md" and linked not in seen_paths:
+                queue.append(linked)
+
+    return sorted(issue_ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
