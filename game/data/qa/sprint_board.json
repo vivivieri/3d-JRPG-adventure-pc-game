@@ -113,7 +113,7 @@
         "L1_gdscript_lint",
         "L0_base_class_compliance"
       ],
-      "status": "pending",
+      "status": "blocked",
       "depends_on": [
         "P1-00"
       ],
@@ -124,7 +124,7 @@
       "github_issue": "130",
       "last_agent_session": null,
       "last_commit_sha": null,
-      "escalation_level": 0,
+      "escalation_level": 4,
       "carry_over_from": null,
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
