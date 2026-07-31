@@ -152,7 +152,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/concept_ruined_village.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/concept_ruined_village.png",
+      "gallery_href": "../../alignment_audit_visuals/style/concept_ruined_village.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/concept_ruined_village.png"
     },
     {
@@ -165,7 +165,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/audit_radar_6axis.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_6axis.png",
+      "gallery_href": "../../alignment_audit_visuals/style/audit_radar_6axis.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/audit_radar_6axis.png"
     },
     {
@@ -178,7 +178,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/roadmap_6phase.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/roadmap_6phase.png",
+      "gallery_href": "../../alignment_audit_visuals/style/roadmap_6phase.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/roadmap_6phase.png"
     },
     {
@@ -191,7 +191,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_concept_beach_shore.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_concept_beach_shore.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_concept_beach_shore.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_concept_beach_shore.png"
     },
     {
@@ -204,7 +204,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_concept_palace_gate.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_concept_palace_gate.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_concept_palace_gate.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_concept_palace_gate.png"
     },
     {
@@ -217,7 +217,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_radar_updated.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_radar_updated.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_radar_updated.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_radar_updated.png"
     },
     {
@@ -230,7 +230,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_alignment_radar.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_alignment_radar.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_alignment_radar.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_alignment_radar.png"
     },
     {
@@ -243,7 +243,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_12phase.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_12phase.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_12phase.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_12phase.png"
     },
     {
@@ -256,7 +256,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_zone_slice.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_zone_slice.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_zone_slice.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_zone_slice.png"
     },
     {
@@ -269,7 +269,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_concept_tidal_caves.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_concept_tidal_caves.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_concept_tidal_caves.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_concept_tidal_caves.png"
     },
     {
@@ -282,7 +282,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_concept_three_endings.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_concept_three_endings.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_concept_three_endings.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_concept_three_endings.png"
     },
     {
@@ -295,7 +295,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_post_p1_dispatch.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_post_p1_dispatch.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_post_p1_dispatch.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_post_p1_dispatch.png"
     },
     {
@@ -308,7 +308,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_mcp_stack.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_mcp_stack.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_mcp_stack.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_mcp_stack.png"
     },
     {
@@ -321,7 +321,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_p1_dispatch.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_p1_dispatch.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_p1_dispatch.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_p1_dispatch.png"
     },
     {
@@ -334,7 +334,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_three_endings.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_three_endings.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_three_endings.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_three_endings.png"
     },
     {
@@ -347,7 +347,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_combat_boss_arena.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_combat_boss_arena.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_combat_boss_arena.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_combat_boss_arena.png"
     },
     {
@@ -360,7 +360,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_combat_ink_overlay.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_combat_ink_overlay.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_combat_ink_overlay.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_combat_ink_overlay.png"
     },
     {
@@ -373,7 +373,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_combat_presentation.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_combat_presentation.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_combat_presentation.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_combat_presentation.png"
     },
     {
@@ -386,7 +386,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_audio_qa.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_audio_qa.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_audio_qa.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_audio_qa.png"
     },
     {
@@ -399,7 +399,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_combat_presentation.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_combat_presentation.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_combat_presentation.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_combat_presentation.png"
     },
     {
@@ -412,7 +412,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_audio_zones_vo.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_audio_zones_vo.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_audio_zones_vo.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_audio_zones_vo.png"
     },
     {
@@ -425,7 +425,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_visualqa_village_palette.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_visualqa_village_palette.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_visualqa_village_palette.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_visualqa_village_palette.png"
     },
     {
@@ -438,7 +438,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_modelqa_turntable.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_modelqa_turntable.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_modelqa_turntable.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_modelqa_turntable.png"
     },
     {
@@ -451,7 +451,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_visual_qa.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_visual_qa.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_visual_qa.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_visual_qa.png"
     },
     {
@@ -464,7 +464,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_flow_model_qa.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_flow_model_qa.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_flow_model_qa.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_flow_model_qa.png"
     },
     {
@@ -477,7 +477,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_visual_qa.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_visual_qa.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_visual_qa.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_visual_qa.png"
     },
     {
@@ -490,7 +490,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_flow_qa_e2e.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_flow_qa_e2e.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_flow_qa_e2e.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_flow_qa_e2e.png"
     },
     {
@@ -503,7 +503,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_steam_capsule_keyart.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_steam_capsule_keyart.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_steam_capsule_keyart.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_steam_capsule_keyart.png"
     },
     {
@@ -516,7 +516,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_steam_rc_ship_build.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_steam_rc_ship_build.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_steam_rc_ship_build.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_steam_rc_ship_build.png"
     },
     {
@@ -529,7 +529,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_steam_ship.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_steam_ship.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_steam_ship.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_steam_ship.png"
     },
     {
@@ -542,7 +542,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_audit_m6_gates.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_audit_m6_gates.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_audit_m6_gates.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_audit_m6_gates.png"
     },
     {
@@ -555,7 +555,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_roadmap_steam_ship.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_roadmap_steam_ship.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_roadmap_steam_ship.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_roadmap_steam_ship.png"
     },
     {
@@ -568,7 +568,7 @@
       "path": "artifacts/alignment_audits/20260717T102357Z_committed_history/visuals/tides_mega_dashboard_all_radars.png",
       "present": true,
       "copied": true,
-      "gallery_href": "../../alignment_audit_visuals/tides_mega_dashboard_all_radars.png",
+      "gallery_href": "../../alignment_audit_visuals/style/tides_mega_dashboard_all_radars.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260717T102357Z_committed_history/visuals/tides_mega_dashboard_all_radars.png"
     }
   ]

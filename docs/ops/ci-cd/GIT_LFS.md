@@ -40,6 +40,8 @@ Use **Git LFS — Large Asset Tracking** (roles: release) when you need this ref
 | `*.glb`, `*.gltf`, `*.blend`, `*.fbx` | Hero meshes, Blender sources |
 | `game/assets/**/*.png` etc. | Zone NPR albedos, UI sheets |
 | `game/assets/audio/**/*.ogg` | BGM/SFX ship assets |
+| `docs/archive/compliance/alignment_audit_visuals/{latest,style}/**/*.png` | Stakeholder audit style + latest |
+| `docs/archive/compliance/alignment_audit_reports/**/visuals/**/*.png` | Per-run audit visual snapshots |
 
 Small files (SVG icons, JSON, `.gd`) stay in normal git.
 

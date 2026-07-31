@@ -33,7 +33,7 @@ from audit_radar_theme import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_VISUALS_DIR = ROOT / "docs/archive/compliance/alignment_audit_visuals"
+DEFAULT_VISUALS_DIR = ROOT / "docs/archive/compliance/alignment_audit_visuals/latest"
 CATALOG_PATH = ROOT / "game/data/qa/alignment_audit_catalog.json"
 
 SPEC_DOMAIN_ORDER = [

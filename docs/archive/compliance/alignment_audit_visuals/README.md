@@ -2,47 +2,41 @@
 
 PNG assets referenced by `game/data/qa/alignment_audit_catalog.json` visual packs.
 
+## Layout (v1.5+)
+
+```
+alignment_audit_visuals/
+  latest/     # current management status set (auto-generated / illustrated locked)
+  style/      # tides_* style kit + concept/roadmap packs (rarely change)
+  README.md
+```
+
+| Folder | Purpose | Updated |
+|--------|---------|---------|
+| `latest/` | Live stakeholder slides (`audit_exec_summary.png`, stream radars, …) | Every audit / art regen |
+| `style/` | Illustrated style refs (`tides_*`, `audit_radar_6axis.png`, concepts) | Rarely |
+
+**Per-run versioned copies** (Git LFS):  
+`docs/archive/compliance/alignment_audit_reports/<audit_id>/visuals/`
+
 ## Usage
 
-1. Run alignment audit (auto-generates slide-quality radars + exec summary from live scores):
-
 ```bash
-bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals
+bash tools/run_alignment_audit.sh \
+  --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
 ```
 
-Or regenerate radars only from the latest report:
+Or regenerate matplotlib fallbacks only (skips illustrated locks unless `--force`):
 
 ```bash
-python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json
+python3 tools/generate_audit_radar_images.py \
+  --report artifacts/alignment_audits/latest.json \
+  --output-dir docs/archive/compliance/alignment_audit_visuals/latest
 ```
 
-2. Copy other review / agent-generated PNGs into this directory using the filenames in the catalog.
-3. Open `artifacts/alignment_dashboard.html` for the stakeholder gallery.
+## Style
 
-## Auto-generated (each audit)
-
-| File | Source |
-|------|--------|
-| `audit_exec_summary.png` | **Primary slide** — illustrated tides_ JRPG aesthetic (locked) |
-| `audit_radar_spec.png` | Spec stream — illustrated (locked) |
-| `audit_radar_build.png` | Build / AWAITING TIDE — illustrated (locked) |
-| `audit_radar_report.png` | Side-by-side — illustrated (locked) |
-
-**Style:** Match `tides_audit_*.png` (navy/gold/teal, ornate frame, Japanese motifs). Matplotlib does **not** overwrite locked management art unless `--force`.
-
-**Do not use** legacy mega dashboard for management status — prefer illustrated `audit_exec_summary.png` / `audit_radar_spec.png` / `audit_radar_build.png`.
-
-## Packs (6 batches, 33 assets)
-
-| Batch | Prefix / files |
-|-------|----------------|
-| 1 Foundation | `concept_ruined_village.png`, `audit_radar_spec.png`, `audit_radar_build.png`, `audit_radar_6axis.png` (legacy), `roadmap_6phase.png` |
-| 2 Zones | `tides_concept_beach_shore.png`, `tides_concept_palace_gate.png`, … |
-| 3 Endings | `tides_concept_tidal_caves.png`, `tides_concept_three_endings.png`, … |
-| 4 Combat/audio | `tides_combat_*.png`, `tides_audit_combat_*.png`, … |
-| 5 QA flow | `tides_visualqa_*.png`, `tides_audit_visual_qa.png`, … |
-| 6 Steam | `tides_steam_*.png`, `tides_mega_dashboard_all_radars.png` |
+Match `style/tides_audit_radar_updated.png` — navy parchment, gold frame, teal radar.  
+See `docs/ops/qa/alignment/visuals/stakeholder_visuals.md`.
 
 Full manifest: `game/data/qa/alignment_audit_catalog.json` → `visual_packs`.
-
-**Note:** Images are optional for CI. Missing files show as placeholders in the HTML dashboard until bundled.

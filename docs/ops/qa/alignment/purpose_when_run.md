@@ -34,6 +34,9 @@ Produces a **repeatable alignment audit** with:
 | Markdown report | `artifacts/alignment_audits/latest.md` |
 | HTML stakeholder dashboard | `artifacts/alignment_dashboard.html` |
 | **Committed history (GitHub)** | `docs/archive/compliance/alignment_audit_reports/<audit_id>/` |
+| Per-run visual snapshots (LFS) | `…/alignment_audit_reports/<audit_id>/visuals/` |
+| Latest management PNGs | `docs/archive/compliance/alignment_audit_visuals/latest/` |
+| Style kit (`tides_*`) | `docs/archive/compliance/alignment_audit_visuals/style/` |
 | History index | `docs/archive/compliance/alignment_audit_history.json` |
 | Timestamped artifact folder | `artifacts/alignment_audits/<audit_id>/` |
 
@@ -89,7 +92,7 @@ On **`game/development`**, both streams score independently. Verdict = worst app
 bash tools/run_alignment_audit.sh
 
 # With stakeholder visuals bundled from a directory
-bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals
+bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
 
 # Fast check without re-running CI (uses skip — scores approximate)
 bash tools/run_alignment_audit.sh --skip-ci --trigger quick_check

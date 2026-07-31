@@ -32,7 +32,7 @@ PM should run alignment audit after any registry change:
 bash tools/run_alignment_audit.sh --trigger post_merge --note "workflow integration update"
 ```
 
-**Management visuals:** Prefer illustrated `audit_exec_summary.png` / `audit_radar_spec.png` / `audit_radar_build.png` matching the `tides_*` JRPG aesthetic (navy/gold/teal, ornate frame). Do not use flat matplotlib or `tides_mega_dashboard_all_radars.png` for executive readiness. Illustrated files are locked via `visual_policy.illustrated_locked_filenames`.
+**Management visuals:** Prefer illustrated slides in `alignment_audit_visuals/latest/` (style kit in `style/`). Per-run snapshots: `alignment_audit_reports/<audit_id>/visuals/` (Git LFS). Do not use flat matplotlib or mega dashboard for executive readiness.
 
 **Full-surface example:** `alignment_audit` is the reference registry entry — script hooks (`alignment_audit_lib.py`, `generate_audit_radar_images.py`), `visual_policy` in catalog, all `standard_agent_surfaces`, and report/HTML management sections must ship together.
 

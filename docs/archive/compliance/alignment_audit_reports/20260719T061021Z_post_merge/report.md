@@ -143,47 +143,47 @@ On `main`, build stream is N/A but domain signal previews still generate.
 
 ## Stream radars (overview)
 
-![Two-stream radar report](../../alignment_audit_visuals/audit_radar_report.png)
+![Two-stream radar report](visuals/audit_radar_report.png)
 *Two-stream radar report (auto-generated)*
-![Spec readiness radar](../../alignment_audit_visuals/audit_radar_spec.png)
+![Spec readiness radar](visuals/audit_radar_spec.png)
 *Spec readiness radar (auto-generated)*
-![Build readiness radar](../../alignment_audit_visuals/audit_radar_build.png)
+![Build readiness radar](visuals/audit_radar_build.png)
 *Build readiness radar (auto-generated)*
 
 ## Spec sub-radar breakdown (6 domains)
 
 Each panel shows signal-level scores within one spec domain.
 
-![Spec sub-radar breakdown (6 domains)](../../alignment_audit_visuals/audit_radar_spec_breakdown.png)
+![Spec sub-radar breakdown (6 domains)](visuals/audit_radar_spec_breakdown.png)
 *Spec sub-radar breakdown (6 domains) (auto-generated)*
 
 ## Spec domain sub-radars (detail)
 
-![Data Alignment sub-radar](../../alignment_audit_visuals/audit_radar_spec_data_alignment.png)
+![Data Alignment sub-radar](visuals/audit_radar_spec_data_alignment.png)
 *Data Alignment sub-radar (auto-generated)*
-![Narrative sub-radar](../../alignment_audit_visuals/audit_radar_spec_narrative.png)
+![Narrative sub-radar](visuals/audit_radar_spec_narrative.png)
 *Narrative sub-radar (auto-generated)*
-![Gameplay sub-radar](../../alignment_audit_visuals/audit_radar_spec_gameplay.png)
+![Gameplay sub-radar](visuals/audit_radar_spec_gameplay.png)
 *Gameplay sub-radar (auto-generated)*
-![Visual Spec sub-radar](../../alignment_audit_visuals/audit_radar_spec_visual_spec.png)
+![Visual Spec sub-radar](visuals/audit_radar_spec_visual_spec.png)
 *Visual Spec sub-radar (auto-generated)*
-![UX & Controls sub-radar](../../alignment_audit_visuals/audit_radar_spec_ux_controls.png)
+![UX & Controls sub-radar](visuals/audit_radar_spec_ux_controls.png)
 *UX & Controls sub-radar (auto-generated)*
-![PM Workflow sub-radar](../../alignment_audit_visuals/audit_radar_spec_pm_workflow.png)
+![PM Workflow sub-radar](visuals/audit_radar_spec_pm_workflow.png)
 *PM Workflow sub-radar (auto-generated)*
 
 ## Build sub-radar breakdown (2 domains)
 
 Each panel shows signal-level scores within one build domain.
 
-![Build sub-radar breakdown (2 domains)](../../alignment_audit_visuals/audit_radar_build_breakdown.png)
+![Build sub-radar breakdown (2 domains)](visuals/audit_radar_build_breakdown.png)
 *Build sub-radar breakdown (2 domains) (auto-generated)*
 
 ## Build domain sub-radars (detail)
 
-![Runtime Proof sub-radar](../../alignment_audit_visuals/audit_radar_build_runtime_proof.png)
+![Runtime Proof sub-radar](visuals/audit_radar_build_runtime_proof.png)
 *Runtime Proof sub-radar (auto-generated)*
-![Steam Ship sub-radar](../../alignment_audit_visuals/audit_radar_build_steam_ship.png)
+![Steam Ship sub-radar](visuals/audit_radar_build_steam_ship.png)
 *Steam Ship sub-radar (auto-generated)*
 
 ---

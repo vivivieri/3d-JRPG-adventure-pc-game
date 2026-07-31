@@ -5,8 +5,8 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 645
-summary: "Six visual packs (33 assets) are catalogued for executive updates:"
+tokens_est: 520
+summary: "Stakeholder audit visuals: latest/ + style/ + per-run visuals/ snapshots"
 ---
 # Alignment — Visuals / History / Integration — Stakeholder visuals
 
@@ -14,44 +14,46 @@ summary: "Six visual packs (33 assets) are catalogued for executive updates:"
 
 ## When to read
 
-Use **Alignment — Visuals / History / Integration — Stakeholder visuals** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+Use when placing or regenerating alignment audit PNGs for stakeholder updates.
 
+## Storage layout
 
+| Path | Role |
+|------|------|
+| `docs/archive/compliance/alignment_audit_visuals/latest/` | Current management set (regen target) |
+| `docs/archive/compliance/alignment_audit_visuals/style/` | `tides_*` style kit + concept/roadmap packs |
+| `docs/archive/compliance/alignment_audit_reports/<audit_id>/visuals/` | **Versioned** per-run snapshot (Git LFS) |
 
-## 7. Stakeholder visuals
+**Do not** dump versioned runs only into the shared root — that overwrites history.
 
-Six visual packs (33 assets) are catalogued for executive updates:
-
-| Pack | Title | Assets |
-|------|-------|--------|
-| `batch_01_foundation` | Foundation review | 3 |
-| `batch_02_zones` | Zones & alignment | 6 |
-| `batch_03_endings_dispatch` | Endings & P1-00 | 6 |
-| `batch_04_combat_audio` | Combat & audio QA | 6 |
-| `batch_05_qa_flow` | Visual/model/flow QA | 6 |
-| `batch_06_steam_mega` | Steam ship & mega dashboard | 6 |
-
-**Store PNGs** under `docs/archive/compliance/alignment_audit_visuals/` (committed) or pass `--visuals-from <dir>` at audit time.
-
-**Auto-generated each audit run** (from live `report.json` scores — do not hand-edit):
+## Auto-generated management set (`latest/`)
 
 | File | Content |
 |------|---------|
-| `audit_exec_summary.png` | **Primary presentation slide** — illustrated tides_ aesthetic |
-| `audit_radar_report.png` | Side-by-side spec + build (illustrated) |
-| `audit_radar_spec.png` | Spec stream radar (6 domains, illustrated) |
-| `audit_radar_spec_breakdown.png` | Spec domain grid (illustrated) |
-| `audit_radar_spec_<domain>.png` | Individual technical sub-radar (matplotlib fallback OK) |
-| `audit_radar_build.png` | Build stream radar or **AWAITING TIDE** card (illustrated) |
-| `audit_radar_build_breakdown.png` | Build domain grid (matplotlib fallback OK) |
-| `audit_radar_build_<domain>.png` | Individual build sub-radar |
+| `audit_exec_summary.png` | Primary illustrated exec slide |
+| `audit_radar_report.png` | Spec + build two-stream |
+| `audit_radar_spec.png` | Spec stream radar |
+| `audit_radar_spec_breakdown.png` | Spec domain grid |
+| `audit_radar_build.png` | Build radar or AWAITING TIDE |
+| `audit_radar_*_<domain>.png` | Technical sub-radars (matplotlib OK if unlocked) |
 
-**Style authority:** Match `tides_audit_radar_updated.png` / `audit_radar_6axis.png` — navy parchment, gold ornate frame, moon/clouds/pagoda/waves, teal radar fill, gold circular axis icons. **Not** flat matplotlib corporate charts.
+Illustrated locks: `visual_policy.illustrated_locked_filenames` — preserved unless `generate_audit_radar_images.py --force`.
 
-Management illustrated files are listed in `visual_policy.illustrated_locked_filenames` and are **preserved** on audit runs unless `generate_audit_radar_images.py --force`. Regenerate illustrated art via GameLab / image gen with `tides_*` references + live scores.
+**Style authority:** `style/tides_audit_radar_updated.png` (navy/gold/teal ornate JRPG).
 
-Matplotlib (`tools/audit_radar_theme.py`) remains for unlocked technical sub-radars only.
+## Commands
 
-Agent-generated review images can be copied into that folder before running the audit so the HTML dashboard embeds them.
+```bash
+bash tools/run_alignment_audit.sh \
+  --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
+```
 
----
+Regenerate matplotlib fallbacks into `latest/` (skips locks):
+
+```bash
+python3 tools/generate_audit_radar_images.py \
+  --report artifacts/alignment_audits/latest.json \
+  --output-dir docs/archive/compliance/alignment_audit_visuals/latest
+```
+
+Legacy mega dashboard / 6-axis art live under `style/` and are **not** management status.

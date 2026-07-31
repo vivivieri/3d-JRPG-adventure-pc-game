@@ -40,7 +40,7 @@ Run **both** at phase exit: stakeholder report for schedule; alignment audit for
 
 ```
 1. bash tools/run_alignment_audit.sh --trigger post_merge --note "<PR or commit summary>" \
-     --visuals-from docs/archive/compliance/alignment_audit_visuals
+     --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
 2. Read docs/archive/compliance/alignment_audit_reports/<audit_id>/report.md — cite verdict + P0 items
 3. Commit docs/archive/compliance/alignment_audit_reports/<audit_id>/ and alignment_audit_history.json on main
 ```

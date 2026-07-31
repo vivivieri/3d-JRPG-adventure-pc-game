@@ -52,6 +52,30 @@ def main() -> int:
     if mgmt_files & deprecated_files:
         errors.append("visual_policy: file cannot be both management and deprecated_for_management")
 
+    outputs = data.get("outputs", {})
+    for key in ("shared_visuals_dir", "style_visuals_dir", "visuals_root_dir"):
+        if key not in outputs:
+            errors.append(f"outputs missing {key}")
+        else:
+            path = ROOT / outputs[key]
+            if not path.is_dir():
+                errors.append(f"outputs.{key} directory missing: {outputs[key]}")
+    if outputs.get("archive_visual_snapshots") is not True:
+        errors.append("outputs.archive_visual_snapshots must be true (per-audit visuals/ snapshots)")
+
+    gitattributes = ROOT / ".gitattributes"
+    if gitattributes.is_file():
+        ga = gitattributes.read_text(encoding="utf-8")
+        for needle in (
+            "alignment_audit_visuals/latest/**/*.png",
+            "alignment_audit_visuals/style/**/*.png",
+            "alignment_audit_reports/**/visuals/**/*.png",
+        ):
+            if needle not in ga:
+                errors.append(f".gitattributes missing LFS pattern for {needle}")
+    else:
+        errors.append("missing .gitattributes")
+
     pack_filenames: set[str] = set()
     for pack in data.get("visual_packs", []):
         for asset in pack.get("assets", []):
@@ -77,6 +101,8 @@ def main() -> int:
             "enrich_visual_manifest",
             "generate_audit_radars",
             "signal_scores",
+            "resolve_visual_file",
+            "style_visuals_dir",
         ):
             if needle not in lib_text:
                 errors.append(f"alignment_audit_lib.py missing hook '{needle}'")

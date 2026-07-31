@@ -1,24 +1,26 @@
 {
-  "version": "1.4",
+  "version": "1.5",
   "authority": "docs/ops/qa/ALIGNMENT_AUDIT.md",
   "description": "Standard alignment audit domains, scoring signals, recommendation rules, and stakeholder visual packs.",
   "outputs": {
     "artifacts_dir": "artifacts/alignment_audits",
     "committed_reports_dir": "docs/archive/compliance/alignment_audit_reports",
-    "shared_visuals_dir": "docs/archive/compliance/alignment_audit_visuals",
+    "shared_visuals_dir": "docs/archive/compliance/alignment_audit_visuals/latest",
+    "style_visuals_dir": "docs/archive/compliance/alignment_audit_visuals/style",
+    "visuals_root_dir": "docs/archive/compliance/alignment_audit_visuals",
     "history_index": "docs/archive/compliance/alignment_audit_history.json",
     "latest_json": "artifacts/alignment_audits/latest.json",
     "latest_markdown": "artifacts/alignment_audits/latest.md",
     "latest_html": "artifacts/alignment_dashboard.html",
     "visuals_subdir": "visuals",
     "history_keep": 100,
-    "committed_history_keep": 50,
-    "archive_visual_snapshots": false
+    "committed_history_keep": 20,
+    "archive_visual_snapshots": true
   },
   "visual_policy": {
     "generator_script": "tools/generate_audit_radar_images.py",
-    "style_authority": "docs/archive/compliance/alignment_audit_visuals/tides_audit_radar_updated.png",
-    "style_notes": "Management status PNGs must match the illustrated tides_* JRPG aesthetic (navy parchment, gold frame, moon/clouds/pagoda, teal radar, gold axis icons) — not flat matplotlib dashboards. Regenerate via GameLab / image gen with tides_ refs; matplotlib only fills unlocked technical sub-radars.",
+    "style_authority": "docs/archive/compliance/alignment_audit_visuals/style/tides_audit_radar_updated.png",
+    "style_notes": "Management status PNGs live in alignment_audit_visuals/latest/ and must match the illustrated tides_* JRPG aesthetic in style/. Per-run copies go to alignment_audit_reports/<audit_id>/visuals/ (Git LFS). Matplotlib only fills unlocked technical sub-radars unless --force.",
     "illustrated_locked_filenames": [
       "audit_exec_summary.png",
       "audit_radar_spec.png",
@@ -307,7 +309,7 @@
       "when": "visuals_missing",
       "min_present": 30,
       "title": "Refresh stakeholder visual pack",
-      "action": "Copy PNGs to docs/archive/compliance/alignment_audit_visuals/ then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals"
+      "action": "Place illustrated management PNGs in docs/archive/compliance/alignment_audit_visuals/latest/ (style refs in style/), then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest"
     },
     {
       "id": "REC_WORKFLOW_DRIFT",
