@@ -45,7 +45,30 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    report = ROOT / "artifacts" / f"docs_pack_{args.issue}.json"
+    issue_raw = str(args.issue).strip()
+    report = ROOT / "artifacts" / f"docs_pack_{issue_raw}.json"
+    board_issue_id = issue_raw
+    if not report.is_file():
+        # Allow GitHub issue numbers: map 130 → P1-01 via sprint_board
+        board_path = ROOT / "game/data/qa/sprint_board.json"
+        if board_path.is_file():
+            try:
+                board = json.loads(board_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                print(
+                    f"[WARN] docs_pack adherence: sprint_board unreadable ({exc})",
+                    file=sys.stderr,
+                )
+                board = {}
+            for row in board.get("issues") or []:
+                if str(row.get("github_issue") or "") == issue_raw or str(
+                    row.get("id") or ""
+                ) == issue_raw:
+                    board_issue_id = str(row.get("id") or issue_raw)
+                    alt = ROOT / "artifacts" / f"docs_pack_{board_issue_id}.json"
+                    if alt.is_file():
+                        report = alt
+                    break
     if not report.is_file():
         print(f"[WARN] docs_pack adherence: missing {report.relative_to(ROOT)}")
         return 0
@@ -70,8 +93,30 @@ def main() -> int:
             "docs/README.md",
         }
     )
+    # Sprint issue leaves are never_autoload for resolve_docs, but reading the
+    # active issue pack (or GitHub #N body mirror) is legitimate for the session.
+    issue_key = str(board_issue_id).strip().upper().replace("_", "-")
+    for path in (
+        ROOT.joinpath("docs/ops/sprints").rglob("*.md")
+        if (ROOT / "docs/ops/sprints").is_dir()
+        else []
+    ):
+        rel = path.relative_to(ROOT).as_posix()
+        stem = path.stem.upper().replace("_", "-")
+        text_head = path.read_text(encoding="utf-8", errors="replace")[:2000]
+        if issue_key and (
+            issue_key in stem
+            or f"## {issue_key} " in text_head
+            or f"## {issue_key}—" in text_head
+            or f"## {issue_key} —" in text_head
+        ):
+            allowed.add(rel)
 
-    default_log = ROOT / "artifacts" / f"docs_reads_{args.issue}.log"
+    default_log = ROOT / "artifacts" / f"docs_reads_{board_issue_id}.log"
+    if not default_log.is_file() and issue_raw != board_issue_id:
+        alt_log = ROOT / "artifacts" / f"docs_reads_{issue_raw}.log"
+        if alt_log.is_file():
+            default_log = alt_log
     reads_file = args.reads_file or os.environ.get("DOCS_READ_LOG") or str(default_log)
     reads_path = Path(reads_file)
     if not reads_path.is_file():
