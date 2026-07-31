@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 464
+tokens_est: 535
 summary: "Silhouettes, environment, UI style"
 ---
 # Art Direction — Silhouettes, environment, UI style

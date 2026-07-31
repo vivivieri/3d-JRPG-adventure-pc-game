@@ -4,8 +4,8 @@ type: reference
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 567
-summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
+tokens_est: 628
+summary: "Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style."
 ---
 # R&R — performance-review-required
 

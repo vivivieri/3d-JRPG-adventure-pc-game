@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 824
+tokens_est: 869
 summary: "One issue → one feature branch → one PR → merge → cycle event."
 ---
 # Multi-Agent Branch Strategy

@@ -2,11 +2,12 @@
 """Print role/task-scoped doc packs from docs/INDEX.yaml (agent progressive disclosure).
 
 Supports:
-  --issue     union sprint_board handoff_refs (+ briefs auto-attach)
+  --issue     union sprint_board handoff_refs (+ briefs auto-attach + zone packs)
   --task      union INDEX.yaml tasks.<id> pack
   --phase     drop optional docs whose frontmatter phase: list excludes N
   --budget    trim non-protected paths by tokens_est
-  --report    write kept/deferred/token summary artifact
+  --report    write kept/deferred/token summary artifact (.txt + .json)
+  --remap-role  map builder→builder_zone etc. from docs_task (default with --issue)
 """
 from __future__ import annotations
 
@@ -21,6 +22,25 @@ INDEX = ROOT / "docs" / "INDEX.yaml"
 BOARD = ROOT / "game/data/qa/sprint_board.json"
 BRIEFS = ROOT / "docs" / "briefs"
 TASK_HINTS = ROOT / "game/data/qa/docs_task_hints.json"
+ZONE_PACK_ROOTS = (
+    ("docs/design/world/env_kits", "{stem}.md"),
+    ("docs/design/world/levels", "{stem}.md"),
+)
+ZONE_STEMS = (
+    "ruined_village",
+    "beach_shore",
+    "tidal_caves",
+    "dragon_palace",
+)
+
+sys.path.insert(0, str(ROOT / "tools"))
+try:
+    from docs_role_map import remap_docs_role  # type: ignore
+except ImportError as exc:  # pragma: no cover
+    print(f"[WARN] docs_role_map unavailable ({exc}); identity remap", file=sys.stderr)
+
+    def remap_docs_role(agent: str, task_id: str | None) -> str:  # type: ignore
+        return agent or "builder"
 
 
 def _load_index() -> dict:
@@ -132,10 +152,25 @@ def _tokens_est(rel: str) -> int:
     return max(100, path.stat().st_size // 4)
 
 
+def _summary_is_useless(raw: str) -> bool:
+    s = raw.strip().strip("\"'")
+    if not s or len(s) < 20:
+        return True
+    if s.startswith("**Version") or s.startswith("**Hub") or s.startswith("**Authority"):
+        return True
+    if s.startswith("**Problem") or s.startswith("**Purpose") or s.startswith("**Print"):
+        return True
+    if re.search(r"\[`[^`]+`\]\([^)]+\)", s) and len(s) < 80:
+        return True  # hub-link-only summaries
+    if s.startswith("[`") and "](" in s:
+        return True
+    return False
+
+
 def _summary(rel: str) -> str:
     raw = _frontmatter(rel).get("summary", "").strip().strip("\"'")
-    if raw and not raw.startswith("**Version") and not raw.startswith("**Hub") and not raw.startswith("**Authority"):
-        return raw
+    if raw and not _summary_is_useless(raw):
+        return raw[:160]
     path = ROOT / rel
     if not path.is_file():
         return ""
@@ -149,11 +184,15 @@ def _summary(rel: str) -> str:
             continue
         if s.startswith("**Hub") or s.startswith("**Version") or s.startswith("**Authority") or s.startswith("**Cross"):
             continue
+        if s.startswith("> Full detail"):
+            continue
         s = re.sub(r"^\*\*[^*]+\*\*\s*—?\s*", "", s)
         s = re.sub(r"\s+", " ", s).strip()
+        if _summary_is_useless(s):
+            continue
         if len(s) >= 20:
             return s[:160]
-    return raw if raw else ""
+    return ""
 
 
 def _infer_docs_task(row: dict, known_tasks: dict) -> str | None:
@@ -241,11 +280,7 @@ def _brief_catalog() -> dict[str, str]:
     return out
 
 
-def _match_briefs(row: dict) -> list[str]:
-    """Attach generation briefs whose stem appears in title / refs / readiness id."""
-    catalog = _brief_catalog()
-    if not catalog:
-        return []
+def _issue_hay(row: dict) -> str:
     parts = [
         str(row.get("title") or ""),
         str(row.get("generation_readiness_id") or ""),
@@ -253,7 +288,15 @@ def _match_briefs(row: dict) -> list[str]:
         " ".join(str(x) for x in (row.get("implementation_plan_tasks") or [])),
         str(row.get("docs_task") or ""),
     ]
-    hay = " ".join(parts).lower().replace("-", "_")
+    return " ".join(parts).lower().replace("-", "_")
+
+
+def _match_briefs(row: dict) -> list[str]:
+    """Attach generation briefs whose stem appears in title / refs / readiness id."""
+    catalog = _brief_catalog()
+    if not catalog:
+        return []
+    hay = _issue_hay(row)
     hay_compact = re.sub(r"[^a-z0-9]+", "", hay)
     matched: list[str] = []
     for stem, rel in sorted(catalog.items(), key=lambda kv: -len(kv[0])):
@@ -265,6 +308,25 @@ def _match_briefs(row: dict) -> list[str]:
             stem_compact in hay_compact
         ):
             matched.append(rel)
+    return _dedupe(matched)
+
+
+def _match_zone_packs(row: dict) -> list[str]:
+    """Attach env_kits/<zone>.md + levels/<zone>.md when stem appears in issue text."""
+    hay = _issue_hay(row)
+    hay_compact = re.sub(r"[^a-z0-9]+", "", hay)
+    matched: list[str] = []
+    for stem in ZONE_STEMS:
+        stem_compact = re.sub(r"[^a-z0-9]+", "", stem)
+        if not (
+            re.search(rf"(?<![a-z0-9]){re.escape(stem)}(?![a-z0-9])", hay)
+            or stem_compact in hay_compact
+        ):
+            continue
+        for root, pattern in ZONE_PACK_ROOTS:
+            rel = f"{root}/{pattern.format(stem=stem)}"
+            if (ROOT / rel).is_file():
+                matched.append(rel)
     return _dedupe(matched)
 
 
@@ -325,8 +387,10 @@ def _write_report(
     path: Path,
     *,
     role: str,
+    role_requested: str,
     issue: str | None,
     task: str | None,
+    task_inferred: bool,
     phase: int | None,
     budget: int,
     must_kept: list[str],
@@ -334,23 +398,30 @@ def _write_report(
     deferred_budget: list[str],
     deferred_phase: list[str],
     briefs: list[str],
+    zone_packs: list[str],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
         f"role: {role}",
+        f"role_requested: {role_requested}",
         f"issue: {issue or ''}",
         f"task: {task or ''}",
+        f"task_inferred: {str(task_inferred).lower()}",
         f"phase: {phase if phase is not None else ''}",
         f"budget: {budget or 'unlimited'}",
         f"briefs_attached: {len(briefs)}",
+        f"zone_packs_attached: {len(zone_packs)}",
         "",
         "# must_read",
     ]
     total = 0
+    must_costs: list[dict] = []
     for p in must_kept:
         cost = _tokens_est(p)
         total += cost
         lines.append(f"{cost:5d}  {p}")
+        must_costs.append({"path": p, "tokens_est": cost, "summary": _summary(p)})
+    opt_costs: list[dict] = []
     if opt_kept:
         lines.append("")
         lines.append("# optional")
@@ -358,24 +429,54 @@ def _write_report(
             cost = _tokens_est(p)
             total += cost
             lines.append(f"{cost:5d}  {p}")
+            opt_costs.append({"path": p, "tokens_est": cost, "summary": _summary(p)})
+    deferred_rows: list[dict] = []
     if deferred_budget:
         lines.append("")
         lines.append("# deferred_over_budget")
         for p in deferred_budget:
             tip = _summary(p)
             suffix = f"  — {tip}" if tip else ""
-            lines.append(f"{_tokens_est(p):5d}  {p}{suffix}")
+            cost = _tokens_est(p)
+            lines.append(f"{cost:5d}  {p}{suffix}")
+            deferred_rows.append(
+                {"path": p, "tokens_est": cost, "summary": tip, "reason": "budget"}
+            )
     if deferred_phase:
         lines.append("")
         lines.append("# deferred_out_of_phase")
         for p in deferred_phase:
             tip = _summary(p)
             suffix = f"  — {tip}" if tip else ""
-            lines.append(f"{_tokens_est(p):5d}  {p}{suffix}")
+            cost = _tokens_est(p)
+            lines.append(f"{cost:5d}  {p}{suffix}")
+            deferred_rows.append(
+                {"path": p, "tokens_est": cost, "summary": tip, "reason": "phase"}
+            )
     lines.append("")
     lines.append(f"tokens_kept_est: {total}")
     lines.append(f"deferred_count: {len(deferred_budget) + len(deferred_phase)}")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    payload = {
+        "role": role,
+        "role_requested": role_requested,
+        "issue": issue,
+        "task": task,
+        "task_inferred": task_inferred,
+        "phase": phase,
+        "budget": budget or None,
+        "briefs": briefs,
+        "zone_packs": zone_packs,
+        "must_read": must_costs,
+        "optional": opt_costs,
+        "deferred": deferred_rows,
+        "tokens_kept_est": total,
+        "deferred_count": len(deferred_rows),
+        "allowed_read_paths": must_kept + opt_kept + [d["path"] for d in deferred_rows],
+    }
+    json_path = path.with_suffix(".json") if path.suffix else Path(str(path) + ".json")
+    json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -413,6 +514,22 @@ def main() -> int:
         action="store_true",
         help="Disable brief auto-attach from issue title/refs",
     )
+    parser.add_argument(
+        "--no-zone-packs",
+        action="store_true",
+        help="Disable zone env_kits/levels auto-attach",
+    )
+    parser.add_argument(
+        "--remap-role",
+        action="store_true",
+        default=None,
+        help="Remap builder→builder_zone etc. from docs_task (default on with --issue)",
+    )
+    parser.add_argument(
+        "--no-remap-role",
+        action="store_true",
+        help="Keep the role argument as-is (no specialty remap)",
+    )
     args = parser.parse_args()
 
     data = _load_index()
@@ -443,11 +560,7 @@ def main() -> int:
         )
         return 2
 
-    if args.role not in roles:
-        print(f"unknown role: {args.role}", file=sys.stderr)
-        print("known:", ", ".join(sorted(roles)), file=sys.stderr)
-        return 1
-
+    role_requested = args.role
     task_id = args.task
     task_inferred = False
     row = _issue_row(args.issue) if args.issue else None
@@ -464,6 +577,20 @@ def main() -> int:
         task_id = None
         task_inferred = False
 
+    do_remap = False
+    if args.no_remap_role:
+        do_remap = False
+    elif args.remap_role:
+        do_remap = True
+    elif args.issue:
+        do_remap = True
+    role = remap_docs_role(role_requested, task_id) if do_remap else role_requested
+
+    if role not in roles:
+        print(f"unknown role: {role}", file=sys.stderr)
+        print("known:", ", ".join(sorted(roles)), file=sys.stderr)
+        return 1
+
     phase = args.phase
     if phase is None and row and row.get("phase") is not None:
         try:
@@ -475,17 +602,20 @@ def main() -> int:
             )
             phase = None
 
-    pack = roles[args.role]
+    pack = roles[role]
     task_pack = tasks.get(task_id) if task_id else None
     boot = list(data.get("boot") or [])
     issue_docs = _issue_doc_refs(row) if row else []
     briefs = [] if args.no_briefs or not row else _match_briefs(row)
+    zone_packs = [] if args.no_zone_packs or not row else _match_zone_packs(row)
 
     task_must = list(task_pack.get("must_read") or []) if task_pack else []
     task_opt = list(task_pack.get("optional") or []) if task_pack else []
 
-    # Boot → issue + briefs → task must → role must
-    must = _dedupe(boot + issue_docs + briefs + task_must + list(pack.get("must_read") or []))
+    # Boot → issue + briefs + zone packs → task must → role must
+    must = _dedupe(
+        boot + issue_docs + briefs + zone_packs + task_must + list(pack.get("must_read") or [])
+    )
     optional: list[str] = []
     if not args.must_only:
         optional = _dedupe(task_opt + list(pack.get("optional") or []))
@@ -494,7 +624,9 @@ def main() -> int:
     # Phase filter applies to optional only (must/issue always kept)
     optional, deferred_phase = _filter_phase(optional, phase)
 
-    print(f"# role: {args.role}")
+    print(f"# role: {role}")
+    if role != role_requested:
+        print(f"# role_requested: {role_requested} (remapped via docs_task)")
     if args.issue:
         print(f"# issue: {args.issue}")
     if task_id:
@@ -503,16 +635,20 @@ def main() -> int:
         print(f"# phase: {phase}")
     if briefs:
         print(f"# briefs: {len(briefs)} auto-attached")
+    if zone_packs:
+        print(f"# zone_packs: {len(zone_packs)} auto-attached")
     if args.budget > 0:
         print(f"# budget: {args.budget} tokens (approx)")
 
-    protected = _dedupe(boot + issue_docs + briefs)
+    protected = _dedupe(boot + issue_docs + briefs + zone_packs)
     role_must = [p for p in must if p not in protected]
     label_bits = ["boot"]
     if issue_docs:
         label_bits.append("issue handoff_refs")
     if briefs:
         label_bits.append("briefs")
+    if zone_packs:
+        label_bits.append("zone packs")
     if task_must:
         label_bits.append("task")
     print("# must_read (+ " + " + ".join(label_bits) + ")")
@@ -556,9 +692,11 @@ def main() -> int:
     if args.report:
         _write_report(
             Path(args.report),
-            role=args.role,
+            role=role,
+            role_requested=role_requested,
             issue=args.issue,
             task=task_id,
+            task_inferred=task_inferred,
             phase=phase,
             budget=args.budget,
             must_kept=must_kept,
@@ -566,8 +704,10 @@ def main() -> int:
             deferred_budget=deferred_budget,
             deferred_phase=deferred_phase,
             briefs=briefs,
+            zone_packs=zone_packs,
         )
         print(f"# report: {args.report}", file=sys.stderr)
+        print(f"# report_json: {Path(args.report).with_suffix('.json')}", file=sys.stderr)
 
     all_printed = must_kept + opt_kept
     if args.check:

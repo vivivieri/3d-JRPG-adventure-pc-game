@@ -5,7 +5,7 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: vision
-tokens_est: 1259
+tokens_est: 1301
 summary: "**Policy:** Short VO at emotional peaks only — **not** full dialogue."
 ---
 # Tides of Urashima — Selective VO Hit List (AI generation)

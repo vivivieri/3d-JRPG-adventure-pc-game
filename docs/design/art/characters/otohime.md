@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 509
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 542
+summary: "Moral mirror; not playable"
 ---
 # Character — Otohime
 

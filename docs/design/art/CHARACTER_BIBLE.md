@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 783
+tokens_est: 838
 summary: "High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds."
 ---
 # Tides of Urashima — Character Bible

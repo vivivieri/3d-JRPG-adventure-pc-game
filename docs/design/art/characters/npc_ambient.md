@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 794
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 859
+summary: "Low-poly crowd and ambient life — **excluded** from `hero_jury` and `L2_model_jury`. Zone composition counts apply (`zone_composition.json` max props). See `gam"
 ---
 # Characters — NPC / ambient
 

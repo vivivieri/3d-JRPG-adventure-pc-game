@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 640
-summary: "[`MCP_STACK.md`](../MCP_STACK.md)"
+tokens_est: 685
+summary: "`docs/ops/agents/PLUGIN_INSTALL_GUIDE.md`, `docs/ops/agents/GDAI_CLOUD_SETUP.md`"
 ---
 # MCP — Install
 

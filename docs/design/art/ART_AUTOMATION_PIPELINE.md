@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 700
+tokens_est: 393
 summary: "Tool tiers and workflows — load the asset class you are generating"
 ---
 # Art Automation Pipeline
@@ -27,7 +27,3 @@ summary: "Tool tiers and workflows — load the asset class you are generating"
 **Authority:** When this doc conflicts with older “hand-painted / commission” language elsewhere, **this doc wins** for production tooling.
 
 **Principle:** Ship **high-detail stylized Japanese 3D** using the **best automated tool per job**. Quality over cost — paid tools are fine when no free option matches output. **No human artists** in the art or audio production path (modeling, texturing, painting, mixing, VO performance). **Human playtest** (L6) is separate — see `docs/ops/qa/PLAYTEST_SCRIPT.md`.
-
-**Cross-refs:** `docs/design/art/ART_DIRECTION.md`, `docs/ops/agents/MCP_STACK.md`, `docs/design/art/RENDERING_GUIDE.md`, `docs/design/audio/AUDIO_PRODUCTION_GUIDE.md`, `docs/design/art/ASSET_COMPLIANCE.md`, `docs/design/art/GENERATION_READINESS.md` (per-asset briefs + human-expectation gaps), `.cursorrules` §0
-
----

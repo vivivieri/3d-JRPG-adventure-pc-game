@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 900
+tokens_est: 245
 summary: "Phase-gated Agile process for the AI factory"
 ---
 # Agile Within Phases

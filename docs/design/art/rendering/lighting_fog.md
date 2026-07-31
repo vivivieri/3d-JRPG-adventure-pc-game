@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 427
-summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
+tokens_est: 491
+summary: "(`ART_DIRECTION.md` §3.7)."
 ---
 # Rendering — Lighting & fog
 

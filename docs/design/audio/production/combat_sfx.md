@@ -5,8 +5,8 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 1243
-summary: "[`AUDIO_PRODUCTION_GUIDE.md`](../AUDIO_PRODUCTION_GUIDE.md)"
+tokens_est: 1276
+summary: "→ player touches encounter"
 ---
 # Audio production — Combat & SFX
 

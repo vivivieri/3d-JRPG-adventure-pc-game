@@ -4,8 +4,8 @@ type: reference
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 855
-summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
+tokens_est: 888
+summary: "WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS."
 ---
 # R&R — qa-gate-layers
 

@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 900
+tokens_est: 345
 summary: "load the pack for the QA step you are running."
 ---
 # 3D Model QA — Technical Gates + Turntable Vision Jury

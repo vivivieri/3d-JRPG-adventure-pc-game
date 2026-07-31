@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 400
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 279
+summary: "SC-04 (shack); confirms party SC-12 if missed"
 ---
 # Character — Roku
 

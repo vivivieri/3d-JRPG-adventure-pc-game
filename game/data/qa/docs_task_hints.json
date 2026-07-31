@@ -10,8 +10,39 @@
       "greybox",
       "environment kit",
       "zone visual",
+      "zone palette",
+      "shader spec"
+    ],
+    "visual_qa": [
+      "visual qa",
       "golden screenshot",
-      "ruined_village"
+      "screenshot compare",
+      "zone composition",
+      "vision jury",
+      "visual smoke"
+    ],
+    "acceptance_ci": [
+      "ci green",
+      "gate report",
+      "l0–l2",
+      "l0-l2",
+      "acceptance criteria",
+      "docs ci",
+      "headless gates"
+    ],
+    "audio_bgm": [
+      "bgm",
+      "ace-step",
+      "audio production",
+      "zone music",
+      "loudness"
+    ],
+    "ui_cinematics": [
+      "cinematic",
+      "tab menu",
+      "dialogue ui",
+      "ui frame",
+      "ink-wash"
     ],
     "water_shader": ["water", "foam", "displacement", "water_stylized"],
     "combat_balance": ["combat", "skills", "balance", "progression", "boss"],

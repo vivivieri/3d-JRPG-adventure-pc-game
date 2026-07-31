@@ -4,8 +4,8 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 957
-summary: "[`DATA_ARCHITECTURE.md`](../DATA_ARCHITECTURE.md)"
+tokens_est: 1005
+summary: "python3 tools/validate_story_data.py # L0 gate — run after every data edit"
 ---
 # Data architecture — i18n, validation, schema
 

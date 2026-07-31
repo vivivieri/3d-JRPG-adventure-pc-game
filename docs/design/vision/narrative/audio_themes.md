@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 485
-summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
+tokens_est: 570
+summary: "Lines with `voice_id` in `chapter_01.json` play one short clip; **all other lines stay text-only**."
 ---
 # Narrative — Audio & themes
 

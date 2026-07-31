@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 2048
-summary: "[`AI_DEV_WORKFLOW.md`](../AI_DEV_WORKFLOW.md)"
+tokens_est: 2089
+summary: "A phase is **done** only when **every** criterion below passes. AI agents must check each item explicitly."
 ---
 # AI Dev Workflow — phase acceptance
 

@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1054
+tokens_est: 1097
 summary: "**Scope:** `tools/*.sh` — CI runners, bootstrap, QA orchestration"
 ---
 # Bash / Shell Style Guide — Tides of Urashima

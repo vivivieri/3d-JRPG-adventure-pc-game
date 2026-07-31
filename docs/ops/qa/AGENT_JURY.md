@@ -4,7 +4,7 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1344
+tokens_est: 1410
 summary: "Alternative to the external-API vision/audio jury (`docs/design/art/VISUAL_QA.md`, `docs/design/art/MODEL_QA.md`, `docs/design/audio/AUDIO_QA.md`) that uses **C"
 ---
 # Agent-driven jury (key-free vision/audio QA)

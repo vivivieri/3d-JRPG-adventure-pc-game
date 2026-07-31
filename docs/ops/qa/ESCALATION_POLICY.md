@@ -4,8 +4,8 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1009
-summary: "**Purpose:** Guarantee every dev↔QA dispute converges to a decision. When fix→reopen can't resolve it (ambiguous/conflicting/infeasible requirement, or QA too s"
+tokens_est: 1063
+summary: "Guarantee every dev↔QA dispute converges to a decision. When fix→reopen can't resolve it (ambiguous/conflicting/infeasible requirement, or QA too strict), it es"
 ---
 # Escalation Policy — no infinite dev ↔ QA loops
 

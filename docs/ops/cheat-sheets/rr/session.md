@@ -4,8 +4,8 @@ type: reference
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 616
-summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
+tokens_est: 650
+summary: "bash tools/ensure_mcp_stack.sh"
 ---
 # R&R — session-startup-every-run
 

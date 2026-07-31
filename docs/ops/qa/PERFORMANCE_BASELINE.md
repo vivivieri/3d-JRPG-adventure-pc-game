@@ -4,7 +4,7 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 2704
+tokens_est: 2723
 summary: "**Machine-readable:** `game/data/qa/perf_baseline.json`"
 ---
 # Performance Baseline — Hardware, Environment & Evidence

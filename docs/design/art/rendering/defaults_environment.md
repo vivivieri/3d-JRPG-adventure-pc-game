@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 986
-summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
+tokens_est: 1089
+summary: "60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production. **Hardware + environment spec:** `docs/ops/qa/PERFORMANCE_BASELINE"
 ---
 # Rendering — Defaults, WorldEnvironment, sky
 

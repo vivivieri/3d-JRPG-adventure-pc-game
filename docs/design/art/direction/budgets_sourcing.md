@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 481
+tokens_est: 550
 summary: "Poly budgets & asset sourcing"
 ---
 # Art Direction — Poly budgets & asset sourcing

@@ -5,7 +5,7 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 402
+tokens_est: 474
 summary: "Global rules & shared kit"
 ---
 # Environment Kits — Global rules & shared kit

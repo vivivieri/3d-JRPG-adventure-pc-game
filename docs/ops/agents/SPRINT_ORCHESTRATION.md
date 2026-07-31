@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1520
+tokens_est: 1561
 summary: "Replaces honor-system sprint planning. If orchestrator FAILs, **no agent may proceed**."
 ---
 # Sprint Orchestration — Enforced Multi-Agent Workflow

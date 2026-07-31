@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 406
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 479
+summary: "Rigged GLB clips must satisfy `required_animations` ⊆ found ⊆ `allowed_animations` in `game/data/models/qa_catalog.json`. Enforced by `L2_animation_whitelist` ("
 ---
 # Characters — Animation & portraits
 

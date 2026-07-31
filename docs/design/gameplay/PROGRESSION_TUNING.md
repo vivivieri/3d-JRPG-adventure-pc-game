@@ -5,7 +5,7 @@ audience: [builder, architect]
 phase: [4]
 status: active
 authority: gameplay
-tokens_est: 1744
+tokens_est: 1792
 summary: "`docs/design/gameplay/ENCOUNTER_TABLE.md`, `docs/design/gameplay/COMBAT_SYSTEMS.md`, `game/data/characters/party.json`, `game/data/shop/roku_shop.json`, `docs/d"
 ---
 # Tides of Urashima — Progression & Tuning Sheet

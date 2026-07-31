@@ -4,7 +4,7 @@ type: reference
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 401
+tokens_est: 459
 summary: "Branch split & purpose"
 ---
 # Continuous Integration — Branch split & purpose

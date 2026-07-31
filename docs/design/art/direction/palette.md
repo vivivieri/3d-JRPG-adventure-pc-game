@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 350
-summary: "Color palette"
+tokens_est: 260
+summary: "Art Direction — Color palette"
 ---
 # Art Direction — Color palette
 

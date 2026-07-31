@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 1900
-summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
+tokens_est: 2004
+summary: "Tides of Urashima is a **2–3 hour** game. Depth comes from **restraint**, callbacks, and systems that echo theme — not from cutscene count or word count."
 ---
 # Narrative — Emotional storytelling rules
 

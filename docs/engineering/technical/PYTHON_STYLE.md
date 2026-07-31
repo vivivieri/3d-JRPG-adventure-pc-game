@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 2517
+tokens_est: 2560
 summary: "**Scope:** `tools/*.py` on `main` — validators, CI, procedural generators, reference libs"
 ---
 # Python 3 Style Guide — Tides of Urashima

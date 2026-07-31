@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 2120
+tokens_est: 2150
 summary: "`game/development` implementation on Cursor Cloud Agents"
 ---
 # Multi-Agent Team — Simulated Small Studio

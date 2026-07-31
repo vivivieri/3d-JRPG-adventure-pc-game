@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 1227
-summary: "[`MODEL_QA.md`](../MODEL_QA.md)"
+tokens_est: 1297
+summary: "M1 check_model_catalog.py → required GLBs for phase"
 ---
 # Model QA — Defense layers & agent workflow
 

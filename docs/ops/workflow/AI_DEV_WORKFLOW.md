@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1322
+tokens_est: 1379
 summary: "`main` clean baseline → Phases 1–8 rebuild"
 ---
 # AI Dev Workflow — Build, Test & Acceptance Criteria

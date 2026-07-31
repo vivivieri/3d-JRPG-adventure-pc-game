@@ -5,7 +5,7 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 812
+tokens_est: 860
 summary: "Melancholy coastal JRPG — restrained, not upbeat adventure."
 ---
 # Tides of Urashima — Audio Production Guide

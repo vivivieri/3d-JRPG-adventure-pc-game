@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1040
-summary: "[`MCP_STACK.md`](../MCP_STACK.md)"
+tokens_est: 1071
+summary: "disable/remove all Godot dev plugins before Steam export."
 ---
 # MCP — Setup And Cost
 

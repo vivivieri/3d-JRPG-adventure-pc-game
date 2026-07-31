@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 350
+tokens_est: 408
 summary: "AI→Godot pipeline, mood, avoid list"
 ---
 # Art Direction — AI→Godot pipeline, mood, avoid list
