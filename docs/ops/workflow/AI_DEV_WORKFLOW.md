@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder]
 status: active
 authority: workflow
-tokens_est: 356
+tokens_est: 360
 summary: "Build/test/acceptance — load build policy or testing pack"
 ---
 # AI Dev Workflow

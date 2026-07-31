@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 539
+tokens_est: 543
 summary: "Intent, channels, lore catalog"
 ---
 # Lore & Environmental Story — Intent, channels, lore catalog

@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 560
+tokens_est: 564
 summary: "Key items, materials, start inv, shop"
 ---
 # Items & Economy — Key items, materials, start inv, shop

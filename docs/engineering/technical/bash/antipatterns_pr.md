@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 238
+tokens_est: 245
 summary: "Anti-patterns + PR checklist"
 ---
 # Bash Style — Anti-patterns + PR checklist

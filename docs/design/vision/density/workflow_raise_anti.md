@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 320
+tokens_est: 323
 summary: "Workflow, raise budget, anti-patterns"
 ---
 # Narrative Density — Workflow, raise budget, anti-patterns

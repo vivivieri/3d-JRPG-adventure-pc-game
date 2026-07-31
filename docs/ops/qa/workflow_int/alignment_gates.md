@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 391
+tokens_est: 395
 summary: "Alignment coop + related gates"
 ---
 # Workflow Integration — Alignment coop + related gates

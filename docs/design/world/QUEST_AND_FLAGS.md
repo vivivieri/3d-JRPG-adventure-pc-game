@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [narrative, builder, flow]
 status: active
 authority: world
-tokens_est: 176
+tokens_est: 180
 summary: "Main quests + story flags — load quest list or flag master"
 ---
 # Quests & Flags

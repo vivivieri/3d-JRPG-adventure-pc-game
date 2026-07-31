@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 743
+tokens_est: 749
 summary: "Standards, format, naming, schema metadata"
 ---
 # JSON Data Style — Standards, format, naming, schema metadata

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 509
+tokens_est: 513
 summary: "Per-zone story, box ladder, writer/QA checklists"
 ---
 # Lore & Environmental Story — Per-zone story, box ladder, writer/QA checklists

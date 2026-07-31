@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, qa, pm]
 status: active
 authority: qa
-tokens_est: 194
+tokens_est: 198
 summary: "Linux+Windows v1 — load policy, platforms, or M6 matrix"
 ---
 # Platform Support

@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 855
+tokens_est: 858
 summary: "Philosophy, prologue, matrix"
 ---
 # Tutorial Design — Philosophy, prologue, matrix

@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [narrative, builder, flow]
 status: active
 authority: world
-tokens_est: 827
+tokens_est: 830
 summary: "Flag list, zone blockers, party join"
 ---
 # Quests & Flags — Flag list, zone blockers, party join

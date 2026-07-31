@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 391
+tokens_est: 395
 summary: "Goals, XP curve, Act I"
 ---
 # Encounter Table — Goals, XP curve, Act I

@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 216
+tokens_est: 220
 summary: "Party/enemy skills — load character kits or MP economy"
 ---
 # Skills Bible

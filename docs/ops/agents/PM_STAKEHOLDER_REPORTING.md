@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 261
+tokens_est: 264
 summary: "Telegram/HTML stakeholder digests — load setup or report contents"
 ---
 # PM Stakeholder Reporting

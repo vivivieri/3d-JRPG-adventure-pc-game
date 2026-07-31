@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 216
+tokens_est: 220
 summary: "Teaching flow — load philosophy, matrix, or scene scripts"
 ---
 # Tutorial Design

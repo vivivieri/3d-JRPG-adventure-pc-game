@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 244
+tokens_est: 247
 summary: "Discoverable lore — load catalog, placements, or zone storytelling"
 ---
 # Lore & Environmental Story

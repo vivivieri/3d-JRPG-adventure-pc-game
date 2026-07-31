@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 761
+tokens_est: 768
 summary: "Architecture + ZH dialect VO"
 ---
 # Localization — Architecture + ZH dialect VO

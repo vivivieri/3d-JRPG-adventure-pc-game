@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 205
+tokens_est: 209
 summary: "Why main + game/development — load decision or rejected alternatives"
 ---
 # Branching Decision Record

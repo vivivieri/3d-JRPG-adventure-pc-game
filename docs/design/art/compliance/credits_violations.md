@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 332
+tokens_est: 335
 summary: "Credits, cross-refs, violations"
 ---
 # Asset Compliance — Credits, cross-refs, violations

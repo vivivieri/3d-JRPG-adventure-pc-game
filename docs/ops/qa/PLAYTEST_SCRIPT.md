@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 230
+tokens_est: 233
 summary: "Human L6 playtest — load act scripts or survey"
 ---
 # Playtest Script

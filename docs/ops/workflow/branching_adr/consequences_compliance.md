@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 616
+tokens_est: 620
 summary: "Consequences, mapping, compliance, refs"
 ---
 # Branching Decision Record — Consequences, mapping, compliance, refs

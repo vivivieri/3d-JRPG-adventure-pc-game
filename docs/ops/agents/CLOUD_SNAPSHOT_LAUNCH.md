@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 255
+tokens_est: 259
 summary: "Snapshot launch — load dashboard branch, checklist, or rebuild"
 ---
 # Cloud Snapshot Launch

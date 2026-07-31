@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 442
+tokens_est: 446
 summary: "Intent, first vs replay, New Game"
 ---
 # Replay Design — Intent, first vs replay, New Game

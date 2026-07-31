@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 581
+tokens_est: 588
 summary: "Summary, engine, GDAI"
 ---
 # Plugin Compatibility — Summary, engine, GDAI

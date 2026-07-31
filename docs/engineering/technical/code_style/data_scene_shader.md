@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 433
+tokens_est: 440
 summary: "Data access, scenes, shaders"
 ---
 # Code Style — Data access, scenes, shaders

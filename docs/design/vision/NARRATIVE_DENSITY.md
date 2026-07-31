@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 229
+tokens_est: 232
 summary: "Line budget discipline — load decision tree or ship budgets"
 ---
 # Narrative Density

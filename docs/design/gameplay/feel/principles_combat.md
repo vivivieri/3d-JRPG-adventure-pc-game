@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 495
+tokens_est: 498
 summary: "Principles + combat feedback"
 ---
 # Game Feel — Principles + combat feedback

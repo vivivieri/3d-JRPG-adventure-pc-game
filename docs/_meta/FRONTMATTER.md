@@ -1,3 +1,13 @@
+---
+id: frontmatter-schema
+type: reference
+audience: [pm, architect, builder, qa]
+phase: [0]
+status: active
+authority: meta
+tokens_est: 320
+summary: "YAML frontmatter schema for docs/**/*.md"
+---
 # Doc frontmatter schema
 
 YAML frontmatter is **required** on active `docs/**/*.md` (except hubs/archive listed below).
@@ -10,7 +20,7 @@ audience: [builder, visual]
 phase: [1, 5]
 status: active           # active | draft | deprecated
 authority: art           # conflict domain tip
-tokens_est: 3500         # optional soft budget
+tokens_est: 450          # optional soft budget
 ---
 ```
 

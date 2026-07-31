@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 220
+tokens_est: 223
 summary: "dev→qa→uat→prod — load map, requirements, or promotion"
 ---
 # Environments

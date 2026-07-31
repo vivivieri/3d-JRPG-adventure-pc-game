@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 564
+tokens_est: 570
 summary: "Folder layout + naming"
 ---
 # Code Style — Folder layout + naming

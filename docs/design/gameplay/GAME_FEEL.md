@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 220
+tokens_est: 223
 summary: "Juice & feedback — load combat, field, or UI feel"
 ---
 # Game Feel

@@ -1054,7 +1054,7 @@
         "L4_integration"
       ],
       "deferred_until": "P1-02 merged (main_scene + GDAI ruined_village) or phase_1 exit",
-      "design_ref": "docs/ops/sprints/Phase1-Sprint1-issues.md §P1-00"
+      "design_ref": "docs/ops/sprints/phase1_sprint1/p1_00_bootstrap.md"
     }
   },
   "toolchain_requirements": {
@@ -1110,7 +1110,7 @@
         "L2_boot_headless",
         "L2_scene_primitives"
       ],
-      "exit_criteria_ref": "docs/ops/sprints/Phase1-Sprint1-issues.md §P1-05",
+      "exit_criteria_ref": "docs/ops/sprints/phase1_sprint1/p1_05_golden_screenshot.md",
       "conditional_gates": [
         "L2_visual_palette",
         "L2_visual_jury",

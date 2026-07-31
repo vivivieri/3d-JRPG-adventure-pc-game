@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 753
+tokens_est: 757
 summary: "Rejected alternatives"
 ---
 # Branching Decision Record — Rejected alternatives

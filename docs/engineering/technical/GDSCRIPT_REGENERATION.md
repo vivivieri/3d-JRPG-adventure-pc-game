@@ -5,8 +5,8 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 237
-summary: "Helper regeneration order and EventBus wiring"
+tokens_est: 250
+summary: "Helper regen — load principle, order, or Phase 1 visuals"
 ---
 # GDScript Regeneration
 
@@ -17,6 +17,8 @@ summary: "Helper regeneration order and EventBus wiring"
 | [`principle_rr.md`](gdscript_regen/principle_rr.md) | Principle, R&R, prerequisites |
 | [`order_helpers.md`](gdscript_regen/order_helpers.md) | Regen order & per-helper steps |
 | [`checklist_recover.md`](gdscript_regen/checklist_recover.md) | Checklist, recover, new helpers, Phase 1 visuals |
+| [`checklist/checklist_helpers.md`](gdscript_regen/checklist/checklist_helpers.md) | Checklist + recover helpers |
+| [`checklist/phase1_visuals.md`](gdscript_regen/checklist/phase1_visuals.md) | Phase 1 visuals (P1-01) |
 # GDScript regeneration — core helpers & Phase 1 visuals
 
 **Version:** 1.1

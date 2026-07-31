@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 235
+tokens_est: 238
 summary: "Repo/Actions setup — load quick script or manual UI"
 ---
 # GitHub Setup

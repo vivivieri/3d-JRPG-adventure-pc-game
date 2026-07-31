@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 234
+tokens_est: 237
 summary: "Optional MCP + troubleshooting"
 ---
 # GitHub Setup — Optional MCP + troubleshooting

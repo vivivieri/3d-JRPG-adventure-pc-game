@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 584
+tokens_est: 591
 summary: "Adding translations + CJK fonts"
 ---
 # Localization — Adding translations + CJK fonts

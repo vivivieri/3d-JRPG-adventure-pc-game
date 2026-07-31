@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [builder, visual]
 status: active
 authority: ui
-tokens_est: 477
+tokens_est: 480
 summary: "Dialogue, combat, rewards, choice, game over"
 ---
 # UI/UX Flow — Dialogue, combat, rewards, choice, game over

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 246
+tokens_est: 250
 summary: "Godot playback + ship checklist"
 ---
 # Selective VO Hit List — Godot playback + ship checklist
