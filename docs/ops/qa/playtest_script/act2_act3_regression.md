@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 343
+tokens_est: 347
 summary: "Act II, Act III, regression"
 ---
 # Playtest Script — Act II, Act III, regression

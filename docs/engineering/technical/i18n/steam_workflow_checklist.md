@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 398
+tokens_est: 405
 summary: "Steam, translator workflow, checklist"
 ---
 # Localization — Steam, translator workflow, checklist

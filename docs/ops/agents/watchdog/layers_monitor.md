@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 441
+tokens_est: 444
 summary: "Two layers + what is monitored"
 ---
 # Factory Watchdog — Two layers + what is monitored

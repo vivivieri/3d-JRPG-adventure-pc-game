@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 216
+tokens_est: 220
 summary: "GitHub Issues PM — load labels, templates, or sprint checklist"
 ---
 # Project Management

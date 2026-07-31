@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 225
+tokens_est: 228
 summary: "Audio direction — load music map, SFX, or mix"
 ---
 # Audio Direction

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 646
+tokens_est: 649
 summary: "Design rules + 12-clip list"
 ---
 # Selective VO Hit List — Design rules + 12-clip list

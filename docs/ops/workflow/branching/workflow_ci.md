@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 300
+tokens_est: 304
 summary: "Developer workflow + CI per branch"
 ---
 # Branching Policy — Developer workflow + CI per branch

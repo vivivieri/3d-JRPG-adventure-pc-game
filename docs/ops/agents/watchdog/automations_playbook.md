@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 613
+tokens_est: 616
 summary: "Automations, events, playbook, refs"
 ---
 # Factory Watchdog — Automations, events, playbook, refs

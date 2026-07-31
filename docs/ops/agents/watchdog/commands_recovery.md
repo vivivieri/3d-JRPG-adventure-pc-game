@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 431
+tokens_est: 434
 summary: "Commands + recovery behavior"
 ---
 # Factory Watchdog — Commands + recovery behavior

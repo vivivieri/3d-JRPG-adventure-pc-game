@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 936
+tokens_est: 939
 summary: "Metrics, usage, in-game logger"
 ---
 # Playtest Telemetry — Metrics, usage, in-game logger

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 463
+tokens_est: 467
 summary: "Placement map, inspect vs lore, hub emptiness"
 ---
 # Lore & Environmental Story — Placement map, inspect vs lore, hub emptiness

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 692
+tokens_est: 695
 summary: "Problem + register-before-merge"
 ---
 # Workflow Integration — Problem + register-before-merge

@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 647
+tokens_est: 651
 summary: "Dashboard, duty, troubleshoot, alignment, refs"
 ---
 # PM Stakeholder Reporting — Dashboard, duty, troubleshoot, alignment, refs

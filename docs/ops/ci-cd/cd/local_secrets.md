@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 252
+tokens_est: 256
 summary: "Local CD + Steam secrets"
 ---
 # Continuous Delivery — Local CD + Steam secrets

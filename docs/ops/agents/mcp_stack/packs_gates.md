@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 175
+tokens_est: 184
 summary: "Existing packs + related gates"
 ---
 # MCP Stack — Existing packs + related gates

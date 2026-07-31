@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 646
+tokens_est: 649
 summary: "Act II, Act III, summary"
 ---
 # Encounter Table — Act II, Act III, summary

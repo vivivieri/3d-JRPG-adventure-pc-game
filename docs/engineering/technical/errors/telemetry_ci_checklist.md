@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 651
+tokens_est: 663
 summary: "Logging, anti-patterns, CI, PR, links"
 ---
 # Error Handling — Logging, anti-patterns, CI, PR, links

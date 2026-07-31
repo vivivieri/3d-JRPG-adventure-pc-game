@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 590
+tokens_est: 593
 summary: "Problem, sources of truth, roles"
 ---
 # Sprint Orchestration — Problem, sources of truth, roles

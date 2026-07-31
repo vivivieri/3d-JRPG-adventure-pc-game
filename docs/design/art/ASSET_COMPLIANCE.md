@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 188
+tokens_est: 192
 summary: "License-safe assets — load allowed licenses or import workflow"
 ---
 # Asset Compliance

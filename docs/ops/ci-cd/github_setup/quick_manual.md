@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 864
+tokens_est: 867
 summary: "Quick setup + manual UI"
 ---
 # GitHub Setup — Quick setup + manual UI

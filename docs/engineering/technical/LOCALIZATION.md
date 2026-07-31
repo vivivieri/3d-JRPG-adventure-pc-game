@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 237
+tokens_est: 243
 summary: "i18n — load architecture, translations, or fonts"
 ---
 # Localization

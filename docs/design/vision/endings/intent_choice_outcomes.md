@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 707
+tokens_est: 711
 summary: "Intent, choice gate, outcomes"
 ---
 # Ending Design — Intent, choice gate, outcomes

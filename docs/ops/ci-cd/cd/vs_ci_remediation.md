@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 341
+tokens_est: 344
 summary: "CD vs CI, remediation, refs"
 ---
 # Continuous Delivery — CD vs CI, remediation, refs

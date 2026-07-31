@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 514
+tokens_est: 518
 summary: "Scene scripts + prompt UI"
 ---
 # Tutorial Design — Scene scripts + prompt UI

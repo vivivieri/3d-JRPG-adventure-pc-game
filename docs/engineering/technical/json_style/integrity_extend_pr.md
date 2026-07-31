@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 688
+tokens_est: 695
 summary: "Integrity, extend, maintenance, anti-patterns, PR"
 ---
 # JSON Data Style — Integrity, extend, maintenance, anti-patterns, PR

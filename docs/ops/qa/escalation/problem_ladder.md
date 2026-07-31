@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 613
+tokens_est: 616
 summary: "`dev → QA check → dev fix → QA reopen → …` can loop forever if the root cause isn't a code bug — because **neither dev nor QA can change the requirement.** Comm"
 ---
 # Escalation Policy — Problem + ladder

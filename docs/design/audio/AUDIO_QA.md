@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 237
+tokens_est: 240
 summary: "BGM/VO QA gates — load layers, smoke, or tools"
 ---
 # Audio QA

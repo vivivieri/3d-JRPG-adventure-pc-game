@@ -98,6 +98,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [ci-cd/ci/branch_protection_refs.md](ci-cd/ci/branch_protection_refs.md) | `branch_protection_refs` |
 | [ci-cd/ci/branch_purpose.md](ci-cd/ci/branch_purpose.md) | `branch_purpose` |
 | [ci-cd/ci/local_rr_remediation.md](ci-cd/ci/local_rr_remediation.md) | `local_rr_remediation` |
+| [ci-cd/ci/required_gates/what_not.md](ci-cd/ci/required_gates/what_not.md) | `what_not` |
+| [ci-cd/ci/required_gates/what_runs.md](ci-cd/ci/required_gates/what_runs.md) | `what_runs` |
 | [ci-cd/ci/required_gates.md](ci-cd/ci/required_gates.md) | `required_gates` |
 | [ci-cd/environments/map_preprod.md](ci-cd/environments/map_preprod.md) | `map_preprod` |
 | [ci-cd/environments/promotion_logs.md](ci-cd/environments/promotion_logs.md) | `promotion_logs` |

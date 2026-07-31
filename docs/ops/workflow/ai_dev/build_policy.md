@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder]
 status: active
 authority: workflow
-tokens_est: 1122
+tokens_est: 1126
 summary: "No hand-edited `.tscn` or inspector-only work in Cursor. If GDAI MCP is unavailable → **stop and notify the user**. Do not fall back to manual scene edits."
 ---
 # AI Dev Workflow — AI build policy

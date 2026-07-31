@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 1128
+tokens_est: 1132
 summary: "Automate vs human + defense layers"
 ---
 # Audio QA — Automate vs human + defense layers

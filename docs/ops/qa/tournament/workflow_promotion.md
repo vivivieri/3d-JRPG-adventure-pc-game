@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 628
+tokens_est: 631
 summary: "Workflow, promotion, PM involvement"
 ---
 # Candidate Tournament — Workflow, promotion, PM involvement
