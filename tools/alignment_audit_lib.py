@@ -852,7 +852,12 @@ def _visual_sections_markdown(
     if not present:
         return []
 
-    overview_names = {"audit_radar_report.png", "audit_radar_spec.png", "audit_radar_build.png"}
+    overview_names = {
+        "audit_exec_summary.png",
+        "audit_radar_report.png",
+        "audit_radar_spec.png",
+        "audit_radar_build.png",
+    }
     overview = [v for v in present if v["filename"] in overview_names]
     breakdown_grid = [v for v in present if v["filename"] == "audit_radar_spec_breakdown.png"]
     subdomains = [

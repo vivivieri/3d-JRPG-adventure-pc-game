@@ -75,7 +75,7 @@ bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
 
 Outputs: `artifacts/alignment_audits/latest.md`, `artifacts/alignment_dashboard.html`, history in `docs/archive/compliance/alignment_audit_history.json`.
 
-**Management visuals (status):** use only auto-generated `audit_radar_spec.png` (design & preparation) and `audit_radar_build.png` (development & shipping). Do **not** use legacy `audit_radar_6axis.png` or `tides_mega_dashboard_all_radars.png` for executive readiness — see report § Management visuals.
+**Management visuals (status):** prefer auto-generated `audit_exec_summary.png` for stakeholder slides; keep `audit_radar_spec.png` (design & preparation) and `audit_radar_build.png` (development & shipping) for stream detail. Do **not** use legacy `audit_radar_6axis.png` or `tides_mega_dashboard_all_radars.png` for executive readiness — see report § Management visuals.
 
 See `docs/ops/qa/ALIGNMENT_AUDIT.md` — run alongside stakeholder report at phase exit.
 

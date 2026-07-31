@@ -4,7 +4,7 @@ PNG assets referenced by `game/data/qa/alignment_audit_catalog.json` visual pack
 
 ## Usage
 
-1. Run alignment audit (auto-generates `audit_radar_spec.png` + `audit_radar_build.png` from live scores):
+1. Run alignment audit (auto-generates slide-quality radars + exec summary from live scores):
 
 ```bash
 bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals
@@ -23,8 +23,10 @@ python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits
 
 | File | Source |
 |------|--------|
+| `audit_exec_summary.png` | **Primary slide** — radar + domain bars + Strength/Gap/Next |
 | `audit_radar_spec.png` | Live spec stream domain scores |
 | `audit_radar_build.png` | Build stream radar or N/A card on `main` |
+| `audit_radar_report.png` | Side-by-side spec + build |
 
 **Do not use** legacy merged radars (`audit_radar_6axis.png`, mega dashboard) for management status — they are static art from an earlier phase.
 

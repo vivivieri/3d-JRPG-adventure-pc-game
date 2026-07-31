@@ -37,7 +37,8 @@ Six visual packs (33 assets) are catalogued for executive updates:
 
 | File | Content |
 |------|---------|
-| `audit_radar_report.png` | **Primary** — side-by-side spec + build radar report |
+| `audit_exec_summary.png` | **Primary presentation slide** — radar + domain bars + Strength/Gap/Next callouts |
+| `audit_radar_report.png` | Side-by-side spec + build radar report |
 | `audit_radar_spec.png` | Spec stream radar (6 domains) |
 | `audit_radar_spec_breakdown.png` | **6-panel grid** — one sub-radar per spec domain (signal breakdown) |
 | `audit_radar_spec_<domain>.png` | Individual sub-radar per domain (e.g. `data_alignment`, `narrative`, …) |
@@ -47,7 +48,9 @@ Six visual packs (33 assets) are catalogued for executive updates:
 
 Each spec domain score rolls up **signals** (gates, parity checks, metrics). Sub-radars show those signals on a 0–10 axis; see `report.md` § Spec domain signal breakdown and § Build domain signal breakdown.
 
-**Visual theme:** Radars use the game palette (`docs/design/art/ART_DIRECTION.md`) — void sky `#1A1A3A`, biolume `#4AE8D8`, fog `#8B9DAF`, lantern gold `#D4A880`, per-domain accents. Renderer: `tools/audit_radar_theme.py`.
+**Visual theme (slide quality):** Sans-serif, high contrast, muted coastal palette (`docs/design/art/ART_DIRECTION.md`) — void `#12182A`, biolume `#4AE8D8`, fog `#A8B8C8`, lantern `#E0B890`, per-domain accents. Soft target ring; weak-axis score callouts. Renderer: `tools/audit_radar_theme.py`.
+
+**Management status:** Prefer `audit_exec_summary.png` for stakeholder updates; keep `audit_radar_spec.png` + `audit_radar_build.png` for stream detail. Do not use legacy mega dashboard / 6-axis art.
 
 Regenerate manually: `python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json`
 

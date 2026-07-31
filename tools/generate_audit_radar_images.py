@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Generate spec/build radar PNGs from alignment audit report data.
 
-Themed for Tides of Urashima — muted coastal palette (docs/design/art/ART_DIRECTION.md).
+Slide-quality presentation visuals — muted coastal palette
+(docs/design/art/ART_DIRECTION.md). Includes exec summary card.
 
 Authority: docs/ops/qa/ALIGNMENT_AUDIT.md
 """
@@ -22,6 +23,8 @@ from audit_radar_theme import (
     apply_void_gradient,
     configure_matplotlib,
     draw_brand_header,
+    draw_callout_card,
+    draw_domain_bars,
     draw_na_panel,
     draw_panel_frame,
     style_polar_axis,
@@ -46,7 +49,7 @@ BUILD_DOMAIN_ORDER = [
     "steam_ship",
 ]
 
-DPI = 180
+DPI = 200
 
 
 def _domain_label(dom_id: str) -> str:
@@ -54,7 +57,10 @@ def _domain_label(dom_id: str) -> str:
 
 
 def _signal_label(sig_id: str) -> str:
-    return sig_id.replace("_", " ").replace("L0 ", "L0·").title()
+    raw = sig_id.replace("_", " ")
+    if raw.lower().startswith("l0 "):
+        return "L0·" + raw[3:].title()
+    return raw.title()
 
 
 def _load_catalog() -> dict[str, Any]:
@@ -70,7 +76,13 @@ def _domain_title(catalog: dict[str, Any], dom_id: str) -> str:
 
 def _save_fig(fig: plt.Figure, out_path: Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_path, dpi=DPI, facecolor=PALETTE["void"], bbox_inches="tight", pad_inches=0.35)
+    fig.savefig(
+        out_path,
+        dpi=DPI,
+        facecolor=PALETTE["void"],
+        bbox_inches="tight",
+        pad_inches=0.28,
+    )
     plt.close(fig)
 
 
@@ -83,21 +95,21 @@ def _radar_figure(
     stream_score: float,
     verdict: str,
     accent: str,
-    figsize: tuple[float, float] = (9, 9),
-    label_fs: float = 9,
+    figsize: tuple[float, float] = (10, 9),
+    label_fs: float = 10,
 ) -> plt.Figure:
     configure_matplotlib()
     fig = plt.figure(figsize=figsize)
-    apply_void_gradient(fig, alpha_top=0.42)
+    apply_void_gradient(fig, alpha_top=0.28)
     draw_brand_header(
         fig,
         title=title,
         subtitle=subtitle or GAME_SUBTITLE,
         verdict=verdict,
         meta=f"Score {stream_score:.2f} / 10",
-        y=0.97,
+        y=0.95,
     )
-    ax = fig.add_subplot(111, projection="polar")
+    ax = fig.add_axes([0.12, 0.08, 0.76, 0.68], projection="polar")
     draw_panel_frame(ax, accent=accent)
     style_polar_axis(
         ax,
@@ -107,8 +119,8 @@ def _radar_figure(
         title="",
         score_line=f"{stream_score:.1f}",
         label_fs=label_fs,
+        callout_weak=True,
     )
-    fig.subplots_adjust(top=0.82, bottom=0.08, left=0.06, right=0.94)
     return fig
 
 
@@ -138,19 +150,27 @@ def _radar_chart(
 
 def _na_card(*, title: str, reason: str, branch: str, out_path: Path) -> None:
     configure_matplotlib()
-    fig = plt.figure(figsize=(9, 9))
-    apply_void_gradient(fig, alpha_top=0.38)
+    fig = plt.figure(figsize=(10, 9))
+    apply_void_gradient(fig, alpha_top=0.26)
+    meta = f"Branch · {_short_branch(branch)}"
     draw_brand_header(
         fig,
         title=title,
         subtitle="Development & shipping stream",
         verdict="N/A",
-        meta=f"Branch · {branch}",
-        y=0.97,
+        meta=meta,
+        y=0.96,
     )
-    ax = fig.add_axes([0.08, 0.12, 0.84, 0.68])
+    ax = fig.add_axes([0.1, 0.12, 0.8, 0.66])
     draw_na_panel(ax, title=title, reason=reason, branch=branch, accent=PALETTE["fog"])
     _save_fig(fig, out_path)
+
+
+def _short_branch(branch: str, max_len: int = 36) -> str:
+    b = str(branch or "?")
+    if len(b) <= max_len:
+        return b
+    return b[: max_len - 1] + "…"
 
 
 def _combined_radar_report(report: dict[str, Any], out_path: Path) -> None:
@@ -160,68 +180,207 @@ def _combined_radar_report(report: dict[str, Any], out_path: Path) -> None:
     verdict = str(report.get("verdict", "?"))
     spec = streams.get("spec_readiness", {})
     build = streams.get("build_readiness", {})
+    gen_at = str(report.get("generated_at", ""))[:10]
 
-    fig = plt.figure(figsize=(15, 8))
-    apply_void_gradient(fig, alpha_top=0.4)
+    fig = plt.figure(figsize=(16, 9))
+    apply_void_gradient(fig, alpha_top=0.26)
     draw_brand_header(
         fig,
         title="Alignment Radar Report",
-        subtitle=GAME_SUBTITLE,
+        subtitle="Spec vs build · two-stream view",
         verdict=verdict,
-        meta=f"{branch} · {report.get('generated_at', '')}",
-        y=0.97,
+        meta=f"{_short_branch(branch)} · {gen_at}",
+        y=0.96,
     )
 
-    ax_spec = fig.add_axes([0.06, 0.12, 0.4, 0.72], projection="polar")
+    # Stream labels sit above panels (not polar titles — avoids header collision)
+    fig.text(
+        0.26,
+        0.78,
+        "Design & Preparation",
+        ha="center",
+        fontsize=12,
+        fontweight="bold",
+        color=PALETTE["biolume"],
+    )
+    fig.text(
+        0.74,
+        0.78,
+        "Development & Shipping",
+        ha="center",
+        fontsize=12,
+        fontweight="bold",
+        color=PALETTE["lantern"],
+    )
+
+    ax_spec = fig.add_axes([0.05, 0.08, 0.42, 0.64], projection="polar")
     draw_panel_frame(ax_spec, accent=PALETTE["biolume"])
     spec_domains = spec.get("domains") or {}
     if spec_domains:
-        labels = [wrap_label(_domain_label(k), 10) for k in spec_domains]
-        values = [float(v) for v in spec_domains.values()]
+        labels = [wrap_label(_domain_label(k), 11) for k in SPEC_DOMAIN_ORDER if k in spec_domains]
+        values = [float(spec_domains[k]) for k in SPEC_DOMAIN_ORDER if k in spec_domains]
         style_polar_axis(
             ax_spec,
             labels=labels,
             values=values,
             accent=PALETTE["biolume"],
-            title="Design & Preparation",
+            title="",
             score_line=f"{float(spec.get('score') or 0):.1f}",
-            label_fs=8,
+            label_fs=9,
+            callout_weak=True,
         )
-    fig.text(
-        0.26,
-        0.08,
-        spec.get("question", ""),
-        ha="center",
-        fontsize=8,
-        color=PALETTE["muted"],
-        wrap=True,
-    )
 
     if build.get("status") == "not_applicable" or build.get("score") is None:
-        ax_build = fig.add_axes([0.56, 0.12, 0.38, 0.72])
+        ax_build = fig.add_axes([0.55, 0.1, 0.4, 0.62])
         draw_na_panel(
             ax_build,
-            title="Development & Shipping",
+            title="Build stream",
             reason=str(build.get("na_reason") or "Not applicable on this branch"),
-            branch=branch,
+            branch=_short_branch(branch, 28),
             accent=PALETTE["lantern"],
         )
     else:
-        ax_build = fig.add_axes([0.56, 0.12, 0.4, 0.72], projection="polar")
+        ax_build = fig.add_axes([0.55, 0.08, 0.4, 0.64], projection="polar")
         draw_panel_frame(ax_build, accent=PALETTE["coral_gold"])
         build_domains = build.get("domains") or {}
         if build_domains:
-            labels = [wrap_label(_domain_label(k), 10) for k in build_domains]
-            values = [float(v) for v in build_domains.values()]
+            labels = [
+                wrap_label(_domain_label(k), 11)
+                for k in BUILD_DOMAIN_ORDER
+                if k in build_domains
+            ]
+            values = [float(build_domains[k]) for k in BUILD_DOMAIN_ORDER if k in build_domains]
             style_polar_axis(
                 ax_build,
                 labels=labels,
                 values=values,
                 accent=PALETTE["coral_gold"],
-                title="Development & Shipping",
+                title="",
                 score_line=f"{float(build.get('score') or 0):.1f}",
-                label_fs=8,
+                label_fs=9,
+                callout_weak=True,
             )
+
+    _save_fig(fig, out_path)
+
+
+def _pick_callouts(report: dict[str, Any]) -> list[tuple[str, str, str]]:
+    """Three presentation callouts: strength, gap, next."""
+    domain_scores = report.get("domain_scores") or {}
+    signal_scores = report.get("signal_scores") or {}
+    streams = report.get("streams") or {}
+    build = streams.get("build_readiness") or {}
+
+    # Strongest domain
+    ranked = sorted(
+        ((k, float(v)) for k, v in domain_scores.items() if k in SPEC_DOMAIN_ORDER),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )
+    strongest = ranked[0] if ranked else ("data_alignment", 10.0)
+    weakest = ranked[-1] if ranked else ("ux_controls", 0.0)
+
+    # Weakest signal under weakest domain
+    weak_signals = signal_scores.get(weakest[0]) or {}
+    weak_sig = None
+    if weak_signals:
+        weak_sig = min(weak_signals.items(), key=lambda kv: float(kv[1]))
+
+    strength_body = f"{_domain_label(strongest[0])} at {strongest[1]:.1f}/10 — design truth locked."
+    if weak_sig:
+        gap_body = (
+            f"{_domain_label(weakest[0])} {weakest[1]:.1f}/10 — "
+            f"softest signal {_signal_label(weak_sig[0])} ({float(weak_sig[1]):.1f})."
+        )
+    else:
+        gap_body = f"{_domain_label(weakest[0])} is the softest axis at {weakest[1]:.1f}/10."
+
+    if build.get("status") == "not_applicable" or build.get("score") is None:
+        next_body = "Build stream awaits game/development — keep specs green, then prove runtime."
+        next_accent = PALETTE["lantern"]
+    else:
+        next_body = (
+            f"Build {float(build.get('score') or 0):.1f}/10 — "
+            "close runtime/Steam gaps before ship."
+        )
+        next_accent = PALETTE["coral_gold"]
+
+    return [
+        ("Strength", strength_body, PALETTE["seaweed"]),
+        ("Gap", gap_body, PALETTE["weak"]),
+        ("Next", next_body, next_accent),
+    ]
+
+
+def _exec_summary(report: dict[str, Any], out_path: Path) -> None:
+    """Widescreen exec slide: radar + domain bars + three callouts."""
+    configure_matplotlib()
+    streams = report.get("streams", {})
+    branch = report.get("branch", "?")
+    verdict = str(report.get("verdict", "?"))
+    spec = streams.get("spec_readiness", {})
+    build = streams.get("build_readiness", {})
+    spec_domains = spec.get("domains") or {}
+    domain_scores = report.get("domain_scores") or {}
+
+    build_score = build.get("score")
+    build_txt = (
+        "N/A"
+        if build.get("status") == "not_applicable" or build_score is None
+        else f"{float(build_score):.2f}"
+    )
+    gen_at = str(report.get("generated_at", ""))[:10]
+    meta = (
+        f"Spec {float(spec.get('score') or 0):.2f}/10 · Build {build_txt}/10 · "
+        f"{_short_branch(branch)} · {gen_at}"
+    )
+
+    fig = plt.figure(figsize=(16, 9))
+    apply_void_gradient(fig, alpha_top=0.24)
+    draw_brand_header(
+        fig,
+        title="Alignment Exec Summary",
+        subtitle="Design readiness for dispatch",
+        verdict=verdict,
+        meta=meta,
+        y=0.96,
+    )
+
+    # Left: hero radar
+    ax_radar = fig.add_axes([0.04, 0.22, 0.38, 0.58], projection="polar")
+    draw_panel_frame(ax_radar, accent=PALETTE["biolume"])
+    if spec_domains:
+        labels = [wrap_label(_domain_label(k), 11) for k in SPEC_DOMAIN_ORDER if k in spec_domains]
+        values = [float(spec_domains[k]) for k in SPEC_DOMAIN_ORDER if k in spec_domains]
+        style_polar_axis(
+            ax_radar,
+            labels=labels,
+            values=values,
+            accent=PALETTE["biolume"],
+            title="",
+            score_line=f"{float(spec.get('score') or 0):.1f}",
+            label_fs=9,
+            callout_weak=True,
+        )
+
+    # Right: domain bars
+    ax_bars = fig.add_axes([0.48, 0.42, 0.48, 0.4])
+    bar_labels = []
+    bar_values = []
+    bar_accents = []
+    for dom_id in SPEC_DOMAIN_ORDER:
+        if dom_id not in domain_scores and dom_id not in spec_domains:
+            continue
+        bar_labels.append(_domain_label(dom_id))
+        bar_values.append(float(domain_scores.get(dom_id, spec_domains.get(dom_id, 0))))
+        bar_accents.append(DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"]))
+    draw_domain_bars(ax_bars, labels=bar_labels, values=bar_values, accents=bar_accents)
+
+    # Bottom: three callouts
+    callouts = _pick_callouts(report)
+    for i, (title, body, accent) in enumerate(callouts):
+        ax_c = fig.add_axes([0.05 + i * 0.31, 0.04, 0.29, 0.16])
+        draw_callout_card(ax_c, title=title, body=body, accent=accent)
 
     _save_fig(fig, out_path)
 
@@ -266,8 +425,8 @@ def _generate_subdomain_radars(
 
     configure_matplotlib()
     stream = report.get("streams", {}).get(stream_key, {})
-    fig = plt.figure(figsize=(17, 7) if grid_cols == 2 else (17, 11))
-    apply_void_gradient(fig, alpha_top=0.38)
+    fig = plt.figure(figsize=(16, 9) if grid_cols == 2 else (16, 10))
+    apply_void_gradient(fig, alpha_top=0.24)
     stream_score = stream.get("score")
     score_meta = (
         "Stream N/A on this branch — domain sub-scores preview"
@@ -288,9 +447,17 @@ def _generate_subdomain_radars(
         row, col = divmod(idx, grid_cols)
         panel_w = 0.9 / grid_cols
         left = 0.05 + col * (panel_w + 0.02)
-        bottom = 0.52 - row * 0.44 if grid_cols == 3 else 0.14
-        height = 0.38 if grid_cols == 3 else 0.62
-        ax = fig.add_axes([left, bottom, panel_w - 0.02, height], projection="polar")
+        if grid_cols == 3:
+            bottom = 0.48 - row * 0.40
+            height = 0.30
+            left = 0.04 + col * 0.32
+            width = 0.28
+        else:
+            bottom = 0.08
+            height = 0.62
+            left = 0.05 + col * (panel_w + 0.02)
+            width = panel_w - 0.02
+        ax = fig.add_axes([left, bottom, width, height], projection="polar")
         accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
         draw_panel_frame(ax, accent=accent)
         signals = signal_scores.get(dom_id, {})
@@ -302,10 +469,22 @@ def _generate_subdomain_radars(
                 labels=labels,
                 values=values,
                 accent=accent,
-                title=_domain_title(catalog, dom_id),
+                title="",
                 score_line=f"{float(domain_scores.get(dom_id, 0)):.1f}",
-                label_fs=6.5 if n > 2 else 8,
-                tick_fs=5.5 if n > 2 else 7,
+                label_fs=6 if n > 2 else 9,
+                tick_fs=5 if n > 2 else 8,
+                callout_weak=False,
+            )
+            # Domain name below panel (avoids colliding with brand header)
+            fig.text(
+                left + width / 2,
+                bottom - 0.022,
+                _domain_title(catalog, dom_id),
+                ha="center",
+                va="top",
+                fontsize=9,
+                fontweight="bold",
+                color=accent,
             )
         else:
             ax.axis("off")
@@ -329,7 +508,7 @@ def generate_spec_subdomain_radars(
         filename_prefix="audit_radar_spec",
         breakdown_filename="audit_radar_spec_breakdown.png",
         breakdown_title="Spec Domain Breakdown",
-        breakdown_subtitle="Six design axes · signal-level sub-radars",
+        breakdown_subtitle="Six design axes · signal-level detail",
         detail_subtitle="Signal breakdown · design stream",
         grid_cols=3,
     )
@@ -348,7 +527,7 @@ def generate_build_subdomain_radars(
         filename_prefix="audit_radar_build",
         breakdown_filename="audit_radar_build_breakdown.png",
         breakdown_title="Build Domain Breakdown",
-        breakdown_subtitle="Runtime proof & Steam ship · signal-level sub-radars",
+        breakdown_subtitle="Runtime proof & Steam ship",
         detail_subtitle="Signal breakdown · build stream",
         grid_cols=2,
     )
@@ -361,6 +540,11 @@ def generate_audit_radars(
     streams = report.get("streams", {})
     branch = report.get("branch", "?")
     written: dict[str, str] = {}
+
+    # Exec summary first — primary presentation slide
+    exec_path = out_dir / "audit_exec_summary.png"
+    _exec_summary(report, exec_path)
+    written["audit_exec_summary.png"] = str(exec_path)
 
     spec = streams.get("spec_readiness", {})
     spec_domains = spec.get("domains") or {}
@@ -416,7 +600,7 @@ def generate_audit_radars(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Generate themed Urashima audit radar PNGs")
+    parser = argparse.ArgumentParser(description="Generate slide-quality Urashima audit radar PNGs")
     parser.add_argument(
         "--report",
         default=str(ROOT / "artifacts/alignment_audits/latest.json"),
