@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 347
-summary: "Gallery, incentives, hard mode"
+tokens_est: 395
+summary: "Replay Design — Gallery, incentives, hard mode — Unlock: Title menu after `game_completed` once."
 ---
 # Replay Design — Gallery, incentives, hard mode
 
 **Hub:** [`REPLAY_DESIGN.md`](../REPLAY_DESIGN.md)
+
+## When to read
+
+Use **Replay Design — Gallery, incentives, hard mode** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Ending gallery](#4-ending-gallery)
+- [5. Incentives to replay](#5-incentives-to-replay)
+- [6. Hard mode on replay](#6-hard-mode-on-replay)
+
 
 ## 4. Ending gallery
 

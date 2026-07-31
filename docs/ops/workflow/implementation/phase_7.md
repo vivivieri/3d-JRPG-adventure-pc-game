@@ -5,12 +5,18 @@ audience: [pm, architect, builder]
 phase: [7]
 status: active
 authority: workflow
-tokens_est: 643
+tokens_est: 617
 summary: "Replace greybox with automated authored assets per `docs/design/art/ART_DIRECTION.md` + `docs/design/art/ART_AUTOMATION_PIPELINE.md`:"
 ---
 # Implementation Plan — Phase 7
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 7** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Phase 7 — M5 art rebuild
 

@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 711
-summary: "GDScript, autoload, signals"
+tokens_est: 817
+summary: "From `.cursorrules` — always enforce:"
 ---
 # Code Style — GDScript, autoload, signals
 
 **Hub:** [`CODE_STYLE.md`](../CODE_STYLE.md)
+
+## When to read
+
+Use **Code Style — GDScript, autoload, signals** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. GDScript rules (strict)](#3-gdscript-rules-strict)
+- [3.1 Base classes (extend-only)](#31-base-classes-extend-only)
+- [3.2 GDScript lint (CI)](#32-gdscript-lint-ci)
+- [4. Autoload vs scene-local](#4-autoload-vs-scene-local)
+- [5. Signals & EventBus](#5-signals-eventbus)
+- [Direct connections](#direct-connections)
+- [EventBus (`scripts/core/event_bus.gd`)](#eventbus-scriptscoreevent_busgd)
+
 
 ## 3. GDScript rules (strict)
 

@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 543
-summary: "Intent, channels, lore catalog"
+tokens_est: 594
+summary: "The ruined coast tells the story without NPC crowds. Emptiness is deliberate — spirits bound to objects, village erased by stolen time."
 ---
 # Lore & Environmental Story — Intent, channels, lore catalog
 
 **Hub:** [`LORE_AND_ENVIRONMENTAL_STORY.md`](../LORE_AND_ENVIRONMENTAL_STORY.md)
+
+## When to read
+
+Use **Lore & Environmental Story — Intent, channels, lore catalog** (roles: narrative, builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Design intent](#1-design-intent)
+- [2. Two discovery channels](#2-two-discovery-channels)
+- [3. Lore entry catalog](#3-lore-entry-catalog)
+
 
 ## 1. Design intent
 

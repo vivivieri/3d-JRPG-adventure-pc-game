@@ -4,12 +4,23 @@ type: how-to
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 642
-summary: "Watchdog + quick ref"
+tokens_est: 701
+summary: "PM Runbook — Planning & Watchdog — Watchdog + quick ref — Normal handoff uses `pm_emit_cycle_event.sh`. If the factory is idle too long while sprint work remain"
 ---
 # PM Runbook — Planning & Watchdog — Watchdog + quick ref
 
 **Hub:** [`planning_watchdog.md`](../planning_watchdog.md)
+
+## When to read
+
+Use **PM Runbook — Planning & Watchdog — Watchdog + quick ref** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7. Watchdog recovery (when factory stalls)](#7-watchdog-recovery-when-factory-stalls)
+- [8. Quick reference](#8-quick-reference)
+- [9. Cross-refs](#9-cross-refs)
+
 
 ## 7. Watchdog recovery (when factory stalls)
 

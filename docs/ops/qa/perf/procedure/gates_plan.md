@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 605
-summary: "Gates relationship + plan"
+tokens_est: 719
+summary: "Perf — Procedure & Evidence — Gates relationship + plan — covers 9. Relationship to gates; 10. Implementation plan; Phase 1 — P1-00 (bootstrap); Phase 2 — P1-02"
 ---
 # Perf — Procedure & Evidence — Gates relationship + plan
 
 **Hub:** [`procedure_evidence.md`](../procedure_evidence.md)
+
+## When to read
+
+Use **Perf — Procedure & Evidence — Gates relationship + plan** (roles: qa, release, builder) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [9. Relationship to gates](#9-relationship-to-gates)
+- [10. Implementation plan](#10-implementation-plan)
+- [Phase 1 — P1-00 (bootstrap)](#phase-1-p1-00-bootstrap)
+- [Phase 2 — P1-02 (ruined village)](#phase-2-p1-02-ruined-village)
+- [Phase 3 — M5 (art pass)](#phase-3-m5-art-pass)
+- [Phase 4 — M6 (Steam ship)](#phase-4-m6-steam-ship)
+- [Optional automation (later)](#optional-automation-later)
+
 
 ## 9. Relationship to gates
 

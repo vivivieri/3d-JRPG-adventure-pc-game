@@ -5,16 +5,28 @@ phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 855
+tokens_est: 940
 summary: "`docs/design/art/ART_DIRECTION.md` · `docs/design/art/RENDERING_GUIDE.md`"
 ---
 # Shader Specifications — Tides of Urashima
 
-**Version:** 1.0
-**Authority:** `docs/design/art/ART_DIRECTION.md` · `docs/design/art/RENDERING_GUIDE.md`
-**Implementation:** GodotPrompter drafts `.gdshader`; GDAI MCP assigns materials in scenes
+## When to read
 
----
+Use **Shader Specifications — Tides of Urashima** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (10 sections).
+
+## Jump to
+
+- [1. Family rules](#1-family-rules)
+- [2. Core shaders (Phase 1+)](#2-core-shaders-phase-1)
+- [3. Hero / story shaders (Phase 5–6)](#3-hero-story-shaders-phase-56)
+- [Spirit lower body (Yuzu, wraiths)](#spirit-lower-body-yuzu-wraiths)
+- [Lacquer box (Urashima)](#lacquer-box-urashima)
+- [Mirror chamber (SC-13)](#mirror-chamber-sc-13)
+- [Ink combat VFX (UI overlay)](#ink-combat-vfx-ui-overlay)
+- [4. Water (`water_stylized.gdshader`)](#4-water-water_stylizedgdshader)
+- [5. QA gates](#5-qa-gates)
+- [Related docs](#related-docs)
+
 
 ## 1. Family rules
 

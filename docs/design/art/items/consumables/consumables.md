@@ -4,12 +4,24 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 366
+tokens_est: 409
 summary: "Single **shared bottle/pouch family** with palette swaps where possible."
 ---
 # Items — Consumables / Key / Currency — Consumables
 
 **Hub:** [`consumables_key_currency.md`](../consumables_key_currency.md)
+
+## When to read
+
+Use **Items — Consumables / Key / Currency — Consumables** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. Consumables](#7-consumables)
+- [`sea_salve`](#sea_salve)
+- [`spirit_tonic`](#spirit_tonic)
+- [`coral_antidote`](#coral_antidote)
+
 
 ## 7. Consumables
 

@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 513
-summary: "game/assets/models/items/"
+tokens_est: 570
+summary: "Items 3D — Export & QA — game/assets/models/items/"
 ---
 # Items 3D — Export & QA
 
 **Hub:** [`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)
+
+## When to read
+
+Use **Items 3D — Export & QA** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [10. File layout & export](#10-file-layout-export)
+- [Export checklist](#export-checklist)
+- [11. Production order](#11-production-order)
+- [12. QA checklist](#12-qa-checklist)
+
 
 ## 10. File layout & export
 

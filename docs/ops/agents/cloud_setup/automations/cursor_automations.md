@@ -4,12 +4,24 @@ type: tutorial
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 1110
+tokens_est: 1250
 summary: "Automations A–D (event-driven, not cron)"
 ---
 # Cloud Setup — Cursor Automations
 
 **Hub:** [`setup_automations.md`](../setup_automations.md)
+
+## When to read
+
+Use **Cloud Setup — Cursor Automations** (roles: pm, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Automation A — **PM Sprint Master** (primary)](#automation-a-pm-sprint-master-primary)
+- [Automation B — **CI failure triage** (required)](#automation-b-ci-failure-triage-required)
+- [Automation C — **Human UAT notify** (end of pipeline)](#automation-c-human-uat-notify-end-of-pipeline)
+- [Automation D — **Factory watchdog / human alert** (exception only)](#automation-d-factory-watchdog-human-alert-exception-only)
+
 
 ### Automation A — **PM Sprint Master** (primary)
 

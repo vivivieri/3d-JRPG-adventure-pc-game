@@ -5,12 +5,24 @@ audience: [builder, builder_zone, architect]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 560
-summary: "Encounters, flags, QA"
+tokens_est: 638
+summary: "Level Design — Encounters, flags, QA — Source: `game/data/encounters/story_encounters.json`."
 ---
 # Level Design — Encounters, flags, QA
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Encounters, flags, QA** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. Encounter index (all zones)](#7-encounter-index-all-zones)
+- [8. Flag gates summary](#8-flag-gates-summary)
+- [9. QA checklist (level design)](#9-qa-checklist-level-design)
+- [10. Related docs (don't duplicate here)](#10-related-docs-dont-duplicate-here)
+
 
 ## 7. Encounter index (all zones)
 

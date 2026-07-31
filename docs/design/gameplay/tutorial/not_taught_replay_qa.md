@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 320
-summary: "Not taught, replay, QA"
+tokens_est: 376
+summary: "Tutorial Design — Not taught, replay, QA — - Speed initiative order math"
 ---
 # Tutorial Design — Not taught, replay, QA
 
 **Hub:** [`TUTORIAL_DESIGN.md`](../TUTORIAL_DESIGN.md)
+
+## When to read
+
+Use **Tutorial Design — Not taught, replay, QA** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. What we deliberately do NOT tutorialize](#6-what-we-deliberately-do-not-tutorialize)
+- [7. Replay behavior](#7-replay-behavior)
+- [8. QA checklist](#8-qa-checklist)
+
 
 ## 6. What we deliberately do NOT tutorialize
 

@@ -5,12 +5,30 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 518
-summary: "Scene scripts + prompt UI"
+tokens_est: 654
+summary: "Tutorial Design — Scene scripts + prompt UI — - Lock interact until player reaches gate marker (8m)"
 ---
 # Tutorial Design — Scene scripts + prompt UI
 
 **Hub:** [`TUTORIAL_DESIGN.md`](../TUTORIAL_DESIGN.md)
+
+## When to read
+
+Use **Tutorial Design — Scene scripts + prompt UI** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (10 sections).
+
+## Jump to
+
+- [4. Scene-by-scene script](#4-scene-by-scene-script)
+- [SC-01 — Movement only](#sc-01-movement-only)
+- [SC-02 — Explore & save](#sc-02-explore-save)
+- [SC-03 — Dialogue](#sc-03-dialogue)
+- [SC-04 — Shop intro](#sc-04-shop-intro)
+- [SC-05 — Combat tutorial](#sc-05-combat-tutorial)
+- [SC-09 — Boss tutorial](#sc-09-boss-tutorial)
+- [SC-10 — Heal tutorial (mandatory)](#sc-10-heal-tutorial-mandatory)
+- [SC-12 — Full party](#sc-12-full-party)
+- [5. Prompt UI spec](#5-prompt-ui-spec)
+
 
 ## 4. Scene-by-scene script
 

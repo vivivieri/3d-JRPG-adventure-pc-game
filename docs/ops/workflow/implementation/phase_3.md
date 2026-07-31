@@ -5,12 +5,18 @@ audience: [pm, architect, builder]
 phase: [3]
 status: active
 authority: workflow
-tokens_est: 316
-summary: "Implementation Plan — Phase 3"
+tokens_est: 317
+summary: "Implementation Plan — Phase 3 — covers Phase 3 — Narrative & exploration"
 ---
 # Implementation Plan — Phase 3
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 3** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Phase 3 — Narrative & exploration
 

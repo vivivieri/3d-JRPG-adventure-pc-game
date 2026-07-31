@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 842
+tokens_est: 880
 summary: "**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates"
 ---
 # Markdown Style Guide — Tides of Urashima
@@ -13,9 +13,22 @@ summary: "**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR
 **Version:** 1.0
 **Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
-**Generated docs:** `docs/archive/compliance/COMPLIANCE_REPORT.md` and `alignment_audit_reports/**` are auto-generated — do not hand-edit.
 
----
+## When to read
+
+Use **Markdown Style Guide — Tides of Urashima** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [1. Industry standards](#1-industry-standards)
+- [2. File format](#2-file-format)
+- [3. Structure](#3-structure)
+- [4. Links & paths](#4-links-paths)
+- [5. Code & commands](#5-code-commands)
+- [6. Voice & content](#6-voice-content)
+- [7. CI enforcement](#7-ci-enforcement)
+- [8. PR checklist](#8-pr-checklist)
+
 
 ## 1. Industry standards
 

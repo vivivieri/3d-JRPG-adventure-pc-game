@@ -5,12 +5,22 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 835
-summary: "Game complete + build/engine"
+tokens_est: 883
+summary: "Steam Release Checklist — Game complete + build/engine — All items ❌ until `game/development` phases land."
 ---
 # Steam Release Checklist — Game complete + build/engine
 
 **Hub:** [`STEAM_RELEASE_CHECKLIST.md`](../STEAM_RELEASE_CHECKLIST.md)
+
+## When to read
+
+Use **Steam Release Checklist — Game complete + build/engine** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Game complete (blockers — Phases 1–7)](#1-game-complete-blockers-phases-17)
+- [2. Technical — build & engine](#2-technical-build-engine)
+
 
 ## 1. Game complete (blockers — Phases 1–7)
 

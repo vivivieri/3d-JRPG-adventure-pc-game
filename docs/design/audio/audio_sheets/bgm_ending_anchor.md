@@ -1,5 +1,15 @@
 # ACE-Step prompt — `bgm_ending_anchor`
 
+## When to read
+
+Use **ACE-Step prompt — `bgm_ending_anchor`** when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Prompt](#prompt)
+- [Negative](#negative)
+- [ACE-Step Gradio / API](#ace-step-gradio-api)
+
 | Field | Value |
 |-------|-------|
 | Scene | SC-17b Anchor ending movie |

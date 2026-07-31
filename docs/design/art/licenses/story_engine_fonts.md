@@ -5,12 +5,23 @@ phase: [1, 5]
 audience: [visual, release, audio]
 status: active
 authority: art
-tokens_est: 313
-summary: "Story, engine, fonts"
+tokens_est: 353
+summary: "Licenses — Story, engine, fonts — covers Story source; Engine & plugins; Fonts (bundled)"
 ---
 # Licenses — Story, engine, fonts
 
 **Hub:** [`LICENSES.md`](../LICENSES.md)
+
+## When to read
+
+Use **Licenses — Story, engine, fonts** (roles: visual, release, audio) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Story source](#story-source)
+- [Engine & plugins](#engine-plugins)
+- [Fonts (bundled)](#fonts-bundled)
+
 
 ## Story source
 

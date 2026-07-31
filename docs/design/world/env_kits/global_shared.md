@@ -5,12 +5,23 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 474
-summary: "Global rules & shared kit"
+tokens_est: 528
+summary: "Environment Kits — Global rules & shared kit — game/assets/models/environment/"
 ---
 # Environment Kits — Global rules & shared kit
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Global rules & shared kit** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Global environment rules](#1-global-environment-rules)
+- [Folder layout](#folder-layout)
+- [2. Shared kit (cross-zone)](#2-shared-kit-cross-zone)
+
 
 ## 1. Global environment rules
 

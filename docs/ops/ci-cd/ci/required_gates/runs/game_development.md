@@ -5,7 +5,7 @@ audience: [release, qa, pm]
 phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 1229
+tokens_est: 1224
 summary: "game/development game-ci gate table (L0–L4) + Windows run job + CD — open when greening Game CI or explaining SKIP≠PASS on export"
 ---
 # CI — What Runs (`game/development`)
@@ -14,14 +14,15 @@ summary: "game/development game-ci gate table (L0–L4) + Windows run job + CD �
 
 ## When to read
 
-Debugging **Game CI** on `game/development` (`game-ci.yml` / `run_ci_checks.sh`). For the short role-oriented list see [`gates_by_branch.md`](../../../../cheat-sheets/controls/gates_by_branch.md). Machine authority: `game/data/qa/acceptance_criteria.json`.
+Use **CI — What Runs (`game/development`)** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
 
 ## Jump to
 
-- [L0 / L1 gates](#l0--l1--run_ci_checkssh)
-- [L2+ / L4 gates](#l2--l4--run_ci_checkssh)
-- [Windows export run job](#windows-export-run-windows-latest)
-- [CD artifacts](#cd-cd-artifactyml)
+- [L0 / L1 — `run_ci_checks.sh`](#l0-l1-run_ci_checkssh)
+- [L2+ / L4 — `run_ci_checks.sh`](#l2-l4-run_ci_checkssh)
+- [Windows export run (windows-latest)](#windows-export-run-windows-latest)
+- [CD (`cd-artifact.yml`)](#cd-cd-artifactyml)
+
 
 ### L0 / L1 — `run_ci_checks.sh`
 

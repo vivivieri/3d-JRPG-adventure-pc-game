@@ -5,19 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 651
+tokens_est: 597
 summary: "Data follows the story spine — scenes drive flags, flags drive quests, quests drive encounters and rewards."
 ---
 # Tides of Urashima — Story-Driven Data Architecture
 
 **Version:** 1.0
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) — naming, schema bumps, extension checklists
-**Principle:** Data follows the story spine — scenes drive flags, flags drive quests, quests drive encounters and rewards.
-**Runtime wiring:** `docs/engineering/technical/TECHNICAL_DESIGN.md` · **Zone placement:** `docs/design/world/LEVEL_DESIGN.md`
 
-**Cross-refs:** `docs/design/vision/STORYBOARD.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `game/data/README.md`
+## When to read
 
----
+Use **Tides of Urashima — Story-Driven Data Architecture** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Why story-first data?](#1-why-story-first-data)
+- [2. Recommended file layout](#2-recommended-file-layout)
+- [Data packs (progressive disclosure)](#data-packs-progressive-disclosure)
+
+
 ## 1. Why story-first data?
 
 This is a **2–3 hour linear narrative JRPG**. The database should mirror the player's journey:

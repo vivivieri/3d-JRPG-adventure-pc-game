@@ -5,12 +5,21 @@ phase: [1, 6]
 audience: [release, pm, architect]
 status: active
 authority: qa
-tokens_est: 265
-summary: "Steam/CD + supply chain"
+tokens_est: 297
+summary: "Security — Steam/CD + supply chain — M6 manual: Windows Authenticode signing (not automated in v1)."
 ---
 # Security — Steam/CD + supply chain
 
 **Hub:** [`SECURITY.md`](../SECURITY.md)
+
+## When to read
+
+Use **Security — Steam/CD + supply chain** (roles: release, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [6. Steam / CD](#6-steam-cd)
+- [7. Supply chain](#7-supply-chain)
 
 ## 6. Steam / CD
 

@@ -5,12 +5,24 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 539
-summary: "Lore, LOD, production, acceptance"
+tokens_est: 617
+summary: "Map for environment artists — 8 entries (`game/data/lore/lore_entries.json`)."
 ---
 # Environment Kits — Lore, LOD, production, acceptance
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Lore, LOD, production, acceptance** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Lore collectible placements](#8-lore-collectible-placements)
+- [9. LOD & performance (PC target)](#9-lod-performance-pc-target)
+- [10. Production order](#10-production-order)
+- [11. Acceptance checklist (per zone)](#11-acceptance-checklist-per-zone)
+
 
 ## 8. Lore collectible placements
 

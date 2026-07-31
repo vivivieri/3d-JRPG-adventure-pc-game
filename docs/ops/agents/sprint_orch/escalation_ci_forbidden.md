@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 460
-summary: "Escalation, CI, forbidden, cross-refs"
+tokens_est: 509
+summary: "Sprint Orchestration — Escalation, CI, forbidden, cross-refs — Stale threshold: `sprint_board.json` → `orchestration.stale_hours` (default 24)."
 ---
 # Sprint Orchestration — Escalation, CI, forbidden, cross-refs
 
 **Hub:** [`SPRINT_ORCHESTRATION.md`](../SPRINT_ORCHESTRATION.md)
+
+## When to read
+
+Use **Sprint Orchestration — Escalation, CI, forbidden, cross-refs** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [6. Escalation ladder](#6-escalation-ladder)
+- [7. CI gates](#7-ci-gates)
+- [8. Forbidden patterns](#8-forbidden-patterns)
+- [9. Cross-refs](#9-cross-refs)
+
 
 ## 6. Escalation ladder
 

@@ -5,12 +5,21 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 256
-summary: "Local CD + Steam secrets"
+tokens_est: 305
+summary: "Continuous Delivery — Local CD + Steam secrets — git checkout game/development"
 ---
 # Continuous Delivery — Local CD + Steam secrets
 
 **Hub:** [`CD.md`](../CD.md)
+
+## When to read
+
+Use **Continuous Delivery — Local CD + Steam secrets** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [4. Local CD (same gates as CI runner)](#4-local-cd-same-gates-as-ci-runner)
+- [5. GitHub Secrets (Steam — Phase 8)](#5-github-secrets-steam-phase-8)
 
 ## 4. Local CD (same gates as CI runner)
 

@@ -5,12 +5,22 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 622
-summary: "Language stack + branch policy"
+tokens_est: 653
+summary: "Coding Standards Hub — Language stack + branch policy — Not shipped in the game: Godot MCP Pro server + addon, GDAI/Godotiq plugins, GitHub Actions YAML."
 ---
 # Coding Standards Hub — Language stack + branch policy
 
 **Hub:** [`CODING_STANDARDS_HUB.md`](../CODING_STANDARDS_HUB.md)
+
+## When to read
+
+Use **Coding Standards Hub — Language stack + branch policy** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Language stack](#1-language-stack)
+- [Branch policy](#branch-policy)
+
 
 ## 1. Language stack
 

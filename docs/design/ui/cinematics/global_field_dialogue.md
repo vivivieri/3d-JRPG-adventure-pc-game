@@ -5,12 +5,25 @@ audience: [builder, visual, narrative]
 phase: [1, 5]
 status: active
 authority: ui
-tokens_est: 504
-summary: "Global, field, dialogue cameras"
+tokens_est: 584
+summary: "Cinematics — Global, field, dialogue cameras — Letterboxing: Optional 2.39:1 bars during SC-11 flashback and SC-17 endings only."
 ---
 # Cinematics — Global, field, dialogue cameras
 
 **Hub:** [`CINEMATICS.md`](../CINEMATICS.md)
+
+## When to read
+
+Use **Cinematics — Global, field, dialogue cameras** (roles: builder, visual, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Global camera rules](#1-global-camera-rules)
+- [2. Field camera — exploration](#2-field-camera-exploration)
+- [Default follow (`OrbitCamera`)](#default-follow-orbitcamera)
+- [SC-02 first hub enter](#sc-02-first-hub-enter)
+- [3. Dialogue camera](#3-dialogue-camera)
+
 
 ## 1. Global camera rules
 

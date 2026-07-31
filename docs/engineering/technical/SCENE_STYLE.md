@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 732
+tokens_est: 786
 summary: "**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)"
 ---
 # Godot Scene Style Guide — Tides of Urashima
@@ -13,9 +13,21 @@ summary: "**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `
 **Version:** 1.0
 **Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
-**Build policy:** Scenes are **GDAI MCP built** — see `.cursorrules` §0, [`MCP_STACK.md`](../../ops/agents/MCP_STACK.md)
 
----
+## When to read
+
+Use **Godot Scene Style Guide — Tides of Urashima** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Naming & layout](#1-naming-layout)
+- [2. Scene graph rules](#2-scene-graph-rules)
+- [3. GDAI verification marker](#3-gdai-verification-marker)
+- [4. Static format (`.tscn` text)](#4-static-format-tscn-text)
+- [5. Workflow](#5-workflow)
+- [6. CI enforcement](#6-ci-enforcement)
+- [7. PR checklist (`game/development`)](#7-pr-checklist-gamedevelopment)
+
 
 ## 1. Naming & layout
 

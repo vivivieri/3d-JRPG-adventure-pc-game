@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 468
-summary: "Per-role controls + L3 split"
+tokens_est: 508
+summary: "Controls Cheat Sheet — Per-role controls + L3 split — CI cannot run the editor; `L3_gdai_built` is the merge blocker for Builder handoffs."
 ---
 # Controls Cheat Sheet — Per-role controls + L3 split
 
 **Hub:** [`CONTROLS_CHEATSHEET.md`](../CONTROLS_CHEATSHEET.md)
+
+## When to read
+
+Use **Controls Cheat Sheet — Per-role controls + L3 split** (roles: pm, builder, qa, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Per-role controls](#per-role-controls)
+- [L3 split (important)](#l3-split-important)
+
 
 ## Per-role controls
 

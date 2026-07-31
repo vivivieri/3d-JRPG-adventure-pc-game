@@ -5,12 +5,23 @@ audience: [builder, builder_combat, qa]
 phase: [2, 3]
 status: active
 authority: gameplay
-tokens_est: 718
-summary: "Status, limit gauge, enemy intent"
+tokens_est: 763
+summary: "Combat Systems — Status, limit gauge, enemy intent — Potency unit: buff/debuff `potency` is a flat stat delta fed into the damage formulas"
 ---
 # Combat Systems — Status, limit gauge, enemy intent
 
 **Hub:** [`COMBAT_SYSTEMS.md`](../COMBAT_SYSTEMS.md)
+
+## When to read
+
+Use **Combat Systems — Status, limit gauge, enemy intent** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Status effects](#4-status-effects)
+- [5. Limit gauge](#5-limit-gauge)
+- [6. Enemy intent system](#6-enemy-intent-system)
+
 
 ## 4. Status effects
 

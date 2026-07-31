@@ -5,12 +5,23 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 611
+tokens_est: 667
 summary: "Instance these `.tscn` components in zones — do not rebuild trigger logic per zone."
 ---
 # Level Design — Global level rules
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Global level rules** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Global level rules](#1-global-level-rules)
+- [Standard node names (all zones)](#standard-node-names-all-zones)
+- [1b. Reusable component scenes (GDAI Builder catalog)](#1b-reusable-component-scenes-gdai-builder-catalog)
+
 
 ## 1. Global level rules
 

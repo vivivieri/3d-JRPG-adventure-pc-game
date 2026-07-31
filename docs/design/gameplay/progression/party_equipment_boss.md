@@ -5,12 +5,26 @@ audience: [builder, builder_combat, qa]
 phase: [2, 3]
 status: active
 authority: gameplay
-tokens_est: 735
-summary: "Party stats, equipment, bosses"
+tokens_est: 851
+summary: "Progression & Tuning — Party stats, equipment, bosses — Formula: `base + growth × (level − 1)` from `party.json`."
 ---
 # Progression & Tuning — Party stats, equipment, bosses
 
 **Hub:** [`PROGRESSION_TUNING.md`](../PROGRESSION_TUNING.md)
+
+## When to read
+
+Use **Progression & Tuning — Party stats, equipment, bosses** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [3. Party stats at milestones](#3-party-stats-at-milestones)
+- [Urashima (active entire game)](#urashima-active-entire-game)
+- [Yuzu (joins SC-10, enters at ~party L5)](#yuzu-joins-sc-10-enters-at-party-l5)
+- [Roku (combat SC-12+, enters at ~party L6)](#roku-combat-sc-12-enters-at-party-l6)
+- [4. Equipment & power spikes](#4-equipment-power-spikes)
+- [5. Boss tuning reference](#5-boss-tuning-reference)
+
 
 ## 3. Party stats at milestones
 

@@ -5,12 +5,26 @@ phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 979
-summary: "Doc map, overview, time model"
+tokens_est: 1092
+summary: "Development Lifecycle — Doc map, overview, time model — Before v1.0: Lifecycle knowledge was split across several docs:"
 ---
 # Development Lifecycle — Doc map, overview, time model
 
 **Hub:** [`DEVELOPMENT_LIFECYCLE.md`](../DEVELOPMENT_LIFECYCLE.md)
+
+## When to read
+
+Use **Development Lifecycle — Doc map, overview, time model** (roles: pm, architect, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. Do we have one document for this?](#1-do-we-have-one-document-for-this)
+- [2. Lifecycle overview (macro)](#2-lifecycle-overview-macro)
+- [Stage map](#stage-map)
+- [3. Two-layer time model](#3-two-layer-time-model)
+- [Layer A — Waterfall roadmap (phases 0–8)](#layer-a-waterfall-roadmap-phases-08)
+- [Layer B — Agile sprints (inside each phase)](#layer-b-agile-sprints-inside-each-phase)
+
 
 ## 1. Do we have one document for this?
 

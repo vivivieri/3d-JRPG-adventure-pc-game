@@ -4,12 +4,18 @@ type: how-to
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 379
+tokens_est: 390
 summary: "`docs/archive/compliance/alignment_audit_history.json`"
 ---
 # Alignment — Visuals / History / Integration — Committed history
 
 **Hub:** [`visuals_history_integration.md`](../visuals_history_integration.md)
+
+## When to read
+
+Use **Alignment — Visuals / History / Integration — Committed history** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 8. History (committed on GitHub)
 

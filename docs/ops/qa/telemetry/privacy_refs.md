@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 779
-summary: "Privacy, cross-refs, workflow coop"
+tokens_est: 880
+summary: "Agent Session Telemetry — Privacy, cross-refs, workflow coop — - Raw logs stay local under `artifacts/` (gitignored)"
 ---
 # Agent Session Telemetry — Privacy, cross-refs, workflow coop
 
 **Hub:** [`AGENT_SESSION_TELEMETRY.md`](../AGENT_SESSION_TELEMETRY.md)
+
+## When to read
+
+Use **Agent Session Telemetry — Privacy, cross-refs, workflow coop** (roles: pm, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [7. Privacy](#7-privacy)
+- [8. Cross-refs](#8-cross-refs)
+- [9. Workflow cooperation (how other agents use this)](#9-workflow-cooperation-how-other-agents-use-this)
+- [Integration map](#integration-map)
+- [Mandatory worker contract](#mandatory-worker-contract)
+- [PM contract](#pm-contract)
+- [Not a ship gate](#not-a-ship-gate)
+
 
 ## 7. Privacy
 

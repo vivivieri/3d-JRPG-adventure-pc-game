@@ -5,12 +5,27 @@ audience: [visual, qa]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 1146
-summary: "Layers A–G defense stack"
+tokens_est: 1326
+summary: "Visual QA — Defense Layers — bash tools/check_scene_visuals.sh"
 ---
 # Visual QA — Defense Layers
 
 **Hub:** [`judge_layers.md`](../judge_layers.md)
+
+## When to read
+
+Use **Visual QA — Defense Layers** (roles: visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Layer A — Static scene lint (before commit)](#layer-a-static-scene-lint-before-commit)
+- [Layer B — Mandatory screenshot (every zone/UI task)](#layer-b-mandatory-screenshot-every-zoneui-task)
+- [Layer C — Vision checklist (agent procedure)](#layer-c-vision-checklist-agent-procedure)
+- [Layer D — Palette sampling (automated)](#layer-d-palette-sampling-automated)
+- [Layer E — Golden masters (L4, when available)](#layer-e-golden-masters-l4-when-available)
+- [Layer F — Human L6](#layer-f-human-l6)
+- [Layer G — Multi-LLM vision jury (recommended)](#layer-g-multi-llm-vision-jury-recommended)
+
 
 ### Layer A — Static scene lint (before commit)
 

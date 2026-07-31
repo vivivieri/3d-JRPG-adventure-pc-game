@@ -5,12 +5,18 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 304
-summary: "M6 ship security checklist"
+tokens_est: 315
+summary: "Security — M6 Player Protect — M6 ship security checklist — - [ ] `bash tools/check_player_build_protection.sh` PASS (save HMAC spec + export hooks)"
 ---
 # Security — M6 Player Protect — M6 ship security checklist
 
 **Hub:** [`m6_player_protect.md`](../m6_player_protect.md)
+
+## When to read
+
+Use **Security — M6 Player Protect — M6 ship security checklist** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 8. M6 ship security checklist
 

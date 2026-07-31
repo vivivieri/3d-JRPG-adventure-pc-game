@@ -5,12 +5,23 @@ audience: [builder, builder_combat, qa]
 phase: [2]
 status: active
 authority: gameplay
-tokens_est: 591
+tokens_est: 620
 summary: "Borrowed from **Ni no Kuni** (grief externalized), **Persona** (harm as felt experience), **XC3 / Expedition 33** (bonds under inevitability). Bosses are **name"
 ---
 # Boss Designs — Global boss rules
 
 **Hub:** [`BOSS_DESIGNS.md`](../BOSS_DESIGNS.md)
+
+## When to read
+
+Use **Boss Designs — Global boss rules** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Global boss rules](#1-global-boss-rules)
+- [Bosses as emotional facets (v1 — not “evil for evil”)](#bosses-as-emotional-facets-v1-not-evil-for-evil)
+- [Intent icon mapping](#intent-icon-mapping)
+
 
 ## 1. Global boss rules
 

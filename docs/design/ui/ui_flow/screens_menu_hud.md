@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [builder, visual]
 status: active
 authority: ui
-tokens_est: 573
-summary: "Screen map, main menu, HUD, field menu"
+tokens_est: 622
+summary: "UI/UX Flow — Screen map, main menu, HUD, field menu — TITLE --> NEW[New Game]"
 ---
 # UI/UX Flow — Screen map, main menu, HUD, field menu
 
 **Hub:** [`UI_UX_FLOW.md`](../UI_UX_FLOW.md)
+
+## When to read
+
+Use **UI/UX Flow — Screen map, main menu, HUD, field menu** (roles: builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Screen map](#1-screen-map)
+- [2. Main menu](#2-main-menu)
+- [3. HUD — field](#3-hud-field)
+- [4. Field menu (Tab)](#4-field-menu-tab)
+
 
 ## 1. Screen map
 

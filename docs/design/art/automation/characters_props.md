@@ -5,12 +5,18 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 380
-summary: "3D character & prop workflow"
+tokens_est: 390
+summary: "Art Automation Pipeline — 3D character & prop workflow — 1. READ  docs/design/art/CHARACTER_BIBLE.md poly budgets + docs/design/art/GENERATION_READINESS.md row"
 ---
 # Art Automation Pipeline — 3D character & prop workflow
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — 3D character & prop workflow** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 5. 3D character & prop workflow
 

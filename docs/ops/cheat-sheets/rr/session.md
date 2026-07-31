@@ -5,12 +5,18 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 653
-summary: "bash tools/ensure_mcp_stack.sh"
+tokens_est: 663
+summary: "R&R — session-startup-every-run — bash tools/ensure_mcp_stack.sh"
 ---
 # R&R — session-startup-every-run
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R — session-startup-every-run** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Session startup (every run)
 

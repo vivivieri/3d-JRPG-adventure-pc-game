@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 769
-summary: "Standards, where TS lives, runtime"
+tokens_est: 860
+summary: "Vendor code: Godot MCP Pro server ships inside the purchased zip — treat as third-party. Prefer upstream updates over large forks; document any project patches"
 ---
 # TypeScript Style — Standards, where TS lives, runtime
 
 **Hub:** [`TYPESCRIPT_STYLE.md`](../TYPESCRIPT_STYLE.md)
+
+## When to read
+
+Use **TypeScript Style — Standards, where TS lives, runtime** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Industry standards (authoritative externals)](#1-industry-standards-authoritative-externals)
+- [2. Where TypeScript lives in this repo](#2-where-typescript-lives-in-this-repo)
+- [3. Runtime & build](#3-runtime-build)
+- [Mode flags (do not change without PM approval)](#mode-flags-do-not-change-without-pm-approval)
+
 
 ## 1. Industry standards (authoritative externals)
 

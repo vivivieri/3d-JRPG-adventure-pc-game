@@ -5,12 +5,22 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 304
-summary: "Developer workflow + CI per branch"
+tokens_est: 347
+summary: "Branching Policy — Developer workflow + CI per branch — bash tools/run_docs_ci_checks.sh"
 ---
 # Branching Policy — Developer workflow + CI per branch
 
 **Hub:** [`BRANCHING.md`](../BRANCHING.md)
+
+## When to read
+
+Use **Branching Policy — Developer workflow + CI per branch** (roles: pm, architect, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Workflow for developers & agents](#3-workflow-for-developers-agents)
+- [4. CI per branch](#4-ci-per-branch)
+
 
 ## 3. Workflow for developers & agents
 

@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 430
+tokens_est: 479
 summary: "Phase gates, tools, remediation relationship"
 ---
 # Acceptance Criteria — Phase gates, tools, remediation relationship
 
 **Hub:** [`ACCEPTANCE_CRITERIA.md`](../ACCEPTANCE_CRITERIA.md)
+
+## When to read
+
+Use **Acceptance Criteria — Phase gates, tools, remediation relationship** (roles: qa, pm, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. Phase gates](#6-phase-gates)
+- [7. Tools](#7-tools)
+- [8. Relationship to remediation](#8-relationship-to-remediation)
+
 
 ## 6. Phase gates
 

@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [qa, pm]
 status: active
 authority: qa
-tokens_est: 535
+tokens_est: 579
 summary: "┌─────────┐ ┌──────────────┐ ┌─────────────────┐ ┌────────────┐"
 ---
 # Remediation — Standards & Loop — Remediation loop
 
 **Hub:** [`standards_loop.md`](../standards_loop.md)
+
+## When to read
+
+Use **Remediation — Standards & Loop — Remediation loop** (roles: qa, pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [2. The remediation loop (required on every FAIL)](#2-the-remediation-loop-required-on-every-fail)
+- [Step-by-step (agent mandatory)](#step-by-step-agent-mandatory)
+
 
 ## 2. The remediation loop (required on every FAIL)
 

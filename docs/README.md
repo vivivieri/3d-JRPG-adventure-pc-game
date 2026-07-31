@@ -183,5 +183,5 @@ Recent efficiency work:
 - Packs must be **named topics** — no opaque `part_a`/`part_b` or `(A)`/`(B)`.
 - Prefer **hub → leaf** (or hub → named packs); avoid hub-of-hub.
 - A coherent ~1.2–1.4k leaf is fine; clarity beats sub-1k chasing.
-- Prefer sharp `summary:` + **When to read** / **Jump to** on fat leaves over new splits.
+- Prefer sharp `summary:` + **When to read** / **Jump to** on fat leaves over new splits (`python3 tools/apply_docs_skim_aids.py`).
 - Next work: **use** packs (`resolve_docs`, adherence), not more splits.

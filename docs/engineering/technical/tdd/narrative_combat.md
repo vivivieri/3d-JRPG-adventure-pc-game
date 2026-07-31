@@ -5,12 +5,22 @@ audience: [architect, builder]
 phase: [2, 3]
 status: active
 authority: engineering
-tokens_est: 609
-summary: "Narrative + combat stacks"
+tokens_est: 643
+summary: "Technical Design — Narrative + combat stacks — participant I as Interactable"
 ---
 # Technical Design — Narrative + combat stacks
 
 **Hub:** [`TECHNICAL_DESIGN.md`](../TECHNICAL_DESIGN.md)
+
+## When to read
+
+Use **Technical Design — Narrative + combat stacks** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [6. Narrative stack](#6-narrative-stack)
+- [7. Combat stack](#7-combat-stack)
+
 
 ## 6. Narrative stack
 

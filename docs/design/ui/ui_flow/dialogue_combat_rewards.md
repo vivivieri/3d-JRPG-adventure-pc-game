@@ -5,12 +5,25 @@ phase: [1, 5]
 audience: [builder, visual]
 status: active
 authority: ui
-tokens_est: 480
+tokens_est: 539
 summary: "Dialogue, combat, rewards, choice, game over"
 ---
 # UI/UX Flow — Dialogue, combat, rewards, choice, game over
 
 **Hub:** [`UI_UX_FLOW.md`](../UI_UX_FLOW.md)
+
+## When to read
+
+Use **UI/UX Flow — Dialogue, combat, rewards, choice, game over** (roles: builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Dialogue box](#5-dialogue-box)
+- [6. Combat UI](#6-combat-ui)
+- [7. Battle rewards](#7-battle-rewards)
+- [8. Choice UI (SC-16)](#8-choice-ui-sc-16)
+- [9. Game Over](#9-game-over)
+
 
 ## 5. Dialogue box
 

@@ -5,12 +5,27 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 587
-summary: "P1-02 Builder greybox + QA handoff"
+tokens_est: 763
+summary: "Title: `[DEV][P1-02] Phase 1.5–1.7 — GDAI ruined_village.tscn greybox + SC-02 lighting"
 ---
 # Phase1-Sprint1 — P1-02 Builder greybox + QA handoff
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-02 Builder greybox + QA handoff** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [P1-02 — Builder: GDAI ruined_village greybox vertical slice](#p1-02-builder-gdai-ruined_village-greybox-vertical-slice)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Spec summary](#spec-summary)
+- [Builder → QA handoff](#builder-qa-handoff)
+- [Handoff to QA](#handoff-to-qa)
+- [Design refs](#design-refs)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-02 — Builder: GDAI ruined_village greybox vertical slice
 

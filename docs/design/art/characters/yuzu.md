@@ -5,12 +5,26 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 312
-summary: "SC-10 (after Shore Wraith)"
+tokens_est: 379
+summary: "Character — Yuzu — Role: Healer / buffer"
 ---
 # Character — Yuzu
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Character — Yuzu** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [3. Yuzu (shrine maiden spirit)](#3-yuzu-shrine-maiden-spirit)
+- [Silhouette](#silhouette)
+- [Spirit treatment](#spirit-treatment)
+- [Colors](#colors)
+- [Field presence](#field-presence)
+- [Combat read](#combat-read)
+
 
 ## 3. Yuzu (shrine maiden spirit)
 

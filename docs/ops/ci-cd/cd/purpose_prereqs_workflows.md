@@ -5,12 +5,25 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 609
-summary: "Purpose, prerequisites, workflows"
+tokens_est: 674
+summary: "Continuous Delivery — Purpose, prerequisites, workflows — CD automates release builds after CI passes. It does not replace human QA (L6) or Steamworks business"
 ---
 # Continuous Delivery — Purpose, prerequisites, workflows
 
 **Hub:** [`CD.md`](../CD.md)
+
+## When to read
+
+Use **Continuous Delivery — Purpose, prerequisites, workflows** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Purpose](#1-purpose)
+- [2. Prerequisites](#2-prerequisites)
+- [3. Workflows](#3-workflows)
+- [3.1 Artifact CD (`cd-artifact.yml`)](#31-artifact-cd-cd-artifactyml)
+- [3.2 Steam CD (`cd-steam.yml`)](#32-steam-cd-cd-steamyml)
+
 
 ## 1. Purpose
 

@@ -4,12 +4,25 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 631
-summary: "WorldEnvironment + sky"
+tokens_est: 710
+summary: "Rendering — Defaults & Environment — WorldEnvironment + sky — Every world scene needs a `WorldEnvironment` node. Apply via `game/scripts/exploration/zone_visual"
 ---
 # Rendering — Defaults & Environment — WorldEnvironment + sky
 
 **Hub:** [`defaults_environment.md`](../defaults_environment.md)
+
+## When to read
+
+Use **Rendering — Defaults & Environment — WorldEnvironment + sky** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. WorldEnvironment (per zone)](#3-worldenvironment-per-zone)
+- [3.1 Global defaults](#31-global-defaults)
+- [3.2 Post-processing](#32-post-processing)
+- [3.3 What to avoid](#33-what-to-avoid)
+- [4. Sky](#4-sky)
+
 
 ## 3. WorldEnvironment (per zone)
 

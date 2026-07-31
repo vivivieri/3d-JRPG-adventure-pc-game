@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 650
+tokens_est: 694
 summary: "Add to settings menu (`docs/design/ui/SETTINGS_ACCESSIBILITY.md`). Store in `user://settings.json`."
 ---
 # Rendering — Quality presets & zone map
 
 **Hub:** [`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)
+
+## When to read
+
+Use **Rendering — Quality presets & zone map** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [10. Graphics quality presets](#10-graphics-quality-presets)
+- [11. Zone implementation map](#11-zone-implementation-map)
+- [12. M5 art acceptance checklist](#12-m5-art-acceptance-checklist)
+
 
 ## 10. Graphics quality presets
 

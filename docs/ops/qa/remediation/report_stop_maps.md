@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 604
+tokens_est: 724
 summary: "Report template, stop rules, medium maps"
 ---
 # QA Remediation Loop — Report template, stop rules, medium maps
 
 **Hub:** [`QA_REMEDIATION_LOOP.md`](../QA_REMEDIATION_LOOP.md)
+
+## When to read
+
+Use **QA Remediation Loop — Report template, stop rules, medium maps** (roles: qa, builder, visual) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [5. Agent report template (after FAIL)](#5-agent-report-template-after-fail)
+- [6. Stop rules (prevents never-ending loops)](#6-stop-rules-prevents-never-ending-loops)
+- [7. Medium-specific quick maps](#7-medium-specific-quick-maps)
+- [Model FAIL → typical fix order](#model-fail-typical-fix-order)
+- [Visual FAIL → typical fix order](#visual-fail-typical-fix-order)
+- [Audio FAIL → typical fix order](#audio-fail-typical-fix-order)
+
 
 ## 5. Agent report template (after FAIL)
 

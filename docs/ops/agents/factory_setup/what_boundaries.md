@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 539
-summary: "What you build + control boundaries"
+tokens_est: 587
+summary: "Factory Setup Guide — What you build + control boundaries — participant W as Worker AI<br/>(snapshot VM)"
 ---
 # Factory Setup Guide — What you build + control boundaries
 
 **Hub:** [`FACTORY_SETUP_GUIDE.md`](../FACTORY_SETUP_GUIDE.md)
+
+## When to read
+
+Use **Factory Setup Guide — What you build + control boundaries** (roles: pm, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. What you are building](#1-what-you-are-building)
+- [2. Control boundaries (read this first)](#2-control-boundaries-read-this-first)
+
 
 ## 1. What you are building
 

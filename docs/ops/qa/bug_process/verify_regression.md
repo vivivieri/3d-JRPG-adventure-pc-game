@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 711
-summary: "Verification + regression suite"
+tokens_est: 806
+summary: "QA and Bug Process — Verification + regression suite — A bug is closed only when:"
 ---
 # QA and Bug Process — Verification + regression suite
 
 **Hub:** [`QA_AND_BUG_PROCESS.md`](../QA_AND_BUG_PROCESS.md)
+
+## When to read
+
+Use **QA and Bug Process — Verification + regression suite** (roles: qa, pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [5. Verification (definition of done)](#5-verification-definition-of-done)
+- [Verify matrix by area](#verify-matrix-by-area)
+- [6. Regression suite](#6-regression-suite)
+- [Automated (required)](#automated-required)
+- [Smoke (15 min)](#smoke-15-min)
+- [Full regression](#full-regression)
+- [Post-fix regression](#post-fix-regression)
+
 
 ## 5. Verification (definition of done)
 

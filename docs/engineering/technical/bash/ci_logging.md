@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 405
-summary: "CI gate pattern, logging, Python invoke"
+tokens_est: 448
+summary: "Bash Style — CI gate pattern, logging, Python invoke — Authoritative runner: `tools/run_docs_ci_checks.sh` / `tools/run_ci_checks.sh"
 ---
 # Bash Style — CI gate pattern, logging, Python invoke
 
 **Hub:** [`BASH_STYLE.md`](../BASH_STYLE.md)
+
+## When to read
+
+Use **Bash Style — CI gate pattern, logging, Python invoke** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [5. CI gate pattern](#5-ci-gate-pattern)
+- [6. Logging & errors](#6-logging-errors)
+- [7. Python invocation](#7-python-invocation)
+
 
 ## 5. CI gate pattern
 

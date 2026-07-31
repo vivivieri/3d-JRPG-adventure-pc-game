@@ -5,12 +5,23 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 629
+tokens_est: 639
 summary: "PM Automation on `0 9 * * *` (or any fixed interval). AI agents do not need sleep; wall-clock schedules waste time between cycles."
 ---
 # Cloud Agent Setup — Goal & architecture
 
 **Hub:** [`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)
+
+## When to read
+
+Use **Cloud Agent Setup — Goal & architecture** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Goal](#1-goal)
+- [2. Architecture (event-driven)](#2-architecture-event-driven)
+- [Cycle types](#cycle-types)
+
 
 ## 1. Goal
 

@@ -5,12 +5,24 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 564
-summary: "Key items, materials, start inv, shop"
+tokens_est: 631
+summary: "Not in inventory UI as usable — Quest / story flags display in Key Items tab (read-only)."
 ---
 # Items & Economy — Key items, materials, start inv, shop
 
 **Hub:** [`ITEMS_AND_ECONOMY.md`](../ITEMS_AND_ECONOMY.md)
+
+## When to read
+
+Use **Items & Economy — Key items, materials, start inv, shop** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. Key items (non-sellable)](#4-key-items-non-sellable)
+- [5. Materials (sell only)](#5-materials-sell-only)
+- [6. Starting inventory](#6-starting-inventory)
+- [7. Roku's shop (`roku_shack`)](#7-rokus-shop-roku_shack)
+
 
 ## 4. Key items (non-sellable)
 

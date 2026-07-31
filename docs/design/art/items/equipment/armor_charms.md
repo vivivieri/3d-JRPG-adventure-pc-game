@@ -4,12 +4,22 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 425
+tokens_est: 457
 summary: "Armor v1 uses **character mesh variants** — not standalone pickup props."
 ---
 # Items — Weapons / Armor / Charms — Armor + charms
 
 **Hub:** [`weapons_armor_charms.md`](../weapons_armor_charms.md)
+
+## When to read
+
+Use **Items — Weapons / Armor / Charms — Armor + charms** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Equipment — armor](#5-equipment-armor)
+- [6. Equipment — charms](#6-equipment-charms)
+
 
 ## 5. Equipment — armor
 

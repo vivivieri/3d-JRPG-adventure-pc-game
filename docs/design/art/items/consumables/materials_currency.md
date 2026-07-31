@@ -4,12 +4,24 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 301
-summary: "Materials & currency"
+tokens_est: 369
+summary: "Items — Consumables / Key / Currency — Materials & currency — covers 9. Materials & currency; `spirit_shard`; `palace_fragment`; `shell_coin` — Shell Coin"
 ---
 # Items — Consumables / Key / Currency — Materials & currency
 
 **Hub:** [`consumables_key_currency.md`](../consumables_key_currency.md)
+
+## When to read
+
+Use **Items — Consumables / Key / Currency — Materials & currency** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [9. Materials & currency](#9-materials-currency)
+- [`spirit_shard`](#spirit_shard)
+- [`palace_fragment`](#palace_fragment)
+- [`shell_coin` — Shell Coin](#shell_coin-shell-coin)
+
 
 ## 9. Materials & currency
 

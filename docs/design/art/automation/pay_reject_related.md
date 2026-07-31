@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 372
-summary: "Pay vs free, rejected tools, related"
+tokens_est: 419
+summary: "Art Automation Pipeline — Pay vs free, rejected tools, related — IF free_tool_output >= paid_tool_output on blind review (same prompt, same zone):"
 ---
 # Art Automation Pipeline — Pay vs free, rejected tools, related
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — Pay vs free, rejected tools, related** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [9. Pay vs free decision rule](#9-pay-vs-free-decision-rule)
+- [10. Explicitly rejected](#10-explicitly-rejected)
+- [Related](#related)
+
 
 ## 9. Pay vs free decision rule
 

@@ -5,12 +5,25 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 498
-summary: "Principles + combat feedback"
+tokens_est: 560
+summary: "Damage numbers: Optional v1 — if shown, float up 0.8 s, max 2 per hit. Default on for tutorial (SC-05), player can disable in settings (future) or always on for"
 ---
 # Game Feel — Principles + combat feedback
 
 **Hub:** [`GAME_FEEL.md`](../GAME_FEEL.md)
+
+## When to read
+
+Use **Game Feel — Principles + combat feedback** (roles: builder, visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Design principles](#1-design-principles)
+- [2. Combat feedback](#2-combat-feedback)
+- [Hit resolution](#hit-resolution)
+- [Status & intent](#status-intent)
+- [Victory & defeat](#victory-defeat)
+
 
 ## 1. Design principles
 

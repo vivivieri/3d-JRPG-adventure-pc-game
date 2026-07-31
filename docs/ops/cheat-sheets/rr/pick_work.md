@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 874
+tokens_est: 977
 summary: "Do **not** self-pick from the backlog. PM dispatches via orchestrator; workers pass session gate first."
 ---
 # R&R — how-to-pick-work-dev-qa
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R — how-to-pick-work-dev-qa** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [How to pick work (dev & QA)](#how-to-pick-work-dev-qa)
+- [Where work is defined](#where-work-is-defined)
+- [Who picks the next item?](#who-picks-the-next-item)
+- [Phase 1 dependency chain (current sprint)](#phase-1-dependency-chain-current-sprint)
+- [Priority (no story points)](#priority-no-story-points)
+- [How QA knows dev is done](#how-qa-knows-dev-is-done)
+- [Definition of done (sprint issue)](#definition-of-done-sprint-issue)
+
 
 ## How to pick work (dev & QA)
 

@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 649
-summary: "Design rules + 12-clip list"
+tokens_est: 686
+summary: "Selective VO Hit List — Design rules + 12-clip list — Totals: 12 clips × 3 primary VO locales (`en`, `ja`, `zh`) + 12 clips × 2 zh-Hant dialects (`cant`, `cmn`)"
 ---
 # Selective VO Hit List — Design rules + 12-clip list
 
 **Hub:** [`VO_HIT_LIST.md`](../VO_HIT_LIST.md)
+
+## When to read
+
+Use **Selective VO Hit List — Design rules + 12-clip list** (roles: audio, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Design rules](#design-rules)
+- [Hit list (12 clips)](#hit-list-12-clips)
+
 
 ## Design rules
 

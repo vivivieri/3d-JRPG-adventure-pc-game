@@ -5,12 +5,22 @@ audience: [visual, builder, qa]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 551
-summary: "Tools + black-box anti-pattern"
+tokens_est: 608
+summary: "Visual QA — Tools + black-box anti-pattern — Recommendation: Use L1 + L3c + L3d (2-of-3 LLM jury) + L4 golden diff together. No single tool replaces human playt"
 ---
 # Visual QA — Tools + black-box anti-pattern
 
 **Hub:** [`VISUAL_QA.md`](../VISUAL_QA.md)
+
+## When to read
+
+Use **Visual QA — Tools + black-box anti-pattern** (roles: visual, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [2H. Tools that can judge visuals today (2026)](#2h-tools-that-can-judge-visuals-today-2026)
+- [3. The black-box scenario (explicit anti-pattern)](#3-the-black-box-scenario-explicit-anti-pattern)
+
 
 ## 2H. Tools that can judge visuals today (2026)
 

@@ -5,12 +5,32 @@ phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 844
-summary: "Characters, world, combat, progression"
+tokens_est: 1031
+summary: "Game Design Document — Characters, world, combat, progression — - Role: Balanced fighter / party leader"
 ---
 # Game Design Document — Characters, world, combat, progression
 
 **Hub:** [`GDD.md`](../GDD.md)
+
+## When to read
+
+Use **Game Design Document — Characters, world, combat, progression** (roles: narrative, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (12 sections).
+
+## Jump to
+
+- [5. Characters](#5-characters)
+- [Urashima Tarō (Protagonist)](#urashima-tarō-protagonist)
+- [Yuzu (Companion — Shrine Maiden Spirit)](#yuzu-companion-shrine-maiden-spirit)
+- [Roku (Companion — Old Diver)](#roku-companion-old-diver)
+- [Otohime (NPC / moral mirror)](#otohime-npc-moral-mirror)
+- [Tide Keeper (Final boss)](#tide-keeper-final-boss)
+- [6. World & locations](#6-world-locations)
+- [6.1 Ruined Fishing Village (Hub)](#61-ruined-fishing-village-hub)
+- [6.2 Tidal Caves (Dungeon 1)](#62-tidal-caves-dungeon-1)
+- [6.3 Dragon Palace Gate (Dungeon 2)](#63-dragon-palace-gate-dungeon-2)
+- [7. Combat system (summary)](#7-combat-system-summary)
+- [8. Progression](#8-progression)
+
 
 ## 5. Characters
 

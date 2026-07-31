@@ -5,12 +5,28 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 632
-summary: "i18n objects, story spine, registries"
+tokens_est: 757
+summary: "JSON Data Style — i18n objects, story spine, registries — All player-facing display strings use inline locale objects:"
 ---
 # JSON Data Style — i18n objects, story spine, registries
 
 **Hub:** [`JSON_DATA_STYLE.md`](../JSON_DATA_STYLE.md)
+
+## When to read
+
+Use **JSON Data Style — i18n objects, story spine, registries** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [5. i18n object shape](#5-i18n-object-shape)
+- [6. Story spine shapes](#6-story-spine-shapes)
+- [6.1 `story/scenes.json` row](#61-storyscenesjson-row)
+- [6.2 `story/flags.json` row](#62-storyflagsjson-row)
+- [6.3 Dialogue line (excerpt)](#63-dialogue-line-excerpt)
+- [7. Registry & QA catalog shapes](#7-registry-qa-catalog-shapes)
+- [Code registries (`game/data/code/`)](#code-registries-gamedatacode)
+- [QA catalogs (`game/data/qa/`)](#qa-catalogs-gamedataqa)
+
 
 ## 5. i18n object shape
 

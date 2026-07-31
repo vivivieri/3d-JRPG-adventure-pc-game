@@ -4,12 +4,25 @@ type: reference
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 535
-summary: "Combat + boss + endings"
+tokens_est: 625
+summary: "BGM — Per-track Specs — Combat + boss + endings — See `AUDIO_DIRECTION.md` §2 for instrument notes. Each ending track must not loop; tail fade ≥ 4 s."
 ---
 # BGM — Per-track Specs — Combat + boss + endings
 
 **Hub:** [`per_track_specs.md`](../per_track_specs.md)
+
+## When to read
+
+Use **BGM — Per-track Specs — Combat + boss + endings** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [`bgm_combat`](#bgm_combat)
+- [`bgm_boss`](#bgm_boss)
+- [`bgm_boss_tide_keeper_p2`](#bgm_boss_tide_keeper_p2)
+- [`bgm_boss_tide_keeper_p3`](#bgm_boss_tide_keeper_p3)
+- [`bgm_ending_rewind` / `bgm_ending_anchor` / `bgm_ending_drift`](#bgm_ending_rewind-bgm_ending_anchor-bgm_ending_drift)
+
 
 ## `bgm_combat`
 

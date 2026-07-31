@@ -4,12 +4,22 @@ type: reference
 audience: [pm, qa, architect]
 status: active
 authority: workflow
-tokens_est: 554
-summary: "(not a separate numbering scheme)."
+tokens_est: 605
+summary: "AI Dev — Phases 0–1 — Task numbers match `docs/ops/workflow/IMPLEMENTATION_PLAN.md` §Phase 1 (not a separate numbering scheme)."
 ---
 # AI Dev — Phases 0–1
 
 **Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
+
+## When to read
+
+Use **AI Dev — Phases 0–1** (roles: pm, qa, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Phase 0 — Dev environment ✅ (baseline)](#phase-0-dev-environment-baseline)
+- [Phase 1 — Environment foundation](#phase-1-environment-foundation)
+
 
 ### Phase 0 — Dev environment ✅ (baseline)
 

@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 442
-summary: "Ship budgets + optimized pass"
+tokens_est: 504
+summary: "Narrative Density — Ship budgets + optimized pass — Source of truth: `game/data/narrative/narrative_density.json"
 ---
 # Narrative Density — Ship budgets + optimized pass
 
 **Hub:** [`NARRATIVE_DENSITY.md`](../NARRATIVE_DENSITY.md)
+
+## When to read
+
+Use **Narrative Density — Ship budgets + optimized pass** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Ship budgets (enforced)](#3-ship-budgets-enforced)
+- [Zone caps](#zone-caps)
+- [4. What “optimized full pass” looks like (v1 ship)](#4-what-optimized-full-pass-looks-like-v1-ship)
+
 
 ## 3. Ship budgets (enforced)
 

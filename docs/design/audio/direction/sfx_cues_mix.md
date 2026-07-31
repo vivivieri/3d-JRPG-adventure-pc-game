@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 423
-summary: "SFX taxonomy, scene cues, mix levels"
+tokens_est: 481
+summary: "Audio Direction — SFX taxonomy, scene cues, mix levels — covers 3. SFX taxonomy; Boss SFX hooks; 4. Scene audio cues; 5. Mix levels (target)"
 ---
 # Audio Direction — SFX taxonomy, scene cues, mix levels
 
 **Hub:** [`AUDIO_DIRECTION.md`](../AUDIO_DIRECTION.md)
+
+## When to read
+
+Use **Audio Direction — SFX taxonomy, scene cues, mix levels** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. SFX taxonomy](#3-sfx-taxonomy)
+- [Boss SFX hooks](#boss-sfx-hooks)
+- [4. Scene audio cues](#4-scene-audio-cues)
+- [5. Mix levels (target)](#5-mix-levels-target)
+
 
 ## 3. SFX taxonomy
 

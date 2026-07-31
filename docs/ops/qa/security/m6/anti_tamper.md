@@ -5,12 +5,28 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 965
-summary: "Player build protection"
+tokens_est: 1118
+summary: "Security — M6 Player Protect — Player build protection — Machine-readable: `game/data/qa/ship_security.json` → `player_build_protection`, `game/data/qa/save_int"
 ---
 # Security — M6 Player Protect — Player build protection
 
 **Hub:** [`m6_player_protect.md`](../m6_player_protect.md)
+
+## When to read
+
+Use **Security — M6 Player Protect — Player build protection** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [9. Player build protection (anti-rip / anti-tamper)](#9-player-build-protection-anti-rip-anti-tamper)
+- [9.1 What we do not ship](#91-what-we-do-not-ship)
+- [9.2 Release export (always)](#92-release-export-always)
+- [9.3 PCK encryption (M6 RC — custom templates required)](#93-pck-encryption-m6-rc-custom-templates-required)
+- [9.4 Save integrity (HMAC)](#94-save-integrity-hmac)
+- [9.5 Steam achievements (server-side)](#95-steam-achievements-server-side)
+- [9.6 Steam DRM — policy: **none**](#96-steam-drm-policy-none)
+- [9.7 CI gate](#97-ci-gate)
+
 
 ## 9. Player build protection (anti-rip / anti-tamper)
 

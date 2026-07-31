@@ -5,12 +5,29 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 914
-summary: "Docstrings, types, project patterns"
+tokens_est: 1059
+summary: "Python Style — Docstrings, types, project patterns — Every module, public function, and public class gets a docstring."
 ---
 # Python Style — Docstrings, types, project patterns
 
 **Hub:** [`PYTHON_STYLE.md`](../PYTHON_STYLE.md)
+
+## When to read
+
+Use **Python Style — Docstrings, types, project patterns** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [3. Docstrings (PEP 257)](#3-docstrings-pep-257)
+- [4. Type hints (PEP 484 / 585)](#4-type-hints-pep-484-585)
+- [5. Project patterns (validators & libs)](#5-project-patterns-validators-libs)
+- [5.1 Repo root resolution](#51-repo-root-resolution)
+- [5.2 CLI entrypoint (gate scripts)](#52-cli-entrypoint-gate-scripts)
+- [5.3 Reference libraries (`*_lib.py`)](#53-reference-libraries-_libpy)
+- [5.4 Error collection vs fail-fast](#54-error-collection-vs-fail-fast)
+- [5.5 Subprocess & paths](#55-subprocess-paths)
+- [5.6 Secrets](#56-secrets)
+
 
 ## 3. Docstrings (PEP 257)
 

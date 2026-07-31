@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 513
+tokens_est: 624
 summary: "Per-zone story, box ladder, writer/QA checklists"
 ---
 # Lore & Environmental Story — Per-zone story, box ladder, writer/QA checklists
 
 **Hub:** [`LORE_AND_ENVIRONMENTAL_STORY.md`](../LORE_AND_ENVIRONMENTAL_STORY.md)
+
+## When to read
+
+Use **Lore & Environmental Story — Per-zone story, box ladder, writer/QA checklists** (roles: narrative, builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [7. Environmental storytelling per zone](#7-environmental-storytelling-per-zone)
+- [Beach / village (Act I)](#beach-village-act-i)
+- [Tidal caves (Act II)](#tidal-caves-act-ii)
+- [Palace gate (Act III)](#palace-gate-act-iii)
+- [8. Box clue ladder](#8-box-clue-ladder)
+- [9. Writer / level design checklist](#9-writer-level-design-checklist)
+- [10. QA checklist](#10-qa-checklist)
+
 
 ## 7. Environmental storytelling per zone
 

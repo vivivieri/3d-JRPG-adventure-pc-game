@@ -5,15 +5,21 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 575
+tokens_est: 590
 summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/vision/GDD.md` §9"
 ---
 # Tides of Urashima — Emotional Pacing Chart
 
-**Version:** 1.0 (Pre-build)
-**Cross-refs:** `docs/design/vision/STORYBOARD.md`, `docs/design/vision/GDD.md` §9
+## When to read
 
----
+Use **Tides of Urashima — Emotional Pacing Chart** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Beat chart (main path ~150 min)](#beat-chart-main-path-150-min)
+- [Intensity curve](#intensity-curve)
+- [Design rules from chart](#design-rules-from-chart)
+
 
 ## Beat chart (main path ~150 min)
 

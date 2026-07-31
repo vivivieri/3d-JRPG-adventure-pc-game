@@ -5,12 +5,25 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 491
-summary: "(`ART_DIRECTION.md` §3.7)."
+tokens_est: 544
+summary: "Rendering — Lighting & fog — One dominant DirectionalLight3D + one colored fill per zone (`ART_DIRECTION.md` §3.7)."
 ---
 # Rendering — Lighting & fog
 
 **Hub:** [`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)
+
+## When to read
+
+Use **Rendering — Lighting & fog** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Lighting & shadows](#5-lighting-shadows)
+- [5.1 Rule](#51-rule)
+- [5.2 Shadows](#52-shadows)
+- [5.3 Point / spot lights](#53-point-spot-lights)
+- [6. Fog](#6-fog)
+
 
 ## 5. Lighting & shadows
 

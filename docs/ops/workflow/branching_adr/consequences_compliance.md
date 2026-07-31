@@ -5,12 +5,27 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 620
-summary: "Consequences, mapping, compliance, refs"
+tokens_est: 719
+summary: "- Single implementation lineage — easy to bisect"
 ---
 # Branching Decision Record — Consequences, mapping, compliance, refs
 
 **Hub:** [`BRANCHING_DECISION_RECORD.md`](../BRANCHING_DECISION_RECORD.md)
+
+## When to read
+
+Use **Branching Decision Record — Consequences, mapping, compliance, refs** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Consequences](#consequences)
+- [Positive](#positive)
+- [Negative / trade-offs](#negative-trade-offs)
+- [Mitigations (see `DEVELOPMENT_LIFECYCLE.md` §10)](#mitigations-see-development_lifecyclemd-10)
+- [Mapping: external advice → this project](#mapping-external-advice-this-project)
+- [Compliance](#compliance)
+- [References](#references)
+
 
 ## Consequences
 

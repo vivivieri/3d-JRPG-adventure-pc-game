@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 685
-summary: "Handoffs, parallel patterns, env matrix"
+tokens_est: 782
+summary: "Multi-Agent Team — Handoffs, parallel patterns, env matrix — - Design doc section (e.g. `ENVIRONMENT_KITS.md` row)"
 ---
 # Multi-Agent Team — Handoffs, parallel patterns, env matrix
 
 **Hub:** [`MULTI_AGENT_TEAM.md`](../MULTI_AGENT_TEAM.md)
+
+## When to read
+
+Use **Multi-Agent Team — Handoffs, parallel patterns, env matrix** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [4. Handoff contracts](#4-handoff-contracts)
+- [Architect → Builder](#architect-builder)
+- [Core helper R&R (summary)](#core-helper-rr-summary)
+- [Builder → QA](#builder-qa)
+- [QA → PM (pass)](#qa-pm-pass)
+- [5. Parallel agent patterns](#5-parallel-agent-patterns)
+- [6. Environment × agent matrix](#6-environment-agent-matrix)
+
 
 ## 4. Handoff contracts
 

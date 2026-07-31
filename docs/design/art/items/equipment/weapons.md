@@ -4,12 +4,26 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 741
+tokens_est: 849
 summary: "Items — Weapons / Armor / Charms — Weapons"
 ---
 # Items — Weapons / Armor / Charms — Weapons
 
 **Hub:** [`weapons_armor_charms.md`](../weapons_armor_charms.md)
+
+## When to read
+
+Use **Items — Weapons / Armor / Charms — Weapons** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [4. Equipment — weapons](#4-equipment-weapons)
+- [`fisher_katana` — Fisher's Katana](#fisher_katana-fishers-katana)
+- [`tide_cut_saber` — Tide-Cut Saber](#tide_cut_saber-tide-cut-saber)
+- [`palace_edge` — Palace Edge](#palace_edge-palace-edge)
+- [`spirit_knife` — Spirit Knife](#spirit_knife-spirit-knife)
+- [`harpoon_rod` — Harpoon Rod](#harpoon_rod-harpoon-rod)
+
 
 ## 4. Equipment — weapons
 

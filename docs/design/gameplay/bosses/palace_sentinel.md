@@ -5,12 +5,27 @@ audience: [builder, builder_combat, qa]
 phase: [3, 5]
 status: active
 authority: gameplay
-tokens_est: 503
-summary: "Dragon Palace Gate — sentinel hall"
+tokens_est: 615
+summary: "Location: Dragon Palace Gate — sentinel hall"
 ---
 # Boss Designs — Palace Sentinel
 
 **Hub:** [`BOSS_DESIGNS.md`](../BOSS_DESIGNS.md)
+
+## When to read
+
+Use **Boss Designs — Palace Sentinel** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. Palace Sentinel (`palace_sentinel`)](#3-palace-sentinel-palace_sentinel)
+- [Visual](#visual)
+- [Stats (Normal) — from `enemies.json`](#stats-normal-from-enemiesjson)
+- [Skill kit (data IDs)](#skill-kit-data-ids)
+- [Phase 1 — Guardian (100% → 0% HP, single phase)](#phase-1-guardian-100-0-hp-single-phase)
+- [Hard mode deltas](#hard-mode-deltas)
+- [Rewards — from `enemies.json`](#rewards-from-enemiesjson)
+
 
 ## 3. Palace Sentinel (`palace_sentinel`)
 

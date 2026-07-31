@@ -4,12 +4,25 @@ type: how-to
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 630
-summary: "Duration recommendations"
+tokens_est: 736
+summary: "Primary model (pure AI agents): session batches — see §12.1. Close a cycle when gate evidence is on the PR, not when a calendar week ends."
 ---
 # Agile — Sprint Duration — Duration recommendations
 
 **Hub:** [`duration.md`](../duration.md)
+
+## When to read
+
+Use **Agile — Sprint Duration — Duration recommendations** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [12. Sprint duration — recommendations](#12-sprint-duration-recommendations)
+- [Per-phase calendar ceiling (Linear)](#per-phase-calendar-ceiling-linear)
+- [When to use a 1-week ceiling (default)](#when-to-use-a-1-week-ceiling-default)
+- [When to extend the ceiling (2–3 weeks)](#when-to-extend-the-ceiling-23-weeks)
+- [Linear configuration](#linear-configuration)
+
 
 ## 12. Sprint duration — recommendations
 

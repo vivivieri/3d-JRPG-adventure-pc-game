@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 657
-summary: "Audit, anti-patterns, cross-refs"
+tokens_est: 754
+summary: "Factory Setup Guide — Audit, anti-patterns, cross-refs — bash tools/check_factory_automation_setup.sh"
 ---
 # Factory Setup Guide — Audit, anti-patterns, cross-refs
 
 **Hub:** [`FACTORY_SETUP_GUIDE.md`](../FACTORY_SETUP_GUIDE.md)
+
+## When to read
+
+Use **Factory Setup Guide — Audit, anti-patterns, cross-refs** (roles: pm, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [10. Audit existing setup](#10-audit-existing-setup)
+- [Repo-side (run now)](#repo-side-run-now)
+- [Per agent run (snapshot proof)](#per-agent-run-snapshot-proof)
+- [Dashboard checklist (human)](#dashboard-checklist-human)
+- [Common failures](#common-failures)
+- [11. Anti-patterns](#11-anti-patterns)
+- [12. Cross-refs](#12-cross-refs)
+
 
 ## 10. Audit existing setup
 

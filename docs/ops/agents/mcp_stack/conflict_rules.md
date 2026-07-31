@@ -5,12 +5,18 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 440
-summary: "Role split & conflict rules"
+tokens_est: 446
+summary: "MCP Stack — Role split & conflict rules — Never use GameLab, Summer Engine, or Fennara for scene graph mutations when GDAI is available."
 ---
 # MCP Stack — Role split & conflict rules
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Use **MCP Stack — Role split & conflict rules** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Role split & conflict rules
 

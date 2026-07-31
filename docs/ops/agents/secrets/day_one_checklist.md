@@ -12,6 +12,12 @@ summary: "(Settings → Secrets and variables → Actions):"
 
 **Hub:** [`CURSOR_SECRETS_SETUP.md`](../CURSOR_SECRETS_SETUP.md)
 
+## When to read
+
+Use **Cursor Secrets Setup — Day-one checklist** (roles: pm, builder, release) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
+
 ## 1. Day-one checklist (all compulsory)
 
 | Secret | Purpose | How to get (section) |

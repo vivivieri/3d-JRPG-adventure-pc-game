@@ -4,12 +4,26 @@ type: reference
 audience: [narrative, builder]
 status: active
 authority: world
-tokens_est: 779
+tokens_est: 896
 summary: "*Explore the ruined village and learn what became of home.*"
 ---
 # Main Quests — Detail — Per-quest detail
 
 **Hub:** [`main_quests_detail.md`](../main_quests_detail.md)
+
+## When to read
+
+Use **Main Quests — Detail — Per-quest detail** (roles: narrative, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [2. Quest detail](#2-quest-detail)
+- [Q1 — The Return (`the_return`)](#q1-the-return-the_return)
+- [Q2 — Echoes at the Torii (`echoes_at_torii`)](#q2-echoes-at-the-torii-echoes_at_torii)
+- [Q3 — Depths of Guilt (`depths_of_guilt`)](#q3-depths-of-guilt-depths_of_guilt)
+- [Q4 — The Palace Gate (`palace_gate`)](#q4-the-palace-gate-palace_gate)
+- [Q5 — The Tide's Answer (`the_tide_answer`)](#q5-the-tides-answer-the_tide_answer)
+
 
 ## 2. Quest detail
 

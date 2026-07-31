@@ -5,12 +5,22 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 511
-summary: "Related docs + quick commands"
+tokens_est: 547
+summary: "Coding — CI & PR — Related docs + quick commands — python3 tools/validate_story_data.py"
 ---
 # Coding — CI & PR — Related docs + quick commands
 
 **Hub:** [`ci_pr_commands.md`](../ci_pr_commands.md)
+
+## When to read
+
+Use **Coding — CI & PR — Related docs + quick commands** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [11. Related authority docs](#11-related-authority-docs)
+- [12. Quick commands](#12-quick-commands)
+
 
 ## 11. Related authority docs
 

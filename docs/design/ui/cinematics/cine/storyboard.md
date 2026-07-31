@@ -4,12 +4,27 @@ type: reference
 audience: [narrative, visual, builder]
 status: active
 authority: ui
-tokens_est: 807
-summary: "Storyboard scene specs"
+tokens_est: 941
+summary: "Cinematics — Storyboard & Endings — Storyboard scene specs — See `docs/design/gameplay/TUTORIAL_DESIGN.md` §2."
 ---
 # Cinematics — Storyboard & Endings — Storyboard scene specs
 
 **Hub:** [`storyboard_endings.md`](../storyboard_endings.md)
+
+## When to read
+
+Use **Cinematics — Storyboard & Endings — Storyboard scene specs** (roles: narrative, visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [7. Storyboard scene specs](#7-storyboard-scene-specs)
+- [SC-00 — Prologue](#sc-00-prologue)
+- [SC-01 — Arrival](#sc-01-arrival)
+- [SC-11 — Palace flashback](#sc-11-palace-flashback)
+- [SC-08 — Deep pool vignette (not a full movie)](#sc-08-deep-pool-vignette-not-a-full-movie)
+- [SC-12 — Palace gate reveal (mid-game hero cinematic)](#sc-12-palace-gate-reveal-mid-game-hero-cinematic)
+- [SC-13 — Mirror chamber](#sc-13-mirror-chamber)
+
 
 ## 7. Storyboard scene specs
 

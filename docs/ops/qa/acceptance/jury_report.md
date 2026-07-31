@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 377
+tokens_est: 433
 summary: "Jury enforcement + agent report template"
 ---
 # Acceptance Criteria — Jury enforcement + agent report template
 
 **Hub:** [`ACCEPTANCE_CRITERIA.md`](../ACCEPTANCE_CRITERIA.md)
+
+## When to read
+
+Use **Acceptance Criteria — Jury enforcement + agent report template** (roles: qa, pm, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [4. Jury acceptance enforcement](#4-jury-acceptance-enforcement)
+- [5. Agent report template (required fields)](#5-agent-report-template-required-fields)
+
 
 ## 4. Jury acceptance enforcement
 

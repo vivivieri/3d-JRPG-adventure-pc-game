@@ -4,12 +4,24 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 432
-summary: "Rig attachment & parenting"
+tokens_est: 513
+summary: "Items — Global Sheets & Rig — Rig attachment & parenting — Humanoid rigs use Mixamo bone names. Custom attachment empties (child of bone) in Blender, exported i"
 ---
 # Items — Global Sheets & Rig — Rig attachment & parenting
 
 **Hub:** [`global_sheets_rig.md`](../global_sheets_rig.md)
+
+## When to read
+
+Use **Items — Global Sheets & Rig — Rig attachment & parenting** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. Rig attachment & parenting](#3-rig-attachment-parenting)
+- [Standard attachment points](#standard-attachment-points)
+- [Parenting rules](#parenting-rules)
+- [Combat pose offset (battle scene)](#combat-pose-offset-battle-scene)
+
 
 ## 3. Rig attachment & parenting
 

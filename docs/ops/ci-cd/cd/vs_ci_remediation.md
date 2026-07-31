@@ -5,12 +5,23 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 344
-summary: "CD vs CI, remediation, refs"
+tokens_est: 383
+summary: "- `docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md` — full ship gap list"
 ---
 # Continuous Delivery — CD vs CI, remediation, refs
 
 **Hub:** [`CD.md`](../CD.md)
+
+## When to read
+
+Use **Continuous Delivery — CD vs CI, remediation, refs** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. CD vs CI](#6-cd-vs-ci)
+- [7. Failure remediation](#7-failure-remediation)
+- [8. Cross-refs](#8-cross-refs)
+
 
 ## 6. CD vs CI
 

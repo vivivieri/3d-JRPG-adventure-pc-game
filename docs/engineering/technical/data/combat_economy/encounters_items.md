@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 633
-summary: "Encounters + story items"
+tokens_est: 711
+summary: "Hand-placed fights only — no random tables."
 ---
 # Data — Combat & Economy — Encounters + story items
 
 **Hub:** [`combat_economy.md`](../combat_economy.md)
+
+## When to read
+
+Use **Data — Combat & Economy — Encounters + story items** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. Encounter data (`encounters/story_encounters.json`)](#6-encounter-data-encountersstory_encountersjson)
+- [8. Items tied to story beats](#8-items-tied-to-story-beats)
+- [Reward ownership rule (avoid double-grants)](#reward-ownership-rule-avoid-double-grants)
+
 
 ## 6. Encounter data (`encounters/story_encounters.json`)
 

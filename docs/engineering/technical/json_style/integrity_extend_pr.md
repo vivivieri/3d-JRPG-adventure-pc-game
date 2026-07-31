@@ -5,12 +5,29 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 695
+tokens_est: 804
 summary: "Integrity, extend, maintenance, anti-patterns, PR"
 ---
 # JSON Data Style — Integrity, extend, maintenance, anti-patterns, PR
 
 **Hub:** [`JSON_DATA_STYLE.md`](../JSON_DATA_STYLE.md)
+
+## When to read
+
+Use **JSON Data Style — Integrity, extend, maintenance, anti-patterns, PR** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [8. Reference integrity rules](#8-reference-integrity-rules)
+- [9. How to extend (step-by-step)](#9-how-to-extend-step-by-step)
+- [New flag](#new-flag)
+- [New item](#new-item)
+- [New QA catalog](#new-qa-catalog)
+- [New registry entry](#new-registry-entry)
+- [10. Maintenance order](#10-maintenance-order)
+- [11. Anti-patterns](#11-anti-patterns)
+- [12. PR checklist (JSON)](#12-pr-checklist-json)
+
 
 ## 8. Reference integrity rules
 

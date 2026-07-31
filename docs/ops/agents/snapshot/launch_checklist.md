@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 503
-summary: "Launch checklist every session"
+tokens_est: 601
+summary: "Cloud Snapshot Launch — Launch checklist every session — - [ ] Open Cloud Agents → Environments (not a bare “new chat” on `main`)"
 ---
 # Cloud Snapshot Launch — Launch checklist every session
 
 **Hub:** [`CLOUD_SNAPSHOT_LAUNCH.md`](../CLOUD_SNAPSHOT_LAUNCH.md)
+
+## When to read
+
+Use **Cloud Snapshot Launch — Launch checklist every session** (roles: pm, builder, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. Launch checklist (every implementation session)](#3-launch-checklist-every-implementation-session)
+- [Before starting the agent](#before-starting-the-agent)
+- [First commands in the agent (after boot)](#first-commands-in-the-agent-after-boot)
+- [Verify snapshot boot (agent or Setup Agent)](#verify-snapshot-boot-agent-or-setup-agent)
+
 
 ## 3. Launch checklist (every implementation session)
 

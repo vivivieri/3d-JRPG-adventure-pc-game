@@ -5,12 +5,24 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 691
-summary: "Scope, later phases, troubleshooting"
+tokens_est: 758
+summary: "Cursor Secrets Setup — Scope, later phases, troubleshooting — Do not commit secrets to git. Do not paste tokens in issues, PRs, or agent prompts."
 ---
 # Cursor Secrets Setup — Scope, later phases, troubleshooting
 
 **Hub:** [`CURSOR_SECRETS_SETUP.md`](../CURSOR_SECRETS_SETUP.md)
+
+## When to read
+
+Use **Cursor Secrets Setup — Scope, later phases, troubleshooting** (roles: pm, builder, release) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [9. Secret scope and placement](#9-secret-scope-and-placement)
+- [10. What is *not* day one (later phases)](#10-what-is-not-day-one-later-phases)
+- [11. Troubleshooting](#11-troubleshooting)
+- [12. Cross-refs](#12-cross-refs)
+
 
 ## 9. Secret scope and placement
 

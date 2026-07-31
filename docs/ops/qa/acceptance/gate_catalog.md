@@ -5,7 +5,7 @@ audience: [qa, pm]
 phase: [1, 6]
 status: active
 authority: qa
-tokens_est: 1423
+tokens_est: 1439
 summary: "L0–L6 / ship gate ids + pass rules — open when wiring CI, remediating a named gate, or checking toolchain requirements"
 ---
 # Acceptance — Gate Catalog
@@ -14,18 +14,19 @@ summary: "L0–L6 / ship gate ids + pass rules — open when wiring CI, remediat
 
 ## When to read
 
-Need a **gate id → pass rule** lookup. Prefer `game/data/qa/acceptance_criteria.json` for machine truth; this doc is the human/agent skim table.
+Use **Acceptance — Gate Catalog** (roles: qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
 
 ## Jump to
 
-- [L0 — Data & workflow](#l0--data--workflow)
-- [L1 — Unit tests & lint](#l1--unit-tests--lint)
-- [L2 — Smoke](#l2--smoke)
-- [L2.5 — Candidate tournament](#l25--candidate-tournament-pre-merge-non-ship)
-- [L3 — GDAI handoff](#l3--gdai-builder-handoff)
-- [L4 / L5 — Flow](#l4--l5--flow)
+- [L0 — Data & workflow](#l0-data-workflow)
+- [L1 — Unit tests & lint](#l1-unit-tests-lint)
+- [L2 — Smoke](#l2-smoke)
+- [L2.5 — Candidate tournament (pre-merge, non-ship)](#l25-candidate-tournament-pre-merge-non-ship)
+- [L3 — GDAI Builder handoff](#l3-gdai-builder-handoff)
+- [L4 / L5 — Flow](#l4-l5-flow)
 - [Ship](#ship)
-- [Required toolchain](#required-toolchain-not-optional)
+- [Required toolchain (not optional)](#required-toolchain-not-optional)
+
 
 ### L0 — Data & workflow
 

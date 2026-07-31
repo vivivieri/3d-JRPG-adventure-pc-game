@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 516
-summary: "bash tools/run_model_smoke_checks.sh"
+tokens_est: 561
+summary: "Model QA — L2 smoke, report, tools — bash tools/run_model_smoke_checks.sh"
 ---
 # Model QA — L2 smoke, report, tools
 
 **Hub:** [`MODEL_QA.md`](../MODEL_QA.md)
+
+## When to read
+
+Use **Model QA — L2 smoke, report, tools** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. L2 smoke](#4-l2-smoke)
+- [5. Agent report template](#5-agent-report-template)
+- [6. Tools](#6-tools)
+- [7. vs Visual / Audio QA](#7-vs-visual-audio-qa)
+
 
 ## 4. L2 smoke
 

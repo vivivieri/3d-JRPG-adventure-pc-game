@@ -5,12 +5,24 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 803
+tokens_est: 854
 summary: "(from `AUDIO_DIRECTION.md` §5): dialogue always readable over Music; Ambient always under Music."
 ---
 # Audio production — Mix, implementation, QA
 
 **Hub:** [`AUDIO_PRODUCTION_GUIDE.md`](../AUDIO_PRODUCTION_GUIDE.md)
+
+## When to read
+
+Use **Audio production — Mix, implementation, QA** (roles: audio) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Mix & loudness targets](#8-mix-loudness-targets)
+- [9. Implementation (`AudioManager`)](#9-implementation-audiomanager)
+- [10. Production order](#10-production-order)
+- [11. QA checklist](#11-qa-checklist)
+
 
 ## 8. Mix & loudness targets
 

@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [visual, release, audio]
 status: active
 authority: art
-tokens_est: 758
-summary: "Art, ship status, code, M6 checklist"
+tokens_est: 826
+summary: "Licenses — Art, ship status, code, M6 checklist — Rendered in code (Pillow). Title text uses bundled Noto (OFL) baked into PNG only."
 ---
 # Licenses — Art, ship status, code, M6 checklist
 
 **Hub:** [`LICENSES.md`](../LICENSES.md)
+
+## When to read
+
+Use **Licenses — Art, ship status, code, M6 checklist** (roles: visual, release, audio) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Art (original — no third-party images)](#art-original-no-third-party-images)
+- [3D models — ship status](#3d-models-ship-status)
+- [Code](#code)
+- [Checklist before Steam ship (M6)](#checklist-before-steam-ship-m6)
+
 
 ## Art (original — no third-party images)
 

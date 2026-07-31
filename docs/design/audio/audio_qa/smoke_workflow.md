@@ -5,12 +5,25 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 483
+tokens_est: 537
 summary: "L2 smoke, agent workflow, report template"
 ---
 # Audio QA — L2 smoke, agent workflow, report template
 
 **Hub:** [`AUDIO_QA.md`](../AUDIO_QA.md)
+
+## When to read
+
+Use **Audio QA — L2 smoke, agent workflow, report template** (roles: audio, qa) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. L2 smoke integration](#3-l2-smoke-integration)
+- [4. Agent workflow](#4-agent-workflow)
+- [BGM](#bgm)
+- [P0 VO](#p0-vo)
+- [5. Agent report template](#5-agent-report-template)
+
 
 ## 3. L2 smoke integration
 

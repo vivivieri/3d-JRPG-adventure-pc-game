@@ -5,12 +5,18 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 362
+tokens_est: 352
 summary: "1. **GodotPrompter writes code** → **GDAI MCP builds scenes** → **QA proves gates** — never skip a handoff."
 ---
 # R&R Cheat Sheet — Golden rules
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R Cheat Sheet — Golden rules** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Golden rules
 

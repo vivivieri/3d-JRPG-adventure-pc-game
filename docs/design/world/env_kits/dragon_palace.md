@@ -5,12 +5,29 @@ audience: [builder, builder_zone, visual]
 phase: [5, 6]
 status: active
 authority: world
-tokens_est: 732
+tokens_est: 876
 summary: "Awe, scale, sterile perfection vs living world"
 ---
 # Environment Kits — Palace + endings
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Palace + endings** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [6. Zone: Dragon Palace Gate (`dragon_palace_gate`)](#6-zone-dragon-palace-gate-dragon_palace_gate)
+- [Modular kit — palace](#modular-kit-palace)
+- [Hero set-pieces](#hero-set-pieces)
+- [Scope note: reverse gravity](#scope-note-reverse-gravity)
+- [Lighting](#lighting)
+- [7. Ending environments (`endings/`)](#7-ending-environments-endings)
+- [SC-17a — Rewind (`ending_rewind`)](#sc-17a-rewind-ending_rewind)
+- [SC-17b — Anchor (`ending_anchor`)](#sc-17b-anchor-ending_anchor)
+- [SC-17c — Drift (`ending_drift`)](#sc-17c-drift-ending_drift)
+
 
 ## 6. Zone: Dragon Palace Gate (`dragon_palace_gate`)
 

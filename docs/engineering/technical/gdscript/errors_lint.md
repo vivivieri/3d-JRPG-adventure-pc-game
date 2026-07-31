@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 377
-summary: "Errors, comments, lint/tests"
+tokens_est: 436
+summary: "Keep handling minimal — linear single-player game, not a live service."
 ---
 # GDScript Style — Errors, comments, lint/tests
 
 **Hub:** [`GDSCRIPT_STYLE.md`](../GDSCRIPT_STYLE.md)
+
+## When to read
+
+Use **GDScript Style — Errors, comments, lint/tests** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [12. Error handling](#12-error-handling)
+- [13. Comments & documentation](#13-comments-documentation)
+- [14. Lint & tests (CI)](#14-lint-tests-ci)
+- [gdlint (gdtoolkit)](#gdlint-gdtoolkit)
+
 
 ## 12. Error handling
 

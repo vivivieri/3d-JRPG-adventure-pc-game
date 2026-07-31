@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 518
-summary: "Sprint Master, orchestrator, dispatch"
+tokens_est: 581
+summary: "PM Agent Runbook — Sprint Master, orchestrator, dispatch — You create sprint items, dispatch other agents in sequence, verify gates, escalate delays, and carry"
 ---
 # PM Agent Runbook — Sprint Master, orchestrator, dispatch
 
 **Hub:** [`PM_AGENT_RUNBOOK.md`](../PM_AGENT_RUNBOOK.md)
+
+## When to read
+
+Use **PM Agent Runbook — Sprint Master, orchestrator, dispatch** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [0. You are the Sprint Master](#0-you-are-the-sprint-master)
+- [1. Every PM session — run orchestrator first](#1-every-pm-session-run-orchestrator-first)
+- [2. Dispatch the next agent](#2-dispatch-the-next-agent)
+
 
 ## 0. You are the Sprint Master
 

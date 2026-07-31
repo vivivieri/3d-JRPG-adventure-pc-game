@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 779
+tokens_est: 861
 summary: "Typing, Godot 4 syntax, base classes, autoload"
 ---
 # GDScript Style — Typing, Godot 4 syntax, base classes, autoload
 
 **Hub:** [`GDSCRIPT_STYLE.md`](../GDSCRIPT_STYLE.md)
+
+## When to read
+
+Use **GDScript Style — Typing, Godot 4 syntax, base classes, autoload** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [5. Static typing (required profile)](#5-static-typing-required-profile)
+- [6. Godot 4 syntax (strict — CI + `.cursorrules`)](#6-godot-4-syntax-strict-ci-cursorrules)
+- [7. Base classes (extend-only)](#7-base-classes-extend-only)
+- [8. Autoload vs scene-local](#8-autoload-vs-scene-local)
+
 
 ## 5. Static typing (required profile)
 

@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 858
-summary: "Philosophy, prologue, matrix"
+tokens_est: 906
+summary: "Tutorial Design — Philosophy, prologue, matrix — Duration: 45–60s (skippable after first play via `prologue_seen`)"
 ---
 # Tutorial Design — Philosophy, prologue, matrix
 
 **Hub:** [`TUTORIAL_DESIGN.md`](../TUTORIAL_DESIGN.md)
+
+## When to read
+
+Use **Tutorial Design — Philosophy, prologue, matrix** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Teaching philosophy](#1-teaching-philosophy)
+- [2. Prologue — SC-00 (new)](#2-prologue-sc-00-new)
+- [3. Tutorial matrix](#3-tutorial-matrix)
+
 
 ## 1. Teaching philosophy
 

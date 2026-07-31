@@ -5,14 +5,21 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 697
-summary: "> **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ('do not restore old code') and "
+tokens_est: 575
+summary: "> **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ('do not restore old code') and"
 ---
 # In-game screenshots
 
-> **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ("do not restore old code") and a `tools/capture_screenshots.sh` script that does not exist in this repo. Kept for historical reference only — do not follow these links or commands. When Phase 1+ produces real screenshots, capture them per `docs/design/art/VISUAL_QA.md` and replace this file's contents.
+## When to read
 
-**Note:** This repository is **private**. `raw.githubusercontent.com` links will **404** unless the repo is public. Use the GitHub file browser links below while logged into GitHub.
+Use **In-game screenshots** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Latest screenshots (PR #5 branch — CC0 3D models)](#latest-screenshots-pr-5-branch-cc0-3d-models)
+- [Previous screenshots (PR #4 branch)](#previous-screenshots-pr-4-branch)
+- [Regenerate locally](#regenerate-locally)
+
 
 ## Latest screenshots (PR #5 branch — CC0 3D models)
 
