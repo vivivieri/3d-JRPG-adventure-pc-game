@@ -6,7 +6,7 @@ audience: [builder, architect]
 status: active
 authority: engineering
 tokens_est: 817
-summary: "From `.cursorrules` — always enforce:"
+summary: "Code Style — GDScript, autoload, signals — covers 3. GDScript rules (strict); 3.1 Base classes (extend-only); 3.2 GDScript lint (CI); 4. Autoload vs scene-local"
 ---
 # Code Style — GDScript, autoload, signals
 

@@ -6,7 +6,7 @@ audience: [flow, qa, builder]
 status: active
 authority: qa
 tokens_est: 615
-summary: "Flow QA — L4 scenarios + lever taxonomy — Implement in `game/tests/integration/` as phases land. Catalog: `game/data/qa/integration_scenarios.json`. IDs from `A"
+summary: "Flow QA — L4 scenarios + lever taxonomy — Implement in `game/tests/integration/` as phases land. Catalog: `game/data/qa/integration_scenarios.json`. IDs from."
 ---
 # Flow QA — L4 scenarios + lever taxonomy
 

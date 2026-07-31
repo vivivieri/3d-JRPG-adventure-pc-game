@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 763
-summary: "Title: `[DEV][P1-02] Phase 1.5–1.7 — GDAI ruined_village.tscn greybox + SC-02 lighting"
+summary: "Phase1-Sprint1 — P1-02 Builder greybox + QA handoff — covers P1-02 — Builder: GDAI ruined_village greybox vertical slice; Acceptance gate IDs; Spec summary."
 ---
 # Phase1-Sprint1 — P1-02 Builder greybox + QA handoff
 

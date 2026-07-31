@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 273
+tokens_est: 274
 summary: "Game design authority stays in `docs/` + `game/data/` — PM tools track work only."
 ---
 # GitHub Setup — Optional MCP + troubleshooting
@@ -20,6 +20,7 @@ Use **GitHub Setup — Optional MCP + troubleshooting** (roles: pm, release) whe
 
 - [5. Optional MCP (not GitHub)](#5-optional-mcp-not-github)
 - [6. Troubleshooting](#6-troubleshooting)
+
 
 ## 5. Optional MCP (not GitHub)
 

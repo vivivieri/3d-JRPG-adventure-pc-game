@@ -6,7 +6,7 @@ audience: [qa, release, builder]
 status: active
 authority: qa
 tokens_est: 667
-summary: "See `docs/ops/cheat-sheets/RR_CHEATSHEET.md` §Performance review — scene/shader/material/mesh/light/fog changes and post-fix regression."
+summary: "Perf — Procedure & Evidence — Procedure + evidence schema — covers 7. Test procedure (`L3_perf_review`); 7.1 When to run; 7.2 Steps; 7.3 Post-fix regression"
 ---
 # Perf — Procedure & Evidence — Procedure + evidence schema
 

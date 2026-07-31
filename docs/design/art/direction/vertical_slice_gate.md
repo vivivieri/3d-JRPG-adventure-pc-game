@@ -22,6 +22,7 @@ Use **Art Direction — Vertical slice gate** (roles: visual, builder) when you 
 - [Phase 1 gate (greybox slice — rendering foundation)](#phase-1-gate-greybox-slice-rendering-foundation)
 - [M5 / Phase 7 gate (final art — before ship)](#m5-phase-7-gate-final-art-before-ship)
 
+
 ## 10. Vertical slice gate
 
 **SC-02 Ruined Village** is gated twice — greybox first, final art later:

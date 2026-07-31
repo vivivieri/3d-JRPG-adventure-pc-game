@@ -23,6 +23,7 @@ Use **Art Direction — Color palette** (roles: visual, builder) when you need t
 - [Dungeon — Tidal Caves](#dungeon-tidal-caves)
 - [Dungeon — Dragon Palace Gate](#dungeon-dragon-palace-gate)
 
+
 ## 1. Color palette
 
 ### Hub — Ruined Village

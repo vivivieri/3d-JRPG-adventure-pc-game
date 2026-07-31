@@ -6,7 +6,7 @@ audience: [narrative, pm, architect]
 status: active
 authority: vision
 tokens_est: 803
-summary: "Game Design Document — Pitch, source, loop, scope — *Urashima Tarō returns from the Dragon Palace to find his village erased by time. A short, melancholy JRPG a"
+summary: "Game Design Document — Pitch, source, loop, scope — *Urashima Tarō returns from the Dragon Palace to find his village erased by time. A short, melancholy JRPG."
 ---
 # Game Design Document — Pitch, source, loop, scope
 

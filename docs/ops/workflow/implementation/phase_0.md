@@ -6,7 +6,7 @@ phase: [0]
 status: active
 authority: workflow
 tokens_est: 593
-summary: "Verify (main — docs/data only):"
+summary: "Implementation Plan — Phase 0 — docs/data verify on main before game/development bootstrap."
 ---
 # Implementation Plan — Phase 0
 

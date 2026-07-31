@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 594
-summary: "Title: `[DEV][P1-05] Phase 1.10–1.11 — ruined_village golden screenshot + zone composition smoke"
+summary: "Phase1-Sprint1 — P1-05 golden screenshot — covers P1-05 — QA + Builder: golden screenshot + zone composition (GR-001, GR-003); Acceptance gate IDs; Spec."
 ---
 # Phase1-Sprint1 — P1-05 golden screenshot
 

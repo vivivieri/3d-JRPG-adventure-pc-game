@@ -6,7 +6,7 @@ phase: [0, 1]
 status: active
 authority: agents
 tokens_est: 407
-summary: "Cloud Agent Setup — GitHub path & timeline — .github/workflows/agent-cycle-pm.yml`:"
+summary: "Cloud Agent Setup — GitHub path & timeline — covers 7. GitHub workflow (secondary path); 8. Full factory timeline (example Phase 1)"
 ---
 # Cloud Agent Setup — GitHub path & timeline
 

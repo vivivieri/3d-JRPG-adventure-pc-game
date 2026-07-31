@@ -6,7 +6,7 @@ audience: [pm, architect]
 status: active
 authority: qa
 tokens_est: 433
-summary: "Workflow Integration — Alignment coop + related gates — alignment_audit_catalog.json` → `pm_workflow` domain includes workflow integration health. On FAIL, reco"
+summary: "Workflow Integration — Alignment coop + related gates — alignment_audit_catalog.json` → `pm_workflow."
 ---
 # Workflow Integration — Alignment coop + related gates
 

@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 267
+tokens_est: 268
 summary: "Skills Bible — Animation/SFX hooks + QA — - [ ] 14 player skills all usable in combat UI (strike shared by Urashima + Roku)"
 ---
 # Skills Bible — Animation/SFX hooks + QA
@@ -20,6 +20,7 @@ Use **Skills Bible — Animation/SFX hooks + QA** (roles: builder, builder_comba
 
 - [7. Animation / SFX hooks](#7-animation-sfx-hooks)
 - [8. QA checklist](#8-qa-checklist)
+
 
 ## 7. Animation / SFX hooks
 

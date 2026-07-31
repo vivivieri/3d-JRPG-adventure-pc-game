@@ -6,7 +6,7 @@ phase: [1, 5]
 status: active
 authority: world
 tokens_est: 720
-summary: "Level Design — Zone tidal_caves — Scene: `res://scenes/world/tidal_caves.tscn"
+summary: "Level Design — Zone tidal_caves — covers 4. Zone: `tidal_caves` (SC-06–11); Blockout; Layout; Interactables & triggers"
 ---
 # Level Design — Zone tidal_caves
 

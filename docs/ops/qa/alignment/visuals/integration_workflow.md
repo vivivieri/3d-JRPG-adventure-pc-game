@@ -5,7 +5,7 @@ audience: [pm, qa]
 status: active
 authority: qa
 tokens_est: 422
-summary: "Alignment — Visuals / History / Integration — PM integration + workflow + catalog — Run both at phase exit: stakeholder report for schedule; alignment audit for"
+summary: "Alignment — Visuals / History / Integration — PM integration + workflow + catalog — Run both at phase exit: stakeholder report for schedule; alignment audit."
 ---
 # Alignment — Visuals / History / Integration — PM integration + workflow + catalog
 

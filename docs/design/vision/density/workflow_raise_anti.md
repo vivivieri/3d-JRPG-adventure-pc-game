@@ -6,7 +6,7 @@ audience: [narrative]
 status: active
 authority: vision
 tokens_est: 383
-summary: "Narrative Density — Workflow, raise budget, anti-patterns — 1. Draft line in `chapter_01.json` or `enemies.json"
+summary: "Narrative Density — Workflow, raise budget, anti-patterns — covers 5. Workflow for new content; 6. When to raise a budget; 7. Anti-patterns (never ship)"
 ---
 # Narrative Density — Workflow, raise budget, anti-patterns
 

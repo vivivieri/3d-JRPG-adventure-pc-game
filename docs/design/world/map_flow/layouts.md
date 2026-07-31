@@ -5,7 +5,7 @@ audience: [architect, builder, narrative]
 status: active
 authority: world
 tokens_est: 427
-summary: "[Well save] — [Shack / Roku SC-04]"
+summary: "World Map & Flow — Zone layouts — covers 4. Ruined village layout (hub); 5. Tidal caves layout (linear with branch); 6. Dragon Palace Gate layout"
 ---
 # World Map & Flow — Zone layouts
 

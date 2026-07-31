@@ -6,7 +6,7 @@ audience: [pm, visual, builder]
 status: active
 authority: qa
 tokens_est: 765
-summary: "Candidate Tournament — Workflow, promotion, PM involvement — 1. Capture golden harness screenshots (GDAI / MCP Pro) to paths in `golden_harness.json"
+summary: "Candidate Tournament — Workflow, promotion, PM involvement — covers 4. Workflow (Builder / Visual); Step A — Produce challenger (after L2 passes on candidate."
 ---
 # Candidate Tournament — Workflow, promotion, PM involvement
 

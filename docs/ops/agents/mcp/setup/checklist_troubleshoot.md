@@ -5,7 +5,7 @@ audience: [pm, builder]
 status: active
 authority: ops
 tokens_est: 838
-summary: "MCP — Setup & Cost — Checklist + troubleshoot + related — Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_toolchain.sh"
+summary: "MCP — Setup & Cost — Checklist + troubleshoot + related — covers User setup checklist (purchase & secrets); Troubleshooting; Related"
 ---
 # MCP — Setup & Cost — Checklist + troubleshoot + related
 
