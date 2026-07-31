@@ -46,6 +46,33 @@ Session gate auto-seeds `must_read` into `artifacts/docs_reads_<id>.log`; post-c
 
 Do not ship `game/addons/gdai-mcp-plugin-godot/`, `godotiq/`, or `godot_mcp/`. Disable GDAI before Steam export.
 
+## Cursor Cloud specific instructions
+
+The dev environment is **dashboard/snapshot-managed** (no repo branch picker). Pods may boot on
+`main`; the startup script `tools/bootstrap_cloud_environment.sh` auto-checks out `game/development`
+(where `game/project.godot` lives) before installing. The dashboard update/install runs with
+`SKIP_MCP_BOOTSTRAP=1` so it only refreshes dependencies — the GDAI/MCP stack is started separately
+(`bash tools/ensure_mcp_stack.sh`, per the every-session block above), never from the install script.
+
+Verified dev inner loop (run from repo root on `game/development`, `~/.local/bin` on `PATH`):
+
+| Step | Command |
+|------|---------|
+| Lint (GDScript) | `bash tools/check_gdscript_all.sh` |
+| Test (unit, headless) | `bash tools/run_unit_tests.sh` |
+| Build (Linux export) | `bash tools/run_linux_export_smoke.sh` |
+| Run (headless boot) | `bash tools/with_ci_godot.sh godot4 --headless --rendering-driver opengl3 --path game --quit-after 120` |
+| Full CI gates | `bash tools/run_ci_checks.sh` |
+
+Non-obvious gotchas:
+
+- Godot needs the repo-local XDG paths (`XDG_DATA_HOME/CONFIG/CACHE` under `.cache/godot-*`); the
+  `run_*`/`check_*` scripts export these themselves, so prefer them over calling `godot4` directly.
+- Python lint tools (`gdlint`, `ruff`, `mypy`) come from `tools/requirements-ci.txt`, **not**
+  `install_cloud_dev.sh` — the update script pip-installs them so lint gates work after a snapshot rebuild.
+- `bash tools/check_dev_environment.sh` reports 3 expected FAILs in cloud (GDAI plugin, Godot MCP Pro,
+  GDAI HTTP bridge) because those are commercial/started-on-demand; they do not block lint/test/build/run.
+
 ## Factory hooks (registry keywords — keep on this page)
 
 Cross-cutting ops live under `docs/ops/`. This page must keep these strings for `L0_workflow_integration`:
