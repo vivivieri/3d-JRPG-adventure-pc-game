@@ -46,6 +46,9 @@ def main() -> int:
     report_only = set(policy.get("report_only_filenames", []))
     if report_only and not report_only.issubset(mgmt_files):
         errors.append("visual_policy.report_only_filenames must be subset of management_status_filenames")
+    illustrated = set(policy.get("illustrated_locked_filenames", []))
+    if illustrated and not illustrated.issubset(mgmt_files):
+        errors.append("visual_policy.illustrated_locked_filenames must be subset of management_status_filenames")
     if mgmt_files & deprecated_files:
         errors.append("visual_policy: file cannot be both management and deprecated_for_management")
 

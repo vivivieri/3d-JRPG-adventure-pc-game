@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Generate spec/build radar PNGs from alignment audit report data.
 
-Slide-quality presentation visuals — muted coastal palette
-(docs/design/art/ART_DIRECTION.md). Includes exec summary card.
+Management status art matches tides_* illustrated JRPG aesthetic.
+Matplotlib fallbacks are used only for unlocked technical sub-radars;
+illustrated_locked files are preserved unless --force.
 
 Authority: docs/ops/qa/ALIGNMENT_AUDIT.md
 """
@@ -385,6 +386,24 @@ def _exec_summary(report: dict[str, Any], out_path: Path) -> None:
     _save_fig(fig, out_path)
 
 
+
+def _illustrated_locked(catalog: dict[str, Any] | None = None) -> set[str]:
+    cat = catalog or _load_catalog()
+    policy = cat.get("visual_policy") or {}
+    return set(policy.get("illustrated_locked_filenames") or [])
+
+
+def _should_write(path: Path, *, force: bool, locked: set[str]) -> bool:
+    """Skip overwriting illustrated tides_-style management art unless forced."""
+    if force:
+        return True
+    if path.name not in locked:
+        return True
+    if path.is_file() and path.stat().st_size > 400_000:
+        return False
+    return True
+
+
 def _generate_subdomain_radars(
     report: dict[str, Any],
     output_dir: Path,
@@ -398,10 +417,13 @@ def _generate_subdomain_radars(
     breakdown_subtitle: str,
     detail_subtitle: str,
     grid_cols: int,
+    force: bool = False,
+    locked: set[str] | None = None,
 ) -> dict[str, str]:
     signal_scores = report.get("signal_scores", {})
     domain_scores = report.get("domain_scores", {})
     written: dict[str, str] = {}
+    locked = locked if locked is not None else _illustrated_locked(catalog)
 
     for dom_id in domain_order:
         signals = signal_scores.get(dom_id, {})
@@ -411,6 +433,11 @@ def _generate_subdomain_radars(
         values = [float(v) for v in signals.values()]
         accent = DOMAIN_ACCENT.get(dom_id, PALETTE["biolume"])
         fname = f"{filename_prefix}_{dom_id}.png"
+        out_path = output_dir / fname
+        if not _should_write(out_path, force=force, locked=locked):
+            written[fname] = str(out_path)
+            print(f"KEEP illustrated {fname} (use --force to overwrite)")
+            continue
         _radar_chart(
             labels=labels,
             values=values,
@@ -418,10 +445,16 @@ def _generate_subdomain_radars(
             subtitle=detail_subtitle,
             stream_score=float(domain_scores.get(dom_id, 0)),
             verdict="",
-            out_path=output_dir / fname,
+            out_path=out_path,
             accent=accent,
         )
-        written[fname] = str(output_dir / fname)
+        written[fname] = str(out_path)
+
+    breakdown_path = output_dir / breakdown_filename
+    if not _should_write(breakdown_path, force=force, locked=locked):
+        written[breakdown_filename] = str(breakdown_path)
+        print(f"KEEP illustrated {breakdown_filename} (use --force to overwrite)")
+        return written
 
     configure_matplotlib()
     stream = report.get("streams", {}).get(stream_key, {})
@@ -446,7 +479,6 @@ def _generate_subdomain_radars(
     for idx, dom_id in enumerate(domain_order):
         row, col = divmod(idx, grid_cols)
         panel_w = 0.9 / grid_cols
-        left = 0.05 + col * (panel_w + 0.02)
         if grid_cols == 3:
             bottom = 0.48 - row * 0.40
             height = 0.30
@@ -475,7 +507,6 @@ def _generate_subdomain_radars(
                 tick_fs=5 if n > 2 else 8,
                 callout_weak=False,
             )
-            # Domain name below panel (avoids colliding with brand header)
             fig.text(
                 left + width / 2,
                 bottom - 0.022,
@@ -489,14 +520,17 @@ def _generate_subdomain_radars(
         else:
             ax.axis("off")
 
-    breakdown_path = output_dir / breakdown_filename
     _save_fig(fig, breakdown_path)
     written[breakdown_filename] = str(breakdown_path)
     return written
 
 
 def generate_spec_subdomain_radars(
-    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+    report: dict[str, Any],
+    output_dir: Path,
+    catalog: dict[str, Any] | None = None,
+    *,
+    force: bool = False,
 ) -> dict[str, str]:
     cat = catalog or _load_catalog()
     return _generate_subdomain_radars(
@@ -511,11 +545,17 @@ def generate_spec_subdomain_radars(
         breakdown_subtitle="Six design axes · signal-level detail",
         detail_subtitle="Signal breakdown · design stream",
         grid_cols=3,
+        force=force,
+        locked=_illustrated_locked(cat),
     )
 
 
 def generate_build_subdomain_radars(
-    report: dict[str, Any], output_dir: Path, catalog: dict[str, Any] | None = None
+    report: dict[str, Any],
+    output_dir: Path,
+    catalog: dict[str, Any] | None = None,
+    *,
+    force: bool = False,
 ) -> dict[str, str]:
     cat = catalog or _load_catalog()
     return _generate_subdomain_radars(
@@ -530,21 +570,33 @@ def generate_build_subdomain_radars(
         breakdown_subtitle="Runtime proof & Steam ship",
         detail_subtitle="Signal breakdown · build stream",
         grid_cols=2,
+        force=force,
+        locked=_illustrated_locked(cat),
     )
 
 
 def generate_audit_radars(
-    report: dict[str, Any], output_dir: Path | None = None
+    report: dict[str, Any],
+    output_dir: Path | None = None,
+    *,
+    force: bool = False,
 ) -> dict[str, str]:
     out_dir = output_dir or DEFAULT_VISUALS_DIR
     streams = report.get("streams", {})
     branch = report.get("branch", "?")
     written: dict[str, str] = {}
+    locked = _illustrated_locked()
 
-    # Exec summary first — primary presentation slide
+    def _maybe(path: Path, writer) -> None:
+        if _should_write(path, force=force, locked=locked):
+            writer()
+            written[path.name] = str(path)
+        else:
+            written[path.name] = str(path)
+            print(f"KEEP illustrated {path.name} (use --force to overwrite)")
+
     exec_path = out_dir / "audit_exec_summary.png"
-    _exec_summary(report, exec_path)
-    written["audit_exec_summary.png"] = str(exec_path)
+    _maybe(exec_path, lambda: _exec_summary(report, exec_path))
 
     spec = streams.get("spec_readiness", {})
     spec_domains = spec.get("domains") or {}
@@ -552,55 +604,65 @@ def generate_audit_radars(
         labels = [_domain_label(k) for k in spec_domains]
         values = [float(v) for v in spec_domains.values()]
         spec_path = out_dir / "audit_radar_spec.png"
-        _radar_chart(
-            labels=labels,
-            values=values,
-            title="Design & Preparation",
-            subtitle=spec.get("question", GAME_SUBTITLE),
-            stream_score=float(spec.get("score") or 0),
-            verdict=str(spec.get("verdict", "?")),
-            out_path=spec_path,
-            accent=PALETTE["biolume"],
-        )
-        written["audit_radar_spec.png"] = str(spec_path)
 
-    build = streams.get("build_readiness", {})
-    build_path = out_dir / "audit_radar_build.png"
-    if build.get("status") == "not_applicable" or build.get("score") is None:
-        _na_card(
-            title="Development & Shipping",
-            reason=str(build.get("na_reason") or "Not applicable on this branch"),
-            branch=branch,
-            out_path=build_path,
-        )
-    else:
-        build_domains = build.get("domains") or {}
-        if build_domains:
-            labels = [_domain_label(k) for k in build_domains]
-            values = [float(v) for v in build_domains.values()]
+        def _write_spec() -> None:
             _radar_chart(
                 labels=labels,
                 values=values,
-                title="Development & Shipping",
-                subtitle=build.get("question", ""),
-                stream_score=float(build.get("score") or 0),
-                verdict=str(build.get("verdict", "?")),
-                out_path=build_path,
-                accent=PALETTE["coral_gold"],
+                title="Design & Preparation",
+                subtitle=spec.get("question", GAME_SUBTITLE),
+                stream_score=float(spec.get("score") or 0),
+                verdict=str(spec.get("verdict", "?")),
+                out_path=spec_path,
+                accent=PALETTE["biolume"],
             )
-    written["audit_radar_build.png"] = str(build_path)
+
+        _maybe(spec_path, _write_spec)
+
+    build = streams.get("build_readiness", {})
+    build_path = out_dir / "audit_radar_build.png"
+
+    def _write_build() -> None:
+        if build.get("status") == "not_applicable" or build.get("score") is None:
+            _na_card(
+                title="Development & Shipping",
+                reason=str(build.get("na_reason") or "Not applicable on this branch"),
+                branch=branch,
+                out_path=build_path,
+            )
+        else:
+            build_domains = build.get("domains") or {}
+            if build_domains:
+                labels = [_domain_label(k) for k in build_domains]
+                values = [float(v) for v in build_domains.values()]
+                _radar_chart(
+                    labels=labels,
+                    values=values,
+                    title="Development & Shipping",
+                    subtitle=build.get("question", ""),
+                    stream_score=float(build.get("score") or 0),
+                    verdict=str(build.get("verdict", "?")),
+                    out_path=build_path,
+                    accent=PALETTE["coral_gold"],
+                )
+
+    _maybe(build_path, _write_build)
 
     report_path = out_dir / "audit_radar_report.png"
-    _combined_radar_report(report, report_path)
-    written["audit_radar_report.png"] = str(report_path)
+    _maybe(report_path, lambda: _combined_radar_report(report, report_path))
 
-    written.update(generate_spec_subdomain_radars(report, out_dir))
-    written.update(generate_build_subdomain_radars(report, out_dir))
+    written.update(generate_spec_subdomain_radars(report, out_dir, force=force))
+    written.update(generate_build_subdomain_radars(report, out_dir, force=force))
     return written
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Generate slide-quality Urashima audit radar PNGs")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate Urashima audit radar PNGs "
+            "(preserves tides_-style illustrated management art by default)"
+        )
+    )
     parser.add_argument(
         "--report",
         default=str(ROOT / "artifacts/alignment_audits/latest.json"),
@@ -611,6 +673,11 @@ def main(argv: list[str] | None = None) -> int:
         default=str(DEFAULT_VISUALS_DIR),
         help="Output directory for radar PNGs",
     )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite illustrated_locked management PNGs with matplotlib fallbacks",
+    )
     args = parser.parse_args(argv)
 
     report_path = Path(args.report)
@@ -619,7 +686,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     report = json.loads(report_path.read_text(encoding="utf-8"))
-    written = generate_audit_radars(report, Path(args.output_dir))
+    written = generate_audit_radars(report, Path(args.output_dir), force=args.force)
     for name, path in written.items():
         print(f"Wrote {path}")
     return 0

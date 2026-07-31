@@ -23,12 +23,14 @@ python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits
 
 | File | Source |
 |------|--------|
-| `audit_exec_summary.png` | **Primary slide** — radar + domain bars + Strength/Gap/Next |
-| `audit_radar_spec.png` | Live spec stream domain scores |
-| `audit_radar_build.png` | Build stream radar or N/A card on `main` |
-| `audit_radar_report.png` | Side-by-side spec + build |
+| `audit_exec_summary.png` | **Primary slide** — illustrated tides_ JRPG aesthetic (locked) |
+| `audit_radar_spec.png` | Spec stream — illustrated (locked) |
+| `audit_radar_build.png` | Build / AWAITING TIDE — illustrated (locked) |
+| `audit_radar_report.png` | Side-by-side — illustrated (locked) |
 
-**Do not use** legacy merged radars (`audit_radar_6axis.png`, mega dashboard) for management status — they are static art from an earlier phase.
+**Style:** Match `tides_audit_*.png` (navy/gold/teal, ornate frame, Japanese motifs). Matplotlib does **not** overwrite locked management art unless `--force`.
+
+**Do not use** legacy mega dashboard for management status — prefer illustrated `audit_exec_summary.png` / `audit_radar_spec.png` / `audit_radar_build.png`.
 
 ## Packs (6 batches, 33 assets)
 

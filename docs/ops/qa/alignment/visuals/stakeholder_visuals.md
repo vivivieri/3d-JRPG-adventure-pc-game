@@ -37,24 +37,20 @@ Six visual packs (33 assets) are catalogued for executive updates:
 
 | File | Content |
 |------|---------|
-| `audit_exec_summary.png` | **Primary presentation slide** — radar + domain bars + Strength/Gap/Next callouts |
-| `audit_radar_report.png` | Side-by-side spec + build radar report |
-| `audit_radar_spec.png` | Spec stream radar (6 domains) |
-| `audit_radar_spec_breakdown.png` | **6-panel grid** — one sub-radar per spec domain (signal breakdown) |
-| `audit_radar_spec_<domain>.png` | Individual sub-radar per domain (e.g. `data_alignment`, `narrative`, …) |
-| `audit_radar_build.png` | Build stream radar on `game/development`, or **N/A card** on `main` |
-| `audit_radar_build_breakdown.png` | **2-panel grid** — one sub-radar per build domain (signal breakdown) |
-| `audit_radar_build_<domain>.png` | Individual sub-radar per build domain (`runtime_proof`, `steam_ship`) |
+| `audit_exec_summary.png` | **Primary presentation slide** — illustrated tides_ aesthetic |
+| `audit_radar_report.png` | Side-by-side spec + build (illustrated) |
+| `audit_radar_spec.png` | Spec stream radar (6 domains, illustrated) |
+| `audit_radar_spec_breakdown.png` | Spec domain grid (illustrated) |
+| `audit_radar_spec_<domain>.png` | Individual technical sub-radar (matplotlib fallback OK) |
+| `audit_radar_build.png` | Build stream radar or **AWAITING TIDE** card (illustrated) |
+| `audit_radar_build_breakdown.png` | Build domain grid (matplotlib fallback OK) |
+| `audit_radar_build_<domain>.png` | Individual build sub-radar |
 
-Each spec domain score rolls up **signals** (gates, parity checks, metrics). Sub-radars show those signals on a 0–10 axis; see `report.md` § Spec domain signal breakdown and § Build domain signal breakdown.
+**Style authority:** Match `tides_audit_radar_updated.png` / `audit_radar_6axis.png` — navy parchment, gold ornate frame, moon/clouds/pagoda/waves, teal radar fill, gold circular axis icons. **Not** flat matplotlib corporate charts.
 
-**Visual theme (slide quality):** Sans-serif, high contrast, muted coastal palette (`docs/design/art/ART_DIRECTION.md`) — void `#12182A`, biolume `#4AE8D8`, fog `#A8B8C8`, lantern `#E0B890`, per-domain accents. Soft target ring; weak-axis score callouts. Renderer: `tools/audit_radar_theme.py`.
+Management illustrated files are listed in `visual_policy.illustrated_locked_filenames` and are **preserved** on audit runs unless `generate_audit_radar_images.py --force`. Regenerate illustrated art via GameLab / image gen with `tides_*` references + live scores.
 
-**Management status:** Prefer `audit_exec_summary.png` for stakeholder updates; keep `audit_radar_spec.png` + `audit_radar_build.png` for stream detail. Do not use legacy mega dashboard / 6-axis art.
-
-Regenerate manually: `python3 tools/generate_audit_radar_images.py --report artifacts/alignment_audits/latest.json`
-
-Legacy merged radars (`audit_radar_6axis.png`, `tides_mega_dashboard_all_radars.png`) remain on disk for archive but are **never shown** in audit reports.
+Matplotlib (`tools/audit_radar_theme.py`) remains for unlocked technical sub-radars only.
 
 Agent-generated review images can be copied into that folder before running the audit so the HTML dashboard embeds them.
 

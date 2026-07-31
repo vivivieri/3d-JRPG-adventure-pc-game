@@ -17,6 +17,15 @@
   },
   "visual_policy": {
     "generator_script": "tools/generate_audit_radar_images.py",
+    "style_authority": "docs/archive/compliance/alignment_audit_visuals/tides_audit_radar_updated.png",
+    "style_notes": "Management status PNGs must match the illustrated tides_* JRPG aesthetic (navy parchment, gold frame, moon/clouds/pagoda, teal radar, gold axis icons) — not flat matplotlib dashboards. Regenerate via GameLab / image gen with tides_ refs; matplotlib only fills unlocked technical sub-radars.",
+    "illustrated_locked_filenames": [
+      "audit_exec_summary.png",
+      "audit_radar_spec.png",
+      "audit_radar_build.png",
+      "audit_radar_report.png",
+      "audit_radar_spec_breakdown.png"
+    ],
     "auto_generated_filenames": [
       "audit_exec_summary.png",
       "audit_radar_spec.png",
