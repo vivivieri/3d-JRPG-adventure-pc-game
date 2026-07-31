@@ -45,6 +45,12 @@ python3 tools/resolve_docs.py <role> --issue <id> --budget 12000 --report artifa
 
 Specialty remap: `builder` + `zone_lighting` → `builder_zone` (`tools/docs_role_map.py`).
 
+After docs/INDEX or pack-router changes, smoke the PM→gate→adherence path:
+
+```bash
+bash tools/smoke_factory_workflow.sh --issue P1-01 --agent architect
+```
+
 ## Branches
 
 | Branch | Contents |
