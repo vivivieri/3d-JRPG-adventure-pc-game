@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 181
+tokens_est: 187
 summary: "Shell script style — load template, CI gates, or checklist"
 ---
 # Bash Style

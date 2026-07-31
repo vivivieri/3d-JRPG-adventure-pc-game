@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 414
+tokens_est: 417
 summary: "python3 tools/pm_escalate.py --issue P1-02 --to arbitration --reopens 3 --reason 'QA keeps failing L2_feel_smoke'"
 ---
 # Escalation Policy — Usage + anti-loop

@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 398
+tokens_est: 405
 summary: "CI gate pattern, logging, Python invoke"
 ---
 # Bash Style — CI gate pattern, logging, Python invoke

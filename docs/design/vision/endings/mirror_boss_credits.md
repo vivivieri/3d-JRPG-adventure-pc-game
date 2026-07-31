@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 382
+tokens_est: 385
 summary: "Mirror choice, boss resolution, credits"
 ---
 # Ending Design — Mirror choice, boss resolution, credits

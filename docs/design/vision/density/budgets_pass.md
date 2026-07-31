@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 438
+tokens_est: 442
 summary: "Ship budgets + optimized pass"
 ---
 # Narrative Density — Ship budgets + optimized pass

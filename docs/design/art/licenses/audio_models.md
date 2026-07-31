@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, release, audio]
 status: active
 authority: art
-tokens_est: 717
+tokens_est: 721
 summary: "Do not import random web loops. Filtered CC0 from documented sources (e.g. Freesound CC0-only) is allowed **only** when registered here and in `asset_manifest.l"
 ---
 # Licenses — Audio + 3D models

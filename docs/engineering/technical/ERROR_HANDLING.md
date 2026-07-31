@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 195
+tokens_est: 202
 summary: "Error handling — load principles, language patterns, or CI"
 ---
 # Error Handling

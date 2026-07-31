@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 656
+tokens_est: 660
 summary: "Purpose, pipeline, schema"
 ---
 # Playtest Telemetry — Purpose, pipeline, schema

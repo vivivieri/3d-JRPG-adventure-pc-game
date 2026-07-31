@@ -49,6 +49,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/gdscript/errors_lint.md](technical/gdscript/errors_lint.md) | `errors_lint` |
 | [technical/gdscript/standards_layout.md](technical/gdscript/standards_layout.md) | `standards_layout` |
 | [technical/gdscript/typing_syntax_base.md](technical/gdscript/typing_syntax_base.md) | `typing_syntax_base` |
+| [technical/gdscript_regen/checklist/checklist_helpers.md](technical/gdscript_regen/checklist/checklist_helpers.md) | `checklist_helpers` |
+| [technical/gdscript_regen/checklist/phase1_visuals.md](technical/gdscript_regen/checklist/phase1_visuals.md) | `phase1_visuals` |
 | [technical/gdscript_regen/checklist_recover.md](technical/gdscript_regen/checklist_recover.md) | `checklist_recover` |
 | [technical/gdscript_regen/order_helpers.md](technical/gdscript_regen/order_helpers.md) | `order_helpers` |
 | [technical/gdscript_regen/principle_rr.md](technical/gdscript_regen/principle_rr.md) | `principle_rr` |

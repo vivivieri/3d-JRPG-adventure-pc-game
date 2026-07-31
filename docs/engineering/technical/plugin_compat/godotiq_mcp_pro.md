@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 499
+tokens_est: 505
 summary: "- Uses Godot 4.5+ script logger when available (`godotiq_logger.gd`) — benefits on 4.7"
 ---
 # Plugin Compatibility — Godotiq + MCP Pro

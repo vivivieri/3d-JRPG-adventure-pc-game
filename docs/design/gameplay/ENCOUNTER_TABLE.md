@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 187
+tokens_est: 191
 summary: "Encounters by act — load Act I–III or economy pacing"
 ---
 # Encounter Table

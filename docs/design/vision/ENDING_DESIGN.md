@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 200
+tokens_est: 204
 summary: "Three endings — load choice gate, outcomes, or credits"
 ---
 # Ending Design

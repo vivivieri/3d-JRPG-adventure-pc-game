@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 605
+tokens_est: 609
 summary: "Purpose, prerequisites, workflows"
 ---
 # Continuous Delivery — Purpose, prerequisites, workflows

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 396
+tokens_est: 400
 summary: "Mirror, economy, credits, backlog, QA"
 ---
 # Replay Design — Mirror, economy, credits, backlog, QA

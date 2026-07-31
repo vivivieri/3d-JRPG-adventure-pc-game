@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 977
+tokens_est: 981
 summary: "Dashboard branch + active snapshot + skip reasons"
 ---
 # Cloud Snapshot Launch — Dashboard branch + active snapshot + skip reasons

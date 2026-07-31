@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 615
+tokens_est: 619
 summary: "GodotPrompter (plan/code)"
 ---
 # MCP Stack — Full R&R map

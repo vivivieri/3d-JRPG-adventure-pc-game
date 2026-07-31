@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 640
+tokens_est: 644
 summary: "Context, decision, comparison"
 ---
 # Branching Decision Record — Context, decision, comparison

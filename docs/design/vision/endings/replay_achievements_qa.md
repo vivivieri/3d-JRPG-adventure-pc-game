@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 394
+tokens_est: 397
 summary: "Replay, achievements, voice notes, QA"
 ---
 # Ending Design — Replay, achievements, voice notes, QA

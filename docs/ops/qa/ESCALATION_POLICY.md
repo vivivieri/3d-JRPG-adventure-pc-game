@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 193
+tokens_est: 196
 summary: "Bounded escalation ladder — load problem, ladder, or usage"
 ---
 # Escalation Policy

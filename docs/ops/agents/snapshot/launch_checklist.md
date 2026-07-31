@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 499
+tokens_est: 503
 summary: "Launch checklist every session"
 ---
 # Cloud Snapshot Launch — Launch checklist every session

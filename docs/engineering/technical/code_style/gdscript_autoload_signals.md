@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 705
+tokens_est: 711
 summary: "GDScript, autoload, signals"
 ---
 # Code Style — GDScript, autoload, signals

@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 253
+tokens_est: 257
 summary: "Sourcing, implementation, production order"
 ---
 # Audio Direction — Sourcing, implementation, production order

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 427
+tokens_est: 431
 summary: "- [ ] `bash tools/run_playtest_smoke.sh` → PASS"
 ---
 # Playtest Script — Goals, setup, Act I

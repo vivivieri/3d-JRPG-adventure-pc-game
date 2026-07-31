@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, visual, audio]
 status: active
 authority: qa
-tokens_est: 216
+tokens_est: 219
 summary: "Vision/audio jury protocol — load limitation or checklist"
 ---
 # Agent Jury

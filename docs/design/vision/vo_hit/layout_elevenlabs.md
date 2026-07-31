@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 438
+tokens_est: 442
 summary: "File layout + ElevenLabs setup"
 ---
 # Selective VO Hit List — File layout + ElevenLabs setup

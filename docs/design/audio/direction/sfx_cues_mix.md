@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 420
+tokens_est: 423
 summary: "SFX taxonomy, scene cues, mix levels"
 ---
 # Audio Direction — SFX taxonomy, scene cues, mix levels

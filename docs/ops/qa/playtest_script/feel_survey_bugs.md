@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 432
+tokens_est: 435
 summary: "Feel checklist, survey, bugs"
 ---
 # Playtest Script — Feel checklist, survey, bugs

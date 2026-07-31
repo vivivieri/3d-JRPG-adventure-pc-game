@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 625
+tokens_est: 632
 summary: "i18n objects, story spine, registries"
 ---
 # JSON Data Style — i18n objects, story spine, registries

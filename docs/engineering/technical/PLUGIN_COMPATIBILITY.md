@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 217
+tokens_est: 223
 summary: "Godot 4.7 plugin matrix — load engine, GDAI, or ship plugins"
 ---
 # Plugin Compatibility

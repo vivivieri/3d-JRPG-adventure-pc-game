@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 274
+tokens_est: 278
 summary: "Tools + vs Visual QA"
 ---
 # Audio QA — Tools + vs Visual QA

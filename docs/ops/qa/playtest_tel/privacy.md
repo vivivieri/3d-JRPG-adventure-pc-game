@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 193
+tokens_est: 196
 summary: "- **Local-only by default.** Logs write to `user://playtest/`; nothing leaves the machine."
 ---
 # Playtest Telemetry — Privacy

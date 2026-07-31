@@ -5,8 +5,8 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 255
-summary: "Required CI gates, local reproduction, remediation"
+tokens_est: 254
+summary: "Required CI gates — load branch purpose, gates, or remediation"
 ---
 # Continuous Integration
 
@@ -18,6 +18,8 @@ summary: "Required CI gates, local reproduction, remediation"
 | [`required_gates.md`](ci/required_gates.md) | What CI runs / does not run |
 | [`local_rr_remediation.md`](ci/local_rr_remediation.md) | Local repro, R&R, remediation |
 | [`branch_protection_refs.md`](ci/branch_protection_refs.md) | Branch protection & cross-refs |
+| [`required_gates/what_runs.md`](ci/required_gates/what_runs.md) | CI what-runs detail |
+| [`required_gates/what_not.md`](ci/required_gates/what_not.md) | CI exclusions detail |
 # Continuous Integration — GitHub Actions
 
 **Version:** 1.3

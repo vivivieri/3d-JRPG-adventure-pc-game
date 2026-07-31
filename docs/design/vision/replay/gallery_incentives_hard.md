@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 343
+tokens_est: 347
 summary: "Gallery, incentives, hard mode"
 ---
 # Replay Design — Gallery, incentives, hard mode

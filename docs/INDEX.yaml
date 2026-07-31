@@ -398,6 +398,9 @@ pack_catalog:
   - docs/briefs/tide_keeper_p1.md
   - docs/briefs/tide_wraith.md
   - docs/briefs/urashima.md
+  - docs/briefs/urashima/acceptance_forbidden.md
+  - docs/briefs/urashima/intent_prompts.md
+  - docs/briefs/urashima/metrics_props.md
   - docs/briefs/village_shack_roku.md
   - docs/briefs/village_torii_damaged.md
   - docs/briefs/village_well_stone.md
@@ -616,6 +619,8 @@ pack_catalog:
   - docs/engineering/technical/gdscript/errors_lint.md
   - docs/engineering/technical/gdscript/standards_layout.md
   - docs/engineering/technical/gdscript/typing_syntax_base.md
+  - docs/engineering/technical/gdscript_regen/checklist/checklist_helpers.md
+  - docs/engineering/technical/gdscript_regen/checklist/phase1_visuals.md
   - docs/engineering/technical/gdscript_regen/checklist_recover.md
   - docs/engineering/technical/gdscript_regen/order_helpers.md
   - docs/engineering/technical/gdscript_regen/principle_rr.md
@@ -730,6 +735,8 @@ pack_catalog:
   - docs/ops/ci-cd/ci/branch_purpose.md
   - docs/ops/ci-cd/ci/local_rr_remediation.md
   - docs/ops/ci-cd/ci/required_gates.md
+  - docs/ops/ci-cd/ci/required_gates/what_not.md
+  - docs/ops/ci-cd/ci/required_gates/what_runs.md
   - docs/ops/ci-cd/environments/map_preprod.md
   - docs/ops/ci-cd/environments/promotion_logs.md
   - docs/ops/ci-cd/environments/requirements_github.md
@@ -805,6 +812,15 @@ pack_catalog:
   - docs/ops/qa/workflow_int/alignment_gates.md
   - docs/ops/qa/workflow_int/checklist_features.md
   - docs/ops/qa/workflow_int/problem_register.md
+  - docs/ops/sprints/Phase1-Sprint1-issues.md
+  - docs/ops/sprints/phase1_sprint1/labels.md
+  - docs/ops/sprints/phase1_sprint1/p1_00_bootstrap.md
+  - docs/ops/sprints/phase1_sprint1/p1_01_architect_toon.md
+  - docs/ops/sprints/phase1_sprint1/p1_02_builder_village.md
+  - docs/ops/sprints/phase1_sprint1/p1_03_architect_water.md
+  - docs/ops/sprints/phase1_sprint1/p1_04_qa_ci.md
+  - docs/ops/sprints/phase1_sprint1/p1_05_golden_screenshot.md
+  - docs/ops/sprints/phase1_sprint1/p1_06_review_preview.md
   - docs/ops/workflow/DELIVERY_CONTROL.md
   - docs/ops/workflow/agile/linear_sprints.md
   - docs/ops/workflow/agile/sprint_master_cadence.md

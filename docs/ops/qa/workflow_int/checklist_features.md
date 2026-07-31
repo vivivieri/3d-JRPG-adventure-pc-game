@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 738
+tokens_est: 741
 summary: "Add-feature checklist + registered features"
 ---
 # Workflow Integration — Add-feature checklist + registered features

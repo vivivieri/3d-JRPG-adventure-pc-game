@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, visual, audio]
 status: active
 authority: qa
-tokens_est: 445
+tokens_est: 448
 summary: "Why + hard limitation"
 ---
 # Agent Jury — Why + hard limitation

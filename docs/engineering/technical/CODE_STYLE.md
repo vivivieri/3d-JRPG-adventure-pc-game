@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 238
+tokens_est: 245
 summary: "Project code style — load layout, GDScript, or checklist"
 ---
 # Code Style

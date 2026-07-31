@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 232
+tokens_est: 236
 summary: "Stall recovery — load layers, commands, or playbook"
 ---
 # Factory Watchdog

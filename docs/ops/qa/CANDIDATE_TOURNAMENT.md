@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 214
+tokens_est: 218
 summary: "L2.5 champion/challenger — load workflow or promotion rules"
 ---
 # Candidate Tournament

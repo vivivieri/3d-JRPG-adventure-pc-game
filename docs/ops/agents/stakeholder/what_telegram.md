@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 464
+tokens_est: 468
 summary: "What you get + Telegram setup"
 ---
 # PM Stakeholder Reporting — What you get + Telegram setup

@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 609
+tokens_est: 613
 summary: "Per-env requirements + GitHub Environments"
 ---
 # Environments — Per-env requirements + GitHub Environments

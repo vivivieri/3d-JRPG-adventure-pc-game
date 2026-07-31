@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 243
+tokens_est: 247
 summary: "Items/shop/economy — load currency, equipment, or pacing"
 ---
 # Items & Economy

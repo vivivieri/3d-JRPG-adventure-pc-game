@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 620
+tokens_est: 624
 summary: "Golden rule, allowed, banned"
 ---
 # Asset Compliance — Golden rule, allowed, banned

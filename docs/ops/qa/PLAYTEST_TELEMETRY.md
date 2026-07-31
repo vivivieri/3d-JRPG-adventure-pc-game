@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 218
+tokens_est: 222
 summary: "Human playtest JSONL — load schema, metrics, or privacy"
 ---
 # Playtest Telemetry

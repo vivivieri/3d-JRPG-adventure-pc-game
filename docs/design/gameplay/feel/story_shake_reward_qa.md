@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 456
+tokens_est: 460
 summary: "Story, shake, rewards, QA"
 ---
 # Game Feel — Story, shake, rewards, QA

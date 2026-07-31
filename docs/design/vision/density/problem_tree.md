@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 333
+tokens_est: 336
 summary: "Problem + decision tree"
 ---
 # Narrative Density — Problem + decision tree
