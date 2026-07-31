@@ -124,7 +124,7 @@
       "github_issue": "130",
       "last_agent_session": null,
       "last_commit_sha": null,
-      "escalation_level": 0,
+      "escalation_level": 4,
       "carry_over_from": null,
       "done_requires": "pr_merged",
       "branch_name_pattern": "cursor/{issue_id}-a091",
@@ -134,7 +134,13 @@
         "docs/design/art/ART_DIRECTION.md"
       ],
       "linear_issue": null,
-      "docs_task": "zone_lighting"
+      "docs_task": "zone_lighting",
+      "pm_notes": [
+        {
+          "at": "2026-07-31T14:19:57.444285+00:00",
+          "text": "Factory halted: JIT boot missing GDAI MCP snapshot stack"
+        }
+      ]
     },
     {
       "id": "P1-02",
