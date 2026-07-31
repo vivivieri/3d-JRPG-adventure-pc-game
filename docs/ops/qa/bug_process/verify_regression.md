@@ -1,10 +1,11 @@
 ---
 id: verify-regression
 type: how-to
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 708
+tokens_est: 711
 summary: "Verification + regression suite"
 ---
 # QA and Bug Process — Verification + regression suite

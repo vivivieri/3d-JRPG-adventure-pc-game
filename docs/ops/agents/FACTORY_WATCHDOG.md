@@ -1,10 +1,11 @@
 ---
 id: factory-watchdog
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1407
+tokens_est: 1410
 summary: "Exception layer on top of event-driven PM dispatch."
 ---
 # Factory Watchdog — Stall & Hang Exception Handling

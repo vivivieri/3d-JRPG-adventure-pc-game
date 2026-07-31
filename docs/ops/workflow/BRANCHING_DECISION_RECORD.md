@@ -1,10 +1,11 @@
 ---
 id: branching-decision-record
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1880
+tokens_est: 1885
 summary: "**Status:** Accepted"
 ---
 # ADR: Branching Strategy for Multi-Agent JRPG Development

@@ -1,10 +1,11 @@
 ---
 id: enhancements-commands
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 974
+tokens_est: 978
 summary: "Enhancements, commands, cross-refs"
 ---
 # Development Lifecycle — Enhancements, commands, cross-refs

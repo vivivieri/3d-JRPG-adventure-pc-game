@@ -1,10 +1,11 @@
 ---
 id: jury-report
 type: reference
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 373
+tokens_est: 377
 summary: "Jury enforcement + agent report template"
 ---
 # Acceptance Criteria — Jury enforcement + agent report template

@@ -1,10 +1,11 @@
 ---
 id: testing-policy
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1520
+tokens_est: 1524
 summary: "Testing is **layered**. Higher layers run after lower layers pass."
 ---
 # AI Dev Workflow — testing policy

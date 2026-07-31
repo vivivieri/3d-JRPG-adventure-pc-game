@@ -1,10 +1,11 @@
 ---
 id: commands-hooks
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 707
+tokens_est: 710
 summary: "Commands, factory hooks, related"
 ---
 # R&R Cheat Sheet — Commands, factory hooks, related

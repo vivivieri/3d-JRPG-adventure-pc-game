@@ -1,10 +1,11 @@
 ---
 id: encounter-table
 type: reference
+phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 1651
+tokens_est: 1655
 summary: "`docs/design/vision/GDD.md` §4–8, `docs/design/gameplay/BOSS_DESIGNS.md`, `game/data/enemies/enemies.json`"
 ---
 # Tides of Urashima — Encounter & Pacing Table

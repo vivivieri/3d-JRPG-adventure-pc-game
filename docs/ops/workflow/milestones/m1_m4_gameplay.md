@@ -1,10 +1,11 @@
 ---
 id: m1-m4-gameplay
 type: reference
+phase: [0, 1, 8]
 audience: [pm, release, architect]
 status: active
 authority: workflow
-tokens_est: 487
+tokens_est: 491
 summary: "M1–M4 gameplay milestones"
 ---
 # Milestones — M1–M4 gameplay milestones

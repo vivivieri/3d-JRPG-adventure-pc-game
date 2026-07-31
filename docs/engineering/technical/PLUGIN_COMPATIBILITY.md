@@ -1,10 +1,11 @@
 ---
 id: plugin-compatibility
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1532
+tokens_est: 1539
 summary: "**Engine pin:** `GODOT_VERSION=4.7-stable` (`tools/install_cloud_dev.sh`)"
 ---
 # Plugin compatibility matrix (Godot 4.7)

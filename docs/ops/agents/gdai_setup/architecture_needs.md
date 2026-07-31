@@ -1,10 +1,11 @@
 ---
 id: architecture-needs
 type: how-to
+phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 504
+tokens_est: 508
 summary: "Architecture + needs + prereqs"
 ---
 # GDAI Cloud Setup — Architecture + needs + prereqs

@@ -1,10 +1,11 @@
 ---
 id: implementation-plan
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 665
+tokens_est: 669
 summary: "open the phase pack for the active sprint; do not preload all phases."
 ---
 # Tides of Urashima — Implementation Plan

@@ -1,10 +1,11 @@
 ---
 id: pitch-scope
 type: explanation
+phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 683
+tokens_est: 687
 summary: "Pitch, source, loop, scope"
 ---
 # Game Design Document — Pitch, source, loop, scope

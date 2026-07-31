@@ -1,10 +1,11 @@
 ---
 id: local-rr-remediation
 type: reference
+phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 732
+tokens_est: 736
 summary: "Local repro, R&R, remediation"
 ---
 # Continuous Integration — Local repro, R&R, remediation

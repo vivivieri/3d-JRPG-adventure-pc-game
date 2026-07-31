@@ -1,10 +1,11 @@
 ---
 id: phases-and-report
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 444
+tokens_est: 447
 summary: "Copy into PR or session summary:"
 ---
 # Phase map, report template & related

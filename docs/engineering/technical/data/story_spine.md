@@ -1,10 +1,11 @@
 ---
 id: story-spine
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1037
+tokens_est: 1044
 summary: "One row per storyboard beat. Engine loads this for QA tools and progression validation."
 ---
 # Data architecture — Story spine

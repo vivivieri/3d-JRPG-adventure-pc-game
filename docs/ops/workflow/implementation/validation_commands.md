@@ -1,10 +1,11 @@
 ---
 id: validation-commands
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 346
+tokens_est: 350
 summary: "python3 tools/validate_story_data.py"
 ---
 # Implementation Plan — Validation commands

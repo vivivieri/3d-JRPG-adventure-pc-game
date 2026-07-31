@@ -1,10 +1,11 @@
 ---
 id: git-lfs
 type: reference
+phase: [6, 8]
 audience: [release]
 status: active
 authority: ci-cd
-tokens_est: 441
+tokens_est: 444
 summary: "`game/development` — hero meshes, textures, audio (M5+)"
 ---
 # Git LFS — Large Asset Tracking

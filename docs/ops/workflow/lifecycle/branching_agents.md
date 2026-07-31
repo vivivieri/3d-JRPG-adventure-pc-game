@@ -1,10 +1,11 @@
 ---
 id: branching-agents
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 974
+tokens_est: 978
 summary: "Branching, agent envs, issue lifecycle"
 ---
 # Development Lifecycle — Branching, agent envs, issue lifecycle

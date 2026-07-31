@@ -1,10 +1,11 @@
 ---
 id: rr-cheatsheet
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 458
+tokens_est: 462
 summary: "Roles & responsibilities — load the pack for your session step"
 ---
 # R&R Cheat Sheet

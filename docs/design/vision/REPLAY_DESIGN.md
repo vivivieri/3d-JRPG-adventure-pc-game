@@ -1,10 +1,11 @@
 ---
 id: replay-design
 type: explanation
+phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 1124
+tokens_est: 1128
 summary: "`docs/design/vision/ENDING_DESIGN.md` §7, `docs/design/gameplay/ACHIEVEMENTS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/gameplay/PROGRESSION_TUNING.md`"
 ---
 # Tides of Urashima — Replay Design

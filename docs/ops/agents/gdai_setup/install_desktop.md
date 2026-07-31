@@ -1,10 +1,11 @@
 ---
 id: install-desktop
 type: how-to
+phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 589
+tokens_est: 592
 summary: "Install plugin + desktop Cursor"
 ---
 # GDAI Cloud Setup — Install plugin + desktop Cursor

@@ -1,10 +1,11 @@
 ---
 id: scope-severity
 type: how-to
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 876
+tokens_est: 879
 summary: "QA and Bug Process — QA scope + severity"
 ---
 # QA and Bug Process — QA scope + severity

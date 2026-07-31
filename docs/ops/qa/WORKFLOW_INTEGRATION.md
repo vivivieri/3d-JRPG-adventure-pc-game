@@ -1,10 +1,11 @@
 ---
 id: workflow-integration
 type: how-to
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1729
+tokens_est: 1733
 summary: "`game/data/qa/workflow_integration_registry.json`"
 ---
 # Workflow Integration Registry — Avoid Feature Drift

@@ -1,10 +1,11 @@
 ---
 id: narrative-endings
 type: explanation
+phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 238
+tokens_est: 241
 summary: "Narrative structure + endings"
 ---
 # Game Design Document — Narrative structure + endings

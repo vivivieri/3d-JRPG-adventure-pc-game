@@ -1,10 +1,11 @@
 ---
 id: shader-specs
 type: reference
+phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 851
+tokens_est: 855
 summary: "`docs/design/art/ART_DIRECTION.md` · `docs/design/art/RENDERING_GUIDE.md`"
 ---
 # Shader Specifications — Tides of Urashima

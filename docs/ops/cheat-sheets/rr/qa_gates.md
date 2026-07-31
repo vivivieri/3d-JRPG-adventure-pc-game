@@ -1,10 +1,11 @@
 ---
 id: qa-gates
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 888
+tokens_est: 892
 summary: "WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS."
 ---
 # R&R — qa-gate-layers

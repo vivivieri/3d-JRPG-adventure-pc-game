@@ -218,6 +218,16 @@ def main() -> int:
         "ops/qa/bug_process/scope_severity.md",
         "ops/qa/flow_qa/scenarios_levers.md",
         "briefs/ruined_village/metrics_acceptance.md",
+        "ops/qa/security/m6_player_protect.md",
+        "ops/ci-cd/steam/legal_qa_release.md",
+        "engineering/technical/gdscript/typing_syntax_base.md",
+        "ops/agents/factory_setup/what_boundaries.md",
+        "ops/agents/pm_runbook/orchestrator_dispatch.md",
+        "design/ui/cinematics/global_field_dialogue.md",
+        "design/vision/illustrations/shots_briefs.md",
+        "design/gameplay/combat/turns_elements_stats.md",
+        "ops/qa/alignment/purpose_when_run.md",
+        "ops/qa/perf/reference_machines.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")

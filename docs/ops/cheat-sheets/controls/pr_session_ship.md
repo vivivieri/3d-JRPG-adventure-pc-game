@@ -1,10 +1,11 @@
 ---
 id: pr-session-ship
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 452
+tokens_est: 456
 summary: "PR, session, ship/CD"
 ---
 # Controls Cheat Sheet — PR, session, ship/CD

@@ -1,10 +1,11 @@
 ---
 id: gdd
 type: explanation
+phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 251
+tokens_est: 255
 summary: "GDD — load the section for your design question"
 ---
 # Game Design Document

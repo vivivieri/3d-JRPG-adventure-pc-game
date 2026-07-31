@@ -1,10 +1,11 @@
 ---
 id: combat-economy
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1674
+tokens_est: 1680
 summary: "Hand-placed fights only — no random tables."
 ---
 # Data architecture — Combat & economy
