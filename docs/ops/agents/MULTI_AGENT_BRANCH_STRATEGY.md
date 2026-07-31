@@ -1,10 +1,11 @@
 ---
 id: multi-agent-branch-strategy
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 869
+tokens_est: 873
 summary: "One issue → one feature branch → one PR → merge → cycle event."
 ---
 # Multi-Agent Branch Strategy

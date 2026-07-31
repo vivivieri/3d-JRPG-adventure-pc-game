@@ -1,10 +1,11 @@
 ---
 id: lore-and-environmental-story
 type: explanation
+phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 1405
+tokens_est: 1409
 summary: "`docs/design/vision/STORYBOARD.md`, `game/data/lore/lore_entries.json`, `game/data/lore/lore_placements.json`"
 ---
 # Tides of Urashima — Lore & Environmental Storytelling

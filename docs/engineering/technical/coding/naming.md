@@ -1,10 +1,11 @@
 ---
 id: naming
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 411
+tokens_est: 418
 summary: "Gameplay **content** lives in JSON; `.gd` implements engines, not story text."
 ---
 # Coding Standards Hub — Naming conventions

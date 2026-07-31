@@ -1,10 +1,11 @@
 ---
 id: overview-time
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 975
+tokens_est: 979
 summary: "Doc map, overview, time model"
 ---
 # Development Lifecycle — Doc map, overview, time model

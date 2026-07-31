@@ -1,10 +1,11 @@
 ---
 id: platform-support
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1302
+tokens_est: 1305
 summary: "Resolves cloud-dev vs ship-platform mismatch"
 ---
 # Platform Support — Windows + Linux (Cloud Dev Parity)

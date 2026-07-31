@@ -1,10 +1,11 @@
 ---
 id: standards-layers
 type: how-to
+phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 516
+tokens_est: 519
 summary: "Industry standards + defense layers"
 ---
 # Flow QA — Industry standards + defense layers

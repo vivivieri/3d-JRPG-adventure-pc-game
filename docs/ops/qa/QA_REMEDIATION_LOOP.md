@@ -1,10 +1,11 @@
 ---
 id: qa-remediation-loop
 type: how-to
+phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 261
+tokens_est: 265
 summary: "FAIL → one lever → re-measure — load the section for your domain"
 ---
 # QA Remediation Loop

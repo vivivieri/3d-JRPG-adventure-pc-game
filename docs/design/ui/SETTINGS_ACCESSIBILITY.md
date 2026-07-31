@@ -1,10 +1,11 @@
 ---
 id: settings-accessibility
 type: reference
+phase: [1, 5]
 audience: [builder, architect]
 status: active
 authority: ui
-tokens_est: 970
+tokens_est: 973
 summary: "`docs/design/ui/UI_UX_FLOW.md`, `user://settings.json`"
 ---
 # Tides of Urashima — Settings & Accessibility

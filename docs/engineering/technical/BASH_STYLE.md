@@ -1,10 +1,11 @@
 ---
 id: bash-style
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1097
+tokens_est: 1104
 summary: "**Scope:** `tools/*.sh` — CI runners, bootstrap, QA orchestration"
 ---
 # Bash / Shell Style Guide — Tides of Urashima

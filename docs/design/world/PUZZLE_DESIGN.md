@@ -1,10 +1,11 @@
 ---
 id: puzzle-design
 type: reference
+phase: [1, 5]
 audience: [builder, architect]
 status: active
 authority: world
-tokens_est: 728
+tokens_est: 732
 summary: "SC-07 — Water Level Puzzle"
 ---
 # Tides of Urashima — Puzzle Design (SC-07)

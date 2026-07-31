@@ -1,10 +1,11 @@
 ---
 id: gdai-cloud-setup
 type: how-to
+phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 240
+tokens_est: 244
 summary: "GDAI MCP install — load desktop or cloud section"
 ---
 # GDAI Cloud Setup

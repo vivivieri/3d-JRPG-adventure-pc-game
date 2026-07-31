@@ -1,10 +1,11 @@
 ---
 id: workflow-handoff
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 721
+tokens_est: 724
 summary: "Workflow, situation→tool, handoffs"
 ---
 # R&R Cheat Sheet — Workflow, situation→tool, handoffs

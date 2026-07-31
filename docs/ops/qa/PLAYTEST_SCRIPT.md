@@ -1,10 +1,11 @@
 ---
 id: playtest-script
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1235
+tokens_est: 1239
 summary: "**Target duration:** 2–3 hours"
 ---
 # Tides of Urashima — Playtest Script

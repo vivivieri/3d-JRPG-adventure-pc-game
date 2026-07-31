@@ -1,10 +1,11 @@
 ---
 id: escalation-branch
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 542
+tokens_est: 546
 summary: "Escalation, branch, sprint, forbidden"
 ---
 # R&R Cheat Sheet — Escalation, branch, sprint, forbidden

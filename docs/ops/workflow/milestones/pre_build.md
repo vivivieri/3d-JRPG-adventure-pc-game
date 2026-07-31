@@ -1,10 +1,11 @@
 ---
 id: pre-build
 type: reference
+phase: [0, 1, 8]
 audience: [pm, release, architect]
 status: active
 authority: workflow
-tokens_est: 1331
+tokens_est: 1335
 summary: "- [x] Game Design Document (`docs/design/vision/GDD.md`)"
 ---
 # Milestones — M0 pre-build packs

@@ -1,10 +1,11 @@
 ---
 id: delivery-control
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 561
+tokens_est: 565
 summary: "No outbound delivery (Telegram report, stakeholder update, etc.) goes out until **automated checks pass**. No human reviewer approval step — CI-style gates only"
 ---
 # Delivery Control — pre-delivery automated gate

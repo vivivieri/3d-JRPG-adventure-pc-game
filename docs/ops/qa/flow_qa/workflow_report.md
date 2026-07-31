@@ -1,10 +1,11 @@
 ---
 id: workflow-report
 type: how-to
+phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 827
+tokens_est: 831
 summary: "Agent workflow, iteration, smoke, report, tools"
 ---
 # Flow QA — Agent workflow, iteration, smoke, report, tools

@@ -1,10 +1,11 @@
 ---
 id: golden-rules
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 359
+tokens_est: 362
 summary: "1. **GodotPrompter writes code** → **GDAI MCP builds scenes** → **QA proves gates** — never skip a handoff."
 ---
 # R&R Cheat Sheet — Golden rules

@@ -1,10 +1,11 @@
 ---
 id: phase-acceptance
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 2089
+tokens_est: 2093
 summary: "A phase is **done** only when **every** criterion below passes. AI agents must check each item explicitly."
 ---
 # AI Dev Workflow — phase acceptance

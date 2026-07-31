@@ -1,10 +1,11 @@
 ---
 id: cloud-steam-troubleshoot
 type: how-to
+phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 1645
+tokens_est: 1649
 summary: "Cloud Agents, Steam, troubleshoot"
 ---
 # GDAI Cloud Setup — Cloud Agents, Steam, troubleshoot

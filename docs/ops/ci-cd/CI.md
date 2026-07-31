@@ -1,10 +1,11 @@
 ---
 id: ci
 type: reference
+phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 252
+tokens_est: 255
 summary: "Required CI gates, local reproduction, remediation"
 ---
 # Continuous Integration

@@ -1,10 +1,11 @@
 ---
 id: gate-catalog
 type: reference
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 1337
+tokens_est: 1340
 summary: "Gate catalog summary"
 ---
 # Acceptance Criteria — Gate catalog summary

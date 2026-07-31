@@ -1,10 +1,11 @@
 ---
 id: golden-stack
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 402
+tokens_est: 405
 summary: "Golden rules + control stack"
 ---
 # Controls Cheat Sheet — Golden rules + control stack

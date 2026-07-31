@@ -1,10 +1,11 @@
 ---
 id: agile-within-phases
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 245
+tokens_est: 249
 summary: "Phase-gated Agile process for the AI factory"
 ---
 # Agile Within Phases

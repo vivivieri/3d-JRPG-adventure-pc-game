@@ -1,10 +1,11 @@
 ---
 id: ai-testing-spec
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 922
+tokens_est: 925
 summary: "All implementation on `main` (Phases 1–8)"
 ---
 # AI Testing Specification

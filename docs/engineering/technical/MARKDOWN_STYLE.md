@@ -1,10 +1,11 @@
 ---
 id: markdown-style
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 835
+tokens_est: 842
 summary: "**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates"
 ---
 # Markdown Style Guide — Tides of Urashima

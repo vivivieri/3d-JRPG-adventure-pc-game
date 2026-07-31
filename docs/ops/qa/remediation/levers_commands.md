@@ -1,10 +1,11 @@
 ---
 id: levers-commands
 type: how-to
+phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 465
+tokens_est: 469
 summary: "Lever taxonomy + commands"
 ---
 # QA Remediation Loop — Lever taxonomy + commands

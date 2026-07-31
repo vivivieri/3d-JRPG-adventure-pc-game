@@ -1,10 +1,11 @@
 ---
 id: environments
 type: reference
+phase: [6, 8]
 audience: [release]
 status: active
 authority: ci-cd
-tokens_est: 1538
+tokens_est: 1542
 summary: "**Machine-readable:** `game/data/qa/environments.json`"
 ---
 # Deployment Environments — Dev · QA · UAT · Preprod · Prod

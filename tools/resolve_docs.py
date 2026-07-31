@@ -92,7 +92,7 @@ def _load_index_stdlib() -> dict:
             continue
         if line.startswith("diataxis:") or line.startswith("folders:") or line.startswith(
             "authority_chain:"
-        ):
+        ) or line.startswith("pack_catalog:"):
             section, name, key = "skip", None, None
             continue
         if (

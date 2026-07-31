@@ -1,10 +1,11 @@
 ---
 id: required-gates
 type: reference
+phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 1792
+tokens_est: 1796
 summary: "What CI runs / does not run"
 ---
 # Continuous Integration — What CI runs / does not run
