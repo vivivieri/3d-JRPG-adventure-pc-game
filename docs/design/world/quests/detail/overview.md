@@ -4,12 +4,18 @@ type: reference
 audience: [narrative, builder]
 status: active
 authority: world
-tokens_est: 302
-summary: "Main quests overview"
+tokens_est: 320
+summary: "Main Quests — Detail — Main quests overview — Rule: a quest is complete when its last stage's completion flag is set (`main_quests.json` stages are ordered)."
 ---
 # Main Quests — Detail — Main quests overview
 
 **Hub:** [`main_quests_detail.md`](../main_quests_detail.md)
+
+## When to read
+
+Use **Main Quests — Detail — Main quests overview** (roles: narrative, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 1. Main quests (5)
 

@@ -5,12 +5,18 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 619
-summary: "GodotPrompter (plan/code)"
+tokens_est: 623
+summary: "MCP Stack — Full R&R map — GodotPrompter (plan/code)"
 ---
 # MCP Stack — Full R&R map
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Use **MCP Stack — Full R&R map** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Full R&R map
 

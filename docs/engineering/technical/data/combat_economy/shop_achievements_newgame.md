@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 751
-summary: "Shop, achievements, new game"
+tokens_est: 830
+summary: "Data — Combat & Economy — Shop, achievements, new game — 'vendor_id': 'roku_shack',"
 ---
 # Data — Combat & Economy — Shop, achievements, new game
 
 **Hub:** [`combat_economy.md`](../combat_economy.md)
+
+## When to read
+
+Use **Data — Combat & Economy — Shop, achievements, new game** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [9. Shop as data (`shop/roku_shop.json`)](#9-shop-as-data-shoproku_shopjson)
+- [10. Achievements (`achievements/achievements.json`)](#10-achievements-achievementsachievementsjson)
+- [11. New game defaults (`starting/new_game.json`)](#11-new-game-defaults-startingnew_gamejson)
+
 
 ## 9. Shop as data (`shop/roku_shop.json`)
 

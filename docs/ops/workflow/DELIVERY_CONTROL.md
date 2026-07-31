@@ -5,17 +5,23 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 565
+tokens_est: 478
 summary: "No outbound delivery (Telegram report, stakeholder update, etc.) goes out until **automated checks pass**. No human reviewer approval step — CI-style gates only"
 ---
 # Delivery Control — pre-delivery automated gate
 
-**Version:** 1.2
-**Purpose:** No outbound delivery (Telegram report, stakeholder update, etc.) goes out until **automated checks pass**. No human reviewer approval step — CI-style gates only. Every delivery is audited.
-**Authority:** `game/data/qa/delivery_control.json` · gate: `tools/predelivery_gate.py`
-**Cross-refs:** `docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md`, `docs/ops/qa/PLAYTEST_TELEMETRY.md`, `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md`
+## When to read
 
----
+Use **Delivery Control — pre-delivery automated gate** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Why](#why)
+- [Flow](#flow)
+- [Verdicts](#verdicts)
+- [Config (`game/data/qa/delivery_control.json`)](#config-gamedataqadelivery_controljson)
+- [Extending to other deliveries](#extending-to-other-deliveries)
+
 
 ## Why
 

@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 426
+tokens_est: 490
 summary: "Why QA fails without this + global pass rules"
 ---
 # Acceptance Criteria — Why QA fails without this + global pass rules
 
 **Hub:** [`ACCEPTANCE_CRITERIA.md`](../ACCEPTANCE_CRITERIA.md)
+
+## When to read
+
+Use **Acceptance Criteria — Why QA fails without this + global pass rules** (roles: qa, pm, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Why QA fails without this](#1-why-qa-fails-without-this)
+- [2. Global pass rules](#2-global-pass-rules)
+- [Invalid pass patterns (forbidden)](#invalid-pass-patterns-forbidden)
+
 
 ## 1. Why QA fails without this
 

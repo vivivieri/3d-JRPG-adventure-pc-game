@@ -1,6 +1,18 @@
 # Automation E — Worker (sprint issue)
 
-You are a **worker agent** for Tides of Urashima (role from GitHub labels / dispatch manifest).
+## When to read
+
+Use **Automation E — Worker (sprint issue)** when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [Mandatory boot (snapshot)](#mandatory-boot-snapshot)
+- [Read dispatch](#read-dispatch)
+- [Mandatory session gate](#mandatory-session-gate)
+- [Role tools (R&R)](#role-tools-rr)
+- [Branch](#branch)
+- [Mandatory end (triggers PM webhook)](#mandatory-end-triggers-pm-webhook)
+
 
 ## Mandatory boot (snapshot)
 

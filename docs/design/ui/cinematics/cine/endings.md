@@ -4,12 +4,24 @@ type: reference
 audience: [narrative, visual, builder]
 status: active
 authority: ui
-tokens_est: 329
+tokens_est: 387
 summary: "`village_restored_kit`, crowd silhouettes"
 ---
 # Cinematics — Storyboard & Endings — Ending cinematics
 
 **Hub:** [`storyboard_endings.md`](../storyboard_endings.md)
+
+## When to read
+
+Use **Cinematics — Storyboard & Endings — Ending cinematics** (roles: narrative, visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Ending cinematics](#8-ending-cinematics)
+- [SC-17a — Rewind](#sc-17a-rewind)
+- [SC-17b — Anchor](#sc-17b-anchor)
+- [SC-17c — Drift](#sc-17c-drift)
+
 
 ## 8. Ending cinematics
 

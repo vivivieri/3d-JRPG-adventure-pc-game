@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 907
-summary: "See `docs/ops/qa/AI_TESTING_SPEC.md` §11 and `docs/ops/qa/ACCEPTANCE_CRITERIA.md` (measurable gates)."
+tokens_est: 936
+summary: "MCP — Testing — See `docs/ops/qa/AI_TESTING_SPEC.md` §11 and `docs/ops/qa/ACCEPTANCE_CRITERIA.md` (measurable gates)."
 ---
 # MCP — Testing
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Use **MCP — Testing** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Testing & QA workflow](#testing-qa-workflow)
+- [QA stack (every commit + per art/flow task)](#qa-stack-every-commit-per-artflow-task)
+- [Example prompts](#example-prompts)
+
 
 ## Testing & QA workflow
 

@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, qa]
 status: active
 authority: engineering
-tokens_est: 901
-summary: "Save system, schema, what persists"
+tokens_est: 979
+summary: "Save & Fail States — Save system, schema, what persists — Two files, two lifetimes:"
 ---
 # Save & Fail States — Save system, schema, what persists
 
 **Hub:** [`SAVE_AND_FAIL_STATES.md`](../SAVE_AND_FAIL_STATES.md)
+
+## When to read
+
+Use **Save & Fail States — Save system, schema, what persists** (roles: architect, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Save system](#1-save-system)
+- [2. Save data schema](#2-save-data-schema)
+- [`user://save_slot_0.json` (per run)](#usersave_slot_0json-per-run)
+- [`user://profile_meta.json` (cross-run)](#userprofile_metajson-cross-run)
+- [3. What persists](#3-what-persists)
+
 
 ## 1. Save system
 

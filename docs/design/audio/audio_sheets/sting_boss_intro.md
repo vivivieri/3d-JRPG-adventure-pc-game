@@ -1,5 +1,15 @@
 # ACE-Step prompt — `sting_boss_intro`
 
+## When to read
+
+Use **ACE-Step prompt — `sting_boss_intro`** when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Prompt](#prompt)
+- [Negative](#negative)
+- [ACE-Step Gradio / API](#ace-step-gradio-api)
+
 | Field | Value |
 |-------|-------|
 | Scene | generic boss intro |

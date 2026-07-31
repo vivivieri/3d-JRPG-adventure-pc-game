@@ -5,12 +5,24 @@ audience: [architect, builder]
 phase: [1]
 status: active
 authority: engineering
-tokens_est: 963
+tokens_est: 1039
 summary: "Design principles + runtime architecture"
 ---
 # Technical Design — Design principles + runtime architecture
 
 **Hub:** [`TECHNICAL_DESIGN.md`](../TECHNICAL_DESIGN.md)
+
+## When to read
+
+Use **Technical Design — Design principles + runtime architecture** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Design principles](#1-design-principles)
+- [2. Runtime architecture](#2-runtime-architecture)
+- [Autoload registry (target — Phase 2+)](#autoload-registry-target-phase-2)
+- [2.1 Code base classes (extend-only)](#21-code-base-classes-extend-only)
+
 
 ## 1. Design principles
 

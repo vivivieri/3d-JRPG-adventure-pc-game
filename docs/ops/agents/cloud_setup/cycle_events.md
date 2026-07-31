@@ -5,12 +5,23 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 481
+tokens_est: 534
 summary: "Every **non-PM** agent session **must** end with:"
 ---
 # Cloud Agent Setup — End-of-cycle & events
 
 **Hub:** [`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)
+
+## When to read
+
+Use **Cloud Agent Setup — End-of-cycle & events** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [5. End-of-cycle contract (every worker agent)](#5-end-of-cycle-contract-every-worker-agent)
+- [PM after dispatching work](#pm-after-dispatching-work)
+- [6. Event reference](#6-event-reference)
+
 
 ## 5. End-of-cycle contract (every worker agent)
 

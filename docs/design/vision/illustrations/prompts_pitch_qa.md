@@ -5,12 +5,25 @@ phase: [1, 6]
 audience: [visual, narrative, pm]
 status: active
 authority: vision
-tokens_est: 729
+tokens_est: 823
 summary: "Prompts, regen, pitch deck, 3D relationship, QA"
 ---
 # Storyboard Illustrations — Prompts, regen, pitch deck, 3D relationship, QA
 
 **Hub:** [`STORYBOARD_ILLUSTRATIONS.md`](../STORYBOARD_ILLUSTRATIONS.md)
+
+## When to read
+
+Use **Storyboard Illustrations — Prompts, regen, pitch deck, 3D relationship, QA** (roles: visual, narrative, pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [6. AI generation prompt template](#6-ai-generation-prompt-template)
+- [7. Automated regeneration brief](#7-automated-regeneration-brief)
+- [8. Pitch deck assembly](#8-pitch-deck-assembly)
+- [9. Relationship to 3D production](#9-relationship-to-3d-production)
+- [10. QA checklist (pitch package)](#10-qa-checklist-pitch-package)
+
 
 ## 6. AI generation prompt template
 

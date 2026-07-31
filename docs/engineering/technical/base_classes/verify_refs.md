@@ -5,12 +5,21 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 285
-summary: "Verification + cross-refs"
+tokens_est: 315
+summary: "Code Base Class Rules — Verification + cross-refs — python3 tools/validate_base_classes.py"
 ---
 # Code Base Class Rules — Verification + cross-refs
 
 **Hub:** [`CODE_BASE_CLASS_RULES.md`](../CODE_BASE_CLASS_RULES.md)
+
+## When to read
+
+Use **Code Base Class Rules — Verification + cross-refs** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Verification](#5-verification)
+- [6. Cross-refs](#6-cross-refs)
 
 ## 5. Verification
 

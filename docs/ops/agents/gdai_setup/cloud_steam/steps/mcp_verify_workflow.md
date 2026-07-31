@@ -4,12 +4,23 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 576
-summary: "MCP register + verify + workflow"
+tokens_est: 658
+summary: "GDAI — Configure Cloud Agents — MCP register + verify + workflow — 1. Open your cloud environment dashboard, e.g."
 ---
 # GDAI — Configure Cloud Agents — MCP register + verify + workflow
 
 **Hub:** [`cloud_agents.md`](../cloud_agents.md)
+
+## When to read
+
+Use **GDAI — Configure Cloud Agents — MCP register + verify + workflow** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4.3 Register MCP in Cursor dashboard (required for agent tools)](#43-register-mcp-in-cursor-dashboard-required-for-agent-tools)
+- [4.4 Verify (cloud)](#44-verify-cloud)
+- [4.5 Workflow (mandatory — no manual fallback)](#45-workflow-mandatory-no-manual-fallback)
+
 
 ### 4.3 Register MCP in Cursor dashboard (required for agent tools)
 

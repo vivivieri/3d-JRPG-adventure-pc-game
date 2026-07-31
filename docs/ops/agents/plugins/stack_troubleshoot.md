@@ -5,12 +5,26 @@ phase: [0, 1]
 audience: [builder, pm]
 status: active
 authority: ops
-tokens_est: 613
-summary: "Full stack, troubleshoot, ship"
+tokens_est: 692
+summary: "Plugin Install Guide — Full stack, troubleshoot, ship — bash tools/install_gdai_plugin.sh"
 ---
 # Plugin Install Guide — Full stack, troubleshoot, ship
 
 **Hub:** [`PLUGIN_INSTALL_GUIDE.md`](../PLUGIN_INSTALL_GUIDE.md)
+
+## When to read
+
+Use **Plugin Install Guide — Full stack, troubleshoot, ship** (roles: builder, pm) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [Install everything (full MCP stack)](#install-everything-full-mcp-stack)
+- [Bridge ports (defaults)](#bridge-ports-defaults)
+- [Editor plugins to enable](#editor-plugins-to-enable)
+- [Troubleshooting](#troubleshooting)
+- [Ship builds](#ship-builds)
+- [Related](#related)
+
 
 ## Install everything (full MCP stack)
 

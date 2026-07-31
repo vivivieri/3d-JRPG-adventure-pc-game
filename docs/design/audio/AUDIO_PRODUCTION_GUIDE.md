@@ -5,18 +5,23 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 860
+tokens_est: 777
 summary: "Melancholy coastal JRPG — restrained, not upbeat adventure."
 ---
 # Tides of Urashima — Audio Production Guide
 
-**Version:** 1.0 (Pre-build)
-**Visual / tonal target:** Melancholy coastal JRPG — restrained, not upbeat adventure.
-**Cross-refs:** `docs/design/audio/AUDIO_DIRECTION.md` (creative direction), `docs/design/vision/STORYBOARD.md`, `docs/design/gameplay/BOSS_DESIGNS.md`, `game/data/story/scenes.json`, `docs/design/art/ASSET_COMPLIANCE.md`
+## When to read
 
-**Canonical rule:** Track and SFX IDs in this doc are the **file names** (without extension). Creative mood notes live in `AUDIO_DIRECTION.md`; this doc is the **production spec** (format, loops, scene hooks, file layout).
+Use **Tides of Urashima — Audio Production Guide** (roles: audio) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
 
----
+## Jump to
+
+- [1. Global audio rules](#1-global-audio-rules)
+- [Bus routing (Godot)](#bus-routing-godot)
+- [2. File layout](#2-file-layout)
+- [Production packs (progressive disclosure)](#production-packs-progressive-disclosure)
+
+
 ## 1. Global audio rules
 
 | Rule | Detail |

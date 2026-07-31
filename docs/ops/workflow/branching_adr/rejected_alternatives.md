@@ -5,12 +5,29 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 757
-summary: "Rejected alternatives"
+tokens_est: 938
+summary: "Branching Decision Record — Rejected alternatives — Each stage is a gate + artifact on the same lineage, not a diverging branch that needs periodic merges."
 ---
 # Branching Decision Record — Rejected alternatives
 
 **Hub:** [`BRANCHING_DECISION_RECORD.md`](../BRANCHING_DECISION_RECORD.md)
+
+## When to read
+
+Use **Branching Decision Record — Rejected alternatives** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [Why environment branches were rejected](#why-environment-branches-were-rejected)
+- [1. Stages are not separate deployables](#1-stages-are-not-separate-deployables)
+- [2. `main` is not the game trunk](#2-main-is-not-the-game-trunk)
+- [3. Binary asset merge pain](#3-binary-asset-merge-pain)
+- [4. Environment drift risk](#4-environment-drift-risk)
+- [Why per-agent forks were rejected](#why-per-agent-forks-were-rejected)
+- [Arguments for forks (acknowledged)](#arguments-for-forks-acknowledged)
+- [Why issue branches + orchestrator suffice here](#why-issue-branches-orchestrator-suffice-here)
+- [Why trunk-based was not rejected](#why-trunk-based-was-not-rejected)
+
 
 ## Why environment branches were rejected
 

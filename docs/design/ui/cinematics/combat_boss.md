@@ -5,12 +5,32 @@ audience: [builder, visual, narrative]
 phase: [2, 5]
 status: active
 authority: ui
-tokens_est: 442
-summary: "Combat transitions + boss cameras"
+tokens_est: 608
+summary: "Cinematics — Combat transitions + boss cameras — 1. Screen ripple (ink-wash radial, 0.4s)"
 ---
 # Cinematics — Combat transitions + boss cameras
 
 **Hub:** [`CINEMATICS.md`](../CINEMATICS.md)
+
+## When to read
+
+Use **Cinematics — Combat transitions + boss cameras** (roles: builder, visual, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (12 sections).
+
+## Jump to
+
+- [4. Combat transitions](#4-combat-transitions)
+- [Enter combat (all fights)](#enter-combat-all-fights)
+- [Exit combat (victory)](#exit-combat-victory)
+- [Exit combat (defeat)](#exit-combat-defeat)
+- [5. Boss intros](#5-boss-intros)
+- [Shore Wraith (SC-09) — 5s](#shore-wraith-sc-09-5s)
+- [Palace Sentinel (SC-14) — 3s](#palace-sentinel-sc-14-3s)
+- [Tide Keeper (SC-15) — 6s](#tide-keeper-sc-15-6s)
+- [6. Boss phase cameras](#6-boss-phase-cameras)
+- [Shore Wraith phase 2](#shore-wraith-phase-2)
+- [Tide Keeper phase 2 — Surge](#tide-keeper-phase-2-surge)
+- [Choice gate (SC-16)](#choice-gate-sc-16)
+
 
 ## 4. Combat transitions
 

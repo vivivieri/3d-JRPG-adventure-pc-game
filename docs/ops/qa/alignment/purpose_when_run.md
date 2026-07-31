@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 870
-summary: "Purpose, when, how to run"
+tokens_est: 922
+summary: "Alignment Audit — Purpose, when, how to run — Produces a repeatable alignment audit with:"
 ---
 # Alignment Audit — Purpose, when, how to run
 
 **Hub:** [`ALIGNMENT_AUDIT.md`](../ALIGNMENT_AUDIT.md)
+
+## When to read
+
+Use **Alignment Audit — Purpose, when, how to run** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Purpose](#1-purpose)
+- [1b. Two streams (management view)](#1b-two-streams-management-view)
+- [2. When to run](#2-when-to-run)
+- [3. How to run](#3-how-to-run)
+
 
 ## 1. Purpose
 

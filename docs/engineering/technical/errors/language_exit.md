@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 795
-summary: "Language patterns + exit codes"
+tokens_est: 912
+summary: "Error Handling — Language patterns + exit codes — Authority: `PYTHON_STYLE.md` §5.4"
 ---
 # Error Handling — Language patterns + exit codes
 
 **Hub:** [`ERROR_HANDLING.md`](../ERROR_HANDLING.md)
+
+## When to read
+
+Use **Error Handling — Language patterns + exit codes** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. Language-specific patterns](#3-language-specific-patterns)
+- [3.1 Python (`tools/*.py`)](#31-python-toolspy)
+- [3.2 Bash (`tools/*.sh`)](#32-bash-toolssh)
+- [3.3 GDScript (`game/scripts/`, `game/tests/`)](#33-gdscript-gamescripts-gametests)
+- [3.4 JSON validators (semantic errors)](#34-json-validators-semantic-errors)
+- [3.5 TypeScript MCP tools](#35-typescript-mcp-tools)
+- [4. Exit code matrix](#4-exit-code-matrix)
+
 
 ## 3. Language-specific patterns
 

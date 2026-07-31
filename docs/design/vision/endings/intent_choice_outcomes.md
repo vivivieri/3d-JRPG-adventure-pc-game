@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 711
-summary: "Intent, choice gate, outcomes"
+tokens_est: 815
+summary: "Ending Design — Intent, choice gate, outcomes — The three endings are equally valid. No 'true' ending. No achievement for 'best' choice."
 ---
 # Ending Design — Intent, choice gate, outcomes
 
 **Hub:** [`ENDING_DESIGN.md`](../ENDING_DESIGN.md)
+
+## When to read
+
+Use **Ending Design — Intent, choice gate, outcomes** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Design intent](#1-design-intent)
+- [2. Choice gate (SC-16)](#2-choice-gate-sc-16)
+- [Choice UI copy](#choice-ui-copy)
+- [3. Ending outcomes](#3-ending-outcomes)
+- [Rewind (`ending_rewind` — SC-17a)](#rewind-ending_rewind-sc-17a)
+- [Anchor (`ending_anchor` — SC-17b)](#anchor-ending_anchor-sc-17b)
+- [Drift (`ending_drift` — SC-17c)](#drift-ending_drift-sc-17c)
+
 
 ## 1. Design intent
 

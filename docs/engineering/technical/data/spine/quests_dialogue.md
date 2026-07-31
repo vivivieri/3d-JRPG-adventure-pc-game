@@ -4,12 +4,22 @@ type: reference
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 387
+tokens_est: 423
 summary: "Stages use `completion: { 'flag': '...' }` or `{ 'all_flags': [...] }`."
 ---
 # Data — Story Spine — Quests + dialogue
 
 **Hub:** [`story_spine.md`](../story_spine.md)
+
+## When to read
+
+Use **Data — Story Spine — Quests + dialogue** (roles: architect, narrative, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Quest data model (5 quests = 3 acts)](#5-quest-data-model-5-quests-3-acts)
+- [7. Dialogue structure](#7-dialogue-structure)
+
 
 ## 5. Quest data model (5 quests = 3 acts)
 

@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [qa, builder, release]
 status: active
 authority: qa
-tokens_est: 976
-summary: "Cloud/PC/Steam/invalid envs"
+tokens_est: 1128
+summary: "Primary implementation OS — Cursor Cloud Agents on `game/development` snapshot. Linux is a v1 ship platform because dev and runtime QA happen here."
 ---
 # Performance Baseline — Cloud/PC/Steam/invalid envs
 
 **Hub:** [`PERFORMANCE_BASELINE.md`](../PERFORMANCE_BASELINE.md)
+
+## When to read
+
+Use **Performance Baseline — Cloud/PC/Steam/invalid envs** (roles: qa, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. Reference Linux — `reference_linux_cloud`](#3-reference-linux-reference_linux_cloud)
+- [4. Reference PC — `reference_pc_gtx1060`](#4-reference-pc-reference_pc_gtx1060)
+- [4.1 Hardware](#41-hardware)
+- [4.2 Godot runtime profile (perf test — both Linux + Windows)](#42-godot-runtime-profile-perf-test-both-linux-windows)
+- [4.3 FPS & scene budgets](#43-fps-scene-budgets)
+- [5. Steam minimum — `steam_minimum`](#5-steam-minimum-steam_minimum)
+- [6. Invalid environments (do not sign off perf)](#6-invalid-environments-do-not-sign-off-perf)
+
 
 ## 3. Reference Linux — `reference_linux_cloud`
 

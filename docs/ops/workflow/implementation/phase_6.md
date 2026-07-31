@@ -6,11 +6,16 @@ phase: [6]
 status: active
 authority: workflow
 tokens_est: 268
-summary: "Implementation Plan — Phase 6"
+summary: "Implementation Plan — Phase 6 — covers Phase 6 — Full story & endings"
 ---
 # Implementation Plan — Phase 6
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 6** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## Phase 6 — Full story & endings
 

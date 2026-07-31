@@ -5,12 +5,23 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 736
-summary: "Local repro, R&R, remediation"
+tokens_est: 794
+summary: "Continuous Integration — Local repro, R&R, remediation — Main branch (docs/data):"
 ---
 # Continuous Integration — Local repro, R&R, remediation
 
 **Hub:** [`CI.md`](../CI.md)
+
+## When to read
+
+Use **Continuous Integration — Local repro, R&R, remediation** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Local reproduction](#4-local-reproduction)
+- [5. R&R alignment (`.cursorrules` §0)](#5-rr-alignment-cursorrules-0)
+- [6. Failure remediation](#6-failure-remediation)
+
 
 ## 4. Local reproduction
 

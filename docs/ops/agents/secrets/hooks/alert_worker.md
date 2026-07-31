@@ -4,12 +4,24 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 616
-summary: "Alert + worker webhooks"
+tokens_est: 696
+summary: "What it is: Separate webhook for Automation D — Factory human alert. Fires on `factory_halt`, `mcp_blocked`, recovery exhausted — not normal cycle dispatch."
 ---
 # Secrets — Webhooks — Alert + worker webhooks
 
 **Hub:** [`webhooks.md`](../webhooks.md)
+
+## When to read
+
+Use **Secrets — Webhooks — Alert + worker webhooks** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. `CURSOR_FACTORY_ALERT_WEBHOOK_URL`](#3-cursor_factory_alert_webhook_url)
+- [Steps](#steps)
+- [Test (optional)](#test-optional)
+- [3b. `CURSOR_WORKER_WEBHOOK_URL` + `CURSOR_WORKER_WEBHOOK_AUTH`](#3b-cursor_worker_webhook_url-cursor_worker_webhook_auth)
+
 
 ## 3. `CURSOR_FACTORY_ALERT_WEBHOOK_URL`
 

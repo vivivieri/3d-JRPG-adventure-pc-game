@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 453
-summary: "When reports fire, commands, contents"
+tokens_est: 504
+summary: "Wired in `tools/pm_emit_cycle_event.sh` — every cycle event emits a stakeholder report."
 ---
 # PM Stakeholder Reporting — When reports fire, commands, contents
 
 **Hub:** [`PM_STAKEHOLDER_REPORTING.md`](../PM_STAKEHOLDER_REPORTING.md)
+
+## When to read
+
+Use **PM Stakeholder Reporting — When reports fire, commands, contents** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. When reports fire (automatic)](#3-when-reports-fire-automatic)
+- [4. PM manual commands](#4-pm-manual-commands)
+- [5. Report contents](#5-report-contents)
+
 
 ## 3. When reports fire (automatic)
 

@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 505
+tokens_est: 562
 summary: "- Uses Godot 4.5+ script logger when available (`godotiq_logger.gd`) — benefits on 4.7"
 ---
 # Plugin Compatibility — Godotiq + MCP Pro
 
 **Hub:** [`PLUGIN_COMPATIBILITY.md`](../PLUGIN_COMPATIBILITY.md)
+
+## When to read
+
+Use **Plugin Compatibility — Godotiq + MCP Pro** (roles: architect, builder, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Godotiq (analyze & debug)](#godotiq-analyze-debug)
+- [Godot 4.7 notes](#godot-47-notes)
+- [Runtime verification](#runtime-verification)
+- [Godot MCP Pro (test — L4/L5)](#godot-mcp-pro-test-l4l5)
+- [Expected compatibility](#expected-compatibility)
+
 
 ## Godotiq (analyze & debug)
 

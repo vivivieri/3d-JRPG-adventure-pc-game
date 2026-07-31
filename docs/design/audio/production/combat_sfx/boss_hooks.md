@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 352
-summary: "→ player touches encounter"
+tokens_est: 428
+summary: "Audio Production — Combat SFX — Combat & boss hooks — → player touches encounter"
 ---
 # Audio Production — Combat SFX — Combat & boss hooks
 
 **Hub:** [`combat_sfx.md`](../combat_sfx.md)
+
+## When to read
+
+Use **Audio Production — Combat SFX — Combat & boss hooks** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [5. Combat & boss audio hooks](#5-combat-boss-audio-hooks)
+- [Standard encounter flow](#standard-encounter-flow)
+- [Boss-specific overrides](#boss-specific-overrides)
+- [Element combat SFX (per skill)](#element-combat-sfx-per-skill)
+
 
 ## 5. Combat & boss audio hooks
 

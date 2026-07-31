@@ -5,12 +5,24 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 460
-summary: "Story, shake, rewards, QA"
+tokens_est: 511
+summary: "Game Feel — Story, shake, rewards, QA — Anti-grind: No XP from inspectables; combat rewards only."
 ---
 # Game Feel — Story, shake, rewards, QA
 
 **Hub:** [`GAME_FEEL.md`](../GAME_FEEL.md)
+
+## When to read
+
+Use **Game Feel — Story, shake, rewards, QA** (roles: builder, visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [6. Story beats](#6-story-beats)
+- [7. Screen shake policy](#7-screen-shake-policy)
+- [8. Reward pacing](#8-reward-pacing)
+- [9. QA checklist](#9-qa-checklist)
+
 
 ## 6. Story beats
 

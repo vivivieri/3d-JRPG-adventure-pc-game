@@ -5,12 +5,26 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 564
-summary: "Telegram + ElevenLabs"
+tokens_est: 641
+summary: "Secrets — API Keys — Telegram + ElevenLabs — What it is: Sends compact HTML status to the product owner after each cycle, sprint close, watchdog recovery, and M"
 ---
 # Secrets — API Keys — Telegram + ElevenLabs
 
 **Hub:** [`api_keys.md`](../api_keys.md)
+
+## When to read
+
+Use **Secrets — API Keys — Telegram + ElevenLabs** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [6. `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`](#6-telegram_bot_token-telegram_chat_id)
+- [`TELEGRAM_BOT_TOKEN`](#telegram_bot_token)
+- [`TELEGRAM_CHAT_ID`](#telegram_chat_id)
+- [Test](#test)
+- [7. `ELEVENLABS_API_KEY`](#7-elevenlabs_api_key)
+- [Steps](#steps)
+
 
 ## 6. `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`
 

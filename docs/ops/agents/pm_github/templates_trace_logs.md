@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 481
-summary: "Templates, traceability, log sources"
+tokens_est: 544
+summary: "Project Management — Templates, traceability, log sources — Use `.github/ISSUE_TEMPLATE/`:"
 ---
 # Project Management — Templates, traceability, log sources
 
 **Hub:** [`PROJECT_MANAGEMENT.md`](../PROJECT_MANAGEMENT.md)
+
+## When to read
+
+Use **Project Management — Templates, traceability, log sources** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. Issue templates](#3-issue-templates)
+- [4. Traceability flow](#4-traceability-flow)
+- [Agent obligation on FAIL](#agent-obligation-on-fail)
+- [5. Log sources by environment](#5-log-sources-by-environment)
+
 
 ## 3. Issue templates
 

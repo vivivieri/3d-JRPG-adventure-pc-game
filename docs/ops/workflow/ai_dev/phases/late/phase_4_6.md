@@ -4,12 +4,23 @@ type: reference
 audience: [pm, qa, architect]
 status: active
 authority: workflow
-tokens_est: 539
-summary: "AI Dev — Phases 4–8 — Phases 4–6"
+tokens_est: 601
+summary: "AI Dev — Phases 4–6 — covers Phase 4 — Combat vertical slice; Phase 5 — Chapter 1 dungeons; Phase 6 — Full story & endings"
 ---
 # AI Dev — Phases 4–6
 
 **Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
+
+## When to read
+
+Use **AI Dev — Phases 4–6** (roles: pm, qa, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Phase 4 — Combat vertical slice](#phase-4-combat-vertical-slice)
+- [Phase 5 — Chapter 1 dungeons](#phase-5-chapter-1-dungeons)
+- [Phase 6 — Full story & endings](#phase-6-full-story-endings)
+
 
 ### Phase 4 — Combat vertical slice
 

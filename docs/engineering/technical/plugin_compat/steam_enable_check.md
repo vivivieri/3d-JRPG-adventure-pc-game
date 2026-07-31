@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 564
-summary: "Steam, enablement, check, fail, related"
+tokens_est: 657
+summary: "Plugin Compatibility — Steam, enablement, check, fail, related — Headless `ClassDB.class_exists('Steam')` on Godot 4.7 with 4.15 → passes on this VM (Linux). Ve"
 ---
 # Plugin Compatibility — Steam, enablement, check, fail, related
 
 **Hub:** [`PLUGIN_COMPATIBILITY.md`](../PLUGIN_COMPATIBILITY.md)
+
+## When to read
+
+Use **Plugin Compatibility — Steam, enablement, check, fail, related** (roles: architect, builder, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [GodotSteam (ship — Phase 8 only)](#godotsteam-ship-phase-8-only)
+- [Runtime verification](#runtime-verification)
+- [Fix (before export)](#fix-before-export)
+- [Editor plugin enablement](#editor-plugin-enablement)
+- [Automated check](#automated-check)
+- [If a plugin fails on 4.7](#if-a-plugin-fails-on-47)
+- [Related](#related)
+
 
 ## GodotSteam (ship — Phase 8 only)
 

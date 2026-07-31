@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 872
+tokens_est: 946
 summary: "Purpose, cross-cutting gaps, brief template"
 ---
 # Generation Readiness — Purpose, cross-cutting gaps, brief template
 
 **Hub:** [`GENERATION_READINESS.md`](../GENERATION_READINESS.md)
+
+## When to read
+
+Use **Generation Readiness — Purpose, cross-cutting gaps, brief template** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. What this document is for](#1-what-this-document-is-for)
+- [2. Cross-cutting gaps (all assets)](#2-cross-cutting-gaps-all-assets)
+- [3. Generation brief template (copy per asset)](#3-generation-brief-template-copy-per-asset)
+
 
 ## 1. What this document is for
 

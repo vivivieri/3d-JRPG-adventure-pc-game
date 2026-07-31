@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 741
+tokens_est: 807
 summary: "Add-feature checklist + registered features"
 ---
 # Workflow Integration — Add-feature checklist + registered features
 
 **Hub:** [`WORKFLOW_INTEGRATION.md`](../WORKFLOW_INTEGRATION.md)
+
+## When to read
+
+Use **Workflow Integration — Add-feature checklist + registered features** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Checklist — adding a new factory feature](#3-checklist-adding-a-new-factory-feature)
+- [Where agents see this rule](#where-agents-see-this-rule)
+- [4. Registered features (current)](#4-registered-features-current)
+
 
 ## 3. Checklist — adding a new factory feature
 

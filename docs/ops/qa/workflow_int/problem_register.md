@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 695
-summary: "Problem + register-before-merge"
+tokens_est: 752
+summary: "Workflow Integration — Problem + register-before-merge — New factory features (telemetry, watchdog hooks, secrets, orchestrator steps) often land in one script"
 ---
 # Workflow Integration — Problem + register-before-merge
 
 **Hub:** [`WORKFLOW_INTEGRATION.md`](../WORKFLOW_INTEGRATION.md)
+
+## When to read
+
+Use **Workflow Integration — Problem + register-before-merge** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Problem](#1-problem)
+- [2. Solution: register before merge](#2-solution-register-before-merge)
+- [Why gaps can still appear (read this)](#why-gaps-can-still-appear-read-this)
+
 
 ## 1. Problem
 

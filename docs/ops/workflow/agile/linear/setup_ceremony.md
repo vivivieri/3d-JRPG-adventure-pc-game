@@ -5,12 +5,25 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 793
+tokens_est: 882
 summary: "Full machine-readable rows: `game/data/qa/sprint_phases.json`."
 ---
 # Agile — Linear Sprints — Setup + ceremony
 
 **Hub:** [`linear_sprints.md`](../linear_sprints.md)
+
+## When to read
+
+Use **Agile — Linear Sprints — Setup + ceremony** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. Linear setup (when MCP authenticated)](#3-linear-setup-when-mcp-authenticated)
+- [3.1 Linear hierarchy](#31-linear-hierarchy)
+- [3.2 Linear ↔ implementation phase map](#32-linear-implementation-phase-map)
+- [3.3 Cycle naming convention](#33-cycle-naming-convention)
+- [4. Sprint ceremony (lightweight — AI team)](#4-sprint-ceremony-lightweight-ai-team)
+
 
 ## 3. Linear setup (when MCP authenticated)
 

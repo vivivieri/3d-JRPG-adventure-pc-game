@@ -5,12 +5,26 @@ audience: [builder, builder_zone, architect]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 654
-summary: "`res://scenes/world/tidal_caves.tscn`"
+tokens_est: 720
+summary: "Level Design — Zone tidal_caves — Scene: `res://scenes/world/tidal_caves.tscn"
 ---
 # Level Design — Zone tidal_caves
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Zone tidal_caves** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [4. Zone: `tidal_caves` (SC-06–11)](#4-zone-tidal_caves-sc-0611)
+- [Blockout](#blockout)
+- [Layout](#layout)
+- [Interactables & triggers](#interactables-triggers)
+- [Encounters](#encounters)
+- [Puzzle SC-07](#puzzle-sc-07)
+
 
 ## 4. Zone: `tidal_caves` (SC-06–11)
 

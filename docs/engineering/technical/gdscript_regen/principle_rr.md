@@ -5,12 +5,25 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 832
-summary: "Principle, R&R, prerequisites"
+tokens_est: 918
+summary: "Never invent behavior when porting — if the reference lib and registry disagree, fix `main` first."
 ---
 # GDScript Regeneration — Principle, R&R, prerequisites
 
 **Hub:** [`GDSCRIPT_REGENERATION.md`](../GDSCRIPT_REGENERATION.md)
+
+## When to read
+
+Use **GDScript Regeneration — Principle, R&R, prerequisites** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Principle](#1-principle)
+- [2. Roles & responsibilities (R&R)](#2-roles-responsibilities-rr)
+- [Dispatch by phase (PM assigns issue; Architect executes port)](#dispatch-by-phase-pm-assigns-issue-architect-executes-port)
+- [Gates per owner](#gates-per-owner)
+- [3. Prerequisites](#3-prerequisites)
+
 
 ## 1. Principle
 

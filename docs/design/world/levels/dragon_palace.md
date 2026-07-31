@@ -5,12 +5,26 @@ audience: [builder, builder_zone, architect]
 phase: [5, 6]
 status: active
 authority: world
-tokens_est: 691
+tokens_est: 771
 summary: "`res://scenes/world/dragon_palace_gate.tscn`"
 ---
 # Level Design — Palace + endings
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Palace + endings** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [5. Zone: `dragon_palace_gate` (SC-12–16)](#5-zone-dragon_palace_gate-sc-1216)
+- [Blockout](#blockout)
+- [Layout](#layout)
+- [Interactables & triggers](#interactables-triggers)
+- [Camera markers (SC-12)](#camera-markers-sc-12)
+- [6. Ending zones (SC-17a/b/c)](#6-ending-zones-sc-17abc)
+
 
 ## 5. Zone: `dragon_palace_gate` (SC-12–16)
 

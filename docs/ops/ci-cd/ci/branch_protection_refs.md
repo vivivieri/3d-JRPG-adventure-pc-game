@@ -5,12 +5,22 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 347
-summary: "Branch protection & cross-refs"
+tokens_est: 388
+summary: "Continuous Integration — Branch protection & cross-refs — On GitHub → Settings → Branches, or via:"
 ---
 # Continuous Integration — Branch protection & cross-refs
 
 **Hub:** [`CI.md`](../CI.md)
+
+## When to read
+
+Use **Continuous Integration — Branch protection & cross-refs** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [7. Branch protection (recommended)](#7-branch-protection-recommended)
+- [8. Cross-refs](#8-cross-refs)
+
 
 ## 7. Branch protection (recommended)
 

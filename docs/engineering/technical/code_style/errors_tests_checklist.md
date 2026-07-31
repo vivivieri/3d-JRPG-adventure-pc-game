@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 458
+tokens_est: 519
 summary: "Errors, comments, tests, assets, PR checklist"
 ---
 # Code Style — Errors, comments, tests, assets, PR checklist
 
 **Hub:** [`CODE_STYLE.md`](../CODE_STYLE.md)
+
+## When to read
+
+Use **Code Style — Errors, comments, tests, assets, PR checklist** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [9. Error handling](#9-error-handling)
+- [10. Comments](#10-comments)
+- [11. Tests](#11-tests)
+- [12. Copyright & assets](#12-copyright-assets)
+- [13. Quick checklist (PR / commit)](#13-quick-checklist-pr-commit)
+
 
 ## 9. Error handling
 

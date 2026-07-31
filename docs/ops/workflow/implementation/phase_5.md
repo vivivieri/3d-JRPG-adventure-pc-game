@@ -5,12 +5,17 @@ audience: [pm, architect, builder]
 phase: [5]
 status: active
 authority: workflow
-tokens_est: 177
-summary: "Implementation Plan — Phase 5"
+tokens_est: 180
+summary: "Implementation Plan — Phase 5 — covers Phase 5 — Chapter 1 dungeons"
 ---
 # Implementation Plan — Phase 5
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 5** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## Phase 5 — Chapter 1 dungeons
 

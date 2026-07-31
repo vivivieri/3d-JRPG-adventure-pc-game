@@ -4,12 +4,22 @@ type: reference
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 729
+tokens_est: 766
 summary: "One row per storyboard beat. Engine loads this for QA tools and progression validation."
 ---
 # Data — Story Spine — Scenes + flags
 
 **Hub:** [`story_spine.md`](../story_spine.md)
+
+## When to read
+
+Use **Data — Story Spine — Scenes + flags** (roles: architect, narrative, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Story spine (`story/scenes.json`)](#3-story-spine-storyscenesjson)
+- [4. Flag registry (`story/flags.json`)](#4-flag-registry-storyflagsjson)
+
 
 ## 3. Story spine (`story/scenes.json`)
 

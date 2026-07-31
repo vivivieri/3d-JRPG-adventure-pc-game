@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 773
-summary: "Verdict rules, radar axes, checklist"
+tokens_est: 871
+summary: "Radar vs CI (read this): Domain scores (0–10) are indicative — they sample weighted signals per domain, not every CI gate. The verdict follows CI only:"
 ---
 # Alignment Audit — Verdict rules, radar axes, checklist
 
 **Hub:** [`ALIGNMENT_AUDIT.md`](../ALIGNMENT_AUDIT.md)
+
+## When to read
+
+Use **Alignment Audit — Verdict rules, radar axes, checklist** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [4. Verdict rules](#4-verdict-rules)
+- [5. Domain scores (radar axes)](#5-domain-scores-radar-axes)
+- [Spec stream (`spec_readiness`)](#spec-stream-spec_readiness)
+- [Build stream (`build_readiness`)](#build-stream-build_readiness)
+- [Legacy alias](#legacy-alias)
+- [6. Recommendation checklist categories](#6-recommendation-checklist-categories)
+
 
 ## 4. Verdict rules
 

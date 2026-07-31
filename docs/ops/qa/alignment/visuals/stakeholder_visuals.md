@@ -4,12 +4,18 @@ type: how-to
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 640
+tokens_est: 645
 summary: "Six visual packs (33 assets) are catalogued for executive updates:"
 ---
 # Alignment — Visuals / History / Integration — Stakeholder visuals
 
 **Hub:** [`visuals_history_integration.md`](../visuals_history_integration.md)
+
+## When to read
+
+Use **Alignment — Visuals / History / Integration — Stakeholder visuals** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 7. Stakeholder visuals
 

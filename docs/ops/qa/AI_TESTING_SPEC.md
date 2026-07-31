@@ -5,19 +5,23 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 925
+tokens_est: 868
 summary: "All implementation on `main` (Phases 1–8)"
 ---
 # AI Testing Specification
 
-**Version:** 1.4
-**Applies to:** All implementation on `main` (Phases 1–8)
-**Parent doc:** `docs/ops/workflow/AI_DEV_WORKFLOW.md` (build policy + acceptance criteria)
-**Cross-refs:** `AGENTS.md`, `docs/engineering/technical/CODE_BASE_CLASS_RULES.md`, `docs/ops/qa/PLAYTEST_SCRIPT.md`, `docs/ops/qa/QA_AND_BUG_PROCESS.md`, `docs/ops/qa/FLOW_QA.md`, `docs/ops/qa/QA_REMEDIATION_LOOP.md`
+## When to read
 
-This document is the **detailed spec** for AI agent testing. It defines **how** to run each layer (L0–L5) and when humans may begin QA.
+Use **AI Testing Specification** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
 
----
+## Jump to
+
+- [0. Golden rule — human QA comes last](#0-golden-rule-human-qa-comes-last)
+- [1. Test layer summary](#1-test-layer-summary)
+- [Layer packs (progressive disclosure)](#layer-packs-progressive-disclosure)
+- [9. Phase → required test layers](#9-phase-required-test-layers)
+
+
 ## 0. Golden rule — human QA comes last
 
 ```

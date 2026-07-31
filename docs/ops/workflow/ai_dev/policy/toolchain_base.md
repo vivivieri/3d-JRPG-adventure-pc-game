@@ -4,12 +4,22 @@ type: how-to
 audience: [pm, architect, builder]
 status: active
 authority: workflow
-tokens_est: 480
-summary: "Toolchain + base classes"
+tokens_est: 527
+summary: "AI Dev — Build Policy — Toolchain + base classes — Rule: No hand-edited `.tscn` or inspector-only work in Cursor. If GDAI MCP is unavailable → stop and notify t"
 ---
 # AI Dev — Build Policy — Toolchain + base classes
 
 **Hub:** [`build_policy.md`](../build_policy.md)
+
+## When to read
+
+Use **AI Dev — Build Policy — Toolchain + base classes** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1.1 Mandatory toolchain](#11-mandatory-toolchain)
+- [1.1b Code base classes (extend-only)](#11b-code-base-classes-extend-only)
+
 
 ### 1.1 Mandatory toolchain
 

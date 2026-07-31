@@ -5,12 +5,25 @@ phase: [1, 5]
 audience: [builder, visual]
 status: active
 authority: ui
-tokens_est: 538
-summary: "Keyboard/mouse, controller, QA"
+tokens_est: 632
+summary: "Use exactly these action IDs in GDScript and scene wiring — do not invent variants:"
 ---
 # UI/UX Flow — Keyboard/mouse, controller, QA
 
 **Hub:** [`UI_UX_FLOW.md`](../UI_UX_FLOW.md)
+
+## When to read
+
+Use **UI/UX Flow — Keyboard/mouse, controller, QA** (roles: builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [10. Input — keyboard & mouse](#10-input-keyboard-mouse)
+- [Canonical InputMap action names (`project.godot`)](#canonical-inputmap-action-names-projectgodot)
+- [11. Controller (Xbox layout)](#11-controller-xbox-layout)
+- [SC-16 choice (gamepad)](#sc-16-choice-gamepad)
+- [12. QA checklist](#12-qa-checklist)
+
 
 ## 10. Input — keyboard & mouse
 

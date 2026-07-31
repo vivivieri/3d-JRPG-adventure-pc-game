@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [qa, builder, release]
 status: active
 authority: qa
-tokens_est: 415
-summary: "Why + profile summary"
+tokens_est: 459
+summary: "Policy: `L3_perf_review` PASS requires evidence on a ship baseline — `reference_linux_cloud` (cloud snapshot / Linux depot) and `reference_pc_gtx1060` (Windows"
 ---
 # Performance Baseline — Why + profile summary
 
 **Hub:** [`PERFORMANCE_BASELINE.md`](../PERFORMANCE_BASELINE.md)
+
+## When to read
+
+Use **Performance Baseline — Why + profile summary** (roles: qa, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Why this exists](#1-why-this-exists)
+- [2. Baseline profiles (summary)](#2-baseline-profiles-summary)
+
 
 ## 1. Why this exists
 

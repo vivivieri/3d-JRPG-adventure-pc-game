@@ -4,12 +4,22 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 493
-summary: "Checklist + renderer"
+tokens_est: 544
+summary: "Performance gate: 60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production. Hardware + environment spec: `docs/ops/qa/PERFOR"
 ---
 # Rendering — Defaults & Environment — Checklist + renderer
 
 **Hub:** [`defaults_environment.md`](../defaults_environment.md)
+
+## When to read
+
+Use **Rendering — Defaults & Environment — Checklist + renderer** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Summary checklist](#1-summary-checklist)
+- [2. Renderer & project defaults](#2-renderer-project-defaults)
+
 
 ## 1. Summary checklist
 

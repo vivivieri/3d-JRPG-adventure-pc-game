@@ -5,15 +5,25 @@ phase: [1, 5]
 audience: [builder, architect]
 status: active
 authority: ui
-tokens_est: 973
+tokens_est: 1030
 summary: "`docs/design/ui/UI_UX_FLOW.md`, `user://settings.json`"
 ---
 # Tides of Urashima — Settings & Accessibility
 
-**Version:** 1.0 (Pre-build)
-**Cross-refs:** `docs/design/ui/UI_UX_FLOW.md`, `user://settings.json`
+## When to read
 
----
+Use **Tides of Urashima — Settings & Accessibility** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Settings menu (global)](#1-settings-menu-global)
+- [2. Text speed values](#2-text-speed-values)
+- [3. Accessibility features (v1)](#3-accessibility-features-v1)
+- [4. Hard mode](#4-hard-mode)
+- [5. Hints system](#5-hints-system)
+- [6. Controller](#6-controller)
+- [7. QA checklist](#7-qa-checklist)
+
 
 ## 1. Settings menu (global)
 

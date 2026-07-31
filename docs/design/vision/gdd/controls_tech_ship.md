@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 894
+tokens_est: 974
 summary: "Controls, tech, milestones, Steam, i18n, risks"
 ---
 # Game Design Document — Controls, tech, milestones, Steam, i18n, risks
 
 **Hub:** [`GDD.md`](../GDD.md)
+
+## When to read
+
+Use **Game Design Document — Controls, tech, milestones, Steam, i18n, risks** (roles: narrative, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [11. Controls (PC)](#11-controls-pc)
+- [12. Technical architecture](#12-technical-architecture)
+- [13. Milestones](#13-milestones)
+- [14. Steam positioning](#14-steam-positioning)
+- [15. Localization](#15-localization)
+- [16. Risk register](#16-risk-register)
+
 
 ## 11. Controls (PC)
 

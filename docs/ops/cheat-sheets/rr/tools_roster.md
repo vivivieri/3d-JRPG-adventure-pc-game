@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 918
-summary: "Controls, tools, agent roster"
+tokens_est: 968
+summary: "Sprint Master: none — PM Agent facilitates; QA Agent owns sprint review evidence."
 ---
 # R&R Cheat Sheet — Controls, tools, agent roster
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R Cheat Sheet — Controls, tools, agent roster** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Controls at a glance](#controls-at-a-glance)
+- [Tool R&R (what owns what)](#tool-rr-what-owns-what)
+- [Agent roster](#agent-roster)
+
 
 ## Controls at a glance
 

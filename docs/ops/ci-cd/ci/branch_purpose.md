@@ -5,12 +5,22 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 463
-summary: "Branch split & purpose"
+tokens_est: 495
+summary: "Game implementation does not merge to `main` until ship-ready (M6). `game/development` CI is a required merge gate — it will fail until `game/project.godot` and"
 ---
 # Continuous Integration — Branch split & purpose
 
 **Hub:** [`CI.md`](../CI.md)
+
+## When to read
+
+Use **Continuous Integration — Branch split & purpose** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [0. Branch split](#0-branch-split)
+- [1. Purpose](#1-purpose)
+
 
 ## 0. Branch split
 

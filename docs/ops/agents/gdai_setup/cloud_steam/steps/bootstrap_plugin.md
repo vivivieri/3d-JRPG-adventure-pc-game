@@ -4,12 +4,22 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 582
-summary: "Bootstrap + GDAI plugin"
+tokens_est: 640
+summary: "Snapshot ID + launch checklist: `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8`, boot veri"
 ---
 # GDAI — Configure Cloud Agents — Bootstrap + GDAI plugin
 
 **Hub:** [`cloud_agents.md`](../cloud_agents.md)
+
+## When to read
+
+Use **GDAI — Configure Cloud Agents — Bootstrap + GDAI plugin** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [4.1 Environment bootstrap (VM)](#41-environment-bootstrap-vm)
+- [4.2 GDAI plugin in cloud (required — not in git)](#42-gdai-plugin-in-cloud-required-not-in-git)
+
 
 ### 4.1 Environment bootstrap (VM)
 

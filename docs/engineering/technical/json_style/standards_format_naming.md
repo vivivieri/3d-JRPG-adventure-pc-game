@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 749
+tokens_est: 817
 summary: "Standards, format, naming, schema metadata"
 ---
 # JSON Data Style — Standards, format, naming, schema metadata
 
 **Hub:** [`JSON_DATA_STYLE.md`](../JSON_DATA_STYLE.md)
+
+## When to read
+
+Use **JSON Data Style — Standards, format, naming, schema metadata** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Industry standards (authoritative externals)](#1-industry-standards-authoritative-externals)
+- [2. File format rules](#2-file-format-rules)
+- [3. Naming conventions](#3-naming-conventions)
+- [4. Schema metadata](#4-schema-metadata)
+
 
 ## 1. Industry standards (authoritative externals)
 

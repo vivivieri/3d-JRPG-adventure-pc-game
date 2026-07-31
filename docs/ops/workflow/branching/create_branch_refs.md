@@ -5,12 +5,22 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 343
-summary: "Creating game branch + cross-refs"
+tokens_est: 384
+summary: "Branching Policy — Creating game branch + cross-refs — git checkout -b game/development   # from last main snapshot with full game tree"
 ---
 # Branching Policy — Creating game branch + cross-refs
 
 **Hub:** [`BRANCHING.md`](../BRANCHING.md)
+
+## When to read
+
+Use **Branching Policy — Creating game branch + cross-refs** (roles: pm, architect, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Creating the game branch (one-time)](#5-creating-the-game-branch-one-time)
+- [6. Cross-refs](#6-cross-refs)
+
 
 ## 5. Creating the game branch (one-time)
 

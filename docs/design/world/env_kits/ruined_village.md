@@ -5,12 +5,28 @@ audience: [builder, builder_zone, visual]
 phase: [1]
 status: active
 authority: world
-tokens_est: 737
-summary: "Zone ruined_village hub"
+tokens_est: 864
+summary: "Environment Kits — Zone ruined_village hub — Storyboard: SC-02 – SC-05"
 ---
 # Environment Kits — Zone ruined_village hub
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Zone ruined_village hub** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [4. Zone: Ruined Fishing Village (`ruined_village`) — HUB](#4-zone-ruined-fishing-village-ruined_village-hub)
+- [Modular kit — architecture](#modular-kit-architecture)
+- [Modular kit — props](#modular-kit-props)
+- [Hero set-pieces](#hero-set-pieces)
+- [Gameplay markers (do not move)](#gameplay-markers-do-not-move)
+- [Scene layout (top-down)](#scene-layout-top-down)
+- [Lighting](#lighting)
+- [Vertical slice scope](#vertical-slice-scope)
+
 
 ## 4. Zone: Ruined Fishing Village (`ruined_village`) — HUB
 

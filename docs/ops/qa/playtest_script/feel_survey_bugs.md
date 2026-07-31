@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 435
-summary: "Feel checklist, survey, bugs"
+tokens_est: 493
+summary: "Playtest Script — Feel checklist, survey, bugs — Per `docs/design/gameplay/GAME_FEEL.md`. Record per tester; average ≥3.5 required for ship."
 ---
 # Playtest Script — Feel checklist, survey, bugs
 
 **Hub:** [`PLAYTEST_SCRIPT.md`](../PLAYTEST_SCRIPT.md)
+
+## When to read
+
+Use **Playtest Script — Feel checklist, survey, bugs** (roles: qa, flow) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7b. Feel checklist (required — rate 1–5)](#7b-feel-checklist-required-rate-15)
+- [8. Post-play survey (5 questions)](#8-post-play-survey-5-questions)
+- [9. Bug reporting](#9-bug-reporting)
+
 
 ## 7b. Feel checklist (required — rate 1–5)
 

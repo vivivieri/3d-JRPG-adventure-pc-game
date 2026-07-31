@@ -5,12 +5,23 @@ phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 822
-summary: "Quality ladder, trackers, promotion"
+tokens_est: 891
+summary: "Development Lifecycle — Quality ladder, trackers, promotion — QA stage = L0–L2 (and L4/L5 when phase requires) automated on trunk."
 ---
 # Development Lifecycle — Quality ladder, trackers, promotion
 
 **Hub:** [`DEVELOPMENT_LIFECYCLE.md`](../DEVELOPMENT_LIFECYCLE.md)
+
+## When to read
+
+Use **Development Lifecycle — Quality ladder, trackers, promotion** (roles: pm, architect, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7. Quality gate ladder (when each stage runs)](#7-quality-gate-ladder-when-each-stage-runs)
+- [8. Tracker roles (GitHub vs Linear)](#8-tracker-roles-github-vs-linear)
+- [9. Promotion checklist](#9-promotion-checklist)
+
 
 ## 7. Quality gate ladder (when each stage runs)
 

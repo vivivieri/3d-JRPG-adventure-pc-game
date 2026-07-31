@@ -5,12 +5,26 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 431
-summary: "P1-05 golden screenshot"
+tokens_est: 594
+summary: "Title: `[DEV][P1-05] Phase 1.10–1.11 — ruined_village golden screenshot + zone composition smoke"
 ---
 # Phase1-Sprint1 — P1-05 golden screenshot
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-05 golden screenshot** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [P1-05 — QA + Builder: golden screenshot + zone composition (GR-001, GR-003)](#p1-05-qa-builder-golden-screenshot-zone-composition-gr-001-gr-003)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Spec summary](#spec-summary)
+- [Evidence](#evidence)
+- [Design refs](#design-refs)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-05 — QA + Builder: golden screenshot + zone composition (GR-001, GR-003)
 

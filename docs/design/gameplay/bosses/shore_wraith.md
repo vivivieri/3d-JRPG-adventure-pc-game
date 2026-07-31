@@ -5,12 +5,29 @@ audience: [builder, builder_combat, qa]
 phase: [2]
 status: active
 authority: gameplay
-tokens_est: 631
-summary: "Tidal Caves — boss arena"
+tokens_est: 761
+summary: "Location: Tidal Caves — boss arena"
 ---
 # Boss Designs — Shore Wraith
 
 **Hub:** [`BOSS_DESIGNS.md`](../BOSS_DESIGNS.md)
+
+## When to read
+
+Use **Boss Designs — Shore Wraith** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [2. Shore Wraith (`shore_wraith`)](#2-shore-wraith-shore_wraith)
+- [Visual](#visual)
+- [Stats (Normal) — from `enemies.json`](#stats-normal-from-enemiesjson)
+- [Skill kit (data IDs)](#skill-kit-data-ids)
+- [Phase 1 — Accusation (100% → 50% HP)](#phase-1-accusation-100-50-hp)
+- [Phase 2 — Collective (50% → 0% HP)](#phase-2-collective-50-0-hp)
+- [Hard mode deltas](#hard-mode-deltas)
+- [Rewards — from `enemies.json`](#rewards-from-enemiesjson)
+- [Audio / VFX](#audio-vfx)
+
 
 ## 2. Shore Wraith (`shore_wraith`)
 

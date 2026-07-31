@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 279
+tokens_est: 325
 summary: "SC-04 (shack); confirms party SC-12 if missed"
 ---
 # Character — Roku
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Character — Roku** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [4. Roku (old diver)](#4-roku-old-diver)
+- [Silhouette](#silhouette)
+- [Colors](#colors)
+- [Field presence](#field-presence)
+- [Combat read](#combat-read)
 
 ## 4. Roku (old diver)
 

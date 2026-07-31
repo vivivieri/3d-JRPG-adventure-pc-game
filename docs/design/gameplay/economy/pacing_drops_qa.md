@@ -5,12 +5,24 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 403
-summary: "Pacing, drops, JSON, QA"
+tokens_est: 468
+summary: "Items & Economy — Pacing, drops, JSON, QA — Soft-lock prevention: Main path grants ≥220 coins (mandatory fights + Q2) without optional fights;"
 ---
 # Items & Economy — Pacing, drops, JSON, QA
 
 **Hub:** [`ITEMS_AND_ECONOMY.md`](../ITEMS_AND_ECONOMY.md)
+
+## When to read
+
+Use **Items & Economy — Pacing, drops, JSON, QA** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Economy pacing (main path)](#8-economy-pacing-main-path)
+- [9. Drop table summary](#9-drop-table-summary)
+- [10. items.json alignment](#10-itemsjson-alignment)
+- [11. QA checklist](#11-qa-checklist)
+
 
 ## 8. Economy pacing (main path)
 

@@ -5,12 +5,26 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 827
+tokens_est: 891
 summary: "`ZoneVisuals.apply_to_scene(root, zone_id)` — static; finds `WorldEnvironment`, `DirectionalLight3D`, and nodes in group `zone_fill_light`, then applies palette"
 ---
 # Rendering — zone_visuals contract & refs
 
 **Hub:** [`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)
+
+## When to read
+
+Use **Rendering — zone_visuals contract & refs** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [13. Reference: `zone_visuals.gd` contract](#13-reference-zone_visualsgd-contract)
+- [Canonical entry (zone load)](#canonical-entry-zone-load)
+- [Instance node (in-scene)](#instance-node-in-scene)
+- [Runtime behavior](#runtime-behavior)
+- [14. External advice filter](#14-external-advice-filter)
+- [15. Related files](#15-related-files)
+
 
 ## 13. Reference: `zone_visuals.gd` contract
 

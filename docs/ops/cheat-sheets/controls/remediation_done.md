@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 420
-summary: "Remediation, DoD, verify, related"
+tokens_est: 486
+summary: "Controls Cheat Sheet — Remediation, DoD, verify, related — 1. `bash tools/qa_emit_remediation.sh <brief-id>"
 ---
 # Controls Cheat Sheet — Remediation, DoD, verify, related
 
 **Hub:** [`CONTROLS_CHEATSHEET.md`](../CONTROLS_CHEATSHEET.md)
+
+## When to read
+
+Use **Controls Cheat Sheet — Remediation, DoD, verify, related** (roles: pm, builder, qa, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Remediation (QA FAIL loop)](#remediation-qa-fail-loop)
+- [Definition of done (merge)](#definition-of-done-merge)
+- [Quick verify commands](#quick-verify-commands)
+- [Related docs](#related-docs)
+
 
 ## Remediation (QA FAIL loop)
 

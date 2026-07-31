@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 828
+tokens_est: 919
 summary: "Pipeline checklist, milestones, next docs"
 ---
 # Generation Readiness — Pipeline checklist, milestones, next docs
 
 **Hub:** [`GENERATION_READINESS.md`](../GENERATION_READINESS.md)
+
+## When to read
+
+Use **Generation Readiness — Pipeline checklist, milestones, next docs** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [6. Pipeline checklist (agent order)](#6-pipeline-checklist-agent-order)
+- [7. What “ready for generation” means per milestone](#7-what-ready-for-generation-means-per-milestone)
+- [8. Recommended next docs/data (priority)](#8-recommended-next-docsdata-priority)
+- [9. Cross-refs](#9-cross-refs)
+
 
 ## 6. Pipeline checklist (agent order)
 

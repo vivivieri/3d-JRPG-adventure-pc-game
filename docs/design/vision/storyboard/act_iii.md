@@ -5,12 +5,28 @@ audience: [narrative, builder, flow]
 phase: [1, 2, 3, 4, 5, 6]
 status: active
 authority: vision
-tokens_est: 893
-summary: "Storyboard — Act III — The Tide"
+tokens_est: 1008
+summary: "Storyboard — Act III — The Tide — covers Act III — The Tide; SC-13 — The Truth of the Box; SC-14 — Palace Sentinel; SC-15 — Tide Keeper Confrontation"
 ---
 # Storyboard — Act III — The Tide
 
 **Hub:** [`STORYBOARD.md`](../STORYBOARD.md)
+
+## When to read
+
+Use **Storyboard — Act III — The Tide** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [Act III — The Tide](#act-iii-the-tide)
+- [SC-13 — The Truth of the Box](#sc-13-the-truth-of-the-box)
+- [SC-14 — Palace Sentinel](#sc-14-palace-sentinel)
+- [SC-15 — Tide Keeper Confrontation](#sc-15-tide-keeper-confrontation)
+- [SC-16 — The Choice](#sc-16-the-choice)
+- [SC-17a — Ending: Rewind](#sc-17a-ending-rewind)
+- [SC-17b — Ending: Anchor](#sc-17b-ending-anchor)
+- [SC-17c — Ending: Drift](#sc-17c-ending-drift)
+
 
 ## Act III — The Tide
 

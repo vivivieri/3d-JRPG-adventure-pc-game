@@ -5,12 +5,28 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 856
-summary: "Naming, strict TS, MCP patterns"
+tokens_est: 969
+summary: "TypeScript Style — Naming, strict TS, MCP patterns — When editing vendor server sources, enable or preserve strict compiler options in `tsconfig.json`:"
 ---
 # TypeScript Style — Naming, strict TS, MCP patterns
 
 **Hub:** [`TYPESCRIPT_STYLE.md`](../TYPESCRIPT_STYLE.md)
+
+## When to read
+
+Use **TypeScript Style — Naming, strict TS, MCP patterns** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [4. Naming conventions (Google TS + project)](#4-naming-conventions-google-ts-project)
+- [5. TypeScript essentials (strict profile)](#5-typescript-essentials-strict-profile)
+- [Types over `any`](#types-over-any)
+- [Imports (Google TS style)](#imports-google-ts-style)
+- [6. MCP server patterns](#6-mcp-server-patterns)
+- [Tool handlers](#tool-handlers)
+- [Error handling](#error-handling)
+- [Logging](#logging)
+
 
 ## 4. Naming conventions (Google TS + project)
 

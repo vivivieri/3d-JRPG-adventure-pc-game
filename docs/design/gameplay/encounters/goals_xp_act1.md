@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 395
-summary: "Goals, XP curve, Act I"
+tokens_est: 445
+summary: "Encounter Table — Goals, XP curve, Act I — XP per fight (Normal): Trash 25–35 | Elite 50–70 | Boss 100–250"
 ---
 # Encounter Table — Goals, XP curve, Act I
 
 **Hub:** [`ENCOUNTER_TABLE.md`](../ENCOUNTER_TABLE.md)
+
+## When to read
+
+Use **Encounter Table — Goals, XP curve, Act I** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Design goals](#1-design-goals)
+- [2. XP & level curve](#2-xp-level-curve)
+- [3. Act I — The Return (~30 min)](#3-act-i-the-return-30-min)
+
 
 ## 1. Design goals
 

@@ -5,12 +5,21 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 245
-summary: "Anti-patterns + PR checklist"
+tokens_est: 276
+summary: "Bash Style — Anti-patterns + PR checklist — - [ ] `#!/usr/bin/env bash` + `set -euo pipefail"
 ---
 # Bash Style — Anti-patterns + PR checklist
 
 **Hub:** [`BASH_STYLE.md`](../BASH_STYLE.md)
+
+## When to read
+
+Use **Bash Style — Anti-patterns + PR checklist** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [8. Anti-patterns](#8-anti-patterns)
+- [9. PR checklist (shell)](#9-pr-checklist-shell)
 
 ## 8. Anti-patterns
 

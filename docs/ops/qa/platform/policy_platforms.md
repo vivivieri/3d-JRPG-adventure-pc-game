@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [release, qa, pm]
 status: active
 authority: qa
-tokens_est: 741
-summary: "Policy, platforms, dev env map"
+tokens_est: 851
+summary: "Platform Support — Policy, platforms, dev env map — If the primary implementation environment is Linux (Cursor Cloud Agents), Linux must be a supported ship pla"
 ---
 # Platform Support — Policy, platforms, dev env map
 
 **Hub:** [`PLATFORM_SUPPORT.md`](../PLATFORM_SUPPORT.md)
+
+## When to read
+
+Use **Platform Support — Policy, platforms, dev env map** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. Policy (read this first)](#1-policy-read-this-first)
+- [2. Supported platforms (v1)](#2-supported-platforms-v1)
+- [Why both Linux and Windows ship](#why-both-linux-and-windows-ship)
+- [3. Development environment map](#3-development-environment-map)
+- [What cloud cannot replace](#what-cloud-cannot-replace)
+- [JIT cloud boot (`build: null`)](#jit-cloud-boot-build-null)
+
 
 ## 1. Policy (read this first)
 

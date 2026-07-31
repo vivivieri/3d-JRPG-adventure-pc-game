@@ -5,12 +5,23 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 624
-summary: "Golden rule, allowed, banned"
+tokens_est: 688
+summary: "Asset Compliance — Golden rule, allowed, banned — That means you must have a documented permissive license or documented AI service ToS that allows commercial u"
 ---
 # Asset Compliance — Golden rule, allowed, banned
 
 **Hub:** [`ASSET_COMPLIANCE.md`](../ASSET_COMPLIANCE.md)
+
+## When to read
+
+Use **Asset Compliance — Golden rule, allowed, banned** (roles: visual, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Golden rule](#1-golden-rule)
+- [2. Allowed licenses (ship-safe)](#2-allowed-licenses-ship-safe)
+- [3. Banned / not allowed without legal review](#3-banned-not-allowed-without-legal-review)
+
 
 ## 1. Golden rule
 

@@ -4,12 +4,22 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 352
-summary: "Rejected tools + licenses"
+tokens_est: 393
+summary: "MCP — Setup & Cost — Rejected tools + licenses — Ship builds: disable/remove all Godot dev plugins before Steam export."
 ---
 # MCP — Setup & Cost — Rejected tools + licenses
 
 **Hub:** [`setup_and_cost.md`](../setup_and_cost.md)
+
+## When to read
+
+Use **MCP — Setup & Cost — Rejected tools + licenses** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Explicitly rejected (do not adopt)](#explicitly-rejected-do-not-adopt)
+- [Licenses & cost](#licenses-cost)
+
 
 ## Explicitly rejected (do not adopt)
 

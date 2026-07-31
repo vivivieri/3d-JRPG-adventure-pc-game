@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 405
-summary: "Golden rules + control stack"
+tokens_est: 446
+summary: "1. Enforce outputs, not intentions — gates PASS with evidence, or merge/tag is blocked."
 ---
 # Controls Cheat Sheet — Golden rules + control stack
 
 **Hub:** [`CONTROLS_CHEATSHEET.md`](../CONTROLS_CHEATSHEET.md)
+
+## When to read
+
+Use **Controls Cheat Sheet — Golden rules + control stack** (roles: pm, builder, qa, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Golden rules](#golden-rules)
+- [Control stack (strong → weak)](#control-stack-strong-weak)
+
 
 ## Golden rules
 

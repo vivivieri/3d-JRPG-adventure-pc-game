@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 444
-summary: "Two layers + what is monitored"
+tokens_est: 487
+summary: "Factory Watchdog — Two layers + what is monitored — Normal flow: Worker finishes → `pm_emit_cycle_event.sh` → PM wakes in seconds."
 ---
 # Factory Watchdog — Two layers + what is monitored
 
 **Hub:** [`FACTORY_WATCHDOG.md`](../FACTORY_WATCHDOG.md)
+
+## When to read
+
+Use **Factory Watchdog — Two layers + what is monitored** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Two layers (do not confuse them)](#1-two-layers-do-not-confuse-them)
+- [2. What gets monitored](#2-what-gets-monitored)
+
 
 ## 1. Two layers (do not confuse them)
 

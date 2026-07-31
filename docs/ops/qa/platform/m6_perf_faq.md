@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [release, qa, pm]
 status: active
 authority: qa
-tokens_est: 576
+tokens_est: 639
 summary: "M6 deliverables, perf matrix, FAQ, related"
 ---
 # Platform Support — M6 deliverables, perf matrix, FAQ, related
 
 **Hub:** [`PLATFORM_SUPPORT.md`](../PLATFORM_SUPPORT.md)
+
+## When to read
+
+Use **Platform Support — M6 deliverables, perf matrix, FAQ, related** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. M6 deliverables (Phase 8)](#4-m6-deliverables-phase-8)
+- [5. Performance sign-off matrix](#5-performance-sign-off-matrix)
+- [6. FAQ](#6-faq)
+- [7. Related docs](#7-related-docs)
+
 
 ## 4. M6 deliverables (Phase 8)
 

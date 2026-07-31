@@ -5,12 +5,22 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 257
+tokens_est: 300
 summary: "Sourcing, implementation, production order"
 ---
 # Audio Direction — Sourcing, implementation, production order
 
 **Hub:** [`AUDIO_DIRECTION.md`](../AUDIO_DIRECTION.md)
+
+## When to read
+
+Use **Audio Direction — Sourcing, implementation, production order** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. Sourcing](#6-sourcing)
+- [7. Implementation](#7-implementation)
+- [8. Production order](#8-production-order)
 
 ## 6. Sourcing
 

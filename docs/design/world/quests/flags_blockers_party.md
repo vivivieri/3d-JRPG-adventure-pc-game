@@ -5,12 +5,23 @@ phase: [1, 5]
 audience: [narrative, builder, flow]
 status: active
 authority: world
-tokens_est: 830
-summary: "Flag list, zone blockers, party join"
+tokens_est: 879
+summary: "Quests & Flags — Flag list, zone blockers, party join — Backtracking: Allowed after Shore Wraith. Hub shop restocks after SC-09."
 ---
 # Quests & Flags — Flag list, zone blockers, party join
 
 **Hub:** [`QUEST_AND_FLAGS.md`](../QUEST_AND_FLAGS.md)
+
+## When to read
+
+Use **Quests & Flags — Flag list, zone blockers, party join** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Master story flag list](#3-master-story-flag-list)
+- [4. Zone blockers](#4-zone-blockers)
+- [5. Party join flags](#5-party-join-flags)
+
 
 ## 3. Master story flag list
 

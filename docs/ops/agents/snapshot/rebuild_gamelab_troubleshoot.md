@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 652
+tokens_est: 736
 summary: "Rebuild, GameLab transport, troubleshooting"
 ---
 # Cloud Snapshot Launch — Rebuild, GameLab transport, troubleshooting
 
 **Hub:** [`CLOUD_SNAPSHOT_LAUNCH.md`](../CLOUD_SNAPSHOT_LAUNCH.md)
+
+## When to read
+
+Use **Cloud Snapshot Launch — Rebuild, GameLab transport, troubleshooting** (roles: pm, builder, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Rebuild snapshot (one-time or after toolchain change)](#4-rebuild-snapshot-one-time-or-after-toolchain-change)
+- [5. GameLab MCP (`gamelab-mcp`) — known Cursor transport issue](#5-gamelab-mcp-gamelab-mcp-known-cursor-transport-issue)
+- [6. Quick troubleshooting](#6-quick-troubleshooting)
+
 
 ## 4. Rebuild snapshot (one-time or after toolchain change)
 

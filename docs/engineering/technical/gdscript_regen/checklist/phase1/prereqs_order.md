@@ -5,12 +5,22 @@ audience: [architect, builder]
 phase: [1]
 status: active
 authority: engineering
-tokens_est: 334
-summary: "git checkout game/development"
+tokens_est: 371
+summary: "Phase 1 Visuals Regen — Prereqs + order — git checkout game/development"
 ---
 # Phase 1 Visuals Regen — Prereqs + order
 
 **Hub:** [`phase1_visuals.md`](../phase1_visuals.md)
+
+## When to read
+
+Use **Phase 1 Visuals Regen — Prereqs + order** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [10.1 Prerequisites](#101-prerequisites)
+- [10.2 Regeneration order (mandatory)](#102-regeneration-order-mandatory)
+
 
 ### 10.1 Prerequisites
 

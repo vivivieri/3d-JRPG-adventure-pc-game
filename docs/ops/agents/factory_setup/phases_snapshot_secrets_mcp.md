@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 535
-summary: "Snapshot, secrets, MCP"
+tokens_est: 612
+summary: "Factory Setup Guide — Snapshot, secrets, MCP — Dashboard: Cloud Agents → Environments"
 ---
 # Factory Setup Guide — Snapshot, secrets, MCP
 
 **Hub:** [`FACTORY_SETUP_GUIDE.md`](../FACTORY_SETUP_GUIDE.md)
+
+## When to read
+
+Use **Factory Setup Guide — Snapshot, secrets, MCP** (roles: pm, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Phase 1 — Snapshot (one-time, human)](#3-phase-1-snapshot-one-time-human)
+- [4. Phase 2 — Secrets (Environment → Secrets)](#4-phase-2-secrets-environment-secrets)
+- [5. Phase 3 — MCP (Dashboard → Integrations & MCP)](#5-phase-3-mcp-dashboard-integrations-mcp)
+
 
 ## 3. Phase 1 — Snapshot (one-time, human)
 

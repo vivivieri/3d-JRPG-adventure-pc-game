@@ -4,12 +4,24 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 517
+tokens_est: 590
 summary: "Items — Consumables / Key / Currency — Key items"
 ---
 # Items — Consumables / Key / Currency — Key items
 
 **Hub:** [`consumables_key_currency.md`](../consumables_key_currency.md)
+
+## When to read
+
+Use **Items — Consumables / Key / Currency — Key items** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Key items](#8-key-items)
+- [`lacquer_box` — Lacquer Box (hero prop)](#lacquer_box-lacquer-box-hero-prop)
+- [`cave_map` — Tidal Cave Map](#cave_map-tidal-cave-map)
+- [`wraith_pearl` — Wraith Pearl](#wraith_pearl-wraith-pearl)
+
 
 ## 8. Key items
 

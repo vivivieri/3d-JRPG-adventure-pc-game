@@ -5,12 +5,23 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 644
-summary: "Context, decision, comparison"
+tokens_est: 689
+summary: "Branching Decision Record — Context, decision, comparison — Multi-agent 3D JRPG development needs:"
 ---
 # Branching Decision Record — Context, decision, comparison
 
 **Hub:** [`BRANCHING_DECISION_RECORD.md`](../BRANCHING_DECISION_RECORD.md)
+
+## When to read
+
+Use **Branching Decision Record — Context, decision, comparison** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Context](#context)
+- [Decision](#decision)
+- [Comparison with common strategies](#comparison-with-common-strategies)
+
 
 ## Context
 

@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 404
-summary: "When required, CI, forbidden, related"
+tokens_est: 461
+summary: "Candidate Tournament — When required, CI, forbidden, related — Both registered in `acceptance_criteria.json`. Only `L0_*` runs on `main` docs CI."
 ---
 # Candidate Tournament — When required, CI, forbidden, related
 
 **Hub:** [`CANDIDATE_TOURNAMENT.md`](../CANDIDATE_TOURNAMENT.md)
+
+## When to read
+
+Use **Candidate Tournament — When required, CI, forbidden, related** (roles: pm, visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. When tournament is required](#7-when-tournament-is-required)
+- [8. CI gates](#8-ci-gates)
+- [9. Forbidden patterns](#9-forbidden-patterns)
+- [10. Related docs](#10-related-docs)
+
 
 ## 7. When tournament is required
 

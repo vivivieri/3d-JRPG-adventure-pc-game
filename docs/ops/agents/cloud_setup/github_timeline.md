@@ -5,12 +5,22 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 360
-summary: "`.github/workflows/agent-cycle-pm.yml`:"
+tokens_est: 407
+summary: "Cloud Agent Setup — GitHub path & timeline — .github/workflows/agent-cycle-pm.yml`:"
 ---
 # Cloud Agent Setup — GitHub path & timeline
 
 **Hub:** [`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)
+
+## When to read
+
+Use **Cloud Agent Setup — GitHub path & timeline** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [7. GitHub workflow (secondary path)](#7-github-workflow-secondary-path)
+- [8. Full factory timeline (example Phase 1)](#8-full-factory-timeline-example-phase-1)
+
 
 ## 7. GitHub workflow (secondary path)
 

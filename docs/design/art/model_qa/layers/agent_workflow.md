@@ -5,12 +5,17 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 214
+tokens_est: 215
 summary: "1. Meshy/Tripo/Rodin → Blender decimate/UV → export GLB"
 ---
 # Model QA — Layers & Workflow — Agent workflow
 
 **Hub:** [`layers_workflow.md`](../layers_workflow.md)
+
+## When to read
+
+Use **Model QA — Layers & Workflow — Agent workflow** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 3. Agent workflow (3D model task)
 

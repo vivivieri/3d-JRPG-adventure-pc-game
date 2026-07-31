@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 710
-summary: "Commands, factory hooks, related"
+tokens_est: 775
+summary: "R&R Cheat Sheet — Commands, factory hooks, related — bash tools/run_ci_checks.sh              # game/development full CI"
 ---
 # R&R Cheat Sheet — Commands, factory hooks, related
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R Cheat Sheet — Commands, factory hooks, related** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Quick commands](#quick-commands)
+- [Factory hooks (names for L0_workflow_integration)](#factory-hooks-names-for-l0_workflow_integration)
+- [Related docs (full detail)](#related-docs-full-detail)
+
 
 ## Quick commands
 

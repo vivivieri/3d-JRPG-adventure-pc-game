@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 434
-summary: "Commands + recovery behavior"
+tokens_est: 463
+summary: "Factory Watchdog — Commands + recovery behavior — bash tools/run_factory_watchdog.sh"
 ---
 # Factory Watchdog — Commands + recovery behavior
 
 **Hub:** [`FACTORY_WATCHDOG.md`](../FACTORY_WATCHDOG.md)
+
+## When to read
+
+Use **Factory Watchdog — Commands + recovery behavior** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Commands](#3-commands)
+- [4. Recovery behavior](#4-recovery-behavior)
+
 
 ## 3. Commands
 

@@ -5,12 +5,26 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 338
-summary: "`res://scenes/world/beach_shore.tscn`"
+tokens_est: 406
+summary: "Level Design — Zone beach_shore — Scene: `res://scenes/world/beach_shore.tscn"
 ---
 # Level Design — Zone beach_shore
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Zone beach_shore** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [2. Zone: `beach_shore` (SC-01)](#2-zone-beach_shore-sc-01)
+- [Blockout](#blockout)
+- [Layout (top-down)](#layout-top-down)
+- [Interactables & triggers](#interactables-triggers)
+- [Encounters](#encounters)
+- [Camera](#camera)
+
 
 ## 2. Zone: `beach_shore` (SC-01)
 

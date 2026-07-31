@@ -5,12 +5,34 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 809
-summary: "P1-01 architect toon + Builder handoff"
+tokens_est: 1089
+summary: "Title: `[DEV][P1-01] Phase 1.1–1.3 — toon_base.gdshader, zone_visuals.gd, ruined_village env preset"
 ---
 # Phase1-Sprint1 — P1-01 architect toon + Builder handoff
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-01 architect toon + Builder handoff** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (14 sections).
+
+## Jump to
+
+- [P1-01 — Architect: toon shader + zone visuals](#p1-01-architect-toon-shader-zone-visuals)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Spec summary](#spec-summary)
+- [Architect → Builder handoff (paste in issue when done)](#architect-builder-handoff-paste-in-issue-when-done)
+- [Handoff to Builder (P1-02)](#handoff-to-builder-p1-02)
+- [Node tree outline — `ruined_village.tscn`](#node-tree-outline-ruined_villagetscn)
+- [Shader / uniform list](#shader-uniform-list)
+- [Inspector targets (GDAI sets)](#inspector-targets-gdai-sets)
+- [Target gate IDs](#target-gate-ids)
+- [Component scenes](#component-scenes)
+- [Base classes](#base-classes)
+- [Generation brief](#generation-brief)
+- [Design refs](#design-refs)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-01 — Architect: toon shader + zone visuals
 

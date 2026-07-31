@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 826
+tokens_est: 924
 summary: "System index, playtest loop, gates, won't-fix, RC checklist"
 ---
 # QA and Bug Process — System index, playtest loop, gates, won't-fix, RC checklist
 
 **Hub:** [`QA_AND_BUG_PROCESS.md`](../QA_AND_BUG_PROCESS.md)
+
+## When to read
+
+Use **QA and Bug Process — System index, playtest loop, gates, won't-fix, RC checklist** (roles: qa, pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [7. Per-system QA index](#7-per-system-qa-index)
+- [8. Playtest → bug loop](#8-playtest-bug-loop)
+- [Playtest metrics to track](#playtest-metrics-to-track)
+- [9. Milestone gates (bug bar)](#9-milestone-gates-bug-bar)
+- [10. Won't fix / by design](#10-wont-fix-by-design)
+- [11. QA checklist (release candidate)](#11-qa-checklist-release-candidate)
+
 
 ## 7. Per-system QA index
 

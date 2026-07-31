@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 602
-summary: "Palette remap, audio, M5 gates"
+tokens_est: 665
+summary: "Art Automation Pipeline — Palette remap, audio, M5 gates — All 2D generated art (ComfyUI, GameLab, Material Maker exports) must pass palette remap before ship."
 ---
 # Art Automation Pipeline — Palette remap, audio, M5 gates
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — Palette remap, audio, M5 gates** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. Palette compliance (`palette_remap.py`)](#6-palette-compliance-palette_remappy)
+- [7. Audio automation (no human mix)](#7-audio-automation-no-human-mix)
+- [8. Quality gates (M5)](#8-quality-gates-m5)
+
 
 ## 6. Palette compliance (`palette_remap.py`)
 

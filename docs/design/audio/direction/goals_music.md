@@ -5,12 +5,22 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 425
-summary: "Design goals + music map"
+tokens_est: 457
+summary: "Audio Direction — Design goals + music map — Loop: All field tracks seamless loop; 2–4 min length target."
 ---
 # Audio Direction — Design goals + music map
 
 **Hub:** [`AUDIO_DIRECTION.md`](../AUDIO_DIRECTION.md)
+
+## When to read
+
+Use **Audio Direction — Design goals + music map** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Design goals](#1-design-goals)
+- [2. Music map](#2-music-map)
+
 
 ## 1. Design goals
 

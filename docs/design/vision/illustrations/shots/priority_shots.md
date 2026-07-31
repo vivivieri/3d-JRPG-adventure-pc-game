@@ -4,12 +4,24 @@ type: reference
 audience: [visual, narrative]
 status: active
 authority: vision
-tokens_est: 557
+tokens_est: 659
 summary: "Illustrations — Shots & Briefs — Priority shot list"
 ---
 # Illustrations — Shots & Briefs — Priority shot list
 
 **Hub:** [`shots_briefs.md`](../shots_briefs.md)
+
+## When to read
+
+Use **Illustrations — Shots & Briefs — Priority shot list** (roles: visual, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. Priority shot list (generate in this order)](#4-priority-shot-list-generate-in-this-order)
+- [Tier P0 — Minimum viable pitch (5 images)](#tier-p0-minimum-viable-pitch-5-images)
+- [Tier P1 — Full storyboard pass (14 scene images)](#tier-p1-full-storyboard-pass-14-scene-images)
+- [Tier P2 — Portraits (UI-adjacent)](#tier-p2-portraits-ui-adjacent)
+
 
 ## 4. Priority shot list (generate in this order)
 

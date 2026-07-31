@@ -5,12 +5,22 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 359
+tokens_est: 402
 summary: "- [x] Data architecture (`docs/engineering/technical/DATA_ARCHITECTURE.md`)"
 ---
 # Milestones — Pre-build — M0e / M0h
 
 **Hub:** [`pre_build.md`](../pre_build.md)
+
+## When to read
+
+Use **Milestones — Pre-build — M0e / M0h** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [M0e — Story data layer (main branch)](#m0e-story-data-layer-main-branch)
+- [M0h — AI dev workflow & testing (main baseline)](#m0h-ai-dev-workflow-testing-main-baseline)
+
 
 ## M0e — Story data layer (main branch)
 - [x] Data architecture (`docs/engineering/technical/DATA_ARCHITECTURE.md`)

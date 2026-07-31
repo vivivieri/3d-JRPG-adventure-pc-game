@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [release, pm, architect]
 status: active
 authority: qa
-tokens_est: 520
-summary: "Threat model + ship build rule"
+tokens_est: 568
+summary: "Security — Threat model + ship build rule — Never ship dev editor integrations:"
 ---
 # Security — Threat model + ship build rule
 
 **Hub:** [`SECURITY.md`](../SECURITY.md)
+
+## When to read
+
+Use **Security — Threat model + ship build rule** (roles: release, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Threat model (practical)](#1-threat-model-practical)
+- [2. Ship build rule (non-negotiable)](#2-ship-build-rule-non-negotiable)
+
 
 ## 1. Threat model (practical)
 

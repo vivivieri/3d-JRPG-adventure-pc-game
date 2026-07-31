@@ -5,17 +5,25 @@ phase: [6, 8]
 audience: [release]
 status: active
 authority: ci-cd
-tokens_est: 444
+tokens_est: 460
 summary: "`game/development` — hero meshes, textures, audio (M5+)"
 ---
 # Git LFS — Large Asset Tracking
 
-**Version:** 1.0
-**Applies to:** `game/development` — hero meshes, textures, audio (M5+)
-**Patterns:** `.gitattributes` at repo root
-**Cross-refs:** `docs/design/art/ASSET_COMPLIANCE.md`, `docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md` §10.4
+## When to read
 
----
+Use **Git LFS — Large Asset Tracking** (roles: release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Why LFS](#1-why-lfs)
+- [2. Tracked patterns](#2-tracked-patterns)
+- [3. Setup (once per machine)](#3-setup-once-per-machine)
+- [First commit of a large file](#first-commit-of-a-large-file)
+- [4. Clone / CI](#4-clone-ci)
+- [5. Verify](#5-verify)
+- [6. Cross-refs](#6-cross-refs)
+
 
 ## 1. Why LFS
 

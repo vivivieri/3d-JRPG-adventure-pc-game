@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, visual, audio]
 status: active
 authority: qa
-tokens_est: 908
+tokens_est: 961
 summary: "Protocol, checklist fields, external API jury"
 ---
 # Agent Jury — Protocol, checklist fields, external API jury
 
 **Hub:** [`AGENT_JURY.md`](../AGENT_JURY.md)
+
+## When to read
+
+Use **Agent Jury — Protocol, checklist fields, external API jury** (roles: qa, visual, audio) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Protocol](#3-protocol)
+- [4. Domain checklist fields](#4-domain-checklist-fields)
+- [5. Relationship to the external-API jury](#5-relationship-to-the-external-api-jury)
+
 
 ## 3. Protocol
 
