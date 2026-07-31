@@ -172,3 +172,15 @@ Recent efficiency work:
 9. Character pack auto-attach; `check_docs_pack_adherence.py` on post-cycle (WARN)
 
 10. Round 4: release/security/steam + language/factory/cinematics splits; `pack_catalog` in INDEX; phase tags ~100%; session gate inits `artifacts/docs_reads_<issue>.log`; thinner AGENTS/BOOT
+11. Rounds 5–8: remaining fat hubs/leaves; then **pause** bulk thinning
+12. Defrag: collapse arbitrary `part_a`/`part_b` halves + hub-of-hub nests ([#180](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/pull/180))
+
+### Standing policy (pack splits)
+
+**Authority:** [`_meta/DOC_LIBRARY_ADR.md`](_meta/DOC_LIBRARY_ADR.md) § Amendment — Docs pack thinning.
+
+- Do **not** run another bulk thinning round.
+- Packs must be **named topics** — no opaque `part_a`/`part_b` or `(A)`/`(B)`.
+- Prefer **hub → leaf** (or hub → named packs); avoid hub-of-hub.
+- A coherent ~1.2–1.4k leaf is fine; clarity beats sub-1k chasing.
+- Next work: **use** packs (`resolve_docs`, adherence), not more splits.
