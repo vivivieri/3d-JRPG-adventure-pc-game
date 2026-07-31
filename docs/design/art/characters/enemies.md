@@ -1,12 +1,12 @@
 ---
 id: enemies
 type: reference
-phase: [1, 5]
 audience: [visual, builder]
+phase: [1, 5]
 status: active
 authority: art
-tokens_est: 129
-summary: "Enemy field/combat model briefs"
+tokens_est: 180
+summary: "Enemy field + boss model briefs"
 ---
 # Character Bible — Enemies
 
@@ -14,9 +14,8 @@ summary: "Enemy field/combat model briefs"
 
 | Pack | Topic |
 |------|-------|
-| [`part_a.md`](enemies/part_a.md) | Character Bible — Enemies (A) |
-| [`part_b.md`](enemies/part_b.md) | Character Bible — Enemies (B) |
+| [`enemies/field.md`](enemies/field.md) | Field enemies |
+| [`enemies/bosses.md`](enemies/bosses.md) | Boss enemies |
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
 
-## 6. Enemies (field + combat models)
-
+Field trash → `field.md`; bosses → `bosses.md`.
