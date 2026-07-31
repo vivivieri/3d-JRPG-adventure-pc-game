@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 473
+tokens_est: 480
 summary: "Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`, `palace_sentinel`, `tide_keeper`; field mobs: `salt_"
 ---
 # Data — Combat & Economy — Enemy combat_barks

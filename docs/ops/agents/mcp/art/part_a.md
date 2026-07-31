@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [visual, builder, pm]
 status: active
 authority: ops
-tokens_est: 679
+tokens_est: 683
 summary: "Stylized tileable wood, stone, ground, hero texture sheets."
 ---
 # MCP — Art Tools — MCP — Art Tools (A)

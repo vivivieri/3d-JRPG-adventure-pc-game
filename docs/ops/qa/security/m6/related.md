@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 166
+tokens_est: 170
 summary: "Security — M6 Player Protect — Related docs"
 ---
 # Security — M6 Player Protect — Related docs

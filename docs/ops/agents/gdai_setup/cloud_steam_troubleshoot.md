@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, release]
 status: active
 authority: ops
-tokens_est: 151
+tokens_est: 154
 summary: "Cloud Agents config, Steam export, troubleshooting"
 ---
 # GDAI Setup — Cloud / Steam / Troubleshoot

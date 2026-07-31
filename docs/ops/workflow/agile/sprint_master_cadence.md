@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 124
+tokens_est: 128
 summary: "Sprint Master role + duration recommendations"
 ---
 # Agile — Sprint Master Cadence

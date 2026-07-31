@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 122
+tokens_est: 125
 summary: "BGM track sheets + scene→audio map"
 ---
 # Audio Production — BGM & Scene Map

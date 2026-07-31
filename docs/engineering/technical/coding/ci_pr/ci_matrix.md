@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 444
+tokens_est: 451
 summary: "CI enforcement matrix"
 ---
 # Coding — CI & PR — CI enforcement matrix

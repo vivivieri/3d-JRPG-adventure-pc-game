@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 693
+tokens_est: 696
 summary: "`game/data/audio/scene_audio_map.json` (validated L0 on `main`). The table below is the human-readable mirror; when they disagree, fix JSON first then sync this"
 ---
 # Audio Production — BGM & Scene Map — Scene → audio map

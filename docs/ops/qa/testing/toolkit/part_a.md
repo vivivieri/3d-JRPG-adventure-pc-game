@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, builder]
 status: active
 authority: qa
-tokens_est: 608
+tokens_est: 612
 summary: "AI Testing — GDAI Toolkit (A)"
 ---
 # AI Testing — GDAI Toolkit — AI Testing — GDAI Toolkit (A)

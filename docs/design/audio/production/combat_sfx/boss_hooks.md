@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 348
+tokens_est: 352
 summary: "→ player touches encounter"
 ---
 # Audio Production — Combat SFX — Combat & boss hooks

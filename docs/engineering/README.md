@@ -46,7 +46,11 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/data/combat_economy/encounters_items.md](technical/data/combat_economy/encounters_items.md) | `encounters_items` |
 | [technical/data/combat_economy/shop_achievements_newgame.md](technical/data/combat_economy/shop_achievements_newgame.md) | `shop_achievements_newgame` |
 | [technical/data/combat_economy.md](technical/data/combat_economy.md) | `combat_economy` |
+| [technical/data/i18n/locale_tools.md](technical/data/i18n/locale_tools.md) | `locale_tools` |
+| [technical/data/i18n/maintenance_schemas.md](technical/data/i18n/maintenance_schemas.md) | `maintenance_schemas` |
 | [technical/data/i18n_validation.md](technical/data/i18n_validation.md) | `i18n_validation` |
+| [technical/data/spine/quests_dialogue.md](technical/data/spine/quests_dialogue.md) | `quests_dialogue` |
+| [technical/data/spine/scenes_flags.md](technical/data/spine/scenes_flags.md) | `scenes_flags` |
 | [technical/data/story_spine.md](technical/data/story_spine.md) | `story_spine` |
 | [technical/errors/language_exit.md](technical/errors/language_exit.md) | `language_exit` |
 | [technical/errors/principles_format.md](technical/errors/principles_format.md) | `principles_format` |
@@ -74,6 +78,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/plugin_compat/summary_engine_gdai.md](technical/plugin_compat/summary_engine_gdai.md) | `summary_engine_gdai` |
 | [technical/python/deps_test_pr.md](technical/python/deps_test_pr.md) | `deps_test_pr` |
 | [technical/python/docs_types_patterns.md](technical/python/docs_types_patterns.md) | `docs_types_patterns` |
+| [technical/python/pep8/externals.md](technical/python/pep8/externals.md) | `externals` |
+| [technical/python/pep8/project_profile.md](technical/python/pep8/project_profile.md) | `project_profile` |
 | [technical/python/standards_pep8.md](technical/python/standards_pep8.md) | `standards_pep8` |
 | [technical/save/continue_fail.md](technical/save/continue_fail.md) | `continue_fail` |
 | [technical/save/scum_qa.md](technical/save/scum_qa.md) | `scum_qa` |

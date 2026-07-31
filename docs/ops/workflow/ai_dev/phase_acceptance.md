@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, qa, architect]
 status: active
 authority: workflow
-tokens_est: 154
+tokens_est: 159
 summary: "Acceptance criteria by phase"
 ---
 # AI Dev — Phase Acceptance

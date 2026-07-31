@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 461
+tokens_est: 465
 summary: "Full list: `python3 -c 'import json; print('\\n'.join(json.load(open('game/data/qa/acceptance_criteria.json'))['docs_ci_gates']['required_gates']))'`"
 ---
 # CI — What Runs — CI — What Runs (A)

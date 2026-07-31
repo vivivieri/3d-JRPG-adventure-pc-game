@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 789
+tokens_est: 793
 summary: "Full machine-readable rows: `game/data/qa/sprint_phases.json`."
 ---
 # Agile — Linear Sprints — Setup + ceremony

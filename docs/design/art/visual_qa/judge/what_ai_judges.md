@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 245
+tokens_est: 248
 summary: "What AI can/cannot judge"
 ---
 # Visual QA — Judge Layers — What AI can/cannot judge

@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 416
+tokens_est: 419
 summary: "Shore Wraith and Palace Sentinel share `bgm_boss`. Tide Keeper uses `bgm_boss` in phase 1, then crossfades to phase-specific tracks at thresholds (see §5)."
 ---
 # BGM Track Sheets — Master BGM list

@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 661
+tokens_est: 664
 summary: "“Keep tweaking until it feels right” without a ladder produces infinite retries or random prompt changes."
 ---
 # Model QA — Polish Direction — Polish cadence

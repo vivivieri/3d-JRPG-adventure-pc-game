@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 208
+tokens_est: 211
 summary: "GameLab, GH, Telegram, ElevenLabs, Cursor API keys"
 ---
 # Secrets — API Keys
