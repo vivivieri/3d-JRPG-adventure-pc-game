@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 153
+tokens_est: 157
 summary: "Direction authority + feel ownership"
 ---
 # Model QA — Who Directs Feel

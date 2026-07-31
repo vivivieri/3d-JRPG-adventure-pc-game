@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, qa, architect, builder]
 status: active
 authority: workflow
-tokens_est: 649
+tokens_est: 653
 summary: "test_runner.gd # Headless entry point (-s)"
 ---
 # AI Dev — Testing Policy — Unit tests

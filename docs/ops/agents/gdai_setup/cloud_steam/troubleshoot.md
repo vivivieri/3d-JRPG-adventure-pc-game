@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, release]
 status: active
 authority: ops
-tokens_est: 378
+tokens_est: 381
 summary: "bash tools/ensure_gdai_mcp.sh"
 ---
 # GDAI Setup — Cloud / Steam / Troubleshoot — Troubleshooting

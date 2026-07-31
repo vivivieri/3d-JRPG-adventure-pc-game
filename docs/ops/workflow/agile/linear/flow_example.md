@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 619
+tokens_est: 624
 summary: "Issue flow + Phase 1 example"
 ---
 # Agile — Linear Sprints — Issue flow + Phase 1 example

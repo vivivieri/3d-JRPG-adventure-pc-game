@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, qa, release]
 status: active
 authority: ops
-tokens_est: 617
+tokens_est: 621
 summary: "Controls — Gates by Branch (B)"
 ---
 # Controls — Gates by Branch — Controls — Gates by Branch (B)

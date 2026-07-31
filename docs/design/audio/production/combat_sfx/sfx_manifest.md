@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 896
+tokens_est: 900
 summary: "3 variants per surface (`_01`, `_02`, `_03`); randomize; interval by walk speed."
 ---
 # Audio Production — Combat SFX — SFX manifest

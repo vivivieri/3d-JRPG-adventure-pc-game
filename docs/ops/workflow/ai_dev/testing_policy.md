@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, qa, architect, builder]
 status: active
 authority: workflow
-tokens_est: 116
+tokens_est: 120
 summary: "AI testing policy + unit tests"
 ---
 # AI Dev — Testing Policy

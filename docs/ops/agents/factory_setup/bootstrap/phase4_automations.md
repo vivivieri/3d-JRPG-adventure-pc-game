@@ -1,0 +1,75 @@
+---
+id: phase4-automations
+type: how-to
+audience: [pm]
+status: active
+authority: ops
+tokens_est: 733
+summary: "Phase 4 Cursor Automations"
+---
+# Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations
+
+**Hub:** [`automations_github_bootstrap.md`](../automations_github_bootstrap.md)
+
+## 6. Phase 4 — Cursor Automations (dashboard)
+
+Machine-readable catalog: `game/data/qa/factory_automations.json`
+Prompt files: `docs/ops/agents/automation_prompts/`
+
+### Automation A — PM cycle dispatch (required)
+
+| Field | Value |
+|-------|--------|
+| Trigger | **Webhook** → `CURSOR_PM_CYCLE_WEBHOOK_URL` |
+| Repo / branch | `3d-JRPG-adventure-pc-game` / `game/development` |
+| Schedule | **None** |
+| Prompt | Paste `docs/ops/agents/automation_prompts/pm_cycle_dispatch.md` |
+
+### Automation B — CI failure triage (required)
+
+Handled by `.github/workflows/game-ci-failure-triage.yml` posting to PM webhook.
+Optional duplicate in Cursor automations on **CI failure** for `Game CI` on `game/development`.
+Prompt: `docs/ops/agents/automation_prompts/ci_failure_triage.md`
+
+### Automation C — UAT notify (optional)
+
+Webhook on `uat_ready` only. Prompt: `docs/ops/agents/automation_prompts/uat_notify.md`
+
+### Automation D — Factory alert (required)
+
+| Field | Value |
+|-------|--------|
+| Trigger | Webhook → `CURSOR_FACTORY_ALERT_WEBHOOK_URL` |
+| Prompt | `docs/ops/agents/automation_prompts/factory_alert.md` |
+
+### Automation E — Worker (required for 100% automation)
+
+This closes the **worker spawn gap**.
+
+> **Cursor UI note:** Many accounts only show **PR label** triggers, not **issue label** triggers. Use the **webhook + GitHub Actions** bridge below instead of a GitHub label trigger in Cursor.
+
+| Field | Value |
+|-------|--------|
+| Name | `Worker — sprint issue` |
+| Trigger | **Webhook** → `CURSOR_WORKER_WEBHOOK_URL` |
+| Repo / branch | `3d-JRPG-adventure-pc-game` / `game/development` |
+| Tools | MCP **on** (all Godot MCPs + gamelab) |
+| Prompt | Paste `docs/ops/agents/automation_prompts/worker_sprint_issue.md` |
+
+**GitHub Actions bridge** (repo workflow `.github/workflows/worker-dispatch.yml`):
+
+1. Save Automation E with **Webhook** trigger → copy URL
+2. GitHub → **Settings → Secrets and variables → Actions** → `CURSOR_WORKER_WEBHOOK_URL` = same URL
+3. Merge `worker-dispatch.yml` to `game/development` (fires on `issues.labeled` → `dispatch/ready`)
+
+**How PM triggers it:** orchestrator step `dispatch_workers` runs:
+
+```bash
+python3 tools/pm_dispatch_workers.py --head-only
+```
+
+That adds labels `dispatch/ready`, `status/in-progress`, `agent/<role>` on the linked GitHub issue and writes `artifacts/worker_dispatch_manifest.json`.
+
+> **Cursor UI note:** If your automations UI only shows repo/branch (no explicit “Environment” dropdown), automations still reuse the **saved Environment for the same repo** when configured. Confirm with `environment-info` → non-null `build.snapshotId` after a test run.
+
+---

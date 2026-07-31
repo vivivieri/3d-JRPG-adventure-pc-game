@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 962
+tokens_est: 965
 summary: "Player build protection"
 ---
 # Security — M6 Player Protect — Player build protection

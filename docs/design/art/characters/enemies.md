@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 125
+tokens_est: 129
 summary: "Enemy field/combat model briefs"
 ---
 # Character Bible — Enemies

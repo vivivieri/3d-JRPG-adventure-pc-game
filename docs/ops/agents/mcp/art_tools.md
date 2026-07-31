@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [visual, builder, pm]
 status: active
 authority: ops
-tokens_est: 139
+tokens_est: 143
 summary: "Art & design MCP/offline tools"
 ---
 # MCP — Art Tools

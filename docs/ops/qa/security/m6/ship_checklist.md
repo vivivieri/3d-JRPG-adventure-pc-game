@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 300
+tokens_est: 304
 summary: "M6 ship security checklist"
 ---
 # Security — M6 Player Protect — M6 ship security checklist

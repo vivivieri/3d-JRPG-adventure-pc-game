@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, pm]
 status: active
 authority: qa
-tokens_est: 962
+tokens_est: 966
 summary: "Industry standards map"
 ---
 # Remediation — Standards & Loop — Industry standards map

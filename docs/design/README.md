@@ -25,6 +25,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/automation/ui_art.md](art/automation/ui_art.md) | `ui_art` |
 | [art/automation/zone_textures.md](art/automation/zone_textures.md) | `zone_textures` |
 | [art/characters/animation_portraits.md](art/characters/animation_portraits.md) | `animation_portraits` |
+| [art/characters/enemies/bosses/part_a.md](art/characters/enemies/bosses/part_a.md) | `part_a` |
+| [art/characters/enemies/bosses/part_b.md](art/characters/enemies/bosses/part_b.md) | `part_b` |
 | [art/characters/enemies/part_a.md](art/characters/enemies/part_a.md) | `part_a` |
 | [art/characters/enemies/part_b.md](art/characters/enemies/part_b.md) | `part_b` |
 | [art/characters/enemies.md](art/characters/enemies.md) | `enemies` |
@@ -45,8 +47,17 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/generation_readiness/characters_zones.md](art/generation_readiness/characters_zones.md) | `characters_zones` |
 | [art/generation_readiness/pipeline_milestones.md](art/generation_readiness/pipeline_milestones.md) | `pipeline_milestones` |
 | [art/generation_readiness/purpose_gaps_brief.md](art/generation_readiness/purpose_gaps_brief.md) | `purpose_gaps_brief` |
+| [art/generation_readiness/rows/characters.md](art/generation_readiness/rows/characters.md) | `characters` |
+| [art/generation_readiness/rows/zones.md](art/generation_readiness/rows/zones.md) | `zones` |
+| [art/items/consumables/consumables.md](art/items/consumables/consumables.md) | `consumables` |
+| [art/items/consumables/key_items.md](art/items/consumables/key_items.md) | `key_items` |
+| [art/items/consumables/materials_currency.md](art/items/consumables/materials_currency.md) | `materials_currency` |
 | [art/items/consumables_key_currency.md](art/items/consumables_key_currency.md) | `consumables_key_currency` |
+| [art/items/equipment/armor_charms.md](art/items/equipment/armor_charms.md) | `armor_charms` |
+| [art/items/equipment/weapons.md](art/items/equipment/weapons.md) | `weapons` |
 | [art/items/export_qa.md](art/items/export_qa.md) | `export_qa` |
+| [art/items/global/rig_parenting.md](art/items/global/rig_parenting.md) | `rig_parenting` |
+| [art/items/global/rules_sheets.md](art/items/global/rules_sheets.md) | `rules_sheets` |
 | [art/items/global_sheets_rig.md](art/items/global_sheets_rig.md) | `global_sheets_rig` |
 | [art/items/weapons_armor_charms.md](art/items/weapons_armor_charms.md) | `weapons_armor_charms` |
 | [art/licenses/art_code_ship.md](art/licenses/art_code_ship.md) | `art_code_ship` |
@@ -55,6 +66,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/model_qa/layers/agent_workflow.md](art/model_qa/layers/agent_workflow.md) | `agent_workflow` |
 | [art/model_qa/layers/automate_vs_human.md](art/model_qa/layers/automate_vs_human.md) | `automate_vs_human` |
 | [art/model_qa/layers/defense_layers.md](art/model_qa/layers/defense_layers.md) | `defense_layers` |
+| [art/model_qa/layers/m_layers/m1_m2.md](art/model_qa/layers/m_layers/m1_m2.md) | `m1_m2` |
+| [art/model_qa/layers/m_layers/m3_jury.md](art/model_qa/layers/m_layers/m3_jury.md) | `m3_jury` |
 | [art/model_qa/layers_workflow.md](art/model_qa/layers_workflow.md) | `layers_workflow` |
 | [art/model_qa/polish/cadence.md](art/model_qa/polish/cadence.md) | `cadence` |
 | [art/model_qa/polish/who/part_a.md](art/model_qa/polish/who/part_a.md) | `part_a` |
@@ -62,6 +75,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/model_qa/polish/who_directs.md](art/model_qa/polish/who_directs.md) | `who_directs` |
 | [art/model_qa/polish_direction.md](art/model_qa/polish_direction.md) | `polish_direction` |
 | [art/model_qa/smoke_report_tools.md](art/model_qa/smoke_report_tools.md) | `smoke_report_tools` |
+| [art/rendering/defaults/checklist_renderer.md](art/rendering/defaults/checklist_renderer.md) | `checklist_renderer` |
+| [art/rendering/defaults/world_sky.md](art/rendering/defaults/world_sky.md) | `world_sky` |
 | [art/rendering/defaults_environment.md](art/rendering/defaults_environment.md) | `defaults_environment` |
 | [art/rendering/lighting_fog.md](art/rendering/lighting_fog.md) | `lighting_fog` |
 | [art/rendering/materials_gi_glow.md](art/rendering/materials_gi_glow.md) | `materials_gi_glow` |
@@ -78,6 +93,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [audio/AUDIO_PRODUCTION_GUIDE.md](audio/AUDIO_PRODUCTION_GUIDE.md) | `AUDIO_PRODUCTION_GUIDE` |
 | [audio/AUDIO_QA.md](audio/AUDIO_QA.md) | `AUDIO_QA` |
 | [audio/audio_qa/automate_layers.md](audio/audio_qa/automate_layers.md) | `automate_layers` |
+| [audio/audio_qa/layers/automate_vs_human.md](audio/audio_qa/layers/automate_vs_human.md) | `automate_vs_human` |
+| [audio/audio_qa/layers/defense_layers.md](audio/audio_qa/layers/defense_layers.md) | `defense_layers` |
 | [audio/audio_qa/smoke_workflow.md](audio/audio_qa/smoke_workflow.md) | `smoke_workflow` |
 | [audio/audio_qa/tools_vs_visual.md](audio/audio_qa/tools_vs_visual.md) | `tools_vs_visual` |
 | [audio/direction/goals_music.md](audio/direction/goals_music.md) | `goals_music` |
@@ -88,6 +105,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [audio/production/bgm_map/scene_map.md](audio/production/bgm_map/scene_map.md) | `scene_map` |
 | [audio/production/bgm_map/sheets/master_list.md](audio/production/bgm_map/sheets/master_list.md) | `master_list` |
 | [audio/production/bgm_map/sheets/per_track_specs.md](audio/production/bgm_map/sheets/per_track_specs.md) | `per_track_specs` |
+| [audio/production/bgm_map/sheets/tracks/combat_endings.md](audio/production/bgm_map/sheets/tracks/combat_endings.md) | `combat_endings` |
+| [audio/production/bgm_map/sheets/tracks/menu_zones.md](audio/production/bgm_map/sheets/tracks/menu_zones.md) | `menu_zones` |
 | [audio/production/combat_sfx/boss_hooks.md](audio/production/combat_sfx/boss_hooks.md) | `boss_hooks` |
 | [audio/production/combat_sfx/loop_template.md](audio/production/combat_sfx/loop_template.md) | `loop_template` |
 | [audio/production/combat_sfx/sfx_manifest.md](audio/production/combat_sfx/sfx_manifest.md) | `sfx_manifest` |
@@ -132,6 +151,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [ui/CINEMATICS.md](ui/CINEMATICS.md) | `CINEMATICS` |
 | [ui/SETTINGS_ACCESSIBILITY.md](ui/SETTINGS_ACCESSIBILITY.md) | `SETTINGS_ACCESSIBILITY` |
 | [ui/UI_UX_FLOW.md](ui/UI_UX_FLOW.md) | `UI_UX_FLOW` |
+| [ui/cinematics/cine/endings.md](ui/cinematics/cine/endings.md) | `endings` |
+| [ui/cinematics/cine/storyboard.md](ui/cinematics/cine/storyboard.md) | `storyboard` |
 | [ui/cinematics/combat_boss.md](ui/cinematics/combat_boss.md) | `combat_boss` |
 | [ui/cinematics/global_field_dialogue.md](ui/cinematics/global_field_dialogue.md) | `global_field_dialogue` |
 | [ui/cinematics/storyboard_endings.md](ui/cinematics/storyboard_endings.md) | `storyboard_endings` |
@@ -160,6 +181,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [vision/gdd/narrative_endings.md](vision/gdd/narrative_endings.md) | `narrative_endings` |
 | [vision/gdd/pitch_scope.md](vision/gdd/pitch_scope.md) | `pitch_scope` |
 | [vision/illustrations/prompts_pitch_qa.md](vision/illustrations/prompts_pitch_qa.md) | `prompts_pitch_qa` |
+| [vision/illustrations/shots/priority_shots.md](vision/illustrations/shots/priority_shots.md) | `priority_shots` |
+| [vision/illustrations/shots/scene_briefs.md](vision/illustrations/shots/scene_briefs.md) | `scene_briefs` |
 | [vision/illustrations/shots_briefs.md](vision/illustrations/shots_briefs.md) | `shots_briefs` |
 | [vision/illustrations/why_style_layout.md](vision/illustrations/why_style_layout.md) | `why_style_layout` |
 | [vision/lore/intent_channels_catalog.md](vision/lore/intent_channels_catalog.md) | `intent_channels_catalog` |
@@ -170,6 +193,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [vision/narrative/checklist_production.md](vision/narrative/checklist_production.md) | `checklist_production` |
 | [vision/narrative/emotional/external_steals.md](vision/narrative/emotional/external_steals.md) | `external_steals` |
 | [vision/narrative/emotional/project_rules.md](vision/narrative/emotional/project_rules.md) | `project_rules` |
+| [vision/narrative/emotional/rules/part_a.md](vision/narrative/emotional/rules/part_a.md) | `part_a` |
+| [vision/narrative/emotional/rules/part_b.md](vision/narrative/emotional/rules/part_b.md) | `part_b` |
 | [vision/narrative/emotional_rules.md](vision/narrative/emotional_rules.md) | `emotional_rules` |
 | [vision/narrative/localization_emotion.md](vision/narrative/localization_emotion.md) | `localization_emotion` |
 | [vision/narrative/scene_dialogue.md](vision/narrative/scene_dialogue.md) | `scene_dialogue` |
@@ -200,6 +225,11 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [world/levels/global_rules.md](world/levels/global_rules.md) | `global_rules` |
 | [world/levels/ruined_village.md](world/levels/ruined_village.md) | `ruined_village` |
 | [world/levels/tidal_caves.md](world/levels/tidal_caves.md) | `tidal_caves` |
+| [world/map_flow/layouts.md](world/map_flow/layouts.md) | `layouts` |
+| [world/map_flow/nav_flow_qa.md](world/map_flow/nav_flow_qa.md) | `nav_flow_qa` |
+| [world/map_flow/overview_zones.md](world/map_flow/overview_zones.md) | `overview_zones` |
+| [world/quests/detail/overview.md](world/quests/detail/overview.md) | `overview` |
+| [world/quests/detail/quest_detail.md](world/quests/detail/quest_detail.md) | `quest_detail` |
 | [world/quests/flags_blockers_party.md](world/quests/flags_blockers_party.md) | `flags_blockers_party` |
 | [world/quests/main_quests_detail.md](world/quests/main_quests_detail.md) | `main_quests_detail` |
 | [world/quests/ui_json_qa.md](world/quests/ui_json_qa.md) | `ui_json_qa` |

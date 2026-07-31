@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 495
+tokens_est: 499
 summary: "In this repo the **PM Agent** is the sprint facilitator — the closest equivalent to a Scrum Master."
 ---
 # Agile — Sprint Master Cadence — Sprint Master role
