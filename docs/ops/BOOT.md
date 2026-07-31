@@ -56,7 +56,7 @@ bash tools/smoke_factory_workflow.sh --issue P1-01 --agent architect
 | Step | Script | Role |
 |------|--------|------|
 | Trigger | `run_agent_session_gate.sh` → `log_docs_read.py --from-pack` | Auto-seeds `must_read` into `artifacts/docs_reads_<id>.log` |
-| Follower | `run_post_agent_cycle.sh` → `check_docs_pack_adherence.py --strict` | FAIL if log missing/empty or reads outside pack∪deferred |
+| Follower | `run_post_agent_cycle.sh` → `check_docs_pack_adherence.py --strict` **before** board/webhook | FAIL if log missing/empty or reads outside pack∪deferred |
 
 Extras beyond the pack: `python3 tools/log_docs_read.py --issue <id> docs/path.md` (still must be in pack∪deferred). Debug-only: `DOCS_PACK_ADHERENCE_STRICT=0`.
 

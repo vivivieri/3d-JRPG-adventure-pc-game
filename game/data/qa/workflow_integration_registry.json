@@ -186,6 +186,11 @@
         },
         {
           "path": "tools/run_post_agent_cycle.sh",
+          "contains": "refusing board update / cycle webhook",
+          "purpose": "adherence runs before board done + webhook"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
           "contains": "DOCS_PACK_ADHERENCE_STRICT",
           "purpose": "strict adherence default on; 0 only for local debug"
         },

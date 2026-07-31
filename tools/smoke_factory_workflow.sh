@@ -210,6 +210,51 @@ else
   fail "run_post_agent_cycle (see /tmp/smoke_post_cycle.log)"
   tail -40 /tmp/smoke_post_cycle.log || true
 fi
+# Ordering: adherence must appear before emit_cycle_event on the happy failed-outcome path
+if awk '/docs_pack_adherence/{a=NR} /emit_cycle_event/{e=NR} END{exit !(a && e && a < e)}' /tmp/smoke_post_cycle.log; then
+  pass "adherence_before_webhook"
+else
+  fail "adherence_before_webhook (docs_pack_adherence must run before emit_cycle_event)"
+fi
+# FAIL path: empty reads must refuse before board/webhook (status unchanged)
+python3 - <<PY
+import json
+from pathlib import Path
+board_path = Path("game/data/qa/sprint_board.json")
+board = json.loads(board_path.read_text(encoding="utf-8"))
+issue = "$ISSUE_ID"
+before = next(i for i in board["issues"] if i["id"] == issue or str(i.get("github_issue")) == issue)
+status_before = before.get("status")
+Path(f"artifacts/docs_reads_{issue}.log").write_text("# wiped for smoke ordering test\n", encoding="utf-8")
+print(f"    status_before={status_before}")
+PY
+if env -u CURSOR_PM_CYCLE_WEBHOOK_URL -u CURSOR_FACTORY_ALERT_WEBHOOK_URL \
+  -u CURSOR_WORKER_WEBHOOK_URL \
+  bash tools/run_post_agent_cycle.sh \
+  --issue "$ISSUE_ID" --agent "$AGENT_ROLE" --commit "$(git rev-parse HEAD)" \
+  --outcome complete --skip-done \
+  --note "smoke adherence fail ordering" >/tmp/smoke_adhere_fail.log 2>&1; then
+  fail "adherence_blocks_close (expected FAIL on empty reads)"
+else
+  if grep -q "refusing board update / cycle webhook" /tmp/smoke_adhere_fail.log \
+    && ! grep -q "\[PASS\] emit_cycle_event" /tmp/smoke_adhere_fail.log; then
+    pass "adherence_blocks_close"
+  else
+    fail "adherence_blocks_close (see /tmp/smoke_adhere_fail.log)"
+    tail -30 /tmp/smoke_adhere_fail.log || true
+  fi
+fi
+python3 - <<PY
+import json
+from pathlib import Path
+board = json.loads(Path("game/data/qa/sprint_board.json").read_text(encoding="utf-8"))
+issue = "$ISSUE_ID"
+row = next(i for i in board["issues"] if i["id"] == issue or str(i.get("github_issue")) == issue)
+# --skip-done should not mark done; empty-reads FAIL must not either
+if row.get("status") == "done":
+    raise SystemExit("board marked done despite adherence FAIL")
+print(f"    status_after={row.get('status')} (not done — OK)")
+PY
 echo
 
 echo "── 6) Docs CI"

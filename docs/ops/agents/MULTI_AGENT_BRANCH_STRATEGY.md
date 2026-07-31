@@ -100,6 +100,7 @@ bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --commit <sha> 
 Manual steps (same order as `run_post_agent_cycle.sh`):
 
 ```bash
+python3 tools/check_docs_pack_adherence.py --issue P1-02 --strict   # before board/webhook
 python3 tools/pm_check_done_criteria.py P1-02 --commit <sha>
 python3 tools/pm_update_issue.py P1-02 --status done --commit <sha>
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-02 --agent builder --commit <sha>
