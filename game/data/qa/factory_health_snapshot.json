@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updated_at": "2026-07-28T23:33:32.887644+00:00",
+  "updated_at": "2026-07-31T14:55:01.744305+00:00",
   "status": "halted",
-  "last_event": "factory_halt",
+  "last_event": "mcp_blocked",
   "last_issue_id": null,
   "last_agent_role": null,
-  "last_commit_sha": "c30ae3f9bfa67aef76d1615ca44ec9bf2a4bcf22",
+  "last_commit_sha": "8ac923aa9357a99e0450466e318b1e563cd25be8",
   "sprint_id": "Phase1-Sprint1",
-  "note": "smoke-test-D",
+  "note": "MCP or toolchain check failed",
   "agent_sessions_this_sprint": 1,
   "factory_halted": false
 }
