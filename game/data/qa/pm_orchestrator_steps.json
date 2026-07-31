@@ -135,15 +135,15 @@
       "audience": "worker"
     },
     {
-      "id": "bundle_evidence",
-      "description": "Inside run_post_agent_cycle — attach gate evidence + session telemetry rollup",
-      "command": "python3 tools/pm_bundle_evidence.py <issue_id> --gate <gate_id> --artifact <path>",
+      "id": "docs_pack_adherence",
+      "description": "Inside run_post_agent_cycle — BEFORE board/webhook; FAIL if reads log missing/empty or outside pack (strict)",
+      "command": "python3 tools/check_docs_pack_adherence.py --issue <issue_id> --strict",
       "required": true,
       "audience": "worker"
     },
     {
       "id": "update_board",
-      "description": "Inside run_post_agent_cycle — PM updates issue status after every agent session",
+      "description": "Inside run_post_agent_cycle — mark done only after adherence + done criteria pass",
       "command": "python3 tools/pm_update_issue.py <issue_id> --status done --commit <sha>",
       "required": true,
       "audience": "worker"
@@ -154,6 +154,13 @@
       "command": "bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue <issue_id> --agent <role> --commit <sha>",
       "required": true,
       "audience": "internal"
+    },
+    {
+      "id": "bundle_evidence",
+      "description": "Inside run_post_agent_cycle — attach gate evidence + session telemetry rollup",
+      "command": "python3 tools/pm_bundle_evidence.py <issue_id> --gate <gate_id> --artifact <path>",
+      "required": true,
+      "audience": "worker"
     },
     {
       "id": "check_feature_integration",
