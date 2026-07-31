@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 3098
+summary: "**Problem:** QA gates catch bad assets, but agents often **re-run the same generator with the same prompt** and expect a different result. That loop never ends."
 ---
 # QA Remediation Loop — Industry Polish + Anti-Infinite-Retry
 

@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 1227
+summary: "[`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)"
 ---
 # GDAI MCP playtesting toolkit
 

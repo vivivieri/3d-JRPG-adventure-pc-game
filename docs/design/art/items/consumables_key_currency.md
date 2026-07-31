@@ -6,6 +6,7 @@ phase: [2, 5]
 status: active
 authority: art
 tokens_est: 957
+summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
 ---
 # Items 3D — Consumables, key items, currency
 

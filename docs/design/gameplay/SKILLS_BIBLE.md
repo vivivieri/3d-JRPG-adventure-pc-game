@@ -6,6 +6,7 @@ phase: [4]
 status: active
 authority: gameplay
 tokens_est: 1114
+summary: "1.1 (Pre-build — reconciled with data)"
 ---
 # Tides of Urashima — Skills Bible
 

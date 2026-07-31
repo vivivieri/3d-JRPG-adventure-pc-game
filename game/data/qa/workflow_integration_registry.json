@@ -91,6 +91,16 @@
         },
         {
           "path": "tools/resolve_docs.py",
+          "contains": "docs_task_hints.json",
+          "purpose": "infer docs_task from issue title when unset"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "_summary",
+          "purpose": "deferred TL;DR from summary frontmatter"
+        },
+        {
+          "path": "tools/resolve_docs.py",
           "contains": "INDEX.yaml",
           "purpose": "role → must_read resolver"
         },
@@ -98,6 +108,21 @@
           "path": "tools/validate_handoff_refs.py",
           "contains": "handoff_refs",
           "purpose": "L0 gate — sprint handoff_refs + docs_task lint"
+        },
+        {
+          "path": "tools/pm_docs_preflight.py",
+          "contains": "resolve_docs.py",
+          "purpose": "PM preflight dry-run packs for next_dispatch"
+        },
+        {
+          "path": "tools/docs_pack_impact.py",
+          "contains": "roles_to_reload",
+          "purpose": "map git-changed docs to role/task packs"
+        },
+        {
+          "path": "tools/agent_session_telemetry_lib.py",
+          "contains": "docs_tokens_kept_est",
+          "purpose": "attach docs pack budget metrics on session_start"
         }
       ],
       "orchestrator_steps": [

@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: gameplay
 tokens_est: 479
+summary: "`docs/design/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`"
 ---
 # Player Controls — Tides of Urashima
 

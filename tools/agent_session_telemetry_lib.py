@@ -357,6 +357,43 @@ def infer_task_tags(issue: dict[str, Any] | None) -> list[str]:
     return tags
 
 
+def _load_docs_pack_metrics(issue_id: str | None) -> dict[str, Any]:
+    """Read artifacts/docs_pack_<issue>.txt written by resolve_docs / session gate."""
+    if not issue_id:
+        return {}
+    path = ROOT / "artifacts" / f"docs_pack_{issue_id}.txt"
+    if not path.is_file():
+        return {}
+    out: dict[str, Any] = {"docs_pack_report": str(path.relative_to(ROOT))}
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        print(f"WARN: cannot read docs pack report {path}: {exc}", file=sys.stderr)
+        return {}
+    for line in text.splitlines():
+        if line.startswith("tokens_kept_est:"):
+            try:
+                out["docs_tokens_kept_est"] = int(line.split(":", 1)[1].strip())
+            except ValueError as exc:
+                print(f"WARN: bad tokens_kept_est: {exc}", file=sys.stderr)
+        elif line.startswith("deferred_count:"):
+            try:
+                out["docs_deferred_count"] = int(line.split(":", 1)[1].strip())
+            except ValueError as exc:
+                print(f"WARN: bad deferred_count: {exc}", file=sys.stderr)
+        elif line.startswith("task:"):
+            task = line.split(":", 1)[1].strip()
+            if task:
+                out["docs_task"] = task
+        elif line.startswith("budget:"):
+            raw = line.split(":", 1)[1].strip()
+            if raw.isdigit():
+                out["docs_budget"] = int(raw)
+        elif line.startswith("role:"):
+            out["docs_role"] = line.split(":", 1)[1].strip()
+    return out
+
+
 def start_session(
     agent_role: str,
     issue_id: str | None = None,
@@ -377,6 +414,7 @@ def start_session(
 
     start_ts = _utcnow()
     commit_sha = _git_short_sha()
+    docs_meta = _load_docs_pack_metrics(issue_id)
     event: dict[str, Any] = {
         "session_id": session_id,
         "event": "session_start",
@@ -410,6 +448,7 @@ def start_session(
         else None,
         "orchestrator_generated_at": dispatch_ctx.get("orchestrator_generated_at"),
         **cursor_meta,
+        **docs_meta,
     }
     if note:
         event["note"] = note

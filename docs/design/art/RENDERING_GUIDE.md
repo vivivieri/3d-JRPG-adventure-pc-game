@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: art
 tokens_est: 900
+summary: "load the pack for the lighting/material pass you are doing."
 ---
 # Tides of Urashima — Rendering Guide
 

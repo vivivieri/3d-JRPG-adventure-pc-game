@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 2728
+summary: "Run after every spec alignment pass, PR merge to `main`, or phase exit on `game/development`."
 ---
 # Alignment Audit — Standard Process & Stakeholder Reporting
 

@@ -23,6 +23,7 @@ tokens_est: 3500         # optional soft budget
 | `status` | recommended | `deprecated` docs belong under `archive/` |
 | `authority` | recommended | Hint when prose conflicts with JSON |
 | `tokens_est` | optional | Helps pack budgeting (`--budget`) |
+| `summary` | optional | One-line TL;DR printed when the doc is deferred over budget/phase |
 
 **Skip frontmatter:** `README.md`, `BOOT.md`, `llms.txt`, `INDEX.yaml`, `archive/**`, `_meta/**`, `briefs/**`, `audio_sheets/**`, `sprints/**`, `automation_prompts/**`.
 

@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: audio
 tokens_est: 1912
+summary: "[`AUDIO_PRODUCTION_GUIDE.md`](../AUDIO_PRODUCTION_GUIDE.md)"
 ---
 # Audio production — BGM & scene map
 

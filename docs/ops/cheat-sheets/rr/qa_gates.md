@@ -5,6 +5,7 @@ audience: [pm, builder, qa]
 status: active
 authority: ops
 tokens_est: 855
+summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
 ---
 # R&R — qa-gate-layers
 

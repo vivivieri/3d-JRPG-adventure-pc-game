@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "docs" / "INDEX.yaml"
 BOARD = ROOT / "game/data/qa/sprint_board.json"
 BRIEFS = ROOT / "docs" / "briefs"
+TASK_HINTS = ROOT / "game/data/qa/docs_task_hints.json"
 
 
 def _load_index() -> dict:
@@ -129,6 +130,68 @@ def _tokens_est(rel: str) -> int:
     if not path.is_file():
         return 0
     return max(100, path.stat().st_size // 4)
+
+
+def _summary(rel: str) -> str:
+    raw = _frontmatter(rel).get("summary", "").strip().strip("\"'")
+    if raw and not raw.startswith("**Version") and not raw.startswith("**Hub") and not raw.startswith("**Authority"):
+        return raw
+    path = ROOT / rel
+    if not path.is_file():
+        return ""
+    text = path.read_text(encoding="utf-8")
+    if text.startswith("---\n"):
+        end = text.find("\n---\n", 4)
+        text = text[end + 5 :] if end > 0 else text
+    for line in text.splitlines():
+        s = line.strip()
+        if not s or s.startswith("#") or s.startswith("|") or s.startswith("```"):
+            continue
+        if s.startswith("**Hub") or s.startswith("**Version") or s.startswith("**Authority") or s.startswith("**Cross"):
+            continue
+        s = re.sub(r"^\*\*[^*]+\*\*\s*—?\s*", "", s)
+        s = re.sub(r"\s+", " ", s).strip()
+        if len(s) >= 20:
+            return s[:160]
+    return raw if raw else ""
+
+
+def _infer_docs_task(row: dict, known_tasks: dict) -> str | None:
+    """Infer docs_task from issue title/refs using docs_task_hints.json."""
+    if not TASK_HINTS.is_file():
+        return None
+    try:
+        hints = json.loads(TASK_HINTS.read_text(encoding="utf-8")).get("hints") or {}
+    except json.JSONDecodeError as exc:
+        print(f"[WARN] docs_task_hints.json invalid: {exc}", file=sys.stderr)
+        return None
+    hay = " ".join(
+        [
+            str(row.get("title") or ""),
+            " ".join(str(x) for x in (row.get("handoff_refs") or [])),
+            " ".join(str(x) for x in (row.get("implementation_plan_tasks") or [])),
+            str(row.get("generation_readiness_id") or ""),
+        ]
+    ).lower()
+    best: tuple[int, str] | None = None
+    for task_id, keywords in hints.items():
+        if task_id not in known_tasks:
+            continue
+        score = 0
+        for kw in keywords or []:
+            kw_l = str(kw).lower()
+            if kw_l and kw_l in hay:
+                score += max(1, len(kw_l) // 4)
+        if score and (best is None or score > best[0]):
+            best = (score, task_id)
+    return best[1] if best else None
+
+
+def _fmt_deferred(path: str) -> str:
+    tip = _summary(path)
+    if tip:
+        return f"{path}  — {tip}"
+    return path
 
 
 def _doc_phases(rel: str) -> list[int] | None:
@@ -299,14 +362,19 @@ def _write_report(
         lines.append("")
         lines.append("# deferred_over_budget")
         for p in deferred_budget:
-            lines.append(f"{_tokens_est(p):5d}  {p}")
+            tip = _summary(p)
+            suffix = f"  — {tip}" if tip else ""
+            lines.append(f"{_tokens_est(p):5d}  {p}{suffix}")
     if deferred_phase:
         lines.append("")
         lines.append("# deferred_out_of_phase")
         for p in deferred_phase:
-            lines.append(f"{_tokens_est(p):5d}  {p}")
+            tip = _summary(p)
+            suffix = f"  — {tip}" if tip else ""
+            lines.append(f"{_tokens_est(p):5d}  {p}{suffix}")
     lines.append("")
     lines.append(f"tokens_kept_est: {total}")
+    lines.append(f"deferred_count: {len(deferred_budget) + len(deferred_phase)}")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -381,15 +449,20 @@ def main() -> int:
         return 1
 
     task_id = args.task
+    task_inferred = False
     row = _issue_row(args.issue) if args.issue else None
     if args.issue and row is None:
         print(f"[WARN] issue {args.issue} not on sprint board", file=sys.stderr)
     if row and not task_id:
         task_id = row.get("docs_task") or None
+    if row and not task_id:
+        task_id = _infer_docs_task(row, tasks)
+        task_inferred = bool(task_id)
 
     if task_id and task_id not in tasks:
         print(f"[WARN] unknown task pack: {task_id}", file=sys.stderr)
         task_id = None
+        task_inferred = False
 
     phase = args.phase
     if phase is None and row and row.get("phase") is not None:
@@ -425,7 +498,7 @@ def main() -> int:
     if args.issue:
         print(f"# issue: {args.issue}")
     if task_id:
-        print(f"# task: {task_id}")
+        print(f"# task: {task_id}" + (" (inferred)" if task_inferred else ""))
     if phase is not None:
         print(f"# phase: {phase}")
     if briefs:
@@ -474,11 +547,11 @@ def main() -> int:
     if deferred_budget:
         print("# deferred_over_budget")
         for path in deferred_budget:
-            print(path)
+            print(_fmt_deferred(path))
     if deferred_phase:
         print("# deferred_out_of_phase")
         for path in deferred_phase:
-            print(path)
+            print(_fmt_deferred(path))
 
     if args.report:
         _write_report(

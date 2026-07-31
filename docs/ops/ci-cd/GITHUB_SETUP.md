@@ -5,6 +5,7 @@ audience: [release]
 status: active
 authority: ci-cd
 tokens_est: 1261
+summary: "**Script:** `bash tools/setup_github_project.sh`"
 ---
 # GitHub Repository Setup
 

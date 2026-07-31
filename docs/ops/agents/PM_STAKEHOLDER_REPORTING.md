@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 1423
+summary: "**Audience:** Product Owner (stakeholder)"
 ---
 # PM Stakeholder Reporting — Product Owner Status Dashboard
 

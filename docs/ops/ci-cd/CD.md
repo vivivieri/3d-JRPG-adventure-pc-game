@@ -6,6 +6,7 @@ phase: [8]
 status: active
 authority: ci-cd
 tokens_est: 1112
+summary: "**Workflows:** `.github/workflows/cd-artifact.yml` · `.github/workflows/cd-steam.yml`"
 ---
 # Continuous Deployment — Artifact & Steam
 

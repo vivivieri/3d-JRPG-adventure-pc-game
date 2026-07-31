@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: audio
 tokens_est: 991
+summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/gameplay/BOSS_DESIGNS.md`, `docs/design/audio/AUDIO_PRODUCTION_GUIDE.md` (production specs), `game/assets/audio"
 ---
 # Tides of Urashima — Audio Direction
 
