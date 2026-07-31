@@ -31,6 +31,7 @@ VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual",
 VALID_STATUS = {"pending", "in_progress", "blocked", "done", "carry_over"}
 VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
+PACK_MD_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+\.md)\)")
 
 DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
     "architect": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/world/ENVIRONMENT_KITS.md", "docs/engineering/technical/CODE_STYLE.md"],
@@ -64,10 +65,34 @@ def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def parse_issue_pack(pack_path: Path) -> list[str]:
+    """Return issue ids (`P1-00`, …) declared as `## P1-00 —` headings.
+
+    After docs-pack thinning, sprint packs are often a hub TOC that links to
+    per-issue leaves. Follow relative `.md` links so hub refs still validate.
+    """
     if not pack_path.is_file():
         return []
     text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    ids: set[str] = set(PACK_ISSUE_RE.findall(text))
+    is_hub = "| Pack | Topic |" in text or "## Packs" in text
+    if is_hub or not ids:
+        root_resolved = ROOT.resolve()
+        for rel in PACK_MD_LINK_RE.findall(text):
+            if rel.startswith(("http://", "https://", "#")):
+                continue
+            child = (pack_path.parent / rel).resolve()
+            try:
+                child.relative_to(root_resolved)
+            except ValueError as exc:
+                print(
+                    f"[WARN] parse_issue_pack: skip link outside repo {rel!r}: {exc}",
+                    file=sys.stderr,
+                )
+                continue
+            if not child.is_file() or child == pack_path.resolve():
+                continue
+            ids.update(PACK_ISSUE_RE.findall(child.read_text(encoding="utf-8")))
+    return sorted(ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
