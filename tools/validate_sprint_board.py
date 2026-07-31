@@ -8,10 +8,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
-PHASES_PATH = ROOT / "game/data/qa/sprint_phases.json"
-
 sys.path.insert(0, str(ROOT / "tools"))
+from factory_paths import (  # noqa: E402
+    ACCEPTANCE_CRITERIA_PATH,
+    BOARD_PATH,
+    PHASES_PATH,
+)
 from pm_orchestrator_lib import (  # noqa: E402
     load_board,
     parse_issue_pack,
@@ -36,7 +38,7 @@ def main() -> int:
     # gates that actually exist (and are documented) in acceptance_criteria.json, and
     # implementation issues must point to design docs (handoff_refs) telling the dev
     # what to build. Keeps "what to develop + how it's judged" real and unambiguous.
-    crit_path = ROOT / "game/data/qa/acceptance_criteria.json"
+    crit_path = ACCEPTANCE_CRITERIA_PATH
     if crit_path.is_file():
         crit = json.loads(crit_path.read_text(encoding="utf-8"))
         known_gates = set(crit.get("gates", {}))

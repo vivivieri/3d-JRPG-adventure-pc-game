@@ -15,14 +15,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / "game/data/qa/stakeholder_report_config.json"
-BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
-PHASES_PATH = ROOT / "game/data/qa/sprint_phases.json"
-ORCH_PATH = ROOT / "artifacts/pm_orchestrator_report.json"
-DISPATCH_PATH = ROOT / "artifacts/pm_dispatch_packet.json"
-HEALTH_SNAPSHOT_PATH = ROOT / "game/data/qa/factory_health_snapshot.json"
-HEALTH_REPORT_PATH = ROOT / "artifacts/factory_health_report.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from factory_paths import (  # noqa: E402,I001
+    BOARD_PATH,
+    DISPATCH_PACKET_PATH as DISPATCH_PATH,
+    HEALTH_REPORT_PATH,
+    HEALTH_SNAPSHOT_PATH,
+    ORCHESTRATOR_REPORT_PATH as ORCH_PATH,
+    PHASES_PATH,
+    ROOT,
+    STAKEHOLDER_CONFIG_PATH as CONFIG_PATH,
+)
 
 sys_path = str(ROOT / "tools")
 if sys_path not in sys.path:

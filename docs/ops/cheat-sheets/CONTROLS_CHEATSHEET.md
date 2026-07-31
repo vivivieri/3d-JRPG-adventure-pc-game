@@ -36,3 +36,4 @@ summary: "How roles are enforced — load gates or PR controls for your branch"
 | Stakeholder | `pm_emit_stakeholder_report.sh` · `L0_stakeholder_report` |
 | Alignment | `run_alignment_audit.sh` · `L0_alignment_audit_catalog` · `audit_radar_spec.png` |
 | Candidate tournament | `run_candidate_tournament.sh` · `L2_candidate_select` |
+| Portable factory pack | `game-dev-factory` · `FACTORY_DATA_DIR` · `L0_game_dev_factory_pack` |

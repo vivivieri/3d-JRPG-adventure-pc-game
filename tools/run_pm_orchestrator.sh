@@ -6,8 +6,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-
 export ROOT
+# shellcheck source=factory_env.sh
+source "$ROOT/tools/factory_env.sh"
 
 # Heartbeat — PM session start (watchdog hang detection)
 bash tools/pm_record_heartbeat.sh --agent pm --phase start --note "orchestrator" 2>/dev/null || true
@@ -20,12 +21,20 @@ import subprocess
 import sys
 from pathlib import Path
 
-root = Path(os.environ["ROOT"])
-steps_path = root / "game/data/qa/pm_orchestrator_steps.json"
+sys.path.insert(0, str(Path(os.environ["ROOT"]) / "tools"))
+from factory_paths import (  # noqa: E402
+    FACTORY_STATE_PATH,
+    ORCHESTRATOR_STEPS_PATH,
+    repo_root,
+)
+
+root = repo_root()
+steps_path = ORCHESTRATOR_STEPS_PATH
 data = json.loads(steps_path.read_text(encoding="utf-8"))
 
 print("==> PM Orchestrator — enforced session workflow")
 print("    Authority: docs/ops/agents/PM_AGENT_RUNBOOK.md")
+print(f"    FACTORY_DATA_DIR={os.environ.get('FACTORY_DATA_DIR', 'game/data/qa')}")
 print()
 
 for step in data.get("session_steps", []):
@@ -47,9 +56,8 @@ for step in data.get("session_steps", []):
         print("Docs: docs/ops/agents/PM_AGENT_RUNBOOK.md")
         # Record fail for watchdog
         from datetime import datetime, timezone
-        from pathlib import Path
         import json
-        state_path = root / "artifacts/factory_state.json"
+        state_path = FACTORY_STATE_PATH
         state_path.parent.mkdir(parents=True, exist_ok=True)
         state = {}
         if state_path.is_file():
@@ -64,9 +72,8 @@ for step in data.get("session_steps", []):
 print("PM ORCHESTRATOR: PASS")
 # Record pass for watchdog
 from datetime import datetime, timezone
-from pathlib import Path
 import json
-state_path = root / "artifacts/factory_state.json"
+state_path = FACTORY_STATE_PATH
 state_path.parent.mkdir(parents=True, exist_ok=True)
 state = {}
 if state_path.is_file():
@@ -75,7 +82,6 @@ state["last_orchestrator_result"] = "pass"
 state["last_orchestrator_at"] = datetime.now(timezone.utc).isoformat()
 state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
 
-sys.path.insert(0, str(root / "tools"))
 from pm_event_lib import write_health_snapshot  # noqa: E402
 
 write_health_snapshot(

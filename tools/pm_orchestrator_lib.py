@@ -9,12 +9,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
-PHASES_PATH = ROOT / "game/data/qa/sprint_phases.json"
-REPORT_PATH = ROOT / "artifacts/pm_orchestrator_report.json"
-DISPATCH_PACKET_PATH = ROOT / "artifacts/pm_dispatch_packet.json"
-SNAPSHOT_PATH = ROOT / "game/data/qa/factory_health_snapshot.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from factory_paths import (  # noqa: E402,I001
+    BOARD_PATH,
+    DISPATCH_PACKET_PATH,
+    HEALTH_SNAPSHOT_PATH as SNAPSHOT_PATH,
+    ORCHESTRATOR_REPORT_PATH as REPORT_PATH,
+    PHASES_PATH,
+    ROOT,
+)
 
 REQUIRED_ISSUE_FIELDS = (
     "id",

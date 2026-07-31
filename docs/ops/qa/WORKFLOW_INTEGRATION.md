@@ -26,5 +26,6 @@ summary: "Register factory features before merge — load checklist or registry"
 
 ## Factory hooks (registry keywords)
 
+- Portable pack: `packages/game-dev-factory/` · `game_dev_factory_pack` · `FACTORY_DATA_DIR`
 - Alignment: `bash tools/run_alignment_audit.sh`
 

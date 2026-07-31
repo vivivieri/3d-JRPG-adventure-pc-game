@@ -36,6 +36,7 @@ Large bibles are split into packs (load hub + one pack):
 | [ART_AUTOMATION_PIPELINE.md](design/art/ART_AUTOMATION_PIPELINE.md) | [design/art/automation/](design/art/automation/) |
 | [CI.md](ops/ci-cd/CI.md) | [ops/ci-cd/ci/](ops/ci-cd/ci/) |
 | [DEVELOPMENT_LIFECYCLE.md](ops/workflow/DEVELOPMENT_LIFECYCLE.md) | [ops/workflow/lifecycle/](ops/workflow/lifecycle/) |
+| [game-dev-factory](../packages/game-dev-factory/README.md) | Portable PM/lifecycle control plane + Cursor skills |
 | [GDSCRIPT_REGENERATION.md](engineering/technical/GDSCRIPT_REGENERATION.md) | [engineering/technical/gdscript_regen/](engineering/technical/gdscript_regen/) |
 
 ```bash

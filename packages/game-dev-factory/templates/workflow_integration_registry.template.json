@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "authority": "{{PROJECT_FACTORY_DOCS}}/WORKFLOW_INTEGRATION.md",
+  "policy": "Every new factory feature MUST register here before merge.",
+  "feature_addition_rule": "1) Add registry entry 2) Wire hooks 3) Update authority doc 4) Run validate_workflow_integration.py",
+  "standard_agent_surfaces": [
+    "AGENTS.md",
+    "packages/game-dev-factory/CONTROL_PLANE.md"
+  ],
+  "features": [
+    {
+      "id": "post_agent_cycle",
+      "label": "Enforced post-agent cycle close",
+      "authority_doc": "{{PROJECT_FACTORY_DOCS}}/PM_AGENT_RUNBOOK.md",
+      "script_hooks": [
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "pm_check_done_criteria.py",
+          "purpose": "done criteria before board update"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "run_post_agent_cycle.sh",
+          "purpose": "session gate end-of-session rule"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "packages/game-dev-factory/CONTROL_PLANE.md",
+          "must_mention": "run_post_agent_cycle"
+        }
+      ]
+    }
+  ]
+}

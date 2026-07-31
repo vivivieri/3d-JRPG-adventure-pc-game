@@ -15,7 +15,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / "game/data/qa/pm_orchestrator_steps.json"
+sys.path.insert(0, str(ROOT / "tools"))
+from factory_paths import ORCHESTRATOR_STEPS_PATH as CONFIG_PATH  # noqa: E402
 
 REQUIRED_TOP = (
     "version",

@@ -9,10 +9,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-STATE_PATH = ROOT / "artifacts/factory_state.json"
-CYCLE_LOG_PATH = ROOT / "artifacts/factory_cycle_log.jsonl"
-SNAPSHOT_PATH = ROOT / "game/data/qa/factory_health_snapshot.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from factory_paths import (  # noqa: E402,I001
+    CYCLE_LOG_PATH,
+    FACTORY_STATE_PATH as STATE_PATH,
+    HEALTH_SNAPSHOT_PATH as SNAPSHOT_PATH,
+)
 
 
 def load_json(path: Path) -> dict[str, Any]:

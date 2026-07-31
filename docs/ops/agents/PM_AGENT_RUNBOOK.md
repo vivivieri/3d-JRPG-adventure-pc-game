@@ -34,4 +34,5 @@ Keep these strings on the hub for `L0_workflow_integration`:
 - Stakeholder: `bash tools/pm_emit_stakeholder_report.sh`
 - Alignment: `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png` + `audit_radar_build.png`
 - Tournament gate: `L2_candidate_select` · `docs/ops/qa/CANDIDATE_TOURNAMENT.md`
+- Portable pack: `packages/game-dev-factory/` · `FACTORY_DATA_DIR`
 

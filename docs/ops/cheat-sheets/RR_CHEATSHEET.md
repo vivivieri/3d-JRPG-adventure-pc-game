@@ -38,3 +38,4 @@ summary: "Roles & responsibilities — load the pack for your session step"
 - `bash tools/pm_emit_stakeholder_report.sh` — stakeholder status
 - `bash tools/run_alignment_audit.sh` — post-merge alignment; visuals `audit_radar_spec.png` + `audit_radar_build.png`
 - `bash tools/run_candidate_tournament.sh` — optional L2.5 champion/challenger (`L2_candidate_select`)
+- `packages/game-dev-factory/` — portable factory control plane · `FACTORY_DATA_DIR`

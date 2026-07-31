@@ -35,4 +35,5 @@ This document is the **single source of truth** for:
 - Stakeholder: `bash tools/pm_emit_stakeholder_report.sh`
 - Alignment: `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png`
 - Tournament: `CANDIDATE_TOURNAMENT`
+- Portable pack: `packages/game-dev-factory/` · `FACTORY_DATA_DIR`
 

@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "agent_role": "pm",
+  "aliases": ["sprint master", "sprint facilitator"],
+  "authority": "{{PROJECT_FACTORY_DOCS}}/PM_AGENT_RUNBOOK.md",
+  "design_ref": "{{PROJECT_FACTORY_DOCS}}/SPRINT_ORCHESTRATION.md",
+  "rule": "PM MUST run bash tools/run_pm_orchestrator.sh at session start. Exit non-zero blocks sprint work. Honor system is forbidden.",
+  "post_agent_cycle": {
+    "command": "bash tools/run_post_agent_cycle.sh --issue <issue_id> --agent <role> --commit <sha>",
+    "rule": "Workers and PM MUST use run_post_agent_cycle.sh — honor-system post_agent_steps forbidden."
+  },
+  "session_steps": [
+    {
+      "step": 1,
+      "id": "validate_sprint_phases",
+      "description": "Active phase and sprint config valid",
+      "command": "python3 tools/validate_sprint_phases.py",
+      "block_on_fail": true
+    },
+    {
+      "step": 2,
+      "id": "validate_sprint_board",
+      "description": "Sprint board schema, deps, required fields",
+      "command": "python3 tools/validate_sprint_board.py --strict",
+      "block_on_fail": true
+    },
+    {
+      "step": 3,
+      "id": "toolchain_preflight",
+      "description": "Game-specific toolchain preflight (plugin — replace command)",
+      "command": "echo 'TODO: replace with engine/MCP preflight or true'",
+      "block_on_fail": false
+    },
+    {
+      "step": 4,
+      "id": "dispatch_orchestrator",
+      "description": "Compute next agent dispatch + packet",
+      "command": "python3 tools/pm_orchestrator_lib.py --dispatch --write-report --write-dispatch-packet",
+      "block_on_fail": true
+    }
+  ],
+  "post_agent_steps": []
+}

@@ -12,14 +12,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / "game/data/qa/factory_watchdog.json"
-BOARD_PATH = ROOT / "game/data/qa/sprint_board.json"
-STATE_PATH = ROOT / "artifacts/factory_state.json"
-HEARTBEAT_PATH = ROOT / "artifacts/factory_heartbeat.json"
-CYCLE_LOG_PATH = ROOT / "artifacts/factory_cycle_log.jsonl"
-ORCH_REPORT_PATH = ROOT / "artifacts/pm_orchestrator_report.json"
-HEALTH_REPORT_PATH = ROOT / "artifacts/factory_health_report.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from factory_paths import (  # noqa: E402,I001
+    BOARD_PATH,
+    CYCLE_LOG_PATH,
+    FACTORY_STATE_PATH as STATE_PATH,
+    HEALTH_REPORT_PATH,
+    HEARTBEAT_PATH,
+    ORCHESTRATOR_REPORT_PATH as ORCH_REPORT_PATH,
+    ROOT,
+    WATCHDOG_CONFIG_PATH as CONFIG_PATH,
+)
 
 
 def _utcnow() -> datetime:

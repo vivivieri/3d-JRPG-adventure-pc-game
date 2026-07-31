@@ -25,6 +25,7 @@ Keep these strings discoverable for `L0_workflow_integration`:
 
 | Surface | Command / doc |
 |---------|----------------|
+| Portable factory pack | `packages/game-dev-factory/` · [`CONTROL_PLANE.md`](../../../packages/game-dev-factory/CONTROL_PLANE.md) · `FACTORY_DATA_DIR` |
 | End-of-cycle | `bash tools/run_post_agent_cycle.sh` |
 | Session telemetry | `docs/ops/qa/AGENT_SESSION_TELEMETRY.md` |
 | Stall recovery | `bash tools/run_factory_watchdog.sh` |

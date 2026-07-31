@@ -85,6 +85,7 @@ run_gate "L0_docs_catalogs" python3 tools/refresh_docs_catalogs.py --check
 run_gate "L0_handoff_refs" python3 tools/validate_handoff_refs.py
 run_gate "L0_alignment_audit_catalog" python3 tools/validate_alignment_audit_catalog.py
 run_gate "L0_workflow_integration" python3 tools/validate_workflow_integration.py
+run_gate "L0_game_dev_factory_pack" python3 tools/validate_game_dev_factory_pack.py
 run_gate "L0_candidate_tournament" python3 tools/validate_candidate_tournament.py
 run_gate "M5_asset_compliance" bash tools/check_asset_compliance.sh
 

@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "model": "phase_gated_agile",
+  "authority": "{{PROJECT_FACTORY_DOCS}}/AGILE_WITHIN_PHASES.md",
+  "active_phase": 1,
+  "active_phase_name": "{{PHASE_1_NAME}}",
+  "sprint_cadence_weeks": 1,
+  "sprint_cadence": {
+    "default_weeks": 1,
+    "min_weeks": 1,
+    "max_weeks": 3,
+    "semantics": "calendar_ceiling"
+  },
+  "ai_native_batch": {
+    "primary_unit": "session_batch",
+    "max_agent_sessions_per_sprint": 40,
+    "micro_cycle": {
+      "max_issues": 3,
+      "max_agent_sessions": 2,
+      "close_when": "acceptance_gate_ids_pass_on_pr"
+    },
+    "standard_cycle": {
+      "max_issues": 10,
+      "target_calendar_days": 7,
+      "close_when": "all_batch_issues_closed_or_carry_over_logged"
+    }
+  },
+  "sprint_master": {
+    "role": "pm",
+    "agent": "PM Agent",
+    "aliases": ["sprint facilitator"]
+  },
+  "cycle_name_pattern": "Phase{phase}-Sprint{sprint}",
+  "github": {
+    "primary_traceability": true,
+    "branch": "{{IMPL_BRANCH}}"
+  },
+  "phases": [
+    {
+      "phase": 0,
+      "name": "Dev environment + design baseline",
+      "status": "done",
+      "exit_gates": ["L0_workflow_integration"]
+    },
+    {
+      "phase": 1,
+      "name": "{{PHASE_1_NAME}}",
+      "status": "active",
+      "exit_gates": [
+        "L0_sprint_board",
+        "L0_pm_orchestrator",
+        "L0_workflow_integration"
+      ]
+    }
+  ]
+}

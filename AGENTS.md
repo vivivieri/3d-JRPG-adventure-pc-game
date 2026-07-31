@@ -82,4 +82,5 @@ Cross-cutting ops live under `docs/ops/`. This page must keep these strings for 
 - Alignment: `bash tools/run_alignment_audit.sh` — management visuals `audit_radar_spec.png` + `audit_radar_build.png`
 - Tournament: `docs/ops/qa/CANDIDATE_TOURNAMENT.md` · gate `L2_candidate_select` · keyword `CANDIDATE_TOURNAMENT`
 - Cycle close: `bash tools/run_post_agent_cycle.sh` · watchdog `bash tools/run_factory_watchdog.sh`
+- Portable factory pack: `packages/game-dev-factory/` · `FACTORY_DATA_DIR` · skills `pm-session` / `worker-session` / `factory-bootstrap`
 

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "authority": "{{PROJECT_FACTORY_DOCS}}/FACTORY_WATCHDOG.md",
+  "policy": "Watchdog handles stall/hang only — not primary dispatch.",
+  "thresholds": {
+    "orchestrator_stale_hours": 24,
+    "worker_heartbeat_stale_hours": 6,
+    "halt_on_repeated_fail": 3
+  },
+  "actions": {
+    "on_stall": ["alert_webhook", "write_health_report"],
+    "on_hang": ["alert_webhook", "suggest_recover"]
+  }
+}

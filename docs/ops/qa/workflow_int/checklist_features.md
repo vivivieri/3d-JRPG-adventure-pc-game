@@ -68,6 +68,7 @@ Copy this when shipping anything that touches PM dispatch, secrets, or agent ses
 | `stakeholder_reporting` | PM status dashboard | `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md` |
 | `alignment_audit` | Stakeholder alignment audit | `docs/ops/qa/ALIGNMENT_AUDIT.md` |
 | `candidate_tournament` | Champion/challenger golden harness (L2.5) | `docs/ops/qa/CANDIDATE_TOURNAMENT.md` |
+| `game_dev_factory_pack` | Portable PM/lifecycle control plane | `packages/game-dev-factory/CONTROL_PLANE.md` |
 
 Add new rows here when registering features.
 

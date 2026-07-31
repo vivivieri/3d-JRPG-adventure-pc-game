@@ -770,6 +770,19 @@
       "evidence": ["game/data/qa/workflow_integration_registry.json", "docs/ops/qa/WORKFLOW_INTEGRATION.md"],
       "design_ref": "docs/ops/qa/WORKFLOW_INTEGRATION.md"
     },
+    "L0_game_dev_factory_pack": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_game_dev_factory_pack.py",
+      "description": "Portable factory pack — CONTROL_PLANE, skills, templates, FACTORY_* path seam sync with tools/",
+      "pass": { "exit_code": 0 },
+      "evidence": [
+        "packages/game-dev-factory/CONTROL_PLANE.md",
+        "packages/game-dev-factory/skills/pm-session/SKILL.md",
+        "tools/factory_paths.py"
+      ],
+      "design_ref": "packages/game-dev-factory/CONTROL_PLANE.md, docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md"
+    },
     "L0_candidate_tournament": {
       "layer": "L0",
       "domain": "flow",
@@ -938,6 +951,7 @@
       "L0_handoff_refs",
       "L0_alignment_audit_catalog",
       "L0_workflow_integration",
+      "L0_game_dev_factory_pack",
       "L0_candidate_tournament",
       "M5_asset_compliance"
     ],

@@ -13,9 +13,14 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "artifacts/pm_orchestrator_report.json"
-OUT = ROOT / "artifacts/docs_preflight_report.json"
-BOARD = ROOT / "game/data/qa/sprint_board.json"
+sys.path.insert(0, str(ROOT / "tools"))
+from factory_paths import (  # noqa: E402,I001
+    BOARD_PATH as BOARD,
+    ORCHESTRATOR_REPORT_PATH as REPORT,
+    artifact_path,
+)
+
+OUT = artifact_path("docs_preflight_report.json")
 BUDGET = int(os.environ.get("AGENT_DOCS_BUDGET", "12000"))
 
 

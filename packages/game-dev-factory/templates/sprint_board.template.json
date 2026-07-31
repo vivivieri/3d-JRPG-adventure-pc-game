@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "authority": "{{PROJECT_FACTORY_DOCS}}/SPRINT_ORCHESTRATION.md",
+  "design_ref": "{{PROJECT_SPRINT_PACK}}",
+  "active_sprint": {
+    "id": "Phase1-Sprint1",
+    "phase": 1,
+    "sprint_number": 1,
+    "status": "active",
+    "started_at": "YYYY-MM-DD",
+    "issue_pack_ref": "{{PROJECT_SPRINT_PACK}}",
+    "max_issues": 10,
+    "branch": "{{IMPL_BRANCH}}",
+    "branch_pattern": "cursor/{issue_id}-xxxx",
+    "phase_exit_gate_ids": [
+      "L0_sprint_board",
+      "L0_pm_orchestrator",
+      "L0_workflow_integration"
+    ]
+  },
+  "previous_sprint": null,
+  "orchestration": {
+    "stale_hours": 24,
+    "max_in_progress": {
+      "pm": 2,
+      "architect": 2,
+      "builder": 1,
+      "qa": 2,
+      "flow": 1,
+      "release": 1,
+      "visual": 2
+    },
+    "escalation_labels": [
+      "remind",
+      "severity/S2",
+      "severity/S1",
+      "severity/S0",
+      "human"
+    ],
+    "status_enum": [
+      "pending",
+      "in_progress",
+      "blocked",
+      "done",
+      "carry_over"
+    ],
+    "require_github_issues": true,
+    "max_parallel_starts": 2,
+    "preflight_mode": "auto"
+  },
+  "issues": [
+    {
+      "id": "P1-00",
+      "title": "Bootstrap factory control plane + CI baseline",
+      "sequence": 1,
+      "phase": 1,
+      "implementation_plan_tasks": ["factory bootstrap"],
+      "agent_owner": "pm",
+      "acceptance_gate_ids": [
+        "L0_sprint_board",
+        "L0_pm_orchestrator",
+        "L0_workflow_integration"
+      ],
+      "status": "pending",
+      "depends_on": [],
+      "blocks": [],
+      "handoff_refs": [
+        "packages/game-dev-factory/CONTROL_PLANE.md"
+      ],
+      "docs_task": null,
+      "github_issue": null
+    }
+  ]
+}

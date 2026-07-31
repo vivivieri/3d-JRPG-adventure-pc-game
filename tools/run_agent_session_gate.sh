@@ -6,10 +6,12 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+# shellcheck source=factory_env.sh
+source "$ROOT/tools/factory_env.sh"
 
 AGENT="${1:-}"
 ISSUE_ID="${2:-}"
-REPORT="${ROOT}/artifacts/pm_orchestrator_report.json"
+REPORT="${FACTORY_ORCH_REPORT_PATH}"
 
 if [[ -z "$AGENT" || -z "$ISSUE_ID" ]]; then
   echo "Usage: bash tools/run_agent_session_gate.sh <agent_role> <issue_id>"
@@ -30,14 +32,16 @@ if [[ ! -f "$REPORT" ]]; then
   exit 1
 fi
 
-export AGENT ISSUE_ID REPORT ROOT
+export AGENT ISSUE_ID REPORT ROOT FACTORY_BOARD_PATH FACTORY_DISPATCH_PATH
 python3 <<'PY'
 import json
 import os
 import sys
 from pathlib import Path
 
-root = Path(os.environ["ROOT"])
+sys.path.insert(0, str(Path(os.environ["ROOT"]) / "tools"))
+from factory_paths import BOARD_PATH, DISPATCH_PACKET_PATH  # noqa: E402
+
 report_path = Path(os.environ["REPORT"])
 agent = os.environ["AGENT"]
 issue_id = os.environ["ISSUE_ID"]
@@ -54,14 +58,14 @@ allowed = [
 if not allowed:
     print(f"[FAIL] Agent session gate — {agent} not dispatched for {issue_id}")
     print("PM must run: bash tools/run_pm_orchestrator.sh")
-    print("Read: artifacts/pm_dispatch_packet.json")
+    print(f"Read: {DISPATCH_PACKET_PATH}")
     print("Current next_dispatch:")
     for d in dispatch:
         print(f"  - {d.get('issue_id')} → {d.get('agent')} ({d.get('action')})")
     sys.exit(1)
 
 # Strict role — owner or co_agent only (no architect wearing builder hat)
-board_path = root / "game/data/qa/sprint_board.json"
+board_path = BOARD_PATH
 board = json.loads(board_path.read_text(encoding="utf-8"))
 issue_row = next((i for i in board.get("issues", []) if i.get("id") == issue_id), None)
 strict = os.environ.get("AGENT_SESSION_STRICT_ROLE", "1") != "0"
@@ -94,8 +98,12 @@ DOCS_TASK="${AGENT_DOCS_TASK:-}"
 if [[ -z "$DOCS_TASK" ]]; then
   DOCS_TASK="$(python3 - <<PY
 import json
+import os
+import sys
 from pathlib import Path
-board = json.loads(Path("game/data/qa/sprint_board.json").read_text(encoding="utf-8"))
+sys.path.insert(0, str(Path(os.environ["ROOT"]) / "tools"))
+from factory_paths import BOARD_PATH
+board = json.loads(BOARD_PATH.read_text(encoding="utf-8"))
 for issue in board.get("issues") or []:
     if str(issue.get("id") or "") == "$ISSUE_ID" or str(issue.get("github_issue") or "") == "$ISSUE_ID":
         print(issue.get("docs_task") or "")
@@ -105,10 +113,10 @@ PY
 fi
 DOCS_ROLE="$(python3 tools/docs_role_map.py "$AGENT" "${DOCS_TASK:-}")"
 DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
-mkdir -p "$ROOT/artifacts"
-DOCS_REPORT="$ROOT/artifacts/docs_pack_${ISSUE_ID}.txt"
+mkdir -p "$FACTORY_ARTIFACTS_ABS"
+DOCS_REPORT="$FACTORY_ARTIFACTS_ABS/docs_pack_${ISSUE_ID}.txt"
 # Reads log — session gate auto-seeds must_read; post-cycle enforces --strict
-export DOCS_READ_LOG="${DOCS_READ_LOG:-$ROOT/artifacts/docs_reads_${ISSUE_ID}.log}"
+export DOCS_READ_LOG="${DOCS_READ_LOG:-$FACTORY_ARTIFACTS_ABS/docs_reads_${ISSUE_ID}.log}"
 : > "$DOCS_READ_LOG"
 echo "# Auto-seeded must_read by session gate; extras: python3 tools/log_docs_read.py --issue $ISSUE_ID <path>" >> "$DOCS_READ_LOG"
 echo "# Session gate initialized $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$DOCS_READ_LOG"

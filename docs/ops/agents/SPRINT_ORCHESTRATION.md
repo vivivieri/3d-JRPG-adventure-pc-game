@@ -33,4 +33,5 @@ summary: "Enforced multi-agent workflow — load roles, flow, or escalation"
 - Stakeholder: `docs/ops/agents/PM_STAKEHOLDER_REPORTING.md`
 - Alignment: `bash tools/run_alignment_audit.sh` · `audit_radar_spec.png`
 - Tournament: `docs/ops/qa/CANDIDATE_TOURNAMENT.md`
+- Portable pack: `packages/game-dev-factory/` · `FACTORY_DATA_DIR`
 

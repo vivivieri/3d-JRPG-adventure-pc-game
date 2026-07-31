@@ -7,7 +7,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PATH = ROOT / "game/data/qa/sprint_phases.json"
+sys.path.insert(0, str(ROOT / "tools"))
+from factory_paths import PHASES_PATH as PATH  # noqa: E402
 
 
 def main() -> int:

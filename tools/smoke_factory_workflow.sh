@@ -12,6 +12,8 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+# shellcheck source=factory_env.sh
+source "$ROOT/tools/factory_env.sh"
 
 ISSUE_ID="P1-01"
 AGENT_ROLE="architect"
@@ -32,7 +34,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 AGENT_ROLE="${AGENT_ROLE#agent/}"
-BOARD="$ROOT/game/data/qa/sprint_board.json"
+BOARD="$FACTORY_BOARD_PATH"
 BOARD_BAK="$(mktemp)"
 cp "$BOARD" "$BOARD_BAK"
 
@@ -88,9 +90,11 @@ else
   tail -30 /tmp/smoke_pm_orch.log || true
 fi
 if python3 - <<PY
-import json, sys
+import json, os, sys
 from pathlib import Path
-r = json.loads(Path("artifacts/pm_orchestrator_report.json").read_text(encoding="utf-8"))
+sys.path.insert(0, "tools")
+from factory_paths import ORCHESTRATOR_REPORT_PATH
+r = json.loads(ORCHESTRATOR_REPORT_PATH.read_text(encoding="utf-8"))
 ok = bool(r.get("orchestrator_pass"))
 dispatch = r.get("next_dispatch") or []
 print(f"    orchestrator_pass={ok} next_dispatch={[d.get('issue_id') for d in dispatch]}")
@@ -110,13 +114,16 @@ echo
 
 echo "── 3) resolve_docs matrix (roles + Phase1 issues)"
 if python3 - <<'PY'
-import json, subprocess, sys
+import json, os, subprocess, sys
 from pathlib import Path
+
+sys.path.insert(0, "tools")
+from factory_paths import BOARD_PATH
 
 roles = subprocess.check_output(
     ["python3", "tools/resolve_docs.py", "--list-roles"], text=True
 ).split()
-board = json.loads(Path("game/data/qa/sprint_board.json").read_text(encoding="utf-8"))
+board = json.loads(BOARD_PATH.read_text(encoding="utf-8"))
 errs = []
 over = []
 thin = []
@@ -177,8 +184,8 @@ else
   fail "run_agent_session_gate (see /tmp/smoke_gate.log)"
   tail -25 /tmp/smoke_gate.log || true
 fi
-PACK="artifacts/docs_pack_${ISSUE_ID}.json"
-READS="artifacts/docs_reads_${ISSUE_ID}.log"
+PACK="${FACTORY_ARTIFACTS_DIR}/docs_pack_${ISSUE_ID}.json"
+READS="${FACTORY_ARTIFACTS_DIR}/docs_reads_${ISSUE_ID}.log"
 if [[ -f "$PACK" && -f "$READS" ]]; then
   # TRIGGER verified: session gate must auto-seed must_read (no honor-system append)
   SEEDED=$(grep -cvE '^\s*(#|$)' "$READS" || true)
@@ -219,13 +226,17 @@ fi
 # FAIL path: empty reads must refuse before board/webhook (status unchanged)
 python3 - <<PY
 import json
+import os
+import sys
 from pathlib import Path
-board_path = Path("game/data/qa/sprint_board.json")
+sys.path.insert(0, "tools")
+from factory_paths import BOARD_PATH, artifact_path
+board_path = BOARD_PATH
 board = json.loads(board_path.read_text(encoding="utf-8"))
 issue = "$ISSUE_ID"
 before = next(i for i in board["issues"] if i["id"] == issue or str(i.get("github_issue")) == issue)
 status_before = before.get("status")
-Path(f"artifacts/docs_reads_{issue}.log").write_text("# wiped for smoke ordering test\n", encoding="utf-8")
+artifact_path(f"docs_reads_{issue}.log").write_text("# wiped for smoke ordering test\n", encoding="utf-8")
 print(f"    status_before={status_before}")
 PY
 if env -u CURSOR_PM_CYCLE_WEBHOOK_URL -u CURSOR_FACTORY_ALERT_WEBHOOK_URL \
@@ -246,8 +257,11 @@ else
 fi
 python3 - <<PY
 import json
+import sys
 from pathlib import Path
-board = json.loads(Path("game/data/qa/sprint_board.json").read_text(encoding="utf-8"))
+sys.path.insert(0, "tools")
+from factory_paths import BOARD_PATH
+board = json.loads(BOARD_PATH.read_text(encoding="utf-8"))
 issue = "$ISSUE_ID"
 row = next(i for i in board["issues"] if i["id"] == issue or str(i.get("github_issue")) == issue)
 # --skip-done should not mark done; empty-reads FAIL must not either
@@ -257,7 +271,16 @@ print(f"    status_after={row.get('status')} (not done — OK)")
 PY
 echo
 
-echo "── 6) Docs CI"
+echo "── 6) Factory path seam"
+if python3 tools/factory_paths.py >/tmp/smoke_factory_paths.json \
+  && python3 tools/validate_game_dev_factory_pack.py; then
+  pass "factory_paths_and_pack"
+else
+  fail "factory_paths_and_pack"
+fi
+echo
+
+echo "── 7) Docs CI"
 if bash tools/run_docs_ci_checks.sh >/tmp/smoke_docs_ci.log 2>&1; then
   pass "run_docs_ci_checks"
 else
@@ -267,7 +290,7 @@ fi
 echo
 
 if [[ -f game/project.godot ]]; then
-  echo "── 7) Game branch note"
+  echo "── 8) Game branch note"
   warn "game/project.godot present — also run: bash tools/run_ci_checks.sh"
   warn "L2 'Dev environment healthy' needs Godot+MCP; docs-pack changes do not gate that"
   echo

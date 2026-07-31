@@ -831,6 +831,94 @@
         }
       ],
       "acceptance_gate": "L0_candidate_tournament"
+    },
+    {
+      "id": "game_dev_factory_pack",
+      "label": "Portable PM/lifecycle factory pack (control plane)",
+      "authority_doc": "packages/game-dev-factory/CONTROL_PLANE.md",
+      "script_hooks": [
+        {
+          "path": "tools/factory_paths.py",
+          "contains": "FACTORY_DATA_DIR",
+          "purpose": "path seam for QA JSON + artifacts"
+        },
+        {
+          "path": "tools/factory_env.sh",
+          "contains": "FACTORY_DATA_DIR",
+          "purpose": "bash path seam for orchestrator/session gate"
+        },
+        {
+          "path": "tools/validate_game_dev_factory_pack.py",
+          "contains": "L0_game_dev_factory_pack",
+          "purpose": "pack completeness + tools/pack path sync"
+        },
+        {
+          "path": "tools/run_pm_orchestrator.sh",
+          "contains": "factory_env.sh",
+          "purpose": "PM orchestrator uses FACTORY_* path seam"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "factory_env.sh",
+          "purpose": "session gate uses FACTORY_* path seam"
+        },
+        {
+          "path": "tools/pm_orchestrator_lib.py",
+          "contains": "factory_paths",
+          "purpose": "board/report paths via factory_paths"
+        }
+      ],
+      "required_doc_refs": [
+        {
+          "doc": "packages/game-dev-factory/CONTROL_PLANE.md",
+          "must_mention": "FACTORY_DATA_DIR"
+        },
+        {
+          "doc": "packages/game-dev-factory/README.md",
+          "must_mention": "pm-session"
+        },
+        {
+          "doc": "docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/qa/WORKFLOW_INTEGRATION.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "AGENTS.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": ".cursorrules",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/cheat-sheets/RR_CHEATSHEET.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/cheat-sheets/CONTROLS_CHEATSHEET.md",
+          "must_mention": "L0_game_dev_factory_pack"
+        },
+        {
+          "doc": "docs/ops/agents/PM_AGENT_RUNBOOK.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/agents/SPRINT_ORCHESTRATION.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/workflow/AI_DEV_WORKFLOW.md",
+          "must_mention": "game-dev-factory"
+        },
+        {
+          "doc": "docs/ops/qa/workflow_int/checklist_features.md",
+          "must_mention": "game_dev_factory_pack"
+        }
+      ],
+      "acceptance_gate": "L0_game_dev_factory_pack"
     }
   ]
 }
