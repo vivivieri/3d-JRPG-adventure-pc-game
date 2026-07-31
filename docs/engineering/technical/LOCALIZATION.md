@@ -1,10 +1,11 @@
 ---
 id: localization
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 2019
+tokens_est: 2026
 summary: "**Tides of Urashima** supports four written languages at launch. **All four ship selective VO** for the 12 emotional hit clips (`docs/design/vision/VO_HIT_LIST."
 ---
 # Localization (i18n)

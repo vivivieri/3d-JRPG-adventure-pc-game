@@ -1,10 +1,11 @@
 ---
 id: report-triage
 type: how-to
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 395
+tokens_est: 398
 summary: "Bug report template + triage"
 ---
 # QA and Bug Process — Bug report template + triage

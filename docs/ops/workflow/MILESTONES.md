@@ -1,10 +1,11 @@
 ---
 id: milestones
 type: reference
+phase: [0, 1, 8]
 audience: [pm, release, architect]
 status: active
 authority: workflow
-tokens_est: 228
+tokens_est: 233
 summary: "M0–M6 checklist — load the active milestone pack"
 ---
 # Milestones

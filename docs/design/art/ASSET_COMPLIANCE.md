@@ -1,10 +1,11 @@
 ---
 id: asset-compliance
 type: reference
+phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 1292
+tokens_est: 1295
 summary: "**Project:** Tides of Urashima"
 ---
 # Asset Compliance Policy — No Copyright Violations

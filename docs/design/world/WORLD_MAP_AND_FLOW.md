@@ -1,10 +1,11 @@
 ---
 id: world-map-and-flow
 type: reference
+phase: [1, 5]
 audience: [builder, architect]
 status: active
 authority: world
-tokens_est: 1179
+tokens_est: 1182
 summary: "`docs/design/vision/STORYBOARD.md`, `game/data/story/scenes.json`"
 ---
 # Tides of Urashima — World Map & Zone Flow

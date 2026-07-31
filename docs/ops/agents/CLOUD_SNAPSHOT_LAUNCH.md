@@ -1,10 +1,11 @@
 ---
 id: cloud-snapshot-launch
 type: tutorial
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 2026
+tokens_est: 2029
 summary: "How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`."
 ---
 # Cloud Snapshot ID & Launch Checklist

@@ -1,10 +1,11 @@
 ---
 id: branch-purpose
 type: reference
+phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 459
+tokens_est: 463
 summary: "Branch split & purpose"
 ---
 # Continuous Integration — Branch split & purpose

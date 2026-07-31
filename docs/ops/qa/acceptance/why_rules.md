@@ -1,10 +1,11 @@
 ---
 id: why-rules
 type: reference
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 423
+tokens_est: 426
 summary: "Why QA fails without this + global pass rules"
 ---
 # Acceptance Criteria — Why QA fails without this + global pass rules

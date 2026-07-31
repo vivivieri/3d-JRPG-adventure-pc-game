@@ -1,10 +1,11 @@
 ---
 id: branch-protection-refs
 type: reference
+phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 344
+tokens_est: 347
 summary: "Branch protection & cross-refs"
 ---
 # Continuous Integration — Branch protection & cross-refs

@@ -1,10 +1,11 @@
 ---
 id: tech-stack
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 664
+tokens_est: 670
 summary: "**Updated:** July 2026 — pin versions here; install scripts read `GODOT_VERSION` from `tools/install_cloud_dev.sh`."
 ---
 # Technology stack (latest)

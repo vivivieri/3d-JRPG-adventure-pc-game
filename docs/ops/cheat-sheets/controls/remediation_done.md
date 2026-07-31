@@ -1,10 +1,11 @@
 ---
 id: remediation-done
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 417
+tokens_est: 420
 summary: "Remediation, DoD, verify, related"
 ---
 # Controls Cheat Sheet — Remediation, DoD, verify, related

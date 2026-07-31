@@ -1,10 +1,11 @@
 ---
 id: install
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 685
+tokens_est: 689
 summary: "`docs/ops/agents/PLUGIN_INSTALL_GUIDE.md`, `docs/ops/agents/GDAI_CLOUD_SETUP.md`"
 ---
 # MCP — Install

@@ -1,10 +1,11 @@
 ---
 id: playtest-telemetry
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 2116
+tokens_est: 2120
 summary: "**Discipline:** Games User Research (GUR) — telemetry-driven playtest tuning"
 ---
 # Playtest Telemetry

@@ -1,10 +1,11 @@
 ---
 id: data-architecture
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 645
+tokens_est: 651
 summary: "Data follows the story spine — scenes drive flags, flags drive quests, quests drive encounters and rewards."
 ---
 # Tides of Urashima — Story-Driven Data Architecture

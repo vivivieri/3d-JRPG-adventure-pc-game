@@ -1,10 +1,11 @@
 ---
 id: escalation-policy
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1063
+tokens_est: 1067
 summary: "Guarantee every dev↔QA dispute converges to a decision. When fix→reopen can't resolve it (ambiguous/conflicting/infeasible requirement, or QA too strict), it es"
 ---
 # Escalation Policy — no infinite dev ↔ QA loops

@@ -1,10 +1,11 @@
 ---
 id: phase-tools
 type: reference
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 426
+tokens_est: 430
 summary: "Phase gates, tools, remediation relationship"
 ---
 # Acceptance Criteria — Phase gates, tools, remediation relationship

@@ -1,10 +1,11 @@
 ---
 id: pick-work
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 871
+tokens_est: 874
 summary: "Do **not** self-pick from the backlog. PM dispatches via orchestrator; workers pass session gate first."
 ---
 # R&R — how-to-pick-work-dev-qa

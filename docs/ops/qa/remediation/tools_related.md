@@ -1,10 +1,11 @@
 ---
 id: tools-related
 type: how-to
+phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 559
+tokens_est: 562
 summary: "Tools, related docs, unified improvement"
 ---
 # QA Remediation Loop — Tools, related docs, unified improvement

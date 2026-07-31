@@ -1,10 +1,11 @@
 ---
 id: scenarios-levers
 type: how-to
+phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 563
+tokens_est: 566
 summary: "L4 scenarios + lever taxonomy"
 ---
 # Flow QA — L4 scenarios + lever taxonomy

@@ -1,10 +1,11 @@
 ---
 id: standards-loop
 type: how-to
+phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 1434
+tokens_est: 1438
 summary: "Industry standards + remediation loop"
 ---
 # QA Remediation Loop — Industry standards + remediation loop

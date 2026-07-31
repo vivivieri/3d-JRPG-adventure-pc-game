@@ -171,3 +171,4 @@ Recent efficiency work:
 8. Remaining splits: `STORYBOARD`, `GDD`, `MILESTONES`, `BOSS_DESIGNS`, `GDAI_CLOUD_SETUP`, `QA_AND_BUG_PROCESS`, `FLOW_QA`, thin `briefs/ruined_village`
 9. Character pack auto-attach; `check_docs_pack_adherence.py` on post-cycle (WARN)
 
+10. Round 4: release/security/steam + language/factory/cinematics splits; `pack_catalog` in INDEX; phase tags ~100%; session gate inits `artifacts/docs_reads_<issue>.log`; thinner AGENTS/BOOT

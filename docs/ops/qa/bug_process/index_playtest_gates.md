@@ -1,10 +1,11 @@
 ---
 id: index-playtest-gates
 type: how-to
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 823
+tokens_est: 826
 summary: "System index, playtest loop, gates, won't-fix, RC checklist"
 ---
 # QA and Bug Process — System index, playtest loop, gates, won't-fix, RC checklist

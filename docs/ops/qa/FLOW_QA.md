@@ -1,10 +1,11 @@
 ---
 id: flow-qa
 type: how-to
+phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 199
+tokens_est: 203
 summary: "Story soft-lock / quest / combat hang gates — load the layer you need"
 ---
 # Flow QA

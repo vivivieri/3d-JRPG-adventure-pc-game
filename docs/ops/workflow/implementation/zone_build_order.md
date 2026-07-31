@@ -1,10 +1,11 @@
 ---
 id: zone-build-order
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 132
+tokens_est: 137
 summary: "1. **ruined_village** — vertical slice gate (SC-02)"
 ---
 # Implementation Plan — Zone build order

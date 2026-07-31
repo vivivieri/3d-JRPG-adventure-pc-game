@@ -1,10 +1,11 @@
 ---
 id: controls-tech-ship
 type: explanation
+phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 890
+tokens_est: 894
 summary: "Controls, tech, milestones, Steam, i18n, risks"
 ---
 # Game Design Document — Controls, tech, milestones, Steam, i18n, risks

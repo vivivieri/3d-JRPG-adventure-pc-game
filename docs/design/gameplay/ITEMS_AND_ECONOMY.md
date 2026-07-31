@@ -1,10 +1,11 @@
 ---
 id: items-and-economy
 type: reference
+phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 1546
+tokens_est: 1549
 summary: "`docs/design/gameplay/ENCOUNTER_TABLE.md`, `game/data/items/items.json`, `docs/design/world/QUEST_AND_FLAGS.md`, `docs/design/art/ITEMS_3D_MODEL_GUIDE.md`"
 ---
 # Tides of Urashima — Items & Economy

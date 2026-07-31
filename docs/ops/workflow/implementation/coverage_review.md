@@ -1,10 +1,11 @@
 ---
 id: coverage-review
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 543
+tokens_est: 547
 summary: "This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DEV_WORKFLOW.md`. The following were **missing** from earlier versions and are now"
 ---
 # Implementation Plan — Coverage review

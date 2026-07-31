@@ -1,10 +1,11 @@
 ---
 id: scene-style
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 726
+tokens_est: 732
 summary: "**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)"
 ---
 # Godot Scene Style Guide — Tides of Urashima

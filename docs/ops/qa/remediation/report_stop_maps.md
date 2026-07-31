@@ -1,10 +1,11 @@
 ---
 id: report-stop-maps
 type: how-to
+phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 601
+tokens_est: 604
 summary: "Report template, stop rules, medium maps"
 ---
 # QA Remediation Loop — Report template, stop rules, medium maps

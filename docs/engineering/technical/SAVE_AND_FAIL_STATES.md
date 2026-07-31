@@ -1,10 +1,11 @@
 ---
 id: save-and-fail-states
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1322
+tokens_est: 1329
 summary: "`docs/design/ui/UI_UX_FLOW.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `docs/design/vision/ENDING_DESIGN.md`"
 ---
 # Tides of Urashima — Save & Fail States
