@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1146
+tokens_est: 1187
 summary: "Branch contents and merge policy. For the **full dev → ship lifecycle**, start at `docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md`."
 ---
 # Branching policy — documentation vs game development

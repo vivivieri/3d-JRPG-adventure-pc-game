@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 1872
-summary: "[`MODEL_QA.md`](../MODEL_QA.md)"
+tokens_est: 1954
+summary: "“Keep tweaking until it feels right” without a ladder produces infinite retries or random prompt changes."
 ---
 # Model QA — Polish cadence & direction
 

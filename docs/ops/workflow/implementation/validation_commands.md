@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 400
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 346
+summary: "python3 tools/validate_story_data.py"
 ---
 # Implementation Plan — Validation commands
 

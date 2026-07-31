@@ -4,8 +4,8 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 410
-summary: "[`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)"
+tokens_est: 444
+summary: "Copy into PR or session summary:"
 ---
 # Phase map, report template & related
 

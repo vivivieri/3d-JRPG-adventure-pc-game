@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 419
+tokens_est: 483
 summary: "Summary & why hybrid"
 ---
 # Agile Within Phases — Summary & why hybrid

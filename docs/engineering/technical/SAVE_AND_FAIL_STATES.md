@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1269
+tokens_est: 1322
 summary: "`docs/design/ui/UI_UX_FLOW.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `docs/design/vision/ENDING_DESIGN.md`"
 ---
 # Tides of Urashima — Save & Fail States

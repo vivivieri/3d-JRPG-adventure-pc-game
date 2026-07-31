@@ -5,8 +5,8 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 459
-summary: "Zone ruined_village"
+tokens_est: 530
+summary: "`res://scenes/world/ruined_village.tscn`"
 ---
 # Level Design — Zone ruined_village
 

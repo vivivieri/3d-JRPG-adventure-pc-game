@@ -5,8 +5,8 @@ audience: [builder, builder_zone, architect]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 583
-summary: "Zone tidal_caves"
+tokens_est: 654
+summary: "`res://scenes/world/tidal_caves.tscn`"
 ---
 # Level Design — Zone tidal_caves
 

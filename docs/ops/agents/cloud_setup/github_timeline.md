@@ -5,8 +5,8 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 400
-summary: "[`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)"
+tokens_est: 360
+summary: "`.github/workflows/agent-cycle-pm.yml`:"
 ---
 # Cloud Agent Setup — GitHub path & timeline
 

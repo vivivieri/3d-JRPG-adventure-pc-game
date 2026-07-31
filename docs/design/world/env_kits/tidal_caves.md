@@ -5,8 +5,8 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 400
-summary: "Zone tidal_caves"
+tokens_est: 474
+summary: "Wonder + wrongness; bioluminescent guilt"
 ---
 # Environment Kits — Zone tidal_caves
 

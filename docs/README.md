@@ -154,3 +154,17 @@ python3 tools/validate_story_data.py
 | [GDAI_REGEN_PLAN.md](archive/deprecated/GDAI_REGEN_PLAN.md) | [IMPLEMENTATION_PLAN.md](ops/workflow/IMPLEMENTATION_PLAN.md) |
 
 See [`_meta/redirects.yaml`](_meta/redirects.yaml) for the full map.
+
+## Docs pack enhance (progressive disclosure)
+
+Agent packs are resolved by `tools/resolve_docs.py` (see `docs/INDEX.yaml`).
+
+Recent efficiency work:
+
+1. Specialty role remap (`tools/docs_role_map.py`) — `builder` + `zone_lighting` → `builder_zone`
+2. Real deferred TL;DRs + calibrated `tokens_est` (`tools/fix_docs_frontmatter.py`)
+3. Tasks: `visual_qa`, `acceptance_ci`, `audio_bgm`, `ui_cinematics`
+4. Split hubs: `VISUAL_QA`, `GENERATION_READINESS`, `TECHNICAL_DESIGN`, `CODING_STANDARDS_HUB`, `RR`/`CONTROLS`, `QA_REMEDIATION`, `ACCEPTANCE_CRITERIA`
+5. Zone-aware `env_kits/` + `levels/` attach from issue title
+6. Machine `artifacts/docs_pack_<issue>.json`; session gate FAILs if resolve fails
+

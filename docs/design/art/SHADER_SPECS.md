@@ -4,7 +4,7 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 807
+tokens_est: 851
 summary: "`docs/design/art/ART_DIRECTION.md` · `docs/design/art/RENDERING_GUIDE.md`"
 ---
 # Shader Specifications — Tides of Urashima

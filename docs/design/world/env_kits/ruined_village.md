@@ -5,7 +5,7 @@ audience: [builder, builder_zone, visual]
 phase: [1]
 status: active
 authority: world
-tokens_est: 667
+tokens_est: 737
 summary: "Zone ruined_village hub"
 ---
 # Environment Kits — Zone ruined_village hub

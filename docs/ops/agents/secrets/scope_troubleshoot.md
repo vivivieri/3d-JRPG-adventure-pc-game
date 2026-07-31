@@ -5,7 +5,7 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 612
+tokens_est: 691
 summary: "Scope, later phases, troubleshooting"
 ---
 # Cursor Secrets Setup — Scope, later phases, troubleshooting

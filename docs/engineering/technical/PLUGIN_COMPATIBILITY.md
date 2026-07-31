@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1487
+tokens_est: 1532
 summary: "**Engine pin:** `GODOT_VERSION=4.7-stable` (`tools/install_cloud_dev.sh`)"
 ---
 # Plugin compatibility matrix (Godot 4.7)

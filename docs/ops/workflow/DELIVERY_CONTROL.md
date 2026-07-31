@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 495
-summary: "**Purpose:** No outbound delivery (Telegram report, stakeholder update, etc.) goes out until **automated checks pass**. No human reviewer approval step — CI-sty"
+tokens_est: 561
+summary: "No outbound delivery (Telegram report, stakeholder update, etc.) goes out until **automated checks pass**. No human reviewer approval step — CI-style gates only"
 ---
 # Delivery Control — pre-delivery automated gate
 

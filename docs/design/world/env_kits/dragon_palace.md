@@ -5,8 +5,8 @@ audience: [builder, builder_zone, visual]
 phase: [5, 6]
 status: active
 authority: world
-tokens_est: 657
-summary: "Palace + endings"
+tokens_est: 732
+summary: "Awe, scale, sterile perfection vs living world"
 ---
 # Environment Kits — Palace + endings
 

@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 604
+tokens_est: 664
 summary: "**Updated:** July 2026 — pin versions here; install scripts read `GODOT_VERSION` from `tools/install_cloud_dev.sh`."
 ---
 # Technology stack (latest)

@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [2, 5]
 status: active
 authority: art
-tokens_est: 957
-summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
+tokens_est: 1041
+summary: "Single **shared bottle/pouch family** with palette swaps where possible."
 ---
 # Items 3D — Consumables, key items, currency
 

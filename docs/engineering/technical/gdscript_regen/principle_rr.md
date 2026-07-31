@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 756
+tokens_est: 832
 summary: "Principle, R&R, prerequisites"
 ---
 # GDScript Regeneration — Principle, R&R, prerequisites

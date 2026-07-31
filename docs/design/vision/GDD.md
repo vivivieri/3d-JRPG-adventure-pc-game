@@ -4,7 +4,7 @@ type: explanation
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 2758
+tokens_est: 2759
 summary: "Godot 4.7 (Forward+)"
 ---
 # Tides of Urashima — Game Design Document

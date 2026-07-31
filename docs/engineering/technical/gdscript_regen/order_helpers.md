@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 400
+tokens_est: 643
 summary: "Regen order & per-helper steps"
 ---
 # GDScript Regeneration — Regen order & per-helper steps

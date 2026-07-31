@@ -5,8 +5,8 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 1909
-summary: "**Problem:** An agent can register `bgm_village.ogg` or `sc00_urashima_01.ogg` without listening — often a **procedural sine placeholder**, wrong loudness, or o"
+tokens_est: 1953
+summary: "An agent can register `bgm_village.ogg` or `sc00_urashima_01.ogg` without listening — often a **procedural sine placeholder**, wrong loudness, or off-direction "
 ---
 # Audio QA — Technical Gates + Optional LLM Jury
 

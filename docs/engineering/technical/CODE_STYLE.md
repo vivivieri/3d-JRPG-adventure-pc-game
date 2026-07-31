@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 2020
+tokens_est: 2055
 summary: "**Language:** GDScript 2.0 (Godot 4.7)"
 ---
 # Tides of Urashima — Code Style Guide

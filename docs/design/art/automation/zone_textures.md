@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 350
+tokens_est: 371
 summary: "Zone texture workflow"
 ---
 # Art Automation Pipeline — Zone texture workflow

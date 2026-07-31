@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 786
+tokens_est: 835
 summary: "**Scope:** `docs/**/*.md`, root `AGENTS.md`, `game/data/README.md`, PR templates"
 ---
 # Markdown Style Guide — Tides of Urashima

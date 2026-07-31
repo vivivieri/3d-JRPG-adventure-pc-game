@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 900
+tokens_est: 237
 summary: "Helper regeneration order and EventBus wiring"
 ---
 # GDScript Regeneration

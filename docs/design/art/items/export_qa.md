@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 450
-summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
+tokens_est: 513
+summary: "game/assets/models/items/"
 ---
 # Items 3D — Export & QA
 

@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 400
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 132
+summary: "1. **ruined_village** — vertical slice gate (SC-02)"
 ---
 # Implementation Plan — Zone build order
 

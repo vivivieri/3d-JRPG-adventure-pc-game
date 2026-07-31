@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 700
+tokens_est: 313
 summary: "Palette, silhouettes, style rules — load the section for your pass"
 ---
 # Art Direction
@@ -25,13 +25,3 @@ summary: "Palette, silhouettes, style rules — load the section for your pass"
 **Visual target:** **High-detail stylized Japanese 3D** — automated stylized albedo, readable silhouettes, authored environments. Not anime-realistic or photoreal PBR — closer to *Ni no Kuni* environmental richness and *Eastward* clarity with Japanese coastal motifs.
 
 **Production policy:** Quality-first **automated** pipeline — no human artists in art/audio production. See `docs/design/art/ART_AUTOMATION_PIPELINE.md`.
-
-**Audience note (men 20–30):** Muted palette, emotional weight, no chibi comedy. Beauty with decay.
-
-**Related docs:** `docs/design/art/CHARACTER_BIBLE.md`, `docs/design/world/ENVIRONMENT_KITS.md`, `docs/design/ui/CINEMATICS.md`, `docs/design/art/ITEMS_3D_MODEL_GUIDE.md`, `docs/design/art/RENDERING_GUIDE.md`
-
-### Ship rule (v1)
-
-**No primitive placeholders** (`BoxMesh`, `CapsuleMesh`, Kenney knight, procedural spheres) in player-facing builds. Greybox may exist in editor-only layers during development.
-
----

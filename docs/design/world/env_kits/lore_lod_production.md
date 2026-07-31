@@ -5,7 +5,7 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 461
+tokens_est: 539
 summary: "Lore, LOD, production, acceptance"
 ---
 # Environment Kits — Lore, LOD, production, acceptance

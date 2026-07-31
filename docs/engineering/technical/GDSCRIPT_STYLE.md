@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 3059
+tokens_est: 3103
 summary: "**Scope:** `game/scripts/**/*.gd`, `game/tests/**/*.gd`, editor tools on `game/development`"
 ---
 # GDScript 2.0 Style Guide — Tides of Urashima

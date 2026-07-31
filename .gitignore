@@ -83,3 +83,4 @@ artifacts/delivery_audit/*
 !artifacts/delivery_audit/.gitkeep
 artifacts/escalations/*
 !artifacts/escalations/.gitkeep
+artifacts/docs_pack_*.json
