@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 333
+tokens_est: 337
 summary: "Session startup every run"
 ---
 # MCP Stack — Session startup every run

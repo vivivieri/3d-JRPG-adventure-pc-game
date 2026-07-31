@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 203
+tokens_est: 207
 summary: "CD workflows — load purpose, Steam secrets, or remediation"
 ---
 # Continuous Delivery

@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 514
+tokens_est: 518
 summary: "Urashima, Yuzu, Roku skills"
 ---
 # Skills Bible — Urashima, Yuzu, Roku skills

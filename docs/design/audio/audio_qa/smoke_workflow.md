@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 480
+tokens_est: 483
 summary: "L2 smoke, agent workflow, report template"
 ---
 # Audio QA — L2 smoke, agent workflow, report template

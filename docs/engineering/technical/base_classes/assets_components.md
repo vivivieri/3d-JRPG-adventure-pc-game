@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 437
+tokens_est: 443
 summary: "3D asset sources + component scenes"
 ---
 # Code Base Class Rules — 3D asset sources + component scenes

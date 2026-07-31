@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 421
+tokens_est: 425
 summary: "Design goals + music map"
 ---
 # Audio Direction — Design goals + music map

@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 567
+tokens_est: 573
 summary: "Standards, template, naming, quoting"
 ---
 # Bash Style — Standards, template, naming, quoting

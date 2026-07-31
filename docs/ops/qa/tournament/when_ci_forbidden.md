@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 400
+tokens_est: 404
 summary: "When required, CI, forbidden, related"
 ---
 # Candidate Tournament — When required, CI, forbidden, related

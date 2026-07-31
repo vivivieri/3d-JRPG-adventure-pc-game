@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 227
+tokens_est: 230
 summary: "Animation/SFX hooks + QA"
 ---
 # Skills Bible — Animation/SFX hooks + QA

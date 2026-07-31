@@ -208,6 +208,11 @@
           "path": "tools/split_docs_round5.py",
           "contains": "def ",
           "purpose": "docs pack round5 splitter"
+        },
+        {
+          "path": "tools/split_docs_round6.py",
+          "contains": "def main",
+          "purpose": "docs pack round6 leftover splitter"
         }
       ],
       "orchestrator_steps": [

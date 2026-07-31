@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 476
+tokens_est: 480
 summary: "What it is, stack position, data files"
 ---
 # Candidate Tournament — What it is, stack position, data files

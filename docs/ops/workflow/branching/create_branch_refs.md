@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 339
+tokens_est: 343
 summary: "Creating game branch + cross-refs"
 ---
 # Branching Policy — Creating game branch + cross-refs

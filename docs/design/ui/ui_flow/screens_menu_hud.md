@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [builder, visual]
 status: active
 authority: ui
-tokens_est: 569
+tokens_est: 573
 summary: "Screen map, main menu, HUD, field menu"
 ---
 # UI/UX Flow — Screen map, main menu, HUD, field menu

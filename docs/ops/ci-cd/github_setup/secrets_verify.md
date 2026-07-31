@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 229
+tokens_est: 233
 summary: "`GH_TOKEN` is for **setup script only** — do not confuse with Steam secrets."
 ---
 # GitHub Setup — CD secrets + verify

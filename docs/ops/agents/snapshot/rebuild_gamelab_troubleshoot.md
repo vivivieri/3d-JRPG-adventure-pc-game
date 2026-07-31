@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 649
+tokens_est: 652
 summary: "Rebuild, GameLab transport, troubleshooting"
 ---
 # Cloud Snapshot Launch — Rebuild, GameLab transport, troubleshooting

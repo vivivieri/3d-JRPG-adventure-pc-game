@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 449
+tokens_est: 453
 summary: "When reports fire, commands, contents"
 ---
 # PM Stakeholder Reporting — When reports fire, commands, contents

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 242
+tokens_est: 245
 summary: "12 emotional VO clips — load rules, hit list, or ElevenLabs setup"
 ---
 # Selective VO Hit List

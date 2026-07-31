@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [narrative, builder, flow]
 status: active
 authority: world
-tokens_est: 288
+tokens_est: 291
 summary: "- **New quest:** Banner top-right, 3s fade; log sound"
 ---
 # Quests & Flags — Quest UI, JSON, QA

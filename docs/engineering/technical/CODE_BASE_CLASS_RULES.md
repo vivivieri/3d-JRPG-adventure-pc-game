@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 216
+tokens_est: 223
 summary: "Extend-only base classes — load rules, components, or verification"
 ---
 # Code Base Class Rules

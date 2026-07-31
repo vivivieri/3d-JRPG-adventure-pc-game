@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 522
+tokens_est: 525
 summary: "Environment map + preprod necessity"
 ---
 # Environments — Environment map + preprod necessity

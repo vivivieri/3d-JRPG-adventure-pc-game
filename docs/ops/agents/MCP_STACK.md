@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 185
+tokens_est: 188
 summary: "Full MCP toolchain — load R&R, conflict rules, or startup"
 ---
 # MCP Stack

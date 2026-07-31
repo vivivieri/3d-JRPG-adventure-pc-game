@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 637
+tokens_est: 640
 summary: "Currency, consumables, equipment"
 ---
 # Items & Economy — Currency, consumables, equipment

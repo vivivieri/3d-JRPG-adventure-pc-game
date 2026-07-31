@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, visual, audio]
 status: active
 authority: qa
-tokens_est: 905
+tokens_est: 908
 summary: "Protocol, checklist fields, external API jury"
 ---
 # Agent Jury — Protocol, checklist fields, external API jury

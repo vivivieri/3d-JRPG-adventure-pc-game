@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [narrative, builder, flow]
 status: active
 authority: world
-tokens_est: 1009
+tokens_est: 1012
 summary: "Main quests + detail"
 ---
 # Quests & Flags — Main quests + detail

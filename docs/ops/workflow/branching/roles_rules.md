@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 566
+tokens_est: 570
 summary: "Branch roles + rules"
 ---
 # Branching Policy — Branch roles + rules

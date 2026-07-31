@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 399
+tokens_est: 403
 summary: "Pacing, drops, JSON, QA"
 ---
 # Items & Economy — Pacing, drops, JSON, QA

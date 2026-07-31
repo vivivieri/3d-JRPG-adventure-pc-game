@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 718
+tokens_est: 721
 summary: "Economy, equipment, limit, hard, random, QA"
 ---
 # Encounter Table — Economy, equipment, limit, hard, random, QA

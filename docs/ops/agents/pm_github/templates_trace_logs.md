@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 478
+tokens_est: 481
 summary: "Templates, traceability, log sources"
 ---
 # Project Management — Templates, traceability, log sources

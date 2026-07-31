@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 224
+tokens_est: 228
 summary: "New Game / gallery — load first-run vs replay or incentives"
 ---
 # Replay Design

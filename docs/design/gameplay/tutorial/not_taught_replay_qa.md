@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [narrative, builder, flow]
 status: active
 authority: gameplay
-tokens_est: 317
+tokens_est: 320
 summary: "Not taught, replay, QA"
 ---
 # Tutorial Design — Not taught, replay, QA

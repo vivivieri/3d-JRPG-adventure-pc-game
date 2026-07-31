@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 473
+tokens_est: 480
 summary: "What inherit means + hard R&R"
 ---
 # Code Base Class Rules — What inherit means + hard R&R

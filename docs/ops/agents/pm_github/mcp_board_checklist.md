@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 696
+tokens_est: 700
 summary: "Optional MCP, board, PM checklist, refs"
 ---
 # Project Management — Optional MCP, board, PM checklist, refs

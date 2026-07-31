@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, qa, pm]
 status: active
 authority: qa
-tokens_est: 573
+tokens_est: 576
 summary: "M6 deliverables, perf matrix, FAQ, related"
 ---
 # Platform Support — M6 deliverables, perf matrix, FAQ, related

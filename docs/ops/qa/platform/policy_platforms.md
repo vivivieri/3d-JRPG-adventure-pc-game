@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, qa, pm]
 status: active
 authority: qa
-tokens_est: 738
+tokens_est: 741
 summary: "Policy, platforms, dev env map"
 ---
 # Platform Support — Policy, platforms, dev env map

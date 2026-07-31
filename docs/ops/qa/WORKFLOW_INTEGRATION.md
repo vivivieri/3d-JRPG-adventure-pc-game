@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 240
+tokens_est: 244
 summary: "Register factory features before merge — load checklist or registry"
 ---
 # Workflow Integration

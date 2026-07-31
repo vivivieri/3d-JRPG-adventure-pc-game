@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 436
+tokens_est: 440
 summary: "Role split & conflict rules"
 ---
 # MCP Stack — Role split & conflict rules

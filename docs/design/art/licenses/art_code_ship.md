@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, release, audio]
 status: active
 authority: art
-tokens_est: 754
+tokens_est: 758
 summary: "Art, ship status, code, M6 checklist"
 ---
 # Licenses — Art, ship status, code, M6 checklist

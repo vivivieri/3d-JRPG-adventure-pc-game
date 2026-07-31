@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 545
+tokens_est: 549
 summary: "Field, puzzle, UI feedback"
 ---
 # Game Feel — Field, puzzle, UI feedback

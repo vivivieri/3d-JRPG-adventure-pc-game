@@ -5,7 +5,7 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 417
+tokens_est: 421
 summary: "Enemy skills, MP, scrolls"
 ---
 # Skills Bible — Enemy skills, MP, scrolls
