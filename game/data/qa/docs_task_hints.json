@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "authority": "tools/resolve_docs.py — infer docs_task when sprint issue omits it",
+  "hints": {
+    "zone_lighting": [
+      "lighting",
+      "palette",
+      "fog",
+      "worldenvironment",
+      "greybox",
+      "environment kit",
+      "zone visual",
+      "golden screenshot",
+      "ruined_village"
+    ],
+    "water_shader": ["water", "foam", "displacement", "water_stylized"],
+    "combat_balance": ["combat", "skills", "balance", "progression", "boss"],
+    "vo_gen": ["voice", "elevenlabs", "vo_hit", "vo gen", "selective vo"],
+    "steam_export": ["steam", "export", "ship prep", "m6"],
+    "factory_bootstrap": ["bootstrap", "project.godot", "ci baseline", "cloud snapshot"],
+    "model_qa": ["model qa", "turntable", "glb", "meshy", "tripo"],
+    "level_layout": [
+      "level design",
+      "interactable",
+      "encounter",
+      "zone layout",
+      "beach_shore",
+      "tidal_caves"
+    ],
+    "secrets_setup": [
+      "secrets",
+      "webhook",
+      "gamelab_api",
+      "elevenlabs",
+      "cursor_api_key"
+    ]
+  }
+}

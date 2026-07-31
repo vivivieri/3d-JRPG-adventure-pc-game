@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 991
+summary: "[`DATA_ARCHITECTURE.md`](../DATA_ARCHITECTURE.md)"
 ---
 # Data architecture — Story spine
 

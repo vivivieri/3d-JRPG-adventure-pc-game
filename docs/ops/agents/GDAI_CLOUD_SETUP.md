@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 2834
+summary: "**GDAI MCP** is a **dev-only** Godot 4 plugin that lets Cursor (and other MCP clients) control the **Godot Editor** — create scenes, move nodes, read script err"
 ---
 # GDAI MCP — local & cloud dev setup
 

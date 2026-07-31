@@ -6,6 +6,7 @@ phase: [3, 6]
 status: active
 authority: narrative
 tokens_est: 433
+summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
 ---
 # Narrative — Localization & emotion tags
 

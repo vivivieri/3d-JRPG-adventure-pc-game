@@ -6,6 +6,7 @@ phase: [8]
 status: active
 authority: ci-cd
 tokens_est: 2254
+summary: "**Milestone:** M6 (Phase 8)"
 ---
 # Steam Release Checklist — Technical & Non-Technical
 

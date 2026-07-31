@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 1984
+summary: "How to boot **game/development** Cloud Agents from the saved environment snapshot — not JIT from `main`."
 ---
 # Cloud Snapshot ID & Launch Checklist
 

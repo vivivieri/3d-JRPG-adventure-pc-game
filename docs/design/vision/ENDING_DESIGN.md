@@ -6,6 +6,7 @@ phase: [6]
 status: active
 authority: vision
 tokens_est: 1344
+summary: "`docs/design/vision/GDD.md` §10, `docs/design/vision/STORYBOARD.md` SC-16–17, `docs/design/ui/CINEMATICS.md`, `docs/design/vision/REPLAY_DESIGN.md`"
 ---
 # Tides of Urashima — Ending Design
 

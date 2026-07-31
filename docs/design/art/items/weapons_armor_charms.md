@@ -6,6 +6,7 @@ phase: [2, 5]
 status: active
 authority: art
 tokens_est: 1018
+summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
 ---
 # Items 3D — Weapons, armor, charms
 

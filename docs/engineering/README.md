@@ -29,3 +29,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/data/combat_economy.md](technical/data/combat_economy.md) | `combat_economy` |
 | [technical/data/i18n_validation.md](technical/data/i18n_validation.md) | `i18n_validation` |
 | [technical/data/story_spine.md](technical/data/story_spine.md) | `story_spine` |
+| [technical/gdscript_regen/checklist_recover.md](technical/gdscript_regen/checklist_recover.md) | `checklist_recover` |
+| [technical/gdscript_regen/order_helpers.md](technical/gdscript_regen/order_helpers.md) | `order_helpers` |
+| [technical/gdscript_regen/principle_rr.md](technical/gdscript_regen/principle_rr.md) | `principle_rr` |

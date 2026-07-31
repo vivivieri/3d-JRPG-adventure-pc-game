@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: art
 tokens_est: 724
+summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
 ---
 # Rendering — zone_visuals contract & refs
 

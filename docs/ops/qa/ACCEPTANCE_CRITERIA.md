@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 2458
+summary: "If a gate is not defined here with a **metric or boolean threshold**, it **cannot block ship**. Vague “looks good” is not QA."
 ---
 # Acceptance Criteria — Measurable QA Pass/Fail
 

@@ -52,11 +52,13 @@ python3 tools/resolve_docs.py <role> --issue <issue_id> --budget 12000
 python3 tools/resolve_docs.py <role> --task zone_lighting --phase 1
 python3 tools/resolve_docs.py --list-roles
 python3 tools/resolve_docs.py --list-tasks
+python3 tools/docs_pack_impact.py --base origin/main
+python3 tools/pm_docs_preflight.py
 ```
 
-Session gate writes `artifacts/docs_pack_<issue>.txt` (kept vs deferred + tokens). Sprint issues may set `docs_task` (see `docs/INDEX.yaml` `tasks:`). Briefs under `docs/briefs/` auto-attach when the issue title/refs mention the asset stem.
+Session gate writes `artifacts/docs_pack_<issue>.txt` (kept vs deferred + tokens; deferred lines include `summary:` TL;DRs). Sprint issues may set `docs_task` or have it inferred from the title. Briefs under `docs/briefs/` auto-attach when the issue title/refs mention the asset stem.
 
-Large bibles are split into packs (`ops/qa/testing/`, `design/art/rendering/`, `ops/workflow/implementation/`, …) — load the hub + one pack, not the old monolith.
+Large bibles are split into packs (`ops/qa/testing/`, `design/art/rendering/`, `ops/workflow/implementation/`, `design/world/levels/`, …) — load the hub + one pack, not the old monolith.
 
 
 | Role | Pack |

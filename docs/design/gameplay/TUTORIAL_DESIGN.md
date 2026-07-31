@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: gameplay
 tokens_est: 1584
+summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/world/QUEST_AND_FLAGS.md`"
 ---
 # Tides of Urashima — Tutorial & Onboarding Design
 

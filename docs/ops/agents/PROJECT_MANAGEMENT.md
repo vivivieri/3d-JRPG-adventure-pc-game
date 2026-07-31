@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 1778
+summary: "**Primary tracker:** **GitHub Issues** (repo-native, PR-linked, Actions-aware)"
 ---
 # Project Management — Issues, Logs & MCP Integrations
 

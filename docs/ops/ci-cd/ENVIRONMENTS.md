@@ -5,6 +5,7 @@ audience: [release]
 status: active
 authority: ci-cd
 tokens_est: 1529
+summary: "**Machine-readable:** `game/data/qa/environments.json`"
 ---
 # Deployment Environments — Dev · QA · UAT · Preprod · Prod
 

@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: gameplay
 tokens_est: 1412
+summary: "`docs/design/gameplay/COMBAT_SYSTEMS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/ui/CINEMATICS.md`, `docs/design/vision/PACING_CHART.md`"
 ---
 # Tides of Urashima — Game Feel & Feedback
 

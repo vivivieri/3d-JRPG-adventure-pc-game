@@ -5,6 +5,7 @@ audience: [pm, builder, qa]
 status: active
 authority: ops
 tokens_est: 3025
+summary: "**Print this:** One-page reference for every agent session"
 ---
 # R&R Cheat Sheet — Roles & Responsibilities
 

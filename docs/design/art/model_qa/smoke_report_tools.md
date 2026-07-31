@@ -6,6 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 451
+summary: "[`MODEL_QA.md`](../MODEL_QA.md)"
 ---
 # Model QA — L2 smoke, report, tools
 

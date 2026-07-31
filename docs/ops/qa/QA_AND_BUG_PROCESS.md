@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 3005
+summary: "`docs/ops/qa/PLAYTEST_SCRIPT.md`, `docs/ops/workflow/MILESTONES.md`, `docs/ops/workflow/AI_DEV_WORKFLOW.md`, `docs/ops/qa/AI_TESTING_SPEC.md`, `docs/ops/qa/ACCE"
 ---
 # Tides of Urashima — QA & Bug Process
 

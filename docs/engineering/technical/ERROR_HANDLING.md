@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 1955
+summary: "**Scope:** All languages in the factory — Python CI, Bash gates, GDScript runtime, TypeScript MCP, JSON validators"
 ---
 # Error Handling & Messages — Tides of Urashima
 

@@ -5,6 +5,7 @@ audience: [pm, builder, qa]
 status: active
 authority: ops
 tokens_est: 2724
+summary: "**Print this:** One-page reference for automated + process controls"
 ---
 # Controls Cheat Sheet — How We Enforce Roles
 

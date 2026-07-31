@@ -6,6 +6,7 @@ phase: [3]
 status: active
 authority: workflow
 tokens_est: 400
+summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
 ---
 # Implementation Plan — Phase 3
 

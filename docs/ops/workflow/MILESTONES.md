@@ -6,6 +6,7 @@ phase: [0, 1, 2, 3, 4, 5, 6, 7, 8]
 status: active
 authority: workflow
 tokens_est: 2980
+summary: "Track implementation progress against the GDD milestones."
 ---
 # Milestone checklist
 

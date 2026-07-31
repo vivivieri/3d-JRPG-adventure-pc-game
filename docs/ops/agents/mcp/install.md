@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 640
+summary: "[`MCP_STACK.md`](../MCP_STACK.md)"
 ---
 # MCP — Install
 

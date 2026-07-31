@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: art
 tokens_est: 2534
+summary: "**Problem:** An agent can “succeed” at placing a `BoxMesh`, decide it looks fine in the abstract, and replicate that placeholder across every zone. **Policy tex"
 ---
 # Visual QA — How AI Reviews Look & Feel
 
