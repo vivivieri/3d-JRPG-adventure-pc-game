@@ -366,13 +366,21 @@ def main() -> int:
         "not whether agents reason correctly from the pack."
     )
     lines.append(
-        "- Session adherence: `python3 tools/check_docs_pack_adherence.py --issue <ID>` "
-        "when `artifacts/docs_reads_<ID>.log` exists."
+        "- Session adherence (enforced): session gate seeds must_read via "
+        "`log_docs_read.py --from-pack`; post-cycle runs "
+        "`check_docs_pack_adherence.py --strict`."
     )
     lines.append("")
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"wrote {json_path.relative_to(ROOT)}")
-    print(f"wrote {md_path.relative_to(ROOT)}")
+
+    def _display(path: Path) -> str:
+        try:
+            return str(path.resolve().relative_to(ROOT))
+        except ValueError:
+            return str(path)
+
+    print(f"wrote {_display(json_path)}")
+    print(f"wrote {_display(md_path)}")
     print(
         f"avg_loaded={avg_loaded} headroom={payload['averages']['budget_headroom']} "
         f"good_summary={lib['good_summary_pct']}% over_budget={len(over)}"
