@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 601
+tokens_est: 605
 summary: "Gates relationship + plan"
 ---
 # Perf — Procedure & Evidence — Gates relationship + plan

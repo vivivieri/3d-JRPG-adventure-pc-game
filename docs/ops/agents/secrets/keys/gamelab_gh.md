@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 569
+tokens_est: 573
 summary: "API key for **GameLab Studio MCP** (`gamelab-mcp`) — ink-wash UI frames, combat icon sheets, menu borders."
 ---
 # Secrets — API Keys — GAMELAB + GH_TOKEN

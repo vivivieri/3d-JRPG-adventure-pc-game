@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 560
+tokens_est: 564
 summary: "Telegram + ElevenLabs"
 ---
 # Secrets — API Keys — Telegram + ElevenLabs

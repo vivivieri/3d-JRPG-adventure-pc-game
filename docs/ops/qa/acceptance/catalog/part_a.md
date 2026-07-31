@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, pm]
 status: active
 authority: qa
-tokens_est: 884
+tokens_est: 887
 summary: "Acceptance — Gate Catalog (A)"
 ---
 # Acceptance — Gate Catalog — Acceptance — Gate Catalog (A)

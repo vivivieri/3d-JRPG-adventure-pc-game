@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 211
+tokens_est: 214
 summary: "1. Meshy/Tripo/Rodin → Blender decimate/UV → export GLB"
 ---
 # Model QA — Layers & Workflow — Agent workflow

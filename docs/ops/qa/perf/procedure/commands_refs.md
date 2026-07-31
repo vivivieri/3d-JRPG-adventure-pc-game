@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 274
+tokens_est: 278
 summary: "bash tools/run_perf_review_checks.sh"
 ---
 # Perf — Procedure & Evidence — Commands + related

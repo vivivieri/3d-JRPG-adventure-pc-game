@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder, release]
 status: active
 authority: ops
-tokens_est: 194
+tokens_est: 198
 summary: "1. **Disable** the GDAI MCP plugin in **Project → Project Settings → Plugins**."
 ---
 # GDAI Setup — Cloud / Steam / Troubleshoot — Before Steam export

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, builder]
 status: active
 authority: qa
-tokens_est: 165
+tokens_est: 168
 summary: "GDAI MCP playtesting toolkit"
 ---
 # AI Testing — GDAI Toolkit

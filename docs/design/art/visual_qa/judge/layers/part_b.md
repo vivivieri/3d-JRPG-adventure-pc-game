@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 648
+tokens_est: 653
 summary: "Visual QA — Defense Layers (B)"
 ---
 # Visual QA — Defense Layers — Visual QA — Defense Layers (B)

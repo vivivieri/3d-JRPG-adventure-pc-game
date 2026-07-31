@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 355
+tokens_est: 359
 summary: "- [x] Data architecture (`docs/engineering/technical/DATA_ARCHITECTURE.md`)"
 ---
 # Milestones — Pre-build — M0e / M0h

@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 817
+tokens_est: 821
 summary: "[Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)"
 ---
 # Cloud Setup — Automations — One-time setup

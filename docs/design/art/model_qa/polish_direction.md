@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 109
+tokens_est: 112
 summary: "Polish cadence + who directs feel"
 ---
 # Model QA — Polish Direction

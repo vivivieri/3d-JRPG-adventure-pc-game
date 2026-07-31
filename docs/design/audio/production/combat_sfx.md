@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 142
+tokens_est: 145
 summary: "Boss hooks, SFX manifest, loop template"
 ---
 # Audio Production — Combat SFX

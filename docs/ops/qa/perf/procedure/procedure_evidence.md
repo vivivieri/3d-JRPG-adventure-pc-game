@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 592
+tokens_est: 596
 summary: "Procedure + evidence schema"
 ---
 # Perf — Procedure & Evidence — Procedure + evidence schema

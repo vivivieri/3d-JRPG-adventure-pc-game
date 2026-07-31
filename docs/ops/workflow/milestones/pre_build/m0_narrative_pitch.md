@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 327
+tokens_est: 331
 summary: "- [x] Narrative writing guide (`docs/design/vision/NARRATIVE_WRITING_GUIDE.md`) — selective VO (12 clips); SC-07 silence"
 ---
 # Milestones — Pre-build — M0f / M0g

@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 126
+tokens_est: 129
 summary: "M6 checklist + anti-tamper"
 ---
 # Security — M6 Player Protect

@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 746
+tokens_est: 750
 summary: "Model QA — Who Directs Feel (B)"
 ---
 # Model QA — Who Directs Feel — Model QA — Who Directs Feel (B)

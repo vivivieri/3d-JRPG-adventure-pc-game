@@ -1,0 +1,64 @@
+---
+id: checklist-troubleshoot
+type: how-to
+audience: [pm, builder]
+status: active
+authority: ops
+tokens_est: 789
+summary: "Checklist + troubleshoot + related"
+---
+# MCP — Setup & Cost — Checklist + troubleshoot + related
+
+**Hub:** [`setup_and_cost.md`](../setup_and_cost.md)
+
+## User setup checklist (purchase & secrets)
+
+Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_toolchain.sh`
+
+| Tool | You need to buy? | What you do |
+|------|------------------|-------------|
+| **GDAI MCP** | ✅ ~$19 one-time | Already installed — keep zip in cloud snapshot |
+| **Godotiq** | ❌ Free (Pro $19 optional) | Already installed |
+| **Godot MCP Pro** | ✅ $15 one-time | Already installed |
+| **GameLab Studio** | Paid OK for quality; free tier for light UI | Sign up → API key → **Cursor Secrets: `GAMELAB_API_KEY`** → re-run install script |
+| **ComfyUI / Material Maker** | ❌ Free | Local install; locked stylized workflows per `ART_AUTOMATION_PIPELINE.md` |
+| **Meshy / Tripo / Rodin** | Paid OK for hero quality | Service ToS → register outputs in `LICENSES.md` |
+| **Blender** | ❌ Free | Auto-installed in cloud via `install_extended_toolchain.sh` |
+| **ACE-Step 1.5** | ❌ Free (local GPU) | `bash tools/install_ace_step.sh`; prompts in `game/data/audio/ace_step_prompts.json` |
+| **ElevenLabs VO** | Paid API | `ELEVENLABS_API_KEY` in Cursor Secrets; `bash tools/generate_ai_vo.sh` |
+| **generate_game_audio.py** | ❌ Free (repo tool) | Procedural fallback — auto on install |
+
+**Cursor cloud dashboard:** Register P0 MCP servers from `.cursor/mcp.json`; add `gamelab-mcp` when `GAMELAB_API_KEY` is set. Restart agent after saving.
+
+**Cannot be automated by agents:** GameLab API key (unless you add secret), ElevenLabs API key (unless you add secret), ACE-Step GPU generation (use prompt sheets + export), ComfyUI workflow runs (local GPU).
+
+---
+
+
+## Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| Any required MCP missing from catalog | Register in Cursor dashboard; restart agent |
+| Too many MCP tools in Cursor | MCP Pro: use `--minimal` in mcp.json args |
+| GDAI + MCP Pro both edit scene | **Rule:** GDAI builds; MCP Pro tests only |
+| Godotiq bridge offline | Enable GodotIQ plugin; wait 5s |
+| GameLab SSE fails | Check API key in Secrets; verify SSE URL |
+| `node` not found | Install Node 18+ for Godot MCP Pro |
+
+---
+
+
+## Related
+
+- `docs/ops/cheat-sheets/RR_CHEATSHEET.md` — printable one-page R&R summary
+- `docs/design/art/ART_AUTOMATION_PIPELINE.md` — quality-first art/audio automation policy
+- `docs/ops/qa/ACCEPTANCE_CRITERIA.md` — measurable QA gates (WARN/SKIP ≠ PASS)
+- `docs/ops/qa/QA_REMEDIATION_LOOP.md` — FAIL iteration policy
+- `docs/design/art/MODEL_QA.md` · `docs/design/art/VISUAL_QA.md` · `docs/design/audio/AUDIO_QA.md` · `docs/ops/qa/FLOW_QA.md`
+- `game/data/qa/acceptance_criteria.json` — machine-readable thresholds
+- `game/.godotiq.json` — Godotiq project conventions
+- `game/addons/README.md` — addon policy
+- `.cursor/mcp.json.example` — MCP config template
+- `docs/ops/agents/PLUGIN_INSTALL_GUIDE.md` — install steps
+- `docs/ops/agents/GDAI_CLOUD_SETUP.md` — cloud snapshot & GDAI bootstrap
