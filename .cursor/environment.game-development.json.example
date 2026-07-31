@@ -1,5 +1,5 @@
 {
-  "snapshot": "snapshot-20260727-ef4f5cd6-2064-4d9f-935f-8a2626c57bd7",
+  "snapshot": "snapshot-20260731-6674a8af-9b2c-4315-a2ff-dd7e4d211b66",
   "install": "bash tools/install_cloud_dev.sh",
   "start": "bash tools/ensure_mcp_stack.sh",
   "terminals": []

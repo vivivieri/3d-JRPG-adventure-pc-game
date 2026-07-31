@@ -6,7 +6,7 @@ audience: [pm, builder]
 status: active
 authority: ops
 tokens_est: 640
-summary: "Snapshot ID + launch checklist: `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8`, boot veri"
+summary: "Snapshot ID + launch checklist: `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260731-6674a8af-9b2c-4315-a2ff-dd7e4d211b66`, boot veri"
 ---
 # GDAI — Configure Cloud Agents — Bootstrap + GDAI plugin
 
@@ -24,7 +24,7 @@ Use **GDAI — Configure Cloud Agents — Bootstrap + GDAI plugin** (roles: pm, 
 
 ### 4.1 Environment bootstrap (VM)
 
-**Snapshot ID + launch checklist:** `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8`, boot verification, and `main` vs `game/development` pitfalls.
+**Snapshot ID + launch checklist:** `docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md` — active snapshot `snapshot-20260731-6674a8af-9b2c-4315-a2ff-dd7e4d211b66`, boot verification, and `main` vs `game/development` pitfalls.
 
 Cloud agents install dependencies via `.cursor/environment.json`:
 
