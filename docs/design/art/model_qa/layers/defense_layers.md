@@ -1,6 +1,7 @@
 ---
 id: defense-layers
 type: how-to
+phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art

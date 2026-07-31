@@ -1,6 +1,7 @@
 ---
 id: main-quests-detail
 type: reference
+phase: [1, 5]
 audience: [narrative, builder]
 status: active
 authority: world

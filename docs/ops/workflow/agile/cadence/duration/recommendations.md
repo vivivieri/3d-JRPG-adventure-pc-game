@@ -1,6 +1,7 @@
 ---
 id: recommendations
 type: how-to
+phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
