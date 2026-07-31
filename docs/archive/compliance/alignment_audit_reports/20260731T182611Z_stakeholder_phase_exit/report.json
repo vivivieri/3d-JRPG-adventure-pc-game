@@ -1,0 +1,499 @@
+{
+  "schema_version": 2,
+  "audit_id": "20260731T182611Z_stakeholder_phase_exit",
+  "generated_at": "2026-07-31T18:26:11Z",
+  "trigger": "stakeholder_phase_exit",
+  "note": "Embedded in stakeholder report (phase_exit)",
+  "branch": "cursor/audit-slide-visuals-780b",
+  "commit": "30dce1e",
+  "verdict": "FAIL",
+  "headline": "Alignment audit — FAIL (cursor/audit-slide-visuals-780b @ 30dce1e) · Spec 4.2/10 · Build N/A/10",
+  "streams": {
+    "spec_readiness": {
+      "id": "spec_readiness",
+      "label": "Design & Preparation",
+      "short_label": "Spec",
+      "question": "Can we dispatch builders? Is design truth complete?",
+      "score": 4.2,
+      "status": "fail",
+      "verdict": "FAIL",
+      "primary_on_branch": false,
+      "domains": {
+        "data_alignment": 6.8,
+        "narrative": 4.0,
+        "gameplay": 2.5,
+        "visual_spec": 3.7,
+        "ux_controls": 8.2,
+        "pm_workflow": 0.0
+      },
+      "na_reason": null
+    },
+    "build_readiness": {
+      "id": "build_readiness",
+      "label": "Development & Shipping",
+      "short_label": "Build",
+      "question": "Does the game run, pass gates, and approach Steam?",
+      "score": null,
+      "status": "not_applicable",
+      "verdict": "N/A",
+      "primary_on_branch": false,
+      "domains": {
+        "runtime_proof": 3.5,
+        "steam_ship": 1.05
+      },
+      "na_reason": "Build stream applies only on game/development — main holds specs until P1-00 bootstrap"
+    }
+  },
+  "domain_scores": {
+    "data_alignment": 6.8,
+    "narrative": 4.0,
+    "gameplay": 2.5,
+    "visual_spec": 3.7,
+    "ux_controls": 8.2,
+    "pm_workflow": 0.0,
+    "runtime_proof": 3.5,
+    "steam_ship": 1.05,
+    "overall_production": 4.2
+  },
+  "signal_scores": {
+    "data_alignment": {
+      "scene_registry_parity": 10.0,
+      "hooks_parity": 10.0,
+      "tutorial_flags": 10.0,
+      "sprint_board_parity": 10.0,
+      "L0_scene_registry": 0.0,
+      "L0_story_data": 0.0
+    },
+    "narrative": {
+      "L0_story_data": 0.0,
+      "L0_narrative_density": 0.0,
+      "vo_hit_list": 10.0,
+      "cinematic_hooks": 10.0
+    },
+    "gameplay": {
+      "L0_spec_registry": 0.0,
+      "encounters_catalogued": 10.0,
+      "L0_difficulty_data": 0.0,
+      "L0_base_classes": 0.0
+    },
+    "visual_spec": {
+      "L0_zone_visuals_contract": 0.0,
+      "L0_zone_composition": 0.0,
+      "zone_palette_rows": 10.0,
+      "impl_shaders_partial": 8.5
+    },
+    "ux_controls": {
+      "settings_accessibility_doc": 10.0,
+      "combat_presentation_doc": 10.0,
+      "impl_scenes_not_started": 4.0
+    },
+    "pm_workflow": {
+      "ci_pass_rate": 0.0,
+      "L0_doc_sync": 0.0,
+      "L0_pm_orchestrator": 0.0,
+      "L0_stakeholder_report": 0.0,
+      "L0_workflow_integration": 0.0,
+      "L0_candidate_tournament": 0.0,
+      "L0_agent_session_telemetry": 0.0,
+      "L0_factory_watchdog": 0.0,
+      "L0_sprint_board": 0.0
+    },
+    "runtime_proof": {
+      "has_project_godot": 2.0,
+      "L2_boot_headless": 4.0,
+      "L4_integration": 4.0,
+      "L5_e2e_three_endings": 4.0
+    },
+    "steam_ship": {
+      "L0_ship_build_security": 0.0,
+      "L0_player_build_protection": 0.0,
+      "M5_asset_compliance": 0.0,
+      "runtime_proof": 3.5
+    }
+  },
+  "ci_summary": {
+    "script": null,
+    "pass_count": 0,
+    "fail_count": 0,
+    "skip_count": 0,
+    "failed_gate_ids": []
+  },
+  "parity": {
+    "encounters_registry": [
+      "enc_sc05_tutorial_crab",
+      "enc_sc06_cave_crab",
+      "enc_sc07_optional_crabs",
+      "enc_sc08_deep_pool",
+      "enc_sc09_shore_wraith",
+      "enc_sc10_optional_wraith",
+      "enc_sc12_palace_wraiths",
+      "enc_sc14_sentinel",
+      "enc_sc15_tide_keeper"
+    ],
+    "encounters_data": [
+      "enc_sc05_tutorial_crab",
+      "enc_sc06_cave_crab",
+      "enc_sc07_optional_crabs",
+      "enc_sc08_deep_pool",
+      "enc_sc09_shore_wraith",
+      "enc_sc10_optional_wraith",
+      "enc_sc12_palace_wraiths",
+      "enc_sc14_sentinel",
+      "enc_sc15_tide_keeper"
+    ],
+    "encounters_ok": true,
+    "hooks_registry": [
+      "sc02_hub_pan",
+      "sc08_deep_pool_vignette",
+      "sc11_palace_flashback",
+      "sc12_gate_reveal",
+      "sc14_sentinel_breather",
+      "sc16_last_mercy_resolution"
+    ],
+    "hooks_data": [
+      "sc02_hub_pan",
+      "sc08_deep_pool_vignette",
+      "sc11_palace_flashback",
+      "sc12_gate_reveal",
+      "sc14_sentinel_breather",
+      "sc16_last_mercy_resolution"
+    ],
+    "hooks_ok": true,
+    "tutorial_flags_expected": 13,
+    "tutorial_flags_emitted": 13,
+    "tutorial_flags_missing": [],
+    "tutorials_ok": true,
+    "sprint_board_ids": [
+      "P1-00",
+      "P1-01",
+      "P1-02",
+      "P1-03",
+      "P1-04",
+      "P1-05",
+      "P1-06"
+    ],
+    "sprint_pack_ids": [
+      "P1-00",
+      "P1-01",
+      "P1-02",
+      "P1-03",
+      "P1-04",
+      "P1-05",
+      "P1-06"
+    ],
+    "sprint_pack_missing_on_board": [],
+    "sprint_board_ok": true,
+    "parity_ok": true
+  },
+  "stale_string_hits": [],
+  "recommendations": [
+    {
+      "id": "REC_L5_E2E",
+      "priority": "P2",
+      "category": "ship_path",
+      "title": "L5 three-endings E2E before human QA",
+      "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+      "status": "open"
+    },
+    {
+      "id": "REC_STAKEHOLDER_VISUALS",
+      "priority": "P2",
+      "category": "stakeholder",
+      "title": "Refresh stakeholder visual pack",
+      "action": "Place illustrated management PNGs in docs/archive/compliance/alignment_audit_visuals/latest/ (style refs in style/), then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest",
+      "status": "open"
+    }
+  ],
+  "checklist": {
+    "sections": [
+      {
+        "id": "blocking",
+        "label": "Blocking (P0)",
+        "must_clear_before_dispatch": true,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "before_dispatch",
+        "label": "Before P1-00 dispatch (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "implementation",
+        "label": "Implementation (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "ship_path",
+        "label": "Ship path M6 (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_L5_E2E",
+            "priority": "P2",
+            "category": "ship_path",
+            "title": "L5 three-endings E2E before human QA",
+            "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "stakeholder",
+        "label": "Stakeholder comms (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_STAKEHOLDER_VISUALS",
+            "priority": "P2",
+            "category": "stakeholder",
+            "title": "Refresh stakeholder visual pack",
+            "action": "Place illustrated management PNGs in docs/archive/compliance/alignment_audit_visuals/latest/ (style refs in style/), then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "doc_nit",
+        "label": "Doc nits (P3)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      }
+    ],
+    "total_open": 2,
+    "blocking_open": 0
+  },
+  "visual_manifest": [
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_exec_summary",
+      "label": "Exec summary slide (radar + bars + callouts)",
+      "kind": "radar",
+      "filename": "audit_exec_summary.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_exec_summary.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_exec_summary.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_exec_summary.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_report",
+      "label": "Two-stream radar report",
+      "kind": "radar",
+      "filename": "audit_radar_report.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_report.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_report.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_report.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec",
+      "label": "Spec readiness radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_build",
+      "label": "Build readiness radar",
+      "kind": "radar",
+      "filename": "audit_radar_build.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_build.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_breakdown",
+      "label": "Spec sub-radar breakdown (6 domains)",
+      "kind": "radar",
+      "filename": "audit_radar_spec_breakdown.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_breakdown.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_breakdown.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_breakdown.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_data_alignment",
+      "label": "Data Alignment sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_data_alignment.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_data_alignment.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_data_alignment.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_data_alignment.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_narrative",
+      "label": "Narrative sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_narrative.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_narrative.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_narrative.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_narrative.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_gameplay",
+      "label": "Gameplay sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_gameplay.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_gameplay.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_gameplay.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_gameplay.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_visual_spec",
+      "label": "Visual Spec sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_visual_spec.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_visual_spec.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_visual_spec.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_visual_spec.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_ux_controls",
+      "label": "UX & Controls sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_ux_controls.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_ux_controls.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_ux_controls.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_ux_controls.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_spec_pm_workflow",
+      "label": "PM Workflow sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_spec_pm_workflow.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_pm_workflow.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_spec_pm_workflow.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_spec_pm_workflow.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_build_breakdown",
+      "label": "Build sub-radar breakdown (2 domains)",
+      "kind": "radar",
+      "filename": "audit_radar_build_breakdown.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_breakdown.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_build_breakdown.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_breakdown.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_build_runtime_proof",
+      "label": "Runtime Proof sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_build_runtime_proof.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_runtime_proof.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_build_runtime_proof.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_runtime_proof.png"
+    },
+    {
+      "pack_id": "batch_01_foundation",
+      "pack_title": "Foundation review",
+      "asset_id": "audit_radar_build_steam_ship",
+      "label": "Steam Ship sub-radar",
+      "kind": "radar",
+      "filename": "audit_radar_build_steam_ship.png",
+      "path": "artifacts/alignment_audits/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_steam_ship.png",
+      "present": true,
+      "copied": true,
+      "management": true,
+      "auto_generated": true,
+      "deprecated_for_management": false,
+      "gallery_href": "visuals/audit_radar_build_steam_ship.png",
+      "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260731T182611Z_stakeholder_phase_exit/visuals/audit_radar_build_steam_ship.png"
+    }
+  ]
+}

@@ -34,7 +34,9 @@ bash tools/run_alignment_audit.sh --trigger post_merge --note "workflow integrat
 
 **Management visuals:** Prefer illustrated slides in `alignment_audit_visuals/latest/` (style kit in `style/`). Per-run snapshots: `alignment_audit_reports/<audit_id>/visuals/` (Git LFS). Do not use flat matplotlib or mega dashboard for executive readiness.
 
-**Full-surface example:** `alignment_audit` is the reference registry entry — script hooks (`alignment_audit_lib.py`, `generate_audit_radar_images.py`), `visual_policy` in catalog, all `standard_agent_surfaces`, and report/HTML management sections must ship together.
+**Telegram merge:** On `sprint_cycle_complete` / `phase_exit` / `uat_ready`, `pm_emit_stakeholder_report.sh` embeds alignment verdict + exec summary photo in the same Telegram message (`stakeholder_report_config.json` → `alignment_audit`).
+
+**Full-surface example:** `alignment_audit` is the reference registry entry — script hooks (`alignment_audit_lib.py`, `generate_audit_radar_images.py`, stakeholder embed), `visual_policy` in catalog, all `standard_agent_surfaces`, and report/HTML management sections must ship together.
 
 ---
 

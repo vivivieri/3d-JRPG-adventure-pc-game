@@ -1,0 +1,88 @@
+{
+  "audit_id": "20260731T182611Z_stakeholder_phase_exit",
+  "generated_at": "2026-07-31T18:26:11Z",
+  "recommendations": [
+    {
+      "id": "REC_L5_E2E",
+      "priority": "P2",
+      "category": "ship_path",
+      "title": "L5 three-endings E2E before human QA",
+      "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+      "status": "open"
+    },
+    {
+      "id": "REC_STAKEHOLDER_VISUALS",
+      "priority": "P2",
+      "category": "stakeholder",
+      "title": "Refresh stakeholder visual pack",
+      "action": "Place illustrated management PNGs in docs/archive/compliance/alignment_audit_visuals/latest/ (style refs in style/), then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest",
+      "status": "open"
+    }
+  ],
+  "checklist": {
+    "sections": [
+      {
+        "id": "blocking",
+        "label": "Blocking (P0)",
+        "must_clear_before_dispatch": true,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "before_dispatch",
+        "label": "Before P1-00 dispatch (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "implementation",
+        "label": "Implementation (P1)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      },
+      {
+        "id": "ship_path",
+        "label": "Ship path M6 (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_L5_E2E",
+            "priority": "P2",
+            "category": "ship_path",
+            "title": "L5 three-endings E2E before human QA",
+            "action": "bash tools/run_e2e_playthrough.sh on game/development; all SC-17a/b/c paths must PASS.",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "stakeholder",
+        "label": "Stakeholder comms (P2)",
+        "must_clear_before_dispatch": false,
+        "items": [
+          {
+            "id": "REC_STAKEHOLDER_VISUALS",
+            "priority": "P2",
+            "category": "stakeholder",
+            "title": "Refresh stakeholder visual pack",
+            "action": "Place illustrated management PNGs in docs/archive/compliance/alignment_audit_visuals/latest/ (style refs in style/), then: bash tools/run_alignment_audit.sh --visuals-from docs/archive/compliance/alignment_audit_visuals/latest",
+            "status": "open"
+          }
+        ],
+        "open_count": 1
+      },
+      {
+        "id": "doc_nit",
+        "label": "Doc nits (P3)",
+        "must_clear_before_dispatch": false,
+        "items": [],
+        "open_count": 0
+      }
+    ],
+    "total_open": 2,
+    "blocking_open": 0
+  }
+}

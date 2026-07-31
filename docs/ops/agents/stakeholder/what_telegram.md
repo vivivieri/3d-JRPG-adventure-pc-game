@@ -39,6 +39,10 @@ After each **micro cycle** (issue done), **sprint cycle**, or **phase exit**, th
 
 **Telegram** (optional): compact HTML message to your chat when secrets are set.
 
+On **sprint cycle** / **phase exit** / **UAT ready**, the same Telegram send also includes:
+- Alignment verdict (Spec / Build scores)
+- Illustrated `audit_exec_summary.png` photo (when present under `latest/` or per-run `visuals/`)
+
 ---
 
 

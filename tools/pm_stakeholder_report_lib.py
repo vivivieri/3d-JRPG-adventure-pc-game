@@ -225,6 +225,113 @@ def _headline(
     return f"PM status — sprint {pct}% ({progress.get('done')}/{progress.get('total')})"
 
 
+def _summarize_alignment(audit: dict[str, Any]) -> dict[str, Any]:
+    """Compact alignment block for stakeholder report + Telegram."""
+    streams = audit.get("streams") or {}
+    spec = streams.get("spec_readiness") or {}
+    build = streams.get("build_readiness") or {}
+    checklist = audit.get("checklist") or {}
+    build_score = build.get("score")
+    build_txt = (
+        "N/A"
+        if build.get("status") == "not_applicable" or build_score is None
+        else f"{float(build_score):.2f}"
+    )
+    return {
+        "audit_id": audit.get("audit_id"),
+        "generated_at": audit.get("generated_at"),
+        "verdict": audit.get("verdict"),
+        "headline": audit.get("headline"),
+        "spec_score": spec.get("score"),
+        "build_score": build.get("score"),
+        "build_status": build.get("status"),
+        "build_display": build_txt,
+        "blocking_open": checklist.get("blocking_open", 0),
+        "recommendation_count": len(audit.get("recommendations") or []),
+        "branch": audit.get("branch"),
+        "report_markdown": "artifacts/alignment_audits/latest.md",
+        "committed_dir": (
+            f"docs/archive/compliance/alignment_audit_reports/{audit.get('audit_id')}"
+            if audit.get("audit_id")
+            else None
+        ),
+    }
+
+
+def _alignment_photo_path(config: dict[str, Any], summary: dict[str, Any] | None) -> Path | None:
+    aa = config.get("alignment_audit") or {}
+    prefs = aa.get("photo_preference") or [
+        "audit_exec_summary.png",
+        "audit_radar_spec.png",
+        "audit_radar_report.png",
+    ]
+    latest_dir = ROOT / aa.get(
+        "latest_visuals_dir", "docs/archive/compliance/alignment_audit_visuals/latest"
+    )
+    candidates: list[Path] = []
+    if summary and summary.get("audit_id"):
+        snap = (
+            ROOT
+            / "docs/archive/compliance/alignment_audit_reports"
+            / str(summary["audit_id"])
+            / "visuals"
+        )
+        candidates.append(snap)
+    candidates.append(latest_dir)
+    for directory in candidates:
+        for fname in prefs:
+            path = directory / fname
+            if path.is_file() and path.stat().st_size > 10_000:
+                return path
+    return None
+
+
+def attach_alignment_audit(
+    report: dict[str, Any],
+    config: dict[str, Any],
+    *,
+    trigger: str,
+) -> dict[str, Any] | None:
+    """Run (for sprint/phase) or load latest alignment audit into the stakeholder report."""
+    aa = config.get("alignment_audit") or {}
+    if not aa.get("include_in_report", True):
+        return None
+
+    run_triggers = set(aa.get("run_before_emit_triggers") or [])
+    if trigger in run_triggers:
+        try:
+            import alignment_audit_lib as aal  # noqa: PLC0415
+
+            visuals = ROOT / aa.get(
+                "latest_visuals_dir",
+                "docs/archive/compliance/alignment_audit_visuals/latest",
+            )
+            audit = aal.build_report(
+                trigger=f"stakeholder_{trigger}",
+                note=f"Embedded in stakeholder report ({trigger})",
+                visuals_from=visuals if visuals.is_dir() else None,
+                skip_ci=bool(aa.get("skip_ci_on_embed", True)),
+            )
+            catalog = aal.load_catalog()
+            aal.write_outputs(
+                audit, catalog, visuals_from=visuals if visuals.is_dir() else None
+            )
+            aal.write_committed_archive(
+                audit, catalog, visuals_from=visuals if visuals.is_dir() else None
+            )
+        except Exception as exc:  # noqa: BLE001
+            print(f"WARN: alignment audit embed run failed: {exc}", file=sys.stderr)
+
+    latest_path = ROOT / aa.get("latest_json", "artifacts/alignment_audits/latest.json")
+    audit = load_json(latest_path)
+    if not audit:
+        report["alignment"] = None
+        return None
+    summary = _summarize_alignment(audit)
+    report["alignment"] = summary
+    return summary
+
+
 def report_to_markdown(report: dict[str, Any]) -> str:
     lines = [
         "# Tides of Urashima — Stakeholder Report",
@@ -284,6 +391,26 @@ def report_to_markdown(report: dict[str, Any]) -> str:
             f"- Status: `{fac.get('health_status') or 'unknown'}` · Halted: `{fac.get('halted')}`",
             f"- Agent sessions this sprint: {fac.get('agent_sessions_this_sprint', 0)}",
             "",
+        ]
+    )
+
+    alignment = report.get("alignment")
+    if alignment:
+        lines.extend(
+            [
+                "## Alignment audit",
+                f"- Verdict: **{alignment.get('verdict', '?')}**",
+                f"- Spec: **{alignment.get('spec_score', '—')}/10** · "
+                f"Build: **{alignment.get('build_display', 'N/A')}/10**",
+                f"- Blocking open: {alignment.get('blocking_open', 0)} · "
+                f"Recommendations: {alignment.get('recommendation_count', 0)}",
+                f"- Audit: `{alignment.get('audit_id') or '—'}`",
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
             "## Links",
             f"- Repo: {report.get('repo', {}).get('github', '')}",
             f"- Actions: {report.get('repo', {}).get('actions', '')}",
@@ -334,6 +461,19 @@ def report_to_telegram_html(report: dict[str, Any]) -> str:
     elif fac.get("health_status") not in (None, "healthy", "idle_ok"):
         lines.append(f"⚠️ Factory: {esc(str(fac.get('health_status')))}")
 
+    alignment = report.get("alignment")
+    if alignment:
+        lines.extend(
+            [
+                "",
+                f"📐 {b('Alignment')}: {esc(str(alignment.get('verdict') or '?'))}",
+                f"Spec {esc(str(alignment.get('spec_score', '—')))}/10 · "
+                f"Build {esc(str(alignment.get('build_display', 'N/A')))}/10",
+            ]
+        )
+        if alignment.get("blocking_open"):
+            lines.append(f"Blocking open: {alignment['blocking_open']}")
+
     gh = report.get("repo", {}).get("github", "")
     if gh:
         lines.append(f'<a href="{esc(gh)}">GitHub</a>')
@@ -378,6 +518,16 @@ def render_html_dashboard(report: dict[str, Any]) -> str:
     data = json.dumps(report, ensure_ascii=False)
     headline = html.escape(report.get("headline", "Status"))
     pct = report.get("progress", {}).get("percent_complete", 0)
+    alignment = report.get("alignment") or {}
+    align_card = ""
+    if alignment:
+        align_card = (
+            f'<div class="card"><h2>Alignment</h2><p>'
+            f'{html.escape(str(alignment.get("verdict") or "—"))}<br/>'
+            f'Spec {html.escape(str(alignment.get("spec_score", "—")))}/10 · '
+            f'Build {html.escape(str(alignment.get("build_display", "N/A")))}/10'
+            f"</p></div>"
+        )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -414,6 +564,7 @@ def render_html_dashboard(report: dict[str, Any]) -> str:
     <div class="card"><h2>Phase</h2><p>{html.escape(str(report.get("phase", {}).get("name", "")))}</p></div>
     <div class="card"><h2>Factory</h2><p>{html.escape(str(report.get("factory", {}).get("health_status") or "—"))}</p></div>
     <div class="card"><h2>Sessions</h2><p>{report.get("factory", {}).get("agent_sessions_this_sprint", 0)}</p></div>
+    {align_card}
   </div>
   <h2>Issues</h2>
   <table>
@@ -562,6 +713,7 @@ def emit_report(
         note=note,
         event_payload=event_payload,
     )
+    alignment = attach_alignment_audit(report, config, trigger=trigger)
     paths = write_outputs(report, config)
 
     tg_cfg = config.get("triggers", {}).get(trigger, {})
@@ -569,11 +721,24 @@ def emit_report(
     if should_send is None:
         should_send = bool(tg_cfg.get("send_telegram", False))
 
-    telegram_result = {"sent": False, "detail": "skipped"}
+    telegram_result: dict[str, Any] = {"sent": False, "detail": "skipped", "photo": None}
     if should_send:
         msg = report_to_telegram_html(report)
         ok, detail = send_telegram(msg, config)
-        telegram_result = {"sent": ok, "detail": detail}
+        telegram_result = {"sent": ok, "detail": detail, "photo": None}
+        aa = config.get("alignment_audit") or {}
+        if ok and aa.get("attach_photo", True):
+            photo = _alignment_photo_path(config, alignment)
+            if photo is not None:
+                caption = "Alignment exec summary"
+                if alignment and alignment.get("verdict"):
+                    caption = (
+                        f"Alignment {alignment.get('verdict')} · "
+                        f"Spec {alignment.get('spec_score', '—')}/10 · "
+                        f"Build {alignment.get('build_display', 'N/A')}/10"
+                    )
+                pok, pdetail = send_telegram_photo(str(photo), caption[:200], config)
+                telegram_result["photo"] = {"sent": pok, "detail": pdetail, "path": str(photo)}
 
     return {
         "report": report,

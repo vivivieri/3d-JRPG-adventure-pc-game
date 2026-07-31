@@ -593,6 +593,11 @@
           "path": "tools/run_post_agent_cycle.sh",
           "contains": "pm_emit_cycle_event.sh",
           "purpose": "stakeholder report via enforced cycle close"
+        },
+        {
+          "path": "tools/pm_stakeholder_report_lib.py",
+          "contains": "attach_alignment_audit",
+          "purpose": "merge alignment audit into sprint/phase Telegram delivery"
         }
       ],
       "orchestrator_steps": [
@@ -661,6 +666,11 @@
           "path": "tools/generate_audit_radar_images.py",
           "contains": "generate_audit_radars",
           "purpose": "matplotlib spec/build radar renderer"
+        },
+        {
+          "path": "tools/pm_stakeholder_report_lib.py",
+          "contains": "attach_alignment_audit",
+          "purpose": "alignment summary + exec photo on stakeholder Telegram"
         }
       ],
       "orchestrator_steps": [
