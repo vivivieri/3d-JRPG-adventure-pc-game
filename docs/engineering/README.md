@@ -36,9 +36,15 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/code_style/errors_tests_checklist.md](technical/code_style/errors_tests_checklist.md) | `errors_tests_checklist` |
 | [technical/code_style/gdscript_autoload_signals.md](technical/code_style/gdscript_autoload_signals.md) | `gdscript_autoload_signals` |
 | [technical/code_style/layout_naming.md](technical/code_style/layout_naming.md) | `layout_naming` |
+| [technical/coding/ci_pr/ci_matrix.md](technical/coding/ci_pr/ci_matrix.md) | `ci_matrix` |
+| [technical/coding/ci_pr/pr_checklist.md](technical/coding/ci_pr/pr_checklist.md) | `pr_checklist` |
+| [technical/coding/ci_pr/refs_commands.md](technical/coding/ci_pr/refs_commands.md) | `refs_commands` |
 | [technical/coding/ci_pr_commands.md](technical/coding/ci_pr_commands.md) | `ci_pr_commands` |
 | [technical/coding/language_stack.md](technical/coding/language_stack.md) | `language_stack` |
 | [technical/coding/naming.md](technical/coding/naming.md) | `naming` |
+| [technical/data/combat_economy/combat_barks.md](technical/data/combat_economy/combat_barks.md) | `combat_barks` |
+| [technical/data/combat_economy/encounters_items.md](technical/data/combat_economy/encounters_items.md) | `encounters_items` |
+| [technical/data/combat_economy/shop_achievements_newgame.md](technical/data/combat_economy/shop_achievements_newgame.md) | `shop_achievements_newgame` |
 | [technical/data/combat_economy.md](technical/data/combat_economy.md) | `combat_economy` |
 | [technical/data/i18n_validation.md](technical/data/i18n_validation.md) | `i18n_validation` |
 | [technical/data/story_spine.md](technical/data/story_spine.md) | `story_spine` |
@@ -50,6 +56,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/gdscript/standards_layout.md](technical/gdscript/standards_layout.md) | `standards_layout` |
 | [technical/gdscript/typing_syntax_base.md](technical/gdscript/typing_syntax_base.md) | `typing_syntax_base` |
 | [technical/gdscript_regen/checklist/checklist_helpers.md](technical/gdscript_regen/checklist/checklist_helpers.md) | `checklist_helpers` |
+| [technical/gdscript_regen/checklist/phase1/artifact_steps.md](technical/gdscript_regen/checklist/phase1/artifact_steps.md) | `artifact_steps` |
+| [technical/gdscript_regen/checklist/phase1/prereqs_order.md](technical/gdscript_regen/checklist/phase1/prereqs_order.md) | `prereqs_order` |
+| [technical/gdscript_regen/checklist/phase1/verify_handoff.md](technical/gdscript_regen/checklist/phase1/verify_handoff.md) | `verify_handoff` |
 | [technical/gdscript_regen/checklist/phase1_visuals.md](technical/gdscript_regen/checklist/phase1_visuals.md) | `phase1_visuals` |
 | [technical/gdscript_regen/checklist_recover.md](technical/gdscript_regen/checklist_recover.md) | `checklist_recover` |
 | [technical/gdscript_regen/order_helpers.md](technical/gdscript_regen/order_helpers.md) | `order_helpers` |

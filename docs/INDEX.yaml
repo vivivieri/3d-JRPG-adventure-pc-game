@@ -411,6 +411,7 @@ pack_catalog:
   - docs/briefs/vo/sc16_tide_keeper_01.md
   - docs/briefs/yuzu.md
   - docs/design/art/ASSET_COMPLIANCE.md
+  - docs/design/art/CHARACTER_BIBLE.md
   - docs/design/art/ITEMS_3D_MODEL_GUIDE.md
   - docs/design/art/LICENSES.md
   - docs/design/art/automation/characters_props.md
@@ -421,6 +422,8 @@ pack_catalog:
   - docs/design/art/automation/zone_textures.md
   - docs/design/art/characters/animation_portraits.md
   - docs/design/art/characters/enemies.md
+  - docs/design/art/characters/enemies/part_a.md
+  - docs/design/art/characters/enemies/part_b.md
   - docs/design/art/characters/export_order.md
   - docs/design/art/characters/npc_ambient.md
   - docs/design/art/characters/otohime.md
@@ -445,7 +448,14 @@ pack_catalog:
   - docs/design/art/licenses/art_code_ship.md
   - docs/design/art/licenses/audio_models.md
   - docs/design/art/licenses/story_engine_fonts.md
+  - docs/design/art/model_qa/layers/agent_workflow.md
+  - docs/design/art/model_qa/layers/automate_vs_human.md
+  - docs/design/art/model_qa/layers/defense_layers.md
   - docs/design/art/model_qa/layers_workflow.md
+  - docs/design/art/model_qa/polish/cadence.md
+  - docs/design/art/model_qa/polish/who/part_a.md
+  - docs/design/art/model_qa/polish/who/part_b.md
+  - docs/design/art/model_qa/polish/who_directs.md
   - docs/design/art/model_qa/polish_direction.md
   - docs/design/art/model_qa/smoke_report_tools.md
   - docs/design/art/rendering/defaults_environment.md
@@ -453,6 +463,10 @@ pack_catalog:
   - docs/design/art/rendering/materials_gi_glow.md
   - docs/design/art/rendering/quality_zones.md
   - docs/design/art/rendering/zone_visuals_contract.md
+  - docs/design/art/visual_qa/judge/defense_layers.md
+  - docs/design/art/visual_qa/judge/layers/part_a.md
+  - docs/design/art/visual_qa/judge/layers/part_b.md
+  - docs/design/art/visual_qa/judge/what_ai_judges.md
   - docs/design/art/visual_qa/judge_layers.md
   - docs/design/art/visual_qa/report_phase_tools.md
   - docs/design/art/visual_qa/tools_antipattern.md
@@ -486,7 +500,14 @@ pack_catalog:
   - docs/design/audio/direction/sfx_cues_mix.md
   - docs/design/audio/direction/sourcing_impl.md
   - docs/design/audio/production/bgm_and_scene_map.md
+  - docs/design/audio/production/bgm_map/bgm_sheets.md
+  - docs/design/audio/production/bgm_map/scene_map.md
+  - docs/design/audio/production/bgm_map/sheets/master_list.md
+  - docs/design/audio/production/bgm_map/sheets/per_track_specs.md
   - docs/design/audio/production/combat_sfx.md
+  - docs/design/audio/production/combat_sfx/boss_hooks.md
+  - docs/design/audio/production/combat_sfx/loop_template.md
+  - docs/design/audio/production/combat_sfx/sfx_manifest.md
   - docs/design/audio/production/mix_impl_qa.md
   - docs/design/gameplay/ACHIEVEMENTS.md
   - docs/design/gameplay/ENCOUNTER_TABLE.md
@@ -552,6 +573,8 @@ pack_catalog:
   - docs/design/vision/narrative/audio_themes.md
   - docs/design/vision/narrative/character_voice.md
   - docs/design/vision/narrative/checklist_production.md
+  - docs/design/vision/narrative/emotional/external_steals.md
+  - docs/design/vision/narrative/emotional/project_rules.md
   - docs/design/vision/narrative/emotional_rules.md
   - docs/design/vision/narrative/localization_emotion.md
   - docs/design/vision/narrative/scene_dialogue.md
@@ -606,10 +629,16 @@ pack_catalog:
   - docs/engineering/technical/code_style/errors_tests_checklist.md
   - docs/engineering/technical/code_style/gdscript_autoload_signals.md
   - docs/engineering/technical/code_style/layout_naming.md
+  - docs/engineering/technical/coding/ci_pr/ci_matrix.md
+  - docs/engineering/technical/coding/ci_pr/pr_checklist.md
+  - docs/engineering/technical/coding/ci_pr/refs_commands.md
   - docs/engineering/technical/coding/ci_pr_commands.md
   - docs/engineering/technical/coding/language_stack.md
   - docs/engineering/technical/coding/naming.md
   - docs/engineering/technical/data/combat_economy.md
+  - docs/engineering/technical/data/combat_economy/combat_barks.md
+  - docs/engineering/technical/data/combat_economy/encounters_items.md
+  - docs/engineering/technical/data/combat_economy/shop_achievements_newgame.md
   - docs/engineering/technical/data/i18n_validation.md
   - docs/engineering/technical/data/story_spine.md
   - docs/engineering/technical/errors/language_exit.md
@@ -620,6 +649,9 @@ pack_catalog:
   - docs/engineering/technical/gdscript/standards_layout.md
   - docs/engineering/technical/gdscript/typing_syntax_base.md
   - docs/engineering/technical/gdscript_regen/checklist/checklist_helpers.md
+  - docs/engineering/technical/gdscript_regen/checklist/phase1/artifact_steps.md
+  - docs/engineering/technical/gdscript_regen/checklist/phase1/prereqs_order.md
+  - docs/engineering/technical/gdscript_regen/checklist/phase1/verify_handoff.md
   - docs/engineering/technical/gdscript_regen/checklist/phase1_visuals.md
   - docs/engineering/technical/gdscript_regen/checklist_recover.md
   - docs/engineering/technical/gdscript_regen/order_helpers.md
@@ -663,6 +695,8 @@ pack_catalog:
   - docs/ops/agents/automation_prompts/uat_notify.md
   - docs/ops/agents/automation_prompts/worker_sprint_issue.md
   - docs/ops/agents/cloud_setup/antipatterns_troubleshoot.md
+  - docs/ops/agents/cloud_setup/automations/cursor_automations.md
+  - docs/ops/agents/cloud_setup/automations/one_time.md
   - docs/ops/agents/cloud_setup/cycle_events.md
   - docs/ops/agents/cloud_setup/github_timeline.md
   - docs/ops/agents/cloud_setup/goal_architecture.md
@@ -673,8 +707,13 @@ pack_catalog:
   - docs/ops/agents/factory_setup/what_boundaries.md
   - docs/ops/agents/gdai_setup/architecture_needs.md
   - docs/ops/agents/gdai_setup/architecture_prereqs.md
+  - docs/ops/agents/gdai_setup/cloud_steam/cloud_agents.md
+  - docs/ops/agents/gdai_setup/cloud_steam/steam_export.md
+  - docs/ops/agents/gdai_setup/cloud_steam/troubleshoot.md
   - docs/ops/agents/gdai_setup/cloud_steam_troubleshoot.md
   - docs/ops/agents/gdai_setup/install_desktop.md
+  - docs/ops/agents/mcp/art/part_a.md
+  - docs/ops/agents/mcp/art/part_b.md
   - docs/ops/agents/mcp/art_tools.md
   - docs/ops/agents/mcp/install.md
   - docs/ops/agents/mcp/setup_and_cost.md
@@ -697,6 +736,9 @@ pack_catalog:
   - docs/ops/agents/pm_runbook/planning_watchdog.md
   - docs/ops/agents/secrets/api_keys.md
   - docs/ops/agents/secrets/day_one_checklist.md
+  - docs/ops/agents/secrets/keys/cursor_api.md
+  - docs/ops/agents/secrets/keys/gamelab_gh.md
+  - docs/ops/agents/secrets/keys/telegram_vo.md
   - docs/ops/agents/secrets/scope_troubleshoot.md
   - docs/ops/agents/secrets/webhooks.md
   - docs/ops/agents/snapshot/dashboard_branch.md
@@ -711,6 +753,8 @@ pack_catalog:
   - docs/ops/agents/watchdog/automations_playbook.md
   - docs/ops/agents/watchdog/commands_recovery.md
   - docs/ops/agents/watchdog/layers_monitor.md
+  - docs/ops/cheat-sheets/controls/gates/part_a.md
+  - docs/ops/cheat-sheets/controls/gates/part_b.md
   - docs/ops/cheat-sheets/controls/gates_by_branch.md
   - docs/ops/cheat-sheets/controls/golden_stack.md
   - docs/ops/cheat-sheets/controls/pr_session_ship.md
@@ -735,6 +779,8 @@ pack_catalog:
   - docs/ops/ci-cd/ci/branch_purpose.md
   - docs/ops/ci-cd/ci/local_rr_remediation.md
   - docs/ops/ci-cd/ci/required_gates.md
+  - docs/ops/ci-cd/ci/required_gates/runs/part_a.md
+  - docs/ops/ci-cd/ci/required_gates/runs/part_b.md
   - docs/ops/ci-cd/ci/required_gates/what_not.md
   - docs/ops/ci-cd/ci/required_gates/what_runs.md
   - docs/ops/ci-cd/environments/map_preprod.md
@@ -757,6 +803,8 @@ pack_catalog:
   - docs/ops/qa/PLAYTEST_TELEMETRY.md
   - docs/ops/qa/QA_AND_BUG_PROCESS.md
   - docs/ops/qa/SCREENSHOTS.md
+  - docs/ops/qa/acceptance/catalog/part_a.md
+  - docs/ops/qa/acceptance/catalog/part_b.md
   - docs/ops/qa/acceptance/gate_catalog.md
   - docs/ops/qa/acceptance/jury_report.md
   - docs/ops/qa/acceptance/phase_tools.md
@@ -775,6 +823,9 @@ pack_catalog:
   - docs/ops/qa/flow_qa/workflow_report.md
   - docs/ops/qa/jury/protocol_fields.md
   - docs/ops/qa/jury/why_limit.md
+  - docs/ops/qa/perf/procedure/commands_refs.md
+  - docs/ops/qa/perf/procedure/gates_plan.md
+  - docs/ops/qa/perf/procedure/procedure_evidence.md
   - docs/ops/qa/perf/procedure_evidence.md
   - docs/ops/qa/perf/reference_machines.md
   - docs/ops/qa/perf/why_profiles.md
@@ -787,9 +838,14 @@ pack_catalog:
   - docs/ops/qa/playtest_tel/privacy.md
   - docs/ops/qa/playtest_tel/purpose_pipeline_schema.md
   - docs/ops/qa/remediation/levers_commands.md
+  - docs/ops/qa/remediation/loop/industry_map.md
+  - docs/ops/qa/remediation/loop/remediation_loop.md
   - docs/ops/qa/remediation/report_stop_maps.md
   - docs/ops/qa/remediation/standards_loop.md
   - docs/ops/qa/remediation/tools_related.md
+  - docs/ops/qa/security/m6/anti_tamper.md
+  - docs/ops/qa/security/m6/related.md
+  - docs/ops/qa/security/m6/ship_checklist.md
   - docs/ops/qa/security/m6_player_protect.md
   - docs/ops/qa/security/secrets_ci_cloud.md
   - docs/ops/qa/security/steam_supply.md
@@ -797,6 +853,7 @@ pack_catalog:
   - docs/ops/qa/telemetry/privacy_refs.md
   - docs/ops/qa/telemetry/tokens_analysis.md
   - docs/ops/qa/telemetry/what_storage_hooks.md
+  - docs/ops/qa/testing/README.md
   - docs/ops/qa/testing/l0.md
   - docs/ops/qa/testing/l1.md
   - docs/ops/qa/testing/l2.md
@@ -806,6 +863,8 @@ pack_catalog:
   - docs/ops/qa/testing/l6.md
   - docs/ops/qa/testing/phases_and_report.md
   - docs/ops/qa/testing/toolkit.md
+  - docs/ops/qa/testing/toolkit/part_a.md
+  - docs/ops/qa/testing/toolkit/part_b.md
   - docs/ops/qa/tournament/what_stack_data.md
   - docs/ops/qa/tournament/when_ci_forbidden.md
   - docs/ops/qa/tournament/workflow_promotion.md
@@ -822,6 +881,10 @@ pack_catalog:
   - docs/ops/sprints/phase1_sprint1/p1_05_golden_screenshot.md
   - docs/ops/sprints/phase1_sprint1/p1_06_review_preview.md
   - docs/ops/workflow/DELIVERY_CONTROL.md
+  - docs/ops/workflow/agile/cadence/duration.md
+  - docs/ops/workflow/agile/cadence/sprint_master.md
+  - docs/ops/workflow/agile/linear/flow_example.md
+  - docs/ops/workflow/agile/linear/setup_ceremony.md
   - docs/ops/workflow/agile/linear_sprints.md
   - docs/ops/workflow/agile/sprint_master_cadence.md
   - docs/ops/workflow/agile/summary_why.md
@@ -830,6 +893,10 @@ pack_catalog:
   - docs/ops/workflow/ai_dev/commands.md
   - docs/ops/workflow/ai_dev/packs_gates.md
   - docs/ops/workflow/ai_dev/phase_acceptance.md
+  - docs/ops/workflow/ai_dev/phases/part_a.md
+  - docs/ops/workflow/ai_dev/phases/part_b.md
+  - docs/ops/workflow/ai_dev/testing/ai_testing.md
+  - docs/ops/workflow/ai_dev/testing/unit_tests.md
   - docs/ops/workflow/ai_dev/testing_policy.md
   - docs/ops/workflow/branching/create_branch_refs.md
   - docs/ops/workflow/branching/roles_rules.md
@@ -856,3 +923,6 @@ pack_catalog:
   - docs/ops/workflow/milestones/m1_m4_gameplay.md
   - docs/ops/workflow/milestones/m5_m6_ship.md
   - docs/ops/workflow/milestones/pre_build.md
+  - docs/ops/workflow/milestones/pre_build/m0_core.md
+  - docs/ops/workflow/milestones/pre_build/m0_data_ai.md
+  - docs/ops/workflow/milestones/pre_build/m0_narrative_pitch.md

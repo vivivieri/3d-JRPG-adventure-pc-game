@@ -22,6 +22,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/PROJECT_MANAGEMENT.md](agents/PROJECT_MANAGEMENT.md) | `PROJECT_MANAGEMENT` |
 | [agents/SPRINT_ORCHESTRATION.md](agents/SPRINT_ORCHESTRATION.md) | `SPRINT_ORCHESTRATION` |
 | [agents/cloud_setup/antipatterns_troubleshoot.md](agents/cloud_setup/antipatterns_troubleshoot.md) | `antipatterns_troubleshoot` |
+| [agents/cloud_setup/automations/cursor_automations.md](agents/cloud_setup/automations/cursor_automations.md) | `cursor_automations` |
+| [agents/cloud_setup/automations/one_time.md](agents/cloud_setup/automations/one_time.md) | `one_time` |
 | [agents/cloud_setup/cycle_events.md](agents/cloud_setup/cycle_events.md) | `cycle_events` |
 | [agents/cloud_setup/github_timeline.md](agents/cloud_setup/github_timeline.md) | `github_timeline` |
 | [agents/cloud_setup/goal_architecture.md](agents/cloud_setup/goal_architecture.md) | `goal_architecture` |
@@ -32,8 +34,13 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/factory_setup/what_boundaries.md](agents/factory_setup/what_boundaries.md) | `what_boundaries` |
 | [agents/gdai_setup/architecture_needs.md](agents/gdai_setup/architecture_needs.md) | `architecture_needs` |
 | [agents/gdai_setup/architecture_prereqs.md](agents/gdai_setup/architecture_prereqs.md) | `architecture_prereqs` |
+| [agents/gdai_setup/cloud_steam/cloud_agents.md](agents/gdai_setup/cloud_steam/cloud_agents.md) | `cloud_agents` |
+| [agents/gdai_setup/cloud_steam/steam_export.md](agents/gdai_setup/cloud_steam/steam_export.md) | `steam_export` |
+| [agents/gdai_setup/cloud_steam/troubleshoot.md](agents/gdai_setup/cloud_steam/troubleshoot.md) | `troubleshoot` |
 | [agents/gdai_setup/cloud_steam_troubleshoot.md](agents/gdai_setup/cloud_steam_troubleshoot.md) | `cloud_steam_troubleshoot` |
 | [agents/gdai_setup/install_desktop.md](agents/gdai_setup/install_desktop.md) | `install_desktop` |
+| [agents/mcp/art/part_a.md](agents/mcp/art/part_a.md) | `part_a` |
+| [agents/mcp/art/part_b.md](agents/mcp/art/part_b.md) | `part_b` |
 | [agents/mcp/art_tools.md](agents/mcp/art_tools.md) | `art_tools` |
 | [agents/mcp/install.md](agents/mcp/install.md) | `install` |
 | [agents/mcp/setup_and_cost.md](agents/mcp/setup_and_cost.md) | `setup_and_cost` |
@@ -56,6 +63,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/pm_runbook/planning_watchdog.md](agents/pm_runbook/planning_watchdog.md) | `planning_watchdog` |
 | [agents/secrets/api_keys.md](agents/secrets/api_keys.md) | `api_keys` |
 | [agents/secrets/day_one_checklist.md](agents/secrets/day_one_checklist.md) | `day_one_checklist` |
+| [agents/secrets/keys/cursor_api.md](agents/secrets/keys/cursor_api.md) | `cursor_api` |
+| [agents/secrets/keys/gamelab_gh.md](agents/secrets/keys/gamelab_gh.md) | `gamelab_gh` |
+| [agents/secrets/keys/telegram_vo.md](agents/secrets/keys/telegram_vo.md) | `telegram_vo` |
 | [agents/secrets/scope_troubleshoot.md](agents/secrets/scope_troubleshoot.md) | `scope_troubleshoot` |
 | [agents/secrets/webhooks.md](agents/secrets/webhooks.md) | `webhooks` |
 | [agents/snapshot/dashboard_branch.md](agents/snapshot/dashboard_branch.md) | `dashboard_branch` |
@@ -72,6 +82,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/watchdog/layers_monitor.md](agents/watchdog/layers_monitor.md) | `layers_monitor` |
 | [cheat-sheets/CONTROLS_CHEATSHEET.md](cheat-sheets/CONTROLS_CHEATSHEET.md) | `CONTROLS_CHEATSHEET` |
 | [cheat-sheets/RR_CHEATSHEET.md](cheat-sheets/RR_CHEATSHEET.md) | `RR_CHEATSHEET` |
+| [cheat-sheets/controls/gates/part_a.md](cheat-sheets/controls/gates/part_a.md) | `part_a` |
+| [cheat-sheets/controls/gates/part_b.md](cheat-sheets/controls/gates/part_b.md) | `part_b` |
 | [cheat-sheets/controls/gates_by_branch.md](cheat-sheets/controls/gates_by_branch.md) | `gates_by_branch` |
 | [cheat-sheets/controls/golden_stack.md](cheat-sheets/controls/golden_stack.md) | `golden_stack` |
 | [cheat-sheets/controls/pr_session_ship.md](cheat-sheets/controls/pr_session_ship.md) | `pr_session_ship` |
@@ -98,6 +110,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [ci-cd/ci/branch_protection_refs.md](ci-cd/ci/branch_protection_refs.md) | `branch_protection_refs` |
 | [ci-cd/ci/branch_purpose.md](ci-cd/ci/branch_purpose.md) | `branch_purpose` |
 | [ci-cd/ci/local_rr_remediation.md](ci-cd/ci/local_rr_remediation.md) | `local_rr_remediation` |
+| [ci-cd/ci/required_gates/runs/part_a.md](ci-cd/ci/required_gates/runs/part_a.md) | `part_a` |
+| [ci-cd/ci/required_gates/runs/part_b.md](ci-cd/ci/required_gates/runs/part_b.md) | `part_b` |
 | [ci-cd/ci/required_gates/what_not.md](ci-cd/ci/required_gates/what_not.md) | `what_not` |
 | [ci-cd/ci/required_gates/what_runs.md](ci-cd/ci/required_gates/what_runs.md) | `what_runs` |
 | [ci-cd/ci/required_gates.md](ci-cd/ci/required_gates.md) | `required_gates` |
@@ -127,6 +141,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/SCREENSHOTS.md](qa/SCREENSHOTS.md) | `SCREENSHOTS` |
 | [qa/SECURITY.md](qa/SECURITY.md) | `SECURITY` |
 | [qa/WORKFLOW_INTEGRATION.md](qa/WORKFLOW_INTEGRATION.md) | `WORKFLOW_INTEGRATION` |
+| [qa/acceptance/catalog/part_a.md](qa/acceptance/catalog/part_a.md) | `part_a` |
+| [qa/acceptance/catalog/part_b.md](qa/acceptance/catalog/part_b.md) | `part_b` |
 | [qa/acceptance/gate_catalog.md](qa/acceptance/gate_catalog.md) | `gate_catalog` |
 | [qa/acceptance/jury_report.md](qa/acceptance/jury_report.md) | `jury_report` |
 | [qa/acceptance/phase_tools.md](qa/acceptance/phase_tools.md) | `phase_tools` |
@@ -145,6 +161,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/flow_qa/workflow_report.md](qa/flow_qa/workflow_report.md) | `workflow_report` |
 | [qa/jury/protocol_fields.md](qa/jury/protocol_fields.md) | `protocol_fields` |
 | [qa/jury/why_limit.md](qa/jury/why_limit.md) | `why_limit` |
+| [qa/perf/procedure/commands_refs.md](qa/perf/procedure/commands_refs.md) | `commands_refs` |
+| [qa/perf/procedure/gates_plan.md](qa/perf/procedure/gates_plan.md) | `gates_plan` |
+| [qa/perf/procedure/procedure_evidence.md](qa/perf/procedure/procedure_evidence.md) | `procedure_evidence` |
 | [qa/perf/procedure_evidence.md](qa/perf/procedure_evidence.md) | `procedure_evidence` |
 | [qa/perf/reference_machines.md](qa/perf/reference_machines.md) | `reference_machines` |
 | [qa/perf/why_profiles.md](qa/perf/why_profiles.md) | `why_profiles` |
@@ -157,9 +176,14 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/playtest_tel/privacy.md](qa/playtest_tel/privacy.md) | `privacy` |
 | [qa/playtest_tel/purpose_pipeline_schema.md](qa/playtest_tel/purpose_pipeline_schema.md) | `purpose_pipeline_schema` |
 | [qa/remediation/levers_commands.md](qa/remediation/levers_commands.md) | `levers_commands` |
+| [qa/remediation/loop/industry_map.md](qa/remediation/loop/industry_map.md) | `industry_map` |
+| [qa/remediation/loop/remediation_loop.md](qa/remediation/loop/remediation_loop.md) | `remediation_loop` |
 | [qa/remediation/report_stop_maps.md](qa/remediation/report_stop_maps.md) | `report_stop_maps` |
 | [qa/remediation/standards_loop.md](qa/remediation/standards_loop.md) | `standards_loop` |
 | [qa/remediation/tools_related.md](qa/remediation/tools_related.md) | `tools_related` |
+| [qa/security/m6/anti_tamper.md](qa/security/m6/anti_tamper.md) | `anti_tamper` |
+| [qa/security/m6/related.md](qa/security/m6/related.md) | `related` |
+| [qa/security/m6/ship_checklist.md](qa/security/m6/ship_checklist.md) | `ship_checklist` |
 | [qa/security/m6_player_protect.md](qa/security/m6_player_protect.md) | `m6_player_protect` |
 | [qa/security/secrets_ci_cloud.md](qa/security/secrets_ci_cloud.md) | `secrets_ci_cloud` |
 | [qa/security/steam_supply.md](qa/security/steam_supply.md) | `steam_supply` |
@@ -175,6 +199,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/testing/l5.md](qa/testing/l5.md) | `l5` |
 | [qa/testing/l6.md](qa/testing/l6.md) | `l6` |
 | [qa/testing/phases_and_report.md](qa/testing/phases_and_report.md) | `phases_and_report` |
+| [qa/testing/toolkit/part_a.md](qa/testing/toolkit/part_a.md) | `part_a` |
+| [qa/testing/toolkit/part_b.md](qa/testing/toolkit/part_b.md) | `part_b` |
 | [qa/testing/toolkit.md](qa/testing/toolkit.md) | `toolkit` |
 | [qa/tournament/what_stack_data.md](qa/tournament/what_stack_data.md) | `what_stack_data` |
 | [qa/tournament/when_ci_forbidden.md](qa/tournament/when_ci_forbidden.md) | `when_ci_forbidden` |
@@ -190,6 +216,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) | `DEVELOPMENT_LIFECYCLE` |
 | [workflow/IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | `IMPLEMENTATION_PLAN` |
 | [workflow/MILESTONES.md](workflow/MILESTONES.md) | `MILESTONES` |
+| [workflow/agile/cadence/duration.md](workflow/agile/cadence/duration.md) | `duration` |
+| [workflow/agile/cadence/sprint_master.md](workflow/agile/cadence/sprint_master.md) | `sprint_master` |
+| [workflow/agile/linear/flow_example.md](workflow/agile/linear/flow_example.md) | `flow_example` |
+| [workflow/agile/linear/setup_ceremony.md](workflow/agile/linear/setup_ceremony.md) | `setup_ceremony` |
 | [workflow/agile/linear_sprints.md](workflow/agile/linear_sprints.md) | `linear_sprints` |
 | [workflow/agile/sprint_master_cadence.md](workflow/agile/sprint_master_cadence.md) | `sprint_master_cadence` |
 | [workflow/agile/summary_why.md](workflow/agile/summary_why.md) | `summary_why` |
@@ -198,6 +228,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/ai_dev/commands.md](workflow/ai_dev/commands.md) | `commands` |
 | [workflow/ai_dev/packs_gates.md](workflow/ai_dev/packs_gates.md) | `packs_gates` |
 | [workflow/ai_dev/phase_acceptance.md](workflow/ai_dev/phase_acceptance.md) | `phase_acceptance` |
+| [workflow/ai_dev/phases/part_a.md](workflow/ai_dev/phases/part_a.md) | `part_a` |
+| [workflow/ai_dev/phases/part_b.md](workflow/ai_dev/phases/part_b.md) | `part_b` |
+| [workflow/ai_dev/testing/ai_testing.md](workflow/ai_dev/testing/ai_testing.md) | `ai_testing` |
+| [workflow/ai_dev/testing/unit_tests.md](workflow/ai_dev/testing/unit_tests.md) | `unit_tests` |
 | [workflow/ai_dev/testing_policy.md](workflow/ai_dev/testing_policy.md) | `testing_policy` |
 | [workflow/branching/create_branch_refs.md](workflow/branching/create_branch_refs.md) | `create_branch_refs` |
 | [workflow/branching/roles_rules.md](workflow/branching/roles_rules.md) | `roles_rules` |
@@ -223,4 +257,7 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/lifecycle/overview_time.md](workflow/lifecycle/overview_time.md) | `overview_time` |
 | [workflow/milestones/m1_m4_gameplay.md](workflow/milestones/m1_m4_gameplay.md) | `m1_m4_gameplay` |
 | [workflow/milestones/m5_m6_ship.md](workflow/milestones/m5_m6_ship.md) | `m5_m6_ship` |
+| [workflow/milestones/pre_build/m0_core.md](workflow/milestones/pre_build/m0_core.md) | `m0_core` |
+| [workflow/milestones/pre_build/m0_data_ai.md](workflow/milestones/pre_build/m0_data_ai.md) | `m0_data_ai` |
+| [workflow/milestones/pre_build/m0_narrative_pitch.md](workflow/milestones/pre_build/m0_narrative_pitch.md) | `m0_narrative_pitch` |
 | [workflow/milestones/pre_build.md](workflow/milestones/pre_build.md) | `pre_build` |

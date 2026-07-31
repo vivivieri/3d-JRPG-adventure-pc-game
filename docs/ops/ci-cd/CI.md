@@ -5,7 +5,7 @@ phase: [6, 8]
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 254
+tokens_est: 303
 summary: "Required CI gates — load branch purpose, gates, or remediation"
 ---
 # Continuous Integration
