@@ -4,8 +4,8 @@ type: how-to
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 2076
-summary: "**Problem:** An agent can wire a scene “done” while the **main story soft-locks**, a **quest never advances**, or **combat hangs** — then patch the same trigger"
+tokens_est: 1984
+summary: "An agent can wire a scene “done” while the **main story soft-locks**, a **quest never advances**, or **combat hangs** — then patch the same trigger logic repeat"
 ---
 # Game Flow QA — Progression Gates + Iterative Fix Loop
 

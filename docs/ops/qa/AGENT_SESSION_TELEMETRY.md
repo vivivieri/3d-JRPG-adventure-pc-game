@@ -4,7 +4,7 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 2543
+tokens_est: 2586
 summary: "**Discipline:** Dev-time factory analytics — measure agent performance by role, task category, and issue"
 ---
 # Agent Session Telemetry — AI Factory Efficiency Studies

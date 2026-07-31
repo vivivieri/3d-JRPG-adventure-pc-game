@@ -4,7 +4,7 @@ type: reference
 audience: [release]
 status: active
 authority: ci-cd
-tokens_est: 401
+tokens_est: 441
 summary: "`game/development` — hero meshes, textures, audio (M5+)"
 ---
 # Git LFS — Large Asset Tracking

@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1549
+tokens_est: 1619
 summary: "Sprint Master & AI cadence"
 ---
 # Agile Within Phases — Sprint Master & AI cadence

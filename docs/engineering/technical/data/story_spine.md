@@ -4,8 +4,8 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 991
-summary: "[`DATA_ARCHITECTURE.md`](../DATA_ARCHITECTURE.md)"
+tokens_est: 1037
+summary: "One row per storyboard beat. Engine loads this for QA tools and progression validation."
 ---
 # Data architecture — Story spine
 

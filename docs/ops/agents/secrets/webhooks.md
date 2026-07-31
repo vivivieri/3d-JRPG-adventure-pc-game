@@ -5,7 +5,7 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 994
+tokens_est: 1067
 summary: "PM / alert / worker webhooks"
 ---
 # Cursor Secrets Setup — PM / alert / worker webhooks

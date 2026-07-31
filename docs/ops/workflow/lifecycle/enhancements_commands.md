@@ -4,7 +4,7 @@ type: explanation
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 895
+tokens_est: 974
 summary: "Enhancements, commands, cross-refs"
 ---
 # Development Lifecycle — Enhancements, commands, cross-refs

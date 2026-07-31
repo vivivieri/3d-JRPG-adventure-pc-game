@@ -5,7 +5,7 @@ audience: [builder, builder_zone, architect]
 phase: [1, 3, 5]
 status: active
 authority: world
-tokens_est: 900
+tokens_est: 293
 summary: "Zone layouts, interactables, encounter index"
 ---
 # Level Design

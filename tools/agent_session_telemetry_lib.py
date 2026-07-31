@@ -358,13 +358,35 @@ def infer_task_tags(issue: dict[str, Any] | None) -> list[str]:
 
 
 def _load_docs_pack_metrics(issue_id: str | None) -> dict[str, Any]:
-    """Read artifacts/docs_pack_<issue>.txt written by resolve_docs / session gate."""
+    """Read artifacts/docs_pack_<issue>.txt|.json written by resolve_docs / session gate."""
     if not issue_id:
         return {}
+    json_path = ROOT / "artifacts" / f"docs_pack_{issue_id}.json"
+    if json_path.is_file():
+        try:
+            data = json.loads(json_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"WARN: cannot read docs pack json {json_path}: {exc}", file=sys.stderr)
+            data = {}
+        if data:
+            out: dict[str, Any] = {
+                "docs_pack_report": str(json_path.relative_to(ROOT)),
+                "docs_tokens_kept_est": data.get("tokens_kept_est"),
+                "docs_deferred_count": data.get("deferred_count"),
+                "docs_task": data.get("task") or None,
+                "docs_budget": data.get("budget"),
+                "docs_role": data.get("role"),
+                "docs_role_requested": data.get("role_requested"),
+                "docs_briefs_attached": len(data.get("briefs") or []),
+                "docs_zone_packs_attached": len(data.get("zone_packs") or []),
+                "docs_deferred_paths": [d.get("path") for d in (data.get("deferred") or []) if d.get("path")],
+            }
+            return {k: v for k, v in out.items() if v is not None and v != [] and v != ""}
+
     path = ROOT / "artifacts" / f"docs_pack_{issue_id}.txt"
     if not path.is_file():
         return {}
-    out: dict[str, Any] = {"docs_pack_report": str(path.relative_to(ROOT))}
+    out = {"docs_pack_report": str(path.relative_to(ROOT))}
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as exc:

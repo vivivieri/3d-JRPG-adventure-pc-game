@@ -5,8 +5,8 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 581
-summary: "Day-one checklist"
+tokens_est: 658
+summary: "(Settings → Secrets and variables → Actions):"
 ---
 # Cursor Secrets Setup — Day-one checklist
 

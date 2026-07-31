@@ -4,7 +4,7 @@ type: reference
 audience: [builder, architect]
 status: active
 authority: ui
-tokens_est: 2487
+tokens_est: 2497
 summary: "Godot 4 — `Camera3D`, `AnimationPlayer`, optional `Tween`"
 ---
 # Tides of Urashima — Cinematics & Camera Spec

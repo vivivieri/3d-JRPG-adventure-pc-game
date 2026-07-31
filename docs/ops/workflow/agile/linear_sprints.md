@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1275
+tokens_est: 1343
 summary: "Linear setup & sprint flow"
 ---
 # Agile Within Phases — Linear setup & sprint flow

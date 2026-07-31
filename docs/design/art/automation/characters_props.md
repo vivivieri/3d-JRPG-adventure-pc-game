@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 350
+tokens_est: 380
 summary: "3D character & prop workflow"
 ---
 # Art Automation Pipeline — 3D character & prop workflow

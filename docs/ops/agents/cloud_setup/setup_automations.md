@@ -5,8 +5,8 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 1876
-summary: "[`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)"
+tokens_est: 1977
+summary: "[Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)"
 ---
 # Cloud Agent Setup — One-time setup & automations
 

@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 350
-summary: "UI art (GameLab)"
+tokens_est: 202
+summary: "1. READ docs/design/art/ART_DIRECTION.md §4 UI style"
 ---
 # Art Automation Pipeline — UI art (GameLab)
 

@@ -19,22 +19,11 @@ BOARD = ROOT / "game/data/qa/sprint_board.json"
 BUDGET = int(os.environ.get("AGENT_DOCS_BUDGET", "12000"))
 
 
-def _role_for(agent: str) -> str:
-    agent = (agent or "builder").replace("agent/", "")
-    known = {
-        "architect",
-        "builder",
-        "builder_zone",
-        "builder_combat",
-        "qa",
-        "flow",
-        "release",
-        "visual",
-        "pm",
-        "narrative",
-        "audio",
-    }
-    return agent if agent in known else "builder"
+def _role_for(agent: str, task_id: str | None = None) -> str:
+    sys.path.insert(0, str(ROOT / "tools"))
+    from docs_role_map import remap_docs_role  # type: ignore
+
+    return remap_docs_role(agent, task_id)
 
 
 def _targets() -> list[dict]:
@@ -115,6 +104,17 @@ def _run(role: str, issue: str) -> dict:
     }
 
 
+def _issue_task(issue_id: str) -> str | None:
+    if not BOARD.is_file():
+        return None
+    board = json.loads(BOARD.read_text(encoding="utf-8"))
+    for issue in board.get("issues") or []:
+        if str(issue.get("id") or "") == issue_id or str(issue.get("github_issue") or "") == issue_id:
+            task = issue.get("docs_task")
+            return str(task) if task else None
+    return None
+
+
 def main() -> int:
     targets = _targets()
     results = []
@@ -122,16 +122,17 @@ def main() -> int:
     warnings: list[str] = []
     for t in targets:
         iid = str(t["issue_id"])
-        role = _role_for(str(t["agent"]))
+        task = _issue_task(iid)
+        role = _role_for(str(t["agent"]), task)
         result = _run(role, iid)
         results.append(result)
         if result["exit_code"] != 0:
             errors.append(f"{iid}/{role}: resolve_docs --check failed")
         elif result["path_count"] < 2:
             errors.append(f"{iid}/{role}: pack too thin ({result['path_count']} paths)")
-        if result.get("tokens_kept_est") and result["tokens_kept_est"] > BUDGET * 1.25:
+        if result.get("tokens_kept_est") and result["tokens_kept_est"] > BUDGET:
             warnings.append(
-                f"{iid}/{role}: tokens_kept_est {result['tokens_kept_est']} >> budget {BUDGET}"
+                f"{iid}/{role}: tokens_kept_est {result['tokens_kept_est']} > budget {BUDGET}"
             )
         # protected overflow: if BOOT missing from output
         if "docs/ops/BOOT.md" not in result["paths"] and "AGENTS.md" not in result["paths"]:

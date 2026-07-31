@@ -5,8 +5,8 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 531
-summary: "[`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)"
+tokens_est: 629
+summary: "PM Automation on `0 9 * * *` (or any fixed interval). AI agents do not need sleep; wall-clock schedules waste time between cycles."
 ---
 # Cloud Agent Setup — Goal & architecture
 

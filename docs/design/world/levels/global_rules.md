@@ -5,8 +5,8 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 529
-summary: "Global level rules"
+tokens_est: 611
+summary: "Instance these `.tscn` components in zones — do not rebuild trigger logic per zone."
 ---
 # Level Design — Global level rules
 

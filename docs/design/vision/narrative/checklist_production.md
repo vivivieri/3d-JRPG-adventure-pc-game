@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 400
-summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
+tokens_est: 384
+summary: "*Did you understand the box before SC-16?*"
 ---
 # Narrative — Checklist & production
 

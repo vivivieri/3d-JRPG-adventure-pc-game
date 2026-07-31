@@ -5,8 +5,8 @@ audience: [pm, architect, builder]
 phase: [1]
 status: active
 authority: workflow
-tokens_est: 502
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 605
+summary: "`bash tools/bootstrap_game_development.sh` — `project.godot`, `EventBus` autoload stub, unit test shell. See `docs/ops/sprints/Phase1-Sprint1-issues.md` §P1-00."
 ---
 # Implementation Plan — Phase 1
 

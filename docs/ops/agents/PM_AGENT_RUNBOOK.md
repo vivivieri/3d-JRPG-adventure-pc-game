@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 2138
+tokens_est: 2178
 summary: "**Role:** PM Agent / Sprint Master (same role — `sprint_phases.json` → `sprint_master.role = 'pm'`)"
 ---
 # PM Agent Runbook — Mandatory Sprint Master Workflow

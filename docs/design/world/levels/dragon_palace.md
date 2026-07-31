@@ -5,8 +5,8 @@ audience: [builder, builder_zone, architect]
 phase: [5, 6]
 status: active
 authority: world
-tokens_est: 619
-summary: "Palace + endings"
+tokens_est: 691
+summary: "`res://scenes/world/dragon_palace_gate.tscn`"
 ---
 # Level Design — Palace + endings
 

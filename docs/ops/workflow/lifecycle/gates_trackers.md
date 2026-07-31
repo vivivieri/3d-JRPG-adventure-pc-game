@@ -4,7 +4,7 @@ type: explanation
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 740
+tokens_est: 817
 summary: "Quality ladder, trackers, promotion"
 ---
 # Development Lifecycle — Quality ladder, trackers, promotion

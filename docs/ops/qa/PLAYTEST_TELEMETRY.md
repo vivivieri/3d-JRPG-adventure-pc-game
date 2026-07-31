@@ -4,7 +4,7 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 2078
+tokens_est: 2116
 summary: "**Discipline:** Games User Research (GUR) — telemetry-driven playtest tuning"
 ---
 # Playtest Telemetry

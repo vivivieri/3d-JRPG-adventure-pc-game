@@ -5,8 +5,8 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 595
-summary: "[`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)"
+tokens_est: 677
+summary: "- [ ] Environment snapshot with GDAI + MCP PASS"
 ---
 # Cloud Agent Setup — Anti-patterns & troubleshooting
 

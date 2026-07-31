@@ -5,8 +5,8 @@ audience: [builder, builder_zone, visual]
 phase: [1]
 status: active
 authority: world
-tokens_est: 350
-summary: "Zone beach_shore"
+tokens_est: 419
+summary: "Lonely arrival; grey sky; distant thunder"
 ---
 # Environment Kits — Zone beach_shore
 

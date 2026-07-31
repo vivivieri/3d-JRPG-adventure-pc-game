@@ -4,7 +4,7 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1436
+tokens_est: 1402
 summary: "**Layer:** **L2.5** (pre-merge, **non-ship**)"
 ---
 # Candidate Tournament — Champion/Challenger + Golden Harness

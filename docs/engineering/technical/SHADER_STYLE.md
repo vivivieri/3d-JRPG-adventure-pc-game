@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 656
+tokens_est: 711
 summary: "**Scope:** `game/shaders/` (`game/development`) · reference templates in `tools/godot_templates/shaders/`"
 ---
 # Godot Shader Style Guide — Tides of Urashima

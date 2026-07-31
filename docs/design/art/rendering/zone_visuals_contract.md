@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 724
-summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
+tokens_est: 827
+summary: "`ZoneVisuals.apply_to_scene(root, zone_id)` — static; finds `WorldEnvironment`, `DirectionalLight3D`, and nodes in group `zone_fill_light`, then applies palette"
 ---
 # Rendering — zone_visuals contract & refs
 

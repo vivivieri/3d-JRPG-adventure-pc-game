@@ -57,7 +57,7 @@
         {
           "path": "tools/run_agent_session_gate.sh",
           "contains": "resolve_docs.py",
-          "purpose": "print role doc pack ∪ issue handoff_refs (budgeted)"
+          "purpose": "print role doc pack \u222a issue handoff_refs (budgeted)"
         },
         {
           "path": "tools/run_agent_session_gate.sh",
@@ -102,12 +102,12 @@
         {
           "path": "tools/resolve_docs.py",
           "contains": "INDEX.yaml",
-          "purpose": "role → must_read resolver"
+          "purpose": "role \u2192 must_read resolver"
         },
         {
           "path": "tools/validate_handoff_refs.py",
           "contains": "handoff_refs",
-          "purpose": "L0 gate — sprint handoff_refs + docs_task lint"
+          "purpose": "L0 gate \u2014 sprint handoff_refs + docs_task lint"
         },
         {
           "path": "tools/pm_docs_preflight.py",
@@ -123,6 +123,41 @@
           "path": "tools/agent_session_telemetry_lib.py",
           "contains": "docs_tokens_kept_est",
           "purpose": "attach docs pack budget metrics on session_start"
+        },
+        {
+          "path": "tools/docs_role_map.py",
+          "contains": "remap_docs_role",
+          "purpose": "map builder\u2192builder_zone/combat from docs_task"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "_match_zone_packs",
+          "purpose": "auto-attach env_kits/levels zone packs from issue text"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "report_json",
+          "purpose": "write docs_pack_*.json machine report"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "refusing BOOT-only fallback",
+          "purpose": "FAIL session when resolve_docs fails"
+        },
+        {
+          "path": "tools/agent_session_telemetry_lib.py",
+          "contains": "docs_deferred_paths",
+          "purpose": "attach deferred pack paths on session_start"
+        },
+        {
+          "path": "tools/fix_docs_frontmatter.py",
+          "contains": "tokens_est",
+          "purpose": "recalibrate tokens_est + summary TL;DRs"
+        },
+        {
+          "path": "tools/enhance_docs_packs.py",
+          "contains": "VISUAL_QA",
+          "purpose": "split remaining fat hubs into packs"
         }
       ],
       "orchestrator_steps": [
@@ -191,7 +226,9 @@
       "label": "Agent session telemetry (auto token logging)",
       "authority_doc": "docs/ops/qa/AGENT_SESSION_TELEMETRY.md",
       "schema": "game/data/qa/agent_session_telemetry_schema.json",
-      "required_secrets": ["CURSOR_API_KEY"],
+      "required_secrets": [
+        "CURSOR_API_KEY"
+      ],
       "script_hooks": [
         {
           "path": "tools/run_agent_session_gate.sh",
@@ -296,15 +333,20 @@
       ],
       "cycle_events": {
         "telemetry_side_effects_key": "telemetry_side_effects",
-        "must_mention_hooks": ["pm_refresh_agent_telemetry.sh", "pm_record_agent_session.sh"]
+        "must_mention_hooks": [
+          "pm_refresh_agent_telemetry.sh",
+          "pm_record_agent_session.sh"
+        ]
       },
       "acceptance_gate": "L0_agent_session_telemetry"
     },
     {
       "id": "factory_watchdog",
-      "label": "Factory watchdog — stall/hang recovery",
+      "label": "Factory watchdog \u2014 stall/hang recovery",
       "authority_doc": "docs/ops/agents/FACTORY_WATCHDOG.md",
-      "required_secrets": ["CURSOR_FACTORY_ALERT_WEBHOOK_URL"],
+      "required_secrets": [
+        "CURSOR_FACTORY_ALERT_WEBHOOK_URL"
+      ],
       "script_hooks": [
         {
           "path": "tools/run_factory_watchdog.sh",
@@ -452,7 +494,10 @@
       "id": "stakeholder_reporting",
       "label": "PM stakeholder status reporting",
       "authority_doc": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md",
-      "required_secrets": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+      "required_secrets": [
+        "TELEGRAM_BOT_TOKEN",
+        "TELEGRAM_CHAT_ID"
+      ],
       "script_hooks": [
         {
           "path": "tools/pm_emit_cycle_event.sh",

@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 565
-summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
+tokens_est: 650
+summary: "Add to settings menu (`docs/design/ui/SETTINGS_ACCESSIBILITY.md`). Store in `user://settings.json`."
 ---
 # Rendering — Quality presets & zone map
 

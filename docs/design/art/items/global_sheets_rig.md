@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [2, 5]
 status: active
 authority: art
-tokens_est: 1033
-summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
+tokens_est: 1132
+summary: "Use this layout for every new item or character prop before modeling. Store sheets in `docs/model_sheets/<id>.png` (not shipped in game build)."
 ---
 # Items 3D — Global rules, sheets, rig
 

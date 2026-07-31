@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 400
-summary: "[`AI_DEV_WORKFLOW.md`](../AI_DEV_WORKFLOW.md)"
+tokens_est: 333
+summary: "bash tools/ensure_gdai_mcp.sh"
 ---
 # AI Dev Workflow — commands
 

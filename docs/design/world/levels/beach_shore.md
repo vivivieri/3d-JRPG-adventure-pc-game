@@ -5,8 +5,8 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 400
-summary: "Zone beach_shore"
+tokens_est: 338
+summary: "`res://scenes/world/beach_shore.tscn`"
 ---
 # Level Design — Zone beach_shore
 

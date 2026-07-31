@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 2141
+tokens_est: 2168
 summary: "Godot **4.7 stable**, Cursor desktop + Cloud Agents"
 ---
 # Plugin install guide — Godotiq & Godot MCP Pro

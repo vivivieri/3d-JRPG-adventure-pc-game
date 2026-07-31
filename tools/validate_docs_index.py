@@ -184,6 +184,8 @@ def main() -> int:
         "ops/agents/mcp/install.md",
         "ops/workflow/ai_dev/testing_policy.md",
         "ops/cheat-sheets/rr/session.md",
+        "ops/cheat-sheets/rr/golden_rules.md",
+        "ops/cheat-sheets/controls/gates_by_branch.md",
         "design/art/characters/urashima.md",
         "design/audio/production/bgm_and_scene_map.md",
         "engineering/technical/data/story_spine.md",
@@ -202,6 +204,12 @@ def main() -> int:
         "design/world/env_kits/ruined_village.md",
         "design/art/automation/zone_textures.md",
         "design/art/direction/palette.md",
+        "design/art/visual_qa/judge_layers.md",
+        "design/art/generation_readiness/characters_zones.md",
+        "engineering/technical/tdd/principles_runtime.md",
+        "engineering/technical/coding/naming.md",
+        "ops/qa/remediation/levers_commands.md",
+        "ops/qa/acceptance/gate_catalog.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")
@@ -219,9 +227,42 @@ def main() -> int:
         "model_qa",
         "level_layout",
         "secrets_setup",
+        "visual_qa",
+        "acceptance_ci",
+        "audio_bgm",
+        "ui_cinematics",
     ):
         if not re.search(rf"(?m)^  {re.escape(task)}:\s*$", index_text):
             errors.append(f"INDEX.yaml missing tasks.{task}")
+
+    # tokens_est drift on INDEX-listed files (hubs + packs)
+    drift_bad: list[str] = []
+    for p in sorted(seen):
+        if p.endswith("/") or p == "AGENTS.md":
+            continue
+        target = ROOT / p
+        if not target.is_file():
+            continue
+        text = target.read_text(encoding="utf-8")
+        if not text.startswith("---\n"):
+            continue
+        end = text.find("\n---\n", 4)
+        block = text[4:end] if end > 0 else ""
+        m = re.search(r"(?m)^tokens_est:\s*(\d+)", block)
+        if not m:
+            continue
+        claimed = int(m.group(1))
+        actual = max(100, target.stat().st_size // 4)
+        # allow 25% or 80 tok slack (tiny hubs)
+        if abs(claimed - actual) > max(80, int(actual * 0.25)):
+            drift_bad.append(f"{p} tokens_est={claimed} size/4={actual}")
+    if len(drift_bad) > 8:
+        errors.append(
+            f"tokens_est drift on {len(drift_bad)} INDEX paths "
+            f"(e.g. {drift_bad[:3]})"
+        )
+    elif drift_bad:
+        warnings.append(f"tokens_est mild drift on {len(drift_bad)} path(s)")
 
     if warnings:
         for w in warnings:

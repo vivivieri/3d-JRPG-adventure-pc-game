@@ -5,7 +5,7 @@ audience: [builder, architect]
 phase: [4]
 status: active
 authority: gameplay
-tokens_est: 1998
+tokens_est: 2020
 summary: "`docs/design/vision/GDD.md` §7, `docs/design/gameplay/SKILLS_BIBLE.md`, `docs/design/gameplay/BOSS_DESIGNS.md`"
 ---
 # Tides of Urashima — Combat Systems Bible

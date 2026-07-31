@@ -5,7 +5,7 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 900
+tokens_est: 397
 summary: "load the pack for your setup step."
 ---
 # Cloud Agent Setup Runbook

@@ -5,8 +5,8 @@ audience: [audio]
 phase: [1, 5]
 status: active
 authority: audio
-tokens_est: 751
-summary: "[`AUDIO_PRODUCTION_GUIDE.md`](../AUDIO_PRODUCTION_GUIDE.md)"
+tokens_est: 803
+summary: "(from `AUDIO_DIRECTION.md` §5): dialogue always readable over Music; Ambient always under Music."
 ---
 # Audio production — Mix, implementation, QA
 

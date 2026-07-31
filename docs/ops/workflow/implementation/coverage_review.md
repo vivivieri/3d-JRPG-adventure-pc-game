@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 444
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 543
+summary: "This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DEV_WORKFLOW.md`. The following were **missing** from earlier versions and are now"
 ---
 # Implementation Plan — Coverage review
 

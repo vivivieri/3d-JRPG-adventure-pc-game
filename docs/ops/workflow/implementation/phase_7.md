@@ -5,8 +5,8 @@ audience: [pm, architect, builder]
 phase: [7]
 status: active
 authority: workflow
-tokens_est: 546
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 643
+summary: "Replace greybox with automated authored assets per `docs/design/art/ART_DIRECTION.md` + `docs/design/art/ART_AUTOMATION_PIPELINE.md`:"
 ---
 # Implementation Plan — Phase 7
 

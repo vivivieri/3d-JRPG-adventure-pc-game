@@ -37,6 +37,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/direction/palette.md](art/direction/palette.md) | `palette` |
 | [art/direction/pipeline_mood_avoid.md](art/direction/pipeline_mood_avoid.md) | `pipeline_mood_avoid` |
 | [art/direction/vertical_slice_gate.md](art/direction/vertical_slice_gate.md) | `vertical_slice_gate` |
+| [art/generation_readiness/characters_zones.md](art/generation_readiness/characters_zones.md) | `characters_zones` |
+| [art/generation_readiness/pipeline_milestones.md](art/generation_readiness/pipeline_milestones.md) | `pipeline_milestones` |
+| [art/generation_readiness/purpose_gaps_brief.md](art/generation_readiness/purpose_gaps_brief.md) | `purpose_gaps_brief` |
 | [art/items/consumables_key_currency.md](art/items/consumables_key_currency.md) | `consumables_key_currency` |
 | [art/items/export_qa.md](art/items/export_qa.md) | `export_qa` |
 | [art/items/global_sheets_rig.md](art/items/global_sheets_rig.md) | `global_sheets_rig` |
@@ -49,6 +52,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/rendering/materials_gi_glow.md](art/rendering/materials_gi_glow.md) | `materials_gi_glow` |
 | [art/rendering/quality_zones.md](art/rendering/quality_zones.md) | `quality_zones` |
 | [art/rendering/zone_visuals_contract.md](art/rendering/zone_visuals_contract.md) | `zone_visuals_contract` |
+| [art/visual_qa/judge_layers.md](art/visual_qa/judge_layers.md) | `judge_layers` |
+| [art/visual_qa/report_phase_tools.md](art/visual_qa/report_phase_tools.md) | `report_phase_tools` |
+| [art/visual_qa/tools_antipattern.md](art/visual_qa/tools_antipattern.md) | `tools_antipattern` |
 | [audio/AUDIO_DIRECTION.md](audio/AUDIO_DIRECTION.md) | `AUDIO_DIRECTION` |
 | [audio/AUDIO_PRODUCTION_GUIDE.md](audio/AUDIO_PRODUCTION_GUIDE.md) | `AUDIO_PRODUCTION_GUIDE` |
 | [audio/AUDIO_QA.md](audio/AUDIO_QA.md) | `AUDIO_QA` |

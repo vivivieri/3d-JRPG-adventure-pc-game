@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [2, 5]
 status: active
 authority: art
-tokens_est: 900
+tokens_est: 310
 summary: "load one pack for the asset class you are building."
 ---
 # Items & Props — 3D Model Guide

@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1]
 status: active
 authority: art
-tokens_est: 350
-summary: "Vertical slice gate"
+tokens_est: 257
+summary: "is gated twice — greybox first, final art later:"
 ---
 # Art Direction — Vertical slice gate
 

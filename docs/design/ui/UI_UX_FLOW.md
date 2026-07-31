@@ -4,7 +4,7 @@ type: reference
 audience: [builder, architect]
 status: active
 authority: ui
-tokens_est: 1532
+tokens_est: 1489
 summary: "`docs/design/gameplay/TUTORIAL_DESIGN.md`, `docs/design/ui/CINEMATICS.md`, `docs/design/art/ART_DIRECTION.md` §4"
 ---
 # Tides of Urashima — UI / UX Flow

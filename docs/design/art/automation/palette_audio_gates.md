@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 526
+tokens_est: 602
 summary: "Palette remap, audio, M5 gates"
 ---
 # Art Automation Pipeline — Palette remap, audio, M5 gates

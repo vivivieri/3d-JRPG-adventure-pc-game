@@ -4,7 +4,7 @@ type: tutorial
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 2649
+tokens_est: 2680
 summary: "End-to-end setup for event-driven PM orchestration + worker Cloud Agents on **snapshot** VMs. Human only at **L6 UAT**."
 ---
 # Factory Setup Guide — 100% AI Multi-Agent Development (snapshot boot)
