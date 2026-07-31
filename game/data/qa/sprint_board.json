@@ -113,7 +113,7 @@
         "L1_gdscript_lint",
         "L0_base_class_compliance"
       ],
-      "status": "pending",
+      "status": "blocked",
       "depends_on": [
         "P1-00"
       ],
@@ -134,7 +134,13 @@
         "docs/design/art/ART_DIRECTION.md"
       ],
       "linear_issue": null,
-      "docs_task": "zone_lighting"
+      "docs_task": "zone_lighting",
+      "pm_notes": [
+        {
+          "at": "2026-07-31T13:10:13.758962+00:00",
+          "text": "Factory mcp_blocked: sprint_preflight failed (GDAI/MCP Pro missing on JIT boot)"
+        }
+      ]
     },
     {
       "id": "P1-02",
