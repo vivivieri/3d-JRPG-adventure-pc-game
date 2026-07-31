@@ -5,12 +5,24 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 516
+tokens_est: 588
 summary: "Checklist, recover, new helpers, ref map"
 ---
 # GDScript Regen — Checklist & Phase 1 — Checklist, recover, new helpers, ref map
 
 **Hub:** [`checklist_recover.md`](../checklist_recover.md)
+
+## When to read
+
+Use **GDScript Regen — Checklist & Phase 1 — Checklist, recover, new helpers, ref map** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [6. One-command checklist](#6-one-command-checklist)
+- [7. Recovering the previous GDScript ports](#7-recovering-the-previous-gdscript-ports)
+- [8. Adding a new helper](#8-adding-a-new-helper)
+- [9. Reference map](#9-reference-map)
+
 
 ## 6. One-command checklist
 

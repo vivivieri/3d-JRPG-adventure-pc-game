@@ -4,12 +4,23 @@ type: how-to
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 433
-summary: "Labels + bootstrap + steady-state"
+tokens_est: 504
+summary: "Factory Setup — Automations & Bootstrap — Labels + bootstrap + steady-state — bash tools/setup_github_project.sh"
 ---
 # Factory Setup — Automations & Bootstrap — Labels + bootstrap + steady-state
 
 **Hub:** [`automations_github_bootstrap.md`](../automations_github_bootstrap.md)
+
+## When to read
+
+Use **Factory Setup — Automations & Bootstrap — Labels + bootstrap + steady-state** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7. Phase 5 — GitHub labels + issues](#7-phase-5-github-labels-issues)
+- [8. Phase 6 — Bootstrap factory loop](#8-phase-6-bootstrap-factory-loop)
+- [9. Steady-state loop (no human)](#9-steady-state-loop-no-human)
+
 
 ## 7. Phase 5 — GitHub labels + issues
 

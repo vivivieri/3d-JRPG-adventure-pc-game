@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 627
-summary: "PR checklist by change type"
+tokens_est: 741
+summary: "Coding — CI & PR — PR checklist by change type — - [ ] PEP 8 naming, 4-space indent, quoted UTF-8 I/O"
 ---
 # Coding — CI & PR — PR checklist by change type
 
 **Hub:** [`ci_pr_commands.md`](../ci_pr_commands.md)
+
+## When to read
+
+Use **Coding — CI & PR — PR checklist by change type** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [10. PR checklist by change type](#10-pr-checklist-by-change-type)
+- [Python PR (`main`)](#python-pr-main)
+- [Documentation PR (`main`)](#documentation-pr-main)
+- [Data-only PR (`main`)](#data-only-pr-main)
+- [GDScript PR (`game/development`)](#gdscript-pr-gamedevelopment)
+- [TypeScript / MCP PR (`game/development`)](#typescript-mcp-pr-gamedevelopment)
+- [New factory / QA feature](#new-factory-qa-feature)
+
 
 ## 10. PR checklist by change type
 

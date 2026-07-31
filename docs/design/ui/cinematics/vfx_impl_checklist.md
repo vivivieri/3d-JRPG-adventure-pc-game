@@ -5,12 +5,25 @@ audience: [builder, visual, narrative]
 phase: [5]
 status: active
 authority: ui
-tokens_est: 670
+tokens_est: 767
 summary: "VFX, Godot hooks, skip, M5 priority, checklist"
 ---
 # Cinematics — VFX, Godot hooks, skip, M5 priority, checklist
 
 **Hub:** [`CINEMATICS.md`](../CINEMATICS.md)
+
+## When to read
+
+Use **Cinematics — VFX, Godot hooks, skip, M5 priority, checklist** (roles: builder, visual, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [9. VFX language (camera-adjacent)](#9-vfx-language-camera-adjacent)
+- [10. Implementation hooks (Godot)](#10-implementation-hooks-godot)
+- [11. Skip policy](#11-skip-policy)
+- [12. Mid-game cinematic priority (M5 art rebuild)](#12-mid-game-cinematic-priority-m5-art-rebuild)
+- [13. Production checklist](#13-production-checklist)
+
 
 ## 9. VFX language (camera-adjacent)
 

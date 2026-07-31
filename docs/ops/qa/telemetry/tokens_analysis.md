@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 929
-summary: "Token reporting, analysis, categories"
+tokens_est: 1053
+summary: "When `CURSOR_API_KEY` is set in Cursor Secrets (one-time setup — `docs/ops/agents/CURSOR_SECRETS_SETUP.md` §8), tokens are fetched automatically from the Cursor"
 ---
 # Agent Session Telemetry — Token reporting, analysis, categories
 
 **Hub:** [`AGENT_SESSION_TELEMETRY.md`](../AGENT_SESSION_TELEMETRY.md)
+
+## When to read
+
+Use **Agent Session Telemetry — Token reporting, analysis, categories** (roles: pm, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [4. Token reporting (automatic)](#4-token-reporting-automatic)
+- [One-time setup (you)](#one-time-setup-you)
+- [Manual fallback (only if API unavailable)](#manual-fallback-only-if-api-unavailable)
+- [5. Analysis](#5-analysis)
+- [Study dimensions (from schema)](#study-dimensions-from-schema)
+- [Efficiency questions to answer after ship](#efficiency-questions-to-answer-after-ship)
+- [6. Task categories](#6-task-categories)
+
 
 ## 4. Token reporting (automatic)
 

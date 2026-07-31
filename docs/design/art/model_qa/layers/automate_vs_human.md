@@ -5,12 +5,17 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 179
+tokens_est: 181
 summary: "Model QA — Layers & Workflow — Automate vs human"
 ---
 # Model QA — Layers & Workflow — Automate vs human
 
 **Hub:** [`layers_workflow.md`](../layers_workflow.md)
+
+## When to read
+
+Use **Model QA — Layers & Workflow — Automate vs human** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 1. What to automate vs human
 

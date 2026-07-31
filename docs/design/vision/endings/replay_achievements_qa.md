@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 397
-summary: "Replay, achievements, voice notes, QA"
+tokens_est: 459
+summary: "Ending Design — Replay, achievements, voice notes, QA — See `docs/design/vision/REPLAY_DESIGN.md` for full replay, gallery, and Hard mode guidance."
 ---
 # Ending Design — Replay, achievements, voice notes, QA
 
 **Hub:** [`ENDING_DESIGN.md`](../ENDING_DESIGN.md)
+
+## When to read
+
+Use **Ending Design — Replay, achievements, voice notes, QA** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. Replay & meta](#7-replay-meta)
+- [8. Achievement mapping](#8-achievement-mapping)
+- [9. Writer notes — voice at choice](#9-writer-notes-voice-at-choice)
+- [10. QA checklist](#10-qa-checklist)
+
 
 ## 7. Replay & meta
 

@@ -4,12 +4,23 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 789
-summary: "Checklist + troubleshoot + related"
+tokens_est: 838
+summary: "MCP — Setup & Cost — Checklist + troubleshoot + related — Run: `bash tools/install_extended_toolchain.sh` then `bash tools/check_extended_toolchain.sh"
 ---
 # MCP — Setup & Cost — Checklist + troubleshoot + related
 
 **Hub:** [`setup_and_cost.md`](../setup_and_cost.md)
+
+## When to read
+
+Use **MCP — Setup & Cost — Checklist + troubleshoot + related** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [User setup checklist (purchase & secrets)](#user-setup-checklist-purchase-secrets)
+- [Troubleshooting](#troubleshooting)
+- [Related](#related)
+
 
 ## User setup checklist (purchase & secrets)
 

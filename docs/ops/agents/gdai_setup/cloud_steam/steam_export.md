@@ -5,12 +5,17 @@ phase: [0, 1]
 audience: [pm, builder, release]
 status: active
 authority: ops
-tokens_est: 198
+tokens_est: 197
 summary: "1. **Disable** the GDAI MCP plugin in **Project → Project Settings → Plugins**."
 ---
 # GDAI Setup — Cloud / Steam / Troubleshoot — Before Steam export
 
 **Hub:** [`cloud_steam_troubleshoot.md`](../cloud_steam_troubleshoot.md)
+
+## When to read
+
+Use **GDAI Setup — Cloud / Steam / Troubleshoot — Before Steam export** (roles: pm, builder, release) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 5. Before Steam / release export
 

@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 664
+tokens_est: 733
 summary: "“Keep tweaking until it feels right” without a ladder produces infinite retries or random prompt changes."
 ---
 # Model QA — Polish Direction — Polish cadence
 
 **Hub:** [`polish_direction.md`](../polish_direction.md)
+
+## When to read
+
+Use **Model QA — Polish Direction — Polish cadence** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [8. Model polish cadence (structured iteration)](#8-model-polish-cadence-structured-iteration)
+- [8.1 Attempt ladder (default per asset)](#81-attempt-ladder-default-per-asset)
+- [8.2 Polish commands (one full pass)](#82-polish-commands-one-full-pass)
+- [8.3 What “polish” is not](#83-what-polish-is-not)
+
 
 ## 8. Model polish cadence (structured iteration)
 

@@ -4,12 +4,31 @@ type: reference
 audience: [visual, narrative]
 status: active
 authority: vision
-tokens_est: 643
+tokens_est: 789
 summary: "Briefs align with `STORYBOARD.md`. Use as ComfyUI/GameLab prompt body."
 ---
 # Illustrations — Shots & Briefs — Per-scene briefs
 
 **Hub:** [`shots_briefs.md`](../shots_briefs.md)
+
+## When to read
+
+Use **Illustrations — Shots & Briefs — Per-scene briefs** (roles: visual, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (11 sections).
+
+## Jump to
+
+- [5. Per-scene illustration briefs](#5-per-scene-illustration-briefs)
+- [SC-00 — Prologue](#sc-00-prologue)
+- [SC-01 — Arrival](#sc-01-arrival)
+- [SC-02 — Empty Village](#sc-02-empty-village)
+- [SC-03 — Cracked Torii](#sc-03-cracked-torii)
+- [SC-07 — Water Puzzle (**no dialogue**)](#sc-07-water-puzzle-no-dialogue)
+- [SC-09 — Shore Wraith](#sc-09-shore-wraith)
+- [SC-11 — Otohime Flashback](#sc-11-otohime-flashback)
+- [SC-12 — Palace Gate](#sc-12-palace-gate)
+- [SC-16 — Choice](#sc-16-choice)
+- [SC-17a / b / c — Endings](#sc-17a-b-c-endings)
+
 
 ## 5. Per-scene illustration briefs
 

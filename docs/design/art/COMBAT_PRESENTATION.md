@@ -5,15 +5,24 @@ audience: [visual, builder]
 phase: [4]
 status: active
 authority: art
-tokens_est: 729
-summary: "`docs/design/gameplay/COMBAT_SYSTEMS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/art/SHADER_SPECS.md`, `game/data/code/shader_registry.json` (`ink_combat_"
+tokens_est: 717
+summary: "Tides of Urashima — Combat Presentation — Boss fights (SC-09, SC-14, SC-15) use wider FOV (+5°) and darker ambient per zone palette."
 ---
 # Tides of Urashima — Combat Presentation
 
-**Version:** 1.0 (Pre-build)
-**Cross-refs:** `docs/design/gameplay/COMBAT_SYSTEMS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/art/SHADER_SPECS.md`, `game/data/code/shader_registry.json` (`ink_combat_overlay`)
+## When to read
 
----
+Use **Tides of Urashima — Combat Presentation** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. Arena layout](#1-arena-layout)
+- [2. Ink-wash overlay](#2-ink-wash-overlay)
+- [3. Intent & action UI](#3-intent-action-ui)
+- [4. VFX tiers](#4-vfx-tiers)
+- [5. Audio ducking](#5-audio-ducking)
+- [6. Acceptance (Phase 4+)](#6-acceptance-phase-4)
+
 
 ## 1. Arena layout
 

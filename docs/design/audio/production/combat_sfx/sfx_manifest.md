@@ -5,12 +5,27 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 900
+tokens_est: 975
 summary: "3 variants per surface (`_01`, `_02`, `_03`); randomize; interval by walk speed."
 ---
 # Audio Production — Combat SFX — SFX manifest
 
 **Hub:** [`combat_sfx.md`](../combat_sfx.md)
+
+## When to read
+
+Use **Audio Production — Combat SFX — SFX manifest** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [6. SFX manifest](#6-sfx-manifest)
+- [UI (`sfx/ui/`)](#ui-sfxui)
+- [Footsteps (`sfx/footstep/`)](#footsteps-sfxfootstep)
+- [Combat (`sfx/combat/`)](#combat-sfxcombat)
+- [Story (`sfx/story/`)](#story-sfxstory)
+- [Ambient beds (`amb/`)](#ambient-beds-amb)
+- [Stings (`stings/`)](#stings-stings)
+
 
 ## 6. SFX manifest
 

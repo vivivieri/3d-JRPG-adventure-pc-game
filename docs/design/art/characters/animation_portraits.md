@@ -5,12 +5,26 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 479
+tokens_est: 503
 summary: "Rigged GLB clips must satisfy `required_animations` ⊆ found ⊆ `allowed_animations` in `game/data/models/qa_catalog.json`. Enforced by `L2_animation_whitelist` ("
 ---
 # Characters — Animation & portraits
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Characters — Animation & portraits** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [8. Master animation list](#8-master-animation-list)
+- [Urashima](#urashima)
+- [Yuzu](#yuzu)
+- [Roku](#roku)
+- [Enemies](#enemies)
+- [9. Portrait spec (UI)](#9-portrait-spec-ui)
+
 
 ## 8. Master animation list
 

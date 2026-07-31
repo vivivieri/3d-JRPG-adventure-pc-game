@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 724
-summary: "Workflow, situation→tool, handoffs"
+tokens_est: 785
+summary: "R&R Cheat Sheet — Workflow, situation→tool, handoffs — READ  → zone row in ENVIRONMENT_KITS.md + RENDERING_GUIDE.md"
 ---
 # R&R Cheat Sheet — Workflow, situation→tool, handoffs
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R Cheat Sheet — Workflow, situation→tool, handoffs** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Default workflow (one feature)](#default-workflow-one-feature)
+- [Situation → tool (conflict resolver)](#situation-tool-conflict-resolver)
+- [Handoff minimums](#handoff-minimums)
+
 
 ## Default workflow (one feature)
 

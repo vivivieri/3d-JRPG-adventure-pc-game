@@ -5,12 +5,18 @@ audience: [pm, architect, builder]
 phase: [1]
 status: active
 authority: workflow
-tokens_est: 605
+tokens_est: 573
 summary: "`bash tools/bootstrap_game_development.sh` — `project.godot`, `EventBus` autoload stub, unit test shell. See `docs/ops/sprints/Phase1-Sprint1-issues.md` §P1-00."
 ---
 # Implementation Plan — Phase 1
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 1** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Phase 1 — Environment foundation (NEXT)
 

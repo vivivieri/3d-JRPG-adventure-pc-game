@@ -4,12 +4,25 @@ type: reference
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 780
-summary: "Legend: ✅ / ⚠️ / ❌ as above."
+tokens_est: 906
+summary: "Generation Readiness — Characters & Zones — Character rows — Legend: ✅ / ⚠️ / ❌ as above."
 ---
 # Generation Readiness — Characters & Zones — Character rows
 
 **Hub:** [`characters_zones.md`](../characters_zones.md)
+
+## When to read
+
+Use **Generation Readiness — Characters & Zones — Character rows** (roles: visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [4. Character rows (`qa_catalog.json`)](#4-character-rows-qa_catalogjson)
+- [Phase 1 — Vertical slice](#phase-1-vertical-slice)
+- [Phase M5 — Party & enemies](#phase-m5-party-enemies)
+- [Characters not yet in `qa_catalog.json`](#characters-not-yet-in-qa_catalogjson)
+- [Crowd / cinematic NPCs (`qa_catalog.json` v1.3 — excluded from `hero_jury`)](#crowd-cinematic-npcs-qa_catalogjson-v13-excluded-from-hero_jury)
+
 
 ## 4. Character rows (`qa_catalog.json`)
 

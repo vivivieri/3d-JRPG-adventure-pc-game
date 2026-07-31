@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 631
-summary: "Workflow, promotion, PM involvement"
+tokens_est: 765
+summary: "Candidate Tournament — Workflow, promotion, PM involvement — 1. Capture golden harness screenshots (GDAI / MCP Pro) to paths in `golden_harness.json"
 ---
 # Candidate Tournament — Workflow, promotion, PM involvement
 
 **Hub:** [`CANDIDATE_TOURNAMENT.md`](../CANDIDATE_TOURNAMENT.md)
+
+## When to read
+
+Use **Candidate Tournament — Workflow, promotion, PM involvement** (roles: pm, visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [4. Workflow (Builder / Visual)](#4-workflow-builder-visual)
+- [Step A — Produce challenger (after L2 passes on candidate commit)](#step-a-produce-challenger-after-l2-passes-on-candidate-commit)
+- [Step B — Compare](#step-b-compare)
+- [Step C — Promote (if verdict wins)](#step-c-promote-if-verdict-wins)
+- [Step D — Merge winner only](#step-d-merge-winner-only)
+- [5. Promotion rules (enforced in code)](#5-promotion-rules-enforced-in-code)
+- [6. PM / PO involvement](#6-pm-po-involvement)
+
 
 ## 4. Workflow (Builder / Visual)
 

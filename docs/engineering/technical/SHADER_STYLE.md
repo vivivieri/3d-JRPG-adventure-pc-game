@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 717
+tokens_est: 745
 summary: "**Scope:** `game/shaders/` (`game/development`) · reference templates in `tools/godot_templates/shaders/`"
 ---
 # Godot Shader Style Guide — Tides of Urashima
@@ -13,9 +13,20 @@ summary: "**Scope:** `game/shaders/` (`game/development`) · reference templates
 **Version:** 1.0
 **Scope:** `game/shaders/` (`game/development`) · reference templates in `tools/godot_templates/shaders/`
 **Hub:** [`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md)
-**Rendering:** [`RENDERING_GUIDE.md`](../../design/art/RENDERING_GUIDE.md) · [`ART_DIRECTION.md`](../../design/art/ART_DIRECTION.md)
 
----
+## When to read
+
+Use **Godot Shader Style Guide — Tides of Urashima** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. NPR family rules](#1-npr-family-rules)
+- [2. Required structure](#2-required-structure)
+- [3. Forbidden in ship builds](#3-forbidden-in-ship-builds)
+- [4. Authoring workflow](#4-authoring-workflow)
+- [5. CI enforcement](#5-ci-enforcement)
+- [6. PR checklist](#6-pr-checklist)
+
 
 ## 1. NPR family rules
 

@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 616
+tokens_est: 624
 summary: "`dev → QA check → dev fix → QA reopen → …` can loop forever if the root cause isn't a code bug — because **neither dev nor QA can change the requirement.** Comm"
 ---
 # Escalation Policy — Problem + ladder
 
 **Hub:** [`ESCALATION_POLICY.md`](../ESCALATION_POLICY.md)
+
+## When to read
+
+Use **Escalation Policy — Problem + ladder** (roles: pm, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [The problem](#the-problem)
+- [The ladder (bounded — always converges)](#the-ladder-bounded-always-converges)
+
 
 ## The problem
 

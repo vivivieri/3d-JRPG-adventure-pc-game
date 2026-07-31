@@ -5,12 +5,30 @@ audience: [builder, builder_combat, qa]
 phase: [5]
 status: active
 authority: gameplay
-tokens_est: 788
+tokens_est: 926
 summary: "Final boss; 3 phases + choice gate at 10% HP"
 ---
 # Boss Designs — Tide Keeper
 
 **Hub:** [`BOSS_DESIGNS.md`](../BOSS_DESIGNS.md)
+
+## When to read
+
+Use **Boss Designs — Tide Keeper** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (10 sections).
+
+## Jump to
+
+- [4. Tide Keeper (`tide_keeper`)](#4-tide-keeper-tide_keeper)
+- [Visual](#visual)
+- [Stats (Normal) — from `enemies.json`](#stats-normal-from-enemiesjson)
+- [Skill kit (data IDs)](#skill-kit-data-ids)
+- [Phase 1 — Calm (100% → 66% HP)](#phase-1-calm-100-66-hp)
+- [Phase 2 — Surge (66% → 33% HP)](#phase-2-surge-66-33-hp)
+- [Phase 3 — Ebb (33% → 10% HP)](#phase-3-ebb-33-10-hp)
+- [Choice gate (10% HP)](#choice-gate-10-hp)
+- [Hard mode deltas](#hard-mode-deltas)
+- [Rewards — from `enemies.json`](#rewards-from-enemiesjson)
+
 
 ## 4. Tide Keeper (`tide_keeper`)
 

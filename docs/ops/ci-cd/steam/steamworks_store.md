@@ -5,12 +5,22 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 610
-summary: "Steamworks + store/marketing"
+tokens_est: 651
+summary: "Steam Release Checklist — Steamworks + store/marketing — covers 3. Steamworks — platform setup; 4. Store page & marketing"
 ---
 # Steam Release Checklist — Steamworks + store/marketing
 
 **Hub:** [`STEAM_RELEASE_CHECKLIST.md`](../STEAM_RELEASE_CHECKLIST.md)
+
+## When to read
+
+Use **Steam Release Checklist — Steamworks + store/marketing** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Steamworks — platform setup](#3-steamworks-platform-setup)
+- [4. Store page & marketing](#4-store-page-marketing)
+
 
 ## 3. Steamworks — platform setup
 

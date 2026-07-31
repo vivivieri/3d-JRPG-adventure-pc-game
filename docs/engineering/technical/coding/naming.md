@@ -5,12 +5,18 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 418
+tokens_est: 414
 summary: "Gameplay **content** lives in JSON; `.gd` implements engines, not story text."
 ---
 # Coding Standards Hub — Naming conventions
 
 **Hub:** [`CODING_STANDARDS_HUB.md`](../CODING_STANDARDS_HUB.md)
+
+## When to read
+
+Use **Coding Standards Hub — Naming conventions** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 2. Naming conventions (all languages)
 

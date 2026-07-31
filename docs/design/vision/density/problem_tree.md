@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 336
-summary: "Problem + decision tree"
+tokens_est: 377
+summary: "Narrative Density — Problem + decision tree — This game targets 2–3 hours. Density beats coverage."
 ---
 # Narrative Density — Problem + decision tree
 
 **Hub:** [`NARRATIVE_DENSITY.md`](../NARRATIVE_DENSITY.md)
+
+## When to read
+
+Use **Narrative Density — Problem + decision tree** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. The problem](#1-the-problem)
+- [2. Decision tree (add a line?)](#2-decision-tree-add-a-line)
+
 
 ## 1. The problem
 

@@ -4,12 +4,26 @@ type: how-to
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 733
-summary: "Phase 4 Cursor Automations"
+tokens_est: 885
+summary: "Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations — Machine-readable catalog: `game/data/qa/factory_automations.json"
 ---
 # Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations
 
 **Hub:** [`automations_github_bootstrap.md`](../automations_github_bootstrap.md)
+
+## When to read
+
+Use **Factory Setup — Automations & Bootstrap — Phase 4 Cursor Automations** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [6. Phase 4 — Cursor Automations (dashboard)](#6-phase-4-cursor-automations-dashboard)
+- [Automation A — PM cycle dispatch (required)](#automation-a-pm-cycle-dispatch-required)
+- [Automation B — CI failure triage (required)](#automation-b-ci-failure-triage-required)
+- [Automation C — UAT notify (optional)](#automation-c-uat-notify-optional)
+- [Automation D — Factory alert (required)](#automation-d-factory-alert-required)
+- [Automation E — Worker (required for 100% automation)](#automation-e-worker-required-for-100-automation)
+
 
 ## 6. Phase 4 — Cursor Automations (dashboard)
 

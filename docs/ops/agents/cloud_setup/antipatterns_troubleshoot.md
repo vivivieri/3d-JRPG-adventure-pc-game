@@ -5,12 +5,24 @@ audience: [pm, builder]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 677
+tokens_est: 725
 summary: "- [ ] Environment snapshot with GDAI + MCP PASS"
 ---
 # Cloud Agent Setup — Anti-patterns & troubleshooting
 
 **Hub:** [`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)
+
+## When to read
+
+Use **Cloud Agent Setup — Anti-patterns & troubleshooting** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [9. Anti-patterns](#9-anti-patterns)
+- [10. Troubleshooting](#10-troubleshooting)
+- [11. Quick start checklist](#11-quick-start-checklist)
+- [12. Cross-refs](#12-cross-refs)
+
 
 ## 9. Anti-patterns
 

@@ -5,12 +5,29 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 643
-summary: "Regen order & per-helper steps"
+tokens_est: 821
+summary: "GDScript Regeneration — Regen order & per-helper steps — From `helpers_registry.json` → `regeneration_order`:"
 ---
 # GDScript Regeneration — Regen order & per-helper steps
 
 **Hub:** [`GDSCRIPT_REGENERATION.md`](../GDSCRIPT_REGENERATION.md)
+
+## When to read
+
+Use **GDScript Regeneration — Regen order & per-helper steps** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [4. Regeneration order (mandatory)](#4-regeneration-order-mandatory)
+- [5. Per-helper steps](#5-per-helper-steps)
+- [Step A — Read spec](#step-a-read-spec)
+- [Step B — Read Python reference](#step-b-read-python-reference)
+- [Step C — Port to GDScript](#step-c-port-to-gdscript)
+- [Global signals — autoload (helpers_registry.json EventBus)](#global-signals-autoload-helpers_registryjson-eventbus)
+- [Step D — Verify reference libs (main parity)](#step-d-verify-reference-libs-main-parity)
+- [Step E — GDScript unit test (game/development)](#step-e-gdscript-unit-test-gamedevelopment)
+- [Step F — Commit on `game/development` only](#step-f-commit-on-gamedevelopment-only)
+
 
 ## 4. Regeneration order (mandatory)
 

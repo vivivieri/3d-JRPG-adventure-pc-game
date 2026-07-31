@@ -5,12 +5,28 @@ audience: [narrative, builder, flow]
 phase: [1, 2, 3, 4, 5, 6]
 status: active
 authority: vision
-tokens_est: 982
-summary: "Storyboard — Act II — The Depths"
+tokens_est: 1104
+summary: "Storyboard — Act II — The Depths — covers Act II — The Depths; SC-06 — Tidal Caves Entrance; SC-07 — Water Level Puzzle; SC-08 — Echo of the Drowned"
 ---
 # Storyboard — Act II — The Depths
 
 **Hub:** [`STORYBOARD.md`](../STORYBOARD.md)
+
+## When to read
+
+Use **Storyboard — Act II — The Depths** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [Act II — The Depths](#act-ii-the-depths)
+- [SC-06 — Tidal Caves Entrance](#sc-06-tidal-caves-entrance)
+- [SC-07 — Water Level Puzzle](#sc-07-water-level-puzzle)
+- [SC-08 — Echo of the Drowned](#sc-08-echo-of-the-drowned)
+- [SC-09 — Boss: Shore Wraith](#sc-09-boss-shore-wraith)
+- [SC-10 — Yuzu Joins](#sc-10-yuzu-joins)
+- [SC-11 — Palace Vision (Flashback)](#sc-11-palace-vision-flashback)
+- [SC-12 — Dragon Palace Gate](#sc-12-dragon-palace-gate)
+
 
 ## Act II — The Depths
 

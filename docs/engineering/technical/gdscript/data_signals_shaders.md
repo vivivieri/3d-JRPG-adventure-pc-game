@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 526
-summary: "Data access, signals, shaders"
+tokens_est: 605
+summary: "GDScript Style — Data access, signals, shaders — var _skills: Dictionary = GameManager.load_json('res://data/skills/skills.json')"
 ---
 # GDScript Style — Data access, signals, shaders
 
 **Hub:** [`GDSCRIPT_STYLE.md`](../GDSCRIPT_STYLE.md)
+
+## When to read
+
+Use **GDScript Style — Data access, signals, shaders** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [9. Data access](#9-data-access)
+- [10. Signals & EventBus](#10-signals-eventbus)
+- [Same feature area — direct connect](#same-feature-area-direct-connect)
+- [Cross-system — EventBus autoload](#cross-system-eventbus-autoload)
+- [11. Shaders (`.gdshader`)](#11-shaders-gdshader)
+
 
 ## 9. Data access
 

@@ -4,12 +4,23 @@ type: how-to
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 525
+tokens_est: 593
 summary: "python3 tools/render_model_turntable.py --model urashima"
 ---
 # Model QA — Defense Layers — M3 turntable + jury
 
 **Hub:** [`defense_layers.md`](../defense_layers.md)
+
+## When to read
+
+Use **Model QA — Defense Layers — M3 turntable + jury** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [M3 — Turntable render (Blender)](#m3-turntable-render-blender)
+- [M3b — Multi-LLM vision jury (hero + set-pieces)](#m3b-multi-llm-vision-jury-hero-set-pieces)
+- [Why turntable + in-game screenshot?](#why-turntable-in-game-screenshot)
+
 
 ### M3 — Turntable render (Blender)
 

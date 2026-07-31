@@ -5,12 +5,23 @@ audience: [architect, builder]
 phase: [1, 4]
 status: active
 authority: engineering
-tokens_est: 511
-summary: "Exploration, audio, UI"
+tokens_est: 552
+summary: "Zone entry: `ZoneVisuals.apply_to_scene(root, zone_id)` (static — `base_classes.json` + `zone_visuals_lib.py`) then `AudioManager.play_bgm(zone_bgm)`."
 ---
 # Technical Design — Exploration, audio, UI
 
 **Hub:** [`TECHNICAL_DESIGN.md`](../TECHNICAL_DESIGN.md)
+
+## When to read
+
+Use **Technical Design — Exploration, audio, UI** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [8. Exploration stack](#8-exploration-stack)
+- [9. Audio routing](#9-audio-routing)
+- [10. UI layer](#10-ui-layer)
+
 
 ## 8. Exploration stack
 

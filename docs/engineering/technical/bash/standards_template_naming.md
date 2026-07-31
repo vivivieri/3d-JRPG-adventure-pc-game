@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 573
-summary: "Standards, template, naming, quoting"
+tokens_est: 633
+summary: "Bash Style — Standards, template, naming, quoting — Project shell: `bash` 5.x (Linux CI and Cloud Agents). Scripts may use bashisms when `#!/usr/bin/env bash` i"
 ---
 # Bash Style — Standards, template, naming, quoting
 
 **Hub:** [`BASH_STYLE.md`](../BASH_STYLE.md)
+
+## When to read
+
+Use **Bash Style — Standards, template, naming, quoting** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Industry standards (authoritative externals)](#1-industry-standards-authoritative-externals)
+- [2. File template](#2-file-template)
+- [3. Naming](#3-naming)
+- [4. Quoting & variables](#4-quoting-variables)
+
 
 ## 1. Industry standards (authoritative externals)
 

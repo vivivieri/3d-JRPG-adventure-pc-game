@@ -5,12 +5,23 @@ audience: [visual, builder, qa]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 459
-summary: "Report template, phase gates, tools"
+tokens_est: 512
+summary: "Visual QA — Report template, phase gates, tools — [VISUAL QA] scene=ruined_village.tscn zone=ruined_village"
 ---
 # Visual QA — Report template, phase gates, tools
 
 **Hub:** [`VISUAL_QA.md`](../VISUAL_QA.md)
+
+## When to read
+
+Use **Visual QA — Report template, phase gates, tools** (roles: visual, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Agent report template (paste every visual task)](#4-agent-report-template-paste-every-visual-task)
+- [5. Phase gates](#5-phase-gates)
+- [6. Related tools](#6-related-tools)
+
 
 ## 4. Agent report template (paste every visual task)
 

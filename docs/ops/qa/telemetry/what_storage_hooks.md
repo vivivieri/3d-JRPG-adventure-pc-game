@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 901
-summary: "What logs, storage, hooks"
+tokens_est: 976
+summary: "Agent Session Telemetry — What logs, storage, hooks — Every agent session produces append-only JSONL events:"
 ---
 # Agent Session Telemetry — What logs, storage, hooks
 
 **Hub:** [`AGENT_SESSION_TELEMETRY.md`](../AGENT_SESSION_TELEMETRY.md)
+
+## When to read
+
+Use **Agent Session Telemetry — What logs, storage, hooks** (roles: pm, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. What gets logged](#1-what-gets-logged)
+- [Captured attributes (raw data)](#captured-attributes-raw-data)
+- [2. Storage layout (analysis-friendly)](#2-storage-layout-analysis-friendly)
+- [3. Automatic hooks](#3-automatic-hooks)
+
 
 ## 1. What gets logged
 

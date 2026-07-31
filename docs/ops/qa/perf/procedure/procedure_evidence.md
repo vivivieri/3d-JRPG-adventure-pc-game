@@ -5,12 +5,25 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 596
-summary: "Procedure + evidence schema"
+tokens_est: 667
+summary: "See `docs/ops/cheat-sheets/RR_CHEATSHEET.md` §Performance review — scene/shader/material/mesh/light/fog changes and post-fix regression."
 ---
 # Perf — Procedure & Evidence — Procedure + evidence schema
 
 **Hub:** [`procedure_evidence.md`](../procedure_evidence.md)
+
+## When to read
+
+Use **Perf — Procedure & Evidence — Procedure + evidence schema** (roles: qa, release, builder) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [7. Test procedure (`L3_perf_review`)](#7-test-procedure-l3_perf_review)
+- [7.1 When to run](#71-when-to-run)
+- [7.2 Steps](#72-steps)
+- [7.3 Post-fix regression](#73-post-fix-regression)
+- [8. Evidence schema](#8-evidence-schema)
+
 
 ## 7. Test procedure (`L3_perf_review`)
 

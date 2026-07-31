@@ -5,12 +5,22 @@ audience: [visual, builder]
 phase: [1]
 status: active
 authority: art
-tokens_est: 257
+tokens_est: 326
 summary: "is gated twice — greybox first, final art later:"
 ---
 # Art Direction — Vertical slice gate
 
 **Hub:** [`ART_DIRECTION.md`](../ART_DIRECTION.md)
+
+## When to read
+
+Use **Art Direction — Vertical slice gate** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [10. Vertical slice gate](#10-vertical-slice-gate)
+- [Phase 1 gate (greybox slice — rendering foundation)](#phase-1-gate-greybox-slice-rendering-foundation)
+- [M5 / Phase 7 gate (final art — before ship)](#m5-phase-7-gate-final-art-before-ship)
 
 ## 10. Vertical slice gate
 

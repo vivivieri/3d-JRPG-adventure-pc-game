@@ -5,12 +5,25 @@ phase: [0, 1, 8]
 audience: [pm, architect, builder, release]
 status: active
 authority: workflow
-tokens_est: 570
-summary: "Branch roles + rules"
+tokens_est: 636
+summary: "Branching Policy — Branch roles + rules — - ✅ Design docs, GDD, art direction, implementation plan"
 ---
 # Branching Policy — Branch roles + rules
 
 **Hub:** [`BRANCHING.md`](../BRANCHING.md)
+
+## When to read
+
+Use **Branching Policy — Branch roles + rules** (roles: pm, architect, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Branch roles](#1-branch-roles)
+- [2. Rules](#2-rules)
+- [On `main`](#on-main)
+- [On `game/development`](#on-gamedevelopment)
+- [Merge to `main` (game complete only)](#merge-to-main-game-complete-only)
+
 
 ## 1. Branch roles
 

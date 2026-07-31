@@ -5,12 +5,23 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 570
+tokens_est: 605
 summary: "Lines with `voice_id` in `chapter_01.json` play one short clip; **all other lines stay text-only**."
 ---
 # Narrative — Audio & themes
 
 **Hub:** [`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)
+
+## When to read
+
+Use **Narrative — Audio & themes** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Audio & presentation model](#1-audio-presentation-model)
+- [What “narrator” means](#what-narrator-means)
+- [2. Themes & adaptation spine](#2-themes-adaptation-spine)
+
 
 ## 1. Audio & presentation model
 

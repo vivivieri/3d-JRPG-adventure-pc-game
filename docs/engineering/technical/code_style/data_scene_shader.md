@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 440
-summary: "Data access, scenes, shaders"
+tokens_est: 487
+summary: "Code Style — Data access, scenes, shaders — var _skills: Dictionary = GameManager.load_json('res://data/skills/skills.json')"
 ---
 # Code Style — Data access, scenes, shaders
 
 **Hub:** [`CODE_STYLE.md`](../CODE_STYLE.md)
+
+## When to read
+
+Use **Code Style — Data access, scenes, shaders** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [6. Data access patterns](#6-data-access-patterns)
+- [7. Scene authoring rules](#7-scene-authoring-rules)
+- [8. Shader conventions](#8-shader-conventions)
+
 
 ## 6. Data access patterns
 

@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 546
-summary: "Escalation, branch, sprint, forbidden"
+tokens_est: 627
+summary: "R&R Cheat Sheet — Escalation, branch, sprint, forbidden — docs/ops/qa/ESCALATION_POLICY.md` · `game/data/qa/escalation_policy.json` · `tools/pm_escalate.py"
 ---
 # R&R Cheat Sheet — Escalation, branch, sprint, forbidden
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R Cheat Sheet — Escalation, branch, sprint, forbidden** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Escalation ladder (no infinite dev↔QA loops)](#escalation-ladder-no-infinite-devqa-loops)
+- [Branch & environment](#branch-environment)
+- [Sprint batches (AI-native)](#sprint-batches-ai-native)
+- [Forbidden without user override](#forbidden-without-user-override)
+
 
 ## Escalation ladder (no infinite dev↔QA loops)
 

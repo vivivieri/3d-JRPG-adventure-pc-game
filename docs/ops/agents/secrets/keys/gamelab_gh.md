@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 573
+tokens_est: 591
 summary: "API key for **GameLab Studio MCP** (`gamelab-mcp`) — ink-wash UI frames, combat icon sheets, menu borders."
 ---
 # Secrets — API Keys — GAMELAB + GH_TOKEN
 
 **Hub:** [`api_keys.md`](../api_keys.md)
+
+## When to read
+
+Use **Secrets — API Keys — GAMELAB + GH_TOKEN** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. `GAMELAB_API_KEY`](#4-gamelab_api_key)
+- [Steps](#steps)
+- [5. `GH_TOKEN`](#5-gh_token)
+- [Steps](#steps-1)
+
 
 ## 4. `GAMELAB_API_KEY`
 

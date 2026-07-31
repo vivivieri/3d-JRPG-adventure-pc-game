@@ -5,12 +5,22 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 331
+tokens_est: 353
 summary: "- [x] Narrative writing guide (`docs/design/vision/NARRATIVE_WRITING_GUIDE.md`) — selective VO (12 clips); SC-07 silence"
 ---
 # Milestones — Pre-build — M0f / M0g
 
 **Hub:** [`pre_build.md`](../pre_build.md)
+
+## When to read
+
+Use **Milestones — Pre-build — M0f / M0g** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [M0f — Pre-build design (narrative & polish)](#m0f-pre-build-design-narrative-polish)
+- [M0g — Pitch illustrations](#m0g-pitch-illustrations)
+
 
 ## M0f — Pre-build design (narrative & polish)
 - [x] Narrative writing guide (`docs/design/vision/NARRATIVE_WRITING_GUIDE.md`) — selective VO (12 clips); SC-07 silence

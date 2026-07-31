@@ -4,12 +4,25 @@ type: how-to
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 640
+tokens_est: 735
 summary: "For a **pure AI agent team**, sprints are **outcome batches**, not human capacity sprints."
 ---
 # Agile — Sprint Duration — AI-native cadence
 
 **Hub:** [`duration.md`](../duration.md)
+
+## When to read
+
+Use **Agile — Sprint Duration — AI-native cadence** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [12.1 AI-native cadence (pure agent implementation)](#121-ai-native-cadence-pure-agent-implementation)
+- [Cycle units](#cycle-units)
+- [What actually consumes calendar time](#what-actually-consumes-calendar-time)
+- [PM Agent batch checklist (replaces “two-week planning”)](#pm-agent-batch-checklist-replaces-two-week-planning)
+- [Example: Phase 1 at AI speed](#example-phase-1-at-ai-speed)
+
 
 ## 12.1 AI-native cadence (pure agent implementation)
 

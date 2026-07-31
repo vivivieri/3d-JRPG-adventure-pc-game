@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 592
-summary: "Install plugin + desktop Cursor"
+tokens_est: 718
+summary: "GDAI Cloud Setup — Install plugin + desktop Cursor — 1. Purchase/download from https://gdaimcp.com/ (commercial plugin)."
 ---
 # GDAI Cloud Setup — Install plugin + desktop Cursor
 
 **Hub:** [`GDAI_CLOUD_SETUP.md`](../GDAI_CLOUD_SETUP.md)
+
+## When to read
+
+Use **GDAI Cloud Setup — Install plugin + desktop Cursor** (roles: builder, pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [2. Install the plugin (local, dev only)](#2-install-the-plugin-local-dev-only)
+- [Recommended editor settings](#recommended-editor-settings)
+- [Path without spaces](#path-without-spaces)
+- [3. Configure Cursor — Desktop (local IDE)](#3-configure-cursor-desktop-local-ide)
+- [3.1 Get the JSON from Godot (authoritative)](#31-get-the-json-from-godot-authoritative)
+- [3.2 Register in Cursor](#32-register-in-cursor)
+- [3.3 Verify (desktop)](#33-verify-desktop)
+
 
 ## 2. Install the plugin (local, dev only)
 

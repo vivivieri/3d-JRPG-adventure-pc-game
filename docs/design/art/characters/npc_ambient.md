@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 859
-summary: "Low-poly crowd and ambient life — **excluded** from `hero_jury` and `L2_model_jury`. Zone composition counts apply (`zone_composition.json` max props). See `gam"
+tokens_est: 926
+summary: "Scope: Low-poly crowd and ambient life — excluded from `hero_jury` and `L2_model_jury`. Zone composition counts apply (`zone_composition.json` max props). See `"
 ---
 # Characters — NPC / ambient
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Characters — NPC / ambient** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. NPC / ambient (silhouettes & crowd)](#7-npc-ambient-silhouettes-crowd)
+- [Villager spirit (`villager_spirit`) — ending crowd](#villager-spirit-villager_spirit-ending-crowd)
+- [Rebuilder (`rebuilder`) — ending shore](#rebuilder-rebuilder-ending-shore)
+- [Village cat / dog (`village_cat`, `village_dog`)](#village-cat-dog-village_cat-village_dog)
+
 
 ## 7. NPC / ambient (silhouettes & crowd)
 

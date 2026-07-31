@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 184
+tokens_est: 217
 summary: "curl -LsSf https://astral.sh/uv/install.sh | sh"
 ---
 # GDAI Cloud Setup — Prerequisites
 
 **Hub:** [`GDAI_CLOUD_SETUP.md`](../GDAI_CLOUD_SETUP.md)
+
+## When to read
+
+Use **GDAI Cloud Setup — Prerequisites** (roles: builder, pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Prerequisites](#1-prerequisites)
+- [`uv` (required by GDAI)](#uv-required-by-gdai)
+- [Godot 4.7 stable](#godot-47-stable)
 
 ## 1. Prerequisites
 

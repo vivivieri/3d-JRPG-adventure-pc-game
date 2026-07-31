@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [audio, narrative]
 status: active
 authority: vision
-tokens_est: 442
-summary: "File layout + ElevenLabs setup"
+tokens_est: 478
+summary: "Selective VO Hit List — File layout + ElevenLabs setup — game/assets/audio/voice/"
 ---
 # Selective VO Hit List — File layout + ElevenLabs setup
 
 **Hub:** [`VO_HIT_LIST.md`](../VO_HIT_LIST.md)
+
+## When to read
+
+Use **Selective VO Hit List — File layout + ElevenLabs setup** (roles: audio, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [File layout](#file-layout)
+- [AI VO setup (ElevenLabs)](#ai-vo-setup-elevenlabs)
+
 
 ## File layout
 

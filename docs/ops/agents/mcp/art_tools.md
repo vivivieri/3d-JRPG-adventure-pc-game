@@ -5,7 +5,7 @@ audience: [visual, builder, pm]
 phase: [0, 1]
 status: active
 authority: ops
-tokens_est: 1360
+tokens_est: 1421
 summary: "Which art tool to use (ComfyUI, GameLab, Meshy/Blender, ACE-Step, ElevenLabs) — open before generating zone/UI/3D/audio assets"
 ---
 # MCP — Art Tools
@@ -14,16 +14,17 @@ summary: "Which art tool to use (ComfyUI, GameLab, Meshy/Blender, ACE-Step, Elev
 
 ## When to read
 
-Choosing or wiring an **art generation** path. Skip for pure scene placement (GDAI) once assets exist.
+Use **MCP — Art Tools** (roles: visual, builder, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
 
 ## Jump to
 
-- [ComfyUI / Material Maker](#comfyui--material-maker--zone-npr-albedos)
-- [GameLab Studio MCP](#gamelab-studio-mcp--ui--2d-sheets-required)
-- [AI 3D + Blender](#ai-3d--blender--offline-hero-pipeline-required-for-turntable-qa)
+- [ComfyUI / Material Maker — zone NPR albedos](#comfyui-material-maker-zone-npr-albedos)
+- [GameLab Studio MCP — UI & 2D sheets (required)](#gamelab-studio-mcp-ui-2d-sheets-required)
+- [AI 3D + Blender — offline hero pipeline (required for turntable QA)](#ai-3d-blender-offline-hero-pipeline-required-for-turntable-qa)
 - [Shader policy](#shader-policy)
-- [ACE-Step BGM](#ace-step-15--audio-prototype-replaces-sunoudio)
-- [ElevenLabs VO](#elevenlabs--selective-vo-12-clips-not-full-dialogue)
+- [ACE-Step 1.5 — audio prototype (replaces Suno/Udio)](#ace-step-15-audio-prototype-replaces-sunoudio)
+- [ElevenLabs — selective VO (12 clips, not full dialogue)](#elevenlabs-selective-vo-12-clips-not-full-dialogue)
+
 
 ### ComfyUI / Material Maker — zone NPR albedos
 

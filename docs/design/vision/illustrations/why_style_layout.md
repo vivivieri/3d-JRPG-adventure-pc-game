@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [visual, narrative, pm]
 status: active
 authority: vision
-tokens_est: 574
-summary: "Why, visual style, file layout"
+tokens_est: 660
+summary: "Rule: Illustrations follow the same hex palettes and silhouettes as `ART_DIRECTION.md`. When 3D models ship, replace pitch art in marketing only — in-game uses"
 ---
 # Storyboard Illustrations — Why, visual style, file layout
 
 **Hub:** [`STORYBOARD_ILLUSTRATIONS.md`](../STORYBOARD_ILLUSTRATIONS.md)
+
+## When to read
+
+Use **Storyboard Illustrations — Why, visual style, file layout** (roles: visual, narrative, pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Why illustrations with the storyboard?](#1-why-illustrations-with-the-storyboard)
+- [2. Visual style (all illustrations)](#2-visual-style-all-illustrations)
+- [Global negative prompts (AI or brief to artist)](#global-negative-prompts-ai-or-brief-to-artist)
+- [3. File layout](#3-file-layout)
+
 
 ## 1. Why illustrations with the storyboard?
 

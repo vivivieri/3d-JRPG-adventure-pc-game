@@ -5,12 +5,28 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 599
+tokens_est: 671
 summary: "Short clauses in Act I. Avoid jokes. Never boast. Posture in stage direction = hunched → upright (`CHARACTER_BIBLE.md`)."
 ---
 # Narrative — Character voice
 
 **Hub:** [`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)
+
+## When to read
+
+Use **Narrative — Character voice** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [3. Character voice](#3-character-voice)
+- [Urashima (`urashima`)](#urashima-urashima)
+- [Yuzu (`yuzu`)](#yuzu-yuzu)
+- [Roku (`roku`)](#roku-roku)
+- [Otohime (`otohime`)](#otohime-otohime)
+- [Tide Keeper (`tide_keeper`)](#tide-keeper-tide_keeper)
+- [Narrator (`narrator`)](#narrator-narrator)
+- [Enemies (combat barks)](#enemies-combat-barks)
+
 
 ## 3. Character voice
 

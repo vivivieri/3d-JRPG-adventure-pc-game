@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, pm]
 status: active
 authority: engineering
-tokens_est: 820
+tokens_est: 895
 summary: "Build workflow, not on main, coverage, anti-patterns"
 ---
 # Spec-First Development — Build workflow, not on main, coverage, anti-patterns
 
 **Hub:** [`SPEC_FIRST_DEVELOPMENT.md`](../SPEC_FIRST_DEVELOPMENT.md)
+
+## When to read
+
+Use **Spec-First Development — Build workflow, not on main, coverage, anti-patterns** (roles: architect, pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [5. Build workflow (after gate passes)](#5-build-workflow-after-gate-passes)
+- [6. What is intentionally not on `main`](#6-what-is-intentionally-not-on-main)
+- [7. Current spec coverage (honest)](#7-current-spec-coverage-honest)
+- [8. Anti-patterns](#8-anti-patterns)
+
 
 ## 5. Build workflow (after gate passes)
 

@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 542
-summary: "Moral mirror; not playable"
+tokens_est: 603
+summary: "Character — Otohime — Role: Moral mirror; not playable"
 ---
 # Character — Otohime
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Character — Otohime** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [5. Otohime (NPC — flashback / glimpse)](#5-otohime-npc-flashback-glimpse)
+- [Design direction](#design-direction)
+- [Silhouette](#silhouette)
+- [Voice tone (writing ref)](#voice-tone-writing-ref)
+
 
 ## 5. Otohime (NPC — flashback / glimpse)
 

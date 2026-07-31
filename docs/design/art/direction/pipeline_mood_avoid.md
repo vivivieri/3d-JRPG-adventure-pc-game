@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 408
-summary: "AI→Godot pipeline, mood, avoid list"
+tokens_est: 464
+summary: "Art Direction — AI→Godot pipeline, mood, avoid list — 1. Generate mesh via Meshy/Tripo/Rodin per `docs/design/art/CHARACTER_BIBLE.md` poly budgets"
 ---
 # Art Direction — AI→Godot pipeline, mood, avoid list
 
 **Hub:** [`ART_DIRECTION.md`](../ART_DIRECTION.md)
+
+## When to read
+
+Use **Art Direction — AI→Godot pipeline, mood, avoid list** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7. AI 3D → Godot pipeline](#7-ai-3d-godot-pipeline)
+- [8. Reference mood board (keywords)](#8-reference-mood-board-keywords)
+- [9. What to avoid](#9-what-to-avoid)
+
 
 ## 7. AI 3D → Godot pipeline
 

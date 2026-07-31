@@ -5,12 +5,24 @@ audience: [builder, builder_combat, qa]
 phase: [2]
 status: active
 authority: gameplay
-tokens_est: 899
-summary: "Turn structure, elements, stats"
+tokens_est: 969
+summary: "Combat Systems — Turn structure, elements, stats — Round start → Sort by SPD (desc) → ties random"
 ---
 # Combat Systems — Turn structure, elements, stats
 
 **Hub:** [`COMBAT_SYSTEMS.md`](../COMBAT_SYSTEMS.md)
+
+## When to read
+
+Use **Combat Systems — Turn structure, elements, stats** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Turn structure](#1-turn-structure)
+- [2. Elements](#2-elements)
+- [3. Stats](#3-stats)
+- [Worked examples (unit-test fixtures — `test_damage_calculator.gd`)](#worked-examples-unit-test-fixtures-test_damage_calculatorgd)
+
 
 ## 1. Turn structure
 

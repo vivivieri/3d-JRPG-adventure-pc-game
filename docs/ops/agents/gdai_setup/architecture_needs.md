@@ -5,12 +5,25 @@ phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 508
-summary: "Architecture + needs + prereqs"
+tokens_est: 584
+summary: "GDAI Cloud Setup — Architecture + needs + prereqs — GDAI is not a single server. Cursor talks to a stdio bridge, which talks to the Godot editor plugin:"
 ---
 # GDAI Cloud Setup — Architecture + needs + prereqs
 
 **Hub:** [`GDAI_CLOUD_SETUP.md`](../GDAI_CLOUD_SETUP.md)
+
+## When to read
+
+Use **GDAI Cloud Setup — Architecture + needs + prereqs** (roles: builder, pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Architecture (two layers — both required)](#architecture-two-layers-both-required)
+- [What you need (3 pieces)](#what-you-need-3-pieces)
+- [1. Prerequisites](#1-prerequisites)
+- [`uv` (required by GDAI)](#uv-required-by-gdai)
+- [Godot 4.7 stable](#godot-47-stable)
+
 
 ## Architecture (two layers — both required)
 

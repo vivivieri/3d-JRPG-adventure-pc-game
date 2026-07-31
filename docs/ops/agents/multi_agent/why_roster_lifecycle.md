@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 766
-summary: "Why, roster, session lifecycle"
+tokens_est: 818
+summary: "One agent doing plan + build + test + deploy violates R&R and skips gates. This doc defines roles that map to tools and handoffs — simulating a 6-person indie t"
 ---
 # Multi-Agent Team — Why, roster, session lifecycle
 
 **Hub:** [`MULTI_AGENT_TEAM.md`](../MULTI_AGENT_TEAM.md)
+
+## When to read
+
+Use **Multi-Agent Team — Why, roster, session lifecycle** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Why multi-agent](#1-why-multi-agent)
+- [2. Team roster](#2-team-roster)
+- [3. Session lifecycle (one feature)](#3-session-lifecycle-one-feature)
+
 
 ## 1. Why multi-agent
 

@@ -4,12 +4,18 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 355
-summary: "Authoritative externals"
+tokens_est: 372
+summary: "Python — PEP 8 Standards — Authoritative externals — Follow these unless this doc or a project validator explicitly overrides them."
 ---
 # Python — PEP 8 Standards — Authoritative externals
 
 **Hub:** [`standards_pep8.md`](../standards_pep8.md)
+
+## When to read
+
+Use **Python — PEP 8 Standards — Authoritative externals** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 1. Industry standards (authoritative externals)
 

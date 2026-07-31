@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 591
-summary: "Adding translations + CJK fonts"
+tokens_est: 637
+summary: "Localization — Adding translations + CJK fonts — Edit `game/locale/translations.csv`:"
 ---
 # Localization — Adding translations + CJK fonts
 
 **Hub:** [`LOCALIZATION.md`](../LOCALIZATION.md)
+
+## When to read
+
+Use **Localization — Adding translations + CJK fonts** (roles: architect, narrative, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Adding translations](#adding-translations)
+- [UI / game data strings (CSV)](#ui-game-data-strings-csv)
+- [Dialogue (JSON)](#dialogue-json)
+- [Fonts (CJK)](#fonts-cjk)
+
 
 ## Adding translations
 

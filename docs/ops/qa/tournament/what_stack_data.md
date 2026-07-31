@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [pm, visual, builder]
 status: active
 authority: qa
-tokens_est: 480
-summary: "What it is, stack position, data files"
+tokens_est: 525
+summary: "Candidate Tournament — What it is, stack position, data files — Ship truth stays L0–L6. `L2_candidate_select` never blocks `main` docs CI or M6 ship by itself."
 ---
 # Candidate Tournament — What it is, stack position, data files
 
 **Hub:** [`CANDIDATE_TOURNAMENT.md`](../CANDIDATE_TOURNAMENT.md)
+
+## When to read
+
+Use **Candidate Tournament — What it is, stack position, data files** (roles: pm, visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. What this is (and is not)](#1-what-this-is-and-is-not)
+- [2. Stack position](#2-stack-position)
+- [3. Data files](#3-data-files)
+
 
 ## 1. What this is (and is not)
 

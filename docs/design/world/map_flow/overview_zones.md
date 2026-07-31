@@ -4,12 +4,23 @@ type: reference
 audience: [architect, builder, narrative]
 status: active
 authority: world
-tokens_est: 467
-summary: "Overview + zones + connections"
+tokens_est: 518
+summary: "Single continuous coastal region — no world map screen v1. Player walks between zones via authored transitions."
 ---
 # World Map & Flow — Overview + zones + connections
 
 **Hub:** [`WORLD_MAP_AND_FLOW.md`](../WORLD_MAP_AND_FLOW.md)
+
+## When to read
+
+Use **World Map & Flow — Overview + zones + connections** (roles: architect, builder, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. World overview](#1-world-overview)
+- [2. Zone reference](#2-zone-reference)
+- [3. Connection table](#3-connection-table)
+
 
 ## 1. World overview
 

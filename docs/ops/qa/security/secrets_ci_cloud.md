@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [release, pm, architect]
 status: active
 authority: qa
-tokens_est: 442
-summary: "Secrets, CI gates, cloud factory"
+tokens_est: 485
+summary: "Security — Secrets, CI gates, cloud factory — bash tools/check_no_secrets.sh           # L0_no_secrets"
 ---
 # Security — Secrets, CI gates, cloud factory
 
 **Hub:** [`SECURITY.md`](../SECURITY.md)
+
+## When to read
+
+Use **Security — Secrets, CI gates, cloud factory** (roles: release, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. Secrets policy](#3-secrets-policy)
+- [4. CI gates](#4-ci-gates)
+- [5. Cloud agent factory](#5-cloud-agent-factory)
+
 
 ## 3. Secrets policy
 

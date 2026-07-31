@@ -5,7 +5,7 @@ audience: [pm, qa, release]
 phase: [0, 1]
 status: active
 authority: ops
-tokens_est: 1222
+tokens_est: 1250
 summary: "Which CI gates run on main vs game/development — open for PR gate triage or “why did CI skip/fail” by branch"
 ---
 # Controls — Gates by Branch
@@ -14,12 +14,13 @@ summary: "Which CI gates run on main vs game/development — open for PR gate tr
 
 ## When to read
 
-Need the **branch → gate list** cheat sheet. For full pass commands see `required_gates/runs/` or `acceptance_criteria.json`.
+Use **Controls — Gates by Branch** (roles: pm, qa, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
 
 ## Jump to
 
-- [`main` docs CI](#main--ciyml--run_docs_ci_checkssh)
-- [`game/development` game CI](#gamedevelopment--game-ciyml--run_ci_checkssh)
+- [`main` — `ci.yml` → `run_docs_ci_checks.sh`](#main-ciyml-run_docs_ci_checkssh)
+- [`game/development` — `game-ci.yml` → `run_ci_checks.sh`](#gamedevelopment-game-ciyml-run_ci_checkssh)
+
 
 ### `main` — `ci.yml` → `run_docs_ci_checks.sh`
 

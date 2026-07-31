@@ -5,12 +5,18 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 451
-summary: "CI enforcement matrix"
+tokens_est: 460
+summary: "Coding — CI & PR — CI enforcement matrix — Policy: WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS."
 ---
 # Coding — CI & PR — CI enforcement matrix
 
 **Hub:** [`ci_pr_commands.md`](../ci_pr_commands.md)
+
+## When to read
+
+Use **Coding — CI & PR — CI enforcement matrix** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 9. CI enforcement matrix
 

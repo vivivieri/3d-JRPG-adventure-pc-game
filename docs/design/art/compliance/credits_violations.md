@@ -5,12 +5,23 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 335
-summary: "Credits, cross-refs, violations"
+tokens_est: 392
+summary: "Asset Compliance — Credits, cross-refs, violations — The in-game credits must list:"
 ---
 # Asset Compliance — Credits, cross-refs, violations
 
 **Hub:** [`ASSET_COMPLIANCE.md`](../ASSET_COMPLIANCE.md)
+
+## When to read
+
+Use **Asset Compliance — Credits, cross-refs, violations** (roles: visual, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [7. Credits screen (ship requirement)](#7-credits-screen-ship-requirement)
+- [8. Cross-references](#8-cross-references)
+- [9. Policy violations](#9-policy-violations)
+
 
 ## 7. Credits screen (ship requirement)
 

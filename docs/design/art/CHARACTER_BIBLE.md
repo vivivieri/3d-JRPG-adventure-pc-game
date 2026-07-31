@@ -5,16 +5,24 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 838
+tokens_est: 816
 summary: "High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds."
 ---
 # Tides of Urashima — Character Bible
 
-**Version:** 1.2 (Pre-build)
-**Visual target:** High-detail stylized Japanese — automated stylized albedo, readable silhouettes, no primitive placeholders in ship builds.
-**Cross-refs:** `docs/design/art/ART_DIRECTION.md`, `docs/design/vision/STORYBOARD.md`, `docs/design/gameplay/BOSS_DESIGNS.md`, `docs/design/art/ITEMS_3D_MODEL_GUIDE.md`
+## When to read
 
----
+Use **Tides of Urashima — Character Bible** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Global character rules](#1-global-character-rules)
+- [Model sheet template](#model-sheet-template)
+- [Rig attachment points](#rig-attachment-points)
+- [Character LOD (field only)](#character-lod-field-only)
+- [Character packs (progressive disclosure)](#character-packs-progressive-disclosure)
+
+
 ## 1. Global character rules
 
 | Rule | Detail |

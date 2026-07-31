@@ -5,12 +5,25 @@ phase: [0, 1, 8]
 audience: [pm, qa, architect, builder]
 status: active
 authority: workflow
-tokens_est: 653
+tokens_est: 728
 summary: "test_runner.gd # Headless entry point (-s)"
 ---
 # AI Dev — Testing Policy — Unit tests
 
 **Hub:** [`testing_policy.md`](../testing_policy.md)
+
+## When to read
+
+Use **AI Dev — Testing Policy — Unit tests** (roles: pm, qa, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. Unit tests](#3-unit-tests)
+- [3.1 Location & naming](#31-location-naming)
+- [3.2 Running unit tests](#32-running-unit-tests)
+- [3.3 What must have unit tests](#33-what-must-have-unit-tests)
+- [3.4 Writing new unit tests (GodotPrompter)](#34-writing-new-unit-tests-godotprompter)
+
 
 ## 3. Unit tests
 

@@ -5,12 +5,21 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 230
-summary: "Animation/SFX hooks + QA"
+tokens_est: 267
+summary: "Skills Bible — Animation/SFX hooks + QA — - [ ] 14 player skills all usable in combat UI (strike shared by Urashima + Roku)"
 ---
 # Skills Bible — Animation/SFX hooks + QA
 
 **Hub:** [`SKILLS_BIBLE.md`](../SKILLS_BIBLE.md)
+
+## When to read
+
+Use **Skills Bible — Animation/SFX hooks + QA** (roles: builder, builder_combat) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [7. Animation / SFX hooks](#7-animation-sfx-hooks)
+- [8. QA checklist](#8-qa-checklist)
 
 ## 7. Animation / SFX hooks
 

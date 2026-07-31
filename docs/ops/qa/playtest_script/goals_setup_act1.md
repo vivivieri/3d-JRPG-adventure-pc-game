@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 431
+tokens_est: 467
 summary: "- [ ] `bash tools/run_playtest_smoke.sh` → PASS"
 ---
 # Playtest Script — Goals, setup, Act I
 
 **Hub:** [`PLAYTEST_SCRIPT.md`](../PLAYTEST_SCRIPT.md)
+
+## When to read
+
+Use **Playtest Script — Goals, setup, Act I** (roles: qa, flow) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Playtest goals](#1-playtest-goals)
+- [2. Session setup](#2-session-setup)
+- [3. Act I script (~30 min)](#3-act-i-script-30-min)
+
 
 ## 1. Playtest goals
 

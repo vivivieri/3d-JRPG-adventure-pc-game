@@ -5,12 +5,24 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 371
-summary: "Zone texture workflow"
+tokens_est: 473
+summary: "Art Automation Pipeline — Zone texture workflow — GameLab is UI-focused. Zone albedos use ComfyUI or Material Maker."
 ---
 # Art Automation Pipeline — Zone texture workflow
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — Zone texture workflow** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. Zone texture workflow (not GameLab-first)](#3-zone-texture-workflow-not-gamelab-first)
+- [3.1 ComfyUI batch (heroes, unique surfaces)](#31-comfyui-batch-heroes-unique-surfaces)
+- [3.2 Material Maker (stone, wood, ground — free path)](#32-material-maker-stone-wood-ground-free-path)
+- [3.3 Nature meshes (rocks, trees)](#33-nature-meshes-rocks-trees)
+
 
 ## 3. Zone texture workflow (not GameLab-first)
 

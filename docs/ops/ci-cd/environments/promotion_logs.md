@@ -5,12 +5,23 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 442
-summary: "Promotion, log correlation, refs"
+tokens_est: 490
+summary: "Environments — Promotion, log correlation, refs — Never promote with SKIP gates (`skip_is_not_pass` in `acceptance_criteria.json`)."
 ---
 # Environments — Promotion, log correlation, refs
 
 **Hub:** [`ENVIRONMENTS.md`](../ENVIRONMENTS.md)
+
+## When to read
+
+Use **Environments — Promotion, log correlation, refs** (roles: pm, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [5. Promotion rules](#5-promotion-rules)
+- [6. Log & trace correlation](#6-log-trace-correlation)
+- [7. Cross-refs](#7-cross-refs)
+
 
 ## 5. Promotion rules
 

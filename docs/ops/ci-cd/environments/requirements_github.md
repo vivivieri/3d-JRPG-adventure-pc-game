@@ -5,12 +5,27 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 613
+tokens_est: 706
 summary: "Per-env requirements + GitHub Environments"
 ---
 # Environments — Per-env requirements + GitHub Environments
 
 **Hub:** [`ENVIRONMENTS.md`](../ENVIRONMENTS.md)
+
+## When to read
+
+Use **Environments — Per-env requirements + GitHub Environments** (roles: pm, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. Per-environment requirements](#3-per-environment-requirements)
+- [Development](#development)
+- [QA (automated)](#qa-automated)
+- [UAT](#uat)
+- [Preproduction (Steam beta)](#preproduction-steam-beta)
+- [Production](#production)
+- [4. GitHub Environments (recommended setup)](#4-github-environments-recommended-setup)
+
 
 ## 3. Per-environment requirements
 

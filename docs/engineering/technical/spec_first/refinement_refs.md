@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, pm]
 status: active
 authority: engineering
-tokens_est: 941
-summary: "Spec refinement mode + cross-refs"
+tokens_est: 1050
+summary: "When: Revising design, registries, narrative data, or helper contracts — before or between sprint dispatches."
 ---
 # Spec-First Development — Spec refinement mode + cross-refs
 
 **Hub:** [`SPEC_FIRST_DEVELOPMENT.md`](../SPEC_FIRST_DEVELOPMENT.md)
+
+## When to read
+
+Use **Spec-First Development — Spec refinement mode + cross-refs** (roles: architect, pm) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [10. Spec refinement mode — prevent ad-hoc implementation](#10-spec-refinement-mode-prevent-ad-hoc-implementation)
+- [Allowed on `main` (spec refinement)](#allowed-on-main-spec-refinement)
+- [Forbidden during spec refinement](#forbidden-during-spec-refinement)
+- [Decision flow](#decision-flow)
+- [Session rules (agents)](#session-rules-agents)
+- [CI gates](#ci-gates)
+- [11. Cross-refs](#11-cross-refs)
+
 
 ## 10. Spec refinement mode — prevent ad-hoc implementation
 

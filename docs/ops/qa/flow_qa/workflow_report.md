@@ -5,12 +5,25 @@ phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 831
+tokens_est: 917
 summary: "Agent workflow, iteration, smoke, report, tools"
 ---
 # Flow QA — Agent workflow, iteration, smoke, report, tools
 
 **Hub:** [`FLOW_QA.md`](../FLOW_QA.md)
+
+## When to read
+
+Use **Flow QA — Agent workflow, iteration, smoke, report, tools** (roles: flow, qa, builder) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Agent workflow (flow task)](#5-agent-workflow-flow-task)
+- [6. Unified iterative improvement (all domains)](#6-unified-iterative-improvement-all-domains)
+- [7. L2 smoke auto-brief](#7-l2-smoke-auto-brief)
+- [8. Agent report template (flow FAIL)](#8-agent-report-template-flow-fail)
+- [9. Tools](#9-tools)
+
 
 ## 5. Agent workflow (flow task)
 

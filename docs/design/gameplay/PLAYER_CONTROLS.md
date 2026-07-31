@@ -5,16 +5,24 @@ phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 533
+tokens_est: 548
 summary: "`docs/design/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`"
 ---
 # Player Controls — Tides of Urashima
 
-**Version:** 1.0
-**Authority:** `docs/design/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`
-**Ship target:** Keyboard + mouse + Xbox-layout gamepad on main path (M5 polish)
+## When to read
 
----
+Use **Player Controls — Tides of Urashima** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. Field exploration](#1-field-exploration)
+- [2. Combat](#2-combat)
+- [3. SC-16 ending choice (gamepad)](#3-sc-16-ending-choice-gamepad)
+- [4. InputMap contract](#4-inputmap-contract)
+- [5. Accessibility](#5-accessibility)
+- [Related docs](#related-docs)
+
 
 ## 1. Field exploration
 

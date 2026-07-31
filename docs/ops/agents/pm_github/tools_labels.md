@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 690
-summary: "Tool choice + label taxonomy"
+tokens_est: 768
+summary: "Project Management — Tool choice + label taxonomy — Rule: `docs/` + `game/data/` remain authoritative for game design. PM tools track work, not spec."
 ---
 # Project Management — Tool choice + label taxonomy
 
 **Hub:** [`PROJECT_MANAGEMENT.md`](../PROJECT_MANAGEMENT.md)
+
+## When to read
+
+Use **Project Management — Tool choice + label taxonomy** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Tool choice](#1-tool-choice)
+- [2. GitHub Issues — label taxonomy](#2-github-issues-label-taxonomy)
+- [Environment](#environment)
+- [Severity (bugs)](#severity-bugs)
+- [Gate / domain](#gate-domain)
+- [Agent / status](#agent-status)
+- [Milestone](#milestone)
+
 
 ## 1. Tool choice
 

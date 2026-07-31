@@ -5,12 +5,26 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 511
+tokens_est: 597
 summary: "- Roku → 六さん in dialogue (respectful distance)"
 ---
 # Narrative — Localization & emotion tags
 
 **Hub:** [`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)
+
+## When to read
+
+Use **Narrative — Localization & emotion tags** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [6. Localization writing (en / ja / zh / zh-Hant)](#6-localization-writing-en-ja-zh-zh-hant)
+- [JA notes](#ja-notes)
+- [ZH notes (Simplified — `zh`)](#zh-notes-simplified-zh)
+- [zh-Hant notes (Traditional)](#zh-hant-notes-traditional)
+- [QA](#qa)
+- [7. Emotion tags (`emotion` field)](#7-emotion-tags-emotion-field)
+
 
 ## 6. Localization writing (en / ja / zh / zh-Hant)
 

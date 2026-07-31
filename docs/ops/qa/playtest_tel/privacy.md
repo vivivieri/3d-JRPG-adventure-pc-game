@@ -5,12 +5,17 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 196
+tokens_est: 191
 summary: "- **Local-only by default.** Logs write to `user://playtest/`; nothing leaves the machine."
 ---
 # Playtest Telemetry — Privacy
 
 **Hub:** [`PLAYTEST_TELEMETRY.md`](../PLAYTEST_TELEMETRY.md)
+
+## When to read
+
+Use **Playtest Telemetry — Privacy** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## Privacy
 

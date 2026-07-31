@@ -5,12 +5,22 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 370
+tokens_est: 404
 summary: "game/assets/models/characters/urashima/urashima.glb"
 ---
 # Characters — Export & production order
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Characters — Export & production order** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [10. File naming & export](#10-file-naming-export)
+- [11. Production order](#11-production-order)
+
 
 ## 10. File naming & export
 

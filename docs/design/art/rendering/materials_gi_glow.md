@@ -5,12 +5,26 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 731
+tokens_est: 809
 summary: "Enable `Environment.glow` wherever emissive content should read on screen:"
 ---
 # Rendering — Materials, GI, glow
 
 **Hub:** [`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)
+
+## When to read
+
+Use **Rendering — Materials, GI, glow** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [7. Materials & shaders](#7-materials-shaders)
+- [7.1 Use (stylized stack)](#71-use-stylized-stack)
+- [7.2 Do not use (v1)](#72-do-not-use-v1)
+- [7.3 Custom shaders (recommended)](#73-custom-shaders-recommended)
+- [8. Global illumination](#8-global-illumination)
+- [9. Glow targets (bloom)](#9-glow-targets-bloom)
+
 
 ## 7. Materials & shaders
 

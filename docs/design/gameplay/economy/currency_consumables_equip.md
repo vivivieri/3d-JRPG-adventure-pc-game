@@ -5,12 +5,26 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 640
-summary: "Currency, consumables, equipment"
+tokens_est: 690
+summary: "Sources: Combat drops, quest rewards, sell materials *(lore-entry coin bonus cut for v1 — `lore_entries.json` has no reward field)*"
 ---
 # Items & Economy — Currency, consumables, equipment
 
 **Hub:** [`ITEMS_AND_ECONOMY.md`](../ITEMS_AND_ECONOMY.md)
+
+## When to read
+
+Use **Items & Economy — Currency, consumables, equipment** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. Currency](#1-currency)
+- [2. Consumables](#2-consumables)
+- [3. Equipment](#3-equipment)
+- [Weapons](#weapons)
+- [Armor](#armor)
+- [Charms](#charms)
+
 
 ## 1. Currency
 

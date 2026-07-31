@@ -5,12 +5,25 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 487
-summary: "Summary & why hybrid"
+tokens_est: 570
+summary: "Agile Within Phases — Summary & why hybrid — Rule: Sprints optimize how we build the current phase. They do not reorder phases (e.g. M5 art still follows Phase"
 ---
 # Agile Within Phases — Summary & why hybrid
 
 **Hub:** [`AGILE_WITHIN_PHASES.md`](../AGILE_WITHIN_PHASES.md)
+
+## When to read
+
+Use **Agile Within Phases — Summary & why hybrid** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Summary](#1-summary)
+- [2. Why not full Agile or full Waterfall?](#2-why-not-full-agile-or-full-waterfall)
+- [Full waterfall would mean](#full-waterfall-would-mean)
+- [Full Agile would mean](#full-agile-would-mean)
+- [Phase-gated Agile (this project)](#phase-gated-agile-this-project)
+
 
 ## 1. Summary
 

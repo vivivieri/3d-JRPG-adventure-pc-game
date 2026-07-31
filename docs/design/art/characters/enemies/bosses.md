@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 1061
+tokens_est: 1156
 summary: "Shore Wraith, Palace Sentinel, Tide Keeper"
 ---
 # Character Bible — Boss Enemies
 
 **Hub:** [`enemies.md`](../enemies.md)
+
+## When to read
+
+Use **Character Bible — Boss Enemies** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Shore Wraith (`shore_wraith`) — BOSS](#shore-wraith-shore_wraith-boss)
+- [Palace Sentinel (`palace_sentinel`) — MINIBOSS](#palace-sentinel-palace_sentinel-miniboss)
+- [Tide Keeper (`tide_keeper`) — FINAL BOSS](#tide-keeper-tide_keeper-final-boss)
+
 
 ### Shore Wraith (`shore_wraith`) — BOSS
 

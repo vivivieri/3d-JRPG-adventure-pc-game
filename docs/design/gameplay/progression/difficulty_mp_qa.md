@@ -5,12 +5,28 @@ audience: [builder, builder_combat, qa]
 phase: [2, 3]
 status: active
 authority: gameplay
-tokens_est: 626
+tokens_est: 740
 summary: "Difficulty, MP, milestones, workflow, QA"
 ---
 # Progression & Tuning — Difficulty, MP, milestones, workflow, QA
 
 **Hub:** [`PROGRESSION_TUNING.md`](../PROGRESSION_TUNING.md)
+
+## When to read
+
+Use **Progression & Tuning — Difficulty, MP, milestones, workflow, QA** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [6. Difficulty modes](#6-difficulty-modes)
+- [Normal (default)](#normal-default)
+- [Hard (`hard_mode: true` in settings)](#hard-hard_mode-true-in-settings)
+- [Expected experience](#expected-experience)
+- [7. MP economy by act](#7-mp-economy-by-act)
+- [8. Milestone affordance table](#8-milestone-affordance-table)
+- [9. Tuning workflow](#9-tuning-workflow)
+- [10. QA checklist](#10-qa-checklist)
+
 
 ## 6. Difficulty modes
 

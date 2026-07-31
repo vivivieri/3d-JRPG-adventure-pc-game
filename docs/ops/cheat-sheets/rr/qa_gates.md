@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 892
+tokens_est: 922
 summary: "WARN ≠ PASS · SKIP ≠ PASS · F5 alone ≠ visual PASS."
 ---
 # R&R — qa-gate-layers
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R — qa-gate-layers** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [QA gate layers](#qa-gate-layers)
+- [Evidence by test layer (L0–L6)](#evidence-by-test-layer-l0l6)
+
 
 ## QA gate layers
 

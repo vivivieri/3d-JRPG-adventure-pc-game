@@ -5,12 +5,26 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 967
-summary: "External JRPG steals"
+tokens_est: 1099
+summary: "Purpose: Actionable patterns from acclaimed JRPG stories — adapted to a 2–3 hour scope."
 ---
 # Narrative — Emotional Rules — External JRPG steals
 
 **Hub:** [`emotional_rules.md`](../emotional_rules.md)
+
+## When to read
+
+Use **Narrative — Emotional Rules — External JRPG steals** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [12. Narrative reference steals (external JRPGs)](#12-narrative-reference-steals-external-jrpgs)
+- [What we borrow](#what-we-borrow)
+- [What we do not borrow](#what-we-do-not-borrow)
+- [Five ship checklist items (writers + combat)](#five-ship-checklist-items-writers-combat)
+- [Companion coping (one line each, optional barks)](#companion-coping-one-line-each-optional-barks)
+- [Density gate (optimized application)](#density-gate-optimized-application)
+
 
 ## 12. Narrative reference steals (external JRPGs)
 

@@ -5,12 +5,26 @@ phase: [2, 3]
 audience: [builder, visual, qa]
 status: active
 authority: gameplay
-tokens_est: 549
-summary: "Field, puzzle, UI feedback"
+tokens_est: 628
+summary: "Game Feel — Field, puzzle, UI feedback — Camera: Orbit smooth; no shake in field except optional boss orbit SC-15 (`screen_shake` setting)."
 ---
 # Game Feel — Field, puzzle, UI feedback
 
 **Hub:** [`GAME_FEEL.md`](../GAME_FEEL.md)
+
+## When to read
+
+Use **Game Feel — Field, puzzle, UI feedback** (roles: builder, visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [3. Field exploration feedback](#3-field-exploration-feedback)
+- [Interaction](#interaction)
+- [Movement](#movement)
+- [Quest & objectives](#quest-objectives)
+- [4. Puzzle feedback (SC-07)](#4-puzzle-feedback-sc-07)
+- [5. UI & menu feedback](#5-ui-menu-feedback)
+
 
 ## 3. Field exploration feedback
 

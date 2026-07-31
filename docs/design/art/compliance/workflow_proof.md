@@ -5,12 +5,24 @@ phase: [1, 5]
 audience: [visual, builder, release]
 status: active
 authority: art
-tokens_est: 466
+tokens_est: 545
 summary: "Import workflow, proof tools, documentation"
 ---
 # Asset Compliance — Import workflow, proof tools, documentation
 
 **Hub:** [`ASSET_COMPLIANCE.md`](../ASSET_COMPLIANCE.md)
+
+## When to read
+
+Use **Asset Compliance — Import workflow, proof tools, documentation** (roles: visual, builder, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. Workflow — before importing any file](#4-workflow-before-importing-any-file)
+- [5. Proof & verification tools](#5-proof-verification-tools)
+- [Pre-release checklist](#pre-release-checklist)
+- [6. What must be documented](#6-what-must-be-documented)
+
 
 ## 4. Workflow — before importing any file
 

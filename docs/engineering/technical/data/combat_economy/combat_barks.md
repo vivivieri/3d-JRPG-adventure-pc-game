@@ -5,12 +5,22 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 480
-summary: "Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`, `palace_sentinel`, `tide_keeper`; field mobs: `salt_"
+tokens_est: 487
+summary: "Data — Combat & Economy — Enemy combat_barks — Boss/elite enemies may define inline combat bark copy in `enemies/enemies.json` (v1 bosses: `shore_wraith`, `pala"
 ---
 # Data — Combat & Economy — Enemy combat_barks
 
 **Hub:** [`combat_economy.md`](../combat_economy.md)
+
+## When to read
+
+Use **Data — Combat & Economy — Enemy combat_barks** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [18. `combat_barks` on enemy entries](#18-combat_barks-on-enemy-entries)
+- [Ending gallery copy](#ending-gallery-copy)
+
 
 ## 18. `combat_barks` on enemy entries
 

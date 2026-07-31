@@ -5,12 +5,17 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 202
+tokens_est: 205
 summary: "1. READ docs/design/art/ART_DIRECTION.md §4 UI style"
 ---
 # Art Automation Pipeline — UI art (GameLab)
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — UI art (GameLab)** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 4. UI art workflow (GameLab-primary)
 

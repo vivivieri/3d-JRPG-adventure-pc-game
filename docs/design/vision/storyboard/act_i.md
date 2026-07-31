@@ -5,12 +5,27 @@ audience: [narrative, builder, flow]
 phase: [1, 2, 3, 4, 5, 6]
 status: active
 authority: vision
-tokens_est: 869
-summary: "Storyboard — Act I — The Return"
+tokens_est: 980
+summary: "Storyboard — Act I — The Return — covers Act I — The Return; SC-00 — Prologue: The Rescue (new); SC-01 — Arrival at the Shore; SC-02 — Empty Village"
 ---
 # Storyboard — Act I — The Return
 
 **Hub:** [`STORYBOARD.md`](../STORYBOARD.md)
+
+## When to read
+
+Use **Storyboard — Act I — The Return** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Act I — The Return](#act-i-the-return)
+- [SC-00 — Prologue: The Rescue (new)](#sc-00-prologue-the-rescue-new)
+- [SC-01 — Arrival at the Shore](#sc-01-arrival-at-the-shore)
+- [SC-02 — Empty Village](#sc-02-empty-village)
+- [SC-03 — The Cracked Torii](#sc-03-the-cracked-torii)
+- [SC-04 — Roku's Warning](#sc-04-rokus-warning)
+- [SC-05 — First Blood (Combat Tutorial)](#sc-05-first-blood-combat-tutorial)
+
 
 ## Act I — The Return
 

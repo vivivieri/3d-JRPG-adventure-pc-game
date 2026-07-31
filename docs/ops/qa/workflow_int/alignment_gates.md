@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [pm, architect]
 status: active
 authority: qa
-tokens_est: 395
-summary: "Alignment coop + related gates"
+tokens_est: 433
+summary: "Workflow Integration — Alignment coop + related gates — alignment_audit_catalog.json` → `pm_workflow` domain includes workflow integration health. On FAIL, reco"
 ---
 # Workflow Integration — Alignment coop + related gates
 
 **Hub:** [`WORKFLOW_INTEGRATION.md`](../WORKFLOW_INTEGRATION.md)
+
+## When to read
+
+Use **Workflow Integration — Alignment coop + related gates** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Alignment audit cooperation](#5-alignment-audit-cooperation)
+- [6. Related gates](#6-related-gates)
+
 
 ## 5. Alignment audit cooperation
 

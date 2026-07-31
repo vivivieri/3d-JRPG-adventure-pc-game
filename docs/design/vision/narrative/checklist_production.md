@@ -5,12 +5,23 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 384
+tokens_est: 435
 summary: "*Did you understand the box before SC-16?*"
 ---
 # Narrative — Checklist & production
 
 **Hub:** [`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)
+
+## When to read
+
+Use **Narrative — Checklist & production** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [8. Box comprehension target](#8-box-comprehension-target)
+- [9. Writer checklist (per new line)](#9-writer-checklist-per-new-line)
+- [10. Production order](#10-production-order)
+
 
 ## 8. Box comprehension target
 

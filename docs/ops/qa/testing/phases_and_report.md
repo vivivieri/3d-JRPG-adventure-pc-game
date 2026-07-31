@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 447
-summary: "Copy into PR or session summary:"
+tokens_est: 524
+summary: "Phase map, report template & related — Human QA never runs before Phase 6 L5 is implemented and passing."
 ---
 # Phase map, report template & related
 
 **Hub:** [`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)
+
+## When to read
+
+Use **Phase map, report template & related** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [9. Phase → required test layers](#9-phase-required-test-layers)
+- [10. Agent session report template](#10-agent-session-report-template)
+- [12. Optional: GUT unit tests (Phase 4+)](#12-optional-gut-unit-tests-phase-4)
+- [13. Related files](#13-related-files)
+
 
 ## 9. Phase → required test layers
 

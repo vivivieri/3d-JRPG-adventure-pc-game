@@ -5,12 +5,25 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 474
+tokens_est: 537
 summary: "Wonder + wrongness; bioluminescent guilt"
 ---
 # Environment Kits — Zone tidal_caves
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Zone tidal_caves** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Zone: Tidal Caves (`tidal_caves`)](#5-zone-tidal-caves-tidal_caves)
+- [Modular kit](#modular-kit)
+- [Hero set-pieces](#hero-set-pieces)
+- [Water puzzle (SC-07)](#water-puzzle-sc-07)
+- [Lighting](#lighting)
+
 
 ## 5. Zone: Tidal Caves (`tidal_caves`)
 

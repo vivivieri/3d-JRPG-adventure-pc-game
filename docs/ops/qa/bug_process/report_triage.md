@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 398
-summary: "Bug report template + triage"
+tokens_est: 464
+summary: "QA and Bug Process — Bug report template + triage — Copy into GitHub issue (template: Gate failure / Bug report), Discord, or playtest spreadsheet."
 ---
 # QA and Bug Process — Bug report template + triage
 
 **Hub:** [`QA_AND_BUG_PROCESS.md`](../QA_AND_BUG_PROCESS.md)
+
+## When to read
+
+Use **QA and Bug Process — Bug report template + triage** (roles: qa, pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. Bug report template](#3-bug-report-template)
+- [4. Triage workflow](#4-triage-workflow)
+- [Triage checklist (maintainer)](#triage-checklist-maintainer)
+- [GitHub labels (recommended)](#github-labels-recommended)
+
 
 ## 3. Bug report template
 

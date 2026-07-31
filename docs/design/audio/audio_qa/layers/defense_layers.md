@@ -4,12 +4,27 @@ type: how-to
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 929
-summary: "Defense layers A1–L6"
+tokens_est: 1057
+summary: "Audio QA — Automate Layers — Defense layers A1–L6 — A1  check_audio_catalog.py     → required BGM tracks exist for phase"
 ---
 # Audio QA — Automate Layers — Defense layers A1–L6
 
 **Hub:** [`automate_layers.md`](../automate_layers.md)
+
+## When to read
+
+Use **Audio QA — Automate Layers — Defense layers A1–L6** (roles: audio, qa) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [2. Defense layers](#2-defense-layers)
+- [Layer A1 — Catalog](#layer-a1-catalog)
+- [Layer A2 — Technical](#layer-a2-technical)
+- [Layer A3 — Multi-LLM listen jury (hero BGM only)](#layer-a3-multi-llm-listen-jury-hero-bgm-only)
+- [Layer A4 — P0 VO technical](#layer-a4-p0-vo-technical)
+- [Layer A5 — Multi-LLM listen jury (P0 VO, gate locale `en`)](#layer-a5-multi-llm-listen-jury-p0-vo-gate-locale-en)
+- [Layer L6 — Human](#layer-l6-human)
+
 
 ## 2. Defense layers
 

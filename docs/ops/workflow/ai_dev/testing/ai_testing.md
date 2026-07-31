@@ -5,12 +5,24 @@ phase: [0, 1, 8]
 audience: [pm, qa, architect, builder]
 status: active
 authority: workflow
-tokens_est: 947
+tokens_est: 995
 summary: "Testing is **layered**. Higher layers run after lower layers pass."
 ---
 # AI Dev — Testing Policy — AI testing policy
 
 **Hub:** [`testing_policy.md`](../testing_policy.md)
+
+## When to read
+
+Use **AI Dev — Testing Policy — AI testing policy** (roles: pm, qa, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [2. AI testing policy](#2-ai-testing-policy)
+- [2.1 AI agent obligations](#21-ai-agent-obligations)
+- [2.2 Headless vs editor](#22-headless-vs-editor)
+- [2.3 Test artifacts](#23-test-artifacts)
+
 
 ## 2. AI testing policy
 

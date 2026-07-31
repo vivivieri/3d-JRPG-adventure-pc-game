@@ -5,12 +5,17 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 248
-summary: "What AI can/cannot judge"
+tokens_est: 258
+summary: "Visual QA — Judge Layers — What AI can/cannot judge — Honest limit: Without a viewport screenshot reviewed by a multimodal agent (or human), the AI is blind. `F"
 ---
 # Visual QA — Judge Layers — What AI can/cannot judge
 
 **Hub:** [`judge_layers.md`](../judge_layers.md)
+
+## When to read
+
+Use **Visual QA — Judge Layers — What AI can/cannot judge** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 1. What AI can and cannot judge
 

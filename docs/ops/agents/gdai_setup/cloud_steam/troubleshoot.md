@@ -5,12 +5,18 @@ phase: [0, 1]
 audience: [pm, builder, release]
 status: active
 authority: ops
-tokens_est: 381
-summary: "bash tools/ensure_gdai_mcp.sh"
+tokens_est: 392
+summary: "GDAI Setup — Cloud / Steam / Troubleshoot — Troubleshooting — Quick health checks:"
 ---
 # GDAI Setup — Cloud / Steam / Troubleshoot — Troubleshooting
 
 **Hub:** [`cloud_steam_troubleshoot.md`](../cloud_steam_troubleshoot.md)
+
+## When to read
+
+Use **GDAI Setup — Cloud / Steam / Troubleshoot — Troubleshooting** (roles: pm, builder, release) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 6. Troubleshooting
 

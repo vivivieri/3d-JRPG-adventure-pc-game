@@ -5,12 +5,23 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 499
+tokens_est: 561
 summary: "In this repo the **PM Agent** is the sprint facilitator — the closest equivalent to a Scrum Master."
 ---
 # Agile — Sprint Master Cadence — Sprint Master role
 
 **Hub:** [`sprint_master_cadence.md`](../sprint_master_cadence.md)
+
+## When to read
+
+Use **Agile — Sprint Master Cadence — Sprint Master role** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [11. Sprint Master (facilitator role)](#11-sprint-master-facilitator-role)
+- [PM Agent as facilitator (not product owner only)](#pm-agent-as-facilitator-not-product-owner-only)
+- [What PM Agent must not do (even as facilitator)](#what-pm-agent-must-not-do-even-as-facilitator)
+
 
 ## 11. Sprint Master (facilitator role)
 

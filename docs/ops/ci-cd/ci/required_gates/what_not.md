@@ -5,12 +5,18 @@ audience: [release, qa, pm]
 phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 345
-summary: "What CI does not run"
+tokens_est: 359
+summary: "These are agent-local or ship-only — intentionally excluded from GitHub Actions:"
 ---
 # CI Required Gates — What CI does not run
 
 **Hub:** [`required_gates.md`](../required_gates.md)
+
+## When to read
+
+Use **CI Required Gates — What CI does not run** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## 3. What CI does **not** run
 

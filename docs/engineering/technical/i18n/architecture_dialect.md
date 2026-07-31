@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 768
-summary: "Architecture + ZH dialect VO"
+tokens_est: 860
+summary: "Localization — Architecture + ZH dialect VO — game/locale/translations.csv     # UI, skills, items, combat log (single source)"
 ---
 # Localization — Architecture + ZH dialect VO
 
 **Hub:** [`LOCALIZATION.md`](../LOCALIZATION.md)
+
+## When to read
+
+Use **Localization — Architecture + ZH dialect VO** (roles: architect, narrative, builder) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Architecture](#architecture)
+- [Settings schema (`user://settings.json`)](#settings-schema-usersettingsjson)
+- [LocalizationManager API](#localizationmanager-api)
+- [Signals](#signals)
+- [Traditional Chinese + dialect VO](#traditional-chinese-dialect-vo)
+- [VO file layout (zh-Hant)](#vo-file-layout-zh-hant)
+- [ElevenLabs casting](#elevenlabs-casting)
+
 
 ## Architecture
 

@@ -5,12 +5,25 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 604
-summary: "P1-00 bootstrap"
+tokens_est: 746
+summary: "Title: `[DEV][P1-00] Bootstrap game/development — project.godot + CI baseline"
 ---
 # Phase1-Sprint1 — P1-00 bootstrap
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-00 bootstrap** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [P1-00 — Bootstrap `game/development` (prerequisite)](#p1-00-bootstrap-gamedevelopment-prerequisite)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Spec summary](#spec-summary)
+- [Design refs](#design-refs)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-00 — Bootstrap `game/development` (prerequisite)
 

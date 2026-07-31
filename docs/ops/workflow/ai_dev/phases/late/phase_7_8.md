@@ -4,12 +4,22 @@ type: reference
 audience: [pm, qa, architect]
 status: active
 authority: workflow
-tokens_est: 538
+tokens_est: 570
 summary: "L0–L5 on release candidate → **then** L6 human QA → export."
 ---
 # AI Dev — Phases 7–8
 
 **Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
+
+## When to read
+
+Use **AI Dev — Phases 7–8** (roles: pm, qa, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Phase 7 — M5 art rebuild](#phase-7-m5-art-rebuild)
+- [Phase 8 — Ship prep](#phase-8-ship-prep)
+
 
 ### Phase 7 — M5 art rebuild
 

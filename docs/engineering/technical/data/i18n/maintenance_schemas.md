@@ -4,12 +4,23 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 660
-summary: "Maintenance + schemas"
+tokens_est: 738
+summary: "All spine files below are already present in `game/data/`. This is the dependency order to keep in mind when editing — change upstream files before downstream r"
 ---
 # Data — i18n & Validation — Maintenance + schemas
 
 **Hub:** [`i18n_validation.md`](../i18n_validation.md)
+
+## When to read
+
+Use **Data — i18n & Validation — Maintenance + schemas** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [15. File maintenance order (all files already exist)](#15-file-maintenance-order-all-files-already-exist)
+- [16. Scene index vs storyboard count](#16-scene-index-vs-storyboard-count)
+- [17. JSON schema versions](#17-json-schema-versions)
+
 
 ## 15. File maintenance order (all files already exist)
 

@@ -4,12 +4,23 @@ type: how-to
 audience: [pm, architect, builder]
 status: active
 authority: workflow
-tokens_est: 675
-summary: "Session startup + loop + forbids"
+tokens_est: 740
+summary: "bash tools/ensure_mcp_stack.sh   # full stack — wraps ensure_gdai_mcp.sh"
 ---
 # AI Dev — Build Policy — Session startup + loop + forbids
 
 **Hub:** [`build_policy.md`](../build_policy.md)
+
+## When to read
+
+Use **AI Dev — Build Policy — Session startup + loop + forbids** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1.2 Session startup (every agent run)](#12-session-startup-every-agent-run)
+- [1.3 Build loop (per task)](#13-build-loop-per-task)
+- [1.4 What AI agents must not do](#14-what-ai-agents-must-not-do)
+
 
 ### 1.2 Session startup (every agent run)
 

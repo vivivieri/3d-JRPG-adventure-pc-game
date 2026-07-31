@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder, architect]
 status: active
 authority: ops
-tokens_est: 981
+tokens_est: 1067
 summary: "Dashboard branch + active snapshot + skip reasons"
 ---
 # Cloud Snapshot Launch — Dashboard branch + active snapshot + skip reasons
 
 **Hub:** [`CLOUD_SNAPSHOT_LAUNCH.md`](../CLOUD_SNAPSHOT_LAUNCH.md)
+
+## When to read
+
+Use **Cloud Snapshot Launch — Dashboard branch + active snapshot + skip reasons** (roles: pm, builder, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [0. Dashboard branch (no branch picker — bootstrap workaround)](#0-dashboard-branch-no-branch-picker-bootstrap-workaround)
+- [1. Active snapshot (game/development)](#1-active-snapshot-gamedevelopment)
+- [2. Why agents sometimes skip the snapshot](#2-why-agents-sometimes-skip-the-snapshot)
+
 
 ## 0. Dashboard branch (no branch picker — bootstrap workaround)
 

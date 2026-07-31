@@ -5,12 +5,17 @@ audience: [pm, architect, builder]
 phase: [4]
 status: active
 authority: workflow
-tokens_est: 158
-summary: "Implementation Plan — Phase 4"
+tokens_est: 180
+summary: "Implementation Plan — Phase 4 — covers Phase 4 — Combat vertical slice"
 ---
 # Implementation Plan — Phase 4
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 4** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## Phase 4 — Combat vertical slice
 

@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 480
-summary: "What inherit means + hard R&R"
+tokens_est: 586
+summary: "Analogy: Human-made skeleton code (classes). AI fills instances (scenes, data, materials) — not a new skeleton per feature."
 ---
 # Code Base Class Rules — What inherit means + hard R&R
 
 **Hub:** [`CODE_BASE_CLASS_RULES.md`](../CODE_BASE_CLASS_RULES.md)
+
+## When to read
+
+Use **Code Base Class Rules — What inherit means + hard R&R** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. What “inherit human base classes” means](#1-what-inherit-human-base-classes-means)
+- [2. Hard R&R rules](#2-hard-rr-rules)
+- [Architect (GodotPrompter) — owns bases](#architect-godotprompter-owns-bases)
+- [Builder (GDAI MCP) — instances only](#builder-gdai-mcp-instances-only)
+- [Forbidden without Architect PR + TDD update](#forbidden-without-architect-pr-tdd-update)
+
 
 ## 1. What “inherit human base classes” means
 

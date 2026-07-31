@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 616
-summary: "Automations, events, playbook, refs"
+tokens_est: 737
+summary: "Unchanged — webhook on `agent_cycle_complete`, `sprint_cycle_complete`, `watchdog_recovery`."
 ---
 # Factory Watchdog — Automations, events, playbook, refs
 
 **Hub:** [`FACTORY_WATCHDOG.md`](../FACTORY_WATCHDOG.md)
+
+## When to read
+
+Use **Factory Watchdog — Automations, events, playbook, refs** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [5. Cursor Automations](#5-cursor-automations)
+- [Automation A — PM cycle dispatch (primary)](#automation-a-pm-cycle-dispatch-primary)
+- [Automation D — Factory alert (optional)](#automation-d-factory-alert-optional)
+- [GitHub Actions — scheduled watchdog](#github-actions-scheduled-watchdog)
+- [6. Event types (watchdog-related)](#6-event-types-watchdog-related)
+- [7. Operator playbook](#7-operator-playbook)
+- [8. Cross-refs](#8-cross-refs)
+
 
 ## 5. Cursor Automations
 

@@ -5,16 +5,26 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 873
+tokens_est: 867
 summary: "One issue → one feature branch → one PR → merge → cycle event."
 ---
 # Multi-Agent Branch Strategy
 
-**Version:** 1.0
-**Authority:** One issue → one feature branch → one PR → merge → cycle event.
-**Cross-refs:** `docs/ops/workflow/DEVELOPMENT_LIFECYCLE.md`, `docs/ops/workflow/BRANCHING.md`, `docs/ops/workflow/BRANCHING_DECISION_RECORD.md`, `docs/ops/agents/SPRINT_ORCHESTRATION.md`, `artifacts/pm_dispatch_packet.json`
+## When to read
 
----
+Use **Multi-Agent Branch Strategy** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [1. Branch naming](#1-branch-naming)
+- [2. Per-issue workflow](#2-per-issue-workflow)
+- [3. Definition of done](#3-definition-of-done)
+- [4. Strict role policy](#4-strict-role-policy)
+- [5. Parallel issues](#5-parallel-issues)
+- [6. Evidence](#6-evidence)
+- [7. Failure path](#7-failure-path)
+- [8. Cross-refs](#8-cross-refs)
+
 
 ## 1. Branch naming
 

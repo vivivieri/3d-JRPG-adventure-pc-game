@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 417
-summary: "python3 tools/pm_escalate.py --issue P1-02 --to arbitration --reopens 3 --reason 'QA keeps failing L2_feel_smoke'"
+tokens_est: 441
+summary: "python3 tools/pm_escalate.py --issue P1-02 --to arbitration --reopens 3 --reason 'QA keeps failing L2_feel_smoke"
 ---
 # Escalation Policy — Usage + anti-loop
 
 **Hub:** [`ESCALATION_POLICY.md`](../ESCALATION_POLICY.md)
+
+## When to read
+
+Use **Escalation Policy — Usage + anti-loop** (roles: pm, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Using it (`tools/pm_escalate.py`)](#using-it-toolspm_escalatepy)
+- [Why it can't loop forever](#why-it-cant-loop-forever)
+
 
 ## Using it (`tools/pm_escalate.py`)
 
