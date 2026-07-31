@@ -2,6 +2,7 @@
 id: cd
 type: reference
 audience: [release]
+phase: [8]
 status: active
 authority: ci-cd
 tokens_est: 1112

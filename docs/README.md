@@ -5,7 +5,7 @@
 | Resource | Purpose |
 |----------|---------|
 | [ops/BOOT.md](ops/BOOT.md) | Thin always-on boot card |
-| [INDEX.yaml](INDEX.yaml) | Role → must_read router |
+| [INDEX.yaml](INDEX.yaml) | Role + task → must_read router |
 | [llms.txt](llms.txt) | LLM discovery map |
 | [_meta/DOC_LIBRARY_ADR.md](_meta/DOC_LIBRARY_ADR.md) | Why this layout |
 | [_meta/FRONTMATTER.md](_meta/FRONTMATTER.md) | Required YAML frontmatter |
@@ -22,11 +22,19 @@ Large bibles are split into packs (load hub + one pack):
 | [CHARACTER_BIBLE.md](design/art/CHARACTER_BIBLE.md) | [design/art/characters/](design/art/characters/) |
 | [AUDIO_PRODUCTION_GUIDE.md](design/audio/AUDIO_PRODUCTION_GUIDE.md) | [design/audio/production/](design/audio/production/) |
 | [DATA_ARCHITECTURE.md](engineering/technical/DATA_ARCHITECTURE.md) | [engineering/technical/data/](engineering/technical/data/) |
+| [RENDERING_GUIDE.md](design/art/RENDERING_GUIDE.md) | [design/art/rendering/](design/art/rendering/) |
+| [MODEL_QA.md](design/art/MODEL_QA.md) | [design/art/model_qa/](design/art/model_qa/) |
+| [ITEMS_3D_MODEL_GUIDE.md](design/art/ITEMS_3D_MODEL_GUIDE.md) | [design/art/items/](design/art/items/) |
+| [NARRATIVE_WRITING_GUIDE.md](design/vision/NARRATIVE_WRITING_GUIDE.md) | [design/vision/narrative/](design/vision/narrative/) |
+| [IMPLEMENTATION_PLAN.md](ops/workflow/IMPLEMENTATION_PLAN.md) | [ops/workflow/implementation/](ops/workflow/implementation/) |
+| [CLOUD_AGENT_SETUP_RUNBOOK.md](ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md) | [ops/agents/cloud_setup/](ops/agents/cloud_setup/) |
 
 ```bash
 python3 tools/resolve_docs.py --list-roles
+python3 tools/resolve_docs.py --list-tasks
 python3 tools/resolve_docs.py builder_zone
-python3 tools/resolve_docs.py architect --issue P1-01 --budget 12000
+python3 tools/resolve_docs.py visual --issue P1-01 --budget 12000 --report artifacts/docs_pack_P1-01.txt
+python3 tools/resolve_docs.py builder --task zone_lighting --phase 1
 python3 tools/refresh_docs_catalogs.py   # after adding docs
 ```
 

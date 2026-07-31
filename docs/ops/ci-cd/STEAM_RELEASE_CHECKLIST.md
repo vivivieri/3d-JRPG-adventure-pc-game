@@ -2,6 +2,7 @@
 id: steam-release-checklist
 type: reference
 audience: [release]
+phase: [8]
 status: active
 authority: ci-cd
 tokens_est: 2254

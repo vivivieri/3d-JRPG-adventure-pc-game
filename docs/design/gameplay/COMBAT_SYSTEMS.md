@@ -2,6 +2,7 @@
 id: combat-systems
 type: reference
 audience: [builder, architect]
+phase: [4]
 status: active
 authority: gameplay
 tokens_est: 1998

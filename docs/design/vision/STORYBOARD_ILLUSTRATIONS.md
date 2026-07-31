@@ -2,6 +2,7 @@
 id: storyboard-illustrations
 type: explanation
 audience: [narrative]
+phase: [3, 6]
 status: active
 authority: vision
 tokens_est: 2312
