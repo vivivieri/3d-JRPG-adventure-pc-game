@@ -66,8 +66,15 @@ def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def parse_issue_pack(pack_path: Path) -> list[str]:
     if not pack_path.is_file():
         return []
-    text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    ids: set[str] = set()
+    hub_text = pack_path.read_text(encoding="utf-8")
+    ids.update(PACK_ISSUE_RE.findall(hub_text))
+    # Split pack shards (e.g. phase1_sprint1/*.md) linked from hub table
+    for rel in re.findall(r"\]\(([^)]+\.md)\)", hub_text):
+        shard = (pack_path.parent / rel).resolve()
+        if shard.is_file() and shard != pack_path.resolve():
+            ids.update(PACK_ISSUE_RE.findall(shard.read_text(encoding="utf-8")))
+    return sorted(ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
