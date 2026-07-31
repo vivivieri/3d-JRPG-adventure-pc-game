@@ -37,7 +37,7 @@ Use **Phase1-Sprint1 — P1-03 water shader** (roles: pm, architect, builder, qa
 | Implementation plan | **1.4** |
 | Lead agent | **architect** |
 | Depends on | P1-00 |
-| Parallel with | P1-02 |
+| Parallel with | P1-01 (toon), P1-02 (builder greybox) |
 
 ### Acceptance gate IDs
 

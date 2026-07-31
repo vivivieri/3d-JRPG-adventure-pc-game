@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Warn when session file reads look outside the resolved docs pack.
+"""Enforce session file reads stay inside the resolved docs pack.
 
 Reads artifacts/docs_pack_<issue>.json (allowed_read_paths) and a newline list
 of paths the agent opened:
 
   DOCS_READ_LOG                 env override
   --reads-file PATH             explicit
-  artifacts/docs_reads_<issue>.log   default (session gate initializes)
+  artifacts/docs_reads_<issue>.log   default (session gate auto-seeds must_read)
 
-Exit 0 always unless --strict (then exit 1 on extras). Soft WARN by default.
+Exit 0 on OK. With --strict (post-cycle default): exit 1 on missing pack,
+missing/empty reads log, or reads outside pack∪deferred.
 Also accepts paths logged as: READ docs/foo.md
 """
 from __future__ import annotations
@@ -31,6 +32,13 @@ def _normalize(path: str) -> str:
     return p.strip()
 
 
+def _rel_display(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--issue", required=True)
@@ -41,7 +49,7 @@ def main() -> int:
     parser.add_argument(
         "--strict",
         action="store_true",
-        help="Exit 1 when reads fall outside pack∪deferred",
+        help="Exit 1 on missing pack/log, empty reads, or extras outside pack",
     )
     args = parser.parse_args()
 
@@ -55,11 +63,9 @@ def main() -> int:
             try:
                 board = json.loads(board_path.read_text(encoding="utf-8"))
             except json.JSONDecodeError as exc:
-                print(
-                    f"[WARN] docs_pack adherence: sprint_board unreadable ({exc})",
-                    file=sys.stderr,
-                )
-                board = {}
+                msg = f"docs_pack adherence: sprint_board unreadable ({exc})"
+                print(f"[FAIL] {msg}" if args.strict else f"[WARN] {msg}", file=sys.stderr)
+                return 1 if args.strict else 0
             for row in board.get("issues") or []:
                 if str(row.get("github_issue") or "") == issue_raw or str(
                     row.get("id") or ""
@@ -70,14 +76,16 @@ def main() -> int:
                         report = alt
                     break
     if not report.is_file():
-        print(f"[WARN] docs_pack adherence: missing {report.relative_to(ROOT)}")
-        return 0
+        msg = f"docs_pack adherence: missing pack report {_rel_display(report)}"
+        print(f"[FAIL] {msg}" if args.strict else f"[WARN] {msg}")
+        return 1 if args.strict else 0
 
     try:
         data = json.loads(report.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        print(f"[WARN] docs_pack adherence: invalid JSON ({exc})", file=sys.stderr)
-        return 0
+        msg = f"docs_pack adherence: invalid JSON ({exc})"
+        print(f"[FAIL] {msg}" if args.strict else f"[WARN] {msg}", file=sys.stderr)
+        return 1 if args.strict else 0
 
     allowed = {
         _normalize(p)
@@ -120,11 +128,12 @@ def main() -> int:
     reads_file = args.reads_file or os.environ.get("DOCS_READ_LOG") or str(default_log)
     reads_path = Path(reads_file)
     if not reads_path.is_file():
-        print(
-            f"[OK] docs_pack adherence: no reads log at {reads_path} "
-            "(session gate creates artifacts/docs_reads_<issue>.log)"
+        msg = (
+            f"docs_pack adherence: no reads log at {_rel_display(reads_path)} "
+            "(session gate must auto-seed via log_docs_read.py --from-pack)"
         )
-        return 0
+        print(f"[FAIL] {msg}" if args.strict else f"[OK] {msg}")
+        return 1 if args.strict else 0
 
     raw_lines = reads_path.read_text(encoding="utf-8").splitlines()
     reads = [
@@ -139,20 +148,20 @@ def main() -> int:
         if r.startswith("docs/") or r == "AGENTS.md" or r.endswith(".md")
     ]
     if not doc_reads:
-        rel = (
-            str(reads_path.relative_to(ROOT))
-            if str(reads_path).startswith(str(ROOT))
-            else str(reads_path)
+        msg = (
+            f"docs_pack adherence: reads log empty of doc paths "
+            f"({_rel_display(reads_path)}) — session gate must seed must_read"
         )
-        print(f"[OK] docs_pack adherence: reads log empty of doc paths ({rel})")
-        return 0
+        print(f"[FAIL] {msg}" if args.strict else f"[OK] {msg}")
+        return 1 if args.strict else 0
 
     extras = sorted({r for r in doc_reads if r not in allowed and r.startswith("docs/")})
     if not extras:
         print(f"[OK] docs_pack adherence — {len(doc_reads)} doc read(s) within pack")
         return 0
 
-    print(f"[WARN] docs_pack adherence — {len(extras)} read(s) outside pack∪deferred:")
+    label = "FAIL" if args.strict else "WARN"
+    print(f"[{label}] docs_pack adherence — {len(extras)} read(s) outside pack∪deferred:")
     for path in extras[:20]:
         print(f"  - {path}")
     if args.strict:

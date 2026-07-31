@@ -204,6 +204,7 @@
       "escalation_level": 0,
       "carry_over_from": null,
       "parallel_with": [
+        "P1-01",
         "P1-02"
       ],
       "done_requires": "pr_merged",

@@ -84,7 +84,7 @@ Do **not** combine Architect + Builder in one session.
 
 ## 5. Parallel issues
 
-When `parallel_with` is set and WIP caps allow, orchestrator may dispatch two starts (e.g. P1-02 Builder + P1-03 Architect). Each still gets its own branch and PR.
+When `parallel_with` is set and WIP caps allow, orchestrator may dispatch two starts (e.g. P1-01 Architect toon + P1-03 Architect water, then P1-02 Builder + P1-03). Each still gets its own branch and PR. Board peers are validated by `validate_sprint_board.py` (unknown `parallel_with` ids FAIL).
 
 ---
 
@@ -100,6 +100,7 @@ bash tools/run_post_agent_cycle.sh --issue P1-02 --agent builder --commit <sha> 
 Manual steps (same order as `run_post_agent_cycle.sh`):
 
 ```bash
+python3 tools/check_docs_pack_adherence.py --issue P1-02 --strict   # before board/webhook
 python3 tools/pm_check_done_criteria.py P1-02 --commit <sha>
 python3 tools/pm_update_issue.py P1-02 --status done --commit <sha>
 bash tools/pm_emit_cycle_event.sh agent_cycle_complete --issue P1-02 --agent builder --commit <sha>

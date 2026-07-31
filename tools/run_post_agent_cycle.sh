@@ -80,21 +80,41 @@ run_step() {
 run_step "factory_halt" "block when factory halted" \
   bash tools/check_factory_halt.sh || exit 2
 
-# 1. Done criteria (success only)
+# 1. Docs pack adherence FIRST — before board done / webhook (strict by default)
+#    set DOCS_PACK_ADHERENCE_STRICT=0 only for local debug
+echo "── Step: docs_pack_adherence — reads vs resolved pack (before board/webhook)"
+ADHERE_ARGS=(--issue "$ISSUE_ID")
+if [[ -n "${DOCS_READ_LOG:-}" ]]; then
+  ADHERE_ARGS+=(--reads-file "$DOCS_READ_LOG")
+fi
+if [[ "${DOCS_PACK_ADHERENCE_STRICT:-1}" != "0" ]]; then
+  ADHERE_ARGS+=(--strict)
+  if ! python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}"; then
+    echo "[FAIL] docs_pack_adherence — refusing board update / cycle webhook"
+    exit 1
+  fi
+  echo "[PASS] docs_pack_adherence"
+else
+  echo "[WARN] docs_pack_adherence — DOCS_PACK_ADHERENCE_STRICT=0 (debug only; not for CI/factory)"
+  python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}" || true
+fi
+echo
+
+# 2. Done criteria (success only)
 if [[ "$OUTCOME" == "complete" && "$SKIP_DONE" -eq 0 ]]; then
   run_step "check_done_criteria" "verify pr_merged / ci_green / push_only" \
     python3 tools/pm_check_done_criteria.py "$ISSUE_ID" --commit "$COMMIT_SHA" || true
   [[ "$FAIL" -eq 0 ]] || exit 1
 fi
 
-# 2. Update board (before cycle event so PM webhook sees done status)
+# 3. Update board (after adherence + done criteria so FAIL cannot leave issue done)
 if [[ "$OUTCOME" == "complete" && "$SKIP_DONE" -eq 0 ]]; then
   UPDATE_ARGS=(python3 tools/pm_update_issue.py "$ISSUE_ID" --status 'done' --commit "$COMMIT_SHA" --agent "$AGENT_ROLE")
   run_step "update_board" "mark issue done on sprint board" \
     "${UPDATE_ARGS[@]}" || exit 1
 fi
 
-# 3. Cycle event (closes telemetry, stakeholder report, PM webhook — writes session_*.json rollup)
+# 4. Cycle event (closes telemetry, stakeholder report, PM webhook — writes session_*.json rollup)
 EVENT="agent_cycle_complete"
 [[ "$OUTCOME" == "failed" ]] && EVENT="agent_cycle_failed"
 CYCLE_ARGS=(bash tools/pm_emit_cycle_event.sh "$EVENT" --issue "$ISSUE_ID" --agent "$AGENT_ROLE" --commit "$COMMIT_SHA")
@@ -103,7 +123,7 @@ CYCLE_ARGS=(bash tools/pm_emit_cycle_event.sh "$EVENT" --issue "$ISSUE_ID" --age
 run_step "emit_cycle_event" "dispatch PM webhook + close session telemetry" \
   "${CYCLE_ARGS[@]}" || exit 1
 
-# 4. Evidence bundle (after cycle event — session rollup lands in sprint_evidence/<issue>/)
+# 5. Evidence bundle (after cycle event — session rollup lands in sprint_evidence/<issue>/)
 if [[ -n "$GATE_ID" && -n "$ARTIFACT" ]]; then
   run_step "bundle_evidence" "attach gate evidence + session rollup" \
     python3 tools/pm_bundle_evidence.py "$ISSUE_ID" --gate "$GATE_ID" --artifact "$ARTIFACT" || true
@@ -117,23 +137,6 @@ else
   fi
   echo
 fi
-
-# 5. Docs pack adherence (WARN unless DOCS_PACK_ADHERENCE_STRICT=1)
-echo "── Step: docs_pack_adherence — reads vs resolved pack"
-ADHERE_ARGS=(--issue "$ISSUE_ID")
-if [[ -n "${DOCS_READ_LOG:-}" ]]; then
-  ADHERE_ARGS+=(--reads-file "$DOCS_READ_LOG")
-fi
-if [[ "${DOCS_PACK_ADHERENCE_STRICT:-0}" == "1" ]]; then
-  ADHERE_ARGS+=(--strict)
-  if ! python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}"; then
-    echo "[FAIL] docs_pack_adherence"
-    FAIL=1
-  fi
-else
-  python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}" || true
-fi
-echo
 
 # 6. Workflow integration registry
 run_step "check_feature_integration" "factory workflow registry parity" \

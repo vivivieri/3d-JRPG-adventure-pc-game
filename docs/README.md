@@ -169,11 +169,11 @@ Recent efficiency work:
 6. Machine `artifacts/docs_pack_<issue>.json`; session gate FAILs if resolve fails
 7. Briefs/zones/characters are **budget-trimable** (boot + handoff stay protected)
 8. Remaining splits: `STORYBOARD`, `GDD`, `MILESTONES`, `BOSS_DESIGNS`, `GDAI_CLOUD_SETUP`, `QA_AND_BUG_PROCESS`, `FLOW_QA`, thin `briefs/ruined_village`
-9. Character pack auto-attach; `check_docs_pack_adherence.py` on post-cycle (WARN)
-
+9. Character pack auto-attach; `check_docs_pack_adherence.py` on post-cycle (**strict** — session gate auto-seeds `must_read` via `log_docs_read.py`)
 10. Round 4: release/security/steam + language/factory/cinematics splits; `pack_catalog` in INDEX; phase tags ~100%; session gate inits `artifacts/docs_reads_<issue>.log`; thinner AGENTS/BOOT
 11. Rounds 5–8: remaining fat hubs/leaves; then **pause** bulk thinning
 12. Defrag: collapse arbitrary `part_a`/`part_b` halves + hub-of-hub nests ([#180](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/pull/180))
+13. Adherence enforced (no honor system): gate seeds reads; post-cycle `--strict` FAIL; P1-03 `parallel_with` P1-01+P1-02; audit `--out` absolute-path safe
 
 ### Standing policy (pack splits)
 

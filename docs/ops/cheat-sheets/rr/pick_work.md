@@ -59,7 +59,7 @@ P1-00 (pm)     bootstrap project.godot + CI
   │           ├─→ P1-04 (qa)  CI + L0–L2 gate report
   │           │     └─→ P1-06 (pm)  sprint review
   │           └─→ P1-05 (qa)  golden screenshot + zone composition
-  └─→ P1-03 (architect)  water shader  [parallel with P1-02 after P1-00]
+  └─→ P1-03 (architect)  water shader  [parallel with P1-01 + P1-02 after P1-00]
 ```
 
 ### Priority (no story points)
