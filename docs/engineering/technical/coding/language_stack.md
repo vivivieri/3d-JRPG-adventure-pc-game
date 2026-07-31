@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 604
+tokens_est: 616
 summary: "Language stack + branch policy"
 ---
 # Coding Standards Hub — Language stack + branch policy

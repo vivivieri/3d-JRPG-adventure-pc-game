@@ -32,6 +32,15 @@ ZONE_STEMS = (
     "tidal_caves",
     "dragon_palace",
 )
+CHARACTER_PACK_ROOT = "docs/design/art/characters"
+CHARACTER_STEMS = (
+    "urashima",
+    "yuzu",
+    "otohime",
+    "roku",
+    "enemies",
+    "npc_ambient",
+)
 
 sys.path.insert(0, str(ROOT / "tools"))
 try:
@@ -330,6 +339,24 @@ def _match_zone_packs(row: dict) -> list[str]:
     return _dedupe(matched)
 
 
+def _match_character_packs(row: dict) -> list[str]:
+    """Attach characters/<name>.md when stem appears in issue text."""
+    hay = _issue_hay(row)
+    hay_compact = re.sub(r"[^a-z0-9]+", "", hay)
+    matched: list[str] = []
+    for stem in CHARACTER_STEMS:
+        stem_compact = re.sub(r"[^a-z0-9]+", "", stem)
+        if not (
+            re.search(rf"(?<![a-z0-9]){re.escape(stem)}(?![a-z0-9])", hay)
+            or stem_compact in hay_compact
+        ):
+            continue
+        rel = f"{CHARACTER_PACK_ROOT}/{stem}.md"
+        if (ROOT / rel).is_file():
+            matched.append(rel)
+    return _dedupe(matched)
+
+
 def _dedupe(paths: list[str]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
@@ -399,6 +426,7 @@ def _write_report(
     deferred_phase: list[str],
     briefs: list[str],
     zone_packs: list[str],
+    character_packs: list[str],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
@@ -411,6 +439,7 @@ def _write_report(
         f"budget: {budget or 'unlimited'}",
         f"briefs_attached: {len(briefs)}",
         f"zone_packs_attached: {len(zone_packs)}",
+        f"character_packs_attached: {len(character_packs)}",
         "",
         "# must_read",
     ]
@@ -468,6 +497,7 @@ def _write_report(
         "budget": budget or None,
         "briefs": briefs,
         "zone_packs": zone_packs,
+        "character_packs": character_packs,
         "must_read": must_costs,
         "optional": opt_costs,
         "deferred": deferred_rows,
@@ -518,6 +548,11 @@ def main() -> int:
         "--no-zone-packs",
         action="store_true",
         help="Disable zone env_kits/levels auto-attach",
+    )
+    parser.add_argument(
+        "--no-character-packs",
+        action="store_true",
+        help="Disable character bible pack auto-attach",
     )
     parser.add_argument(
         "--remap-role",
@@ -608,20 +643,33 @@ def main() -> int:
     issue_docs = _issue_doc_refs(row) if row else []
     briefs = [] if args.no_briefs or not row else _match_briefs(row)
     zone_packs = [] if args.no_zone_packs or not row else _match_zone_packs(row)
+    character_packs = (
+        [] if getattr(args, "no_character_packs", False) or not row else _match_character_packs(row)
+    )
 
     task_must = list(task_pack.get("must_read") or []) if task_pack else []
     task_opt = list(task_pack.get("optional") or []) if task_pack else []
 
-    # Boot → issue + briefs + zone packs → task must → role must
-    must = _dedupe(
-        boot + issue_docs + briefs + zone_packs + task_must + list(pack.get("must_read") or [])
-    )
+    # Hard-protected: boot + handoff only (never budget-trimmed).
+    # Priority-attach: briefs / zone / character — kept before optionals, but trimable
+    # so role/task musts stay in-pack when a fat brief would overflow the budget.
+    protected = _dedupe(boot + issue_docs)
+    core_must = _dedupe(task_must + list(pack.get("must_read") or []))
+    core_must = [p for p in core_must if p not in protected]
+    priority_attach = _dedupe(briefs + zone_packs + character_packs)
+    priority_attach = [
+        p for p in priority_attach if p not in protected and p not in core_must
+    ]
+
     optional: list[str] = []
     if not args.must_only:
         optional = _dedupe(task_opt + list(pack.get("optional") or []))
-        optional = [p for p in optional if p not in must]
+        optional = [
+            p
+            for p in optional
+            if p not in protected and p not in core_must and p not in priority_attach
+        ]
 
-    # Phase filter applies to optional only (must/issue always kept)
     optional, deferred_phase = _filter_phase(optional, phase)
 
     print(f"# role: {role}")
@@ -634,34 +682,45 @@ def main() -> int:
     if phase is not None:
         print(f"# phase: {phase}")
     if briefs:
-        print(f"# briefs: {len(briefs)} auto-attached")
+        print(f"# briefs: {len(briefs)} auto-attached (budget-trimable)")
     if zone_packs:
-        print(f"# zone_packs: {len(zone_packs)} auto-attached")
+        print(f"# zone_packs: {len(zone_packs)} auto-attached (budget-trimable)")
+    if character_packs:
+        print(f"# character_packs: {len(character_packs)} auto-attached (budget-trimable)")
     if args.budget > 0:
         print(f"# budget: {args.budget} tokens (approx)")
 
-    protected = _dedupe(boot + issue_docs + briefs + zone_packs)
-    role_must = [p for p in must if p not in protected]
     label_bits = ["boot"]
     if issue_docs:
         label_bits.append("issue handoff_refs")
-    if briefs:
-        label_bits.append("briefs")
-    if zone_packs:
-        label_bits.append("zone packs")
     if task_must:
         label_bits.append("task")
     print("# must_read (+ " + " + ".join(label_bits) + ")")
 
+    must_deferred: list[str] = []
+    priority_deferred: list[str] = []
     if args.budget > 0:
         protected_cost = sum(_tokens_est(p) for p in protected)
-        role_budget = max(0, args.budget - protected_cost)
-        role_kept, must_deferred = _apply_budget(role_must, role_budget)
-        must_kept = protected + role_kept
+        core_budget = max(0, args.budget - protected_cost)
+        core_kept, must_deferred = _apply_budget(core_must, core_budget)
+        must_kept = protected + core_kept
+        for path in must_kept:
+            print(path)
+        remaining = max(0, args.budget - sum(_tokens_est(p) for p in must_kept))
+        priority_kept, priority_deferred = _apply_budget(priority_attach, remaining)
+        if priority_kept:
+            print("# priority_attach (briefs / zone / character)")
+            for path in priority_kept:
+                print(path)
+            must_kept = must_kept + priority_kept
     else:
-        must_kept, must_deferred = must, []
-    for path in must_kept:
-        print(path)
+        must_kept = protected + core_must + priority_attach
+        for path in protected + core_must:
+            print(path)
+        if priority_attach:
+            print("# priority_attach (briefs / zone / character)")
+            for path in priority_attach:
+                print(path)
 
     remaining_budget = 0
     if args.budget > 0:
@@ -679,7 +738,7 @@ def main() -> int:
             for path in opt_kept:
                 print(path)
 
-    deferred_budget = must_deferred + opt_deferred
+    deferred_budget = must_deferred + priority_deferred + opt_deferred
     if deferred_budget:
         print("# deferred_over_budget")
         for path in deferred_budget:
@@ -705,6 +764,7 @@ def main() -> int:
             deferred_phase=deferred_phase,
             briefs=briefs,
             zone_packs=zone_packs,
+            character_packs=character_packs,
         )
         print(f"# report: {args.report}", file=sys.stderr)
         print(f"# report_json: {Path(args.report).with_suffix('.json')}", file=sys.stderr)
