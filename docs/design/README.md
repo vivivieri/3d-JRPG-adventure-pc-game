@@ -25,10 +25,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/automation/ui_art.md](art/automation/ui_art.md) | `ui_art` |
 | [art/automation/zone_textures.md](art/automation/zone_textures.md) | `zone_textures` |
 | [art/characters/animation_portraits.md](art/characters/animation_portraits.md) | `animation_portraits` |
-| [art/characters/enemies/bosses/part_a.md](art/characters/enemies/bosses/part_a.md) | `part_a` |
-| [art/characters/enemies/bosses/part_b.md](art/characters/enemies/bosses/part_b.md) | `part_b` |
-| [art/characters/enemies/part_a.md](art/characters/enemies/part_a.md) | `part_a` |
-| [art/characters/enemies/part_b.md](art/characters/enemies/part_b.md) | `part_b` |
+| [art/characters/enemies/bosses.md](art/characters/enemies/bosses.md) | `bosses` |
+| [art/characters/enemies/field.md](art/characters/enemies/field.md) | `field` |
 | [art/characters/enemies.md](art/characters/enemies.md) | `enemies` |
 | [art/characters/export_order.md](art/characters/export_order.md) | `export_order` |
 | [art/characters/npc_ambient.md](art/characters/npc_ambient.md) | `npc_ambient` |
@@ -70,8 +68,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/model_qa/layers/m_layers/m3_jury.md](art/model_qa/layers/m_layers/m3_jury.md) | `m3_jury` |
 | [art/model_qa/layers_workflow.md](art/model_qa/layers_workflow.md) | `layers_workflow` |
 | [art/model_qa/polish/cadence.md](art/model_qa/polish/cadence.md) | `cadence` |
-| [art/model_qa/polish/who/part_a.md](art/model_qa/polish/who/part_a.md) | `part_a` |
-| [art/model_qa/polish/who/part_b.md](art/model_qa/polish/who/part_b.md) | `part_b` |
 | [art/model_qa/polish/who_directs.md](art/model_qa/polish/who_directs.md) | `who_directs` |
 | [art/model_qa/polish_direction.md](art/model_qa/polish_direction.md) | `polish_direction` |
 | [art/model_qa/smoke_report_tools.md](art/model_qa/smoke_report_tools.md) | `smoke_report_tools` |
@@ -83,8 +79,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/rendering/quality_zones.md](art/rendering/quality_zones.md) | `quality_zones` |
 | [art/rendering/zone_visuals_contract.md](art/rendering/zone_visuals_contract.md) | `zone_visuals_contract` |
 | [art/visual_qa/judge/defense_layers.md](art/visual_qa/judge/defense_layers.md) | `defense_layers` |
-| [art/visual_qa/judge/layers/part_a.md](art/visual_qa/judge/layers/part_a.md) | `part_a` |
-| [art/visual_qa/judge/layers/part_b.md](art/visual_qa/judge/layers/part_b.md) | `part_b` |
 | [art/visual_qa/judge/what_ai_judges.md](art/visual_qa/judge/what_ai_judges.md) | `what_ai_judges` |
 | [art/visual_qa/judge_layers.md](art/visual_qa/judge_layers.md) | `judge_layers` |
 | [art/visual_qa/report_phase_tools.md](art/visual_qa/report_phase_tools.md) | `report_phase_tools` |
@@ -193,8 +187,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [vision/narrative/checklist_production.md](vision/narrative/checklist_production.md) | `checklist_production` |
 | [vision/narrative/emotional/external_steals.md](vision/narrative/emotional/external_steals.md) | `external_steals` |
 | [vision/narrative/emotional/project_rules.md](vision/narrative/emotional/project_rules.md) | `project_rules` |
-| [vision/narrative/emotional/rules/part_a.md](vision/narrative/emotional/rules/part_a.md) | `part_a` |
-| [vision/narrative/emotional/rules/part_b.md](vision/narrative/emotional/rules/part_b.md) | `part_b` |
 | [vision/narrative/emotional_rules.md](vision/narrative/emotional_rules.md) | `emotional_rules` |
 | [vision/narrative/localization_emotion.md](vision/narrative/localization_emotion.md) | `localization_emotion` |
 | [vision/narrative/scene_dialogue.md](vision/narrative/scene_dialogue.md) | `scene_dialogue` |

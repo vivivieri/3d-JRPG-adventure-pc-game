@@ -22,8 +22,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/PROJECT_MANAGEMENT.md](agents/PROJECT_MANAGEMENT.md) | `PROJECT_MANAGEMENT` |
 | [agents/SPRINT_ORCHESTRATION.md](agents/SPRINT_ORCHESTRATION.md) | `SPRINT_ORCHESTRATION` |
 | [agents/cloud_setup/antipatterns_troubleshoot.md](agents/cloud_setup/antipatterns_troubleshoot.md) | `antipatterns_troubleshoot` |
-| [agents/cloud_setup/automations/automations/automation_a_pm.md](agents/cloud_setup/automations/automations/automation_a_pm.md) | `automation_a_pm` |
-| [agents/cloud_setup/automations/automations/automation_bcd.md](agents/cloud_setup/automations/automations/automation_bcd.md) | `automation_bcd` |
 | [agents/cloud_setup/automations/cursor_automations.md](agents/cloud_setup/automations/cursor_automations.md) | `cursor_automations` |
 | [agents/cloud_setup/automations/one_time.md](agents/cloud_setup/automations/one_time.md) | `one_time` |
 | [agents/cloud_setup/cycle_events.md](agents/cloud_setup/cycle_events.md) | `cycle_events` |
@@ -45,8 +43,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/gdai_setup/cloud_steam/troubleshoot.md](agents/gdai_setup/cloud_steam/troubleshoot.md) | `troubleshoot` |
 | [agents/gdai_setup/cloud_steam_troubleshoot.md](agents/gdai_setup/cloud_steam_troubleshoot.md) | `cloud_steam_troubleshoot` |
 | [agents/gdai_setup/install_desktop.md](agents/gdai_setup/install_desktop.md) | `install_desktop` |
-| [agents/mcp/art/part_a.md](agents/mcp/art/part_a.md) | `part_a` |
-| [agents/mcp/art/part_b.md](agents/mcp/art/part_b.md) | `part_b` |
 | [agents/mcp/art_tools.md](agents/mcp/art_tools.md) | `art_tools` |
 | [agents/mcp/install.md](agents/mcp/install.md) | `install` |
 | [agents/mcp/setup/checklist_troubleshoot.md](agents/mcp/setup/checklist_troubleshoot.md) | `checklist_troubleshoot` |
@@ -94,8 +90,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/watchdog/layers_monitor.md](agents/watchdog/layers_monitor.md) | `layers_monitor` |
 | [cheat-sheets/CONTROLS_CHEATSHEET.md](cheat-sheets/CONTROLS_CHEATSHEET.md) | `CONTROLS_CHEATSHEET` |
 | [cheat-sheets/RR_CHEATSHEET.md](cheat-sheets/RR_CHEATSHEET.md) | `RR_CHEATSHEET` |
-| [cheat-sheets/controls/gates/part_a.md](cheat-sheets/controls/gates/part_a.md) | `part_a` |
-| [cheat-sheets/controls/gates/part_b.md](cheat-sheets/controls/gates/part_b.md) | `part_b` |
 | [cheat-sheets/controls/gates_by_branch.md](cheat-sheets/controls/gates_by_branch.md) | `gates_by_branch` |
 | [cheat-sheets/controls/golden_stack.md](cheat-sheets/controls/golden_stack.md) | `golden_stack` |
 | [cheat-sheets/controls/pr_session_ship.md](cheat-sheets/controls/pr_session_ship.md) | `pr_session_ship` |
@@ -122,10 +116,8 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [ci-cd/ci/branch_protection_refs.md](ci-cd/ci/branch_protection_refs.md) | `branch_protection_refs` |
 | [ci-cd/ci/branch_purpose.md](ci-cd/ci/branch_purpose.md) | `branch_purpose` |
 | [ci-cd/ci/local_rr_remediation.md](ci-cd/ci/local_rr_remediation.md) | `local_rr_remediation` |
-| [ci-cd/ci/required_gates/runs/game_dev/gates_l0_l1.md](ci-cd/ci/required_gates/runs/game_dev/gates_l0_l1.md) | `gates_l0_l1` |
-| [ci-cd/ci/required_gates/runs/game_dev/gates_l2_plus.md](ci-cd/ci/required_gates/runs/game_dev/gates_l2_plus.md) | `gates_l2_plus` |
-| [ci-cd/ci/required_gates/runs/part_a.md](ci-cd/ci/required_gates/runs/part_a.md) | `part_a` |
-| [ci-cd/ci/required_gates/runs/part_b.md](ci-cd/ci/required_gates/runs/part_b.md) | `part_b` |
+| [ci-cd/ci/required_gates/runs/game_development.md](ci-cd/ci/required_gates/runs/game_development.md) | `game_development` |
+| [ci-cd/ci/required_gates/runs/main.md](ci-cd/ci/required_gates/runs/main.md) | `main` |
 | [ci-cd/ci/required_gates/what_not.md](ci-cd/ci/required_gates/what_not.md) | `what_not` |
 | [ci-cd/ci/required_gates/what_runs.md](ci-cd/ci/required_gates/what_runs.md) | `what_runs` |
 | [ci-cd/ci/required_gates.md](ci-cd/ci/required_gates.md) | `required_gates` |
@@ -155,8 +147,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/SCREENSHOTS.md](qa/SCREENSHOTS.md) | `SCREENSHOTS` |
 | [qa/SECURITY.md](qa/SECURITY.md) | `SECURITY` |
 | [qa/WORKFLOW_INTEGRATION.md](qa/WORKFLOW_INTEGRATION.md) | `WORKFLOW_INTEGRATION` |
-| [qa/acceptance/catalog/part_a.md](qa/acceptance/catalog/part_a.md) | `part_a` |
-| [qa/acceptance/catalog/part_b.md](qa/acceptance/catalog/part_b.md) | `part_b` |
 | [qa/acceptance/gate_catalog.md](qa/acceptance/gate_catalog.md) | `gate_catalog` |
 | [qa/acceptance/jury_report.md](qa/acceptance/jury_report.md) | `jury_report` |
 | [qa/acceptance/phase_tools.md](qa/acceptance/phase_tools.md) | `phase_tools` |
@@ -216,8 +206,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/testing/l5.md](qa/testing/l5.md) | `l5` |
 | [qa/testing/l6.md](qa/testing/l6.md) | `l6` |
 | [qa/testing/phases_and_report.md](qa/testing/phases_and_report.md) | `phases_and_report` |
-| [qa/testing/toolkit/part_a.md](qa/testing/toolkit/part_a.md) | `part_a` |
-| [qa/testing/toolkit/part_b.md](qa/testing/toolkit/part_b.md) | `part_b` |
 | [qa/testing/toolkit.md](qa/testing/toolkit.md) | `toolkit` |
 | [qa/tournament/what_stack_data.md](qa/tournament/what_stack_data.md) | `what_stack_data` |
 | [qa/tournament/when_ci_forbidden.md](qa/tournament/when_ci_forbidden.md) | `when_ci_forbidden` |
@@ -251,8 +239,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/ai_dev/phases/early/phase_2_3.md](workflow/ai_dev/phases/early/phase_2_3.md) | `phase_2_3` |
 | [workflow/ai_dev/phases/late/phase_4_6.md](workflow/ai_dev/phases/late/phase_4_6.md) | `phase_4_6` |
 | [workflow/ai_dev/phases/late/phase_7_8.md](workflow/ai_dev/phases/late/phase_7_8.md) | `phase_7_8` |
-| [workflow/ai_dev/phases/part_a.md](workflow/ai_dev/phases/part_a.md) | `part_a` |
-| [workflow/ai_dev/phases/part_b.md](workflow/ai_dev/phases/part_b.md) | `part_b` |
 | [workflow/ai_dev/policy/session_loop.md](workflow/ai_dev/policy/session_loop.md) | `session_loop` |
 | [workflow/ai_dev/policy/toolchain_base.md](workflow/ai_dev/policy/toolchain_base.md) | `toolchain_base` |
 | [workflow/ai_dev/testing/ai_testing.md](workflow/ai_dev/testing/ai_testing.md) | `ai_testing` |

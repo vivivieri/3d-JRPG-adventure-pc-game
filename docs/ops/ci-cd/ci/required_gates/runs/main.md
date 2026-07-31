@@ -1,14 +1,14 @@
 ---
-id: part-a
+id: main
 type: reference
-phase: [6, 8]
 audience: [release, qa, pm]
+phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 465
-summary: "Full list: `python3 -c 'import json; print('\\n'.join(json.load(open('game/data/qa/acceptance_criteria.json'))['docs_ci_gates']['required_gates']))'`"
+tokens_est: 412
+summary: "main branch docs CI gates"
 ---
-# CI — What Runs — CI — What Runs (A)
+# CI — What Runs (`main`)
 
 **Hub:** [`what_runs.md`](../what_runs.md)
 
