@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 441
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 479
+summary: "Balanced fighter / party leader"
 ---
 # Character — Urashima
 

@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 2425
+tokens_est: 2473
 summary: "**Scope:** `tools/godot-mcp-pro-server/` (Godot MCP Pro Node server) · future project-owned TS tooling"
 ---
 # TypeScript / Node.js Style Guide — Tides of Urashima

@@ -26,9 +26,17 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [technical/TECHNICAL_DESIGN.md](technical/TECHNICAL_DESIGN.md) | `TECHNICAL_DESIGN` |
 | [technical/TECH_STACK.md](technical/TECH_STACK.md) | `TECH_STACK` |
 | [technical/TYPESCRIPT_STYLE.md](technical/TYPESCRIPT_STYLE.md) | `TYPESCRIPT_STYLE` |
+| [technical/coding/ci_pr_commands.md](technical/coding/ci_pr_commands.md) | `ci_pr_commands` |
+| [technical/coding/language_stack.md](technical/coding/language_stack.md) | `language_stack` |
+| [technical/coding/naming.md](technical/coding/naming.md) | `naming` |
 | [technical/data/combat_economy.md](technical/data/combat_economy.md) | `combat_economy` |
 | [technical/data/i18n_validation.md](technical/data/i18n_validation.md) | `i18n_validation` |
 | [technical/data/story_spine.md](technical/data/story_spine.md) | `story_spine` |
 | [technical/gdscript_regen/checklist_recover.md](technical/gdscript_regen/checklist_recover.md) | `checklist_recover` |
 | [technical/gdscript_regen/order_helpers.md](technical/gdscript_regen/order_helpers.md) | `order_helpers` |
 | [technical/gdscript_regen/principle_rr.md](technical/gdscript_regen/principle_rr.md) | `principle_rr` |
+| [technical/tdd/exploration_audio_ui.md](technical/tdd/exploration_audio_ui.md) | `exploration_audio_ui` |
+| [technical/tdd/narrative_combat.md](technical/tdd/narrative_combat.md) | `narrative_combat` |
+| [technical/tdd/principles_runtime.md](technical/tdd/principles_runtime.md) | `principles_runtime` |
+| [technical/tdd/scene_data_save.md](technical/tdd/scene_data_save.md) | `scene_data_save` |
+| [technical/tdd/testing_phases.md](technical/tdd/testing_phases.md) | `testing_phases` |

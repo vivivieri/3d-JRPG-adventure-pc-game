@@ -5,7 +5,7 @@ audience: [builder, builder_zone, visual]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 700
+tokens_est: 291
 summary: "Per-zone lighting, kits, LOD — load only the active zone pack"
 ---
 # Environment Kits

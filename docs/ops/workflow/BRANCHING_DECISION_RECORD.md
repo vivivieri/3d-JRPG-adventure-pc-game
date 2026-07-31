@@ -4,7 +4,7 @@ type: explanation
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1854
+tokens_est: 1880
 summary: "**Status:** Accepted"
 ---
 # ADR: Branching Strategy for Multi-Agent JRPG Development

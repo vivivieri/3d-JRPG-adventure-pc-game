@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 1214
-summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
+tokens_est: 1243
+summary: "Sideways scuttle idle; claw snap attack"
 ---
 # Characters — Enemies
 

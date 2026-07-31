@@ -4,7 +4,7 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 1270
+tokens_est: 1292
 summary: "**Project:** Tides of Urashima"
 ---
 # Asset Compliance Policy — No Copyright Violations

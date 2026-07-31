@@ -5,7 +5,7 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 665
+tokens_est: 741
 summary: "Tier matrix & MCP requirements"
 ---
 # Art Automation Pipeline — Tier matrix & MCP requirements

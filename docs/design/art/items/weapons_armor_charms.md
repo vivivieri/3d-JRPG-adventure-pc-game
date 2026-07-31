@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [2, 5]
 status: active
 authority: art
-tokens_est: 1018
-summary: "[`ITEMS_3D_MODEL_GUIDE.md`](../ITEMS_3D_MODEL_GUIDE.md)"
+tokens_est: 1099
+summary: "Armor v1 uses **character mesh variants** — not standalone pickup props."
 ---
 # Items 3D — Weapons, armor, charms
 

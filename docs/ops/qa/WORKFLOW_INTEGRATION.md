@@ -4,7 +4,7 @@ type: how-to
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1697
+tokens_est: 1729
 summary: "`game/data/qa/workflow_integration_registry.json`"
 ---
 # Workflow Integration Registry — Avoid Feature Drift

@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: vision
-tokens_est: 2312
-summary: "**Purpose:** Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless regenerated as 3D via `ART_AUTOMATION_PIPELIN"
+tokens_est: 2367
+summary: "Presentation art for pitches, Steam, social, and team alignment — **not** final in-game assets unless regenerated as 3D via `ART_AUTOMATION_PIPELINE.md`."
 ---
 # Tides of Urashima — Storyboard Illustrations (Pitch Package)
 

@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 433
-summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
+tokens_est: 511
+summary: "- Roku → 六さん in dialogue (respectful distance)"
 ---
 # Narrative — Localization & emotion tags
 

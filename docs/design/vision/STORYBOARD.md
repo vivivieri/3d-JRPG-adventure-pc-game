@@ -5,7 +5,7 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: vision
-tokens_est: 3122
+tokens_est: 3148
 summary: "**Format per scene:** ID, location, camera, dialogue summary, gameplay type, mood, assets needed."
 ---
 # Tides of Urashima — Storyboard

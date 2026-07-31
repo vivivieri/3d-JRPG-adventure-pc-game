@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 451
-summary: "[`MODEL_QA.md`](../MODEL_QA.md)"
+tokens_est: 516
+summary: "bash tools/run_model_smoke_checks.sh"
 ---
 # Model QA — L2 smoke, report, tools
 

@@ -4,8 +4,8 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 590
-summary: "[`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) — naming, schema bumps, extension checklists"
+tokens_est: 645
+summary: "Data follows the story spine — scenes drive flags, flags drive quests, quests drive encounters and rewards."
 ---
 # Tides of Urashima — Story-Driven Data Architecture
 

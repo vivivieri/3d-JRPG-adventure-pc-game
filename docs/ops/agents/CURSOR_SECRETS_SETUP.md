@@ -5,7 +5,7 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 900
+tokens_est: 313
 summary: "Day-one Cursor / GitHub secrets for the factory"
 ---
 # Cursor Secrets Setup

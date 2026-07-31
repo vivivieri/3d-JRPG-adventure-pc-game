@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1280
-summary: "[`MCP_STACK.md`](../MCP_STACK.md)"
+tokens_est: 1314
+summary: "`docs/design/art/ART_AUTOMATION_PIPELINE.md` — quality-first, zero human artists, tiered MCP."
 ---
 # MCP — Art Tools
 

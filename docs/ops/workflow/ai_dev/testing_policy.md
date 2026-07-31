@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1488
-summary: "[`AI_DEV_WORKFLOW.md`](../AI_DEV_WORKFLOW.md)"
+tokens_est: 1520
+summary: "Testing is **layered**. Higher layers run after lower layers pass."
 ---
 # AI Dev Workflow — testing policy
 

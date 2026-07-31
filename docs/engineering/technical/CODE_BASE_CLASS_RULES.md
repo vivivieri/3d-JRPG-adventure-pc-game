@@ -4,7 +4,7 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1064
+tokens_est: 1099
 summary: "**Machine-readable:** `game/data/code/base_classes.json`"
 ---
 # Code Base Classes — Agent R&R (Not 3D Meshes)

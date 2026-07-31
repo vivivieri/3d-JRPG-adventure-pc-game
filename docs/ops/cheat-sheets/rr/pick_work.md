@@ -4,8 +4,8 @@ type: reference
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 837
-summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
+tokens_est: 871
+summary: "Do **not** self-pick from the backlog. PM dispatches via orchestrator; workers pass session gate first."
 ---
 # R&R — how-to-pick-work-dev-qa
 

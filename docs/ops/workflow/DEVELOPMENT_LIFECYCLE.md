@@ -4,7 +4,7 @@ type: explanation
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 900
+tokens_est: 402
 summary: "Macro lifecycle, branching, gates, promotion"
 ---
 # Development Lifecycle

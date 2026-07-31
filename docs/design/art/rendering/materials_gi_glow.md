@@ -5,8 +5,8 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 653
-summary: "[`RENDERING_GUIDE.md`](../RENDERING_GUIDE.md)"
+tokens_est: 731
+summary: "Enable `Environment.glow` wherever emissive content should read on screen:"
 ---
 # Rendering — Materials, GI, glow
 

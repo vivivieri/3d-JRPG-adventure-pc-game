@@ -4,7 +4,7 @@ type: reference
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 669
+tokens_est: 732
 summary: "Local repro, R&R, remediation"
 ---
 # Continuous Integration — Local repro, R&R, remediation

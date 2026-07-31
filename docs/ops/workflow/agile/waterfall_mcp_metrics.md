@@ -4,7 +4,7 @@ type: how-to
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 462
+tokens_est: 534
 summary: "Waterfall bounds, MCP, metrics"
 ---
 # Agile Within Phases — Waterfall bounds, MCP, metrics

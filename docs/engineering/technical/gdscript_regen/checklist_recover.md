@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 1683
+tokens_est: 1770
 summary: "Checklist, recover, new helpers, Phase 1 visuals"
 ---
 # GDScript Regeneration — Checklist, recover, new helpers, Phase 1 visuals

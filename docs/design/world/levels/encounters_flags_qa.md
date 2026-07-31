@@ -5,7 +5,7 @@ audience: [builder, builder_zone, architect]
 phase: [1, 5]
 status: active
 authority: world
-tokens_est: 490
+tokens_est: 560
 summary: "Encounters, flags, QA"
 ---
 # Level Design — Encounters, flags, QA

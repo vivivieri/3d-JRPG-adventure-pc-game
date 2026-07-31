@@ -4,8 +4,8 @@ type: reference
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1227
-summary: "[`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)"
+tokens_est: 1280
+summary: "These techniques come from live-runtime MCP testing (recommended for JRPG UI-heavy flows). They extend L3–L5; they **do not** replace L0–L2 headless tests."
 ---
 # GDAI MCP playtesting toolkit
 

@@ -5,8 +5,8 @@ audience: [pm, architect, builder]
 phase: [6]
 status: active
 authority: workflow
-tokens_est: 400
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 268
+summary: "Implementation Plan — Phase 6"
 ---
 # Implementation Plan — Phase 6
 

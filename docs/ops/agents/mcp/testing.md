@@ -4,8 +4,8 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 860
-summary: "[`MCP_STACK.md`](../MCP_STACK.md)"
+tokens_est: 904
+summary: "See `docs/ops/qa/AI_TESTING_SPEC.md` §11 and `docs/ops/qa/ACCEPTANCE_CRITERIA.md` (measurable gates)."
 ---
 # MCP — Testing
 

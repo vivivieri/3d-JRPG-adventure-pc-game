@@ -5,8 +5,8 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 507
-summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
+tokens_est: 599
+summary: "Short clauses in Act I. Avoid jokes. Never boast. Posture in stage direction = hunched → upright (`CHARACTER_BIBLE.md`)."
 ---
 # Narrative — Character voice
 

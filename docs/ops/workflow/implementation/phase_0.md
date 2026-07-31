@@ -5,8 +5,8 @@ audience: [pm, architect, builder]
 phase: [0]
 status: active
 authority: workflow
-tokens_est: 522
-summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
+tokens_est: 594
+summary: "bash tools/setup_dev_environment.sh"
 ---
 # Implementation Plan — Phase 0
 

@@ -4,8 +4,8 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1634
-summary: "[`DATA_ARCHITECTURE.md`](../DATA_ARCHITECTURE.md)"
+tokens_est: 1674
+summary: "Hand-placed fights only — no random tables."
 ---
 # Data architecture — Combat & economy
 

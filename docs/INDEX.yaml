@@ -37,9 +37,11 @@ roles:
   pm:
     must_read:
       - docs/ops/cheat-sheets/RR_CHEATSHEET.md
+      - docs/ops/cheat-sheets/rr/session.md
       - docs/ops/agents/PM_AGENT_RUNBOOK.md
       - docs/ops/agents/SPRINT_ORCHESTRATION.md
     optional:
+      - docs/ops/cheat-sheets/rr/golden_rules.md
       - docs/ops/workflow/AGILE_WITHIN_PHASES.md
       - docs/ops/qa/WORKFLOW_INTEGRATION.md
 
@@ -49,6 +51,8 @@ roles:
       - docs/engineering/technical/DATA_ARCHITECTURE.md
       - docs/engineering/technical/CODING_STANDARDS_HUB.md
     optional:
+      - docs/engineering/technical/tdd/principles_runtime.md
+      - docs/engineering/technical/coding/naming.md
       - docs/engineering/technical/data/story_spine.md
       - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
       - docs/ops/workflow/IMPLEMENTATION_PLAN.md
@@ -59,6 +63,8 @@ roles:
       - docs/ops/qa/QA_REMEDIATION_LOOP.md
       - docs/ops/qa/AI_TESTING_SPEC.md
     optional:
+      - docs/ops/qa/acceptance/gate_catalog.md
+      - docs/ops/qa/remediation/levers_commands.md
       - docs/ops/qa/testing/l0.md
       - docs/ops/qa/testing/l4.md
       - docs/ops/qa/FLOW_QA.md
@@ -89,7 +95,6 @@ roles:
       - docs/design/world/ENVIRONMENT_KITS.md
       - docs/design/art/ART_DIRECTION.md
     optional:
-      - docs/design/world/env_kits/ruined_village.md
       - docs/design/art/direction/palette.md
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/SHADER_SPECS.md
@@ -109,6 +114,7 @@ roles:
       - docs/design/art/ART_AUTOMATION_PIPELINE.md
       - docs/design/art/VISUAL_QA.md
     optional:
+      - docs/design/art/visual_qa/judge_layers.md
       - docs/design/art/direction/palette.md
       - docs/design/art/automation/zone_textures.md
       - docs/design/art/MODEL_QA.md
@@ -118,6 +124,7 @@ roles:
       - docs/design/art/CHARACTER_BIBLE.md
       - docs/design/art/characters/urashima.md
       - docs/design/art/GENERATION_READINESS.md
+      - docs/design/art/generation_readiness/characters_zones.md
 
   release:
     must_read:
@@ -155,10 +162,45 @@ tasks:
       - docs/design/world/ENVIRONMENT_KITS.md
       - docs/design/art/ART_DIRECTION.md
     optional:
-      - docs/design/world/env_kits/ruined_village.md
       - docs/design/art/direction/palette.md
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/rendering/defaults_environment.md
+
+  visual_qa:
+    must_read:
+      - docs/design/art/VISUAL_QA.md
+      - docs/design/art/ART_DIRECTION.md
+    optional:
+      - docs/design/art/visual_qa/judge_layers.md
+      - docs/design/art/visual_qa/report_phase_tools.md
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+      - docs/design/art/GENERATION_READINESS.md
+
+  acceptance_ci:
+    must_read:
+      - docs/ops/qa/ACCEPTANCE_CRITERIA.md
+      - docs/ops/ci-cd/CI.md
+    optional:
+      - docs/ops/qa/acceptance/gate_catalog.md
+      - docs/ops/qa/QA_REMEDIATION_LOOP.md
+      - docs/ops/qa/testing/l0.md
+      - docs/ops/qa/testing/l2.md
+
+  audio_bgm:
+    must_read:
+      - docs/design/audio/AUDIO_PRODUCTION_GUIDE.md
+      - docs/design/audio/AUDIO_DIRECTION.md
+    optional:
+      - docs/design/audio/AUDIO_QA.md
+      - docs/design/audio/production/bgm_and_scene_map.md
+
+  ui_cinematics:
+    must_read:
+      - docs/design/ui/CINEMATICS.md
+      - docs/design/art/ART_DIRECTION.md
+    optional:
+      - docs/design/art/automation/ui_art.md
+      - docs/design/art/direction/characters_env_ui.md
 
   combat_balance:
     must_read:

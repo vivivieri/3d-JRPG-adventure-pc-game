@@ -4,7 +4,7 @@ type: reference
 audience: [release, qa, pm]
 status: active
 authority: ci-cd
-tokens_est: 400
+tokens_est: 344
 summary: "Branch protection & cross-refs"
 ---
 # Continuous Integration — Branch protection & cross-refs

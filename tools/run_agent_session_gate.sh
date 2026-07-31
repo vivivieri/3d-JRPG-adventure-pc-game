@@ -89,30 +89,39 @@ print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
 # Progressive disclosure — role ∪ task ∪ issue handoff_refs ∪ briefs (budgeted)
-DOCS_ROLE="$AGENT"
-case "$AGENT" in
-  architect|builder|qa|flow|release|visual|pm|narrative|audio) DOCS_ROLE="$AGENT" ;;
-  builder_zone|builder_combat) DOCS_ROLE="$AGENT" ;;
-  *) DOCS_ROLE="builder" ;;
-esac
-DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
+# Specialty remap: builder + zone_lighting → builder_zone (tools/docs_role_map.py)
 DOCS_TASK="${AGENT_DOCS_TASK:-}"
+if [[ -z "$DOCS_TASK" ]]; then
+  DOCS_TASK="$(python3 - <<PY
+import json
+from pathlib import Path
+board = json.loads(Path("game/data/qa/sprint_board.json").read_text(encoding="utf-8"))
+for issue in board.get("issues") or []:
+    if str(issue.get("id") or "") == "$ISSUE_ID" or str(issue.get("github_issue") or "") == "$ISSUE_ID":
+        print(issue.get("docs_task") or "")
+        break
+PY
+)"
+fi
+DOCS_ROLE="$(python3 tools/docs_role_map.py "$AGENT" "${DOCS_TASK:-}")"
+DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
 mkdir -p "$ROOT/artifacts"
 DOCS_REPORT="$ROOT/artifacts/docs_pack_${ISSUE_ID}.txt"
-RESOLVE_ARGS=("$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --report "$DOCS_REPORT")
+RESOLVE_ARGS=("$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --report "$DOCS_REPORT" --remap-role)
 if [[ -n "$DOCS_TASK" ]]; then
   RESOLVE_ARGS+=(--task "$DOCS_TASK")
 fi
 echo ""
-echo "[DOCS] Role pack ($DOCS_ROLE) + issue $ISSUE_ID (budget≈${DOCS_BUDGET}; report=$DOCS_REPORT):"
+echo "[DOCS] Role pack ($DOCS_ROLE${DOCS_TASK:+ / task=$DOCS_TASK}) + issue $ISSUE_ID (budget≈${DOCS_BUDGET}; report=$DOCS_REPORT):"
 if python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" --check \
   >/tmp/resolve_docs_check.txt 2>&1; then
   python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" | sed 's/^/       /'
-  echo "       [OK] wrote $DOCS_REPORT"
+  echo "       [OK] wrote $DOCS_REPORT (+ ${DOCS_REPORT%.txt}.json)"
 else
-  echo "       [WARN] resolve_docs.py failed for role=$DOCS_ROLE issue=$ISSUE_ID — falling back to BOOT.md"
+  echo "[FAIL] resolve_docs.py failed for role=$DOCS_ROLE issue=$ISSUE_ID — refusing BOOT-only fallback"
   sed 's/^/       /' /tmp/resolve_docs_check.txt || true
-  echo "       docs/ops/BOOT.md"
+  echo "       Fix INDEX paths / handoff_refs, then re-run session gate."
+  exit 1
 fi
 
 # Agent session telemetry — session start (warn once if API key missing)

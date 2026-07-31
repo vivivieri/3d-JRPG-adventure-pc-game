@@ -5,8 +5,8 @@ audience: [pm, builder, release]
 phase: [0, 1]
 status: active
 authority: agents
-tokens_est: 1354
-summary: "API keys"
+tokens_est: 1442
+summary: "API key for **GameLab Studio MCP** (`gamelab-mcp`) — ink-wash UI frames, combat icon sheets, menu borders."
 ---
 # Cursor Secrets Setup — API keys
 
