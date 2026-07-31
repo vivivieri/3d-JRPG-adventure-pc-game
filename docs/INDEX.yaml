@@ -65,16 +65,20 @@ roles:
     optional:
       - docs/ops/qa/acceptance/gate_catalog.md
       - docs/ops/qa/remediation/levers_commands.md
+      - docs/ops/qa/bug_process/scope_severity.md
       - docs/ops/qa/testing/l0.md
       - docs/ops/qa/testing/l4.md
       - docs/ops/qa/FLOW_QA.md
+      - docs/ops/qa/flow_qa/scenarios_levers.md
 
   flow:
     must_read:
       - docs/ops/qa/FLOW_QA.md
       - docs/ops/qa/ACCEPTANCE_CRITERIA.md
     optional:
+      - docs/ops/qa/flow_qa/scenarios_levers.md
       - docs/design/vision/STORYBOARD.md
+      - docs/design/vision/storyboard/act_i.md
       - docs/design/world/WORLD_MAP_AND_FLOW.md
       - docs/ops/qa/testing/l5.md
 
@@ -107,6 +111,8 @@ roles:
     optional:
       - docs/design/gameplay/SKILLS_BIBLE.md
       - docs/design/gameplay/PROGRESSION_TUNING.md
+      - docs/design/gameplay/bosses/shore_wraith.md
+      - docs/design/gameplay/BOSS_DESIGNS.md
 
   visual:
     must_read:
@@ -115,6 +121,7 @@ roles:
       - docs/design/art/VISUAL_QA.md
     optional:
       - docs/design/art/visual_qa/judge_layers.md
+      - docs/design/art/visual_qa/tools_antipattern.md
       - docs/design/art/direction/palette.md
       - docs/design/art/automation/zone_textures.md
       - docs/design/art/MODEL_QA.md
@@ -132,6 +139,7 @@ roles:
       - docs/ops/workflow/MILESTONES.md
       - docs/ops/qa/SECURITY.md
     optional:
+      - docs/ops/workflow/milestones/m5_m6_ship.md
       - docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md
       - docs/ops/ci-cd/CD.md
 
@@ -141,6 +149,8 @@ roles:
       - docs/design/vision/STORYBOARD.md
       - docs/design/vision/NARRATIVE_WRITING_GUIDE.md
     optional:
+      - docs/design/vision/gdd/pitch_scope.md
+      - docs/design/vision/storyboard/act_i.md
       - docs/design/vision/narrative/character_voice.md
       - docs/design/vision/ENDING_DESIGN.md
       - docs/design/vision/VO_HIT_LIST.md
@@ -163,8 +173,10 @@ tasks:
       - docs/design/art/ART_DIRECTION.md
     optional:
       - docs/design/art/direction/palette.md
+      - docs/design/art/direction/pipeline_mood_avoid.md
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/rendering/defaults_environment.md
+      - docs/design/art/automation/zone_textures.md
 
   visual_qa:
     must_read:
@@ -173,8 +185,10 @@ tasks:
     optional:
       - docs/design/art/visual_qa/judge_layers.md
       - docs/design/art/visual_qa/report_phase_tools.md
+      - docs/design/art/visual_qa/tools_antipattern.md
       - docs/ops/qa/ACCEPTANCE_CRITERIA.md
       - docs/design/art/GENERATION_READINESS.md
+      - docs/briefs/ruined_village/metrics_acceptance.md
 
   acceptance_ci:
     must_read:
@@ -185,6 +199,7 @@ tasks:
       - docs/ops/qa/QA_REMEDIATION_LOOP.md
       - docs/ops/qa/testing/l0.md
       - docs/ops/qa/testing/l2.md
+      - docs/ops/qa/bug_process/scope_severity.md
 
   audio_bgm:
     must_read:
@@ -193,6 +208,7 @@ tasks:
     optional:
       - docs/design/audio/AUDIO_QA.md
       - docs/design/audio/production/bgm_and_scene_map.md
+      - docs/design/audio/production/mix_impl_qa.md
 
   ui_cinematics:
     must_read:
@@ -209,6 +225,8 @@ tasks:
     optional:
       - docs/design/gameplay/SKILLS_BIBLE.md
       - docs/design/art/COMBAT_PRESENTATION.md
+      - docs/design/gameplay/bosses/global_rules.md
+      - docs/design/gameplay/BOSS_DESIGNS.md
 
   vo_gen:
     must_read:
@@ -225,6 +243,7 @@ tasks:
     optional:
       - docs/ops/ci-cd/CD.md
       - docs/ops/ci-cd/CI.md
+      - docs/ops/workflow/milestones/m5_m6_ship.md
 
   water_shader:
     must_read:
@@ -241,6 +260,7 @@ tasks:
     optional:
       - docs/ops/agents/cloud_setup/setup_automations.md
       - docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md
+      - docs/ops/agents/gdai_setup/install_desktop.md
 
   model_qa:
     must_read:
@@ -248,15 +268,18 @@ tasks:
       - docs/design/art/ART_DIRECTION.md
     optional:
       - docs/design/art/model_qa/layers_workflow.md
+      - docs/design/art/model_qa/smoke_report_tools.md
       - docs/design/art/VISUAL_QA.md
+      - docs/design/art/generation_readiness/characters_zones.md
 
   level_layout:
     must_read:
       - docs/design/world/LEVEL_DESIGN.md
-      - docs/design/world/levels/ruined_village.md
-    optional:
       - docs/design/world/ENVIRONMENT_KITS.md
+    optional:
       - docs/design/world/levels/encounters_flags_qa.md
+      - docs/design/world/levels/global_rules.md
+      - docs/design/art/direction/characters_env_ui.md
 
   secrets_setup:
     must_read:

@@ -158,6 +158,31 @@
           "path": "tools/enhance_docs_packs.py",
           "contains": "VISUAL_QA",
           "purpose": "split remaining fat hubs into packs"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "priority_attach",
+          "purpose": "briefs/zones/characters budget-trimable after core must"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "_match_character_packs",
+          "purpose": "auto-attach character bible packs from issue text"
+        },
+        {
+          "path": "tools/check_docs_pack_adherence.py",
+          "contains": "allowed_read_paths",
+          "purpose": "WARN when agent reads outside docs pack"
+        },
+        {
+          "path": "tools/run_post_agent_cycle.sh",
+          "contains": "docs_pack_adherence",
+          "purpose": "post-cycle pack adherence check"
+        },
+        {
+          "path": "tools/split_docs_remaining.py",
+          "contains": "STORYBOARD",
+          "purpose": "split remaining fat hubs + ruined_village brief"
         }
       ],
       "orchestrator_steps": [
