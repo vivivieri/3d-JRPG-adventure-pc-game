@@ -83,6 +83,11 @@ for k, v in result["paths"].items():
 tg = result["telegram"]
 if tg.get("sent"):
     print(f"[OK]   Telegram → product owner ({tg.get('detail')})")
+    photo = tg.get("photo") or {}
+    if photo.get("sent"):
+        print(f"[OK]   Telegram photo → alignment visual ({photo.get('detail')})")
+    elif photo:
+        print(f"[INFO] Telegram photo: {photo.get('detail')}")
 else:
     print(f"[INFO] Telegram: {tg.get('detail')}")
 

@@ -49,6 +49,22 @@ def main() -> int:
         if key not in outputs:
             errors.append(f"outputs missing {key}")
 
+    aa = data.get("alignment_audit")
+    if not isinstance(aa, dict):
+        errors.append("missing alignment_audit block (merge alignment into Telegram reports)")
+    else:
+        if not aa.get("include_in_report"):
+            errors.append("alignment_audit.include_in_report must be true")
+        for key in ("run_before_emit_triggers", "latest_json", "latest_visuals_dir", "photo_preference"):
+            if key not in aa:
+                errors.append(f"alignment_audit missing {key}")
+        lib = ROOT / "tools/pm_stakeholder_report_lib.py"
+        if lib.is_file():
+            text = lib.read_text(encoding="utf-8")
+            for needle in ("attach_alignment_audit", "send_telegram_photo", "_summarize_alignment"):
+                if needle not in text:
+                    errors.append(f"pm_stakeholder_report_lib.py missing {needle}")
+
     if errors:
         print("stakeholder_report_config.json FAILED:")
         for e in errors:

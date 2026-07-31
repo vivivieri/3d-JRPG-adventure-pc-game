@@ -654,21 +654,46 @@ def compute_verdict(
     return "ALIGNED"
 
 
+def visual_search_dirs(catalog: dict[str, Any], source_dir: Path | None = None) -> list[Path]:
+    """Resolve order: explicit source → latest → style → legacy root."""
+    outputs = catalog.get("outputs", {})
+    dirs: list[Path] = []
+    if source_dir is not None:
+        candidate = source_dir if source_dir.is_absolute() else ROOT / source_dir
+        dirs.append(candidate)
+    for key in ("shared_visuals_dir", "style_visuals_dir", "visuals_root_dir"):
+        rel = outputs.get(key)
+        if not rel:
+            continue
+        path = ROOT / rel
+        if path not in dirs:
+            dirs.append(path)
+    legacy = ROOT / "docs/archive/compliance/alignment_audit_visuals"
+    if legacy not in dirs:
+        dirs.append(legacy)
+    return dirs
+
+
+def resolve_visual_file(
+    catalog: dict[str, Any],
+    filename: str,
+    source_dir: Path | None = None,
+) -> Path | None:
+    """Find a catalogued PNG across latest/style/legacy locations."""
+    for directory in visual_search_dirs(catalog, source_dir):
+        candidate = directory / filename
+        if candidate.is_file():
+            return candidate
+    return None
+
+
 def scan_visual_inventory(catalog: dict[str, Any], source_dir: Path | None = None) -> list[dict[str, Any]]:
     """Check which catalogued visuals exist on disk (no copy)."""
     manifest: list[dict[str, Any]] = []
     for pack in catalog.get("visual_packs", []):
         for asset in pack.get("assets", []):
             fname = asset["filename"]
-            src: Path | None = None
-            if source_dir:
-                candidate = source_dir / fname
-                if not candidate.is_absolute():
-                    candidate = ROOT / candidate
-                if candidate.is_file():
-                    src = candidate
-            elif (ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname).is_file():
-                src = ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname
+            src = resolve_visual_file(catalog, fname, source_dir)
             manifest.append(
                 {
                     "pack_id": pack["id"],
@@ -701,12 +726,10 @@ def bundle_visuals(
             if report_only and fname not in report_only:
                 continue
             dest = visuals_dir / fname
+            src = resolve_visual_file(catalog, fname, source_dir)
             copied = False
-            if source_dir and (source_dir / fname).is_file():
-                shutil.copy2(source_dir / fname, dest)
-                copied = True
-            elif (ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname).is_file():
-                shutil.copy2(ROOT / "docs/archive/compliance/alignment_audit_visuals" / fname, dest)
+            if src is not None:
+                shutil.copy2(src, dest)
                 copied = True
             manifest.append(
                 {
@@ -807,13 +830,14 @@ def build_report(
 
 
 def _shared_visual_href(committed_audit_dir: Path, filename: str, catalog: dict[str, Any]) -> str:
-    """Relative href from a committed audit folder to the shared visuals pack."""
+    """Relative href from a committed audit folder to latest/style shared pack."""
+    resolved = resolve_visual_file(catalog, filename)
+    if resolved is not None:
+        return Path(os_path_relpath(resolved, committed_audit_dir)).as_posix()
     shared = ROOT / catalog.get("outputs", {}).get(
-        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals"
+        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals/latest"
     )
-    return Path(
-        os_path_relpath(shared / filename, committed_audit_dir)
-    ).as_posix()
+    return Path(os_path_relpath(shared / filename, committed_audit_dir)).as_posix()
 
 
 def os_path_relpath(target: Path, start: Path) -> str:
@@ -826,7 +850,11 @@ def os_path_relpath(target: Path, start: Path) -> str:
 def apply_committed_visual_hrefs(
     report: dict[str, Any], committed_audit_dir: Path, catalog: dict[str, Any]
 ) -> None:
-    """Point manifest entries at shared pack paths for GitHub-committed reports."""
+    """Point manifest entries at shared pack paths for GitHub-committed reports.
+
+    When archive_visual_snapshots is enabled, write_committed_archive overwrites
+    gallery_href to the per-audit visuals/ copy.
+    """
     for entry in report.get("visual_manifest", []):
         fname = entry.get("filename")
         if not fname:
@@ -834,7 +862,13 @@ def apply_committed_visual_hrefs(
         if entry.get("present"):
             entry["gallery_href"] = _shared_visual_href(committed_audit_dir, fname, catalog)
         entry["committed_visual"] = (
-            str((committed_audit_dir / catalog.get("outputs", {}).get("visuals_subdir", "visuals") / fname).relative_to(ROOT))
+            str(
+                (
+                    committed_audit_dir
+                    / catalog.get("outputs", {}).get("visuals_subdir", "visuals")
+                    / fname
+                ).relative_to(ROOT)
+            )
             if entry.get("present")
             else None
         )
@@ -852,7 +886,12 @@ def _visual_sections_markdown(
     if not present:
         return []
 
-    overview_names = {"audit_radar_report.png", "audit_radar_spec.png", "audit_radar_build.png"}
+    overview_names = {
+        "audit_exec_summary.png",
+        "audit_radar_report.png",
+        "audit_radar_spec.png",
+        "audit_radar_build.png",
+    }
     overview = [v for v in present if v["filename"] in overview_names]
     breakdown_grid = [v for v in present if v["filename"] == "audit_radar_spec_breakdown.png"]
     subdomains = [
@@ -1307,12 +1346,8 @@ def write_committed_archive(
             if not entry.get("present"):
                 continue
             fname = entry["filename"]
-            src: Path | None = None
-            if visuals_from and (visuals_from / fname).is_file():
-                src = visuals_from / fname
-            elif (ROOT / outputs.get("shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals") / fname).is_file():
-                src = ROOT / outputs["shared_visuals_dir"] / fname
-            elif entry.get("path"):
+            src = resolve_visual_file(catalog, fname, visuals_from)
+            if src is None and entry.get("path"):
                 candidate = ROOT / entry["path"]
                 if candidate.is_file():
                     src = candidate
@@ -1362,8 +1397,9 @@ def write_outputs(
 ) -> dict[str, str]:
     outputs = catalog.get("outputs", {})
     shared_visuals = ROOT / outputs.get(
-        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals"
+        "shared_visuals_dir", "docs/archive/compliance/alignment_audit_visuals/latest"
     )
+    shared_visuals.mkdir(parents=True, exist_ok=True)
     try:
         from generate_audit_radar_images import generate_audit_radars  # noqa: E402
 

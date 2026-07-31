@@ -67,17 +67,20 @@ Skipping stakeholder report = incomplete PM handoff (cite `invalid_pass_patterns
 
 ## 9. Alignment audit (technical complement)
 
-For **spec alignment** and **dispatch readiness** (not sprint schedule), run the standard alignment audit:
+For **spec alignment** and **dispatch readiness**, the stakeholder Telegram report now **includes the alignment audit** on sprint/phase triggers (verdict + exec summary photo).
+
+Manual / extra run:
 
 ```bash
 bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N"
+bash tools/pm_emit_stakeholder_report.sh --trigger phase_exit --telegram
 ```
 
-Outputs: `artifacts/alignment_audits/latest.md`, `artifacts/alignment_dashboard.html`, history in `docs/archive/compliance/alignment_audit_history.json`.
+Outputs: `artifacts/alignment_audits/latest.md`, history in `docs/archive/compliance/alignment_audit_history.json`, plus Telegram via stakeholder emit.
 
-**Management visuals (status):** use only auto-generated `audit_radar_spec.png` (design & preparation) and `audit_radar_build.png` (development & shipping). Do **not** use legacy `audit_radar_6axis.png` or `tides_mega_dashboard_all_radars.png` for executive readiness — see report § Management visuals.
+**Management visuals (status):** `docs/archive/compliance/alignment_audit_visuals/latest/` (style kit in `style/`). Per-run: `alignment_audit_reports/<audit_id>/visuals/`.
 
-See `docs/ops/qa/ALIGNMENT_AUDIT.md` — run alongside stakeholder report at phase exit.
+See `docs/ops/qa/ALIGNMENT_AUDIT.md`.
 
 ---
 

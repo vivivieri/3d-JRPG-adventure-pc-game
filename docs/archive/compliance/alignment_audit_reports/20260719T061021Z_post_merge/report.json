@@ -267,7 +267,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_report.png",
+      "gallery_href": "visuals/audit_radar_report.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_report.png"
     },
     {
@@ -283,7 +283,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec.png",
+      "gallery_href": "visuals/audit_radar_spec.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec.png"
     },
     {
@@ -299,7 +299,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_build.png",
+      "gallery_href": "visuals/audit_radar_build.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_build.png"
     },
     {
@@ -315,7 +315,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_breakdown.png",
+      "gallery_href": "visuals/audit_radar_spec_breakdown.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_breakdown.png"
     },
     {
@@ -331,7 +331,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_data_alignment.png",
+      "gallery_href": "visuals/audit_radar_spec_data_alignment.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_data_alignment.png"
     },
     {
@@ -347,7 +347,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_narrative.png",
+      "gallery_href": "visuals/audit_radar_spec_narrative.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_narrative.png"
     },
     {
@@ -363,7 +363,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_gameplay.png",
+      "gallery_href": "visuals/audit_radar_spec_gameplay.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_gameplay.png"
     },
     {
@@ -379,7 +379,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_visual_spec.png",
+      "gallery_href": "visuals/audit_radar_spec_visual_spec.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_visual_spec.png"
     },
     {
@@ -395,7 +395,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_ux_controls.png",
+      "gallery_href": "visuals/audit_radar_spec_ux_controls.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_ux_controls.png"
     },
     {
@@ -411,7 +411,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_spec_pm_workflow.png",
+      "gallery_href": "visuals/audit_radar_spec_pm_workflow.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_spec_pm_workflow.png"
     },
     {
@@ -427,7 +427,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_build_breakdown.png",
+      "gallery_href": "visuals/audit_radar_build_breakdown.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_build_breakdown.png"
     },
     {
@@ -443,7 +443,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_build_runtime_proof.png",
+      "gallery_href": "visuals/audit_radar_build_runtime_proof.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_build_runtime_proof.png"
     },
     {
@@ -459,7 +459,7 @@
       "management": true,
       "auto_generated": true,
       "deprecated_for_management": false,
-      "gallery_href": "../../alignment_audit_visuals/audit_radar_build_steam_ship.png",
+      "gallery_href": "visuals/audit_radar_build_steam_ship.png",
       "committed_visual": "docs/archive/compliance/alignment_audit_reports/20260719T061021Z_post_merge/visuals/audit_radar_build_steam_ship.png"
     }
   ]

@@ -27,10 +27,10 @@ Use **Alignment — Visuals / History / Integration — PM integration + workflo
 
 | Report | Audience | Focus |
 |--------|----------|-------|
-| `pm_emit_stakeholder_report.sh` | Product owner | Sprint/phase/factory cycle |
+| `pm_emit_stakeholder_report.sh` | Product owner | Sprint/phase/factory cycle **(+ alignment on Telegram)** |
 | `run_alignment_audit.sh` | Product owner + tech lead | Spec alignment, data parity, ship readiness |
 
-Run **both** at phase exit: stakeholder report for schedule; alignment audit for technical debt and dispatch readiness.
+On **sprint_cycle_complete** / **phase_exit** / **uat_ready**, `pm_emit_stakeholder_report.sh` runs/loads the alignment audit and sends verdict + exec summary photo in the same Telegram delivery. Separate audit runs still commit history under `alignment_audit_reports/`.
 
 ---
 
@@ -40,7 +40,7 @@ Run **both** at phase exit: stakeholder report for schedule; alignment audit for
 
 ```
 1. bash tools/run_alignment_audit.sh --trigger post_merge --note "<PR or commit summary>" \
-     --visuals-from docs/archive/compliance/alignment_audit_visuals
+     --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
 2. Read docs/archive/compliance/alignment_audit_reports/<audit_id>/report.md — cite verdict + P0 items
 3. Commit docs/archive/compliance/alignment_audit_reports/<audit_id>/ and alignment_audit_history.json on main
 ```

@@ -1,10 +1,10 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "authority": "docs/ops/agents/PM_STAKEHOLDER_REPORTING.md",
   "product_owner": {
     "role": "stakeholder",
     "title": "Product Owner",
-    "note": "Receives automated cycle/phase status via Telegram"
+    "note": "Receives automated cycle/phase status via Telegram (includes alignment audit on sprint/phase)"
   },
   "telegram": {
     "enabled": true,
@@ -31,6 +31,24 @@
     "latest_markdown": "artifacts/stakeholder_reports/latest.md",
     "latest_html": "artifacts/stakeholder_dashboard.html",
     "history_keep": 50
+  },
+  "alignment_audit": {
+    "include_in_report": true,
+    "run_before_emit_triggers": [
+      "sprint_cycle_complete",
+      "phase_exit",
+      "uat_ready"
+    ],
+    "skip_ci_on_embed": true,
+    "attach_photo": true,
+    "photo_preference": [
+      "audit_exec_summary.png",
+      "audit_radar_spec.png",
+      "audit_radar_report.png"
+    ],
+    "latest_json": "artifacts/alignment_audits/latest.json",
+    "latest_visuals_dir": "docs/archive/compliance/alignment_audit_visuals/latest",
+    "note": "Sprint/phase Telegram messages include alignment verdict + illustrated exec summary photo"
   },
   "repo_links": {
     "github": "https://github.com/vivivieri/3d-JRPG-adventure-pc-game",

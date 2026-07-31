@@ -30,18 +30,27 @@ Use **Alignment — Visuals / History / Integration — Committed history** (rol
 | `report.md` | Human-readable report with embedded image links |
 | `dashboard.html` | Stakeholder dashboard (open locally or download) |
 | `recommendations.json` | Checklist + recommendations only (easy `git diff`) |
-| `visuals/` | Optional PNG snapshot (`--archive-visual-snapshots`) |
+| `visuals/` | PNG snapshot of management set (always on; Git LFS) |
 
 Each entry in the history index records: `audit_id`, `commit`, `verdict`, `overall_score`, CI counts, checklist counts, paths to committed reports.
 
 Ephemeral copies (regenerate locally): `artifacts/alignment_audits/<audit_id>/` (git-ignored).
 
+**Shared packs (not versioned per run):**
+
+| Path | Role |
+|------|------|
+| `…/alignment_audit_visuals/latest/` | Current management slides |
+| `…/alignment_audit_visuals/style/` | `tides_*` style kit |
+
 **Commit after each audit on `main`:**
 
 ```bash
 bash tools/run_alignment_audit.sh --trigger post_merge --note "PR #N" \
-  --visuals-from docs/archive/compliance/alignment_audit_visuals
-git add docs/archive/compliance/alignment_audit_reports/ docs/archive/compliance/alignment_audit_history.json
+  --visuals-from docs/archive/compliance/alignment_audit_visuals/latest
+git add docs/archive/compliance/alignment_audit_reports/ \
+        docs/archive/compliance/alignment_audit_history.json \
+        docs/archive/compliance/alignment_audit_visuals/latest/
 git commit -m "chore(audit): record alignment audit <audit_id>"
 ```
 
