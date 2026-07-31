@@ -2,6 +2,7 @@
 id: combat-presentation
 type: reference
 audience: [visual, builder]
+phase: [4]
 status: active
 authority: art
 tokens_est: 658

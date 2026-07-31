@@ -2,6 +2,7 @@
 id: visual-qa
 type: how-to
 audience: [visual, builder]
+phase: [1, 5]
 status: active
 authority: art
 tokens_est: 2534

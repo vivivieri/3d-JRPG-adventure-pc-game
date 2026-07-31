@@ -2,6 +2,7 @@
 id: combat-sfx
 type: reference
 audience: [audio]
+phase: [1, 5]
 status: active
 authority: audio
 tokens_est: 1243

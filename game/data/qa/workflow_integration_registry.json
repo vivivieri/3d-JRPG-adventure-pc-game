@@ -60,6 +60,11 @@
           "purpose": "print role doc pack ∪ issue handoff_refs (budgeted)"
         },
         {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "docs_pack_",
+          "purpose": "write budgeted docs pack report artifact"
+        },
+        {
           "path": "tools/resolve_docs.py",
           "contains": "--issue",
           "purpose": "union sprint_board handoff_refs docs"
@@ -71,8 +76,28 @@
         },
         {
           "path": "tools/resolve_docs.py",
+          "contains": "--task",
+          "purpose": "union INDEX.yaml task packs"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "--phase",
+          "purpose": "filter optional docs by frontmatter phase"
+        },
+        {
+          "path": "tools/resolve_docs.py",
+          "contains": "--report",
+          "purpose": "write kept/deferred token report artifact"
+        },
+        {
+          "path": "tools/resolve_docs.py",
           "contains": "INDEX.yaml",
           "purpose": "role → must_read resolver"
+        },
+        {
+          "path": "tools/validate_handoff_refs.py",
+          "contains": "handoff_refs",
+          "purpose": "L0 gate — sprint handoff_refs + docs_task lint"
         }
       ],
       "orchestrator_steps": [

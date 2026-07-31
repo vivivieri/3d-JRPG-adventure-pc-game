@@ -2,6 +2,7 @@
 id: animation-portraits
 type: reference
 audience: [visual, builder]
+phase: [5]
 status: active
 authority: art
 tokens_est: 406
