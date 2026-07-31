@@ -89,6 +89,8 @@ roles:
       - docs/design/world/ENVIRONMENT_KITS.md
       - docs/design/art/ART_DIRECTION.md
     optional:
+      - docs/design/world/env_kits/ruined_village.md
+      - docs/design/art/direction/palette.md
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/SHADER_SPECS.md
       - docs/design/world/LEVEL_DESIGN.md
@@ -107,6 +109,8 @@ roles:
       - docs/design/art/ART_AUTOMATION_PIPELINE.md
       - docs/design/art/VISUAL_QA.md
     optional:
+      - docs/design/art/direction/palette.md
+      - docs/design/art/automation/zone_textures.md
       - docs/design/art/MODEL_QA.md
       - docs/design/art/model_qa/layers_workflow.md
       - docs/design/art/RENDERING_GUIDE.md
@@ -151,6 +155,8 @@ tasks:
       - docs/design/world/ENVIRONMENT_KITS.md
       - docs/design/art/ART_DIRECTION.md
     optional:
+      - docs/design/world/env_kits/ruined_village.md
+      - docs/design/art/direction/palette.md
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/rendering/defaults_environment.md
 

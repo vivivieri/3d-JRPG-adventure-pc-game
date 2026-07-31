@@ -31,6 +31,9 @@ Large bibles are split into packs (load hub + one pack):
 | [AGILE_WITHIN_PHASES.md](ops/workflow/AGILE_WITHIN_PHASES.md) | [ops/workflow/agile/](ops/workflow/agile/) |
 | [CURSOR_SECRETS_SETUP.md](ops/agents/CURSOR_SECRETS_SETUP.md) | [ops/agents/secrets/](ops/agents/secrets/) |
 | [LEVEL_DESIGN.md](design/world/LEVEL_DESIGN.md) | [design/world/levels/](design/world/levels/) |
+| [ENVIRONMENT_KITS.md](design/world/ENVIRONMENT_KITS.md) | [design/world/env_kits/](design/world/env_kits/) |
+| [ART_DIRECTION.md](design/art/ART_DIRECTION.md) | [design/art/direction/](design/art/direction/) |
+| [ART_AUTOMATION_PIPELINE.md](design/art/ART_AUTOMATION_PIPELINE.md) | [design/art/automation/](design/art/automation/) |
 | [CI.md](ops/ci-cd/CI.md) | [ops/ci-cd/ci/](ops/ci-cd/ci/) |
 | [DEVELOPMENT_LIFECYCLE.md](ops/workflow/DEVELOPMENT_LIFECYCLE.md) | [ops/workflow/lifecycle/](ops/workflow/lifecycle/) |
 | [GDSCRIPT_REGENERATION.md](engineering/technical/GDSCRIPT_REGENERATION.md) | [engineering/technical/gdscript_regen/](engineering/technical/gdscript_regen/) |
