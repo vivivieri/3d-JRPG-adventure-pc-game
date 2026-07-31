@@ -18,6 +18,12 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/RENDERING_GUIDE.md](art/RENDERING_GUIDE.md) | `RENDERING_GUIDE` |
 | [art/SHADER_SPECS.md](art/SHADER_SPECS.md) | `SHADER_SPECS` |
 | [art/VISUAL_QA.md](art/VISUAL_QA.md) | `VISUAL_QA` |
+| [art/automation/characters_props.md](art/automation/characters_props.md) | `characters_props` |
+| [art/automation/palette_audio_gates.md](art/automation/palette_audio_gates.md) | `palette_audio_gates` |
+| [art/automation/pay_reject_related.md](art/automation/pay_reject_related.md) | `pay_reject_related` |
+| [art/automation/tiers_requirements.md](art/automation/tiers_requirements.md) | `tiers_requirements` |
+| [art/automation/ui_art.md](art/automation/ui_art.md) | `ui_art` |
+| [art/automation/zone_textures.md](art/automation/zone_textures.md) | `zone_textures` |
 | [art/characters/animation_portraits.md](art/characters/animation_portraits.md) | `animation_portraits` |
 | [art/characters/enemies.md](art/characters/enemies.md) | `enemies` |
 | [art/characters/export_order.md](art/characters/export_order.md) | `export_order` |
@@ -26,6 +32,11 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [art/characters/roku.md](art/characters/roku.md) | `roku` |
 | [art/characters/urashima.md](art/characters/urashima.md) | `urashima` |
 | [art/characters/yuzu.md](art/characters/yuzu.md) | `yuzu` |
+| [art/direction/budgets_sourcing.md](art/direction/budgets_sourcing.md) | `budgets_sourcing` |
+| [art/direction/characters_env_ui.md](art/direction/characters_env_ui.md) | `characters_env_ui` |
+| [art/direction/palette.md](art/direction/palette.md) | `palette` |
+| [art/direction/pipeline_mood_avoid.md](art/direction/pipeline_mood_avoid.md) | `pipeline_mood_avoid` |
+| [art/direction/vertical_slice_gate.md](art/direction/vertical_slice_gate.md) | `vertical_slice_gate` |
 | [art/items/consumables_key_currency.md](art/items/consumables_key_currency.md) | `consumables_key_currency` |
 | [art/items/export_qa.md](art/items/export_qa.md) | `export_qa` |
 | [art/items/global_sheets_rig.md](art/items/global_sheets_rig.md) | `global_sheets_rig` |
@@ -78,6 +89,12 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [world/PUZZLE_DESIGN.md](world/PUZZLE_DESIGN.md) | `PUZZLE_DESIGN` |
 | [world/QUEST_AND_FLAGS.md](world/QUEST_AND_FLAGS.md) | `QUEST_AND_FLAGS` |
 | [world/WORLD_MAP_AND_FLOW.md](world/WORLD_MAP_AND_FLOW.md) | `WORLD_MAP_AND_FLOW` |
+| [world/env_kits/beach_shore.md](world/env_kits/beach_shore.md) | `beach_shore` |
+| [world/env_kits/dragon_palace.md](world/env_kits/dragon_palace.md) | `dragon_palace` |
+| [world/env_kits/global_shared.md](world/env_kits/global_shared.md) | `global_shared` |
+| [world/env_kits/lore_lod_production.md](world/env_kits/lore_lod_production.md) | `lore_lod_production` |
+| [world/env_kits/ruined_village.md](world/env_kits/ruined_village.md) | `ruined_village` |
+| [world/env_kits/tidal_caves.md](world/env_kits/tidal_caves.md) | `tidal_caves` |
 | [world/levels/beach_shore.md](world/levels/beach_shore.md) | `beach_shore` |
 | [world/levels/dragon_palace.md](world/levels/dragon_palace.md) | `dragon_palace` |
 | [world/levels/encounters_flags_qa.md](world/levels/encounters_flags_qa.md) | `encounters_flags_qa` |

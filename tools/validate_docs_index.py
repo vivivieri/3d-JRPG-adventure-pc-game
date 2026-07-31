@@ -199,6 +199,9 @@ def main() -> int:
         "ops/ci-cd/ci/required_gates.md",
         "ops/workflow/lifecycle/overview_time.md",
         "engineering/technical/gdscript_regen/principle_rr.md",
+        "design/world/env_kits/ruined_village.md",
+        "design/art/automation/zone_textures.md",
+        "design/art/direction/palette.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")
