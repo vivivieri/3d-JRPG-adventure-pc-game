@@ -6,6 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 900
+summary: "load the pack for the QA step you are running."
 ---
 # 3D Model QA — Technical Gates + Turntable Vision Jury
 

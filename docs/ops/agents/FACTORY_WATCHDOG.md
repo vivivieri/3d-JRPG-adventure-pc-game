@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 1375
+summary: "Exception layer on top of event-driven PM dispatch."
 ---
 # Factory Watchdog — Stall & Hang Exception Handling
 

@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: world
 tokens_est: 3069
+summary: "High-detail stylized Japanese coastal environments — authored modular kits, no greybox boxes in ship builds."
 ---
 # Tides of Urashima — Environment Kits
 

@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 3080
+summary: "**Engine:** Godot 4.7 stable, Forward+"
 ---
 # Tides of Urashima — Technical Design Document (TDD)
 

@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 678
+summary: "**Scope:** `game/scenes/**/*.tscn` (`game/development` only — **no `.tscn` on `main`**)"
 ---
 # Godot Scene Style Guide — Tides of Urashima
 

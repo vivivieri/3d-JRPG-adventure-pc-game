@@ -5,6 +5,7 @@ audience: [narrative]
 status: active
 authority: vision
 tokens_est: 1349
+summary: "`docs/design/vision/STORYBOARD.md`, `game/data/lore/lore_entries.json`, `game/data/lore/lore_placements.json`"
 ---
 # Tides of Urashima — Lore & Environmental Storytelling
 

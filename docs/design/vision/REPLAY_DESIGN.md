@@ -5,6 +5,7 @@ audience: [narrative]
 status: active
 authority: vision
 tokens_est: 1060
+summary: "`docs/design/vision/ENDING_DESIGN.md` §7, `docs/design/gameplay/ACHIEVEMENTS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/gameplay/PROGRESSION_TUNING.md`"
 ---
 # Tides of Urashima — Replay Design
 

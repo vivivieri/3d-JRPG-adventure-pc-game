@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: gameplay
 tokens_est: 1620
+summary: "`docs/design/vision/GDD.md` §4–8, `docs/design/gameplay/BOSS_DESIGNS.md`, `game/data/enemies/enemies.json`"
 ---
 # Tides of Urashima — Encounter & Pacing Table
 

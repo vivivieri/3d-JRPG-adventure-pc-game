@@ -5,6 +5,7 @@ audience: [pm, architect]
 status: active
 authority: workflow
 tokens_est: 444
+summary: "[`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)"
 ---
 # Implementation Plan — Coverage review
 

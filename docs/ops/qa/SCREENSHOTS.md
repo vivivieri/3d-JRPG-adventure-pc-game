@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 625
+summary: "> **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ('do not restore old code') and "
 ---
 # In-game screenshots
 

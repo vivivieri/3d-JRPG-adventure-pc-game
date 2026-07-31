@@ -78,3 +78,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [world/PUZZLE_DESIGN.md](world/PUZZLE_DESIGN.md) | `PUZZLE_DESIGN` |
 | [world/QUEST_AND_FLAGS.md](world/QUEST_AND_FLAGS.md) | `QUEST_AND_FLAGS` |
 | [world/WORLD_MAP_AND_FLOW.md](world/WORLD_MAP_AND_FLOW.md) | `WORLD_MAP_AND_FLOW` |
+| [world/levels/beach_shore.md](world/levels/beach_shore.md) | `beach_shore` |
+| [world/levels/dragon_palace.md](world/levels/dragon_palace.md) | `dragon_palace` |
+| [world/levels/encounters_flags_qa.md](world/levels/encounters_flags_qa.md) | `encounters_flags_qa` |
+| [world/levels/global_rules.md](world/levels/global_rules.md) | `global_rules` |
+| [world/levels/ruined_village.md](world/levels/ruined_village.md) | `ruined_village` |
+| [world/levels/tidal_caves.md](world/levels/tidal_caves.md) | `tidal_caves` |

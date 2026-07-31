@@ -30,6 +30,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/mcp/install.md](agents/mcp/install.md) | `install` |
 | [agents/mcp/setup_and_cost.md](agents/mcp/setup_and_cost.md) | `setup_and_cost` |
 | [agents/mcp/testing.md](agents/mcp/testing.md) | `testing` |
+| [agents/secrets/api_keys.md](agents/secrets/api_keys.md) | `api_keys` |
+| [agents/secrets/day_one_checklist.md](agents/secrets/day_one_checklist.md) | `day_one_checklist` |
+| [agents/secrets/scope_troubleshoot.md](agents/secrets/scope_troubleshoot.md) | `scope_troubleshoot` |
+| [agents/secrets/webhooks.md](agents/secrets/webhooks.md) | `webhooks` |
 | [cheat-sheets/CONTROLS_CHEATSHEET.md](cheat-sheets/CONTROLS_CHEATSHEET.md) | `CONTROLS_CHEATSHEET` |
 | [cheat-sheets/RR_CHEATSHEET.md](cheat-sheets/RR_CHEATSHEET.md) | `RR_CHEATSHEET` |
 | [cheat-sheets/rr/performance_review.md](cheat-sheets/rr/performance_review.md) | `performance_review` |
@@ -42,6 +46,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [ci-cd/GITHUB_SETUP.md](ci-cd/GITHUB_SETUP.md) | `GITHUB_SETUP` |
 | [ci-cd/GIT_LFS.md](ci-cd/GIT_LFS.md) | `GIT_LFS` |
 | [ci-cd/STEAM_RELEASE_CHECKLIST.md](ci-cd/STEAM_RELEASE_CHECKLIST.md) | `STEAM_RELEASE_CHECKLIST` |
+| [ci-cd/ci/branch_protection_refs.md](ci-cd/ci/branch_protection_refs.md) | `branch_protection_refs` |
+| [ci-cd/ci/branch_purpose.md](ci-cd/ci/branch_purpose.md) | `branch_purpose` |
+| [ci-cd/ci/local_rr_remediation.md](ci-cd/ci/local_rr_remediation.md) | `local_rr_remediation` |
+| [ci-cd/ci/required_gates.md](ci-cd/ci/required_gates.md) | `required_gates` |
 | [qa/ACCEPTANCE_CRITERIA.md](qa/ACCEPTANCE_CRITERIA.md) | `ACCEPTANCE_CRITERIA` |
 | [qa/AGENT_JURY.md](qa/AGENT_JURY.md) | `AGENT_JURY` |
 | [qa/AGENT_SESSION_TELEMETRY.md](qa/AGENT_SESSION_TELEMETRY.md) | `AGENT_SESSION_TELEMETRY` |
@@ -76,6 +84,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/DEVELOPMENT_LIFECYCLE.md](workflow/DEVELOPMENT_LIFECYCLE.md) | `DEVELOPMENT_LIFECYCLE` |
 | [workflow/IMPLEMENTATION_PLAN.md](workflow/IMPLEMENTATION_PLAN.md) | `IMPLEMENTATION_PLAN` |
 | [workflow/MILESTONES.md](workflow/MILESTONES.md) | `MILESTONES` |
+| [workflow/agile/linear_sprints.md](workflow/agile/linear_sprints.md) | `linear_sprints` |
+| [workflow/agile/sprint_master_cadence.md](workflow/agile/sprint_master_cadence.md) | `sprint_master_cadence` |
+| [workflow/agile/summary_why.md](workflow/agile/summary_why.md) | `summary_why` |
+| [workflow/agile/waterfall_mcp_metrics.md](workflow/agile/waterfall_mcp_metrics.md) | `waterfall_mcp_metrics` |
 | [workflow/ai_dev/commands.md](workflow/ai_dev/commands.md) | `commands` |
 | [workflow/ai_dev/phase_acceptance.md](workflow/ai_dev/phase_acceptance.md) | `phase_acceptance` |
 | [workflow/ai_dev/testing_policy.md](workflow/ai_dev/testing_policy.md) | `testing_policy` |
@@ -91,3 +103,7 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/implementation/phase_8.md](workflow/implementation/phase_8.md) | `phase_8` |
 | [workflow/implementation/validation_commands.md](workflow/implementation/validation_commands.md) | `validation_commands` |
 | [workflow/implementation/zone_build_order.md](workflow/implementation/zone_build_order.md) | `zone_build_order` |
+| [workflow/lifecycle/branching_agents.md](workflow/lifecycle/branching_agents.md) | `branching_agents` |
+| [workflow/lifecycle/enhancements_commands.md](workflow/lifecycle/enhancements_commands.md) | `enhancements_commands` |
+| [workflow/lifecycle/gates_trackers.md](workflow/lifecycle/gates_trackers.md) | `gates_trackers` |
+| [workflow/lifecycle/overview_time.md](workflow/lifecycle/overview_time.md) | `overview_time` |

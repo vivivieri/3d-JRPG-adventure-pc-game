@@ -6,6 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 1872
+summary: "[`MODEL_QA.md`](../MODEL_QA.md)"
 ---
 # Model QA — Polish cadence & direction
 

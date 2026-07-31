@@ -6,6 +6,7 @@ phase: [1, 5]
 status: active
 authority: art
 tokens_est: 1939
+summary: "1.1 (Pre-build pivot)"
 ---
 # Tides of Urashima — Art Direction Bible
 

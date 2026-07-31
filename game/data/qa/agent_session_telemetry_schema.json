@@ -64,7 +64,9 @@
         "commit_sha_start", "git_branch", "repo",
         "cursor_bc_id", "cursor_agent_url", "model_name", "model_provider",
         "cloud_environment", "cloud_snapshot_id", "mcp_stack_required",
-        "session_gate_command", "orchestrator_generated_at"
+        "session_gate_command", "orchestrator_generated_at",
+        "docs_tokens_kept_est", "docs_deferred_count", "docs_task", "docs_budget",
+        "docs_role", "docs_pack_report"
       ]
     },
     {

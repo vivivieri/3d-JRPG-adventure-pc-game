@@ -28,6 +28,12 @@ Large bibles are split into packs (load hub + one pack):
 | [NARRATIVE_WRITING_GUIDE.md](design/vision/NARRATIVE_WRITING_GUIDE.md) | [design/vision/narrative/](design/vision/narrative/) |
 | [IMPLEMENTATION_PLAN.md](ops/workflow/IMPLEMENTATION_PLAN.md) | [ops/workflow/implementation/](ops/workflow/implementation/) |
 | [CLOUD_AGENT_SETUP_RUNBOOK.md](ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md) | [ops/agents/cloud_setup/](ops/agents/cloud_setup/) |
+| [AGILE_WITHIN_PHASES.md](ops/workflow/AGILE_WITHIN_PHASES.md) | [ops/workflow/agile/](ops/workflow/agile/) |
+| [CURSOR_SECRETS_SETUP.md](ops/agents/CURSOR_SECRETS_SETUP.md) | [ops/agents/secrets/](ops/agents/secrets/) |
+| [LEVEL_DESIGN.md](design/world/LEVEL_DESIGN.md) | [design/world/levels/](design/world/levels/) |
+| [CI.md](ops/ci-cd/CI.md) | [ops/ci-cd/ci/](ops/ci-cd/ci/) |
+| [DEVELOPMENT_LIFECYCLE.md](ops/workflow/DEVELOPMENT_LIFECYCLE.md) | [ops/workflow/lifecycle/](ops/workflow/lifecycle/) |
+| [GDSCRIPT_REGENERATION.md](engineering/technical/GDSCRIPT_REGENERATION.md) | [engineering/technical/gdscript_regen/](engineering/technical/gdscript_regen/) |
 
 ```bash
 python3 tools/resolve_docs.py --list-roles
@@ -35,6 +41,8 @@ python3 tools/resolve_docs.py --list-tasks
 python3 tools/resolve_docs.py builder_zone
 python3 tools/resolve_docs.py visual --issue P1-01 --budget 12000 --report artifacts/docs_pack_P1-01.txt
 python3 tools/resolve_docs.py builder --task zone_lighting --phase 1
+python3 tools/docs_pack_impact.py --base origin/main
+python3 tools/pm_docs_preflight.py
 python3 tools/refresh_docs_catalogs.py   # after adding docs
 ```
 

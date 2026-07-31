@@ -6,6 +6,7 @@ phase: [3, 6]
 status: active
 authority: narrative
 tokens_est: 1900
+summary: "[`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)"
 ---
 # Narrative — Emotional storytelling rules
 

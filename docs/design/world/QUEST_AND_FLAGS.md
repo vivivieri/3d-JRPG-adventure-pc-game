@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: world
 tokens_est: 1972
+summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/vision/GDD.md`, `game/data/quests/main_quests.json`"
 ---
 # Tides of Urashima — Quest & Story Flag Map
 

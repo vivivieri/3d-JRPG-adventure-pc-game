@@ -5,6 +5,7 @@ audience: [pm, builder, qa]
 status: active
 authority: ops
 tokens_est: 616
+summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
 ---
 # R&R — session-startup-every-run
 

@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 899
+summary: "All implementation on `main` (Phases 1–8)"
 ---
 # AI Testing Specification
 

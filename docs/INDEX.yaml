@@ -202,6 +202,22 @@ tasks:
       - docs/design/art/model_qa/layers_workflow.md
       - docs/design/art/VISUAL_QA.md
 
+  level_layout:
+    must_read:
+      - docs/design/world/LEVEL_DESIGN.md
+      - docs/design/world/levels/ruined_village.md
+    optional:
+      - docs/design/world/ENVIRONMENT_KITS.md
+      - docs/design/world/levels/encounters_flags_qa.md
+
+  secrets_setup:
+    must_read:
+      - docs/ops/agents/CURSOR_SECRETS_SETUP.md
+      - docs/ops/agents/secrets/day_one_checklist.md
+    optional:
+      - docs/ops/agents/secrets/webhooks.md
+      - docs/ops/agents/cloud_setup/setup_automations.md
+
 diataxis:
   tutorial:
     - docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md
