@@ -63,11 +63,24 @@ def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {i["id"]: i for i in board.get("issues", [])}
 
 
+PACK_FRAGMENT_LINK_RE = re.compile(r"\[`[^`]+`\]\(([^)]+)\)")
+
+
 def parse_issue_pack(pack_path: Path) -> list[str]:
     if not pack_path.is_file():
         return []
-    text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    ids: set[str] = set()
+    files_to_scan: list[Path] = [pack_path]
+    hub_text = pack_path.read_text(encoding="utf-8")
+    for rel in PACK_FRAGMENT_LINK_RE.findall(hub_text):
+        if not rel.endswith(".md"):
+            continue
+        fragment = (pack_path.parent / rel).resolve()
+        if fragment.is_file() and fragment not in files_to_scan:
+            files_to_scan.append(fragment)
+    for path in files_to_scan:
+        ids.update(PACK_ISSUE_RE.findall(path.read_text(encoding="utf-8")))
+    return sorted(ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
