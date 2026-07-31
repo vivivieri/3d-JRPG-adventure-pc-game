@@ -88,18 +88,27 @@ print(f"[OK] Agent session gate PASS — {agent} cleared for {issue_id}")
 print(f"     Gates: {', '.join(allowed[0].get('acceptance_gate_ids') or [])}")
 PY
 
-# Progressive disclosure — role pack ∪ issue handoff_refs (budgeted)
+# Progressive disclosure — role ∪ task ∪ issue handoff_refs ∪ briefs (budgeted)
 DOCS_ROLE="$AGENT"
 case "$AGENT" in
   architect|builder|qa|flow|release|visual|pm|narrative|audio) DOCS_ROLE="$AGENT" ;;
+  builder_zone|builder_combat) DOCS_ROLE="$AGENT" ;;
   *) DOCS_ROLE="builder" ;;
 esac
 DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
+DOCS_TASK="${AGENT_DOCS_TASK:-}"
+mkdir -p "$ROOT/artifacts"
+DOCS_REPORT="$ROOT/artifacts/docs_pack_${ISSUE_ID}.txt"
+RESOLVE_ARGS=("$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --report "$DOCS_REPORT")
+if [[ -n "$DOCS_TASK" ]]; then
+  RESOLVE_ARGS+=(--task "$DOCS_TASK")
+fi
 echo ""
-echo "[DOCS] Role pack ($DOCS_ROLE) + issue $ISSUE_ID handoff_refs (budget≈${DOCS_BUDGET}):"
-if python3 tools/resolve_docs.py "$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --check \
+echo "[DOCS] Role pack ($DOCS_ROLE) + issue $ISSUE_ID (budget≈${DOCS_BUDGET}; report=$DOCS_REPORT):"
+if python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" --check \
   >/tmp/resolve_docs_check.txt 2>&1; then
-  python3 tools/resolve_docs.py "$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" | sed 's/^/       /'
+  python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" | sed 's/^/       /'
+  echo "       [OK] wrote $DOCS_REPORT"
 else
   echo "       [WARN] resolve_docs.py failed for role=$DOCS_ROLE issue=$ISSUE_ID — falling back to BOOT.md"
   sed 's/^/       /' /tmp/resolve_docs_check.txt || true

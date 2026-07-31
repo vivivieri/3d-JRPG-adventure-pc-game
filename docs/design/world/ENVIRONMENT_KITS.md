@@ -2,6 +2,7 @@
 id: environment-kits
 type: reference
 audience: [builder, architect]
+phase: [1, 5]
 status: active
 authority: world
 tokens_est: 3069

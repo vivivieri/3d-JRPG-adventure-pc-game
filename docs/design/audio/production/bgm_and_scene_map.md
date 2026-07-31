@@ -2,6 +2,7 @@
 id: bgm-and-scene-map
 type: reference
 audience: [audio]
+phase: [1, 5]
 status: active
 authority: audio
 tokens_est: 1912

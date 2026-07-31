@@ -2,6 +2,7 @@
 id: npc-ambient
 type: reference
 audience: [visual, builder]
+phase: [5]
 status: active
 authority: art
 tokens_est: 794

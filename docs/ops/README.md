@@ -21,6 +21,11 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/PM_STAKEHOLDER_REPORTING.md](agents/PM_STAKEHOLDER_REPORTING.md) | `PM_STAKEHOLDER_REPORTING` |
 | [agents/PROJECT_MANAGEMENT.md](agents/PROJECT_MANAGEMENT.md) | `PROJECT_MANAGEMENT` |
 | [agents/SPRINT_ORCHESTRATION.md](agents/SPRINT_ORCHESTRATION.md) | `SPRINT_ORCHESTRATION` |
+| [agents/cloud_setup/antipatterns_troubleshoot.md](agents/cloud_setup/antipatterns_troubleshoot.md) | `antipatterns_troubleshoot` |
+| [agents/cloud_setup/cycle_events.md](agents/cloud_setup/cycle_events.md) | `cycle_events` |
+| [agents/cloud_setup/github_timeline.md](agents/cloud_setup/github_timeline.md) | `github_timeline` |
+| [agents/cloud_setup/goal_architecture.md](agents/cloud_setup/goal_architecture.md) | `goal_architecture` |
+| [agents/cloud_setup/setup_automations.md](agents/cloud_setup/setup_automations.md) | `setup_automations` |
 | [agents/mcp/art_tools.md](agents/mcp/art_tools.md) | `art_tools` |
 | [agents/mcp/install.md](agents/mcp/install.md) | `install` |
 | [agents/mcp/setup_and_cost.md](agents/mcp/setup_and_cost.md) | `setup_and_cost` |
@@ -74,3 +79,15 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/ai_dev/commands.md](workflow/ai_dev/commands.md) | `commands` |
 | [workflow/ai_dev/phase_acceptance.md](workflow/ai_dev/phase_acceptance.md) | `phase_acceptance` |
 | [workflow/ai_dev/testing_policy.md](workflow/ai_dev/testing_policy.md) | `testing_policy` |
+| [workflow/implementation/coverage_review.md](workflow/implementation/coverage_review.md) | `coverage_review` |
+| [workflow/implementation/phase_0.md](workflow/implementation/phase_0.md) | `phase_0` |
+| [workflow/implementation/phase_1.md](workflow/implementation/phase_1.md) | `phase_1` |
+| [workflow/implementation/phase_2.md](workflow/implementation/phase_2.md) | `phase_2` |
+| [workflow/implementation/phase_3.md](workflow/implementation/phase_3.md) | `phase_3` |
+| [workflow/implementation/phase_4.md](workflow/implementation/phase_4.md) | `phase_4` |
+| [workflow/implementation/phase_5.md](workflow/implementation/phase_5.md) | `phase_5` |
+| [workflow/implementation/phase_6.md](workflow/implementation/phase_6.md) | `phase_6` |
+| [workflow/implementation/phase_7.md](workflow/implementation/phase_7.md) | `phase_7` |
+| [workflow/implementation/phase_8.md](workflow/implementation/phase_8.md) | `phase_8` |
+| [workflow/implementation/validation_commands.md](workflow/implementation/validation_commands.md) | `validation_commands` |
+| [workflow/implementation/zone_build_order.md](workflow/implementation/zone_build_order.md) | `zone_build_order` |

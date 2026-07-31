@@ -2,6 +2,7 @@
 id: art-automation-pipeline
 type: how-to
 audience: [visual, builder]
+phase: [5]
 status: active
 authority: art
 tokens_est: 2512
