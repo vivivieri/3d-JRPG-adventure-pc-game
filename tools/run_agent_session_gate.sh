@@ -107,10 +107,10 @@ DOCS_ROLE="$(python3 tools/docs_role_map.py "$AGENT" "${DOCS_TASK:-}")"
 DOCS_BUDGET="${AGENT_DOCS_BUDGET:-12000}"
 mkdir -p "$ROOT/artifacts"
 DOCS_REPORT="$ROOT/artifacts/docs_pack_${ISSUE_ID}.txt"
-# Default reads log for post-cycle adherence (agents may append paths they open)
+# Reads log — session gate auto-seeds must_read; post-cycle enforces --strict
 export DOCS_READ_LOG="${DOCS_READ_LOG:-$ROOT/artifacts/docs_reads_${ISSUE_ID}.log}"
 : > "$DOCS_READ_LOG"
-echo "# Append docs/… paths you open this session (one per line)" >> "$DOCS_READ_LOG"
+echo "# Auto-seeded must_read by session gate; extras: python3 tools/log_docs_read.py --issue $ISSUE_ID <path>" >> "$DOCS_READ_LOG"
 echo "# Session gate initialized $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$DOCS_READ_LOG"
 RESOLVE_ARGS=("$DOCS_ROLE" --issue "$ISSUE_ID" --budget "$DOCS_BUDGET" --report "$DOCS_REPORT" --remap-role)
 if [[ -n "$DOCS_TASK" ]]; then
@@ -118,7 +118,7 @@ if [[ -n "$DOCS_TASK" ]]; then
 fi
 echo ""
 echo "[DOCS] Role pack ($DOCS_ROLE${DOCS_TASK:+ / task=$DOCS_TASK}) + issue $ISSUE_ID (budget≈${DOCS_BUDGET}; report=$DOCS_REPORT):"
-echo "       Reads log: $DOCS_READ_LOG (append docs paths you open; checked at post-cycle)"
+echo "       Reads log: $DOCS_READ_LOG (auto-seed must_read; strict check at post-cycle)"
 if python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" --check \
   >/tmp/resolve_docs_check.txt 2>&1; then
   python3 tools/resolve_docs.py "${RESOLVE_ARGS[@]}" | sed 's/^/       /'
@@ -127,6 +127,11 @@ else
   echo "[FAIL] resolve_docs.py failed for role=$DOCS_ROLE issue=$ISSUE_ID — refusing BOOT-only fallback"
   sed 's/^/       /' /tmp/resolve_docs_check.txt || true
   echo "       Fix INDEX paths / handoff_refs, then re-run session gate."
+  exit 1
+fi
+# TRIGGER: seed must_read into reads log (follower = post-cycle --strict)
+if ! python3 tools/log_docs_read.py --issue "$ISSUE_ID" --from-pack --log "$DOCS_READ_LOG"; then
+  echo "[FAIL] log_docs_read.py --from-pack — cannot enforce docs pack adherence"
   exit 1
 fi
 

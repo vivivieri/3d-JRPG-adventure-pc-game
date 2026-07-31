@@ -118,19 +118,22 @@ else
   echo
 fi
 
-# 5. Docs pack adherence (WARN unless DOCS_PACK_ADHERENCE_STRICT=1)
-echo "── Step: docs_pack_adherence — reads vs resolved pack"
+# 5. Docs pack adherence (FOLLOWER — strict by default; set DOCS_PACK_ADHERENCE_STRICT=0 only for local debug)
+echo "── Step: docs_pack_adherence — reads vs resolved pack (strict)"
 ADHERE_ARGS=(--issue "$ISSUE_ID")
 if [[ -n "${DOCS_READ_LOG:-}" ]]; then
   ADHERE_ARGS+=(--reads-file "$DOCS_READ_LOG")
 fi
-if [[ "${DOCS_PACK_ADHERENCE_STRICT:-0}" == "1" ]]; then
+if [[ "${DOCS_PACK_ADHERENCE_STRICT:-1}" != "0" ]]; then
   ADHERE_ARGS+=(--strict)
   if ! python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}"; then
     echo "[FAIL] docs_pack_adherence"
     FAIL=1
+  else
+    echo "[PASS] docs_pack_adherence"
   fi
 else
+  echo "[WARN] docs_pack_adherence — DOCS_PACK_ADHERENCE_STRICT=0 (debug only; not for CI/factory)"
   python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}" || true
 fi
 echo

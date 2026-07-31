@@ -80,6 +80,16 @@ def main() -> int:
             if missing:
                 errors.append(f"issue pack ids missing from board: {', '.join(missing)}")
 
+    # parallel_with peers must exist (orchestrator follower — no honor-system parallels)
+    board_ids = {i.get("id") for i in board.get("issues", []) if i.get("id")}
+    for issue in board.get("issues", []):
+        iid = issue.get("id", "?")
+        for pid in issue.get("parallel_with") or []:
+            if pid not in board_ids:
+                errors.append(f"{iid}: parallel_with references unknown issue '{pid}'")
+            elif pid == iid:
+                errors.append(f"{iid}: parallel_with must not include self")
+
     # Done-issue truth: SHA must resolve; bootstrap issues require project.godot.
     import subprocess
 

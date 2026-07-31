@@ -178,37 +178,22 @@ else
   tail -25 /tmp/smoke_gate.log || true
 fi
 PACK="artifacts/docs_pack_${ISSUE_ID}.json"
-if [[ -f "$PACK" ]]; then
-  python3 - <<PY
-import json
-from pathlib import Path
-issue = "$ISSUE_ID"
-d = json.loads(Path(f"artifacts/docs_pack_{issue}.json").read_text(encoding="utf-8"))
-log = Path(f"artifacts/docs_reads_{issue}.log")
-hdr = [l for l in log.read_text(encoding="utf-8").splitlines() if l.startswith("#")] if log.is_file() else []
-paths = []
-for row in d.get("must_read") or []:
-    paths.append(row["path"] if isinstance(row, dict) else row)
-for row in (d.get("optional") or [])[:3]:
-    paths.append(row["path"] if isinstance(row, dict) else row)
-leaf = None
-for p in Path("docs/ops/sprints").rglob("*.md"):
-    stem = p.stem.upper().replace("_", "-")
-    if issue.upper().replace("_", "-") in stem:
-        leaf = p.as_posix()
-        break
-if leaf:
-    paths.append(leaf)
-log.write_text("\n".join(hdr + paths) + "\n", encoding="utf-8")
-print(f"    seeded {len(paths)} reads → {log}")
-PY
+READS="artifacts/docs_reads_${ISSUE_ID}.log"
+if [[ -f "$PACK" && -f "$READS" ]]; then
+  # TRIGGER verified: session gate must auto-seed must_read (no honor-system append)
+  SEEDED=$(grep -cvE '^\s*(#|$)' "$READS" || true)
+  if [[ "${SEEDED:-0}" -gt 0 ]]; then
+    pass "docs_reads_auto_seed ($SEEDED paths)"
+  else
+    fail "docs_reads_auto_seed empty — session gate must call log_docs_read.py --from-pack"
+  fi
   if python3 tools/check_docs_pack_adherence.py --issue "$ISSUE_ID" --strict; then
     pass "check_docs_pack_adherence"
   else
     fail "check_docs_pack_adherence"
   fi
 else
-  fail "docs pack report missing after session gate"
+  fail "docs pack/reads missing after session gate (pack=$PACK reads=$READS)"
 fi
 echo
 

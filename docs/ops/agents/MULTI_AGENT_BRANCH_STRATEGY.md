@@ -84,7 +84,7 @@ Do **not** combine Architect + Builder in one session.
 
 ## 5. Parallel issues
 
-When `parallel_with` is set and WIP caps allow, orchestrator may dispatch two starts (e.g. P1-02 Builder + P1-03 Architect). Each still gets its own branch and PR.
+When `parallel_with` is set and WIP caps allow, orchestrator may dispatch two starts (e.g. P1-01 Architect toon + P1-03 Architect water, then P1-02 Builder + P1-03). Each still gets its own branch and PR. Board peers are validated by `validate_sprint_board.py` (unknown `parallel_with` ids FAIL).
 
 ---
 

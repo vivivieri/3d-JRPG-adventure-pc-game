@@ -65,7 +65,7 @@ IMPLEMENTATION_PLAN task row
 | P1-05 Golden screenshot + zone composition | qa + builder | 1.10–1.11 | L2_visual_palette, GR-001/003 |
 | P1-06 Sprint review + carry-over | pm + qa | sprint review | `phase_1` required_gates gap |
 
-**Dependency order:** `P1-00` → `P1-01` → `P1-02` → `P1-04` / `P1-03` (parallel) → `P1-05` → `P1-06`
+**Dependency order:** `P1-00` → `P1-01` ∥ `P1-03` → `P1-02` ∥ `P1-03` → `P1-04` / `P1-05` → `P1-06`
 
 ### Phase1-Sprint2 (preview — remaining Phase 1 scope)
 

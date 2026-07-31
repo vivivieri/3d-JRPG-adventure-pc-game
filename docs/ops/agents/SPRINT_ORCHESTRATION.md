@@ -26,6 +26,7 @@ summary: "Enforced multi-agent workflow — load roles, flow, or escalation"
 ## Factory hooks (registry keywords)
 
 - Cycle close: `bash tools/run_post_agent_cycle.sh`
+- Docs pack adherence: session gate → `log_docs_read.py --from-pack`; cycle → `check_docs_pack_adherence.py --strict`
 - Telemetry: `docs/ops/qa/AGENT_SESSION_TELEMETRY.md`
 - Watchdog: `docs/ops/agents/FACTORY_WATCHDOG.md`
 - Dispatch: `python3 tools/pm_dispatch_workers.py`

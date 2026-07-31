@@ -156,6 +156,13 @@
       "audience": "internal"
     },
     {
+      "id": "docs_pack_adherence",
+      "description": "Inside run_post_agent_cycle — FAIL if reads log missing/empty or outside pack (strict by default)",
+      "command": "python3 tools/check_docs_pack_adherence.py --issue <issue_id> --strict",
+      "required": true,
+      "audience": "worker"
+    },
+    {
       "id": "check_feature_integration",
       "description": "Inside run_post_agent_cycle — verify factory workflow integration registry parity",
       "command": "bash tools/check_feature_integration.sh",

@@ -25,6 +25,7 @@ bash tools/run_agent_session_gate.sh <role> <issue_id>
 ```
 
 Load **only** the docs pack printed by the session gate (`tools/resolve_docs.py`). Do not preload the library.
+Session gate auto-seeds `must_read` into `artifacts/docs_reads_<id>.log`; post-cycle runs `check_docs_pack_adherence.py --strict` (FAIL = missing/empty/out-of-pack).
 
 ## Sprint roles
 
