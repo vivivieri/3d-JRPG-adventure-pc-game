@@ -210,6 +210,14 @@ def main() -> int:
         "engineering/technical/coding/naming.md",
         "ops/qa/remediation/levers_commands.md",
         "ops/qa/acceptance/gate_catalog.md",
+        "design/vision/storyboard/act_i.md",
+        "design/vision/gdd/pitch_scope.md",
+        "ops/workflow/milestones/m5_m6_ship.md",
+        "design/gameplay/bosses/shore_wraith.md",
+        "ops/agents/gdai_setup/install_desktop.md",
+        "ops/qa/bug_process/scope_severity.md",
+        "ops/qa/flow_qa/scenarios_levers.md",
+        "briefs/ruined_village/metrics_acceptance.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")

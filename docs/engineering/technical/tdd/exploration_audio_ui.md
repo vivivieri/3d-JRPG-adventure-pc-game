@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 4]
 status: active
 authority: engineering
-tokens_est: 510
+tokens_est: 511
 summary: "Exploration, audio, UI"
 ---
 # Technical Design — Exploration, audio, UI

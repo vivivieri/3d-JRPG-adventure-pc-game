@@ -26,6 +26,10 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [agents/cloud_setup/github_timeline.md](agents/cloud_setup/github_timeline.md) | `github_timeline` |
 | [agents/cloud_setup/goal_architecture.md](agents/cloud_setup/goal_architecture.md) | `goal_architecture` |
 | [agents/cloud_setup/setup_automations.md](agents/cloud_setup/setup_automations.md) | `setup_automations` |
+| [agents/gdai_setup/architecture_needs.md](agents/gdai_setup/architecture_needs.md) | `architecture_needs` |
+| [agents/gdai_setup/architecture_prereqs.md](agents/gdai_setup/architecture_prereqs.md) | `architecture_prereqs` |
+| [agents/gdai_setup/cloud_steam_troubleshoot.md](agents/gdai_setup/cloud_steam_troubleshoot.md) | `cloud_steam_troubleshoot` |
+| [agents/gdai_setup/install_desktop.md](agents/gdai_setup/install_desktop.md) | `install_desktop` |
 | [agents/mcp/art_tools.md](agents/mcp/art_tools.md) | `art_tools` |
 | [agents/mcp/install.md](agents/mcp/install.md) | `install` |
 | [agents/mcp/setup_and_cost.md](agents/mcp/setup_and_cost.md) | `setup_and_cost` |
@@ -81,6 +85,13 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [qa/acceptance/jury_report.md](qa/acceptance/jury_report.md) | `jury_report` |
 | [qa/acceptance/phase_tools.md](qa/acceptance/phase_tools.md) | `phase_tools` |
 | [qa/acceptance/why_rules.md](qa/acceptance/why_rules.md) | `why_rules` |
+| [qa/bug_process/index_playtest_gates.md](qa/bug_process/index_playtest_gates.md) | `index_playtest_gates` |
+| [qa/bug_process/report_triage.md](qa/bug_process/report_triage.md) | `report_triage` |
+| [qa/bug_process/scope_severity.md](qa/bug_process/scope_severity.md) | `scope_severity` |
+| [qa/bug_process/verify_regression.md](qa/bug_process/verify_regression.md) | `verify_regression` |
+| [qa/flow_qa/scenarios_levers.md](qa/flow_qa/scenarios_levers.md) | `scenarios_levers` |
+| [qa/flow_qa/standards_layers.md](qa/flow_qa/standards_layers.md) | `standards_layers` |
+| [qa/flow_qa/workflow_report.md](qa/flow_qa/workflow_report.md) | `workflow_report` |
 | [qa/remediation/levers_commands.md](qa/remediation/levers_commands.md) | `levers_commands` |
 | [qa/remediation/report_stop_maps.md](qa/remediation/report_stop_maps.md) | `report_stop_maps` |
 | [qa/remediation/standards_loop.md](qa/remediation/standards_loop.md) | `standards_loop` |
@@ -125,3 +136,6 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [workflow/lifecycle/enhancements_commands.md](workflow/lifecycle/enhancements_commands.md) | `enhancements_commands` |
 | [workflow/lifecycle/gates_trackers.md](workflow/lifecycle/gates_trackers.md) | `gates_trackers` |
 | [workflow/lifecycle/overview_time.md](workflow/lifecycle/overview_time.md) | `overview_time` |
+| [workflow/milestones/m1_m4_gameplay.md](workflow/milestones/m1_m4_gameplay.md) | `m1_m4_gameplay` |
+| [workflow/milestones/m5_m6_ship.md](workflow/milestones/m5_m6_ship.md) | `m5_m6_ship` |
+| [workflow/milestones/pre_build.md](workflow/milestones/pre_build.md) | `pre_build` |

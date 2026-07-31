@@ -379,6 +379,7 @@ def _load_docs_pack_metrics(issue_id: str | None) -> dict[str, Any]:
                 "docs_role_requested": data.get("role_requested"),
                 "docs_briefs_attached": len(data.get("briefs") or []),
                 "docs_zone_packs_attached": len(data.get("zone_packs") or []),
+                "docs_character_packs_attached": len(data.get("character_packs") or []),
                 "docs_deferred_paths": [d.get("path") for d in (data.get("deferred") or []) if d.get("path")],
             }
             return {k: v for k, v in out.items() if v is not None and v != [] and v != ""}

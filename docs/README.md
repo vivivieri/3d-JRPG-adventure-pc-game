@@ -167,4 +167,7 @@ Recent efficiency work:
 4. Split hubs: `VISUAL_QA`, `GENERATION_READINESS`, `TECHNICAL_DESIGN`, `CODING_STANDARDS_HUB`, `RR`/`CONTROLS`, `QA_REMEDIATION`, `ACCEPTANCE_CRITERIA`
 5. Zone-aware `env_kits/` + `levels/` attach from issue title
 6. Machine `artifacts/docs_pack_<issue>.json`; session gate FAILs if resolve fails
+7. Briefs/zones/characters are **budget-trimable** (boot + handoff stay protected)
+8. Remaining splits: `STORYBOARD`, `GDD`, `MILESTONES`, `BOSS_DESIGNS`, `GDAI_CLOUD_SETUP`, `QA_AND_BUG_PROCESS`, `FLOW_QA`, thin `briefs/ruined_village`
+9. Character pack auto-attach; `check_docs_pack_adherence.py` on post-cycle (WARN)
 

@@ -118,19 +118,36 @@ else
   echo
 fi
 
-# 5. Workflow integration registry
+# 5. Docs pack adherence (WARN unless DOCS_PACK_ADHERENCE_STRICT=1)
+echo "── Step: docs_pack_adherence — reads vs resolved pack"
+ADHERE_ARGS=(--issue "$ISSUE_ID")
+if [[ -n "${DOCS_READ_LOG:-}" ]]; then
+  ADHERE_ARGS+=(--reads-file "$DOCS_READ_LOG")
+fi
+if [[ "${DOCS_PACK_ADHERENCE_STRICT:-0}" == "1" ]]; then
+  ADHERE_ARGS+=(--strict)
+  if ! python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}"; then
+    echo "[FAIL] docs_pack_adherence"
+    FAIL=1
+  fi
+else
+  python3 tools/check_docs_pack_adherence.py "${ADHERE_ARGS[@]}" || true
+fi
+echo
+
+# 6. Workflow integration registry
 run_step "check_feature_integration" "factory workflow registry parity" \
   bash tools/check_feature_integration.sh || true
 [[ "$FAIL" -eq 0 ]] || exit 1
 
-# 6. PM-only: alignment audit (non-blocking)
+# 7. PM-only: alignment audit (non-blocking)
 if [[ "$ALIGNMENT_AUDIT" -eq 1 ]]; then
   echo "── Step: alignment_audit — stakeholder alignment snapshot (non-blocking)"
   bash tools/run_alignment_audit.sh --trigger post_merge --note "post_agent_cycle issue=$ISSUE_ID" 2>/dev/null || echo "[WARN] alignment audit skipped"
   echo
 fi
 
-# 7. PM-only: re-run orchestrator (same session — e.g. PM closed own issue)
+# 8. PM-only: re-run orchestrator (same session — e.g. PM closed own issue)
 if [[ "$RUN_ORCHESTRATOR" -eq 1 ]]; then
   run_step "re_run_orchestrator" "PM dispatch next agent" \
     bash tools/run_pm_orchestrator.sh || exit 1
