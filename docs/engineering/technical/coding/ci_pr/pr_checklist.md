@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 617
+tokens_est: 627
 summary: "PR checklist by change type"
 ---
 # Coding — CI & PR — PR checklist by change type

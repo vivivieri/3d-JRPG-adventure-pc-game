@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 212
+tokens_est: 216
 summary: "Character Bible — Enemies (A)"
 ---
 # Character Bible — Enemies — Character Bible — Enemies (A)

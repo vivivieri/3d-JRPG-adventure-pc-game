@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 160
+tokens_est: 166
 summary: "Encounter/items/shop/achievements JSON shapes"
 ---
 # Data — Combat & Economy

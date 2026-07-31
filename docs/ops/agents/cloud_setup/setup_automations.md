@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 126
+tokens_est: 129
 summary: "One-time setup + Cursor Automations"
 ---
 # Cloud Setup — Automations

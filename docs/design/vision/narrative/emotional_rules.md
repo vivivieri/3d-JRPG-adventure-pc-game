@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 128
+tokens_est: 132
 summary: "JRPG emotional rules + external steals"
 ---
 # Narrative — Emotional Rules

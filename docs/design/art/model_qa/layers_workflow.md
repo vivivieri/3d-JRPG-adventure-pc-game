@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 135
+tokens_est: 138
 summary: "Automate vs human, layers, agent workflow"
 ---
 # Model QA — Layers & Workflow

@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 448
+tokens_est: 451
 summary: "User API key for the **Cursor Cloud Agents API** — enables **fully automatic** token usage logging in agent session telemetry (`docs/ops/qa/AGENT_SESSION_TELEME"
 ---
 # Secrets — API Keys — CURSOR_API_KEY

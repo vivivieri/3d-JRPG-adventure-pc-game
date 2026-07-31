@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, pm]
 status: active
 authority: qa
-tokens_est: 532
+tokens_est: 535
 summary: "┌─────────┐ ┌──────────────┐ ┌─────────────────┐ ┌────────────┐"
 ---
 # Remediation — Standards & Loop — Remediation loop

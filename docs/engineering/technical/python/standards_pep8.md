@@ -1,123 +1,19 @@
 ---
 id: standards-pep8
 type: reference
-phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1047
-summary: "Industry standards + PEP 8 profile"
+tokens_est: 122
+summary: "External standards + project PEP 8 profile"
 ---
-# Python Style — Industry standards + PEP 8 profile
+# Python — PEP 8 Standards
 
+**Hub** — load only the pack for your current pass.
+
+| Pack | Topic |
+|------|-------|
+| [`externals.md`](pep8/externals.md) | Authoritative externals |
+| [`project_profile.md`](pep8/project_profile.md) | Project PEP 8 profile |
 **Hub:** [`PYTHON_STYLE.md`](../PYTHON_STYLE.md)
 
-## 1. Industry standards (authoritative externals)
-
-Follow these unless this doc or a project validator explicitly overrides them.
-
-| Standard | PEP / doc | What it governs |
-|----------|-----------|-----------------|
-| **Style** | [PEP 8](https://peps.python.org/pep-0008/) | Layout, naming, whitespace, imports |
-| **Docstrings** | [PEP 257](https://peps.python.org/pep-0257/) | Module / class / function docstrings |
-| **Type hints** | [PEP 484](https://peps.python.org/pep-0484/) · [PEP 585](https://peps.python.org/pep-0585/) | `list[str]`, `dict[str, Any]`, return types |
-| **Annotations future** | [PEP 563](https://peps.python.org/pep-0563/) via `from __future__ import annotations` | Postpone evaluation — use in all new modules |
-| **Zen** | [PEP 20](https://peps.python.org/pep-0020/) | Readability counts; explicit is better than implicit |
-| **JSON in Python** | [PEP 8 §Programming Recommendations](https://peps.python.org/pep-0008/#programming-recommendations) | `with open(..., encoding="utf-8")` |
-
-**Python version:** 3.10+ (stdlib features like `list[str]` without `from __future__` are OK when `annotations` import is present).
-
----
-
-
-## 2. PEP 8 essentials (project profile)
-
-### 2.1 Code layout
-
-| Rule | Project default |
-|------|-----------------|
-| Indentation | **4 spaces** — never tabs |
-| Line length | **100 characters** soft limit (PEP 8 allows 99; match surrounding file if older) |
-| Blank lines | 2 between top-level defs; 1 between methods |
-| Trailing whitespace | None |
-| Final newline | Required on every `.py` file |
-
-```python
-# Good — vertical breathing room
-def load_catalog() -> dict[str, Any]:
-    return load_json(CATALOG_PATH)
-
-
-def save_catalog(data: dict[str, Any]) -> None:
-    save_json(CATALOG_PATH, data)
-```
-
-### 2.2 Imports (PEP 8 §Imports)
-
-Order: **stdlib → third-party → local**. One import per line for `import x`. Group with blank lines.
-
-```python
-from __future__ import annotations
-
-import json
-import sys
-from pathlib import Path
-from typing import Any
-
-import matplotlib.pyplot as plt
-
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-from pm_orchestrator_lib import parse_issue_pack  # noqa: E402  — after sys.path tweak only
-```
-
-| Do | Don't |
-|----|-------|
-| `from pathlib import Path` | `from pathlib import *` |
-| `import json` | `import json, sys` on one line |
-| Absolute imports within `tools/` after path setup | Circular imports without lazy import |
-
-### 2.3 Naming (PEP 8 §Naming conventions)
-
-| Kind | Style | Example |
-|------|-------|---------|
-| Modules | `snake_case` | `validate_story_data.py` |
-| Functions / variables | `snake_case` | `load_catalog()`, `scene_ids` |
-| Constants | `UPPER_SNAKE` | `ROOT`, `REQUIRED_LOCALES` |
-| Classes | `CapWords` | `class AlignmentAuditError(Exception)` |
-| Private | `_leading_underscore` | `_hidden_domain_ids()` |
-| “Internal use” module | `_leading_underscore` prefix (rare) | `_legacy_parser.py` |
-
-**Avoid:** single-letter names except `i`, `j`, `k` in loops, `e` in `except`, `_` for unused.
-
-### 2.4 Whitespace (PEP 8 §Whitespace)
-
-```python
-# Good
-spam(ham[1], {eggs: 2})
-x = 1
-y = 2
-long_variable = function(one, two, three, four)
-
-# Bad
-spam( ham[ 1 ], { eggs : 2 } )
-x             = 1
-y             = 2
-```
-
-- No space inside `()`, `[]`, `{}` for indexing/calls (except slicing `a[i : j]`)
-- Space after `,` in argument lists
-- No space before `:` in dict literals / slices
-
-### 2.5 Strings & files
-
-```python
-# UTF-8 always for game data and docs
-data = json.loads(path.read_text(encoding="utf-8"))
-path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-```
-
-- Prefer **double quotes** for docstrings and user-facing strings; single quotes OK for short internal strings — **be consistent within a file**
-- Use f-strings (PEP 498) for formatting: `f"Unknown flag: {flag_id}"`
-
----

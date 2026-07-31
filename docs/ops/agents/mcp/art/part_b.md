@@ -5,7 +5,7 @@ phase: [0, 1]
 audience: [visual, builder, pm]
 status: active
 authority: ops
-tokens_est: 691
+tokens_est: 694
 summary: "External cel-shading preset packs are **reference only** — GodotPrompter authors the project’s single `toon_base.gdshader` ramp family. No full PBR `StandardMat"
 ---
 # MCP — Art Tools — MCP — Art Tools (B)

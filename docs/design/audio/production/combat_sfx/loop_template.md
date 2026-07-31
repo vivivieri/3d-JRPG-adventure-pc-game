@@ -5,7 +5,7 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 182
+tokens_est: 186
 summary: "Store per-track loop documentation in `docs/design/audio/audio_sheets/<track_id>.md`:"
 ---
 # Audio Production — Combat SFX — Loop sheet template

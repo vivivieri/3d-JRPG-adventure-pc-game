@@ -5,7 +5,7 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 150
+tokens_est: 154
 summary: "L3 perf procedure, evidence, plan, commands"
 ---
 # Perf — Procedure & Evidence

@@ -5,7 +5,7 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 803
+tokens_est: 807
 summary: "- [x] Game Design Document (`docs/design/vision/GDD.md`)"
 ---
 # Milestones — Pre-build — M0 / M0c / M0d

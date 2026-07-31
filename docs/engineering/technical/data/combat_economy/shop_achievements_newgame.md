@@ -5,7 +5,7 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 744
+tokens_est: 751
 summary: "Shop, achievements, new game"
 ---
 # Data — Combat & Economy — Shop, achievements, new game
