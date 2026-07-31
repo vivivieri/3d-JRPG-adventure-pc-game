@@ -9,10 +9,11 @@ TASK_ROLE_REMAP: dict[str, dict[str, str]] = {
     "water_shader": {"builder": "builder_zone"},
     "combat_balance": {"builder": "builder_combat"},
     "model_qa": {"builder": "visual"},
-    "visual_qa": {"builder": "visual"},  # QA keeps qa role; task pack adds visual docs
+    "visual_qa": {"builder": "visual", "architect": "visual"},  # QA keeps qa; task pack adds visual docs
     "audio_bgm": {"builder": "audio"},
     "ui_cinematics": {"builder": "builder"},
-    "acceptance_ci": {"builder": "qa"},
+    # CI / acceptance work uses the QA pack — not the full architect style stack.
+    "acceptance_ci": {"builder": "qa", "architect": "qa"},
 }
 
 KNOWN_ROLES = frozenset(

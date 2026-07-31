@@ -6,7 +6,7 @@ audience: [release, qa, pm]
 status: active
 authority: ci-cd
 tokens_est: 495
-summary: "Game implementation does not merge to `main` until ship-ready (M6). `game/development` CI is a required merge gate — it will fail until `game/project.godot` and"
+summary: "Game implementation does not merge to `main` until ship-ready (M6). `game/development` CI is a required merge gate — it will fail until `game/project.godot`."
 ---
 # Continuous Integration — Branch split & purpose
 

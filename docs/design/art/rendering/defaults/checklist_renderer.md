@@ -5,7 +5,7 @@ audience: [visual, builder]
 status: active
 authority: art
 tokens_est: 544
-summary: "Performance gate: 60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production. Hardware + environment spec: `docs/ops/qa/PERFOR"
+summary: "Performance gate: 60 FPS @ 1080p on GTX 1060 — test SC-02 Ruined Village vertical slice before full production. Hardware + environment spec."
 ---
 # Rendering — Defaults & Environment — Checklist + renderer
 

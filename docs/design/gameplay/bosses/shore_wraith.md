@@ -6,7 +6,7 @@ phase: [2]
 status: active
 authority: gameplay
 tokens_est: 761
-summary: "Location: Tidal Caves — boss arena"
+summary: "Boss Designs — Shore Wraith — covers 2. Shore Wraith (`shore_wraith`); Visual; Stats (Normal) — from `enemies.json`; Skill kit (data IDs)"
 ---
 # Boss Designs — Shore Wraith
 

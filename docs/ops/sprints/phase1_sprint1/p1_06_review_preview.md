@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 745
-summary: "Title: `[DEV][P1-06] Phase1-Sprint1 review — phase_1 exit gap analysis"
+summary: "Phase1-Sprint1 — P1-06 review + Sprint2 preview — covers P1-06 — PM: Phase 1 sprint review + carry-over; Phase 1 exit gates (`acceptance_criteria.json`)."
 ---
 # Phase1-Sprint1 — P1-06 review + Sprint2 preview
 

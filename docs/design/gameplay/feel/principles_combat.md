@@ -6,7 +6,7 @@ audience: [builder, visual, qa]
 status: active
 authority: gameplay
 tokens_est: 560
-summary: "Damage numbers: Optional v1 — if shown, float up 0.8 s, max 2 per hit. Default on for tutorial (SC-05), player can disable in settings (future) or always on for"
+summary: "Damage numbers: Optional v1 — if shown, float up 0.8 s, max 2 per hit. Default on for tutorial (SC-05), player can disable in settings (future) or always on."
 ---
 # Game Feel — Principles + combat feedback
 

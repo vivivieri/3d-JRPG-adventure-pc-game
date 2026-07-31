@@ -6,7 +6,7 @@ audience: [pm, builder]
 status: active
 authority: ops
 tokens_est: 466
-summary: "What it is: User API key for the Cursor Cloud Agents API — enables fully automatic token usage logging in agent session telemetry (`docs/ops/qa/AGENT_SESSION_TE"
+summary: "What it is: User API key for the Cursor Cloud Agents API — enables fully automatic token usage logging in agent session telemetry."
 ---
 # Secrets — API Keys — CURSOR_API_KEY
 

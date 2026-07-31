@@ -6,7 +6,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 575
-summary: "> **Deprecated.** This file references `*-dc91` branches that `docs/ops/workflow/IMPLEMENTATION_PLAN.md` records as **deleted** ('do not restore old code') and"
+summary: "In-game screenshots — Folder: https://github.com/vivivieri/3d-JRPG-adventure-pc-game/tree/cursor/cc0-3d-assets-dc91/steam/screenshots-capture"
 ---
 # In-game screenshots
 

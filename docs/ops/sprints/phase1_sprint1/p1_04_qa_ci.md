@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 697
-summary: "Title: `[DEV][P1-04] Phase 1 — CI green + L0–L2 gate report on ruined_village PR"
+summary: "Phase1-Sprint1 — P1-04 QA CI + gate report — covers P1-04 — QA: CI green + Phase 1 gate report; Acceptance gate IDs; Commands; Gate report template (paste in."
 ---
 # Phase1-Sprint1 — P1-04 QA CI + gate report
 

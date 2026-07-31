@@ -5,7 +5,7 @@ audience: [visual, builder]
 status: active
 authority: art
 tokens_est: 812
-summary: "Items — Global Sheets & Rig — Rules + sheet template — Use this layout for every new item or character prop before modeling. Store sheets in `docs/model_sheets/"
+summary: "Items — Global Sheets & Rig — Rules + sheet template — Use this layout for every new item or character prop before modeling. Store sheets in."
 ---
 # Items — Global Sheets & Rig — Rules + sheet template
 

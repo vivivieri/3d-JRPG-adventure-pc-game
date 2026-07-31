@@ -6,7 +6,7 @@ audience: [audio, narrative]
 status: active
 authority: vision
 tokens_est: 289
-summary: "Selective VO Hit List — Godot playback + ship checklist — VoiceLinePlayer` resolves paths; `DialogueRunner` plays VO when `voice_id` is set:"
+summary: "Selective VO Hit List — Godot playback + ship checklist — covers Godot playback (Phase 2+); Ship checklist"
 ---
 # Selective VO Hit List — Godot playback + ship checklist
 
@@ -20,6 +20,7 @@ Use **Selective VO Hit List — Godot playback + ship checklist** (roles: audio,
 
 - [Godot playback (Phase 2+)](#godot-playback-phase-2)
 - [Ship checklist](#ship-checklist)
+
 
 ## Godot playback (Phase 2+)
 

@@ -17,6 +17,7 @@ summary: "- **Local-only by default.** Logs write to `user://playtest/`; nothing
 Use **Playtest Telemetry — Privacy** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## Privacy
 
 - **Local-only by default.** Logs write to `user://playtest/`; nothing leaves the machine.

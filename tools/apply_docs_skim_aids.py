@@ -25,7 +25,11 @@ SKIP_NAMES = {
     "ARTIFACTS.md",
     "DOCS_PACK_SCHEMA.md",
 }
-SKIP_PREFIXES = ("archive/", "briefs/")  # relative to docs/
+SKIP_PREFIXES = (
+    "archive/",
+    "briefs/",
+    "design/audio/audio_sheets/",  # never_autoload sheets — not in resolve packs
+)  # relative to docs/
 
 
 def strip_fm(text: str) -> tuple[str, str]:
@@ -95,9 +99,31 @@ def summary_weak(raw: str) -> bool:
     # Truncated / broken frontmatter leftovers
     if s.count("`") % 2 == 1:
         return True
-    if s.endswith(("_", "-", "…")) or s.endswith("..."):
+    if s.endswith(("_", "-", "…", "—")):
+        return True
+    # Very short ellipsis clamps are usually mid-thought cuts
+    if s.endswith("...") and len(s) < 90:
+        return True
+    # Mid-sentence cut (common after 160-char clamp)
+    if s.endswith((" the", " a", " an", " to", " of", " for", " and", " or", " with")):
         return True
     return False
+
+
+def _clamp_summary(text: str, limit: int = 160) -> str:
+    """Clamp without breaking backticks or mid-word when possible."""
+    s = text.replace("\n", " ").replace('"', "'").strip()
+    if len(s) <= limit:
+        return s
+    cut = s[:limit]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    if cut.count("`") % 2 == 1:
+        cut = cut.rsplit("`", 1)[0].rstrip()
+    cut = cut.rstrip(".,;: —-")
+    if not cut.endswith("."):
+        cut += "."
+    return cut[:limit]
 
 
 def first_prose(body: str) -> str:
@@ -109,34 +135,62 @@ def first_prose(body: str) -> str:
             continue
         if s.startswith("| Pack"):
             continue
+        if s.startswith(("- [ ]", "- [x]", "* [ ]")):
+            continue
         # strip markdown bold/links lightly
         s = re.sub(r"\*\*([^*]+)\*\*", r"\1", s)
         s = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", s)
         s = s.strip().strip("`")
         if len(s) < 20:
             continue
-        return s[:160]
+        return s
     return ""
 
 
 def derive_summary(title: str, body: str, meta: dict[str, str], hs: list[tuple[int, str, str]]) -> str:
     prose = first_prose(body)
     audience = meta.get("audience", "").strip("[]")
-    if prose and not prose.lower().startswith("hub"):
-        # Prefer actionable: title cue + prose snippet
+    # Prefer section topics when first prose is a fragment / code / diagram label
+    prose_bad = False
+    if prose:
+        low = prose.lower()
+        if "`" in prose or prose.startswith(("[", "|", "-", "*")):
+            prose_bad = True
+        if low.startswith(
+            ("runner:", "location:", "scene:", "source of truth:", "policy:", "from ")
+        ):
+            prose_bad = True
+        if prose.startswith("Scope:") and len(prose) < 80:
+            prose_bad = True
+    if prose and not prose_bad and not prose.lower().startswith("hub"):
         tip = prose
-        if not tip.endswith("."):
-            tip = tip.rstrip(".") + ""
-        # Ensure "open when" style if missing
-        if "open when" not in tip.lower() and " — " not in tip:
+        if "open when" not in tip.lower() and " — " not in tip and not tip.lower().startswith(
+            title.lower()[:12]
+        ):
             tip = f"{title} — {tip}"
-        return tip[:160]
+        return _clamp_summary(tip)
     if hs:
         topics = "; ".join(h[1] for h in hs[:4])
-        return f"{title} — covers {topics}"[:160]
+        return _clamp_summary(f"{title} — covers {topics}")
     if audience:
-        return f"{title} — for {audience}"[:160]
-    return f"{title} — project reference"[:160]
+        return _clamp_summary(f"{title} — for {audience}")
+    return _clamp_summary(f"{title} — project reference")
+
+
+def ensure_frontmatter(fm_block: str, body: str, title: str) -> tuple[str, str]:
+    """Guarantee a summary field exists (create minimal FM when missing)."""
+    if fm_block:
+        return fm_block, body
+    slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:48] or "doc"
+    fm = (
+        "---\n"
+        f"id: {slug}\n"
+        "type: reference\n"
+        "status: active\n"
+        f'summary: "{title} — project reference"\n'
+        "---\n"
+    )
+    return fm, body
 
 
 def derive_when(title: str, meta: dict[str, str], hs: list[tuple[int, str, str]]) -> str:
@@ -187,11 +241,9 @@ def build_jump(hs: list[tuple[int, str, str]]) -> str:
 
 
 def set_fm_field(fm_block: str, key: str, value: str) -> str:
-    safe = value.replace("\n", " ").replace('"', "'").strip()
-    if len(safe) > 160:
-        safe = safe[:157].rsplit(" ", 1)[0].rstrip(".,;:") + "..."
+    safe = _clamp_summary(value.replace("\n", " ").replace('"', "'").strip())
     if re.search(rf"(?m)^{key}:", fm_block):
-        return re.sub(rf'(?m)^{key}:\s*".*"', f'{key}: "{safe}"', fm_block, count=1)
+        return re.sub(rf"(?m)^{key}:\s*.*$", f'{key}: "{safe}"', fm_block, count=1)
     if fm_block.rstrip().endswith("---"):
         return fm_block.rstrip()[:-3] + f'{key}: "{safe}"\n---\n'
     return fm_block
@@ -222,9 +274,10 @@ def process_file(path: Path, *, min_tokens: int, summary_only_below: int, dry_ru
     if tok < min_tokens:
         return None
 
-    meta = parse_fm(fm_block)
     title_m = re.search(r"(?m)^#\s+(.+)$", body)
     title = title_m.group(1).strip() if title_m else path.stem.replace("_", " ")
+    fm_block, body = ensure_frontmatter(fm_block, body, title)
+    meta = parse_fm(fm_block)
 
     body2 = strip_existing_skim(body)
     hs = headings(body2)
@@ -259,23 +312,20 @@ def process_file(path: Path, *, min_tokens: int, summary_only_below: int, dry_ru
             else:
                 body2 = insert + "\n" + body2
 
-    if fm_block:
-        fm_block = set_fm_field(fm_block, "summary", new_sum)
-        fm_block = retokens(fm_block, body2)
-        # fix tokens_est if quoted wrongly
-        fm_block = re.sub(r'(?m)^tokens_est:\s*"(\d+)"', r"tokens_est: \1", fm_block)
-        out = fm_block + body2
-        if not out.endswith("\n"):
-            out += "\n"
-    else:
-        out = body2 if body2.endswith("\n") else body2 + "\n"
+    fm_block = set_fm_field(fm_block, "summary", new_sum)
+    fm_block = retokens(fm_block, body2)
+    # fix tokens_est if quoted wrongly
+    fm_block = re.sub(r'(?m)^tokens_est:\s*"(\d+)"', r"tokens_est: \1", fm_block)
+    out = fm_block + body2
+    if not out.endswith("\n"):
+        out += "\n"
 
     if out == raw:
         return None
     if dry_run:
         return f"DRY {rel} sum_weak={summary_weak(old_sum)} jump={add_jump} hs={len(hs)}"
     path.write_text(out, encoding="utf-8")
-    return f"OK {rel} jump={add_jump} hs={len(hs)} tok~{len(body2)//4}"
+    return f"OK {rel} jump={add_jump} hs={len(hs)} tok~{len(body2)//4} weak_fix={summary_weak(old_sum)}"
 
 
 def main() -> int:

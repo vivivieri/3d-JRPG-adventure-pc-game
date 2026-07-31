@@ -6,7 +6,7 @@ audience: [visual, qa]
 status: active
 authority: art
 tokens_est: 258
-summary: "Visual QA — Judge Layers — What AI can/cannot judge — Honest limit: Without a viewport screenshot reviewed by a multimodal agent (or human), the AI is blind. `F"
+summary: "Visual QA — Judge Layers — What AI can/cannot judge — Honest limit: Without a viewport screenshot reviewed by a multimodal agent (or human), the AI is blind."
 ---
 # Visual QA — Judge Layers — What AI can/cannot judge
 
@@ -15,6 +15,7 @@ summary: "Visual QA — Judge Layers — What AI can/cannot judge — Honest lim
 ## When to read
 
 Use **Visual QA — Judge Layers — What AI can/cannot judge** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 
 ## 1. What AI can and cannot judge

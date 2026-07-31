@@ -1,3 +1,10 @@
+---
+id: automation-a-pm-cycle-dispatch
+type: reference
+status: active
+summary: "Automation A — PM cycle dispatch — project reference"
+tokens_est: 671
+---
 # Automation A — PM cycle dispatch
 
 ## When to read

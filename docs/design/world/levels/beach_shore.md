@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: world
 tokens_est: 406
-summary: "Level Design — Zone beach_shore — Scene: `res://scenes/world/beach_shore.tscn"
+summary: "Level Design — Zone beach_shore — covers 2. Zone: `beach_shore` (SC-01); Blockout; Layout (top-down); Interactables & triggers"
 ---
 # Level Design — Zone beach_shore
 

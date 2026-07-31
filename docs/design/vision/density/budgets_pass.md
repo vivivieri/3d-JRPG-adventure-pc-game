@@ -6,7 +6,7 @@ audience: [narrative]
 status: active
 authority: vision
 tokens_est: 504
-summary: "Narrative Density — Ship budgets + optimized pass — Source of truth: `game/data/narrative/narrative_density.json"
+summary: "Narrative Density — Ship budgets + optimized pass — covers 3. Ship budgets (enforced); Zone caps; 4. What “optimized full pass” looks like (v1 ship)"
 ---
 # Narrative Density — Ship budgets + optimized pass
 

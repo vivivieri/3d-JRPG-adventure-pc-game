@@ -21,6 +21,7 @@ Use **Save & Fail States — Save scumming + QA** (roles: architect, builder, qa
 - [7. Save scumming](#7-save-scumming)
 - [8. QA checklist](#8-qa-checklist)
 
+
 ## 7. Save scumming
 
 **Allowed.** Single slot reduces abuse; players may backup `user://` file. No anti-scum for v1.
