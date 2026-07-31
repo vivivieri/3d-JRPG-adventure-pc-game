@@ -7,9 +7,9 @@ authority: workflow
 tokens_est: 539
 summary: "AI Dev — Phases 4–8 — Phases 4–6"
 ---
-# AI Dev — Phases 4–8 — Phases 4–6
+# AI Dev — Phases 4–6
 
-**Hub:** [`part_b.md`](../part_b.md)
+**Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
 
 ### Phase 4 — Combat vertical slice
 
