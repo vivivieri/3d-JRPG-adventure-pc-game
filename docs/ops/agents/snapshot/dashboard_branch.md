@@ -63,8 +63,8 @@ Committed in `.cursor/environment.json` on branch **`game/development`** (templa
 
 | Field | Value |
 |-------|-------|
-| **Snapshot ID** | `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8` |
-| **Saved** | 2026-07-14 |
+| **Snapshot ID** | `snapshot-20260731-6674a8af-9b2c-4315-a2ff-dd7e4d211b66` |
+| **Saved** | 2026-07-31 |
 | **Install** | `bash tools/install_cloud_dev.sh` |
 | **Start** | `bash tools/ensure_mcp_stack.sh` |
 

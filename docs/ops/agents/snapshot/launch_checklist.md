@@ -30,7 +30,7 @@ Use **Cloud Snapshot Launch — Launch checklist every session** (roles: pm, bui
 
 - [ ] Open [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game) (not a bare “new chat” on `main`)
 - [ ] Branch = **`game/development`**
-- [ ] Snapshot in dashboard matches `snapshot-20260714-8addf87a-f344-489f-bbe2-da0f57cb66d8` (or newer if rebuilt)
+- [ ] Snapshot in dashboard matches `snapshot-20260731-6674a8af-9b2c-4315-a2ff-dd7e4d211b66` (or newer if rebuilt)
 - [ ] **Cursor Secrets** set — see `docs/ops/agents/CURSOR_SECRETS_SETUP.md` (`GAMELAB_API_KEY`, `GH_TOKEN`, webhooks, etc.)
 - [ ] **Dashboard → Integrations & MCP** — all four servers registered:
 
