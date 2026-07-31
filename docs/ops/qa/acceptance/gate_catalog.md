@@ -5,12 +5,27 @@ audience: [qa, pm]
 phase: [1, 6]
 status: active
 authority: qa
-tokens_est: 1306
-summary: "Gate catalog summary"
+tokens_est: 1423
+summary: "L0–L6 / ship gate ids + pass rules — open when wiring CI, remediating a named gate, or checking toolchain requirements"
 ---
 # Acceptance — Gate Catalog
 
 **Hub:** [`ACCEPTANCE_CRITERIA.md`](../ACCEPTANCE_CRITERIA.md)
+
+## When to read
+
+Need a **gate id → pass rule** lookup. Prefer `game/data/qa/acceptance_criteria.json` for machine truth; this doc is the human/agent skim table.
+
+## Jump to
+
+- [L0 — Data & workflow](#l0--data--workflow)
+- [L1 — Unit tests & lint](#l1--unit-tests--lint)
+- [L2 — Smoke](#l2--smoke)
+- [L2.5 — Candidate tournament](#l25--candidate-tournament-pre-merge-non-ship)
+- [L3 — GDAI handoff](#l3--gdai-builder-handoff)
+- [L4 / L5 — Flow](#l4--l5--flow)
+- [Ship](#ship)
+- [Required toolchain](#required-toolchain-not-optional)
 
 ### L0 — Data & workflow
 

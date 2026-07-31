@@ -5,14 +5,25 @@ audience: [release, qa, pm]
 phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 1272
-summary: "game/development game-ci gates + Windows/CD"
+tokens_est: 1229
+summary: "game/development game-ci gate table (L0–L4) + Windows run job + CD — open when greening Game CI or explaining SKIP≠PASS on export"
 ---
 # CI — What Runs (`game/development`)
 
 **Hub:** [`what_runs.md`](../what_runs.md)
 
-### `game/development` — `game-ci.yml` → `run_ci_checks.sh`
+## When to read
+
+Debugging **Game CI** on `game/development` (`game-ci.yml` / `run_ci_checks.sh`). For the short role-oriented list see [`gates_by_branch.md`](../../../../cheat-sheets/controls/gates_by_branch.md). Machine authority: `game/data/qa/acceptance_criteria.json`.
+
+## Jump to
+
+- [L0 / L1 gates](#l0--l1--run_ci_checkssh)
+- [L2+ / L4 gates](#l2--l4--run_ci_checkssh)
+- [Windows export run job](#windows-export-run-windows-latest)
+- [CD artifacts](#cd-cd-artifactyml)
+
+### L0 / L1 — `run_ci_checks.sh`
 
 | Gate ID | Command | Pass when |
 |---------|---------|-----------|
@@ -37,19 +48,7 @@ summary: "game/development game-ci gates + Windows/CD"
 | `L1_gdscript_lint_all` | `bash tools/check_gdscript_all.sh` | Exit 0 — full-tree gdlint; **2** SKIP when no `game/scripts` |
 | `L0_base_class_compliance` | `bash tools/check_base_class_compliance.sh` | Exit 0 — no rogue native `extends` (`CharacterBody3D`/`Area3D`/`Node`) |
 
-**Second job — `windows-export-run` (windows-latest):**
-
-| Gate ID | Command | Pass when |
-|---------|---------|-----------|
-| `L2_windows_export_run` | `bash tools/run_windows_export_run.sh` | Exit 0 — Windows export + native `.exe` headless run; **exit 2 SKIP → FAIL** (SKIP≠PASS) |
-
-See `docs/ops/qa/PLATFORM_SUPPORT.md` — Linux run on ubuntu CI; Windows **run** on windows-latest CI.
-
-**CD (`cd-artifact.yml`):** exports **Linux + Windows**, packages both Steam depot zips — required for v1 (`docs/ops/qa/PLATFORM_SUPPORT.md`).
-
----
-
-### `game/development` — `game-ci.yml` → `run_ci_checks.sh`
+### L2+ / L4 — `run_ci_checks.sh`
 
 | Gate ID | Command | Pass when |
 |---------|---------|-----------|
@@ -65,7 +64,9 @@ See `docs/ops/qa/PLATFORM_SUPPORT.md` — Linux run on ubuntu CI; Windows **run*
 | `L4_integration` | `bash tools/run_integration_tests.sh` | Exit 0 — `INT-BOOT-01`; fails if `integration_scenarios.json` required scenarios missing |
 | `M5_asset_compliance` | `bash tools/check_asset_compliance.sh` | Exit 0 when manifest exists |
 
-**Second job — `windows-export-run` (windows-latest):**
+### Windows export run (windows-latest)
+
+Second job — `windows-export-run`:
 
 | Gate ID | Command | Pass when |
 |---------|---------|-----------|
@@ -73,6 +74,6 @@ See `docs/ops/qa/PLATFORM_SUPPORT.md` — Linux run on ubuntu CI; Windows **run*
 
 See `docs/ops/qa/PLATFORM_SUPPORT.md` — Linux run on ubuntu CI; Windows **run** on windows-latest CI.
 
-**CD (`cd-artifact.yml`):** exports **Linux + Windows**, packages both Steam depot zips — required for v1 (`docs/ops/qa/PLATFORM_SUPPORT.md`).
+### CD (`cd-artifact.yml`)
 
----
+Exports **Linux + Windows**, packages both Steam depot zips — required for v1 (`docs/ops/qa/PLATFORM_SUPPORT.md`).

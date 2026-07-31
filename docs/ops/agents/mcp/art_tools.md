@@ -5,12 +5,25 @@ audience: [visual, builder, pm]
 phase: [0, 1]
 status: active
 authority: ops
-tokens_est: 1251
-summary: "Art & design MCP/offline tools"
+tokens_est: 1360
+summary: "Which art tool to use (ComfyUI, GameLab, Meshy/Blender, ACE-Step, ElevenLabs) — open before generating zone/UI/3D/audio assets"
 ---
 # MCP — Art Tools
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Choosing or wiring an **art generation** path. Skip for pure scene placement (GDAI) once assets exist.
+
+## Jump to
+
+- [ComfyUI / Material Maker](#comfyui--material-maker--zone-npr-albedos)
+- [GameLab Studio MCP](#gamelab-studio-mcp--ui--2d-sheets-required)
+- [AI 3D + Blender](#ai-3d--blender--offline-hero-pipeline-required-for-turntable-qa)
+- [Shader policy](#shader-policy)
+- [ACE-Step BGM](#ace-step-15--audio-prototype-replaces-sunoudio)
+- [ElevenLabs VO](#elevenlabs--selective-vo-12-clips-not-full-dialogue)
 
 ### ComfyUI / Material Maker — zone NPR albedos
 
