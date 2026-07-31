@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 410
+summary: "[`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)"
 ---
 # Phase map, report template & related
 

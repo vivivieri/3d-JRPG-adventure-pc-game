@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 1211
+summary: "**Target duration:** 2–3 hours"
 ---
 # Tides of Urashima — Playtest Script
 

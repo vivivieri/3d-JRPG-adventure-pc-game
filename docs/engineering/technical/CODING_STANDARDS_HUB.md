@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 2988
+summary: "**Purpose:** Single entry point for languages, naming, best practices, data-structure rules, and CI enforcement."
 ---
 # Coding Standards Hub — Tides of Urashima
 

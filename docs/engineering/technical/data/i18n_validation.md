@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 957
+summary: "[`DATA_ARCHITECTURE.md`](../DATA_ARCHITECTURE.md)"
 ---
 # Data architecture — i18n, validation, schema
 

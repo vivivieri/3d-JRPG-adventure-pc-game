@@ -6,6 +6,7 @@ phase: [4]
 status: active
 authority: art
 tokens_est: 658
+summary: "`docs/design/gameplay/COMBAT_SYSTEMS.md`, `docs/design/ui/UI_UX_FLOW.md`, `docs/design/art/SHADER_SPECS.md`, `game/data/code/shader_registry.json` (`ink_combat_"
 ---
 # Tides of Urashima — Combat Presentation
 

@@ -5,6 +5,7 @@ audience: [visual, builder]
 status: active
 authority: art
 tokens_est: 1705
+summary: "Track every third-party asset, story source, and engine dependency."
 ---
 # License & Attribution Log
 

@@ -5,6 +5,7 @@ audience: [pm, builder, qa]
 status: active
 authority: ops
 tokens_est: 567
+summary: "[`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)"
 ---
 # R&R — performance-review-required
 

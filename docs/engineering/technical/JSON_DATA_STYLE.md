@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 1915
+summary: "**Scope:** `game/data/**/*.json` — story, combat, registries, QA catalogs"
 ---
 # JSON Data Style Guide — Tides of Urashima
 

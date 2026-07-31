@@ -6,6 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 441
+summary: "[`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)"
 ---
 # Character — Urashima
 

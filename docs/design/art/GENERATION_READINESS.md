@@ -5,6 +5,7 @@ audience: [visual, builder]
 status: active
 authority: art
 tokens_est: 3133
+summary: "Extends (does not replace) `CHARACTER_BIBLE.md`, `ENVIRONMENT_KITS.md`, `ART_AUTOMATION_PIPELINE.md`, `GAME_FEEL.md`, and `game/data/models/qa_catalog.json`."
 ---
 # Generation Readiness — Human-Expectation Gaps for AI 3D Pipelines
 

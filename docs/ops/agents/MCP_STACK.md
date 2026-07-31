@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 1628
+summary: "`main` rebuild workflow — **Godot 4.7 stable**"
 ---
 # MCP Stack — Full Toolchain (Godot 4.7)
 

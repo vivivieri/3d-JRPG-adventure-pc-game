@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 2078
+summary: "**Discipline:** Games User Research (GUR) — telemetry-driven playtest tuning"
 ---
 # Playtest Telemetry
 

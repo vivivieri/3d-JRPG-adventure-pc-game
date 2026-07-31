@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 1054
+summary: "**Scope:** `tools/*.sh` — CI runners, bootstrap, QA orchestration"
 ---
 # Bash / Shell Style Guide — Tides of Urashima
 

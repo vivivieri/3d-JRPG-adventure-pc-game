@@ -6,6 +6,7 @@ phase: [0, 1]
 status: active
 authority: agents
 tokens_est: 404
+summary: "[`CLOUD_AGENT_SETUP_RUNBOOK.md`](../CLOUD_AGENT_SETUP_RUNBOOK.md)"
 ---
 # Cloud Agent Setup — End-of-cycle & events
 

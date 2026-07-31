@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: gameplay
 tokens_est: 1488
+summary: "`docs/design/gameplay/ENCOUNTER_TABLE.md`, `game/data/items/items.json`, `docs/design/world/QUEST_AND_FLAGS.md`, `docs/design/art/ITEMS_3D_MODEL_GUIDE.md`"
 ---
 # Tides of Urashima — Items & Economy
 

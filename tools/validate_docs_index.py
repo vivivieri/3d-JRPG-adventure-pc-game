@@ -193,6 +193,12 @@ def main() -> int:
         "design/vision/narrative/character_voice.md",
         "ops/workflow/implementation/phase_1.md",
         "ops/agents/cloud_setup/setup_automations.md",
+        "ops/workflow/agile/summary_why.md",
+        "ops/agents/secrets/day_one_checklist.md",
+        "design/world/levels/ruined_village.md",
+        "ops/ci-cd/ci/required_gates.md",
+        "ops/workflow/lifecycle/overview_time.md",
+        "engineering/technical/gdscript_regen/principle_rr.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")
@@ -208,6 +214,8 @@ def main() -> int:
         "water_shader",
         "factory_bootstrap",
         "model_qa",
+        "level_layout",
+        "secrets_setup",
     ):
         if not re.search(rf"(?m)^  {re.escape(task)}:\s*$", index_text):
             errors.append(f"INDEX.yaml missing tasks.{task}")

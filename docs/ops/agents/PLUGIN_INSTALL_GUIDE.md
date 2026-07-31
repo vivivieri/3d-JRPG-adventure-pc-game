@@ -5,6 +5,7 @@ audience: [pm, builder]
 status: active
 authority: agents
 tokens_est: 2141
+summary: "Godot **4.7 stable**, Cursor desktop + Cloud Agents"
 ---
 # Plugin install guide — Godotiq & Godot MCP Pro
 

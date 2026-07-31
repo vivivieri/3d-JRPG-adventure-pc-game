@@ -5,6 +5,7 @@ audience: [narrative]
 status: active
 authority: vision
 tokens_est: 577
+summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/vision/GDD.md` §9"
 ---
 # Tides of Urashima — Emotional Pacing Chart
 

@@ -6,6 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 2512
+summary: "M5 art rebuild and all player-facing assets on **`game/development`** (design docs + catalogs stay on `main`)"
 ---
 # Art Automation Pipeline — Quality-First, Zero Human Artists
 

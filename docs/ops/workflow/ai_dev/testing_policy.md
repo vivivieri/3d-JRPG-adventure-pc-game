@@ -5,6 +5,7 @@ audience: [pm, architect]
 status: active
 authority: workflow
 tokens_est: 1488
+summary: "[`AI_DEV_WORKFLOW.md`](../AI_DEV_WORKFLOW.md)"
 ---
 # AI Dev Workflow — testing policy
 

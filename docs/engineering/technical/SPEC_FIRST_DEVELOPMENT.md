@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 2450
+summary: "Defines what lives on `main` vs `game/development` and when coding may start."
 ---
 # Spec-first development policy
 

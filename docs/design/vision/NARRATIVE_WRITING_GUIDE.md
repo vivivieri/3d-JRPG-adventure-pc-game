@@ -6,6 +6,7 @@ phase: [3, 6]
 status: active
 authority: narrative
 tokens_est: 900
+summary: "load one pack below, not the old monolith."
 ---
 # Tides of Urashima — Narrative Writing Guide
 

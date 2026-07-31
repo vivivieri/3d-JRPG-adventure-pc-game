@@ -5,6 +5,7 @@ audience: [qa, flow]
 status: active
 authority: qa
 tokens_est: 2427
+summary: "**Machine-readable:** `game/data/qa/ship_security.json`"
 ---
 # Security — Ship Build, Secrets & Supply Chain
 

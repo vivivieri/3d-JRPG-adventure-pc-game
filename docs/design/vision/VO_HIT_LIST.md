@@ -6,6 +6,7 @@ phase: [3, 6]
 status: active
 authority: vision
 tokens_est: 1259
+summary: "**Policy:** Short VO at emotional peaks only — **not** full dialogue."
 ---
 # Tides of Urashima — Selective VO Hit List (AI generation)
 

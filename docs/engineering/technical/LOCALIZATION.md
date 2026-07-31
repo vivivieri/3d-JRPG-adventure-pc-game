@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 2021
+summary: "**Tides of Urashima** supports four written languages at launch. **All four ship selective VO** for the 12 emotional hit clips (`docs/design/vision/VO_HIT_LIST."
 ---
 # Localization (i18n)
 

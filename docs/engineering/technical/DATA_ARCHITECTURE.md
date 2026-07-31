@@ -5,6 +5,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 590
+summary: "[`CODING_STANDARDS_HUB.md`](CODING_STANDARDS_HUB.md) — naming, schema bumps, extension checklists"
 ---
 # Tides of Urashima — Story-Driven Data Architecture
 

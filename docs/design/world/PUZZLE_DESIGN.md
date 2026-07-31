@@ -5,6 +5,7 @@ audience: [builder, architect]
 status: active
 authority: world
 tokens_est: 697
+summary: "SC-07 — Water Level Puzzle"
 ---
 # Tides of Urashima — Puzzle Design (SC-07)
 
