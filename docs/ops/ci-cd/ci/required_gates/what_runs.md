@@ -1,11 +1,11 @@
 ---
 id: what-runs
 type: reference
-phase: [6, 8]
 audience: [release, qa, pm]
+phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 123
+tokens_est: 180
 summary: "main vs game/development required gates"
 ---
 # CI — What Runs
@@ -14,9 +14,7 @@ summary: "main vs game/development required gates"
 
 | Pack | Topic |
 |------|-------|
-| [`part_a.md`](runs/part_a.md) | CI — What Runs (A) |
-| [`part_b.md`](runs/part_b.md) | CI — What Runs (B) |
+| [`runs/main.md`](runs/main.md) | `main` docs CI |
+| [`runs/game_development.md`](runs/game_development.md) | `game/development` game CI |
 **Hub:** [`required_gates.md`](../required_gates.md)
-
-## 2. What CI runs (required — blocks merge)
 

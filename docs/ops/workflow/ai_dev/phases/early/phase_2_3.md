@@ -7,9 +7,9 @@ authority: workflow
 tokens_est: 583
 summary: "AI Dev — Phases 0–3 — Phases 2–3"
 ---
-# AI Dev — Phases 0–3 — Phases 2–3
+# AI Dev — Phases 2–3
 
-**Hub:** [`part_a.md`](../part_a.md)
+**Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
 
 ### Phase 2 — Core systems shell
 

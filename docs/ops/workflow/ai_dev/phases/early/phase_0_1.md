@@ -7,9 +7,9 @@ authority: workflow
 tokens_est: 554
 summary: "(not a separate numbering scheme)."
 ---
-# AI Dev — Phases 0–3 — Phases 0–1
+# AI Dev — Phases 0–1
 
-**Hub:** [`part_a.md`](../part_a.md)
+**Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
 
 ### Phase 0 — Dev environment ✅ (baseline)
 

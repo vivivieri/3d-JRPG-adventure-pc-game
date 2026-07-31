@@ -1,14 +1,14 @@
 ---
-id: part-a
+id: field
 type: reference
-phase: [1, 5]
 audience: [visual, builder]
+phase: [1, 5]
 status: active
 authority: art
-tokens_est: 216
-summary: "Character Bible — Enemies (A)"
+tokens_est: 200
+summary: "Field enemy model briefs"
 ---
-# Character Bible — Enemies — Character Bible — Enemies (A)
+# Character Bible — Field Enemies
 
 **Hub:** [`enemies.md`](../enemies.md)
 

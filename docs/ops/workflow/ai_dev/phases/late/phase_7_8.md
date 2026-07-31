@@ -7,9 +7,9 @@ authority: workflow
 tokens_est: 538
 summary: "L0–L5 on release candidate → **then** L6 human QA → export."
 ---
-# AI Dev — Phases 4–8 — Phases 7–8
+# AI Dev — Phases 7–8
 
-**Hub:** [`part_b.md`](../part_b.md)
+**Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
 
 ### Phase 7 — M5 art rebuild
 
