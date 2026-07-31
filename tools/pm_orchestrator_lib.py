@@ -292,6 +292,8 @@ def compute_dispatch(board: dict[str, Any]) -> dict[str, Any]:
                     "done_requires": issue.get("done_requires", "pr_merged"),
                     "branch_name_pattern": issue.get("branch_name_pattern", "cursor/{issue_id}-a091"),
                     "parallel_with": issue.get("parallel_with", []),
+                    "github_issue": issue.get("github_issue"),
+                    "docs_task": issue.get("docs_task"),
                 }
             )
 
