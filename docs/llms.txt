@@ -9,34 +9,39 @@
 - [Agent boot card](ops/BOOT.md): MCP stack commands, STOP conditions, authority chain
 - [AGENTS.md](../AGENTS.md): Cloud bootstrap + branch rules
 - [Index router](INDEX.yaml): role → must_read paths
-- Session gate prints the pack via `python3 tools/resolve_docs.py <role>`
+- Session gate prints the pack via `python3 tools/resolve_docs.py <role> --issue <id> --budget 12000`
 
-## Design (product truth)
+**Rule:** load hub + **one pack** for your pass — do not preload full bibles.
 
-- [GDD](design/vision/GDD.md)
-- [Storyboard](design/vision/STORYBOARD.md)
-- [Level design](design/world/LEVEL_DESIGN.md)
-- [Combat systems](design/gameplay/COMBAT_SYSTEMS.md)
-- [Art direction](design/art/ART_DIRECTION.md)
-- [Rendering guide](design/art/RENDERING_GUIDE.md)
-- [Audio production](design/audio/AUDIO_PRODUCTION_GUIDE.md)
+## Design (hubs — then open one pack)
+
+- [GDD](design/vision/GDD.md) → `gdd/`
+- [Storyboard](design/vision/STORYBOARD.md) → `storyboard/act_*.md`
+- [Level design](design/world/LEVEL_DESIGN.md) → `levels/`
+- [Environment kits](design/world/ENVIRONMENT_KITS.md) → `env_kits/`
+- [Combat systems](design/gameplay/COMBAT_SYSTEMS.md) · [Boss designs](design/gameplay/BOSS_DESIGNS.md) → `bosses/`
+- [Art direction](design/art/ART_DIRECTION.md) → `direction/`
+- [Rendering guide](design/art/RENDERING_GUIDE.md) → `rendering/`
+- [Visual QA](design/art/VISUAL_QA.md) → `visual_qa/`
+- [Audio production](design/audio/AUDIO_PRODUCTION_GUIDE.md) → `production/`
 
 ## Engineering
 
-- [Technical design](engineering/technical/TECHNICAL_DESIGN.md)
-- [Coding standards hub](engineering/technical/CODING_STANDARDS_HUB.md)
+- [Technical design](engineering/technical/TECHNICAL_DESIGN.md) → `tdd/`
+- [Coding standards hub](engineering/technical/CODING_STANDARDS_HUB.md) → `coding/`
 - [Data architecture](engineering/technical/DATA_ARCHITECTURE.md)
 
 ## Ops (factory / QA / ship)
 
-- [MCP stack](ops/agents/MCP_STACK.md)
-- [Implementation plan](ops/workflow/IMPLEMENTATION_PLAN.md)
-- [Acceptance criteria](ops/qa/ACCEPTANCE_CRITERIA.md)
+- [MCP stack](ops/agents/MCP_STACK.md) · [GDAI setup](ops/agents/GDAI_CLOUD_SETUP.md) → `gdai_setup/`
+- [Milestones](ops/workflow/MILESTONES.md) → `milestones/`
+- [Acceptance criteria](ops/qa/ACCEPTANCE_CRITERIA.md) → `acceptance/`
+- [Flow QA](ops/qa/FLOW_QA.md) → `flow_qa/`
 - [CI](ops/ci-cd/CI.md)
-- [R&R cheat sheet](ops/cheat-sheets/RR_CHEATSHEET.md)
+- [R&R cheat sheet](ops/cheat-sheets/RR_CHEATSHEET.md) → `rr/`
 
 ## Optional (task-scoped only)
 
-- Generation briefs: `briefs/`
+- Generation briefs: `briefs/` (hub + packs; budget-trimable)
 - Audio sheets: `design/audio/audio_sheets/`
 - Archive (never autoload): `archive/`
