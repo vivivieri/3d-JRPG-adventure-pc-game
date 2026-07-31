@@ -5,12 +5,24 @@ audience: [qa, builder]
 phase: [1, 6]
 status: active
 authority: qa
-tokens_est: 1180
-summary: "GDAI MCP playtesting toolkit"
+tokens_est: 1289
+summary: "GDAI/Godotiq/MCP Pro playtest techniques — open when writing L3–L5 scenarios, UI discovery, or runtime injection prompts"
 ---
 # AI Testing — GDAI Toolkit
 
 **Hub:** [`AI_TESTING_SPEC.md`](../AI_TESTING_SPEC.md)
+
+## When to read
+
+Building or debugging **automated playtest** flows (menus, combat UI, injections). Skip for unit-test-only or data-gate work.
+
+## Jump to
+
+- [11.1 Adoption matrix](#111-adoption-matrix-external-advice--this-project)
+- [11.2 UI discovery + actions](#112-ui-discovery--action-sequences)
+- [11.3 Runtime GDScript injection](#113-runtime-gdscript-injection-edge-cases)
+- [11.4 Example agent prompts](#114-example-agent-prompts-copy-paste)
+- [11.5 Division of labor](#115-division-of-labor-mcp-stack)
 
 ### 11.1 Adoption matrix (external advice → this project)
 
