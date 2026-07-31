@@ -5,7 +5,7 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 250
+tokens_est: 295
 summary: "Helper regen — load principle, order, or Phase 1 visuals"
 ---
 # GDScript Regeneration
