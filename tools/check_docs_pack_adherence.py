@@ -70,6 +70,20 @@ def main() -> int:
             "docs/README.md",
         }
     )
+    # Sprint issue leaves are never_autoload for resolve_docs, but reading the
+    # active issue pack (or GitHub #N body mirror) is legitimate for the session.
+    issue_key = str(args.issue).strip().upper().replace("_", "-")
+    for path in ROOT.joinpath("docs/ops/sprints").rglob("*.md") if (ROOT / "docs/ops/sprints").is_dir() else []:
+        rel = path.relative_to(ROOT).as_posix()
+        stem = path.stem.upper().replace("_", "-")
+        text_head = path.read_text(encoding="utf-8", errors="replace")[:2000]
+        if issue_key and (
+            issue_key in stem
+            or f"## {issue_key} " in text_head
+            or f"## {issue_key}—" in text_head
+            or f"## {issue_key} —" in text_head
+        ):
+            allowed.add(rel)
 
     default_log = ROOT / "artifacts" / f"docs_reads_{args.issue}.log"
     reads_file = args.reads_file or os.environ.get("DOCS_READ_LOG") or str(default_log)
