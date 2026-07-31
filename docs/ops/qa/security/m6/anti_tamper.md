@@ -6,7 +6,7 @@ audience: [release, pm]
 status: active
 authority: qa
 tokens_est: 1118
-summary: "Security — M6 Player Protect — Player build protection — Machine-readable: `game/data/qa/ship_security.json` → `player_build_protection`, `game/data/qa/save_int"
+summary: "Security — M6 Player Protect — Player build protection — Machine-readable: `game/data/qa/ship_security.json` → `player_build_protection`."
 ---
 # Security — M6 Player Protect — Player build protection
 

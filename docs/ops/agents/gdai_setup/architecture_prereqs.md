@@ -22,6 +22,7 @@ Use **GDAI Cloud Setup — Prerequisites** (roles: builder, pm, architect) when 
 - [`uv` (required by GDAI)](#uv-required-by-gdai)
 - [Godot 4.7 stable](#godot-47-stable)
 
+
 ## 1. Prerequisites
 
 ### `uv` (required by GDAI)

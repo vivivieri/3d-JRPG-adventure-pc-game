@@ -21,6 +21,7 @@ Use **Security — Steam/CD + supply chain** (roles: release, pm, architect) whe
 - [6. Steam / CD](#6-steam-cd)
 - [7. Supply chain](#7-supply-chain)
 
+
 ## 6. Steam / CD
 
 | Item | Control |

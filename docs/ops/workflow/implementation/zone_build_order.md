@@ -17,6 +17,7 @@ summary: "1. **ruined_village** — vertical slice gate (SC-02)"
 Use **Implementation Plan — Zone build order** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## Zone build order (environment)
 
 1. **ruined_village** — vertical slice gate (SC-02)

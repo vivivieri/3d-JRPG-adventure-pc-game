@@ -56,20 +56,16 @@ roles:
       - docs/engineering/technical/DATA_ARCHITECTURE.md
       - docs/engineering/technical/CODING_STANDARDS_HUB.md
     optional:
+      # Keep lean — language/style leaves live under CODING_STANDARDS_HUB packs.
+      - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
+      - docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md
+      - docs/engineering/technical/spec_first/rule_registries_gate.md
+      - docs/engineering/technical/data/story_spine.md
+      - docs/ops/workflow/IMPLEMENTATION_PLAN.md
+      - docs/ops/workflow/implementation/phase_1.md
       - docs/ops/workflow/branching/roles_rules.md
       - docs/engineering/technical/errors/principles_format.md
       - docs/engineering/technical/code_style/layout_naming.md
-      - docs/engineering/technical/SPEC_FIRST_DEVELOPMENT.md
-      - docs/engineering/technical/TYPESCRIPT_STYLE.md
-      - docs/engineering/technical/PYTHON_STYLE.md
-      - docs/engineering/technical/tdd/principles_runtime.md
-      - docs/engineering/technical/coding/naming.md
-      - docs/engineering/technical/python/standards_pep8.md
-      - docs/engineering/technical/spec_first/rule_registries_gate.md
-      - docs/engineering/technical/data/story_spine.md
-      - docs/engineering/technical/CODE_BASE_CLASS_RULES.md
-      - docs/ops/workflow/IMPLEMENTATION_PLAN.md
-      - docs/ops/workflow/implementation/phase_1.md
 
   qa:
     must_read:
@@ -77,22 +73,15 @@ roles:
       - docs/ops/qa/QA_REMEDIATION_LOOP.md
       - docs/ops/qa/AI_TESTING_SPEC.md
     optional:
-      - docs/ops/qa/tournament/what_stack_data.md
-      - docs/ops/qa/playtest_script/goals_setup_act1.md
-      - docs/ops/qa/PLAYTEST_SCRIPT.md
-      - docs/ops/qa/PERFORMANCE_BASELINE.md
-      - docs/ops/qa/QA_AND_BUG_PROCESS.md
+      # Core gate/remediation only — L3/L4 + playtest/flow/tournament via task packs.
       - docs/ops/qa/acceptance/gate_catalog.md
       - docs/ops/qa/remediation/levers_commands.md
       - docs/ops/qa/bug_process/scope_severity.md
+      - docs/ops/qa/QA_AND_BUG_PROCESS.md
       - docs/ops/qa/testing/l0.md
       - docs/ops/qa/testing/l1.md
       - docs/ops/qa/testing/l2.md
-      - docs/ops/qa/testing/l3.md
-      - docs/ops/qa/testing/l4.md
-      - docs/ops/qa/FLOW_QA.md
-      - docs/ops/qa/flow_qa/scenarios_levers.md
-      - docs/ops/qa/perf/why_profiles.md
+      - docs/ops/qa/PLAYTEST_SCRIPT.md
 
   flow:
     must_read:
@@ -224,6 +213,8 @@ tasks:
       - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/rendering/defaults_environment.md
       - docs/design/art/automation/zone_textures.md
+      - docs/design/art/SHADER_SPECS.md
+      - docs/design/world/LEVEL_DESIGN.md
 
   visual_qa:
     must_read:
@@ -245,8 +236,13 @@ tasks:
       - docs/ops/qa/acceptance/gate_catalog.md
       - docs/ops/qa/QA_REMEDIATION_LOOP.md
       - docs/ops/qa/testing/l0.md
+      - docs/ops/qa/testing/l1.md
       - docs/ops/qa/testing/l2.md
+      - docs/ops/qa/testing/l3.md
+      - docs/ops/qa/testing/l4.md
       - docs/ops/qa/bug_process/scope_severity.md
+      - docs/ops/qa/PERFORMANCE_BASELINE.md
+      - docs/ops/qa/remediation/levers_commands.md
 
   audio_bgm:
     must_read:
@@ -313,10 +309,9 @@ tasks:
       - docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md
       - docs/ops/agents/factory_setup/phases_snapshot_secrets_mcp.md
       - docs/ops/agents/factory_setup/automations_github_bootstrap.md
-      - docs/ops/agents/gdai_setup/install_desktop.md
       - docs/ops/agents/plugins/stack_troubleshoot.md
-      - docs/ops/agents/multi_agent/why_roster_lifecycle.md
-      - docs/ops/qa/workflow_int/problem_register.md
+      - docs/ops/workflow/IMPLEMENTATION_PLAN.md
+      - docs/ops/workflow/implementation/phase_1.md
 
   model_qa:
     must_read:

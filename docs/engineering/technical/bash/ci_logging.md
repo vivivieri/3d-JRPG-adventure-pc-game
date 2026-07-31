@@ -6,7 +6,7 @@ audience: [architect, builder]
 status: active
 authority: engineering
 tokens_est: 448
-summary: "Bash Style — CI gate pattern, logging, Python invoke — Authoritative runner: `tools/run_docs_ci_checks.sh` / `tools/run_ci_checks.sh"
+summary: "Bash Style — CI gate pattern, logging, Python invoke — covers 5. CI gate pattern; 6. Logging & errors; 7. Python invocation"
 ---
 # Bash Style — CI gate pattern, logging, Python invoke
 

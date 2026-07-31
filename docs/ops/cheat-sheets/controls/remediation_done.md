@@ -6,7 +6,7 @@ audience: [pm, builder, qa, release]
 status: active
 authority: ops
 tokens_est: 486
-summary: "Controls Cheat Sheet — Remediation, DoD, verify, related — 1. `bash tools/qa_emit_remediation.sh <brief-id>"
+summary: "Controls Cheat Sheet — Remediation, DoD, verify, related — covers Remediation (QA FAIL loop); Definition of done (merge); Quick verify commands; Related docs"
 ---
 # Controls Cheat Sheet — Remediation, DoD, verify, related
 

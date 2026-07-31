@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 746
-summary: "Title: `[DEV][P1-00] Bootstrap game/development — project.godot + CI baseline"
+summary: "Phase1-Sprint1 — P1-00 bootstrap — covers P1-00 — Bootstrap `game/development` (prerequisite); Acceptance gate IDs; Spec summary; Design refs"
 ---
 # Phase1-Sprint1 — P1-00 bootstrap
 

@@ -6,7 +6,7 @@ phase: [5]
 status: active
 authority: art
 tokens_est: 926
-summary: "Scope: Low-poly crowd and ambient life — excluded from `hero_jury` and `L2_model_jury`. Zone composition counts apply (`zone_composition.json` max props). See `"
+summary: "Scope: Low-poly crowd and ambient life — excluded from `hero_jury` and `L2_model_jury`. Zone composition counts apply (`zone_composition.json` max props). See."
 ---
 # Characters — NPC / ambient
 

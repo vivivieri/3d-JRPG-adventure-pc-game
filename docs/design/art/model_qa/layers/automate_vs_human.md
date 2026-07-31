@@ -17,6 +17,7 @@ summary: "Model QA — Layers & Workflow — Automate vs human"
 Use **Model QA — Layers & Workflow — Automate vs human** (roles: visual, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## 1. What to automate vs human
 
 | Automate | Human L6 |

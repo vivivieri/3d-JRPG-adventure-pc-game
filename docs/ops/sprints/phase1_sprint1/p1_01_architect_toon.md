@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 1089
-summary: "Title: `[DEV][P1-01] Phase 1.1–1.3 — toon_base.gdshader, zone_visuals.gd, ruined_village env preset"
+summary: "Phase1-Sprint1 — P1-01 architect toon + Builder handoff — covers P1-01 — Architect: toon shader + zone visuals; Acceptance gate IDs; Spec summary; Architect →."
 ---
 # Phase1-Sprint1 — P1-01 architect toon + Builder handoff
 

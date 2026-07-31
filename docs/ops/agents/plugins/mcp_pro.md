@@ -6,7 +6,7 @@ audience: [builder, pm]
 status: active
 authority: ops
 tokens_est: 1045
-summary: "Plugin Install Guide — Godot MCP Pro install — Use `--minimal` mode in Cursor (35 tools) so MCP Pro does not overlap GDAI for scene editing. See `docs/ops/agent"
+summary: "Plugin Install Guide — Godot MCP Pro install — Use `--minimal` mode in Cursor (35 tools) so MCP Pro does not overlap GDAI for scene editing. See."
 ---
 # Plugin Install Guide — Godot MCP Pro install
 

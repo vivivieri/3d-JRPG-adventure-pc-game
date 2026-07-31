@@ -17,6 +17,7 @@ summary: "Implementation Plan — Phase 6 — covers Phase 6 — Full story & en
 Use **Implementation Plan — Phase 6** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## Phase 6 — Full story & endings
 
 | # | Task | Docs |

@@ -22,6 +22,7 @@ Use **Quests & Flags — Quest UI, JSON, QA** (roles: narrative, builder, flow) 
 - [7. Implementation JSON](#7-implementation-json)
 - [8. QA checklist](#8-qa-checklist)
 
+
 ## 6. Quest UI behavior
 
 - **New quest:** Banner top-right, 3s fade; log sound

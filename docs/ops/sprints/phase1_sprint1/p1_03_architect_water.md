@@ -6,7 +6,7 @@ phase: [1]
 status: active
 authority: ops
 tokens_est: 407
-summary: "Title: `[DEV][P1-03] Phase 1.4 — water_stylized.gdshader (foam + displacement)"
+summary: "Phase1-Sprint1 — P1-03 water shader — covers P1-03 — Architect: water_stylized shader (parallel); Acceptance gate IDs; Spec summary; Design refs"
 ---
 # Phase1-Sprint1 — P1-03 water shader
 

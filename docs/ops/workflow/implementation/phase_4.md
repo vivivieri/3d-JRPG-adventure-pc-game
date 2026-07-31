@@ -17,6 +17,7 @@ summary: "Implementation Plan — Phase 4 — covers Phase 4 — Combat vertical
 Use **Implementation Plan — Phase 4** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## Phase 4 — Combat vertical slice
 
 | # | Task | Docs |

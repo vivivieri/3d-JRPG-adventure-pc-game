@@ -17,6 +17,7 @@ summary: "Store per-track loop documentation in `docs/design/audio/audio_sheets/
 Use **Audio Production — Combat SFX — Loop sheet template** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
 
 
+
 ## 7. Loop sheet template
 
 Store per-track loop documentation in `docs/design/audio/audio_sheets/<track_id>.md`:
