@@ -31,6 +31,7 @@ VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual",
 VALID_STATUS = {"pending", "in_progress", "blocked", "done", "carry_over"}
 VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
+PACK_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+\.md)\)")
 
 DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
     "architect": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/world/ENVIRONMENT_KITS.md", "docs/engineering/technical/CODE_STYLE.md"],
@@ -67,7 +68,21 @@ def parse_issue_pack(pack_path: Path) -> list[str]:
     if not pack_path.is_file():
         return []
     text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    ids = set(PACK_ISSUE_RE.findall(text))
+
+    # Hub packs link to per-issue sub-packs (docs reorg) — follow local links.
+    pack_dir = pack_path.parent.resolve()
+    for link in PACK_LINK_RE.findall(text):
+        sub_path = (pack_dir / link).resolve()
+        try:
+            sub_path.relative_to(pack_dir)
+        except ValueError:
+            continue
+        if sub_path.is_file():
+            sub_text = sub_path.read_text(encoding="utf-8")
+            ids.update(PACK_ISSUE_RE.findall(sub_text))
+
+    return sorted(ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
