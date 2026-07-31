@@ -203,6 +203,11 @@
           "path": "docs/INDEX.yaml",
           "contains": "pack_catalog:",
           "purpose": "catalog all pack files for discoverability"
+        },
+        {
+          "path": "tools/split_docs_round5.py",
+          "contains": "def ",
+          "purpose": "docs pack round5 splitter"
         }
       ],
       "orchestrator_steps": [
