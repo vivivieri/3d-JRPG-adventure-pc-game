@@ -1,6 +1,7 @@
 ---
 id: shots-briefs
 type: reference
+phase: [1, 6]
 audience: [visual, narrative]
 status: active
 authority: vision

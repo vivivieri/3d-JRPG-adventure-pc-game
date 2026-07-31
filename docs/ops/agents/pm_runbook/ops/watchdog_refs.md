@@ -1,6 +1,7 @@
 ---
 id: watchdog-refs
 type: how-to
+phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops

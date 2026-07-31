@@ -1,6 +1,7 @@
 ---
 id: project-rules
 type: reference
+phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
