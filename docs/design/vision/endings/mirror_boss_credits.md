@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 385
-summary: "Mirror choice, boss resolution, credits"
+tokens_est: 445
+summary: "Ending Design — Mirror choice, boss resolution, credits — Scene: Roku reveals box truth"
 ---
 # Ending Design — Mirror choice, boss resolution, credits
 
 **Hub:** [`ENDING_DESIGN.md`](../ENDING_DESIGN.md)
+
+## When to read
+
+Use **Ending Design — Mirror choice, boss resolution, credits** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. SC-13 mirror choice (recorded, low branch)](#4-sc-13-mirror-choice-recorded-low-branch)
+- [5. Post-choice boss resolution](#5-post-choice-boss-resolution)
+- [6. Credits](#6-credits)
+
 
 ## 4. SC-13 mirror choice (recorded, low branch)
 

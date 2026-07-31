@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 939
-summary: "Metrics, usage, in-game logger"
+tokens_est: 1014
+summary: "Playtest Telemetry — Metrics, usage, in-game logger — All thresholds live in `playtest_telemetry_schema.json` and cross-reference existing gates:"
 ---
 # Playtest Telemetry — Metrics, usage, in-game logger
 
 **Hub:** [`PLAYTEST_TELEMETRY.md`](../PLAYTEST_TELEMETRY.md)
+
+## When to read
+
+Use **Playtest Telemetry — Metrics, usage, in-game logger** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [Metrics & thresholds](#metrics-thresholds)
+- [Usage](#usage)
+- [Reports, charts & delivery](#reports-charts-delivery)
+- [In-game logger (implement on `game/development` via GDAI)](#in-game-logger-implement-on-gamedevelopment-via-gdai)
+
 
 ## Metrics & thresholds
 

@@ -5,12 +5,25 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 651
+tokens_est: 727
 summary: "Dashboard, duty, troubleshoot, alignment, refs"
 ---
 # PM Stakeholder Reporting — Dashboard, duty, troubleshoot, alignment, refs
 
 **Hub:** [`PM_STAKEHOLDER_REPORTING.md`](../PM_STAKEHOLDER_REPORTING.md)
+
+## When to read
+
+Use **PM Stakeholder Reporting — Dashboard, duty, troubleshoot, alignment, refs** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [6. HTML dashboard](#6-html-dashboard)
+- [7. PM Agent duty (enforced)](#7-pm-agent-duty-enforced)
+- [8. Troubleshooting](#8-troubleshooting)
+- [9. Alignment audit (technical complement)](#9-alignment-audit-technical-complement)
+- [10. Cross-refs](#10-cross-refs)
+
 
 ## 6. HTML dashboard
 

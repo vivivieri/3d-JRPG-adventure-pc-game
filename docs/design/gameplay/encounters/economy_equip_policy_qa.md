@@ -5,12 +5,27 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 721
+tokens_est: 828
 summary: "Economy, equipment, limit, hard, random, QA"
 ---
 # Encounter Table — Economy, equipment, limit, hard, random, QA
 
 **Hub:** [`ENCOUNTER_TABLE.md`](../ENCOUNTER_TABLE.md)
+
+## When to read
+
+Use **Encounter Table — Economy, equipment, limit, hard, random, QA** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [7. Economy pacing](#7-economy-pacing)
+- [Roku's shop (`roku_shack`)](#rokus-shop-roku_shack)
+- [8. Equipment progression](#8-equipment-progression)
+- [9. Limit gauge tutorial](#9-limit-gauge-tutorial)
+- [10. Hard mode encounter deltas](#10-hard-mode-encounter-deltas)
+- [11. Random encounter policy (v1)](#11-random-encounter-policy-v1)
+- [12. QA checklist](#12-qa-checklist)
+
 
 ## 7. Economy pacing
 

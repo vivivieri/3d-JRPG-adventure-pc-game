@@ -5,12 +5,22 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 570
-summary: "Folder layout + naming"
+tokens_est: 602
+summary: "Code Style — Folder layout + naming — core/           GameManager, SaveSystem, EventBus, LocalizationManager, boot"
 ---
 # Code Style — Folder layout + naming
 
 **Hub:** [`CODE_STYLE.md`](../CODE_STYLE.md)
+
+## When to read
+
+Use **Code Style — Folder layout + naming** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Folder layout](#1-folder-layout)
+- [2. Naming conventions](#2-naming-conventions)
+
 
 ## 1. Folder layout
 

@@ -5,12 +5,25 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 263
-summary: "P1-03 water shader"
+tokens_est: 407
+summary: "Title: `[DEV][P1-03] Phase 1.4 — water_stylized.gdshader (foam + displacement)"
 ---
 # Phase1-Sprint1 — P1-03 water shader
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-03 water shader** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [P1-03 — Architect: water_stylized shader (parallel)](#p1-03-architect-water_stylized-shader-parallel)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Spec summary](#spec-summary)
+- [Design refs](#design-refs)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-03 — Architect: water_stylized shader (parallel)
 

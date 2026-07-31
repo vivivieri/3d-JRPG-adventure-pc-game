@@ -5,12 +5,18 @@ audience: [pm, architect, builder]
 phase: [2]
 status: active
 authority: workflow
-tokens_est: 336
+tokens_est: 320
 summary: "`docs/engineering/technical/TECHNICAL_DESIGN.md`, `docs/engineering/technical/CODE_STYLE.md`"
 ---
 # Implementation Plan — Phase 2
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 2** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Phase 2 — Core systems shell
 

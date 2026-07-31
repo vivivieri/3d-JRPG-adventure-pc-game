@@ -5,12 +5,18 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 350
-summary: "python3 tools/validate_story_data.py"
+tokens_est: 351
+summary: "Implementation Plan — Validation commands — python3 tools/validate_story_data.py"
 ---
 # Implementation Plan — Validation commands
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Validation commands** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Validation commands
 

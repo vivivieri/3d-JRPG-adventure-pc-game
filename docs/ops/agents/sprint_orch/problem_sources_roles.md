@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 593
-summary: "Problem, sources of truth, roles"
+tokens_est: 642
+summary: "Sprint Orchestration — Problem, sources of truth, roles — covers 1. Problem this solves; 2. Machine-readable sources of truth; 3. Roles"
 ---
 # Sprint Orchestration — Problem, sources of truth, roles
 
 **Hub:** [`SPRINT_ORCHESTRATION.md`](../SPRINT_ORCHESTRATION.md)
+
+## When to read
+
+Use **Sprint Orchestration — Problem, sources of truth, roles** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Problem this solves](#1-problem-this-solves)
+- [2. Machine-readable sources of truth](#2-machine-readable-sources-of-truth)
+- [3. Roles](#3-roles)
+
 
 ## 1. Problem this solves
 

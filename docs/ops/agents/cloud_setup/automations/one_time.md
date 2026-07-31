@@ -5,12 +5,25 @@ phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops
-tokens_est: 821
-summary: "[Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents/environments/r/github.com/vivivieri/3d-jrpg-adventure-pc-game)"
+tokens_est: 893
+summary: "Cloud Setup — Automations — One-time setup — Dashboard: Cloud Agents → Environments"
 ---
 # Cloud Setup — Automations — One-time setup
 
 **Hub:** [`setup_automations.md`](../setup_automations.md)
+
+## When to read
+
+Use **Cloud Setup — Automations — One-time setup** (roles: pm, architect) when learning/setup for the first time Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. One-time setup](#3-one-time-setup)
+- [3.1 Cloud environment snapshot](#31-cloud-environment-snapshot)
+- [3.2 Secrets (Cursor Cloud Agents → Secrets)](#32-secrets-cursor-cloud-agents-secrets)
+- [3.3 MCP (Cloud dashboard — required)](#33-mcp-cloud-dashboard-required)
+- [3.4 Branch bootstrap (first cycle)](#34-branch-bootstrap-first-cycle)
+
 
 ## 3. One-time setup
 

@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, pm]
 status: active
 authority: engineering
-tokens_est: 854
+tokens_est: 919
 summary: "Core rule, what is spec, registries, start gate"
 ---
 # Spec-First Development — Core rule, what is spec, registries, start gate
 
 **Hub:** [`SPEC_FIRST_DEVELOPMENT.md`](../SPEC_FIRST_DEVELOPMENT.md)
+
+## When to read
+
+Use **Spec-First Development — Core rule, what is spec, registries, start gate** (roles: architect, pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Core rule](#1-core-rule)
+- [2. What counts as “specification”](#2-what-counts-as-specification)
+- [3. Spec registries (machine-readable)](#3-spec-registries-machine-readable)
+- [4. Development start gate](#4-development-start-gate)
+
 
 ## 1. Core rule
 

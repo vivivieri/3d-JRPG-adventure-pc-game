@@ -5,16 +5,27 @@ phase: [1, 5]
 audience: [builder, architect]
 status: active
 authority: world
-tokens_est: 732
-summary: "SC-07 — Water Level Puzzle"
+tokens_est: 768
+summary: "Tides of Urashima — Puzzle Design (SC-07) — Version: 1.0 (Pre-build)"
 ---
 # Tides of Urashima — Puzzle Design (SC-07)
 
-**Version:** 1.0 (Pre-build)
-**Scene:** SC-07 — Water Level Puzzle
-**Cross-refs:** `docs/design/vision/STORYBOARD.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `docs/design/vision/NARRATIVE_WRITING_GUIDE.md` §4
+## When to read
 
----
+Use **Tides of Urashima — Puzzle Design (SC-07)** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [1. Overview](#1-overview)
+- [2. Layout](#2-layout)
+- [3. States](#3-states)
+- [4. Solution path](#4-solution-path)
+- [5. Hint system](#5-hint-system)
+- [6. Soft-lock checks](#6-soft-lock-checks)
+- [7. Assets](#7-assets)
+- [8. Audio / feedback](#8-audio-feedback)
+- [9. QA checklist](#9-qa-checklist)
+
 
 ## 1. Overview
 

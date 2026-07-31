@@ -5,12 +5,25 @@ audience: [builder, builder_combat, qa]
 phase: [2, 3]
 status: active
 authority: gameplay
-tokens_est: 511
-summary: "Party, XP, UI, hard mode, QA"
+tokens_est: 575
+summary: "- XP on battle end (win); party level is shared — one level value for the whole party, all"
 ---
 # Combat Systems — Party, XP, UI, hard mode, QA
 
 **Hub:** [`COMBAT_SYSTEMS.md`](../COMBAT_SYSTEMS.md)
+
+## When to read
+
+Use **Combat Systems — Party, XP, UI, hard mode, QA** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [7. Party rules](#7-party-rules)
+- [8. XP & level up](#8-xp-level-up)
+- [9. Combat UI states](#9-combat-ui-states)
+- [10. Hard mode deltas](#10-hard-mode-deltas)
+- [11. QA checklist](#11-qa-checklist)
+
 
 ## 7. Party rules
 

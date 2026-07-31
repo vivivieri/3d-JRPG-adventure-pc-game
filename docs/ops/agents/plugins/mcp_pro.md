@@ -5,12 +5,29 @@ phase: [0, 1]
 audience: [builder, pm]
 status: active
 authority: ops
-tokens_est: 931
-summary: "Godot MCP Pro install"
+tokens_est: 1045
+summary: "Plugin Install Guide — Godot MCP Pro install — Use `--minimal` mode in Cursor (35 tools) so MCP Pro does not overlap GDAI for scene editing. See `docs/ops/agent"
 ---
 # Plugin Install Guide — Godot MCP Pro install
 
 **Hub:** [`PLUGIN_INSTALL_GUIDE.md`](../PLUGIN_INSTALL_GUIDE.md)
+
+## When to read
+
+Use **Plugin Install Guide — Godot MCP Pro install** (roles: builder, pm) when executing this procedure Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [Godot MCP Pro](#godot-mcp-pro)
+- [What you need](#what-you-need)
+- [Step 1 — Obtain the zip](#step-1-obtain-the-zip)
+- [Step 2 — Install](#step-2-install)
+- [Step 3 — Enable in Godot](#step-3-enable-in-godot)
+- [Step 4 — Cursor MCP config](#step-4-cursor-mcp-config)
+- [Cursor — desktop](#cursor-desktop)
+- [Cursor — Cloud Agents](#cursor-cloud-agents)
+- [Verify Godot MCP Pro](#verify-godot-mcp-pro)
+
 
 ## Godot MCP Pro
 

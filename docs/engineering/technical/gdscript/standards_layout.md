@@ -5,12 +5,24 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [builder, architect]
 status: active
 authority: engineering
-tokens_est: 790
-summary: "Standards, layout, naming, structure"
+tokens_est: 878
+summary: "Project architecture: scene tree + autoload singletons — not ECS. See `TECHNICAL_DESIGN.md`."
 ---
 # GDScript Style — Standards, layout, naming, structure
 
 **Hub:** [`GDSCRIPT_STYLE.md`](../GDSCRIPT_STYLE.md)
+
+## When to read
+
+Use **GDScript Style — Standards, layout, naming, structure** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Industry standards (authoritative externals)](#1-industry-standards-authoritative-externals)
+- [2. File & folder layout](#2-file-folder-layout)
+- [3. Naming (Godot style guide + project)](#3-naming-godot-style-guide-project)
+- [4. Script structure (declaration order)](#4-script-structure-declaration-order)
+
 
 ## 1. Industry standards (authoritative externals)
 

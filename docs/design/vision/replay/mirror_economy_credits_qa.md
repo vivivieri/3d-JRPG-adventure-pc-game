@@ -5,12 +5,25 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 400
-summary: "Mirror, economy, credits, backlog, QA"
+tokens_est: 481
+summary: "Flavor only — `mirror_choice` flag adjusts SC-16 subtext warmth. All three endings remain available every run."
 ---
 # Replay Design — Mirror, economy, credits, backlog, QA
 
 **Hub:** [`REPLAY_DESIGN.md`](../REPLAY_DESIGN.md)
+
+## When to read
+
+Use **Replay Design — Mirror, economy, credits, backlog, QA** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [7. SC-13 mirror choice (replay note)](#7-sc-13-mirror-choice-replay-note)
+- [8. Economy on replay](#8-economy-on-replay)
+- [9. Credits & post-game](#9-credits-post-game)
+- [10. Post-v1 backlog (not ship)](#10-post-v1-backlog-not-ship)
+- [11. QA checklist](#11-qa-checklist)
+
 
 ## 7. SC-13 mirror choice (replay note)
 

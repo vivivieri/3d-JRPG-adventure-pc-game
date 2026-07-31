@@ -5,12 +5,23 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 451
-summary: "User API key for the **Cursor Cloud Agents API** — enables **fully automatic** token usage logging in agent session telemetry (`docs/ops/qa/AGENT_SESSION_TELEME"
+tokens_est: 466
+summary: "What it is: User API key for the Cursor Cloud Agents API — enables fully automatic token usage logging in agent session telemetry (`docs/ops/qa/AGENT_SESSION_TE"
 ---
 # Secrets — API Keys — CURSOR_API_KEY
 
 **Hub:** [`api_keys.md`](../api_keys.md)
+
+## When to read
+
+Use **Secrets — API Keys — CURSOR_API_KEY** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [8. `CURSOR_API_KEY`](#8-cursor_api_key)
+- [Steps (one-time setup)](#steps-one-time-setup)
+- [How auto token logging works](#how-auto-token-logging-works)
+
 
 ## 8. `CURSOR_API_KEY`
 

@@ -5,12 +5,25 @@ phase: [0, 1, 8]
 audience: [pm]
 status: active
 authority: workflow
-tokens_est: 624
-summary: "Issue flow + Phase 1 example"
+tokens_est: 732
+summary: "Agile — Linear Sprints — Issue flow + Phase 1 example — IMPLEMENTATION_PLAN task row"
 ---
 # Agile — Linear Sprints — Issue flow + Phase 1 example
 
 **Hub:** [`linear_sprints.md`](../linear_sprints.md)
+
+## When to read
+
+Use **Agile — Linear Sprints — Issue flow + Phase 1 example** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Issue flow (GitHub + Linear)](#5-issue-flow-github-linear)
+- [6. Example: Phase 1 sprint breakdown](#6-example-phase-1-sprint-breakdown)
+- [Phase1-Sprint1 (current — ruined_village vertical slice)](#phase1-sprint1-current-ruined_village-vertical-slice)
+- [Phase1-Sprint2 (preview — remaining Phase 1 scope)](#phase1-sprint2-preview-remaining-phase-1-scope)
+- [Phase exit](#phase-exit)
+
 
 ## 5. Issue flow (GitHub + Linear)
 

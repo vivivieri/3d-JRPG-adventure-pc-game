@@ -4,12 +4,22 @@ type: reference
 audience: [pm, qa, architect]
 status: active
 authority: workflow
-tokens_est: 583
-summary: "AI Dev — Phases 0–3 — Phases 2–3"
+tokens_est: 629
+summary: "AI Dev — Phases 2–3 — covers Phase 2 — Core systems shell; Phase 3 — Narrative & exploration"
 ---
 # AI Dev — Phases 2–3
 
 **Hub:** [`phase_acceptance.md`](../../phase_acceptance.md)
+
+## When to read
+
+Use **AI Dev — Phases 2–3** (roles: pm, qa, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Phase 2 — Core systems shell](#phase-2-core-systems-shell)
+- [Phase 3 — Narrative & exploration](#phase-3-narrative-exploration)
+
 
 ### Phase 2 — Core systems shell
 

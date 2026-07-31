@@ -5,12 +5,27 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 521
-summary: "P1-04 QA CI + gate report"
+tokens_est: 697
+summary: "Title: `[DEV][P1-04] Phase 1 — CI green + L0–L2 gate report on ruined_village PR"
 ---
 # Phase1-Sprint1 — P1-04 QA CI + gate report
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-04 QA CI + gate report** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [P1-04 — QA: CI green + Phase 1 gate report](#p1-04-qa-ci-green-phase-1-gate-report)
+- [Acceptance gate IDs](#acceptance-gate-ids)
+- [Commands](#commands)
+- [Gate report template (paste in PR + issue)](#gate-report-template-paste-in-pr-issue)
+- [Gate report — Phase1-Sprint1](#gate-report-phase1-sprint1)
+- [On FAIL](#on-fail)
+- [Definition of done](#definition-of-done)
+
 
 ## P1-04 — QA: CI green + Phase 1 gate report
 

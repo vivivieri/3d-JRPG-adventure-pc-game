@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering
-tokens_est: 405
-summary: "Steam, translator workflow, checklist"
+tokens_est: 440
+summary: "Localization — Steam, translator workflow, checklist — Plan separate store pages or one page with language bullets:"
 ---
 # Localization — Steam, translator workflow, checklist
 
 **Hub:** [`LOCALIZATION.md`](../LOCALIZATION.md)
+
+## When to read
+
+Use **Localization — Steam, translator workflow, checklist** (roles: architect, narrative, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Steam store](#steam-store)
+- [Translator workflow](#translator-workflow)
+- [Checklist for new content](#checklist-for-new-content)
+
 
 ## Steam store
 

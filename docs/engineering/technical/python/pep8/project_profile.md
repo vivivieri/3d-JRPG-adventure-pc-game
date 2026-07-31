@@ -4,12 +4,26 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 749
-summary: "Project PEP 8 profile"
+tokens_est: 860
+summary: "Python — PEP 8 Standards — Project PEP 8 profile — def load_catalog() -> dict[str, Any]:"
 ---
 # Python — PEP 8 Standards — Project PEP 8 profile
 
 **Hub:** [`standards_pep8.md`](../standards_pep8.md)
+
+## When to read
+
+Use **Python — PEP 8 Standards — Project PEP 8 profile** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [2. PEP 8 essentials (project profile)](#2-pep-8-essentials-project-profile)
+- [2.1 Code layout](#21-code-layout)
+- [2.2 Imports (PEP 8 §Imports)](#22-imports-pep-8-imports)
+- [2.3 Naming (PEP 8 §Naming conventions)](#23-naming-pep-8-naming-conventions)
+- [2.4 Whitespace (PEP 8 §Whitespace)](#24-whitespace-pep-8-whitespace)
+- [2.5 Strings & files](#25-strings-files)
+
 
 ## 2. PEP 8 essentials (project profile)
 

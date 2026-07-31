@@ -5,12 +5,22 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 550
-summary: "Poly budgets & asset sourcing"
+tokens_est: 592
+summary: "Art Direction — Poly budgets & asset sourcing — Priority: AI-generated heroes + set-pieces; curated CC0 Japanese-environment packs for modular fill. No commissi"
 ---
 # Art Direction — Poly budgets & asset sourcing
 
 **Hub:** [`ART_DIRECTION.md`](../ART_DIRECTION.md)
+
+## When to read
+
+Use **Art Direction — Poly budgets & asset sourcing** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Poly budgets](#5-poly-budgets)
+- [6. Asset sourcing plan (automated)](#6-asset-sourcing-plan-automated)
+
 
 ## 5. Poly budgets
 

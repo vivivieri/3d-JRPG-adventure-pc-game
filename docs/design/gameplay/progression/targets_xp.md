@@ -5,12 +5,23 @@ audience: [builder, builder_combat, qa]
 phase: [2, 3]
 status: active
 authority: gameplay
-tokens_est: 485
-summary: "Design targets + XP curve"
+tokens_est: 531
+summary: "Progression & Tuning — Design targets + XP curve — XP per fight: Trash 25–35 | Pair 55–70 | Boss 100–250 (`ENCOUNTER_TABLE.md`)"
 ---
 # Progression & Tuning — Design targets + XP curve
 
 **Hub:** [`PROGRESSION_TUNING.md`](../PROGRESSION_TUNING.md)
+
+## When to read
+
+Use **Progression & Tuning — Design targets + XP curve** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Design targets](#1-design-targets)
+- [2. XP curve](#2-xp-curve)
+- [Main-path XP budget](#main-path-xp-budget)
+
 
 ## 1. Design targets
 

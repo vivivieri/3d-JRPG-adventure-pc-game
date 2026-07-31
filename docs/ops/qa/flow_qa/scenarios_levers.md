@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 566
-summary: "L4 scenarios + lever taxonomy"
+tokens_est: 615
+summary: "Flow QA — L4 scenarios + lever taxonomy — Implement in `game/tests/integration/` as phases land. Catalog: `game/data/qa/integration_scenarios.json`. IDs from `A"
 ---
 # Flow QA — L4 scenarios + lever taxonomy
 
 **Hub:** [`FLOW_QA.md`](../FLOW_QA.md)
+
+## When to read
+
+Use **Flow QA — L4 scenarios + lever taxonomy** (roles: flow, qa, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Integration scenarios (L4)](#3-integration-scenarios-l4)
+- [4. Flow lever taxonomy (change one per attempt)](#4-flow-lever-taxonomy-change-one-per-attempt)
+
 
 ## 3. Integration scenarios (L4)
 

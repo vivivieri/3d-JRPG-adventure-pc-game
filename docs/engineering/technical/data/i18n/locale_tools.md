@@ -4,12 +4,23 @@ type: reference
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 401
-summary: "Locale + tools + migration"
+tokens_est: 471
+summary: "python3 tools/validate_story_data.py   # L0 gate — run after every data edit"
 ---
 # Data — i18n & Validation — Locale + tools + migration
 
 **Hub:** [`i18n_validation.md`](../i18n_validation.md)
+
+## When to read
+
+Use **Data — i18n & Validation — Locale + tools + migration** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [12. Localization split](#12-localization-split)
+- [13. Validation tools (implemented)](#13-validation-tools-implemented)
+- [14. Migration from old 3-quest data](#14-migration-from-old-3-quest-data)
+
 
 ## 12. Localization split
 

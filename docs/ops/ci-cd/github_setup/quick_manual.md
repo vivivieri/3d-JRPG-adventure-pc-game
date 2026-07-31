@@ -5,12 +5,30 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 867
-summary: "Quick setup + manual UI"
+tokens_est: 994
+summary: "GitHub Setup — Quick setup + manual UI — 1. GitHub → Settings → Developer settings → Fine-grained personal access token"
 ---
 # GitHub Setup — Quick setup + manual UI
 
 **Hub:** [`GITHUB_SETUP.md`](../GITHUB_SETUP.md)
+
+## When to read
+
+Use **GitHub Setup — Quick setup + manual UI** (roles: pm, release) when learning/setup for the first time Jump to a section below instead of reading end-to-end (10 sections).
+
+## Jump to
+
+- [1. Quick setup (recommended)](#1-quick-setup-recommended)
+- [Step A — Create a token](#step-a-create-a-token)
+- [Step B — Run setup](#step-b-run-setup)
+- [What the script creates](#what-the-script-creates)
+- [2. Manual UI setup (if script fails)](#2-manual-ui-setup-if-script-fails)
+- [Labels](#labels)
+- [Environments](#environments)
+- [Branch protection](#branch-protection)
+- [GitHub Projects board](#github-projects-board)
+- [Milestones](#milestones)
+
 
 ## 1. Quick setup (recommended)
 

@@ -4,12 +4,29 @@ type: reference
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 990
-summary: "JRPG emotional storytelling rules A–I"
+tokens_est: 1156
+summary: "Narrative — Project Emotional Rules — Rule: If a line explains what the camera already showed, cut the line."
 ---
 # Narrative — Project Emotional Rules
 
 **Hub:** [`emotional_rules.md`](../emotional_rules.md)
+
+## When to read
+
+Use **Narrative — Project Emotional Rules** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [A. Show before tell](#a-show-before-tell)
+- [B. Silence is a beat](#b-silence-is-a-beat)
+- [C. Callbacks (cheap, high impact)](#c-callbacks-cheap-high-impact)
+- [D. Party as emotional mirror](#d-party-as-emotional-mirror)
+- [E. Combat as punctuation](#e-combat-as-punctuation)
+- [F. Endings earn their length](#f-endings-earn-their-length)
+- [G. Replay without bloat](#g-replay-without-bloat)
+- [H. What to avoid (audience 20–30)](#h-what-to-avoid-audience-2030)
+- [I. Writer smoke test](#i-writer-smoke-test)
+
 
 ### A. Show before tell
 

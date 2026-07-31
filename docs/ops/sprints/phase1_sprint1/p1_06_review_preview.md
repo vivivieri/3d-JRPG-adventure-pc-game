@@ -5,12 +5,26 @@ audience: [pm, architect, builder, qa]
 phase: [1]
 status: active
 authority: ops
-tokens_est: 544
-summary: "P1-06 review + Sprint2 preview"
+tokens_est: 745
+summary: "Title: `[DEV][P1-06] Phase1-Sprint1 review — phase_1 exit gap analysis"
 ---
 # Phase1-Sprint1 — P1-06 review + Sprint2 preview
 
 **Hub:** [`Phase1-Sprint1-issues.md`](../Phase1-Sprint1-issues.md)
+
+## When to read
+
+Use **Phase1-Sprint1 — P1-06 review + Sprint2 preview** (roles: pm, architect, builder, qa) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [P1-06 — PM: Phase 1 sprint review + carry-over](#p1-06-pm-phase-1-sprint-review-carry-over)
+- [Phase 1 exit gates (`acceptance_criteria.json`)](#phase-1-exit-gates-acceptance_criteriajson)
+- [Sprint review agenda](#sprint-review-agenda)
+- [Definition of done](#definition-of-done)
+- [Phase1-Sprint2 preview (file issues next cycle)](#phase1-sprint2-preview-file-issues-next-cycle)
+- [Quick copy: GitHub issue titles only](#quick-copy-github-issue-titles-only)
+
 
 ## P1-06 — PM: Phase 1 sprint review + carry-over
 

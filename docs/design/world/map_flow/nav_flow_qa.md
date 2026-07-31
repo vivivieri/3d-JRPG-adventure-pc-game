@@ -4,12 +4,24 @@ type: reference
 audience: [architect, builder, narrative]
 status: active
 authority: world
-tokens_est: 374
-summary: "Save, nav, scene flow, QA"
+tokens_est: 440
+summary: "World Map & Flow — Save, nav, scene flow, QA — Autosave: Before each boss (SC-09, SC-14, SC-15) and on scene transitions (`SAVE_AND_FAIL_STATES.md`)."
 ---
 # World Map & Flow — Save, nav, scene flow, QA
 
 **Hub:** [`WORLD_MAP_AND_FLOW.md`](../WORLD_MAP_AND_FLOW.md)
+
+## When to read
+
+Use **World Map & Flow — Save, nav, scene flow, QA** (roles: architect, builder, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. Save points](#7-save-points)
+- [8. Player navigation aids](#8-player-navigation-aids)
+- [9. Scene flow (canonical)](#9-scene-flow-canonical)
+- [10. QA checklist](#10-qa-checklist)
+
 
 ## 7. Save points
 

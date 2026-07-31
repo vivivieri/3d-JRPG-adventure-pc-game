@@ -4,12 +4,24 @@ type: reference
 audience: [visual, builder]
 status: active
 authority: art
-tokens_est: 735
-summary: "Rules + sheet template"
+tokens_est: 812
+summary: "Items — Global Sheets & Rig — Rules + sheet template — Use this layout for every new item or character prop before modeling. Store sheets in `docs/model_sheets/"
 ---
 # Items — Global Sheets & Rig — Rules + sheet template
 
 **Hub:** [`global_sheets_rig.md`](../global_sheets_rig.md)
+
+## When to read
+
+Use **Items — Global Sheets & Rig — Rules + sheet template** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Global item & prop rules](#1-global-item-prop-rules)
+- [Representation matrix](#representation-matrix)
+- [2. Model sheet template](#2-model-sheet-template)
+- [Required fields per sheet](#required-fields-per-sheet)
+
 
 ## 1. Global item & prop rules
 

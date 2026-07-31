@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 421
-summary: "Enemy skills, MP, scrolls"
+tokens_est: 470
+summary: "Skills Bible — Enemy skills, MP, scrolls — Tonic value: 25 MP ≈ 1–2 skills. Price tuned in `ITEMS_AND_ECONOMY.md`."
 ---
 # Skills Bible — Enemy skills, MP, scrolls
 
 **Hub:** [`SKILLS_BIBLE.md`](../SKILLS_BIBLE.md)
+
+## When to read
+
+Use **Skills Bible — Enemy skills, MP, scrolls** (roles: builder, builder_combat) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Enemy skills (reference)](#4-enemy-skills-reference)
+- [5. MP economy](#5-mp-economy)
+- [6. Skill scrolls (shop)](#6-skill-scrolls-shop)
+
 
 ## 4. Enemy skills (reference)
 

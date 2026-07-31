@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, builder, visual]
 status: active
 authority: qa
-tokens_est: 562
+tokens_est: 614
 summary: "Tools, related docs, unified improvement"
 ---
 # QA Remediation Loop — Tools, related docs, unified improvement
 
 **Hub:** [`QA_REMEDIATION_LOOP.md`](../QA_REMEDIATION_LOOP.md)
+
+## When to read
+
+Use **QA Remediation Loop — Tools, related docs, unified improvement** (roles: qa, builder, visual) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [8. Tools](#8-tools)
+- [9. Related docs](#9-related-docs)
+- [10. Unified iterative improvement (all domains)](#10-unified-iterative-improvement-all-domains)
+
 
 ## 8. Tools
 

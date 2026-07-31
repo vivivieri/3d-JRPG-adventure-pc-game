@@ -5,12 +5,23 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 260
-summary: "Art Direction — Color palette"
+tokens_est: 321
+summary: "Art Direction — Color palette — covers 1. Color palette; Hub — Ruined Village; Dungeon — Tidal Caves; Dungeon — Dragon Palace Gate"
 ---
 # Art Direction — Color palette
 
 **Hub:** [`ART_DIRECTION.md`](../ART_DIRECTION.md)
+
+## When to read
+
+Use **Art Direction — Color palette** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. Color palette](#1-color-palette)
+- [Hub — Ruined Village](#hub-ruined-village)
+- [Dungeon — Tidal Caves](#dungeon-tidal-caves)
+- [Dungeon — Dragon Palace Gate](#dungeon-dragon-palace-gate)
 
 ## 1. Color palette
 

@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 652
-summary: "Principles + message format"
+tokens_est: 727
+summary: "Policy: WARN ≠ PASS · SKIP ≠ PASS — same tri-state rules as QA gates (`docs/ops/qa/ACCEPTANCE_CRITERIA.md`)."
 ---
 # Error Handling — Principles + message format
 
 **Hub:** [`ERROR_HANDLING.md`](../ERROR_HANDLING.md)
+
+## When to read
+
+Use **Error Handling — Principles + message format** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Principles](#1-principles)
+- [2. Message format conventions](#2-message-format-conventions)
+- [2.1 CI / tooling (Python, Bash)](#21-ci-tooling-python-bash)
+- [2.2 GDScript runtime](#22-gdscript-runtime)
+- [2.3 TypeScript (MCP Pro)](#23-typescript-mcp-pro)
+
 
 ## 1. Principles
 

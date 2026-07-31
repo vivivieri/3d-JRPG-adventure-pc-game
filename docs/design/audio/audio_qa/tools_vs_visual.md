@@ -5,12 +5,21 @@ phase: [1, 5]
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 278
-summary: "Tools + vs Visual QA"
+tokens_est: 300
+summary: "Audio QA — Tools + vs Visual QA — covers 6. Tools; 7. vs Visual QA"
 ---
 # Audio QA — Tools + vs Visual QA
 
 **Hub:** [`AUDIO_QA.md`](../AUDIO_QA.md)
+
+## When to read
+
+Use **Audio QA — Tools + vs Visual QA** (roles: audio, qa) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [6. Tools](#6-tools)
+- [7. vs Visual QA](#7-vs-visual-qa)
 
 ## 6. Tools
 

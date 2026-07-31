@@ -4,12 +4,25 @@ type: how-to
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 423
+tokens_est: 498
 summary: "1. Read `docs/ops/workflow/IMPLEMENTATION_PLAN.md` §Phase N + `sprint_phases.json` exit gates."
 ---
 # PM Runbook — Planning & Watchdog — Planning + close
 
 **Hub:** [`planning_watchdog.md`](../planning_watchdog.md)
+
+## When to read
+
+Use **PM Runbook — Planning & Watchdog — Planning + close** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Sprint planning — create / sync issues](#5-sprint-planning-create-sync-issues)
+- [New sprint batch](#new-sprint-batch)
+- [Missing issue detection](#missing-issue-detection)
+- [Carry-over from previous sprint](#carry-over-from-previous-sprint)
+- [6. Sprint close checklist](#6-sprint-close-checklist)
+
 
 ## 5. Sprint planning — create / sync issues
 

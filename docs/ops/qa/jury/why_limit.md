@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [qa, visual, audio]
 status: active
 authority: qa
-tokens_est: 448
-summary: "Why + hard limitation"
+tokens_est: 486
+summary: "Agent Jury — Why + hard limitation — The external-API jury (`tools/review_*_vision.py`) calls `api.openai.com` / `api.anthropic.com` / Gemini directly, which ne"
 ---
 # Agent Jury — Why + hard limitation
 
 **Hub:** [`AGENT_JURY.md`](../AGENT_JURY.md)
+
+## When to read
+
+Use **Agent Jury — Why + hard limitation** (roles: qa, visual, audio) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Why this exists](#1-why-this-exists)
+- [2. Hard limitation (read this)](#2-hard-limitation-read-this)
+
 
 ## 1. Why this exists
 

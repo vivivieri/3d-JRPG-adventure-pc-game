@@ -5,12 +5,29 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 689
+tokens_est: 792
 summary: "`docs/ops/agents/PLUGIN_INSTALL_GUIDE.md`, `docs/ops/agents/GDAI_CLOUD_SETUP.md`"
 ---
 # MCP — Install
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Use **MCP — Install** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (9 sections).
+
+## Jump to
+
+- [Install — Godot MCP plugins](#install-godot-mcp-plugins)
+- [1. GDAI MCP](#1-gdai-mcp)
+- [2. Godotiq](#2-godotiq)
+- [3. Godot MCP Pro](#3-godot-mcp-pro)
+- [4. Bootstrap all Godot bridges](#4-bootstrap-all-godot-bridges)
+- [Install — Cursor MCP servers](#install-cursor-mcp-servers)
+- [Full `mcpServers` example](#full-mcpservers-example)
+- [Ports (defaults)](#ports-defaults)
+- [Godot editor plugins (enable all)](#godot-editor-plugins-enable-all)
+
 
 ## Install — Godot MCP plugins
 

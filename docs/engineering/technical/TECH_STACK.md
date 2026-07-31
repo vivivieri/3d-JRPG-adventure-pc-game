@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 670
+tokens_est: 679
 summary: "**Updated:** July 2026 — pin versions here; install scripts read `GODOT_VERSION` from `tools/install_cloud_dev.sh`."
 ---
 # Technology stack (latest)
 
-**Updated:** July 2026 — pin versions here; install scripts read `GODOT_VERSION` from `tools/install_cloud_dev.sh`.
+## When to read
+
+Use **Technology stack (latest)** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Engine](#engine)
+- [AI development stack](#ai-development-stack)
+- [MCP plugin compatibility (Godot 4.7)](#mcp-plugin-compatibility-godot-47)
+- [Ship (Phase 8)](#ship-phase-8)
+- [Upgrade Godot](#upgrade-godot)
+
 
 ## Engine
 

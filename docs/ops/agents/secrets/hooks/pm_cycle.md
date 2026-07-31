@@ -4,12 +4,23 @@ type: how-to
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 524
+tokens_est: 531
 summary: "The inbound webhook URL for **Automation A — PM cycle dispatch**. Workers and `pm_emit_cycle_event.sh` POST here when a cycle completes; PM wakes in seconds."
 ---
 # Secrets — Webhooks — PM cycle webhook
 
 **Hub:** [`webhooks.md`](../webhooks.md)
+
+## When to read
+
+Use **Secrets — Webhooks — PM cycle webhook** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [2. `CURSOR_PM_CYCLE_WEBHOOK_URL`](#2-cursor_pm_cycle_webhook_url)
+- [Steps](#steps)
+- [Test](#test)
+
 
 ## 2. `CURSOR_PM_CYCLE_WEBHOOK_URL`
 

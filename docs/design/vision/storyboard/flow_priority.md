@@ -5,12 +5,27 @@ audience: [narrative, builder, flow]
 phase: [1, 2, 3, 4, 5, 6]
 status: active
 authority: vision
-tokens_est: 385
-summary: "Flow diagram + production priority"
+tokens_est: 511
+summary: "Storyboard — Flow diagram + production priority — SC00[SC-00 Prologue] --> SC01"
 ---
 # Storyboard — Flow diagram + production priority
 
 **Hub:** [`STORYBOARD.md`](../STORYBOARD.md)
+
+## When to read
+
+Use **Storyboard — Flow diagram + production priority** (roles: narrative, builder, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Scene flow diagram](#scene-flow-diagram)
+- [Production priority (pre-build → art rebuild)](#production-priority-pre-build-art-rebuild)
+- [Phase 0 — Design lock (complete)](#phase-0-design-lock-complete)
+- [Phase 1 — Vertical art slice](#phase-1-vertical-art-slice)
+- [Phase 2 — Act II art](#phase-2-act-ii-art)
+- [Phase 3 — Act III art](#phase-3-act-iii-art)
+- [Legacy greybox order (prototype branches only)](#legacy-greybox-order-prototype-branches-only)
+
 
 ## Scene flow diagram
 

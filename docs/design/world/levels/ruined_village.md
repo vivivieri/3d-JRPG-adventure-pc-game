@@ -5,12 +5,27 @@ audience: [builder, builder_zone, architect]
 phase: [1]
 status: active
 authority: world
-tokens_est: 530
+tokens_est: 605
 summary: "`res://scenes/world/ruined_village.tscn`"
 ---
 # Level Design — Zone ruined_village
 
 **Hub:** [`LEVEL_DESIGN.md`](../LEVEL_DESIGN.md)
+
+## When to read
+
+Use **Level Design — Zone ruined_village** (roles: builder, builder_zone, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [3. Zone: `ruined_village` (SC-02–05 hub)](#3-zone-ruined_village-sc-0205-hub)
+- [Blockout](#blockout)
+- [Layout](#layout)
+- [Interactables & triggers](#interactables-triggers)
+- [Encounters](#encounters)
+- [Shop](#shop)
+- [Lore placements](#lore-placements)
+
 
 ## 3. Zone: `ruined_village` (SC-02–05 hub)
 

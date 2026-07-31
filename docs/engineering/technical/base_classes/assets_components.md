@@ -5,12 +5,23 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 443
-summary: "3D asset sources + component scenes"
+tokens_est: 529
+summary: "Code Base Class Rules — 3D asset sources + component scenes — Code base classes ≠ 3D base mesh. For models, use this pipeline only:"
 ---
 # Code Base Class Rules — 3D asset sources + component scenes
 
 **Hub:** [`CODE_BASE_CLASS_RULES.md`](../CODE_BASE_CLASS_RULES.md)
+
+## When to read
+
+Use **Code Base Class Rules — 3D asset sources + component scenes** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [3. 3D assets — license-safe sources (separate from code bases)](#3-3d-assets-license-safe-sources-separate-from-code-bases)
+- [Optional proportion reference (not shipped)](#optional-proportion-reference-not-shipped)
+- [4. Component scenes (Builder catalog)](#4-component-scenes-builder-catalog)
+
 
 ## 3. 3D assets — license-safe sources (separate from code bases)
 

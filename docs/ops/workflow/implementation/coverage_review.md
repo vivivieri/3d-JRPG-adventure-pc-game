@@ -5,12 +5,18 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 547
+tokens_est: 517
 summary: "This plan was audited against `TECHNICAL_DESIGN.md`, `MILESTONES.md`, and `AI_DEV_WORKFLOW.md`. The following were **missing** from earlier versions and are now"
 ---
 # Implementation Plan — Coverage review
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Coverage review** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Coverage review (gaps closed in v1.2)
 

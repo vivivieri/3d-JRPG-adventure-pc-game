@@ -5,12 +5,24 @@ phase: [0, 1, 8]
 audience: [pm, release, architect]
 status: active
 authority: workflow
-tokens_est: 491
-summary: "M1–M4 gameplay milestones"
+tokens_est: 548
+summary: "- [ ] Player movement polish (camera orbit — right-mouse + scroll)"
 ---
 # Milestones — M1–M4 gameplay milestones
 
 **Hub:** [`MILESTONES.md`](../MILESTONES.md)
+
+## When to read
+
+Use **Milestones — M1–M4 gameplay milestones** (roles: pm, release, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [M1 — Greybox exploration](#m1-greybox-exploration)
+- [M2 — Combat vertical slice](#m2-combat-vertical-slice)
+- [M3 — Chapter 1](#m3-chapter-1)
+- [M4 — Full game](#m4-full-game)
+
 
 ## M1 — Greybox exploration
 - [ ] Player movement polish (camera orbit — right-mouse + scroll)

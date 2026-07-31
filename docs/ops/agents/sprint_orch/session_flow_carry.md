@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 571
-summary: "Session flow + carry-over"
+tokens_est: 619
+summary: "Sprint Orchestration — Session flow + carry-over — PM: bash tools/run_pm_orchestrator.sh          → PASS required"
 ---
 # Sprint Orchestration — Session flow + carry-over
 
 **Hub:** [`SPRINT_ORCHESTRATION.md`](../SPRINT_ORCHESTRATION.md)
+
+## When to read
+
+Use **Sprint Orchestration — Session flow + carry-over** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [4. Session flow (event-driven — not cron)](#4-session-flow-event-driven-not-cron)
+- [5. Carry-over and new sprints](#5-carry-over-and-new-sprints)
+
 
 ## 4. Session flow (event-driven — not cron)
 

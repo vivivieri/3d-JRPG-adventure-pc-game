@@ -5,12 +5,28 @@ audience: [visual, builder]
 phase: [5]
 status: active
 authority: art
-tokens_est: 479
-summary: "Balanced fighter / party leader"
+tokens_est: 574
+summary: "Character — Urashima — Role: Balanced fighter / party leader"
 ---
 # Character — Urashima
 
 **Hub:** [`CHARACTER_BIBLE.md`](../CHARACTER_BIBLE.md)
+
+## When to read
+
+Use **Character — Urashima** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [2. Urashima Tarō (protagonist)](#2-urashima-tarō-protagonist)
+- [Silhouette](#silhouette)
+- [Costume layers (model order)](#costume-layers-model-order)
+- [Lacquer box states](#lacquer-box-states)
+- [Colors](#colors)
+- [Field vs combat](#field-vs-combat)
+- [Key scenes](#key-scenes)
+- [Voice tone (writing ref)](#voice-tone-writing-ref)
+
 
 ## 2. Urashima Tarō (protagonist)
 

@@ -5,12 +5,24 @@ audience: [architect, builder]
 phase: [1]
 status: active
 authority: engineering
-tokens_est: 394
-summary: "Verify, handoff, recover, checklist"
+tokens_est: 463
+summary: "Phase 1 Visuals Regen — Verify, handoff, recover, checklist — bash tools/regenerate_phase1_visuals.sh --test"
 ---
 # Phase 1 Visuals Regen — Verify, handoff, recover, checklist
 
 **Hub:** [`phase1_visuals.md`](../phase1_visuals.md)
+
+## When to read
+
+Use **Phase 1 Visuals Regen — Verify, handoff, recover, checklist** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [10.4 Verify](#104-verify)
+- [10.5 Builder handoff (P1-02)](#105-builder-handoff-p1-02)
+- [10.6 Recovering prior ports (diff hints)](#106-recovering-prior-ports-diff-hints)
+- [10.7 One-command checklist](#107-one-command-checklist)
+
 
 ### 10.4 Verify
 

@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative, builder, visual]
 status: active
 authority: vision
-tokens_est: 467
+tokens_est: 526
 summary: "Placement map, inspect vs lore, hub emptiness"
 ---
 # Lore & Environmental Story — Placement map, inspect vs lore, hub emptiness
 
 **Hub:** [`LORE_AND_ENVIRONMENTAL_STORY.md`](../LORE_AND_ENVIRONMENTAL_STORY.md)
+
+## When to read
+
+Use **Lore & Environmental Story — Placement map, inspect vs lore, hub emptiness** (roles: narrative, builder, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Placement map](#4-placement-map)
+- [5. Inspect scenes vs lore (village)](#5-inspect-scenes-vs-lore-village)
+- [6. Hub emptiness (by design)](#6-hub-emptiness-by-design)
+
 
 ## 4. Placement map
 

@@ -5,12 +5,26 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 468
-summary: "What you get + Telegram setup"
+tokens_est: 556
+summary: "PM Stakeholder Reporting — What you get + Telegram setup — After each micro cycle (issue done), sprint cycle, or phase exit, the PM stack generates:"
 ---
 # PM Stakeholder Reporting — What you get + Telegram setup
 
 **Hub:** [`PM_STAKEHOLDER_REPORTING.md`](../PM_STAKEHOLDER_REPORTING.md)
+
+## When to read
+
+Use **PM Stakeholder Reporting — What you get + Telegram setup** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [1. What you get](#1-what-you-get)
+- [2. One-time Telegram setup](#2-one-time-telegram-setup)
+- [Step 1 — Create a bot](#step-1-create-a-bot)
+- [Step 2 — Get your chat ID](#step-2-get-your-chat-id)
+- [Step 3 — Cursor / GitHub Secrets](#step-3-cursor-github-secrets)
+- [Step 4 — Test](#step-4-test)
+
 
 ## 1. What you get
 

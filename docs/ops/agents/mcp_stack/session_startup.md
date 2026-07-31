@@ -5,12 +5,22 @@ phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops
-tokens_est: 337
-summary: "Session startup every run"
+tokens_est: 384
+summary: "MCP Stack — Session startup every run — bash tools/ensure_mcp_stack.sh"
 ---
 # MCP Stack — Session startup every run
 
 **Hub:** [`MCP_STACK.md`](../MCP_STACK.md)
+
+## When to read
+
+Use **MCP Stack — Session startup every run** (roles: pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [Session startup (every agent run)](#session-startup-every-agent-run)
+- [Block until all required checks pass](#block-until-all-required-checks-pass)
+
 
 ## Session startup (every agent run)
 

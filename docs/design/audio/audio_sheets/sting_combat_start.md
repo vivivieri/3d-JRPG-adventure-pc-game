@@ -1,5 +1,15 @@
 # ACE-Step prompt — `sting_combat_start`
 
+## When to read
+
+Use **ACE-Step prompt — `sting_combat_start`** when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Prompt](#prompt)
+- [Negative](#negative)
+- [ACE-Step Gradio / API](#ace-step-gradio-api)
+
 | Field | Value |
 |-------|-------|
 | Scene | combat enter |

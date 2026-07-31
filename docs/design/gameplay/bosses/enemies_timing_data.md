@@ -5,12 +5,27 @@ audience: [builder, builder_combat, qa]
 phase: [2, 5]
 status: active
 authority: gameplay
-tokens_est: 643
+tokens_est: 772
 summary: "Tutorial/standard enemies, timing, data, playtest"
 ---
 # Boss Designs — Tutorial/standard enemies, timing, data, playtest
 
 **Hub:** [`BOSS_DESIGNS.md`](../BOSS_DESIGNS.md)
+
+## When to read
+
+Use **Boss Designs — Tutorial/standard enemies, timing, data, playtest** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [5. Tutorial enemy — Salt Crab (`salt_crab`)](#5-tutorial-enemy-salt-crab-salt_crab)
+- [6. Standard enemies (non-boss patterns)](#6-standard-enemies-non-boss-patterns)
+- [Tide Wraith (`tide_wraith`)](#tide-wraith-tide_wraith)
+- [Salt Crab (`salt_crab`) — field](#salt-crab-salt_crab-field)
+- [7. Boss intro / outro timing](#7-boss-intro-outro-timing)
+- [8. Data implementation notes](#8-data-implementation-notes)
+- [9. Playtest acceptance](#9-playtest-acceptance)
+
 
 ## 5. Tutorial enemy — Salt Crab (`salt_crab`)
 

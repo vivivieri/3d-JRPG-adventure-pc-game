@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 675
+tokens_est: 778
 summary: "Close loop, factory features, stale agents"
 ---
 # PM Agent Runbook — Close loop, factory features, stale agents
 
 **Hub:** [`PM_AGENT_RUNBOOK.md`](../PM_AGENT_RUNBOOK.md)
+
+## When to read
+
+Use **PM Agent Runbook — Close loop, factory features, stale agents** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [3. After agent completes — close the loop](#3-after-agent-completes-close-the-loop)
+- [3b. Cross-cutting factory features (all agents)](#3b-cross-cutting-factory-features-all-agents)
+- [L2.5 candidate tournament (when policy applies)](#l25-candidate-tournament-when-policy-applies)
+- [4. When an agent is stale or unresponsive](#4-when-an-agent-is-stale-or-unresponsive)
+
 
 ## 3. After agent completes — close the loop
 

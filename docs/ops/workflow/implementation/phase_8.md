@@ -6,11 +6,16 @@ phase: [8]
 status: active
 authority: workflow
 tokens_est: 200
-summary: "Implementation Plan — Phase 8"
+summary: "Implementation Plan — Phase 8 — covers Phase 8 — M6 Steam & ship prep"
 ---
 # Implementation Plan — Phase 8
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 8** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## Phase 8 — M6 Steam & ship prep
 

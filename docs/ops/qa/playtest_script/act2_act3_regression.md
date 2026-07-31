@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 347
-summary: "Act II, Act III, regression"
+tokens_est: 396
+summary: "Playtest Script — Act II, Act III, regression — Pass: Yuzu heals; pearl in inventory."
 ---
 # Playtest Script — Act II, Act III, regression
 
 **Hub:** [`PLAYTEST_SCRIPT.md`](../PLAYTEST_SCRIPT.md)
+
+## When to read
+
+Use **Playtest Script — Act II, Act III, regression** (roles: qa, flow) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Act II script (~60 min)](#4-act-ii-script-60-min)
+- [5. Act III script (~45 min)](#5-act-iii-script-45-min)
+- [6. Regression checks](#6-regression-checks)
+
 
 ## 4. Act II script (~60 min)
 

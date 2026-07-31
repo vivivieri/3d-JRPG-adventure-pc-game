@@ -5,12 +5,24 @@ phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 879
+tokens_est: 935
 summary: "QA and Bug Process — QA scope + severity"
 ---
 # QA and Bug Process — QA scope + severity
 
 **Hub:** [`QA_AND_BUG_PROCESS.md`](../QA_AND_BUG_PROCESS.md)
+
+## When to read
+
+Use **QA and Bug Process — QA scope + severity** (roles: qa, pm, builder) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [1. QA scope](#1-qa-scope)
+- [2. Severity definitions](#2-severity-definitions)
+- [Severity examples (this project)](#severity-examples-this-project)
+- [Priority vs severity](#priority-vs-severity)
+
 
 ## 1. QA scope
 

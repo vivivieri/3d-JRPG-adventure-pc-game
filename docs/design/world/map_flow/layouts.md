@@ -4,12 +4,23 @@ type: reference
 audience: [architect, builder, narrative]
 status: active
 authority: world
-tokens_est: 357
+tokens_est: 427
 summary: "[Well save] — [Shack / Roku SC-04]"
 ---
 # World Map & Flow — Zone layouts
 
 **Hub:** [`WORLD_MAP_AND_FLOW.md`](../WORLD_MAP_AND_FLOW.md)
+
+## When to read
+
+Use **World Map & Flow — Zone layouts** (roles: architect, builder, narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Ruined village layout (hub)](#4-ruined-village-layout-hub)
+- [5. Tidal caves layout (linear with branch)](#5-tidal-caves-layout-linear-with-branch)
+- [6. Dragon Palace Gate layout](#6-dragon-palace-gate-layout)
+
 
 ## 4. Ruined village layout (hub)
 

@@ -5,12 +5,22 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 525
-summary: "Environment map + preprod necessity"
+tokens_est: 568
+summary: "Environments — Environment map + preprod necessity — game/development ──CI──► QA (automated)"
 ---
 # Environments — Environment map + preprod necessity
 
 **Hub:** [`ENVIRONMENTS.md`](../ENVIRONMENTS.md)
+
+## When to read
+
+Use **Environments — Environment map + preprod necessity** (roles: pm, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Environment map](#1-environment-map)
+- [2. Is preproduction necessary?](#2-is-preproduction-necessary)
+
 
 ## 1. Environment map
 

@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 663
-summary: "Logging, anti-patterns, CI, PR, links"
+tokens_est: 727
+summary: "Error Handling — Logging, anti-patterns, CI, PR, links — Do not log: API keys, webhook URLs, save file contents."
 ---
 # Error Handling — Logging, anti-patterns, CI, PR, links
 
 **Hub:** [`ERROR_HANDLING.md`](../ERROR_HANDLING.md)
+
+## When to read
+
+Use **Error Handling — Logging, anti-patterns, CI, PR, links** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Logging & telemetry](#5-logging-telemetry)
+- [6. Anti-patterns](#6-anti-patterns)
+- [7. CI enforcement](#7-ci-enforcement)
+- [8. PR checklist](#8-pr-checklist)
+- [9. Quick reference links](#9-quick-reference-links)
+
 
 ## 5. Logging & telemetry
 

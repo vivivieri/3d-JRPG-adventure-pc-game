@@ -5,12 +5,23 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 807
+tokens_est: 871
 summary: "- [x] Game Design Document (`docs/design/vision/GDD.md`)"
 ---
 # Milestones — Pre-build — M0 / M0c / M0d
 
 **Hub:** [`pre_build.md`](../pre_build.md)
+
+## When to read
+
+Use **Milestones — Pre-build — M0 / M0c / M0d** (roles: pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [M0 — Pre-production](#m0-pre-production)
+- [M0c — Pre-build design (art rebuild specs)](#m0c-pre-build-design-art-rebuild-specs)
+- [M0d — Pre-build game design (gameplay systems)](#m0d-pre-build-game-design-gameplay-systems)
+
 
 ## M0 — Pre-production
 - [x] Game Design Document (`docs/design/vision/GDD.md`)

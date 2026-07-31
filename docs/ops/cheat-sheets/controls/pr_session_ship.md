@@ -5,12 +5,26 @@ phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 456
-summary: "PR, session, ship/CD"
+tokens_est: 572
+summary: "Controls Cheat Sheet — PR, session, ship/CD — export GH_TOKEN=github_pat_...   # Cursor Secrets"
 ---
 # Controls Cheat Sheet — PR, session, ship/CD
 
 **Hub:** [`CONTROLS_CHEATSHEET.md`](../CONTROLS_CHEATSHEET.md)
+
+## When to read
+
+Use **Controls Cheat Sheet — PR, session, ship/CD** (roles: pm, builder, qa, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [PR + GitHub controls](#pr-github-controls)
+- [PR templates (`.github/PULL_REQUEST_TEMPLATE/`)](#pr-templates-githubpull_request_template)
+- [Branch protection (`tools/setup_github_project.sh`)](#branch-protection-toolssetup_github_projectsh)
+- [Issue templates](#issue-templates)
+- [Session startup (before scene work)](#session-startup-before-scene-work)
+- [Ship / CD controls](#ship-cd-controls)
+
 
 ## PR + GitHub controls
 

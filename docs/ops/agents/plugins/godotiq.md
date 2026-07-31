@@ -5,12 +5,26 @@ phase: [0, 1]
 audience: [builder, pm]
 status: active
 authority: ops
-tokens_est: 576
+tokens_est: 627
 summary: "https://godotiq.com/ — set `GODOTIQ_LICENSE_KEY` in MCP env for extra tools."
 ---
 # Plugin Install Guide — Godotiq install
 
 **Hub:** [`PLUGIN_INSTALL_GUIDE.md`](../PLUGIN_INSTALL_GUIDE.md)
+
+## When to read
+
+Use **Plugin Install Guide — Godotiq install** (roles: builder, pm) when executing this procedure Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [Godotiq](#godotiq)
+- [What you need](#what-you-need)
+- [Local install](#local-install)
+- [Cursor — desktop](#cursor-desktop)
+- [Cursor — Cloud Agents](#cursor-cloud-agents)
+- [Verify Godotiq](#verify-godotiq)
+
 
 ## Godotiq
 

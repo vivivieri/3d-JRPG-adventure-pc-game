@@ -4,12 +4,17 @@ type: how-to
 audience: [audio, qa]
 status: active
 authority: audio
-tokens_est: 297
-summary: "run multi-LLM jury on every footstep SFX or every locale variant — cost/noise too high. Gate locale for VO jury: **`en`** (all locales still get technical lint "
+tokens_est: 274
+summary: "run multi-LLM jury on every footstep SFX or every locale variant — cost/noise too high. Gate locale for VO jury: **`en`** (all locales still get technical lint"
 ---
 # Audio QA — Automate Layers — Automate vs human
 
 **Hub:** [`automate_layers.md`](../automate_layers.md)
+
+## When to read
+
+Use **Audio QA — Automate Layers — Automate vs human** (roles: audio, qa) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 1. What to automate vs human
 

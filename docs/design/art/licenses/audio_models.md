@@ -5,12 +5,23 @@ phase: [1, 5]
 audience: [visual, release, audio]
 status: active
 authority: art
-tokens_est: 721
-summary: "Do not import random web loops. Filtered CC0 from documented sources (e.g. Freesound CC0-only) is allowed **only** when registered here and in `asset_manifest.l"
+tokens_est: 747
+summary: "Licenses — Audio + 3D models — Third-party audio samples: Do not import random web loops. Filtered CC0 from documented sources (e.g. Freesound CC0-only) is allo"
 ---
 # Licenses — Audio + 3D models
 
 **Hub:** [`LICENSES.md`](../LICENSES.md)
+
+## When to read
+
+Use **Licenses — Audio + 3D models** (roles: visual, release, audio) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Audio](#audio)
+- [3D models (CC0 — Kenney) — **dev greybox only**](#3d-models-cc0-kenney-dev-greybox-only)
+- [3D models (CC0 — Poly Haven, high-poly)](#3d-models-cc0-poly-haven-high-poly)
+
 
 ## Audio
 

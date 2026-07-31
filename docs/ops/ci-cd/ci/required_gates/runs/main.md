@@ -5,12 +5,18 @@ audience: [release, qa, pm]
 phase: [6, 8]
 status: active
 authority: ci-cd
-tokens_est: 412
-summary: "main branch docs CI gates"
+tokens_est: 440
+summary: "CI — What Runs (`main`) — Authority: `game/data/qa/acceptance_criteria.json` → `docs_ci_gates.required_gates` (must match `run_docs_ci_checks.sh` 1:1 via `L0_do"
 ---
 # CI — What Runs (`main`)
 
 **Hub:** [`what_runs.md`](../what_runs.md)
+
+## When to read
+
+Use **CI — What Runs (`main`)** (roles: release, qa, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ### `main` — `ci.yml` → `run_docs_ci_checks.sh`
 

@@ -4,12 +4,22 @@ type: reference
 audience: [visual, qa]
 status: active
 authority: art
-tokens_est: 414
+tokens_est: 500
 summary: "Generation Readiness — Characters & Zones — Zone rows"
 ---
 # Generation Readiness — Characters & Zones — Zone rows
 
 **Hub:** [`characters_zones.md`](../characters_zones.md)
+
+## When to read
+
+Use **Generation Readiness — Characters & Zones — Zone rows** (roles: visual, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Zone rows (`ENVIRONMENT_KITS.md`)](#5-zone-rows-environment_kitsmd)
+- [Per-zone composition contract (to add to `ENVIRONMENT_KITS.md` or `game/data/qa/zone_composition.json`)](#per-zone-composition-contract-to-add-to-environment_kitsmd-or-gamedataqazone_compositionjson)
+
 
 ## 5. Zone rows (`ENVIRONMENT_KITS.md`)
 

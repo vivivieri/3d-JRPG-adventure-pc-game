@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [narrative, flow]
 status: active
 authority: vision
-tokens_est: 446
-summary: "Intent, first vs replay, New Game"
+tokens_est: 491
+summary: "Player message: *'The tide offers three answers — which debt will you pay?'* (store copy, not in-game morality score)"
 ---
 # Replay Design — Intent, first vs replay, New Game
 
 **Hub:** [`REPLAY_DESIGN.md`](../REPLAY_DESIGN.md)
+
+## When to read
+
+Use **Replay Design — Intent, first vs replay, New Game** (roles: narrative, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Design intent](#1-design-intent)
+- [2. First run vs replay](#2-first-run-vs-replay)
+- [3. New Game flow](#3-new-game-flow)
+
 
 ## 1. Design intent
 

@@ -5,12 +5,23 @@ audience: [architect, builder]
 phase: [1, 6]
 status: active
 authority: engineering
-tokens_est: 348
-summary: "Testing hooks, phase map, related"
+tokens_est: 406
+summary: "Technical Design — Testing hooks, phase map, related — Headless boot does not replace GDAI for `.tscn` work (`MCP_STACK.md`)."
 ---
 # Technical Design — Testing hooks, phase map, related
 
 **Hub:** [`TECHNICAL_DESIGN.md`](../TECHNICAL_DESIGN.md)
+
+## When to read
+
+Use **Technical Design — Testing hooks, phase map, related** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [11. Testing hooks](#11-testing-hooks)
+- [12. Phase implementation map](#12-phase-implementation-map)
+- [13. Related docs (do not duplicate)](#13-related-docs-do-not-duplicate)
+
 
 ## 11. Testing hooks
 

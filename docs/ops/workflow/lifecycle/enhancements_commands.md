@@ -5,12 +5,28 @@ phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 978
-summary: "Enhancements, commands, cross-refs"
+tokens_est: 1142
+summary: "Development Lifecycle — Enhancements, commands, cross-refs — export GH_TOKEN=github_pat_...   # Administration: read/write"
 ---
 # Development Lifecycle — Enhancements, commands, cross-refs
 
 **Hub:** [`DEVELOPMENT_LIFECYCLE.md`](../DEVELOPMENT_LIFECYCLE.md)
+
+## When to read
+
+Use **Development Lifecycle — Enhancements, commands, cross-refs** (roles: pm, architect, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (8 sections).
+
+## Jump to
+
+- [10. Lifecycle enhancements](#10-lifecycle-enhancements)
+- [10.1 Trunk protection (enhancement 1)](#101-trunk-protection-enhancement-1)
+- [10.2 GitHub Environments on CD (enhancement 2–3)](#102-github-environments-on-cd-enhancement-23)
+- [10.3 Per-sprint cloud snapshots (enhancement 5 — pending)](#103-per-sprint-cloud-snapshots-enhancement-5-pending)
+- [10.4 Git LFS (enhancement 4)](#104-git-lfs-enhancement-4)
+- [10.5 Explicit carry-over protocol](#105-explicit-carry-over-protocol)
+- [11. Quick commands by lifecycle stage](#11-quick-commands-by-lifecycle-stage)
+- [12. Cross-refs](#12-cross-refs)
+
 
 ## 10. Lifecycle enhancements
 

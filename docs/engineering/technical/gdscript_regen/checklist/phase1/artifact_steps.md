@@ -5,12 +5,18 @@ audience: [architect, builder]
 phase: [1]
 status: active
 authority: engineering
-tokens_est: 567
+tokens_est: 563
 summary: "1. Read `game/data/code/shader_registry.json` → entry `toon_base`"
 ---
 # Phase 1 Visuals Regen — Per-artifact steps
 
 **Hub:** [`phase1_visuals.md`](../phase1_visuals.md)
+
+## When to read
+
+Use **Phase 1 Visuals Regen — Per-artifact steps** (roles: architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ### 10.3 Per-artifact steps
 

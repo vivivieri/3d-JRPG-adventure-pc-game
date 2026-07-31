@@ -5,12 +5,24 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 538
-summary: "Waterfall bounds, MCP, metrics"
+tokens_est: 611
+summary: "Agile Within Phases — Waterfall bounds, MCP, metrics — Change these only via explicit doc + data PR to `main`, not via sprint backlog reprioritization."
 ---
 # Agile Within Phases — Waterfall bounds, MCP, metrics
 
 **Hub:** [`AGILE_WITHIN_PHASES.md`](../AGILE_WITHIN_PHASES.md)
+
+## When to read
+
+Use **Agile Within Phases — Waterfall bounds, MCP, metrics** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. What stays waterfall (do not agile-ify)](#7-what-stays-waterfall-do-not-agile-ify)
+- [8. Linear MCP — agent commands](#8-linear-mcp-agent-commands)
+- [9. Metrics (optional, lightweight)](#9-metrics-optional-lightweight)
+- [10. Cross-refs](#10-cross-refs)
+
 
 ## 7. What stays waterfall (do not agile-ify)
 

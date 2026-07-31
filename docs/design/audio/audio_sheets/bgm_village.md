@@ -1,5 +1,15 @@
 # ACE-Step prompt — `bgm_village`
 
+## When to read
+
+Use **ACE-Step prompt — `bgm_village`** when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Prompt](#prompt)
+- [Negative](#negative)
+- [ACE-Step Gradio / API](#ace-step-gradio-api)
+
 | Field | Value |
 |-------|-------|
 | Scene | beach_shore, ruined_village |

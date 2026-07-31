@@ -5,12 +5,27 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 535
-summary: "Silhouettes, environment, UI style"
+tokens_est: 605
+summary: "Art Direction — Silhouettes, environment, UI style — Readable at gameplay camera distance. Exaggerate head-to-body ratio slightly (1:5, not chibi 1:3). Full mod"
 ---
 # Art Direction — Silhouettes, environment, UI style
 
 **Hub:** [`ART_DIRECTION.md`](../ART_DIRECTION.md)
+
+## When to read
+
+Use **Art Direction — Silhouettes, environment, UI style** (roles: visual, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [2. Character silhouettes](#2-character-silhouettes)
+- [Urashima](#urashima)
+- [Yuzu](#yuzu)
+- [Roku](#roku)
+- [Enemies](#enemies)
+- [3. Environment style rules](#3-environment-style-rules)
+- [4. UI style](#4-ui-style)
+
 
 ## 2. Character silhouettes
 

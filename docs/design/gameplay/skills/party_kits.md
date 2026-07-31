@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [builder, builder_combat]
 status: active
 authority: gameplay
-tokens_est: 518
-summary: "Urashima, Yuzu, Roku skills"
+tokens_est: 563
+summary: "Skills Bible — Urashima, Yuzu, Roku skills — Role: Flexible DPS + party Def buffer; AoE for adds phase."
 ---
 # Skills Bible — Urashima, Yuzu, Roku skills
 
 **Hub:** [`SKILLS_BIBLE.md`](../SKILLS_BIBLE.md)
+
+## When to read
+
+Use **Skills Bible — Urashima, Yuzu, Roku skills** (roles: builder, builder_combat) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [1. Urashima (Water)](#1-urashima-water)
+- [2. Yuzu (Spirit)](#2-yuzu-spirit)
+- [3. Roku (Physical)](#3-roku-physical)
+
 
 ## 1. Urashima (Water)
 

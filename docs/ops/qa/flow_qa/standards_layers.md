@@ -5,12 +5,22 @@ phase: [1, 6]
 audience: [flow, qa, builder]
 status: active
 authority: qa
-tokens_est: 519
-summary: "Industry standards + defense layers"
+tokens_est: 560
+summary: "Flow QA — Industry standards + defense layers — References: ISTQB scenario testing; platform manufacturer functional test categories (save data, progression); V"
 ---
 # Flow QA — Industry standards + defense layers
 
 **Hub:** [`FLOW_QA.md`](../FLOW_QA.md)
+
+## When to read
+
+Use **Flow QA — Industry standards + defense layers** (roles: flow, qa, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Industry standards we map to](#1-industry-standards-we-map-to)
+- [2. Defense layers (game flow)](#2-defense-layers-game-flow)
+
 
 ## 1. Industry standards we map to
 

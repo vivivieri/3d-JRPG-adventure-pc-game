@@ -5,12 +5,26 @@ audience: [architect, builder]
 phase: [1, 2]
 status: active
 authority: engineering
-tokens_est: 862
-summary: "Scene flow, data loading, save/load"
+tokens_est: 937
+summary: "Technical Design — Scene flow, data loading, save/load — MainMenu --> Prologue: New Game"
 ---
 # Technical Design — Scene flow, data loading, save/load
 
 **Hub:** [`TECHNICAL_DESIGN.md`](../TECHNICAL_DESIGN.md)
+
+## When to read
+
+Use **Technical Design — Scene flow, data loading, save/load** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [3. Scene flow](#3-scene-flow)
+- [4. Data loading](#4-data-loading)
+- [API (Phase 2)](#api-phase-2)
+- [Load order at New Game](#load-order-at-new-game)
+- [Content resolution](#content-resolution)
+- [5. Save / load pipeline](#5-save-load-pipeline)
+
 
 ## 3. Scene flow
 

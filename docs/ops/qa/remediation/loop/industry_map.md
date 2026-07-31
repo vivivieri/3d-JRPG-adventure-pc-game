@@ -5,12 +5,25 @@ phase: [1, 6]
 audience: [qa, pm]
 status: active
 authority: qa
-tokens_est: 966
-summary: "Industry standards map"
+tokens_est: 1058
+summary: "We do not ship a AAA art/audio department. These are the industry practices our automated gates approximate — use them when arguing *what* to fix, not *whether*"
 ---
 # Remediation — Standards & Loop — Industry standards map
 
 **Hub:** [`standards_loop.md`](../standards_loop.md)
+
+## When to read
+
+Use **Remediation — Standards & Loop — Industry standards map** (roles: qa, pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [1. Industry standards we map to](#1-industry-standards-we-map-to)
+- [3D models & environment art](#3d-models-environment-art)
+- [Visual polish & look-dev](#visual-polish-look-dev)
+- [Audio polish & mastering](#audio-polish-mastering)
+- [General QA iteration (any medium)](#general-qa-iteration-any-medium)
+
 
 ## 1. Industry standards we map to
 

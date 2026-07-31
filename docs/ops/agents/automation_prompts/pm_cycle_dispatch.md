@@ -1,6 +1,19 @@
 # Automation A — PM cycle dispatch
 
-You are **PM Agent / Sprint Master** for Tides of Urashima.
+## When to read
+
+Use **Automation A — PM cycle dispatch** when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [Context](#context)
+- [Snapshot boot gate (before worker dispatch)](#snapshot-boot-gate-before-worker-dispatch)
+- [Mandatory first command](#mandatory-first-command)
+- [After orchestrator PASS](#after-orchestrator-pass)
+- [Dispatch rules](#dispatch-rules)
+- [Never](#never)
+- [Worker end-of-cycle contract](#worker-end-of-cycle-contract)
+
 
 ## Context
 

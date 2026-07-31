@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder, pm]
 status: active
 authority: engineering
-tokens_est: 588
-summary: "Summary, engine, GDAI"
+tokens_est: 651
+summary: "Plugin Compatibility — Summary, engine, GDAI — Verdict: GDAI + Godotiq are verified on Godot 4.7. Per `.cursorrules` §0 /"
 ---
 # Plugin Compatibility — Summary, engine, GDAI
 
 **Hub:** [`PLUGIN_COMPATIBILITY.md`](../PLUGIN_COMPATIBILITY.md)
+
+## When to read
+
+Use **Plugin Compatibility — Summary, engine, GDAI** (roles: architect, builder, pm) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Summary](#summary)
+- [Godot Engine 4.7.stable](#godot-engine-47stable)
+- [GDAI MCP (build — primary)](#gdai-mcp-build-primary)
+- [Runtime verification (this VM)](#runtime-verification-this-vm)
+- [Risk](#risk)
+
 
 ## Summary
 

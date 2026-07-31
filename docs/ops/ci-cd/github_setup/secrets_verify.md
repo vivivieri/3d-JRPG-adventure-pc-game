@@ -5,12 +5,21 @@ phase: [6, 8]
 audience: [pm, release]
 status: active
 authority: ci-cd
-tokens_est: 233
+tokens_est: 256
 summary: "`GH_TOKEN` is for **setup script only** — do not confuse with Steam secrets."
 ---
 # GitHub Setup — CD secrets + verify
 
 **Hub:** [`GITHUB_SETUP.md`](../GITHUB_SETUP.md)
+
+## When to read
+
+Use **GitHub Setup — CD secrets + verify** (roles: pm, release) when learning/setup for the first time Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [3. Secrets for CD (Phase 8 only)](#3-secrets-for-cd-phase-8-only)
+- [4. Verify setup](#4-verify-setup)
 
 ## 3. Secrets for CD (Phase 8 only)
 

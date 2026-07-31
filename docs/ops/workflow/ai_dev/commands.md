@@ -5,12 +5,22 @@ phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 338
-summary: "bash tools/ensure_gdai_mcp.sh"
+tokens_est: 364
+summary: "AI Dev Workflow — commands — bash tools/ensure_gdai_mcp.sh"
 ---
 # AI Dev Workflow — commands
 
 **Hub:** [`AI_DEV_WORKFLOW.md`](../AI_DEV_WORKFLOW.md)
+
+## When to read
+
+Use **AI Dev Workflow — commands** (roles: pm, architect) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [5. Command cheat sheet](#5-command-cheat-sheet)
+- [6. Related docs](#6-related-docs)
+
 
 ## 5. Command cheat sheet
 

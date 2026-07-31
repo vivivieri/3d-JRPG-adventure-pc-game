@@ -5,17 +5,23 @@ phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 551
+tokens_est: 527
 summary: "`docs/design/vision/ENDING_DESIGN.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`"
 ---
 # Tides of Urashima — Steam Achievements
 
-**Version:** 1.0 (Pre-build)
-**Cross-refs:** `docs/design/vision/ENDING_DESIGN.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`
+## When to read
 
-**Total:** 13 achievements (easy distribution for short game) — matches `game/data/achievements/achievements.json`
+Use **Tides of Urashima — Steam Achievements** (roles: builder, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
 
----
+## Jump to
+
+- [1. Story & endings](#1-story-endings)
+- [2. Combat](#2-combat)
+- [3. Exploration](#3-exploration)
+- [4. Implementation notes](#4-implementation-notes)
+- [5. QA checklist](#5-qa-checklist)
+
 
 ## 1. Story & endings
 

@@ -5,12 +5,27 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 940
-summary: "R&R, lint, security, testing, PR"
+tokens_est: 1065
+summary: "Scene editing remains GDAI MCP (`godot-mcp`) — never add scene-mutation tools to a project fork of MCP Pro."
 ---
 # TypeScript Style — R&R, lint, security, testing, PR
 
 **Hub:** [`TYPESCRIPT_STYLE.md`](../TYPESCRIPT_STYLE.md)
+
+## When to read
+
+Use **TypeScript Style — R&R, lint, security, testing, PR** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [7. Project R&R (what agents may edit)](#7-project-rr-what-agents-may-edit)
+- [8. ESLint / Prettier (when present in vendor package)](#8-eslint-prettier-when-present-in-vendor-package)
+- [9. Security](#9-security)
+- [10. Testing MCP Pro integration](#10-testing-mcp-pro-integration)
+- [11. Anti-patterns](#11-anti-patterns)
+- [12. PR checklist (TypeScript / MCP)](#12-pr-checklist-typescript-mcp)
+- [13. Quick reference links](#13-quick-reference-links)
+
 
 ## 7. Project R&R (what agents may edit)
 

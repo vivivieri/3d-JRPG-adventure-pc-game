@@ -5,12 +5,18 @@ audience: [pm, architect, builder]
 phase: [0]
 status: active
 authority: workflow
-tokens_est: 594
-summary: "bash tools/setup_dev_environment.sh"
+tokens_est: 593
+summary: "Verify (main — docs/data only):"
 ---
 # Implementation Plan — Phase 0
 
 **Hub:** [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md)
+
+## When to read
+
+Use **Implementation Plan — Phase 0** (roles: pm, architect, builder) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
+
 
 ## Phase 0 — Dev environment ✅ (current)
 

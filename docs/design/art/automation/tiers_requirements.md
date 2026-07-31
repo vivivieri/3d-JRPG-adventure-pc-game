@@ -5,12 +5,22 @@ audience: [visual, builder]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 741
-summary: "Tier matrix & MCP requirements"
+tokens_est: 793
+summary: "Art Automation Pipeline — Tier matrix & MCP requirements — All listed servers and offline tools are required for the project. Agents use this table at session s"
 ---
 # Art Automation Pipeline — Tier matrix & MCP requirements
 
 **Hub:** [`ART_AUTOMATION_PIPELINE.md`](../ART_AUTOMATION_PIPELINE.md)
+
+## When to read
+
+Use **Art Automation Pipeline — Tier matrix & MCP requirements** (roles: visual, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [1. Tier matrix (right tool, right job)](#1-tier-matrix-right-tool-right-job)
+- [2. MCP and toolchain requirement tiers](#2-mcp-and-toolchain-requirement-tiers)
+
 
 ## 1. Tier matrix (right tool, right job)
 

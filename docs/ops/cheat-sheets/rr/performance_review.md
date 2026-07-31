@@ -5,12 +5,25 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 631
+tokens_est: 713
 summary: "Every scene/visual change gets a **lightweight performance re-check**, not a heavy code review. Measure runtime; do not debate style."
 ---
 # R&R — performance-review-required
 
 **Hub:** [`RR_CHEATSHEET.md`](../RR_CHEATSHEET.md)
+
+## When to read
+
+Use **R&R — performance-review-required** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [Performance review (required — not code review)](#performance-review-required-not-code-review)
+- [When required](#when-required)
+- [What to measure (thresholds in `game/data/qa/perf_thresholds.json`)](#what-to-measure-thresholds-in-gamedataqaperf_thresholdsjson)
+- [How to run (agent-local)](#how-to-run-agent-local)
+- [Post-fix regression (with perf)](#post-fix-regression-with-perf)
+
 
 ## Performance review (required — not code review)
 

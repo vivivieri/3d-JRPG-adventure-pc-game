@@ -5,12 +5,22 @@ phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 696
+tokens_est: 706
 summary: "`game/data/audio/scene_audio_map.json` (validated L0 on `main`). The table below is the human-readable mirror; when they disagree, fix JSON first then sync this"
 ---
 # Audio Production — BGM & Scene Map — Scene → audio map
 
 **Hub:** [`bgm_and_scene_map.md`](../bgm_and_scene_map.md)
+
+## When to read
+
+Use **Audio Production — BGM & Scene Map — Scene → audio map** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [4. Scene → audio map](#4-scene-audio-map)
+- [Zone default BGM (field)](#zone-default-bgm-field)
+
 
 ## 4. Scene → audio map
 

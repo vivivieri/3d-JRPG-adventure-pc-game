@@ -5,12 +5,17 @@ phase: [1, 6]
 audience: [release, pm]
 status: active
 authority: qa
-tokens_est: 170
+tokens_est: 180
 summary: "Security — M6 Player Protect — Related docs"
 ---
 # Security — M6 Player Protect — Related docs
 
 **Hub:** [`m6_player_protect.md`](../m6_player_protect.md)
+
+## When to read
+
+Use **Security — M6 Player Protect — Related docs** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (1 sections).
+
 
 ## 11. Related docs
 

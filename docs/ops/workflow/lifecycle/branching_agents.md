@@ -5,12 +5,26 @@ phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 978
-summary: "Branching, agent envs, issue lifecycle"
+tokens_est: 1095
+summary: "Development Lifecycle — Branching, agent envs, issue lifecycle — Full policy: `BRANCHING.md` · per-agent rules: `MULTI_AGENT_BRANCH_STRATEGY.md"
 ---
 # Development Lifecycle — Branching, agent envs, issue lifecycle
 
 **Hub:** [`DEVELOPMENT_LIFECYCLE.md`](../DEVELOPMENT_LIFECYCLE.md)
+
+## When to read
+
+Use **Development Lifecycle — Branching, agent envs, issue lifecycle** (roles: pm, architect, release) when you need this reference during the current task Jump to a section below instead of reading end-to-end (6 sections).
+
+## Jump to
+
+- [4. Branching mechanism (summary)](#4-branching-mechanism-summary)
+- [5. Agent environments (isolation model)](#5-agent-environments-isolation-model)
+- [Cloud Agent branch rule](#cloud-agent-branch-rule)
+- [Session gate (every worker agent)](#session-gate-every-worker-agent)
+- [6. Issue lifecycle (one sprint task)](#6-issue-lifecycle-one-sprint-task)
+- [Definition of done (issue)](#definition-of-done-issue)
+
 
 ## 4. Branching mechanism (summary)
 

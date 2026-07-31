@@ -5,12 +5,23 @@ phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 660
-summary: "Purpose, pipeline, schema"
+tokens_est: 697
+summary: "Playtest Telemetry — Purpose, pipeline, schema — Turn structured gameplay logs from playtests into measured pacing / combat / progression / ending metrics, so t"
 ---
 # Playtest Telemetry — Purpose, pipeline, schema
 
 **Hub:** [`PLAYTEST_TELEMETRY.md`](../PLAYTEST_TELEMETRY.md)
+
+## When to read
+
+Use **Playtest Telemetry — Purpose, pipeline, schema** (roles: qa, flow) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [Purpose](#purpose)
+- [Pipeline](#pipeline)
+- [Event schema (JSONL)](#event-schema-jsonl)
+
 
 ## Purpose
 

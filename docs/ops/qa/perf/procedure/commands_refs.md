@@ -5,12 +5,21 @@ phase: [1, 6]
 audience: [qa, release, builder]
 status: active
 authority: qa
-tokens_est: 278
-summary: "bash tools/run_perf_review_checks.sh"
+tokens_est: 305
+summary: "Perf — Procedure & Evidence — Commands + related — bash tools/run_perf_review_checks.sh"
 ---
 # Perf — Procedure & Evidence — Commands + related
 
 **Hub:** [`procedure_evidence.md`](../procedure_evidence.md)
+
+## When to read
+
+Use **Perf — Procedure & Evidence — Commands + related** (roles: qa, release, builder) when executing this procedure Jump to a section below instead of reading end-to-end (2 sections).
+
+## Jump to
+
+- [11. Commands](#11-commands)
+- [12. Related docs](#12-related-docs)
 
 ## 11. Commands
 

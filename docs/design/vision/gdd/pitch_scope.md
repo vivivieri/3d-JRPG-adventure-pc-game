@@ -5,12 +5,27 @@ phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 687
-summary: "Pitch, source, loop, scope"
+tokens_est: 803
+summary: "Game Design Document — Pitch, source, loop, scope — *Urashima Tarō returns from the Dragon Palace to find his village erased by time. A short, melancholy JRPG a"
 ---
 # Game Design Document — Pitch, source, loop, scope
 
 **Hub:** [`GDD.md`](../GDD.md)
+
+## When to read
+
+Use **Game Design Document — Pitch, source, loop, scope** (roles: narrative, pm, architect) when you need this reference during the current task Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [1. Elevator pitch](#1-elevator-pitch)
+- [2. Source material & adaptation](#2-source-material-adaptation)
+- [Original tale (abridged)](#original-tale-abridged)
+- [Our dark adaptation](#our-dark-adaptation)
+- [Themes (for 20–30 male audience)](#themes-for-2030-male-audience)
+- [3. Core gameplay loop](#3-core-gameplay-loop)
+- [4. Scope (v1 — shippable short game)](#4-scope-v1-shippable-short-game)
+
 
 ## 1. Elevator pitch
 

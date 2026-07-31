@@ -5,12 +5,24 @@ phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 659
-summary: "Cloud startup, subagents, DoD, refs"
+tokens_est: 737
+summary: "Multi-Agent Team — Cloud startup, subagents, DoD, refs — bash tools/ensure_mcp_stack.sh"
 ---
 # Multi-Agent Team — Cloud startup, subagents, DoD, refs
 
 **Hub:** [`MULTI_AGENT_TEAM.md`](../MULTI_AGENT_TEAM.md)
+
+## When to read
+
+Use **Multi-Agent Team — Cloud startup, subagents, DoD, refs** (roles: pm, builder, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [7. Cloud agent startup (every role)](#7-cloud-agent-startup-every-role)
+- [8. Subagent invocation (Cursor)](#8-subagent-invocation-cursor)
+- [9. Definition of done (per issue)](#9-definition-of-done-per-issue)
+- [10. Cross-refs](#10-cross-refs)
+
 
 ## 7. Cloud agent startup (every role)
 

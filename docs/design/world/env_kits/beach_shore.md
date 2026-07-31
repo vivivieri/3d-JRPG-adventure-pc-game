@@ -5,12 +5,25 @@ audience: [builder, builder_zone, visual]
 phase: [1]
 status: active
 authority: world
-tokens_est: 419
+tokens_est: 486
 summary: "Lonely arrival; grey sky; distant thunder"
 ---
 # Environment Kits — Zone beach_shore
 
 **Hub:** [`ENVIRONMENT_KITS.md`](../ENVIRONMENT_KITS.md)
+
+## When to read
+
+Use **Environment Kits — Zone beach_shore** (roles: builder, builder_zone, visual) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [3. Zone: Beach Shore (`beach_shore`)](#3-zone-beach-shore-beach_shore)
+- [Modular kit](#modular-kit)
+- [Hero set-pieces](#hero-set-pieces)
+- [Scene composition (SC-01)](#scene-composition-sc-01)
+- [Audio / VFX](#audio-vfx)
+
 
 ## 3. Zone: Beach Shore (`beach_shore`)
 

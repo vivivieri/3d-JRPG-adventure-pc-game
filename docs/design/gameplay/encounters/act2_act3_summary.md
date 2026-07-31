@@ -5,12 +5,23 @@ phase: [2, 3]
 audience: [builder, builder_combat, qa]
 status: active
 authority: gameplay
-tokens_est: 649
-summary: "Act II, Act III, summary"
+tokens_est: 708
+summary: "Post SC-10 optional (`enc_sc10_optional_wraith` — doubles as heal tutorial, `TUTORIAL_DESIGN.md` SC-10):"
 ---
 # Encounter Table — Act II, Act III, summary
 
 **Hub:** [`ENCOUNTER_TABLE.md`](../ENCOUNTER_TABLE.md)
+
+## When to read
+
+Use **Encounter Table — Act II, Act III, summary** (roles: builder, builder_combat, qa) when you need this reference during the current task Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [4. Act II — The Depths (~60 min)](#4-act-ii-the-depths-60-min)
+- [5. Act III — The Tide (~30–45 min)](#5-act-iii-the-tide-3045-min)
+- [6. Encounter summary](#6-encounter-summary)
+
 
 ## 4. Act II — The Depths (~60 min)
 

@@ -5,12 +5,27 @@ phase: [0, 1]
 audience: [pm]
 status: active
 authority: ops
-tokens_est: 700
-summary: "Optional MCP, board, PM checklist, refs"
+tokens_est: 827
+summary: "Project Management — Optional MCP, board, PM checklist, refs — When: Multiple parallel agents executing the current implementation phase."
 ---
 # Project Management — Optional MCP, board, PM checklist, refs
 
 **Hub:** [`PROJECT_MANAGEMENT.md`](../PROJECT_MANAGEMENT.md)
+
+## When to read
+
+Use **Project Management — Optional MCP, board, PM checklist, refs** (roles: pm) when executing this procedure Jump to a section below instead of reading end-to-end (7 sections).
+
+## Jump to
+
+- [6. Optional MCP integrations](#6-optional-mcp-integrations)
+- [Linear (P1 — sprint board)](#linear-p1-sprint-board)
+- [Notion (P2 — narrative / planning notes)](#notion-p2-narrative-planning-notes)
+- [GitHub (P0 — no extra MCP)](#github-p0-no-extra-mcp)
+- [7. GitHub Projects board (recommended columns)](#7-github-projects-board-recommended-columns)
+- [8. PM Agent checklist (start of sprint)](#8-pm-agent-checklist-start-of-sprint)
+- [9. Cross-refs](#9-cross-refs)
+
 
 ## 6. Optional MCP integrations
 

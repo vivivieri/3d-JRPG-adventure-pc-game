@@ -5,12 +5,25 @@ phase: [6, 8]
 audience: [release, pm]
 status: active
 authority: ci-cd
-tokens_est: 744
+tokens_est: 823
 summary: "Legal, QA, release sequence, commands, refs"
 ---
 # Steam Release Checklist — Legal, QA, release sequence, commands, refs
 
 **Hub:** [`STEAM_RELEASE_CHECKLIST.md`](../STEAM_RELEASE_CHECKLIST.md)
+
+## When to read
+
+Use **Steam Release Checklist — Legal, QA, release sequence, commands, refs** (roles: release, pm) when executing this procedure Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [5. Legal & compliance](#5-legal-compliance)
+- [6. QA & operations](#6-qa-operations)
+- [7. Release sequence (recommended order)](#7-release-sequence-recommended-order)
+- [8. Quick commands before upload](#8-quick-commands-before-upload)
+- [9. Cross-refs](#9-cross-refs)
+
 
 ## 5. Legal & compliance
 

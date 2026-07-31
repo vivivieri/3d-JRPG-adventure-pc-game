@@ -4,12 +4,25 @@ type: reference
 audience: [audio, builder]
 status: active
 authority: audio
-tokens_est: 538
-summary: "BGM — Per-track Specs — Menu + zone BGM"
+tokens_est: 588
+summary: "BGM — Per-track Specs — Menu + zone BGM — covers `bgm_menu`; `bgm_prologue`; `bgm_village`; `bgm_caves`"
 ---
 # BGM — Per-track Specs — Menu + zone BGM
 
 **Hub:** [`per_track_specs.md`](../per_track_specs.md)
+
+## When to read
+
+Use **BGM — Per-track Specs — Menu + zone BGM** (roles: audio, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [`bgm_menu`](#bgm_menu)
+- [`bgm_prologue`](#bgm_prologue)
+- [`bgm_village`](#bgm_village)
+- [`bgm_caves`](#bgm_caves)
+- [`bgm_palace`](#bgm_palace)
+
 
 ## `bgm_menu`
 

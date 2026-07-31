@@ -5,12 +5,25 @@ phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 721
-summary: "Deps, testing, anti-patterns, PR, links"
+tokens_est: 791
+summary: "Python Style — Deps, testing, anti-patterns, PR, links — Declared in `tools/requirements-ci.txt`:"
 ---
 # Python Style — Deps, testing, anti-patterns, PR, links
 
 **Hub:** [`PYTHON_STYLE.md`](../PYTHON_STYLE.md)
+
+## When to read
+
+Use **Python Style — Deps, testing, anti-patterns, PR, links** (roles: architect, builder) when you need this reference during the current task Jump to a section below instead of reading end-to-end (5 sections).
+
+## Jump to
+
+- [6. Dependencies](#6-dependencies)
+- [7. Testing](#7-testing)
+- [8. Anti-patterns (do not ship)](#8-anti-patterns-do-not-ship)
+- [9. PR checklist (Python)](#9-pr-checklist-python)
+- [10. Quick reference links](#10-quick-reference-links)
+
 
 ## 6. Dependencies
 

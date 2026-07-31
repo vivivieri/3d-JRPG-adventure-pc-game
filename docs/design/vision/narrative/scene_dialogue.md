@@ -5,12 +5,24 @@ audience: [narrative]
 phase: [3, 6]
 status: active
 authority: narrative
-tokens_est: 672
+tokens_est: 731
 summary: "Minimize dialogue during fights except phase banners and SC-15 choice gate."
 ---
 # Narrative — Scene dialogue
 
 **Hub:** [`NARRATIVE_WRITING_GUIDE.md`](../NARRATIVE_WRITING_GUIDE.md)
+
+## When to read
+
+Use **Narrative — Scene dialogue** (roles: narrative) when you need this reference during the current task Jump to a section below instead of reading end-to-end (4 sections).
+
+## Jump to
+
+- [4. Scene dialogue rules](#4-scene-dialogue-rules)
+- [Line count limits](#line-count-limits)
+- [Intentional silence — SC-07](#intentional-silence-sc-07)
+- [5. Scene writing reference (from storyboard)](#5-scene-writing-reference-from-storyboard)
+
 
 ## 4. Scene dialogue rules
 

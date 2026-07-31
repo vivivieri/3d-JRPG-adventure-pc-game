@@ -4,12 +4,23 @@ type: how-to
 audience: [pm, qa]
 status: active
 authority: qa
-tokens_est: 339
-summary: "PM integration + workflow + catalog"
+tokens_est: 422
+summary: "Alignment — Visuals / History / Integration — PM integration + workflow + catalog — Run both at phase exit: stakeholder report for schedule; alignment audit for"
 ---
 # Alignment — Visuals / History / Integration — PM integration + workflow + catalog
 
 **Hub:** [`visuals_history_integration.md`](../visuals_history_integration.md)
+
+## When to read
+
+Use **Alignment — Visuals / History / Integration — PM integration + workflow + catalog** (roles: pm, qa) when executing this procedure Jump to a section below instead of reading end-to-end (3 sections).
+
+## Jump to
+
+- [9. Integration with PM stakeholder reporting](#9-integration-with-pm-stakeholder-reporting)
+- [10. Agent workflow (mandatory after alignment work)](#10-agent-workflow-mandatory-after-alignment-work)
+- [11. Catalog validation](#11-catalog-validation)
+
 
 ## 9. Integration with PM stakeholder reporting
 

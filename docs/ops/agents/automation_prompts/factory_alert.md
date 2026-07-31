@@ -1,5 +1,10 @@
 # Automation D — Factory human alert
 
+## When to read
+
+Use **Automation D — Factory human alert** when you need this reference during the current task Jump to a section below instead of reading end-to-end (1 sections).
+
+
 You were triggered because the automated factory **STOPPED** or recovery was exhausted.
 
 Read `artifacts/agent_cycle_event.json` and `artifacts/factory_health_report.json` if present.
