@@ -213,6 +213,11 @@
           "path": "tools/split_docs_round6.py",
           "contains": "def main",
           "purpose": "docs pack round6 leftover splitter"
+        },
+        {
+          "path": "tools/split_docs_round7.py",
+          "contains": "def main",
+          "purpose": "docs pack round7 fat sibling thinner"
         }
       ],
       "orchestrator_steps": [
