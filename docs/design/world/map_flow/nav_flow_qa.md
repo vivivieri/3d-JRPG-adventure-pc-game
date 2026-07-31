@@ -1,6 +1,7 @@
 ---
 id: nav-flow-qa
 type: reference
+phase: [1, 5]
 audience: [architect, builder, narrative]
 status: active
 authority: world

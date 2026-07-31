@@ -8,13 +8,44 @@ from __future__ import annotations
 
 import re
 import shutil
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-sys.path.insert(0, str(ROOT / "tools"))
-from enhance_docs_packs import fm, write  # noqa: E402
+
+
+def write(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not content.endswith("\n"):
+        content += "\n"
+    path.write_text(content, encoding="utf-8")
+    print(f"write {path.relative_to(ROOT)} ({len(content)} bytes)")
+
+
+def fm(
+    stem: str,
+    doc_type: str,
+    audience: list[str],
+    authority: str,
+    tokens: int,
+    phase: list[int] | None = None,
+    summary: str | None = None,
+) -> str:
+    """Minimal frontmatter writer (kept after enhance_docs_packs one-shot retirement)."""
+    lines = [
+        "---",
+        f"id: {stem}",
+        f"type: {doc_type}",
+        f"audience: [{', '.join(audience)}]",
+    ]
+    if phase:
+        lines.append(f"phase: [{', '.join(str(p) for p in phase)}]")
+    lines += ["status: active", f"authority: {authority}", f"tokens_est: {tokens}"]
+    if summary:
+        safe = summary.replace("\n", " ").replace('"', "'").strip()[:160]
+        lines.append(f'summary: "{safe}"')
+    lines += ["---", ""]
+    return "\n".join(lines)
 
 
 def strip_fm(text: str) -> str:

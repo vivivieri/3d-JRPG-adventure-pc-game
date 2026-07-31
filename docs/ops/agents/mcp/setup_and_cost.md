@@ -1,6 +1,7 @@
 ---
 id: setup-and-cost
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops

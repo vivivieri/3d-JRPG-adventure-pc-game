@@ -1,6 +1,7 @@
 ---
 id: world-map-and-flow
 type: reference
+phase: [1, 5]
 audience: [architect, builder, narrative]
 status: active
 authority: world

@@ -1,6 +1,7 @@
 ---
 id: rig-parenting
 type: reference
+phase: [1, 5]
 audience: [visual, builder]
 status: active
 authority: art

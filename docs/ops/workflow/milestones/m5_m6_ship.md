@@ -1,6 +1,7 @@
 ---
 id: m5-m6-ship
 type: reference
+phase: [0, 1, 8]
 audience: [pm, release, visual]
 status: active
 authority: workflow

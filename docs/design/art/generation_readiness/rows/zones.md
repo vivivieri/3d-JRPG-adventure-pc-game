@@ -1,6 +1,7 @@
 ---
 id: zones
 type: reference
+phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art

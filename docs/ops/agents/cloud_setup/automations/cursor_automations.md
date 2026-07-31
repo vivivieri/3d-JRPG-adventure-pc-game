@@ -1,6 +1,7 @@
 ---
 id: cursor-automations
 type: tutorial
+phase: [0, 1]
 audience: [pm, architect]
 status: active
 authority: ops

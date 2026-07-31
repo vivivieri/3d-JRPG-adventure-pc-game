@@ -1,6 +1,7 @@
 ---
 id: menu-zones
 type: reference
+phase: [1, 5]
 audience: [audio, builder]
 status: active
 authority: audio
