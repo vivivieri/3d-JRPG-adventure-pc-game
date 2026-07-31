@@ -68,7 +68,8 @@ Also:
 2. **Named topic packs only** — pack filenames and TOC labels must name the topic (`weapons.md`, `field.md`). Never ship opaque `part_a` / `part_b` or `(A)`/`(B)` labels unless the names are real topics.
 3. **Nest depth** — prefer **hub → leaf** or **hub → named packs**. Avoid hub-of-hub (a pack that is only another TOC). Cap practical depth; deep `../` chains are a smell.
 4. **Clarity over sub-1k** — a coherent ~1.2–1.4k leaf beats another arbitrary split. Re-split only when a must_read/task pack blows budget, or one file mixes two jobs for different roles.
-5. **Opportunistic only** — further splits happen when already editing that topic, not as dedicated thinning sprints.
-6. **Next effort** — use packs (`resolve_docs` task packs, adherence), not more file splits. Tooling reference: `tools/consolidate_docs_part_ab.py` (defrag), not new `split_docs_roundN.py` by default.
+5. **Skim aids on fat leaves** — prefer sharp frontmatter `summary:` (for `resolve_docs` deferred tips) plus in-doc **When to read** / **Jump to** over new pack files.
+6. **Opportunistic only** — further splits happen when already editing that topic, not as dedicated thinning sprints.
+7. **Next effort** — use packs (`resolve_docs` task packs, adherence), not more file splits. Tooling reference: `tools/consolidate_docs_part_ab.py` (defrag), not new `split_docs_roundN.py` by default.
 
 Authority: this ADR · pointer: [`docs/README.md`](../README.md) § Docs pack enhance.

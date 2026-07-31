@@ -5,12 +5,26 @@ audience: [visual, qa]
 phase: [1, 5]
 status: active
 authority: art
-tokens_est: 1296
-summary: "Direction authority + feel ownership"
+tokens_est: 1417
+summary: "Who sets art direction vs who judges “feels right” — open on model polish disputes, jury FAIL ownership, or L6 handoff"
 ---
 # Model QA — Who Directs Feel
 
 **Hub:** [`polish_direction.md`](../polish_direction.md)
+
+## When to read
+
+Model/visual polish ownership is unclear (agents vs humans, on-direction vs feel). Skip if only running automated M1–M3 gates.
+
+## Jump to
+
+- [9.1 Two questions](#91-two-questions)
+- [9.2 Direction authority chain](#92-direction-authority-chain-on-direction)
+- [9.3 Who knows “feels right”](#93-who-knows-feels-right-in-motion)
+- [9.4 Keep tweaking (legal loop)](#94-how-keep-tweaking-works-legally)
+- [9.5 Role cheat sheet](#95-role-cheat-sheet)
+- [9.6 Gaps](#96-gaps-honest-limits)
+- [9.7 Audio parallel](#97-audio-parallel-bgm--p0-vo)
 
 ### 9.1 Two questions
 
