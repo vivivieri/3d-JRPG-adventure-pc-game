@@ -54,3 +54,21 @@ Also:
 | Flat Diátaxis-only tree (`tutorials/`, `how-to/`, …) | Breaks domain mental model for game design |
 | Keep old paths + INDEX only | Misses navigability; archive still pollutes listings |
 | One mega-doc | Worse for tokens and git blame |
+
+---
+
+## Amendment — Docs pack thinning / fragmentation (2026-07-31)
+
+**Status:** Accepted  
+**Context:** After packs rounds 4–8, active leaves ≥1.0k were cleared, but arbitrary `part_a`/`part_b` halves and hub-of-hub nests raised navigation cost. Defrag merged those halves ([#180](https://github.com/vivivieri/3d-JRPG-adventure-pc-game/pull/180)).
+
+### Standing policy (do not reopen bulk thinning)
+
+1. **No more bulk thinning rounds** chasing token bands (e.g. 900–999). Done bar: active leaves generally &lt;1.0k; thin hubs with pack TOCs.
+2. **Named topic packs only** — pack filenames and TOC labels must name the topic (`weapons.md`, `field.md`). Never ship opaque `part_a` / `part_b` or `(A)`/`(B)` labels unless the names are real topics.
+3. **Nest depth** — prefer **hub → leaf** or **hub → named packs**. Avoid hub-of-hub (a pack that is only another TOC). Cap practical depth; deep `../` chains are a smell.
+4. **Clarity over sub-1k** — a coherent ~1.2–1.4k leaf beats another arbitrary split. Re-split only when a must_read/task pack blows budget, or one file mixes two jobs for different roles.
+5. **Opportunistic only** — further splits happen when already editing that topic, not as dedicated thinning sprints.
+6. **Next effort** — use packs (`resolve_docs` task packs, adherence), not more file splits. Tooling reference: `tools/consolidate_docs_part_ab.py` (defrag), not new `split_docs_roundN.py` by default.
+
+Authority: this ADR · pointer: [`docs/README.md`](../README.md) § Docs pack enhance.

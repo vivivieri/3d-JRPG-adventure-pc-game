@@ -22,7 +22,7 @@ bash tools/check_extended_toolchain.sh
 bash tools/run_agent_session_gate.sh <role> <issue_id>
 ```
 
-Load **only** the pack printed by the gate (`python3 tools/resolve_docs.py <role> --issue <id> --budget 12000`). Hub + one pack — never the full library.
+Load **only** the pack printed by the gate (`python3 tools/resolve_docs.py <role> --issue <id> --budget 12000`). Hub + one pack — never the full library. Pack-split policy: [`DOC_LIBRARY_ADR.md`](../_meta/DOC_LIBRARY_ADR.md) § Amendment — Docs pack thinning (no bulk thinning; named packs only).
 
 ## STOP — do not fall back
 
