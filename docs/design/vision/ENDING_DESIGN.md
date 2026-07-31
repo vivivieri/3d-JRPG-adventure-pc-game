@@ -2,6 +2,7 @@
 id: ending-design
 type: explanation
 audience: [narrative]
+phase: [6]
 status: active
 authority: vision
 tokens_est: 1344

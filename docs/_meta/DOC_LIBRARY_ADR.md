@@ -29,12 +29,13 @@ Reorganize under five top-level buckets + a machine index:
 
 Also:
 
-- **`docs/INDEX.yaml`** — role → `must_read` / `optional` / `never_autoload`
+- **`docs/INDEX.yaml`** — role → `must_read` / `optional` / `never_autoload` + **`tasks:`** packs
 - **`docs/llms.txt`** — [llmstxt.org](https://llmstxt.org/) discovery map
 - **`docs/ops/BOOT.md`** — single thin always-on boot card
 - **`docs/_meta/redirects.yaml`** — legacy path → new path
 - **Diátaxis types** tagged in `INDEX.yaml` (tutorial / how-to / reference / explanation)
 - **YAML frontmatter** optional on docs (`docs/_meta/FRONTMATTER.md`); enforced gradually via `L0_docs_index`
+- **`resolve_docs.py`** — `--issue` / `--task` / `--phase` / `--budget` / `--report`; briefs auto-attach; `L0_handoff_refs` lint
 
 `docs/build/` was rejected as a folder name because root `.gitignore` ignores `build/`.
 

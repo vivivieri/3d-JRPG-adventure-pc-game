@@ -187,9 +187,30 @@ def main() -> int:
         "design/art/characters/urashima.md",
         "design/audio/production/bgm_and_scene_map.md",
         "engineering/technical/data/story_spine.md",
+        "design/art/rendering/lighting_fog.md",
+        "design/art/model_qa/layers_workflow.md",
+        "design/art/items/export_qa.md",
+        "design/vision/narrative/character_voice.md",
+        "ops/workflow/implementation/phase_1.md",
+        "ops/agents/cloud_setup/setup_automations.md",
     ):
         if not (DOCS / rel).is_file():
             errors.append(f"expected pack missing: docs/{rel}")
+
+    # Task packs present in INDEX
+    if "tasks:" not in index_text:
+        errors.append("INDEX.yaml missing tasks: section")
+    for task in (
+        "zone_lighting",
+        "combat_balance",
+        "vo_gen",
+        "steam_export",
+        "water_shader",
+        "factory_bootstrap",
+        "model_qa",
+    ):
+        if not re.search(rf"(?m)^  {re.escape(task)}:\s*$", index_text):
+            errors.append(f"INDEX.yaml missing tasks.{task}")
 
     if warnings:
         for w in warnings:

@@ -49,10 +49,14 @@ Resolve packs with:
 ```bash
 python3 tools/resolve_docs.py <role>
 python3 tools/resolve_docs.py <role> --issue <issue_id> --budget 12000
+python3 tools/resolve_docs.py <role> --task zone_lighting --phase 1
 python3 tools/resolve_docs.py --list-roles
+python3 tools/resolve_docs.py --list-tasks
 ```
 
-Large bibles are split into packs (`ops/qa/testing/`, `ops/agents/mcp/`, `ops/workflow/ai_dev/`, `design/art/characters/`, …) — load the hub + one pack, not the old monolith.
+Session gate writes `artifacts/docs_pack_<issue>.txt` (kept vs deferred + tokens). Sprint issues may set `docs_task` (see `docs/INDEX.yaml` `tasks:`). Briefs under `docs/briefs/` auto-attach when the issue title/refs mention the asset stem.
+
+Large bibles are split into packs (`ops/qa/testing/`, `design/art/rendering/`, `ops/workflow/implementation/`, …) — load the hub + one pack, not the old monolith.
 
 
 | Role | Pack |

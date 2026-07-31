@@ -53,6 +53,7 @@ artifacts/data_reviews/*
 !artifacts/data_reviews/.gitkeep
 artifacts/qa_reports/*
 !artifacts/qa_reports/.gitkeep
+artifacts/docs_pack_*.txt
 artifacts/pm_orchestrator_report.json
 artifacts/agent_cycle_event.json
 artifacts/.cycle_pending

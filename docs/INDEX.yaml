@@ -89,6 +89,7 @@ roles:
       - docs/design/world/ENVIRONMENT_KITS.md
       - docs/design/art/ART_DIRECTION.md
     optional:
+      - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/SHADER_SPECS.md
       - docs/design/world/LEVEL_DESIGN.md
 
@@ -107,8 +108,12 @@ roles:
       - docs/design/art/VISUAL_QA.md
     optional:
       - docs/design/art/MODEL_QA.md
+      - docs/design/art/model_qa/layers_workflow.md
+      - docs/design/art/RENDERING_GUIDE.md
+      - docs/design/art/rendering/lighting_fog.md
       - docs/design/art/CHARACTER_BIBLE.md
       - docs/design/art/characters/urashima.md
+      - docs/design/art/GENERATION_READINESS.md
 
   release:
     must_read:
@@ -125,6 +130,7 @@ roles:
       - docs/design/vision/STORYBOARD.md
       - docs/design/vision/NARRATIVE_WRITING_GUIDE.md
     optional:
+      - docs/design/vision/narrative/character_voice.md
       - docs/design/vision/ENDING_DESIGN.md
       - docs/design/vision/VO_HIT_LIST.md
 
@@ -135,6 +141,66 @@ roles:
     optional:
       - docs/design/audio/AUDIO_QA.md
       - docs/design/audio/production/bgm_and_scene_map.md
+
+# Task packs — reusable across roles (`resolve_docs.py --task <id>`).
+# Sprint issues may set `docs_task` to auto-union these with the role pack.
+tasks:
+  zone_lighting:
+    must_read:
+      - docs/design/art/RENDERING_GUIDE.md
+      - docs/design/world/ENVIRONMENT_KITS.md
+      - docs/design/art/ART_DIRECTION.md
+    optional:
+      - docs/design/art/rendering/lighting_fog.md
+      - docs/design/art/rendering/defaults_environment.md
+
+  combat_balance:
+    must_read:
+      - docs/design/gameplay/COMBAT_SYSTEMS.md
+      - docs/design/gameplay/PROGRESSION_TUNING.md
+    optional:
+      - docs/design/gameplay/SKILLS_BIBLE.md
+      - docs/design/art/COMBAT_PRESENTATION.md
+
+  vo_gen:
+    must_read:
+      - docs/design/vision/VO_HIT_LIST.md
+      - docs/design/audio/AUDIO_DIRECTION.md
+    optional:
+      - docs/design/vision/narrative/character_voice.md
+      - docs/design/vision/NARRATIVE_WRITING_GUIDE.md
+
+  steam_export:
+    must_read:
+      - docs/ops/ci-cd/STEAM_RELEASE_CHECKLIST.md
+      - docs/ops/qa/SECURITY.md
+    optional:
+      - docs/ops/ci-cd/CD.md
+      - docs/ops/ci-cd/CI.md
+
+  water_shader:
+    must_read:
+      - docs/design/art/RENDERING_GUIDE.md
+      - docs/design/art/SHADER_SPECS.md
+    optional:
+      - docs/design/art/rendering/materials_gi_glow.md
+      - docs/design/art/ART_DIRECTION.md
+
+  factory_bootstrap:
+    must_read:
+      - docs/ops/workflow/BRANCHING.md
+      - docs/ops/agents/CLOUD_SNAPSHOT_LAUNCH.md
+    optional:
+      - docs/ops/agents/cloud_setup/setup_automations.md
+      - docs/ops/agents/CLOUD_AGENT_SETUP_RUNBOOK.md
+
+  model_qa:
+    must_read:
+      - docs/design/art/MODEL_QA.md
+      - docs/design/art/ART_DIRECTION.md
+    optional:
+      - docs/design/art/model_qa/layers_workflow.md
+      - docs/design/art/VISUAL_QA.md
 
 diataxis:
   tutorial:

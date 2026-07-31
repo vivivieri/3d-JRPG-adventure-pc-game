@@ -81,6 +81,7 @@ run_gate "L0_player_build_protection" bash tools/check_player_build_protection.s
 run_gate "L0_doc_sync" python3 tools/check_doc_sync.py
 run_gate "L0_docs_index" python3 tools/validate_docs_index.py
 run_gate "L0_docs_catalogs" python3 tools/refresh_docs_catalogs.py --check
+run_gate "L0_handoff_refs" python3 tools/validate_handoff_refs.py
 run_gate "L0_alignment_audit_catalog" python3 tools/validate_alignment_audit_catalog.py
 run_gate "L0_workflow_integration" python3 tools/validate_workflow_integration.py
 run_gate "L0_candidate_tournament" python3 tools/validate_candidate_tournament.py

@@ -10,12 +10,24 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BACKLOG_PATH = ROOT / "game/data/qa/generation_readiness_backlog.json"
 PLAN_PATH = ROOT / "docs/ops/workflow/IMPLEMENTATION_PLAN.md"
+PLAN_PACKS = ROOT / "docs/ops/workflow/implementation"
 CRITERIA_PATH = ROOT / "game/data/qa/acceptance_criteria.json"
 ZONE_PATH = ROOT / "game/data/qa/zone_composition.json"
 
 TASK_RE = re.compile(r"^\d+\.\d+[a-z]?$")
 PRIORITIES = {"P0", "P1", "P2"}
 STATUSES = {"pending", "in_progress", "done", "waived"}
+
+
+def _plan_corpus() -> str:
+    """Hub + phase packs (IMPLEMENTATION_PLAN was split for progressive disclosure)."""
+    chunks: list[str] = []
+    if PLAN_PATH.is_file():
+        chunks.append(PLAN_PATH.read_text(encoding="utf-8"))
+    if PLAN_PACKS.is_dir():
+        for md in sorted(PLAN_PACKS.glob("*.md")):
+            chunks.append(md.read_text(encoding="utf-8"))
+    return "\n".join(chunks)
 
 
 def main() -> int:
@@ -29,7 +41,7 @@ def main() -> int:
     if not items:
         errors.append("items must be non-empty")
 
-    plan_text = PLAN_PATH.read_text(encoding="utf-8") if PLAN_PATH.is_file() else ""
+    plan_text = _plan_corpus()
     gates: set[str] = set()
     if CRITERIA_PATH.is_file():
         criteria = json.loads(CRITERIA_PATH.read_text(encoding="utf-8"))
@@ -81,7 +93,10 @@ def main() -> int:
             if not TASK_RE.match(str(task)):
                 errors.append(f"{iid}: invalid task id {task!r}")
             elif plan_text and f"| {task} |" not in plan_text:
-                errors.append(f"{iid}: task {task} not found in IMPLEMENTATION_PLAN.md")
+                errors.append(
+                    f"{iid}: task {task} not found in IMPLEMENTATION_PLAN.md "
+                    "(or docs/ops/workflow/implementation/ packs)"
+                )
 
         for gid in item.get("gate_ids", []):
             if gates and gid not in gates:

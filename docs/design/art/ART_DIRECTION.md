@@ -2,6 +2,7 @@
 id: art-direction
 type: reference
 audience: [visual, builder]
+phase: [1, 5]
 status: active
 authority: art
 tokens_est: 1939

@@ -19,11 +19,11 @@ tokens_est: 3500         # optional soft budget
 | `id` | yes | kebab-case stable id |
 | `type` | yes | Diátaxis type |
 | `audience` | recommended | Matches `docs/INDEX.yaml` roles |
-| `phase` | optional | Implementation phases 0–8 |
+| `phase` | optional | Implementation phases 0–8 — `resolve_docs.py --phase N` drops optionals whose list excludes N |
 | `status` | recommended | `deprecated` docs belong under `archive/` |
 | `authority` | recommended | Hint when prose conflicts with JSON |
-| `tokens_est` | optional | Helps pack budgeting |
+| `tokens_est` | optional | Helps pack budgeting (`--budget`) |
 
 **Skip frontmatter:** `README.md`, `BOOT.md`, `llms.txt`, `INDEX.yaml`, `archive/**`, `_meta/**`, `briefs/**`, `audio_sheets/**`, `sprints/**`, `automation_prompts/**`.
 
-**CI:** `L0_docs_index` requires ≥80% of active docs to have `type:` frontmatter.
+**CI:** `L0_docs_index` requires ≥80% of active docs to have `type:` frontmatter. `L0_handoff_refs` validates sprint `handoff_refs` + `docs_task`.

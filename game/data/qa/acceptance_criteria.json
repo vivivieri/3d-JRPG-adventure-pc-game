@@ -734,6 +734,15 @@
       "evidence": ["docs/design/README.md", "docs/engineering/README.md", "docs/ops/README.md"],
       "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
     },
+    "L0_handoff_refs": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_handoff_refs.py",
+      "description": "Sprint board handoff_refs resolve to existing docs; docs_task ids exist in INDEX.yaml tasks; archive/sprint paths rejected",
+      "pass": { "exit_code": 0 },
+      "evidence": ["game/data/qa/sprint_board.json", "docs/INDEX.yaml"],
+      "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md, docs/ops/BOOT.md"
+    },
     "L0_alignment_audit_catalog": {
       "layer": "L0",
       "domain": "flow",
@@ -916,6 +925,7 @@
       "L0_doc_sync",
       "L0_docs_index",
       "L0_docs_catalogs",
+      "L0_handoff_refs",
       "L0_alignment_audit_catalog",
       "L0_workflow_integration",
       "L0_candidate_tournament",
