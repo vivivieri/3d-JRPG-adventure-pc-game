@@ -1,6 +1,7 @@
 ---
 id: m3-jury
 type: how-to
+phase: [1, 5]
 audience: [visual, qa]
 status: active
 authority: art

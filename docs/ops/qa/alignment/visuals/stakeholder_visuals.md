@@ -1,6 +1,7 @@
 ---
 id: stakeholder-visuals
 type: how-to
+phase: [1, 6]
 audience: [pm, qa]
 status: active
 authority: qa

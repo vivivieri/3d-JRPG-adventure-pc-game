@@ -73,4 +73,16 @@ Also:
 7. **Next effort** — use packs (`resolve_docs` task packs, adherence), not more file splits. Tooling reference: `tools/consolidate_docs_part_ab.py` (defrag), not new `split_docs_roundN.py` by default.
 8. **Pack budget headroom** — keep role/task `optional` lists lean so typical `resolve_docs --budget 12000` packs retain ≥~800 tok headroom. Prefer task packs for deep leaves (L3/L4, playtest act sheets, language style). When a task pack provides optionals, those replace generic role optionals (specialty remaps still merge). Remap CI work: `architect` + `acceptance_ci` → `qa`; skip zone/brief auto-attach on process tasks (`acceptance_ci`, `factory_bootstrap`, …). Re-measure: `python3 tools/audit_docs_read_efficiency.py`.
 
+### CI lock (completed one-shots retired)
+
+Bulk split/stamp/reorg scripts were one-shots. Their outcomes are now gated — do not reintroduce them:
+
+| Gate / rule | Enforces |
+|-------------|----------|
+| `L0_docs_pack_policy` (`tools/validate_docs_pack_policy.py`) | No opaque `part_a`/`part_b` filenames; INDEX active docs have `type`/`phase`/`summary`/`tokens_est`; forbidden completed one-shots stay deleted |
+| `L0_docs_index` | INDEX paths, redirects, legacy folders gone, hub packs exist, `tokens_est` drift |
+| Phase heuristics (authors) | Path → phase list printed on policy FAIL (from retired `stamp_docs_phase.py`) |
+
+**Keep (operator / ongoing):** `apply_docs_skim_aids.py`, `form_docs_frontmatter.py`, `consolidate_docs_part_ab.py`, `audit_docs_read_efficiency.py`, `resolve_docs.py`.
+
 Authority: this ADR · pointer: [`docs/README.md`](../README.md) § Docs pack enhance.

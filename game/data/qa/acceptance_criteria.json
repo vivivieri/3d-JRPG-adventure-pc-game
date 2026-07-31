@@ -725,6 +725,15 @@
       "evidence": ["docs/INDEX.yaml", "docs/ops/BOOT.md", "docs/llms.txt", "docs/_meta/redirects.json"],
       "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
     },
+    "L0_docs_pack_policy": {
+      "layer": "L0",
+      "domain": "flow",
+      "command": "python3 tools/validate_docs_pack_policy.py",
+      "description": "Docs pack standing policy — no opaque part_a/part_b packs, INDEX docs have type/phase/summary/tokens_est, completed split/stamp/reorg one-shots stay deleted",
+      "pass": { "exit_code": 0 },
+      "evidence": ["docs/_meta/DOC_LIBRARY_ADR.md", "tools/validate_docs_pack_policy.py"],
+      "design_ref": "docs/_meta/DOC_LIBRARY_ADR.md"
+    },
     "L0_docs_catalogs": {
       "layer": "L0",
       "domain": "flow",
@@ -924,6 +933,7 @@
       "L0_difficulty_data",
       "L0_doc_sync",
       "L0_docs_index",
+      "L0_docs_pack_policy",
       "L0_docs_catalogs",
       "L0_handoff_refs",
       "L0_alignment_audit_catalog",

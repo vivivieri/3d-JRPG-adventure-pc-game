@@ -1,6 +1,7 @@
 ---
 id: build-policy
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect, builder]
 status: active
 authority: workflow

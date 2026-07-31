@@ -186,3 +186,4 @@ Recent efficiency work:
 - Prefer sharp `summary:` + **When to read** / **Jump to** on fat leaves over new splits (`python3 tools/apply_docs_skim_aids.py`).
 - Keep role/task `optional` packs lean (≥~800 tok headroom at budget 12000); deep leaves live on task packs. When a task provides optionals, they replace generic role optionals (specialty remaps still merge). Audit: `python3 tools/audit_docs_read_efficiency.py`.
 - Next work: **use** packs (`resolve_docs`, adherence), not more splits.
+- **CI:** `L0_docs_pack_policy` locks standing policy (no opaque packs; INDEX docs have phase/summary/tokens; completed `split_docs_*` / stamp / reorg one-shots must stay deleted). Operator tools kept: `form_docs_frontmatter.py`, `consolidate_docs_part_ab.py`, `apply_docs_skim_aids.py`.

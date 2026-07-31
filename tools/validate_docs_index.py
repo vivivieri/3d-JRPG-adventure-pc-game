@@ -131,7 +131,7 @@ def main() -> int:
         'ROOT / "docs" / "compliance"',
     )
     for py in (ROOT / "tools").glob("*.py"):
-        if py.name.startswith("reorganize_docs") or py.name == "validate_docs_index.py":
+        if py.name == "validate_docs_index.py":
             continue
         text = py.read_text(encoding="utf-8")
         for snippet in stale_path_snippets:

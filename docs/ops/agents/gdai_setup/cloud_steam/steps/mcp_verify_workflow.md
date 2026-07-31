@@ -1,6 +1,7 @@
 ---
 id: mcp-verify-workflow
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: ops

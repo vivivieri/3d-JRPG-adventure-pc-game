@@ -1,6 +1,7 @@
 ---
 id: scenes-flags
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, narrative, builder]
 status: active
 authority: engineering

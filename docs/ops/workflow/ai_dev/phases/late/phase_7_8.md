@@ -1,6 +1,7 @@
 ---
 id: phase-7-8
 type: reference
+phase: [0, 1, 8]
 audience: [pm, qa, architect]
 status: active
 authority: workflow

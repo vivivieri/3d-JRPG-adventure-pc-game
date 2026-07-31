@@ -57,7 +57,7 @@
         {
           "path": "tools/run_agent_session_gate.sh",
           "contains": "resolve_docs.py",
-          "purpose": "print role doc pack \u222a issue handoff_refs (budgeted)"
+          "purpose": "print role doc pack ∪ issue handoff_refs (budgeted)"
         },
         {
           "path": "tools/run_agent_session_gate.sh",
@@ -102,12 +102,12 @@
         {
           "path": "tools/resolve_docs.py",
           "contains": "INDEX.yaml",
-          "purpose": "role \u2192 must_read resolver"
+          "purpose": "role → must_read resolver"
         },
         {
           "path": "tools/validate_handoff_refs.py",
           "contains": "handoff_refs",
-          "purpose": "L0 gate \u2014 sprint handoff_refs + docs_task lint"
+          "purpose": "L0 gate — sprint handoff_refs + docs_task lint"
         },
         {
           "path": "tools/pm_docs_preflight.py",
@@ -127,7 +127,7 @@
         {
           "path": "tools/docs_role_map.py",
           "contains": "remap_docs_role",
-          "purpose": "map builder\u2192builder_zone/combat from docs_task"
+          "purpose": "map builder→builder_zone/combat from docs_task"
         },
         {
           "path": "tools/resolve_docs.py",
@@ -153,11 +153,6 @@
           "path": "tools/fix_docs_frontmatter.py",
           "contains": "tokens_est",
           "purpose": "recalibrate tokens_est + summary TL;DRs"
-        },
-        {
-          "path": "tools/enhance_docs_packs.py",
-          "contains": "VISUAL_QA",
-          "purpose": "split remaining fat hubs into packs"
         },
         {
           "path": "tools/resolve_docs.py",
@@ -200,21 +195,6 @@
           "purpose": "TRIGGER — auto-seed must_read after resolve_docs"
         },
         {
-          "path": "tools/split_docs_remaining.py",
-          "contains": "STORYBOARD",
-          "purpose": "split remaining fat hubs + ruined_village brief"
-        },
-        {
-          "path": "tools/split_docs_round4.py",
-          "contains": "SECURITY.md",
-          "purpose": "round4 hub splits release/language/factory"
-        },
-        {
-          "path": "tools/stamp_docs_phase.py",
-          "contains": "infer_phase",
-          "purpose": "stamp phase frontmatter on active docs"
-        },
-        {
           "path": "tools/run_agent_session_gate.sh",
           "contains": "docs_reads_",
           "purpose": "init DOCS_READ_LOG for adherence"
@@ -245,19 +225,24 @@
           "purpose": "catalog all pack files for discoverability"
         },
         {
-          "path": "tools/split_docs_round5.py",
-          "contains": "def ",
-          "purpose": "docs pack round5 splitter"
+          "path": "tools/apply_docs_skim_aids.py",
+          "contains": "When to read",
+          "purpose": "idempotent skim aids — prefer over new pack splits"
         },
         {
-          "path": "tools/split_docs_round6.py",
-          "contains": "def main",
-          "purpose": "docs pack round6 leftover splitter"
+          "path": "tools/consolidate_docs_part_ab.py",
+          "contains": "part_a",
+          "purpose": "operator defrag for opaque part_a/part_b halves"
         },
         {
-          "path": "tools/split_docs_round7.py",
-          "contains": "def main",
-          "purpose": "docs pack round7 fat sibling thinner"
+          "path": "tools/validate_docs_pack_policy.py",
+          "contains": "FORBIDDEN_ONESHOTS",
+          "purpose": "L0 — lock pack policy; completed one-shots must stay deleted"
+        },
+        {
+          "path": "tools/run_docs_ci_checks.sh",
+          "contains": "L0_docs_pack_policy",
+          "purpose": "docs CI runs pack policy gate"
         }
       ],
       "orchestrator_steps": [
@@ -442,7 +427,7 @@
     },
     {
       "id": "factory_watchdog",
-      "label": "Factory watchdog \u2014 stall/hang recovery",
+      "label": "Factory watchdog — stall/hang recovery",
       "authority_doc": "docs/ops/agents/FACTORY_WATCHDOG.md",
       "required_secrets": [
         "CURSOR_FACTORY_ALERT_WEBHOOK_URL"

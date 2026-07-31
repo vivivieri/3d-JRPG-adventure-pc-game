@@ -1,6 +1,7 @@
 ---
 id: storyboard-endings
 type: reference
+phase: [1, 5]
 audience: [narrative, visual, builder]
 status: active
 authority: ui
