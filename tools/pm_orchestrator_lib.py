@@ -31,6 +31,7 @@ VALID_AGENTS = {"pm", "architect", "builder", "qa", "flow", "release", "visual",
 VALID_STATUS = {"pending", "in_progress", "blocked", "done", "carry_over"}
 VALID_DONE_REQUIRES = {"pr_merged", "ci_green_on_branch", "push_only"}
 PACK_ISSUE_RE = re.compile(r"^##\s+(P\d+-\d+)\s+—", re.MULTILINE)
+PACK_LINK_RE = re.compile(r"\]\(([^)]+?\.md)\)")
 
 DEFAULT_HANDOFF_REFS: dict[str, list[str]] = {
     "architect": ["docs/design/art/RENDERING_GUIDE.md", "docs/design/world/ENVIRONMENT_KITS.md", "docs/engineering/technical/CODE_STYLE.md"],
@@ -64,10 +65,26 @@ def issue_index(board: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def parse_issue_pack(pack_path: Path) -> list[str]:
+    """Collect issue ids from pack markdown — hub file plus linked sub-packs."""
     if not pack_path.is_file():
         return []
-    text = pack_path.read_text(encoding="utf-8")
-    return sorted(set(PACK_ISSUE_RE.findall(text)))
+    ids: set[str] = set()
+    seen: set[Path] = set()
+
+    def _parse_file(path: Path) -> None:
+        resolved = path.resolve()
+        if resolved in seen or not path.is_file():
+            return
+        seen.add(resolved)
+        text = path.read_text(encoding="utf-8")
+        ids.update(PACK_ISSUE_RE.findall(text))
+        for link in PACK_LINK_RE.findall(text):
+            linked = (path.parent / link).resolve()
+            if linked.suffix == ".md":
+                _parse_file(linked)
+
+    _parse_file(pack_path)
+    return sorted(ids)
 
 
 def deps_satisfied(issue: dict[str, Any], idx: dict[str, dict[str, Any]]) -> bool:
