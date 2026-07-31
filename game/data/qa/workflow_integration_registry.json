@@ -183,6 +183,26 @@
           "path": "tools/split_docs_remaining.py",
           "contains": "STORYBOARD",
           "purpose": "split remaining fat hubs + ruined_village brief"
+        },
+        {
+          "path": "tools/split_docs_round4.py",
+          "contains": "SECURITY.md",
+          "purpose": "round4 hub splits release/language/factory"
+        },
+        {
+          "path": "tools/stamp_docs_phase.py",
+          "contains": "infer_phase",
+          "purpose": "stamp phase frontmatter on active docs"
+        },
+        {
+          "path": "tools/run_agent_session_gate.sh",
+          "contains": "docs_reads_",
+          "purpose": "init DOCS_READ_LOG for adherence"
+        },
+        {
+          "path": "docs/INDEX.yaml",
+          "contains": "pack_catalog:",
+          "purpose": "catalog all pack files for discoverability"
         }
       ],
       "orchestrator_steps": [

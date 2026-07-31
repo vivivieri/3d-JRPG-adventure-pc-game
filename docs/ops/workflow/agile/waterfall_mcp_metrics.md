@@ -1,10 +1,11 @@
 ---
 id: waterfall-mcp-metrics
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 534
+tokens_est: 538
 summary: "Waterfall bounds, MCP, metrics"
 ---
 # Agile Within Phases — Waterfall bounds, MCP, metrics

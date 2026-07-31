@@ -1,10 +1,11 @@
 ---
 id: architecture-prereqs
 type: how-to
+phase: [0, 1]
 audience: [builder, pm, architect]
 status: active
 authority: ops
-tokens_est: 181
+tokens_est: 184
 summary: "curl -LsSf https://astral.sh/uv/install.sh | sh"
 ---
 # GDAI Cloud Setup — Prerequisites

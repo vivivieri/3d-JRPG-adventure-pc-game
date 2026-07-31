@@ -1,10 +1,11 @@
 ---
 id: commands
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 333
+tokens_est: 338
 summary: "bash tools/ensure_gdai_mcp.sh"
 ---
 # AI Dev Workflow — commands

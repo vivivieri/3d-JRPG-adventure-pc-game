@@ -1,10 +1,11 @@
 ---
 id: pm-stakeholder-reporting
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1457
+tokens_est: 1461
 summary: "**Audience:** Product Owner (stakeholder)"
 ---
 # PM Stakeholder Reporting — Product Owner Status Dashboard

@@ -1,10 +1,11 @@
 ---
 id: player-controls
 type: reference
+phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 529
+tokens_est: 533
 summary: "`docs/design/ui/UI_UX_FLOW.md` §10–11 · `game/data/code/input_registry.json`"
 ---
 # Player Controls — Tides of Urashima

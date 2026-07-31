@@ -1,10 +1,11 @@
 ---
 id: mcp-stack
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1640
+tokens_est: 1643
 summary: "`main` rebuild workflow — **Godot 4.7 stable**"
 ---
 # MCP Stack — Full Toolchain (Godot 4.7)

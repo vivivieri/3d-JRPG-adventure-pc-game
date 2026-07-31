@@ -1,10 +1,11 @@
 ---
 id: tools-roster
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 915
+tokens_est: 918
 summary: "Controls, tools, agent roster"
 ---
 # R&R Cheat Sheet — Controls, tools, agent roster

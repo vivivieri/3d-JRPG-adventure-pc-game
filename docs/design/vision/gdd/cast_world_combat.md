@@ -1,10 +1,11 @@
 ---
 id: cast-world-combat
 type: explanation
+phase: [1, 6]
 audience: [narrative, pm, architect]
 status: active
 authority: vision
-tokens_est: 840
+tokens_est: 844
 summary: "Characters, world, combat, progression"
 ---
 # Game Design Document — Characters, world, combat, progression

@@ -1,10 +1,11 @@
 ---
 id: gates-trackers
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 817
+tokens_est: 822
 summary: "Quality ladder, trackers, promotion"
 ---
 # Development Lifecycle — Quality ladder, trackers, promotion

@@ -76,9 +76,16 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [gameplay/bosses/palace_sentinel.md](gameplay/bosses/palace_sentinel.md) | `palace_sentinel` |
 | [gameplay/bosses/shore_wraith.md](gameplay/bosses/shore_wraith.md) | `shore_wraith` |
 | [gameplay/bosses/tide_keeper.md](gameplay/bosses/tide_keeper.md) | `tide_keeper` |
+| [gameplay/combat/party_xp_ui_qa.md](gameplay/combat/party_xp_ui_qa.md) | `party_xp_ui_qa` |
+| [gameplay/combat/status_limit_intent.md](gameplay/combat/status_limit_intent.md) | `status_limit_intent` |
+| [gameplay/combat/turns_elements_stats.md](gameplay/combat/turns_elements_stats.md) | `turns_elements_stats` |
 | [ui/CINEMATICS.md](ui/CINEMATICS.md) | `CINEMATICS` |
 | [ui/SETTINGS_ACCESSIBILITY.md](ui/SETTINGS_ACCESSIBILITY.md) | `SETTINGS_ACCESSIBILITY` |
 | [ui/UI_UX_FLOW.md](ui/UI_UX_FLOW.md) | `UI_UX_FLOW` |
+| [ui/cinematics/combat_boss.md](ui/cinematics/combat_boss.md) | `combat_boss` |
+| [ui/cinematics/global_field_dialogue.md](ui/cinematics/global_field_dialogue.md) | `global_field_dialogue` |
+| [ui/cinematics/storyboard_endings.md](ui/cinematics/storyboard_endings.md) | `storyboard_endings` |
+| [ui/cinematics/vfx_impl_checklist.md](ui/cinematics/vfx_impl_checklist.md) | `vfx_impl_checklist` |
 | [vision/ENDING_DESIGN.md](vision/ENDING_DESIGN.md) | `ENDING_DESIGN` |
 | [vision/GDD.md](vision/GDD.md) | `GDD` |
 | [vision/LORE_AND_ENVIRONMENTAL_STORY.md](vision/LORE_AND_ENVIRONMENTAL_STORY.md) | `LORE_AND_ENVIRONMENTAL_STORY` |
@@ -93,6 +100,9 @@ Hub: [`docs/README.md`](../README.md) · Router: [`docs/INDEX.yaml`](../INDEX.ya
 | [vision/gdd/controls_tech_ship.md](vision/gdd/controls_tech_ship.md) | `controls_tech_ship` |
 | [vision/gdd/narrative_endings.md](vision/gdd/narrative_endings.md) | `narrative_endings` |
 | [vision/gdd/pitch_scope.md](vision/gdd/pitch_scope.md) | `pitch_scope` |
+| [vision/illustrations/prompts_pitch_qa.md](vision/illustrations/prompts_pitch_qa.md) | `prompts_pitch_qa` |
+| [vision/illustrations/shots_briefs.md](vision/illustrations/shots_briefs.md) | `shots_briefs` |
+| [vision/illustrations/why_style_layout.md](vision/illustrations/why_style_layout.md) | `why_style_layout` |
 | [vision/narrative/audio_themes.md](vision/narrative/audio_themes.md) | `audio_themes` |
 | [vision/narrative/character_voice.md](vision/narrative/character_voice.md) | `character_voice` |
 | [vision/narrative/checklist_production.md](vision/narrative/checklist_production.md) | `checklist_production` |

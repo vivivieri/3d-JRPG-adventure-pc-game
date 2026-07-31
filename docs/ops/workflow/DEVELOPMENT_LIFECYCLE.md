@@ -1,10 +1,11 @@
 ---
 id: development-lifecycle
 type: explanation
+phase: [0, 1, 8]
 audience: [pm, architect, release]
 status: active
 authority: workflow
-tokens_est: 402
+tokens_est: 406
 summary: "Macro lifecycle, branching, gates, promotion"
 ---
 # Development Lifecycle

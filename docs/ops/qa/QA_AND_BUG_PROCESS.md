@@ -1,10 +1,11 @@
 ---
 id: qa-and-bug-process
 type: how-to
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 261
+tokens_est: 264
 summary: "Triage, severity, verification — load the step you are on"
 ---
 # QA and Bug Process

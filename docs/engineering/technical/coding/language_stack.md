@@ -1,10 +1,11 @@
 ---
 id: language-stack
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 616
+tokens_est: 622
 summary: "Language stack + branch policy"
 ---
 # Coding Standards Hub — Language stack + branch policy

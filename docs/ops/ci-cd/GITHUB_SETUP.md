@@ -1,10 +1,11 @@
 ---
 id: github-setup
 type: reference
+phase: [6, 8]
 audience: [release]
 status: active
 authority: ci-cd
-tokens_est: 1282
+tokens_est: 1286
 summary: "**Script:** `bash tools/setup_github_project.sh`"
 ---
 # GitHub Repository Setup

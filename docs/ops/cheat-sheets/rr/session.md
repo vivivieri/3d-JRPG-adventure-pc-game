@@ -1,10 +1,11 @@
 ---
 id: session
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa]
 status: active
 authority: ops
-tokens_est: 650
+tokens_est: 653
 summary: "bash tools/ensure_mcp_stack.sh"
 ---
 # R&R — session-startup-every-run

@@ -1,10 +1,11 @@
 ---
 id: coding-standards-hub
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 232
+tokens_est: 239
 summary: "Languages, naming, CI — load the section for your change type"
 ---
 # Coding Standards Hub

@@ -1,10 +1,11 @@
 ---
 id: controls-cheatsheet
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 412
+tokens_est: 416
 summary: "How roles are enforced — load gates or PR controls for your branch"
 ---
 # Controls Cheat Sheet

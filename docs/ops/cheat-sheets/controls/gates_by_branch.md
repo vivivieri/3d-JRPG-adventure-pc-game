@@ -1,10 +1,11 @@
 ---
 id: gates-by-branch
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 1204
+tokens_est: 1207
 summary: "Automated gates by branch"
 ---
 # Controls Cheat Sheet — Automated gates by branch

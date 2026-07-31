@@ -1,10 +1,11 @@
 ---
 id: ci-pr-commands
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1434
+tokens_est: 1440
 summary: "CI matrix, PR checklist, related, commands"
 ---
 # Coding Standards Hub — CI matrix, PR checklist, related, commands

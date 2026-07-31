@@ -1,10 +1,11 @@
 ---
 id: acceptance-criteria
 type: reference
+phase: [1, 6]
 audience: [qa, pm, builder]
 status: active
 authority: qa
-tokens_est: 259
+tokens_est: 262
 summary: "Measurable pass/fail gates — load catalog or jury section"
 ---
 # Acceptance Criteria

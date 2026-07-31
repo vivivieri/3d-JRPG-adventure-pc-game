@@ -1,10 +1,11 @@
 ---
 id: art-tools
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1314
+tokens_est: 1318
 summary: "`docs/design/art/ART_AUTOMATION_PIPELINE.md` — quality-first, zero human artists, tiered MCP."
 ---
 # MCP — Art Tools

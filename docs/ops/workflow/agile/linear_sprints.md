@@ -1,10 +1,11 @@
 ---
 id: linear-sprints
 type: how-to
+phase: [0, 1, 8]
 audience: [pm, architect]
 status: active
 authority: workflow
-tokens_est: 1343
+tokens_est: 1348
 summary: "Linear setup & sprint flow"
 ---
 # Agile Within Phases — Linear setup & sprint flow

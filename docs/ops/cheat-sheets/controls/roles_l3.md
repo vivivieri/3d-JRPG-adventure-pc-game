@@ -1,10 +1,11 @@
 ---
 id: roles-l3
 type: reference
+phase: [0, 1]
 audience: [pm, builder, qa, release]
 status: active
 authority: ops
-tokens_est: 465
+tokens_est: 468
 summary: "Per-role controls + L3 split"
 ---
 # Controls Cheat Sheet — Per-role controls + L3 split

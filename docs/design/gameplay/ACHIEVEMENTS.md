@@ -1,10 +1,11 @@
 ---
 id: achievements
 type: reference
+phase: [2, 3]
 audience: [builder, architect]
 status: active
 authority: gameplay
-tokens_est: 548
+tokens_est: 551
 summary: "`docs/design/vision/ENDING_DESIGN.md`, `docs/design/world/QUEST_AND_FLAGS.md`, `steam/STORE_PAGE.md`"
 ---
 # Tides of Urashima — Steam Achievements

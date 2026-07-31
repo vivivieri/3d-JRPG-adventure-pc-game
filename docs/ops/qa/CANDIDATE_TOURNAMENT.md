@@ -1,10 +1,11 @@
 ---
 id: candidate-tournament
 type: reference
+phase: [1, 6]
 audience: [qa, flow]
 status: active
 authority: qa
-tokens_est: 1402
+tokens_est: 1405
 summary: "**Layer:** **L2.5** (pre-merge, **non-ship**)"
 ---
 # Candidate Tournament — Champion/Challenger + Golden Harness

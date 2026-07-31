@@ -1,10 +1,11 @@
 ---
 id: pacing-chart
 type: explanation
+phase: [1, 6]
 audience: [narrative]
 status: active
 authority: vision
-tokens_est: 572
+tokens_est: 575
 summary: "`docs/design/vision/STORYBOARD.md`, `docs/design/vision/GDD.md` §9"
 ---
 # Tides of Urashima — Emotional Pacing Chart

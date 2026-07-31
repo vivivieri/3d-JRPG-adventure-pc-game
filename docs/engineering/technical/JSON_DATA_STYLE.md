@@ -1,10 +1,11 @@
 ---
 id: json-data-style
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1943
+tokens_est: 1950
 summary: "**Scope:** `game/data/**/*.json` — story, combat, registries, QA catalogs"
 ---
 # JSON Data Style Guide — Tides of Urashima

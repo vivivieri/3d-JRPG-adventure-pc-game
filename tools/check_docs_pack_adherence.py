@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """Warn when session file reads look outside the resolved docs pack.
 
-Reads artifacts/docs_pack_<issue>.json (allowed_read_paths) and optionally a
-newline list of paths the agent opened (DOCS_READ_LOG or --reads-file).
+Reads artifacts/docs_pack_<issue>.json (allowed_read_paths) and a newline list
+of paths the agent opened:
 
-Exit 0 always unless --strict (then exit 1 on extras). Designed for
-run_post_agent_cycle.sh as a soft WARN by default.
+  DOCS_READ_LOG                 env override
+  --reads-file PATH             explicit
+  artifacts/docs_reads_<issue>.log   default (session gate initializes)
+
+Exit 0 always unless --strict (then exit 1 on extras). Soft WARN by default.
+Also accepts paths logged as: READ docs/foo.md
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -22,7 +27,8 @@ def _normalize(path: str) -> str:
     p = path.strip().lstrip("./")
     if p.startswith("res://"):
         p = p[6:]
-    return p
+    p = re.sub(r"^(READ|OPEN|opened|read)\s+", "", p, flags=re.I)
+    return p.strip()
 
 
 def main() -> int:
@@ -55,7 +61,6 @@ def main() -> int:
         for p in (data.get("allowed_read_paths") or [])
         if isinstance(p, str)
     }
-    # Always allow boot + router meta
     allowed.update(
         {
             "docs/ops/BOOT.md",
@@ -66,27 +71,38 @@ def main() -> int:
         }
     )
 
-    reads: list[str] = []
-    reads_file = args.reads_file or os.environ.get("DOCS_READ_LOG")
-    if reads_file and Path(reads_file).is_file():
-        reads = [
-            _normalize(line)
-            for line in Path(reads_file).read_text(encoding="utf-8").splitlines()
-            if line.strip() and not line.strip().startswith("#")
-        ]
-    else:
+    default_log = ROOT / "artifacts" / f"docs_reads_{args.issue}.log"
+    reads_file = args.reads_file or os.environ.get("DOCS_READ_LOG") or str(default_log)
+    reads_path = Path(reads_file)
+    if not reads_path.is_file():
         print(
-            "[OK] docs_pack adherence: no reads log "
-            "(set DOCS_READ_LOG or --reads-file to enable)"
+            f"[OK] docs_pack adherence: no reads log at {reads_path} "
+            "(session gate creates artifacts/docs_reads_<issue>.log)"
         )
         return 0
+
+    raw_lines = reads_path.read_text(encoding="utf-8").splitlines()
+    reads = [
+        _normalize(line)
+        for line in raw_lines
+        if line.strip() and not line.strip().startswith("#")
+    ]
 
     doc_reads = [
         r
         for r in reads
         if r.startswith("docs/") or r == "AGENTS.md" or r.endswith(".md")
     ]
-    extras = sorted({r for r in doc_reads if r not in allowed and "docs/" in r})
+    if not doc_reads:
+        rel = (
+            str(reads_path.relative_to(ROOT))
+            if str(reads_path).startswith(str(ROOT))
+            else str(reads_path)
+        )
+        print(f"[OK] docs_pack adherence: reads log empty of doc paths ({rel})")
+        return 0
+
+    extras = sorted({r for r in doc_reads if r not in allowed and r.startswith("docs/")})
     if not extras:
         print(f"[OK] docs_pack adherence — {len(doc_reads)} doc read(s) within pack")
         return 0

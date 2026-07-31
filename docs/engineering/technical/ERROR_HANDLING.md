@@ -1,10 +1,11 @@
 ---
 id: error-handling
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 1995
+tokens_est: 2002
 summary: "**Scope:** All languages in the factory — Python CI, Bash gates, GDScript runtime, TypeScript MCP, JSON validators"
 ---
 # Error Handling & Messages — Tides of Urashima

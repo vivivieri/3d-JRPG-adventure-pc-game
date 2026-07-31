@@ -1,10 +1,11 @@
 ---
 id: testing
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 904
+tokens_est: 907
 summary: "See `docs/ops/qa/AI_TESTING_SPEC.md` §11 and `docs/ops/qa/ACCEPTANCE_CRITERIA.md` (measurable gates)."
 ---
 # MCP — Testing

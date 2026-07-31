@@ -1,10 +1,11 @@
 ---
 id: setup-and-cost
 type: how-to
+phase: [0, 1]
 audience: [pm, builder]
 status: active
 authority: agents
-tokens_est: 1071
+tokens_est: 1074
 summary: "disable/remove all Godot dev plugins before Steam export."
 ---
 # MCP — Setup And Cost

@@ -1,10 +1,11 @@
 ---
 id: code-style
 type: reference
+phase: [1, 2, 3, 4, 5, 6]
 audience: [architect, builder]
 status: active
 authority: engineering
-tokens_est: 2055
+tokens_est: 2062
 summary: "**Language:** GDScript 2.0 (Godot 4.7)"
 ---
 # Tides of Urashima — Code Style Guide
