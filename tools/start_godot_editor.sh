@@ -5,6 +5,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export PATH="${HOME}/.local/bin:${PATH}"
+bash "${ROOT}/tools/ensure_xvfb_display.sh"
 export DISPLAY="${DISPLAY:-:1}"
 export XDG_DATA_HOME="${ROOT}/.cache/godot-data"
 export XDG_CONFIG_HOME="${ROOT}/.cache/godot-config"
@@ -25,7 +26,8 @@ mkdir -p "${ROOT}/.cache"
 echo "Starting Godot editor (GDAI MCP: enable plugin + Start in editor panel)..."
 nohup godot4 --rendering-driver opengl3 --path "${ROOT}/game" --editor >> "${ROOT}/.cache/godot-editor.log" 2>&1 &
 
-sleep 3
+# Cold snapshot boot: editor + GDAI plugin need longer to attach.
+sleep "${GODOT_EDITOR_STARTUP_SEC:-8}"
 PID="$(pgrep -f "$PGREP_PATTERN" | head -1 || true)"
 echo "Godot editor PID: ${PID:-unknown}"
 echo "Log: ${ROOT}/.cache/godot-editor.log"
