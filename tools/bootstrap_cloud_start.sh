@@ -15,4 +15,5 @@ if [[ ! -f game/project.godot ]]; then
   exit 0
 fi
 
-exec bash tools/ensure_mcp_stack.sh
+bash tools/ensure_xvfb_display.sh
+exec bash tools/ensure_mcp_stack.sh --wait "${GDAI_MCP_WAIT:-180}"

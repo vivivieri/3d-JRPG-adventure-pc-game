@@ -15,7 +15,16 @@ if [[ "${1:-}" == "--wait" ]]; then
   WAIT="${2:-90}"
 fi
 
+# Snapshot cold-boot: plugins on disk but editor/GDAI bridge need longer to warm up.
+if [[ -f "${ROOT}/.cursor/environment.json" ]]; then
+  if python3 -c "import json; import sys; d=json.load(open('.cursor/environment.json')); sys.exit(0 if d.get('snapshot') else 1)" 2>/dev/null; then
+    WAIT="${GDAI_MCP_WAIT:-180}"
+  fi
+fi
+WAIT="${GDAI_MCP_WAIT:-$WAIT}"
+
 export PATH="${HOME}/.local/bin:${PATH}"
+bash "${ROOT}/tools/ensure_xvfb_display.sh"
 export DISPLAY="${DISPLAY:-:1}"
 export XDG_DATA_HOME="${ROOT}/.cache/godot-data"
 export XDG_CONFIG_HOME="${ROOT}/.cache/godot-config"
@@ -71,7 +80,7 @@ PGREP_PATTERN="godot4.*${ROOT}/game.*--editor"
 if ! pgrep -f "$PGREP_PATTERN" >/dev/null 2>&1; then
   log "Starting Godot editor..."
   bash "${ROOT}/tools/start_godot_editor.sh" >>"$LOG" 2>&1 || true
-  sleep 5
+  sleep "${GODOT_EDITOR_WARMUP_SEC:-10}"
 fi
 
 if ! pgrep -f "$PGREP_PATTERN" >/dev/null 2>&1; then
@@ -94,6 +103,8 @@ while [[ $SECONDS -lt $deadline ]]; do
 done
 
 if [[ $ready -ne 1 ]]; then
+  log "GDAI HTTP not ready — tail godot-editor.log:"
+  tail -20 "${ROOT}/.cache/godot-editor.log" 2>/dev/null | tee -a "$LOG" || true
   fail "GDAI HTTP server not responding on :${GDAI_MCP_SERVER_PORT}. Open Godot → GDAI MCP panel → Start."
 fi
 
@@ -108,9 +119,21 @@ fi
 
 # Godotiq + Godot MCP Pro — required — see docs/ops/agents/MCP_STACK.md
 STACK_OK=1
+
+godotiq_listening() {
+  ss -tln 2>/dev/null | grep -q ':6007 ' || netstat -tln 2>/dev/null | grep -q ':6007 '
+}
+
 if [[ -d "${ROOT}/game/addons/godotiq" ]]; then
-  log "Godotiq addon present"
-  if ss -tln 2>/dev/null | grep -q ':6007 ' || netstat -tln 2>/dev/null | grep -q ':6007 '; then
+  log "Godotiq addon present — waiting for :6007 (editor plugin warm-up)"
+  iq_deadline=$((SECONDS + ${GODOTIQ_WARMUP_SEC:-45}))
+  while [[ $SECONDS -lt $iq_deadline ]]; do
+    if godotiq_listening; then
+      break
+    fi
+    sleep 2
+  done
+  if godotiq_listening; then
     log "Godotiq WebSocket OK on :6007"
   else
     log "FAIL: Godotiq :6007 not listening — enable GodotIQ plugin in Project → Plugins"
